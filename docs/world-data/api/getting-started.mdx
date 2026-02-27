@@ -1,0 +1,135 @@
+---
+id: api-getting-started
+title: API Getting Started Guide
+sidebar_label: Getting Started
+sidebar_position: 1
+description: Quick start guide for using the ECODATA API to access economic data programmatically.
+keywords:
+  - api
+  - getting started
+  - quick start
+  - ecodata api
+slug: /world-data/api/getting-started
+---
+
+import Steps from '@site/src/components/Steps';
+
+# Getting Started with ECODATA API
+
+This guide will help you start using the ECODATA API to access economic data programmatically.
+
+## Base URL
+
+```
+https://ecodata.khoviet.com/api/v1
+```
+
+## Quick Start
+
+<Steps>
+
+1. **Get your API key** from [ECODATA Dashboard](https://ecodata.khoviet.com/dashboard)
+2. **Install dependencies** (optional - use any HTTP client)
+3. **Make your first request**
+4. **Parse the response**
+
+</Steps>
+
+## First Request
+
+### Using cURL
+
+```bash
+curl -X GET "https://ecodata.khoviet.com/api/v1/indicators?source=WB&indicator=NY.GDP.MKTP.CD&country=VN&start_year=2020" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+### Using Python
+
+```python
+import requests
+
+url = "https://ecodata.khoviet.com/api/v1/indicators"
+headers = {
+    "Authorization": "Bearer YOUR_API_KEY"
+}
+params = {
+    "source": "WB",
+    "indicator": "NY.GDP.MKTP.CD",
+    "country": "VN",
+    "start_year": 2020,
+    "end_year": 2023
+}
+
+response = requests.get(url, headers=headers, params=params)
+data = response.json()
+
+print(data)
+```
+
+### Using JavaScript
+
+```javascript
+const response = await fetch(
+  "https://ecodata.khoviet.com/api/v1/indicators?" + 
+  new URLSearchParams({
+    source: "WB",
+    indicator: "NY.GDP.MKTP.CD",
+    country: "VN",
+    start_year: 2020
+  }),
+  {
+    headers: {
+      "Authorization": "Bearer YOUR_API_KEY"
+    }
+  }
+);
+
+const data = await response.json();
+console.log(data);
+```
+
+## Response Format
+
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "indicator_code": "NY.GDP.MKTP.CD",
+      "indicator_name": "GDP (current US$)",
+      "country_code": "VN",
+      "country_name": "Vietnam",
+      "year": 2023,
+      "value": 430000000000,
+      "unit": "US$"
+    }
+  ],
+  "metadata": {
+    "source": "World Bank - WDI",
+    "last_updated": "2024-03-15",
+    "total_records": 1
+  }
+}
+```
+
+## Rate Limits
+
+| Plan | Requests/minute | Requests/day |
+|------|-----------------|--------------|
+| Free | 10 | 100 |
+| Basic | 60 | 1,000 |
+| Pro | 300 | 10,000 |
+| Enterprise | Unlimited | Unlimited |
+
+## Next Steps
+
+- [Authentication Guide →](./authentication)
+- [API Endpoints Reference →](./endpoints)
+
+---
+
+:::tip Support
+Need help? Contact support@khoviet.com
+:::
+

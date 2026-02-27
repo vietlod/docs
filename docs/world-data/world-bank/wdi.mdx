@@ -1,0 +1,165 @@
+---
+id: wb-wdi
+title: World Development Indicators Guide
+sidebar_label: WDI Indicators
+sidebar_position: 2
+description: Complete guide to World Development Indicators (WDI) - the World Bank's flagship database with 1,600+ indicators for 200+ countries.
+keywords:
+  - wdi
+  - world development indicators
+  - world bank data
+  - economic indicators
+  - development statistics
+slug: /world-data/world-bank/wdi
+---
+
+# World Development Indicators (WDI) Guide
+
+The **World Development Indicators (WDI)** is the World Bank's premier compilation of cross-country comparable data on development. It contains over 1,600 time series indicators for 217 economies.
+
+## Indicator Categories
+
+### 1. Economy & Growth
+
+| Indicator Code | Name | Unit |
+|----------------|------|------|
+| NY.GDP.MKTP.CD | GDP (current US$) | US$ |
+| NY.GDP.MKTP.KD.ZG | GDP growth (annual %) | % |
+| NY.GDP.PCAP.CD | GDP per capita (current US$) | US$ |
+| NY.GDP.PCAP.PP.CD | GDP per capita, PPP (current intl $) | Intl $ |
+| NV.AGR.TOTL.ZS | Agriculture, value added (% of GDP) | % |
+| NV.IND.TOTL.ZS | Industry, value added (% of GDP) | % |
+| NV.SRV.TOTL.ZS | Services, value added (% of GDP) | % |
+
+### 2. Trade & External Sector
+
+| Indicator Code | Name | Unit |
+|----------------|------|------|
+| NE.EXP.GNFS.CD | Exports of goods and services (current US$) | US$ |
+| NE.IMP.GNFS.CD | Imports of goods and services (current US$) | US$ |
+| BN.CAB.XOKA.GD.ZS | Current account balance (% of GDP) | % |
+| BX.KLT.DINV.CD.WD | FDI, net inflows (BoP, current US$) | US$ |
+| BX.TRF.PWKR.CD.DT | Personal remittances, received (current US$) | US$ |
+| FI.RES.TOTL.CD | Total reserves (includes gold, current US$) | US$ |
+
+### 3. Financial Sector
+
+| Indicator Code | Name | Unit |
+|----------------|------|------|
+| FM.LBL.BMNY.GD.ZS | Broad money (% of GDP) | % |
+| FP.CPI.TOTL.ZG | Inflation, consumer prices (annual %) | % |
+| FR.INR.RINR | Real interest rate (%) | % |
+| CM.MKT.LCAP.GD.ZS | Market capitalization (% of GDP) | % |
+| GC.DOD.TOTL.GD.ZS | Central government debt (% of GDP) | % |
+
+### 4. Demographics & Labor
+
+| Indicator Code | Name | Unit |
+|----------------|------|------|
+| SP.POP.TOTL | Population, total | Persons |
+| SP.POP.GROW | Population growth (annual %) | % |
+| SP.DYN.LE00.IN | Life expectancy at birth, total (years) | Years |
+| SP.DYN.TFRT.IN | Fertility rate, total (births per woman) | Births |
+| SL.UEM.TOTL.ZS | Unemployment, total (% of total labor force) | % |
+| SL.TLF.CACT.ZS | Labor force participation rate (% of pop ages 15+) | % |
+
+### 5. Social Indicators
+
+| Indicator Code | Name | Unit |
+|----------------|------|------|
+| SI.POV.DDAY | Poverty headcount ratio at $2.15/day | % |
+| SI.POV.GINI | Gini index | Index |
+| SE.PRM.ENRR | School enrollment, primary (% gross) | % |
+| SE.SEC.ENRR | School enrollment, secondary (% gross) | % |
+| SE.TER.ENRR | School enrollment, tertiary (% gross) | % |
+| SH.XPD.CHEX.GD.ZS | Current health expenditure (% of GDP) | % |
+
+### 6. Infrastructure & Technology
+
+| Indicator Code | Name | Unit |
+|----------------|------|------|
+| EG.ELC.ACCS.ZS | Access to electricity (% of population) | % |
+| EG.USE.PCAP.KG.OE | Energy use (kg of oil equivalent per capita) | kg |
+| IT.NET.USER.ZS | Individuals using the Internet (% of pop) | % |
+| IT.CEL.SETS.P2 | Mobile cellular subscriptions (per 100 people) | Per 100 |
+| IS.AIR.PSGR | Air transport, passengers carried | Persons |
+
+### 7. Environment
+
+| Indicator Code | Name | Unit |
+|----------------|------|------|
+| EN.ATM.CO2E.KT | CO2 emissions (kt) | kt |
+| EN.ATM.CO2E.PC | CO2 emissions (metric tons per capita) | Metric tons |
+| AG.LND.FRST.ZS | Forest area (% of land area) | % |
+| ER.LND.PTLD.ZS | Terrestrial protected areas (% of total land area) | % |
+
+## Sample Query
+
+### Python Example
+
+```python
+import requests
+
+# Query multiple WDI indicators for Vietnam
+url = "https://ecodata.khoviet.com/api/v1/indicators/batch"
+
+payload = {
+    "source": "WB",
+    "indicators": [
+        "NY.GDP.MKTP.CD",
+        "NY.GDP.MKTP.KD.ZG",
+        "FP.CPI.TOTL.ZG"
+    ],
+    "countries": ["VN", "TH", "ID", "MY", "PH"],
+    "start_year": 2015,
+    "end_year": 2023
+}
+
+response = requests.post(url, json=payload)
+data = response.json()
+
+# Print results
+for item in data['data']:
+    print(f"{item['country']}: {item['indicator']} = {item['value']} ({item['year']})")
+```
+
+### Output Format
+
+```json
+{
+  "data": [
+    {
+      "country": "VN",
+      "country_name": "Vietnam",
+      "indicator": "NY.GDP.MKTP.CD",
+      "indicator_name": "GDP (current US$)",
+      "year": 2023,
+      "value": 430000000000,
+      "unit": "US$"
+    }
+  ],
+  "metadata": {
+    "source": "World Bank - WDI",
+    "last_updated": "2024-03-15"
+  }
+}
+```
+
+## Data Coverage
+
+| Region | Countries | Time Range |
+|--------|-----------|------------|
+| East Asia & Pacific | 37 | 1960-2023 |
+| Europe & Central Asia | 58 | 1960-2023 |
+| Latin America & Caribbean | 42 | 1960-2023 |
+| Middle East & North Africa | 21 | 1960-2023 |
+| North America | 3 | 1960-2023 |
+| South Asia | 8 | 1960-2023 |
+| Sub-Saharan Africa | 48 | 1960-2023 |
+
+---
+
+:::tip Pro Tip
+Use the batch API endpoint for querying multiple indicators at once to optimize performance.
+:::
+

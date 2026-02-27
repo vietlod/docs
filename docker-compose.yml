@@ -1,0 +1,19 @@
+# =============================================================================
+# EcoData Documentation (Docusaurus) - Standalone Deployment
+# URL: https://docs.khoviet.com
+# =============================================================================
+
+services:
+  docs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ecodata-docs-standalone
+    ports:
+      - "3001:80"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
