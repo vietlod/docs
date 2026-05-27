@@ -1,0 +1,86 @@
+---
+id: phan-nhom-nguon-du-lieu
+title: Phân nhóm nguồn dữ liệu
+description: Cách phân loại nguồn dữ liệu trong Ecodata theo đơn vị phân tích và mục đích nghiên cứu.
+---
+
+# Phân nhóm nguồn dữ liệu
+
+Ecodata gom nhiều nguồn dữ liệu khác nhau vào một workflow thống nhất. Khi chọn nguồn, người dùng nên bắt đầu từ đơn vị phân tích thay vì bắt đầu từ tên tổ chức.
+
+## Bản đồ nguồn theo đơn vị phân tích
+
+| Đơn vị phân tích | Nguồn phù hợp | Module |
+| --- | --- | --- |
+| Quốc gia | World Bank, IMF, OECD, Eurostat, ILO, FAO, WTO, UNCTAD, ADB, FRED, OWID | Dashboard |
+| Tỉnh/thành Việt Nam | GSO KTXH, NGTK-TINH, VHLSS aggregate, Macro Survey | GSO, Survey |
+| Hàng hóa và đối tác thương mại | Vietnam Customs | Customs |
+| Hộ gia đình/cá nhân | VHLSS Micro | VHLSS Variable Hub |
+| Doanh nghiệp niêm yết | Stock Hub, BCTC, Events Calendar | Stocks |
+| Chỉ số quản trị địa phương | PCI, PAPI, PAR, SIPAS, ICT | Macro Survey |
+
+## Nhóm Global Data
+
+Nhóm này phù hợp cho nghiên cứu so sánh quốc tế, dữ liệu panel quốc gia, kiểm định macro và các biến kiểm soát chuẩn. Các nguồn đang được app hỗ trợ trong mã nguồn và tài liệu kỹ thuật gồm World Bank, IMF, OECD, Eurostat, ILO, FAO, OWID, FRED, WTO, UNCTAD, ADB và SAMADB.
+
+Các indicators thường gặp:
+
+- Tăng trưởng GDP, GDP bình quân đầu người, GDP theo giá hiện hành hoặc giá cố định.
+- Lạm phát, tỷ giá, lãi suất, cán cân thanh toán.
+- Lao động, việc làm, tiền lương, năng suất.
+- Thương mại, xuất nhập khẩu, thuế quan, logistics.
+- Dân số, giáo dục, y tế, phát triển con người.
+- Governance, institutional quality, risk và các chỉ số phát triển.
+
+## Nhóm dữ liệu Việt Nam từ GSO
+
+GSO gồm nhiều lớp dữ liệu:
+
+| Dataset | Nội dung |
+| --- | --- |
+| KTXH | Chỉ tiêu kinh tế xã hội theo kỳ báo cáo. |
+| NGTK-CN | Niên giám thống kê cấp quốc gia. |
+| NGTK-TINH | Niên giám thống kê cấp tỉnh/thành. |
+| VHLSS aggregate | Chỉ tiêu tổng hợp từ báo cáo VHLSS chính thức. |
+
+Dữ liệu GSO phù hợp khi nghiên cứu cần chỉ tiêu chính thức theo tỉnh, theo năm, hoặc khi cần đối chiếu giữa báo cáo quốc gia và báo cáo địa phương.
+
+## Nhóm Customs
+
+Customs khai thác báo cáo của Tổng cục Hải quan. Nguồn này phù hợp cho nghiên cứu thương mại hàng hóa, thị trường xuất nhập khẩu, cơ cấu đối tác và phân tích theo tỉnh hoặc phương thức vận tải.
+
+Các chiều dữ liệu chính:
+
+- Hàng hóa theo mã và mô tả.
+- Quốc gia đối tác.
+- Tỉnh/thành.
+- Phương thức vận tải.
+- Kỳ báo cáo tháng hoặc quý.
+- Trạng thái báo cáo như chính thức, sơ bộ hoặc điều chỉnh.
+
+## Nhóm Macro Survey và VHLSS
+
+Macro Survey gom các chỉ số cấp tỉnh như PCI, PAPI, ICT, PAR và SIPAS. Đây là nhóm phù hợp để làm biến giải thích về môi trường kinh doanh, quản trị công, cải cách hành chính và dịch vụ công.
+
+VHLSS Micro khác với VHLSS aggregate. VHLSS Micro đi vào dữ liệu vi mô dạng Stata theo wave, dataset và biến. Người dùng cần chọn wave, chọn bảng, lọc biến, preview record và quyết định dạng merge hoặc append.
+
+## Nhóm Stock Hub
+
+Stock Hub phù hợp cho phân tích doanh nghiệp, thị trường vốn và dữ liệu tài chính. App đọc dữ liệu theo mô hình DB-first, sau đó fallback sang nguồn dịch vụ hoặc file offline khi cần.
+
+Các nhóm dữ liệu gồm:
+
+- Giá, volume, market cap và thông tin giao dịch.
+- Hồ sơ mã chứng khoán, sàn, ngành ICB, nhóm chỉ số.
+- Bảng cân đối kế toán, kết quả kinh doanh, lưu chuyển tiền tệ.
+- Thuyết minh báo cáo tài chính.
+- Lịch sự kiện doanh nghiệp.
+
+## Cách chọn nguồn trong thực tế
+
+1. Nếu câu hỏi nghiên cứu là so sánh giữa quốc gia, bắt đầu từ Global Data.
+2. Nếu câu hỏi nghiên cứu là khác biệt giữa tỉnh Việt Nam, bắt đầu từ GSO hoặc Macro Survey.
+3. Nếu câu hỏi liên quan xuất nhập khẩu, bắt đầu từ Customs.
+4. Nếu câu hỏi cần dữ liệu hộ gia đình/cá nhân, bắt đầu từ VHLSS Micro.
+5. Nếu câu hỏi về công ty niêm yết, bắt đầu từ Stock Hub.
+6. Nếu chưa rõ, dùng AI Chat để chuyển câu hỏi nghiên cứu thành danh sách nguồn và indicators ứng viên.

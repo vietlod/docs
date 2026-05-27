@@ -1,0 +1,65 @@
+---
+id: tong-hop-indicators
+title: Tổng hợp nhóm indicators
+description: Bản đồ các nhóm indicators đang triển khai trong Ecodata.
+---
+
+# Tổng hợp nhóm indicators
+
+Indicators trong Ecodata không chỉ là tên biến. Mỗi indicator cần được hiểu cùng nguồn, coverage, tần suất, đơn vị đo, metadata, phương pháp và quyền export.
+
+## Cấu trúc thông tin của một indicator
+
+| Thành phần | Ý nghĩa |
+| --- | --- |
+| Tên indicator | Tên hiển thị cho người dùng. |
+| Mã/short code | Mã dùng để truy vấn, copy, export hoặc trao đổi với AI Chat. |
+| Source | Nguồn dữ liệu gốc hoặc pipeline nhập liệu. |
+| Category | Nhóm chủ đề như macro, trade, labor, governance, survey, stock. |
+| Coverage | Quốc gia/tỉnh/doanh nghiệp/hàng hóa và khoảng năm có dữ liệu. |
+| Frequency | Annual, quarterly, monthly hoặc theo kỳ báo cáo. |
+| Unit | Đơn vị đo, giá hiện hành/cố định, phần trăm, index, VND, USD. |
+| Completeness | Mức độ đầy đủ dữ liệu trong phạm vi đã chọn. |
+| Methodology | Định nghĩa và phương pháp tính từ nguồn. |
+| Citation | Thông tin trích dẫn khi dùng trong báo cáo/nghiên cứu. |
+| Quality notes | Ghi chú về thiếu dữ liệu, thay đổi phương pháp hoặc nguồn thay thế. |
+
+## Nhóm indicator theo chủ đề
+
+| Chủ đề | Ví dụ indicators | Nguồn thường dùng |
+| --- | --- | --- |
+| National accounts | GDP, GDP growth, GDP per capita, sector value added | World Bank, IMF, OECD, GSO |
+| Prices and monetary | CPI, inflation, exchange rate, interest rate, money supply | IMF, World Bank, GSO |
+| Trade | Export, import, trade balance, commodity trade, partner country | WTO, UNCTAD, Customs, World Bank |
+| Labor | Employment, unemployment, wages, productivity | ILO, World Bank, GSO |
+| Population and society | Population, urbanization, education, health | World Bank, GSO, VHLSS |
+| Governance and institutions | WGI, PCI, PAPI, PAR, SIPAS | WGI, Macro Survey |
+| Household welfare | Income, expenditure, poverty, demographics | VHLSS aggregate, VHLSS Micro |
+| Stock and financial statements | Price, OHLCV, balance sheet, income statement, cash flow | Stock Hub |
+
+## Nhóm indicator theo module
+
+| Module | Cách chọn indicators |
+| --- | --- |
+| Dashboard | Lọc keyword/category/source/frequency/year/completeness, chọn indicator cards, mở details và export. |
+| GSO Explorer | Chọn dataset, duyệt catalog, chọn tối đa nhóm chỉ tiêu phù hợp, xem pivot province-year. |
+| Customs Explorer | Chọn loại báo cáo, kỳ báo cáo, hàng hóa/quốc gia/tỉnh/phương thức vận tải. |
+| Survey Explorer | Lọc survey, tỉnh, năm, nhóm chỉ số và indicator detail. |
+| VHLSS Variable Hub | Chọn wave, dataset, biến, preview 100 dòng, chọn merge/panel/pooled. |
+| Stock Hub | Chọn symbol, tab giá/BCTC/thuyết minh/sự kiện, xuất dữ liệu theo nhu cầu. |
+
+## Quy tắc kết hợp indicators
+
+1. Không trộn đơn vị phân tích khác nhau trong cùng một mô hình nếu chưa aggregate hoặc merge rõ ràng.
+2. Không trộn tần suất monthly, quarterly và annual mà không có bước chuyển đổi.
+3. Không trộn đơn vị tiền tệ hoặc giá hiện hành/giá cố định nếu chưa chuẩn hóa.
+4. Dùng metadata để xác nhận định nghĩa của indicators cùng tên nhưng khác nguồn.
+5. Dùng Preview để phát hiện missing values trước khi chạy mô hình.
+
+## Gợi ý flow chọn indicators bằng AI Chat
+
+1. Mô tả câu hỏi nghiên cứu, đơn vị phân tích, giai đoạn và mô hình dự kiến.
+2. Yêu cầu AI Chat đề xuất biến phụ thuộc, biến giải thích, biến kiểm soát và nguồn dữ liệu.
+3. Dùng danh sách gợi ý để search trong Dashboard hoặc module tương ứng.
+4. Copy short code của indicators đã chọn quay lại AI Chat để kiểm tra logic mô hình.
+5. Nếu coverage thiếu, yêu cầu AI Chat đề xuất proxy indicators hoặc nguồn thay thế.

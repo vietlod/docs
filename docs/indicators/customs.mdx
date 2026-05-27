@@ -1,0 +1,55 @@
+---
+id: customs
+title: Customs indicators
+description: Hướng dẫn khai thác dữ liệu xuất nhập khẩu từ Vietnam Customs.
+---
+
+# Customs indicators
+
+Customs Explorer phục vụ dữ liệu xuất nhập khẩu từ báo cáo của Tổng cục Hải quan. Đây là nguồn phù hợp cho nghiên cứu thương mại hàng hóa, chuỗi cung ứng, thị trường xuất khẩu, đối tác nhập khẩu và phân tích theo địa phương.
+
+## Nhóm báo cáo
+
+| Nhóm | Nội dung |
+| --- | --- |
+| Commodity reports | Xuất nhập khẩu theo hàng hóa, mã và mô tả hàng hóa. |
+| Country reports | Xuất nhập khẩu theo quốc gia đối tác. |
+| Country x commodity | Giao cắt giữa đối tác và hàng hóa. |
+| Transport mode | Xuất nhập khẩu theo phương thức vận tải. |
+| Province reports | Xuất nhập khẩu theo tỉnh/thành. |
+
+Các mã báo cáo trong pipeline gồm các nhóm như `1X`, `1N`, `2X`, `2N`, `3X`, `3N`, `HTX`, `5X`, `5N`, `PTVT` và `Biểu 4`. Người dùng cuối không cần nhớ mã, nhưng nên hiểu rằng mỗi mã tương ứng một cấu trúc dữ liệu khác nhau.
+
+## Dimensions cần chọn
+
+| Dimension | Cách dùng |
+| --- | --- |
+| Kỳ báo cáo | Chọn tháng/quý/năm phù hợp với tần suất nghiên cứu. |
+| Trạng thái báo cáo | Phân biệt chính thức, sơ bộ hoặc điều chỉnh nếu có. |
+| Hàng hóa | Dùng khi phân tích ngành hàng hoặc sản phẩm. |
+| Quốc gia | Dùng khi phân tích thị trường đối tác. |
+| Tỉnh/thành | Dùng khi cần phân tích địa phương. |
+| Phương thức vận tải | Dùng khi nghiên cứu logistics và vận tải. |
+
+## Flow thao tác
+
+1. Mở Customs Explorer.
+2. Chọn loại báo cáo hoặc dimension chính.
+3. Lọc kỳ báo cáo.
+4. Search hàng hóa, quốc gia, tỉnh hoặc phương thức vận tải.
+5. Xem bảng kết quả và biểu đồ.
+6. Preview vài dòng để kiểm tra đúng chiều dữ liệu.
+7. Export CSV/Excel theo phạm vi đã lọc.
+
+## Gợi ý nghiên cứu
+
+| Câu hỏi | Cách chọn dữ liệu |
+| --- | --- |
+| Thị trường xuất khẩu chính của một mặt hàng | Chọn commodity và partner country. |
+| Tỉnh nào xuất khẩu nhiều nhất một nhóm hàng | Chọn province report và lọc commodity nếu có. |
+| Cơ cấu vận tải của nhập khẩu | Chọn transport mode và kỳ báo cáo. |
+| Tác động của biến động thương mại đến GRDP tỉnh | Kết hợp Customs province với GSO NGTK-TINH. |
+
+## Lưu ý khi kết hợp với nguồn khác
+
+Dữ liệu Customs thường có tần suất tháng/quý, trong khi GSO và Global Data thường là năm. Nếu mô hình dùng dữ liệu annual, cần aggregate Customs theo năm trước khi merge.

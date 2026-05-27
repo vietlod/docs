@@ -1,138 +1,100 @@
-import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
-import { useColorMode } from '@docusaurus/theme-common';
 import Heading from '@theme/Heading';
+import viText from '../i18n/vi.json';
+import enText from '../i18n/en.json';
 import styles from './index.module.css';
 
-function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
-  const { colorMode } = useColorMode();
- 
+const localeText = {
+  vi: viText,
+  en: enText,
+};
+
+function useHomeText() {
+  const {i18n} = useDocusaurusContext();
+  return localeText[i18n.currentLocale] || viText;
+}
+
+function Hero() {
+  const text = useHomeText();
+
   return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <div className="container">
-        <Heading as="h1" className="hero__title">
-          {siteConfig.title}
-        </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/world-data">
-            World Data
-          </Link>
-          <Link
-            className="button button--secondary button--lg"
-            to="/vietnam-data">
-            Vietnam Data
-          </Link>
+    <header className={styles.hero}>
+      <div className={styles.heroGrid}>
+        <div className={styles.heroCopy}>
+          <span className={styles.eyebrow}>{text.hero.eyebrow}</span>
+          <Heading as="h1" className={styles.title}>
+            {text.hero.title}
+          </Heading>
+          <p className={styles.subtitle}>{text.hero.subtitle}</p>
+          <div className={styles.actions}>
+            <Link className={styles.primaryAction} to={text.hero.primaryHref}>
+              {text.hero.primaryAction}
+            </Link>
+            <Link className={styles.secondaryAction} to={text.hero.secondaryHref}>
+              {text.hero.secondaryAction}
+            </Link>
+          </div>
+        </div>
+
+        <div className={styles.workflowPanel} aria-label={text.workflow.title}>
+          <div className={styles.panelHeader}>
+            <span>{text.workflow.title}</span>
+            <span>{text.workflow.badge}</span>
+          </div>
+          <ol className={styles.workflowList}>
+            {text.workflow.steps.map((step) => (
+              <li key={step.title}>
+                <strong>{step.title}</strong>
+                <span>{step.description}</span>
+              </li>
+            ))}
+          </ol>
         </div>
       </div>
     </header>
   );
 }
 
-function FeatureCard({icon, title, description, link}) {
+function SourceMatrix() {
+  const text = useHomeText();
+
   return (
-    <div className="col col--4">
-      <div className={clsx('card', styles.featureCard)}>
-        <div className="card__header">
-          <h3>{icon} {title}</h3>
-        </div>
-        <div className="card__body">
-          <p>{description}</p>
-        </div>
-        <div className="card__footer">
-          <Link className="button button--primary button--block" to={link}>
-            Explore →
-          </Link>
-        </div>
+    <section className={styles.section}>
+      <div className={styles.sectionHeader}>
+        <Heading as="h2">{text.sources.title}</Heading>
+        <p>{text.sources.description}</p>
       </div>
-    </div>
-  );
-}
-
-function HomepageFeatures() {
-  const features = [
-    {
-      icon: '🏦',
-      title: 'World Bank',
-      description: 'Access WDI, IDS, and microdata for 200+ countries with 1,600+ development indicators.',
-      link: '/world-data/world-bank',
-    },
-    {
-      icon: '💰',
-      title: 'IMF',
-      description: 'Financial statistics, economic outlook, balance of payments, and trade data.',
-      link: '/world-data/imf',
-    },
-    {
-      icon: '🌐',
-      title: 'United Nations',
-      description: 'Trade statistics (Comtrade), SDG indicators, and demographic data.',
-      link: '/world-data/united-nations',
-    },
-    {
-      icon: '📊',
-      title: 'GSO Vietnam',
-      description: 'Official statistics including GDP, CPI, industrial production, and provincial data.',
-      link: '/vietnam-data/gso',
-    },
-    {
-      icon: '🚢',
-      title: 'Vietnam Customs',
-      description: 'Import/export data by commodity, partner country, and time period.',
-      link: '/vietnam-data/customs',
-    },
-    {
-      icon: '📈',
-      title: 'Stock Market',
-      description: 'VN-Index, HNX, UPCOM indices and sector analysis for Vietnam stocks.',
-      link: '/vietnam-data/stocks',
-    },
-  ];
-
-  return (
-    <section className={styles.features}>
-      <div className="container">
-        <div className="row">
-          <div className="col col--12">
-            <Heading as="h2" className={styles.featuresTitle}>
-              Data Sources
-            </Heading>
-          </div>
-        </div>
-        <div className="row">
-          {features.map((feature, idx) => (
-            <FeatureCard key={idx} {...feature} />
-          ))}
-        </div>
+      <div className={styles.sourceGrid}>
+        {text.sources.items.map((item) => (
+          <Link key={item.title} className={styles.sourceCard} to={item.href}>
+            <span className={styles.sourceType}>{item.type}</span>
+            <strong>{item.title}</strong>
+            <p>{item.description}</p>
+          </Link>
+        ))}
       </div>
     </section>
   );
 }
 
-function QuickStats() {
-  const stats = [
-    { value: '50+', label: 'Data Sources' },
-    { value: '200+', label: 'Countries' },
-    { value: '10,000+', label: 'Indicators' },
-    { value: '2', label: 'Languages' },
-  ];
+function ToolStrip() {
+  const text = useHomeText();
 
   return (
-    <section className={styles.stats}>
-      <div className="container">
-        <div className="row">
-          {stats.map((stat, idx) => (
-            <div key={idx} className="col col--3">
-              <div className={styles.statItem}>
-                <div className={styles.statValue}>{stat.value}</div>
-                <div className={styles.statLabel}>{stat.label}</div>
-              </div>
-            </div>
+    <section className={styles.toolBand}>
+      <div className={styles.toolInner}>
+        <div>
+          <Heading as="h2">{text.tools.title}</Heading>
+          <p>{text.tools.description}</p>
+        </div>
+        <div className={styles.toolLinks}>
+          {text.tools.items.map((item) => (
+            <Link key={item.title} to={item.href}>
+              <strong>{item.title}</strong>
+              <span>{item.description}</span>
+            </Link>
           ))}
         </div>
       </div>
@@ -141,15 +103,14 @@ function QuickStats() {
 }
 
 export default function Home() {
-  const {siteConfig} = useDocusaurusContext();
+  const text = useHomeText();
+
   return (
-    <Layout
-      title={siteConfig.title}
-      description={siteConfig.tagline}>
-      <HomepageHeader />
+    <Layout title={text.meta.title} description={text.meta.description}>
+      <Hero />
       <main>
-        <QuickStats />
-        <HomepageFeatures />
+        <SourceMatrix />
+        <ToolStrip />
       </main>
     </Layout>
   );

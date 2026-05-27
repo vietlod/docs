@@ -1,56 +1,52 @@
 // @ts-check
-// ECODATA Documentation - Docusaurus Configuration
-// https://docs.khoviet.com
+// Documentation site for Khai thac Ecodata.
 
-import { themes as prismThemes } from 'prism-react-renderer';
+import {themes as prismThemes} from 'prism-react-renderer';
+
+const docsDomain = 'https://ecodata.tnsai.vn';
+const appDomain = 'https://ecodata.io.vn';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  // Search engine indexing
-  noIndex: false,
-  
-  // Site metadata
-  title: 'EcoData Docs',
-  tagline: 'Economic Data Platform for Vietnam and the World',
-  // No favicon specified - Docusaurus will use default favicon
+  title: 'Khai thác Ecodata',
+  tagline: 'Hướng dẫn chọn, xem trước và tải đúng indicators cho nghiên cứu',
+  favicon: 'img/favicon.ico',
 
-  // Extra themes
-  themes: [
-    '@docusaurus/theme-mermaid',
-  ],
-  markdown: {
-    mermaid: true,
-    hooks: {
-      onBrokenMarkdownLinks: 'warn',
-    },
-  },
-
-  // Production URL
-  url: 'https://docs.khoviet.com',
+  url: docsDomain,
   baseUrl: '/',
-  
-  // Organization info
-  organizationName: 'khoviet',
-  projectName: 'ecodata',
+  organizationName: 'vietlod',
+  projectName: 'docs',
 
   onBrokenLinks: 'warn',
 
-  // Internationalization - English and Vietnamese
+  customFields: {
+    appUrl: appDomain,
+    docsDomain,
+  },
+
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en', 'vi'],
+    defaultLocale: 'vi',
+    locales: ['vi', 'en'],
     localeConfigs: {
-      en: {
-        label: 'English',
-        direction: 'ltr',
-        htmlLang: 'en-US',
-      },
       vi: {
         label: 'Tiếng Việt',
         direction: 'ltr',
         htmlLang: 'vi-VN',
         calendar: 'gregory',
       },
+      en: {
+        label: 'English',
+        direction: 'ltr',
+        htmlLang: 'en-US',
+      },
+    },
+  },
+
+  themes: ['@docusaurus/theme-mermaid'],
+  markdown: {
+    mermaid: true,
+    hooks: {
+      onBrokenMarkdownLinks: 'warn',
     },
   },
 
@@ -60,10 +56,10 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          sidebarCollapsible: true,
-          routeBasePath: '/', // docs at root
+          routeBasePath: '/',
           sidebarPath: './sidebars.js',
-          editUrl: 'https://github.com/khoviet/ecodata/tree/main/docs/',
+          sidebarCollapsible: true,
+          editUrl: 'https://github.com/vietlod/docs/tree/main/',
         },
         blog: false,
         theme: {
@@ -73,147 +69,116 @@ const config = {
     ],
   ],
 
-  plugins: [
-    '@docusaurus/plugin-ideal-image',
-  ],
+  plugins: ['@docusaurus/plugin-ideal-image'],
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      // Social card image
-      image: 'img/ecodata-social-card.jpg',
-      
-      // Color mode settings
+      image: 'img/ecodata-docs-hero.png',
       colorMode: {
         defaultMode: 'light',
         disableSwitch: false,
         respectPrefersColorScheme: true,
       },
-
-      // Search configuration (can be replaced with Algolia later)
-      // algolia: {
-      //   appId: 'YOUR_APP_ID',
-      //   apiKey: 'YOUR_API_KEY',
-      //   indexName: 'ecodata',
-      //   contextualSearch: true,
-      // },
-
-      // Navbar configuration
       navbar: {
+        title: 'Khai thác Ecodata',
         logo: {
-          alt: 'EcoData Logo',
+          alt: 'Ecodata',
           src: 'img/ecodata-logo.svg',
           srcDark: 'img/ecodata-logo-white.svg',
-          href: 'https://ecodata.khoviet.com',
+          href: docsDomain,
           target: '_self',
         },
         items: [
-          // Home link to docs homepage
-          {
-            type: 'html',
-            position: 'left',
-            value: '<a href="/docs" class="navbar__item navbar__link" target="_self"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>Home</a>',
-          },
-          // World Data sidebar
           {
             type: 'docSidebar',
-            sidebarId: 'worldData',
+            sidebarId: 'guideSidebar',
             position: 'left',
-            label: 'World Data',
+            label: 'Hướng dẫn',
           },
-          // Vietnam Data sidebar
           {
-            type: 'docSidebar',
-            sidebarId: 'vietnamData',
+            to: '/nguon-du-lieu/phan-nhom-nguon-du-lieu',
+            label: 'Nguồn dữ liệu',
             position: 'left',
-            label: 'Vietnam Data',
           },
-          // Language switcher
+          {
+            to: '/indicators/tong-hop-indicators',
+            label: 'Indicators',
+            position: 'left',
+          },
+          {
+            href: appDomain,
+            label: 'Mở ứng dụng',
+            position: 'right',
+          },
           {
             type: 'localeDropdown',
             position: 'right',
-            dropdownItemsAfter: [],
-            dropdownItemsBefore: [],
           },
-          // Search
           {
             type: 'search',
             position: 'right',
           },
         ],
       },
-
-      // Announcement bar (optional)
-      announcementBar: {
-        id: 'ecodata-launch',
-        content: '🎉 EcoData v2.0 - Comprehensive economic data platform for Vietnam and the World. <a href="https://ecodata.khoviet.com">Explore now →</a>',
-        backgroundColor: '#1e40af',
-        textColor: '#ffffff',
-        isCloseable: true,
-      },
-
-      // Footer configuration - 2 column layout
       footer: {
         style: 'dark',
         links: [
           {
-            // Column 1 - Info links
-            title: 'Thông tin',
+            title: 'Hướng dẫn chính',
             items: [
               {
-                label: 'Giới thiệu',
-                href: 'https://ecodata.khoviet.com/about',
+                label: 'Flow chọn và tải dữ liệu',
+                to: '/bat-dau/login-filter-preview-export',
               },
               {
-                label: 'Hướng dẫn thanh toán',
-                href: 'https://ecodata.khoviet.com/payment-guide',
+                label: 'Tổng hợp indicators',
+                to: '/indicators/tong-hop-indicators',
               },
               {
-                label: 'Chính sách bảo mật',
-                href: 'https://ecodata.khoviet.com/privacy-policy',
+                label: 'Preview và Export',
+                to: '/xuat-du-lieu/preview-export',
               },
             ],
           },
           {
-            // Column 2 - Data Resources
-            title: 'Dữ liệu',
+            title: 'Công cụ hỗ trợ',
             items: [
               {
-                label: 'World Data',
-                to: '/world-data',
+                label: 'AI Chat',
+                to: '/cong-cu/ai-chat',
               },
               {
-                label: 'Vietnam Data',
-                to: '/vietnam-data',
+                label: 'Econometrics',
+                to: '/cong-cu/econometrics',
               },
               {
-                label: 'API Reference',
-                href: 'https://ecodata.khoviet.com/api/docs',
+                label: 'Quản trị dữ liệu',
+                to: '/admin/quan-tri-du-lieu',
               },
             ],
           },
           {
-            // Column 3 - Contact
-            title: 'Liên hệ',
+            title: 'Triển khai',
             items: [
               {
-                label: 'Email: ngocthuyet@gmail.com',
-                href: 'mailto:ngocthuyet@gmail.com',
+                label: 'Docusaurus và VPS',
+                to: '/trien-khai/docusaurus-vps',
+              },
+              {
+                label: 'GitHub',
+                href: 'https://github.com/vietlod/docs',
               },
             ],
           },
         ],
-        copyright: `© ${new Date().getFullYear()} EcoData by Vietlod. Tất cả quyền được bảo lưu.`,
+        copyright: `© ${new Date().getFullYear()} Vietlod. Tài liệu Khai thác Ecodata.`,
       },
-
-      // Prism syntax highlighting
       prism: {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
         additionalLanguages: ['python', 'json', 'bash'],
       },
-
-      // Table of contents settings
       tableOfContents: {
         minHeadingLevel: 2,
         maxHeadingLevel: 4,

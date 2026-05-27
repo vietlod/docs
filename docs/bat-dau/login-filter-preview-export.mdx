@@ -1,0 +1,81 @@
+---
+id: login-filter-preview-export
+title: Login → Filter/Select → Preview → Export
+description: Flow từng bước để người dùng chọn, xem trước và tải đúng indicators trong Ecodata.
+---
+
+# Login → Filter/Select → Preview → Export
+
+Đây là flow chuẩn khi người dùng cần tạo một bộ dữ liệu nghiên cứu từ Ecodata. Mục tiêu là tránh tải quá rộng, thiếu metadata hoặc chọn indicators không phù hợp với đơn vị phân tích.
+
+## Bước 1. Login
+
+1. Mở ứng dụng Ecodata.
+2. Đăng nhập bằng tài khoản được cấp.
+3. Kiểm tra quyền tài khoản: tài khoản miễn phí có thể preview/export giới hạn; tài khoản trả phí có quyền export đầy đủ hơn.
+4. Vào đúng module theo nhu cầu: Dashboard cho global indicators, GSO cho dữ liệu thống kê Việt Nam, Customs cho hải quan, Survey/VHLSS cho khảo sát, Stocks cho dữ liệu doanh nghiệp.
+
+:::tip
+Nếu chưa chắc nên dùng nguồn nào, mở AI Chat và mô tả câu hỏi nghiên cứu trước. Ví dụ: "Tôi muốn nghiên cứu tác động của FDI đến tăng trưởng GDP cấp tỉnh Việt Nam giai đoạn 2010-2023. Nên chọn indicators nào?"
+:::
+
+## Bước 2. Filter và Select
+
+Trong Dashboard, người dùng lọc indicators theo các nhóm điều kiện:
+
+| Bộ lọc | Khi nào dùng |
+| --- | --- |
+| Keyword | Khi đã biết tên chỉ tiêu, mã, chủ đề hoặc từ khóa như GDP, inflation, trade, FDI. |
+| Category | Khi muốn duyệt theo nhóm macro, finance, labor, trade, population, governance. |
+| Source | Khi muốn giới hạn vào World Bank, IMF, OECD, ADB, GSO, Customs hoặc nguồn cụ thể. |
+| Frequency | Khi mô hình cần dữ liệu annual, quarterly hoặc monthly. |
+| Year range | Khi cần coverage đủ dài cho mô hình. |
+| Completeness | Khi ưu tiên indicators ít thiếu dữ liệu. |
+| Favorite | Khi muốn lưu lại nhóm indicators hay dùng. |
+
+Sau khi lọc, mở thẻ indicator để kiểm tra định nghĩa, coverage, tần suất, độ đầy đủ, citation và related indicators. Chỉ chọn indicators sau khi thông tin này phù hợp với câu hỏi nghiên cứu.
+
+## Bước 3. Preview
+
+Preview giúp kiểm tra dữ liệu trước khi export. Người dùng nên kiểm tra:
+
+1. Dữ liệu có đúng quốc gia/tỉnh/doanh nghiệp/hàng hóa cần nghiên cứu không.
+2. Năm bắt đầu và năm kết thúc có đủ cho mô hình không.
+3. Đơn vị đo có thống nhất không, ví dụ current USD, constant USD, %, index, VND.
+4. Dữ liệu có bị thiếu quá nhiều ở một số năm hoặc địa bàn không.
+5. Metadata có đủ source, citation, methodology và notes không.
+
+Với dữ liệu GSO, Customs, Macro Survey và VHLSS Micro, preview đặc biệt quan trọng vì các nguồn này có nhiều chiều dữ liệu và nhiều cấp đơn vị khác nhau.
+
+## Bước 4. Chạy thử bằng công cụ hỗ trợ
+
+Trước khi tải dữ liệu cuối cùng, người dùng có thể dùng:
+
+| Công cụ | Vai trò |
+| --- | --- |
+| AI Chat | Gợi ý indicators, kiểm tra biến phụ thuộc/biến giải thích, đề xuất nguồn thay thế nếu coverage thiếu. |
+| Econometrics | Chạy thử OLS, WLS, GLS, panel, VAR, ARIMA, Logit, Probit để kiểm tra sơ bộ quan hệ dữ liệu. |
+| Indicator details | Đọc metadata, citation, related indicators và quality notes. |
+| Export preview | Kiểm tra dòng dữ liệu mẫu và cấu trúc bảng trước khi tải. |
+
+## Bước 5. Export
+
+Khi export, cần xác định:
+
+1. Indicators đã chọn.
+2. Quốc gia, nhóm quốc gia, tỉnh, doanh nghiệp hoặc đơn vị phân tích.
+3. Khoảng năm.
+4. Định dạng và cấu trúc bảng.
+5. Có kèm metadata hay không.
+
+:::caution
+Trong mã nguồn hiện tại, UI có nhắc đến nhiều định dạng export, nhưng backend đang xử lý quyền preview/full export theo API và worker export đầy đủ tạo workbook Excel chuyên nghiệp. Khi viết hướng dẫn cho người dùng cuối, nên mô tả theo hành vi production đã kiểm thử, không chỉ theo nhãn hiển thị trên UI.
+:::
+
+## Checklist trước khi tải dữ liệu
+
+- Câu hỏi nghiên cứu đã xác định rõ biến phụ thuộc, biến giải thích và đơn vị phân tích.
+- Indicators có coverage đủ dài và đủ rộng.
+- Metadata đã được đọc và lưu lại.
+- Preview không phát hiện sai đơn vị, sai địa bàn hoặc thiếu dữ liệu nghiêm trọng.
+- Nếu dùng mô hình, đã chạy thử nhanh trong Econometrics hoặc kiểm tra logic bằng AI Chat.

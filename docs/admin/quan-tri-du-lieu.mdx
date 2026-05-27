@@ -1,0 +1,37 @@
+---
+id: quan-tri-du-lieu
+title: Quản trị dữ liệu và pipeline
+description: Tóm tắt các module quản trị, ingestion, translation và kiểm tra dữ liệu.
+---
+
+# Quản trị dữ liệu và pipeline
+
+Trang này dành cho admin hoặc người vận hành Ecodata. Người dùng phổ thông không cần thao tác các bước này để tải indicators.
+
+## Module quản trị chính
+
+| Module | Vai trò |
+| --- | --- |
+| Admin Dashboard | Theo dõi hệ thống, dữ liệu, quyền và pipeline. |
+| GSO Admin | Chạy/import dữ liệu GSO, alias indicators, kiểm tra extract. |
+| Customs Admin | Quản lý batch báo cáo Hải quan và trạng thái import. |
+| Stock Admin | Quản lý dữ liệu chứng khoán, BCTC, lịch sự kiện. |
+| Translation Jobs | Dịch metadata, nhãn biến, mô tả indicators khi cần. |
+| Chat Providers | Cấu hình provider AI cho Chat. |
+| Export Requests | Theo dõi request export đầy đủ và trạng thái xử lý. |
+
+## Nguyên tắc vận hành
+
+1. Không bypass service layer khi thêm pipeline mới.
+2. Không sửa trực tiếp dữ liệu production nếu chưa có backup.
+3. Với VPS đang chạy nhiều app, phải kiểm tra port, Nginx và Docker trước khi deploy.
+4. Không dùng compose hoặc script đã được đánh dấu legacy/dead trong KB nội bộ.
+5. Mỗi thay đổi dữ liệu cần có smoke test ở UI và API.
+
+## Kiểm tra sau ingestion
+
+- Tổng số indicators/data points thay đổi hợp lý.
+- Search và filter trả kết quả đúng.
+- Preview hiển thị đúng metadata.
+- Export tạo file đúng scope.
+- Các trang Dashboard/GSO/Customs/Survey/Stocks không lỗi console hoặc API.
