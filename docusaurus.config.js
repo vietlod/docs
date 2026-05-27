@@ -158,21 +158,8 @@ const config = {
               },
             ],
           },
-          {
-            title: 'Triển khai',
-            items: [
-              {
-                label: 'Docusaurus và VPS',
-                to: '/trien-khai/docusaurus-vps',
-              },
-              {
-                label: 'GitHub',
-                href: 'https://github.com/vietlod/docs',
-              },
-            ],
-          },
         ],
-        copyright: `© ${new Date().getFullYear()} Vietlod. Tài liệu Khai thác Ecodata.`,
+        copyright: '© 2025 TNS. Tài liệu Khai thác Ecodata.',
       },
       prism: {
         theme: prismThemes.github,
