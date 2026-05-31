@@ -1,15 +1,14 @@
 // @ts-check
-// Documentation site for Khai thac Ecodata.
+// Documentation site for TNS AI Applications.
 
 import {themes as prismThemes} from 'prism-react-renderer';
 
-const docsDomain = 'https://ecodata.tnsai.vn';
-const appDomain = 'https://ecodata.io.vn';
+const docsDomain = 'https://docs.tnsai.vn';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Khai thác Ecodata',
-  tagline: 'Hướng dẫn chọn, xem trước và tải đúng indicators cho nghiên cứu',
+  title: 'TNS AI Docs',
+  tagline: 'Cổng hướng dẫn sử dụng các ứng dụng hệ sinh thái TNS AI',
   favicon: 'img/favicon.ico',
 
   url: docsDomain,
@@ -20,7 +19,6 @@ const config = {
   onBrokenLinks: 'warn',
 
   customFields: {
-    appUrl: appDomain,
     docsDomain,
   },
 
@@ -81,35 +79,44 @@ const config = {
         respectPrefersColorScheme: true,
       },
       navbar: {
-        title: 'Khai thác Ecodata',
+        title: 'TNS AI Docs',
         logo: {
-          alt: 'Ecodata',
-          src: 'img/ecodata-logo.svg',
-          srcDark: 'img/ecodata-logo-white.svg',
+          alt: 'TNS AI Logo',
+          src: 'img/logo.svg',
+          srcDark: 'img/logo-white.svg',
           href: docsDomain,
           target: '_self',
         },
         items: [
           {
             type: 'docSidebar',
-            sidebarId: 'guideSidebar',
+            sidebarId: 'ecodataSidebar',
             position: 'left',
-            label: 'Hướng dẫn',
+            label: 'EcoData',
           },
           {
-            to: '/nguon-du-lieu/phan-nhom-nguon-du-lieu',
-            label: 'Nguồn dữ liệu',
+            type: 'docSidebar',
+            sidebarId: 'ecolabSidebar',
             position: 'left',
+            label: 'EcoLab',
           },
           {
-            to: '/indicators/tong-hop-indicators',
-            label: 'Indicators',
+            type: 'docSidebar',
+            sidebarId: 'ecolitSidebar',
             position: 'left',
+            label: 'EcoLit',
           },
           {
-            href: appDomain,
-            label: 'Mở ứng dụng',
-            position: 'right',
+            type: 'docSidebar',
+            sidebarId: 'pdfhubSidebar',
+            position: 'left',
+            label: 'PDFHUB',
+          },
+          {
+            type: 'docSidebar',
+            sidebarId: 'keywordsSidebar',
+            position: 'left',
+            label: 'KEYWORDs',
           },
           {
             type: 'localeDropdown',
@@ -125,41 +132,37 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Hướng dẫn chính',
+            title: 'Tài liệu ứng dụng',
             items: [
               {
-                label: 'Flow chọn và tải dữ liệu',
-                to: '/bat-dau/login-filter-preview-export',
+                label: 'Tài liệu EcoData',
+                to: '/ecodata/overview',
               },
               {
-                label: 'Tổng hợp indicators',
-                to: '/indicators/tong-hop-indicators',
+                label: 'Tài liệu EcoLab',
+                to: '/ecolab/overview',
               },
               {
-                label: 'Preview và Export',
-                to: '/xuat-du-lieu/preview-export',
+                label: 'Tài liệu EcoLit',
+                to: '/ecolit/overview',
               },
             ],
           },
           {
-            title: 'Công cụ hỗ trợ',
+            title: 'Phân tích & Tiện ích',
             items: [
               {
-                label: 'AI Chat',
-                to: '/cong-cu/ai-chat',
+                label: 'Tài liệu PDFHUB',
+                to: '/pdfhub/overview',
               },
               {
-                label: 'Econometrics',
-                to: '/cong-cu/econometrics',
-              },
-              {
-                label: 'Quản trị dữ liệu',
-                to: '/admin/quan-tri-du-lieu',
+                label: 'Tài liệu KEYWORDs',
+                to: '/keywords/overview',
               },
             ],
           },
         ],
-        copyright: '© 2025 TNS. Tài liệu Khai thác Ecodata.',
+        copyright: `© ${new Date().getFullYear()} TNS AI. Tài liệu hướng dẫn sử dụng hệ sinh thái ứng dụng.`,
       },
       prism: {
         theme: prismThemes.github,

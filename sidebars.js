@@ -1,13 +1,13 @@
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
-  guideSidebar: [
-    'overview',
+  ecodataSidebar: [
+    'ecodata/overview',
     {
       type: 'category',
       label: 'Bắt đầu',
       collapsed: false,
       items: [
-        'bat-dau/login-filter-preview-export',
+        'ecodata/bat-dau/login-filter-preview-export',
       ],
     },
     {
@@ -15,7 +15,7 @@ const sidebars = {
       label: 'Nguồn dữ liệu',
       collapsed: false,
       items: [
-        'nguon-du-lieu/phan-nhom-nguon-du-lieu',
+        'ecodata/nguon-du-lieu/phan-nhom-nguon-du-lieu',
       ],
     },
     {
@@ -23,12 +23,12 @@ const sidebars = {
       label: 'Indicators',
       collapsed: false,
       items: [
-        'indicators/tong-hop-indicators',
-        'indicators/global-data',
-        'indicators/gso-vietnam',
-        'indicators/customs',
-        'indicators/macro-survey-vhlss',
-        'indicators/stock-hub',
+        'ecodata/indicators/tong-hop-indicators',
+        'ecodata/indicators/global-data',
+        'ecodata/indicators/gso-vietnam',
+        'ecodata/indicators/customs',
+        'ecodata/indicators/macro-survey-vhlss',
+        'ecodata/indicators/stock-hub',
       ],
     },
     {
@@ -36,8 +36,8 @@ const sidebars = {
       label: 'Công cụ hỗ trợ',
       collapsed: false,
       items: [
-        'cong-cu/ai-chat',
-        'cong-cu/econometrics',
+        'ecodata/cong-cu/ai-chat',
+        'ecodata/cong-cu/econometrics',
       ],
     },
     {
@@ -45,7 +45,7 @@ const sidebars = {
       label: 'Xuất dữ liệu',
       collapsed: false,
       items: [
-        'xuat-du-lieu/preview-export',
+        'ecodata/xuat-du-lieu/preview-export',
       ],
     },
     {
@@ -53,8 +53,123 @@ const sidebars = {
       label: 'Quản trị và triển khai',
       collapsed: true,
       items: [
-        'admin/quan-tri-du-lieu',
-        'trien-khai/docusaurus-vps',
+        'ecodata/admin/quan-tri-du-lieu',
+        'ecodata/trien-khai/docusaurus-vps',
+      ],
+    },
+  ],
+
+  ecolabSidebar: [
+    'ecolab/overview',
+    {
+      type: 'category',
+      label: 'Bắt đầu',
+      collapsed: false,
+      items: [
+        'ecolab/bat-dau/login-navigation',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Đồ thị & Tra cứu RAG',
+      collapsed: false,
+      items: [
+        'ecolab/rag-knowledge-graph',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Phân tích Định lượng',
+      collapsed: false,
+      items: [
+        'ecolab/econometrics-modeling',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Tài khoản & Thanh toán',
+      collapsed: false,
+      items: [
+        'ecolab/membership-billing',
+      ],
+    },
+  ],
+
+  ecolitSidebar: [
+    'ecolit/overview',
+    {
+      type: 'category',
+      label: 'Bắt đầu',
+      collapsed: false,
+      items: [
+        'ecolit/bat-dau/academic-search',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Tìm kiếm Học thuật',
+      collapsed: false,
+      items: [
+        'ecolit/openalex-search',
+        'ecolit/crossref-metadata',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Hồ sơ cá nhân',
+      collapsed: false,
+      items: [
+        'ecolit/orcid-integration',
+      ],
+    },
+  ],
+
+  pdfhubSidebar: [
+    'pdfhub/overview',
+    {
+      type: 'category',
+      label: 'Bắt đầu',
+      collapsed: false,
+      items: [
+        'pdfhub/bat-dau/file-upload',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Trích xuất & Caching',
+      collapsed: false,
+      items: [
+        'pdfhub/parser-engine',
+        'pdfhub/liteparse-prompt-caching',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'RAG Tài chính',
+      collapsed: false,
+      items: [
+        'pdfhub/agentic-rag-finance',
+      ],
+    },
+  ],
+
+  keywordsSidebar: [
+    'keywords/overview',
+    {
+      type: 'category',
+      label: 'Bắt đầu',
+      collapsed: false,
+      items: [
+        'keywords/bat-dau/keyword-monitoring',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Cào & Phân tích',
+      collapsed: false,
+      items: [
+        'keywords/crawler-settings',
+        'keywords/semantic-analysis',
       ],
     },
   ],
