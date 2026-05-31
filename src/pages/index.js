@@ -5,6 +5,8 @@ import Heading from '@theme/Heading';
 import viText from '../i18n/vi.json';
 import enText from '../i18n/en.json';
 import styles from './index.module.css';
+import Highlights from '../components/Highlights';
+import EconometricsShowcase from '../components/EconometricsShowcase';
 
 const localeText = {
   vi: viText,
@@ -109,7 +111,9 @@ export default function Home() {
     <Layout title={text.meta.title} description={text.meta.description}>
       <Hero />
       <main>
+        <Highlights />
         <SourceMatrix />
+        <EconometricsShowcase />
         <ToolStrip />
       </main>
     </Layout>
