@@ -1,179 +1,106 @@
-# EcoData Documentation
+# TNS AI Docs
 
-This repository contains the source code for the **EcoData Documentation** site, built with [Docusaurus](https://docusaurus.io/). The documentation provides comprehensive guides and references for the EcoData platform - an economic data aggregation platform for Vietnam and global economic indicators.
+Mã nguồn cổng thông tin tài liệu hướng dẫn sử dụng dùng chung cho hệ sinh thái các ứng dụng **TNS AI**: **EcoData, EcoLab, EcoLit, PDFHUB, và KEYWORDs**. Hệ thống được xây dựng trên framework [Docusaurus](https://docusaurus.io/).
 
-**Live Site:** [https://ecodata.khoviet.com/docs](https://ecodata.khoviet.com/docs)
-
-## 📋 Overview
-
-EcoData Documentation covers:
-
-- **Vietnam Data**: Official economic data from GSO, Customs, Stock exchanges, Surveys, Indices, and Sector-specific sources
-- **World Data**: International economic indicators from IMF, World Bank, OECD, ILO, ADB, WTO, United Nations, and other global sources
-- **API Reference**: Complete API documentation for accessing economic datasets
-- **Guides**: Getting started tutorials, data export guides, and best practices
-
-The documentation is available in **English** and **Tiếng Việt** (Vietnamese).
-
-## 🛠️ Tech Stack
-
-- **[Docusaurus](https://docusaurus.io/) 3.9.2** - Documentation framework
-- **React 18** - UI library
-- **MDX** - Content format (Markdown + React components)
-- **Prism** - Syntax highlighting
-- **i18n** - Internationalization (English & Vietnamese)
-
-### Key Dependencies
-
-- `@docusaurus/preset-classic` - Core Docusaurus preset
-- `@docusaurus/theme-mermaid` - Mermaid diagram support
-- `docusaurus-plugin-openapi-docs` - API documentation plugin
-- `@iconify/react` - Icon system
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- **Node.js**: >= 18.0
-- **npm** or **yarn**
-
-### Installation
-
-```bash
-# Navigate to docs directory
-cd docs
-
-# Install dependencies
-npm install
-```
-
-### Development
-
-```bash
-# Start development server (English locale)
-npm start
-
-# Start development server (Vietnamese locale)
-npm start -- --locale vi
-
-# Build for production
-npm run build
-
-# Serve production build locally
-npm run serve
-```
-
-The development server will start at `http://localhost:3000/docs/` (English) or `http://localhost:3000/docs/vi/` (Vietnamese).
-
-### Important Notes for i18n Development
-
-- **Dev mode (`npm start`)**: i18n routing may not work perfectly. Use build mode for accurate testing.
-- **Build mode (`npm run build && npm run serve`)**: Required for proper i18n testing, especially when switching between locales.
-- Always clear cache before building: `npm run clear && npm run build`
-
-## 📁 Project Structure
-
-```
-docs/
-├── docs/                          # Documentation content (MDX files)
-│   ├── vietnam-data/             # Vietnam economic data documentation
-│   │   ├── gso/                  # General Statistics Office
-│   │   ├── customs/              # Customs data
-│   │   ├── stocks/               # Stock market data
-│   │   ├── surveys/              # Survey data (VHLSS, VES, etc.)
-│   │   ├── indices/              # Economic indices (PCI, PAPI, PMI, etc.)
-│   │   ├── sectors/              # Sector-specific data
-│   │   └── guide/                # User guides
-│   └── world-data/               # World economic data documentation
-│       ├── imf/                  # International Monetary Fund
-│       ├── world-bank/           # World Bank data
-│       ├── oecd/                 # OECD data
-│       ├── ilo/                  # International Labour Organization
-│       ├── adb/                  # Asian Development Bank
-│       ├── wto/                  # World Trade Organization
-│       ├── united-nations/       # UN data sources
-│       ├── other-sources/        # Other global sources
-│       └── api/                  # API documentation
-├── i18n/                         # Internationalization
-│   └── vi/                       # Vietnamese translations
-│       ├── docusaurus-plugin-content-docs/  # Translated docs
-│       ├── docusaurus-theme-classic/        # Translated UI
-│       └── src/pages/            # Translated pages
-├── src/                          # Source code
-│   ├── components/               # React components
-│   ├── css/                      # Custom styles
-│   └── pages/                    # Custom pages
-├── static/                       # Static assets (images, files)
-├── docusaurus.config.js          # Docusaurus configuration
-├── package.json                  # Dependencies and scripts
-└── DEPLOYMENT_GUIDE.md           # Deployment instructions
-```
-
-## 🌐 Deployment
-
-The documentation is deployed at `https://ecodata.khoviet.com/docs` using Docker and Nginx.
-
-### Production Deployment
-
-See [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md) for detailed deployment instructions, including:
-
-- Docker container setup
-- Nginx configuration for path-based routing (`/docs/`)
-- i18n routing setup (`/docs/vi/` for Vietnamese)
-- Static asset serving
-- Build and deployment workflow
-
-### Key Deployment Configuration
-
-- **baseUrl**: `/docs/`
-- **url**: `https://ecodata.khoviet.com`
-- **Default locale**: English (`en`)
-- **Locales**: English (`en`), Vietnamese (`vi`)
-
-## 📝 Contributing
-
-### Adding Documentation
-
-1. Create or edit MDX files in `docs/docs/` directory
-2. Follow the existing structure and naming conventions
-3. Use absolute paths for internal links (e.g., `/vietnam-data/gso` instead of `./gso`)
-4. Add translations in `i18n/vi/docusaurus-plugin-content-docs/current/` for Vietnamese content
-
-### Adding New Pages
-
-1. Create MDX file in appropriate directory
-2. Add `_category_.json` if creating a new category
-3. Update navigation in `docusaurus.config.js` if needed
-4. Add translations if applicable
-
-### Running Linters
-
-```bash
-# Check markdown linting
-npm run lint
-```
-
-## 🔧 Configuration
-
-Main configuration file: `docusaurus.config.js`
-
-Key settings:
-- **Site metadata**: Title, tagline, organization info
-- **i18n**: Locale configuration (English & Vietnamese)
-- **Navbar**: Navigation menu items
-- **Footer**: Footer content and links
-- **Plugins**: Mermaid diagrams, OpenAPI docs
-
-## 📚 Resources
-
-- [Docusaurus Documentation](https://docusaurus.io/docs)
-- [MDX Documentation](https://mdxjs.com/)
-- [Deployment Guide](./DEPLOYMENT_GUIDE.md)
-
-## 📄 License
-
-All documentation content and resources fall under the Apache v2 license present at the root of this repository.
+**Live Site:** [https://docs.tnsai.vn/](https://docs.tnsai.vn/)
 
 ---
 
-**Built with ❤️ for the EcoData community**
+## 📋 Tổng quan (Overview)
+
+TNS AI Docs cung cấp hướng dẫn vận hành chi tiết cho 5 phân hệ:
+*   **EcoData**: Phân hệ dữ liệu kinh tế vĩ mô và vi mô chính thức của Việt Nam (GSO, Hải quan, khảo sát VHLSS/VES) và quốc tế (WB, IMF, ADB, FRED...).
+*   **EcoLab**: Phân hệ phân tích định lượng học thuật (hơn 100 mô hình toán), tích hợp RAG, Đồ thị tri thức (Neo4j) và thanh toán SePay.
+*   **EcoLit**: Phân hệ nghiên cứu tài liệu học thuật (OpenAlex, Crossref) kết hợp đồng bộ ORCID.
+*   **PDFHUB**: Phân hệ trích xuất báo cáo tài chính tự động sử dụng Layout-aware Parsing, LiteParse, Prompt Caching và Agentic RAG.
+*   **KEYWORDs**: Phân hệ theo dõi và phân tích từ khóa SEO kết hợp mô hình semantic clustering.
+
+---
+
+## 🛠️ Công nghệ Sử dụng (Tech Stack)
+
+*   **Docusaurus v3** - Framework biên dịch tài liệu tĩnh.
+*   **React 19 & TypeScript** - Thư viện xây dựng giao diện.
+*   **Mermaid** - Tích hợp sơ đồ kiến trúc động.
+*   **i18n** - Hỗ trợ dịch đa ngôn ngữ toàn diện (Tiếng Việt `vi` và Tiếng Anh `en`).
+*   **CSS Vanilla** - Giao diện Premium tối giản sang trọng, tối ưu hóa di động.
+
+---
+
+## 🚀 Khởi chạy Cục bộ (Local Development)
+
+### Yêu cầu trước khi cài đặt:
+*   **Node.js**: Version >= 20.x
+*   **npm**: Version >= 10.x
+
+### Cài đặt và Chạy:
+```bash
+# Cài đặt thư viện
+npm install
+
+# Khởi chạy máy chủ phát triển (Tiếng Việt)
+npm run start -- --locale vi
+
+# Khởi chạy máy chủ phát triển (Tiếng Anh)
+npm run start -- --locale en
+
+# Biên dịch tĩnh production
+npm run build
+
+# Chạy thử bản build tĩnh cục bộ
+npm run serve
+```
+*Giao diện phát triển sẽ chạy tại địa chỉ: `http://localhost:3000/`*
+
+---
+
+## 📁 Cấu trúc Thư mục (Project Structure)
+
+```
+docs-repository/
+├── docs/                             # Nội dung tài liệu gốc (Tiếng Việt)
+│   ├── ecodata/                      # Hướng dẫn sử dụng EcoData
+│   ├── ecolab/                       # Hồi quy & Phân tích lượng EcoLab
+│   ├── ecolit/                       # Tìm kiếm thư mục học thuật EcoLit
+│   ├── pdfhub/                       # Phân tích BCTC PDFHUB
+│   └── keywords/                     # Trình cào & SEO KEYWORDs
+├── i18n/                             # Bản dịch đa ngôn ngữ
+│   └── en/
+│       └── docusaurus-plugin-content-docs/current/ # Tài liệu Tiếng Anh
+├── src/                              # Mã nguồn giao diện React
+│   ├── components/                   # React components (Highlights, Showcase)
+│   ├── css/                          # Custom styles (CSS học thuật)
+│   └── pages/                        # Trang chủ index
+├── static/                           # Tài sản tĩnh (Ảnh, Favicon, SVG)
+├── readme/                           # Tài liệu AI Governance & VPS Map
+│   └── ai/                           # Sách hướng dẫn vận hành cho AI agent
+├── docusaurus.config.js              # File cấu hình Docusaurus trung tâm
+├── sidebars.js                       # Khai báo cấu trúc Sidebar cho 5 app
+└── package.json                      # Scripts & dependencies
+```
+
+---
+
+## 🌐 Triển khai & Vận hành trên VPS (Production Deploy)
+
+Dự án được deploy tĩnh và chạy trực tiếp trên máy chủ VPS `31.97.110.12` dưới sự quản lý của reverse proxy Nginx.
+
+Chi tiết lệnh deploy nhanh trên VPS:
+```bash
+cd /opt/docs/ecodata
+git pull origin main
+npm install
+npm run build
+# Bản build tĩnh sẽ được Nginx Host phục vụ từ: /opt/docs/ecodata/build
+```
+
+---
+
+## 🛡️ AI Governance & Quản trị Phát triển
+
+Để đảm bảo việc code và deploy an toàn trên môi trường VPS chạy chung nhiều ứng dụng, dự án áp dụng hệ thống file governance bắt buộc:
+*   [CLAUDE.md](./CLAUDE.md): Workflow và lệnh biên dịch chuẩn.
+*   [Memory.md](./Memory.md): Nhật ký bền vững lưu trữ các quyết định thiết kế và bài học incident.
+*   [Agents.md](./Agents.md): Định nghĩa vai trò tác nhân AI.
+*   [readme/ai/context-index.md](./readme/ai/context-index.md): Mục lục định hướng nhanh cho AI Agent để tiết kiệm token.
+*   [readme/ai/vps-app-context.md](./readme/ai/vps-app-context.md): Bản đồ phân bổ port, domain của các ứng dụng trên VPS.
