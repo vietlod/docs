@@ -210,7 +210,7 @@ export default function EconometricsShowcase() {
         <div className={styles.cta}>
           <Link
             className={styles.ctaButton}
-            href="https://ecodata.io.vn/econometrics/flow">
+            href="https://ecodata.io.vn/econometrics">
             <Translate id="econ.cta" description="Econ CTA">
               Dùng thử quy trình phân tích
             </Translate>
