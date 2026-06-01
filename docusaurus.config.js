@@ -5,6 +5,28 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 const docsDomain = 'https://docs.tnsai.vn';
 
+// Site-wide structured data (read by search engines and AI/LLM crawlers).
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': `${docsDomain}/#organization`,
+  name: 'TNS AI',
+  url: docsDomain,
+  logo: `${docsDomain}/img/ecodata-logo.svg`,
+  description:
+    'Documentation portal for the TNS AI application ecosystem (EcoData, EcoLab, EcoLit, PDFHUB, KEYWORDs).',
+};
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${docsDomain}/#website`,
+  url: docsDomain,
+  name: 'TNS AI Docs',
+  inLanguage: ['vi', 'en'],
+  publisher: { '@id': `${docsDomain}/#organization` },
+};
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'TNS AI Docs',
@@ -21,6 +43,19 @@ const config = {
   customFields: {
     docsDomain,
   },
+
+  headTags: [
+    {
+      tagName: 'script',
+      attributes: { type: 'application/ld+json' },
+      innerHTML: JSON.stringify(orgSchema),
+    },
+    {
+      tagName: 'script',
+      attributes: { type: 'application/ld+json' },
+      innerHTML: JSON.stringify(websiteSchema),
+    },
+  ],
 
   i18n: {
     defaultLocale: 'vi',
@@ -62,6 +97,12 @@ const config = {
         blog: false,
         theme: {
           customCss: './src/css/custom.css',
+        },
+        sitemap: {
+          changefreq: 'weekly',
+          priority: 0.5,
+          ignorePatterns: ['/tags/**'],
+          filename: 'sitemap.xml',
         },
       }),
     ],

@@ -2,6 +2,7 @@
 const sidebars = {
   ecodataSidebar: [
     'ecodata/overview',
+    'ecodata/faq',
     {
       type: 'category',
       label: 'Bắt đầu',
