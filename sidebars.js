@@ -88,6 +88,23 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'Mô hình kinh tế lượng',
+      collapsed: false,
+      items: [
+        'ecolab/mo-hinh/ardl',
+        'ecolab/mo-hinh/fem-rem',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Ví dụ thực nghiệm',
+      collapsed: false,
+      items: [
+        'ecolab/vi-du/fdi-tang-truong-ardl',
+      ],
+    },
+    {
+      type: 'category',
       label: 'Tài khoản & Thanh toán',
       collapsed: false,
       items: [
