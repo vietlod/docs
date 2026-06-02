@@ -145,6 +145,16 @@ const sidebars = {
         },
         {
           type: 'category',
+          label: '6. Dữ liệu đếm',
+          items: [
+            'ecolab/mo-hinh/poisson',
+            'ecolab/mo-hinh/negbin',
+            'ecolab/mo-hinh/zip',
+            'ecolab/mo-hinh/zinb',
+          ],
+        },
+        {
+          type: 'category',
           label: '8. Chuỗi thời gian đơn biến',
           items: ['ecolab/mo-hinh/ardl'],
         },
