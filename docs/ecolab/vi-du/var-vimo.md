@@ -40,7 +40,7 @@ $$
 | :--- | :--- |
 | Độ trễ tối ưu | 2 (theo AIC) |
 | IRF: sốc `rate` ↑ | `inf` giảm sau 2–4 kỳ; `lny` giảm tạm thời |
-| Granger | `rate` → `inf` (p<0.05) |
+| Granger | `rate` → `inf` (p &lt; 0.05) |
 | FEVD (lny, 10 kỳ) | ~25% do sốc lãi suất |
 
 Diễn giải mẫu: cú sốc thắt chặt (lãi suất tăng) làm **giảm lạm phát** sau vài kỳ và **giảm sản lượng** tạm thời — phù hợp truyền dẫn chính sách tiền tệ. Để diễn giải cú sốc cấu trúc, dùng [SVAR](/ecolab/mo-hinh/svar).

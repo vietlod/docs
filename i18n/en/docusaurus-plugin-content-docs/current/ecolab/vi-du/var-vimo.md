@@ -40,7 +40,7 @@ $$
 | :--- | :--- |
 | Optimal lag | 2 (by AIC) |
 | IRF: `rate` ↑ shock | `inf` falls after 2–4 periods; `lny` falls temporarily |
-| Granger | `rate` → `inf` (p<0.05) |
+| Granger | `rate` → `inf` (p &lt; 0.05) |
 | FEVD (lny, 10 periods) | ~25% due to interest-rate shock |
 
 Sample interpretation: a tightening shock (rate up) **lowers inflation** after a few periods and **temporarily reduces output** — consistent with monetary transmission. To interpret structural shocks, use [SVAR](/en/ecolab/mo-hinh/svar).
