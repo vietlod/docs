@@ -108,7 +108,31 @@ const config = {
     ],
   ],
 
-  plugins: ['@docusaurus/plugin-ideal-image'],
+  plugins: [
+    '@docusaurus/plugin-ideal-image',
+    [
+      'docusaurus-plugin-llms',
+      {
+        // Sinh /llms.txt, /llms-full.txt va ban .md tung trang cho AI/LLM crawler
+        // (chuan llmstxt.org). Thay cho file static/llms.txt thu cong truoc day.
+        generateLLMsTxt: true,
+        generateLLMsFullTxt: true,
+        generateMarkdownFiles: true,
+        docsDir: 'docs',
+        title: 'TNS AI Docs',
+        description:
+          'Tai lieu huong dan he sinh thai ung dung TNS AI: EcoData, EcoLab, EcoLit, PDFHUB, KEYWORDs.',
+        includeOrder: [
+          'ecodata/**',
+          'ecolab/**',
+          'ecolit/**',
+          'pdfhub/**',
+          'keywords/**',
+        ],
+        includeUnmatchedLast: true,
+      },
+    ],
+  ],
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */

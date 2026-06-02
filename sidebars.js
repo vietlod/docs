@@ -93,6 +93,9 @@ const sidebars = {
       items: [
         'ecolab/mo-hinh/ardl',
         'ecolab/mo-hinh/fem-rem',
+        'ecolab/mo-hinh/gmm',
+        'ecolab/mo-hinh/vecm',
+        'ecolab/mo-hinh/did',
       ],
     },
     {
@@ -101,6 +104,7 @@ const sidebars = {
       collapsed: false,
       items: [
         'ecolab/vi-du/fdi-tang-truong-ardl',
+        'ecolab/vi-du/no-cong-tang-truong-panel',
       ],
     },
     {
