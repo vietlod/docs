@@ -1,0 +1,119 @@
+---
+id: data-dictionary
+title: Từ điển dữ liệu (Data Dictionary)
+description: Mô hình metadata, hệ thống mã chuẩn hóa (short code ss_dom_key_mod), các trường dữ liệu, tần suất và đơn vị của EcoData.
+---
+
+import Head from '@docusaurus/Head';
+
+export const dictSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'DefinedTermSet',
+  '@id': 'https://docs.tnsai.vn/ecodata/du-lieu/data-dictionary#termset',
+  name: 'EcoData Data Dictionary',
+  description:
+    'Metadata model and field definitions for EcoData indicators: standardized short code, label, unit, frequency, source, temporal and spatial coverage.',
+  url: 'https://docs.tnsai.vn/ecodata/du-lieu/data-dictionary',
+  inLanguage: ['vi', 'en'],
+  publisher: { '@type': 'Organization', name: 'EcoData', url: 'https://ecodata.io.vn/' },
+  hasDefinedTerm: [
+    { '@type': 'DefinedTerm', name: 'short_code', description: 'Standardized indicator code in the ss_dom_key_mod scheme (e.g. wb_mac_gdp_usd).' },
+    { '@type': 'DefinedTerm', name: 'code', description: 'Native source code as published by the original provider (e.g. NY.GDP.MKTP.CD).' },
+    { '@type': 'DefinedTerm', name: 'unit', description: 'Unit of measurement (e.g. USD, % of GDP, index, persons).' },
+    { '@type': 'DefinedTerm', name: 'frequency', description: 'Observation frequency: annual, quarterly, monthly or mixed.' },
+    { '@type': 'DefinedTerm', name: 'source', description: 'Originating organization (World Bank, IMF, GSO, Customs, ...).' },
+    { '@type': 'DefinedTerm', name: 'temporal_coverage', description: 'First and last year/period available for the series.' },
+    { '@type': 'DefinedTerm', name: 'spatial_coverage', description: 'Geographic unit of the series (country, province, firm, household).' },
+  ],
+};
+
+<Head>
+  <script type="application/ld+json">{JSON.stringify(dictSchema)}</script>
+</Head>
+
+# Từ điển dữ liệu (Data Dictionary)
+
+Tài liệu này định nghĩa **mô hình metadata** của EcoData: mỗi chỉ tiêu (indicator) được mô tả bằng một tập trường chuẩn để người dùng có thể tra cứu, trích dẫn và tái lập nghiên cứu. Từ điển áp dụng cho cả dữ liệu quốc tế và dữ liệu Việt Nam.
+
+## Mô hình metadata của một chỉ tiêu
+
+Mỗi chỉ tiêu trong EcoData mang các trường sau:
+
+| Trường | Ý nghĩa | Ví dụ |
+| --- | --- | --- |
+| `short_code` | Mã chuẩn hóa của EcoData (xem bên dưới) | `wb_mac_gdp_usd` |
+| `code` | Mã gốc do nguồn công bố | `NY.GDP.MKTP.CD` |
+| `label_vi` / `label_en` | Nhãn song ngữ | "GDP (USD hiện hành)" / "GDP (current US$)" |
+| `unit` | Đơn vị đo | `USD`, `% GDP`, `index`, `người` |
+| `frequency` | Tần suất quan sát | `annual`, `quarterly`, `monthly`, `mixed` |
+| `source` | Tổ chức nguồn | World Bank, IMF, GSO, Hải quan |
+| `time_start` / `time_end` | Năm/kỳ đầu và cuối | 1990 / 2023 |
+| `spatial_coverage` | Đơn vị phân tích | quốc gia, tỉnh, doanh nghiệp, hộ |
+| `data_quality_notes` | Ghi chú chất lượng/nguồn gốc | đơn vị, nhóm nguồn, lưu ý phương pháp |
+
+:::tip Tra cứu song hành
+Người dùng có thể tìm theo **`short_code`** (gọn, ổn định) hoặc **`code`** gốc của nguồn. Giao diện ưu tiên hiển thị `short_code`; mã gốc luôn được giữ trong metadata để đối chiếu.
+:::
+
+## Hệ thống mã chuẩn hóa: `ss_dom_key_mod`
+
+EcoData ánh xạ các mã gốc dài, không đồng nhất giữa các nguồn về một **mã ngắn có cấu trúc** gồm bốn đoạn, phân tách bằng dấu gạch dưới:
+
+```
+ss _ dom _ key _ mod
+│    │     │     └── modifier: đơn vị / biến thể (usd, pct, idx, sa, ...)
+│    │     └──────── key: tên chỉ tiêu (gdp, cpi, exp, pop, ...)
+│    └────────────── domain: lĩnh vực (mac, ext, fis, lab, dem, ...)
+└─────────────────── source: nguồn (wb, im, ad, un, fr, ...)
+```
+
+| Đoạn | Vai trò | Ví dụ giá trị |
+| --- | --- | --- |
+| `ss` (source) | Nguồn dữ liệu | `wb` (World Bank), `im` (IMF), `ad` (ADB), `un` (UN), `fr` (FRED) |
+| `dom` (domain) | Lĩnh vực | `mac` (vĩ mô), `ext` (đối ngoại), `fis` (tài khóa), `lab` (lao động), `dem` (dân số) |
+| `key` | Tên chỉ tiêu | `gdp`, `cpi`, `exp`, `imp`, `pop`, `une` |
+| `mod` | Đơn vị / biến thể | `usd`, `pct`, `idx`, `cap` (bình quân đầu người) |
+
+**Ví dụ ánh xạ:**
+
+| Mã gốc | `short_code` | Diễn giải |
+| --- | --- | --- |
+| `NY.GDP.MKTP.CD` | `wb_mac_gdp_usd` | World Bank · vĩ mô · GDP · USD hiện hành |
+| `FP.CPI.TOTL.ZG` | `wb_mac_cpi_pct` | World Bank · vĩ mô · CPI · %/năm |
+| `SL.UEM.TOTL.ZS` | `wb_lab_une_pct` | World Bank · lao động · thất nghiệp · % |
+
+:::note Nguồn chuẩn của bộ mã
+Bộ mã được sinh và kiểm định bằng công cụ Codebook tích hợp (trang quản trị `Codebook`) và script kiểm định nội bộ. Hậu tố tự sinh được giới hạn `[a-z0-9]{2,8}` ký tự. Toàn bộ catalogue (~18.000+ chỉ tiêu) đều có `short_code`.
+:::
+
+## Tần suất và đơn vị
+
+- **Tần suất (`frequency`)**: `annual` (theo năm), `quarterly` (Q1–Q4), `monthly` (M01–M12), hoặc `mixed` khi một chỉ tiêu có nhiều tần suất theo nguồn.
+- **Khóa kỳ (`period_key`)**: với dữ liệu dưới năm, mỗi quan sát mang khóa kỳ chuẩn — `Q1`…`Q4` cho quý, `M01`…`M12` cho tháng. Dữ liệu năm để khóa kỳ trống.
+- **Đơn vị (`unit`)**: giữ nguyên ngữ nghĩa của nguồn (USD, % GDP, chỉ số, người, tấn…). Khi ghép panel nhiều nguồn, hãy đọc `unit` để tránh cộng gộp sai đơn vị.
+
+## Định nghĩa theo nhóm dữ liệu
+
+Mỗi nhóm có bộ biến đặc trưng; xem trang chi tiết để biết danh sách đầy đủ và phạm vi:
+
+| Nhóm | Đơn vị phân tích | Biến tiêu biểu | Chi tiết |
+| --- | --- | --- | --- |
+| Global Data | Quốc gia × năm | GDP, CPI, xuất/nhập khẩu, FDI, dân số | [Global Data](/ecodata/indicators/global-data) |
+| GSO Việt Nam | Quốc gia/Tỉnh × năm | GRDP, dân số, công nghiệp, CPI, đầu tư | [GSO Việt Nam](/ecodata/indicators/gso-vietnam) |
+| Hải quan | Mặt hàng × đối tác × kỳ | trị giá XK/NK, lượng, cán cân | [Customs](/ecodata/indicators/customs) |
+| Macro Survey | Tỉnh × năm | PCI, PAPI, PAR, SIPAS, ICT | [Macro Survey & VHLSS](/ecodata/indicators/macro-survey-vhlss) |
+| VHLSS Micro | Hộ/Cá nhân × wave | thu nhập, chi tiêu, giáo dục, y tế | [Macro Survey & VHLSS](/ecodata/indicators/macro-survey-vhlss) |
+| Stock Hub | Mã CK × thời gian | giá OHLCV, doanh thu, LNST, EPS, sự kiện | [Stock Hub](/ecodata/indicators/stock-hub) |
+
+## Cách dùng metadata để tái lập
+
+1. Lưu **`short_code` + `code` gốc** cùng dữ liệu để người khác đối chiếu nguồn.
+2. Ghi lại **`unit`, `frequency`, `time_start/time_end`** trong phần mô tả dữ liệu của nghiên cứu.
+3. Khi ghép nhiều nguồn, kiểm tra **đơn vị** và **đơn vị phân tích** trước khi tạo panel.
+4. Xuất kèm metadata (CSV/Excel/JSON) — xem [Xuất dữ liệu](/ecodata/xuat-du-lieu/preview-export).
+
+## Xem thêm
+
+- [Phương pháp luận dữ liệu](/ecodata/du-lieu/methodology) — cách EcoData thu thập, làm sạch và chuẩn hóa.
+- [Tổng hợp nhóm indicators](/ecodata/indicators/tong-hop-indicators)
+- [Câu hỏi thường gặp (FAQ)](/ecodata/faq)

@@ -8,6 +8,7 @@ const sidebars = {
       label: 'Bắt đầu',
       collapsed: false,
       items: [
+        'ecodata/bat-dau/huong-dan-nhanh',
         'ecodata/bat-dau/login-filter-preview-export',
       ],
     },
@@ -30,6 +31,15 @@ const sidebars = {
         'ecodata/indicators/customs',
         'ecodata/indicators/macro-survey-vhlss',
         'ecodata/indicators/stock-hub',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Từ điển & phương pháp',
+      collapsed: false,
+      items: [
+        'ecodata/du-lieu/data-dictionary',
+        'ecodata/du-lieu/methodology',
       ],
     },
     {
