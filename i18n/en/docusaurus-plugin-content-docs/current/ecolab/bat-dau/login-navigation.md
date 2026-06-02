@@ -41,8 +41,10 @@ All research activities, data collection, and model runs in EcoLab must be organ
 3.  Enter a **Description** (Optional - summarizing the research goals).
 4.  **Content Language Setting:**
     *   Select **Tiếng Việt** (Vietnamese) or **English** for the AI output.
-    *   > [!WARNING]
-    *   **This setting will be PERMANENTLY LOCKED** once the project is created. The content language determines the language of all AI-generated outputs (ideas, literature reviews, reports) throughout the project life cycle.
+
+    :::warning
+    **This setting will be PERMANENTLY LOCKED** once the project is created. The content language determines the language of all AI-generated outputs (ideas, literature reviews, reports) throughout the project life cycle.
+    :::
 5.  Click **Create** to initialize the project and set it as your active project.
 
 ---

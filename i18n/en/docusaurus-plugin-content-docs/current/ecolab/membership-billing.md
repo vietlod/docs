@@ -38,8 +38,9 @@ To activate AI Agents throughout the research pipeline, you need to configure at
 3.  Paste your API key and click **Thêm** (Add).
 4.  Click **Kiểm tra** (Test Connection). The system will send a small test prompt to verify. A green checkmark confirms a successful connection.
 
-> [!IMPORTANT]
-> **API Key Encryption:** All user-provided API keys are encrypted at rest using **asymmetric encryption in the database**. Keys are only decrypted in-memory during API calls and are never exposed.
+:::info[Important]
+**API Key Encryption:** All user-provided API keys are encrypted at rest using **asymmetric encryption in the database**. Keys are only decrypted in-memory during API calls and are never exposed.
+:::
 
 ---
 
@@ -59,6 +60,8 @@ Bank Transfer → SePay webhook notification → Instant Account Activation
     *   **A VietQR Code** (for fast scanning using any Vietnamese Mobile Banking application).
     *   **Transfer Details:** Account Number, Recipient Bank, exact Amount, and the **Transfer Message** (containing a unique transaction ID in the format `ECOLABXXXXX`).
 4.  Initiate the transfer from your banking app.
-    *   > [!WARNING]
-    *   If transferring manually (not scanning the QR code), **you must input the Transfer Message exactly as displayed**. This message is the only way the system matches transaction records.
+
+    :::warning
+    If transferring manually (not scanning the QR code), **you must input the Transfer Message exactly as displayed**. This message is the only way the system matches transaction records.
+    :::
 5.  As soon as the bank processes the transaction (usually within 3 to 10 seconds), SePay will send a webhook confirmation to the EcoLab backend. The system will automatically upgrade your account to Premium without requiring a page reload.

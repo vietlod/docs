@@ -1,0 +1,119 @@
+---
+id: data-dictionary
+title: Data Dictionary
+description: The metadata model, standardized code scheme (short code ss_dom_key_mod), data fields, frequencies, and units used in EcoData.
+---
+
+import Head from '@docusaurus/Head';
+
+export const dictSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'DefinedTermSet',
+  '@id': 'https://docs.tnsai.vn/en/ecodata/du-lieu/data-dictionary#termset',
+  name: 'EcoData Data Dictionary',
+  description:
+    'Metadata model and field definitions for EcoData indicators: standardized short code, label, unit, frequency, source, temporal and spatial coverage.',
+  url: 'https://docs.tnsai.vn/en/ecodata/du-lieu/data-dictionary',
+  inLanguage: ['vi', 'en'],
+  publisher: { '@type': 'Organization', name: 'EcoData', url: 'https://ecodata.io.vn/' },
+  hasDefinedTerm: [
+    { '@type': 'DefinedTerm', name: 'short_code', description: 'Standardized indicator code in the ss_dom_key_mod scheme (e.g. wb_mac_gdp_usd).' },
+    { '@type': 'DefinedTerm', name: 'code', description: 'Native source code as published by the original provider (e.g. NY.GDP.MKTP.CD).' },
+    { '@type': 'DefinedTerm', name: 'unit', description: 'Unit of measurement (e.g. USD, % of GDP, index, persons).' },
+    { '@type': 'DefinedTerm', name: 'frequency', description: 'Observation frequency: annual, quarterly, monthly or mixed.' },
+    { '@type': 'DefinedTerm', name: 'source', description: 'Originating organization (World Bank, IMF, GSO, Customs, ...).' },
+    { '@type': 'DefinedTerm', name: 'temporal_coverage', description: 'First and last year/period available for the series.' },
+    { '@type': 'DefinedTerm', name: 'spatial_coverage', description: 'Geographic unit of the series (country, province, firm, household).' },
+  ],
+};
+
+<Head>
+  <script type="application/ld+json">{JSON.stringify(dictSchema)}</script>
+</Head>
+
+# Data Dictionary
+
+This page defines the **metadata model** of EcoData: every indicator is described by a standard set of fields so users can look it up, cite it, and reproduce their research. The dictionary applies to both international and Vietnam data.
+
+## Metadata model of an indicator
+
+Every indicator in EcoData carries the following fields:
+
+| Field | Meaning | Example |
+| --- | --- | --- |
+| `short_code` | EcoData standardized code (see below) | `wb_mac_gdp_usd` |
+| `code` | Native code published by the source | `NY.GDP.MKTP.CD` |
+| `label_vi` / `label_en` | Bilingual labels | "GDP (USD hiện hành)" / "GDP (current US$)" |
+| `unit` | Unit of measurement | `USD`, `% of GDP`, `index`, `persons` |
+| `frequency` | Observation frequency | `annual`, `quarterly`, `monthly`, `mixed` |
+| `source` | Originating organization | World Bank, IMF, GSO, Customs |
+| `time_start` / `time_end` | First and last year/period | 1990 / 2023 |
+| `spatial_coverage` | Unit of analysis | country, province, firm, household |
+| `data_quality_notes` | Quality / provenance notes | unit, source group, methodological caveats |
+
+:::tip Dual lookup
+Users can search by **`short_code`** (compact, stable) or by the source's native **`code`**. The interface shows `short_code` first; the native code is always kept in the metadata for cross-checking.
+:::
+
+## Standardized code scheme: `ss_dom_key_mod`
+
+EcoData maps long, inconsistent native codes across sources into a single **structured short code** made of four segments separated by underscores:
+
+```
+ss _ dom _ key _ mod
+│    │     │     └── modifier: unit / variant (usd, pct, idx, sa, ...)
+│    │     └──────── key: indicator name (gdp, cpi, exp, pop, ...)
+│    └────────────── domain: field (mac, ext, fis, lab, dem, ...)
+└─────────────────── source: provider (wb, im, ad, un, fr, ...)
+```
+
+| Segment | Role | Example values |
+| --- | --- | --- |
+| `ss` (source) | Data source | `wb` (World Bank), `im` (IMF), `ad` (ADB), `un` (UN), `fr` (FRED) |
+| `dom` (domain) | Field | `mac` (macro), `ext` (external), `fis` (fiscal), `lab` (labor), `dem` (demographic) |
+| `key` | Indicator name | `gdp`, `cpi`, `exp`, `imp`, `pop`, `une` |
+| `mod` | Unit / variant | `usd`, `pct`, `idx`, `cap` (per capita) |
+
+**Example mappings:**
+
+| Native code | `short_code` | Interpretation |
+| --- | --- | --- |
+| `NY.GDP.MKTP.CD` | `wb_mac_gdp_usd` | World Bank · macro · GDP · current USD |
+| `FP.CPI.TOTL.ZG` | `wb_mac_cpi_pct` | World Bank · macro · CPI · %/year |
+| `SL.UEM.TOTL.ZS` | `wb_lab_une_pct` | World Bank · labor · unemployment · % |
+
+:::note Canonical source of the code scheme
+The code scheme is generated and validated by the integrated Codebook tool (the `Codebook` admin page) and internal validation scripts. Auto-generated suffixes are limited to `[a-z0-9]{2,8}` characters. The entire catalogue (~18,000+ indicators) has `short_code` values.
+:::
+
+## Frequency and units
+
+- **Frequency (`frequency`)**: `annual`, `quarterly` (Q1–Q4), `monthly` (M01–M12), or `mixed` when an indicator has multiple frequencies depending on the source.
+- **Period key (`period_key`)**: for sub-annual data, each observation carries a standard period key — `Q1`…`Q4` for quarters, `M01`…`M12` for months. Annual data leaves the period key empty.
+- **Unit (`unit`)**: keeps the source's original semantics (USD, % of GDP, index, persons, tonnes, etc.). When building a multi-source panel, read `unit` to avoid aggregating mismatched units.
+
+## Definitions by data group
+
+Each group has its own characteristic variables; see the detail page for the full list and scope:
+
+| Group | Unit of analysis | Representative variables | Details |
+| --- | --- | --- | --- |
+| Global Data | Country × year | GDP, CPI, exports/imports, FDI, population | [Global Data](/ecodata/indicators/global-data) |
+| Vietnam GSO | National/Province × year | GRDP, population, industry, CPI, investment | [Vietnam GSO](/ecodata/indicators/gso-vietnam) |
+| Customs | Commodity × partner × period | export/import value, quantity, balance | [Customs](/ecodata/indicators/customs) |
+| Macro Survey | Province × year | PCI, PAPI, PAR, SIPAS, ICT | [Macro Survey & VHLSS](/ecodata/indicators/macro-survey-vhlss) |
+| VHLSS Micro | Household/Individual × wave | income, expenditure, education, health | [Macro Survey & VHLSS](/ecodata/indicators/macro-survey-vhlss) |
+| Stock Hub | Symbol × time | OHLCV prices, revenue, net income, EPS, events | [Stock Hub](/ecodata/indicators/stock-hub) |
+
+## Using metadata for reproducibility
+
+1. Keep the **`short_code` + native `code`** with your data so others can cross-check sources.
+2. Record the **`unit`, `frequency`, `time_start/time_end`** in your study's data description.
+3. When combining sources, check the **unit** and **unit of analysis** before building a panel.
+4. Export with metadata (CSV/Excel/JSON) — see [Data Export](/ecodata/xuat-du-lieu/preview-export).
+
+## See Also
+
+- [Data Methodology](/ecodata/du-lieu/methodology) — how EcoData collects, cleans, and standardizes data.
+- [Indicator Groups](/ecodata/indicators/tong-hop-indicators)
+- [Frequently Asked Questions (FAQ)](/ecodata/faq)
