@@ -220,6 +220,11 @@ const sidebars = {
       items: [
         'ecolab/vi-du/fdi-tang-truong-ardl',
         'ecolab/vi-du/no-cong-tang-truong-panel',
+        'ecolab/vi-du/luong-giao-duc-ols',
+        'ecolab/vi-du/iv-loi-suat-giao-duc',
+        'ecolab/vi-du/vo-no-logit',
+        'ecolab/vi-du/bang-sang-che-count',
+        'ecolab/vi-du/bat-binh-dang-quantile',
       ],
     },
     {
