@@ -114,6 +114,16 @@ const sidebars = {
         },
         {
           type: 'category',
+          label: '2. Hồi quy chính quy hóa',
+          items: [
+            'ecolab/mo-hinh/ridge',
+            'ecolab/mo-hinh/lasso',
+            'ecolab/mo-hinh/elastic-net',
+            'ecolab/mo-hinh/adaptive-lasso',
+          ],
+        },
+        {
+          type: 'category',
           label: '3. Dữ liệu bảng tuyến tính',
           items: ['ecolab/mo-hinh/fem-rem'],
         },
