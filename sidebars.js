@@ -101,6 +101,7 @@ const sidebars = {
       label: 'Mô hình kinh tế lượng',
       collapsed: false,
       items: [
+        'ecolab/mo-hinh/danh-muc',
         'ecolab/mo-hinh/ardl',
         'ecolab/mo-hinh/fem-rem',
         'ecolab/mo-hinh/gmm',
