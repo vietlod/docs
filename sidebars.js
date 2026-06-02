@@ -155,6 +155,14 @@ const sidebars = {
         },
         {
           type: 'category',
+          label: '7. Hồi quy phân vị',
+          items: [
+            'ecolab/mo-hinh/quantile',
+            'ecolab/mo-hinh/panel-quantile',
+          ],
+        },
+        {
+          type: 'category',
           label: '8. Chuỗi thời gian đơn biến',
           items: ['ecolab/mo-hinh/ardl'],
         },
@@ -162,6 +170,23 @@ const sidebars = {
           type: 'category',
           label: '9. Chuỗi thời gian đa biến',
           items: ['ecolab/mo-hinh/vecm'],
+        },
+        {
+          type: 'category',
+          label: '10. IV & hệ phương trình',
+          items: [
+            'ecolab/mo-hinh/iv-2sls',
+            'ecolab/mo-hinh/3sls',
+            'ecolab/mo-hinh/sur',
+          ],
+        },
+        {
+          type: 'category',
+          label: '11. Phi tuyến & bán tham số',
+          items: [
+            'ecolab/mo-hinh/nls',
+            'ecolab/mo-hinh/gam',
+          ],
         },
         {
           type: 'category',
