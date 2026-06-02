@@ -134,6 +134,17 @@ const sidebars = {
         },
         {
           type: 'category',
+          label: '5. Biến phụ thuộc giới hạn',
+          items: [
+            'ecolab/mo-hinh/logit',
+            'ecolab/mo-hinh/probit',
+            'ecolab/mo-hinh/tobit',
+            'ecolab/mo-hinh/truncated',
+            'ecolab/mo-hinh/heckman',
+          ],
+        },
+        {
+          type: 'category',
           label: '8. Chuỗi thời gian đơn biến',
           items: ['ecolab/mo-hinh/ardl'],
         },
