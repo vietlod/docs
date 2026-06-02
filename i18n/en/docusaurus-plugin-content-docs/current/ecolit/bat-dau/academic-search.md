@@ -52,5 +52,6 @@ By default, the system utilizes local LLMs running via **Ollama** (such as Qwen3
 5.  Click the **Test Connection** button. The system will send a small request. Once the status shows `✅ Connected`, choose your default models and click save.
 6.  Enable **Set as preferred** to prioritize this provider over the local Ollama instance.
 
-> [!IMPORTANT]
-> **Encryption Security:** Your API keys are encrypted using the **AES-256** algorithm before being written to the PostgreSQL database. Keys are only decrypted in-memory during API calls.
+:::info[Important]
+**Encryption Security:** Your API keys are encrypted using the **AES-256** algorithm before being written to the PostgreSQL database. Keys are only decrypted in-memory during API calls.
+:::

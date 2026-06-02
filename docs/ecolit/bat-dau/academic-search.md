@@ -52,5 +52,6 @@ Hệ thống mặc định sử dụng các mô hình chạy local qua bộ máy
 5.  Nhấn nút **Kiểm tra kết nối (Test Connection)**. Hệ thống sẽ gọi thử API. Khi hiển thị trạng thái `✅ Đã kết nối`, bạn có thể chọn mô hình mặc định và nhấn lưu.
 6.  Bật tùy chọn **Đặt làm nhà cung cấp ưa thích (Set as preferred)** để hệ thống ưu tiên sử dụng API key này thay vì Ollama local.
 
-> [!IMPORTANT]
-> **Bảo mật mã hóa:** Khóa API của bạn được mã hóa bằng thuật toán **AES-256** trước khi ghi vào cơ sở dữ liệu PostgreSQL và chỉ được giải mã tạm thời trên bộ nhớ RAM khi gọi API.
+:::info[Quan trọng]
+**Bảo mật mã hóa:** Khóa API của bạn được mã hóa bằng thuật toán **AES-256** trước khi ghi vào cơ sở dữ liệu PostgreSQL và chỉ được giải mã tạm thời trên bộ nhớ RAM khi gọi API.
+:::
