@@ -25,12 +25,12 @@ Trong EcoLab, GMM thuộc nhóm **Dữ liệu bảng** và sinh mã tái lập S
 
 ## Đặc tả mô hình
 
-```
-Y_it = α·Y_{i,t-1} + β·X_it + μ_i + ε_it
-```
+$$
+Y_{it} = \alpha \, Y_{i,t-1} + \beta \, X_{it} + \mu_i + \varepsilon_{it}
+$$
 
-- `Y_{i,t-1}`: biến phụ thuộc trễ (nguồn gốc tính động và nội sinh với `μ_i`).
-- Difference GMM: lấy sai phân bậc nhất để khử `μ_i`, dùng độ trễ mức (levels) làm công cụ.
+- $Y_{i,t-1}$: biến phụ thuộc trễ (nguồn gốc tính động và nội sinh với $\mu_i$).
+- Difference GMM: lấy sai phân bậc nhất để khử $\mu_i$, dùng độ trễ mức (levels) làm công cụ.
 - System GMM: kết hợp phương trình sai phân và phương trình mức, dùng thêm độ trễ sai phân làm công cụ cho phương trình mức.
 
 ---

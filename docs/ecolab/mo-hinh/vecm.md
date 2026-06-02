@@ -26,13 +26,13 @@ Trong EcoLab, VECM thuộc nhóm **Chuỗi thời gian**. Khác với [ARDL](/ec
 
 Dạng VECM rút gọn:
 
-```
-ΔY_t = Π·Y_{t-1} + Σ Γ_i·ΔY_{t-i} + ε_t
-```
+$$
+\Delta Y_t = \Pi \, Y_{t-1} + \sum_i \Gamma_i \, \Delta Y_{t-i} + \varepsilon_t
+$$
 
-- `Π = α·β'`: ma trận `β` chứa các **vector đồng liên kết** (quan hệ dài hạn); `α` là **tốc độ điều chỉnh**.
-- **Hạng (rank) của Π = r** = số quan hệ đồng liên kết, xác định bằng kiểm định Johansen.
-- `Γ_i`: động học ngắn hạn.
+- $\Pi = \alpha \beta'$: ma trận $\beta$ chứa các **vector đồng liên kết** (quan hệ dài hạn); $\alpha$ là **tốc độ điều chỉnh**.
+- **Hạng (rank) của $\Pi = r$** = số quan hệ đồng liên kết, xác định bằng kiểm định Johansen.
+- $\Gamma_i$: động học ngắn hạn.
 
 ---
 

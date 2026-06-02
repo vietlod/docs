@@ -2,6 +2,8 @@
 // Documentation site for TNS AI Applications.
 
 import {themes as prismThemes} from 'prism-react-renderer';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
 
 const docsDomain = 'https://docs.tnsai.vn';
 
@@ -83,6 +85,14 @@ const config = {
     },
   },
 
+  stylesheets: [
+    {
+      href: 'https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.css',
+      type: 'text/css',
+      crossorigin: 'anonymous',
+    },
+  ],
+
   presets: [
     [
       'classic',
@@ -93,6 +103,8 @@ const config = {
           sidebarPath: './sidebars.js',
           sidebarCollapsible: true,
           editUrl: 'https://github.com/vietlod/docs/tree/main/',
+          remarkPlugins: [remarkMath],
+          rehypePlugins: [rehypeKatex],
         },
         blog: false,
         theme: {

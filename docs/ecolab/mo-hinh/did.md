@@ -24,11 +24,11 @@ Trong EcoLab, DID thuộc nhóm **Suy luận nhân quả (Causal Inference)**. X
 
 Dạng DID hai nhóm – hai thời kỳ:
 
-```
-Y_it = β0 + β1·Treat_i + β2·Post_t + δ·(Treat_i × Post_t) + ε_it
-```
+$$
+Y_{it} = \beta_0 + \beta_1 \, \text{Treat}_i + \beta_2 \, \text{Post}_t + \delta \, (\text{Treat}_i \times \text{Post}_t) + \varepsilon_{it}
+$$
 
-- `δ` (hệ số tương tác) là **ước lượng tác động chính sách (ATT)**.
+- $\delta$ (hệ số tương tác) là **ước lượng tác động chính sách (ATT)**.
 - Mở rộng: TWFE (two-way fixed effects) với hiệu ứng cố định đơn vị và thời gian cho nhiều nhóm/nhiều thời kỳ.
 
 ---

@@ -32,14 +32,14 @@ Trong EcoLab, FEM/REM thuộc nhóm **Dữ liệu bảng (Panel Data)** và sinh
 
 ## Đặc tả mô hình
 
-```
-Y_it = β·X_it + α_i + u_it
-```
+$$
+Y_{it} = \beta \, X_{it} + \alpha_i + u_{it}
+$$
 
-- `Y_it`: biến phụ thuộc của đơn vị `i` tại thời kỳ `t`.
-- `X_it`: vector biến giải thích.
-- `α_i`: đặc điểm riêng không quan sát được của đơn vị `i`.
-- FEM xử lý `α_i` như tham số cố định; REM xử lý `α_i` như biến ngẫu nhiên với `E[α_i | X_it] = 0`.
+- $Y_{it}$: biến phụ thuộc của đơn vị $i$ tại thời kỳ $t$.
+- $X_{it}$: vector biến giải thích.
+- $\alpha_i$: đặc điểm riêng không quan sát được của đơn vị $i$.
+- FEM xử lý $\alpha_i$ như tham số cố định; REM xử lý $\alpha_i$ như biến ngẫu nhiên với $E[\alpha_i \mid X_{it}] = 0$.
 
 ---
 

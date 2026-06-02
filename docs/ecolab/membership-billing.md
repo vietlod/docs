@@ -38,8 +38,9 @@ Tại thẻ **Sử dụng Token (Token Usage)**, hệ thống thống kê trực
 3.  Dán khóa API của bạn vào ô nhập liệu và nhấn **Thêm**.
 4.  Nhấn nút **Kiểm tra (Test Connection)**. Hệ thống sẽ gửi một câu lệnh kiểm tra ngắn để xác thực. Dấu tích xanh hiển thị nghĩa là khóa hoạt động chính xác.
 
-> [!IMPORTANT]
-> **Cam kết bảo mật:** Tất cả các khóa API do người dùng cung cấp đều được **mã hóa bất đối xứng ở mức cơ sở dữ liệu** trước khi lưu trữ. Khóa chỉ được giải mã tạm thời trong bộ nhớ RAM tại thời điểm gửi request đến máy chủ AI, đảm bảo tuyệt đối không bị rò rỉ.
+:::info[Quan trọng]
+**Cam kết bảo mật:** Tất cả các khóa API do người dùng cung cấp đều được **mã hóa bất đối xứng ở mức cơ sở dữ liệu** trước khi lưu trữ. Khóa chỉ được giải mã tạm thời trong bộ nhớ RAM tại thời điểm gửi request đến máy chủ AI, đảm bảo tuyệt đối không bị rò rỉ.
+:::
 
 ---
 
@@ -59,6 +60,8 @@ Chuyển khoản ngân hàng → SePay webhook thông báo → Hệ thống kíc
     *   **Mã QR thanh toán VietQR** (hỗ trợ quét nhanh trên mọi ứng dụng ngân hàng di động - Mobile Banking).
     *   **Thông tin chuyển khoản chi tiết:** Số tài khoản, Ngân hàng thụ hưởng, Số tiền chính xác và **Nội dung chuyển khoản** (chứa mã giao dịch duy nhất có định dạng dạng `ECOLABXXXXX`).
 4.  Thực hiện chuyển khoản thông qua ứng dụng ngân hàng của bạn.
-    *   > [!WARNING]
-    *   Nếu chuyển khoản thủ công (không quét QR), **bạn phải nhập chính xác Nội dung chuyển khoản** được hiển thị. Đây là thông tin duy nhất để hệ thống khớp giao dịch tự động.
+
+    :::warning
+    Nếu chuyển khoản thủ công (không quét QR), **bạn phải nhập chính xác Nội dung chuyển khoản** được hiển thị. Đây là thông tin duy nhất để hệ thống khớp giao dịch tự động.
+    :::
 5.  Ngay khi ngân hàng xử lý thành công (thường từ 3 - 10 giây), SePay sẽ gửi webhook xác nhận về máy chủ EcoLab. Hệ thống sẽ tự động kích hoạt tài khoản Premium của bạn và hiển thị thông báo thành công trên màn hình mà không cần bạn phải tải lại trang.

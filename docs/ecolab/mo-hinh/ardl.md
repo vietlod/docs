@@ -29,17 +29,17 @@ Dùng ARDL khi đồng thời thỏa các điều kiện sau:
 
 Dạng tổng quát của ARDL(p, q) với một biến độc lập:
 
-```
-Y_t = c + Σ(i=1..p) φ_i · Y_{t-i} + Σ(j=0..q) β_j · X_{t-j} + ε_t
-```
+$$
+Y_t = c + \sum_{i=1}^{p} \varphi_i \, Y_{t-i} + \sum_{j=0}^{q} \beta_j \, X_{t-j} + \varepsilon_t
+$$
 
-Trong đó `p` là độ trễ của biến phụ thuộc `Y`, `q` là độ trễ của biến độc lập `X`. Dạng hiệu chỉnh sai số (ARDL-ECM) tách quan hệ dài hạn và điều chỉnh ngắn hạn:
+Trong đó $p$ là độ trễ của biến phụ thuộc $Y$, $q$ là độ trễ của biến độc lập $X$. Dạng hiệu chỉnh sai số (ARDL-ECM) tách quan hệ dài hạn và điều chỉnh ngắn hạn:
 
-```
-ΔY_t = c + α·(Y_{t-1} − θ·X_{t-1}) + Σ γ_i·ΔY_{t-i} + Σ δ_j·ΔX_{t-j} + ε_t
-```
+$$
+\Delta Y_t = c + \alpha \, (Y_{t-1} - \theta \, X_{t-1}) + \sum_i \gamma_i \, \Delta Y_{t-i} + \sum_j \delta_j \, \Delta X_{t-j} + \varepsilon_t
+$$
 
-`θ` là hệ số dài hạn; `α` (hệ số điều chỉnh, error correction term) phải âm và có ý nghĩa thống kê để khẳng định tồn tại quan hệ đồng liên kết.
+$\theta$ là hệ số dài hạn; $\alpha$ (hệ số điều chỉnh, error correction term) phải âm và có ý nghĩa thống kê để khẳng định tồn tại quan hệ đồng liên kết.
 
 ---
 

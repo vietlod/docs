@@ -41,8 +41,10 @@ Mọi hoạt động nghiên cứu, thu thập dữ liệu và chạy mô hình 
 3.  Nhập **Mô tả dự án** (Tùy chọn - tóm tắt mục tiêu nghiên cứu).
 4.  **Cài đặt ngôn ngữ nội dung (Content Language):** 
     *   Lựa chọn **Tiếng Việt** hoặc **Tiếng Anh** cho đầu ra AI.
-    *   > [!WARNING]
-    *   **Cài đặt này sẽ bị KHÓA vĩnh viễn** sau khi dự án được tạo. Ngôn ngữ nội dung này quyết định ngôn ngữ của tất cả các kết quả do AI trả về trong suốt quá trình nghiên cứu (ý tưởng, tóm tắt tài liệu, báo cáo).
+
+    :::warning
+    **Cài đặt này sẽ bị KHÓA vĩnh viễn** sau khi dự án được tạo. Ngôn ngữ nội dung này quyết định ngôn ngữ của tất cả các kết quả do AI trả về trong suốt quá trình nghiên cứu (ý tưởng, tóm tắt tài liệu, báo cáo).
+    :::
 5.  Nhấn nút **Tạo** để hoàn tất khởi tạo. Dự án mới sẽ tự động được chọn làm dự án đang hoạt động (Active Project).
 
 ---
