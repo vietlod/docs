@@ -125,7 +125,11 @@ const sidebars = {
         {
           type: 'category',
           label: '3. Dữ liệu bảng tuyến tính',
-          items: ['ecolab/mo-hinh/fem-rem'],
+          items: [
+            'ecolab/mo-hinh/pooled-ols',
+            'ecolab/mo-hinh/fem-rem',
+            'ecolab/mo-hinh/between',
+          ],
         },
         {
           type: 'category',
@@ -164,12 +168,22 @@ const sidebars = {
         {
           type: 'category',
           label: '8. Chuỗi thời gian đơn biến',
-          items: ['ecolab/mo-hinh/ardl'],
+          items: [
+            'ecolab/mo-hinh/arima',
+            'ecolab/mo-hinh/sarima',
+            'ecolab/mo-hinh/garch',
+            'ecolab/mo-hinh/egarch',
+            'ecolab/mo-hinh/ardl',
+          ],
         },
         {
           type: 'category',
           label: '9. Chuỗi thời gian đa biến',
-          items: ['ecolab/mo-hinh/vecm'],
+          items: [
+            'ecolab/mo-hinh/var',
+            'ecolab/mo-hinh/vecm',
+            'ecolab/mo-hinh/svar',
+          ],
         },
         {
           type: 'category',
@@ -191,7 +205,11 @@ const sidebars = {
         {
           type: 'category',
           label: '12. Suy luận nhân quả',
-          items: ['ecolab/mo-hinh/did'],
+          items: [
+            'ecolab/mo-hinh/did',
+            'ecolab/mo-hinh/psm',
+            'ecolab/mo-hinh/rdd',
+          ],
         },
       ],
     },
