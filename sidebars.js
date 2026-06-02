@@ -225,6 +225,10 @@ const sidebars = {
         'ecolab/vi-du/vo-no-logit',
         'ecolab/vi-du/bang-sang-che-count',
         'ecolab/vi-du/bat-binh-dang-quantile',
+        'ecolab/vi-du/du-bao-lam-phat-lasso',
+        'ecolab/vi-du/var-vimo',
+        'ecolab/vi-du/duong-cong-engel-gam',
+        'ecolab/vi-du/rdd-hoc-bong',
       ],
     },
     {
