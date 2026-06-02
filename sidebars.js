@@ -102,11 +102,41 @@ const sidebars = {
       collapsed: false,
       items: [
         'ecolab/mo-hinh/danh-muc',
-        'ecolab/mo-hinh/ardl',
-        'ecolab/mo-hinh/fem-rem',
-        'ecolab/mo-hinh/gmm',
-        'ecolab/mo-hinh/vecm',
-        'ecolab/mo-hinh/did',
+        {
+          type: 'category',
+          label: '1. Hồi quy tuyến tính cổ điển',
+          items: [
+            'ecolab/mo-hinh/ols',
+            'ecolab/mo-hinh/wls',
+            'ecolab/mo-hinh/gls',
+            'ecolab/mo-hinh/tls',
+          ],
+        },
+        {
+          type: 'category',
+          label: '3. Dữ liệu bảng tuyến tính',
+          items: ['ecolab/mo-hinh/fem-rem'],
+        },
+        {
+          type: 'category',
+          label: '4. Dữ liệu bảng động',
+          items: ['ecolab/mo-hinh/gmm'],
+        },
+        {
+          type: 'category',
+          label: '8. Chuỗi thời gian đơn biến',
+          items: ['ecolab/mo-hinh/ardl'],
+        },
+        {
+          type: 'category',
+          label: '9. Chuỗi thời gian đa biến',
+          items: ['ecolab/mo-hinh/vecm'],
+        },
+        {
+          type: 'category',
+          label: '12. Suy luận nhân quả',
+          items: ['ecolab/mo-hinh/did'],
+        },
       ],
     },
     {
