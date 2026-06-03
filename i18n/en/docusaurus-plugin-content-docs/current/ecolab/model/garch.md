@@ -1,4 +1,4 @@
----
+﻿---
 title: ARCH / GARCH — Volatility models
 sidebar_position: 3
 description: ARCH/GARCH models capture time-varying conditional variance (volatility clustering) in financial series, and how to run them in EcoLab.
@@ -111,9 +111,10 @@ plt.show()
 
 <VideoTutorial
   title="Running GARCH in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 
 - [EGARCH](/en/ecolab/model/egarch) · [ARIMA](/en/ecolab/model/arima) · [Catalog](/en/ecolab/model/group)
+

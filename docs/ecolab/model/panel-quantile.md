@@ -1,4 +1,4 @@
----
+﻿---
 title: Panel Quantile (FE-QR)
 sidebar_position: 2
 description: Hồi quy phân vị cho dữ liệu bảng có hiệu ứng cố định (FE-QR), kết hợp quantile regression với panel, và cách chạy trong EcoLab.
@@ -121,9 +121,10 @@ print(mod.summary())
 
 <VideoTutorial
   title="Hướng dẫn chạy Panel Quantile (FE-QR) trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 
 - [Hồi quy phân vị](/ecolab/model/quantile) · [FEM/REM](/ecolab/model/fem-rem) · [Danh mục](/ecolab/model/group)
+

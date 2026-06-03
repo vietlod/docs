@@ -1,4 +1,4 @@
----
+﻿---
 title: SARIMA — Seasonal ARIMA
 sidebar_position: 2
 description: The SARIMA (Seasonal ARIMA) model extends ARIMA for series with seasonality, the (p,d,q)(P,D,Q)s notation, and how to run it in EcoLab.
@@ -116,9 +116,10 @@ print(forecast.summary_frame())
 
 <VideoTutorial
   title="Running SARIMA in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 
 - [ARIMA](/en/ecolab/model/arima) · [GARCH](/en/ecolab/model/garch) · [Catalog](/en/ecolab/model/group)
+

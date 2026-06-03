@@ -1,4 +1,4 @@
----
+﻿---
 title: Between Estimator
 sidebar_position: 3
 description: Ước lượng Between dùng trung bình theo đơn vị để khai thác biến thiên giữa các đơn vị (cross-unit), khác FE/RE, và cách chạy trong EcoLab.
@@ -91,9 +91,10 @@ print(model.summary)
 
 <VideoTutorial
   title="Hướng dẫn chạy Between Estimator trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 
 - [FEM/REM](/ecolab/model/fem-rem) · [Pooled OLS](/ecolab/model/pooled-ols) · [Danh mục](/ecolab/model/group)
+

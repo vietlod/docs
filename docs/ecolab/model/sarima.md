@@ -1,4 +1,4 @@
----
+﻿---
 title: SARIMA — ARIMA mùa vụ
 sidebar_position: 2
 description: Mô hình SARIMA (Seasonal ARIMA) mở rộng ARIMA cho chuỗi có yếu tố mùa vụ, ký hiệu (p,d,q)(P,D,Q)s, và cách chạy trong EcoLab.
@@ -128,9 +128,10 @@ print(forecast.summary_frame())
 
 <VideoTutorial
   title="Hướng dẫn chạy SARIMA trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 
 - [ARIMA](/ecolab/model/arima) · [GARCH](/ecolab/model/garch) · [Danh mục](/ecolab/model/group)
+

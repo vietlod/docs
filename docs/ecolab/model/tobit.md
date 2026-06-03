@@ -1,4 +1,4 @@
----
+﻿---
 title: Tobit — Hồi quy kiểm duyệt
 sidebar_position: 3
 description: Mô hình Tobit cho biến phụ thuộc bị kiểm duyệt (censored), ví dụ chi tiêu/giờ làm bị chặn tại 0, và cách chạy trong EcoLab.
@@ -118,9 +118,10 @@ def tobit_loglik(params, X, y, lower=0):
 
 <VideoTutorial
   title="Hướng dẫn chạy Tobit trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 
 - [Truncated Regression](/ecolab/model/truncated) · [Heckman](/ecolab/model/heckman) · [Danh mục](/ecolab/model/group)
+

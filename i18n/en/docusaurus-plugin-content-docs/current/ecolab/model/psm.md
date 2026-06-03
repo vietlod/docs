@@ -1,4 +1,4 @@
----
+﻿---
 title: PSM — Propensity Score Matching
 sidebar_position: 2
 description: Propensity Score Matching (PSM) evaluates impact by matching treated and control units with similar participation probabilities, and how to run it in EcoLab.
@@ -117,9 +117,10 @@ print(cm.estimates)
 
 <VideoTutorial
   title="Guide to running PSM in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 
 - [DiD](/en/ecolab/model/did) · [RDD](/en/ecolab/model/rdd) · [Catalog](/en/ecolab/model/group)
+

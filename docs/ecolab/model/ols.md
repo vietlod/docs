@@ -1,4 +1,4 @@
----
+﻿---
 title: OLS — Bình phương nhỏ nhất
 sidebar_position: 1
 description: Hồi quy OLS (Ordinary Least Squares) là gì, các giả định Gauss-Markov, chẩn đoán khuyết tật, sai số chuẩn vững và cách chạy OLS trong EcoLab.
@@ -154,10 +154,11 @@ print(f"Breusch-Pagan p-value: {bp_test[1]:.4f}")
 
 <VideoTutorial
   title="Hướng dẫn chạy OLS trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 
 - [WLS](/ecolab/model/wls) · [GLS](/ecolab/model/gls) · [Danh mục mô hình](/ecolab/model/group)
 - [Ước lượng & Mô hình hóa](/ecolab/econometrics-modeling)
+

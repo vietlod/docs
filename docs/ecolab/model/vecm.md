@@ -1,4 +1,4 @@
----
+﻿---
 title: Mô hình VECM
 sidebar_position: 4
 description: VECM (Vector Error Correction Model) là gì, quan hệ với VAR và đồng liên kết Johansen, khi nào dùng, các bước kiểm định và cách chạy VECM trong EcoLab.
@@ -170,7 +170,7 @@ irf.plot(orth=True)
 
 <VideoTutorial
   title="Hướng dẫn chạy VECM trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
@@ -178,3 +178,4 @@ irf.plot(orth=True)
 - [Mô hình ARDL](/ecolab/model/ardl) — thay thế một phương trình
 - [Ví dụ: FDI và tăng trưởng (ARDL)](/ecolab/vi-du/fdi-tang-truong-ardl)
 - [Ước lượng & Mô hình hóa Kinh tế lượng](/ecolab/econometrics-modeling)
+

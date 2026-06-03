@@ -1,4 +1,4 @@
----
+﻿---
 title: ARCH / GARCH — Mô hình độ biến động
 sidebar_position: 3
 description: Mô hình ARCH/GARCH mô hình hóa phương sai có điều kiện thay đổi theo thời gian (volatility clustering) cho chuỗi tài chính, và cách chạy trong EcoLab.
@@ -127,9 +127,10 @@ print(forecasts.variance.iloc[-1])
 
 <VideoTutorial
   title="Hướng dẫn chạy GARCH trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 
 - [EGARCH](/ecolab/model/egarch) · [ARIMA](/ecolab/model/arima) · [Danh mục](/ecolab/model/group)
+

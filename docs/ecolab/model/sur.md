@@ -1,4 +1,4 @@
----
+﻿---
 title: SUR — Hồi quy có vẻ không liên quan
 sidebar_position: 3
 description: Seemingly Unrelated Regressions (SUR) ước lượng nhiều phương trình có sai số tương quan chéo để tăng hiệu quả, và cách chạy trong EcoLab.
@@ -108,9 +108,10 @@ print(result)
 
 <VideoTutorial
   title="Hướng dẫn chạy SUR trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 
 - [3SLS](/ecolab/model/3sls) · [IV/2SLS](/ecolab/model/iv-2sls) · [Danh mục](/ecolab/model/group)
+

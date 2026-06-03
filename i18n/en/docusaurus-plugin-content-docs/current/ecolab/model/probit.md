@@ -1,4 +1,4 @@
----
+﻿---
 title: Probit
 sidebar_position: 2
 description: The Probit model for a binary outcome using the standard normal CDF, how it differs from Logit, marginal effects, and how to run it in EcoLab.
@@ -130,9 +130,10 @@ print("Pseudo R²:", model.prsquared)
 
 <VideoTutorial
   title="Guide to running Probit in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 
 - [Logit](/en/ecolab/model/logit) · [Heckman](/en/ecolab/model/heckman) · [Catalog](/en/ecolab/model/group)
+

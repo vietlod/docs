@@ -1,4 +1,4 @@
----
+﻿---
 title: Negative Binomial
 sidebar_position: 2
 description: Hồi quy nhị thức âm (Negative Binomial) cho biến đếm có overdispersion (phương sai > kỳ vọng), khác Poisson, và cách chạy trong EcoLab.
@@ -120,9 +120,10 @@ print(f"AIC NegBin:   {model.aic:.2f}")
 
 <VideoTutorial
   title="Hướng dẫn chạy Negative Binomial trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 
 - [Poisson](/ecolab/model/poisson) · [ZIP](/ecolab/model/zip) · [ZINB](/ecolab/model/zinb) · [Danh mục](/ecolab/model/group)
+

@@ -1,4 +1,4 @@
----
+﻿---
 title: 'Lãi suất – lạm phát – sản lượng (VAR)'
 sidebar_position: 9
 description: Thực hành VAR trên EcoLab — phân tích tương tác động giữa lãi suất, lạm phát và sản lượng bằng phản ứng đẩy (IRF) và phân rã phương sai.
@@ -131,8 +131,9 @@ Xuất báo cáo + đồ thị **IRF/FEVD** + **mã tái lập**.
 
 <VideoTutorial
   title="Hướng dẫn chạy VAR trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 - [VAR](/ecolab/model/var) · [SVAR](/ecolab/model/svar) · [VECM](/ecolab/model/vecm) · [Danh mục](/ecolab/model/group)
+

@@ -1,4 +1,4 @@
----
+﻿---
 title: FEM and REM (panel data)
 sidebar_position: 2
 description: Fixed Effects (FEM) vs Random Effects (REM) for panel data, when to use each, the Hausman test, and how to run them in EcoLab.
@@ -175,7 +175,7 @@ print("RE params:", re.params.values)
 
 <VideoTutorial
   title="Running FEM and REM in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
@@ -183,3 +183,4 @@ print("RE params:", re.params.values)
 - [ARDL Model (time series)](/en/ecolab/model/ardl)
 - [Worked example: Public debt and growth (panel data)](/en/ecolab/vi-du/no-cong-tang-truong-panel)
 - [Estimation & Econometric Modeling](/en/ecolab/econometrics-modeling)
+

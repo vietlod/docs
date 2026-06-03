@@ -1,4 +1,4 @@
----
+﻿---
 title: GAM — Generalized Additive Models
 sidebar_position: 2
 description: Generalized Additive Models (GAM) model smooth nonlinear relationships via splines without pre-specifying the functional form, and how to run them in EcoLab.
@@ -113,9 +113,10 @@ for i, term in enumerate(gam.terms):
 
 <VideoTutorial
   title="Guide to running GAM in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 
 - [NLS](/en/ecolab/model/nls) · [Quantile Regression](/en/ecolab/model/quantile) · [Catalog](/en/ecolab/model/group)
+

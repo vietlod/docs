@@ -1,4 +1,4 @@
----
+﻿---
 title: ZINB — Zero-Inflated Negative Binomial
 sidebar_position: 4
 description: The Zero-Inflated Negative Binomial (ZINB) model for count data with both excess zeros and overdispersion, and how to run it in EcoLab.
@@ -137,9 +137,10 @@ print(f"AIC NegBin:  {model_nb.aic:.1f}")
 
 <VideoTutorial
   title="Guide to running ZINB (Zero-Inflated Negative Binomial) in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 
 - [ZIP](/en/ecolab/model/zip) · [Negative Binomial](/en/ecolab/model/negbin) · [Poisson](/en/ecolab/model/poisson) · [Catalog](/en/ecolab/model/group)
+

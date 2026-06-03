@@ -1,4 +1,4 @@
----
+﻿---
 title: Corporate default probability (Logit)
 sidebar_position: 4
 description: Hands-on Logit in EcoLab — predicting corporate default probability from financial ratios, reading odds ratios and marginal effects.
@@ -148,8 +148,9 @@ Export a report + **replication code**; include the classification table and ROC
 
 <VideoTutorial
   title="Guide to running Logit for default prediction in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 - [Logit](/en/ecolab/model/logit) · [Probit](/en/ecolab/model/probit) · [Catalog](/en/ecolab/model/group)
+

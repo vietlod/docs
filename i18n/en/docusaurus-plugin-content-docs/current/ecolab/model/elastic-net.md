@@ -1,4 +1,4 @@
----
+﻿---
 title: Elastic Net — L1 + L2
 sidebar_position: 3
 description: Elastic Net combines the L1 (Lasso) and L2 (Ridge) penalties to both select variables and handle highly correlated variable groups, and how to run it in EcoLab.
@@ -112,9 +112,10 @@ print(f"Coefficients: {model.coef_}")
 
 <VideoTutorial
   title="Running Elastic Net in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 
 - [Ridge](/en/ecolab/model/ridge) · [Lasso](/en/ecolab/model/lasso) · [Adaptive Lasso](/en/ecolab/model/adaptive-lasso) · [Catalog](/en/ecolab/model/group)
+

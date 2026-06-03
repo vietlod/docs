@@ -1,4 +1,4 @@
----
+﻿---
 title: VAR — Vector Autoregression
 sidebar_position: 1
 description: Mô hình VAR (Vector Autoregression) cho hệ nhiều chuỗi thời gian dừng, phản ứng đẩy (IRF), phân rã phương sai, Granger, và cách chạy trong EcoLab.
@@ -139,9 +139,10 @@ fevd.plot()
 
 <VideoTutorial
   title="Hướng dẫn chạy VAR trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 
 - [VECM](/ecolab/model/vecm) · [SVAR](/ecolab/model/svar) · [Danh mục](/ecolab/model/group)
+

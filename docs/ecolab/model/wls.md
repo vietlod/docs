@@ -1,4 +1,4 @@
----
+﻿---
 title: WLS — Bình phương nhỏ nhất có trọng số
 sidebar_position: 2
 description: Hồi quy WLS (Weighted Least Squares) xử lý phương sai sai số thay đổi đã biết, công thức trọng số, và cách chạy WLS trong EcoLab.
@@ -116,9 +116,10 @@ print(model_wls.summary())
 
 <VideoTutorial
   title="Hướng dẫn chạy WLS trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 
 - [OLS](/ecolab/model/ols) · [GLS](/ecolab/model/gls) · [Danh mục mô hình](/ecolab/model/group)
+

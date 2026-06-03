@@ -1,4 +1,4 @@
----
+﻿---
 title: RDD — Hồi quy gián đoạn
 sidebar_position: 3
 description: Regression Discontinuity Design (RDD) khai thác ngưỡng cắt của một biến chạy để đánh giá tác động nhân quả, sharp/fuzzy, và cách chạy trong EcoLab.
@@ -103,9 +103,10 @@ rdplot(y=df['y'], x=df['score'], c=50)
 
 <VideoTutorial
   title="Hướng dẫn chạy RDD trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 
 - [DiD](/ecolab/model/did) · [PSM](/ecolab/model/psm) · [IV/2SLS](/ecolab/model/iv-2sls) · [Danh mục](/ecolab/model/group)
+

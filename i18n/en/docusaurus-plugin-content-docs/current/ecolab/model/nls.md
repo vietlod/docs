@@ -1,4 +1,4 @@
----
+﻿---
 title: NLS — Nonlinear Least Squares
 sidebar_position: 1
 description: Nonlinear Least Squares (NLS) for relationships nonlinear in parameters, e.g. growth/production functions, and how to run it in EcoLab.
@@ -112,9 +112,10 @@ print(f"SE: {se}")
 
 <VideoTutorial
   title="Guide to running NLS in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 
 - [GAM](/en/ecolab/model/gam) · [OLS](/en/ecolab/model/ols) · [Catalog](/en/ecolab/model/group)
+

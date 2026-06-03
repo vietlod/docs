@@ -1,4 +1,4 @@
----
+﻿---
 title: Logit — Logistic regression
 sidebar_position: 1
 description: The Logit model for a binary dependent variable, the logistic link, odds ratios, marginal effects, and how to run it in EcoLab.
@@ -155,9 +155,10 @@ print(classification_report(y, (y_pred > 0.5).astype(int)))
 
 <VideoTutorial
   title="Guide to running Logit (logistic regression) in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 
 - [Probit](/en/ecolab/model/probit) · [Tobit](/en/ecolab/model/tobit) · [Catalog](/en/ecolab/model/group)
+

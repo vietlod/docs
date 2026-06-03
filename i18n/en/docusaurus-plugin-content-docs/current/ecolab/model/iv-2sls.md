@@ -1,4 +1,4 @@
----
+﻿---
 title: IV / 2SLS — Instrumental Variables
 sidebar_position: 1
 description: Instrumental Variables (IV) and Two-Stage Least Squares (2SLS) handle endogeneity, valid-instrument conditions, tests, and how to run them in EcoLab.
@@ -117,9 +117,10 @@ print(results)
 
 <VideoTutorial
   title="Guide to running IV/2SLS in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 
 - [3SLS](/en/ecolab/model/3sls) · [SUR](/en/ecolab/model/sur) · [Catalog](/en/ecolab/model/group)
+

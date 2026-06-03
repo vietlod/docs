@@ -1,4 +1,4 @@
----
+﻿---
 title: SVAR — Structural VAR
 sidebar_position: 3
 description: The SVAR (Structural VAR) model imposes identification restrictions to interpret economically meaningful structural shocks, how it differs from reduced-form VAR, and how to run it in EcoLab.
@@ -129,9 +129,10 @@ plt.show()
 
 <VideoTutorial
   title="Running SVAR in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 
 - [VAR](/en/ecolab/model/var) · [VECM](/en/ecolab/model/vecm) · [Catalog](/en/ecolab/model/group)
+

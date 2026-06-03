@@ -1,4 +1,4 @@
----
+﻿---
 title: 'Returns to education on wages (OLS)'
 sidebar_position: 3
 description: Hands-on OLS in EcoLab — estimating the Mincer wage equation (effect of schooling and experience on wages), from idea to a report with replication code.
@@ -111,8 +111,9 @@ Export an APA/Harvard… report with **replication code**.
 
 <VideoTutorial
   title="Running the Mincer wage equation (OLS) in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 - [OLS](/en/ecolab/model/ols) · [IV example](/en/ecolab/vi-du/iv-loi-suat-giao-duc) · [Catalog](/en/ecolab/model/group)
+

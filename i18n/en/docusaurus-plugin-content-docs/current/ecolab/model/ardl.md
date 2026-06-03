@@ -1,4 +1,4 @@
----
+﻿---
 title: ARDL Model
 sidebar_position: 1
 description: What ARDL (Autoregressive Distributed Lag) is, when to use it, assumptions, the bounds test for cointegration, and how to run ARDL in EcoLab with time-series data.
@@ -167,7 +167,7 @@ print("BIC:", result.bic)
 
 <VideoTutorial
   title="Running ARDL in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
@@ -175,3 +175,4 @@ print("BIC:", result.bic)
 - [Worked example: FDI and economic growth in Vietnam (ARDL)](/en/ecolab/vi-du/fdi-tang-truong-ardl)
 - [FEM and REM for panel data](/en/ecolab/model/fem-rem)
 - [Estimation & Econometric Modeling](/en/ecolab/econometrics-modeling)
+

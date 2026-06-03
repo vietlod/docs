@@ -1,4 +1,4 @@
----
+﻿---
 title: Lasso — L1 regularization
 sidebar_position: 2
 description: Lasso regression (L1 regularization) both shrinks coefficients and performs automatic variable selection, the L1 penalty, and how to run it in EcoLab.
@@ -119,9 +119,10 @@ print(f"Coefficients: {model.coef_}")
 
 <VideoTutorial
   title="Running Lasso regression in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 
 - [Ridge](/en/ecolab/model/ridge) · [Elastic Net](/en/ecolab/model/elastic-net) · [Adaptive Lasso](/en/ecolab/model/adaptive-lasso) · [Catalog](/en/ecolab/model/group)
+

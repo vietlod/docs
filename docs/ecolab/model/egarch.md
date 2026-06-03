@@ -1,4 +1,4 @@
----
+﻿---
 title: EGARCH — GARCH bất đối xứng
 sidebar_position: 4
 description: Mô hình EGARCH (Exponential GARCH) nắm bắt hiệu ứng đòn bẩy (tin xấu tác động mạnh hơn tin tốt) trong biến động tài chính, và cách chạy trong EcoLab.
@@ -120,9 +120,10 @@ plt.show()
 
 <VideoTutorial
   title="Hướng dẫn chạy EGARCH trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 
 - [ARCH/GARCH](/ecolab/model/garch) · [ARIMA](/ecolab/model/arima) · [Danh mục](/ecolab/model/group)
+

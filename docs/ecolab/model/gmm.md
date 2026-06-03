@@ -1,4 +1,4 @@
----
+﻿---
 title: GMM cho dữ liệu bảng động
 sidebar_position: 3
 description: GMM hệ thống (System GMM) và sai phân (Difference GMM) của Arellano-Bond/Blundell-Bond cho dữ liệu bảng động, khi nào dùng, kiểm định AR(2) và Hansen/Sargan, cách chạy trong EcoLab.
@@ -171,7 +171,7 @@ print(result)
 
 <VideoTutorial
   title="Hướng dẫn chạy GMM (Arellano–Bond / Blundell–Bond) trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
@@ -179,3 +179,4 @@ print(result)
 - [FEM và REM](/ecolab/model/fem-rem) · [Mô hình ARDL](/ecolab/model/ardl)
 - [Ví dụ: Nợ công và tăng trưởng (dữ liệu bảng)](/ecolab/vi-du/no-cong-tang-truong-panel)
 - [Ước lượng & Mô hình hóa Kinh tế lượng](/ecolab/econometrics-modeling)
+

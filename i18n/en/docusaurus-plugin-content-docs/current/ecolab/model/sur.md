@@ -1,4 +1,4 @@
----
+﻿---
 title: SUR — Seemingly Unrelated Regressions
 sidebar_position: 3
 description: Seemingly Unrelated Regressions (SUR) estimates multiple equations with cross-equation correlated errors for efficiency, and how to run it in EcoLab.
@@ -107,9 +107,10 @@ print(results)
 
 <VideoTutorial
   title="Guide to running SUR in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 
 - [3SLS](/en/ecolab/model/3sls) · [IV/2SLS](/en/ecolab/model/iv-2sls) · [Catalog](/en/ecolab/model/group)
+

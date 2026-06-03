@@ -1,4 +1,4 @@
----
+﻿---
 title: 'Nonlinear Engel curve (GAM)'
 sidebar_position: 10
 description: Hands-on GAM in EcoLab — modeling the nonlinear relationship between food spending and income (the Engel curve) with smooth functions.
@@ -106,8 +106,9 @@ Export a report + the **smooth-function plot** + **replication code**.
 
 <VideoTutorial
   title="Guide to running GAM in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 - [GAM](/en/ecolab/model/gam) · [NLS](/en/ecolab/model/nls) · [Catalog](/en/ecolab/model/group)
+

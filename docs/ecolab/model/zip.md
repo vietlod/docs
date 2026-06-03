@@ -1,4 +1,4 @@
----
+﻿---
 title: ZIP — Zero-Inflated Poisson
 sidebar_position: 3
 description: Mô hình Zero-Inflated Poisson (ZIP) cho biến đếm có dư thừa số 0 từ hai cơ chế, cấu trúc hỗn hợp, và cách chạy trong EcoLab.
@@ -122,9 +122,10 @@ print(f"AIC ZIP:     {model.aic:.2f}")
 
 <VideoTutorial
   title="Hướng dẫn chạy Zero-Inflated Poisson (ZIP) trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 
 - [Poisson](/ecolab/model/poisson) · [ZINB](/ecolab/model/zinb) · [Negative Binomial](/ecolab/model/negbin) · [Danh mục](/ecolab/model/group)
+

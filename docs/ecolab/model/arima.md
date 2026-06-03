@@ -1,4 +1,4 @@
----
+﻿---
 title: AR / MA / ARMA / ARIMA
 sidebar_position: 1
 description: Họ mô hình Box-Jenkins (AR, MA, ARMA, ARIMA) cho chuỗi thời gian đơn biến, bậc tích hợp, quy trình nhận dạng và dự báo, cách chạy trong EcoLab.
@@ -150,9 +150,10 @@ print(forecast)
 
 <VideoTutorial
   title="Hướng dẫn chạy ARIMA trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 
 - [SARIMA](/ecolab/model/sarima) · [GARCH](/ecolab/model/garch) · [ARDL](/ecolab/model/ardl) · [Danh mục](/ecolab/model/group)
+

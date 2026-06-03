@@ -1,4 +1,4 @@
----
+﻿---
 title: VECM Model
 sidebar_position: 4
 description: What VECM (Vector Error Correction Model) is, its relationship to VAR and Johansen cointegration, when to use it, the testing workflow, and how to run VECM in EcoLab.
@@ -164,7 +164,7 @@ plt.tight_layout(); plt.show()
 
 <VideoTutorial
   title="Running VECM in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
@@ -172,3 +172,4 @@ plt.tight_layout(); plt.show()
 - [ARDL Model](/en/ecolab/model/ardl) — single-equation alternative
 - [Worked example: FDI and growth (ARDL)](/en/ecolab/vi-du/fdi-tang-truong-ardl)
 - [Estimation & Econometric Modeling](/en/ecolab/econometrics-modeling)
+

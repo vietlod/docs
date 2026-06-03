@@ -1,4 +1,4 @@
----
+﻿---
 title: Hồi quy phân vị (Quantile)
 sidebar_position: 1
 description: Hồi quy phân vị (Quantile Regression) ước lượng tác động tại các phân vị khác nhau của phân phối biến phụ thuộc, khác hồi quy trung bình OLS, và cách chạy trong EcoLab.
@@ -121,9 +121,10 @@ print(coef_df)
 
 <VideoTutorial
   title="Hướng dẫn chạy Hồi quy phân vị (Quantile Regression) trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 
 - [Panel Quantile (FE-QR)](/ecolab/model/panel-quantile) · [OLS](/ecolab/model/ols) · [Danh mục](/ecolab/model/group)
+

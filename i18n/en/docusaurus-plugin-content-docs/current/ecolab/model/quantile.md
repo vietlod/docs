@@ -1,4 +1,4 @@
----
+﻿---
 title: Quantile Regression
 sidebar_position: 1
 description: Quantile Regression estimates effects at different quantiles of the dependent variable's distribution, unlike OLS mean regression, and how to run it in EcoLab.
@@ -108,9 +108,10 @@ for q in quantiles:
 
 <VideoTutorial
   title="Running Quantile Regression in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 
 - [Panel Quantile (FE-QR)](/en/ecolab/model/panel-quantile) · [OLS](/en/ecolab/model/ols) · [Catalog](/en/ecolab/model/group)
+

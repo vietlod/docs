@@ -1,4 +1,4 @@
----
+﻿---
 title: Pooled OLS
 sidebar_position: 1
 description: Pooled OLS gộp toàn bộ dữ liệu bảng và chạy OLS, là mô hình cơ sở cho dữ liệu bảng, khi nào phù hợp và cách chạy trong EcoLab.
@@ -89,9 +89,10 @@ print(model.summary)
 
 <VideoTutorial
   title="Hướng dẫn chạy Pooled OLS trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 
 - [FEM/REM](/ecolab/model/fem-rem) · [Between](/ecolab/model/between) · [Danh mục](/ecolab/model/group)
+

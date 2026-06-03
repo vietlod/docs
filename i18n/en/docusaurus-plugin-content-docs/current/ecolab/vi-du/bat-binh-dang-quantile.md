@@ -1,4 +1,4 @@
----
+﻿---
 title: 'Wage inequality (Quantile)'
 sidebar_position: 6
 description: Hands-on quantile regression in EcoLab — returns to education differ across wage quantiles (heterogeneous effects across the distribution).
@@ -108,8 +108,9 @@ Export a report + the **quantile-process** plot + **replication code**; SE by bo
 
 <VideoTutorial
   title="Running Quantile Regression in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 - [Quantile Regression](/en/ecolab/model/quantile) · [Panel FE-QR](/en/ecolab/model/panel-quantile) · [Mincer example (OLS)](/en/ecolab/vi-du/luong-giao-duc-ols)
+

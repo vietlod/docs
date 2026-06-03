@@ -1,4 +1,4 @@
----
+﻿---
 title: 3SLS — Simultaneous equations
 sidebar_position: 2
 description: Three-Stage Least Squares (3SLS) estimates a system of simultaneous equations with endogeneity and cross-equation correlated errors, and how to run it in EcoLab.
@@ -112,9 +112,10 @@ print(res_supply)
 
 <VideoTutorial
   title="Guide to running 3SLS in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 
 - [IV/2SLS](/en/ecolab/model/iv-2sls) · [SUR](/en/ecolab/model/sur) · [Catalog](/en/ecolab/model/group)
+

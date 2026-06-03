@@ -1,4 +1,4 @@
----
+﻿---
 title: Adaptive Lasso
 sidebar_position: 4
 description: Adaptive Lasso dùng trọng số riêng cho từng hệ số để đạt tính chất oracle (chọn biến nhất quán), khác Lasso thường, và cách chạy trong EcoLab.
@@ -114,9 +114,10 @@ print(f"Số biến được chọn: {np.sum(coef_adaptive != 0)}")
 
 <VideoTutorial
   title="Hướng dẫn chạy Adaptive Lasso trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 
 - [Lasso](/ecolab/model/lasso) · [Ridge](/ecolab/model/ridge) · [Elastic Net](/ecolab/model/elastic-net) · [Danh mục](/ecolab/model/group)
+

@@ -1,4 +1,4 @@
----
+﻿---
 title: 'Returns to education with IV'
 sidebar_position: 7
 description: Hands-on IV/2SLS in EcoLab — addressing the endogeneity of schooling when estimating returns to education, using an instrument and instrument tests.
@@ -114,8 +114,9 @@ Export a report + **replication code**; report the first-stage F, the endogeneit
 
 <VideoTutorial
   title="Guide to running IV/2SLS in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 - [IV/2SLS](/en/ecolab/model/iv-2sls) · [Mincer example (OLS)](/en/ecolab/vi-du/luong-giao-duc-ols) · [Catalog](/en/ecolab/model/group)
+

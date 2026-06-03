@@ -1,4 +1,4 @@
----
+﻿---
 title: Poisson — Count regression
 sidebar_position: 1
 description: Poisson regression for count data (non-negative integers), the mean = variance assumption, overdispersion testing, and how to run it in EcoLab.
@@ -128,9 +128,10 @@ print("Dispersion:", model.pearson_chi2 / model.df_resid)
 
 <VideoTutorial
   title="Guide to running Poisson regression in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 
 - [Negative Binomial](/en/ecolab/model/negbin) · [ZIP](/en/ecolab/model/zip) · [ZINB](/en/ecolab/model/zinb) · [Catalog](/en/ecolab/model/group)
+

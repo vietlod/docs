@@ -1,4 +1,4 @@
----
+﻿---
 title: GLS / FGLS — Generalized Least Squares
 sidebar_position: 3
 description: GLS and FGLS (Feasible GLS) regression handle heteroskedasticity and autocorrelation via the error covariance matrix, and how to run them in EcoLab.
@@ -117,9 +117,10 @@ print(model_gls.summary())
 
 <VideoTutorial
   title="Running GLS in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 
 - [OLS](/en/ecolab/model/ols) · [WLS](/en/ecolab/model/wls) · [Model catalog](/en/ecolab/model/group)
+

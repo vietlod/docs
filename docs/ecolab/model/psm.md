@@ -1,4 +1,4 @@
----
+﻿---
 title: PSM — Ghép cặp điểm xu hướng
 sidebar_position: 2
 description: Propensity Score Matching (PSM) đánh giá tác động bằng cách ghép cặp đối tượng xử lý và đối chứng có xác suất tham gia tương tự, và cách chạy trong EcoLab.
@@ -126,9 +126,10 @@ print(cm.estimates)
 
 <VideoTutorial
   title="Hướng dẫn chạy PSM trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 
 - [DiD](/ecolab/model/did) · [RDD](/ecolab/model/rdd) · [Danh mục](/ecolab/model/group)
+

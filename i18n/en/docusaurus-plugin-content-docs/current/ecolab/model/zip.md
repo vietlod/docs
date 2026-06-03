@@ -1,4 +1,4 @@
----
+﻿---
 title: ZIP — Zero-Inflated Poisson
 sidebar_position: 3
 description: The Zero-Inflated Poisson (ZIP) model for count data with excess zeros from two mechanisms, the mixture structure, and how to run it in EcoLab.
@@ -126,9 +126,10 @@ print(f"AIC ZIP:     {model.aic:.1f}")
 
 <VideoTutorial
   title="Guide to running Zero-Inflated Poisson (ZIP) in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 
 - [Poisson](/en/ecolab/model/poisson) · [ZINB](/en/ecolab/model/zinb) · [Negative Binomial](/en/ecolab/model/negbin) · [Catalog](/en/ecolab/model/group)
+

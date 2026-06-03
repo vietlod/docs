@@ -1,4 +1,4 @@
----
+﻿---
 title: 'Lợi suất giáo dục lên tiền lương (OLS)'
 sidebar_position: 3
 description: Thực hành OLS trên EcoLab — ước lượng hàm tiền lương Mincer (tác động của số năm học và kinh nghiệm lên lương), từ ý tưởng đến báo cáo có mã tái lập.
@@ -112,8 +112,9 @@ Xuất báo cáo APA/Harvard… kèm **mã tái lập** Stata/R/Python.
 
 <VideoTutorial
   title="Hướng dẫn chạy OLS (hàm Mincer) trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 - [OLS](/ecolab/model/ols) · [Ví dụ IV](/ecolab/vi-du/iv-loi-suat-giao-duc) · [Danh mục](/ecolab/model/group)
+

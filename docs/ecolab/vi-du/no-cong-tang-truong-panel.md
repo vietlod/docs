@@ -1,4 +1,4 @@
----
+﻿---
 title: 'Nợ công và tăng trưởng (dữ liệu bảng)'
 sidebar_position: 2
 description: Thực hành đầy đủ trên EcoLab — phân tích tác động của nợ công đến tăng trưởng kinh tế bằng dữ liệu bảng đa quốc gia, so sánh FEM/REM và System GMM, từ ý tưởng đến báo cáo.
@@ -144,7 +144,7 @@ Mọi bước ước lượng (FEM, REM, Hausman, System GMM với AR(2)/Hansen)
 
 <VideoTutorial
   title="Hướng dẫn phân tích nợ công và tăng trưởng trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
@@ -152,3 +152,4 @@ Mọi bước ước lượng (FEM, REM, Hausman, System GMM với AR(2)/Hansen)
 - [GMM cho dữ liệu bảng động](/ecolab/model/gmm) · [FEM và REM](/ecolab/model/fem-rem)
 - [Ví dụ: FDI và tăng trưởng Việt Nam (ARDL)](/ecolab/vi-du/fdi-tang-truong-ardl)
 - [Tổng quan EcoLab](/ecolab/overview) · [Ước lượng & Mô hình hóa](/ecolab/econometrics-modeling)
+

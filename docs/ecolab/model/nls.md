@@ -1,4 +1,4 @@
----
+﻿---
 title: NLS — Hồi quy phi tuyến
 sidebar_position: 1
 description: Hồi quy phi tuyến (Nonlinear Least Squares) cho quan hệ phi tuyến theo tham số, ví dụ hàm tăng trưởng/sản xuất, và cách chạy trong EcoLab.
@@ -105,9 +105,10 @@ print(f"SE: {perr}")
 
 <VideoTutorial
   title="Hướng dẫn chạy NLS trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 
 - [GAM](/ecolab/model/gam) · [OLS](/ecolab/model/ols) · [Danh mục](/ecolab/model/group)
+

@@ -1,4 +1,4 @@
----
+﻿---
 title: 'Inflation forecasting with many predictors (Lasso)'
 sidebar_position: 8
 description: Hands-on Lasso/Elastic Net in EcoLab — forecasting inflation from many macro predictors, automatic variable selection and avoiding overfitting.
@@ -131,8 +131,9 @@ Regularization is **prediction-oriented**, not causal inference; coefficients ar
 
 <VideoTutorial
   title="Inflation forecasting with Lasso in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 - [Lasso](/en/ecolab/model/lasso) · [Elastic Net](/en/ecolab/model/elastic-net) · [Ridge](/en/ecolab/model/ridge) · [Catalog](/en/ecolab/model/group)
+

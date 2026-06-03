@@ -1,4 +1,4 @@
----
+﻿---
 title: Truncated Regression
 sidebar_position: 4
 description: Hồi quy cắt cụt (truncated) khi mẫu chỉ chứa quan sát vượt/dưới ngưỡng, khác Tobit, và cách chạy trong EcoLab.
@@ -112,9 +112,10 @@ def trunc_loglik(params, X, y, lower=0):
 
 <VideoTutorial
   title="Hướng dẫn chạy Truncated Regression trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 
 - [Tobit](/ecolab/model/tobit) · [Heckman](/ecolab/model/heckman) · [Danh mục](/ecolab/model/group)
+

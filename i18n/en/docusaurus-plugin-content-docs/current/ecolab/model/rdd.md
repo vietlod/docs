@@ -1,4 +1,4 @@
----
+﻿---
 title: RDD — Regression Discontinuity
 sidebar_position: 3
 description: Regression Discontinuity Design (RDD) exploits a cutoff in a running variable to evaluate causal impact, sharp/fuzzy designs, and how to run it in EcoLab.
@@ -106,9 +106,10 @@ rdplot(df["y"], df["score"], c=50,
 
 <VideoTutorial
   title="Guide to running RDD in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 
 - [DiD](/en/ecolab/model/did) · [PSM](/en/ecolab/model/psm) · [IV/2SLS](/en/ecolab/model/iv-2sls) · [Catalog](/en/ecolab/model/group)
+

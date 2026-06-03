@@ -1,4 +1,4 @@
----
+﻿---
 title: ZINB — Zero-Inflated Negative Binomial
 sidebar_position: 4
 description: Mô hình Zero-Inflated Negative Binomial (ZINB) cho biến đếm vừa dư thừa số 0 vừa overdispersion, và cách chạy trong EcoLab.
@@ -128,9 +128,10 @@ print(f"AIC ZINB:    {model.aic:.2f}")
 
 <VideoTutorial
   title="Hướng dẫn chạy Zero-Inflated Negative Binomial (ZINB) trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 
 - [ZIP](/ecolab/model/zip) · [Negative Binomial](/ecolab/model/negbin) · [Poisson](/ecolab/model/poisson) · [Danh mục](/ecolab/model/group)
+

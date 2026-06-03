@@ -1,4 +1,4 @@
----
+﻿---
 title: Tobit — Censored regression
 sidebar_position: 3
 description: The Tobit model for a censored dependent variable, e.g. spending/hours bounded at zero, and how to run it in EcoLab.
@@ -132,9 +132,10 @@ def tobit_loglik(params, X, y, lower=0):
 
 <VideoTutorial
   title="Guide to running Tobit (censored regression) in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 
 - [Truncated Regression](/en/ecolab/model/truncated) · [Heckman](/en/ecolab/model/heckman) · [Catalog](/en/ecolab/model/group)
+

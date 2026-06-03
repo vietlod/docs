@@ -1,4 +1,4 @@
----
+﻿---
 title: 'Interest rate – inflation – output (VAR)'
 sidebar_position: 9
 description: Hands-on VAR in EcoLab — analyzing the dynamic interactions among interest rate, inflation and output via impulse responses (IRF) and variance decomposition.
@@ -134,8 +134,9 @@ Export a report + **IRF/FEVD** plots + **replication code**.
 
 <VideoTutorial
   title="Running VAR in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 - [VAR](/en/ecolab/model/var) · [SVAR](/en/ecolab/model/svar) · [VECM](/en/ecolab/model/vecm) · [Catalog](/en/ecolab/model/group)
+

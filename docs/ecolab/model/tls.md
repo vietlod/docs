@@ -1,4 +1,4 @@
----
+﻿---
 title: TLS — Bình phương nhỏ nhất toàn phần
 sidebar_position: 4
 description: Hồi quy TLS (Total Least Squares) xử lý sai số đo lường ở cả biến độc lập (errors-in-variables), khác biệt với OLS, và cách dùng trong EcoLab.
@@ -110,9 +110,10 @@ output.pprint()  # In hệ số TLS và sai số chuẩn
 
 <VideoTutorial
   title="Hướng dẫn chạy TLS trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 
 - [OLS](/ecolab/model/ols) · [GLS](/ecolab/model/gls) · [Danh mục mô hình](/ecolab/model/group)
+

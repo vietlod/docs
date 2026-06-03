@@ -1,4 +1,4 @@
----
+﻿---
 title: SVAR — Structural VAR
 sidebar_position: 3
 description: Mô hình SVAR (Structural VAR) áp ràng buộc nhận dạng để diễn giải cú sốc cấu trúc có ý nghĩa kinh tế, khác VAR rút gọn, và cách chạy trong EcoLab.
@@ -124,9 +124,10 @@ fevd.plot()
 
 <VideoTutorial
   title="Hướng dẫn chạy SVAR trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 
 - [VAR](/ecolab/model/var) · [VECM](/ecolab/model/vecm) · [Danh mục](/ecolab/model/group)
+

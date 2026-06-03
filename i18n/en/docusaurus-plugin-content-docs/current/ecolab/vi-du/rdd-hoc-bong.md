@@ -1,4 +1,4 @@
----
+﻿---
 title: 'Scholarship effect (RDD)'
 sidebar_position: 11
 description: Hands-on RDD in EcoLab — evaluating the effect of a scholarship based on an admission-score cutoff on academic performance.
@@ -115,8 +115,9 @@ Export a report + the **RDD plot** (scatter + fitted lines on both sides of the 
 
 <VideoTutorial
   title="Guide to running RDD in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 - [RDD](/en/ecolab/model/rdd) · [PSM](/en/ecolab/model/psm) · [DiD](/en/ecolab/model/did) · [Catalog](/en/ecolab/model/group)
+

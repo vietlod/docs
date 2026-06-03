@@ -1,4 +1,4 @@
----
+﻿---
 title: Logit — Hồi quy logistic
 sidebar_position: 1
 description: Mô hình Logit cho biến phụ thuộc nhị phân, hàm liên kết logistic, tỷ số odds, tác động biên (marginal effects) và cách chạy trong EcoLab.
@@ -157,9 +157,10 @@ print(f"AUC = {auc:.4f}")
 
 <VideoTutorial
   title="Hướng dẫn chạy Logit trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 
 - [Probit](/ecolab/model/probit) · [Tobit](/ecolab/model/tobit) · [Danh mục](/ecolab/model/group)
+

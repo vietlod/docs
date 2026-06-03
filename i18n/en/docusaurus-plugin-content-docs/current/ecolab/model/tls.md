@@ -1,4 +1,4 @@
----
+﻿---
 title: TLS — Total Least Squares
 sidebar_position: 4
 description: TLS (Total Least Squares) regression handles measurement error in the regressors (errors-in-variables), how it differs from OLS, and how to use it in EcoLab.
@@ -120,9 +120,10 @@ output.pprint()
 
 <VideoTutorial
   title="Running TLS in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 
 - [OLS](/en/ecolab/model/ols) · [GLS](/en/ecolab/model/gls) · [Model catalog](/en/ecolab/model/group)
+

@@ -1,4 +1,4 @@
----
+﻿---
 title: 3SLS — Hệ phương trình đồng thời
 sidebar_position: 2
 description: Bình phương nhỏ nhất ba giai đoạn (3SLS) ước lượng hệ phương trình đồng thời có nội sinh và sai số tương quan chéo, và cách chạy trong EcoLab.
@@ -112,9 +112,10 @@ print(supply)
 
 <VideoTutorial
   title="Hướng dẫn chạy 3SLS trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 
 - [IV/2SLS](/ecolab/model/iv-2sls) · [SUR](/ecolab/model/sur) · [Danh mục](/ecolab/model/group)
+

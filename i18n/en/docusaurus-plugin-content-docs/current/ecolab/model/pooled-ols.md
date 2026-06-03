@@ -1,4 +1,4 @@
----
+﻿---
 title: Pooled OLS
 sidebar_position: 1
 description: Pooled OLS pools all panel data and runs OLS, the baseline panel model, when it is appropriate, and how to run it in EcoLab.
@@ -91,9 +91,10 @@ print(model)
 
 <VideoTutorial
   title="Running Pooled OLS in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 
 - [FEM/REM](/en/ecolab/model/fem-rem) · [Between](/en/ecolab/model/between) · [Catalog](/en/ecolab/model/group)
+

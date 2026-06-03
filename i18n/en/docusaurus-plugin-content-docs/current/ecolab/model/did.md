@@ -1,4 +1,4 @@
----
+﻿---
 title: Difference-in-Differences (DID)
 sidebar_position: 5
 description: The Difference-in-Differences (DID) method for policy impact evaluation, the parallel trends assumption, event study, and how to run DID in EcoLab.
@@ -150,7 +150,7 @@ print(model_did.summary())
 
 <VideoTutorial
   title="Guide to running DID in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
@@ -158,3 +158,4 @@ print(model_did.summary())
 - [FEM and REM (TWFE)](/en/ecolab/model/fem-rem)
 - [Worked example: Public debt and growth (panel data)](/en/ecolab/vi-du/no-cong-tang-truong-panel)
 - [Estimation & Econometric Modeling](/en/ecolab/econometrics-modeling)
+

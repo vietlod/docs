@@ -1,4 +1,4 @@
----
+﻿---
 title: GAM — Mô hình cộng tính tổng quát
 sidebar_position: 2
 description: Generalized Additive Models (GAM) mô hình quan hệ phi tuyến mượt bằng hàm trơn (splines) mà không cần định trước dạng hàm, và cách chạy trong EcoLab.
@@ -106,9 +106,10 @@ for i, term in enumerate(gam.terms):
 
 <VideoTutorial
   title="Hướng dẫn chạy GAM trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 
 - [NLS](/ecolab/model/nls) · [Hồi quy phân vị](/ecolab/model/quantile) · [Danh mục](/ecolab/model/group)
+

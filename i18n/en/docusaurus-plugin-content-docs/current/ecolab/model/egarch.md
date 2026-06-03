@@ -1,4 +1,4 @@
----
+﻿---
 title: EGARCH — Asymmetric GARCH
 sidebar_position: 4
 description: The EGARCH (Exponential GARCH) model captures the leverage effect (bad news raises volatility more than good news) in financial volatility, and how to run it in EcoLab.
@@ -107,9 +107,10 @@ plt.show()
 
 <VideoTutorial
   title="Running EGARCH in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 
 - [ARCH/GARCH](/en/ecolab/model/garch) · [ARIMA](/en/ecolab/model/arima) · [Catalog](/en/ecolab/model/group)
+

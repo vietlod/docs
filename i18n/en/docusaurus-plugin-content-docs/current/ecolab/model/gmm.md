@@ -1,4 +1,4 @@
----
+﻿---
 title: GMM for dynamic panels
 sidebar_position: 3
 description: System GMM and Difference GMM (Arellano-Bond/Blundell-Bond) for dynamic panel data, when to use them, the AR(2) and Hansen/Sargan tests, and how to run GMM in EcoLab.
@@ -180,7 +180,7 @@ result = regression.abond(command_sys, df, ["country_id", "year"])
 
 <VideoTutorial
   title="Guide to running GMM (System/Difference) in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
@@ -188,3 +188,4 @@ result = regression.abond(command_sys, df, ["country_id", "year"])
 - [FEM and REM](/en/ecolab/model/fem-rem) · [ARDL Model](/en/ecolab/model/ardl)
 - [Worked example: Public debt and growth (panel data)](/en/ecolab/vi-du/no-cong-tang-truong-panel)
 - [Estimation & Econometric Modeling](/en/ecolab/econometrics-modeling)
+

@@ -1,4 +1,4 @@
----
+﻿---
 title: OLS — Ordinary Least Squares
 sidebar_position: 1
 description: What OLS (Ordinary Least Squares) regression is, the Gauss-Markov assumptions, diagnostics, robust standard errors, and how to run OLS in EcoLab.
@@ -161,10 +161,11 @@ print(model.summary())
 
 <VideoTutorial
   title="Running OLS in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 
 - [WLS](/en/ecolab/model/wls) · [GLS](/en/ecolab/model/gls) · [Model catalog](/en/ecolab/model/group)
 - [Estimation & Modeling](/en/ecolab/econometrics-modeling)
+

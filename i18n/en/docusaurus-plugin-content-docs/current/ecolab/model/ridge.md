@@ -1,4 +1,4 @@
----
+﻿---
 title: Ridge — L2 regularization
 sidebar_position: 1
 description: Ridge regression (L2 regularization) handles multicollinearity and overfitting, the L2 penalty, choosing lambda, and how to run it in EcoLab.
@@ -119,9 +119,10 @@ print(f"Coefficients: {model.coef_}")
 
 <VideoTutorial
   title="Running Ridge regression in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 
 - [Lasso](/en/ecolab/model/lasso) · [Elastic Net](/en/ecolab/model/elastic-net) · [OLS](/en/ecolab/model/ols) · [Catalog](/en/ecolab/model/group)
+

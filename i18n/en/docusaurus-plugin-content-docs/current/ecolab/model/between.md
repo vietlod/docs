@@ -1,4 +1,4 @@
----
+﻿---
 title: Between Estimator
 sidebar_position: 3
 description: The Between estimator uses unit means to exploit cross-unit variation, how it differs from FE/RE, and how to run it in EcoLab.
@@ -97,9 +97,10 @@ print(model_be)
 
 <VideoTutorial
   title="Running the Between estimator in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 
 - [FEM/REM](/en/ecolab/model/fem-rem) · [Pooled OLS](/en/ecolab/model/pooled-ols) · [Catalog](/en/ecolab/model/group)
+

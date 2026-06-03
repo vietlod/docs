@@ -1,4 +1,4 @@
----
+﻿---
 title: AR / MA / ARMA / ARIMA
 sidebar_position: 1
 description: The Box-Jenkins family (AR, MA, ARMA, ARIMA) for univariate time series, integration order, the identification-and-forecasting workflow, and how to run it in EcoLab.
@@ -135,9 +135,10 @@ print(forecast.summary_frame())
 
 <VideoTutorial
   title="Running ARIMA in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 
 - [SARIMA](/en/ecolab/model/sarima) · [GARCH](/en/ecolab/model/garch) · [ARDL](/en/ecolab/model/ardl) · [Catalog](/en/ecolab/model/group)
+

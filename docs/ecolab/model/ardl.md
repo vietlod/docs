@@ -1,4 +1,4 @@
----
+﻿---
 title: Mô hình ARDL
 sidebar_position: 1
 description: ARDL (Autoregressive Distributed Lag) là gì, khi nào dùng, giả định, kiểm định đường bao (bounds test) và cách chạy ARDL trong EcoLab với dữ liệu chuỗi thời gian.
@@ -176,7 +176,7 @@ print(result.summary())
 
 <VideoTutorial
   title="Hướng dẫn chạy ARDL trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
@@ -184,3 +184,4 @@ print(result.summary())
 - [Ví dụ: FDI và tăng trưởng kinh tế Việt Nam (ARDL)](/ecolab/vi-du/fdi-tang-truong-ardl)
 - [FEM và REM cho dữ liệu bảng](/ecolab/model/fem-rem)
 - [Ước lượng & Mô hình hóa Kinh tế lượng](/ecolab/econometrics-modeling)
+

@@ -1,4 +1,4 @@
----
+﻿---
 title: Probit
 sidebar_position: 2
 description: Mô hình Probit cho biến nhị phân dùng hàm phân phối chuẩn tích lũy, khác biệt với Logit, tác động biên và cách chạy trong EcoLab.
@@ -121,9 +121,10 @@ print(f"Pseudo R² = {model.prsquared:.4f}")
 
 <VideoTutorial
   title="Hướng dẫn chạy Probit trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 
 - [Logit](/ecolab/model/logit) · [Heckman](/ecolab/model/heckman) · [Danh mục](/ecolab/model/group)
+

@@ -1,4 +1,4 @@
----
+﻿---
 title: Truncated Regression
 sidebar_position: 4
 description: Truncated regression when the sample only contains observations above/below a threshold, how it differs from Tobit, and how to run it in EcoLab.
@@ -120,9 +120,10 @@ def trunc_loglik(params, X, y, lower=0):
 
 <VideoTutorial
   title="Guide to running Truncated Regression in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 
 - [Tobit](/en/ecolab/model/tobit) · [Heckman](/en/ecolab/model/heckman) · [Catalog](/en/ecolab/model/group)
+

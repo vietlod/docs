@@ -1,4 +1,4 @@
----
+﻿---
 title: Adaptive Lasso
 sidebar_position: 4
 description: Adaptive Lasso uses coefficient-specific weights to achieve the oracle property (consistent variable selection), how it differs from plain Lasso, and how to run it in EcoLab.
@@ -120,9 +120,10 @@ print(f"Coefficients: {adaptive_coef}")
 
 <VideoTutorial
   title="Running Adaptive Lasso in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 
 - [Lasso](/en/ecolab/model/lasso) · [Ridge](/en/ecolab/model/ridge) · [Elastic Net](/en/ecolab/model/elastic-net) · [Catalog](/en/ecolab/model/group)
+

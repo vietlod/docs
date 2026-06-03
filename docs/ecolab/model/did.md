@@ -1,4 +1,4 @@
----
+﻿---
 title: Difference-in-Differences (DID)
 sidebar_position: 5
 description: Phương pháp Difference-in-Differences (DID) đánh giá tác động chính sách, giả định xu hướng song song (parallel trends), event study, và cách chạy DID trong EcoLab.
@@ -153,7 +153,7 @@ print(result.summary())
 
 <VideoTutorial
   title="Hướng dẫn chạy DID trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
@@ -161,3 +161,4 @@ print(result.summary())
 - [FEM và REM (TWFE)](/ecolab/model/fem-rem)
 - [Ví dụ: Nợ công và tăng trưởng (dữ liệu bảng)](/ecolab/vi-du/no-cong-tang-truong-panel)
 - [Ước lượng & Mô hình hóa Kinh tế lượng](/ecolab/econometrics-modeling)
+

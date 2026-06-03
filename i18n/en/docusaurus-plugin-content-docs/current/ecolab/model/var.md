@@ -1,4 +1,4 @@
----
+﻿---
 title: VAR — Vector Autoregression
 sidebar_position: 1
 description: The VAR (Vector Autoregression) model for systems of stationary time series, impulse responses (IRF), variance decomposition, Granger causality, and how to run it in EcoLab.
@@ -141,9 +141,10 @@ plt.show()
 
 <VideoTutorial
   title="Running VAR in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 
 - [VECM](/en/ecolab/model/vecm) · [SVAR](/en/ecolab/model/svar) · [Catalog](/en/ecolab/model/group)
+

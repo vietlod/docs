@@ -1,4 +1,4 @@
----
+﻿---
 title: IV / 2SLS — Biến công cụ
 sidebar_position: 1
 description: Hồi quy biến công cụ (IV) và bình phương nhỏ nhất hai giai đoạn (2SLS) xử lý nội sinh, điều kiện biến công cụ hợp lệ, kiểm định, và cách chạy trong EcoLab.
@@ -123,9 +123,10 @@ print(result)
 
 <VideoTutorial
   title="Hướng dẫn chạy IV/2SLS trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 
 - [3SLS](/ecolab/model/3sls) · [SUR](/ecolab/model/sur) · [Danh mục](/ecolab/model/group)
+

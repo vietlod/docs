@@ -1,4 +1,4 @@
----
+﻿---
 title: WLS — Weighted Least Squares
 sidebar_position: 2
 description: WLS (Weighted Least Squares) regression for known heteroskedasticity, the weighting formula, and how to run WLS in EcoLab.
@@ -122,9 +122,10 @@ print(model_wls.summary())
 
 <VideoTutorial
   title="Running WLS in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 
 - [OLS](/en/ecolab/model/ols) · [GLS](/en/ecolab/model/gls) · [Model catalog](/en/ecolab/model/group)
+

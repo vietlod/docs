@@ -1,4 +1,4 @@
----
+﻿---
 title: 'Đường cong Engel phi tuyến (GAM)'
 sidebar_position: 10
 description: Thực hành GAM trên EcoLab — mô hình quan hệ phi tuyến giữa chi tiêu thực phẩm và thu nhập (đường cong Engel) bằng hàm trơn.
@@ -102,8 +102,9 @@ Xuất báo cáo + **đồ thị hàm trơn** + **mã tái lập**.
 
 <VideoTutorial
   title="Hướng dẫn chạy GAM trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 - [GAM](/ecolab/model/gam) · [NLS](/ecolab/model/nls) · [Danh mục](/ecolab/model/group)
+

@@ -1,4 +1,4 @@
----
+﻿---
 title: Elastic Net — Kết hợp L1 + L2
 sidebar_position: 3
 description: Elastic Net kết hợp phạt L1 (Lasso) và L2 (Ridge) để vừa chọn biến vừa xử lý nhóm biến tương quan cao, và cách chạy trong EcoLab.
@@ -105,9 +105,10 @@ print(f"Hệ số: {model.coef_}")
 
 <VideoTutorial
   title="Hướng dẫn chạy Elastic Net trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 
 - [Ridge](/ecolab/model/ridge) · [Lasso](/ecolab/model/lasso) · [Adaptive Lasso](/ecolab/model/adaptive-lasso) · [Danh mục](/ecolab/model/group)
+

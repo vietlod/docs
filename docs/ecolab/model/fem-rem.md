@@ -1,4 +1,4 @@
----
+﻿---
 title: FEM và REM (dữ liệu bảng)
 sidebar_position: 2
 description: Phân biệt mô hình hiệu ứng cố định (FEM) và hiệu ứng ngẫu nhiên (REM) cho dữ liệu bảng, khi nào dùng mô hình nào, kiểm định Hausman và cách chạy trong EcoLab.
@@ -168,7 +168,7 @@ print(re.summary)
 
 <VideoTutorial
   title="Hướng dẫn chạy FEM / REM trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
@@ -176,3 +176,4 @@ print(re.summary)
 - [Mô hình ARDL (chuỗi thời gian)](/ecolab/model/ardl)
 - [Ví dụ: FDI và tăng trưởng kinh tế Việt Nam](/ecolab/vi-du/fdi-tang-truong-ardl)
 - [Ước lượng & Mô hình hóa Kinh tế lượng](/ecolab/econometrics-modeling)
+

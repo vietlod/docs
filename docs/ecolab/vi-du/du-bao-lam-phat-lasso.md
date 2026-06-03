@@ -1,4 +1,4 @@
----
+﻿---
 title: 'Dự báo lạm phát với nhiều biến (Lasso)'
 sidebar_position: 8
 description: Thực hành Lasso/Elastic Net trên EcoLab — dự báo lạm phát từ rất nhiều biến vĩ mô, chọn biến tự động và tránh overfitting.
@@ -116,8 +116,9 @@ Regularization thiên về **dự báo**, không phải suy diễn nhân quả; 
 
 <VideoTutorial
   title="Hướng dẫn chạy Lasso dự báo lạm phát trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 - [Lasso](/ecolab/model/lasso) · [Elastic Net](/ecolab/model/elastic-net) · [Ridge](/ecolab/model/ridge) · [Danh mục](/ecolab/model/group)
+

@@ -1,4 +1,4 @@
----
+﻿---
 title: 'Xác suất vỡ nợ doanh nghiệp (Logit)'
 sidebar_position: 4
 description: Thực hành Logit trên EcoLab — dự báo xác suất vỡ nợ của doanh nghiệp từ các chỉ số tài chính, đọc odds ratio và tác động biên.
@@ -144,8 +144,9 @@ Xuất báo cáo + **mã tái lập**; kèm bảng phân loại và đường RO
 
 <VideoTutorial
   title="Hướng dẫn chạy Logit (vỡ nợ doanh nghiệp) trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 - [Logit](/ecolab/model/logit) · [Probit](/ecolab/model/probit) · [Danh mục](/ecolab/model/group)
+

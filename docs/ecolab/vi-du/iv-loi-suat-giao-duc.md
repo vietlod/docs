@@ -1,4 +1,4 @@
----
+﻿---
 title: 'Lợi suất giáo dục với biến công cụ (IV)'
 sidebar_position: 7
 description: Thực hành IV/2SLS trên EcoLab — xử lý nội sinh của học vấn khi ước lượng lợi suất giáo dục, dùng biến công cụ và kiểm định công cụ.
@@ -120,8 +120,9 @@ Xuất báo cáo + **mã tái lập**; báo cáo đầy đủ F giai đoạn 1, 
 
 <VideoTutorial
   title="Hướng dẫn chạy IV/2SLS trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 - [IV/2SLS](/ecolab/model/iv-2sls) · [Ví dụ Mincer (OLS)](/ecolab/vi-du/luong-giao-duc-ols) · [Danh mục](/ecolab/model/group)
+

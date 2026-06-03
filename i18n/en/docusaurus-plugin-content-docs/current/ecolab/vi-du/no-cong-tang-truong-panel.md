@@ -1,4 +1,4 @@
----
+﻿---
 title: 'Public debt and growth (panel data)'
 sidebar_position: 2
 description: A full hands-on walkthrough in EcoLab — analyzing the impact of public debt on economic growth with cross-country panel data, comparing FEM/REM and System GMM, from idea to report.
@@ -148,7 +148,7 @@ Every estimation step (FEM, REM, Hausman, System GMM with AR(2)/Hansen) is gener
 
 <VideoTutorial
   title="Panel data analysis (public debt and growth) in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
@@ -156,3 +156,4 @@ Every estimation step (FEM, REM, Hausman, System GMM with AR(2)/Hansen) is gener
 - [GMM for dynamic panels](/en/ecolab/model/gmm) · [FEM and REM](/en/ecolab/model/fem-rem)
 - [Worked example: FDI and growth in Vietnam (ARDL)](/en/ecolab/vi-du/fdi-tang-truong-ardl)
 - [EcoLab Overview](/en/ecolab/overview) · [Estimation & Modeling](/en/ecolab/econometrics-modeling)
+

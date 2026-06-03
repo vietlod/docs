@@ -1,4 +1,4 @@
----
+﻿---
 title: Heckman selection model
 sidebar_position: 5
 description: The Heckman (Heckit) model corrects sample selection bias via the inverse Mills ratio, two-step/MLE estimation, and how to run it in EcoLab.
@@ -150,9 +150,10 @@ print("IMR p-value:", outcome_model.pvalues["imr"])
 
 <VideoTutorial
   title="Guide to running Heckman selection model in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 
 - [Probit](/en/ecolab/model/probit) · [Tobit](/en/ecolab/model/tobit) · [Truncated](/en/ecolab/model/truncated) · [Catalog](/en/ecolab/model/group)
+

@@ -1,4 +1,4 @@
----
+﻿---
 title: Negative Binomial
 sidebar_position: 2
 description: Negative Binomial regression for overdispersed count data (variance > mean), how it differs from Poisson, and how to run it in EcoLab.
@@ -133,9 +133,10 @@ print(f"AIC NegBin:  {model.aic:.1f}")
 
 <VideoTutorial
   title="Guide to running Negative Binomial regression in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 
 - [Poisson](/en/ecolab/model/poisson) · [ZIP](/en/ecolab/model/zip) · [ZINB](/en/ecolab/model/zinb) · [Catalog](/en/ecolab/model/group)
+

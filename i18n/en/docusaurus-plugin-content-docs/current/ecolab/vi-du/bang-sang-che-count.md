@@ -1,4 +1,4 @@
----
+﻿---
 title: 'R&D and patent counts (Count)'
 sidebar_position: 5
 description: Hands-on count models in EcoLab — the effect of R&D spending on a firm's patent count, Poisson vs Negative Binomial.
@@ -144,8 +144,9 @@ Export a report + **replication code**; if there are excess zeros (many firms wi
 
 <VideoTutorial
   title="Guide to running count models (Poisson/NegBin) in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 - [Poisson](/en/ecolab/model/poisson) · [Negative Binomial](/en/ecolab/model/negbin) · [ZINB](/en/ecolab/model/zinb) · [Catalog](/en/ecolab/model/group)
+

@@ -1,4 +1,4 @@
----
+﻿---
 title: Ridge — Hồi quy co L2
 sidebar_position: 1
 description: Hồi quy Ridge (chính quy hóa L2) xử lý đa cộng tuyến và overfitting, công thức phạt L2, chọn lambda, và cách chạy trong EcoLab.
@@ -119,9 +119,10 @@ print(f"R²: {model.score(X_scaled, y):.4f}")
 
 <VideoTutorial
   title="Hướng dẫn chạy Ridge trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 
 - [Lasso](/ecolab/model/lasso) · [Elastic Net](/ecolab/model/elastic-net) · [OLS](/ecolab/model/ols) · [Danh mục](/ecolab/model/group)
+

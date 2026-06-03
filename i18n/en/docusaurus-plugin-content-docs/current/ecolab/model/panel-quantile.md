@@ -1,4 +1,4 @@
----
+﻿---
 title: Panel Quantile (FE-QR)
 sidebar_position: 2
 description: Quantile regression for panel data with fixed effects (FE-QR), combining quantile regression with panel structure, and how to run it in EcoLab.
@@ -112,9 +112,10 @@ for q in quantiles:
 
 <VideoTutorial
   title="Running Panel Quantile Regression in EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## See also
 
 - [Quantile Regression](/en/ecolab/model/quantile) · [FEM/REM](/en/ecolab/model/fem-rem) · [Catalog](/en/ecolab/model/group)
+

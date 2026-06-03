@@ -1,4 +1,4 @@
----
+﻿---
 title: Heckman — Mô hình chọn mẫu
 sidebar_position: 5
 description: Mô hình Heckman (Heckit) hiệu chỉnh thiên lệch chọn mẫu (sample selection bias) qua tỷ số Mills nghịch đảo, hai bước/MLE, và cách chạy trong EcoLab.
@@ -139,9 +139,10 @@ print(ols.summary())
 
 <VideoTutorial
   title="Hướng dẫn chạy Heckman (Heckit) trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 
 - [Probit](/ecolab/model/probit) · [Tobit](/ecolab/model/tobit) · [Truncated](/ecolab/model/truncated) · [Danh mục](/ecolab/model/group)
+

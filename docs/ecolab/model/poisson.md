@@ -1,4 +1,4 @@
----
+﻿---
 title: Poisson — Hồi quy biến đếm
 sidebar_position: 1
 description: Hồi quy Poisson cho biến đếm (số nguyên không âm), giả định mean = variance, kiểm định overdispersion và cách chạy trong EcoLab.
@@ -114,9 +114,10 @@ print(f"\nOverdispersion ratio: {model.pearson_chi2 / model.df_resid:.2f}")
 
 <VideoTutorial
   title="Hướng dẫn chạy Poisson Regression trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 
 - [Negative Binomial](/ecolab/model/negbin) · [ZIP](/ecolab/model/zip) · [ZINB](/ecolab/model/zinb) · [Danh mục](/ecolab/model/group)
+

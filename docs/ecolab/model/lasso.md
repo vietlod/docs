@@ -1,4 +1,4 @@
----
+﻿---
 title: Lasso — Hồi quy co L1
 sidebar_position: 2
 description: Hồi quy Lasso (chính quy hóa L1) vừa co hệ số vừa chọn biến tự động, công thức phạt L1, và cách chạy trong EcoLab.
@@ -118,9 +118,10 @@ print(f"Hệ số: {model.coef_}")
 
 <VideoTutorial
   title="Hướng dẫn chạy Lasso trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 
 - [Ridge](/ecolab/model/ridge) · [Elastic Net](/ecolab/model/elastic-net) · [Adaptive Lasso](/ecolab/model/adaptive-lasso) · [Danh mục](/ecolab/model/group)
+

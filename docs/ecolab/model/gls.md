@@ -1,4 +1,4 @@
----
+﻿---
 title: GLS / FGLS — Bình phương nhỏ nhất tổng quát
 sidebar_position: 3
 description: Hồi quy GLS và FGLS (Feasible GLS) xử lý phương sai sai số thay đổi và tự tương quan qua ma trận hiệp phương sai, và cách chạy trong EcoLab.
@@ -111,9 +111,10 @@ print(model_gls.summary())
 
 <VideoTutorial
   title="Hướng dẫn chạy GLS / FGLS trong EcoLab"
-  src="https://www.youtube.com/user/vietlod"
+  src="https://www.youtube.com/embed/m3wyHeBOfUE"
 />
 
 ## Xem thêm
 
 - [OLS](/ecolab/model/ols) · [WLS](/ecolab/model/wls) · [Danh mục mô hình](/ecolab/model/group)
+
