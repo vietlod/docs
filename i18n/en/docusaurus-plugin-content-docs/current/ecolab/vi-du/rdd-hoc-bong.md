@@ -1,12 +1,16 @@
 ---
-title: 'Example: Scholarship effect (RDD)'
+title: 'Scholarship effect (RDD)'
 sidebar_position: 11
 description: Hands-on RDD in EcoLab — evaluating the effect of a scholarship based on an admission-score cutoff on academic performance.
 ---
 
-# Example: Effect of a scholarship on academic performance (RDD)
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import VideoTutorial from '@site/src/components/VideoTutorial';
 
-This illustrates [RDD](/en/ecolab/mo-hinh/rdd): a scholarship is awarded to students with an **admission score ≥ cutoff**. Comparing students **just above and just below the cutoff** (as-good-as random) yields a credible causal estimate at the threshold. Figures are **illustrative**.
+# Effect of a scholarship on academic performance (RDD)
+
+This illustrates [RDD](/en/ecolab/model/rdd): a scholarship is awarded to students with an **admission score ≥ cutoff**. Comparing students **just above and just below the cutoff** (as-good-as random) yields a credible causal estimate at the threshold. Figures are **illustrative**.
 
 > Summary: estimate the **jump** in academic performance (next-year GPA) at the score cutoff = the causal effect of the scholarship at the threshold.
 
@@ -50,8 +54,69 @@ flowchart LR
 
 Sample interpretation: the scholarship **raises GPA by ~0.18** at the threshold; a non-rejected McCrary test ⇒ no sign of score manipulation around the cutoff. This effect is **local to the cutoff** (LATE).
 
+<Tabs groupId="lang">
+  <TabItem value="stata" label="Stata" default>
+
+```stata
+* ── RDD: scholarship effect on GPA ────────────────
+* Install: ssc install rdrobust
+rdrobust gpa score, c(50)
+
+* ── RDD plot ──────────────────────────────────────
+rdplot gpa score, c(50)
+
+* ── Optimal bandwidth selection ───────────────────
+rdbwselect gpa score, c(50)
+```
+
+  </TabItem>
+  <TabItem value="r" label="R">
+
+```r
+# ── RDD: scholarship effect on GPA ────────────────
+library(rdrobust)
+
+# Robust RD estimate at cutoff = 50
+rd <- rdrobust(df$gpa, df$score, c = 50)
+summary(rd)
+
+# RDD plot
+rdplot(df$gpa, df$score, c = 50,
+       title = "Scholarship effect on GPA",
+       x.label = "Admission score",
+       y.label = "GPA (next year)")
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python">
+
+```python
+# ── RDD: scholarship effect on GPA ────────────────
+from rdrobust import rdrobust, rdplot
+
+# Robust RD estimate at cutoff = 50
+rd = rdrobust(df["gpa"], df["score"], c=50)
+print(rd)
+
+# RDD plot
+rdplot(df["gpa"], df["score"], c=50,
+       title="Scholarship effect on GPA",
+       x_label="Admission score",
+       y_label="GPA (next year)")
+```
+
+  </TabItem>
+</Tabs>
+
 ## Step 5 — Reporting
 Export a report + the **RDD plot** (scatter + fitted lines on both sides of the cutoff) + **replication code**.
 
+## Video tutorial
+
+<VideoTutorial
+  title="Guide to running RDD in EcoLab"
+  src="https://www.youtube.com/user/vietlod"
+/>
+
 ## See also
-- [RDD](/en/ecolab/mo-hinh/rdd) · [PSM](/en/ecolab/mo-hinh/psm) · [DiD](/en/ecolab/mo-hinh/did) · [Catalog](/en/ecolab/mo-hinh/danh-muc)
+- [RDD](/en/ecolab/model/rdd) · [PSM](/en/ecolab/model/psm) · [DiD](/en/ecolab/model/did) · [Catalog](/en/ecolab/model/group)

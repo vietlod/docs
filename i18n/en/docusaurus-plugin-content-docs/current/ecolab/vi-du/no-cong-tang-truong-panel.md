@@ -1,12 +1,16 @@
 ---
-title: 'Example: Public debt and growth (panel data)'
+title: 'Public debt and growth (panel data)'
 sidebar_position: 2
 description: A full hands-on walkthrough in EcoLab — analyzing the impact of public debt on economic growth with cross-country panel data, comparing FEM/REM and System GMM, from idea to report.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import VideoTutorial from '@site/src/components/VideoTutorial';
+
 # Worked example: Public debt and economic growth (panel data)
 
-This page illustrates EcoLab's **5-step workflow** for a common panel-data topic: *the impact of public debt on economic growth*. The focus is how to choose between [FEM/REM](/en/ecolab/mo-hinh/fem-rem) and [dynamic GMM](/en/ecolab/mo-hinh/gmm) when the model is dynamic and endogeneity is suspected. The figures in the results are **format illustrations**, not official empirical findings.
+This page illustrates EcoLab's **5-step workflow** for a common panel-data topic: *the impact of public debt on economic growth*. The focus is how to choose between [FEM/REM](/en/ecolab/model/fem-rem) and [dynamic GMM](/en/ecolab/model/gmm) when the model is dynamic and endogeneity is suspected. The figures in the results are **format illustrations**, not official empirical findings.
 
 > Summary: with a panel of many countries × many years and a dynamic growth model (with a lagged growth term), **System GMM** is usually preferable to FEM because it controls for endogeneity and the Nickell bias.
 
@@ -39,7 +43,7 @@ EcoLab synthesizes the literature (e.g., the debate around the 90%-of-GDP debt t
 **Estimation strategy, in order:**
 
 1. **Pooled OLS** (baseline) → **FEM/REM**; run **Hausman** to choose between FEM and REM.
-2. Recognize the **dynamics** (add `growth_lag`) and **endogeneity** (debt may be endogenous) → switch to **[System GMM](/en/ecolab/mo-hinh/gmm)**.
+2. Recognize the **dynamics** (add `growth_lag`) and **endogeneity** (debt may be endogenous) → switch to **[System GMM](/en/ecolab/model/gmm)**.
 3. Mandatory GMM tests: **AR(2)**, **Hansen**, and control of the **instrument count**.
 
 **Illustrative results (format — not real results):**
@@ -55,6 +59,79 @@ EcoLab synthesizes the literature (e.g., the debate around the 90%-of-GDP debt t
 
 Sample interpretation: public debt has a small negative effect on growth; GMM confirms the sign after controlling for endogeneity and dynamics.
 
+<Tabs groupId="lang">
+  <TabItem value="stata" label="Stata" default>
+
+```stata
+* ---- Panel: Public debt and growth ----
+use "debt_growth_panel.dta", clear
+xtset country year
+
+* Fixed Effects with robust SE
+xtreg growth debt invest open, fe vce(robust)
+estimates store fe
+
+* Random Effects
+xtreg growth debt invest open, re
+estimates store re
+
+* Hausman test
+hausman fe re
+```
+
+  </TabItem>
+  <TabItem value="r" label="R">
+
+```r
+# ---- Panel: Public debt and growth ----
+library(plm)
+
+# Load data (illustrative)
+df <- read.csv("debt_growth_panel.csv")
+pdata <- pdata.frame(df, index = c("country", "year"))
+
+# Fixed Effects
+fe <- plm(growth ~ debt + invest + open,
+          data = pdata, model = "within")
+summary(fe)
+
+# Random Effects
+re <- plm(growth ~ debt + invest + open,
+          data = pdata, model = "random")
+summary(re)
+
+# Hausman test
+phtest(fe, re)
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python">
+
+```python
+# ---- Panel: Public debt and growth ----
+import pandas as pd
+from linearmodels.panel import PanelOLS, RandomEffects
+
+# Load data (illustrative)
+df = pd.read_csv("debt_growth_panel.csv")
+df = df.set_index(["country", "year"])
+
+y = df["growth"]
+X = df[["debt", "invest", "open"]]
+
+# Fixed Effects with clustered SE
+fe = PanelOLS(y, X, entity_effects=True).fit(
+    cov_type="clustered", cluster_entity=True)
+print(fe)
+
+# Random Effects
+re = RandomEffects(y, X).fit()
+print(re)
+```
+
+  </TabItem>
+</Tabs>
+
 ## Step 5 — Reporting
 
 EcoLab produces a standard report (APA/Chicago/Harvard/IEEE/MLA) including data & methodology, an FEM-vs-GMM results table, diagnostics, discussion, and a **replication-code appendix** (Stata/R/Python).
@@ -67,8 +144,15 @@ Every estimation step (FEM, REM, Hausman, System GMM with AR(2)/Hansen) is gener
 
 ---
 
+## Video tutorial
+
+<VideoTutorial
+  title="Panel data analysis (public debt and growth) in EcoLab"
+  src="https://www.youtube.com/user/vietlod"
+/>
+
 ## See also
 
-- [GMM for dynamic panels](/en/ecolab/mo-hinh/gmm) · [FEM and REM](/en/ecolab/mo-hinh/fem-rem)
+- [GMM for dynamic panels](/en/ecolab/model/gmm) · [FEM and REM](/en/ecolab/model/fem-rem)
 - [Worked example: FDI and growth in Vietnam (ARDL)](/en/ecolab/vi-du/fdi-tang-truong-ardl)
 - [EcoLab Overview](/en/ecolab/overview) · [Estimation & Modeling](/en/ecolab/econometrics-modeling)

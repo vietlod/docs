@@ -1,12 +1,16 @@
 ---
-title: 'Example: Corporate default probability (Logit)'
+title: Corporate default probability (Logit)
 sidebar_position: 4
 description: Hands-on Logit in EcoLab — predicting corporate default probability from financial ratios, reading odds ratios and marginal effects.
 ---
 
-# Example: Corporate default probability (Logit)
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import VideoTutorial from '@site/src/components/VideoTutorial';
 
-This illustrates [Logit](/en/ecolab/mo-hinh/logit) for a binary outcome: predicting the **probability of default** ($Y=1$ if default) from financial ratios. Figures are **illustrative**.
+# Corporate default probability (Logit)
+
+This illustrates [Logit](/en/ecolab/model/logit) for a binary outcome: predicting the **probability of default** ($Y=1$ if default) from financial ratios. Figures are **illustrative**.
 
 > Summary: regress the binary `default` on leverage, profitability and liquidity; interpret via **odds ratios** and **marginal effects**.
 
@@ -46,8 +50,106 @@ $$
 
 Sample interpretation: high leverage **raises** default odds (OR ≈ 4.3); higher ROA and liquidity **reduce** risk; AUC 0.84 indicates good classification.
 
+<Tabs groupId="lang">
+  <TabItem value="stata" label="Stata" default>
+
+```stata
+* ===== Logit — Corporate default probability =====
+* Estimate the logit model
+logit default leverage roa current
+
+* Odds ratios
+logit default leverage roa current, or
+
+* Average marginal effects (AME)
+margins, dydx(*)
+
+* Classification table
+estat classification
+
+* ROC curve and AUC
+lroc
+lsens
+```
+
+  </TabItem>
+  <TabItem value="r" label="R">
+
+```r
+# ===== Logit — Corporate default probability =====
+model <- glm(default ~ leverage + roa + current,
+             data   = df,
+             family = binomial(link = "logit"))
+
+summary(model)
+
+# Odds ratios
+exp(coef(model))
+exp(confint(model))
+
+# Average marginal effects (AME)
+library(margins)
+summary(margins(model))
+
+# ROC curve and AUC
+library(pROC)
+pred <- predict(model, type = "response")
+roc_obj <- roc(df$default, pred)
+auc(roc_obj)
+plot(roc_obj, main = "ROC Curve — Default Logit")
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python">
+
+```python
+# ===== Logit — Corporate default probability =====
+import statsmodels.api as sm
+import numpy as np
+from sklearn.metrics import roc_auc_score, roc_curve
+import matplotlib.pyplot as plt
+
+# Prepare data
+X = sm.add_constant(df[["leverage", "roa", "current"]])
+y = df["default"]
+
+# Estimate the logit model
+model = sm.Logit(y, X).fit()
+print(model.summary())
+
+# Odds ratios
+print("Odds Ratios:")
+print(np.exp(model.params))
+
+# Average marginal effects
+mfx = model.get_margeff()
+print(mfx.summary())
+
+# ROC curve and AUC
+y_pred = model.predict(X)
+print("AUC:", roc_auc_score(y, y_pred))
+
+fpr, tpr, _ = roc_curve(y, y_pred)
+plt.plot(fpr, tpr, label=f"AUC = {roc_auc_score(y, y_pred):.2f}")
+plt.xlabel("False Positive Rate")
+plt.ylabel("True Positive Rate")
+plt.title("ROC Curve — Default Logit")
+plt.legend()
+plt.show()
+```
+
+  </TabItem>
+</Tabs>
+
 ## Step 5 — Reporting
 Export a report + **replication code**; include the classification table and ROC curve.
 
+## Video tutorial
+
+<VideoTutorial
+  title="Guide to running Logit for default prediction in EcoLab"
+  src="https://www.youtube.com/user/vietlod"
+/>
+
 ## See also
-- [Logit](/en/ecolab/mo-hinh/logit) · [Probit](/en/ecolab/mo-hinh/probit) · [Catalog](/en/ecolab/mo-hinh/danh-muc)
+- [Logit](/en/ecolab/model/logit) · [Probit](/en/ecolab/model/probit) · [Catalog](/en/ecolab/model/group)

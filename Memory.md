@@ -34,6 +34,13 @@ Tài liệu này lưu trữ các quyết định thiết kế bền vững, bài
     -   *Phương án B (Chọn)*: Dùng 1 Doc Instance duy nhất, chia thư mục trong `docs/` và cấu hình Navbar để tự động hoán đổi Sidebars của từng app.
 *   **Lý do chọn**: Giúp quản lý mã nguồn tập trung, đồng bộ tệp CSS/UI thống nhất phong cách tối giản sang trọng (premium academic style) và tiết kiệm tài nguyên build trên VPS.
 
+### Chuẩn hóa tên thư mục và URL định tuyến EcoLab (2026-06-03)
+*   **Quyết định**: Đồng bộ hóa tên thư mục chứa tài liệu học thuật từ tiếng Việt không dấu sang tiếng Anh để nhất quán giữa cấu trúc vật lý và định tuyến URL trên môi trường đa ngôn ngữ:
+    - Thay thế `mo-hinh/` thành `model/`
+    - Thay thế `danh-muc/` thành `group/`
+*   **Lợi ích**: Tránh lỗi mã hóa URL khi chia sẻ liên kết, đồng thời tạo cấu trúc link thân thiện với SEO đối với cả bản dịch tiếng Anh (i18n) và tiếng Việt.
+
+
 ---
 
 ## 3. Quy tắc Tránh Lỗi Thường Gặp (Pitfalls Mapping)

@@ -1,14 +1,18 @@
 ---
-title: 'Ví dụ: R&D và số bằng sáng chế (Count)'
+title: 'R&D và số bằng sáng chế (Count)'
 sidebar_position: 5
 description: Thực hành mô hình biến đếm trên EcoLab — tác động của chi R&D lên số bằng sáng chế của doanh nghiệp, Poisson vs Negative Binomial.
 ---
 
-# Ví dụ: R&D và số bằng sáng chế (dữ liệu đếm)
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import VideoTutorial from '@site/src/components/VideoTutorial';
 
-Minh họa nhóm [biến đếm](/ecolab/mo-hinh/poisson): số **bằng sáng chế** một doanh nghiệp đăng ký (số nguyên không âm) theo chi **R&D** và quy mô. Số liệu là **minh họa**.
+# R&D và số bằng sáng chế (dữ liệu đếm)
 
-> Tóm tắt: vì biến đếm thường **overdispersion**, ta so sánh [Poisson](/ecolab/mo-hinh/poisson) và [Negative Binomial](/ecolab/mo-hinh/negbin) và chọn mô hình phù hợp.
+Minh họa nhóm [biến đếm](/ecolab/model/poisson): số **bằng sáng chế** một doanh nghiệp đăng ký (số nguyên không âm) theo chi **R&D** và quy mô. Số liệu là **minh họa**.
+
+> Tóm tắt: vì biến đếm thường **overdispersion**, ta so sánh [Poisson](/ecolab/model/poisson) và [Negative Binomial](/ecolab/model/negbin) và chọn mô hình phù hợp.
 
 ---
 
@@ -44,8 +48,104 @@ $$
 
 Diễn giải mẫu: chi R&D tăng 1% gắn với số bằng sáng chế kỳ vọng cao hơn (IRR > 1); kiểm định $\alpha \ne 0$ ⇒ **NegBin phù hợp hơn Poisson**.
 
+<Tabs groupId="lang">
+  <TabItem value="stata" label="Stata" default>
+
+```stata
+* === So sánh Poisson vs Negative Binomial ===
+
+* Poisson với sai số chuẩn robust
+poisson patents rd_spend size_log, vce(robust)
+estimates store pois
+
+* Negative Binomial với sai số chuẩn robust
+nbreg patents rd_spend size_log, vce(robust)
+estimates store nb
+
+* So sánh AIC/BIC
+estimates stats pois nb
+
+* IRR
+nbreg patents rd_spend size_log, vce(robust) irr
+
+* Kiểm định alpha = 0 (NegBin vs Poisson)
+* ⇒ LR test tự động hiển thị trong output nbreg
+```
+
+  </TabItem>
+  <TabItem value="r" label="R">
+
+```r
+# === So sánh Poisson vs Negative Binomial ===
+library(MASS)
+
+# Poisson
+pois <- glm(patents ~ rd_spend + size_log,
+            family = poisson, data = df)
+
+# Negative Binomial
+nb <- glm.nb(patents ~ rd_spend + size_log, data = df)
+
+# So sánh AIC
+AIC(pois, nb)
+
+# IRR — NegBin
+exp(coef(nb))
+exp(confint(nb))
+
+# Kiểm tra overdispersion
+library(AER)
+dispersiontest(pois)
+
+# Kết luận: AIC NegBin < AIC Poisson ⇒ NegBin phù hợp hơn
+summary(nb)
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python">
+
+```python
+# === So sánh Poisson vs Negative Binomial ===
+import statsmodels.api as sm
+import numpy as np
+
+X = sm.add_constant(df[["rd_spend", "size_log"]])
+y = df["patents"]
+
+# Poisson
+pois = sm.GLM(y, X, family=sm.families.Poisson()).fit()
+print("=== Poisson ===")
+print(pois.summary())
+
+# Negative Binomial
+nb = sm.GLM(y, X, family=sm.families.NegativeBinomial()).fit()
+print("\n=== Negative Binomial ===")
+print(nb.summary())
+
+# So sánh AIC
+print(f"\nAIC Poisson:  {pois.aic:.2f}")
+print(f"AIC NegBin:   {nb.aic:.2f}")
+
+# IRR — NegBin
+print("\nIRR (NegBin):")
+print(np.exp(nb.params))
+
+# Overdispersion ratio
+print(f"\nOverdispersion (Poisson): {pois.pearson_chi2 / pois.df_resid:.2f}")
+```
+
+  </TabItem>
+</Tabs>
+
 ## Bước 5 — Báo cáo
-Xuất báo cáo + **mã tái lập**; nếu dư thừa số 0 (nhiều DN 0 bằng sáng chế) ⇒ cân nhắc [ZINB](/ecolab/mo-hinh/zinb).
+Xuất báo cáo + **mã tái lập**; nếu dư thừa số 0 (nhiều DN 0 bằng sáng chế) ⇒ cân nhắc [ZINB](/ecolab/model/zinb).
+
+## Video minh họa
+
+<VideoTutorial
+  title="Hướng dẫn chạy mô hình biến đếm (Poisson / NegBin) trong EcoLab"
+  src="https://www.youtube.com/user/vietlod"
+/>
 
 ## Xem thêm
-- [Poisson](/ecolab/mo-hinh/poisson) · [Negative Binomial](/ecolab/mo-hinh/negbin) · [ZINB](/ecolab/mo-hinh/zinb) · [Danh mục](/ecolab/mo-hinh/danh-muc)
+- [Poisson](/ecolab/model/poisson) · [Negative Binomial](/ecolab/model/negbin) · [ZINB](/ecolab/model/zinb) · [Danh mục](/ecolab/model/group)

@@ -1,12 +1,16 @@
 ---
-title: 'Ví dụ: Nợ công và tăng trưởng (dữ liệu bảng)'
+title: 'Nợ công và tăng trưởng (dữ liệu bảng)'
 sidebar_position: 2
 description: Thực hành đầy đủ trên EcoLab — phân tích tác động của nợ công đến tăng trưởng kinh tế bằng dữ liệu bảng đa quốc gia, so sánh FEM/REM và System GMM, từ ý tưởng đến báo cáo.
 ---
 
-# Ví dụ thực nghiệm: Nợ công và tăng trưởng kinh tế (dữ liệu bảng)
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import VideoTutorial from '@site/src/components/VideoTutorial';
 
-Trang này minh họa **quy trình 5 bước** của EcoLab cho một đề tài dữ liệu bảng phổ biến: *tác động của nợ công đến tăng trưởng kinh tế*. Trọng tâm là cách chọn giữa [FEM/REM](/ecolab/mo-hinh/fem-rem) và [GMM động](/ecolab/mo-hinh/gmm) khi mô hình có tính động và nghi ngờ nội sinh. Các con số kết quả là **minh họa định dạng**, không phải kết quả thực nghiệm chính thức.
+# Nợ công và tăng trưởng kinh tế (dữ liệu bảng)
+
+Trang này minh họa **quy trình 5 bước** của EcoLab cho một đề tài dữ liệu bảng phổ biến: *tác động của nợ công đến tăng trưởng kinh tế*. Trọng tâm là cách chọn giữa [FEM/REM](/ecolab/model/fem-rem) và [GMM động](/ecolab/model/gmm) khi mô hình có tính động và nghi ngờ nội sinh. Các con số kết quả là **minh họa định dạng**, không phải kết quả thực nghiệm chính thức.
 
 > Tóm tắt: với bảng nhiều quốc gia × nhiều năm và mô hình tăng trưởng động (có biến tăng trưởng trễ), **System GMM** thường phù hợp hơn FEM do kiểm soát được nội sinh và chệch Nickell.
 
@@ -39,7 +43,7 @@ EcoLab tổng hợp tài liệu (ví dụ tranh luận quanh ngưỡng nợ 90% 
 **Chiến lược ước lượng theo thứ tự:**
 
 1. **Pooled OLS** (cơ sở) → **FEM/REM**; chạy **Hausman** để chọn giữa FEM và REM.
-2. Nhận diện **tính động** (thêm `growth_lag`) và **nội sinh** (debt có thể nội sinh) → chuyển sang **[System GMM](/ecolab/mo-hinh/gmm)**.
+2. Nhận diện **tính động** (thêm `growth_lag`) và **nội sinh** (debt có thể nội sinh) → chuyển sang **[System GMM](/ecolab/model/gmm)**.
 3. Kiểm định bắt buộc cho GMM: **AR(2)**, **Hansen**, kiểm soát **số công cụ**.
 
 **Kết quả minh họa (định dạng — không phải kết quả thực):**
@@ -55,6 +59,75 @@ EcoLab tổng hợp tài liệu (ví dụ tranh luận quanh ngưỡng nợ 90% 
 
 Diễn giải mẫu: nợ công có tác động âm nhỏ đến tăng trưởng; GMM xác nhận dấu sau khi kiểm soát nội sinh và tính động.
 
+**Mã tái lập:**
+
+<Tabs groupId="lang">
+  <TabItem value="stata" label="Stata" default>
+
+```stata
+* === Nợ công & Tăng trưởng — Panel FE/RE + Hausman ===
+xtset country year
+
+* Fixed Effects với sai số chuẩn robust
+xtreg growth debt invest open, fe vce(robust)
+estimates store fe_est
+
+* Random Effects
+xtreg growth debt invest open, re
+estimates store re_est
+
+* Kiểm định Hausman
+hausman fe_est re_est
+```
+
+  </TabItem>
+  <TabItem value="r" label="R">
+
+```r
+# === Nợ công & Tăng trưởng — Panel FE/RE + Hausman ===
+library(plm)
+
+pdata <- pdata.frame(df, index = c("country", "year"))
+
+# Fixed Effects
+fe <- plm(growth ~ debt + invest + open,
+          data = pdata, model = "within")
+summary(fe)
+
+# Random Effects
+re <- plm(growth ~ debt + invest + open,
+          data = pdata, model = "random")
+summary(re)
+
+# Kiểm định Hausman
+phtest(fe, re)
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python">
+
+```python
+from linearmodels.panel import PanelOLS, RandomEffects
+import statsmodels.api as sm
+
+# === Nợ công & Tăng trưởng — Panel FE ===
+df = df.set_index(['country', 'year'])
+y = df['growth']
+X = sm.add_constant(df[['debt', 'invest', 'open']])
+
+# Fixed Effects với sai số chuẩn cụm
+fe = PanelOLS(y, X, entity_effects=True).fit(
+    cov_type='clustered', cluster_entity=True)
+print(fe.summary)
+
+# Random Effects
+re = RandomEffects(y, X).fit()
+print(re.summary)
+```
+
+  </TabItem>
+</Tabs>
+
 ## Bước 5 — Báo cáo (Reporting)
 
 EcoLab tạo báo cáo chuẩn (APA/Chicago/Harvard/IEEE/MLA) gồm dữ liệu & phương pháp, bảng kết quả FEM vs GMM, chẩn đoán, thảo luận và **phụ lục mã tái lập** (Stata/R/Python).
@@ -67,8 +140,15 @@ Mọi bước ước lượng (FEM, REM, Hausman, System GMM với AR(2)/Hansen)
 
 ---
 
+## Video minh họa
+
+<VideoTutorial
+  title="Hướng dẫn phân tích nợ công và tăng trưởng trong EcoLab"
+  src="https://www.youtube.com/user/vietlod"
+/>
+
 ## Xem thêm
 
-- [GMM cho dữ liệu bảng động](/ecolab/mo-hinh/gmm) · [FEM và REM](/ecolab/mo-hinh/fem-rem)
+- [GMM cho dữ liệu bảng động](/ecolab/model/gmm) · [FEM và REM](/ecolab/model/fem-rem)
 - [Ví dụ: FDI và tăng trưởng Việt Nam (ARDL)](/ecolab/vi-du/fdi-tang-truong-ardl)
 - [Tổng quan EcoLab](/ecolab/overview) · [Ước lượng & Mô hình hóa](/ecolab/econometrics-modeling)

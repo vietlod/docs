@@ -244,7 +244,7 @@ const config = {
       prism: {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
-        additionalLanguages: ['python', 'json', 'bash'],
+        additionalLanguages: ['python', 'json', 'bash', 'r', 'stata'],
       },
       tableOfContents: {
         minHeadingLevel: 2,

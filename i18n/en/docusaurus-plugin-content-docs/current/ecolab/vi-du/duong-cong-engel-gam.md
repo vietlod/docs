@@ -1,12 +1,16 @@
 ---
-title: 'Example: Nonlinear Engel curve (GAM)'
+title: 'Nonlinear Engel curve (GAM)'
 sidebar_position: 10
 description: Hands-on GAM in EcoLab — modeling the nonlinear relationship between food spending and income (the Engel curve) with smooth functions.
 ---
 
-# Example: Nonlinear Engel curve (GAM)
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import VideoTutorial from '@site/src/components/VideoTutorial';
 
-This illustrates [GAM](/en/ecolab/mo-hinh/gam): the relationship between the **food expenditure share** and **income** (the Engel curve) is typically **nonlinear** — declining as income rises (Engel's law). GAM captures this curvature with a **smooth function** without pre-specifying the form. Figures are **illustrative**.
+# Nonlinear Engel curve (GAM)
+
+This illustrates [GAM](/en/ecolab/model/gam): the relationship between the **food expenditure share** and **income** (the Engel curve) is typically **nonlinear** — declining as income rises (Engel's law). GAM captures this curvature with a **smooth function** without pre-specifying the form. Figures are **illustrative**.
 
 > Summary: use a smooth function $f(\text{income})$ to model the Engel curve, versus a linear OLS.
 
@@ -39,8 +43,71 @@ $$
 
 Sample interpretation: the smooth-function plot shows the food share **falling quickly at low income then flattening** — exactly Engel's law; GAM fits better than linear OLS (edf > 1 ⇒ nonlinear).
 
+<Tabs groupId="lang">
+  <TabItem value="stata" label="Stata" default>
+
+```stata
+* ── GAM: Engel curve ──────────────────────────────
+* Smooth nonlinear relationship: food_share ~ f(income)
+npregress series food_share income, basis(bspline 4)
+
+* Marginal effect plot
+margins, at(income=(1(0.5)10)) post
+marginsplot
+```
+
+  </TabItem>
+  <TabItem value="r" label="R">
+
+```r
+# ── GAM: Engel curve ──────────────────────────────
+library(mgcv)
+
+model_engel <- gam(
+  food_share ~ s(log_income) + household_size,
+  data   = df,
+  method = "REML"
+)
+
+summary(model_engel)
+
+# Smooth-function plot with partial residuals
+plot(model_engel, residuals = TRUE, pch = 20,
+     main = "Engel curve — smooth f(log income)")
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python">
+
+```python
+# ── GAM: Engel curve ──────────────────────────────
+from pygam import LinearGAM, s, l
+import matplotlib.pyplot as plt
+
+X = df[["log_income", "household_size"]].values
+y = df["food_share"].values
+
+gam = LinearGAM(s(0) + l(1)).fit(X, y)
+print(gam.summary())
+
+# Plot the smooth function for log_income
+gam.plot(term=0)
+plt.title("Engel curve — smooth f(log income)")
+plt.show()
+```
+
+  </TabItem>
+</Tabs>
+
 ## Step 5 — Reporting
 Export a report + the **smooth-function plot** + **replication code**.
 
+## Video tutorial
+
+<VideoTutorial
+  title="Guide to running GAM in EcoLab"
+  src="https://www.youtube.com/user/vietlod"
+/>
+
 ## See also
-- [GAM](/en/ecolab/mo-hinh/gam) · [NLS](/en/ecolab/mo-hinh/nls) · [Catalog](/en/ecolab/mo-hinh/danh-muc)
+- [GAM](/en/ecolab/model/gam) · [NLS](/en/ecolab/model/nls) · [Catalog](/en/ecolab/model/group)

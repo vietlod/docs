@@ -1,65 +1,92 @@
-/* Styling for the details element that contains the video */
+/* ── VideoTutorial component ─────────────────────────────────── */
+
 .details {
-  border: 1px solid #ddd; 
-  border-radius: 0.2rem;
-  margin: 0.2rem 0 0.8rem;
-  background: #f9f9f9; 
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  overflow: hidden; 
-  transition: max-height 0.5s ease-out, padding 0.5s ease-out; 
-  max-height: 5rem;
-  padding: 0.2rem; 
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-left: 4px solid var(--ifm-color-primary);
+  border-radius: 8px;
+  margin: 1rem 0 1.5rem;
+  background: var(--ifm-background-surface-color, #f9f9f9);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  transition: max-height 0.4s ease, box-shadow 0.3s ease;
+  max-height: 4rem;
+  padding: 0;
 }
 
-/* Styling when details is opened */
+.details:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
 .details[open] {
-  max-height: 1000px; 
+  max-height: 1200px;
 }
 
-/* Styling for the summary element */
+/* ── Summary row ─────────────────────────────────────────────── */
+
 .summary {
-  color: #333;
+  color: var(--ifm-font-color-base);
+  font-weight: 600;
+  font-size: 0.95rem;
   width: 100%;
   text-align: left;
   outline: none;
-  position: relative; 
+  position: relative;
   display: flex;
   align-items: center;
-  cursor: pointer; 
-  user-select: none; 
+  cursor: pointer;
+  user-select: none;
+  padding: 0.7rem 1rem;
+  transition: background 0.2s ease;
 }
 
-  
-
-/* Styling for the content element */
-.content {
-  margin-top: 0.2rem; 
-  transition: opacity 0.5s ease-out; 
-  opacity: 0; 
-  max-height: 0; 
-  overflow: hidden; 
+.summary:hover {
+  background: var(--ifm-color-emphasis-100);
 }
+
+/* ── YouTube icon ────────────────────────────────────────────── */
 
 .icon {
-  margin-right: 0.2rem ;
-  margin-left: 0.2rem ;
-  display: inline-block;
-  background-size: cover; 
-  transform: translateY(0.2rem);
+  margin-right: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
 }
 
+.icon svg {
+  width: 24px;
+  height: 24px;
+}
 
-/* Styling when details is opened */
+/* ── Video content ───────────────────────────────────────────── */
+
+.content {
+  padding: 0 1rem 1rem;
+  transition: opacity 0.4s ease;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+}
+
 .details[open] .content {
-  opacity: 1; 
-  max-height: 100%; 
+  opacity: 1;
+  max-height: 100%;
 }
 
-/* Responsive iframe styling */
+/* ── Responsive 16:9 iframe ──────────────────────────────────── */
+
 .iframe {
-  width: 100%; 
-  max-width: 560px; 
-  height: 315px; 
-  border: none; 
-  border-radius: 0.2rem; 
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: none;
+  border-radius: 6px;
+}
+
+/* ── Dark mode refinements ───────────────────────────────────── */
+
+[data-theme='dark'] .details {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+[data-theme='dark'] .details:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
 }

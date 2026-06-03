@@ -1,12 +1,16 @@
 ---
-title: 'Example: Returns to education with IV'
+title: 'Returns to education with IV'
 sidebar_position: 7
 description: Hands-on IV/2SLS in EcoLab — addressing the endogeneity of schooling when estimating returns to education, using an instrument and instrument tests.
 ---
 
-# Example: Returns to education with instrumental variables (IV/2SLS)
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import VideoTutorial from '@site/src/components/VideoTutorial';
 
-Following the [Mincer OLS example](/en/ecolab/vi-du/luong-giao-duc-ols): because `educ` may be **endogenous** (unobserved ability), we use [IV/2SLS](/en/ecolab/mo-hinh/iv-2sls) for a consistent estimate. Figures are **illustrative**.
+# Returns to education with instrumental variables (IV/2SLS)
+
+Following the [Mincer OLS example](/en/ecolab/vi-du/luong-giao-duc-ols): because `educ` may be **endogenous** (unobserved ability), we use [IV/2SLS](/en/ecolab/model/iv-2sls) for a consistent estimate. Figures are **illustrative**.
 
 > Summary: use an **instrument** for schooling (e.g. distance to school, an education reform, regional tuition) to isolate the exogenous part and estimate an unbiased return to education.
 
@@ -48,8 +52,70 @@ flowchart LR
 
 Sample interpretation: IV gives a **higher** return than OLS (0.104 vs 0.082) — consistent with much of the literature; F > 10 and a non-rejected Hansen ⇒ the instrument is acceptable.
 
+<Tabs groupId="lang">
+  <TabItem value="stata" label="Stata" default>
+
+```stata
+* ── IV/2SLS: returns to education ─────────────────
+* Endogenous: educ | Instruments: near_college, parent_educ
+ivregress 2sls lnwage exper exper2 ///
+    (educ = near_college parent_educ), first robust
+
+* ── Diagnostics ───────────────────────────────────
+estat firststage        // First-stage F-statistic
+estat endogenous        // Durbin-Wu-Hausman test
+estat overid            // Sargan / Hansen J test
+```
+
+  </TabItem>
+  <TabItem value="r" label="R">
+
+```r
+# ── IV/2SLS: returns to education ─────────────────
+library(AER)
+
+model_iv <- ivreg(
+  lnwage ~ educ + exper + exper2 |
+           near_college + parent_educ + exper + exper2,
+  data = df
+)
+
+# Summary with all diagnostics
+# (Weak instruments, Wu-Hausman, Sargan)
+summary(model_iv, diagnostics = TRUE)
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python">
+
+```python
+# ── IV/2SLS: returns to education ─────────────────
+from linearmodels.iv import IV2SLS
+
+dep   = df["lnwage"]
+exog  = df[["exper", "exper2"]]
+endog = df[["educ"]]
+instr = df[["near_college", "parent_educ"]]
+
+results = IV2SLS(dep, exog, endog, instr).fit(
+    cov_type="robust"
+)
+print(results)
+# Check first_stage.diagnostics for F-stat
+```
+
+  </TabItem>
+</Tabs>
+
 ## Step 5 — Reporting
 Export a report + **replication code**; report the first-stage F, the endogeneity test and overidentification.
 
+## Video tutorial
+
+<VideoTutorial
+  title="Guide to running IV/2SLS in EcoLab"
+  src="https://www.youtube.com/user/vietlod"
+/>
+
 ## See also
-- [IV/2SLS](/en/ecolab/mo-hinh/iv-2sls) · [Mincer example (OLS)](/en/ecolab/vi-du/luong-giao-duc-ols) · [Catalog](/en/ecolab/mo-hinh/danh-muc)
+- [IV/2SLS](/en/ecolab/model/iv-2sls) · [Mincer example (OLS)](/en/ecolab/vi-du/luong-giao-duc-ols) · [Catalog](/en/ecolab/model/group)

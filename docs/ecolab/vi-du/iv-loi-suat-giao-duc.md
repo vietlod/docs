@@ -1,12 +1,16 @@
 ---
-title: 'Ví dụ: Lợi suất giáo dục với biến công cụ (IV)'
+title: 'Lợi suất giáo dục với biến công cụ (IV)'
 sidebar_position: 7
 description: Thực hành IV/2SLS trên EcoLab — xử lý nội sinh của học vấn khi ước lượng lợi suất giáo dục, dùng biến công cụ và kiểm định công cụ.
 ---
 
-# Ví dụ: Lợi suất giáo dục với biến công cụ (IV/2SLS)
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import VideoTutorial from '@site/src/components/VideoTutorial';
 
-Tiếp nối [ví dụ Mincer OLS](/ecolab/vi-du/luong-giao-duc-ols): vì `educ` có thể **nội sinh** (năng lực bẩm sinh không quan sát), ta dùng [IV/2SLS](/ecolab/mo-hinh/iv-2sls) để ước lượng nhất quán. Số liệu là **minh họa**.
+# Lợi suất giáo dục với biến công cụ (IV/2SLS)
+
+Tiếp nối [ví dụ Mincer OLS](/ecolab/vi-du/luong-giao-duc-ols): vì `educ` có thể **nội sinh** (năng lực bẩm sinh không quan sát), ta dùng [IV/2SLS](/ecolab/model/iv-2sls) để ước lượng nhất quán. Số liệu là **minh họa**.
 
 > Tóm tắt: dùng một **biến công cụ** cho học vấn (vd khoảng cách tới trường, cải cách giáo dục, học phí vùng) để tách phần ngoại sinh và ước lượng lợi suất giáo dục không chệch.
 
@@ -48,8 +52,76 @@ flowchart LR
 
 Diễn giải mẫu: IV cho lợi suất **cao hơn OLS** (0.104 vs 0.082) — phù hợp với nhiều nghiên cứu; F > 10 và Hansen không bác bỏ ⇒ công cụ chấp nhận được.
 
+<Tabs groupId="lang">
+  <TabItem value="stata" label="Stata" default>
+
+```stata
+* === Lợi suất giáo dục — IV/2SLS ===
+
+* Hồi quy 2SLS với sai số chuẩn vững
+ivregress 2sls lnwage exper exper2 ///
+    (educ = near_college parent_educ), first robust
+
+* Kiểm định công cụ yếu (F giai đoạn 1)
+estat firststage
+
+* Kiểm định overidentification (Sargan/Hansen)
+estat overid
+
+* Kiểm định nội sinh (Durbin-Wu-Hausman)
+estat endogtest
+```
+
+  </TabItem>
+  <TabItem value="r" label="R">
+
+```r
+# === Lợi suất giáo dục — IV/2SLS ===
+
+library(AER)
+
+# Hồi quy 2SLS
+iv <- ivreg(lnwage ~ educ + exper + I(exper^2) |
+              near_college + parent_educ + exper + I(exper^2),
+            data = df)
+
+# Kết quả + kiểm định chẩn đoán (weak instruments, Wu-Hausman, Sargan)
+summary(iv, diagnostics = TRUE)
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python">
+
+```python
+# === Lợi suất giáo dục — IV/2SLS ===
+
+from linearmodels.iv import IV2SLS
+
+# Ước lượng 2SLS với sai số chuẩn vững
+result = IV2SLS(
+    dependent=df['lnwage'],
+    exog=df[['exper', 'exper2']],
+    endog=df[['educ']],
+    instruments=df[['near_college', 'parent_educ']]
+).fit(cov_type='robust')
+
+print(result)
+
+# first_stage, Sargan, Wu-Hausman có trong result.diagnostics
+```
+
+  </TabItem>
+</Tabs>
+
 ## Bước 5 — Báo cáo
 Xuất báo cáo + **mã tái lập**; báo cáo đầy đủ F giai đoạn 1, kiểm định nội sinh và overidentification.
 
+## Video minh họa
+
+<VideoTutorial
+  title="Hướng dẫn chạy IV/2SLS trong EcoLab"
+  src="https://www.youtube.com/user/vietlod"
+/>
+
 ## Xem thêm
-- [IV/2SLS](/ecolab/mo-hinh/iv-2sls) · [Ví dụ Mincer (OLS)](/ecolab/vi-du/luong-giao-duc-ols) · [Danh mục](/ecolab/mo-hinh/danh-muc)
+- [IV/2SLS](/ecolab/model/iv-2sls) · [Ví dụ Mincer (OLS)](/ecolab/vi-du/luong-giao-duc-ols) · [Danh mục](/ecolab/model/group)
