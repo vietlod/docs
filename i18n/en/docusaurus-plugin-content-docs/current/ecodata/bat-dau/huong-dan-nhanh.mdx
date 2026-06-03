@@ -87,6 +87,65 @@ Use the integrated **Econometrics** tool to prepare data, estimate, and test mod
 
 → Details: [Econometrics](/ecodata/cong-cu/econometrics) · Assistant: [AI Chat](/ecodata/cong-cu/ai-chat)
 
+## Retrieve data with Excel / Python / Stata / R
+
+If your research workflow runs in Excel, Python, Stata, or R, use the **EcoData retrieval toolkit** instead of downloading manually and copying tables. All clients use the same Public SDMX API at `/api/v1/sdmx` and require a personal API key.
+
+### 1. Create an API key
+
+1. Open **Dashboard → API Access**.
+2. Create a new key and name it after the project or software client.
+3. Copy the full key once and store it securely in an environment variable, `~/.ecodata`, Office task pane storage, or a password manager.
+4. Revoke the key when a project ends or a device/collaborator no longer needs access.
+
+### 2. Choose the dataflow
+
+| Dataflow | When to use it |
+| --- | --- |
+| `MACRO_INTL` | International macro indicators by indicator, country, and frequency. |
+| `GSO_VN` | Vietnam GSO indicators by indicator, province, dataset, and frequency. |
+| `CUSTOMS_VN` | Import-export panels by province, flow, measure, and frequency. |
+| `STOCK_VN` | Vietnam market series by symbol, metric, and frequency. |
+
+### 3. Run the client in your research software
+
+```python
+from ecodata import EcoData
+
+eco = EcoData()
+gdp = eco.series(
+    "MACRO_INTL",
+    indicator="NY.GDP.MKTP.CD",
+    ref_area=["VNM", "USA"],
+    freq="A",
+    start=2010,
+)
+```
+
+```r
+library(ecodata)
+
+gdp <- eco_series(
+  "MACRO_INTL",
+  indicator = "NY.GDP.MKTP.CD",
+  ref_area = c("VNM", "USA"),
+  freq = "A",
+  start = 2010
+)
+```
+
+```stata
+net install ecodata, from("https://ecodata.io.vn/clients/stata") replace
+ecodata setkey eco_live_...
+ecodata use MACRO_INTL, indicator(NY.GDP.MKTP.CD) ref_area(VNM USA) freq(A) start(2015) frame(gdp)
+```
+
+```text
+=ECODATA.SERIES("MACRO_INTL","NY.GDP.MKTP.CD.VNM.A","2019","2023")
+```
+
+**Release status:** Python, R, and Stata core clients have passed production live smokes with real data; Stata and Excel have self-hosted routes. PyPI, CRAN, SSC, AppSource, and manual Excel runtime checks remain separate release gates and should not be described as complete.
+
 ## See Also
 
 - [EcoData Overview](/ecodata/overview)

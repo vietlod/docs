@@ -17,6 +17,19 @@ This documentation replaces the previous source-by-source guide with articles or
 - **Full international macro indicators:** from official sources — World Bank, IMF, ADB, UN, FRED, OECD, ILO, and more.
 - **Official Vietnam data:** General Statistics Office (statistical yearbooks, socio-economic reports), General Department of Customs (import-export reports and data by commodity), governance surveys (PAPI, PCI, PAR, SIPAS, ICT), and microdata sets VHLSS, VARHS, VES.
 
+## EcoData Retrieval Toolkit
+
+EcoData is not limited to browser downloads. Users can create a **personal API key** in the Dashboard and retrieve the same real datasets through the Excel / Python / Stata / R toolkit. All clients call the same **Public SDMX API** at `/api/v1/sdmx`, so one research series can be reproduced across several research environments.
+
+| Tool | Main use | Accurate release status |
+| --- | --- | --- |
+| Excel | Sideload the self-hosted manifest `https://ecodata.io.vn/excel/manifest.xml`, then use the task pane or `=ECODATA.SERIES(...)` | Self-host route and production data layer verified; AppSource and manual Excel Win/Web runtime checks remain pending. |
+| Python | `EcoData().series(...)` returns a tidy `pandas.DataFrame` | Core package and production live smoke verified; PyPI publication is pending. |
+| Stata | `net install ecodata, from("https://ecodata.io.vn/clients/stata") replace`, then run `ecodata use ...` | Self-host route and production live smoke verified; SSC submission is pending. |
+| R | `eco_series(...)` returns a tidy `tibble` | Core package and production live smoke verified; CRAN publication is pending. |
+
+Current client dataflows include `MACRO_INTL`, `GSO_VN`, `CUSTOMS_VN`, and `STOCK_VN`. For real research, store the API key in an environment variable or `~/.ecodata`, keep metadata and short codes with exported data, and revoke keys when a project ends.
+
 ## Main Feature Groups
 
 | Group | App module | What users do |
