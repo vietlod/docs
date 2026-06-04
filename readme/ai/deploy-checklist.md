@@ -8,15 +8,18 @@ Tài liệu này cung cấp checklist các bước triển khai an toàn và có
 
 ## 1. Triển khai Cổng Tài liệu (`docs.tnsai.vn`)
 
-### Phương thức A: CI/CD Tự động (Khuyên dùng)
+### Phương thức A: CI/CD Tự động qua Webhook (Khuyên dùng)
 
-Khi có push lên nhánh `main` với thay đổi ở `docs/`, `i18n/`, `static/`, `src/`, `sidebars.js`, `docusaurus.config.js` hoặc `package.json`:
-1. **GitHub Actions** tự động trigger workflow `.github/workflows/deploy.yml`
-2. Build Docusaurus trên GitHub runner (không tốn CPU VPS)
-3. rsync `build/` xuống VPS tại `/opt/docs/ecodata/build`
-4. Nginx phục vụ nội dung mới ngay lập tức (không cần reload)
+Khi có push lên nhánh `main` trên GitHub (từ local git push hoặc qua giao diện CMS admin):
+1. **GitHub Webhook** tự động gửi HTTPS POST request đến `https://docs.tnsai.vn/webhook/docs`.
+2. Dịch vụ **docs-webhook** (PM2 port 3051) trên VPS nhận request, xác thực chữ ký SHA-256 (bằng `WEBHOOK_SECRET` lưu trong môi trường).
+3. Webhook server kích hoạt tiến trình kéo code mới và build Docusaurus local ngay trên VPS:
+   `cd /opt/docs/ecodata && git pull origin main && npm run build`
+4. Giao diện tĩnh mới được tạo ra tại `/opt/docs/ecodata/build` và Nginx phục vụ nội dung mới ngay lập tức (không cần reload Nginx).
 
-**Yêu cầu**: GitHub Secrets (`VPS_SSH_KEY`, `VPS_HOST`, `VPS_USER`) đã được cấu hình.
+**Cách kiểm tra trạng thái auto-deploy**:
+*   Kiểm tra logs của webhook trên VPS: `pm2 logs docs-webhook`
+*   Xem health check của webhook: `curl https://docs.tnsai.vn/webhook/health` (trả về status: ok)
 
 ### Phương thức B: Triển khai thủ công qua SSH
 
