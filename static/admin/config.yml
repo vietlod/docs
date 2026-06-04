@@ -1,0 +1,226 @@
+# ==============================================================================
+# Sveltia CMS Configuration for TNS AI Docs (Docusaurus)
+# Trang quản trị nội dung tại: https://docs.tnsai.vn/admin/
+# ==============================================================================
+
+backend:
+  name: github
+  repo: vietlod/docs
+  branch: main
+  base_url: https://docs.tnsai.vn
+  auth_endpoint: oauth/auth
+
+# ------------------------------------------------------------------------------
+# i18n — Docusaurus multiple_folders structure
+# Vietnamese (vi): docs/<app>/...
+# English (en):    i18n/en/docusaurus-plugin-content-docs/current/<app>/...
+# ------------------------------------------------------------------------------
+i18n:
+  structure: multiple_folders
+  locales: [vi, en]
+  default_locale: vi
+
+media_folder: "static/img"
+public_folder: "/img"
+
+# ==============================================================================
+# COLLECTIONS
+# ==============================================================================
+
+collections:
+  # ============================================================================
+  # ECODATA
+  # ============================================================================
+  - name: "ecodata-root"
+    label: "EcoData — Tổng quan"
+    folder: "docs/ecodata"
+    i18n: true
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    filter: { field: "title" }
+    fields: &doc_fields
+      - { label: "Title", name: "title", widget: "string", i18n: true }
+      - { label: "Sidebar Position", name: "sidebar_position", widget: "number", required: false }
+      - { label: "Sidebar Label", name: "sidebar_label", widget: "string", required: false, i18n: true }
+      - { label: "Description", name: "description", widget: "string", required: false, i18n: true }
+      - { label: "Keywords", name: "keywords", widget: "list", required: false }
+      - { label: "Body", name: "body", widget: "markdown", i18n: true }
+
+  - name: "ecodata-bat-dau"
+    label: "EcoData — Bắt đầu"
+    folder: "docs/ecodata/bat-dau"
+    i18n: true
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    fields: *doc_fields
+
+  - name: "ecodata-du-lieu"
+    label: "EcoData — Dữ liệu"
+    folder: "docs/ecodata/du-lieu"
+    i18n: true
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    fields: *doc_fields
+
+  - name: "ecodata-nguon-du-lieu"
+    label: "EcoData — Nguồn dữ liệu"
+    folder: "docs/ecodata/nguon-du-lieu"
+    i18n: true
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    fields: *doc_fields
+
+  - name: "ecodata-cong-cu"
+    label: "EcoData — Công cụ"
+    folder: "docs/ecodata/cong-cu"
+    i18n: true
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    fields: *doc_fields
+
+  - name: "ecodata-xuat-du-lieu"
+    label: "EcoData — Xuất dữ liệu"
+    folder: "docs/ecodata/xuat-du-lieu"
+    i18n: true
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    fields: *doc_fields
+
+  - name: "ecodata-indicators"
+    label: "EcoData — Indicators"
+    folder: "docs/ecodata/indicators"
+    i18n: true
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    fields: *doc_fields
+
+  - name: "ecodata-admin"
+    label: "EcoData — Admin"
+    folder: "docs/ecodata/admin"
+    i18n: true
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    fields: *doc_fields
+
+  - name: "ecodata-trien-khai"
+    label: "EcoData — Triển khai"
+    folder: "docs/ecodata/trien-khai"
+    i18n: true
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    fields: *doc_fields
+
+  # ============================================================================
+  # ECOLAB
+  # ============================================================================
+  - name: "ecolab-root"
+    label: "EcoLab — Tổng quan"
+    folder: "docs/ecolab"
+    i18n: true
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    filter: { field: "title" }
+    fields: *doc_fields
+
+  - name: "ecolab-bat-dau"
+    label: "EcoLab — Bắt đầu"
+    folder: "docs/ecolab/bat-dau"
+    i18n: true
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    fields: *doc_fields
+
+  - name: "ecolab-model"
+    label: "EcoLab — Mô hình"
+    folder: "docs/ecolab/model"
+    i18n: true
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    fields: *doc_fields
+
+  - name: "ecolab-vi-du"
+    label: "EcoLab — Ví dụ thực nghiệm"
+    folder: "docs/ecolab/vi-du"
+    i18n: true
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    fields: *doc_fields
+
+  # ============================================================================
+  # ECOLIT
+  # ============================================================================
+  - name: "ecolit-root"
+    label: "EcoLit — Tổng quan"
+    folder: "docs/ecolit"
+    i18n: true
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    filter: { field: "title" }
+    fields: *doc_fields
+
+  - name: "ecolit-bat-dau"
+    label: "EcoLit — Bắt đầu"
+    folder: "docs/ecolit/bat-dau"
+    i18n: true
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    fields: *doc_fields
+
+  # ============================================================================
+  # PDFHUB
+  # ============================================================================
+  - name: "pdfhub-root"
+    label: "PDFHUB — Tổng quan"
+    folder: "docs/pdfhub"
+    i18n: true
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    filter: { field: "title" }
+    fields: *doc_fields
+
+  - name: "pdfhub-bat-dau"
+    label: "PDFHUB — Bắt đầu"
+    folder: "docs/pdfhub/bat-dau"
+    i18n: true
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    fields: *doc_fields
+
+  # ============================================================================
+  # KEYWORDS
+  # ============================================================================
+  - name: "keywords-root"
+    label: "KEYWORDs — Tổng quan"
+    folder: "docs/keywords"
+    i18n: true
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    filter: { field: "title" }
+    fields: *doc_fields
+
+  - name: "keywords-bat-dau"
+    label: "KEYWORDs — Bắt đầu"
+    folder: "docs/keywords/bat-dau"
+    i18n: true
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    fields: *doc_fields
