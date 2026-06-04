@@ -48,3 +48,12 @@ Tài liệu này lưu trữ các quyết định thiết kế bền vững, bài
     *   *Giải pháp*: Luôn giữ công thức toán học trong khối `$$ ... $$` hoặc định dạng bằng text thuần nếu nằm ngoài khối toán học.
 *   **Ký tự `$` bị nuốt khi truyền lệnh qua SSH**: Khi dùng các lệnh `cat << 'EOF'` lồng trong chuỗi lệnh PowerShell để ghi file Nginx cấu hình lên VPS, các biến `$uri`, `$host` có thể bị PowerShell nuốt hoặc thông dịch sai.
     *   *Giải pháp*: Mã hóa Base64 nội dung tệp ở local, truyền chuỗi Base64 qua SSH và giải mã bằng lệnh `echo "BASE64" | base64 -d > path` trên VPS.
+
+### Tích hợp Sveltia CMS + GitHub Actions CI/CD (2026-06-04)
+*   **Context**: Cần dashboard quản trị nội dung cho Admin (tạo/sửa/xóa bài) và CI/CD tự động deploy.
+*   **Quyết định**:
+    - CMS: **Sveltia CMS** (static admin panel, không cần DB, i18n tích hợp, < 300KB). Truy cập tại `/admin/`.
+    - CI/CD: **GitHub Actions** + rsync (build trên GitHub runner, deploy build/ xuống VPS). Paths filter tiết kiệm minutes.
+    - OAuth: Node.js proxy nhỏ trên VPS port 3050, PM2, Nginx `/oauth/` location block.
+*   **Các phương án đã loại**: TinaCMS (quá nặng, cần DB + Node.js backend), Keystatic (chỉ hỗ trợ Next.js/Astro), Webhook VPS (tốn CPU VPS khi build).
+*   **VPS Impact**: Port 3050 (nội bộ), 1 PM2 process (`docs-oauth-proxy`), 1 Nginx location block. Không ảnh hưởng app khác.
