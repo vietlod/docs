@@ -5,28 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
   <title>TNS AI Docs — Content Manager</title>
-  <style>
-    /* Override Sveltia CMS login branding */
-    [class*="logo"] img,
-    [class*="logo"] svg {
-      display: none !important;
-    }
-    /* Replace login page title */
-    [class*="login"] [class*="logo"]::after {
-      content: "TNS AI Docs";
-      display: block;
-      font-size: 1.75rem;
-      font-weight: 700;
-      letter-spacing: -0.025em;
-      background: linear-gradient(135deg, #6366f1, #8b5cf6);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 0.5rem;
-    }
-  </style>
 </head>
 <body>
   <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
+  <script>
+    // Hide "Sveltia CMS" branding and center logo after CMS renders
+    const observer = new MutationObserver(() => {
+      // Find and hide any element containing "Sveltia CMS" text
+      document.querySelectorAll('*').forEach(el => {
+        if (el.children.length === 0 && el.textContent.trim() === 'Sveltia CMS') {
+          el.style.display = 'none';
+        }
+      });
+      // Center the logo image
+      document.querySelectorAll('img[src*="logo"]').forEach(img => {
+        img.style.display = 'block';
+        img.style.margin = '0 auto';
+        const parent = img.closest('a') || img.parentElement;
+        if (parent) {
+          parent.style.display = 'flex';
+          parent.style.justifyContent = 'center';
+          parent.style.width = '100%';
+        }
+      });
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+  </script>
 </body>
 </html>
