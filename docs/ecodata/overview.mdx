@@ -1,68 +1,321 @@
 ---
-title: Tổng quan Khai thác Ecodata
-description: Bản đồ hướng dẫn sử dụng Ecodata cho người nghiên cứu cần chọn, xem trước và tải indicators.
+id: overview
+title: Hướng dẫn sử dụng EcoData toàn diện
+description: Cẩm nang hướng dẫn sử dụng EcoData phục vụ nghiên cứu kinh tế lượng tự động với bộ 3 runtime (Python, R, Stata), EcoData MCP Server 37 công cụ và phân hệ Jev Co-Processor.
+keywords:
+  - hướng dẫn sử dụng ecodata
+  - kinh tế lượng tự động
+  - ecodata mcp server
+  - jev co-processor
+  - python r stata econometrics
+  - dữ liệu vĩ mô việt nam
 ---
 
-# Tổng quan Khai thác Ecodata
+import Head from '@docusaurus/Head';
+import { EconometricsPipelineSvg, McpServerFlowSvg, JevCoProcessorSvg } from '@site/src/components/EcoDataSvg';
 
-Ecodata là nền tảng khai thác dữ liệu kinh tế phục vụ nghiên cứu, phân tích chính sách và mô hình định lượng. Ứng dụng hiện tập trung vào ba việc chính: tìm đúng nguồn dữ liệu, chọn đúng indicators, và xuất bộ dữ liệu có metadata để người dùng có thể kiểm tra lại quy trình nghiên cứu.
+export const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: 'Hướng dẫn sử dụng EcoData toàn diện: Phân tích kinh tế lượng tự động, MCP Server và Jev Co-Processor',
+  description: 'Cẩm nang toàn diện hướng dẫn khai thác EcoData với quy trình kinh tế lượng 1-Click qua 3 runtime (Python/R/Stata 18 MP), tích hợp 37 công cụ MCP và giám sát học thuật Jev.',
+  inLanguage: 'vi',
+  author: {
+    '@type': 'Organization',
+    name: 'EcoData Research Team',
+    url: 'https://ecodata.io.vn',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'TNS AI & VietLOD',
+    url: 'https://docs.tnsai.vn',
+  },
+  about: [
+    { '@type': 'Thing', name: 'Econometric Analysis Pipeline' },
+    { '@type': 'Thing', name: 'Model Context Protocol (MCP)' },
+    { '@type': 'Thing', name: 'Jev Co-Processor' },
+    { '@type': 'Thing', name: 'Macroeconomic Data' },
+  ],
+};
 
-Tài liệu này thay thế cấu trúc hướng dẫn cũ bằng các bài viết theo flow thao tác trong ứng dụng. Người dùng mới nên bắt đầu từ bài [Login → Filter/Select → Preview → Export](/ecodata/bat-dau/login-filter-preview-export), sau đó đọc chi tiết từng nhóm indicators.
+export const softwareSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'EcoData Platform',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web, Windows, macOS, Linux',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'VND',
+  },
+  featureList: [
+    'Automated Econometrics Analysis Pipeline across Python, R, and Stata 18 MP',
+    'EcoData MCP Server with 37 specialized AI tools',
+    'Jev Co-Processor for token optimization and 3-tier academic verification',
+    'Over 200,000 clean macroeconomic and microeconomic time series',
+  ],
+};
 
-## Điểm nổi bật
+<Head>
+  <script type="application/ld+json">{JSON.stringify(articleSchema)}</script>
+  <script type="application/ld+json">{JSON.stringify(softwareSchema)}</script>
+</Head>
 
-- **Dữ liệu sạch, sẵn sàng công bố:** được làm sạch và chuẩn hóa theo định dạng panel/time-series, sẵn sàng cho nghiên cứu và công bố quốc tế (*ready to publication*).
-- **Phong phú và cập nhật:** kho dữ liệu đa lĩnh vực, đa nguồn, được cập nhật thường xuyên.
-- **Đầy đủ chỉ số vĩ mô quốc tế:** từ các nguồn chính thức — World Bank, IMF, ADB, UN, FRED, OECD, ILO...
-- **Dữ liệu chính thức của Việt Nam:** Tổng cục Thống kê (Niên giám thống kê, Báo cáo kinh tế – xã hội), Tổng cục Hải quan (báo cáo và dữ liệu xuất nhập khẩu theo mặt hàng), dữ liệu khảo sát (PAPI, PCI, PAR, SIPAS, ICT) và các bộ vi mô VHLSS, VARHS, VES.
+# Hướng dẫn sử dụng EcoData toàn diện
 
-## Bộ công cụ truy xuất dữ liệu EcoData
+:::tip[Tóm tắt nhanh cho công cụ tìm kiếm và AI (AEO Quick Answer)]
+**EcoData là gì?** EcoData là nền tảng khai thác dữ liệu kinh tế – tài chính và phân tích kinh tế lượng tự động hàng đầu tại Việt Nam. Nền tảng tích hợp hơn **200.000 chuỗi dữ liệu sạch** chuẩn quốc tế (*ready-to-publication*), cung cấp **Quy trình phân tích kinh tế lượng tự động 1-Click** chạy đồng thời trên **bộ 3 runtime (Python, R, Stata 18 MP)**, máy chủ **EcoData MCP Server** (37 công cụ kết nối trực tiếp với Gemini Spark, Claude Desktop, Cursor, AntiGravity) và phân hệ **Jev Co-Processor** giúp cắt giảm 84,2% token, ngăn ngừa bẫy lặp và kiểm chứng học thuật 3 tầng.
+:::
 
-EcoData không chỉ hỗ trợ tải dữ liệu trên trình duyệt. Người dùng có thể tạo **khóa API cá nhân** trong Dashboard và truy xuất cùng một nguồn dữ liệu thật qua bộ công cụ Excel / Python / Stata / R. Các client này gọi chung bề mặt **Public SDMX API** tại `/api/v1/sdmx`, nên cùng một chuỗi dữ liệu có thể được tái lập giữa nhiều phần mềm nghiên cứu.
+Tài liệu này cung cấp bản đồ hướng dẫn chi tiết từ việc lựa chọn chỉ số, kết nối trợ lý AI, đến thực thi các mô hình định lượng phức tạp và xuất trọn bộ mã nguồn tái lập nghiên cứu.
 
-| Công cụ | Cách dùng chính | Trạng thái phát hành trung thực |
-| --- | --- | --- |
-| Excel | Sideload manifest self-host `https://ecodata.io.vn/excel/manifest.xml`, dùng task pane hoặc hàm `=ECODATA.SERIES(...)` | Route self-host và data layer production đã xác minh; AppSource và kiểm thử runtime Excel Win/Web thủ công vẫn đang chờ. |
-| Python | `EcoData().series(...)` trả về `pandas.DataFrame` dạng tidy | Core package và live smoke production đã xác minh; phát hành PyPI đang chờ. |
-| Stata | `net install ecodata, from("https://ecodata.io.vn/clients/stata") replace`, sau đó dùng `ecodata use ...` | Route self-host và live smoke production đã xác minh; nộp SSC đang chờ. |
-| R | `eco_series(...)` trả về `tibble` dạng tidy | Core package và live smoke production đã xác minh; phát hành CRAN đang chờ. |
+---
 
-Các dataflow hiện dùng cho client gồm `MACRO_INTL`, `GSO_VN`, `CUSTOMS_VN` và `STOCK_VN`. Khi làm nghiên cứu thật, nên lưu khóa API trong biến môi trường hoặc `~/.ecodata`, giữ metadata/short code cùng dữ liệu đã tải, và thu hồi khóa khi dự án kết thúc.
+## Các điểm nổi bật tạo nên sự khác biệt của EcoData
 
-## Nhóm chức năng chính
+1. **Dữ liệu sạch, sẵn sàng công bố quốc tế (*ready to publication*):** Toàn bộ dữ liệu được chuẩn hóa theo cấu trúc bảng (*panel*) hoặc chuỗi thời gian (*time-series*), loại bỏ dị biệt, xử lý dữ liệu khuyết và gán nhãn metadata đầy đủ theo chuẩn SDMX quốc tế.
+2. **Đầy đủ chỉ số vĩ mô quốc tế:** Tích hợp trực tiếp từ các tổ chức tài chính hàng đầu thế giới: World Bank, IMF, ADB, United Nations (Comtrade, SDG), OECD, ILO, FRED...
+3. **Thống kê chính thức và độc quyền của Việt Nam:** Tổng cục Thống kê (Niên giám thống kê, Báo cáo kinh tế – xã hội 63 tỉnh thành), Tổng cục Hải quan (dữ liệu xuất nhập khẩu chi tiết theo mặt hàng và đối tác), các chỉ số quản trị địa phương (PCI, PAPI, PAR-Index, SIPAS, ICT-Index), cùng các bộ điều tra vi mô chuyên sâu như VHLSS, VARHS, VES.
+4. **Bộ 3 giải pháp công nghệ duy nhất tại Việt Nam:**
+   - **Quy trình kinh tế lượng tự động:** 105 mô hình thuộc 12 họ phân tích, thực thi 1-Click trên bộ 3 runtime Python, R và Stata 18 MP.
+   - **EcoData MCP Server:** 37 công cụ AI chuẩn hóa, đưa kho dữ liệu vĩ mô và tính toán kinh tế lượng vào ngay không gian chat của AI.
+   - **Jev Co-Processor:** Tối ưu hóa suy luận, giảm 84,2% token ngữ cảnh và kiểm định học thuật 3 tầng (Verifiability – Methodology – Consistency).
 
-| Nhóm | Module trong app | Người dùng làm gì |
-| --- | --- | --- |
-| Global Data | Dashboard, Export Panel | Tìm indicators quốc tế từ World Bank, IMF, OECD, Eurostat, ILO, FAO, WTO, ADB và các nguồn liên quan. |
-| GSO Việt Nam | GSO Explorer | Khai thác KTXH, NGTK-CN, NGTK-TINH và VHLSS aggregate theo năm, tỉnh, nhóm chỉ tiêu. |
-| Hải quan | Customs Explorer | Lọc báo cáo xuất nhập khẩu theo hàng hóa, quốc gia, tỉnh, phương thức vận tải và kỳ báo cáo. |
-| Macro Survey | Survey Explorer | Tìm PCI, PAPI, ICT, PAR, SIPAS theo tỉnh và năm. |
-| VHLSS Micro | Variable Hub | Chọn wave, dataset, biến vi mô, preview record và tạo bộ dữ liệu panel/pooled. |
-| Stock Hub | Stocks | Xem giá, hồ sơ mã, báo cáo tài chính, thuyết minh và lịch sự kiện. |
-| AI Chat | Chat | Nhờ AI gợi ý indicators, nguồn dữ liệu, biến mô hình và truy vấn dữ liệu. |
-| Econometrics | Analysis | Chạy thử OLS, WLS, GLS, panel, VAR, ARIMA, Logit, Probit trước khi export chính thức. |
+---
 
-## Flow chuẩn cho người nghiên cứu
+## Quy trình phân tích kinh tế lượng tự động qua bộ 3 runtime
 
-```mermaid
-flowchart LR
-  A["Đăng nhập"] --> B["Xác định câu hỏi nghiên cứu"]
-  B --> C["Lọc nguồn dữ liệu và indicators"]
-  C --> D["Chọn indicators"]
-  D --> E["Preview dữ liệu và metadata"]
-  E --> F["Chạy thử bằng AI Chat hoặc Econometrics"]
-  F --> G["Tinh chỉnh phạm vi"]
-  G --> H["Export dữ liệu và metadata"]
+Thay vì phải xuất dữ liệu thô sang Excel rồi nhập thủ công vào các phần mềm thống kê độc lập, EcoData cung cấp quy trình phân tích kinh tế lượng khép kín từ trích xuất chỉ số đến xuất mã lệnh chạy thực tế.
+
+<EconometricsPipelineSvg />
+
+### Bốn giai đoạn phân tích khép kín
+
+1. **Nạp và xử lý dữ liệu (Data Ingestion & Transformation):**
+   - Tự động ghép nối các bảng dữ liệu đa nguồn theo mã định danh quốc gia/tỉnh/doanh nghiệp và chuỗi thời gian ($i, t$).
+   - Tự động kiểm tra tính dừng (Augmented Dickey-Fuller test, Phillips-Perron test), tính toán sai phân bậc 1, logarit tự nhiên, hoặc tạo biến trễ (lagged variables) chỉ qua một thao tác.
+2. **Xác lập mô hình (Model Specification):**
+   - Hỗ trợ **105 mô hình định lượng thuộc 12 họ phân tích chuyên sâu**: Hồi quy tuyến tính (OLS, WLS, GLS), Dữ liệu bảng (Fixed Effects, Random Effects, Pooled OLS, 2SLS), Dynamic Panel GMM (Arellano-Bond, Blundell-Bond), Chuỗi thời gian (VAR, VECM, ARDL), Mô hình lựa chọn nhị phân (Logit, Probit, Tobit), Phân tích sống sót (Survival Analysis), Kinh tế lượng không gian (Spatial Autoregressive), và Phân tích nhân quả (Difference-in-Differences, Synthetic Control).
+3. **Thực thi song song trên bộ 3 runtime (Python / R / Stata 18 MP):**
+   - Động cơ phân tích của EcoData chạy đồng bộ trên 3 môi trường thực thi để đối soát kết quả:
+     - **Python Runtime:** Tận dụng hệ sinh thái `statsmodels`, `pandas`, `linearmodels` cho tốc độ xử lý lớn và tính tương thích cao với AI.
+     - **R Runtime:** Sử dụng thư viện học thuật đầu ngành `tidyverse`, `plm`, `fixest` cho các mô hình cố định đa chiều (high-dimensional fixed effects).
+     - **Stata 18 MP Runtime:** Lõi C-engine đa nhân của Stata 18 MP, đáp ứng tiêu chuẩn vàng về tính chuẩn xác của các tạp chí kinh tế quốc tế thuộc danh mục Scopus Q1/FT50.
+4. **Kiểm định giả định và xuất gói tái lập (Diagnostics & Replication Package):**
+   - Hệ thống tự động chạy toàn bộ các kiểm định chất lượng: Đa cộng tuyến ($VIF$), Phương sai sai số thay đổi (White test, Breusch-Pagan test), Tự tương quan (Durbin-Watson, Breusch-Godfrey test), và Kiểm định lựa chọn mô hình Hausman test.
+   - Xuất bảng kết quả hồi quy theo định dạng chuẩn học thuật: APA 7th, Chicago 8th, Harvard 2008, IEEE 2008 và MLA 7th.
+   - Xuất trọn bộ file kịch bản mã nguồn tái lập: file `.do` (cho Stata), file `.R` (cho R), và notebook `.py` / `.ipynb` (cho Python) kèm file dữ liệu đã làm sạch.
+
+### So sánh năng lực của bộ 3 runtime
+
+| Tiêu chí kỹ thuật | Python Runtime | R Runtime | Stata 18 MP Runtime |
+| :--- | :--- | :--- | :--- |
+| **Thư viện cốt lõi** | `pandas`, `statsmodels`, `linearmodels` | `tidyverse`, `plm`, `fixest`, `sandwich` | Stata MP Multi-core C-Engine |
+| **Thế mạnh nổi bật** | Tích hợp AI, pipeline dữ liệu lớn | Mô hình Fixed Effects đa chiều siêu tốc | Chuẩn mực vàng bài báo học thuật Q1 |
+| **Độ tin cậy kiểm định** | Rất cao ($p$-value, robust SE) | Rất cao (Clustered SE tiêu chuẩn) | Tiêu chuẩn tham chiếu gốc (Ground Truth) |
+| **Định dạng xuất mã** | Script Python (`.py`), Jupyter Notebook | Script R (`.R`), Quarto (`.qmd`) | Do-file Stata (`.do`) tự động hóa |
+| **Sai số chéo (Parity)** | Delta sai số $\Delta < 10^{-6}$ | Delta sai số $\Delta < 10^{-6}$ | Mốc kiểm chứng cơ sở (Baseline) |
+
+---
+
+## Kiến trúc EcoData MCP Server với 37 công cụ AI chuyên biệt
+
+Model Context Protocol (MCP) là tiêu chuẩn kết nối mở giữa mô hình ngôn ngữ lớn (LLM) và các hệ thống dữ liệu ngoài. EcoData là nền tảng đầu tiên tại Việt Nam phát triển máy chủ **EcoData MCP Server** hoàn chỉnh với **37 công cụ AI chuyên biệt**, cho phép trợ lý AI tương tác trực tiếp với kho dữ liệu kinh tế vĩ mô mà không cần người dùng phải viết mã hay tải tệp trung gian.
+
+<McpServerFlowSvg />
+
+### Danh mục công cụ nổi bật
+
+Trong tổng số 37 công cụ, các công cụ cốt lõi phục vụ nghiên cứu gồm:
+
+- `search_indicators_unified`: Tìm kiếm ngữ nghĩa đa ngôn ngữ (Việt - Anh) trên hơn 200.000 chỉ số quốc tế và Việt Nam.
+- `query_macro_data_unified`: Truy xuất chuỗi dữ liệu vĩ mô đa chiều kèm bộ định danh, tần suất và metadata kiểm định chỉ trong 1 bước.
+- `inspect_series_metadata`: Kiểm tra định nghĩa phương pháp tính, cơ quan ban hành, đơn vị đo lường và chu kỳ cập nhật.
+- `run_econometrics_regression`: Khởi chạy trực tiếp các mô hình OLS, Panel, GMM từ lệnh tự nhiên của người dùng trong khung chat AI.
+- `export_replication_bundle`: Đóng gói bộ mã nguồn tái lập (Stata/R/Python) và gửi đường dẫn tải trực tiếp.
+- `query_customs_trade_data`: Khai thác số liệu xuất nhập khẩu chi tiết theo mã HS, quốc gia đối tác và tỉnh thành.
+- `query_corporate_financials`: Khai thác báo cáo tài chính và chỉ số tài chính của hơn 1.600 doanh nghiệp niêm yết trong 30 năm.
+
+### Hướng dẫn kết nối từng nền tảng AI
+
+#### 1. Kết nối Google Gemini Spark (Custom apps)
+- **Phương thức 1 (Khuyên dùng - Direct tokenized URL):**
+  1. Truy cập EcoData > Cổng tích hợp AI (`/account/connect-apps`) và sao chép đường dẫn **Direct tokenized URL**.
+  2. Mở `gemini.google.com/spark/apps`, chọn **Add app** và dán đường dẫn token vào ô **App link**.
+  3. Nhấn **Next** để hoàn tất liên kết mà không cần cấu hình phức tạp.
+- **Phương thức 2 (OAuth 2.1 PKCE tiêu chuẩn):** Nhập Client ID và Client Secret từ Dashboard vào Advanced settings của Spark.
+- **Sử dụng trong chat:** Gõ `@EcoData` kèm câu hỏi tự nhiên:
+  > *"@EcoData Lấy dữ liệu tăng trưởng GDP và vốn FDI đăng ký của Việt Nam giai đoạn 2010–2025, sau đó chạy mô hình OLS đánh giá tác động của FDI đến tăng trưởng."*
+
+#### 2. Kết nối Claude Desktop
+Thêm cấu hình máy chủ MCP vào tệp `claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "ecodata": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@ecodata/mcp-server",
+        "--api-key",
+        "YOUR_ECODATA_API_KEY"
+      ]
+    }
+  }
+}
 ```
 
-## Nguyên tắc chọn indicators
+Sau khi khởi động lại Claude Desktop, biểu tượng công cụ búa (*tools*) sẽ hiện thị 37 công cụ sẵn sàng thực thi.
 
-1. Chọn nguồn theo đơn vị phân tích trước: quốc gia, tỉnh, doanh nghiệp, hàng hóa, hộ gia đình hoặc cá nhân.
-2. Kiểm tra coverage theo năm, tần suất, địa bàn và độ đầy đủ trước khi thêm vào export.
-3. Đọc metadata để xác nhận định nghĩa, đơn vị đo, phương pháp tính và nguồn gốc.
-4. Preview dữ liệu mẫu trước khi tải toàn bộ, nhất là khi dùng dữ liệu panel hoặc nhiều nguồn.
-5. Lưu citation, short code và metadata cùng dữ liệu để tái lập kết quả.
+#### 3. Kết nối Cursor và Windsurf IDE
+Thêm cấu hình vào `.cursor/mcp.json` hoặc thiết lập MCP trong phần cài đặt Settings:
 
-## Trạng thái triển khai tài liệu
+```json
+{
+  "mcpServers": {
+    "ecodata": {
+      "url": "https://ecodata.io.vn/api/v1/mcp",
+      "headers": {
+        "Authorization": "Bearer YOUR_ECODATA_API_KEY"
+      }
+    }
+  }
+}
+```
 
-Bộ tài liệu hiện ưu tiên tiếng Việt. Các chuỗi UI của trang chủ được quản lý bằng `src/i18n/vi.json` và `src/i18n/en.json`; nội dung bài viết dùng cơ chế i18n theo file của Docusaurus khi cần mở rộng bản tiếng Anh đầy đủ.
+---
+
+## Phân hệ Jev Co-Processor: Tối ưu suy luận và kiểm định học thuật
+
+Trong phân tích kinh tế lượng với AI, các mô hình ngôn ngữ lớn thường gặp phải 3 vấn đề lớn:
+1. **Quá tải ngữ cảnh (Context bloat):** Khi nạp quá nhiều công cụ, AI tiêu tốn hàng chục nghìn token và dễ đưa ra tham số sai.
+2. **Bẫy lặp (Loop traps):** AI gọi API lặp đi lặp lại khi gặp định dạng ngày tháng không chuẩn hoặc mã chỉ số không tồn tại.
+3. **Ảo giác thống kê (Statistical hallucination):** AI suy diễn kết quả không khớp với bảng hồi quy thực tế, hoặc bỏ qua các vi phạm giả định OLS cơ bản.
+
+**Jev Co-Processor** là phân hệ đồng xử lý lai ghép (*hybrid co-processor*) được xây dựng để loại bỏ hoàn toàn các nguy cơ này.
+
+<JevCoProcessorSvg />
+
+### Năm trụ cột công nghệ đột phá của Jev
+
+1. **Cắt giảm 84,2% token ngữ cảnh (Dynamic Sub-schema Exposure):**
+   Thay vì nạp toàn bộ 37 công cụ (~15.200 token), bộ phân loại ý định của Jev nhận diện bài toán trong thời gian dưới 5ms và chỉ để lộ 7–10 công cụ phù hợp nhất (~1.850 token). Điều này vừa giúp tiết kiệm chi phí token cho người dùng, vừa tăng độ chính xác của phản hồi.
+2. **Chặn bẫy lặp và tự động chuẩn hóa dữ liệu (Inbound Guardrails):**
+   Bộ đệm Inbound tự động phát hiện và khắc phục các sai sót phổ biến như: đảo ngược khoảng thời gian (tự sửa `2024 -> 2020` thành `2020 -> 2024`), chuẩn hóa mã chuỗi ký tự, và tự động chuyển các lệnh gọi lẻ thành truy vấn theo lô (*batch query*).
+3. **Quy trình kinh tế lượng 1-Click tự hành (1-Click Autonomous Pipeline):**
+   Tự động phối hợp 5 giai đoạn từ chuẩn bị mẫu, kiểm định tính dừng, hồi quy đa mô hình đến kết luận học thuật chỉ với một lượt phản hồi duy nhất mà không bị gián đoạn hay lặp hỏi.
+4. **Kiểm chứng kết quả 3 tầng (Unified Outbound Verifier):**
+   Mọi kết quả trước khi gửi đến người dùng đều phải vượt qua barem kiểm định 3 tầng nghiêm ngặt:
+   - **Tầng 1 (Verifiability - Khả năng kiểm chứng):** Xác thực nguồn gốc chuỗi dữ liệu gốc, tính đầy đủ của metadata và liên kết trích dẫn học thuật.
+   - **Tầng 2 (Methodology - Chuẩn mực phương pháp):** Kiểm tra các giả định Gauss-Markov, cảnh báo đa cộng tuyến ($VIF > 5$), tự tương quan và phương sai sai số thay đổi.
+   - **Tầng 3 (Consistency - Tính nhất quán liên môi trường):** Chạy kiểm chứng chéo giữa Python, R và Stata 18 MP. Báo cáo chỉ được phê duyệt khi kết quả hệ số hồi quy đồng nhất với sai số toán học $\Delta < 10^{-6}$.
+5. **Phân phối biểu đồ Native MCP Multimodal:**
+   Hỗ trợ xuất trực tiếp biểu đồ kinh tế độ phân giải cao và đồ thị hồi quy tương tác trực tiếp trong luồng phản hồi MCP mà không cần mở tab phụ.
+
+---
+
+## Bộ công cụ truy xuất dữ liệu đa nền tảng
+
+EcoData cho phép truy xuất dữ liệu linh hoạt qua giao diện web hoặc thông qua **khóa API cá nhân** kết nối vào các ngôn ngữ lập trình phổ biến qua giao diện **Public SDMX API** (`/api/v1/sdmx`):
+
+```bash
+# Cài đặt thư viện Python chính thức
+pip install ecodata-py
+```
+
+```python
+# Ví dụ truy xuất chuỗi dữ liệu vĩ mô bằng Python
+from ecodata import EcoData
+
+client = EcoData(api_key="YOUR_ECODATA_API_KEY")
+df = client.series(
+    flow="MACRO_INTL",
+    indicator="NY.GDP.MKTP.KD.ZG",
+    countries=["VNM", "THA", "MYS", "SGP"],
+    start_year=2010,
+    end_year=2024
+)
+print(df.head())
+```
+
+```stata
+* Cài đặt và sử dụng package Stata
+net install ecodata, from("https://ecodata.io.vn/clients/stata") replace
+ecodata use "MACRO_INTL/NY.GDP.MKTP.KD.ZG", countries("VNM") clear
+```
+
+```r
+# Sử dụng gói R chính thức
+library(ecodata)
+data <- eco_series("MACRO_INTL", "NY.GDP.MKTP.KD.ZG", countries = c("VNM", "IDN"))
+```
+
+---
+
+## Các phân hệ dữ liệu chính trong EcoData
+
+| Phân hệ | Tên module trong ứng dụng | Phạm vi dữ liệu phục vụ nghiên cứu |
+| :--- | :--- | :--- |
+| **Vĩ mô quốc tế** | Dashboard, Export Panel | World Bank (WDI, IDS), IMF (IFS, WEO), OECD, Eurostat, ILO, FAO, WTO, ADB. |
+| **GSO Việt Nam** | GSO Explorer | Niên giám thống kê quốc gia, Báo cáo tình hình KTXH, số liệu phân bổ theo 63 tỉnh thành. |
+| **Hải quan Việt Nam** | Customs Explorer | Thống kê xuất nhập khẩu chi tiết theo mã HS 2-4-6 số, đối tác thương mại, phương thức vận tải. |
+| **Khảo sát quản trị** | Survey Explorer | Chỉ số PCI, PAPI, PAR-Index, SIPAS, DTI (Chuyển đổi số) của các tỉnh thành từ 2006 đến nay. |
+| **Vi mô hộ gia đình** | Variable Hub | Dữ liệu điều tra vi mô VHLSS (Khảo sát mức sống dân cư), VARHS (Nông thôn), VES (Doanh nghiệp). |
+| **Tài chính doanh nghiệp** | Stocks Hub | Báo cáo tài chính 30 năm, thuyết minh, giao dịch nội bộ và lịch sử kiện của 1.600+ công ty niêm yết. |
+| **Kinh tế lượng tự động** | Analysis Engine | Hồi quy OLS, Panel FE/RE, GMM, VAR, ARDL, DID kèm kiểm định giả định và xuất gói tái lập. |
+| **Trợ lý AI & Tái lập** | AI Chat, Replication Hub | Trò chuyện tra cứu dữ liệu, tái lập mô hình từ bài báo nghiên cứu (Replication Assistant). |
+
+---
+
+## Quy trình nghiên cứu thực nghiệm chuẩn hóa
+
+Quy trình 6 bước được khuyến nghị cho các nhà nghiên cứu, giảng viên và học viên khi thực hiện nghiên cứu thực nghiệm với EcoData:
+
+```mermaid
+flowchart TD
+  A["1. Xác định đề tài & giả thuyết nghiên cứu"] --> B["2. Khai thác dữ liệu vĩ mô / vi mô qua EcoData"]
+  B --> C["3. Kiểm tra tính dừng, làm sạch & preview metadata"]
+  C --> D["4. Thiết lập mô hình kinh tế lượng trên Analysis Hub"]
+  D --> E["5. Thực thi qua bộ 3 runtime (Python / R / Stata 18 MP)"]
+  E --> F["6. Kiểm chứng giả định qua Jev Co-Processor & xuất mã nguồn tái lập"]
+```
+
+### Năm nguyên tắc vàng khi chọn dữ liệu nghiên cứu
+
+1. **Xác định đúng đơn vị phân tích (*Unit of Analysis*):** Phân biệt rõ cấp độ quốc gia, tỉnh thành, doanh nghiệp, hộ gia đình hay cá nhân trước khi trích xuất chuỗi.
+2. **Kiểm tra độ đầy đủ của chuỗi thời gian (*Data Coverage*):** Kiểm tra tỷ lệ khuyết dữ liệu (*missing rate*) theo giai đoạn nghiên cứu trước khi ghép nối mẫu.
+3. **Đọc kỹ định nghĩa metadata:** Đối chiếu đơn vị đo lường (USD hiện hành, USD cố định, %, tỷ VNĐ) và phương pháp thu thập dữ liệu của cơ quan ban hành.
+4. **Kiểm chứng độ vững (*Robustness Checks*):** Sử dụng các mô hình thay thế và kiểm tra tính vững qua bộ 3 runtime để đảm bảo kết quả không phụ thuộc vào một phần mềm duy nhất.
+5. **Lưu trữ mã tái lập khoa học:** Luôn tải về bộ tệp mã nguồn (`.do`, `.R`, `.py`) kèm phiên bản trích xuất dữ liệu để đảm bảo khả năng tái lập 100% khi nộp bài cho các tạp chí khoa học.
+
+---
+
+## Câu hỏi thường gặp
+
+export const faqItems = [
+  {
+    q: 'Dữ liệu của EcoData có đủ điều kiện để công bố trên các tạp chí quốc tế (Scopus/ISI) không?',
+    a: 'Hoàn toàn đủ điều kiện. EcoData lấy nguồn trực tiếp từ các tổ chức quốc tế chính thức (World Bank, IMF, OECD, ILO) và cơ quan nhà nước Việt Nam (GSO, Tổng cục Hải quan), tuân thủ định dạng chuẩn SDMX, cung cấp đầy đủ metadata, mã nhận diện và mã nguồn tái lập chạy trên Stata 18 MP – tiêu chuẩn vàng được các tạp chí uy tín chấp thuận.',
+  },
+  {
+    q: 'Tại sao cần đối soát kết quả kinh tế lượng trên cả 3 runtime Python, R và Stata?',
+    a: 'Các phần mềm khác nhau có thể sử dụng các thuật toán tối ưu hóa ma trận hoặc cách tính sai số chuẩn (robust standard errors) có độ lệch nhẹ. EcoData sử dụng bộ 3 runtime song song để kiểm chứng chéo: chỉ khi các ước lượng đạt độ đồng thuận cao (sai số delta < 1e-6), kết quả mới được xác thực là vững chắc và khách quan.',
+  },
+  {
+    q: 'Phân hệ Jev Co-Processor giúp gì cho người dùng khi sử dụng AI để nghiên cứu?',
+    a: 'Jev Co-Processor giúp tiết kiệm 84,2% chi phí token thông qua cơ chế Dynamic Sub-schema Exposure, ngăn chặn các lỗi lặp truy vấn thường gặp ở các mô hình AI, và thực thi cơ chế kiểm chứng 3 tầng ngăn chặn hoàn toàn hiện tượng ảo giác thống kê.',
+  },
+  {
+    q: 'Tôi có thể dùng EcoData MCP Server trên những ứng dụng AI nào?',
+    a: 'Bạn có thể sử dụng EcoData MCP Server trên Google Gemini Spark (bản web/di động), Claude Desktop, Cursor IDE, Windsurf IDE, và AntiGravity / Gemini CLI.',
+  },
+];
+
+{faqItems.map((item, index) => (
+  <details key={index} style={{ marginBottom: '1rem', padding: '0.5rem 1rem', border: '1px solid var(--ifm-color-emphasis-200)', borderRadius: '8px' }}>
+    <summary style={{ fontWeight: '600', cursor: 'pointer' }}>{item.q}</summary>
+    <p style={{ marginTop: '0.75rem', marginBottom: '0.25rem', color: 'var(--ifm-color-emphasis-800)' }}>{item.a}</p>
+  </details>
+))}

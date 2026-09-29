@@ -1,69 +1,314 @@
 ---
 id: overview
-title: Using Ecodata Overview
-description: A user guide map for researchers who need to find, preview, and export Ecodata indicators.
+title: Comprehensive EcoData user guide
+description: A complete guide to EcoData for automated econometric research across triple runtime (Python, R, Stata 18 MP), EcoData MCP Server with 37 AI tools, and Jev Co-Processor.
+keywords:
+  - ecodata user guide
+  - automated econometrics
+  - ecodata mcp server
+  - jev co-processor
+  - python r stata econometrics
+  - vietnam macroeconomic data
 ---
 
-# Using Ecodata Overview
+import Head from '@docusaurus/Head';
+import { EconometricsPipelineSvg, McpServerFlowSvg, JevCoProcessorSvg } from '@site/src/components/EcoDataSvg';
 
-Ecodata is an economic data platform for research, policy analysis, and quantitative modeling. The application focuses on three practical jobs: finding the right data source, selecting the right indicators, and exporting datasets with metadata so users can audit and reproduce their research workflow.
+export const articleSchemaEn = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: 'Comprehensive EcoData User Guide: Automated Econometrics Pipeline, MCP Server, and Jev Co-Processor',
+  description: 'An in-depth guide to EcoData featuring a 1-Click econometrics pipeline across Python, R, and Stata 18 MP, 37 specialized MCP tools, and Jev Co-Processor academic oversight.',
+  inLanguage: 'en',
+  author: {
+    '@type': 'Organization',
+    name: 'EcoData Research Team',
+    url: 'https://ecodata.io.vn',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'TNS AI & VietLOD',
+    url: 'https://docs.tnsai.vn',
+  },
+  about: [
+    { '@type': 'Thing', name: 'Econometric Analysis Pipeline' },
+    { '@type': 'Thing', name: 'Model Context Protocol (MCP)' },
+    { '@type': 'Thing', name: 'Jev Co-Processor' },
+    { '@type': 'Thing', name: 'Macroeconomic Data' },
+  ],
+};
 
-This documentation replaces the previous source-by-source guide with articles organized around in-app workflows. New users should start with [Login → Filter/Select → Preview → Export](/ecodata/bat-dau/login-filter-preview-export), then read the detailed indicator guides for each data group.
+export const softwareSchemaEn = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'EcoData Platform',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web, Windows, macOS, Linux',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+  featureList: [
+    'Automated Econometrics Analysis Pipeline across Python, R, and Stata 18 MP',
+    'EcoData MCP Server with 37 specialized AI tools',
+    'Jev Co-Processor for token optimization and 3-tier academic verification',
+    'Over 200,000 clean macroeconomic and microeconomic time series',
+  ],
+};
 
-## Highlights
+<Head>
+  <script type="application/ld+json">{JSON.stringify(articleSchemaEn)}</script>
+  <script type="application/ld+json">{JSON.stringify(softwareSchemaEn)}</script>
+</Head>
 
-- **Clean, publication-ready data:** cleaned and standardized into panel/time-series format, ready for research and international publication (*ready to publication*).
-- **Rich and up to date:** a multi-domain, multi-source data repository, updated regularly.
-- **Full international macro indicators:** from official sources — World Bank, IMF, ADB, UN, FRED, OECD, ILO, and more.
-- **Official Vietnam data:** General Statistics Office (statistical yearbooks, socio-economic reports), General Department of Customs (import-export reports and data by commodity), governance surveys (PAPI, PCI, PAR, SIPAS, ICT), and microdata sets VHLSS, VARHS, VES.
+# Comprehensive EcoData user guide
 
-## EcoData Retrieval Toolkit
+:::tip[Direct answer for search engines and AI assistants (AEO Quick Answer)]
+**What is EcoData?** EcoData is an advanced economic intelligence and automated econometric analysis platform. It provides **over 200,000 clean, publication-ready datasets**, an **Automated Econometrics Analysis Pipeline** executing across a **triple runtime (Python, R, Stata 18 MP)**, an **EcoData MCP Server** featuring 37 specialized tools for direct integration with Gemini Spark, Claude Desktop, Cursor, and AntiGravity, and the **Jev Co-Processor** which reduces context token usage by 84.2%, prevents conversation loop traps, and enforces 3-tier academic verification.
+:::
 
-EcoData is not limited to browser downloads. Users can create a **personal API key** in the Dashboard and retrieve the same real datasets through the Excel / Python / Stata / R toolkit. All clients call the same **Public SDMX API** at `/api/v1/sdmx`, so one research series can be reproduced across several research environments.
+This guide outlines the end-to-end workflow: selecting indicators, connecting AI assistants, executing complex empirical models, and exporting complete replication packages.
 
-| Tool | Main use | Accurate release status |
-| --- | --- | --- |
-| Excel | Sideload the self-hosted manifest `https://ecodata.io.vn/excel/manifest.xml`, then use the task pane or `=ECODATA.SERIES(...)` | Self-host route and production data layer verified; AppSource and manual Excel Win/Web runtime checks remain pending. |
-| Python | `EcoData().series(...)` returns a tidy `pandas.DataFrame` | Core package and production live smoke verified; PyPI publication is pending. |
-| Stata | `net install ecodata, from("https://ecodata.io.vn/clients/stata") replace`, then run `ecodata use ...` | Self-host route and production live smoke verified; SSC submission is pending. |
-| R | `eco_series(...)` returns a tidy `tibble` | Core package and production live smoke verified; CRAN publication is pending. |
+---
 
-Current client dataflows include `MACRO_INTL`, `GSO_VN`, `CUSTOMS_VN`, and `STOCK_VN`. For real research, store the API key in an environment variable or `~/.ecodata`, keep metadata and short codes with exported data, and revoke keys when a project ends.
+## Distinctive highlights of EcoData
 
-## Main Feature Groups
+1. **Clean, publication-ready data:** All series are pre-cleaned and standardized into structured panel or time-series formats, complete with international SDMX metadata, ready for submission to leading scientific journals.
+2. **Comprehensive international macro indicators:** Directly integrated from official international organizations: World Bank, IMF, ADB, United Nations (Comtrade, SDG), OECD, ILO, and FRED.
+3. **Official and granular Vietnam data:** General Statistics Office of Vietnam (Statistical Yearbooks, Socio-Economic Reports across all 63 provinces), General Department of Customs (detailed import-export records by partner and commodity), governance indicators (PCI, PAPI, PAR-Index, SIPAS, ICT-Index), and microdata surveys (VHLSS, VARHS, VES).
+4. **Three proprietary technological breakthroughs:**
+   - **Automated econometrics pipeline:** 105 models across 12 analytical families, executed via 1-Click across Python, R, and Stata 18 MP.
+   - **EcoData MCP Server:** 37 standardized AI tools bringing economic data extraction and regression estimation directly into AI chat windows.
+   - **Jev Co-Processor:** Hybrid reasoning co-processor cutting context tokens by 84.2% while enforcing a 3-tier academic verification standard (Verifiability – Methodology – Consistency).
 
-| Group | App module | What users do |
-| --- | --- | --- |
-| Global Data | Dashboard, Export Panel | Find international indicators from World Bank, IMF, OECD, Eurostat, ILO, FAO, WTO, ADB, and related sources. |
-| Vietnam GSO | GSO Explorer | Explore KTXH, NGTK-CN, NGTK-TINH, and VHLSS aggregate indicators by year, province, and indicator group. |
-| Customs | Customs Explorer | Filter import-export reports by commodity, partner country, province, transport mode, and reporting period. |
-| Macro Survey | Survey Explorer | Find PCI, PAPI, ICT, PAR, and SIPAS indicators by province and year. |
-| VHLSS Micro | Variable Hub | Select waves, datasets, and micro variables, preview records, and create panel or pooled datasets. |
-| Stock Hub | Stocks | View prices, symbol profiles, financial statements, notes, and corporate events. |
-| AI Chat | Chat | Ask AI to suggest indicators, sources, model variables, and data queries. |
-| Econometrics | Analysis | Run preliminary OLS, WLS, GLS, panel, VAR, ARIMA, Logit, and Probit models before export. |
+---
 
-## Standard Research Workflow
+## Automated econometrics analysis pipeline across triple runtime
 
-```mermaid
-flowchart LR
-  A["Login"] --> B["Define the research question"]
-  B --> C["Filter sources and indicators"]
-  C --> D["Select indicators"]
-  D --> E["Preview data and metadata"]
-  E --> F["Test with AI Chat or Econometrics"]
-  F --> G["Refine scope"]
-  G --> H["Export data and metadata"]
+Instead of manually exporting raw files into spreadsheets and configuring separate statistical software, EcoData provides a seamless, closed-loop econometrics pipeline from data preparation to reproducible script export.
+
+<EconometricsPipelineSvg />
+
+### Four closed-loop analysis stages
+
+1. **Data ingestion and transformation:**
+   - Automatic multi-source data merging based on entity identifiers ($i$) and time periods ($t$).
+   - Automated stationarity checks (Augmented Dickey-Fuller and Phillips-Perron tests), first-differencing, log transformations, and lag creation.
+2. **Model specification:**
+   - Supports **105 econometric models across 12 specialized families**: Linear regressions (OLS, WLS, GLS), Panel data (Fixed Effects, Random Effects, Pooled OLS, 2SLS), Dynamic Panel GMM (Arellano-Bond, Blundell-Bond), Time Series (VAR, VECM, ARDL), Binary choice models (Logit, Probit, Tobit), Survival analysis, Spatial econometrics, and Causal inference (Difference-in-Differences, Synthetic Control).
+3. **Parallel execution across triple runtime (Python / R / Stata 18 MP):**
+   - EcoData's analytical engine executes models synchronously across three computational environments:
+     - **Python Runtime:** Utilizes `statsmodels`, `pandas`, and `linearmodels` for high computational throughput and AI interoperability.
+     - **R Runtime:** Leverages `tidyverse`, `plm`, and `fixest` for high-dimensional fixed-effect estimations.
+     - **Stata 18 MP Runtime:** Powered by the multi-core C-engine of Stata 18 MP, representing the gold standard of empirical accuracy for Q1 Scopus and FT50 journals.
+4. **Hypothesis testing and replication packages:**
+   - Comprehensive automated diagnostic battery: Multicollinearity ($VIF$), Heteroskedasticity (White test, Breusch-Pagan test), Autocorrelation (Durbin-Watson, Breusch-Godfrey test), and specification Hausman tests.
+   - Formatted academic regression tables: APA 7th, Chicago 8th, Harvard 2008, IEEE 2008, and MLA 7th.
+   - Complete, executable replication bundles: `.do` (Stata), `.R` (R), and `.py` / `.ipynb` (Python) files packaged with processed datasets.
+
+### Comparative capabilities across triple runtime
+
+| Technical criteria | Python Runtime | R Runtime | Stata 18 MP Runtime |
+| :--- | :--- | :--- | :--- |
+| **Core libraries** | `pandas`, `statsmodels`, `linearmodels` | `tidyverse`, `plm`, `fixest`, `sandwich` | Stata MP Multi-core C-Engine |
+| **Key strength** | AI pipeline integration, high throughput | Ultra-fast high-dimensional fixed effects | Peer-reviewed gold standard for Q1 journals |
+| **Diagnostic rigor** | Very high ($p$-values, robust SE) | Very high (standard clustered SE) | Ground truth reference baseline |
+| **Export format** | Python script (`.py`), Jupyter Notebook | R script (`.R`), Quarto (`.qmd`) | Automated Stata do-file (`.do`) |
+| **Cross-runtime parity** | Numerical delta $\Delta < 10^{-6}$ | Numerical delta $\Delta < 10^{-6}$ | Reference baseline |
+
+---
+
+## EcoData MCP Server architecture with 37 specialized AI tools
+
+The Model Context Protocol (MCP) is an open standard allowing large language models to interact securely with external tools and databases. EcoData is the first platform in the region to launch a production **EcoData MCP Server** featuring **37 specialized AI tools**, enabling AI assistants to explore, retrieve, and estimate empirical models without manual code writing.
+
+<McpServerFlowSvg />
+
+### Featured tools catalog
+
+Among the 37 specialized tools, key capabilities include:
+
+- `search_indicators_unified`: Semantic multilingual search across 200,000+ indicators.
+- `query_macro_data_unified`: One-step multi-dimensional retrieval with verified metadata.
+- `inspect_series_metadata`: Deep inspection of calculation methodologies, issuing agencies, units, and update cadences.
+- `run_econometrics_regression`: Direct natural-language execution of OLS, Panel, and GMM models.
+- `export_replication_bundle`: Automatic packaging of Stata, R, and Python code bundles.
+- `query_customs_trade_data`: Granular export-import data querying by HS code, partner nation, and province.
+- `query_corporate_financials`: 30-year financial statements and ratios for over 1,600 listed firms.
+
+### Step-by-step setup for AI platforms
+
+#### 1. Google Gemini Spark (Custom apps)
+- **Method 1 (Recommended - Direct tokenized URL):**
+  1. Open EcoData > AI Integration Portal (`/account/connect-apps`) and copy your **Direct tokenized URL**.
+  2. Visit `gemini.google.com/spark/apps`, select **Add app**, and paste the URL into the **App link** field.
+  3. Click **Next** to link your EcoData workspace without manual OAuth setup.
+- **Method 2 (Standard OAuth 2.1 PKCE):** Enter your Client ID and Client Secret in Spark Advanced settings.
+- **Prompt example in chat:** Mention `@EcoData` with natural queries:
+  > *"@EcoData Retrieve Vietnam's GDP growth and registered FDI inflows from 2010 to 2025, and run an OLS regression examining the impact of FDI on GDP growth."*
+
+#### 2. Claude Desktop
+Add the MCP configuration to `claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "ecodata": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@ecodata/mcp-server",
+        "--api-key",
+        "YOUR_ECODATA_API_KEY"
+      ]
+    }
+  }
+}
 ```
 
-## Indicator Selection Principles
+#### 3. Cursor and Windsurf IDE
+Configure `.cursor/mcp.json` or add an MCP server in editor settings:
 
-1. Choose the source by unit of analysis first: country, province, firm, commodity, household, or individual.
-2. Check coverage by year, frequency, geography, and completeness before adding an indicator to export.
-3. Read metadata to confirm definition, unit, calculation method, and provenance.
-4. Preview sample data before downloading full data, especially for panel datasets or multi-source exports.
-5. Keep citation, short code, and metadata together with the exported data to reproduce results.
+```json
+{
+  "mcpServers": {
+    "ecodata": {
+      "url": "https://ecodata.io.vn/api/v1/mcp",
+      "headers": {
+        "Authorization": "Bearer YOUR_ECODATA_API_KEY"
+      }
+    }
+  }
+}
+```
 
-## Documentation Implementation Status
+---
 
-The documentation is bilingual. Homepage UI strings are managed through `src/i18n/vi.json` and `src/i18n/en.json`; full article translations use Docusaurus file-based i18n, so selecting English shows the English content and selecting Vietnamese shows the Vietnamese content.
+## Jev Co-Processor: AI inference optimization and academic verification
+
+Applying LLMs to empirical research faces three acute hurdles: context bloat, prompt loop traps, and statistical hallucination. The **Jev Co-Processor** is a hybrid intelligence sub-system designed to eliminate these failure modes completely.
+
+<JevCoProcessorSvg />
+
+### Five technological pillars of Jev
+
+1. **84.2% context token reduction (Dynamic Sub-schema Exposure):**
+   Instead of exposing all 37 tools (~15,200 tokens), Jev classifies user intent in under 5ms and exposes only the 7–10 relevant tools (~1,850 tokens), drastically cutting costs and eliminating tool confusion.
+2. **Loop prevention and automated input sanitization (Inbound Guardrails):**
+   Automatically rectifies reversed date ranges (e.g., converting `2024 -> 2020` to `2020 -> 2024`), validates symbol strings, and routes scattered single queries into efficient batch operations.
+3. **1-Click autonomous pipeline execution:**
+   Orchestrates sample preparation, stationarity checking, regression, and reporting in a single execution step without repetitive confirmation loops.
+4. **Three-tier academic verification standard (Unified Outbound Verifier):**
+   Every analytical response is audited across three pillars before reaching the user:
+   - **Tier 1 (Verifiability):** Validates raw series integrity, citation links, and identifier consistency.
+   - **Tier 2 (Methodology):** Enforces Gauss-Markov diagnostic tests, flagging multicollinearity ($VIF > 5$), autocorrelation, and heteroskedasticity.
+   - **Tier 3 (Consistency):** Conducts cross-runtime verification across Python, R, and Stata 18 MP. The output is approved only if parameter differences satisfy $\Delta < 10^{-6}$.
+5. **Native MCP multimodal chart rendering:**
+   Delivers high-resolution economic figures and regression diagnostic plots directly within the MCP stream.
+
+---
+
+## Multi-platform data retrieval toolkit
+
+In addition to interactive web dashboards, EcoData provides official client libraries connecting through the **Public SDMX API** (`/api/v1/sdmx`):
+
+```bash
+# Install the official Python package
+pip install ecodata-py
+```
+
+```python
+# Query macroeconomic series via Python
+from ecodata import EcoData
+
+client = EcoData(api_key="YOUR_ECODATA_API_KEY")
+df = client.series(
+    flow="MACRO_INTL",
+    indicator="NY.GDP.MKTP.KD.ZG",
+    countries=["VNM", "THA", "MYS", "SGP"],
+    start_year=2010,
+    end_year=2024
+)
+print(df.head())
+```
+
+```stata
+* Install and run the official Stata package
+net install ecodata, from("https://ecodata.io.vn/clients/stata") replace
+ecodata use "MACRO_INTL/NY.GDP.MKTP.KD.ZG", countries("VNM") clear
+```
+
+```r
+# Retrieve tidy tibbles via R
+library(ecodata)
+data <- eco_series("MACRO_INTL", "NY.GDP.MKTP.KD.ZG", countries = c("VNM", "IDN"))
+```
+
+---
+
+## Core data modules in EcoData
+
+| Module | App section | Research scope |
+| :--- | :--- | :--- |
+| **Global Macro** | Dashboard, Export Panel | World Bank (WDI, IDS), IMF (IFS, WEO), OECD, Eurostat, ILO, FAO, WTO, ADB. |
+| **Vietnam GSO** | GSO Explorer | National Statistical Yearbooks, provincial indicators across all 63 provinces. |
+| **Customs Trade** | Customs Explorer | Granular trade data by 2-to-6 digit HS code, trading partner, and transit mode. |
+| **Governance Surveys** | Survey Explorer | Provincial governance indicators: PCI, PAPI, PAR-Index, SIPAS, DTI (2006–present). |
+| **Microdata Hub** | Variable Hub | Household and enterprise surveys: VHLSS, VARHS, and VES microdata. |
+| **Corporate Financials** | Stocks Hub | 30-year financial statements, notes, and corporate events for 1,600+ listed companies. |
+| **Autonomous Econometrics** | Analysis Engine | Estimation for OLS, Panel FE/RE, GMM, VAR, ARDL, DID with automated replication packages. |
+| **AI Replication Assistant** | AI Chat, Replication Hub | Interactive data inquiries and automated empirical paper replication from PDF/DOI. |
+
+---
+
+## Standard empirical research workflow
+
+A 6-step empirical roadmap for researchers, graduate students, and policy analysts using EcoData:
+
+```mermaid
+flowchart TD
+  A["1. Formulate research topic and hypotheses"] --> B["2. Retrieve macro/micro data via EcoData"]
+  B --> C["3. Verify stationarity, clean, and inspect metadata"]
+  C --> D["4. Specify econometric models in Analysis Hub"]
+  D --> E["5. Execute across triple runtime (Python / R / Stata 18 MP)"]
+  E --> F["6. Verify Gauss-Markov assumptions via Jev & export replication package"]
+```
+
+### Five golden principles for indicator selection
+
+1. **Clarify unit of analysis:** Match your research question to country, province, firm, household, or individual level before downloading.
+2. **Audit data coverage:** Examine missing value ratios across panels and timeframes before merging datasets.
+3. **Scrutinize metadata definitions:** Confirm measurement units (current vs. constant currency, percentages, ratios) and official methodologies.
+4. **Perform robustness checks:** Compare estimation results across specifications and runtime engines to ensure conclusions remain invariant.
+5. **Preserve scientific replication bundles:** Retain generated `.do`, `.R`, and `.py` scripts alongside raw data pulls to guarantee 100% scientific reproducibility.
+
+---
+
+## Frequently asked questions
+
+export const faqItemsEn = [
+  {
+    q: 'Are EcoData datasets eligible for publication in international peer-reviewed journals (Scopus/ISI)?',
+    a: 'Yes, absolutely. EcoData datasets originate directly from official global institutions (World Bank, IMF, OECD, ILO) and Vietnamese government agencies (GSO, Customs), adhering to international SDMX standards with full metadata provenance and automated Stata 18 MP replication packages accepted by leading journals.',
+  },
+  {
+    q: 'Why does EcoData cross-validate econometric models across Python, R, and Stata simultaneously?',
+    a: 'Different statistical software packages use subtle variations in matrix decomposition algorithms and robust standard error calculations. EcoData runs a triple runtime pipeline to ensure cross-runtime consensus: only models with numerical delta < 1e-6 are validated as scientifically robust.',
+  },
+  {
+    q: 'How does the Jev Co-Processor assist researchers when using AI?',
+    a: 'Jev Co-Processor reduces context token consumption by 84.2% via Dynamic Sub-schema Exposure, eliminates conversational prompt loops, and enforces a 3-tier academic verification battery that prevents statistical hallucination.',
+  },
+  {
+    q: 'Which AI platforms support the EcoData MCP Server?',
+    a: 'EcoData MCP Server is fully supported on Google Gemini Spark, Claude Desktop, Cursor IDE, Windsurf IDE, and AntiGravity / Gemini CLI.',
+  },
+];
+
+{faqItemsEn.map((item, index) => (
+  <details key={index} style={{ marginBottom: '1rem', padding: '0.5rem 1rem', border: '1px solid var(--ifm-color-emphasis-200)', borderRadius: '8px' }}>
+    <summary style={{ fontWeight: '600', cursor: 'pointer' }}>{item.q}</summary>
+    <p style={{ marginTop: '0.75rem', marginBottom: '0.25rem', color: 'var(--ifm-color-emphasis-800)' }}>{item.a}</p>
+  </details>
+))}

@@ -1,0 +1,162 @@
+/* EcoData Interactive SVG Animation Styles */
+
+.svgContainer {
+  width: 100%;
+  margin: 1.75rem 0;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  background: linear-gradient(180deg, rgba(248, 250, 252, 0.95) 0%, rgba(241, 245, 249, 0.95) 100%);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+[data-theme='dark'] .svgContainer {
+  background: linear-gradient(180deg, #0b1120 0%, #030712 100%);
+  border-color: rgba(56, 189, 248, 0.2);
+  box-shadow: 0 14px 40px -10px rgba(0, 0, 0, 0.6), 0 0 20px -5px rgba(14, 165, 233, 0.15);
+}
+
+.svgRoot {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+}
+
+/* Animations */
+@keyframes flowDashForward {
+  from {
+    stroke-dashoffset: 40;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes flowDashReverse {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: 40;
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.85;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.03);
+    filter: drop-shadow(0 0 8px currentColor);
+  }
+}
+
+@keyframes radarSweep {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes floatBadge {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes particleFlow {
+  0% {
+    offset-distance: 0%;
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    offset-distance: 100%;
+    opacity: 0;
+  }
+}
+
+.animFlow {
+  animation: flowDashForward 1.8s linear infinite;
+}
+
+.animFlowFast {
+  animation: flowDashForward 1.2s linear infinite;
+}
+
+.animFlowRev {
+  animation: flowDashReverse 1.8s linear infinite;
+}
+
+.animPulse {
+  animation: pulseGlow 3s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.animFloat {
+  animation: floatBadge 3.5s ease-in-out infinite;
+}
+
+.animFloatDelay {
+  animation: floatBadge 3.5s ease-in-out infinite;
+  animation-delay: 1.75s;
+}
+
+.animRadar {
+  animation: radarSweep 6s linear infinite;
+  transform-origin: center;
+}
+
+/* Captions & Info Footers */
+.svgFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 1.25rem;
+  background: rgba(241, 245, 249, 0.7);
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+  font-size: 0.82rem;
+  color: var(--ifm-color-emphasis-700);
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+[data-theme='dark'] .svgFooter {
+  background: rgba(15, 23, 42, 0.75);
+  border-top-color: rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+}
+
+.badgeTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(14, 165, 233, 0.12);
+  color: #0284c7;
+  border: 1px solid rgba(14, 165, 233, 0.3);
+}
+
+[data-theme='dark'] .badgeTag {
+  background: rgba(14, 165, 233, 0.2);
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.35);
+}
