@@ -50,3 +50,18 @@ AI Agent bắt buộc phải dừng hoạt động và lấy ý kiến người 
 1.  **Lỗi xác thực tên miền trên DNS**: Khi chạy Certbot báo lỗi xác thực tên miền do bản ghi DNS (A record) chưa được trỏ hoặc cập nhật kịp.
 2.  **Xung đột cổng hoặc tài nguyên trên VPS**: Khi phát hiện cổng nội bộ của app mới trùng với cổng đang hoạt động của một app khác trên máy chủ.
 3.  **Lỗi biên dịch Docusaurus**: Bản build tĩnh bị lỗi Acorn/MDX parsing mà không thể tự sửa đổi mà không làm thay đổi nội dung học thuật gốc của công thức toán hay bảng biểu.
+
+---
+
+## 4. Liên kết Vai trò Tác tử với Hệ thống 8 Agent Skills (`.agents/skills/`)
+
+Mỗi vai trò tác tử chỉ kích hoạt đúng các Skills thuộc phạm vi trách nhiệm của mình theo cơ chế **Progressive Disclosure**:
+
+| Vai trò Tác tử | Skills kích hoạt tương ứng | Kịch bản kiểm chứng bắt buộc (`[BENCHMARK]` & `[PASS]`) |
+| :--- | :--- | :--- |
+| **1.1 Planner** | `repo-governance`, `multi-app-sidebars-routing`, `vps-nginx-isolation` | `verify_governance.py`, `verify_routing.py`, `verify_vps_isolation.py` |
+| **1.2 Implementer** | `docusaurus-mdx-latex`, `i18n-bilingual-sync`, `sveltia-cms-workflow`, `ui-theme-components` | `verify_mdx_latex.py`, `verify_i18n.py`, `verify_cms.py`, `verify_ui_build.py` |
+| **1.3 Tester** | Toàn bộ 8 Skills trong `.agents/skills/` | Chạy toàn bộ 8 kịch bản `scripts/verify_*.py` đạt exit code `0` |
+| **1.4 Deployer** | `webhook-cicd-deploy`, `vps-nginx-isolation`, `repo-governance` | `verify_webhook.py`, `verify_vps_isolation.py`, `verify_governance.py` |
+| **1.5 Documenter** | `repo-governance`, `i18n-bilingual-sync` | `verify_governance.py`, `verify_i18n.py` |
+

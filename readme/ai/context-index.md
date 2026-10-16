@@ -34,3 +34,21 @@ Khi bắt đầu một phiên làm việc, **BẮT BUỘC** đọc theo thứ t�
 ## 3. Các vùng rủi ro cao cần lưu ý (High-Risk Areas)
 *   **Chỉnh sửa tệp cấu hình Nginx trên VPS**: Có thể làm sập định tuyến của các ứng dụng khác đang chạy song song. Bắt buộc phải đọc kỹ [`vps-app-context.md`](file:///d:/docs/readme/ai/vps-app-context.md) trước khi sửa.
 *   **Docusaurus Sidebars & Config**: Chỉnh sửa sai cấu trúc trong `docusaurus.config.js` hoặc `sidebars.js` sẽ gây lỗi biên dịch hoặc gãy liên kết (broken links) diện rộng. Bắt buộc phải chạy `npm run build` ở local trước khi commit.
+
+---
+
+## 4. Danh mục 8 Agent Skills Theo Chuẩn Progressive Disclosure (`.agents/skills/`)
+
+Ngoài các tài liệu trong `/readme/ai/`, AI Agent có thể kích hoạt theo nhu cầu (On-demand) bộ **8 Skills** được đồng bộ tại `.agents/skills/`, `.agent/skills/`, và `.claude/skills/`:
+
+| Tên Skill | Mục đích & Ngữ cảnh kích hoạt | Kịch bản kiểm chứng (`scripts/verify_*.py`) |
+| :--- | :--- | :--- |
+| **`repo-governance`** | Quy trình Layered Context, Plan Mode, Conventional Commits, chống rò rỉ token Git. | `python .agents/skills/repo-governance/scripts/verify_governance.py` |
+| **`docusaurus-mdx-latex`** | Phòng chống lỗi biên dịch Acorn MDX v3, cô lập công thức KaTeX `$$...$$`, chuẩn Admonitions/SVG. | `python .agents/skills/docusaurus-mdx-latex/scripts/verify_mdx_latex.py` |
+| **`multi-app-sidebars-routing`** | Quản lý 5 sidebars độc lập (`sidebars.js`), Navbar switching và chuẩn hóa slug (`model/`, `group/`). | `python .agents/skills/multi-app-sidebars-routing/scripts/verify_routing.py` |
+| **`i18n-bilingual-sync`** | Đảm bảo đối xứng 1:1 giữa `docs/` (VI) và `i18n/en/` (EN) cùng 4 tệp từ điển JSON. | `python .agents/skills/i18n-bilingual-sync/scripts/verify_i18n.py` |
+| **`sveltia-cms-workflow`** | Quản trị Sveltia CMS (`static/admin/config.yml`, 22 collections) và GitHub OAuth Proxy (port 3050). | `python .agents/skills/sveltia-cms-workflow/scripts/verify_cms.py` |
+| **`webhook-cicd-deploy`** | Quy trình tự động build qua HTTPS Webhook (`docs-webhook` port 3051, HMAC SHA-256). | `python .agents/skills/webhook-cicd-deploy/scripts/verify_webhook.py` |
+| **`vps-nginx-isolation`** | Cô lập 11 ứng dụng trên VPS `31.97.110.12`, truyền file qua SSH bằng Base64, kiểm định `nginx -t`. | `python .agents/skills/vps-nginx-isolation/scripts/verify_vps_isolation.py` |
+| **`ui-theme-components`** | Thiết kế giao diện học thuật `src/css/custom.css`, Dark/Light mode, bảng responsive và SVG động. | `python .agents/skills/ui-theme-components/scripts/verify_ui_build.py` |
+

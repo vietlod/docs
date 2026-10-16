@@ -60,3 +60,11 @@ Tài liệu này lưu trữ các quyết định thiết kế bền vững, bài
     - Port: 3050 (OAuth), 3051 (Webhook) - cả hai đều bind nội bộ 127.0.0.1.
     - PM2: 2 processes (`docs-oauth-proxy`, `docs-webhook`).
     - Nginx: 2 location blocks (`/oauth/` và `/webhook/`). Không ảnh hưởng app khác.
+
+### Triển khai Chuẩn Agent Skills Specification & Đồng bộ Đa môi trường (2026-10-16)
+*   **Context**: Cần chuẩn hóa tri thức vận hành, quy tắc biên dịch học thuật (MDX/KaTeX/i18n) và kiểm chứng tự động cho AntiGravity IDE/CLI cùng Claude Code mà không làm tràn ngữ cảnh (Context Window) của AI Agent.
+*   **Quyết định**:
+    1.  Thiết lập hệ thống **8 Agent Skills** theo cơ chế **Progressive Disclosure 3 giai đoạn** (`SKILL.md` < 5.000 tokens với YAML frontmatter ngôi thứ ba + `references/*.md` + `scripts/verify_*.py`): `repo-governance`, `docusaurus-mdx-latex`, `multi-app-sidebars-routing`, `i18n-bilingual-sync`, `sveltia-cms-workflow`, `webhook-cicd-deploy`, `vps-nginx-isolation`, và `ui-theme-components`.
+    2.  Đồng bộ bản sao vật lý 100% giữa 3 thư mục `.agents/skills/`, `.agent/skills/`, và `.claude/skills/` để tránh lỗi tương thích symlink giữa Windows (Local) và Ubuntu Linux (VPS).
+    3.  Áp dụng chính sách **Zero-Token Persistence** cho Git: tuyệt đối không lưu cứng `GITHUB_TOKEN` trong `.git/config`; sử dụng `http.extraHeader` tạm thời khi push/pull và giữ URL `origin` sạch (`https://github.com/vietlod/docs.git`) ở cả Local và VPS.
+
