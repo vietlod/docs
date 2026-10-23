@@ -1,72 +1,47 @@
 ---
 id: econometrics
-title: Econometrics chạy thử model
-description: Hướng dẫn dùng Econometrics để kiểm tra sơ bộ quan hệ giữa indicators.
+title: Động cơ kinh tế lượng 12 họ mô hình và 105 bộ ước lượng
+description: Hướng dẫn sử dụng động cơ Kinh tế lượng của EcoData với 12 họ mô hình, 40 mô hình con và 105 bộ ước lượng chạy đồng thời trên Python, R và Stata 18 MP.
 ---
 
-# Econometrics chạy thử model
+# Động cơ kinh tế lượng 12 họ mô hình và 105 bộ ước lượng
 
-Econometrics giúp chạy thử mô hình sơ bộ ngay trong Ecodata. Mục tiêu là kiểm tra nhanh quan hệ dữ liệu trước khi export và phân tích sâu ở môi trường chuyên dụng.
+Công cụ Kinh tế lượng của EcoData cho phép chuẩn bị mẫu, ước lượng, kiểm định giả định và xuất mã lệnh tái lập ngay trong trình duyệt web hoặc qua máy chủ EcoData MCP Server.
 
-## Hệ thống 12 họ mô hình, 40 mô hình con và 105 bộ ước lượng hỗ trợ
+## Hệ thống 12 họ mô hình, 40 mô hình con và 105 bộ ước lượng
 
-EcoData tích hợp Econometrics Engine toàn diện cho phép chạy thử và ước lượng sơ bộ với:
+EcoData tích hợp động cơ kinh tế lượng toàn diện phục vụ nghiên cứu học thuật và phân tích chính sách:
 
-### 12 Họ mô hình lớn (Model Families)
+### Mười hai họ mô hình phân tích lớn
 
-1. **Hồi quy Tuyến tính Cổ điển (Classical Linear Regression)**: OLS, WLS, GLS, TLS (Total Least Squares).
-2. **Hồi quy Chính quy hóa (Regularized Regression)**: Ridge, Lasso, Elastic Net, Adaptive Lasso.
-3. **Dữ liệu bảng tuyến tính (Linear Panel Data)**: Pooled OLS, Fixed Effects (Entity/Time FE), Random Effects, Between Effects.
-4. **Dữ liệu bảng động (Dynamic Panel Data)**: Arellano-Bond (Difference GMM), Blundell-Bond (System GMM).
-5. **Biến phụ thuộc giới hạn (Limited Dependent Variable)**: Binary Logit, Binary Probit, Tobit (Censored), Truncated Regression, Heckman Selection (Heckit).
-6. **Mô hình biến đếm (Count Data)**: Poisson Regression, Negative Binomial, Zero-Inflated Poisson (ZIP), Zero-Inflated Negative Binomial (ZINB).
-7. **Hồi quy Phân vị (Quantile Regression)**: Linear Quantile Regression, Panel Quantile Regression (FE-QR).
-8. **Chuỗi thời gian đơn biến (Univariate Time Series)**: AR, MA, ARMA, ARIMA, SARIMA, ARCH, GARCH, EGARCH.
-9. **Chuỗi thời gian đa biến (Multivariate Time Series)**: Vector Autoregression (VAR), Vector Error Correction Model (VECM), Structural VAR (SVAR).
-10. **Hệ phương trình đồng thời & Biến công cụ (IV & Simultaneous Equations)**: IV/2SLS, 3SLS, Seemingly Unrelated Regressions (SUR).
-11. **Hồi quy Phi tuyến & Bán tham số (Non-linear & Semi-parametric)**: Non-linear Least Squares (NLS), Generalized Additive Models (GAM).
-12. **Suy luận nhân quả & Đánh giá tác động (Causal Inference & Impact Evaluation)**: Difference-in-Differences (DiD), Propensity Score Matching (PSM), Regression Discontinuity Design (RDD).
+1. **Hồi quy tuyến tính cổ điển:** OLS, WLS, GLS và hồi quy bình phương tối thiểu toàn phần TLS.
+2. **Hồi quy phạt chuẩn hóa:** Ridge, Lasso, Elastic Net và Adaptive Lasso.
+3. **Dữ liệu bảng tuyến tính:** Pooled OLS, Fixed Effects theo thực thể và thời gian, Random Effects và Between Effects.
+4. **Dữ liệu bảng động:** Arellano-Bond Difference GMM và Blundell-Bond System GMM.
+5. **Biến phụ thuộc rời rạc và giới hạn:** Binary Logit, Binary Probit, Multinomial Logit, Ordered Probit, Tobit bị chặn, hồi quy cắt cụt và mô hình chọn mẫu Heckman hai bước.
+6. **Mô hình dữ liệu đếm:** Hồi quy Poisson, Negative Binomial, Zero-Inflated Poisson ZIP và Zero-Inflated Negative Binomial ZINB.
+7. **Hồi quy phân vị:** Hồi quy phân vị tuyến tính và hồi quy phân vị dữ liệu bảng tác động cố định.
+8. **Chuỗi thời gian đơn biến và biến động:** AR, MA, ARMA, ARIMA, SARIMAX, ARDL cùng các mô hình phương sai thay đổi ARCH, GARCH và EGARCH.
+9. **Chuỗi thời gian đa biến:** Tự hồi quy véctơ VAR, hiệu chỉnh sai số véctơ VECM, Structural VAR, kiểm định nhân quả Granger và hàm phản ứng xung IRF.
+10. **Biến công cụ và hệ phương trình đồng thời:** Hồi quy hai giai đoạn 2SLS, ba giai đoạn 3SLS và hệ phương trình dường như không liên quan SUR.
+11. **Hồi quy phi tuyến và bán tham số:** Bình phương tối thiểu phi tuyến NLS, mô hình cộng tính tổng quát GAM, suy luận Bayes MCMC và học máy nhân quả Causal Forest.
+12. **Suy luận nhân quả và kinh tế lượng không gian:** Difference-in-Differences DID, Event Study, đối sánh điểm xu hướng PSM, thiết kế đứt gãy hồi quy RDD cùng các mô hình không gian SAR, SEM và Spatial Durbin SDM.
 
-### Phân rã 40 Mô hình con và 105 Bộ ước lượng (Estimators)
+### Phân rã 40 mô hình con và 105 bộ ước lượng
 
-Hệ thống cung cấp **40 mô hình con** tương ứng với các đặc tả toán học khác nhau. Để phục vụ nghiên cứu học thuật đòi hỏi tính vững của hệ số, hệ thống hỗ trợ **105 bộ ước lượng** được cấu hình dựa trên sự kết hợp của:
-- **Phương pháp tối ưu hóa**: OLS, FGLS, Maximum Likelihood (MLE), Quasi-MLE, GMM (1-step/2-step với hiệu chỉnh Windmeijer).
-- **Cấu trúc phương sai sai số chuẩn**: Homoskedastic, White Robust (HC0, HC1, HC2, HC3), Clustered Standard Errors (theo Entity, Time, hoặc Multi-way Clustering) giúp kiểm soát hiện tượng tự tương quan và phương sai sai số thay đổi.
+Hệ thống cung cấp **40 mô hình con** tương ứng với các đặc tả toán học khác nhau và **105 bộ ước lượng** kết hợp giữa:
+- **Phương pháp tối ưu hóa:** Bình phương tối thiểu OLS, FGLS, hợp lý cực đại MLE, Quasi-MLE và GMM một bước hoặc hai bước có hiệu chỉnh sai số hữu hạn Windmeijer.
+- **Cấu trúc ma trận hiệp phương sai sai số chuẩn:** Phương sai đồng nhất cổ điển, sai số chuẩn vững White HC0, HC1, HC2, HC3, sai số chuẩn Newey-West HAC và sai số chuẩn phân cụm theo tỉnh thành, doanh nghiệp hoặc hai chiều thực thể – thời gian.
 
-## Flow chạy thử
+## Quy trình ước lượng trên giao diện và MCP
 
-1. Mở Econometrics.
-2. Chọn nhóm model.
-3. Chọn model cụ thể.
-4. Chọn dependent indicator.
-5. Chọn independent indicators từ danh sách `/api/indicators`.
-6. Chọn khoảng năm.
-7. Thêm custom variables nếu cần.
-8. Chạy phân tích.
-9. Đọc coefficients, standard errors, t-stats, p-values, model fit và phần diễn giải.
+1. Mở công cụ **Kinh tế lượng** hoặc gọi công cụ MCP `run_complete_econometric_study`.
+2. Chọn họ mô hình và bộ ước lượng cụ thể.
+3. Chọn biến phụ thuộc và các biến giải thích từ danh mục chỉ tiêu hoặc bảng dữ liệu 34 tỉnh, 63 tỉnh, doanh nghiệp.
+4. Thiết lập khoảng thời gian và các phép biến đổi logarit, sai phân hoặc biến trễ.
+5. Khởi chạy ước lượng song song trên **Python, R và Stata 18 MP**.
+6. Kiểm tra bảng hệ số hồi quy, sai số chuẩn, trị số thống kê $t$, trị số $p$, các kiểm định chẩn đoán $VIF$, Breusch-Pagan, Wooldridge, Hausman, Hansen $J$ và tải gói mã lệnh tái lập `.do`, `.R`, `.py`.
 
-## Cách chọn indicators cho model
+## Định dạng bảng học thuật và trích dẫn
 
-| Thành phần | Ví dụ |
-| --- | --- |
-| Dependent variable | GDP growth, poverty rate, export value, stock return. |
-| Main explanatory variable | FDI, PCI, tariff, education, investment. |
-| Controls | Population, labor force, CPI, sector structure, year. |
-| Time range | Chọn đủ dài để có ít nhất số quan sát tối thiểu cho mô hình. |
-
-## Citation style
-
-Module hỗ trợ nhiều kiểu trích dẫn như APA 7, Chicago 17, Harvard 2008, IEEE 2008 và MLA 7. Khi export kết quả hoặc viết báo cáo, người dùng nên giữ citation cùng metadata của indicators.
-
-## Giới hạn cần biết
-
-Econometrics phù hợp cho kiểm thử nhanh. Với mô hình học thuật hoặc báo cáo chính thức, người dùng nên export dữ liệu và kiểm định lại bằng R, Python, Stata hoặc phần mềm chuyên dụng. Đặc biệt với panel model, cần kiểm tra entity, time index, missing values và cách aggregate trước khi diễn giải kết quả.
-
-## Kết hợp với AI Chat
-
-Người dùng có thể mở AI Chat từ ý tưởng mô hình để:
-
-- Gợi ý model phù hợp.
-- Giải thích ý nghĩa hệ số.
-- Nhắc kiểm tra multicollinearity, missing data, stationarity hoặc lag structure.
-- Đề xuất indicators thay thế khi coverage không đủ.
+Bảng kết quả hỗ trợ chuyển đổi tức thời giữa 5 chuẩn trình bày quốc tế gồm **APA 7th**, **Chicago 17th**, **Harvard**, **IEEE** và **MLA 9th**, đồng thời tự động chuyển đổi nhãn biến sang ký hiệu toán học LaTeX 3 tầng.

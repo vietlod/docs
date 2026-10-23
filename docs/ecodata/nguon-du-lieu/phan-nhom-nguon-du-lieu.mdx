@@ -1,86 +1,95 @@
 ---
 id: phan-nhom-nguon-du-lieu
-title: Phân nhóm nguồn dữ liệu
-description: Cách phân loại nguồn dữ liệu trong Ecodata theo đơn vị phân tích và mục đích nghiên cứu.
+title: Phân nhóm nguồn dữ liệu và 7 phân hệ chuyên sâu
+description: Cách phân loại nguồn dữ liệu trong EcoData theo đơn vị phân tích, 7 phân hệ Finco và thị trường hàng hóa cùng 8 khu vực kinh tế trọng điểm toàn cầu.
 ---
 
-# Phân nhóm nguồn dữ liệu
+import Head from '@docusaurus/Head';
 
-Ecodata gom nhiều nguồn dữ liệu khác nhau vào một workflow thống nhất. Khi chọn nguồn, người dùng nên bắt đầu từ đơn vị phân tích thay vì bắt đầu từ tên tổ chức.
+export const sourceGroupSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'DataCatalog',
+  name: 'Danh mục nguồn dữ liệu quốc tế, 7 phân hệ Finco và thị trường hàng hóa trên EcoData',
+  url: 'https://docs.tnsai.vn/ecodata/nguon-du-lieu/phan-nhom-nguon-du-lieu',
+  inLanguage: 'vi',
+  description: 'Phân loại nguồn dữ liệu kinh tế vĩ mô quốc tế, 8 khu vực MAIN_MARKET và 7 phân hệ dữ liệu Việt Nam chuyên sâu gồm NSO, FISCAL, KTXH_GSO, CUSTOMS, SURVEY_INDEX, COMMODITY_MARKET và VN_34_REBUILD.',
+};
 
-## Bản đồ nguồn theo đơn vị phân tích
+<Head>
+  <script type="application/ld+json">{JSON.stringify(sourceGroupSchema)}</script>
+</Head>
 
-| Đơn vị phân tích | Nguồn phù hợp | Module |
+# Phân nhóm nguồn dữ liệu và 7 phân hệ chuyên sâu
+
+EcoData hợp nhất các nguồn dữ liệu quốc tế và nội địa vào một quy trình nghiên cứu thống nhất. Khi chọn nguồn dữ liệu, nhà nghiên cứu nên bắt đầu từ **đơn vị phân tích** và **chế độ địa giới hành chính** thay vì tìm riêng lẻ theo tên cơ quan ban hành.
+
+## Bản đồ nguồn dữ liệu theo đơn vị phân tích
+
+| Đơn vị phân tích | Nguồn dữ liệu và phân hệ phù hợp | Module trong ứng dụng |
 | --- | --- | --- |
-| Quốc gia | World Bank, IMF, OECD, Eurostat, ILO, FAO, WTO, UNCTAD, ADB, FRED, OWID | Dashboard |
-| Tỉnh/thành Việt Nam | GSO KTXH, NGTK-TINH, VHLSS aggregate, Macro Survey | GSO, Survey |
-| Hàng hóa và đối tác thương mại | Vietnam Customs | Customs |
-| Hộ gia đình/cá nhân | VHLSS Micro | VHLSS Variable Hub |
-| Doanh nghiệp niêm yết | Stock Hub, BCTC, Events Calendar | Stocks |
-| Chỉ số quản trị địa phương | PCI, PAPI, PAR, SIPAS, ICT | Macro Survey |
+| Quốc gia và 8 khu vực trọng điểm | World Bank, IMF, OECD, Eurostat, ILO, FAO, WTO, UNCTAD, ADB, FRED, OWID, `MAIN_MARKET` | Dashboard |
+| Tỉnh thành Việt Nam — 63 tỉnh hoặc 34 tỉnh mới | `NSO`, `FISCAL`, `KTXH_GSO`, `VN_34_REBUILD`, NGTK-TINH, VHLSS tổng hợp | GSO Explorer |
+| Hàng hóa chiến lược và đối tác thương mại | `CUSTOMS` 11 biểu mẫu, `COMMODITY_MARKET` 5 nhóm ngành | Customs Explorer |
+| Chỉ số quản trị và thể chế cấp tỉnh | `SURVEY_INDEX` gồm PCI, PGI, PAPI, PII, PAR Index, SIPAS, ICT Index | Survey Explorer |
+| Hộ gia đình và cá nhân | Điều tra vi mô VHLSS, VARHS, VES | VHLSS Variable Hub |
+| Doanh nghiệp niêm yết trên HOSE, HNX, UPCoM | Báo cáo tài chính 30 năm theo 4 chế độ kế toán, thuyết minh, lịch sự kiện | Stock Hub |
 
-## Nhóm Global Data
+## Nhóm dữ liệu quốc tế và tám khu vực trọng điểm
 
-Nhóm này phù hợp cho nghiên cứu so sánh quốc tế, dữ liệu panel quốc gia, kiểm định macro và các biến kiểm soát chuẩn. Các nguồn đang được app hỗ trợ trong mã nguồn và tài liệu kỹ thuật gồm World Bank, IMF, OECD, Eurostat, ILO, FAO, OWID, FRED, WTO, UNCTAD, ADB và SAMADB.
+Nhóm dữ liệu này phục vụ nghiên cứu so sánh quốc tế, mô hình dữ liệu bảng đa quốc gia và các biến kiểm soát vĩ mô toàn cầu. EcoData kết nối trực tiếp với World Bank, IMF, OECD, Eurostat, ILO, FAO, OWID, FRED, WTO, UNCTAD và ADB, đồng thời tổ chức phân hệ **`MAIN_MARKET`** theo 8 khu vực kinh tế trọng điểm:
+- **Việt Nam**
+- **Hoa Kỳ**
+- **Trung Quốc**
+- **Ấn Độ**
+- **Châu Âu**
+- **Đông Á**
+- **ASEAN**
+- **Châu Mỹ – Trung Đông – Châu Đại Dương**
 
-Các indicators thường gặp:
+Các nhóm chỉ tiêu cốt lõi bao gồm:
+- Tăng trưởng GDP, GDP bình quân đầu người theo giá hiện hành, giá cố định và ngang giá sức mua.
+- Lạm phát CPI, tỷ giá hối đoái, lãi suất điều hành, cung tiền và cán cân thanh toán.
+- Lực lượng lao động, việc làm, tiền lương và năng suất lao động.
+- Thương mại quốc tế, thuế quan, đầu tư trực tiếp nước ngoài và logistics.
+- Dân số, giáo dục, y tế, phát triển con người và chất lượng thể chế quốc gia.
 
-- Tăng trưởng GDP, GDP bình quân đầu người, GDP theo giá hiện hành hoặc giá cố định.
-- Lạm phát, tỷ giá, lãi suất, cán cân thanh toán.
-- Lao động, việc làm, tiền lương, năng suất.
-- Thương mại, xuất nhập khẩu, thuế quan, logistics.
-- Dân số, giáo dục, y tế, phát triển con người.
-- Governance, institutional quality, risk và các chỉ số phát triển.
+## Bảy phân hệ dữ liệu Việt Nam chuyên sâu từ Finco và thị trường hàng hóa
 
-## Nhóm dữ liệu Việt Nam từ GSO
+EcoData tích hợp 7 phân hệ dữ liệu kinh tế – tài chính nội địa được chuẩn hóa đồng bộ cho cả chế độ 63 tỉnh và 34 tỉnh thành mới:
 
-GSO gồm nhiều lớp dữ liệu:
+| Mã phân hệ | Tên phân hệ | Nội dung và phạm vi dữ liệu |
+| --- | --- | --- |
+| **`NSO`** | Thống kê nhà nước PX-Web và Phụ lục 34 tỉnh | 28 bảng dữ liệu cấp tỉnh từ hệ thống PX-Web chính thức và bộ Phụ lục Niên giám 2024 theo 34 tỉnh thành mới mã `PLV01..PLV14`. |
+| **`FISCAL`** | Thu chi ngân sách nhà nước Bộ Tài chính | Chuỗi quyết toán và dự toán ngân sách nhà nước giai đoạn 1995–2026 mã `THUCHINS` gồm tổng thu, thu nội địa, thu xuất nhập khẩu, tổng chi, chi đầu tư phát triển và chi thường xuyên. |
+| **`KTXH_GSO`** | Báo cáo kinh tế – xã hội định kỳ | Chỉ tiêu thống kê tháng, quý và năm giai đoạn 2000–2026 gồm GRDP, IIP, CPI, vốn đầu tư thực hiện, bán lẻ hàng hóa dịch vụ và vận tải. |
+| **`CUSTOMS`** | Thống kê Hải quan 11 biểu mẫu | Dữ liệu xuất nhập khẩu chính thức qua 11 biểu mẫu: `1X`, `1N`, `2X`, `2N`, `3X`, `3N`, `4`, `5X`, `5N`, `HTX` và `PTVT`. |
+| **`SURVEY_INDEX`** | Khảo sát chỉ số quản trị cấp tỉnh | Chuỗi dữ liệu bảng dài hạn của 7 bộ chỉ số thể chế: `PCI`, `PGI`, `PAPI`, `PII`, `ICT Index`, `PAR Index` và `SIPAS`. |
+| **`COMMODITY_MARKET`** | Thị trường hàng hóa 5 nhóm ngành | Chuỗi cung ứng, sản lượng, xuất nhập khẩu và giá cả của 5 nhóm ngành hàng hóa qua 5 chiều phân tích định lượng. |
+| **`VN_34_REBUILD`** | Động cơ tái cấu trúc chuỗi 34 tỉnh | Bảng chuỗi chuẩn hóa `vn_province_34_series` giai đoạn 2000–2026 xử lý trọn vẹn 3 mốc địa giới 1995–2003, 2003–2008 và 2025 theo 5 quy tắc toán học. |
 
-| Dataset | Nội dung |
-| --- | --- |
-| KTXH | Chỉ tiêu kinh tế xã hội theo kỳ báo cáo. |
-| NGTK-CN | Niên giám thống kê cấp quốc gia. |
-| NGTK-TINH | Niên giám thống kê cấp tỉnh/thành. |
-| VHLSS aggregate | Chỉ tiêu tổng hợp từ báo cáo VHLSS chính thức. |
+## Phân hệ thị trường hàng hóa năm nhóm ngành và năm chiều phân tích
 
-Dữ liệu GSO phù hợp khi nghiên cứu cần chỉ tiêu chính thức theo tỉnh, theo năm, hoặc khi cần đối chiếu giữa báo cáo quốc gia và báo cáo địa phương.
+Phân hệ `COMMODITY_MARKET` cung cấp bức tranh toàn diện về chuỗi giá trị hàng hóa Việt Nam và thế giới:
+- **Năm nhóm ngành hàng hóa:** Năng lượng; Kim loại và khoáng sản; Nông sản và thực phẩm; Thủy sản và chăn nuôi; Vật liệu và hóa chất công nghiệp.
+- **Năm thẻ phân tích chuyên sâu:** Tổng quan; Sản xuất; Xuất khẩu; Nhập khẩu và tiêu thụ; Giá cả và thị trường.
+- **Chú thích nguồn dữ liệu gốc thu gọn:** Đặt ở cuối mỗi khung phân tích, cho phép nhấp mở rộng để tra cứu mã bảng nguồn như `NSO`, `CUSTOMS`, `FISCAL`, `GSO` cùng kỳ cập nhật.
 
-## Nhóm Customs
+## Nhóm khảo sát quản trị và vi mô hộ gia đình VHLSS
 
-Customs khai thác báo cáo của Tổng cục Hải quan. Nguồn này phù hợp cho nghiên cứu thương mại hàng hóa, thị trường xuất nhập khẩu, cơ cấu đối tác và phân tích theo tỉnh hoặc phương thức vận tải.
+Phân hệ `SURVEY_INDEX` tập hợp 7 chỉ số quản trị cấp tỉnh làm biến giải thích về chất lượng thể chế và cải cách hành chính. Trong khi đó, **VHLSS Variable Hub** cung cấp dữ liệu vi mô hộ gia đình theo từng kỳ khảo sát, bảng câu hỏi và biến số gốc để kết nối hoặc gộp chuỗi phục vụ ước lượng vi mô.
 
-Các chiều dữ liệu chính:
+## Nhóm Stock Hub tài chính doanh nghiệp
 
-- Hàng hóa theo mã và mô tả.
-- Quốc gia đối tác.
-- Tỉnh/thành.
-- Phương thức vận tải.
-- Kỳ báo cáo tháng hoặc quý.
-- Trạng thái báo cáo như chính thức, sơ bộ hoặc điều chỉnh.
+Stock Hub phục vụ nghiên cứu tài chính doanh nghiệp và thị trường vốn Việt Nam qua kiến trúc truy xuất 3 tầng ưu tiên bộ nhớ đệm và cơ sở dữ liệu chuẩn hóa:
+- Giá giao dịch lịch sử, khối lượng khớp lệnh, vốn hóa và giao dịch khối ngoại.
+- Báo cáo tài chính 30 năm gồm Bảng cân đối kế toán, Báo cáo kết quả kinh doanh, Báo cáo lưu chuyển tiền tệ và Thuyết minh báo cáo tài chính tự động phân tách theo **4 chế độ kế toán**: Doanh nghiệp phi tài chính, Ngân hàng thương mại, Công ty chứng khoán và Doanh nghiệp bảo hiểm.
+- Lịch sự kiện doanh nghiệp, cổ tức và giao dịch cổ đông nội bộ.
 
-## Nhóm Macro Survey và VHLSS
+## Nguyên tắc chọn nguồn dữ liệu trong thực tế
 
-Macro Survey gom các chỉ số cấp tỉnh như PCI, PAPI, ICT, PAR và SIPAS. Đây là nhóm phù hợp để làm biến giải thích về môi trường kinh doanh, quản trị công, cải cách hành chính và dịch vụ công.
-
-VHLSS Micro khác với VHLSS aggregate. VHLSS Micro đi vào dữ liệu vi mô dạng Stata theo wave, dataset và biến. Người dùng cần chọn wave, chọn bảng, lọc biến, preview record và quyết định dạng merge hoặc append.
-
-## Nhóm Stock Hub
-
-Stock Hub phù hợp cho phân tích doanh nghiệp, thị trường vốn và dữ liệu tài chính. App đọc dữ liệu theo mô hình DB-first, sau đó fallback sang nguồn dịch vụ hoặc file offline khi cần.
-
-Các nhóm dữ liệu gồm:
-
-- Giá, volume, market cap và thông tin giao dịch.
-- Hồ sơ mã chứng khoán, sàn, ngành ICB, nhóm chỉ số.
-- Bảng cân đối kế toán, kết quả kinh doanh, lưu chuyển tiền tệ.
-- Thuyết minh báo cáo tài chính.
-- Lịch sự kiện doanh nghiệp.
-
-## Cách chọn nguồn trong thực tế
-
-1. Nếu câu hỏi nghiên cứu là so sánh giữa quốc gia, bắt đầu từ Global Data.
-2. Nếu câu hỏi nghiên cứu là khác biệt giữa tỉnh Việt Nam, bắt đầu từ GSO hoặc Macro Survey.
-3. Nếu câu hỏi liên quan xuất nhập khẩu, bắt đầu từ Customs.
-4. Nếu câu hỏi cần dữ liệu hộ gia đình/cá nhân, bắt đầu từ VHLSS Micro.
-5. Nếu câu hỏi về công ty niêm yết, bắt đầu từ Stock Hub.
-6. Nếu chưa rõ, dùng AI Chat để chuyển câu hỏi nghiên cứu thành danh sách nguồn và indicators ứng viên.
+1. Nếu câu hỏi nghiên cứu so sánh giữa các quốc gia hoặc khu vực kinh tế, bắt đầu từ **Global Data** và **`MAIN_MARKET`**.
+2. Nếu câu hỏi nghiên cứu phân tích cấp tỉnh Việt Nam dài hạn, mở **GSO Explorer**, chọn chế độ **34 tỉnh** hoặc **63 tỉnh** và kết hợp **`NSO`**, **`FISCAL`**, **`KTXH_GSO`** cùng **`SURVEY_INDEX`**.
+3. Nếu câu hỏi nghiên cứu xoay quanh chuỗi cung ứng hàng hóa và thương mại quốc tế, sử dụng **`CUSTOMS`** và **`COMMODITY_MARKET`**.
+4. Nếu câu hỏi nghiên cứu ở cấp độ hộ gia đình hoặc cá nhân, sử dụng **VHLSS Variable Hub**.
+5. Nếu câu hỏi nghiên cứu về cấu trúc vốn, hiệu quả hoạt động hoặc định giá công ty niêm yết, sử dụng **Stock Hub**.
+6. Nếu muốn tự động hóa toàn bộ quy trình qua trợ lý AI, sử dụng **AI Chat** hoặc tải bộ kỹ năng **EcoData MCP 37 công cụ** tại `/account/connect-apps`.

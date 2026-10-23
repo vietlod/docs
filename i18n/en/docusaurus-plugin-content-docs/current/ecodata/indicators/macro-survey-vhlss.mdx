@@ -1,33 +1,34 @@
 ---
 id: macro-survey-vhlss
-title: Macro Survey and VHLSS
-description: How to use PCI, PAPI, ICT, PAR, SIPAS, and VHLSS Micro/Variable Hub.
+title: SURVEY_INDEX Governance Indices and VHLSS Household Microdata
+description: How to use the seven provincial governance indices PCI, PGI, PAPI, PII, ICT Index, PAR Index, and SIPAS alongside VHLSS household microdata on the Variable Hub.
 ---
 
 import Head from '@docusaurus/Head';
 
-export const datasetSchema = {
+export const datasetSchemaEn = {
   '@context': 'https://schema.org',
   '@type': 'Dataset',
-  name: 'EcoData — Vietnam governance surveys (PCI, PAPI, PAR, SIPAS, ICT) and VHLSS microdata',
+  name: 'EcoData — Vietnam SURVEY_INDEX Provincial Governance Surveys and VHLSS Microdata',
   description:
-    'Provincial governance and competitiveness surveys for Vietnam (PCI, PAPI, PAR Index, SIPAS, ICT Index) by province and year, together with VHLSS household microdata variables accessible through the Variable Hub.',
+    'Seven provincial governance, green transition, innovation, and public administration indices for Vietnam including PCI, PGI, PAPI, PII, ICT Index, PAR Index, and SIPAS alongside VHLSS household microdata variables on the Variable Hub.',
   url: 'https://docs.tnsai.vn/en/ecodata/indicators/macro-survey-vhlss',
   inLanguage: ['vi', 'en'],
   isAccessibleForFree: true,
   conditionsOfAccess: 'Free browsing and preview; full export requires a subscription.',
-  keywords: ['Vietnam', 'PCI', 'PAPI', 'SIPAS', 'PAR Index', 'ICT Index', 'VHLSS', 'governance', 'microdata'],
+  keywords: ['Vietnam', 'PCI', 'PGI', 'PAPI', 'PII', 'SIPAS', 'PAR Index', 'ICT Index', 'VHLSS', 'governance', 'microdata'],
   creator: [
-    { '@type': 'Organization', name: 'VCCI (Provincial Competitiveness Index)' },
-    { '@type': 'Organization', name: 'UNDP / CECODES (PAPI)' },
-    { '@type': 'GovernmentOrganization', name: 'Ministry of Home Affairs of Vietnam (PAR, SIPAS)' },
-    { '@type': 'GovernmentOrganization', name: 'General Statistics Office of Vietnam (VHLSS)' },
+    { '@type': 'Organization', name: 'VCCI' },
+    { '@type': 'Organization', name: 'UNDP and CECODES' },
+    { '@type': 'GovernmentOrganization', name: 'Ministry of Home Affairs of Vietnam' },
+    { '@type': 'GovernmentOrganization', name: 'Ministry of Science and Technology of Vietnam' },
+    { '@type': 'GovernmentOrganization', name: 'National Statistics Office of Vietnam' },
   ],
   publisher: { '@type': 'Organization', name: 'EcoData', url: 'https://ecodata.io.vn/' },
   includedInDataCatalog: { '@type': 'DataCatalog', '@id': 'https://ecodata.io.vn/#catalog' },
-  spatialCoverage: { '@type': 'Place', name: 'Vietnam (63 provinces; households)' },
-  temporalCoverage: '2009/..',
-  variableMeasured: ['PCI score', 'PAPI score', 'PAR Index', 'SIPAS', 'ICT Index', 'Household income', 'Household expenditure', 'Education', 'Health'],
+  spatialCoverage: { '@type': 'Place', name: 'Vietnam across 63 and 34 provinces and surveyed households' },
+  temporalCoverage: '2002/2026',
+  variableMeasured: ['PCI score', 'PGI score', 'PAPI score', 'PII score', 'PAR Index', 'SIPAS', 'ICT Index', 'Household income', 'Household expenditure'],
   distribution: [
     { '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: 'https://ecodata.io.vn/data/survey' },
     { '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: 'https://ecodata.io.vn/data/vhlss-micro' },
@@ -35,60 +36,43 @@ export const datasetSchema = {
 };
 
 <Head>
-  <script type="application/ld+json">{JSON.stringify(datasetSchema)}</script>
+  <script type="application/ld+json">{JSON.stringify(datasetSchemaEn)}</script>
 </Head>
 
-# Macro Survey and VHLSS
+# SURVEY_INDEX Governance Indices and VHLSS Household Microdata
 
-This group contains two different data layers: province-level Macro Survey data and household or individual-level VHLSS Micro data. Users must keep the unit of analysis clear to avoid invalid merges.
+This group combines two complementary empirical layers: the **`SURVEY_INDEX`** subsystem capturing provincial institutional quality and public administration, and the **VHLSS Variable Hub** providing household and individual microdata.
 
-## Macro Survey
+## Seven Provincial Governance Indices in the SURVEY_INDEX Subsystem
 
-Macro Survey collects provincial indices that often represent institutions, governance, and public service quality.
+The `SURVEY_INDEX` subsystem standardizes longitudinal provincial panels across seven major institutional evaluation programs in Vietnam:
 
-| Index | Meaning |
+| Index Code | Survey Program Name | Issuing Agency and Empirical Scope |
+| --- | --- | --- |
+| **`PCI`** | Provincial Competitiveness Index | Published by VCCI to measure economic governance quality and business environment from the perspective of private enterprises. |
+| **`PGI`** | Provincial Green Index | Published by VCCI to evaluate environmental governance, climate resilience, and green transition policies at the provincial level. |
+| **`PAPI`** | Provincial Governance and Public Administration Performance Index | Jointly conducted by UNDP and CECODES to measure citizen experiences with public governance, transparency, and public service delivery. |
+| **`PII`** | Provincial Innovation Index | Published by the Ministry of Science and Technology to measure regional innovation inputs, knowledge infrastructure, and socio-economic outputs. |
+| **`ICT Index`** | Vietnam ICT Readiness Index | Published by the Ministry of Information and Communications to track digital infrastructure, human capital, and e-government readiness across provinces. |
+| **`PAR Index`** | Public Administration Reform Index | Published by the Ministry of Home Affairs to evaluate administrative procedure reform, organizational streamlining, and public finance management. |
+| **`SIPAS`** | Satisfaction Index of Public Administration Services | Published by the Ministry of Home Affairs to measure citizen and enterprise satisfaction with administrative service delivery. |
+
+### 34-Province Boundary Harmonization Note for SURVEY_INDEX
+
+Under EcoData's **`non_aggregable`** rule, institutional perception scores collected prior to July 1, 2025 are preserved at their original 63-province observation level to prevent ecological fallacy when combining non-linear perception composites. When switching to **34-province mode**, EcoData attaches 34-province crosswalk keys and optional enterprise-weighted or population-weighted composite series for robustness checks.
+
+## VHLSS Aggregates in GSO Explorer
+
+Provincial aggregates published in official VHLSS reports — including monthly per-capita income, household expenditure, Gini inequality coefficients, and poverty rates — are available in **GSO Explorer** across both 63-province and 34-province modes under the `weighted_mean` rule.
+
+## VHLSS Microdata and Variable Hub
+
+The VHLSS Variable Hub enables researchers to search variable dictionaries and build custom microdata extracts across living standards survey waves:
+
+| Step | Action on Variable Hub |
 | --- | --- |
-| PCI | Provincial competitiveness and business environment. |
-| PAPI | Provincial governance and public administration. |
-| ICT | Information and communication technology readiness and adoption. |
-| PAR | Public administrative reform. |
-| SIPAS | Citizen satisfaction with public administrative services. |
-
-Workflow:
-
-1. Open Survey Explorer.
-2. Select a survey or indicator group.
-3. Filter province and year.
-4. Open indicator detail to read the definition.
-5. Review table, chart, and export CSV when needed.
-
-## VHLSS Aggregate
-
-VHLSS aggregate is available in GSO Explorer. It includes indicators summarized from official reports. Use this group for living standards, income, expenditure, poverty, education, or health indicators by province or population group.
-
-## VHLSS Micro and Variable Hub
-
-VHLSS Micro uses Stata microdata files. Variable Hub helps users select wave, dataset, and variables before creating an analysis dataset.
-
-| Step | Action |
-| --- | --- |
-| 1 | Select waves, for example 2002-2024 depending on availability. |
-| 2 | Select datasets or data table groups. |
-| 3 | Filter variables by keyword, label, dataset, or wave. |
-| 4 | Preview sample data to validate variables. |
-| 5 | Review descriptive summary. |
-| 6 | Export as single-wave merge, cross-wave panel, or pooled append. |
-
-## VHLSS Micro Export Modes
-
-| Mode | When to use |
-| --- | --- |
-| Single-wave merge | A one-year survey study that needs several tables merged within one wave. |
-| Cross-wave panel | A time-based study with appropriate panel keys. |
-| Pooled append | Combining waves to increase observations without tracking the same unit over time. |
-
-## Method Notes
-
-1. Macro Survey is province-level; VHLSS Micro is household or individual-level.
-2. VHLSS Micro requires careful checks on weights, province codes, waves, household or person keys, and variable name changes.
-3. Full export can depend on account permissions; preview first before large exports.
+| 1 | Select target VHLSS survey waves from 2002 through 2024. |
+| 2 | Choose questionnaire modules such as Demographics, Education, Health, Employment, Income, Expenditure, or Housing. |
+| 3 | Filter variables by Vietnamese or English keywords or native Stata variable names. |
+| 4 | Preview sample records and summary statistics to inspect distributions and missingness. |
+| 5 | Export datasets using single-wave merge, cross-wave panel, or pooled append modes, or query directly via the MCP tool `get_vhlss_survey_data`. |

@@ -1,66 +1,95 @@
 ---
 id: phan-nhom-nguon-du-lieu
-title: Data Source Groups
-description: How Ecodata data sources are grouped by unit of analysis and research purpose.
+title: Data Source Groups and Seven Specialized Subsystems
+description: How EcoData data sources are organized by unit of analysis, seven Finco and commodity market subsystems, and eight global focus economic regions.
 ---
 
-# Data Source Groups
+import Head from '@docusaurus/Head';
 
-Ecodata brings many economic data sources into a unified workflow. When choosing a source, start from the unit of analysis rather than the organization name.
+export const sourceGroupSchemaEn = {
+  '@context': 'https://schema.org',
+  '@type': 'DataCatalog',
+  name: 'EcoData International Macro, Seven Finco Subsystems, and Commodity Market Catalog',
+  url: 'https://docs.tnsai.vn/en/ecodata/nguon-du-lieu/phan-nhom-nguon-du-lieu',
+  inLanguage: 'en',
+  description: 'Classification of international macroeconomic feeds, eight MAIN_MARKET global regions, and seven specialized Vietnam data subsystems: NSO, FISCAL, KTXH_GSO, CUSTOMS, SURVEY_INDEX, COMMODITY_MARKET, and VN_34_REBUILD.',
+};
+
+<Head>
+  <script type="application/ld+json">{JSON.stringify(sourceGroupSchemaEn)}</script>
+</Head>
+
+# Data Source Groups and Seven Specialized Subsystems
+
+EcoData unifies international and domestic economic feeds into a single empirical workflow. When selecting a data source, start from your **unit of analysis** and **administrative boundary mode** rather than searching by individual agency names.
 
 ## Source Map by Unit of Analysis
 
-| Unit of analysis | Suitable sources | Module |
+| Unit of Analysis | Suitable Sources and Subsystems | App Module |
 | --- | --- | --- |
-| Country | World Bank, IMF, OECD, Eurostat, ILO, FAO, WTO, UNCTAD, ADB, FRED, OWID | Dashboard |
-| Vietnam province | GSO KTXH, NGTK-TINH, VHLSS aggregate, Macro Survey | GSO, Survey |
-| Commodity and trade partner | Vietnam Customs | Customs |
-| Household or individual | VHLSS Micro | VHLSS Variable Hub |
-| Listed firm | Stock Hub, financial statements, Events Calendar | Stocks |
-| Provincial governance index | PCI, PAPI, PAR, SIPAS, ICT | Macro Survey |
+| Country and Eight Global Focus Regions | World Bank, IMF, OECD, Eurostat, ILO, FAO, WTO, UNCTAD, ADB, FRED, OWID, `MAIN_MARKET` | Dashboard |
+| Vietnam Province in 63-Province or 34-Province Mode | `NSO`, `FISCAL`, `KTXH_GSO`, `VN_34_REBUILD`, NGTK-TINH, VHLSS aggregates | GSO Explorer |
+| Strategic Commodities and Trade Partners | `CUSTOMS` across 11 forms, `COMMODITY_MARKET` across five sectors | Customs Explorer |
+| Provincial Governance and Institutional Indices | `SURVEY_INDEX` covering PCI, PGI, PAPI, PII, PAR Index, SIPAS, ICT Index | Survey Explorer |
+| Household and Individual Microdata | VHLSS, VARHS, and VES survey microdata | VHLSS Variable Hub |
+| Listed Firms on HOSE, HNX, and UPCoM | 30-year financial statements across four accounting regimes, notes, corporate events | Stock Hub |
 
-## Global Data
+## Global Data and Eight Focus Economic Regions
 
-This group is suitable for cross-country comparison, national panel data, macroeconomic testing, and standard control variables. Sources supported by the application and technical documentation include World Bank, IMF, OECD, Eurostat, ILO, FAO, OWID, FRED, WTO, UNCTAD, ADB, and SAMADB.
+This group supports cross-country comparisons, multi-country panel econometrics, and global macroeconomic control variables. EcoData connects directly to the World Bank, IMF, OECD, Eurostat, ILO, FAO, OWID, FRED, WTO, UNCTAD, and ADB, and organizes the **`MAIN_MARKET`** subsystem across eight strategic global regions:
+- **Vietnam**
+- **United States**
+- **China**
+- **India**
+- **Europe**
+- **East Asia**
+- **ASEAN**
+- **Americas, Middle East, and Oceania**
 
-Common indicators include GDP growth, GDP per capita, inflation, exchange rate, interest rate, balance of payments, labor, wages, productivity, trade, population, education, health, governance, risk, and development indicators.
+Core indicator families include:
+- GDP growth and GDP per capita in current USD, constant USD, and purchasing power parity.
+- CPI inflation, exchange rates, policy interest rates, money supply, and balance of payments.
+- Labor force participation, employment, wages, and labor productivity.
+- Merchandise trade, tariffs, foreign direct investment, and logistics performance.
+- Demographics, education, health outcomes, human development, and national institutional quality.
 
-## Vietnam GSO Data
+## Seven Specialized Vietnam Data Subsystems From Finco and Commodity Markets
 
-GSO has several data layers:
+EcoData integrates seven specialized domestic economic and financial subsystems standardized across both 63-province and 34-province administrative regimes:
 
-| Dataset | Content |
-| --- | --- |
-| KTXH | Socio-economic indicators by reporting period. |
-| NGTK-CN | National statistical yearbook data. |
-| NGTK-TINH | Provincial statistical yearbook data. |
-| VHLSS aggregate | Aggregated indicators from official VHLSS reports. |
+| Subsystem Code | Subsystem Name | Scope and Data Coverage |
+| --- | --- | --- |
+| **`NSO`** | National Statistics Office PX-Web and 34-Province Appendices | 28 provincial PX-Web statistical tables and the official 2024 Statistical Yearbook Appendices for 34 provinces coded `PLV01..PLV14`. |
+| **`FISCAL`** | Ministry of Finance State Budget Revenue and Expenditure | State budget outturn and estimate series from 1995 to 2026 coded `THUCHINS` covering total revenue, domestic revenue, trade tax revenue, total expenditure, capital expenditure, and recurrent expenditure. |
+| **`KTXH_GSO`** | Periodic Socio-Economic Statistical Reports | Monthly, quarterly, and annual series from 2000 to 2026 covering GRDP, IIP, CPI, realized investment, retail sales, and transport. |
+| **`CUSTOMS`** | Vietnam Customs Statistics Across 11 Official Forms | Official merchandise trade statistics across 11 operational forms: `1X`, `1N`, `2X`, `2N`, `3X`, `3N`, `4`, `5X`, `5N`, `HTX`, and `PTVT`. |
+| **`SURVEY_INDEX`** | Provincial Governance Survey Indices | Longitudinal provincial panel combining seven governance indices: `PCI`, `PGI`, `PAPI`, `PII`, `ICT Index`, `PAR Index`, and `SIPAS`. |
+| **`COMMODITY_MARKET`** | Five-Sector Commodity Market Intelligence | Supply-demand balances, production, trade flows, and prices across five strategic commodity sectors and five analytical tabs. |
+| **`VN_34_REBUILD`** | 34-Province Historical Panel Rebuild Engine | Harmonized `vn_province_34_series` panel from 2000 to 2026 resolving the 1995–2003, 2003–2008, and 2025 boundary milestones across five mathematical rules. |
 
-GSO data is suitable when the research needs official Vietnam indicators by province, year, or report group.
+## Commodity Market Intelligence Across Five Sectors and Five Analytical Tabs
 
-## Customs
+The `COMMODITY_MARKET` subsystem provides end-to-end visibility into domestic and global commodity value chains:
+- **Five Commodity Sectors:** Energy; Metals and Minerals; Agriculture and Food; Aquaculture and Livestock; Industrial Materials and Chemicals.
+- **Five Analytical Tabs:** Overview; Production; Export; Import and Consumption; Price and Market.
+- **Collapsible Primary Data Source Footnotes:** Placed at the bottom of each analytical card and collapsed by default, allowing researchers to inspect source table codes such as `NSO`, `CUSTOMS`, `FISCAL`, and `GSO` along with update schedules.
 
-Customs data comes from General Department of Customs reports. It is suitable for research on merchandise trade, export markets, import partners, provincial trade structure, and transport modes.
+## Governance Surveys and VHLSS Household Microdata
 
-Main dimensions include commodity, partner country, province, transport mode, reporting month or quarter, and report status.
+The `SURVEY_INDEX` subsystem consolidates seven provincial governance indices used as institutional explanatory variables in regional studies. Complementing provincial aggregates, the **VHLSS Variable Hub** provides household-level microdata organized by survey wave, questionnaire module, and variable dictionary for custom merging and appending.
 
-## Macro Survey and VHLSS
+## Stock Hub Corporate Financials
 
-Macro Survey includes provincial indicators such as PCI, PAPI, ICT, PAR, and SIPAS. These are useful for business environment, public governance, administrative reform, and public service quality variables.
+Stock Hub powers corporate finance and capital market research through a three-tier cache and database architecture:
+- Historical daily prices, trading volumes, market capitalization, and foreign investor flows.
+- 30-year financial statements comprising Balance Sheets, Income Statements, Cash Flow Statements, and Financial Notes automatically routed across **four Vietnamese accounting regimes**: Non-Financial Corporates, Commercial Banks, Securities Brokerages, and Insurance Companies.
+- Corporate event calendars, cash and stock dividends, and insider transactions.
 
-VHLSS Micro is different from VHLSS aggregate. It uses Stata microdata by wave, dataset, and variable. Users select waves, tables, variables, preview records, and choose merge or append mode.
+## Practical Guidelines for Source Selection
 
-## Stock Hub
-
-Stock Hub is for listed firms, capital market research, and financial data. The app reads from database and cache first, then falls back to service sources or offline files when needed.
-
-Data groups include prices, volumes, market cap, symbol profile, exchange, ICB industry, index groups, balance sheet, income statement, cash flow, notes, and corporate events.
-
-## Practical Source Selection
-
-1. For cross-country research, start with Global Data.
-2. For Vietnam province-level research, start with GSO or Macro Survey.
-3. For import-export questions, start with Customs.
-4. For household or individual analysis, start with VHLSS Micro.
-5. For listed firms, start with Stock Hub.
-6. If unsure, use AI Chat to turn the research question into candidate sources and indicators.
+1. For cross-country or regional macroeconomic comparisons, start with **Global Data** and **`MAIN_MARKET`**.
+2. For longitudinal Vietnam provincial research, open **GSO Explorer**, select **34-province** or **63-province** mode, and combine **`NSO`**, **`FISCAL`**, **`KTXH_GSO`**, and **`SURVEY_INDEX`**.
+3. For commodity supply chain and international trade analysis, use **`CUSTOMS`** and **`COMMODITY_MARKET`**.
+4. For household or individual microeconometric research, use **VHLSS Variable Hub**.
+5. For capital structure, firm performance, or equity valuation studies, use **Stock Hub**.
+6. To automate multi-source retrieval and regression via AI assistants, use **AI Chat** or download the **37-tool EcoData MCP Skills Pack** at `/account/connect-apps`.

@@ -1,7 +1,7 @@
 ---
 id: customs
-title: Customs indicators
-description: Hướng dẫn khai thác dữ liệu xuất nhập khẩu từ Vietnam Customs.
+title: Thống kê Hải quan 11 biểu mẫu và thị trường hàng hóa 5 nhóm ngành
+description: Hướng dẫn khai thác dữ liệu xuất nhập khẩu 11 biểu mẫu từ Cục Hải quan và phân hệ thị trường hàng hóa 5 nhóm ngành qua 5 chiều phân tích định lượng.
 ---
 
 import Head from '@docusaurus/Head';
@@ -9,20 +9,20 @@ import Head from '@docusaurus/Head';
 export const datasetSchema = {
   '@context': 'https://schema.org',
   '@type': 'Dataset',
-  name: 'EcoData — Vietnam import-export (Customs) data',
+  name: 'EcoData — Thống kê xuất nhập khẩu Hải quan 11 biểu mẫu và thị trường hàng hóa 5 nhóm ngành',
   description:
-    'Vietnam import and export statistics from the General Department of Vietnam Customs, filterable by commodity, partner country, province, transport mode and reporting period.',
+    'Dữ liệu xuất nhập khẩu chính thức của Cục Hải quan qua 11 biểu mẫu nghiệp vụ cùng phân hệ COMMODITY_MARKET bao phủ 5 nhóm ngành hàng hóa chiến lược qua 5 chiều phân tích định lượng.',
   url: 'https://docs.tnsai.vn/ecodata/indicators/customs',
   inLanguage: ['vi', 'en'],
   isAccessibleForFree: true,
-  conditionsOfAccess: 'Free browsing and preview; full export requires a subscription.',
-  keywords: ['Vietnam', 'customs', 'trade', 'exports', 'imports', 'commodity', 'HS code'],
+  conditionsOfAccess: 'Duyệt danh mục và xem trước miễn phí; xuất toàn bộ dữ liệu theo gói thành viên.',
+  keywords: ['Vietnam', 'customs', 'trade', 'exports', 'imports', 'commodity market', 'HS code'],
   creator: [{ '@type': 'GovernmentOrganization', name: 'General Department of Vietnam Customs' }],
   publisher: { '@type': 'Organization', name: 'EcoData', url: 'https://ecodata.io.vn/' },
   includedInDataCatalog: { '@type': 'DataCatalog', '@id': 'https://ecodata.io.vn/#catalog' },
-  spatialCoverage: { '@type': 'Place', name: 'Vietnam (provinces and trade partners)' },
-  temporalCoverage: '2010/..',
-  variableMeasured: ['Export value', 'Import value', 'Trade balance', 'Quantity', 'Commodity (HS) breakdown', 'Partner country', 'Transport mode'],
+  spatialCoverage: { '@type': 'Place', name: 'Vietnam across 63 and 34 provinces and global trade partners' },
+  temporalCoverage: '2010/2026',
+  variableMeasured: ['Export value', 'Import value', 'Trade balance', 'Quantity', 'Unit price', 'Commodity breakdown', 'Partner country', 'Transport mode'],
   distribution: [
     { '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: 'https://ecodata.io.vn/data/customs' },
   ],
@@ -32,52 +32,46 @@ export const datasetSchema = {
   <script type="application/ld+json">{JSON.stringify(datasetSchema)}</script>
 </Head>
 
-# Customs indicators
+# Thống kê Hải quan 11 biểu mẫu và thị trường hàng hóa 5 nhóm ngành
 
-Customs Explorer phục vụ dữ liệu xuất nhập khẩu từ báo cáo của Tổng cục Hải quan. Đây là nguồn phù hợp cho nghiên cứu thương mại hàng hóa, chuỗi cung ứng, thị trường xuất khẩu, đối tác nhập khẩu và phân tích theo địa phương.
+Customs Explorer hợp nhất hai phân hệ dữ liệu cốt lõi là **`CUSTOMS`** từ báo cáo thống kê của Cục Hải quan và **`COMMODITY_MARKET`** phân tích chuỗi cung ứng hàng hóa. Nguồn dữ liệu này phục vụ nghiên cứu thương mại quốc tế, cấu trúc thị trường xuất nhập khẩu, chuỗi giá trị ngành hàng và kinh tế địa phương theo cả chế độ 63 tỉnh và 34 tỉnh thành.
 
-## Nhóm báo cáo
+## Mười một biểu mẫu thống kê Hải quan trong phân hệ CUSTOMS
 
-| Nhóm | Nội dung |
-| --- | --- |
-| Commodity reports | Xuất nhập khẩu theo hàng hóa, mã và mô tả hàng hóa. |
-| Country reports | Xuất nhập khẩu theo quốc gia đối tác. |
-| Country x commodity | Giao cắt giữa đối tác và hàng hóa. |
-| Transport mode | Xuất nhập khẩu theo phương thức vận tải. |
-| Province reports | Xuất nhập khẩu theo tỉnh/thành. |
+| Mã biểu mẫu | Nhóm báo cáo | Nội dung chi tiết |
+| --- | --- | --- |
+| **`1X` và `1N`** | Tổng hợp mặt hàng chủ lực | Khối lượng, trị giá và đơn giá xuất khẩu `1X` và nhập khẩu `1N` theo danh mục mặt hàng chủ lực hàng tháng, quý và năm. |
+| **`2X` và `2N`** | Thị trường quốc gia đối tác | Kim ngạch xuất khẩu `2X` và nhập khẩu `2N` phân tổ theo từng quốc gia và vùng lãnh thổ đối tác. |
+| **`3X` và `3N`** | Ma trận Quốc gia × Mặt hàng | Giao cắt hai chiều giữa thị trường đối tác và mặt hàng xuất khẩu `3X` hoặc nhập khẩu `3N`. |
+| **`Biểu 4`** | Cán cân thương mại và loại hình | Tổng kim ngạch xuất nhập khẩu và cán cân thương mại phân tách giữa khu vực doanh nghiệp FDI và doanh nghiệp trong nước. |
+| **`5X` và `5N`** | Thống kê theo tỉnh thành | Trị giá xuất khẩu `5X` và nhập khẩu `5N` theo địa phương, hỗ trợ đồng thời chế độ **63 tỉnh lịch sử** và **34 tỉnh thành mới**. |
+| **`HTX`** | Hình thức thương mại | Phân tích kim ngạch theo loại hình xuất nhập khẩu kinh doanh, gia công, sản xuất xuất khẩu và chế xuất. |
+| **`PTVT`** | Phương thức vận tải | Kim ngạch và sản lượng thương mại qua đường biển, đường hàng không, đường bộ và đường sắt. |
 
-Các mã báo cáo trong pipeline gồm các nhóm như `1X`, `1N`, `2X`, `2N`, `3X`, `3N`, `HTX`, `5X`, `5N`, `PTVT` và `Biểu 4`. Người dùng cuối không cần nhớ mã, nhưng nên hiểu rằng mỗi mã tương ứng một cấu trúc dữ liệu khác nhau.
+## Phân hệ thị trường hàng hóa COMMODITY_MARKET
 
-## Dimensions cần chọn
+Phân hệ `COMMODITY_MARKET` tổng hợp dữ liệu sản lượng, thương mại và giá cả của **5 nhóm ngành hàng hóa chiến lược**:
+1. **Năng lượng:** Dầu thô, xăng dầu thành phẩm, khí đốt tự nhiên, than đá và điện thương phẩm.
+2. **Kim loại và khoáng sản:** Thép xây dựng, thép cuộn cán nóng, quặng sắt, đồng, nhôm và đất hiếm.
+3. **Nông sản và thực phẩm:** Gạo xuất khẩu, cà phê, hạt điều, hồ tiêu, cao su, sắn và đường.
+4. **Thủy sản và chăn nuôi:** Tôm, cá tra, thủy sản chế biến, thịt heo hơi và thức ăn chăn nuôi.
+5. **Vật liệu và hóa chất công nghiệp:** Phân bón, hạt nhựa nguyên sinh, hóa chất cơ bản, xi măng, clinker, gỗ và sản phẩm gỗ.
 
-| Dimension | Cách dùng |
-| --- | --- |
-| Kỳ báo cáo | Chọn tháng/quý/năm phù hợp với tần suất nghiên cứu. |
-| Trạng thái báo cáo | Phân biệt chính thức, sơ bộ hoặc điều chỉnh nếu có. |
-| Hàng hóa | Dùng khi phân tích ngành hàng hoặc sản phẩm. |
-| Quốc gia | Dùng khi phân tích thị trường đối tác. |
-| Tỉnh/thành | Dùng khi cần phân tích địa phương. |
-| Phương thức vận tải | Dùng khi nghiên cứu logistics và vận tải. |
+Mỗi nhóm ngành hàng hóa được phân tích qua **5 thẻ định lượng chuẩn hóa**:
+- **Tổng quan:** Tóm tắt cân đối cung cầu, thị phần xuất nhập khẩu và xu hướng biến động mới nhất.
+- **Sản xuất:** Sản lượng khai thác, chế biến nội địa và công suất ngành theo kỳ báo cáo.
+- **Xuất khẩu:** Khối lượng, kim ngạch và đơn giá xuất khẩu bình quân theo thị trường đối tác và tỉnh thành.
+- **Nhập khẩu và tiêu thụ:** Khối lượng, trị giá nhập khẩu nguyên liệu đầu vào và ước tính tiêu thụ nội địa.
+- **Giá cả và thị trường:** Diễn biến giá giao dịch nội địa, đơn giá xuất nhập khẩu biên giới và tương quan giá thế giới.
 
-## Flow thao tác
+## Chú thích nguồn dữ liệu gốc thu gọn
 
-1. Mở Customs Explorer.
-2. Chọn loại báo cáo hoặc dimension chính.
-3. Lọc kỳ báo cáo.
-4. Search hàng hóa, quốc gia, tỉnh hoặc phương thức vận tải.
-5. Xem bảng kết quả và biểu đồ.
-6. Preview vài dòng để kiểm tra đúng chiều dữ liệu.
-7. Export CSV/Excel theo phạm vi đã lọc.
+Ở cuối mỗi khung biểu đồ và bảng số liệu hàng hóa, hệ thống tích hợp thành phần **Chú thích nguồn dữ liệu gốc** ở trạng thái thu gọn mặc định. Khi nhấp mở rộng, người dùng xem được đầy đủ thẻ mã nguồn như `CUSTOMS`, `NSO`, `GSO`, `FISCAL`, kỳ báo cáo chính thức hoặc sơ bộ và quy tắc gộp địa giới 34 tỉnh.
 
-## Gợi ý nghiên cứu
+## Quy trình thao tác trên Customs Explorer và EcoData MCP
 
-| Câu hỏi | Cách chọn dữ liệu |
-| --- | --- |
-| Thị trường xuất khẩu chính của một mặt hàng | Chọn commodity và partner country. |
-| Tỉnh nào xuất khẩu nhiều nhất một nhóm hàng | Chọn province report và lọc commodity nếu có. |
-| Cơ cấu vận tải của nhập khẩu | Chọn transport mode và kỳ báo cáo. |
-| Tác động của biến động thương mại đến GRDP tỉnh | Kết hợp Customs province với GSO NGTK-TINH. |
-
-## Lưu ý khi kết hợp với nguồn khác
-
-Dữ liệu Customs thường có tần suất tháng/quý, trong khi GSO và Global Data thường là năm. Nếu mô hình dùng dữ liệu annual, cần aggregate Customs theo năm trước khi merge.
+1. Mở **Customs Explorer** hoặc chọn phân hệ hàng hóa trên giao diện.
+2. Chọn chiều phân tích chính: Mặt hàng, Quốc gia đối tác, Tỉnh thành ở chế độ 63 hoặc 34 tỉnh, Phương thức vận tải hoặc 1 trong 5 thẻ của `COMMODITY_MARKET`.
+3. Lọc kỳ báo cáo tháng, quý hoặc năm và trạng thái báo cáo chính thức hoặc sơ bộ.
+4. Xem bảng kết quả, biểu đồ trực quan và kiểm tra chú thích nguồn dữ liệu gốc.
+5. Xuất tệp CSV hoặc Excel kèm siêu dữ liệu, hoặc truy xuất tự động qua các công cụ MCP `get_customs_trade_data`, `get_customs_commodity_trade`, `get_customs_country_trade` và `get_customs_province_trade`.

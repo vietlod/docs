@@ -1,7 +1,7 @@
 ---
 id: tong-hop-indicators
-title: Tổng hợp nhóm indicators
-description: Bản đồ các nhóm indicators đang triển khai trong Ecodata.
+title: Tổng hợp danh mục chỉ tiêu trên EcoData
+description: Bản đồ các nhóm chỉ tiêu kinh tế quốc tế và 8 phân hệ dữ liệu Việt Nam đang triển khai trên EcoData.
 ---
 
 import Head from '@docusaurus/Head';
@@ -12,73 +12,70 @@ export const catalogSchema = {
   '@id': 'https://ecodata.io.vn/#catalog',
   name: 'EcoData Indicator Catalogue',
   description:
-    'Catalogue of economic and financial datasets in EcoData: international macroeconomic indicators, Vietnam official statistics (GSO), customs trade data, governance and microdata surveys, and a Vietnam stock hub.',
+    'Catalogue of economic and financial datasets in EcoData: international macroeconomic indicators, Vietnam official statistics GSO and NSO across 63 and 34 provinces, customs trade data, commodity market sectors, governance and microdata surveys, and a Vietnam stock hub.',
   url: 'https://docs.tnsai.vn/ecodata/indicators/tong-hop-indicators',
   inLanguage: ['vi', 'en'],
   publisher: { '@type': 'Organization', name: 'EcoData', url: 'https://ecodata.io.vn/' },
-  keywords: ['economic data', 'Vietnam', 'macroeconomics', 'indicators', 'panel data', 'time series'],
+  keywords: ['economic data', 'Vietnam', '34 provinces', 'macroeconomics', 'indicators', 'panel data', 'time series'],
 };
 
 <Head>
   <script type="application/ld+json">{JSON.stringify(catalogSchema)}</script>
 </Head>
 
-# Tổng hợp nhóm indicators
+# Tổng hợp danh mục chỉ tiêu trên EcoData
 
-Indicators trong Ecodata không chỉ là tên biến. Mỗi indicator cần được hiểu cùng nguồn, coverage, tần suất, đơn vị đo, metadata, phương pháp và quyền export.
+Mỗi chỉ tiêu trong EcoData được chuẩn hóa kèm mã ngắn `VARCHAR(18)`, nguồn gốc dữ liệu, độ phủ thời gian, chế độ địa giới hành chính `63 Tỉnh/TP` hoặc `34 Tỉnh/TP`, tần suất, đơn vị đo, phương pháp luận và thông tin trích dẫn học thuật.
 
-## Cấu trúc thông tin của một indicator
+## Cấu trúc thông tin của một chỉ tiêu
 
 | Thành phần | Ý nghĩa |
 | --- | --- |
-| Tên indicator | Tên hiển thị cho người dùng. |
-| Mã/short code | Mã dùng để truy vấn, copy, export hoặc trao đổi với AI Chat. |
-| Source | Nguồn dữ liệu gốc hoặc pipeline nhập liệu. |
-| Category | Nhóm chủ đề như macro, trade, labor, governance, survey, stock. |
-| Coverage | Quốc gia/tỉnh/doanh nghiệp/hàng hóa và khoảng năm có dữ liệu. |
-| Frequency | Annual, quarterly, monthly hoặc theo kỳ báo cáo. |
-| Unit | Đơn vị đo, giá hiện hành/cố định, phần trăm, index, VND, USD. |
-| Completeness | Mức độ đầy đủ dữ liệu trong phạm vi đã chọn. |
-| Methodology | Định nghĩa và phương pháp tính từ nguồn. |
-| Citation | Thông tin trích dẫn khi dùng trong báo cáo/nghiên cứu. |
-| Quality notes | Ghi chú về thiếu dữ liệu, thay đổi phương pháp hoặc nguồn thay thế. |
+| Tên chỉ tiêu | Tên hiển thị chuẩn hóa bằng tiếng Việt và tiếng Anh. |
+| Mã ngắn `short_code` | Mã định danh tối đa 18 ký tự dùng để truy vấn, xuất dữ liệu và tạo biến trong Stata, R, Python. |
+| Nguồn dữ liệu | Tổ chức phát hành gốc hoặc phân hệ thu thập dữ liệu chuyên biệt. |
+| Danh mục chủ đề | Nhóm chủ đề như kinh tế vĩ mô, ngân sách, ngoại thương, thị trường hàng hóa, quản trị công, khảo sát hộ gia đình, chứng khoán. |
+| Độ phủ không gian và thời gian | Quốc gia, 63 hoặc 34 tỉnh thành, doanh nghiệp, mặt hàng và khoảng năm có dữ liệu. |
+| Tần suất | Hàng năm, hàng quý, hàng tháng hoặc theo ngày giao dịch. |
+| Đơn vị đo | Đơn vị chuẩn hóa như USD hiện hành, USD cố định, tỷ đồng, phần trăm hoặc điểm chỉ số. |
+| Quy tắc gộp địa giới | Quy tắc toán học `sum`, `weighted_mean`, `growth_constant_scale`, `index_chain` hoặc `non_aggregable` khi chuyển từ 63 sang 34 tỉnh thành. |
+| Phương pháp luận và trích dẫn | Định nghĩa, công thức tính toán và chuẩn trích dẫn học thuật đi kèm. |
 
-## Nhóm indicator theo chủ đề
+## Các nhóm chỉ tiêu theo chủ đề nghiên cứu
 
-| Chủ đề | Ví dụ indicators | Nguồn thường dùng |
+| Chủ đề | Ví dụ chỉ tiêu tiêu biểu | Nguồn dữ liệu chính |
 | --- | --- | --- |
-| National accounts | GDP, GDP growth, GDP per capita, sector value added | World Bank, IMF, OECD, GSO |
-| Prices and monetary | CPI, inflation, exchange rate, interest rate, money supply | IMF, World Bank, GSO |
-| Trade | Export, import, trade balance, commodity trade, partner country | WTO, UNCTAD, Customs, World Bank |
-| Labor | Employment, unemployment, wages, productivity | ILO, World Bank, GSO |
-| Population and society | Population, urbanization, education, health | World Bank, GSO, VHLSS |
-| Governance and institutions | WGI, PCI, PAPI, PAR, SIPAS | WGI, Macro Survey |
-| Household welfare | Income, expenditure, poverty, demographics | VHLSS aggregate, VHLSS Micro |
-| Stock and financial statements | Price, OHLCV, balance sheet, income statement, cash flow | Stock Hub |
+| Tài khoản quốc gia và tăng trưởng | GDP, GRDP cấp tỉnh, tăng trưởng thực, GRDP bình quân đầu người | World Bank, IMF, OECD, NSO, GSO |
+| Ngân sách và tài khóa | Thu ngân sách trên địa bàn, chi đầu tư phát triển, cân đối ngân sách | Bộ Tài chính `FISCAL`, IMF, World Bank |
+| Giá cả và tiền tệ | CPI, lạm phát, tỷ giá hối đoái, lãi suất, cung tiền | IMF, World Bank, FRED, GSO `KTXH_GSO` |
+| Ngoại thương và hải quan | Kim ngạch xuất nhập khẩu 11 biểu mẫu `1X..PTVT` theo mã HS, đối tác và tỉnh thành | Cục Hải quan `CUSTOMS`, WTO, UNCTAD |
+| Thị trường hàng hóa chiến lược | Sản lượng, xuất nhập khẩu, tiêu thụ và giá của 5 nhóm ngành Năng lượng, Kim loại, Nông sản, Thủy sản và Chăn nuôi, Vật liệu công nghiệp | Phân hệ `COMMODITY_MARKET` |
+| Lao động và dân số | Lực lượng lao động, việc làm, thất nghiệp, tiền lương, đô thị hóa | ILO, NSO, GSO, VHLSS |
+| Quản trị công và đổi mới sáng tạo | PCI, PGI, PAPI, PII, ICT Index, PAR Index, SIPAS | Phân hệ `SURVEY_INDEX`, WGI |
+| Phúc lợi hộ gia đình | Thu nhập, chi tiêu, nghèo đa chiều, giáo dục, y tế cấp hộ | Kho biến vi mô `VHLSS` |
+| Chứng khoán và tài chính doanh nghiệp | Giá OHLCV, báo cáo tài chính 4 chế độ kế toán, chỉ số định giá, sự kiện doanh nghiệp | Trung tâm chứng khoán `Stock Hub` |
 
-## Nhóm indicator theo module
+## Các nhóm chỉ tiêu theo phân hệ chức năng
 
-| Module | Cách chọn indicators |
+| Phân hệ | Cách chọn và khai thác chỉ tiêu |
 | --- | --- |
-| Dashboard | Lọc keyword/category/source/frequency/year/completeness, chọn indicator cards, mở details và export. |
-| GSO Explorer | Chọn dataset, duyệt catalog, chọn tối đa nhóm chỉ tiêu phù hợp, xem pivot province-year. |
-| Customs Explorer | Chọn loại báo cáo, kỳ báo cáo, hàng hóa/quốc gia/tỉnh/phương thức vận tải. |
-| Survey Explorer | Lọc survey, tỉnh, năm, nhóm chỉ số và indicator detail. |
-| VHLSS Variable Hub | Chọn wave, dataset, biến, preview 100 dòng, chọn merge/panel/pooled. |
-| Stock Hub | Chọn symbol, tab giá/BCTC/thuyết minh/sự kiện, xuất dữ liệu theo nhu cầu. |
+| Bảng điều khiển quốc tế | Lọc theo từ khóa, danh mục, nguồn, tần suất, khoảng năm và độ đầy đủ cho hơn 30.000 chỉ tiêu toàn cầu. |
+| Thống kê Việt Nam GSO và NSO | Duyệt 28 bảng PX-Web, Phụ lục `PLV01..PLV14`, bật chuyển đổi tức thời `[63 Tỉnh/TP \| 34 Tỉnh/TP]` xuyên suốt giai đoạn 1995–2026. |
+| Hải quan và Thị trường hàng hóa | Khai thác 11 biểu mẫu hải quan `1X..PTVT` và 5 nhóm ngành hàng hóa qua 5 thẻ phân tích kèm chú thích nguồn gốc ở chân trang. |
+| Khảo sát quản trị cấp tỉnh | Lọc 7 bộ chỉ số quản trị và đổi mới sáng tạo theo tỉnh thành và năm công bố. |
+| Kho biến vi mô VHLSS | Chọn kỳ khảo sát, bảng dữ liệu, biến số, xem trước 100 dòng mẫu và ghép nối dữ liệu bảng. |
+| Trung tâm chứng khoán | Tra cứu mã cổ phiếu, xem báo cáo tài chính, chỉ số tài chính và xuất dữ liệu doanh nghiệp. |
 
-## Quy tắc kết hợp indicators
+## Quy tắc kết hợp các chỉ tiêu từ nhiều nguồn
 
-1. Không trộn đơn vị phân tích khác nhau trong cùng một mô hình nếu chưa aggregate hoặc merge rõ ràng.
-2. Không trộn tần suất monthly, quarterly và annual mà không có bước chuyển đổi.
-3. Không trộn đơn vị tiền tệ hoặc giá hiện hành/giá cố định nếu chưa chuẩn hóa.
-4. Dùng metadata để xác nhận định nghĩa của indicators cùng tên nhưng khác nguồn.
-5. Dùng Preview để phát hiện missing values trước khi chạy mô hình.
+1. Không trộn lẫn hai chế độ địa giới `63 Tỉnh/TP` và `34 Tỉnh/TP` trong cùng một bảng dữ liệu cấp tỉnh Việt Nam.
+2. Không trộn lẫn các tần suất tháng, quý và năm nếu chưa thực hiện bước quy đổi tần suất rõ ràng.
+3. Không trộn đơn vị tiền tệ hoặc giá hiện hành với giá so sánh nếu chưa chuẩn hóa.
+4. Kiểm tra kỹ quy tắc gộp địa giới đối với các biến chỉ số thể chế thuộc nhóm `non_aggregable` trước năm 2025.
+5. Sử dụng bước Xem trước để kiểm tra giá trị khuyết thiếu trước khi đưa vào công cụ Kinh tế lượng.
 
-## Gợi ý flow chọn indicators bằng AI Chat
+## Quy trình chọn chỉ tiêu bằng Trợ lý AI và EcoData MCP
 
-1. Mô tả câu hỏi nghiên cứu, đơn vị phân tích, giai đoạn và mô hình dự kiến.
-2. Yêu cầu AI Chat đề xuất biến phụ thuộc, biến giải thích, biến kiểm soát và nguồn dữ liệu.
-3. Dùng danh sách gợi ý để search trong Dashboard hoặc module tương ứng.
-4. Copy short code của indicators đã chọn quay lại AI Chat để kiểm tra logic mô hình.
-5. Nếu coverage thiếu, yêu cầu AI Chat đề xuất proxy indicators hoặc nguồn thay thế.
+1. Mô tả câu hỏi nghiên cứu, đơn vị phân tích, giai đoạn thời gian và chế độ địa giới `34` hoặc `63` tỉnh thành.
+2. Gọi công cụ `analyze_request` hoặc hỏi Trợ lý AI để nhận ma trận khuyến nghị biến phụ thuộc, biến giải thích và biến kiểm soát kèm ký hiệu LaTeX.
+3. Truy xuất trực tiếp qua `query_macro_data_unified` hoặc chạy trọn gói bằng `run_complete_econometric_study`.

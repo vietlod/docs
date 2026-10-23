@@ -1,119 +1,99 @@
 ---
 id: data-dictionary
-title: Data Dictionary
-description: The metadata model, standardized code scheme (short code ss_dom_key_mod), data fields, frequencies, and units used in EcoData.
+title: Data Dictionary and Academic Short Code System
+description: Metadata model, academic short code system ss_dom_key_mod, 34-province boundary_mode parameter, field definitions, frequencies, and units in EcoData.
 ---
 
 import Head from '@docusaurus/Head';
 
-export const dictSchema = {
+export const dictSchemaEn = {
   '@context': 'https://schema.org',
   '@type': 'DefinedTermSet',
   '@id': 'https://docs.tnsai.vn/en/ecodata/du-lieu/data-dictionary#termset',
-  name: 'EcoData Data Dictionary',
+  name: 'EcoData Data Dictionary and Academic Short Code System',
   description:
-    'Metadata model and field definitions for EcoData indicators: standardized short code, label, unit, frequency, source, temporal and spatial coverage.',
+    'Metadata schema and field definitions for EcoData indicators including ss_dom_key_mod academic short codes, 34-province and 63-province boundary_mode, vn_province_34_series, bilingual labels, measurement units, frequencies, and coverage.',
   url: 'https://docs.tnsai.vn/en/ecodata/du-lieu/data-dictionary',
   inLanguage: ['vi', 'en'],
   publisher: { '@type': 'Organization', name: 'EcoData', url: 'https://ecodata.io.vn/' },
   hasDefinedTerm: [
-    { '@type': 'DefinedTerm', name: 'short_code', description: 'Standardized indicator code in the ss_dom_key_mod scheme (e.g. wb_mac_gdp_usd).' },
-    { '@type': 'DefinedTerm', name: 'code', description: 'Native source code as published by the original provider (e.g. NY.GDP.MKTP.CD).' },
-    { '@type': 'DefinedTerm', name: 'unit', description: 'Unit of measurement (e.g. USD, % of GDP, index, persons).' },
-    { '@type': 'DefinedTerm', name: 'frequency', description: 'Observation frequency: annual, quarterly, monthly or mixed.' },
-    { '@type': 'DefinedTerm', name: 'source', description: 'Originating organization (World Bank, IMF, GSO, Customs, ...).' },
-    { '@type': 'DefinedTerm', name: 'temporal_coverage', description: 'First and last year/period available for the series.' },
-    { '@type': 'DefinedTerm', name: 'spatial_coverage', description: 'Geographic unit of the series (country, province, firm, household).' },
+    { '@type': 'DefinedTerm', name: 'short_code', description: 'Standardized indicator code in the ss_dom_key_mod scheme such as wb_mac_gdp_usd.' },
+    { '@type': 'DefinedTerm', name: 'boundary_mode', description: 'Parameter switching Vietnam provincial data between 63 historical provinces and 34 consolidated provinces under Resolution 202/2025/QH15.' },
+    { '@type': 'DefinedTerm', name: 'vn_province_34_series', description: 'Database table storing harmonized 2000–2026 time series for Vietnam 34 provinces across five mathematical rules.' },
+    { '@type': 'DefinedTerm', name: 'PLV01..PLV14', description: 'Fourteen official 2024 Statistical Yearbook Appendices published by the National Statistics Office for 34 provinces.' },
+    { '@type': 'DefinedTerm', name: 'THUCHINS', description: 'Ministry of Finance state budget revenue and expenditure dataset code in the FISCAL subsystem covering 1995–2026.' },
   ],
 };
 
 <Head>
-  <script type="application/ld+json">{JSON.stringify(dictSchema)}</script>
+  <script type="application/ld+json">{JSON.stringify(dictSchemaEn)}</script>
 </Head>
 
-# Data Dictionary
+# Data Dictionary and Academic Short Code System
 
-This page defines the **metadata model** of EcoData: every indicator is described by a standard set of fields so users can look it up, cite it, and reproduce their research. The dictionary applies to both international and Vietnam data.
+This reference defines the **metadata schema** of EcoData: every economic and financial indicator is documented through standardized fields so researchers can discover, cite, and reproduce empirical studies with full transparency.
 
-## Metadata model of an indicator
+## Metadata Schema of an Indicator
 
-Every indicator in EcoData carries the following fields:
+Every indicator in EcoData carries the following standardized fields:
 
-| Field | Meaning | Example |
+| Field Name | Academic and Technical Definition | Representative Example |
 | --- | --- | --- |
-| `short_code` | EcoData standardized code (see below) | `wb_mac_gdp_usd` |
-| `code` | Native code published by the source | `NY.GDP.MKTP.CD` |
-| `label_vi` / `label_en` | Bilingual labels | "GDP (USD hiện hành)" / "GDP (current US$)" |
-| `unit` | Unit of measurement | `USD`, `% of GDP`, `index`, `persons` |
-| `frequency` | Observation frequency | `annual`, `quarterly`, `monthly`, `mixed` |
-| `source` | Originating organization | World Bank, IMF, GSO, Customs |
-| `time_start` / `time_end` | First and last year/period | 1990 / 2023 |
-| `spatial_coverage` | Unit of analysis | country, province, firm, household |
-| `data_quality_notes` | Quality / provenance notes | unit, source group, methodological caveats |
+| `short_code` | EcoData four-segment standardized academic identifier | `wb_mac_gdp_usd` |
+| `code` | Native indicator code published by the originating institution | `NY.GDP.MKTP.CD`, `PLV01`, `THUCHINS` |
+| `label_vi` and `label_en` | Curated bilingual Vietnamese and English indicator titles | Gross Domestic Product in current USD |
+| `unit` | Original unit of measurement | `USD`, `% of GDP`, `billion VND`, `thousand persons`, `tons` |
+| `frequency` | Observation frequency of the series | `annual`, `quarterly`, `monthly`, `mixed` |
+| `source` | Originating agency or domestic subsystem | World Bank, IMF, `NSO`, `FISCAL`, `KTXH_GSO`, `CUSTOMS`, `SURVEY_INDEX`, `COMMODITY_MARKET` |
+| `boundary_mode` | Vietnam provincial administrative boundary regime | `"63"` for 63 historical provinces; `"34"` for 34 provinces under Resolution 202/2025/QH15 |
+| `aggregation_rule` | Mathematical rule aggregating 63 provinces into 34 provinces | `sum`, `weighted_mean`, `growth_constant_scale`, `index_chain`, `non_aggregable` |
+| `time_start` and `time_end` | First and last available observation period | `1995` / `2026` |
+| `spatial_coverage` | Geographic or institutional unit of analysis | Country, 63 provinces, 34 provinces, listed firm, household |
+| `source_footnotes` | Collapsible primary data source footnote with source badges | Source tables `PLV01..PLV14`, `THUCHINS`, update cadence, and boundary notes |
 
-:::tip Dual lookup
-Users can search by **`short_code`** (compact, stable) or by the source's native **`code`**. The interface shows `short_code` first; the native code is always kept in the metadata for cross-checking.
+:::tip Dual Lookup by Short Code and Native Code
+Researchers can search by **`short_code`** for compact, stable modeling or by the agency's native **`code`**. The interface prioritizes `short_code` while preserving the native code in metadata for source verification.
 :::
 
-## Standardized code scheme: `ss_dom_key_mod`
+## Academic Short Code System `ss_dom_key_mod`
 
-EcoData maps long, inconsistent native codes across sources into a single **structured short code** made of four segments separated by underscores:
+EcoData maps lengthy, heterogeneous agency codes into a **structured four-segment academic short code** up to 18 characters separated by underscores:
 
-```
+```text
 ss _ dom _ key _ mod
-│    │     │     └── modifier: unit / variant (usd, pct, idx, sa, ...)
-│    │     └──────── key: indicator name (gdp, cpi, exp, pop, ...)
-│    └────────────── domain: field (mac, ext, fis, lab, dem, ...)
-└─────────────────── source: provider (wb, im, ad, un, fr, ...)
+│    │     │     └── mod: measurement unit or transformation such as usd, pct, idx, cap
+│    │     └──────── key: core economic concept such as gdp, cpi, exp, pop
+│    └────────────── dom: substantive domain such as mac, ext, fis, lab, dem
+└─────────────────── ss: originating agency such as wb, im, ad, un, fr, gs
 ```
 
-| Segment | Role | Example values |
+| Segment | Identification Role | Representative Values |
 | --- | --- | --- |
-| `ss` (source) | Data source | `wb` (World Bank), `im` (IMF), `ad` (ADB), `un` (UN), `fr` (FRED) |
-| `dom` (domain) | Field | `mac` (macro), `ext` (external), `fis` (fiscal), `lab` (labor), `dem` (demographic) |
-| `key` | Indicator name | `gdp`, `cpi`, `exp`, `imp`, `pop`, `une` |
-| `mod` | Unit / variant | `usd`, `pct`, `idx`, `cap` (per capita) |
+| `ss` | Data Source | `wb` World Bank, `im` IMF, `ad` ADB, `un` United Nations, `fr` FRED, `gs` GSO/NSO |
+| `dom` | Economic Domain | `mac` macroeconomics, `ext` external sector, `fis` fiscal budget, `lab` labor market, `dem` demographics |
+| `key` | Core Indicator Concept | `gdp`, `grdp`, `cpi`, `exp`, `imp`, `pop`, `une`, `fdi` |
+| `mod` | Unit or Variant | `usd`, `vnd`, `pct`, `idx`, `cap` per capita |
 
-**Example mappings:**
+### Academic Short Code Mapping Examples
 
-| Native code | `short_code` | Interpretation |
+| Native Agency Code | EcoData `short_code` | Full Semantic Meaning |
 | --- | --- | --- |
-| `NY.GDP.MKTP.CD` | `wb_mac_gdp_usd` | World Bank · macro · GDP · current USD |
-| `FP.CPI.TOTL.ZG` | `wb_mac_cpi_pct` | World Bank · macro · CPI · %/year |
-| `SL.UEM.TOTL.ZS` | `wb_lab_une_pct` | World Bank · labor · unemployment · % |
+| `NY.GDP.MKTP.CD` | `wb_mac_gdp_usd` | World Bank · Macroeconomics · GDP · Current USD |
+| `FP.CPI.TOTL.ZG` | `wb_mac_cpi_pct` | World Bank · Macroeconomics · CPI Inflation · Annual Percentage |
+| `SL.UEM.TOTL.ZS` | `wb_lab_une_pct` | World Bank · Labor · Unemployment Rate · Percentage of Labor Force |
 
-:::note Canonical source of the code scheme
-The code scheme is generated and validated by the integrated Codebook tool (the `Codebook` admin page) and internal validation scripts. Auto-generated suffixes are limited to `[a-z0-9]{2,8}` characters. The entire catalogue (~18,000+ indicators) has `short_code` values.
-:::
+## 34-Province Boundary Harmonization and Finco Subsystem Terms
 
-## Frequency and units
-
-- **Frequency (`frequency`)**: `annual`, `quarterly` (Q1–Q4), `monthly` (M01–M12), or `mixed` when an indicator has multiple frequencies depending on the source.
-- **Period key (`period_key`)**: for sub-annual data, each observation carries a standard period key — `Q1`…`Q4` for quarters, `M01`…`M12` for months. Annual data leaves the period key empty.
-- **Unit (`unit`)**: keeps the source's original semantics (USD, % of GDP, index, persons, tonnes, etc.). When building a multi-source panel, read `unit` to avoid aggregating mismatched units.
-
-## Definitions by data group
-
-Each group has its own characteristic variables; see the detail page for the full list and scope:
-
-| Group | Unit of analysis | Representative variables | Details |
-| --- | --- | --- | --- |
-| Global Data | Country × year | GDP, CPI, exports/imports, FDI, population | [Global Data](/ecodata/indicators/global-data) |
-| Vietnam GSO | National/Province × year | GRDP, population, industry, CPI, investment | [Vietnam GSO](/ecodata/indicators/gso-vietnam) |
-| Customs | Commodity × partner × period | export/import value, quantity, balance | [Customs](/ecodata/indicators/customs) |
-| Macro Survey | Province × year | PCI, PAPI, PAR, SIPAS, ICT | [Macro Survey & VHLSS](/ecodata/indicators/macro-survey-vhlss) |
-| VHLSS Micro | Household/Individual × wave | income, expenditure, education, health | [Macro Survey & VHLSS](/ecodata/indicators/macro-survey-vhlss) |
-| Stock Hub | Symbol × time | OHLCV prices, revenue, net income, EPS, events | [Stock Hub](/ecodata/indicators/stock-hub) |
-
-## Using metadata for reproducibility
-
-1. Keep the **`short_code` + native `code`** with your data so others can cross-check sources.
-2. Record the **`unit`, `frequency`, `time_start/time_end`** in your study's data description.
-3. When combining sources, check the **unit** and **unit of analysis** before building a panel.
-4. Export with metadata (CSV/Excel/JSON) — see [Data Export](/ecodata/xuat-du-lieu/preview-export).
+| Technical Term | Standard Definition in EcoData |
+| --- | --- |
+| `boundary_mode` | Parameter toggling between `"63"` historical provinces and `"34"` consolidated provinces and cities under Resolution 202/2025/QH15 across the web UI and all 37 MCP tools. |
+| `vn_province_34_series` | Database table storing harmonized 2000–2026 provincial time series for all 34 consolidated provinces reconstructed under five mathematical rules without mutating 63-province tables. |
+| `vn_admin_units_34` | Official crosswalk table mapping 63 historical provinces to 34 consolidated provinces, including administrative centers and constituent province lists. |
+| `PLV01..PLV14` | Fourteen official 2024 Statistical Yearbook Appendices published by the National Statistics Office under the 34-province structure, used as the 99.5% or higher reconciliation benchmark. |
+| `THUCHINS` | Ministry of Finance state budget revenue and expenditure dataset code covering 1995 to 2026 in the `FISCAL` subsystem. |
 
 ## See Also
 
-- [Data Methodology](/ecodata/du-lieu/methodology) — how EcoData collects, cleans, and standardizes data.
-- [Indicator Groups](/ecodata/indicators/tong-hop-indicators)
-- [Frequently Asked Questions (FAQ)](/ecodata/faq)
+- [Data Methodology and 34-Province Boundary Harmonization](/ecodata/du-lieu/methodology)
+- [Data Source Groups and Seven Specialized Subsystems](/ecodata/nguon-du-lieu/phan-nhom-nguon-du-lieu)
+- [Frequently Asked Questions About EcoData](/ecodata/faq)

@@ -1,49 +1,67 @@
 ---
 id: ai-chat
-title: Use AI Chat to Select Indicators
-description: Use AI Chat as an assistant for choosing sources, indicators, and research logic.
+title: Using AI Chat, the 37-Tool EcoData MCP Server, and AI Agent Skills
+description: How to use AI Chat, connect the 37-tool EcoData MCP Server, and install the five specialized skill files for Gemini Task, AntiGravity, Claude Code, OpenAI Codex, and Cursor IDE.
 ---
 
-# Use AI Chat to Select Indicators
+import Head from '@docusaurus/Head';
 
-AI Chat helps users turn research questions into candidate data sources and indicators. It is most useful before export.
+export const aiMcpSchemaEn = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: 'Using AI Chat, the 37-Tool EcoData MCP Server, and Specialized Skills for Gemini Task and AI Agents',
+  description: 'Step-by-step guide to using AI Chat and installing specialized EcoData MCP Server skills for Gemini Task, Gemini Gems, AntiGravity, Claude Code, OpenAI Codex, and Cursor IDE.',
+  url: 'https://docs.tnsai.vn/en/ecodata/cong-cu/ai-chat',
+  inLanguage: 'en',
+};
 
-## When to Use AI Chat
+<Head>
+  <script type="application/ld+json">{JSON.stringify(aiMcpSchemaEn)}</script>
+</Head>
 
-| Situation | How to ask |
-| --- | --- |
-| Unsure which source to use | Describe the research question, unit of analysis, geography, and period. |
-| Need dependent and explanatory variables | State the intended model and ask for indicator suggestions. |
-| Coverage is incomplete | Provide the indicator name or short code and ask for proxies. |
-| Need logic checks | Ask AI to identify frequency, unit, endogeneity, or missing-data risks. |
-| Need reporting help | Ask for a data summary, chart idea, or export workflow. |
+# Using AI Chat, the 37-Tool EcoData MCP Server, and AI Agent Skills
 
-## Prompt Examples
+EcoData provides two complementary pathways for AI-assisted economic research: using the built-in **AI Chat** workspace directly in your browser, or connecting the production **EcoData MCP Server** at `https://ecodata.io.vn/mcp` with **37 specialized tools** to external AI assistants and coding IDEs including Gemini Spark, Gemini Gems, AntiGravity, Claude Code, OpenAI Codex, and Cursor IDE.
+
+## When to Use AI Chat and EcoData MCP
+
+| Research Scenario | How to Prompt Your AI Assistant | Automatically Invoked MCP Tools |
+| --- | --- | --- |
+| Unsure which data sources or variables to select | Describe your research question, national or provincial unit of analysis, and target period. | `analyze_request`, `search_macro_indicators` |
+| Need Vietnam provincial data under 34-province or 63-province boundaries | Request GRDP, `FISCAL` state budget revenue, or public investment with `boundary_mode="34"` or `"63"`. | `get_gso_data`, `get_yearbook_data`, `query_macro_data_unified` |
+| Need merchandise trade and five-sector commodity intelligence | Specify the commodity, HS code, partner market, or trading province. | `get_customs_commodity_trade`, `get_customs_country_trade`, `get_customs_province_trade` |
+| Need 30-year financial statements across VN30, HNX30, or sector baskets | Request constituent tickers for the basket and batch-extract balance sheets, income statements, or ratios. | `list_stock_groups`, `get_batch_financial_data`, `get_financial_ratios` |
+| Need an end-to-end econometric study | State the dependent and explanatory variables and request a one-click study with Stata, R, and Python code. | `run_complete_econometric_study`, `generate_econometric_code` |
+
+## Five One-Click Downloadable Skill Files for Gemini Task and AI Agents
+
+To equip your AI assistant with complete mastery of all 37 MCP tools, automatic `boundary_mode="34"` / `"63"` selection across the 1995–2026 administrative boundary milestones, and all seven Finco subsystems, download and install the skill file matching your platform:
+
+| AI Agent Platform | One-Click Downloadable Skill File | Installation Path or Upload Target | Core Workflow Advantage |
+| --- | --- | --- | --- |
+| **Gemini Task & Gemini Gems** | [`gemini-ecodata-mcp-skill.md`](https://ecodata.io.vn/downloads/gemini-ecodata-mcp-skill.md) | Upload to **Knowledge** when creating a Gemini Gem or attach directly to a **Gemini Task** after linking the app at `gemini.google.com/spark/apps`. | Guides Gemini to prioritize `query_macro_data_unified` and `run_complete_econometric_study`, master all seven Finco subsystems, and apply 34-province rules. |
+| **AntiGravity CLI & IDE** | [`antigravity-ecodata-skill.md`](https://ecodata.io.vn/downloads/antigravity-ecodata-skill.md) | Save to `.agents/skills/ecodata-mcp/SKILL.md` and `.agent/skills/ecodata-mcp/SKILL.md` inside your repository. | Activates Progressive Disclosure in Google AntiGravity, automating Jev Co-Processor verification and replication package export. |
+| **Claude Code & Claude Desktop** | [`claude-code-ecodata-skill.md`](https://ecodata.io.vn/downloads/claude-code-ecodata-skill.md) | Save to `.claude/skills/ecodata-mcp/SKILL.md` for Claude Code CLI or upload to **Project Knowledge** in Claude Desktop. | Standardizes empirical study planning, four-regime Vietnamese corporate financial statement routing, and Gauss-Markov diagnostic checks. |
+| **OpenAI Codex CLI** | [`codex-ecodata-skill.md`](https://ecodata.io.vn/downloads/codex-ecodata-skill.md) | Save to `.agents/skills/ecodata-mcp/SKILL.md` or append to your repository root `AGENTS.md` file. | Provides exact parameter schemas for all 37 MCP tools and 105 econometric estimators for autonomous Codex execution. |
+| **Cursor & Windsurf IDE** | [`cursor-ecodata-rules.mdc`](https://ecodata.io.vn/downloads/cursor-ecodata-rules.mdc) | Save to `.cursor/rules/ecodata-mcp.mdc` alongside your `.cursor/mcp.json` server configuration. | Automatically injects Vietnam data context, `ss_dom_key_mod` short codes, and 37 MCP tools into Cursor and Windsurf coding sessions. |
+
+## Actionable Prompt Examples for AI Chat and Gemini Spark
 
 ```text
-I want to study the effect of FDI on provincial economic growth in Vietnam from 2010 to 2023.
-Suggest the dependent variable, explanatory variables, controls, Ecodata sources, and coverage checks before export.
+@EcoData Analyze the impact of public investment and state budget revenue from the FISCAL subsystem on GRDP growth across Vietnam's 34 provinces from 2020 to 2025 using boundary_mode="34". Execute the one-click study via run_complete_econometric_study and generate Stata 18 MP replication code.
 ```
 
 ```text
-I selected these indicators: GDP growth, FDI inflow, labor force, CPI.
-Check whether they are suitable for a province-level panel model and suggest additional controls.
+@EcoData Retrieve coffee and rice export series from the COMMODITY_MARKET and CUSTOMS subsystems from 2018 to 2025 segmented by top partner countries, and evaluate export unit price trends.
 ```
 
-## AI Chat -> Dashboard -> Export
+```text
+@EcoData Fetch the VN30 constituent tickers via list_stock_groups, batch-extract ROE, ROA, and net profit margin from 2015 to 2025 using get_batch_financial_data, and estimate a Fixed Effects panel model.
+```
 
-1. Ask AI Chat for candidate sources and indicators.
-2. Go to Dashboard or the relevant module to search for indicators.
-3. Open indicator details and review metadata.
-4. Copy selected short codes.
-5. Return to AI Chat to validate model logic and coverage.
-6. Preview data.
-7. Export data with metadata.
+## Integrated Workflow Across AI Chat, Dashboard, and Econometrics
 
-## Combining With Econometrics
-
-After selecting indicators, open Econometrics to run a preliminary model. AI Chat can help interpret results, suggest missing variables, or flag assumptions to verify.
-
-## Notes
-
-AI Chat supports selection and interpretation, but it does not replace metadata review or source-data validation. Research conclusions should rely on previewed/exported data and a properly tested method.
+1. Submit your research question to **AI Chat** or an AI assistant equipped with an **EcoData MCP Skill** to identify candidate indicators and choose between 34-province and 63-province boundary modes.
+2. Inspect metadata definitions, sample coverage, and expand the **Primary Data Source Footnotes** panel in the UI to verify official source tables such as `PLV01..PLV14` or `THUCHINS`.
+3. Execute preliminary estimations and diagnostic batteries through the **Econometrics** engine or `run_complete_econometric_study`.
+4. Review outputs audited by the three-tier **Jev Co-Processor** and download the complete Stata, R, and Python replication bundle alongside cleaned data.

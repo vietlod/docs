@@ -1,79 +1,99 @@
 ---
 id: gso-vietnam
-title: GSO and Vietnam Indicators
-description: How to use KTXH, NGTK-CN, NGTK-TINH, and VHLSS aggregate data.
+title: GSO, NSO, and Vietnam 34-Province Statistics
+description: How to use official Vietnam statistics in EcoData including NSO PX-Web tables, 34-province Appendices PLV01..PLV14, KTXH_GSO reports, FISCAL state budget series, and 1995–2026 administrative boundary harmonization.
 ---
 
 import Head from '@docusaurus/Head';
 
-export const datasetSchema = {
+export const datasetSchemaEn = {
   '@context': 'https://schema.org',
   '@type': 'Dataset',
-  name: 'EcoData — Vietnam official statistics (GSO)',
+  name: 'EcoData — Vietnam Official Statistics GSO, NSO, FISCAL, and 34-Province Harmonized Series 1995–2026',
   description:
-    'Vietnam official statistics from the General Statistics Office: socio-economic indicators (KTXH), the industry statistical yearbook (NGTK-CN), the provincial statistical yearbook (NGTK-TINH) and VHLSS aggregates, organized by year, province and indicator group.',
+    'Official Vietnam statistical datasets from the National Statistics Office and Ministry of Finance including 28 NSO PX-Web tables, 34-province Appendices PLV01..PLV14, KTXH_GSO periodic socio-economic reports, NGTK-CN and NGTK-TINH yearbooks, THUCHINS state budget series, and the harmonized vn_province_34_series panel across the 1995–2003, 2003–2008, and 2025 boundary milestones.',
   url: 'https://docs.tnsai.vn/en/ecodata/indicators/gso-vietnam',
   inLanguage: ['vi', 'en'],
   isAccessibleForFree: true,
   conditionsOfAccess: 'Free browsing and preview; full export requires a subscription.',
-  keywords: ['Vietnam', 'GSO', 'statistical yearbook', 'GRDP', 'provincial statistics', 'socio-economic'],
-  creator: [{ '@type': 'GovernmentOrganization', name: 'General Statistics Office of Vietnam' }],
+  keywords: [
+    'Vietnam GSO',
+    'NSO PX-Web',
+    'Vietnam 34 provinces Resolution 202/2025/QH15',
+    'PLV01 PLV14',
+    'THUCHINS state budget Vietnam',
+    'Vietnam provincial GRDP panel',
+  ],
+  creator: [
+    { '@type': 'GovernmentOrganization', name: 'National Statistics Office of Vietnam' },
+    { '@type': 'GovernmentOrganization', name: 'Ministry of Finance of Vietnam' },
+  ],
   publisher: { '@type': 'Organization', name: 'EcoData', url: 'https://ecodata.io.vn/' },
   includedInDataCatalog: { '@type': 'DataCatalog', '@id': 'https://ecodata.io.vn/#catalog' },
-  spatialCoverage: { '@type': 'Place', name: 'Vietnam (national and 63 provinces)' },
-  temporalCoverage: '2000/..',
-  variableMeasured: ['GRDP', 'Population', 'Labor and employment', 'Industrial output', 'Agriculture', 'Services', 'CPI', 'Investment', 'Retail sales'],
+  spatialCoverage: { '@type': 'Place', name: 'Vietnam across 63 historical provinces and 34 consolidated provinces' },
+  temporalCoverage: '1995/2026',
+  variableMeasured: [
+    'GRDP current and constant prices',
+    'Population and labor force',
+    'State budget revenue and expenditure THUCHINS',
+    'Industrial production index IIP',
+    'Consumer price index CPI',
+    'Realized investment and public disbursement',
+    'Retail sales of goods and services',
+  ],
   distribution: [
     { '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: 'https://ecodata.io.vn/data/gso' },
   ],
 };
 
 <Head>
-  <script type="application/ld+json">{JSON.stringify(datasetSchema)}</script>
+  <script type="application/ld+json">{JSON.stringify(datasetSchemaEn)}</script>
 </Head>
 
-# GSO and Vietnam Indicators
+# GSO, NSO, and Vietnam 34-Province Statistics
 
-GSO Explorer focuses on official Vietnam statistics. This module is suitable when users need indicators by province, year, sector group, or official statistical report.
+GSO Explorer is EcoData's central module for official national and provincial statistics of Vietnam. It integrates primary feeds from the National Statistics Office and the Ministry of Finance while supporting instant switching between **63 historical provinces** and **34 consolidated provinces and cities** under Resolution 202/2025/QH15.
 
-## Main Datasets
+## Integrated Datasets and Subsystems in GSO Explorer
 
-| Dataset | Purpose |
-| --- | --- |
-| KTXH | Socio-economic indicators by reporting period. |
-| NGTK-CN | National statistical yearbook data for national time series. |
-| NGTK-TINH | Provincial statistical yearbook data for province-year panels. |
-| VHLSS aggregate | Aggregated indicators from official VHLSS reports, not microdata. |
+| Dataset Code | Dataset Name | Research Scope and Purpose |
+| --- | --- | --- |
+| **`NSO`** | PX-Web Tables and 34-Province Appendices `PLV01..PLV14` | 28 provincial statistical tables from the official PX-Web portal and the 14 Statistical Yearbook 2024 Appendices compiled under the 34-province structure. |
+| **`FISCAL`** | State Budget Revenue and Expenditure `THUCHINS` | Ministry of Finance budget outturn and estimate series from 1995 to 2026 across both 63-province and 34-province modes. |
+| **`KTXH_GSO`** | Periodic Socio-Economic Statistical Reports | Monthly, quarterly, and annual indicators from 2000 to 2026 tracking GRDP, IIP, CPI, investment, and consumption. |
+| **`NGTK-CN`** | National Statistical Yearbook | Long-horizon national macroeconomic time series for Vietnam. |
+| **`NGTK-TINH`** | Provincial Statistical Yearbook | Traditional 63-province panels alongside the harmonized 34-province panel in `VN_34_REBUILD`. |
+| **`VHLSS Aggregate`** | Living Standards Survey Aggregates | Provincial income, expenditure, inequality, and poverty aggregates from official VHLSS publications. |
 
-## GSO Indicator Groups
+## Harmonization Across Three Historical Boundary Milestones From 1995 to 2026
 
-| Group | Examples |
-| --- | --- |
-| Population and labor | Population, population density, labor force, employment, unemployment. |
-| National accounts | GRDP/GDP, sector structure, current prices, constant prices. |
-| Industry | IIP, output, firms, manufacturing sectors. |
-| Agriculture | Area, production, livestock, fisheries. |
-| Trade and services | Retail, tourism, transport, local import-export. |
-| Prices | CPI and price index groups. |
-| Social indicators | Education, health, living standards, poverty, income. |
+When querying long provincial time series spanning 1995 to 2026, GSO Explorer and the MCP tool `get_gso_data` automatically handle three administrative boundary reforms:
 
-## GSO Explorer Workflow
+1. **1995–2003 Milestone Under Resolution 22/2003/QH11:** Effective January 1, 2004, Lai Chau split into Lai Chau and Dien Bien; Dak Lak split into Dak Lak and Dak Nong; and Can Tho split into Can Tho City and Hau Giang. In **63-province mode**, EcoData backcasts 1995–2003 series using empirical 2004–2006 share weights. In **34-province mode**, Can Tho, Hau Giang, and Soc Trang belong to the same consolidated Can Tho City cluster, allowing exact summation of pre-2004 values without allocation error; Dien Bien and Lai Chau remain independent units in the 34-province catalog and retain empirical 2004–2006 share weights.
+2. **2003–2008 Milestone Under Resolution 15/2008/QH12:** Effective August 1, 2008, Ha Tay Province, Me Linh District from Vinh Phuc, and four communes of Luong Son District from Hoa Binh merged into Hanoi Capital City. EcoData automatically detects official series already backcasted for expanded Hanoi prior to 2008 to prevent double-counting with Ha Tay.
+3. **2025 Milestone Under Resolution 202/2025/QH15:** Consolidates 63 provinces into **34 provinces and cities** comprising 11 unchanged units and 23 consolidated units formed from 2 to 3 former provinces. EcoData preserves original 63-province tables and reconstructs `vn_province_34_series` using five mathematical rules:
+   - `sum` for extensive scale variables such as area, population, labor force, nominal GRDP, constant-price GRDP, budget revenue and expenditure, and investment capital.
+   - `weighted_mean` for intensive ratios and per-capita metrics such as GRDP per capita, population density, monthly income, and poverty rate.
+   - `growth_constant_scale` recomputing growth rates from summed constant-price output of the consolidated cluster in period $t$ and period $t-1$.
+   - `index_chain` chaining CPI and IIP series using retail sales or industrial value added weights.
+   - `non_aggregable` preserving original institutional survey observations prior to July 2025.
 
-1. Open GSO Explorer.
-2. Select KTXH, NGTK-CN, NGTK-TINH, or VHLSS.
-3. Use Browse Catalog to find an indicator group.
-4. Select indicators.
-5. Select provinces and years.
-6. View province-year pivot tables and heatmap, line, bar, or area charts.
-7. Export Excel or CSV with metadata when needed.
+## Core Indicator Groups in GSO Explorer
 
-## When to Use GSO Instead of Global Data
+| Indicator Group | Representative Variables | 34-Province Aggregation Rule |
+| --- | --- | --- |
+| **National Accounts** | Nominal GRDP, constant-2010 GRDP, three-sector economic structure | `sum` for GRDP levels; `growth_constant_scale` for growth rates |
+| **State Budget `FISCAL`** | Total state budget revenue, domestic revenue, trade tax revenue, total local budget expenditure, capital expenditure | `sum` |
+| **Population and Labor** | Land area, average population, population density, labor force aged 15 and above, unemployment rate | `sum` for area, population, labor; `weighted_mean` for density and rates |
+| **Industry and Investment** | Industrial Production Index IIP, total realized social investment, registered and implemented FDI | `sum` for investment capital; `index_chain` for IIP |
+| **Trade, Services, and Prices** | Retail sales of goods and consumer service revenue, freight traffic volume, Consumer Price Index CPI | `sum` for retail and freight; `index_chain` for CPI |
+| **Social, Education, and Health** | Monthly per-capita income, multidimensional poverty rate, hospital beds, schools, and teachers | `weighted_mean` for income and poverty rate; `sum` for facilities and beds |
 
-Use GSO when the research focuses on Vietnam, requires official province-level statistics, or needs to match domestic yearbooks and reports. Use Global Data when comparing Vietnam with other countries.
+## Workflow in GSO Explorer and EcoData MCP
 
-## Data Quality Notes
-
-1. Provincial indicator names may change by year or source report.
-2. Administrative boundary changes can affect long time series.
-3. Always check units and current or constant price basis before combining indicators.
-4. For PDF or Excel extraction sources, preview several sample years before export.
+1. Open **GSO Explorer** from the main navigation bar.
+2. Select your boundary regime using the **[63 Provinces | 34 Provinces]** toggle in the top header.
+3. Choose the target dataset: `NSO`, `FISCAL`, `KTXH_GSO`, `NGTK-CN`, `NGTK-TINH`, or `VHLSS`.
+4. Select indicators, provinces, and the target year range from 1995 to 2026.
+5. Inspect the Province × Year pivot table, interactive charts, and expand the **Primary Data Source Footnotes** panel at the bottom to verify source badges such as `PLV01..PLV14` or `THUCHINS`.
+6. Export an Excel or CSV workbook with a dedicated metadata sheet, or query directly via MCP tools `get_gso_data` and `get_yearbook_data` using `boundary_mode="34"` or `"63"`.

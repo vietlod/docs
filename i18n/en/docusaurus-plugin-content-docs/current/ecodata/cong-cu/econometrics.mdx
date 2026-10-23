@@ -1,67 +1,47 @@
 ---
 id: econometrics
-title: Run Preliminary Econometrics Models
-description: Use Econometrics to test relationships among indicators before export.
+title: Econometrics Engine Across 12 Model Families and 105 Estimators
+description: How to use EcoData's Econometrics Engine featuring 12 model families, 40 sub-models, and 105 estimators executing across Python, R, and Stata 18 MP.
 ---
 
-# Run Preliminary Econometrics Models
+# Econometrics Engine Across 12 Model Families and 105 Estimators
 
-Econometrics helps users run preliminary models directly in Ecodata. The goal is quick screening before exporting data for deeper analysis.
+EcoData's integrated Econometrics Engine enables sample preparation, parameter estimation, diagnostic testing, and replication script generation directly in your browser or through the EcoData MCP Server.
 
-## 12 Model Families, 40 Sub-models, and 105 Estimators Supported
+## Architecture of 12 Model Families, 40 Sub-Models, and 105 Estimators
 
-EcoData integrates a comprehensive Econometrics Engine allowing preliminary screening and estimation with:
+EcoData provides a comprehensive econometric suite designed for academic publishing and policy evaluation:
 
-### 12 Major Model Families
+### Twelve Core Model Families
 
-1. **Classical Linear Regression**: OLS, WLS, GLS, TLS (Total Least Squares).
-2. **Regularized Regression**: Ridge, Lasso, Elastic Net, Adaptive Lasso.
-3. **Linear Panel Data**: Pooled OLS, Fixed Effects (Entity/Time FE), Random Effects, Between Effects.
-4. **Dynamic Panel Data**: Arellano-Bond (Difference GMM), Blundell-Bond (System GMM).
-5. **Limited Dependent Variable**: Binary Logit, Binary Probit, Tobit (Censored), Truncated Regression, Heckman Selection (Heckit).
-6. **Count Data**: Poisson Regression, Negative Binomial, Zero-Inflated Poisson (ZIP), Zero-Inflated Negative Binomial (ZINB).
-7. **Quantile Regression**: Linear Quantile Regression, Panel Quantile Regression (FE-QR).
-8. **Univariate Time Series**: AR, MA, ARMA, ARIMA, SARIMA, ARCH, GARCH, EGARCH.
-9. **Multivariate Time Series**: Vector Autoregression (VAR), Vector Error Correction Model (VECM), Structural VAR (SVAR).
-10. **IV & Simultaneous Equations**: IV/2SLS, 3SLS, Seemingly Unrelated Regressions (SUR).
-11. **Non-linear & Semi-parametric**: Non-linear Least Squares (NLS), Generalized Additive Models (GAM).
-12. **Causal Inference & Impact Evaluation**: Difference-in-Differences (DiD), Propensity Score Matching (PSM), Regression Discontinuity Design (RDD).
+1. **Classical Linear Regression:** OLS, WLS, GLS, and Total Least Squares TLS.
+2. **Regularized Regression:** Ridge, Lasso, Elastic Net, and Adaptive Lasso.
+3. **Linear Panel Data:** Pooled OLS, Entity and Two-Way Fixed Effects, Random Effects, and Between Effects.
+4. **Dynamic Panel Data:** Arellano-Bond Difference GMM and Blundell-Bond System GMM.
+5. **Discrete Choice and Limited Dependent Variables:** Binary Logit, Binary Probit, Multinomial Logit, Ordered Probit, Censored Tobit, Truncated Regression, and Heckman two-step selection.
+6. **Count Data Models:** Poisson Regression, Negative Binomial, Zero-Inflated Poisson ZIP, and Zero-Inflated Negative Binomial ZINB.
+7. **Quantile Regression:** Linear Quantile Regression and Fixed-Effects Panel Quantile Regression.
+8. **Univariate Time Series and Conditional Volatility:** AR, MA, ARMA, ARIMA, SARIMAX, ARDL, ARCH, GARCH, and EGARCH.
+9. **Multivariate Time Series:** Vector Autoregression VAR, Vector Error Correction VECM, Structural VAR, Granger causality tests, and Impulse Response Functions IRF.
+10. **Instrumental Variables and Simultaneous Equations:** Two-Stage Least Squares 2SLS, Three-Stage Least Squares 3SLS, and Seemingly Unrelated Regressions SUR.
+11. **Non-Linear, Semi-Parametric, and Bayesian Machine Learning:** Non-Linear Least Squares NLS, Generalized Additive Models GAM, Bayesian MCMC, and Causal Forest.
+12. **Causal Inference and Spatial Econometrics:** Difference-in-Differences DID, Event Study, Propensity Score Matching PSM, Regression Discontinuity Design RDD, and spatial models SAR, SEM, and Spatial Durbin SDM.
 
-### Breakdown of 40 Sub-models and 105 Estimators
+### Breakdown of 40 Sub-Models and 105 Estimators
 
-The system provides **40 sub-models** corresponding to different mathematical specifications. To ensure robustness of coefficients for academic research, the system supports **105 estimators** configured based on the combination of:
-- **Optimization Methods**: OLS, FGLS, Maximum Likelihood (MLE), Quasi-MLE, GMM (1-step/2-step with Windmeijer correction).
-- **Standard Error Covariance Structures**: Homoskedastic, White Robust (HC0, HC1, HC2, HC3), Clustered Standard Errors (by Entity, Time, or Multi-way Clustering) to control for autocorrelation and heteroskedasticity.
+The engine exposes **40 mathematical sub-models** and **105 distinct estimators** parameterized across:
+- **Optimization Methods:** OLS, FGLS, Maximum Likelihood MLE, Quasi-MLE, and one-step or two-step GMM with Windmeijer finite-sample correction.
+- **Variance-Covariance Standard Error Structures:** Classical homoskedastic, White heteroskedasticity-robust HC0, HC1, HC2, HC3, Newey-West HAC, and one-way or two-way clustered standard errors by province, firm, or time.
 
-## Workflow
+## Estimation Workflow in the Web App and MCP
 
-1. Open Econometrics.
-2. Choose a model category.
-3. Select the model.
-4. Select the dependent indicator.
-5. Select independent indicators from `/api/indicators`.
-6. Choose year range.
-7. Add custom variables if needed.
-8. Run the analysis.
-9. Review coefficients, standard errors, t-statistics, p-values, model fit, and interpretation.
+1. Open the **Econometrics** module or invoke the MCP tool `run_complete_econometric_study`.
+2. Select a model family and specific estimator.
+3. Choose the dependent variable and explanatory variables from the indicator catalog or 34-province, 63-province, or firm panels.
+4. Configure the sample period and log, difference, or lag transformations.
+5. Execute the model in parallel across **Python, R, and Stata 18 MP**.
+6. Inspect parameter estimates, standard errors, $t$-statistics, $p$-values, diagnostic tests including $VIF$, Breusch-Pagan, Wooldridge, Hausman, and Hansen $J$, and export executable `.do`, `.R`, and `.py` replication scripts.
 
-## Choosing Model Indicators
+## Academic Table Formatting and Citation Styles
 
-| Component | Examples |
-| --- | --- |
-| Dependent variable | GDP growth, poverty rate, export value, stock return. |
-| Main explanatory variable | FDI, PCI, tariff, education, investment. |
-| Controls | Population, labor force, CPI, sector structure, year. |
-| Time range | Choose a period with enough observations for the model. |
-
-## Citation Style
-
-The module supports citation styles such as APA 7, Chicago 17, Harvard 2008, IEEE 2008, and MLA 7. Keep indicator citations together with exported data and metadata.
-
-## Limits
-
-Econometrics is suitable for quick checks. For academic or official reports, export the data and re-test it in R, Python, Stata, or another specialized environment. For panel models, verify entity keys, time indexes, missing values, and aggregation before interpreting results.
-
-## Combining With AI Chat
-
-AI Chat can help choose a model, explain coefficients, remind users to check multicollinearity, missing data, stationarity, lag structure, or suggest alternate indicators when coverage is insufficient.
+Regression output tables switch instantaneously across five international publication standards — **APA 7th**, **Chicago 17th**, **Harvard**, **IEEE**, and **MLA 9th** — while automatically rendering three-tier LaTeX mathematical variable notation.

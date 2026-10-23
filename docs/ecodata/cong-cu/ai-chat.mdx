@@ -1,49 +1,67 @@
 ---
 id: ai-chat
-title: Dùng AI Chat để chọn indicators
-description: Cách dùng AI Chat như trợ lý chọn nguồn, indicators và kiểm tra logic nghiên cứu.
+title: Khai thác AI Chat, EcoData MCP 37 công cụ và bộ kỹ năng AI Agents
+description: Hướng dẫn sử dụng AI Chat, kết nối máy chủ EcoData MCP 37 công cụ và cài đặt bộ 5 tệp kỹ năng chuyên dụng cho Gemini Task, AntiGravity, Claude Code, OpenAI Codex và Cursor IDE.
 ---
 
-# Dùng AI Chat để chọn indicators
+import Head from '@docusaurus/Head';
 
-AI Chat giúp người dùng chuyển câu hỏi nghiên cứu thành danh sách nguồn dữ liệu và indicators ứng viên. Công cụ này hữu ích nhất ở giai đoạn trước khi export.
+export const aiMcpSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: 'Khai thác AI Chat, EcoData MCP Server 37 công cụ và bộ kỹ năng chuyên dụng cho Gemini Task và AI Agents',
+  description: 'Hướng dẫn sử dụng AI Chat và cài đặt bộ kỹ năng chuyên dụng của EcoData MCP Server cho Gemini Task, Gemini Gems, AntiGravity, Claude Code, OpenAI Codex và Cursor IDE.',
+  url: 'https://docs.tnsai.vn/ecodata/cong-cu/ai-chat',
+  inLanguage: 'vi',
+};
 
-## Khi nào nên dùng AI Chat
+<Head>
+  <script type="application/ld+json">{JSON.stringify(aiMcpSchema)}</script>
+</Head>
 
-| Tình huống | Cách hỏi |
-| --- | --- |
-| Chưa biết chọn nguồn nào | Mô tả câu hỏi, đơn vị phân tích, quốc gia/tỉnh và giai đoạn. |
-| Cần biến phụ thuộc/biến giải thích | Nêu mô hình dự kiến và yêu cầu gợi ý indicators. |
-| Coverage bị thiếu | Đưa short code hoặc tên indicator, yêu cầu tìm proxy. |
-| Cần kiểm tra logic | Yêu cầu AI chỉ ra rủi ro về tần suất, đơn vị đo, endogeneity hoặc missing data. |
-| Cần tạo báo cáo | Yêu cầu tóm tắt dữ liệu, biểu đồ hoặc hướng dẫn export. |
+# Khai thác AI Chat, EcoData MCP 37 công cụ và bộ kỹ năng AI Agents
 
-## Prompt mẫu
+EcoData cung cấp hai phương thức kết hợp trí tuệ nhân tạo vào nghiên cứu kinh tế: sử dụng trực tiếp **AI Chat** ngay trên trình duyệt web, hoặc kết nối máy chủ **EcoData MCP Server** tại địa chỉ `https://ecodata.io.vn/mcp` với **37 công cụ chuyên biệt** vào các trợ lý AI và môi trường lập trình như Gemini Spark, Gemini Gems, AntiGravity, Claude Code, OpenAI Codex và Cursor IDE.
+
+## Khi nào nên dùng AI Chat và EcoData MCP
+
+| Tình huống nghiên cứu | Cách đặt câu lệnh cho trợ lý AI | Công cụ MCP được kích hoạt tự động |
+| --- | --- | --- |
+| Chưa biết chọn nguồn dữ liệu và biến số nào | Mô tả câu hỏi nghiên cứu, đơn vị phân tích quốc gia hoặc tỉnh thành và giai đoạn. | `analyze_request`, `search_macro_indicators` |
+| Cần dữ liệu cấp tỉnh Việt Nam theo địa giới 34 tỉnh mới hoặc 63 tỉnh lịch sử | Yêu cầu trích xuất GRDP, thu ngân sách `FISCAL` hoặc đầu tư công kèm chế độ `boundary_mode="34"` hoặc `"63"`. | `get_gso_data`, `get_yearbook_data`, `query_macro_data_unified` |
+| Cần phân tích xuất nhập khẩu và 5 nhóm ngành hàng hóa | Nêu tên mặt hàng, mã HS, thị trường đối tác hoặc tỉnh thành xuất nhập khẩu. | `get_customs_commodity_trade`, `get_customs_country_trade`, `get_customs_province_trade` |
+| Cần trích xuất BCTC 30 năm theo rổ cổ phiếu VN30, HNX30 hoặc ngành nghề | Yêu cầu lấy danh sách mã trong nhóm và tải bảng cân đối, kết quả kinh doanh hoặc chỉ số tài chính. | `list_stock_groups`, `get_batch_financial_data`, `get_financial_ratios` |
+| Cần chạy trọn gói một nghiên cứu kinh tế lượng | Nêu biến phụ thuộc, các biến giải thích và yêu cầu chạy quy trình một chạm kèm mã tái lập Stata, R, Python. | `run_complete_econometric_study`, `generate_econometric_code` |
+
+## Bộ 5 tệp kỹ năng tải về một chạm cho Gemini Task và AI Agents
+
+Để trợ lý AI nắm vững cấu trúc 37 công cụ MCP, tự động chọn đúng tham số `boundary_mode="34"` / `"63"` cho 3 mốc lịch sử địa giới hành chính Việt Nam 1995–2026 và khai thác trọn vẹn 7 phân hệ Finco, hãy tải và cài đặt tệp kỹ năng tương ứng với nền tảng của bạn:
+
+| Nền tảng AI Agent | Tệp kỹ năng tải về một chạm | Vị trí cài đặt hoặc cách nạp | Lợi ích cốt lõi khi sử dụng |
+| --- | --- | --- | --- |
+| **Gemini Task & Gemini Gems** | [`gemini-ecodata-mcp-skill.md`](https://ecodata.io.vn/downloads/gemini-ecodata-mcp-skill.md) | Tải lên mục **Knowledge** khi tạo Gemini Gem hoặc đính kèm trực tiếp vào **Gemini Task** sau khi liên kết ứng dụng tại `gemini.google.com/spark/apps`. | Giúp Gemini tự động ưu tiên `query_macro_data_unified` và `run_complete_econometric_study`, hiểu rõ 7 phân hệ Finco và quy tắc địa giới 34 tỉnh. |
+| **AntiGravity CLI & IDE** | [`antigravity-ecodata-skill.md`](https://ecodata.io.vn/downloads/antigravity-ecodata-skill.md) | Lưu vào `.agents/skills/ecodata-mcp/SKILL.md` và `.agent/skills/ecodata-mcp/SKILL.md` trong thư mục dự án. | Kích hoạt cơ chế tiết lộ lũy tiến trên Google AntiGravity, tự động kiểm chứng kết quả qua Jev Co-Processor và xuất gói tái lập. |
+| **Claude Code & Claude Desktop** | [`claude-code-ecodata-skill.md`](https://ecodata.io.vn/downloads/claude-code-ecodata-skill.md) | Lưu vào `.claude/skills/ecodata-mcp/SKILL.md` cho Claude Code CLI hoặc tải lên **Project Knowledge** trong Claude Desktop. | Chuẩn hóa quy trình lập kế hoạch thực nghiệm, bóc tách 4 chế độ kế toán doanh nghiệp Việt Nam và kiểm định giả định Gauss-Markov. |
+| **OpenAI Codex CLI** | [`codex-ecodata-skill.md`](https://ecodata.io.vn/downloads/codex-ecodata-skill.md) | Lưu vào `.agents/skills/ecodata-mcp/SKILL.md` hoặc tích hợp vào tệp `AGENTS.md` ở thư mục gốc của dự án. | Cung cấp đặc tả tham số chính xác của 37 công cụ MCP và 105 mô hình kinh tế lượng cho tác nhân lập trình tự hành Codex. |
+| **Cursor & Windsurf IDE** | [`cursor-ecodata-rules.mdc`](https://ecodata.io.vn/downloads/cursor-ecodata-rules.mdc) | Lưu vào `.cursor/rules/ecodata-mcp.mdc` kết hợp với cấu hình máy chủ trong `.cursor/mcp.json`. | Tự động nạp ngữ cảnh dữ liệu Việt Nam, mã ngắn học thuật `ss_dom_key_mod` và 37 công cụ MCP ngay khi lập trình phân tích dữ liệu. |
+
+## Các câu lệnh mẫu thực chiến trên AI Chat và Gemini Spark
 
 ```text
-Tôi muốn nghiên cứu tác động của FDI đến tăng trưởng kinh tế cấp tỉnh Việt Nam giai đoạn 2010-2023.
-Hãy gợi ý biến phụ thuộc, biến giải thích, biến kiểm soát, nguồn dữ liệu trong Ecodata và các bước kiểm tra coverage trước khi export.
+@EcoData Phân tích tác động của đầu tư công và thu ngân sách nhà nước từ phân hệ FISCAL đến tăng trưởng GRDP của 34 tỉnh thành Việt Nam giai đoạn 2020–2025 với boundary_mode="34". Hãy chạy quy trình kinh tế lượng một chạm run_complete_econometric_study và xuất mã tái lập Stata 18 MP.
 ```
 
 ```text
-Tôi đã chọn các indicators: GDP growth, FDI inflow, labor force, CPI.
-Hãy kiểm tra xem chúng có phù hợp để chạy mô hình panel theo tỉnh không, và cần thêm biến kiểm soát nào.
+@EcoData Truy xuất dữ liệu xuất khẩu mặt hàng cà phê và gạo từ phân hệ COMMODITY_MARKET và CUSTOMS giai đoạn 2018–2025 theo các thị trường đối tác lớn nhất, sau đó kiểm tra xu hướng biến động đơn giá xuất khẩu.
 ```
 
-## Flow AI Chat → Dashboard → Export
+```text
+@EcoData Lấy danh sách cổ phiếu rổ VN30 qua list_stock_groups, trích xuất hàng loạt tỷ số ROE, ROA và biên lợi nhuận ròng giai đoạn 2015–2025 bằng get_batch_financial_data và ước lượng mô hình dữ liệu bảng Fixed Effects.
+```
 
-1. Hỏi AI Chat để lấy danh sách nguồn và indicators ứng viên.
-2. Vào Dashboard hoặc module tương ứng để search indicators.
-3. Mở indicator details để kiểm tra metadata.
-4. Copy short code của indicators đã chọn.
-5. Quay lại AI Chat để kiểm tra logic mô hình và coverage.
-6. Preview dữ liệu.
-7. Export dữ liệu kèm metadata.
+## Quy trình kết hợp AI Chat, Dashboard và Kinh tế lượng
 
-## Kết hợp với Econometrics
-
-Sau khi có danh sách indicators, người dùng có thể mở Econometrics để chạy thử mô hình sơ bộ. AI Chat có thể hỗ trợ diễn giải kết quả, gợi ý biến bị thiếu hoặc nhắc kiểm tra giả định mô hình.
-
-## Lưu ý
-
-AI Chat là công cụ hỗ trợ chọn và diễn giải, không thay thế việc kiểm tra metadata và dữ liệu gốc. Mọi kết luận nghiên cứu cần dựa trên dữ liệu đã preview/export và phương pháp định lượng được kiểm định riêng.
+1. Gửi câu hỏi nghiên cứu vào **AI Chat** hoặc trợ lý AI đã gắn kỹ năng **EcoData MCP** để xác định danh sách chỉ tiêu và chế độ địa giới 34 tỉnh hoặc 63 tỉnh.
+2. Kiểm tra siêu dữ liệu, độ phủ mẫu và mở phần **Chú thích nguồn dữ liệu gốc** trên giao diện để đối chiếu các bảng nguồn như `PLV01..PLV14` hay `THUCHINS`.
+3. Chạy ước lượng sơ bộ và kiểm định chẩn đoán qua động cơ **Kinh tế lượng** hoặc lệnh `run_complete_econometric_study`.
+4. Đối chiếu kết quả đã được **Jev Co-Processor** kiểm chứng 3 tầng và tải trọn bộ mã nguồn tái lập Stata, R, Python kèm dữ liệu sạch.
