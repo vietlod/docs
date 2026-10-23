@@ -38,11 +38,11 @@ EcoData không tự tạo ra số liệu sơ cấp. Vai trò của nền tảng 
 
 ```mermaid
 flowchart LR
-  A["Nguồn chính thức WB, IMF, NSO, FISCAL, Hải quan"] --> B["Thu thập qua API, SDMX và trích xuất có kiểm soát"]
+  A["Nguồn chính thức World Bank, IMF, Cục Thống kê, Bộ Tài chính, Cục Hải quan"] --> B["Thu thập qua API, SDMX và trích xuất có kiểm soát"]
   B --> C["Làm sạch, khử trùng lặp và chuẩn hóa kiểu dữ liệu"]
   C --> D["Chuẩn hóa 3 mốc địa giới 1995-2003, 2003-2008, 2025"]
   D --> E["Ánh xạ mã ngắn học thuật ss_dom_key_mod"]
-  E --> F["Kiểm soát chất lượng, đối soát PLV01..PLV14 và dịch song ngữ"]
+  E --> F["Kiểm soát chất lượng, đối soát 14 Phụ lục Niên giám 34 tỉnh và dịch song ngữ"]
   F --> G["Lưu trữ song song bảng 63 tỉnh và 34 tỉnh"]
   G --> H["Xem trước, xuất dữ liệu và truy xuất qua 37 công cụ MCP"]
 ```
@@ -50,20 +50,20 @@ flowchart LR
 ## 1. Thu thập dữ liệu đa nguồn và 7 phân hệ Finco
 
 EcoData vận hành các đường ống thu thập chuyên biệt theo từng loại nguồn:
-- **API quốc tế chuẩn hóa:** Giao thức SDMX v2/v3 cho IMF, Eurostat, OECD, ILO; giao thức REST cho World Bank, FAO, OWID, FRED, WTO, UNCTAD và ADB; cùng phân hệ **`MAIN_MARKET`** bao phủ 8 khu vực kinh tế trọng điểm.
+- **API quốc tế chuẩn hóa:** Giao thức SDMX v2/v3 cho IMF, Eurostat, OECD, ILO; giao thức REST cho World Bank, FAO, OWID, FRED, WTO, UNCTAD và ADB; cùng phân hệ **Tám Khu vực Kinh tế Trọng điểm** bao phủ 8 khu vực kinh tế trọng điểm.
 - **Bảy phân hệ dữ liệu Việt Nam chuyên sâu:**
-  - **`NSO`:** 28 bảng dữ liệu PX-Web cấp tỉnh và Phụ lục Niên giám 2024 theo 34 tỉnh thành mã `PLV01..PLV14`.
-  - **`FISCAL`:** Chuỗi quyết toán và dự toán ngân sách nhà nước của Bộ Tài chính mã `THUCHINS` giai đoạn 1995–2026.
-  - **`KTXH_GSO`:** Báo cáo kinh tế – xã hội định kỳ tháng, quý và năm giai đoạn 2000–2026.
-  - **`CUSTOMS`:** 11 biểu mẫu thống kê xuất nhập khẩu chính thức của Cục Hải quan gồm `1X`, `1N`, `2X`, `2N`, `3X`, `3N`, `4`, `5X`, `5N`, `HTX` và `PTVT`.
-  - **`SURVEY_INDEX`:** 7 bộ chỉ số quản trị và thể chế cấp tỉnh gồm `PCI`, `PGI`, `PAPI`, `PII`, `ICT Index`, `PAR Index` và `SIPAS`.
-  - **`COMMODITY_MARKET`:** Dữ liệu sản lượng, thương mại và giá cả của 5 nhóm ngành hàng hóa qua 5 chiều phân tích.
-  - **`VN_34_REBUILD`:** Động cơ tái cấu trúc chuỗi lịch sử 34 tỉnh thành giai đoạn 2000–2026.
+  - **Thống kê Quốc gia:** 28 bảng dữ liệu PX-Web cấp tỉnh và Phụ lục Niên giám 2024 theo 34 tỉnh thành gồm 14 biểu phụ lục chuyên đề.
+  - **Ngân sách Nhà nước:** Chuỗi quyết toán và dự toán ngân sách nhà nước của Bộ Tài chính của Bộ Tài chính giai đoạn 1995–2026.
+  - **Báo cáo Kinh tế – Xã hội định kỳ:** Báo cáo kinh tế – xã hội định kỳ tháng, quý và năm giai đoạn 2000–2026.
+  - **Thống kê Hải quan 11 biểu mẫu:** 11 biểu mẫu thống kê xuất nhập khẩu chính thức của Cục Hải quan gồm `1X`, `1N`, `2X`, `2N`, `3X`, `3N`, `4`, `5X`, `5N`, `HTX` và `PTVT`.
+  - **Chỉ số Quản trị Cấp tỉnh:** 7 bộ chỉ số quản trị và thể chế cấp tỉnh gồm `PCI`, `PGI`, `PAPI`, `PII`, `ICT Index`, `PAR Index` và `SIPAS`.
+  - **Thị trường Hàng hóa:** Dữ liệu sản lượng, thương mại và giá cả của 5 nhóm ngành hàng hóa qua 5 chiều phân tích.
+  - **Chuỗi Dữ liệu Chuẩn hóa 34 Tỉnh:** Động cơ tái cấu trúc chuỗi lịch sử 34 tỉnh thành giai đoạn 2000–2026.
 - **Dữ liệu vi mô và thị trường vốn:** Điều tra mức sống dân cư VHLSS theo kỳ khảo sát và báo cáo tài chính 30 năm của hơn 1.600 doanh nghiệp niêm yết theo 4 chế độ kế toán Việt Nam.
 
 ## 2. Phương pháp luận xử lý ba mốc lịch sử địa giới hành chính Việt Nam 1995–2026
 
-Để giải quyết bài toán đứt gãy chuỗi dữ liệu cấp tỉnh mà không làm mất giá trị lịch sử gốc, EcoData áp dụng nguyên tắc **không ghi đè bảng 63 tỉnh**: mọi bảng dữ liệu gốc 63 tỉnh được giữ nguyên 100%, trong khi chuỗi chuẩn hóa 34 tỉnh được tính toán độc lập và lưu tại bảng `vn_province_34_series` dựa trên bảng ánh xạ `vn_admin_units_34`.
+Để giải quyết bài toán đứt gãy chuỗi dữ liệu cấp tỉnh mà không làm mất giá trị lịch sử gốc, EcoData áp dụng nguyên tắc **không ghi đè bảng 63 tỉnh**: mọi bảng dữ liệu gốc 63 tỉnh được giữ nguyên 100%, trong khi chuỗi chuẩn hóa 34 tỉnh được tính toán độc lập và lưu tại bảng chuỗi dữ liệu chuẩn hóa 34 tỉnh thành dựa trên từ điển đối chiếu đơn vị hành chính 34 tỉnh.
 
 ### Xử lý mốc 1995–2003 theo Nghị quyết 22/2003/QH11
 
@@ -83,18 +83,18 @@ Từ ngày 01/07/2025, 63 tỉnh thành được sắp xếp thành **34 tỉnh,
 
 | Mã quy tắc | Công thức toán học | Nhóm biến số áp dụng |
 | --- | --- | --- |
-| **`sum`** | $Y_{P,t} = \sum_{i \in P} Y_{i,t}$ | Diện tích tự nhiên, dân số trung bình, lực lượng lao động, GRDP giá hiện hành, GRDP giá so sánh, tổng thu chi ngân sách `THUCHINS`, vốn đầu tư thực hiện, kim ngạch xuất nhập khẩu. |
-| **`weighted_mean`** | $R_{P,t} = \frac{\sum_{i \in P} R_{i,t} W_{i,t}}{\sum_{i \in P} W_{i,t}}$ | GRDP bình quân đầu người, thu nhập bình quân tháng, mật độ dân số, tỷ lệ hộ nghèo, tỷ lệ thất nghiệp, tỷ lệ đô thị hóa với quyền số $W_{i,t}$ là dân số, diện tích hoặc lao động tương ứng. |
-| **`growth_constant_scale`** | $g_{P,t} = \left(\frac{\sum_{i \in P} Q_{i,t}}{\sum_{i \in P} Q_{i,t-1}} - 1\right) \times 100$ | Tốc độ tăng trưởng GRDP, tốc độ tăng giá trị sản xuất nông – lâm – thủy sản, công nghiệp – xây dựng và dịch vụ tính từ quy mô giá so sánh $Q_{i,t}$. |
-| **`index_chain`** | $I_{P,t} = \frac{\sum_{i \in P} I_{i,t} S_{i,t-1}}{\sum_{i \in P} S_{i,t-1}}$ | Chỉ số giá tiêu dùng CPI và chỉ số sản xuất công nghiệp IIP gia quyền theo quy mô bán lẻ hàng hóa dịch vụ hoặc giá trị tăng thêm công nghiệp $S_{i,t-1}$. |
-| **`non_aggregable`** | Giữ nguyên quan sát gốc kèm khóa ánh xạ 34 tỉnh | Các chỉ số khảo sát cảm nhận quản trị thể chế trước tháng 07/2025 như PCI, PAPI, PAR Index, SIPAS và bản ghi điều tra vi mô hộ gia đình VHLSS. |
+| **Biến quy mô cộng tổng** | $Y_{P,t} = \sum_{i \in P} Y_{i,t}$ | Diện tích tự nhiên, dân số trung bình, lực lượng lao động, GRDP giá hiện hành, GRDP giá so sánh, tổng thu chi ngân sách nhà nước, vốn đầu tư thực hiện, kim ngạch xuất nhập khẩu. |
+| **Biến bình quân và tỷ lệ** | $R_{P,t} = \frac{\sum_{i \in P} R_{i,t} W_{i,t}}{\sum_{i \in P} W_{i,t}}$ | GRDP bình quân đầu người, thu nhập bình quân tháng, mật độ dân số, tỷ lệ hộ nghèo, tỷ lệ thất nghiệp, tỷ lệ đô thị hóa với quyền số $W_{i,t}$ là dân số, diện tích hoặc lao động tương ứng. |
+| **Biến tốc độ tăng trưởng** | $g_{P,t} = \left(\frac{\sum_{i \in P} Q_{i,t}}{\sum_{i \in P} Q_{i,t-1}} - 1\right) \times 100$ | Tốc độ tăng trưởng GRDP, tốc độ tăng giá trị sản xuất nông – lâm – thủy sản, công nghiệp – xây dựng và dịch vụ tính từ quy mô giá so sánh $Q_{i,t}$. |
+| **Biến chỉ số giá và sản xuất** | $I_{P,t} = \frac{\sum_{i \in P} I_{i,t} S_{i,t-1}}{\sum_{i \in P} S_{i,t-1}}$ | Chỉ số giá tiêu dùng CPI và chỉ số sản xuất công nghiệp IIP gia quyền theo quy mô bán lẻ hàng hóa dịch vụ hoặc giá trị tăng thêm công nghiệp $S_{i,t-1}$. |
+| **Biến thứ hạng định tính** | Giữ nguyên quan sát gốc kèm khóa ánh xạ 34 tỉnh | Các chỉ số khảo sát cảm nhận quản trị thể chế trước tháng 07/2025 như PCI, PAPI, PAR Index, SIPAS và bản ghi điều tra vi mô hộ gia đình VHLSS. |
 
-Toàn bộ chuỗi tái cấu trúc 34 tỉnh được đối soát tự động với Phụ lục NSO `PLV01..PLV14` và Báo cáo KTXH 2025–2026, bảo đảm **độ khớp từ 99,5% trở lên**.
+Toàn bộ chuỗi tái cấu trúc 34 tỉnh được đối soát tự động với 14 Phụ lục Niên giám 34 tỉnh và Báo cáo KTXH 2025–2026, bảo đảm **độ khớp từ 99,5% trở lên**.
 
 ## 3. Chuẩn hóa mã ngắn học thuật và kiểm soát chất lượng
 
 - **Hệ thống mã học thuật `ss_dom_key_mod`:** Mọi chỉ tiêu đều được gán mã ngắn tối đa 18 ký tự không dấu, chữ thường, ngăn cách bằng dấu gạch dưới như `wb_mac_gdp_usd`, đồng thời tự động sinh nhãn ký hiệu toán học LaTeX 3 tầng khi đưa vào mô hình kinh tế lượng.
-- **Chú thích nguồn dữ liệu gốc thu gọn:** Mỗi bảng dữ liệu đều đính kèm thông tin nguồn gốc chi tiết đặt trong khung thu gọn ở cuối màn hình, hiển thị rõ mã nguồn như `NSO`, `FISCAL`, `CUSTOMS`, `GSO`, đơn vị gốc và quy tắc chuẩn hóa.
+- **Chú thích nguồn dữ liệu gốc thu gọn:** Mỗi bảng dữ liệu đều đính kèm thông tin nguồn gốc chi tiết đặt trong khung thu gọn ở cuối màn hình, hiển thị rõ mã nguồn như Thống kê Quốc gia, Ngân sách Nhà nước, Hải quan Việt Nam, đơn vị gốc và quy tắc chuẩn hóa.
 - **Song ngữ Việt – Anh có kiểm chứng:** Toàn bộ nhãn chỉ tiêu và đơn vị đo được chuẩn hóa song ngữ qua đường ống dịch thuật học thuật có kiểm soát chất lượng.
 
 ## 4. Tái lập khoa học và trích dẫn
@@ -104,5 +104,5 @@ Mỗi tệp dữ liệu xuất ra từ EcoData luôn đi kèm trang **Metadata**
 ## Xem thêm
 
 - [Từ điển dữ liệu](/ecodata/du-lieu/data-dictionary)
-- [Thống kê GSO, NSO và dữ liệu 34 tỉnh thành Việt Nam](/ecodata/indicators/gso-vietnam)
+- [Thống kê Quốc gia và dữ liệu 34 tỉnh thành Việt Nam](/ecodata/indicators/gso-vietnam)
 - [Phân nhóm nguồn dữ liệu và 7 phân hệ chuyên sâu](/ecodata/nguon-du-lieu/phan-nhom-nguon-du-lieu)

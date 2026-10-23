@@ -38,11 +38,11 @@ EcoData does not fabricate primary statistics. The platform's role is to **aggre
 
 ```mermaid
 flowchart LR
-  A["Official feeds WB, IMF, NSO, FISCAL, Customs"] --> B["Ingestion via SDMX, REST APIs, and controlled extraction"]
+  A["Official feeds World Bank, IMF, National Statistics, State Budget, Customs"] --> B["Ingestion via SDMX, REST APIs, and controlled extraction"]
   B --> C["Cleaning, deduplication, and type normalization"]
   C --> D["Boundary harmonization across 1995-2003, 2003-2008, 2025"]
   D --> E["Academic short code mapping ss_dom_key_mod"]
-  E --> F["Quality control, PLV01..PLV14 reconciliation, and EN-VI curation"]
+  E --> F["Quality control, 34-province Yearbook Appendix reconciliation, and EN-VI curation"]
   F --> G["Dual-layer storage across 63-province and 34-province tables"]
   G --> H["Preview, Export, and retrieval via 37 MCP tools"]
 ```
@@ -50,20 +50,20 @@ flowchart LR
 ## 1. Multi-Source Data Ingestion and Seven Finco Subsystems
 
 EcoData operates specialized ingestion pipelines tailored to each source family:
-- **Standardized International APIs:** SDMX v2/v3 feeds for the IMF, Eurostat, OECD, and ILO; REST APIs for the World Bank, FAO, OWID, FRED, WTO, UNCTAD, and ADB; plus the **`MAIN_MARKET`** subsystem covering eight global focus regions.
+- **Standardized International APIs:** SDMX v2/v3 feeds for the IMF, Eurostat, OECD, and ILO; REST APIs for the World Bank, FAO, OWID, FRED, WTO, UNCTAD, and ADB; plus the **Eight Global Focus Economic Regions** subsystem covering eight global focus regions.
 - **Seven Specialized Vietnam Data Subsystems:**
-  - **`NSO`:** 28 provincial PX-Web statistical tables and the 2024 Statistical Yearbook Appendices for 34 provinces coded `PLV01..PLV14`.
-  - **`FISCAL`:** Ministry of Finance state budget outturn and estimate series coded `THUCHINS` from 1995 to 2026.
-  - **`KTXH_GSO`:** Monthly, quarterly, and annual socio-economic reports from 2000 to 2026.
-  - **`CUSTOMS`:** 11 official merchandise trade forms from Vietnam Customs: `1X`, `1N`, `2X`, `2N`, `3X`, `3N`, `4`, `5X`, `5N`, `HTX`, and `PTVT`.
-  - **`SURVEY_INDEX`:** Seven provincial governance and institutional indices: `PCI`, `PGI`, `PAPI`, `PII`, `ICT Index`, `PAR Index`, and `SIPAS`.
-  - **`COMMODITY_MARKET`:** Production, trade, consumption, and price series across five strategic commodity sectors and five analytical dimensions.
-  - **`VN_34_REBUILD`:** Historical 34-province panel reconstruction engine covering 2000 to 2026.
+  - **National Statistics:** 28 provincial PX-Web statistical tables and the 2024 Statistical Yearbook Appendices for 34 provinces comprising 14 thematic appendices.
+  - **State Budget:** Ministry of Finance state budget outturn and estimate series published by the Ministry of Finance from 1995 to 2026.
+  - **Periodic Socio-Economic Reports:** Monthly, quarterly, and annual socio-economic reports from 2000 to 2026.
+  - **Vietnam Customs 11 Forms:** 11 official merchandise trade forms from Vietnam Customs: `1X`, `1N`, `2X`, `2N`, `3X`, `3N`, `4`, `5X`, `5N`, `HTX`, and `PTVT`.
+  - **Provincial Governance Indices:** Seven provincial governance and institutional indices: `PCI`, `PGI`, `PAPI`, `PII`, `ICT Index`, `PAR Index`, and `SIPAS`.
+  - **Commodity Market Intelligence:** Production, trade, consumption, and price series across five strategic commodity sectors and five analytical dimensions.
+  - **34-Province Harmonized Series:** Historical 34-province panel reconstruction engine covering 2000 to 2026.
 - **Microdata and Capital Markets:** Multi-wave VHLSS household living standards microdata and 30-year corporate financial statements for over 1,600 listed firms across four Vietnamese accounting regimes.
 
 ## 2. Methodology for Three Vietnam Administrative Boundary Milestones From 1995 to 2026
 
-To eliminate structural breaks in long provincial panels without altering historical records, EcoData enforces a strict **non-destructive dual-layer storage architecture**: all original 63-province tables remain 100% untouched, while harmonized 34-province series are computed into `vn_province_34_series` using the `vn_admin_units_34` mapping dictionary.
+To eliminate structural breaks in long provincial panels without altering historical records, EcoData enforces a strict **non-destructive dual-layer storage architecture**: all original 63-province tables remain 100% untouched, while harmonized 34-province series are computed into the harmonized 34-province panel database using the official 34-province administrative crosswalk dictionary.
 
 ### Handling the 1995–2003 Milestone Under Resolution 22/2003/QH11
 
@@ -83,18 +83,18 @@ Effective July 1, 2025, Vietnam consolidated 63 provinces into **34 provinces an
 
 | Rule Code | Mathematical Formula | Applicable Variable Classes |
 | --- | --- | --- |
-| **`sum`** | $Y_{P,t} = \sum_{i \in P} Y_{i,t}$ | Land area, average population, labor force, nominal GRDP, constant-price GRDP, total state budget revenue and expenditure `THUCHINS`, realized investment, merchandise export and import value. |
-| **`weighted_mean`** | $R_{P,t} = \frac{\sum_{i \in P} R_{i,t} W_{i,t}}{\sum_{i \in P} W_{i,t}}$ | GRDP per capita, average monthly income, population density, poverty rate, unemployment rate, and urbanization rate using appropriate weights $W_{i,t}$ such as population, area, or labor force. |
-| **`growth_constant_scale`** | $g_{P,t} = \left(\frac{\sum_{i \in P} Q_{i,t}}{\sum_{i \in P} Q_{i,t-1}} - 1\right) \times 100$ | Real GRDP growth rate and sectoral output growth rates recomputed from summed constant-price output $Q_{i,t}$. |
-| **`index_chain`** | $I_{P,t} = \frac{\sum_{i \in P} I_{i,t} S_{i,t-1}}{\sum_{i \in P} S_{i,t-1}}$ | Consumer Price Index CPI and Industrial Production Index IIP weighted by retail sales of goods and services or industrial value added $S_{i,t-1}$. |
-| **`non_aggregable`** | Preserve original observations with 34-province crosswalk keys | Pre-July 2025 institutional perception surveys including PCI, PAPI, PAR Index, and SIPAS as well as VHLSS household microdata records. |
+| **Additive Scale Variables** | $Y_{P,t} = \sum_{i \in P} Y_{i,t}$ | Land area, average population, labor force, nominal GRDP, constant-price GRDP, total state budget revenue and expenditure, realized investment, merchandise export and import value. |
+| **Weighted Mean and Ratio Variables** | $R_{P,t} = \frac{\sum_{i \in P} R_{i,t} W_{i,t}}{\sum_{i \in P} W_{i,t}}$ | GRDP per capita, average monthly income, population density, poverty rate, unemployment rate, and urbanization rate using appropriate weights $W_{i,t}$ such as population, area, or labor force. |
+| **Real Scale Growth Rate Variables** | $g_{P,t} = \left(\frac{\sum_{i \in P} Q_{i,t}}{\sum_{i \in P} Q_{i,t-1}} - 1\right) \times 100$ | Real GRDP growth rate and sectoral output growth rates recomputed from summed constant-price output $Q_{i,t}$. |
+| **Price and Production Index Variables** | $I_{P,t} = \frac{\sum_{i \in P} I_{i,t} S_{i,t-1}}{\sum_{i \in P} S_{i,t-1}}$ | Consumer Price Index CPI and Industrial Production Index IIP weighted by retail sales of goods and services or industrial value added $S_{i,t-1}$. |
+| **Qualitative Institutional Ranking Variables** | Preserve original observations with 34-province crosswalk keys | Pre-July 2025 institutional perception surveys including PCI, PAPI, PAR Index, and SIPAS as well as VHLSS household microdata records. |
 
-All reconstructed 34-province series are reconciled against NSO Appendices `PLV01..PLV14` and 2025–2026 Socio-Economic Reports, achieving **99.5% or higher reconciliation accuracy**.
+All reconstructed 34-province series are reconciled against 14 Statistical Yearbook Appendices for 34 Provinces and 2025–2026 Socio-Economic Reports, achieving **99.5% or higher reconciliation accuracy**.
 
 ## 3. Academic Short Code Mapping and Quality Control
 
 - **Academic Short Code System `ss_dom_key_mod`:** Every indicator receives a lowercase ASCII identifier up to 18 characters separated by underscores such as `wb_mac_gdp_usd`, and automatically generates three-tier LaTeX mathematical notation when loaded into econometric models.
-- **Collapsible Primary Data Source Footnotes:** Every analytical panel includes a collapsible source footnote block displaying exact source badges such as `NSO`, `FISCAL`, `CUSTOMS`, and `GSO`, original measurement units, and applied harmonization rules.
+- **Collapsible Primary Data Source Footnotes:** Every analytical panel includes a collapsible source footnote block displaying exact source badges such as National Statistics, State Budget, and Vietnam Customs, original measurement units, and applied harmonization rules.
 - **Verified Bilingual Curation:** All indicator titles and units are curated across Vietnamese and English through a quality-controlled academic translation pipeline.
 
 ## 4. Scientific Reproducibility and Citation
@@ -104,5 +104,5 @@ Every exported workbook from EcoData includes a dedicated **Metadata** sheet doc
 ## See Also
 
 - [Data Dictionary](/ecodata/du-lieu/data-dictionary)
-- [GSO, NSO, and Vietnam 34-Province Statistics](/ecodata/indicators/gso-vietnam)
+- [Vietnam National and 34-Province Statistics](/ecodata/indicators/gso-vietnam)
 - [Data Source Groups and Seven Specialized Subsystems](/ecodata/nguon-du-lieu/phan-nhom-nguon-du-lieu)

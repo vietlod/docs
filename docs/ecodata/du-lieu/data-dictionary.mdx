@@ -12,16 +12,16 @@ export const dictSchema = {
   '@id': 'https://docs.tnsai.vn/ecodata/du-lieu/data-dictionary#termset',
   name: 'Từ điển dữ liệu và mã ngắn học thuật EcoData',
   description:
-    'Mô hình siêu dữ liệu và định nghĩa trường chuẩn cho chỉ tiêu EcoData gồm mã ngắn ss_dom_key_mod, chế độ địa giới boundary_mode 34 hoặc 63 tỉnh, bảng chuỗi vn_province_34_series, nhãn song ngữ, đơn vị đo, tần suất và độ phủ.',
+    'Mô hình siêu dữ liệu và định nghĩa trường chuẩn cho chỉ tiêu EcoData gồm mã ngắn ss_dom_key_mod, chế độ địa giới boundary_mode 34 hoặc 63 tỉnh, bảng chuỗi dữ liệu chuẩn hóa 34 tỉnh thành, nhãn song ngữ, đơn vị đo, tần suất và độ phủ.',
   url: 'https://docs.tnsai.vn/ecodata/du-lieu/data-dictionary',
   inLanguage: ['vi', 'en'],
   publisher: { '@type': 'Organization', name: 'EcoData', url: 'https://ecodata.io.vn/' },
   hasDefinedTerm: [
     { '@type': 'DefinedTerm', name: 'short_code', description: 'Mã chuẩn hóa của EcoData theo cấu trúc ss_dom_key_mod như wb_mac_gdp_usd.' },
     { '@type': 'DefinedTerm', name: 'boundary_mode', description: 'Tham số chọn chế độ địa giới hành chính Việt Nam giữa 63 tỉnh lịch sử và 34 tỉnh thành mới theo Nghị quyết 202/2025/QH15.' },
-    { '@type': 'DefinedTerm', name: 'vn_province_34_series', description: 'Bảng dữ liệu chuỗi thời gian chuẩn hóa 34 tỉnh thành giai đoạn 2000–2026 theo 5 quy tắc toán học.' },
-    { '@type': 'DefinedTerm', name: 'PLV01..PLV14', description: 'Mười bốn biểu Phụ lục Niên giám Thống kê 2024 của Cục Thống kê biên soạn theo 34 tỉnh thành mới.' },
-    { '@type': 'DefinedTerm', name: 'THUCHINS', description: 'Mã bộ dữ liệu thu chi ngân sách nhà nước của Bộ Tài chính trong phân hệ FISCAL giai đoạn 1995–2026.' },
+    { '@type': 'DefinedTerm', name: 'Chuỗi dữ liệu bảng chuẩn hóa 34 tỉnh thành', description: 'Bảng dữ liệu chuỗi thời gian chuẩn hóa 34 tỉnh thành giai đoạn 2000–2026 theo 5 quy tắc toán học.' },
+    { '@type': 'DefinedTerm', name: 'Hệ thống 14 Phụ lục Niên giám 34 Tỉnh', description: 'Mười bốn biểu Phụ lục Niên giám Thống kê 2024 của Cục Thống kê biên soạn theo 34 tỉnh thành mới.' },
+    { '@type': 'DefinedTerm', name: 'Thu chi Ngân sách Nhà nước', description: 'Bộ dữ liệu quyết toán và dự toán thu chi ngân sách nhà nước của Bộ Tài chính trong phân hệ Ngân sách Nhà nước giai đoạn 1995–2026.' },
   ],
 };
 
@@ -40,16 +40,16 @@ Mỗi chỉ tiêu trong EcoData mang các trường chuẩn sau:
 | Trường dữ liệu | Ý nghĩa học thuật và kỹ thuật | Ví dụ minh họa |
 | --- | --- | --- |
 | `short_code` | Mã ngắn chuẩn hóa của EcoData theo cấu trúc 4 thành phần | `wb_mac_gdp_usd` |
-| `code` | Mã gốc do cơ quan thống kê hoặc tổ chức quốc tế công bố | `NY.GDP.MKTP.CD`, `PLV01`, `THUCHINS` |
+| `code` | Mã gốc do cơ quan thống kê hoặc tổ chức quốc tế công bố | `NY.GDP.MKTP.CD`, `GRDP_34`, `NSNN_THU` |
 | `label_vi` và `label_en` | Nhãn chỉ tiêu song ngữ Việt – Anh đã rà soát học thuật | Tổng sản phẩm trong nước theo USD hiện hành / GDP in current USD |
 | `unit` | Đơn vị đo lường gốc của chuỗi số liệu | `USD`, `% GDP`, `tỷ đồng`, `nghìn người`, `tấn` |
 | `frequency` | Tần suất quan sát của chuỗi thời gian | `annual`, `quarterly`, `monthly`, `mixed` |
-| `source` | Cơ quan ban hành hoặc phân hệ dữ liệu | World Bank, IMF, `NSO`, `FISCAL`, `KTXH_GSO`, `CUSTOMS`, `SURVEY_INDEX`, `COMMODITY_MARKET` |
+| `source` | Cơ quan ban hành hoặc phân hệ dữ liệu | World Bank, IMF, Thống kê Quốc gia, Ngân sách Nhà nước, Báo cáo Kinh tế – Xã hội, Hải quan Việt Nam, Chỉ số Quản trị, Thị trường Hàng hóa |
 | `boundary_mode` | Chế độ địa giới hành chính cấp tỉnh Việt Nam | `"63"` cho 63 tỉnh lịch sử; `"34"` cho 34 tỉnh thành theo Nghị quyết 202/2025/QH15 |
-| `aggregation_rule` | Quy tắc toán học gộp từ 63 tỉnh sang 34 tỉnh | `sum`, `weighted_mean`, `growth_constant_scale`, `index_chain`, `non_aggregable` |
+| `aggregation_rule` | Quy tắc toán học gộp từ 63 tỉnh sang 34 tỉnh | cộng tổng quy mô, bình quân gia quyền, tốc độ tăng trưởng thực, ghép chuỗi chỉ số, giữ nguyên quan sát gốc |
 | `time_start` và `time_end` | Năm hoặc kỳ quan sát đầu tiên và cuối cùng | `1995` / `2026` |
 | `spatial_coverage` | Cấp độ đơn vị phân tích không gian | Quốc gia, 63 tỉnh, 34 tỉnh, doanh nghiệp, hộ gia đình |
-| `source_footnotes` | Chú thích nguồn dữ liệu gốc thu gọn kèm thẻ mã nguồn | Bảng nguồn `PLV01..PLV14`, `THUCHINS`, kỳ cập nhật và ghi chú địa giới |
+| `source_footnotes` | Chú thích nguồn dữ liệu gốc thu gọn kèm thẻ mã nguồn | Bảng nguồn Cục Thống kê, Bộ Tài chính, Cục Hải quan, kỳ cập nhật và ghi chú địa giới |
 
 :::tip Tra cứu song hành mã ngắn và mã gốc
 Người dùng có thể tìm kiếm bằng **`short_code`** ngắn gọn, ổn định hoặc bằng **`code`** gốc của cơ quan ban hành. Giao diện ưu tiên hiển thị `short_code` và luôn lưu giữ mã gốc trong siêu dữ liệu để đối chiếu.
@@ -69,7 +69,7 @@ ss _ dom _ key _ mod
 
 | Thành phần | Vai trò định danh | Giá trị tiêu biểu |
 | --- | --- | --- |
-| `ss` | Nguồn dữ liệu | `wb` World Bank, `im` IMF, `ad` ADB, `un` Liên Hợp Quốc, `fr` FRED, `gs` GSO/NSO |
+| `ss` | Nguồn dữ liệu | `wb` World Bank, `im` IMF, `ad` ADB, `un` Liên Hợp Quốc, `fr` FRED, `gs` Cục Thống kê |
 | `dom` | Lĩnh vực kinh tế | `mac` kinh tế vĩ mô, `ext` kinh tế đối ngoại, `fis` tài khóa ngân sách, `lab` lao động, `dem` dân số |
 | `key` | Khái niệm chỉ tiêu | `gdp`, `grdp`, `cpi`, `exp`, `imp`, `pop`, `une`, `fdi` |
 | `mod` | Đơn vị hoặc phương pháp tính | `usd`, `vnd`, `pct`, `idx`, `cap` bình quân đầu người |
@@ -87,10 +87,10 @@ ss _ dom _ key _ mod
 | Thuật ngữ kỹ thuật | Định nghĩa chuẩn trong EcoData |
 | --- | --- |
 | `boundary_mode` | Tham số chuyển đổi giữa `"63"` đơn vị hành chính lịch sử và `"34"` tỉnh, thành phố mới theo Nghị quyết 202/2025/QH15 trên giao diện web và 37 công cụ MCP. |
-| `vn_province_34_series` | Bảng cơ sở dữ liệu lưu trữ chuỗi thời gian chuẩn hóa giai đoạn 2000–2026 của 34 tỉnh thành mới được tái cấu trúc theo 5 quy tắc kinh tế lượng mà không làm thay đổi bảng gốc 63 tỉnh. |
-| `vn_admin_units_34` | Bảng từ điển ánh xạ chính thức giữa 63 tỉnh thành lịch sử và 34 tỉnh thành mới kèm mã tỉnh, trung tâm hành chính và danh sách các tỉnh thành phần hợp nhất. |
-| `PLV01..PLV14` | Bộ 14 biểu Phụ lục Niên giám Thống kê 2024 do Cục Thống kê công bố theo cấu trúc 34 tỉnh thành, dùng làm mốc chuẩn đối soát độ khớp từ 99,5% trở lên. |
-| `THUCHINS` | Mã bộ dữ liệu quyết toán và dự toán thu chi ngân sách nhà nước của Bộ Tài chính giai đoạn 1995–2026 trong phân hệ `FISCAL`. |
+| **Chuỗi dữ liệu chuẩn hóa 34 tỉnh** | Bảng cơ sở dữ liệu lưu trữ chuỗi thời gian chuẩn hóa giai đoạn 2000–2026 của 34 tỉnh thành mới được tái cấu trúc theo 5 quy tắc kinh tế lượng mà không làm thay đổi bảng gốc 63 tỉnh. |
+| **Từ điển đối chiếu 34 tỉnh** | Bảng từ điển ánh xạ chính thức giữa 63 tỉnh thành lịch sử và 34 tỉnh thành mới kèm mã tỉnh, trung tâm hành chính và danh sách các tỉnh thành phần hợp nhất. |
+| **Phụ lục Niên giám 34 Tỉnh** | Bộ 14 biểu Phụ lục Niên giám Thống kê 2024 do Cục Thống kê công bố theo cấu trúc 34 tỉnh thành, dùng làm mốc chuẩn đối soát độ khớp từ 99,5% trở lên. |
+| **Thu chi Ngân sách Nhà nước** | Bộ dữ liệu quyết toán và dự toán thu chi ngân sách nhà nước của Bộ Tài chính giai đoạn 1995–2026 trong phân hệ Ngân sách Nhà nước. |
 
 ## Xem thêm
 

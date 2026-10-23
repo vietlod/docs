@@ -12,16 +12,16 @@ export const dictSchemaEn = {
   '@id': 'https://docs.tnsai.vn/en/ecodata/du-lieu/data-dictionary#termset',
   name: 'EcoData Data Dictionary and Academic Short Code System',
   description:
-    'Metadata schema and field definitions for EcoData indicators including ss_dom_key_mod academic short codes, 34-province and 63-province boundary_mode, vn_province_34_series, bilingual labels, measurement units, frequencies, and coverage.',
+    'Metadata schema and field definitions for EcoData indicators including ss_dom_key_mod academic short codes, 34-province and 63-province boundary_mode, harmonized 34-province panel series, bilingual labels, measurement units, frequencies, and coverage.',
   url: 'https://docs.tnsai.vn/en/ecodata/du-lieu/data-dictionary',
   inLanguage: ['vi', 'en'],
   publisher: { '@type': 'Organization', name: 'EcoData', url: 'https://ecodata.io.vn/' },
   hasDefinedTerm: [
     { '@type': 'DefinedTerm', name: 'short_code', description: 'Standardized indicator code in the ss_dom_key_mod scheme such as wb_mac_gdp_usd.' },
     { '@type': 'DefinedTerm', name: 'boundary_mode', description: 'Parameter switching Vietnam provincial data between 63 historical provinces and 34 consolidated provinces under Resolution 202/2025/QH15.' },
-    { '@type': 'DefinedTerm', name: 'vn_province_34_series', description: 'Database table storing harmonized 2000–2026 time series for Vietnam 34 provinces across five mathematical rules.' },
-    { '@type': 'DefinedTerm', name: 'PLV01..PLV14', description: 'Fourteen official 2024 Statistical Yearbook Appendices published by the National Statistics Office for 34 provinces.' },
-    { '@type': 'DefinedTerm', name: 'THUCHINS', description: 'Ministry of Finance state budget revenue and expenditure dataset code in the FISCAL subsystem covering 1995–2026.' },
+    { '@type': 'DefinedTerm', name: '34-Province Harmonized Panel Series', description: 'Database table storing harmonized 2000–2026 time series for Vietnam 34 provinces across five mathematical rules.' },
+    { '@type': 'DefinedTerm', name: '14 Statistical Yearbook Appendices for 34 Provinces', description: 'Fourteen official 2024 Statistical Yearbook Appendices published by the National Statistics Office for 34 provinces.' },
+    { '@type': 'DefinedTerm', name: 'State Budget Revenue and Expenditure', description: 'Ministry of Finance state budget revenue and expenditure dataset code in the State Budget subsystem covering 1995–2026.' },
   ],
 };
 
@@ -40,16 +40,16 @@ Every indicator in EcoData carries the following standardized fields:
 | Field Name | Academic and Technical Definition | Representative Example |
 | --- | --- | --- |
 | `short_code` | EcoData four-segment standardized academic identifier | `wb_mac_gdp_usd` |
-| `code` | Native indicator code published by the originating institution | `NY.GDP.MKTP.CD`, `PLV01`, `THUCHINS` |
+| `code` | Native indicator code published by the originating institution | `NY.GDP.MKTP.CD`, `GRDP_34`, `STATE_BUDGET` |
 | `label_vi` and `label_en` | Curated bilingual Vietnamese and English indicator titles | Gross Domestic Product in current USD |
 | `unit` | Original unit of measurement | `USD`, `% of GDP`, `billion VND`, `thousand persons`, `tons` |
 | `frequency` | Observation frequency of the series | `annual`, `quarterly`, `monthly`, `mixed` |
-| `source` | Originating agency or domestic subsystem | World Bank, IMF, `NSO`, `FISCAL`, `KTXH_GSO`, `CUSTOMS`, `SURVEY_INDEX`, `COMMODITY_MARKET` |
+| `source` | Originating agency or domestic subsystem | World Bank, IMF, National Statistics, State Budget, Socio-Economic Reports, Vietnam Customs, Governance Indices, Commodity Market |
 | `boundary_mode` | Vietnam provincial administrative boundary regime | `"63"` for 63 historical provinces; `"34"` for 34 provinces under Resolution 202/2025/QH15 |
-| `aggregation_rule` | Mathematical rule aggregating 63 provinces into 34 provinces | `sum`, `weighted_mean`, `growth_constant_scale`, `index_chain`, `non_aggregable` |
+| `aggregation_rule` | Mathematical rule aggregating 63 provinces into 34 provinces | additive scale summation, denominator-weighted average, constant-price scale growth recomputation, index chaining, non-aggregable observation preservation |
 | `time_start` and `time_end` | First and last available observation period | `1995` / `2026` |
 | `spatial_coverage` | Geographic or institutional unit of analysis | Country, 63 provinces, 34 provinces, listed firm, household |
-| `source_footnotes` | Collapsible primary data source footnote with source badges | Source tables `PLV01..PLV14`, `THUCHINS`, update cadence, and boundary notes |
+| `source_footnotes` | Collapsible primary data source footnote with source badges | Source tables from the National Statistics Office, Ministry of Finance, and Vietnam Customs, update cadence, and boundary notes |
 
 :::tip Dual Lookup by Short Code and Native Code
 Researchers can search by **`short_code`** for compact, stable modeling or by the agency's native **`code`**. The interface prioritizes `short_code` while preserving the native code in metadata for source verification.
@@ -69,7 +69,7 @@ ss _ dom _ key _ mod
 
 | Segment | Identification Role | Representative Values |
 | --- | --- | --- |
-| `ss` | Data Source | `wb` World Bank, `im` IMF, `ad` ADB, `un` United Nations, `fr` FRED, `gs` GSO/NSO |
+| `ss` | Data Source | `wb` World Bank, `im` IMF, `ad` ADB, `un` United Nations, `fr` FRED, `gs` National Statistics Office |
 | `dom` | Economic Domain | `mac` macroeconomics, `ext` external sector, `fis` fiscal budget, `lab` labor market, `dem` demographics |
 | `key` | Core Indicator Concept | `gdp`, `grdp`, `cpi`, `exp`, `imp`, `pop`, `une`, `fdi` |
 | `mod` | Unit or Variant | `usd`, `vnd`, `pct`, `idx`, `cap` per capita |
@@ -87,10 +87,10 @@ ss _ dom _ key _ mod
 | Technical Term | Standard Definition in EcoData |
 | --- | --- |
 | `boundary_mode` | Parameter toggling between `"63"` historical provinces and `"34"` consolidated provinces and cities under Resolution 202/2025/QH15 across the web UI and all 37 MCP tools. |
-| `vn_province_34_series` | Database table storing harmonized 2000–2026 provincial time series for all 34 consolidated provinces reconstructed under five mathematical rules without mutating 63-province tables. |
-| `vn_admin_units_34` | Official crosswalk table mapping 63 historical provinces to 34 consolidated provinces, including administrative centers and constituent province lists. |
-| `PLV01..PLV14` | Fourteen official 2024 Statistical Yearbook Appendices published by the National Statistics Office under the 34-province structure, used as the 99.5% or higher reconciliation benchmark. |
-| `THUCHINS` | Ministry of Finance state budget revenue and expenditure dataset code covering 1995 to 2026 in the `FISCAL` subsystem. |
+| **34-Province Harmonized Series** | Database table storing harmonized 2000–2026 provincial time series for all 34 consolidated provinces reconstructed under five mathematical rules without mutating 63-province tables. |
+| **34-Province Administrative Crosswalk** | Official crosswalk table mapping 63 historical provinces to 34 consolidated provinces, including administrative centers and constituent province lists. |
+| **34-Province Yearbook Appendices** | Fourteen official 2024 Statistical Yearbook Appendices published by the National Statistics Office under the 34-province structure, used as the 99.5% or higher reconciliation benchmark. |
+| **State Budget Revenue and Expenditure** | Ministry of Finance state budget revenue and expenditure dataset code covering 1995 to 2026 in the State Budget subsystem. |
 
 ## See Also
 

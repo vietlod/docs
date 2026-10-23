@@ -28,7 +28,7 @@ EcoData cung cấp hai phương thức kết hợp trí tuệ nhân tạo vào n
 | Tình huống nghiên cứu | Cách đặt câu lệnh cho trợ lý AI | Công cụ MCP được kích hoạt tự động |
 | --- | --- | --- |
 | Chưa biết chọn nguồn dữ liệu và biến số nào | Mô tả câu hỏi nghiên cứu, đơn vị phân tích quốc gia hoặc tỉnh thành và giai đoạn. | `analyze_request`, `search_macro_indicators` |
-| Cần dữ liệu cấp tỉnh Việt Nam theo địa giới 34 tỉnh mới hoặc 63 tỉnh lịch sử | Yêu cầu trích xuất GRDP, thu ngân sách `FISCAL` hoặc đầu tư công kèm chế độ `boundary_mode="34"` hoặc `"63"`. | `get_gso_data`, `get_yearbook_data`, `query_macro_data_unified` |
+| Cần dữ liệu cấp tỉnh Việt Nam theo địa giới 34 tỉnh mới hoặc 63 tỉnh lịch sử | Yêu cầu trích xuất GRDP, thu ngân sách nhà nước hoặc đầu tư công kèm chế độ `boundary_mode="34"` hoặc `"63"`. | `get_gso_data`, `get_yearbook_data`, `query_macro_data_unified` |
 | Cần phân tích xuất nhập khẩu và 5 nhóm ngành hàng hóa | Nêu tên mặt hàng, mã HS, thị trường đối tác hoặc tỉnh thành xuất nhập khẩu. | `get_customs_commodity_trade`, `get_customs_country_trade`, `get_customs_province_trade` |
 | Cần trích xuất BCTC 30 năm theo rổ cổ phiếu VN30, HNX30 hoặc ngành nghề | Yêu cầu lấy danh sách mã trong nhóm và tải bảng cân đối, kết quả kinh doanh hoặc chỉ số tài chính. | `list_stock_groups`, `get_batch_financial_data`, `get_financial_ratios` |
 | Cần chạy trọn gói một nghiên cứu kinh tế lượng | Nêu biến phụ thuộc, các biến giải thích và yêu cầu chạy quy trình một chạm kèm mã tái lập Stata, R, Python. | `run_complete_econometric_study`, `generate_econometric_code` |
@@ -48,11 +48,11 @@ EcoData cung cấp hai phương thức kết hợp trí tuệ nhân tạo vào n
 ## Các câu lệnh mẫu thực chiến trên AI Chat và Gemini Spark
 
 ```text
-@EcoData Phân tích tác động của đầu tư công và thu ngân sách nhà nước từ phân hệ FISCAL đến tăng trưởng GRDP của 34 tỉnh thành Việt Nam giai đoạn 2020–2025 với boundary_mode="34". Hãy chạy quy trình kinh tế lượng một chạm run_complete_econometric_study và xuất mã tái lập Stata 18 MP.
+@EcoData Phân tích tác động của đầu tư công và thu ngân sách nhà nước từ phân hệ Ngân sách Nhà nước đến tăng trưởng GRDP của 34 tỉnh thành Việt Nam giai đoạn 2020–2025 với boundary_mode="34". Hãy chạy quy trình kinh tế lượng một chạm run_complete_econometric_study và xuất mã tái lập Stata 18 MP.
 ```
 
 ```text
-@EcoData Truy xuất dữ liệu xuất khẩu mặt hàng cà phê và gạo từ phân hệ COMMODITY_MARKET và CUSTOMS giai đoạn 2018–2025 theo các thị trường đối tác lớn nhất, sau đó kiểm tra xu hướng biến động đơn giá xuất khẩu.
+@EcoData Truy xuất dữ liệu xuất khẩu mặt hàng cà phê và gạo từ phân hệ Thị trường Hàng hóa và Hải quan Việt Nam giai đoạn 2018–2025 theo các thị trường đối tác lớn nhất, sau đó kiểm tra xu hướng biến động đơn giá xuất khẩu.
 ```
 
 ```text
@@ -62,6 +62,6 @@ EcoData cung cấp hai phương thức kết hợp trí tuệ nhân tạo vào n
 ## Quy trình kết hợp AI Chat, Dashboard và Kinh tế lượng
 
 1. Gửi câu hỏi nghiên cứu vào **AI Chat** hoặc trợ lý AI đã gắn kỹ năng **EcoData MCP** để xác định danh sách chỉ tiêu và chế độ địa giới 34 tỉnh hoặc 63 tỉnh.
-2. Kiểm tra siêu dữ liệu, độ phủ mẫu và mở phần **Chú thích nguồn dữ liệu gốc** trên giao diện để đối chiếu các bảng nguồn như `PLV01..PLV14` hay `THUCHINS`.
+2. Kiểm tra siêu dữ liệu, độ phủ mẫu và mở phần **Chú thích nguồn dữ liệu gốc** trên giao diện để đối chiếu các bảng nguồn từ Cục Thống kê, Bộ Tài chính và Cục Hải quan.
 3. Chạy ước lượng sơ bộ và kiểm định chẩn đoán qua động cơ **Kinh tế lượng** hoặc lệnh `run_complete_econometric_study`.
 4. Đối chiếu kết quả đã được **Jev Co-Processor** kiểm chứng 3 tầng và tải trọn bộ mã nguồn tái lập Stata, R, Python kèm dữ liệu sạch.
