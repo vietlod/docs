@@ -7,11 +7,11 @@ export default function McpServerFlowSvg() {
   const isVi = currentLocale === 'vi';
 
   const t = {
-    title: isVi ? 'Kiến trúc EcoData MCP Server với 37 công cụ AI chuyên biệt' : 'EcoData MCP Server Architecture with 37 Specialized AI Tools',
-    sub: isVi ? 'Kết nối Gemini Spark, Claude Desktop, Cursor và AntiGravity vào kho dữ liệu kinh tế' : 'Connecting Gemini Spark, Claude Desktop, Cursor, and AntiGravity to economic data',
+    title: isVi ? 'Kiến trúc Unified EcoData MCP Server với 52 công cụ AI chuyên biệt' : 'Unified EcoData MCP Server Architecture with 52 Specialized AI Tools',
+    sub: isVi ? 'Hợp nhất 37 công cụ dữ liệu/kinh tế lượng EcoData và 15 công cụ nghiên cứu 5 bước EcoLab' : 'Unifying 37 native EcoData data/econometric tools and 15 bridged EcoLab 5-stage tools',
     clientsHeader: isVi ? 'Khách hàng AI (AI Clients)' : 'AI Clients & IDEs',
     busHeader: isVi ? 'Giao thức kết nối MCP (Model Context Protocol)' : 'MCP Protocol Bus',
-    toolsHeader: isVi ? '37 công cụ kinh tế lượng chuyên biệt' : '37 Specialized Economic Tools',
+    toolsHeader: isVi ? '52 công cụ hợp nhất (37 EcoData + 15 EcoLab)' : '52 Unified Tools (37 EcoData + 15 EcoLab)',
     coreHeader: isVi ? 'Kho dữ liệu và lõi tính toán EcoData' : 'EcoData Data Warehouse & Analytical Engine',
     tool1: 'search_indicators_unified',
     tool2: 'query_macro_data_unified',
@@ -196,7 +196,7 @@ export default function McpServerFlowSvg() {
           </g>
         </g>
 
-        {/* CENTER COLUMN: MCP Protocol Bus & 37 Tools */}
+        {/* CENTER COLUMN: MCP Protocol Bus & 52 Unified Tools */}
         <g transform="translate(315, 85)">
           <rect width="330" height="360" rx="16" fill="url(#mcpGrad)" stroke="#8b5cf6" strokeWidth="1.8" />
 
@@ -217,7 +217,7 @@ export default function McpServerFlowSvg() {
             </text>
           </g>
 
-          {/* 37 Tools List showcase */}
+          {/* 52 Unified Tools List showcase */}
           <text x="18" y="110" fill="currentColor" fontSize="11.5" fontWeight="700">
             {t.toolsHeader}
           </text>
@@ -263,7 +263,7 @@ export default function McpServerFlowSvg() {
           </g>
 
           <text x="18" y="348" fill="#7c3aed" fontSize="9.5" fontWeight="600">
-            + 32 công cụ khác (BCTC, Thuyết minh, Customs, VHLSS micro...)
+            {isVi ? '+ 47 công cụ khác (15 công cụ EcoLab 5 bước, BCTC, Customs, VHLSS...)' : '+ 47 more tools (15 EcoLab 5-stage tools, Financials, Customs, VHLSS...)'}
           </text>
         </g>
 
@@ -316,7 +316,7 @@ export default function McpServerFlowSvg() {
         </g>
       </svg>
       <div className={styles.svgFooter}>
-        <span><strong>37 {isVi ? 'công cụ MCP chuyên sâu' : 'specialized MCP tools'}</strong> | JSON-RPC 2.0 / SSE / STDIO</span>
+        <span><strong>52 {isVi ? 'công cụ Unified MCP (37 EcoData + 15 EcoLab)' : 'Unified MCP tools (37 EcoData + 15 EcoLab)'}</strong> | JSON-RPC 2.0 / SSE / Streamable HTTP</span>
         <span className={styles.badgeTag}>Gemini Spark • Claude • Cursor • AntiGravity</span>
       </div>
     </div>

@@ -1,62 +1,57 @@
 ---
 title: Knowledge Graph & RAG
 sidebar_position: 2
+description: Guide to EcoLab's 6-source DOI-verified Literature Review module, Verified Citation Ledger, and interactive Academic Knowledge Graph.
 ---
 
-# AI RAG Agents & Academic Knowledge Graphs
+# Six-Source Literature Synthesis & Academic Knowledge Graphs
 
-EcoLab's **Literature Review** module is designed to fully automate the process of searching, evaluating, and synthesizing academic papers related to your research topic. This module uses **Retrieval-Augmented Generation (RAG)** combined with **Knowledge Graphs** powered by Neo4j to ensure academic accuracy and eliminate AI hallucinations.
-
----
-
-## 1. Academic Search and Filtering
-
-The platform connects directly to large-scale open academic databases (Semantic Scholar, ArXiv) to retrieve relevant literature:
-
-1.  Navigate to the **Literature Review** module.
-2.  Enter your research question or topic into the search bar. The AI agent will automatically combine this with the selected project idea as the background context.
-3.  Click the **Chạy tổng quan** (Run Review) button.
-4.  Search results will populate the **Bài báo** (Papers) tab with detailed information:
-    *   Paper title, authors list, journal, year.
-    *   Citation count — a key metric for measuring paper authority.
-    *   Verification status.
+EcoLab's **Literature Review** module automates academic discovery, DOI metadata verification, empirical evidence synthesis, and interactive knowledge graph mapping tailored to your research question. Every synthesized reference is locked into a **Verified Citation Ledger** backed by primary scholarly metadata to eliminate fabricated citations.
 
 ---
 
-## 2. Academic Synthesis Modules
+## 1. Simultaneous Discovery Across Six Scholarly Databases
 
-After retrieving the papers, EcoLab's RAG agent analyzes the abstracts and full texts (if available) to synthesize findings into 5 structured formats:
+EcoLab queries **six authoritative scholarly registries** in parallel:
+
+- **Four Open-Access Registries Active by Default:** **OpenAlex**, **Crossref**, **DOAJ** (Directory of Open Access Journals), and **arXiv**.
+- **Two Personal-Key Enhanced Registries:** **Semantic Scholar** and **CORE** — researchers can save encrypted personal API keys in **Settings → Scholarly API Keys** and run a live connectivity probe before launching large-scale reviews.
+
+Execution steps:
+
+1. Navigate to the **Literature Review** stage inside your research project.
+2. Enter your research query or domain keywords; EcoLab automatically incorporates your selected Stage 1 research design context.
+3. Confirm source readiness across the 6 registries and click **Run Review**.
+4. Inspect retrieved publications in the **Papers** tab displaying title, authors, publication year, journal venue, citation count, verified DOI/source link, and ledger status.
+
+---
+
+## 2. Five Structured Academic Synthesis Outputs
+
+Once candidate papers are retrieved and deduplicated across the six sources, EcoLab synthesizes the empirical literature into five structured components:
 
 ### Literature Matrix
-A structured matrix that allows you to compare previous studies at a glance:
-*   **Author & Year:** Identifies the timeline and research group.
-*   **Research Question:** The core question addressed by the paper.
-*   **Econometric Methodology:** The estimators used (e.g., OLS, GMM, FE/RE).
-*   **Key Findings:** The most important quantitative results of the study.
-*   **Variables & Identification Strategy:** Key variables included in the model.
+Compares prior empirical studies side by side across standardized academic columns:
+- **Authors, Year & Venue:** Tracks theoretical and empirical lineage.
+- **Core Research Question:** Identifies the primary economic mechanism studied.
+- **Econometric Identification & Estimator:** Highlights estimation strategies used (such as Multi-Way HDFE, System GMM, Staggered DID, PPML, ARDL/NARDL, or ACF TFP).
+- **Key Variables & Quantitative Findings:** Summarizes effect signs, magnitudes, and sample scope.
 
 ### Research Gaps
-The AI agent analyzes the collection of papers to identify remaining knowledge gaps that your study could fill:
-*   *Geographic/Contextual Gaps:* Studies have not been conducted in developing countries or specifically in Vietnam.
-*   *Methodological Gaps:* Lack of robustness tests or endogeneity corrections.
-*   *Temporal Gaps:* Datasets used in previous studies are outdated and do not reflect recent economic shifts (e.g., post-pandemic or post-financial crisis).
+Isolates concrete scholarly contributions your paper can address:
+- *Contextual & Institutional Gaps:* Under-explored emerging-market settings or harmonized Vietnam 34-province and firm-level panels.
+- *Methodological Gaps:* Unresolved endogeneity, cross-sectional dependence, or staggered treatment-effect heterogeneity in older TWFE studies.
+- *Temporal & Policy Gaps:* Recent structural reforms, digital transformation waves, or macroeconomic shocks absent from earlier samples.
 
-### Research Objectives & Hypotheses
-The AI automatically translates your selected idea and reference papers into a clear set of objectives:
-*   **General & Specific Objectives.**
-*   **Scientific Hypotheses:** Clearly defines testing hypotheses (e.g., $H_0$, $H_1$) to form the basis for econometric modeling.
+### Research Objectives and Testable Hypotheses ($H_0 / H_1$)
+Translates theoretical mechanisms and literature gaps into general objectives, specific objectives, and falsifiable statistical hypotheses ready for Stage 4 estimation.
 
-### Proposed Model (Variables & Estimator)
-Based on the selected papers, the AI suggests a model specification:
-*   **Editable Variables Table:**
-    *   *Variable Name:* Name of the indicator (e.g., ROA, Leverage, Size).
-    *   *Variable Role:* Dependent, Independent, or Control.
-    *   *Measurement:* How the indicator is calculated.
-    *   *Expected Sign:* Negative ($-$), positive ($+$), or ambiguous ($?$) based on economic theory.
-*   **Suggested Estimator:** Suggests OLS, Fixed Effects, or GMM depending on the proposed data structure.
+### Proposed Variable Dictionary and Estimator Mapping
+- **Editable Variable Framework:** Defines dependent, core explanatory, control, and endogenous/instrumental variables alongside measurement formulas and expected theoretical signs ($+$, $-$, $?$).
+- **Recommended Estimators Across 15 Families:** Maps your data structure directly to baseline and robustness estimators within EcoLab's **201+ estimator catalog**.
 
-### Knowledge Graph Viz
-Uses Neo4j to draw interactive visual network maps connecting:
-*   Citation relationships between papers.
-*   Semantic relationships between research concepts.
-*   The most frequently applied methodological clusters.
+### Interactive Academic Knowledge Graph
+Renders an interactive network map connecting:
+- Citation and co-citation clusters linking foundational papers.
+- Semantic pathways bridging economic concepts and transmission channels.
+- Methodological clusters showing dominant econometric designs in your field.

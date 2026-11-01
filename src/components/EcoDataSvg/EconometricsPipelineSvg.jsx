@@ -12,9 +12,9 @@ export default function EconometricsPipelineSvg() {
     step1Title: isVi ? '1. Nạp và xử lý dữ liệu' : '1. Ingestion & Prep',
     step1Desc1: isVi ? '200.000+ chuỗi vĩ mô & vi mô' : '200k+ macro & micro series',
     step1Desc2: isVi ? 'Làm sạch, định danh, trễ/log' : 'Cleaning, panel indexing, lag/log',
-    step2Title: isVi ? '2. Xác lập 105 mô hình' : '2. Model Specification',
-    step2Desc1: isVi ? '12 họ phân tích định lượng' : '12 quantitative families',
-    step2Desc2: isVi ? 'OLS, Panel FE/RE, GMM, VAR, DID' : 'OLS, Panel FE/RE, GMM, VAR, DID',
+    step2Title: isVi ? '2. Xác lập 201+ mô hình' : '2. 201+ Model Specs',
+    step2Desc1: isVi ? '15 họ & 58 mô hình con' : '15 families & 58 sub-models',
+    step2Desc2: isVi ? 'OLS, HDFE, GMM, DID, PPML, BLP' : 'OLS, HDFE, GMM, DID, PPML, BLP',
     step3Title: isVi ? '3. Bộ 3 runtime song song' : '3. Parallel Triple Runtime',
     pyDesc: 'Python (statsmodels / linearmodels)',
     rDesc: 'R (tidyverse / plm / fixest)',
@@ -205,7 +205,7 @@ export default function EconometricsPipelineSvg() {
           </g>
           <g transform="translate(14, 226)">
             <rect width="162" height="24" rx="5" fill="rgba(139,92,246,0.15)" />
-            <text x="10" y="16" fill="#6d28d9" fontSize="9.5" fontWeight="700">+ Logit, Probit, Spatial, DID</text>
+            <text x="10" y="16" fill="#6d28d9" fontSize="9.5" fontWeight="700">+ DID, PPML, Spatial, BLP, TFP</text>
           </g>
         </g>
 
@@ -288,8 +288,8 @@ export default function EconometricsPipelineSvg() {
         </g>
       </svg>
       <div className={styles.svgFooter}>
-        <span><strong>105 {isVi ? 'mô hình kinh tế lượng' : 'econometric models'}</strong> | 12 {isVi ? 'họ phân tích chuyên sâu' : 'analytical families'}</span>
-        <span className={styles.badgeTag}>Python 3.12 • R 4.4 • Stata 18 MP</span>
+        <span><strong>201+ {isVi ? 'mô hình kinh tế lượng' : 'econometric models'}</strong> | 15 {isVi ? 'họ phân tích (58 mô hình con)' : 'analytical families (58 sub-models)'}</span>
+        <span className={styles.badgeTag}>Python 3.13 • R 4.4 • Stata 18 MP</span>
       </div>
     </div>
   );

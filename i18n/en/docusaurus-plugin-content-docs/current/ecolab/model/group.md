@@ -1,137 +1,112 @@
 ---
-title: Model & estimator catalog
+title: Catalog of 15 Model Families & 201+ Estimators
 sidebar_position: 0
-description: Overview of the 12 model families, 40 sub-models and 105 econometric estimators supported by EcoData/EcoLab — classification, how to choose, and how the 105 estimators are formed.
+description: Comprehensive overview of the 15 model families, 58 sub-models, and 201+ econometric estimators supported across EcoData and EcoLab — selection map, Pre/Postestimation diagnostics, and .zip replication bundles.
 ---
 
-# Econometric model & estimator catalog
+# Catalog of 15 Model Families, 58 Sub-Models & 201+ Estimators
 
-EcoData/EcoLab integrates a comprehensive **Econometrics Engine** with **12 major model families**, broken down into **40 sub-models** and **105 estimators**. This page is the overview map: it helps you choose the right family for your data structure and research question, and explains how the 105 estimators are formed.
+EcoData (`v3.82.0`) and EcoLab (`v1.5.0`) share a unified Tri-Engine econometrics catalog comprising **15 major model families**, **58 mathematical sub-models**, and **201+ core estimators** executing natively across **Python**, **R**, and **Stata 18 MP**. Use this page as your methodological roadmap to match data structures and identification designs to the right estimator family.
 
-:::tip Test feasibility before investing further
-Run a quick estimation on real data to confirm your topic **has data, statistical significance and reproducibility** before writing a thesis or paper. Every estimation exports **replication code** for Stata/R/Python.
+:::tip Method-Accurate Execution & 100% Reproducibility
+Every estimator executes its genuine econometric algorithm (strict Fail-Closed `422` enforcement with zero silent OLS fallback) and exports a `.zip` replication bundle containing Stata 18 MP (`.do`), R (`.R`), and Python (`.py`) scripts alongside `SHA256SUMS.txt`.
 :::
 
 ---
 
-## Map of the 12 model families
+## Decision Map Across the 15 Model Families
 
 ```mermaid
 flowchart TD
-    A["Research data"] --> B{"Data structure?"}
-    B -->|"Cross-section"| C["Cross-section"]
-    B -->|"Panel"| D["Panel"]
-    B -->|"Time series"| E["Time Series"]
-    B -->|"Impact evaluation"| F["Causal"]
+    A["Research Dataset & Question"] --> B{"Data & Identification?"}
+    B -->|"Cross-Section / HDFE"| C["Cross-Section & Multi-Way"]
+    B -->|"Longitudinal Panel N x T"| D["Static & Dynamic Panels"]
+    B -->|"Time Series"| E["Univariate & Multivariate TS"]
+    B -->|"Causal Identification"| F["Causal & Spatial"]
+    B -->|"Structural Micro & ML"| G["Demand, Frontier TFP & ML"]
 
-    C --> C1["1. Classical linear regression"]
-    C --> C2["2. Regularized regression"]
-    C --> C3["5. Limited dependent variable"]
-    C --> C4["6. Count data"]
-    C --> C5["7. Quantile regression"]
-    C --> C6["11. Non-linear & semi-parametric"]
+    C --> C1["1. Classical Linear & Multi-Way HDFE"]
+    C --> C2["2. Regularized Ridge/Lasso/Post-Lasso"]
+    C --> C5["5. Discrete Choice, Selection & Survival"]
+    C --> C6["6. Count Data & Gravity PPML"]
+    C --> C7["7. Quantile, RIF & Oaxaca-Blinder"]
+    C --> C11["11. Non-Linear, GAM & Threshold"]
 
-    D --> D1["3. Linear panel data"]
-    D --> D2["4. Dynamic panel data"]
+    D --> D3["3. Linear Panel, Driscoll-Kraay & CCE-MG"]
+    D --> D4["4. Dynamic GMM, Threshold & DOLS/PMG"]
 
-    E --> E1["8. Univariate time series"]
-    E --> E2["9. Multivariate time series"]
+    E --> E8["8. ARIMA, GARCH, ARDL/NARDL & PSY"]
+    E --> E9["9. VAR, VECM, SVAR & Local Projections"]
 
-    F --> F1["12. Causal inference & impact evaluation"]
-    C --> G["10. IV & simultaneous equations"]
+    F --> F10["10. IV/2SLS, LIML, Bartik & 3SLS/SUR"]
+    F --> F12["12. Staggered DID, SDID, RDD & Spatial"]
+
+    G --> G13["13. Demand Systems AIDS/QUAIDS & BLP"]
+    G --> G14["14. Frontier SFA/DEA & Structural ACF TFP"]
+    G --> G15["15. Wild Cluster Bootstrap & Causal ML"]
 ```
 
 ---
 
-## Family → sub-model table
+## Classification of 15 Model Families → 58 Sub-Models
 
-| # | Model family | Representative sub-models | When to use |
+| # | Model Family | Representative Sub-Models | When to Prioritize |
 | :--- | :--- | :--- | :--- |
-| 1 | **Classical linear regression** | OLS, WLS, GLS, TLS | Linear relationships, baseline cross-section |
-| 2 | **Regularized regression** | Ridge, Lasso, Elastic Net, Adaptive Lasso | Many regressors, multicollinearity, variable selection |
-| 3 | **Linear panel data** | Pooled OLS, [Fixed Effects](/en/ecolab/model/fem-rem), [Random Effects](/en/ecolab/model/fem-rem), Between | Many units × many periods |
-| 4 | **Dynamic panel data** | [Arellano-Bond (Diff GMM)](/en/ecolab/model/gmm), [Blundell-Bond (System GMM)](/en/ecolab/model/gmm) | Lagged variable, endogeneity, large N small T |
-| 5 | **Limited dependent variable** | Logit, Probit, Tobit, Truncated, Heckman | Binary, censored, sample-selected outcomes |
-| 6 | **Count data** | Poisson, Negative Binomial, ZIP, ZINB | Count outcomes (non-negative integers) |
-| 7 | **Quantile regression** | Linear Quantile, Panel FE-QR | Effects across different quantiles |
-| 8 | **Univariate time series** | AR, MA, ARMA, ARIMA, SARIMA, ARCH, GARCH, EGARCH | Forecasting, volatility of one series |
-| 9 | **Multivariate time series** | [VAR](/en/ecolab/model/vecm), [VECM](/en/ecolab/model/vecm), SVAR | Multi-variable systems, cointegration |
-| 10 | **IV & simultaneous equations** | IV/2SLS, 3SLS, SUR | Endogeneity, equation systems |
-| 11 | **Non-linear & semi-parametric** | NLS, GAM | Non-linear relationships |
-| 12 | **Causal inference** | [DiD](/en/ecolab/model/did), PSM, RDD | Policy impact evaluation |
-
-> In addition, [ARDL](/en/ecolab/model/ardl) (Autoregressive Distributed Lag) supports long-run/short-run relationships for time series with mixed I(0)/I(1) integration orders.
+| 1 | **Classical Linear & Multi-Way HDFE** | [OLS](/ecolab/model/ols), [WLS](/ecolab/model/wls), [GLS](/ecolab/model/gls), [TLS](/ecolab/model/tls), Multi-Way HDFE | Baseline linear specifications or absorbing multi-way high-dimensional fixed effects |
+| 2 | **Regularized Regression** | [Ridge](/ecolab/model/ridge), [Lasso](/ecolab/model/lasso), [Elastic Net](/ecolab/model/elastic-net), [Adaptive Lasso](/ecolab/model/adaptive-lasso), Post-Lasso | High-dimensional predictors, severe collinearity, and principled variable selection |
+| 3 | **Linear Panel Data** | [Pooled OLS](/ecolab/model/pooled-ols), [Fixed/Random Effects](/ecolab/model/fem-rem), [Between](/ecolab/model/between), Mundlak CRE, Driscoll-Kraay, CCE-MG, PCSE | Multi-entity longitudinal panels controlling unobserved heterogeneity and cross-sectional dependence |
+| 4 | **Dynamic, Threshold & Cointegrated Panel** | [Difference & System GMM](/ecolab/model/gmm), Dynamic Panel Threshold, Panel DOLS, FMOLS, PMG | Lagged dependent variables with endogenous regressors (large $N$, small $T$) or long-$T$ cointegrated panels |
+| 5 | **Limited Dependent & Survival** | [Logit](/ecolab/model/logit), [Probit](/ecolab/model/probit), [Tobit](/ecolab/model/tobit), [Truncated](/ecolab/model/truncated), [Heckman](/ecolab/model/heckman), Fractional, Cox PH, Weibull AFT | Binary, multinomial, fractional $[0, 1]$, censored, sample-selected, or time-to-event duration outcomes |
+| 6 | **Count Data & Gravity PPML** | [Poisson](/ecolab/model/poisson), [Negative Binomial](/ecolab/model/negbin), [ZIP](/ecolab/model/zip), [ZINB](/ecolab/model/zinb), Gravity PPML-HDFE | Non-negative integer counts, innovation patents, and bilateral trade gravity flows with zeros |
+| 7 | **Quantile & Distributional Decomposition** | [Linear Quantile](/ecolab/model/quantile), [Panel MM-QR](/ecolab/model/panel-quantile), RIF Quantile, Oaxaca-Blinder | Heterogeneous effects across quantiles and counterfactual wage or productivity decompositions |
+| 8 | **Univariate Time Series & Regime Switching** | [ARIMA](/ecolab/model/arima), [SARIMA](/ecolab/model/sarima), [GARCH](/ecolab/model/garch), [EGARCH](/ecolab/model/egarch), [ARDL](/ecolab/model/ardl), NARDL, Markov-Switching, PSY GSADF | Conditional volatility, mixed $I(0)/I(1)$ cointegration, asymmetric pass-through, and bubble detection |
+| 9 | **Multivariate Time Series & Local Projections** | [VAR](/ecolab/model/var), [VECM](/ecolab/model/vecm), [SVAR](/ecolab/model/svar), Jordà Local Projections, IV-LP, Panel VAR | Multi-equation macro dynamics, structural shocks, and specification-robust impulse responses |
+| 10 | **Instrumental Variables & Simultaneous Systems** | [IV/2SLS](/ecolab/model/iv-2sls), LIML, Lewbel IV, Bartik Shift-Share, [3SLS](/ecolab/model/3sls), [SUR](/ecolab/model/sur) | Endogenous regressors, weak instruments, shift-share exposure designs, and simultaneous systems |
+| 11 | **Non-Linear, Semi-Parametric & Threshold** | [NLS](/ecolab/model/nls), [GAM](/ecolab/model/gam), Hansen Threshold, Robinson Semiparametric | Flexible non-linear curves and endogenous sample-splitting threshold regimes |
+| 12 | **Causal Inference & Spatial Econometrics** | [TWFE & Staggered DID (CS, SA, BJS, SDID)](/ecolab/model/did), [PSM/AIPW](/ecolab/model/psm), [Sharp/Fuzzy RDD](/ecolab/model/rdd), Synthetic Control, Spatial SAR/SEM/SDM & Conley HAC | Staggered policy rollouts, synthetic counterfactuals, cutoff discontinuities, and spatial spillovers |
+| 13 | **Structural IO & Demand Systems** | [AIDS, QUAIDS, Berry Logit IV & Random-Coefficients BLP](/ecolab/model/demand-systems-blp) | Price and expenditure elasticities in consumer demand systems and differentiated-product markets |
+| 14 | **Productivity, Frontier & TFP Estimation** | [SFA, DEA, Malmquist, Olley-Pakes, Levinsohn-Petrin, Wooldridge & ACF TFP](/ecolab/model/frontier-tfp-decomposition) | Technical efficiency benchmarking and structural firm-level total factor productivity estimation |
+| 15 | **Resampling, Econometric ML & High-Dimensional Inference** | [Wild Cluster Bootstrap, Double/Debiased ML, Causal Forest & PCA/Factor](/ecolab/model/bootstrap-highdim-inference) | Reliable inference under few clusters ($G < 30$), high-dimensional nuisance controls, and CATE |
 
 ---
 
-## How are the 105 estimators formed?
+## How Are the 201+ Core Estimators Formed?
 
-The **40 sub-models** correspond to distinct **mathematical specifications**. To serve academic research that requires coefficient robustness, each sub-model can be combined with several **optimization methods** and **standard-error structures** — yielding **105 estimators**.
+The **58 mathematical sub-models** capture distinct structural equations. Pairing each sub-model with its appropriate optimization routine and variance-covariance / resampling estimator yields **201+ core estimators** (continuously extensible via EcoData's 2-stage `B1–B4` curation pipeline):
 
 ```mermaid
 flowchart LR
-    M["40 sub-models"] --> O["Estimation method"]
-    M --> S["Standard-error structure"]
-    O --> O1["OLS / FGLS"]
-    O --> O2["MLE / Quasi-MLE"]
-    O --> O3["GMM 1-step / 2-step (Windmeijer)"]
-    S --> S1["Homoskedastic"]
-    S --> S2["White Robust (HC0–HC3)"]
-    S --> S3["Clustered (Entity / Time / Multi-way)"]
-    O1 --> R["105 estimators"]
+    M["58 Sub-Models (15 Families)"] --> O["Optimization Routine"]
+    M --> S["Covariance & Resampling"]
+    O --> O1["OLS / HDFE / FGLS"]
+    O --> O2["MLE / QMLE / PPML / Cox"]
+    O --> O3["1-Step & 2-Step Windmeijer GMM / BLP / ACF"]
+    O --> O4["Linear Programming DEA / Spline / Orthogonal ML"]
+    S --> S1["Homoskedastic & White HC0–HC3"]
+    S --> S2["Newey-West HAC / Driscoll-Kraay / Conley Spatial"]
+    S --> S3["One-Way / Multi-Way Cluster & Wild Cluster Bootstrap"]
+    O1 --> R["201+ Core Estimators"]
     O2 --> R
     O3 --> R
+    O4 --> R
     S1 --> R
     S2 --> R
     S3 --> R
 ```
 
-| Component | Options |
-| :--- | :--- |
-| **Optimization method** | OLS, FGLS, Maximum Likelihood (MLE), Quasi-MLE, GMM (1-step/2-step with Windmeijer correction) |
-| **Standard-error structure** | Homoskedastic; White Robust (HC0, HC1, HC2, HC3); Clustered by Entity, Time or Multi-way |
+---
 
-:::info Robust standard errors
-Choosing the right standard-error structure controls for **heteroskedasticity** and **autocorrelation** — a decisive factor for the reliability of statistical inference (t-stats, p-values, confidence intervals).
-:::
+## Separated Pre-Estimation and Postestimation Diagnostic Matrix
+
+| Diagnostic Phase | Representative Statistical Tests | Role in Peer-Reviewed Manuscripts |
+| :--- | :--- | :--- |
+| **Pre-Estimation Diagnostics** | ADF, PP, KPSS, IPS, LLC, Pesaran CIPS; $VIF$; Pesaran CD; Moran's $I$; Pedroni, Kao, Westerlund, Johansen | Establishes stationarity orders, screens collinearity, and verifies spatial/cross-sectional dependence and cointegration prior to model selection |
+| **Postestimation Diagnostics** | Breusch-Pagan, White, Wooldridge, Ramsey RESET, Hausman/Mundlak, AR(1)/AR(2), Hansen $J$, Kleibergen-Paap rk Wald $F$, Bounds $F/t$, Event-Study Pre-Trend, McCrary | Validates residual assumptions, instrument relevance/exogeneity, parallel pre-trends, and statistical inference reliability |
 
 ---
 
-## Estimation workflow
+## See Also
 
-```mermaid
-flowchart LR
-    A["Choose family"] --> B["Choose sub-model"]
-    B --> C["Select dependent & independent variables"]
-    C --> D["Configure SE & parameters"]
-    D --> E["Run estimation"]
-    E --> F["Read coefficients, SE, p-values, diagnostics"]
-    F --> G["Export replication code + report"]
-```
-
-1. In the **Modeling** module, choose the **family** by data structure.
-2. Choose the **sub-model** (specific specification).
-3. Declare the dependent variable $Y$ and the independent variables $X_1, \dots, X_k$.
-4. Choose the **standard-error structure** (Homoskedastic / Robust / Clustered) and advanced parameters.
-5. Run and read the **estimation table**, **diagnostics**, **robustness**; export the **replication code**.
-
----
-
-## Choosing a model by data structure
-
-| Data structure | Preferred family |
-| :--- | :--- |
-| Cross-section, continuous $Y$ | Classical linear regression; regularized if many regressors |
-| Binary / discrete / censored $Y$ | Limited dependent variable; count data |
-| Panel (N units × T periods) | Linear panel (FE/RE); dynamic panel (GMM) if lagged variable |
-| Single time series | ARIMA/SARIMA; ARCH/GARCH for volatility |
-| Multiple time-series system | VAR/VECM/SVAR |
-| Policy impact evaluation | DiD, PSM, RDD, IV |
-
----
-
-## See also
-
-- [Estimation & Modeling](/en/ecolab/econometrics-modeling) — detailed workflow
-- Family detail pages: [Panel data (FEM/REM)](/en/ecolab/model/fem-rem) · [Dynamic panel (GMM)](/en/ecolab/model/gmm) · [ARDL](/en/ecolab/model/ardl) · [VECM](/en/ecolab/model/vecm) · [DiD](/en/ecolab/model/did)
-- Worked examples: [FDI & growth (ARDL)](/en/ecolab/vi-du/fdi-tang-truong-ardl) · [Public debt & growth (panel)](/en/ecolab/vi-du/no-cong-tang-truong-panel)
+- [Econometrics Estimation & Modeling](/ecolab/econometrics-modeling) — complete operational workflow in EcoLab
+- Newly expanded model families: [Demand Systems & BLP (Family 13)](/ecolab/model/demand-systems-blp) · [Frontier & TFP Estimation (Family 14)](/ecolab/model/frontier-tfp-decomposition) · [Wild Cluster Bootstrap & Causal ML (Family 15)](/ecolab/model/bootstrap-highdim-inference)
+- Core family guides: [Panel Data (FEM/REM)](/ecolab/model/fem-rem) · [Dynamic Panel (GMM)](/ecolab/model/gmm) · [ARDL](/ecolab/model/ardl) · [VECM](/ecolab/model/vecm) · [DID](/ecolab/model/did)

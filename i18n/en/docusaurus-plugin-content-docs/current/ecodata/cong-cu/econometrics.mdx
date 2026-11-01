@@ -1,47 +1,57 @@
 ---
 id: econometrics
-title: Econometrics Engine Across 12 Model Families and 105 Estimators
-description: How to use EcoData's Econometrics Engine featuring 12 model families, 40 sub-models, and 105 estimators executing across Python, R, and Stata 18 MP.
+title: Econometrics Engine Across 15 Model Families, 58 Sub-Models, and 201+ Estimators
+description: Complete guide to EcoData's Econometrics Engine (v3.82.0) featuring 15 model families, 58 sub-models, and 201+ core estimators across Python, R, and Stata 18 MP with separated Pre/Postestimation diagnostics and .zip replication bundles.
 ---
 
-# Econometrics Engine Across 12 Model Families and 105 Estimators
+# Econometrics Engine Across 15 Model Families, 58 Sub-Models, and 201+ Estimators
 
-EcoData's integrated Econometrics Engine enables sample preparation, parameter estimation, diagnostic testing, and replication script generation directly in your browser or through the EcoData MCP Server.
+EcoData's integrated Econometrics Engine (`v3.82.0`) enables sample preparation, pre-estimation specification testing, method-accurate parameter estimation, postestimation diagnostic auditing, and `.zip` replication bundle generation directly in your browser or through the **Unified EcoData MCP Server** (`https://ecodata.io.vn/mcp`).
 
-## Architecture of 12 Model Families, 40 Sub-Models, and 105 Estimators
+## Architecture of 15 Model Families, 58 Sub-Models, and 201+ Core Estimators
 
-EcoData provides a comprehensive econometric suite designed for academic publishing and policy evaluation:
+EcoData organizes **201+ core estimators** across **15 specialized model families** and **58 mathematical sub-models**, covering modern empirical methodologies published in leading economics journals from 2021 to 2026:
 
-### Twelve Core Model Families
+| ID | Model Family | Representative Sub-Models and Estimators | Primary Empirical Research Context |
+| :--- | :--- | :--- | :--- |
+| **1** | **Classical Linear & Multi-Way HDFE** | OLS, WLS, GLS/FGLS, TLS, Multi-Way HDFE (`reghdfe` / `fixest::feols` / `PyFixest`) | Baseline cross-sectional regressions and high-dimensional fixed effects absorbing firm, industry, province, and year dimensions |
+| **2** | **Regularized Regression & Variable Selection** | Ridge ($L_2$), Lasso ($L_1$), Elastic Net, Adaptive Lasso, Post-Lasso OLS | High-dimensional predictors, severe multicollinearity mitigation, and principled covariate selection |
+| **3** | **Linear Panel Data & Cross-Sectional Dependence** | Pooled OLS, Entity/Time/Two-Way FE, Random Effects, Between, First-Difference, Mundlak CRE, Driscoll-Kraay, Pesaran CCE-MG, Beck-Katz PCSE | Provincial, cross-country, and corporate panels exhibiting spatial or macroeconomic cross-sectional dependence |
+| **4** | **Dynamic, Threshold & Cointegrated Panel** | Arellano-Bond Difference GMM, Blundell-Bond System GMM (Windmeijer correction), Seo-Shin Dynamic Panel Threshold, Panel DOLS, FMOLS, Pesaran PMG | Persistent outcomes with lagged dependent variables, endogenous regressors, regime thresholds, and long-$T$ macro panels |
+| **5** | **Discrete Choice, Sample Selection & Survival** | Binary/Multinomial/Conditional/Ordered Logit & Probit, Censored Tobit, Truncated, Heckman 2-Step & MLE, Cragg Double-Hurdle, Beta/Fractional, Cox PH, Weibull/Log-Normal AFT | Binary, categorical, fractional $[0, 1]$, corner-solution, sample-selected, and time-to-event duration outcomes |
+| **6** | **Count Data & Gravity PPML** | Poisson QMLE, Negative Binomial (NB1/NB2), Hurdle Count, ZIP, ZINB, Gravity PPML-HDFE (`ppmlhdfe`) | Patent counts, event frequencies, and bilateral trade gravity equations with extensive zero trade flows |
+| **7** | **Quantile, Distributional & Decomposition** | Koenker-Bassett Quantile Regression, Machado-Santos Silva MM-QR (`xtqreg`), Firpo-Fortin-Lemieux RIF, Kitagawa-Oaxaca-Blinder & Machado-Mata | Distributional heterogeneity, unconditional quantile policy impacts, and wage or productivity gap decompositions |
+| **8** | **Univariate Time Series, Volatility & Regimes** | ARIMA/SARIMAX, GARCH/EGARCH/GJR-GARCH, Pesaran-Shin-Smith ARDL, Shin-Yu-Greenwood-Nimmo NARDL, Hamilton Markov-Switching, PSY GSADF Bubble Test | Macroeconomic and financial volatility forecasting, asymmetric short/long-run pass-through, and exuberance detection |
+| **9** | **Multivariate Time Series & Local Projections** | VAR, Johansen VECM, Structural VAR (Cholesky & Long-Run Blanchard-Quah), Jordà Local Projections & IV-LP, Panel VAR (`pvar`) | Monetary and fiscal shock identification, impulse response functions (IRF), and forecast error variance decompositions |
+| **10** | **Instrumental Variables & Simultaneous Systems** | IV-2SLS, LIML, Fuller-$k$, Lewbel Heteroskedasticity-Based IV, Bartik Shift-Share IV, IV-GMM, 3SLS, Zellner SUR | Endogenous regressors, weak-instrument-robust inference, Bartik exposure designs, and simultaneous equation systems |
+| **11** | **Non-Linear, Semi-Parametric & Threshold** | Nonlinear Least Squares (NLS), Penalized Spline GAM, Hansen Sample-Splitting Threshold, Robinson Partial Linear Semiparametric | Non-linear Engel or Kuznets curves and endogenous regime-splitting structural relationships |
+| **12** | **Causal Inference, Program Evaluation & Spatial** | TWFE DID, Callaway-Sant'Anna, Sun-Abraham, Borusyak-Jaravel-Spiess, de Chaisemartin-D'Haultfœuille, Goodman-Bacon, Dube LP-DID, Arkhangelsky SDID, Abadie Synthetic Control, Sharp/Fuzzy RDD, PSM/IPW/AIPW/CEM, Spatial SAR/SEM/SDM/SAC/SDEM & Conley Spatial HAC | Staggered policy adoption robust to heterogeneous treatment effects, synthetic counterfactuals, discontinuities, and spatial spillovers |
+| **13** | **Structural IO & Demand Systems** | Deaton-Muellbauer AIDS, Banks-Blundell-Lewbel QUAIDS, Berry Logit Demand IV, Berry-Levinsohn-Pakes Random-Coefficients BLP (`pyblp`) | Household expenditure elasticities (VHLSS) and differentiated-products market power and welfare estimation |
+| **14** | **Productivity, Frontier & TFP Estimation** | Aigner-Lovell-Schmidt SFA, Battese-Coelli Panel SFA, Charnes-Cooper-Rhodes & Banker-Charnes-Cooper DEA, Malmquist Index, Olley-Pakes, Levinsohn-Petrin, Wooldridge & Ackerberg-Caves-Frazer (ACF) TFP | Technical efficiency benchmarking for banks/firms and structural total factor productivity estimation correcting input endogeneity |
+| **15** | **Resampling, Econometric ML & High-Dimensional Inference** | Nonparametric/Pairs, Moving-Block, Panel Cluster & Roodman-MacKinnon-Nielsen-Webb Wild Cluster Bootstrap, Chernozhukov Double/Debiased ML, Athey-Wager Causal Forest, PCA/Factor/K-Means, Benchmark Predictive ML | Finite-sample inference with few clusters ($G < 30$), high-dimensional nuisance control, and heterogeneous treatment effects (CATE) |
 
-1. **Classical Linear Regression:** OLS, WLS, GLS, and Total Least Squares TLS.
-2. **Regularized Regression:** Ridge, Lasso, Elastic Net, and Adaptive Lasso.
-3. **Linear Panel Data:** Pooled OLS, Entity and Two-Way Fixed Effects, Random Effects, and Between Effects.
-4. **Dynamic Panel Data:** Arellano-Bond Difference GMM and Blundell-Bond System GMM.
-5. **Discrete Choice and Limited Dependent Variables:** Binary Logit, Binary Probit, Multinomial Logit, Ordered Probit, Censored Tobit, Truncated Regression, and Heckman two-step selection.
-6. **Count Data Models:** Poisson Regression, Negative Binomial, Zero-Inflated Poisson ZIP, and Zero-Inflated Negative Binomial ZINB.
-7. **Quantile Regression:** Linear Quantile Regression and Fixed-Effects Panel Quantile Regression.
-8. **Univariate Time Series and Conditional Volatility:** AR, MA, ARMA, ARIMA, SARIMAX, ARDL, ARCH, GARCH, and EGARCH.
-9. **Multivariate Time Series:** Vector Autoregression VAR, Vector Error Correction VECM, Structural VAR, Granger causality tests, and Impulse Response Functions IRF.
-10. **Instrumental Variables and Simultaneous Equations:** Two-Stage Least Squares 2SLS, Three-Stage Least Squares 3SLS, and Seemingly Unrelated Regressions SUR.
-11. **Non-Linear, Semi-Parametric, and Bayesian Machine Learning:** Non-Linear Least Squares NLS, Generalized Additive Models GAM, Bayesian MCMC, and Causal Forest.
-12. **Causal Inference and Spatial Econometrics:** Difference-in-Differences DID, Event Study, Propensity Score Matching PSM, Regression Discontinuity Design RDD, and spatial models SAR, SEM, and Spatial Durbin SDM.
+### How 201+ Estimators Are Parameterized and Fail-Closed Integrity
 
-### Breakdown of 40 Sub-Models and 105 Estimators
+Each of the **58 mathematical sub-models** pairs its exact structural objective (OLS/HDFE, FGLS, MLE/QMLE, 1-step/2-step Windmeijer GMM, Penalized Splines, Linear Programming DEA, BLP Contraction Mapping) with rigorous variance-covariance structures (Homoskedastic, White Robust HC0–HC3, Newey-West HAC, Driscoll-Kraay, Conley Spatial HAC, One-Way/Multi-Way Clustering, and Wild Cluster Bootstrap).
 
-The engine exposes **40 mathematical sub-models** and **105 distinct estimators** parameterized across:
-- **Optimization Methods:** OLS, FGLS, Maximum Likelihood MLE, Quasi-MLE, and one-step or two-step GMM with Windmeijer finite-sample correction.
-- **Variance-Covariance Standard Error Structures:** Classical homoskedastic, White heteroskedasticity-robust HC0, HC1, HC2, HC3, Newey-West HAC, and one-way or two-way clustered standard errors by province, firm, or time.
+:::warning[Fail-Closed Methodological Guarantee]
+EcoData's Tri-Engine executes the **exact mathematical algorithm** corresponding to every requested estimator key. If an unregistered estimator key is requested or required structural inputs are missing (such as excluded instruments for 2SLS/BLP, spatial weights or coordinates for spatial models, or intermediate proxy inputs for ACF TFP), the engine returns an explicit `422 UNSUPPORTED_ESTIMATOR` or `422 INVALID_SPECIFICATION` error — **never silently falling back to OLS**.
+:::
 
-## Estimation Workflow in the Web App and MCP
+## Separated Pre-Estimation and Postestimation Diagnostics
 
-1. Open the **Econometrics** module or invoke the MCP tool `run_complete_econometric_study`.
-2. Select a model family and specific estimator.
-3. Choose the dependent variable and explanatory variables from the indicator catalog or 34-province, 63-province, or firm panels.
-4. Configure the sample period and log, difference, or lag transformations.
-5. Execute the model in parallel across **Python, R, and Stata 18 MP**.
-6. Inspect parameter estimates, standard errors, $t$-statistics, $p$-values, diagnostic tests including $VIF$, Breusch-Pagan, Wooldridge, Hausman, and Hansen $J$, and export executable `.do`, `.R`, and `.py` replication scripts.
+EcoData cleanly separates pre-estimation data checks from postestimation model validation to mirror peer-reviewed empirical workflows:
 
-## Academic Table Formatting and Citation Styles
+| Diagnostic Phase | Automated Statistical Test Battery | Methodological Decision Role |
+| :--- | :--- | :--- |
+| **1. Pre-Estimation Diagnostics** | Unit-root tests (ADF, Phillips-Perron, KPSS, Im-Pesaran-Shin, Levin-Lin-Chu, Pesaran CIPS); Multicollinearity $VIF$ and condition numbers; Pesaran CD cross-sectional dependence; Global/Local Moran's $I$ and Geary's $C$ spatial autocorrelation; Pedroni, Kao, Westerlund, and Johansen cointegration tests | Determines $I(0)/I(1)$ integration orders, flags cross-sectional dependence requiring Driscoll-Kraay or CCE-MG, verifies spatial dependence prior to SAR/SDM, and confirms cointegration before VECM/ARDL/FMOLS |
+| **2. Postestimation Diagnostics** | Breusch-Pagan and White heteroskedasticity; Durbin-Watson, Breusch-Godfrey, and Wooldridge serial correlation; Ramsey RESET and Jarque-Bera normality; Hausman and Mundlak FE/RE specification; Arellano-Bond AR(1)/AR(2) and Hansen/Sargan $J$ overidentification; Cragg-Donald and Kleibergen-Paap rk Wald $F$ weak-instrument tests; Pesaran-Shin-Smith Bounds $F/t$ and NARDL asymmetry Wald tests; Event-Study Pre-Trend joint Wald and McCrary RDD density tests | Validates Gauss-Markov assumptions, instrument validity, causal identification assumptions, and cross-runtime numerical parity across Python, R, and Stata 18 MP ($\Delta < 10^{-6}$) |
 
-Regression output tables switch instantaneously across five international publication standards: **APA 7th**, **Chicago 17th**, **Harvard**, **IEEE**, and **MLA 9th**: while automatically rendering three-tier LaTeX mathematical variable notation.
+## Estimation Workflow and Three-Language `.zip` Replication Bundles
+
+1. Open the **Econometrics** module in the web workspace or invoke `run_econometrics_model` / `run_complete_econometric_study` via MCP.
+2. Execute **Pre-Estimation Diagnostics** on your candidate variables (supporting both `boundary_mode="34"` and `"63"`).
+3. Select from the **15 model families** and **201+ core estimators**.
+4. Specify dependent, explanatory, endogenous/instrument, entity/time identifiers, and standard-error structures.
+5. Run parallel estimation across **Python**, **R**, and **Stata 18 MP** to inspect coefficients, standard errors, $t/z$-statistics, $p$-values, and the full **Postestimation Diagnostics** suite.
+6. Switch instantaneously across five publication table standards (**APA 7th**, **Chicago 17th**, **Harvard**, **IEEE**, **MLA 9th**) and export the self-contained **`.zip` Replication Bundle** containing `.do` (Stata 18 MP), `.R`, `.py`, cleaned data slices, and **`SHA256SUMS.txt`** cryptographic checksums.

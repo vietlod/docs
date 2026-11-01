@@ -1,7 +1,7 @@
 ---
 id: ai-chat
-title: Using AI Chat, the 37-Tool EcoData MCP Server, and AI Agent Skills
-description: How to use AI Chat, connect the 37-tool EcoData MCP Server, and install the five specialized skill files for Gemini Task, AntiGravity, Claude Code, OpenAI Codex, and Cursor IDE.
+title: Using AI Chat, the 52-Tool Unified EcoData MCP Server, and AI Agent Skills
+description: How to use AI Chat, connect the 52-tool Unified EcoData MCP Server (37 native EcoData tools + 15 bridged EcoLab 5-stage tools), and install the five specialized skill files for Gemini Task, AntiGravity, Claude Code, OpenAI Codex, and Cursor IDE.
 ---
 
 import Head from '@docusaurus/Head';
@@ -9,8 +9,8 @@ import Head from '@docusaurus/Head';
 export const aiMcpSchemaEn = {
   '@context': 'https://schema.org',
   '@type': 'TechArticle',
-  headline: 'Using AI Chat, the 37-Tool EcoData MCP Server, and Specialized Skills for Gemini Task and AI Agents',
-  description: 'Step-by-step guide to using AI Chat and installing specialized EcoData MCP Server skills for Gemini Task, Gemini Gems, AntiGravity, Claude Code, OpenAI Codex, and Cursor IDE.',
+  headline: 'Using AI Chat, the 52-Tool Unified EcoData MCP Server, and Specialized Skills for Gemini Task and AI Agents',
+  description: 'Step-by-step guide to using AI Chat, orchestrating all 52 Unified MCP tools (37 EcoData + 15 EcoLab) under server_llm_calls == 0, and installing specialized skills for Gemini Task, Gemini Gems, AntiGravity, Claude Code, OpenAI Codex, and Cursor IDE.',
   url: 'https://docs.tnsai.vn/en/ecodata/cong-cu/ai-chat',
   inLanguage: 'en',
 };
@@ -19,49 +19,53 @@ export const aiMcpSchemaEn = {
   <script type="application/ld+json">{JSON.stringify(aiMcpSchemaEn)}</script>
 </Head>
 
-# Using AI Chat, the 37-Tool EcoData MCP Server, and AI Agent Skills
+# Using AI Chat, the 52-Tool Unified EcoData MCP Server, and AI Agent Skills
 
-EcoData provides two complementary pathways for AI-assisted economic research: using the built-in **AI Chat** workspace directly in your browser, or connecting the production **EcoData MCP Server** at `https://ecodata.io.vn/mcp` with **37 specialized tools** to external AI assistants and coding IDEs including Gemini Spark, Gemini Gems, AntiGravity, Claude Code, OpenAI Codex, and Cursor IDE.
+EcoData provides two complementary pathways for AI-assisted quantitative research: using the built-in **AI Chat** workspace directly in your browser, or connecting the production **Unified EcoData MCP Server** at `https://ecodata.io.vn/mcp` with **52 specialized tools** to external AI assistants and coding IDEs including Gemini Spark, Gemini Gems, AntiGravity, Claude Code, OpenAI Codex, and Cursor IDE.
 
-## When to Use AI Chat and EcoData MCP
+## Unified 52-Tool MCP Architecture and `server_llm_calls == 0` Execution Lock
+
+The `https://ecodata.io.vn/mcp` gateway unifies EcoData's primary data warehouse and Tri-Engine econometrics runtime with EcoLab's 5-stage scholarly research pipeline through a single connection:
+
+- **37 Native EcoData Data and Econometrics Tools:** Semantic discovery across 200,000+ international macro indicators and seven Vietnam subsystems (`boundary_mode="34"` / `"63"`), 30-year corporate financials across four accounting regimes, VHLSS/PCI/PAPI microdata, and execution across **201+ core estimators in 15 model families** on Python, R, and Stata 18 MP with `.zip` replication bundles.
+- **15 Bridged EcoLab 5-Stage Research Tools (`ecolab_*`):** Project and research design bootstrapping (Stage 1), DOI-verified literature synthesis across 6 scholarly databases — OpenAlex, Crossref, DOAJ, arXiv, Semantic Scholar, and CORE (Stage 2), **Zero-Copy** dataset transfer via `ecodata_TransferPayload`, `ecodata_bundle_id`, or `ecodata_csv_url` (Stage 3), dynamic catalog estimation across 201+ models (Stage 4), and 5-gate evidence-locked **Standard IMRaD** or **STORM** manuscript authoring with 300-DPI PNG figures and native Word OMML `.docx` equations (Stage 5).
+- **5 Admin Model Curation Tools (`admin_econometrics_*`):** Exposed exclusively to authenticated **Admin** principals to orchestrate Stage A discovery and Stage B 4-gate (`B1–B4`) model verification.
+- **Host-LLM Execution Lock (`server_llm_calls == 0`):** Every `/mcp*` call relies strictly on the connected client's Host LLM reasoning (Gemini, Claude, Cursor, Codex), guaranteeing `0` server-side LLM API calls and `0` server AI quota bottlenecks.
+
+## When to Use AI Chat and Unified EcoData MCP
 
 | Research Scenario | How to Prompt Your AI Assistant | Automatically Invoked MCP Tools |
 | --- | --- | --- |
-| Unsure which data sources or variables to select | Describe your research question, national or provincial unit of analysis, and target period. | `analyze_request`, `search_macro_indicators` |
-| Need Vietnam provincial data under 34-province or 63-province boundaries | Request GRDP, Ministry of Finance state budget revenue, or public investment with `boundary_mode="34"` or `"63"`. | `get_gso_data`, `get_yearbook_data`, `query_macro_data_unified` |
-| Need merchandise trade and five-sector commodity intelligence | Specify the commodity, HS code, partner market, or trading province. | `get_customs_commodity_trade`, `get_customs_country_trade`, `get_customs_province_trade` |
-| Need 30-year financial statements across VN30, HNX30, or sector baskets | Request constituent tickers for the basket and batch-extract balance sheets, income statements, or ratios. | `list_stock_groups`, `get_batch_financial_data`, `get_financial_ratios` |
-| Need an end-to-end econometric study | State the dependent and explanatory variables and request a one-click study with Stata, R, and Python code. | `run_complete_econometric_study`, `generate_econometric_code` |
+| Discover indicators and select 34-province or 63-province boundaries | Describe your research question, national/provincial/firm unit of analysis, and target years. | `analyze_request`, `search_macro_indicators`, `get_macro_data` |
+| Extract listed corporate financials or VHLSS/PCI survey panels | Request stock groups (such as VN30), accounting regimes, or household/governance modules. | `list_stock_groups`, `get_batch_financial_data`, `search_vhlss_variables` |
+| Fast Tri-Engine estimation across 201+ econometric models (Mode A) | Request pre-estimation diagnostics, choose among the 15 model families, and export `.zip` scripts. | `run_econometrics_model`, `run_complete_econometric_study` |
+| Full 5-stage study from 6-source literature review to `.docx` manuscript (Mode B) | Request project creation, DOI-verified synthesis, Zero-Copy dataset handoff, and IMRaD/STORM report generation. | `ecolab_project_bootstrap`, `ecolab_literature_discover_start`, `ecolab_dataset_ingest_ecodata`, `ecolab_model_estimate_start`, `ecolab_report_generate_start` |
 
-## Five One-Click Downloadable Skill Files for Gemini Task and AI Agents
+## Five Specialized Skill Files for Gemini Task and AI Agents
 
-To equip your AI assistant with complete mastery of all 37 MCP tools, automatic `boundary_mode="34"` / `"63"` selection across the 1995–2026 administrative boundary milestones, and all seven Finco subsystems, download and install the skill file matching your platform:
+To equip your AI assistant with complete mastery of all **52 Unified MCP tools**, automatic `boundary_mode="34"` / `"63"` selection, Zero-Copy dataset handoffs, and the **201+ estimator catalog**, download the official skill pack from `/account/connect-apps` or the Quick Start page:
 
-| AI Agent Platform | One-Click Downloadable Skill File | Installation Path or Upload Target | Core Workflow Advantage |
+| AI Agent Platform | Downloadable Skill File | Installation Path or Attachment | Key Optimization Capabilities |
 | --- | --- | --- | --- |
-| **Gemini Task & Gemini Gems** | [`gemini-ecodata-mcp-skill.md`](https://ecodata.io.vn/downloads/gemini-ecodata-mcp-skill.md) | Upload to **Knowledge** when creating a Gemini Gem or attach directly to a **Gemini Task** after linking the app at `gemini.google.com/spark/apps`. | Guides Gemini to prioritize `query_macro_data_unified` and `run_complete_econometric_study`, master all seven Finco subsystems, and apply 34-province rules. |
-| **AntiGravity CLI & IDE** | [`antigravity-ecodata-skill.md`](https://ecodata.io.vn/downloads/antigravity-ecodata-skill.md) | Save to `.agents/skills/ecodata-mcp/SKILL.md` and `.agent/skills/ecodata-mcp/SKILL.md` inside your repository. | Activates Progressive Disclosure in Google AntiGravity, automating Jev Co-Processor verification and replication package export. |
-| **Claude Code & Claude Desktop** | [`claude-code-ecodata-skill.md`](https://ecodata.io.vn/downloads/claude-code-ecodata-skill.md) | Save to `.claude/skills/ecodata-mcp/SKILL.md` for Claude Code CLI or upload to **Project Knowledge** in Claude Desktop. | Standardizes empirical study planning, four-regime Vietnamese corporate financial statement routing, and Gauss-Markov diagnostic checks. |
-| **OpenAI Codex CLI** | [`codex-ecodata-skill.md`](https://ecodata.io.vn/downloads/codex-ecodata-skill.md) | Save to `.agents/skills/ecodata-mcp/SKILL.md` or append to your repository root `AGENTS.md` file. | Provides exact parameter schemas for all 37 MCP tools and 105 econometric estimators for autonomous Codex execution. |
-| **Cursor & Windsurf IDE** | [`cursor-ecodata-rules.mdc`](https://ecodata.io.vn/downloads/cursor-ecodata-rules.mdc) | Save to `.cursor/rules/ecodata-mcp.mdc` alongside your `.cursor/mcp.json` server configuration. | Automatically injects Vietnam data context, `ss_dom_key_mod` short codes, and 37 MCP tools into Cursor and Windsurf coding sessions. |
+| **Gemini Task & Gemini Gems** | [`gemini-ecodata-mcp-skill.md`](https://ecodata.io.vn/downloads/gemini-ecodata-mcp-skill.md) | Upload to **Knowledge** in Gemini Gems or attach to **Gemini Task** alongside your connected `https://ecodata.io.vn/mcp` app. | Orchestrates all 52 Unified MCP tools, 34-province panel harmonization, and `.docx` manuscript generation. |
+| **AntiGravity IDE & CLI** | [`antigravity-ecodata-skill.md`](https://ecodata.io.vn/downloads/antigravity-ecodata-skill.md) | Save to `.agents/skills/ecodata-mcp/SKILL.md` and `.agent/skills/ecodata-mcp/SKILL.md` in your workspace. | Progressive-disclosure skill for Google AntiGravity automating Pre/Postestimation batteries across 15 families. |
+| **Claude Code & Claude Desktop** | [`claude-code-ecodata-skill.md`](https://ecodata.io.vn/downloads/claude-code-ecodata-skill.md) | Save to `.claude/skills/ecodata-mcp/SKILL.md` or upload to **Project Knowledge** in Claude Desktop. | Streamlines 5-stage empirical workflows, 6-source DOI-verified literature reviews, and `.zip` replication bundles. |
+| **OpenAI Codex CLI** | [`codex-ecodata-skill.md`](https://ecodata.io.vn/downloads/codex-ecodata-skill.md) | Save to `.agents/skills/ecodata-mcp/SKILL.md` or reference inside your repository `AGENTS.md`. | Specifies all 52 Unified MCP tools and 201+ estimators under strict Fail-Closed anti-hallucination rules. |
+| **Cursor & Windsurf IDE** | [`cursor-ecodata-rules.mdc`](https://ecodata.io.vn/downloads/cursor-ecodata-rules.mdc) | Save to `.cursor/rules/ecodata-mcp.mdc` alongside your `.cursor/mcp.json` server configuration. | Automatically injects Vietnam data context, `ss_dom_key_mod` short codes, and 52 Unified MCP tools into coding sessions. |
 
 ## Actionable Prompt Examples for AI Chat and Gemini Spark
 
 ```text
-@EcoData Analyze the impact of public investment and state budget revenue from the State Budget subsystem on GRDP growth across Vietnam's 34 provinces from 2020 to 2025 using boundary_mode="34". Execute the one-click study via run_complete_econometric_study and generate Stata 18 MP replication code.
+@EcoData Analyze the impact of public investment and state budget revenue from the State Budget subsystem on GRDP growth across Vietnam's 34 provinces from 2020 to 2025 using boundary_mode="34". Run pre-estimation diagnostics, estimate Multi-Way HDFE and Driscoll-Kraay models, and export Stata 18 MP replication code.
 ```
 
 ```text
-@EcoData Retrieve coffee and rice export series from the Commodity Market and Vietnam Customs subsystems from 2018 to 2025 segmented by top partner countries, and evaluate export unit price trends.
+@EcoData Bootstrap a 5-stage empirical study on digital transformation and firm-level total factor productivity (ACF TFP) for Vietnamese listed firms from 2016 to 2025: synthesize DOI-verified literature across 6 scholarly databases, transfer corporate financials Zero-Copy to EcoLab, estimate ACF TFP on the Tri-Engine, and generate an APA 7th IMRaD Word .docx manuscript.
 ```
 
-```text
-@EcoData Fetch the VN30 constituent tickers via list_stock_groups, batch-extract ROE, ROA, and net profit margin from 2015 to 2025 using get_batch_financial_data, and estimate a Fixed Effects panel model.
-```
+## Integrated Workflow Across AI Chat, Dashboard, EcoLab, and Econometrics
 
-## Integrated Workflow Across AI Chat, Dashboard, and Econometrics
-
-1. Submit your research question to **AI Chat** or an AI assistant equipped with an **EcoData MCP Skill** to identify candidate indicators and choose between 34-province and 63-province boundary modes.
+1. Submit your research question to **AI Chat** or an AI assistant equipped with a **Unified EcoData MCP Skill** to identify candidate indicators and choose between 34-province and 63-province boundary modes.
 2. Inspect metadata definitions, sample coverage, and expand the **Primary Data Source Footnotes** panel in the UI to verify official source tables from the National Statistics Office, Ministry of Finance, and Vietnam Customs.
-3. Execute preliminary estimations and diagnostic batteries through the **Econometrics** engine or `run_complete_econometric_study`.
-4. Review outputs audited by the three-tier **Jev Co-Processor** and download the complete Stata, R, and Python replication bundle alongside cleaned data.
+3. Run pre-estimation diagnostics and execute models from the **201+ estimators across 15 families** directly in the **Econometrics** engine or hand off Zero-Copy into **EcoLab's** 5-stage pipeline.
+4. Review outputs audited by the three-tier **Jev Co-Processor** and download the complete `.zip` replication bundle (`Stata 18 MP`, `R`, `Python`, `SHA256SUMS.txt`) alongside publication-ready `.docx` manuscripts.

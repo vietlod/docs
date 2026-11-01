@@ -1,58 +1,55 @@
 ---
 title: Tổng quan EcoLab
 sidebar_position: 1
+description: Tổng quan nền tảng nghiên cứu kinh tế lượng EcoLab (v1.5.0) với quy trình 5 giai đoạn khép kín, tổng hợp học thuật 6 nguồn xác thực DOI, cầu nối dữ liệu Zero-Copy EcoData, 201+ bộ ước lượng thuộc 15 họ mô hình và biên soạn báo cáo kiểm chứng 5 cổng.
 ---
 
 # Tổng quan EcoLab
 
-**EcoLab** (phiên bản v0.22.0) là nền tảng nghiên cứu kinh tế lượng được hỗ trợ bởi trí tuệ nhân tạo (AI-powered Econometrics Research Platform). Hệ thống được thiết kế nhằm tự động hóa và tối ưu hóa toàn bộ quy trình nghiên cứu học thuật — từ bước phát triển ý tưởng ban đầu cho đến khi xuất bản báo cáo hoàn thiện.
+**EcoLab** (phiên bản `v1.5.0`) là nền tảng nghiên cứu kinh tế định lượng chuyên sâu hỗ trợ toàn diện vòng đời học thuật — từ thiết kế ý tưởng, tổng hợp tài liệu xác thực DOI, kết nối dữ liệu chuẩn hóa, ước lượng mô hình kinh tế lượng trên bộ 3 môi trường thực thi đến xuất bản bản thảo nghiên cứu hoàn chỉnh.
 
-Nền tảng tích hợp các tác tử AI (AI Agents) chuyên biệt cùng hơn 30 mô hình kinh tế lượng để hỗ trợ các nhà nghiên cứu vượt qua các rào cản về kỹ thuật và dữ liệu.
+Nền tảng kết nối trực tiếp với kho dữ liệu và lõi tính toán **EcoData Tri-Engine** (**Python**, **R** và **Stata 18 MP**), cung cấp danh mục động **201+ bộ ước lượng cốt lõi thuộc 15 họ mô hình và 58 mô hình con**, đồng thời hỗ trợ điều phối tự động qua cả hai cổng **Unified EcoData MCP (`https://ecodata.io.vn/mcp`, 52 công cụ)** và **Direct EcoLab MCP (`https://ecolab.io.vn/mcp`, 15 công cụ)**.
 
 ---
 
-## 1. Kiến trúc Công nghệ
+## 1. Kiến trúc học thuật và năng lực cốt lõi
 
-Hệ thống EcoLab được xây dựng dựa trên sự kết hợp của các công nghệ hiện đại và chuyên nghiệp:
+Hệ thống EcoLab được thiết kế xoay quanh tính minh bạch phương pháp luận, khả năng tái lập 100% và cơ chế chống ảo giác số liệu tuyệt đối:
 
-| Thành phần | Công nghệ tích hợp | Mục đích sử dụng |
+| Trụ cột nghiên cứu | Năng lực chuyên sâu | Giá trị học thuật mang lại |
 | :--- | :--- | :--- |
-| **Frontend** | Next.js 14, React 18, TypeScript, Tailwind CSS | Giao diện tối giản sang trọng, tương tác mượt mà và tối ưu hóa trải nghiệm người dùng (UX). |
-| **Backend** | FastAPI, Python 3.11 | Cung cấp REST API hiệu năng cao, WebSocket thời gian thực và điều phối tác tử AI. |
-| **Trí tuệ nhân tạo** | DeepSeek, OpenAI, Gemini, Perplexity, OpenRouter | Đa nhà cung cấp mô hình ngôn ngữ lớn (LLM) với cơ chế tự động chuyển đổi dự phòng (failover) và ngắt mạch (circuit breaker). |
-| **Cơ sở dữ liệu** | PostgreSQL 14, Redis 7, Neo4j 5 | Quản lý dữ liệu người dùng, bộ nhớ đệm và lưu trữ Đồ thị tri thức (Knowledge Graph) phức tạp. |
+| **Tổng hợp tài liệu 6 nguồn mở** | OpenAlex, Crossref, DOAJ, arXiv cùng khóa cá nhân mã hóa cho Semantic Scholar và CORE | Mọi trích dẫn đều được đối chiếu trong Sổ cái Trích dẫn Xác thực (Verified Citation Ledger) gắn với DOI hoặc định danh nguồn thật. |
+| **Cầu nối dữ liệu Zero-Copy EcoData** | Bàn giao trực tiếp chuỗi vĩ mô quốc tế, dữ liệu 34/63 tỉnh Việt Nam, BCTC 30 năm và khảo sát vi mô VHLSS/PCI | Loại bỏ sai sót gộp tệp thủ công, giữ nguyên từ điển nhãn biến song ngữ và siêu dữ liệu nguồn gốc. |
+| **Động cơ 201+ mô hình kinh tế lượng** | 15 họ mô hình, 58 mô hình con thực thi thật trên Python, R và Stata 18 MP; tự động đồng bộ danh mục mới trong `<= 60` giây | Tách bạch kiểm định tiền ước lượng và hậu ước lượng, cam kết Fail-Closed `422` (không bao giờ âm thầm chuyển về OLS) và xuất gói mã tái lập `.zip` (`SHA256SUMS.txt`). |
+| **Biên soạn bản thảo khóa bằng chứng 5 cổng** | Hai chế độ **Standard IMRaD** và **STORM** đa góc nhìn kèm 5 chuẩn trích dẫn (APA 7th, Chicago, Harvard, IEEE, MLA) | Mọi hệ số, sai số chuẩn, trị số $p$ và biểu đồ PNG 300-DPI cùng công thức toán học Word OMML `.docx` đều khóa cứng vào tạo tác ước lượng thực tế. |
+| **Hệ sinh thái Dual MCP (`server_llm_calls == 0`)** | 52 công cụ tại `https://ecodata.io.vn/mcp` hoặc 15 công cụ tại `https://ecolab.io.vn/mcp` | Kết nối một chạm với Gemini Task/Gems, AntiGravity, Claude Code, OpenAI Codex và Cursor IDE không tiêu tốn hạn mức AI phía máy chủ. |
 
 ---
 
 ## 2. Đối tượng phục vụ
 
-EcoLab hướng tới việc nâng cao năng suất và chất lượng nghiên cứu của cộng đồng học thuật chuyên nghiệp:
+EcoLab hướng tới nâng cao năng suất và chất lượng công bố khoa học cho cộng đồng nghiên cứu chuyên nghiệp:
 
-*   **Học viên Cao học & Nghiên cứu sinh:** Hỗ trợ thực hiện luận văn, luận án thạc sĩ/tiến sĩ trong ngành kinh tế, tài chính và các ngành khoa học xã hội liên quan một cách bài bản và chuẩn khoa học.
-*   **Giảng viên Đại học:** Hỗ trợ chuẩn bị tài liệu giảng dạy, định hướng nghiên cứu cho sinh viên và thực hiện các công trình nghiên cứu cá nhân/đề tài các cấp.
-*   **Nhà nghiên cứu & Chuyên gia phân tích:** Hỗ trợ các viện nghiên cứu, chuyên gia tư vấn thực hiện đánh giá chính sách và phân tích định lượng thực nghiệm với độ tin cậy cao.
+- **Học viên cao học và nghiên cứu sinh:** Chuẩn hóa quy trình thực hiện luận văn, luận án kinh tế, tài chính, thương mại quốc tế và chính sách công theo chuẩn tạp chí quốc tế.
+- **Giảng viên đại học:** Phát triển đề cương nghiên cứu, kiểm chứng nhanh tính khả thi thực nghiệm của đề tài và hướng dẫn sinh viên bằng gói mã tái lập `.do`, `.R`, `.py` minh bạch.
+- **Nhà nghiên cứu và chuyên gia phân tích chính sách:** Đánh giá tác động chính sách đa thời điểm (Staggered DID, SDID, Synthetic Control, RDD), phân tích năng suất doanh nghiệp (SFA/DEA/ACF TFP) và mô hình cầu cấu trúc (QUAIDS/BLP) với độ tin cậy thống kê cao.
 
 ---
 
-## 3. Quy trình nghiên cứu 5 bước (5-Step Research Pipeline)
+## 3. Quy trình nghiên cứu 5 bước khép kín
 
-Để đảm bảo tính nhất quán khoa học, EcoLab tổ chức nghiên cứu theo một quy trình khép kín gồm 5 bước. Ngữ cảnh của bước trước sẽ tự động được truyền và kế thừa ở bước tiếp theo:
+Để đảm bảo tính nhất quán khoa học, EcoLab tổ chức dự án theo quy trình khép kín gồm 5 giai đoạn; ngữ cảnh, giả thuyết, từ điển biến và tạo tác kiểm định của bước trước được truyền tự động sang bước kế tiếp:
 
 ```mermaid
 flowchart LR
-    A[Tạo ý tưởng] --> B[Tổng quan tài liệu]
-    B --> C[Thu thập dữ liệu]
-    C --> D[Mô hình hóa]
-    D --> E[Báo cáo nghiên cứu]
-    style A fill:#f9f,stroke:#333,stroke-width:1px
-    style B fill:#bbf,stroke:#333,stroke-width:1px
-    style C fill:#dfd,stroke:#333,stroke-width:1px
-    style D fill:#fdd,stroke:#333,stroke-width:1px
-    style E fill:#dff,stroke:#333,stroke-width:1px
+    A["1. Tạo ý tưởng"] --> B["2. Tổng quan 6 nguồn"]
+    B --> C["3. Dữ liệu & Zero-Copy"]
+    C --> D["4. Mô hình hóa (201+)"]
+    D --> E["5. Báo cáo 5 cổng (.docx)"]
 ```
 
-1.  **Tạo ý tưởng (Idea Generation):** Phát triển và đánh giá các ý tưởng nghiên cứu sơ bộ từ từ khóa hoặc nhân bản ý tưởng từ các bài báo học thuật hiện có.
-2.  **Tổng quan tài liệu (Literature Review):** Tự động tìm kiếm bài báo liên quan, phân tích lỗ hổng nghiên cứu, xác định mục tiêu và đề xuất mô hình kiểm định.
-3.  **Thu thập dữ liệu (Data Collection):** Nhập dữ liệu tự động từ các nguồn công khai uy tín (World Bank, FRED, ADB, IMF) hoặc tải lên tệp tin cục bộ.
-4.  **Mô hình hóa (Modeling):** Thực hiện hồi quy với hơn 30 mô hình kinh tế lượng trên các môi trường ước lượng Python, R hoặc Stata.
-5.  **Báo cáo nghiên cứu (Research Report):** Tự động tạo bản thảo học thuật chuẩn format (APA7, Chicago, Harvard, v.v.) qua pipeline STORM chuyên sâu.
+1. **Tạo ý tưởng (Idea Generation):** Hình thành, chấm điểm tính khả thi và tinh chỉnh câu hỏi nghiên cứu, chiến lược định danh nhân quả từ chủ đề hoặc bài báo gốc.
+2. **Tổng quan tài liệu (Literature Review):** Truy vấn đồng thời 6 nguồn học thuật uy tín, xây dựng ma trận tổng hợp tài liệu, xác định khoảng trống nghiên cứu, thiết lập giả thuyết $H_0 / H_1$ và đề xuất khung biến số.
+3. **Thu thập và chuẩn bị dữ liệu (Data Collection):** Nhận dữ liệu Zero-Copy trực tiếp từ EcoData (hoặc tải tệp CSV/Excel/Stata cục bộ), kiểm tra thống kê mô tả, ma trận tương quan và chạy bộ **Kiểm định tiền ước lượng (Pre-Estimation Diagnostics)**.
+4. **Mô hình hóa kinh tế lượng (Econometric Modeling):** Thực thi **201+ bộ ước lượng thuộc 15 họ mô hình** trên Python, R và Stata 18 MP, đối chiếu **Kiểm định hậu ước lượng (Postestimation Diagnostics)**, phân tích độ vững và tải gói tái lập `.zip` (`SHA256SUMS.txt`).
+5. **Báo cáo nghiên cứu (Research Report):** Tự động biên soạn bản thảo học thuật **Standard IMRaD** hoặc **STORM** vượt qua 5 cổng kiểm chứng bằng chứng, xuất tệp Word `.docx` tích hợp công thức OMML gốc, biểu đồ PNG 300-DPI, LaTeX, Markdown và HTML.

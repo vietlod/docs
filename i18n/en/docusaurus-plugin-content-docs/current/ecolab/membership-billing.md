@@ -1,67 +1,58 @@
 ---
 title: Membership & Billing
 sidebar_position: 4
+description: Guide to managing your academic profile, personal API keys (BYOK AI, Semantic Scholar, CORE, and MCP Access Tokens), and subscription upgrades in EcoLab.
 ---
 
-# User Account, API Keys & SePay Integration
+# Account Management, Personal API Keys & Billing
 
-EcoLab provides an intuitive administrative dashboard under **Cài đặt** (Settings) to help you manage your personal profile, configure large language model (LLM) API keys, monitor resource utilization, and purchase premium upgrades via the automated SePay gateway.
+EcoLab (`v1.5.0`) provides a unified workspace under **Settings** to manage your academic profile, personal AI provider keys, personal scholarly database keys, MCP access tokens, and subscription tiers.
 
 ---
 
 ## 1. Profile Management & Usage Analytics
 
-In the **Hồ sơ (Profile)** tab:
-*   Update your name, contact email, and account password.
-*   View your active subscription tier (Free, Premium, Academic Partner) and expiration date.
+In the **Profile** tab, you can:
+- Update your display name, institutional affiliation, contact email, and account password.
+- Inspect your active membership tier, project quotas, and renewal dates.
 
-In the **Sử dụng Token (Token Usage)** tab, the platform provides clear metrics on your AI consumption:
-*   *Token Consumption:* Total input and output tokens consumed.
-*   *Estimated Cost:* Token usage converted to USD/VND value based on real-time pricing from LLM providers.
-*   *API Calls:* Total successful connections to LLM backends.
-*   Daily consumption bar charts help you analyze usage trends and optimize prompts.
+In the **Usage Analytics** tab, EcoLab reports transparent metrics covering:
+- Input and output token utilization segmented across the 5-stage research pipeline.
+- Daily econometric estimation runs and manuscript export history.
 
 ---
 
-## 2. Configuring LLM API Keys
+## 2. Configuring Three Categories of Personal Keys (BYOK, Scholarly & MCP)
 
-To activate AI Agents throughout the research pipeline, you need to configure at least one valid API key from an LLM provider.
+Under **Settings → API Keys**, EcoLab organizes user-owned credentials into three isolated categories:
 
-### Setup Guide
-1.  Navigate to **Settings → API Keys**.
-2.  Select your provider:
-    *   **DeepSeek:** The primary reasoning engine, optimized for mathematical structures and econometrics logic.
-    *   **OpenAI:** GPT-4 models, offering high stability and general-purpose capabilities.
-    *   **Gemini (Google):** Flash models, offering quick response times for general Q&A.
-    *   **Perplexity:** Search-augmented models, excellent for locating academic papers.
-    *   **OpenRouter:** A model aggregator allowing you to access 400+ models from a single API endpoint.
-3.  Paste your API key and click **Thêm** (Add).
-4.  Click **Kiểm tra** (Test Connection). The system will send a small test prompt to verify. A green checkmark confirms a successful connection.
+1. **Personal AI Provider Keys (BYOK AI):**
+   - Connect your own API keys from leading language model providers (**Google Gemini**, **OpenAI**, **Anthropic Claude**, **Perplexity**, **OpenRouter**, and OpenAI-compatible endpoints) with one-click live connection testing.
+2. **Personal Scholarly Literature Keys (6-Source Discovery):**
+   - Four open-access scholarly databases (**OpenAlex**, **Crossref**, **DOAJ**, and **arXiv**) operate out-of-the-box without keys.
+   - Add your personal **Semantic Scholar** and **CORE** API keys with live `Probe` verification to unlock dedicated rate limits across all **6/6 scholarly sources**.
+3. **Personal EcoLab MCP Access Tokens:**
+   - Mint, rotate, and revoke personal Bearer tokens to connect external AI clients (Gemini Task, AntiGravity, Claude Code, Codex, Cursor) directly to **`https://ecolab.io.vn/mcp`** under strict `server_llm_calls == 0` enforcement.
 
-:::info[Important]
-**API Key Encryption:** All user-provided API keys are encrypted at rest using **asymmetric encryption in the database**. Keys are only decrypted in-memory during API calls and are never exposed.
+:::info[At-Rest Key Encryption Guarantee]
+Every user-supplied API key is encrypted at rest using **Fernet authenticated encryption (AES-128-CBC + HMAC-SHA256)**. The UI displays only masked key suffixes, and keys are decrypted ephemerally in memory solely during authenticated requests initiated by their owner.
 :::
 
 ---
 
-## 3. Upgrading via the SePay Payment Gateway
+## 3. Automated Subscription Upgrades via VietQR & SePay
 
-EcoLab integrates the **SePay** payment gateway to support instant premium upgrades or token purchases via Vietnamese bank transfers.
+EcoLab supports instant subscription activation via **SePay** automated Vietnamese bank transfers (VietQR) and online checkout:
 
+```text
+Select Membership Plan -> System generates VietQR & unique transaction reference ->
+Scan QR in Mobile Banking -> Automated webhook reconciliation -> Instant Tier Activation
 ```
-Select Plan → System generates QR & Transaction Code → 
-Bank Transfer → SePay webhook notification → Instant Account Activation
-```
 
-### Steps to Upgrade
-1.  Navigate to the **Upgrade** page or the **Billing** tab.
-2.  Select your desired plan (e.g., *Academic Monthly*, *Professional Yearly*, or *Token Credit Top-up*).
-3.  The system will generate a checkout window showing:
-    *   **A VietQR Code** (for fast scanning using any Vietnamese Mobile Banking application).
-    *   **Transfer Details:** Account Number, Recipient Bank, exact Amount, and the **Transfer Message** (containing a unique transaction ID in the format `ECOLABXXXXX`).
-4.  Initiate the transfer from your banking app.
+1. Navigate to the **Upgrade** page or **Settings → Billing**.
+2. Choose the membership plan matching your empirical research workload.
+3. Scan the **VietQR payment code** using any Mobile Banking application to pre-fill the exact amount and transaction reference automatically.
 
-    :::warning
-    If transferring manually (not scanning the QR code), **you must input the Transfer Message exactly as displayed**. This message is the only way the system matches transaction records.
-    :::
-5.  As soon as the bank processes the transaction (usually within 3 to 10 seconds), SePay will send a webhook confirmation to the EcoLab backend. The system will automatically upgrade your account to Premium without requiring a page reload.
+:::warning[Manual Bank Transfers]
+If entering bank transfer details manually rather than scanning the VietQR code, **enter the displayed Transfer Reference string verbatim** so automated webhook reconciliation activates your membership within seconds.
+:::

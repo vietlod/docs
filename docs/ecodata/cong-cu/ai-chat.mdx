@@ -1,7 +1,7 @@
 ---
 id: ai-chat
-title: Khai thác AI Chat, EcoData MCP 37 công cụ và bộ kỹ năng AI Agents
-description: Hướng dẫn sử dụng AI Chat, kết nối máy chủ EcoData MCP 37 công cụ và cài đặt bộ 5 tệp kỹ năng chuyên dụng cho Gemini Task, AntiGravity, Claude Code, OpenAI Codex và Cursor IDE.
+title: Khai thác AI Chat, Unified EcoData MCP 52 công cụ và bộ kỹ năng AI Agents
+description: Hướng dẫn sử dụng AI Chat, kết nối máy chủ Unified EcoData MCP 52 công cụ (37 công cụ EcoData + 15 công cụ nghiên cứu 5 bước EcoLab) và cài đặt bộ 5 tệp kỹ năng chuyên dụng cho Gemini Task, AntiGravity, Claude Code, OpenAI Codex và Cursor IDE.
 ---
 
 import Head from '@docusaurus/Head';
@@ -9,8 +9,8 @@ import Head from '@docusaurus/Head';
 export const aiMcpSchema = {
   '@context': 'https://schema.org',
   '@type': 'TechArticle',
-  headline: 'Khai thác AI Chat, EcoData MCP Server 37 công cụ và bộ kỹ năng chuyên dụng cho Gemini Task và AI Agents',
-  description: 'Hướng dẫn sử dụng AI Chat và cài đặt bộ kỹ năng chuyên dụng của EcoData MCP Server cho Gemini Task, Gemini Gems, AntiGravity, Claude Code, OpenAI Codex và Cursor IDE.',
+  headline: 'Khai thác AI Chat, Unified EcoData MCP Server 52 công cụ và bộ kỹ năng chuyên dụng cho Gemini Task và AI Agents',
+  description: 'Hướng dẫn sử dụng AI Chat, điều phối 52 công cụ Unified MCP (37 EcoData + 15 EcoLab) với khóa cứng server_llm_calls == 0 và cài đặt bộ 5 kỹ năng cho Gemini Task, Gemini Gems, AntiGravity, Claude Code, OpenAI Codex và Cursor IDE.',
   url: 'https://docs.tnsai.vn/ecodata/cong-cu/ai-chat',
   inLanguage: 'vi',
 };
@@ -19,49 +19,53 @@ export const aiMcpSchema = {
   <script type="application/ld+json">{JSON.stringify(aiMcpSchema)}</script>
 </Head>
 
-# Khai thác AI Chat, EcoData MCP 37 công cụ và bộ kỹ năng AI Agents
+# Khai thác AI Chat, Unified EcoData MCP 52 công cụ và bộ kỹ năng AI Agents
 
-EcoData cung cấp hai phương thức kết hợp trí tuệ nhân tạo vào nghiên cứu kinh tế: sử dụng trực tiếp **AI Chat** ngay trên trình duyệt web, hoặc kết nối máy chủ **EcoData MCP Server** tại địa chỉ `https://ecodata.io.vn/mcp` với **37 công cụ chuyên biệt** vào các trợ lý AI và môi trường lập trình như Gemini Spark, Gemini Gems, AntiGravity, Claude Code, OpenAI Codex và Cursor IDE.
+EcoData cung cấp hai phương thức kết hợp trí tuệ nhân tạo vào nghiên cứu kinh tế định lượng: sử dụng trực tiếp **AI Chat** ngay trên trình duyệt web, hoặc kết nối máy chủ **Unified EcoData MCP Server** tại địa chỉ `https://ecodata.io.vn/mcp` với **52 công cụ chuyên biệt** vào các trợ lý AI và môi trường lập trình như Gemini Spark, Gemini Gems, AntiGravity, Claude Code, OpenAI Codex và Cursor IDE.
 
-## Khi nào nên dùng AI Chat và EcoData MCP
+## Kiến trúc 52 công cụ hợp nhất và khóa cứng `server_llm_calls == 0`
 
-| Tình huống nghiên cứu | Cách đặt câu lệnh cho trợ lý AI | Công cụ MCP được kích hoạt tự động |
+Cổng `https://ecodata.io.vn/mcp` hợp nhất toàn bộ năng lực dữ liệu của EcoData và quy trình nghiên cứu học thuật 5 giai đoạn của EcoLab trong một kết nối MCP duy nhất:
+
+- **37 công cụ dữ liệu và kinh tế lượng gốc của EcoData:** Tìm kiếm ngữ nghĩa hơn 200.000 chỉ số vĩ mô quốc tế và 7 phân hệ Việt Nam (`boundary_mode="34"` / `"63"`), BCTC 30 năm theo 4 chế độ kế toán, khảo sát vi mô VHLSS/PCI/PAPI, thực thi **201+ bộ ước lượng thuộc 15 họ mô hình** trên Python, R và Stata 18 MP cùng gói tái lập `.zip`.
+- **15 công cụ nghiên cứu học thuật 5 bước của EcoLab (`ecolab_*`):** Khởi tạo dự án và ý tưởng nghiên cứu (Stage 1), khám phá và kiểm chứng DOI trên 6 cơ sở dữ liệu học thuật mở gồm OpenAlex, Crossref, DOAJ, arXiv, Semantic Scholar, CORE (Stage 2), bàn giao dữ liệu **Zero-Copy** qua 3 chế độ `ecodata_TransferPayload`, `ecodata_bundle_id` hoặc `ecodata_csv_url` (Stage 3), ước lượng chuyên sâu trên danh mục động 201+ mô hình (Stage 4) và biên soạn bản thảo **Standard IMRaD** hoặc **STORM** khóa bằng chứng 5 cổng kèm biểu đồ PNG 300-DPI và công thức Word OMML `.docx` gốc (Stage 5).
+- **5 công cụ quản trị kiểm duyệt mô hình (`admin_econometrics_*`):** Chỉ hiển thị cho tài khoản có quyền **Admin**, phục vụ điều phối quy trình phát hiện Giai đoạn A và kiểm chứng 4 cổng `B1–B4` Giai đoạn B.
+- **Khóa thực thi Host-LLM (`server_llm_calls == 0`):** Toàn bộ luồng gọi qua `/mcp*` chỉ sử dụng tài nguyên suy luận từ mô hình AI phía máy khách (Gemini, Claude, Cursor, Codex), đảm bảo `0` lệnh gọi LLM phía máy chủ và `0` phụ thuộc hạn mức khóa AI server.
+
+## Khi nào nên dùng AI Chat và Unified EcoData MCP
+
+| Tình huống nghiên cứu | Cách đặt câu lệnh cho trợ lý AI | Nhóm công cụ MCP kích hoạt tự động |
 | --- | --- | --- |
-| Chưa biết chọn nguồn dữ liệu và biến số nào | Mô tả câu hỏi nghiên cứu, đơn vị phân tích quốc gia hoặc tỉnh thành và giai đoạn. | `analyze_request`, `search_macro_indicators` |
-| Cần dữ liệu cấp tỉnh Việt Nam theo địa giới 34 tỉnh mới hoặc 63 tỉnh lịch sử | Yêu cầu trích xuất GRDP, thu ngân sách nhà nước hoặc đầu tư công kèm chế độ `boundary_mode="34"` hoặc `"63"`. | `get_gso_data`, `get_yearbook_data`, `query_macro_data_unified` |
-| Cần phân tích xuất nhập khẩu và 5 nhóm ngành hàng hóa | Nêu tên mặt hàng, mã HS, thị trường đối tác hoặc tỉnh thành xuất nhập khẩu. | `get_customs_commodity_trade`, `get_customs_country_trade`, `get_customs_province_trade` |
-| Cần trích xuất BCTC 30 năm theo rổ cổ phiếu VN30, HNX30 hoặc ngành nghề | Yêu cầu lấy danh sách mã trong nhóm và tải bảng cân đối, kết quả kinh doanh hoặc chỉ số tài chính. | `list_stock_groups`, `get_batch_financial_data`, `get_financial_ratios` |
-| Cần chạy trọn gói một nghiên cứu kinh tế lượng | Nêu biến phụ thuộc, các biến giải thích và yêu cầu chạy quy trình một chạm kèm mã tái lập Stata, R, Python. | `run_complete_econometric_study`, `generate_econometric_code` |
+| Khám phá chỉ tiêu và chọn chế độ địa giới 34 hoặc 63 tỉnh | Mô tả câu hỏi nghiên cứu, đơn vị phân tích quốc gia/tỉnh/doanh nghiệp và giai đoạn mục tiêu. | `analyze_request`, `search_macro_indicators`, `get_macro_data` |
+| Trích xuất BCTC doanh nghiệp niêm yết hoặc khảo sát VHLSS/PCI | Yêu cầu nhóm cổ phiếu (như VN30), chế độ kế toán hoặc chủ đề khảo sát hộ gia đình/quản trị địa phương. | `list_stock_groups`, `get_batch_financial_data`, `search_vhlss_variables` |
+| Ước lượng nhanh 201+ mô hình kinh tế lượng 3 động cơ (Mode A) | Yêu cầu kiểm định tiền ước lượng, chọn họ mô hình trong 15 họ và xuất gói mã tái lập `.zip`. | `run_econometrics_model`, `run_complete_econometric_study` |
+| Nghiên cứu trọn gói 5 bước từ tổng quan 6 nguồn đến xuất bài báo `.docx` (Mode B) | Yêu cầu lập dự án, tổng hợp tài liệu xác thực DOI, truyền dữ liệu Zero-Copy và xuất bản thảo IMRaD/STORM. | `ecolab_project_bootstrap`, `ecolab_literature_discover_start`, `ecolab_dataset_ingest_ecodata`, `ecolab_model_estimate_start`, `ecolab_report_generate_start` |
 
-## Bộ 5 tệp kỹ năng tải về một chạm cho Gemini Task và AI Agents
+## Bộ 5 tệp kỹ năng chuyên dụng cho Gemini Task và AI Agents
 
-Để trợ lý AI nắm vững cấu trúc 37 công cụ MCP, tự động chọn đúng tham số `boundary_mode="34"` / `"63"` cho 3 mốc lịch sử địa giới hành chính Việt Nam 1995–2026 và khai thác trọn vẹn 7 phân hệ Finco, hãy tải và cài đặt tệp kỹ năng tương ứng với nền tảng của bạn:
+Để trợ lý AI nắm vững cấu trúc **52 công cụ Unified MCP**, tự động chọn đúng tham số `boundary_mode="34"` / `"63"`, bàn giao dữ liệu Zero-Copy và chọn chính xác mô hình trong danh mục **201+ bộ ước lượng**, hãy tải bộ kỹ năng tại `/account/connect-apps` hoặc trang Quick Start:
 
-| Nền tảng AI Agent | Tệp kỹ năng tải về một chạm | Vị trí cài đặt hoặc cách nạp | Lợi ích cốt lõi khi sử dụng |
+| Nền tảng AI Agent | Tệp kỹ năng tải về | Vị trí cài đặt hoặc đính kèm | Tối ưu hóa nổi bật |
 | --- | --- | --- | --- |
-| **Gemini Task & Gemini Gems** | [`gemini-ecodata-mcp-skill.md`](https://ecodata.io.vn/downloads/gemini-ecodata-mcp-skill.md) | Tải lên mục **Knowledge** khi tạo Gemini Gem hoặc đính kèm trực tiếp vào **Gemini Task** sau khi liên kết ứng dụng tại `gemini.google.com/spark/apps`. | Giúp Gemini tự động ưu tiên `query_macro_data_unified` và `run_complete_econometric_study`, hiểu rõ 7 phân hệ Finco và quy tắc địa giới 34 tỉnh. |
-| **AntiGravity CLI & IDE** | [`antigravity-ecodata-skill.md`](https://ecodata.io.vn/downloads/antigravity-ecodata-skill.md) | Lưu vào `.agents/skills/ecodata-mcp/SKILL.md` và `.agent/skills/ecodata-mcp/SKILL.md` trong thư mục dự án. | Kích hoạt cơ chế tiết lộ lũy tiến trên Google AntiGravity, tự động kiểm chứng kết quả qua Jev Co-Processor và xuất gói tái lập. |
-| **Claude Code & Claude Desktop** | [`claude-code-ecodata-skill.md`](https://ecodata.io.vn/downloads/claude-code-ecodata-skill.md) | Lưu vào `.claude/skills/ecodata-mcp/SKILL.md` cho Claude Code CLI hoặc tải lên **Project Knowledge** trong Claude Desktop. | Chuẩn hóa quy trình lập kế hoạch thực nghiệm, bóc tách 4 chế độ kế toán doanh nghiệp Việt Nam và kiểm định giả định Gauss-Markov. |
-| **OpenAI Codex CLI** | [`codex-ecodata-skill.md`](https://ecodata.io.vn/downloads/codex-ecodata-skill.md) | Lưu vào `.agents/skills/ecodata-mcp/SKILL.md` hoặc tích hợp vào tệp `AGENTS.md` ở thư mục gốc của dự án. | Cung cấp đặc tả tham số chính xác của 37 công cụ MCP và 105 mô hình kinh tế lượng cho tác nhân lập trình tự hành Codex. |
-| **Cursor & Windsurf IDE** | [`cursor-ecodata-rules.mdc`](https://ecodata.io.vn/downloads/cursor-ecodata-rules.mdc) | Lưu vào `.cursor/rules/ecodata-mcp.mdc` kết hợp với cấu hình máy chủ trong `.cursor/mcp.json`. | Tự động nạp ngữ cảnh dữ liệu Việt Nam, mã ngắn học thuật `ss_dom_key_mod` và 37 công cụ MCP ngay khi lập trình phân tích dữ liệu. |
+| **Gemini Task & Gemini Gems** | [`gemini-ecodata-mcp-skill.md`](https://ecodata.io.vn/downloads/gemini-ecodata-mcp-skill.md) | Đính kèm vào mục **Knowledge** của Gemini Gems hoặc tệp hướng dẫn của **Gemini Task** cùng liên kết ứng dụng `https://ecodata.io.vn/mcp`. | Điều phối mượt mà cả 52 công cụ Unified MCP, chuẩn hóa chuỗi 34 tỉnh và xuất bản thảo học thuật `.docx`. |
+| **AntiGravity IDE & CLI** | [`antigravity-ecodata-skill.md`](https://ecodata.io.vn/downloads/antigravity-ecodata-skill.md) | Lưu vào `.agents/skills/ecodata-mcp/SKILL.md` và `.agent/skills/ecodata-mcp/SKILL.md` trong thư mục dự án. | Kỹ năng tiết lộ lũy tiến cho Google AntiGravity, tự động kiểm định tiền/hậu ước lượng trên 15 họ mô hình. |
+| **Claude Code & Claude Desktop** | [`claude-code-ecodata-skill.md`](https://ecodata.io.vn/downloads/claude-code-ecodata-skill.md) | Lưu vào `.claude/skills/ecodata-mcp/SKILL.md` hoặc nạp vào **Project Knowledge** trên Claude Desktop. | Tối ưu hóa lập kế hoạch thực nghiệm 5 bước, tổng hợp 6 nguồn học thuật xác thực DOI và xuất gói tái lập `.zip`. |
+| **OpenAI Codex CLI** | [`codex-ecodata-skill.md`](https://ecodata.io.vn/downloads/codex-ecodata-skill.md) | Lưu vào `.agents/skills/ecodata-mcp/SKILL.md` hoặc tích hợp vào `AGENTS.md` của dự án. | Đặc tả 52 công cụ Unified MCP và 201+ bộ ước lượng với cơ chế kiểm chứng Fail-Closed không phát sinh ảo giác số liệu. |
+| **Cursor & Windsurf IDE** | [`cursor-ecodata-rules.mdc`](https://ecodata.io.vn/downloads/cursor-ecodata-rules.mdc) | Lưu vào `.cursor/rules/ecodata-mcp.mdc` kèm tệp `.cursor/mcp.json`. | Tự động nạp ngữ cảnh mã ngắn `ss_dom_key_mod`, 7 phân hệ dữ liệu Việt Nam và 52 công cụ MCP ngay khi lập trình phân tích dữ liệu. |
 
 ## Các câu lệnh mẫu thực chiến trên AI Chat và Gemini Spark
 
 ```text
-@EcoData Phân tích tác động của đầu tư công và thu ngân sách nhà nước từ phân hệ Ngân sách Nhà nước đến tăng trưởng GRDP của 34 tỉnh thành Việt Nam giai đoạn 2020–2025 với boundary_mode="34". Hãy chạy quy trình kinh tế lượng một chạm run_complete_econometric_study và xuất mã tái lập Stata 18 MP.
+@EcoData Phân tích tác động của đầu tư công và thu ngân sách nhà nước từ phân hệ Ngân sách Nhà nước đến tăng trưởng GRDP của 34 tỉnh thành Việt Nam giai đoạn 2020–2025 với boundary_mode="34". Hãy chạy kiểm định tiền ước lượng, ước lượng mô hình HDFE / Driscoll-Kraay và xuất gói mã tái lập Stata 18 MP.
 ```
 
 ```text
-@EcoData Truy xuất dữ liệu xuất khẩu mặt hàng cà phê và gạo từ phân hệ Thị trường Hàng hóa và Hải quan Việt Nam giai đoạn 2018–2025 theo các thị trường đối tác lớn nhất, sau đó kiểm tra xu hướng biến động đơn giá xuất khẩu.
+@EcoData Khởi tạo dự án nghiên cứu 5 bước về tác động chuyển đổi số đến năng suất nhân tố tổng hợp (ACF TFP) của các doanh nghiệp niêm yết Việt Nam giai đoạn 2016–2025: tổng hợp tài liệu từ 6 nguồn học thuật mở, truyền dữ liệu BCTC Zero-Copy sang EcoLab, ước lượng ACF TFP trên bộ 3 động cơ và xuất bản thảo IMRaD chuẩn APA 7th định dạng Word .docx.
 ```
 
-```text
-@EcoData Lấy danh sách cổ phiếu rổ VN30 qua list_stock_groups, trích xuất hàng loạt tỷ số ROE, ROA và biên lợi nhuận ròng giai đoạn 2015–2025 bằng get_batch_financial_data và ước lượng mô hình dữ liệu bảng Fixed Effects.
-```
+## Quy trình kết hợp AI Chat, Dashboard, EcoLab và Kinh tế lượng
 
-## Quy trình kết hợp AI Chat, Dashboard và Kinh tế lượng
-
-1. Gửi câu hỏi nghiên cứu vào **AI Chat** hoặc trợ lý AI đã gắn kỹ năng **EcoData MCP** để xác định danh sách chỉ tiêu và chế độ địa giới 34 tỉnh hoặc 63 tỉnh.
-2. Kiểm tra siêu dữ liệu, độ phủ mẫu và mở phần **Chú thích nguồn dữ liệu gốc** trên giao diện để đối chiếu các bảng nguồn từ Cục Thống kê, Bộ Tài chính và Cục Hải quan.
-3. Chạy ước lượng sơ bộ và kiểm định chẩn đoán qua động cơ **Kinh tế lượng** hoặc lệnh `run_complete_econometric_study`.
-4. Đối chiếu kết quả đã được **Jev Co-Processor** kiểm chứng 3 tầng và tải trọn bộ mã nguồn tái lập Stata, R, Python kèm dữ liệu sạch.
+1. Gửi câu hỏi nghiên cứu vào **AI Chat** hoặc trợ lý AI đã gắn kỹ năng **Unified EcoData MCP** để xác định danh sách chỉ tiêu và chế độ địa giới 34 tỉnh hoặc 63 tỉnh.
+2. Kiểm tra siêu dữ liệu, độ phủ mẫu và mở phần **Chú thích nguồn dữ liệu gốc** trên giao diện để đối chiếu bảng nguồn chính thức từ Cục Thống kê, Bộ Tài chính và Cục Hải quan.
+3. Chạy kiểm định tiền ước lượng, thực thi hồi quy trong danh mục **201+ mô hình thuộc 15 họ** qua động cơ **Kinh tế lượng** hoặc chuyển tiếp Zero-Copy sang quy trình 5 giai đoạn của **EcoLab**.
+4. Đối chiếu kết quả đã được **Jev Co-Processor** kiểm chứng 3 tầng và tải trọn gói mã nguồn tái lập `.zip` (`Stata 18 MP`, `R`, `Python`, `SHA256SUMS.txt`) cùng bản thảo học thuật `.docx`.

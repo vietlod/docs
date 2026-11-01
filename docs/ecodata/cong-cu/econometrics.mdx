@@ -1,47 +1,57 @@
 ---
 id: econometrics
-title: Động cơ kinh tế lượng 12 họ mô hình và 105 bộ ước lượng
-description: Hướng dẫn sử dụng động cơ Kinh tế lượng của EcoData với 12 họ mô hình, 40 mô hình con và 105 bộ ước lượng chạy đồng thời trên Python, R và Stata 18 MP.
+title: Động cơ kinh tế lượng 15 họ mô hình, 58 mô hình con và 201+ bộ ước lượng
+description: Hướng dẫn sử dụng động cơ Kinh tế lượng của EcoData (v3.82.0) với 15 họ mô hình, 58 mô hình con và 201+ bộ ước lượng chạy đồng thời trên Python, R và Stata 18 MP kèm kiểm định tiền/hậu ước lượng và gói mã tái lập .zip.
 ---
 
-# Động cơ kinh tế lượng 12 họ mô hình và 105 bộ ước lượng
+# Động cơ kinh tế lượng 15 họ mô hình, 58 mô hình con và 201+ bộ ước lượng
 
-Công cụ Kinh tế lượng của EcoData cho phép chuẩn bị mẫu, ước lượng, kiểm định giả định và xuất mã lệnh tái lập ngay trong trình duyệt web hoặc qua máy chủ EcoData MCP Server.
+Công cụ Kinh tế lượng của EcoData (`v3.82.0`) cho phép chuẩn bị mẫu, kiểm định tiền ước lượng, thực thi ước lượng chuẩn xác theo phương pháp, kiểm định hậu ước lượng và xuất gói mã tái lập `.zip` ngay trên trình duyệt web hoặc qua máy chủ **Unified EcoData MCP Server** (`https://ecodata.io.vn/mcp`).
 
-## Hệ thống 12 họ mô hình, 40 mô hình con và 105 bộ ước lượng
+## Kiến trúc 15 họ mô hình, 58 mô hình con và 201+ bộ ước lượng cốt lõi
 
-EcoData tích hợp động cơ kinh tế lượng toàn diện phục vụ nghiên cứu học thuật và phân tích chính sách:
+EcoData mở rộng danh mục kinh tế lượng lên **15 họ phân tích chuyên sâu**, **58 mô hình con** và **201+ bộ ước lượng cốt lõi** bao phủ toàn diện các phương pháp xuất bản học thuật giai đoạn 2021–2026:
 
-### Mười hai họ mô hình phân tích lớn
+| Mã họ | Họ mô hình phân tích | Mô hình con và phương pháp tiêu biểu | Bối cảnh nghiên cứu phù hợp |
+| :--- | :--- | :--- | :--- |
+| **1** | **Tuyến tính cổ điển & HDFE** | OLS, WLS, GLS/FGLS, TLS, Multi-Way HDFE (`reghdfe` / `fixest::feols` / `PyFixest`) | Hồi quy cơ sở, hấp thụ tác động cố định đa chiều quy mô lớn (doanh nghiệp – ngành – tỉnh – năm) |
+| **2** | **Chính quy hóa & chọn biến** | Ridge ($L_2$), Lasso ($L_1$), Elastic Net, Adaptive Lasso, Post-Lasso OLS | Dữ liệu nhiều biến dự báo, xử lý đa cộng tuyến cao và chọn lọc biến |
+| **3** | **Dữ liệu bảng tuyến tính** | Pooled OLS, Entity/Time/Two-Way FE, Random Effects, Between, First-Difference, Mundlak CRE, Driscoll-Kraay, Pesaran CCE-MG, Beck-Katz PCSE | Dữ liệu bảng tỉnh thành, quốc gia hoặc doanh nghiệp có phụ thuộc chéo không gian – thời gian |
+| **4** | **Bảng động, ngưỡng & đồng liên kết** | Arellano-Bond Difference GMM, Blundell-Bond System GMM (hiệu chỉnh Windmeijer), Seo-Shin Dynamic Panel Threshold, Panel DOLS, FMOLS, Pesaran PMG | Biến phụ thuộc trễ, nội sinh động, hiệu ứng ngưỡng phi tuyến và bảng vĩ mô dài hạn $T$ lớn |
+| **5** | **Lựa chọn rời rạc, chọn mẫu & sinh tồn** | Binary/Multinomial/Conditional/Ordered Logit & Probit, Censored Tobit, Truncated, Heckman 2 bước & MLE, Cragg Double-Hurdle, Beta/Fractional, Cox PH, Weibull/Log-Normal AFT | Biến nhị phân, đa lựa chọn, tỷ trọng $[0, 1]$, dữ liệu bị chặn, thiên lệch chọn mẫu và thời gian sống sót |
+| **6** | **Dữ liệu đếm & trọng lực PPML** | Poisson QMLE, Negative Binomial (NB1/NB2), Hurdle Count, ZIP, ZINB, Gravity PPML-HDFE (`ppmlhdfe`) | Số lượng bằng sáng chế, sự kiện và mô hình trọng lực thương mại song phương có nhiều quan sát bằng $0$ |
+| **7** | **Phân vị, phân phối & phân rã** | Koenker-Bassett Quantile Regression, Machado-Santos Silva MM-QR (`xtqreg`), Firpo-Fortin-Lemieux RIF, Kitagawa-Oaxaca-Blinder & Machado-Mata | Bất bình đẳng thu nhập, tác động không đồng nhất trên toàn phân phối và phân rã khoảng cách lương |
+| **8** | **Chuỗi thời gian đơn biến & chuyển chế độ** | ARIMA/SARIMAX, GARCH/EGARCH/GJR-GARCH, Pesaran-Shin-Smith ARDL, Shin-Yu-Greenwood-Nimmo NARDL, Hamilton Markov-Switching, PSY GSADF Bubble Test | Dự báo vĩ mô – tài chính, truyền dẫn bất đối xứng ngắn/dài hạn và phát hiện bong bóng tài sản |
+| **9** | **Chuỗi thời gian đa biến & Local Projections** | VAR, Johansen VECM, Structural VAR (Cholesky & Long-Run Blanchard-Quah), Jordà Local Projections & IV-LP, Panel VAR (`pvar`) | Cú sốc chính sách tiền tệ – tài khóa, hàm phản ứng đẩy IRF và phân rã phương sai FEVD |
+| **10** | **Biến công cụ & hệ phương trình** | IV-2SLS, LIML, Fuller-$k$, Lewbel Heteroskedasticity-Based IV, Bartik Shift-Share IV, IV-GMM, 3SLS, Zellner SUR | Xử lý nội sinh, công cụ yếu, cú sốc ngành – địa phương Shift-Share và hệ phương trình đồng thời |
+| **11** | **Phi tuyến, bán tham số & ngưỡng** | Nonlinear Least Squares (NLS), Penalized Spline GAM, Hansen Sample-Splitting Threshold, Robinson Partial Linear Semiparametric | Đường cong Engel, Kuznets phi tuyến và chuyển dịch cấu trúc theo ngưỡng nội sinh |
+| **12** | **Suy luận nhân quả & không gian** | TWFE DID, Callaway-Sant'Anna, Sun-Abraham, Borusyak-Jaravel-Spiess, de Chaisemartin-D'Haultfœuille, Goodman-Bacon, Dube LP-DID, Arkhangelsky SDID, Abadie Synthetic Control, Sharp/Fuzzy RDD, PSM/IPW/AIPW/CEM, Spatial SAR/SEM/SDM/SAC/SDEM & Conley Spatial HAC | Đánh giá chính sách đa thời điểm (staggered adoption), biên giới địa lý, đối chứng tổng hợp và lan tỏa không gian |
+| **13** | **Tổ chức ngành cấu trúc & hệ thống cầu** | Deaton-Muellbauer AIDS, Banks-Blundell-Lewbel QUAIDS, Berry Logit Demand IV, Berry-Levinsohn-Pakes Random-Coefficients BLP (`pyblp`) | Độ co giãn giá – chi tiêu hộ gia đình (VHLSS) và ước lượng cầu sản phẩm phân biệt |
+| **14** | **Biên hiệu quả, năng suất & TFP** | Aigner-Lovell-Schmidt SFA, Battese-Coelli Panel SFA, Charnes-Cooper-Rhodes & Banker-Charnes-Cooper DEA, Chỉ số Malmquist, Olley-Pakes, Levinsohn-Petrin, Wooldridge & Ackerberg-Caves-Frazer (ACF) TFP | Đo lường hiệu quả kỹ thuật ngân hàng/doanh nghiệp và năng suất nhân tố tổng hợp cấp doanh nghiệp |
+| **15** | **Tái lấy mẫu, học máy nhân quả & nhiều chiều** | Nonparametric/Pairs, Moving-Block, Panel Cluster & Roodman-MacKinnon-Nielsen-Webb Wild Cluster Bootstrap, Chernozhukov Double/Debiased ML, Athey-Wager Causal Forest, PCA/Factor/K-Means, Benchmark Predictive ML | Suy diễn vững với số cụm ít ($G < 30$), kiểm soát nhiễu nhiều chiều và ước lượng CATE |
 
-1. **Hồi quy tuyến tính cổ điển:** OLS, WLS, GLS và hồi quy bình phương tối thiểu toàn phần TLS.
-2. **Hồi quy phạt chuẩn hóa:** Ridge, Lasso, Elastic Net và Adaptive Lasso.
-3. **Dữ liệu bảng tuyến tính:** Pooled OLS, Fixed Effects theo thực thể và thời gian, Random Effects và Between Effects.
-4. **Dữ liệu bảng động:** Arellano-Bond Difference GMM và Blundell-Bond System GMM.
-5. **Biến phụ thuộc rời rạc và giới hạn:** Binary Logit, Binary Probit, Multinomial Logit, Ordered Probit, Tobit bị chặn, hồi quy cắt cụt và mô hình chọn mẫu Heckman hai bước.
-6. **Mô hình dữ liệu đếm:** Hồi quy Poisson, Negative Binomial, Zero-Inflated Poisson ZIP và Zero-Inflated Negative Binomial ZINB.
-7. **Hồi quy phân vị:** Hồi quy phân vị tuyến tính và hồi quy phân vị dữ liệu bảng tác động cố định.
-8. **Chuỗi thời gian đơn biến và biến động:** AR, MA, ARMA, ARIMA, SARIMAX, ARDL cùng các mô hình phương sai thay đổi ARCH, GARCH và EGARCH.
-9. **Chuỗi thời gian đa biến:** Tự hồi quy véctơ VAR, hiệu chỉnh sai số véctơ VECM, Structural VAR, kiểm định nhân quả Granger và hàm phản ứng xung IRF.
-10. **Biến công cụ và hệ phương trình đồng thời:** Hồi quy hai giai đoạn 2SLS, ba giai đoạn 3SLS và hệ phương trình dường như không liên quan SUR.
-11. **Hồi quy phi tuyến và bán tham số:** Bình phương tối thiểu phi tuyến NLS, mô hình cộng tính tổng quát GAM, suy luận Bayes MCMC và học máy nhân quả Causal Forest.
-12. **Suy luận nhân quả và kinh tế lượng không gian:** Difference-in-Differences DID, Event Study, đối sánh điểm xu hướng PSM, thiết kế đứt gãy hồi quy RDD cùng các mô hình không gian SAR, SEM và Spatial Durbin SDM.
+### Cơ chế hình thành 201+ bộ ước lượng và nguyên tắc Fail-Closed
 
-### Phân rã 40 mô hình con và 105 bộ ước lượng
+Mỗi mô hình con trong 58 đặc tả toán học được kết hợp chặt chẽ với phương pháp tối ưu hóa đặc thù (OLS/HDFE, FGLS, MLE/QMLE, 1-step/2-step Windmeijer GMM, Sieve/Spline, Linear Programming DEA, Kontraction Mapping BLP) và cấu trúc ma trận hiệp phương sai sai số chuẩn phù hợp (Homoskedastic, White Robust HC0–HC3, Newey-West HAC, Driscoll-Kraay, Conley Spatial HAC, Clustered một chiều/đa chiều và Wild Cluster Bootstrap).
 
-Hệ thống cung cấp **40 mô hình con** tương ứng với các đặc tả toán học khác nhau và **105 bộ ước lượng** kết hợp giữa:
-- **Phương pháp tối ưu hóa:** Bình phương tối thiểu OLS, FGLS, hợp lý cực đại MLE, Quasi-MLE và GMM một bước hoặc hai bước có hiệu chỉnh sai số hữu hạn Windmeijer.
-- **Cấu trúc ma trận hiệp phương sai sai số chuẩn:** Phương sai đồng nhất cổ điển, sai số chuẩn vững White HC0, HC1, HC2, HC3, sai số chuẩn Newey-West HAC và sai số chuẩn phân cụm theo tỉnh thành, doanh nghiệp hoặc hai chiều thực thể – thời gian.
+:::warning[Cam kết toàn vẹn học thuật Fail-Closed]
+Động cơ Tri-Engine của EcoData thực thi **đúng thuật toán gốc** của từng khóa ước lượng được yêu cầu. Nếu một khóa mô hình chưa được đăng ký hoặc thiếu biến bắt buộc (như thiếu biến công cụ cho 2SLS/BLP, thiếu ma trận trọng số hoặc tọa độ cho mô hình không gian, thiếu biến đầu vào trung gian cho ACF TFP), hệ thống trả về mã lỗi tường minh `422 UNSUPPORTED_ESTIMATOR` hoặc `422 INVALID_SPECIFICATION` — **tuyệt đối không bao giờ âm thầm chuyển về hồi quy OLS**.
+:::
 
-## Quy trình ước lượng trên giao diện và MCP
+## Tách bạch kiểm định tiền ước lượng và kiểm định hậu ước lượng
 
-1. Mở công cụ **Kinh tế lượng** hoặc gọi công cụ MCP `run_complete_econometric_study`.
-2. Chọn họ mô hình và bộ ước lượng cụ thể.
-3. Chọn biến phụ thuộc và các biến giải thích từ danh mục chỉ tiêu hoặc bảng dữ liệu 34 tỉnh, 63 tỉnh, doanh nghiệp.
-4. Thiết lập khoảng thời gian và các phép biến đổi logarit, sai phân hoặc biến trễ.
-5. Khởi chạy ước lượng song song trên **Python, R và Stata 18 MP**.
-6. Kiểm tra bảng hệ số hồi quy, sai số chuẩn, trị số thống kê $t$, trị số $p$, các kiểm định chẩn đoán $VIF$, Breusch-Pagan, Wooldridge, Hausman, Hansen $J$ và tải gói mã lệnh tái lập `.do`, `.R`, `.py`.
+EcoData tách riêng hai nhóm kiểm định chẩn đoán để nhà nghiên cứu tuân thủ chặt chẽ quy trình thực nghiệm chuẩn tạp chí quốc tế:
 
-## Định dạng bảng học thuật và trích dẫn
+| Giai đoạn kiểm định | Nhóm kiểm định chẩn đoán tự động | Ý nghĩa quyết định phương pháp |
+| :--- | :--- | :--- |
+| **1. Tiền ước lượng (Pre-Estimation Diagnostics)** | Nghiệm đơn vị ADF, Phillips-Perron, KPSS, Im-Pesaran-Shin, Levin-Lin-Chu, Pesaran CIPS; Đa cộng tuyến $VIF$ và số điều kiện ma trận; Phụ thuộc chéo Pesaran CD; Tự tương quan không gian toàn cục/cục bộ Moran's $I$ và Geary's $C$; Đồng liên kết bảng Pedroni, Kao, Westerlund và chuỗi thời gian Johansen | Xác định bậc tích hợp $I(0)/I(1)$, phát hiện phụ thuộc chéo để chọn Driscoll-Kraay hoặc CCE-MG, xác nhận hiệu ứng không gian trước khi chạy SAR/SDM và kiểm tra đồng liên kết trước khi ước lượng VECM/ARDL/FMOLS |
+| **2. Hậu ước lượng (Postestimation Diagnostics)** | Phương sai sai số thay đổi Breusch-Pagan, White; Tự tương quan Durbin-Watson, Breusch-Godfrey, Wooldridge; Dạng hàm Ramsey RESET và chuẩn phần dư Jarque-Bera; Lựa chọn FE/RE Hausman và Mundlak; Arellano-Bond AR(1)/AR(2) và Hansen/Sargan $J$; Công cụ yếu Cragg-Donald và Kleibergen-Paap rk Wald $F$; Kiểm định biên Pesaran-Shin-Smith Bounds $F/t$ và bất đối xứng Wald NARDL; Xu hướng song song Event-Study Pre-Trend Wald và mật độ liên tục McCrary RDD | Kiểm chứng giả định Gauss-Markov, tính hợp lệ của biến công cụ, tính vững của chiến lược định danh nhân quả và sự đồng thuận hệ số giữa Python, R và Stata 18 MP ($\Delta < 10^{-6}$) |
 
-Bảng kết quả hỗ trợ chuyển đổi tức thời giữa 5 chuẩn trình bày quốc tế gồm **APA 7th**, **Chicago 17th**, **Harvard**, **IEEE** và **MLA 9th**, đồng thời tự động chuyển đổi nhãn biến sang ký hiệu toán học LaTeX 3 tầng.
+## Quy trình thực thi và gói tái lập `.zip` ba ngôn ngữ
+
+1. Mở công cụ **Kinh tế lượng** trên giao diện web hoặc gọi công cụ MCP `run_econometrics_model` / `run_complete_econometric_study`.
+2. Chạy bước **Kiểm định tiền ước lượng** trên tập biến mục tiêu (hỗ trợ cả chế độ địa giới `boundary_mode="34"` và `"63"`).
+3. Chọn một trong **15 họ mô hình** và bộ ước lượng cụ thể trong danh mục **201+ estimators**.
+4. Khai báo biến phụ thuộc, biến giải thích, biến nội sinh/công cụ, biến thực thể – thời gian và cấu trúc sai số chuẩn.
+5. Thực thi đồng thời trên **Python**, **R** và **Stata 18 MP** để đối soát chéo hệ số, sai số chuẩn, trị số thống kê $t/z$, trị số $p$ và toàn bộ bảng **Kiểm định hậu ước lượng**.
+6. Chuyển đổi tức thời bảng xuất bản giữa 5 chuẩn quốc tế (**APA 7th**, **Chicago 17th**, **Harvard**, **IEEE**, **MLA 9th**) và tải gói tái lập **`.zip`** bao gồm mã nguồn `.do` (Stata 18 MP), `.R`, `.py`, tập dữ liệu sạch kèm tệp băm kiểm chứng toàn vẹn **`SHA256SUMS.txt`**.

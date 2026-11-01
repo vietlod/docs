@@ -211,6 +211,27 @@ const sidebars = {
             'ecolab/model/rdd',
           ],
         },
+        {
+          type: 'category',
+          label: '13. Hệ thống cầu & BLP',
+          items: [
+            'ecolab/model/demand-systems-blp',
+          ],
+        },
+        {
+          type: 'category',
+          label: '14. Biên hiệu quả & TFP',
+          items: [
+            'ecolab/model/frontier-tfp-decomposition',
+          ],
+        },
+        {
+          type: 'category',
+          label: '15. Bootstrap & Causal ML',
+          items: [
+            'ecolab/model/bootstrap-highdim-inference',
+          ],
+        },
       ],
     },
     {

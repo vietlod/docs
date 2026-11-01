@@ -1,62 +1,57 @@
 ---
 title: Đồ thị & Tra cứu RAG
 sidebar_position: 2
+description: Hướng dẫn phân hệ Tổng quan tài liệu 6 nguồn học thuật xác thực DOI, Sổ cái Trích dẫn Xác thực và Đồ thị Tri thức trên EcoLab.
 ---
 
-# Tác tử RAG & Đồ thị Tri thức học thuật
+# Tổng quan tài liệu 6 nguồn học thuật & Đồ thị Tri thức
 
-Module **Tổng quan tài liệu** của EcoLab được thiết kế để tự động hóa hoàn toàn quy trình tìm kiếm, đánh giá và tổng hợp các nghiên cứu học thuật liên quan đến đề tài nghiên cứu của bạn. Phân hệ này sử dụng công nghệ **Tạo nội dung tăng cường bằng truy xuất (RAG)** phối hợp cùng **Đồ thị tri thức (Knowledge Graph)** trên nền tảng Neo4j để đảm bảo tính chính xác khoa học và tránh hiện tượng "ảo tưởng" (hallucination) của AI.
-
----
-
-## 1. Tìm kiếm và Lọc bài báo học thuật
-
-Hệ thống kết nối trực tiếp với các cơ sở dữ liệu học thuật mở quy mô lớn (Semantic Scholar, ArXiv) để truy xuất các bài viết liên quan:
-
-1.  Điều hướng tới phân hệ **Tổng quan tài liệu**.
-2.  Nhập câu hỏi nghiên cứu hoặc chủ đề của bạn vào ô tìm kiếm. Tác tử AI sẽ tự động phân tích và kết hợp với ý tưởng nghiên cứu đã chọn từ module trước làm ngữ cảnh nền.
-3.  Nhấn nút **Chạy tổng quan** (Run Review).
-4.  Kết quả tìm kiếm hiển thị tại tab **Bài báo** với các thông tin chi tiết:
-    *   Tiêu đề bài báo, danh sách tác giả, tạp chí xuất bản và năm.
-    *   Số lượng trích dẫn (Citation count) - chỉ số đo lường mức độ uy tín của bài viết.
-    *   Trạng thái xác minh (Verification status).
+Phân hệ **Tổng quan tài liệu** của EcoLab tự động hóa quy trình tìm kiếm, thẩm định siêu dữ liệu DOI, tổng hợp bằng chứng thực nghiệm và trực quan hóa mạng lưới tri thức học thuật liên quan đến đề tài nghiên cứu của bạn. Mọi bài báo đưa vào tổng hợp đều được neo chặt vào **Sổ cái Trích dẫn Xác thực (Verified Citation Ledger)** nhằm loại bỏ triệt để hiện tượng bịa đặt tài liệu tham khảo của AI.
 
 ---
 
-## 2. Các phân hệ Tổng hợp học thuật
+## 1. Truy vấn đồng thời 6 nguồn cơ sở dữ liệu học thuật và khóa cá nhân
 
-Sau khi thu thập các bài báo, tác tử RAG của EcoLab sẽ phân tích sâu nội dung tóm tắt (abstract) và toàn văn (nếu có) để trích xuất và hiển thị thông tin thành 5 cấu trúc chuyên biệt:
+EcoLab kết nối trực tiếp tới **6 nguồn cơ sở dữ liệu học thuật uy tín quốc tế**:
 
-### Bảng tóm tắt tài liệu (Literature Matrix)
-Bảng tóm tắt có cấu trúc giúp bạn nhanh chóng so sánh các nghiên cứu trước đây:
-*   **Tác giả & Năm:** Xác định mốc thời gian và nhóm nghiên cứu.
-*   **Vấn đề nghiên cứu:** Câu hỏi cốt lõi mà bài viết giải quyết.
-*   **Phương pháp kinh tế lượng:** Các công cụ ước lượng được sử dụng (ví dụ: OLS, GMM, FE/RE).
-*   **Phát hiện chính:** Kết quả định lượng quan trọng nhất của bài nghiên cứu.
-*   **Biến số & Chiến lược nhận dạng:** Các biến số chính được đưa vào mô hình.
+- **4 nguồn học thuật mở hoạt động ngay mặc định:** **OpenAlex**, **Crossref**, **DOAJ** (Directory of Open Access Journals) và **arXiv**.
+- **2 nguồn học thuật mở rộng qua khóa API cá nhân:** **Semantic Scholar** và **CORE** — người dùng có thể lưu khóa cá nhân được mã hóa bảo mật ngay trong mục **Cài đặt → Khóa API học thuật** kèm nút kiểm tra kết nối trực tiếp (`Probe`) trước khi chạy tổng quan.
 
-### Lỗ hổng nghiên cứu (Research Gaps)
-Tác tử AI phân tích tập hợp các bài báo để xác định các lỗ hổng tri thức còn tồn tại mà nghiên cứu của bạn có thể lấp đầy:
-*   *Lỗ hổng về mặt địa lý/bối cảnh:* Nghiên cứu chưa được thực hiện ở các nước đang phát triển hoặc tại Việt Nam.
-*   *Lỗ hổng phương pháp luận:* Thiếu các kiểm định độ vững hoặc xử lý nội sinh triệt để.
-*   *Lỗ hổng về thời gian:* Bộ dữ liệu của các nghiên cứu trước đã cũ, chưa cập nhật bối cảnh kinh tế mới (ví dụ: sau dịch bệnh hoặc khủng hoảng tài chính).
+Quy trình thực hiện:
 
-### Mục tiêu & Giả thuyết nghiên cứu
-AI tự động chuyển hóa ý tưởng và tài liệu tham khảo thành hệ thống mục tiêu và câu hỏi nghiên cứu rõ ràng:
-*   **Mục tiêu tổng quát & Mục tiêu cụ thể.**
-*   **Giả thuyết kiểm định khoa học (Hypotheses):** Định nghĩa rõ các giả thuyết kiểm định (ví dụ: $H_0$, $H_1$) để làm cơ sở cho bước mô hình hóa kinh tế lượng.
+1. Mở phân hệ **Tổng quan tài liệu** trong dự án nghiên cứu.
+2. Nhập câu hỏi nghiên cứu hoặc từ khóa chuyên ngành; hệ thống tự động kết hợp ngữ cảnh ý tưởng đã chọn từ Giai đoạn 1.
+3. Kiểm tra trạng thái sẵn sàng của 6 nguồn dữ liệu và nhấn **Chạy tổng quan**.
+4. Duyệt danh sách công bố khoa học tại thẻ **Bài báo** với đầy đủ tiêu đề, tác giả, năm xuất bản, tên tạp chí, lượt trích dẫn, mã định danh DOI/URL gốc và trạng thái xác thực.
 
-### Mô hình đề xuất (Proposed Variables & Estimator)
-Dựa trên các bài báo đã chọn, AI đề xuất cấu trúc mô hình phù hợp:
-*   **Bảng biến số có thể chỉnh sửa:**
-    *   *Tên biến:* Tên biến số (ví dụ: ROA, Leverage, Size).
-    *   *Vai trò biến:* Phụ thuộc (Dependent), Độc lập (Independent) hoặc Kiểm soát (Control).
-    *   *Đo lường (Measurement):* Cách thức tính toán chỉ tiêu.
-    *   *Dấu kỳ vọng (Expected sign):* Tác động âm ($-$), dương ($+$) hoặc chưa xác định ($?$) dựa trên lý thuyết và thực nghiệm trước đây.
-*   **Gợi ý phương pháp ước lượng:** Gợi ý sử dụng OLS, Fixed Effects, hoặc GMM tùy thuộc vào cấu trúc dữ liệu đề xuất.
+---
 
-### Bản đồ tri thức (Knowledge Graph Viz)
-Sử dụng công nghệ Neo4j để vẽ sơ đồ trực quan kết nối:
-*   Mối quan hệ trích dẫn giữa các bài báo.
-*   Mối quan hệ ngữ nghĩa giữa các khái niệm nghiên cứu.
-*   Các cụm phương pháp luận được áp dụng nhiều nhất.
+## 2. Năm cấu trúc tổng hợp học thuật chuyên sâu
+
+Sau khi thu thập và khử trùng lặp danh mục công bố từ 6 nguồn, EcoLab phân tích nội dung tóm tắt và siêu dữ liệu học thuật để cấu trúc hóa kết quả thành 5 thành phần:
+
+### Bảng ma trận tổng hợp tài liệu (Literature Matrix)
+Đối chiếu có hệ thống các nghiên cứu tiền nhiệm trên cùng một bảng chuẩn:
+- **Tác giả, năm & nguồn công bố:** Xác định dòng thời gian phát triển lý thuyết và thực nghiệm.
+- **Câu hỏi nghiên cứu trọng tâm:** Vấn đề kinh tế cốt lõi được giải quyết.
+- **Phương pháp kinh tế lượng:** Các kỹ thuật định danh và ước lượng đã áp dụng (như HDFE, System GMM, Staggered DID, PPML, ARDL/NARDL, ACF TFP).
+- **Biến số & phát hiện định lượng chính:** Chiều hướng tác động, mức ý nghĩa thống kê và điều kiện mẫu.
+
+### Khoảng trống nghiên cứu (Research Gaps)
+Phân loại rõ các khoảng trống tri thức mà đề tài của bạn có thể đóng góp:
+- *Khoảng trống bối cảnh & thể chế:* Thiếu bằng chứng thực nghiệm tại các nền kinh tế mới nổi hoặc dữ liệu cấp tỉnh/doanh nghiệp Việt Nam (đặc biệt trên chuỗi chuẩn hóa 34 tỉnh).
+- *Khoảng trống phương pháp luận:* Các nghiên cứu trước chưa xử lý triệt để nội sinh, phụ thuộc chéo không gian hoặc hiệu ứng xử lý không đồng nhất theo thời điểm.
+- *Khoảng trống dữ liệu & giai đoạn:* Chưa cập nhật các cú sốc chính sách, chuyển đổi số và biến động vĩ mô giai đoạn mới.
+
+### Mục tiêu và giả thuyết kiểm định ($H_0 / H_1$)
+Chuyển hóa tổng quan tài liệu thành hệ thống mục tiêu tổng quát, mục tiêu cụ thể và các cặp giả thuyết khoa học có thể kiểm định trực tiếp ở bước mô hình hóa.
+
+### Đề xuất khung biến số và họ mô hình ước lượng
+- **Bảng từ điển biến số đề xuất:** Phân định rõ vai trò biến phụ thuộc, biến giải thích trọng tâm, biến kiểm soát, biến nội sinh/công cụ, công thức đo lường và dấu kỳ vọng ($+$, $-$, $?$).
+- **Gợi ý bộ ước lượng trong 15 họ mô hình:** Đề xuất phương pháp ước lượng chính và các mô hình kiểm tra độ vững tương thích trực tiếp với danh mục **201+ bộ ước lượng** của EcoLab.
+
+### Bản đồ Đồ thị Tri thức học thuật (Academic Knowledge Graph)
+Trực quan hóa mạng lưới kết nối đa chiều giữa:
+- Cụm trích dẫn và đồng trích dẫn giữa các công trình nền tảng.
+- Mối liên hệ ngữ nghĩa giữa các khái niệm kinh tế và cơ chế truyền dẫn.
+- Các cụm phương pháp kinh tế lượng được sử dụng phổ biến nhất trong lĩnh vực nghiên cứu.
