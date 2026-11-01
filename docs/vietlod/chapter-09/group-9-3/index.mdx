@@ -1,0 +1,118 @@
+---
+id: index
+title: "Nhóm 9.3: Hồi quy gián đoạn, gãy khúc, tích tụ và hiệu ứng biên"
+sidebar_label: "Nhóm 9.3. Hồi quy gián đoạn, gãy khúc, tích tụ và hiệu ứng biên"
+sidebar_position: 3
+slug: /vietlod/chapter-09/group-9-3
+description: "Hướng dẫn thực hành Nhóm 9.3 — Hồi quy gián đoạn, gãy khúc, tích tụ và hiệu ứng biên thuộc Chương 09: so sánh và thực thi 6 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+keywords:
+  - Nhóm 9.3 VietLOD
+  - Hồi quy gián đoạn, gãy khúc, tích tụ và hiệu ứng biên
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Nhóm 9.3: Hồi quy gián đoạn, gãy khúc, tích tụ và hiệu ứng biên
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Nhóm phương pháp 9.3 — Hồi quy gián đoạn, gãy khúc, tích tụ và hiệu ứng biên** thuộc [Chương 09: Suy luận nhân quả và đánh giá tác động chính sách](/vietlod/chapter-09) cung cấp quy trình thực hành từng bước cho **6 mô hình kinh tế lượng** từ bài `9.3.1` đến `9.3.6`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Nhóm 9.3](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-09-suy-luan-nhan-qua-va-danh-gia-tac-dong-chinh-sach/nhom-9-3-rdd) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Nhóm 9.3: Hồi quy gián đoạn, gãy khúc, tích tụ và hiệu ứng biên trên Stata 18, R 4.x và Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Bản chất phương pháp và hệ phương trình định danh
+
+- **Câu hỏi nghiên cứu trọng tâm của nhóm**: Làm sao để nhận dạng tác động nhân quả tin cậy bằng Staggered DID thế hệ mới, Đối chứng tổng hợp (SCM) và (SDID), Hồi quy gián đoạn, MTE, Bunching và Học máy nhân quả?
+- **Kiểm định chẩn đoán bắt buộc**: Kiểm định mật độ liên tục của biến chạy McCrary / Cattaneo–Jansson–Ma để bác bỏ thao túng điểm số, kiểm định tính liên tục của các biến đồng biến tiền điều trị tại ngưỡng cắt và kiểm tra độ nhạy theo băng thông.
+
+Phương trình đặc tả cấu trúc của nhóm phương pháp 9.3:
+
+$$
+\tau_{\text{SRD}} = \lim_{x \downarrow c}\text{E}[Y_i \mid X_i = x] - \lim_{x \uparrow c}\text{E}[Y_i \mid X_i = x]
+$$
+
+Điều kiện mô-men và hàm mục tiêu ước lượng:
+
+$$
+\tau_{\text{ATT}} = \text{E}\left[Y_{it}(1) - Y_{it}(0) \;\middle|\; D_i = 1\right], \quad \text{E}_N\left[\psi\left(W_i; \hat{\tau}, \hat{\eta}\right)\right] = 0
+$$
+
+<FeatureNotAvailable
+  note="Khi dữ liệu vi phạm giả định định danh của Nhóm 9.3, nhà nghiên cứu cần chuyển sang các nhóm phương pháp mở rộng trong Chương 09 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
+/>
+
+## 2. Danh mục các mô hình trong Nhóm 9.3
+
+<FeatureCards
+  features={[
+    {
+      title: '9.3.1. Thiết kế hồi quy gián đoạn sắc nhọn tại ngưỡng cắt (RDD)',
+      description: 'Khai thác quy tắc phân bổ điều trị tất định dựa trên biến chạy liên tục $X_i$; nhận dạng tác động nhân quả cục bộ tại ngưỡng cắt $c$ thông q...',
+      link: '/vietlod/chapter-09/group-9-3/b153-sharp-rdd',
+      badge: 'B153 · sharp_rdd'
+    },
+    {
+      title: '9.3.2. Thiết kế hồi quy gián đoạn mờ với biến công cụ cục bộ',
+      description: 'Xử lý trường hợp xác suất nhận điều trị chỉ nhảy một bước nhỏ hơn $1$ tại ngưỡng cắt $c$ do sự tuân thủ không hoàn hảo bằng cách sử dụng chỉ...',
+      link: '/vietlod/chapter-09/group-9-3/b154-fuzzy-rdd',
+      badge: 'B154 · fuzzy_rdd'
+    },
+    {
+      title: '9.3.3. Hồi quy gián đoạn đa thức cục bộ hiệu chỉnh chệch bền vững',
+      description: 'Chuẩn vàng hiện đại cho thiết kế hồi quy gián đoạn: chọn băng thông tối ưu MSE dữ liệu dẫn dắt — $h_{\text{MSE}}$, hiệu chỉnh chệch làm trơn...',
+      link: '/vietlod/chapter-09/group-9-3/b155-rdrobust-sharp-fuzzy',
+      badge: 'B155 · rdrobust_sharp_fuzzy'
+    },
+    {
+      title: '9.3.4. Thiết kế gãy khúc hồi quy tại điểm đổi độ dốc chính sách (RKD)',
+      description: 'Nhận dạng hiệu ứng nhân quả khi quy tắc chính sách là hàm liên tục tại ngưỡng $c$ nhưng độ dốc — đạo hàm bậc nhất — bị gãy khúc tại $c$: $\t...',
+      link: '/vietlod/chapter-09/group-9-3/b156-regression-kink-rkd',
+      badge: 'B156 · regression_kink_rkd'
+    },
+    {
+      title: '9.3.5. Ước lượng tích tụ hành vi tại ngưỡng chính sách Saez–Kleven',
+      description: 'Đo lường khối lượng tích tụ vượt mức chuẩn hóa — $\hat{b} = \hat{B}/h_0(z^*)$ — của các tác nhân kinh tế ngay tại điểm gãy khúc thuế suất bi...',
+      link: '/vietlod/chapter-09/group-9-3/b157-bunching-estimator',
+      badge: 'B157 · bunching_estimator'
+    },
+    {
+      title: '9.3.6. Hiệu ứng điều trị biên và biến công cụ cục bộ (MTE)',
+      description: 'Ước lượng toàn bộ đường cong hiệu ứng điều trị biên $\text{MTE}(x, u_D) = E[Y_1 - Y_0 \mid X = x, U_D = u_D]$ theo kháng cự lựa chọn không q...',
+      link: '/vietlod/chapter-09/group-9-3/b158-marginal-treatment-effects',
+      badge: 'B158 · marginal_treatment_effects'
+    }
+  ]}
+/>
+
+## 3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
+
+| Bài học & Mô hình | Mã định danh | Cú pháp Stata 18 MP | Cú pháp R 4.x | Cú pháp Python 3.11+ | Hỗ trợ |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `9.3.1` · [Thiết kế hồi quy gián đoạn sắc nhọn tại ngưỡng cắt (RDD)](/vietlod/chapter-09/group-9-3/b153-sharp-rdd) | `sharp_rdd` | `rdrobust y x_run, c(0)` | `rdrobust::rdrobust(df$y, df$x_run, c = 0)` | `rdrobust(y=df['y'], x=df['x_run'], c=0)` | <Available /> |
+| `9.3.2` · [Thiết kế hồi quy gián đoạn mờ với biến công cụ cục bộ](/vietlod/chapter-09/group-9-3/b154-fuzzy-rdd) | `fuzzy_rdd` | `rdrobust y x_run, c(0) fuzzy(treat)` | `rdrobust::rdrobust(df$y, df$x_run, c = 0, fuzzy = df$treat)` | `rdrobust(y=df['y'], x=df['x_run'], c=0, fuzzy=df['treat'])` | <Available /> |
+| `9.3.3` · [Hồi quy gián đoạn đa thức cục bộ hiệu chỉnh chệch bền vững](/vietlod/chapter-09/group-9-3/b155-rdrobust-sharp-fuzzy) | `rdrobust_sharp_fuzzy` | `rdrobust y x_run, c(0) p(1) q(2) kernel(triangular)` | `rdrobust::rdrobust(y = df$y, x = df$x_run, c = 0, p = 1, q = 2)` | `rdrobust(y=df['y'], x=df['x_run'], c=0, p=1, q=2)` | <Available /> |
+| `9.3.4` · [Thiết kế gãy khúc hồi quy tại điểm đổi độ dốc chính sách (RKD)](/vietlod/chapter-09/group-9-3/b156-regression-kink-rkd) | `regression_kink_rkd` | `rdrobust y x_run, c(0) deriv(1) p(2) q(3)` | `rdrobust::rdrobust(y = df$y, x = df$x_run, c = 0, deriv = 1, p = 2)` | `rdrobust(y=df['y'], x=df['x_run'], c=0, deriv=1, p=2, q=3)` | <Available /> |
+| `9.3.5` · [Ước lượng tích tụ hành vi tại ngưỡng chính sách Saez–Kleven](/vietlod/chapter-09/group-9-3/b157-bunching-estimator) | `bunching_estimator` | `bunchit z_var, zstar(0) binwidth(0.1) poly(5)` | `bunching::bunchit(z_vector = df$z_var, zstar = 0, binwidth = 0.1, bins_l = 20, bins_r = 20, poly = 5)` | `smf.ols('bin_count ~ z_pow1 + z_pow2 + z_pow3 + excl_window', data=hist_df).fit()` | <Available /> |
+| `9.3.6` · [Hiệu ứng điều trị biên và biến công cụ cục bộ (MTE)](/vietlod/chapter-09/group-9-3/b158-marginal-treatment-effects) | `marginal_treatment_effects` | `mtefe y x1 x2 (d = z1 z2), polyn(2) bootreps(200)` | `ivmte::ivmte(data = df, target = 'ate', m0 = ~ x1 + u, m1 = ~ x1 + u, propensity = d ~ x1 + z1)` | `smf.ols('y ~ x1 + p_hat + p_hat_sq', data=df).fit(cov_type='HC1')` | <Available /> |
+
+## 4. Quy trình thực hành chuẩn cho Nhóm 9.3
+
+<Steps>
+
+### Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco
+
+Tải tệp CSV thực hành của từng mô hình trong Nhóm `9.3` hoặc kết nối dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
+
+### Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu
+
+So sánh các mô hình từ `9.3.1` đến `9.3.6` trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.
+
+### Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab
+
+Thực hiện đầy đủ bộ kiểm định **Kiểm định mật độ liên tục của biến chạy McCrary / Cattaneo–Jansson–Ma để bác bỏ thao túng điểm số, kiểm định tính liên tục của các biến đồng biến tiền điều trị tại ngưỡng cắt và kiểm tra độ nhạy theo băng thông** và đẩy mã mô hình sang [EcoLab](https://ecolab.io.vn) để xuất bảng kết quả chuẩn công bố quốc tế.
+
+</Steps>

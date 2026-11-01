@@ -1,0 +1,104 @@
+---
+id: index
+title: "Group 4.4: Corner Solution and Fractional Response Models"
+sidebar_label: "Group 4.4. Corner Solution and Fractional Response Models"
+sidebar_position: 4
+slug: /vietlod/chapter-04/group-4-4
+description: "How-To User Guide for Methodological Group 4.4 — Corner Solution and Fractional Response Models in Chapter 04: comparing and executing 4 econometric models across Stata 18 MP, R 4.x, and Python 3.11+."
+keywords:
+  - VietLOD Group 4.4
+  - Corner Solution and Fractional Response Models
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Group 4.4: Corner Solution and Fractional Response Models
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Methodological Group 4.4 — Corner Solution and Fractional Response Models** in [Chapter 04: Count Data, Trade Gravity and Limited Dependent Variable Models](/en/vietlod/chapter-04) provides step-by-step How-To implementation guides for **4 econometric models** spanning from Section `4.4.1` to `4.4.4`. Full theoretical derivations are available at [VietLOD Group 4.4](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-04-mo-hinh-dem-luc-hap-dan-va-bien-phu-thuoc-gioi-han/nhom-4-4-corner-proportion) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="How-To Guide for Group 4.4: Corner Solution and Fractional Response Models in Stata 18, R 4.x, and Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Methodological Overview and Structural Equations
+
+- **Methodological Focus**: Provides consistent estimation and robust inference for **Corner Solution and Fractional Response Models** specifications within **Count Data, Trade Gravity and Limited Dependent Variable Models**.
+- **Mandatory Post-Estimation Diagnostics**: Kiểm định LR lồng nhau Cragg Double-Hurdle vs Tobit — $\text{LR} = -2[\ell_{\text{Tobit}} - (\ell_{\text{Probit}} + \ell_{\text{Trunc}})]$, AME $P(Y\gt 0)$ & $E[Y\mid Y\gt 0]$..
+
+Core structural specification for Group 4.4:
+
+$$
+Y_i = D_i \cdot Y_i^\ast, \quad D_i = \mathbb{I}(Z_i^\top \gamma + u_i \gt 0), \quad Y_i^\ast = \max(0, X_i^\top \beta + \varepsilon_i), \quad (u_i, \varepsilon_i) \sim \mathcal{N}_2(0, \Sigma)
+$$
+
+Estimator objective and moment conditions:
+
+$$
+\hat{\theta}_{\text{QMLE}} = \arg\max_{\theta \in \Theta} \sum_{i=1}^N \ln f\left(Y_i \mid X_i, Z_i; \theta\right), \quad \text{E}[Y_i \mid X_i] = g^{-1}(X_i^\top \beta)
+$$
+
+<FeatureNotAvailable
+  note="When empirical data violate the identification conditions of Group 4.4, researchers should transition to the extended methodological groups in Chapter 04 or apply appropriate instrumental-variable and cluster-robust corrections."
+/>
+
+## 2. Econometric Models in Group 4.4
+
+<FeatureCards
+  features={[
+    {
+      title: '4.4.1. Cragg Double-Hurdle Corner-Solution Model',
+      description: 'Generalizes Type-I Tobit for corner-solution outcomes Y &gt;= 0 by allowing distinct parameter vectors for participation and positive expend...',
+      link: '/en/vietlod/chapter-04/group-4-4/b052-double-hurdle',
+      badge: 'B052 · double_hurdle'
+    },
+    {
+      title: '4.4.2. Two-Part Semicontinuous Model',
+      description: 'Combines Logit participation for zero mass with Gamma Log-link GLM for heavy-tailed positive expenditures and combined delta-method AME. Acr...',
+      link: '/en/vietlod/chapter-04/group-4-4/b053-two-part-continuous',
+      badge: 'B053 · two_part_continuous'
+    },
+    {
+      title: '4.4.3. Papke-Wooldridge Fractional Logit',
+      description: 'Estimates the Papke-Wooldridge Fractional Logit specification within the Corner Solution and Fractional Response Models framework by optimiz...',
+      link: '/en/vietlod/chapter-04/group-4-4/b054-fractional-logit',
+      badge: 'B054 · fractional_logit'
+    },
+    {
+      title: '4.4.4. Beta Regression for Continuous Proportions',
+      description: 'Models continuous rates, shares, and proportions strictly inside — 0, 1 — with logit mean link and log precision parameter. Across empirical...',
+      link: '/en/vietlod/chapter-04/group-4-4/b055-beta-regression',
+      badge: 'B055 · beta_regression'
+    }
+  ]}
+/>
+
+## 3. Comparative Execution Syntax Across Stata 18, R 4.x, and Python 3.11+
+
+| Section & Model Title | Estimator Key | Stata 18 MP Syntax | R 4.x Syntax | Python 3.11+ Syntax | Support |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `4.4.1` · [Cragg Double-Hurdle Corner-Solution Model](/en/vietlod/chapter-04/group-4-4/b052-double-hurdle) | `double_hurdle` | `churdle linear y_cens x1 x2, select(z1) ll(0) vce(robust)` | `mhurdle::mhurdle(y_cens ~ z1 \| x1 + x2, dist = 'n', data = df)` | `smf.ols('y ~ x1 + x2', data=df[df['y'] > 0]).fit(cov_type='HC1')` | <Available /> |
+| `4.4.2` · [Two-Part Semicontinuous Model](/en/vietlod/chapter-04/group-4-4/b053-two-part-continuous) | `two_part_continuous` | `twopm y x1 x2, firstpart(logit) secondpart(glm, family(gamma) link(log)) vce(robust)` | `twopartm::tpm(y ~ x1 + x2, data = df, family_sec = Gamma(link = 'log'))` | `smf.glm('y ~ x1 + x2', data=df, family=sm.families.Gamma(sm.families.links.Log())).fit()` | <Available /> |
+| `4.4.3` · [Papke-Wooldridge Fractional Logit](/en/vietlod/chapter-04/group-4-4/b054-fractional-logit) | `fractional_logit` | `fracreg logit y_frac x1 x2, vce(robust)` | `glm(y_frac ~ x1 + x2, family = quasibinomial(link = 'logit'), data = df)` | `smf.glm('y_frac ~ x1 + x2', data=df, family=sm.families.Binomial()).fit(cov_type='HC1')` | <Available /> |
+| `4.4.4` · [Beta Regression for Continuous Proportions](/en/vietlod/chapter-04/group-4-4/b055-beta-regression) | `beta_regression` | `betareg y_prop x1 x2, link(logit) vce(robust)` | `betareg::betareg(y_prop ~ x1 + x2, data = df, link = 'logit')` | `BetaModel(df['y_prop'], sm.add_constant(df[['x1', 'x2']])).fit()` | <Available /> |
+
+## 4. Standard Implementation Workflow for Group 4.4
+
+<Steps>
+
+### Step 1. Load Standardized Practice Datasets From VietLOD, EcoData, or Finco
+
+Download the model-specific `.csv` practice dataset in Group `4.4` or extract custom empirical panels from [EcoData](https://ecodata.io.vn) and [Finco](https://www.finco.vn).
+
+### Step 2. Select the Optimal Estimator for Your Error and Sample Structure
+
+Compare the estimators from `4.4.1` to `4.4.4` in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.
+
+### Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab
+
+Verify all required diagnostics including **Kiểm định LR lồng nhau Cragg Double-Hurdle vs Tobit — $\text{LR} = -2[\ell_{\text{Tobit}} - (\ell_{\text{Probit}} + \ell_{\text{Trunc}})]$, AME $P(Y\gt 0)$ & $E[Y\mid Y\gt 0]$.** and dispatch the specification to [EcoLab](https://ecolab.io.vn) for automated journal-grade reporting.
+
+</Steps>

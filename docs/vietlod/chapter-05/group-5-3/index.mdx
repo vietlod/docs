@@ -1,0 +1,97 @@
+---
+id: index
+title: "Nhóm 5.3: Biến công cụ dữ liệu bảng"
+sidebar_label: "Nhóm 5.3. Biến công cụ dữ liệu bảng"
+sidebar_position: 3
+slug: /vietlod/chapter-05/group-5-3
+description: "Hướng dẫn thực hành Nhóm 5.3 — Biến công cụ dữ liệu bảng thuộc Chương 05: so sánh và thực thi 3 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+keywords:
+  - Nhóm 5.3 VietLOD
+  - Biến công cụ dữ liệu bảng
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Nhóm 5.3: Biến công cụ dữ liệu bảng
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Nhóm phương pháp 5.3 — Biến công cụ dữ liệu bảng** thuộc [Chương 05: Kinh tế lượng dữ liệu bảng tĩnh, động và phụ thuộc chéo](/vietlod/chapter-05) cung cấp quy trình thực hành từng bước cho **3 mô hình kinh tế lượng** từ bài `5.3.1` đến `5.3.3`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Nhóm 5.3](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-05-kinh-te-luong-du-lieu-bang-tinh-dong-va-phu-thuoc-cheo/nhom-5-3-panel-iv) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Nhóm 5.3: Biến công cụ dữ liệu bảng trên Stata 18, R 4.x và Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Bản chất phương pháp và hệ phương trình định danh
+
+- **Câu hỏi nghiên cứu trọng tâm của nhóm**: Làm sao để kiểm soát đại lượng không quan sát được theo cá thể, xử lý nội sinh động (GMM), phụ thuộc chéo thế hệ 2 (ARDL) và hiệu ứng ngưỡng trên dữ liệu bảng?
+- **Kiểm định chẩn đoán bắt buộc**: Thống kê $F$ giai đoạn 1 Kleibergen–Paap rk Wald $F$ trên dữ liệu đã khử trung bình cá thể, kiểm định nội sinh Davidson–MacKinnon / Hausman và kiểm định Hansen $J$.
+
+Phương trình đặc tả cấu trúc của nhóm phương pháp 5.3:
+
+$$
+\tilde{Y}_{it} = \tilde{X}_{it}^\top \beta + \tilde{D}_{it}^\top \gamma + \tilde{\varepsilon}_{it}, \quad \text{E}[\tilde{Z}_{it}\tilde{\varepsilon}_{it}] = 0
+$$
+
+Điều kiện mô-men và hàm mục tiêu ước lượng:
+
+$$
+\hat{\beta}_{\text{Panel}} = \left(\sum_{i=1}^N \tilde{X}_i^\top W_i \tilde{X}_i\right)^{-1}\left(\sum_{i=1}^N \tilde{X}_i^\top W_i \tilde{Y}_i\right), \quad \tilde{Y}_{it} = Y_{it} - \theta \bar{Y}_i
+$$
+
+<FeatureNotAvailable
+  note="Khi dữ liệu vi phạm giả định định danh của Nhóm 5.3, nhà nghiên cứu cần chuyển sang các nhóm phương pháp mở rộng trong Chương 05 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
+/>
+
+## 2. Danh mục các mô hình trong Nhóm 5.3
+
+<FeatureCards
+  features={[
+    {
+      title: '5.3.1. Ước lượng biến công cụ hai giai đoạn dữ liệu bảng',
+      description: 'Kết hợp phép biến đổi nội nhóm Within hoặc hiệu ứng ngẫu nhiên (GLS) với ước lượng biến công cụ hai giai đoạn (2SLS) để xử lý đồng thời cả h...',
+      link: '/vietlod/chapter-05/group-5-3/b068-panel-iv-2sls',
+      badge: 'B068 · panel_iv_2sls'
+    },
+    {
+      title: '5.3.2. Ước lượng phương pháp moment tổng quát dữ liệu bảng (GMM)',
+      description: 'Tổng quát hóa Panel IV-2SLS bằng ma trận trọng số tối ưu hai bước kháng phương sai thay đổi và tự tương quan nội cụm trên dữ liệu bảng đã kh...',
+      link: '/vietlod/chapter-05/group-5-3/b069-panel-gmm',
+      badge: 'B069 · panel_gmm'
+    },
+    {
+      title: '5.3.3. Ước lượng biến công cụ nội tại Hausman–Taylor',
+      description: 'Sử dụng chính độ lệch nội nhóm $X_{1it} - \bar{X}_{1i}$ và trung bình nhóm $\bar{X}_{1i}$ của các biến ngoại sinh biến thiên theo thời gian ...',
+      link: '/vietlod/chapter-05/group-5-3/b070-hausman-taylor',
+      badge: 'B070 · hausman_taylor'
+    }
+  ]}
+/>
+
+## 3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
+
+| Bài học & Mô hình | Mã định danh | Cú pháp Stata 18 MP | Cú pháp R 4.x | Cú pháp Python 3.11+ | Hỗ trợ |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `5.3.1` · [Ước lượng biến công cụ hai giai đoạn dữ liệu bảng](/vietlod/chapter-05/group-5-3/b068-panel-iv-2sls) | `panel_iv_2sls` | `xtivreg y x1 (d_endog = z1 z2), fe vce(cluster id)` | `plm::plm(y ~ x1 + d_endog \| x1 + z1 + z2, data = pdata, model = 'within')` | `IV2SLS.from_formula('y_w ~ x1_w + [d_w ~ z1_w + z2_w]', data=df).fit(cov_type='clustered', clusters=df['id'])` | <Available /> |
+| `5.3.2` · [Ước lượng phương pháp moment tổng quát dữ liệu bảng (GMM)](/vietlod/chapter-05/group-5-3/b069-panel-gmm) | `panel_gmm` | `xtivreg2 y x1 (d_endog = z1 z2), fe gmm2s cluster(id)` | `fixest::feols(y ~ x1 \| id \| d_endog ~ z1 + z2, cluster = ~id, data = df)` | `IVGMM.from_formula('y_w ~ x1_w + [d_w ~ z1_w + z2_w]', data=df).fit(cov_type='clustered', clusters=df['id'])` | <Available /> |
+| `5.3.3` · [Ước lượng biến công cụ nội tại Hausman–Taylor](/vietlod/chapter-05/group-5-3/b070-hausman-taylor) | `hausman_taylor` | `xthtaylor y x1 x2 z_exog z_endog, endog(x2 z_endog)` | `plm::plm(y ~ x1 + x2 + z_exog + z_endog \| x1 + x2 + z_exog, data = pdata, model = 'random', random.method = 'ht')` | `RandomEffects.from_formula('y ~ 1 + x1 + x2 + z_exog + z_endog', data=pdata).fit()` | <Available /> |
+
+## 4. Quy trình thực hành chuẩn cho Nhóm 5.3
+
+<Steps>
+
+### Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco
+
+Tải tệp CSV thực hành của từng mô hình trong Nhóm `5.3` hoặc kết nối dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
+
+### Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu
+
+So sánh các mô hình từ `5.3.1` đến `5.3.3` trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.
+
+### Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab
+
+Thực hiện đầy đủ bộ kiểm định **Thống kê $F$ giai đoạn 1 Kleibergen–Paap rk Wald $F$ trên dữ liệu đã khử trung bình cá thể, kiểm định nội sinh Davidson–MacKinnon / Hausman và kiểm định Hansen $J$** và đẩy mã mô hình sang [EcoLab](https://ecolab.io.vn) để xuất bảng kết quả chuẩn công bố quốc tế.
+
+</Steps>

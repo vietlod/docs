@@ -1,0 +1,132 @@
+---
+id: index
+title: "Nhóm 9.5: Sai biệt trong sai biệt lệch pha hiện đại"
+sidebar_label: "Nhóm 9.5. Sai biệt trong sai biệt lệch pha hiện đại"
+sidebar_position: 5
+slug: /vietlod/chapter-09/group-9-5
+description: "Hướng dẫn thực hành Nhóm 9.5 — Sai biệt trong sai biệt lệch pha hiện đại thuộc Chương 09: so sánh và thực thi 8 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+keywords:
+  - Nhóm 9.5 VietLOD
+  - Sai biệt trong sai biệt lệch pha hiện đại
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Nhóm 9.5: Sai biệt trong sai biệt lệch pha hiện đại
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Nhóm phương pháp 9.5 — Sai biệt trong sai biệt lệch pha hiện đại** thuộc [Chương 09: Suy luận nhân quả và đánh giá tác động chính sách](/vietlod/chapter-09) cung cấp quy trình thực hành từng bước cho **8 mô hình kinh tế lượng** từ bài `9.5.1` đến `9.5.8`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Nhóm 9.5](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-09-suy-luan-nhan-qua-va-danh-gia-tac-dong-chinh-sach/nhom-9-5-staggered-did-modern) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Nhóm 9.5: Sai biệt trong sai biệt lệch pha hiện đại trên Stata 18, R 4.x và Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Bản chất phương pháp và hệ phương trình định danh
+
+- **Câu hỏi nghiên cứu trọng tâm của nhóm**: Làm sao để nhận dạng tác động nhân quả tin cậy bằng Staggered DID thế hệ mới, Đối chứng tổng hợp (SCM) và (SDID), Hồi quy gián đoạn, MTE, Bunching và Học máy nhân quả?
+- **Kiểm định chẩn đoán bắt buộc**: Tổng tỷ trọng và ước lượng DID trung bình theo 3 nhóm, tỷ phần trọng số bị ô nhiễm động học..
+
+Phương trình đặc tả cấu trúc của nhóm phương pháp 9.5:
+
+$$
+\hat{\beta}_{\text{TWFE}} = \sum_{k \neq U} s_{kU}\hat{\beta}_{kU}^{2\times 2} + \sum_{k \lt \ell} \left(s_{k\ell}^k \hat{\beta}_{k\ell}^{2\times 2, k} + s_{k\ell}^\ell \hat{\beta}_{k\ell}^{2\times 2, \ell}\right), \quad \sum s_{ab} = 1
+$$
+
+Điều kiện mô-men và hàm mục tiêu ước lượng:
+
+$$
+\tau_{\text{ATT}} = \text{E}\left[Y_{it}(1) - Y_{it}(0) \;\middle|\; D_i = 1\right], \quad \text{E}_N\left[\psi\left(W_i; \hat{\tau}, \hat{\eta}\right)\right] = 0
+$$
+
+<FeatureNotAvailable
+  note="Khi dữ liệu vi phạm giả định định danh của Nhóm 9.5, nhà nghiên cứu cần chuyển sang các nhóm phương pháp mở rộng trong Chương 09 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
+/>
+
+## 2. Danh mục các mô hình trong Nhóm 9.5
+
+<FeatureCards
+  features={[
+    {
+      title: '9.5.1. Phân rã trọng số hai nhân hai của Goodman-Bacon',
+      description: 'Phân rã chính xác hệ số $\hat{\beta}_{\text{TWFE}}$ trên dữ liệu bảng lệch pha thành trung bình có trọng số của mọi cặp so sánh $2\times 2$:...',
+      link: '/vietlod/chapter-09/group-9-5/b142-bacon-decomposition',
+      badge: 'B142 · bacon_decomposition'
+    },
+    {
+      title: '9.5.2. Nghiên cứu sự kiện trọng số tương tác đoàn hệ Sun–Abraham',
+      description: 'Ước lượng riêng từng hiệu ứng đoàn hệ – thời gian tương đối $\text{CATT}_{e,\ell}$ bằng tương tác bão hòa rồi gộp theo tỷ phần đoàn hệ, loại...',
+      link: '/vietlod/chapter-09/group-9-5/b144-sun-abraham-did',
+      badge: 'B144 · sun_abraham_did'
+    },
+    {
+      title: '9.5.3. Ước lượng DID suy diễn khử chệch Borusyak–Jaravel–Spiess',
+      description: 'Ước lượng hiệu ứng cố định đơn vị $\hat{\alpha}_i$, thời gian $\hat{\lambda}_t$ và biến kiểm soát chỉ trên tập quan sát chưa chịu xử lý — $\...',
+      link: '/vietlod/chapter-09/group-9-5/b145-borusyak-imputation-did',
+      badge: 'B145 · borusyak_imputation_did'
+    },
+    {
+      title: '9.5.4. Ước lượng DID động cho xử lý đảo chiều de Chaisemartin–D\'Haultfœuille',
+      description: 'Ước lượng nhân quả không chệch cho thiết kế DID tổng quát nơi trạng thái xử lý có thể bật rồi tắt hoặc là biến xử lý không nhị phân/liên tục...',
+      link: '/vietlod/chapter-09/group-9-5/b146-dechaisemartin-did',
+      badge: 'B146 · dechaisemartin_did'
+    },
+    {
+      title: '9.5.5. Mô hình hiệu ứng cố định hai chiều mở rộng Mundlak (ETWFE)',
+      description: 'Chứng minh rằng TWFE truyền thống chỉ sai do thiếu bão hòa tương tác: bằng cách đưa đầy đủ tương tác đoàn hệ × thời kỳ kèm biến kiểm soát kh...',
+      link: '/vietlod/chapter-09/group-9-5/b147-wooldridge-etwfe',
+      badge: 'B147 · wooldridge_etwfe'
+    },
+    {
+      title: '9.5.6. Phương pháp chiếu cục bộ kết hợp mẫu đối chứng sạch (DID)',
+      description: 'Kết hợp sự linh hoạt động học của Jordà Local Projections $Y_{i,t+h} - Y_{i,t-1}$ với điều kiện lọc mẫu đối chứng sạch — clean controls: chỉ...',
+      link: '/vietlod/chapter-09/group-9-5/b148-lp-did',
+      badge: 'B148 · lp_did'
+    },
+    {
+      title: '9.5.7. Phân tích độ nhạy vi phạm xu hướng song song Rambachan–Roth',
+      description: 'Thay vì giả định xu hướng song song sau can thiệp đúng tuyệt đối 100%, thiết lập khoảng nhận dạng từng phần cho hiệu ứng chính sách khi vi p...',
+      link: '/vietlod/chapter-09/group-9-5/b149-honest-did-sensitivity',
+      badge: 'B149 · honest_did_sensitivity'
+    },
+    {
+      title: '9.5.8. Sai biệt trong sai biệt tổng hợp (SDID)',
+      description: 'Kết hợp tối ưu trọng số đơn vị đối chứng $\hat{\omega}_i$ của Synthetic Control với trọng số thời kỳ tiền xử lý $\hat{\lambda}_t$ và hiệu ứn...',
+      link: '/vietlod/chapter-09/group-9-5/b152-synthetic-did',
+      badge: 'B152 · synthetic_did'
+    }
+  ]}
+/>
+
+## 3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
+
+| Bài học & Mô hình | Mã định danh | Cú pháp Stata 18 MP | Cú pháp R 4.x | Cú pháp Python 3.11+ | Hỗ trợ |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `9.5.1` · [Phân rã trọng số hai nhân hai của Goodman-Bacon](/vietlod/chapter-09/group-9-5/b142-bacon-decomposition) | `bacon_decomposition` | `bacondecomp y treat, ddetail` | `bacondecomp::bacon(y ~ treat, data = df, id_var = 'id', time_var = 'year')` | `PanelOLS.from_formula('y ~ 1 + treat + EntityEffects + TimeEffects', data=pdata).fit()` | <Available /> |
+| `9.5.2` · [Nghiên cứu sự kiện trọng số tương tác đoàn hệ Sun–Abraham](/vietlod/chapter-09/group-9-5/b144-sun-abraham-did) | `sun_abraham_did` | `eventstudyinteract y lead* lag*, cohort(first_treat) control_cohort(never) absorb(id year) vce(cluster id)` | `fixest::feols(y ~ x1 + sunab(first_treat, year) \| id + year, cluster = ~id, data = df)` | `pyfixest.event_study(df, yname='y', idname='id', tname='year', gname='first_treat', estimator='saturated')` | <Available /> |
+| `9.5.3` · [Ước lượng DID suy diễn khử chệch Borusyak–Jaravel–Spiess](/vietlod/chapter-09/group-9-5/b145-borusyak-imputation-did) | `borusyak_imputation_did` | `did_imputation y id year first_treat, horizons(0/5) pretrends(4)` | `did2s::did2s(df, yname = 'y', first_stage = ~ 0 \| id + year, second_stage = ~ i(rel_time), treatment = 'treat', cluster_var = 'id')` | `pyfixest.did2s(df, yname='y', first_stage='~ 0 \| id + year', second_stage='~ treat', treatment='treat', cluster='id')` | <Available /> |
+| `9.5.4` · [Ước lượng DID động cho xử lý đảo chiều de Chaisemartin–D'Haultfœuille](/vietlod/chapter-09/group-9-5/b146-dechaisemartin-did) | `dechaisemartin_did` | `did_multiplegt_dyn y id year treat, effects(5) placebo(3) cluster(id)` | `DIDmultiplegtDYN::did_multiplegt_dyn(df, 'y', 'id', 'year', 'treat', effects = 5, placebo = 3)` | `PanelOLS.from_formula('dy ~ 1 + d_treat + x1 + TimeEffects', data=pdata).fit(cov_type='clustered', cluster_entity=True)` | <Available /> |
+| `9.5.5` · [Mô hình hiệu ứng cố định hai chiều mở rộng Mundlak (ETWFE)](/vietlod/chapter-09/group-9-5/b147-wooldridge-etwfe) | `wooldridge_etwfe` | `xthdidregress twfe (y x1) (treat), group(id)` | `etwfe::etwfe(fml = y ~ x1, tvar = year, gvar = first_treat, data = df, vcov = ~id)` | `pyfixest.feols('y ~ treat : i(cohort, year) + x1 \| id + year', data=df, vcov={'CRV1': 'id'})` | <Available /> |
+| `9.5.6` · [Phương pháp chiếu cục bộ kết hợp mẫu đối chứng sạch (DID)](/vietlod/chapter-09/group-9-5/b148-lp-did) | `lp_did` | `lpdid y, unit(id) time(year) treat(treat) pre_window(4) post_window(6)` | `fixest::feols(dy_h ~ d_treat + x1 \| year, subset = clean_sample, cluster = ~id, data = df)` | `pyfixest.lpdid(df, yname='y', idname='id', tname='year', gname='first_treat')` | <Available /> |
+| `9.5.7` · [Phân tích độ nhạy vi phạm xu hướng song song Rambachan–Roth](/vietlod/chapter-09/group-9-5/b149-honest-did-sensitivity) | `honest_did_sensitivity` | `honestdid, pre(1/4) post(5/8) mvec(0.5(0.5)2)` | `HonestDiD::createSensitivityResults_relativeMagnitudes(betahat, sigma, numPrePeriods = 4, numPostPeriods = 4)` | `scipy.optimize.linprog(c_obj, A_ub=A_rm, b_ub=b_rm)` | <Available /> |
+| `9.5.8` · [Sai biệt trong sai biệt tổng hợp (SDID)](/vietlod/chapter-09/group-9-5/b152-synthetic-did) | `synthetic_did` | `sdid y id year treat, vce(placebo) reps(200)` | `synthdid::synthdid_estimate(Y, N0, T0)` | `SynthDID().fit(Y_panel, N0, T0)` | <Available /> |
+
+## 4. Quy trình thực hành chuẩn cho Nhóm 9.5
+
+<Steps>
+
+### Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco
+
+Tải tệp CSV thực hành của từng mô hình trong Nhóm `9.5` hoặc kết nối dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
+
+### Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu
+
+So sánh các mô hình từ `9.5.1` đến `9.5.8` trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.
+
+### Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab
+
+Thực hiện đầy đủ bộ kiểm định **Tổng tỷ trọng và ước lượng DID trung bình theo 3 nhóm, tỷ phần trọng số bị ô nhiễm động học.** và đẩy mã mô hình sang [EcoLab](https://ecolab.io.vn) để xuất bảng kết quả chuẩn công bố quốc tế.
+
+</Steps>

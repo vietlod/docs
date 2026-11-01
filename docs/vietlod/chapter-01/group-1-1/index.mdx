@@ -1,0 +1,104 @@
+---
+id: index
+title: "Nhóm 1.1: Bình phương nhỏ nhất"
+sidebar_label: "Nhóm 1.1. Bình phương nhỏ nhất"
+sidebar_position: 1
+slug: /vietlod/chapter-01/group-1-1
+description: "Hướng dẫn thực hành Nhóm 1.1 — Bình phương nhỏ nhất thuộc Chương 01: so sánh và thực thi 4 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+keywords:
+  - Nhóm 1.1 VietLOD
+  - Bình phương nhỏ nhất
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Nhóm 1.1: Bình phương nhỏ nhất
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Nhóm phương pháp 1.1 — Bình phương nhỏ nhất** thuộc [Chương 01: Hồi quy tuyến tính cổ điển và biến công cụ](/vietlod/chapter-01) cung cấp quy trình thực hành từng bước cho **4 mô hình kinh tế lượng** từ bài `1.1.1` đến `1.1.4`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Nhóm 1.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-01-hoi-quy-tuyen-tinh-co-dien-va-bien-cong-cu/nhom-1-1-least-squares) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Nhóm 1.1: Bình phương nhỏ nhất trên Stata 18, R 4.x và Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Bản chất phương pháp và hệ phương trình định danh
+
+- **Câu hỏi nghiên cứu trọng tâm của nhóm**: Làm thế nào để ước lượng tác động tuyến tính vững chắc khi tồn tại phương sai thay đổi, điểm ngoại lai, hiệu ứng cố định đa chiều và biến giải thích nội sinh?
+- **Kiểm định chẩn đoán bắt buộc**: Kiểm định phương sai thay đổi Breusch–Pagan và White, hệ số phóng đại phương sai đa cộng tuyến (VIF), kiểm định dạng hàm Ramsey RESET, kiểm định phân phối chuẩn phần dư Jarque–Bera.
+
+Phương trình đặc tả cấu trúc của nhóm phương pháp 1.1:
+
+$$
+Y_i = \beta_0 + \sum_{k=1}^K \beta_k X_{ik} + \varepsilon_i, \quad \text{E}[\varepsilon_i \mid X_i] = 0
+$$
+
+Điều kiện mô-men và hàm mục tiêu ước lượng:
+
+$$
+\hat{\beta}_N = \arg\min_{\beta \in \mathbb{R}^K} \sum_{i=1}^N w_i \left(Y_i - X_i^\top \beta\right)^2, \quad \text{E}\left[X_i \varepsilon_i\right] = 0
+$$
+
+<FeatureNotAvailable
+  note="Khi dữ liệu vi phạm giả định định danh của Nhóm 1.1, nhà nghiên cứu cần chuyển sang các nhóm phương pháp mở rộng trong Chương 01 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
+/>
+
+## 2. Danh mục các mô hình trong Nhóm 1.1
+
+<FeatureCards
+  features={[
+    {
+      title: '1.1.1. Hồi quy bình phương nhỏ nhất thông thường (OLS)',
+      description: 'Ước lượng hàm kỳ vọng có điều kiện tuyến tính bằng cách cực tiểu hóa tổng bình phương phần dư; đạt tính chất không chệch tuyến tính tốt nhất...',
+      link: '/vietlod/chapter-01/group-1-1/b001-ols',
+      badge: 'B001 · ols'
+    },
+    {
+      title: '1.1.2. Hồi quy bình phương nhỏ nhất có trọng số (WLS)',
+      description: 'Khôi phục hiệu quả tiệm cận và tính chất (BLUE) khi phương sai của sai số tỷ lệ thuận với một biến quy mô đã biết $\sigma_i^2 = \sigma^2 / w...',
+      link: '/vietlod/chapter-01/group-1-1/b002-wls',
+      badge: 'B002 · wls'
+    },
+    {
+      title: '1.1.3. Hồi quy bình phương nhỏ nhất tổng quát (GLS)',
+      description: 'Biến đổi tuyến tính hệ phương trình bằng ma trận căn bậc hai nghịch đảo hiệp phương sai $\Omega^{-1/2}$ đã biết nhằm triệt tiêu hoàn toàn cấ...',
+      link: '/vietlod/chapter-01/group-1-1/b003-gls',
+      badge: 'B003 · gls'
+    },
+    {
+      title: '1.1.4. Hồi quy bình phương nhỏ nhất tổng quát khả thi (FGLS)',
+      description: 'Ước lượng hai bước khả thi: bước 1 ước lượng hàm phương sai sai số $\ln(e_i^2)$ hoặc hệ số tự tương quan $\rho$ từ phần dư (OLS), bước 2 thự...',
+      link: '/vietlod/chapter-01/group-1-1/b004-fgls',
+      badge: 'B004 · fgls'
+    }
+  ]}
+/>
+
+## 3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
+
+| Bài học & Mô hình | Mã định danh | Cú pháp Stata 18 MP | Cú pháp R 4.x | Cú pháp Python 3.11+ | Hỗ trợ |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `1.1.1` · [Hồi quy bình phương nhỏ nhất thông thường (OLS)](/vietlod/chapter-01/group-1-1/b001-ols) | `ols` | `regress y x1 x2, vce(robust)` | `lm(y ~ x1 + x2, data = df)` | `smf.ols('y ~ x1 + x2', data=df).fit(cov_type='HC1')` | <Available /> |
+| `1.1.2` · [Hồi quy bình phương nhỏ nhất có trọng số (WLS)](/vietlod/chapter-01/group-1-1/b002-wls) | `wls` | `regress y x1 x2 [aweight = w], vce(robust)` | `lm(y ~ x1 + x2, data = df, weights = w)` | `smf.wls('y ~ x1 + x2', data=df, weights=df['w']).fit()` | <Available /> |
+| `1.1.3` · [Hồi quy bình phương nhỏ nhất tổng quát (GLS)](/vietlod/chapter-01/group-1-1/b003-gls) | `gls` | `gls / vwls y x1 x2, sd(sigma_i)` | `nlme::gls(y ~ x1 + x2, data = df)` | `sm.GLS(y, X, sigma=Omega).fit()` | <Available /> |
+| `1.1.4` · [Hồi quy bình phương nhỏ nhất tổng quát khả thi (FGLS)](/vietlod/chapter-01/group-1-1/b004-fgls) | `fgls` | `regress y x1 x2 -> gen ln_e2 = ln(e^2) -> regress y x1 x2 [aw=1/exp(xb)]` | `nlme::gls(y ~ x1 + x2, weights = varExp(), data = df)` | `smf.glsar('y ~ x1 + x2', data=df, rho=1).iterative_fit()` | <Available /> |
+
+## 4. Quy trình thực hành chuẩn cho Nhóm 1.1
+
+<Steps>
+
+### Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco
+
+Tải tệp CSV thực hành của từng mô hình trong Nhóm `1.1` hoặc kết nối dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
+
+### Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu
+
+So sánh các mô hình từ `1.1.1` đến `1.1.4` trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.
+
+### Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab
+
+Thực hiện đầy đủ bộ kiểm định **Kiểm định phương sai thay đổi Breusch–Pagan và White, hệ số phóng đại phương sai đa cộng tuyến (VIF), kiểm định dạng hàm Ramsey RESET, kiểm định phân phối chuẩn phần dư Jarque–Bera** và đẩy mã mô hình sang [EcoLab](https://ecolab.io.vn) để xuất bảng kết quả chuẩn công bố quốc tế.
+
+</Steps>

@@ -1,0 +1,104 @@
+---
+id: index
+title: "Group 12.3: Econometric Machine Learning"
+sidebar_label: "Group 12.3. Econometric Machine Learning"
+sidebar_position: 3
+slug: /vietlod/chapter-12/group-12-3
+description: "How-To User Guide for Methodological Group 12.3 — Econometric Machine Learning in Chapter 12: comparing and executing 4 econometric models across Stata 18 MP, R 4.x, and Python 3.11+."
+keywords:
+  - VietLOD Group 12.3
+  - Econometric Machine Learning
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Group 12.3: Econometric Machine Learning
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Methodological Group 12.3 — Econometric Machine Learning** in [Chapter 12: Simultaneous Systems, Demand Systems, Bayesian and Machine Learning Econometrics](/en/vietlod/chapter-12) provides step-by-step How-To implementation guides for **4 econometric models** spanning from Section `12.3.1` to `12.3.4`. Full theoretical derivations are available at [VietLOD Group 12.3](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-12-he-phuong-trinh-he-cau-kinh-te-luong-bayes-va-hoc-may/nhom-12-3-ml-econometrics) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="How-To Guide for Group 12.3: Econometric Machine Learning in Stata 18, R 4.x, and Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Methodological Overview and Structural Equations
+
+- **Methodological Focus**: Provides consistent estimation and robust inference for **Econometric Machine Learning** specifications within **Simultaneous Systems, Demand Systems, Bayesian and Machine Learning Econometrics**.
+- **Mandatory Post-Estimation Diagnostics**: Sai số dự báo ngoài túi (OOB) (MSE) và $R^2$, độ quan trọng biến theo hoán vị ngoài mẫu, biểu đồ phụ thuộc riêng phần (PDP) và (ICE) cùng K-Fold (CV).
+
+Core structural specification for Group 12.3:
+
+$$
+\hat{f}_{\text{RF}}(x) = \frac{1}{B}\sum_{b=1}^B T_b(x; \Theta_b)
+$$
+
+Estimator objective and moment conditions:
+
+$$
+\hat{\theta}_{\text{SYS}} = \arg\min_{\theta \in \Theta} g_N(\theta)^\top \left(\hat{\Sigma}^{-1} \otimes P_Z\right) g_N(\theta), \quad p(\theta \mid Y, X) \propto L(Y \mid X, \theta)\,\pi(\theta)
+$$
+
+<FeatureNotAvailable
+  note="When empirical data violate the identification conditions of Group 12.3, researchers should transition to the extended methodological groups in Chapter 12 or apply appropriate instrumental-variable and cluster-robust corrections."
+/>
+
+## 2. Econometric Models in Group 12.3
+
+<FeatureCards
+  features={[
+    {
+      title: '12.3.1. Breiman Random Forest Ensemble Regression',
+      description: 'Estimates the Breiman Random Forest Ensemble Regression specification within the Econometric Machine Learning framework by optimizing the st...',
+      link: '/en/vietlod/chapter-12/group-12-3/b186-random-forest-regressor',
+      badge: 'B186 · random_forest_regressor'
+    },
+    {
+      title: '12.3.2. Friedman Gradient Boosting Regression',
+      description: 'Estimates the Friedman Gradient Boosting Regression specification within the Econometric Machine Learning framework by optimizing the struct...',
+      link: '/en/vietlod/chapter-12/group-12-3/b187-gradient-boosting-regressor',
+      badge: 'B187 · gradient_boosting_regressor'
+    },
+    {
+      title: '12.3.3. Cross-Validated Support Vector Regression with Partial Effects',
+      description: 'Nonparametric reproducing-kernel Hilbert space regression with epsilon-insensitive loss, K-fold out-of-sample R2 validation, permutation imp...',
+      link: '/en/vietlod/chapter-12/group-12-3/b188-svr-econometric',
+      badge: 'B188 · svr_econometric'
+    },
+    {
+      title: '12.3.4. Multi-Layer Perceptron Econometric Nonlinear Regressor',
+      description: 'Approximates general nonlinear conditional expectations E[Y|X] = g — X — via L2-penalized feedforward neural networks while extracting econo...',
+      link: '/en/vietlod/chapter-12/group-12-3/b189-mlp-regressor',
+      badge: 'B189 · mlp_regressor'
+    }
+  ]}
+/>
+
+## 3. Comparative Execution Syntax Across Stata 18, R 4.x, and Python 3.11+
+
+| Section & Model Title | Estimator Key | Stata 18 MP Syntax | R 4.x Syntax | Python 3.11+ Syntax | Support |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `12.3.1` · [Breiman Random Forest Ensemble Regression](/en/vietlod/chapter-12/group-12-3/b186-random-forest-regressor) | `random_forest_regressor` | `rforest y x1 x2 x3, type(reg) iterations(200)` | `randomForest::randomForest(y ~ x1 + x2 + x3, data = df, ntree = 200, importance = TRUE)` | `RandomForestRegressor(n_estimators=200, random_state=42).fit(X, y)` | <Available /> |
+| `12.3.2` · [Friedman Gradient Boosting Regression](/en/vietlod/chapter-12/group-12-3/b187-gradient-boosting-regressor) | `gradient_boosting_regressor` | `boost y x1 x2 x3, distribution(normal) maxiter(200)` | `gbm::gbm(y ~ x1 + x2 + x3, data = df, distribution = 'gaussian', n.trees = 200)` | `GradientBoostingRegressor(n_estimators=200, learning_rate=0.05, random_state=42).fit(X, y)` | <Available /> |
+| `12.3.3` · [Cross-Validated Support Vector Regression with Partial Effects](/en/vietlod/chapter-12/group-12-3/b188-svr-econometric) | `svr_econometric` | `svmachines y x1 x2, type(svr) kernel(rbf)` | `e1071::svm(y ~ x1 + x2, data = df, kernel = 'radial', type = 'eps-regression')` | `GridSearchCV(SVR(kernel='rbf'), param_grid={'C': [1, 10], 'epsilon': [0.1, 0.2]}, cv=5).fit(X_std, y)` | <Available /> |
+| `12.3.4` · [Multi-Layer Perceptron Econometric Nonlinear Regressor](/en/vietlod/chapter-12/group-12-3/b189-mlp-regressor) | `mlp_regressor` | `python: MLPRegressor(hidden_layer_sizes=(64, 32), early_stopping=True).fit(X_std, y)` | `nnet::nnet(y ~ x1 + x2, data = df, size = 16, linout = TRUE, decay = 0.01)` | `MLPRegressor(hidden_layer_sizes=(64, 32), early_stopping=True, random_state=42).fit(X_std, y)` | <Available /> |
+
+## 4. Standard Implementation Workflow for Group 12.3
+
+<Steps>
+
+### Step 1. Load Standardized Practice Datasets From VietLOD, EcoData, or Finco
+
+Download the model-specific `.csv` practice dataset in Group `12.3` or extract custom empirical panels from [EcoData](https://ecodata.io.vn) and [Finco](https://www.finco.vn).
+
+### Step 2. Select the Optimal Estimator for Your Error and Sample Structure
+
+Compare the estimators from `12.3.1` to `12.3.4` in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.
+
+### Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab
+
+Verify all required diagnostics including **Sai số dự báo ngoài túi (OOB) (MSE) và $R^2$, độ quan trọng biến theo hoán vị ngoài mẫu, biểu đồ phụ thuộc riêng phần (PDP) và (ICE) cùng K-Fold (CV)** and dispatch the specification to [EcoLab](https://ecolab.io.vn) for automated journal-grade reporting.
+
+</Steps>

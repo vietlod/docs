@@ -1,0 +1,90 @@
+---
+id: index
+title: "Group 7.2: Granger Causality and Impulse Response Analysis"
+sidebar_label: "Group 7.2. Granger Causality and Impulse Response Analysis"
+sidebar_position: 2
+slug: /vietlod/chapter-07/group-7-2
+description: "How-To User Guide for Methodological Group 7.2 — Granger Causality and Impulse Response Analysis in Chapter 07: comparing and executing 2 econometric models across Stata 18 MP, R 4.x, and Python 3.11+."
+keywords:
+  - VietLOD Group 7.2
+  - Granger Causality and Impulse Response Analysis
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Group 7.2: Granger Causality and Impulse Response Analysis
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Methodological Group 7.2 — Granger Causality and Impulse Response Analysis** in [Chapter 07: Multivariate Time Series, Local Projections and Spillover Networks](/en/vietlod/chapter-07) provides step-by-step How-To implementation guides for **2 econometric models** spanning from Section `7.2.1` to `7.2.2`. Full theoretical derivations are available at [VietLOD Group 7.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-07-chuoi-thoi-gian-da-bien-chieu-cuc-bo-va-mang-lan-toa/nhom-7-2-causality) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="How-To Guide for Group 7.2: Granger Causality and Impulse Response Analysis in Stata 18, R 4.x, and Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Methodological Overview and Structural Equations
+
+- **Methodological Focus**: Provides consistent estimation and robust inference for **Granger Causality and Impulse Response Analysis** specifications within **Multivariate Time Series, Local Projections and Spillover Networks**.
+- **Mandatory Post-Estimation Diagnostics**: Kiểm định Wald $\chi^2$ khối hệ số trễ trong (VAR) dừng hoặc kiểm định Wald sửa đổi của Toda–Yamamoto trên hệ VAR bậc $p + d_{\max}$ sau khi đã đảm bảo phần dư không tự tương quan.
+
+Core structural specification for Group 7.2:
+
+$$
+Y_t = \alpha_0 + \sum_{j=1}^p \alpha_j Y_{t-j} + \sum_{j=1}^p \beta_j X_{t-j} + u_t, \quad H_0: \beta_1 = \dots = \beta_p = 0
+$$
+
+Estimator objective and moment conditions:
+
+$$
+Y_t = c + \sum_{\ell=1}^p A_\ell Y_{t-\ell} + B^{-1}\Sigma_u \varepsilon_t, \quad \Psi_h = \frac{\partial Y_{t+h}}{\partial \varepsilon_t^\top} = \Phi_h B^{-1}\Sigma_u
+$$
+
+<FeatureNotAvailable
+  note="When empirical data violate the identification conditions of Group 7.2, researchers should transition to the extended methodological groups in Chapter 07 or apply appropriate instrumental-variable and cluster-robust corrections."
+/>
+
+## 2. Econometric Models in Group 7.2
+
+<FeatureCards
+  features={[
+    {
+      title: '7.2.1. Multi-Lag Granger Causality System',
+      description: 'Estimates the Multi-Lag Granger Causality System specification within the Granger Causality and Impulse Response Analysis framework by optim...',
+      link: '/en/vietlod/chapter-07/group-7-2/b108-granger-causality',
+      badge: 'B108 · granger_causality'
+    },
+    {
+      title: '7.2.2. Orthogonalized Impulse Response System — IRF',
+      description: 'Estimates the Orthogonalized Impulse Response System — IRF specification within the Granger Causality and Impulse Response Analysis framewor...',
+      link: '/en/vietlod/chapter-07/group-7-2/b109-impulse-response',
+      badge: 'B109 · impulse_response'
+    }
+  ]}
+/>
+
+## 3. Comparative Execution Syntax Across Stata 18, R 4.x, and Python 3.11+
+
+| Section & Model Title | Estimator Key | Stata 18 MP Syntax | R 4.x Syntax | Python 3.11+ Syntax | Support |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `7.2.1` · [Multi-Lag Granger Causality System](/en/vietlod/chapter-07/group-7-2/b108-granger-causality) | `granger_causality` | `var y x1 x2, lags(1/2) -> vargranger` | `lmtest::grangertest(y ~ x1, order = 2, data = df)` | `grangercausalitytests(df[['y', 'x1']], maxlag=2)` | <Available /> |
+| `7.2.2` · [Orthogonalized Impulse Response System — IRF](/en/vietlod/chapter-07/group-7-2/b109-impulse-response) | `impulse_response` | `var y x1 x2, lags(1/2) -> irf create oirf, step(10)` | `vars::irf(var_fit, impulse = 'x1', response = 'y', n.ahead = 10)` | `VAR(df[['y', 'x1', 'x2']]).fit(2).irf(10)` | <Available /> |
+
+## 4. Standard Implementation Workflow for Group 7.2
+
+<Steps>
+
+### Step 1. Load Standardized Practice Datasets From VietLOD, EcoData, or Finco
+
+Download the model-specific `.csv` practice dataset in Group `7.2` or extract custom empirical panels from [EcoData](https://ecodata.io.vn) and [Finco](https://www.finco.vn).
+
+### Step 2. Select the Optimal Estimator for Your Error and Sample Structure
+
+Compare the estimators from `7.2.1` to `7.2.2` in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.
+
+### Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab
+
+Verify all required diagnostics including **Kiểm định Wald $\chi^2$ khối hệ số trễ trong (VAR) dừng hoặc kiểm định Wald sửa đổi của Toda–Yamamoto trên hệ VAR bậc $p + d_{\max}$ sau khi đã đảm bảo phần dư không tự tương quan** and dispatch the specification to [EcoLab](https://ecolab.io.vn) for automated journal-grade reporting.
+
+</Steps>

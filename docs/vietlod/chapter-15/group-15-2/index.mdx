@@ -1,0 +1,90 @@
+---
+id: index
+title: "Nhóm 15.2: Suy luận tái lấy mẫu cụm ít và ngẫu nhiên hóa"
+sidebar_label: "Nhóm 15.2. Suy luận tái lấy mẫu cụm ít và ngẫu nhiên hóa"
+sidebar_position: 2
+slug: /vietlod/chapter-15/group-15-2
+description: "Hướng dẫn thực hành Nhóm 15.2 — Suy luận tái lấy mẫu cụm ít và ngẫu nhiên hóa thuộc Chương 15: so sánh và thực thi 2 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+keywords:
+  - Nhóm 15.2 VietLOD
+  - Suy luận tái lấy mẫu cụm ít và ngẫu nhiên hóa
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Nhóm 15.2: Suy luận tái lấy mẫu cụm ít và ngẫu nhiên hóa
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Nhóm phương pháp 15.2 — Suy luận tái lấy mẫu cụm ít và ngẫu nhiên hóa** thuộc [Chương 15: Kinh tế lượng phi tham số và suy luận tái lấy mẫu cụm ít](/vietlod/chapter-15) cung cấp quy trình thực hành từng bước cho **2 mô hình kinh tế lượng** từ bài `15.2.1` đến `15.2.2`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Nhóm 15.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-15-kinh-te-luong-phi-tham-so-va-suy-luan-tai-lay-mau-cum-it/nhom-15-2-resampling-inference) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Nhóm 15.2: Suy luận tái lấy mẫu cụm ít và ngẫu nhiên hóa trên Stata 18, R 4.x và Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Bản chất phương pháp và hệ phương trình định danh
+
+- **Câu hỏi nghiên cứu trọng tâm của nhóm**: Khi không muốn áp đặt dạng hàm đại số hoặc khi số lượng cụm quá ít — G &lt; 30 — khiến định lý giới hạn trung tâm thất bại, làm sao để ước lượng và suy luận chính xác?
+- **Kiểm định chẩn đoán bắt buộc**: $p$-value Wild Cluster Restricted (WCR), khoảng tin cậy đảo ngược thống kê $t^*$ — bootstrap-$t$ inversion CI — không phụ thuộc đối xứng, bậc tự do hiệu dụng Pustejovsky–Tipton CR2, đối chiếu với CRV1 $p$-value thường..
+
+Phương trình đặc tả cấu trúc của nhóm phương pháp 15.2:
+
+$$
+\tilde{Y}_{ig}^\ast = X_{ig}^\top \tilde{\beta}_0 + \tilde{u}_{ig}\cdot v_g^\ast, \quad w_{\text{Boot}} = \frac{\hat{\beta}_1^\ast - \beta_1^0}{\text{SE}_{\text{CR}}(\hat{\beta}_1^\ast)}, \quad p_{\text{WCB}} = \frac{1}{B}\sum_{b=1}^B \mathbb{I}(|w_{\text{Boot}}^{(b)}| \ge |w_{\text{obs}}|)
+$$
+
+Điều kiện mô-men và hàm mục tiêu ước lượng:
+
+$$
+\hat{m}_h(x) = e_1^\top \left(\mathcal{X}_x^\top \mathcal{W}_h(x)\mathcal{X}_x\right)^{-1}\mathcal{X}_x^\top \mathcal{W}_h(x) Y, \quad h_{\text{opt}} = \arg\min_{h \gt 0}\text{CV}(h)
+$$
+
+<FeatureNotAvailable
+  note="Khi dữ liệu vi phạm giả định định danh của Nhóm 15.2, nhà nghiên cứu cần chuyển sang các nhóm phương pháp mở rộng trong Chương 15 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
+/>
+
+## 2. Danh mục các mô hình trong Nhóm 15.2
+
+<FeatureCards
+  features={[
+    {
+      title: '15.2.1. Suy luận Bootstrap cụm Wild nhanh với trọng số Rademacher và Webb',
+      description: 'Giải pháp chuẩn xuất bản bắt buộc khi dữ liệu có cấu trúc phân cụm nhưng số lượng cụm ít — $G \lt  30$ hoặc $G \lt  50$ — ví dụ 6 vùng kinh ...',
+      link: '/vietlod/chapter-15/group-15-2/b200-wild-cluster-bootstrap',
+      badge: 'B200 · wild_cluster_bootstrap'
+    },
+    {
+      title: '15.2.2. Suy luận ngẫu nhiên hóa chính xác của Fisher và kiểm chứng Alwyn Young',
+      description: 'Suy luận chính xác trên mẫu hữu hạn dựa hoàn toàn vào cơ chế phân bổ ngẫu nhiên / hoán vị biến điều trị $D$, theo tầng strata hoặc cụm clust...',
+      link: '/vietlod/chapter-15/group-15-2/b201-randomization-inference',
+      badge: 'B201 · randomization_inference'
+    }
+  ]}
+/>
+
+## 3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
+
+| Bài học & Mô hình | Mã định danh | Cú pháp Stata 18 MP | Cú pháp R 4.x | Cú pháp Python 3.11+ | Hỗ trợ |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `15.2.1` · [Suy luận Bootstrap cụm Wild nhanh với trọng số Rademacher và Webb](/vietlod/chapter-15/group-15-2/b200-wild-cluster-bootstrap) | `wild_cluster_bootstrap` | `regress y x1 x2, vce(cluster cid) -> boottest x1, weight(webb) reps(9999)` | `sandwich::vcovBS(lm(y ~ x1 + x2, data = df), cluster = ~cid, R = 4999, type = 'wild-webb')` | `wildboottest(smf.ols('y ~ x1 + x2', data=df).fit(), param='x1', cluster=df['cid'], B=9999)` | <Available /> |
+| `15.2.2` · [Suy luận ngẫu nhiên hóa chính xác của Fisher và kiểm chứng Alwyn Young](/vietlod/chapter-15/group-15-2/b201-randomization-inference) | `randomization_inference` | `ritest treat _b[treat], reps(5000) cluster(cid): regress y treat x1 x2` | `ri2::conduct_ri(y ~ treat + x1 + x2, declaration = decl, sharp_hypothesis = 0, sims = 5000, data = df)` | `scipy.stats.permutation_test((df_treat, df_ctrl), statistic=diff_in_means, n_resamples=5000)` | <Available /> |
+
+## 4. Quy trình thực hành chuẩn cho Nhóm 15.2
+
+<Steps>
+
+### Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco
+
+Tải tệp CSV thực hành của từng mô hình trong Nhóm `15.2` hoặc kết nối dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
+
+### Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu
+
+So sánh các mô hình từ `15.2.1` đến `15.2.2` trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.
+
+### Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab
+
+Thực hiện đầy đủ bộ kiểm định **$p$-value Wild Cluster Restricted (WCR), khoảng tin cậy đảo ngược thống kê $t^*$ — bootstrap-$t$ inversion CI — không phụ thuộc đối xứng, bậc tự do hiệu dụng Pustejovsky–Tipton CR2, đối chiếu với CRV1 $p$-value thường.** và đẩy mã mô hình sang [EcoLab](https://ecolab.io.vn) để xuất bảng kết quả chuẩn công bố quốc tế.
+
+</Steps>

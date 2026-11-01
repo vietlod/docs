@@ -1,0 +1,118 @@
+---
+title: "Hướng dẫn khai thác StockMCP với 138 công cụ phân tích và kiểm thử chiến lược"
+sidebar_label: "Hướng dẫn StockMCP 138 công cụ"
+sidebar_position: 8
+description: "Hướng dẫn toàn diện cách kết nối và khai thác bộ 138 công cụ MCP vietnam-securities của Finco: phân tích Top-Down 4 tầng, cổ phiếu 360 độ và Backtest 3M-6M-12M-3Y."
+keywords:
+  - Finco
+  - StockMCP
+  - công cụ phân tích kinh tế
+  - công cụ nghiên cứu định lượng
+  - hỗ trợ nghiên cứu khoa học
+  - dữ liệu kinh tế
+  - dữ liệu nghiên cứu
+  - dữ liệu Việt Nam
+  - EcoData
+  - EcoLab
+  - VietLOD
+---
+
+<script type="application/ld+json">
+  {JSON.stringify({"@context": "https://schema.org", "@graph": [{"@type": ["TechArticle", "HowTo"], "headline": "Hướng dẫn khai thác StockMCP với 138 công cụ phân tích và kiểm thử chiến lược", "description": "Hướng dẫn toàn diện cách kết nối và khai thác bộ 138 công cụ MCP vietnam-securities của Finco: phân tích Top-Down 4 tầng, cổ phiếu 360 độ và Backtest 3M-6M-12M-3Y.", "inLanguage": "vi-VN", "url": "https://docs.tnsai.vn/finco/stockmcp-guide", "author": {"@type": "Organization", "name": "TNS AI", "url": "https://www.tnsai.vn"}, "publisher": {"@type": "Organization", "name": "TNS AI", "url": "https://docs.tnsai.vn"}, "about": [{"@type": "Thing", "name": "Finco Data Platform"}, {"@type": "Thing", "name": "StockMCP Vietnam Securities"}, {"@type": "Thing", "name": "Quantitative Economic Research"}]}]})}
+</script>
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Hướng dẫn khai thác StockMCP với 138 công cụ phân tích và kiểm thử chiến lược
+
+**StockMCP** với tên kỹ thuật `vietnam-securities` là hệ thống máy chủ **Model Context Protocol gồm 138 công cụ chuyên sâu** kết nối trực tiếp hai chiều với cơ sở dữ liệu [Finco](https://www.finco.vn) cùng ba nguồn dữ liệu chứng khoán hàng đầu Việt Nam gồm **TCBS**, **SSI** và **DNSE**. Công cụ cho phép các nhà nghiên cứu định lượng, giảng viên và nhà đầu tư tự động hóa hoàn toàn quy trình phân tích vĩ mô, định giá doanh nghiệp và kiểm thử hiệu suất chiến lược giao dịch chỉ với một lệnh gọi duy nhất.
+
+<VideoTutorial title="Hướng dẫn khai thác StockMCP 138 công cụ và Backtest đa khung thời gian" src="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3" opened={false} />
+
+## Kiến trúc 8 nhóm công cụ cốt lõi trong bộ 138 công cụ StockMCP
+
+Hệ thống 138 công cụ của **StockMCP** được phân bổ thành các công cụ điều phối cấp cao và các công cụ truy xuất dữ liệu nguyên tử:
+
+| Nhóm công cụ StockMCP | Tên công cụ tiêu biểu | Chức năng phân tích & nghiên cứu cốt lõi | Trạng thái |
+| :--- | :--- | :--- | :---: |
+| **1. Khởi tạo & Định tuyến phiên** | `vietnam_securities_session_bootstrap` | Khởi tạo phiên phân tích không trạng thái và nạp toàn bộ ngữ cảnh thị trường trong 1 bước | <Available /> |
+| **2. Tổng hợp Vĩ mô Top-Down 4 tầng** | `vietnam_macro_topdown_synthesis` | Kết nối Vĩ mô toàn cầu, Thống kê NSO, Ngân sách Bộ Tài chính, Hải quan và Khảo sát cấp tỉnh | <Available /> |
+| **3. Phân tích Cổ phiếu 360 độ** | `vietnam_securities_stock_360` | Bóc tách toàn diện BCTC, Thuyết minh TM, định giá P/E, P/B, ROE, CASA, NPL và giao dịch nội bộ | <Available /> |
+| **4. Quét Dòng tiền & Radar Thị trường** | `vietnam_securities_market_radar` | Đo lường độ rộng thị trường, cổ phiếu dẫn dắt, phân loại nhà đầu tư và dòng vốn khối ngoại | <Available /> |
+| **5. Bộ lọc Cơ hội & Doanh nghiệp** | `vietnam_securities_opportunity_screener`, `vietnam_securities_corporate_screener` | Sàng lọc cổ phiếu theo tiêu chí giá trị, tăng trưởng, cổ tức và sức khỏe bảng cân đối kế toán | <Available /> |
+| **6. Tư vấn Chứng quyền Có bảo đảm** | `vietnam_securities_cw_advisor` | Định giá Black-Scholes, độ nhạy Delta, đòn bẩy hiệu dụng và sàng lọc chứng quyền tối ưu | <Available /> |
+| **7. Hoạch định Chiến lược 4 Khung thời gian** | `vietnam_securities_strategy_advisor` | Thiết lập chiến lược đầu tư định lượng trên 4 chân trời thời gian: 3 tháng, 6 tháng, 12 tháng và 3 năm | <Available /> |
+| **8. Kiểm thử Hiệu suất Quick Backtest** | `vietnam_securities_quick_backtest` | Chạy kiểm thử lịch sử tính toán lợi suất kỳ vọng, Sharpe Ratio, Sortino, Maximum Drawdown và Win Rate | <Available /> |
+
+## Khung phân tích đầu tư và nghiên cứu Top-Down 4 tầng
+
+Khi khai thác **StockMCP** kết hợp cùng [Finco](https://www.finco.vn), nhà nghiên cứu và nhà phân tích thực hiện quy trình suy luận từ vĩ mô xuống vi mô qua bốn tầng chặt chẽ:
+
+1. **Tầng 1 — Chu kỳ vĩ mô toàn cầu và trong nước**: Sử dụng `global_macro_world_query`, `vietnam_macro_gso_nso_query`, `vietnam_macro_fiscal_mof_query` và `vietnam_macro_customs_trade_query` để xác định xu hướng lãi suất, tỷ giá, giải ngân đầu tư công và xuất nhập khẩu.
+2. **Tầng 2 — Luân chuyển ngành và dòng tiền thị trường**: Sử dụng `vietnam_securities_market_radar`, `tcbs_getIndustryIndex` và `tcbs_getMarketForeignVal` để nhận diện nhóm ngành thu hút dòng vốn tổ chức và khối ngoại.
+3. **Tầng 3 — Phân tích cơ bản doanh nghiệp 360 độ và Thuyết minh BCTC**: Sử dụng `vietnam_securities_stock_360` và `vietnam_securities_corporate_screener` để kiểm định chất lượng lợi nhuận, tỷ lệ CASA, cấu trúc nợ nhóm N1 đến N5 và định giá đa mô hình.
+4. **Tầng 4 — Hoạch định chiến lược 4 khung thời gian và Backtest định lượng**: Sử dụng `vietnam_securities_strategy_advisor` và `vietnam_securities_quick_backtest` để kiểm chứng thực nghiệm hiệu quả danh mục trên các khung thời gian **3 tháng**, **6 tháng**, **12 tháng** và **3 năm**.
+
+## Quy trình thực hành khai thác StockMCP từng bước
+
+<Steps>
+
+### Bước 1: Kích hoạt phiên làm việc với công cụ Bootstrap
+
+Khởi đầu phiên làm việc bằng lệnh gọi `vietnam_securities_session_bootstrap` để nạp cấu hình kết nối đồng bộ giữa StockMCP và kho dữ liệu [Finco](https://www.finco.vn).
+
+### Bước 2: Chạy tổng hợp vĩ mô và sàng lọc doanh nghiệp mục tiêu
+
+Sử dụng `vietnam_macro_topdown_synthesis` kết hợp `vietnam_securities_corporate_screener` để chọn ra danh mục các doanh nghiệp đầu ngành có nền tảng tài chính vững chắc.
+
+### Bước 3: Phân tích 360 độ và kiểm thử chiến lược đa khung thời gian
+
+Gọi `vietnam_securities_stock_360` cho mã cổ phiếu mục tiêu, sau đó chạy `vietnam_securities_strategy_advisor` và `vietnam_securities_quick_backtest` để nhận báo cáo kiểm thử định lượng đầy đủ các chỉ số rủi ro và hiệu suất.
+
+### Bước 4: Mở rộng sang kiểm định kinh tế lượng trên EcoData, EcoLab và VietLOD
+
+Kết hợp kết quả từ StockMCP với bộ 52 công cụ kinh tế lượng của [EcoData](https://ecodata.io.vn), quy trình viết báo cáo học thuật của [EcoLab](https://ecolab.io.vn) và 201 hướng dẫn mô hình tại [VietLOD](https://vietlod.tnsai.vn) để hoàn thiện công trình nghiên cứu đạt chuẩn công bố quốc tế.
+
+</Steps>
+
+## Ví dụ cấu hình kết nối và gọi công cụ StockMCP
+
+<Tabs>
+  <TabItem value="json" label="Cấu hình MCP Client" default>
+
+```json
+{
+  "mcpServers": {
+    "vietnam-securities": {
+      "url": "https://www.finco.vn/mcp/sse",
+      "headers": {
+        "Authorization": "Bearer YOUR_FINCO_API_TOKEN"
+      }
+    }
+  }
+}
+```
+
+  </TabItem>
+  <TabItem value="python" label="Kịch bản gọi phân tích 360 & Backtest">
+
+```python
+# Ví dụ chuỗi tham số gọi công cụ phân tích cổ phiếu 360 độ và Backtest 4 khung thời gian
+stock_360_payload = {
+    "symbol": "VCB",
+    "include_financial_notes": True,
+    "accounting_regime": "bank",
+    "periods": 12,
+}
+
+strategy_backtest_payload = {
+    "symbol": "VCB",
+    "horizons": ["3M", "6M", "12M", "3Y"],
+    "benchmark": "VNINDEX",
+    "metrics": ["cagr", "sharpe_ratio", "sortino_ratio", "max_drawdown", "win_rate"],
+}
+```
+
+  </TabItem>
+</Tabs>

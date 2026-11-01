@@ -1,0 +1,134 @@
+---
+title: "Khai thác dữ liệu thị trường chứng khoán và thuyết minh báo cáo tài chính"
+sidebar_label: "Thị trường chứng khoán & BCTC"
+sidebar_position: 2
+description: "Hướng dẫn truy xuất báo cáo tài chính 4 chuẩn kế toán, giải mã thuyết minh báo cáo tài chính TM, CASA, nợ nhóm N1-N5 và chứng quyền có bảo đảm trên Finco."
+keywords:
+  - Finco
+  - StockMCP
+  - công cụ phân tích kinh tế
+  - công cụ nghiên cứu định lượng
+  - hỗ trợ nghiên cứu khoa học
+  - dữ liệu kinh tế
+  - dữ liệu nghiên cứu
+  - dữ liệu Việt Nam
+  - EcoData
+  - EcoLab
+  - VietLOD
+---
+
+<script type="application/ld+json">
+  {JSON.stringify({"@context": "https://schema.org", "@graph": [{"@type": ["TechArticle", "HowTo"], "headline": "Khai thác dữ liệu thị trường chứng khoán và thuyết minh báo cáo tài chính", "description": "Hướng dẫn truy xuất báo cáo tài chính 4 chuẩn kế toán, giải mã thuyết minh báo cáo tài chính TM, CASA, nợ nhóm N1-N5 và chứng quyền có bảo đảm trên Finco.", "inLanguage": "vi-VN", "url": "https://docs.tnsai.vn/finco/stock-market", "author": {"@type": "Organization", "name": "TNS AI", "url": "https://www.tnsai.vn"}, "publisher": {"@type": "Organization", "name": "TNS AI", "url": "https://docs.tnsai.vn"}, "about": [{"@type": "Thing", "name": "Finco Data Platform"}, {"@type": "Thing", "name": "StockMCP Vietnam Securities"}, {"@type": "Thing", "name": "Quantitative Economic Research"}]}]})}
+</script>
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Khai thác dữ liệu thị trường chứng khoán và thuyết minh báo cáo tài chính
+
+Phân hệ **Thị trường chứng khoán** trên [Finco](https://www.finco.vn) cung cấp hệ thống cơ sở dữ liệu tài chính doanh nghiệp, giao dịch cổ phiếu, cấu trúc quản trị và chứng quyền có bảo đảm cho toàn bộ các mã niêm yết trên ba sàn **HOSE**, **HNX** và **UPCOM**. Đây là nguồn dữ liệu nền tảng cho các đề tài nghiên cứu tài chính doanh nghiệp, định giá tài sản và kiểm định kinh tế lượng dữ liệu bảng trên [EcoData](https://ecodata.io.vn) và [VietLOD](https://vietlod.tnsai.vn).
+
+<VideoTutorial title="Hướng dẫn khai thác Báo cáo tài chính và Thuyết minh TM trên Finco" src="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3" opened={false} />
+
+## Phân tách tự động 4 chuẩn kế toán doanh nghiệp Việt Nam
+
+Hệ thống cơ sở dữ liệu của [Finco](https://www.finco.vn) tự động nhận diện và chuẩn hóa cấu trúc chỉ tiêu tài chính theo bốn loại hình doanh nghiệp đặc thù tại Việt Nam, giúp nhà nghiên cứu không bị lệch trường dữ liệu khi ghép nối bảng cân đối kế toán hay báo cáo kết quả kinh doanh:
+
+| Mã phân loại | Loại hình định chế / doanh nghiệp | Chuẩn mực kế toán áp dụng | Các chỉ tiêu đặc thù trọng tâm | Hỗ trợ Thuyết minh TM |
+| :--- | :--- | :--- | :--- | :---: |
+| **Corp** | Doanh nghiệp sản xuất, thương mại, dịch vụ phi tài chính | Thông tư 200/2014/TT-BTC | Doanh thu thuần, Giá vốn hàng bán, Hàng tồn kho, Tài sản cố định, EBITDA | <Available /> |
+| **Bank** | Ngân hàng thương mại cổ phần và ngân hàng quốc doanh | Hệ thống tài khoản tổ chức tín dụng NHNN | Thu nhập lãi thuần, NIM, Tiền gửi không kỳ hạn CASA, Nợ xấu nhóm N1 đến N5 | <Available /> |
+| **Sec** | Công ty chứng khoán và ngân hàng đầu tư | Thông tư 210/2014/TT-BTC | Tài sản tài chính FVTPL, Cho vay ký quỹ Margin, Doanh thu môi giới và tự doanh | <Available /> |
+| **Ins** | Tập đoàn và doanh nghiệp bảo hiểm nhân thọ, phi nhân thọ | Thông tư 199/2014/TT-BTC | Doanh thu phí bảo hiểm gốc, Dự phòng nghiệp vụ, Chi bồi thường bảo hiểm | <Available /> |
+
+## Giải mã chuyên sâu Thuyết minh báo cáo tài chính TM
+
+Khác với các cổng dữ liệu thông thường chỉ dừng ở ba bảng báo cáo tài chính tổng hợp, [Finco](https://www.finco.vn) bóc tách chi tiết **Thuyết minh báo cáo tài chính** ký hiệu **TM**, cho phép truy xuất các biến số vi mô có giá trị học thuật cao:
+
+- **Cấu trúc tiền gửi không kỳ hạn CASA của ngân hàng**: Tự động tổng hợp tiền gửi thanh toán, tiền gửi không kỳ hạn bằng VND và ngoại tệ để tính tỷ lệ CASA chính xác theo từng quý và năm.
+- **Phân loại chất lượng tín dụng từ Nhóm 1 đến Nhóm 5**: Truy xuất dư nợ tiêu chuẩn Nhóm 1, nợ cần chú ý Nhóm 2, nợ dưới tiêu chuẩn Nhóm 3, nợ nghi ngờ Nhóm 4 và nợ có khả năng mất vốn Nhóm 5 để tính tỷ lệ nợ xấu NPL và tỷ lệ bao phủ nợ xấu LLCR.
+- **Chi tiết cơ cấu nợ vay, tài sản cố định và chi phí sản xuất theo yếu tố**: Phục vụ ước lượng hàm sản xuất biên ngẫu nhiên SFA và năng suất nhân tố tổng hợp TFP theo phương pháp Olley-Pakes hoặc Levinsohn-Petrin trên [EcoLab](https://ecolab.io.vn).
+
+## Quy trình truy xuất dữ liệu chứng khoán và chứng quyền có bảo đảm CW
+
+<Steps>
+
+### Bước 1: Chọn nhóm dữ liệu cổ phiếu hoặc chứng quyền
+
+Tại giao diện chính của [Finco](https://www.finco.vn), mở phân hệ **Thị trường chứng khoán** và lựa chọn một trong sáu nhóm dữ liệu chuyên sâu: Báo cáo tài chính, Thuyết minh báo cáo tài chính TM, Chỉ số định giá và tài chính, Giao dịch khối ngoại và nội bộ, Quản trị doanh nghiệp hoặc Chứng quyền có bảo đảm CW.
+
+### Bước 2: Lọc theo danh sách mã chứng khoán, nhóm ngành ICB và kỳ báo cáo
+
+Nhập danh sách mã chứng khoán như `VCB`, `FPT`, `HPG`, `SSI` hoặc lọc toàn bộ doanh nghiệp theo phân ngành ICB cấp 2, cấp 3. Chọn tần suất dữ liệu theo Quý hoặc Năm trên dải thời gian lịch sử liên tục.
+
+### Bước 3: Đối chiếu từ điển biến học thuật và kiểm định nhanh
+
+Chuyển sang chế độ **Variable View** để kiểm tra công thức tính toán của từng chỉ số định giá như P/E, P/B, EV/EBITDA, ROE, ROA, NIM, CASA, NPL hoặc các tham số định giá Black-Scholes của chứng quyền có bảo đảm như Implied Volatility, Delta, Gearing và điểm hòa vốn.
+
+### Bước 4: Tải tệp dữ liệu bảng hoặc chuyển sang mô hình kinh tế lượng
+
+Xuất tệp Excel 2-Sheet chuẩn SPSS để thực hiện ước lượng hồi quy dữ liệu bảng Fixed Effects, Random Effects, System GMM theo hướng dẫn chi tiết tại [VietLOD](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z).
+
+</Steps>
+
+## Minh họa truy xuất và kiểm định dữ liệu tài chính doanh nghiệp trên 3 phần mềm
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Nạp dữ liệu bảng tài chính doanh nghiệp xuất từ Finco
+import delimited "finco_corporate_panel.csv", clear encoding("UTF-8")
+
+* Khai báo cấu trúc dữ liệu bảng theo mã doanh nghiệp và năm tài chính
+encode ticker, gen(firm_id)
+xtset firm_id fiscal_year
+
+* Ước lượng mô hình tác động cố định đánh giá ảnh hưởng của đòn bẩy nợ lên ROE
+xtreg roe leverage firm_size tangibility revenue_growth i.fiscal_year, fe vce(cluster firm_id)
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+library(readr)
+library(plm)
+library(lmtest)
+
+# Đọc bộ dữ liệu bảng doanh nghiệp niêm yết từ Finco
+df <- read_csv("finco_corporate_panel.csv", show_col_types = FALSE)
+pdata <- pdata.frame(df, index = c("ticker", "fiscal_year"))
+
+# Ước lượng mô hình Fixed Effects hai chiều với sai số chuẩn vững theo cụm
+fe_model <- plm(
+  roe ~ leverage + firm_size + tangibility + revenue_growth,
+  data = pdata,
+  model = "within",
+  effect = "twoways"
+)
+coeftest(fe_model, vcov = vcovHC(fe_model, type = "HC1", cluster = "group"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+import pandas as pd
+from linearmodels.panel import PanelOLS
+
+# Đọc dữ liệu bảng xuất từ Finco và thiết lập MultiIndex
+df = pd.read_csv("finco_corporate_panel.csv")
+df = df.set_index(["ticker", "fiscal_year"])
+
+# Ước lượng mô hình Panel OLS với Entity Effects và Time Effects
+mod = PanelOLS.from_formula(
+    "roe ~ 1 + leverage + firm_size + tangibility + revenue_growth + EntityEffects + TimeEffects",
+    data=df,
+)
+res = mod.fit(cov_type="clustered", cluster_entity=True)
+print(res.summary)
+```
+
+  </TabItem>
+</Tabs>

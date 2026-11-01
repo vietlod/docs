@@ -1,0 +1,90 @@
+---
+id: index
+title: "Nhóm 3.3: Lựa chọn có thứ tự"
+sidebar_label: "Nhóm 3.3. Lựa chọn có thứ tự"
+sidebar_position: 3
+slug: /vietlod/chapter-03/group-3-3
+description: "Hướng dẫn thực hành Nhóm 3.3 — Lựa chọn có thứ tự thuộc Chương 03: so sánh và thực thi 2 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+keywords:
+  - Nhóm 3.3 VietLOD
+  - Lựa chọn có thứ tự
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Nhóm 3.3: Lựa chọn có thứ tự
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Nhóm phương pháp 3.3 — Lựa chọn có thứ tự** thuộc [Chương 03: Mô hình lựa chọn rời rạc và cầu cấu trúc](/vietlod/chapter-03) cung cấp quy trình thực hành từng bước cho **2 mô hình kinh tế lượng** từ bài `3.3.1` đến `3.3.2`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Nhóm 3.3](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-03-mo-hinh-lua-chon-roi-rac-va-cau-cau-truc/nhom-3-3-ordered) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Nhóm 3.3: Lựa chọn có thứ tự trên Stata 18, R 4.x và Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Bản chất phương pháp và hệ phương trình định danh
+
+- **Câu hỏi nghiên cứu trọng tâm của nhóm**: Làm thế nào để mô hình hóa quyết định định tính — nhị phân, đa phương án, có thứ tự — và ước lượng cầu sản phẩm phân hóa có nội sinh giá bán?
+- **Kiểm định chẩn đoán bắt buộc**: Kiểm định giả định đường song song của Brant và Wolfe–Gould, kiểm định tách biệt ngưỡng cắt $\kappa_j$ và (AME) cho từng mức.
+
+Phương trình đặc tả cấu trúc của nhóm phương pháp 3.3:
+
+$$
+P(Y_i \le j \mid X_i) = \Lambda(\kappa_j - X_i^\top \beta), \quad j = 1, \dots, J-1
+$$
+
+Điều kiện mô-men và hàm mục tiêu ước lượng:
+
+$$
+\hat{\theta}_{\text{MLE}} = \arg\max_{\theta \in \Theta} \sum_{i=1}^N \sum_{j=1}^J y_{ij}\ln P_{ij}(X_i; \theta), \quad \frac{\partial \ell_N(\hat{\theta})}{\partial \theta} = \sum_{i=1}^N s_i(Y_i, X_i; \hat{\theta}) = 0
+$$
+
+<FeatureNotAvailable
+  note="Khi dữ liệu vi phạm giả định định danh của Nhóm 3.3, nhà nghiên cứu cần chuyển sang các nhóm phương pháp mở rộng trong Chương 03 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
+/>
+
+## 2. Danh mục các mô hình trong Nhóm 3.3
+
+<FeatureCards
+  features={[
+    {
+      title: '3.3.1. Mô hình Logit thứ bậc và giả định tỷ lệ cược tỷ lệ',
+      description: 'Mô hình hóa biến phụ thuộc phân loại có thứ tự tự nhiên $1 \lt 2 \lt \dots \lt J$ thông qua biến ẩn liên tục cắt qua $J - 1$ ngưỡng cắt $\ka...',
+      link: '/vietlod/chapter-03/group-3-3/b036-ordered-logit',
+      badge: 'B036 · ordered_logit'
+    },
+    {
+      title: '3.3.2. Mô hình Probit thứ bậc',
+      description: 'Ước lượng xác suất tích lũy của các trạng thái có thứ tự bằng phân phối chuẩn tắc $P(Y_i = j \mid X_i) = \Phi(\kappa_j - X_i^\top \beta) - \...',
+      link: '/vietlod/chapter-03/group-3-3/b037-ordered-probit',
+      badge: 'B037 · ordered_probit'
+    }
+  ]}
+/>
+
+## 3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
+
+| Bài học & Mô hình | Mã định danh | Cú pháp Stata 18 MP | Cú pháp R 4.x | Cú pháp Python 3.11+ | Hỗ trợ |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `3.3.1` · [Mô hình Logit thứ bậc và giả định tỷ lệ cược tỷ lệ](/vietlod/chapter-03/group-3-3/b036-ordered-logit) | `ordered_logit` | `ologit y_ord x1 x2, vce(robust)` | `MASS::polr(factor(y_ord) ~ x1 + x2, data = df, method = 'logistic')` | `OrderedModel(df['y_ord'], df[['x1', 'x2']], distr='logit').fit(method='bfgs')` | <Available /> |
+| `3.3.2` · [Mô hình Probit thứ bậc](/vietlod/chapter-03/group-3-3/b037-ordered-probit) | `ordered_probit` | `oprobit y_ord x1 x2, vce(robust)` | `MASS::polr(factor(y_ord) ~ x1 + x2, data = df, method = 'probit')` | `OrderedModel(df['y_ord'], df[['x1', 'x2']], distr='probit').fit(method='bfgs')` | <Available /> |
+
+## 4. Quy trình thực hành chuẩn cho Nhóm 3.3
+
+<Steps>
+
+### Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco
+
+Tải tệp CSV thực hành của từng mô hình trong Nhóm `3.3` hoặc kết nối dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
+
+### Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu
+
+So sánh các mô hình từ `3.3.1` đến `3.3.2` trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.
+
+### Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab
+
+Thực hiện đầy đủ bộ kiểm định **Kiểm định giả định đường song song của Brant và Wolfe–Gould, kiểm định tách biệt ngưỡng cắt $\kappa_j$ và (AME) cho từng mức** và đẩy mã mô hình sang [EcoLab](https://ecolab.io.vn) để xuất bảng kết quả chuẩn công bố quốc tế.
+
+</Steps>

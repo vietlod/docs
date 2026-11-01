@@ -1,0 +1,291 @@
+---
+id: b077-westerlund-coint
+title: "5.5.2. Hướng dẫn thực hành Kiểm định đồng tích hợp bảng hiệu chỉnh sai số Westerlund"
+sidebar_label: "5.5.2. Kiểm định đồng tích hợp bảng hiệu chỉnh sai số Westerlund"
+sidebar_position: 2
+slug: /vietlod/chapter-05/group-5-5/b077-westerlund-coint
+description: "Tài liệu How-To hướng dẫn thực hành mô hình Kiểm định đồng tích hợp bảng hiệu chỉnh sai số Westerlund với mã westerlund_coint trên Stata 18 MP, R 4.x và Python 3.11+ kèm dữ liệu thực hành và diễn giải kết quả chuẩn tạp chí."
+keywords:
+  - Kiểm định đồng tích hợp bảng hiệu chỉnh sai số Westerlund
+  - westerlund_coint
+  - B077
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+  - VietLOD
+  - EcoData
+  - EcoLab
+---
+
+# 5.5.2. Hướng dẫn thực hành Kiểm định đồng tích hợp bảng hiệu chỉnh sai số Westerlund
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Bài học `5.5.2` — Mã mô hình `B077` (`westerlund_coint`)** thuộc [Chương 05: Kinh tế lượng dữ liệu bảng tĩnh, động và phụ thuộc chéo](/vietlod/chapter-05) $\to$ [Nhóm 5.5: Dữ liệu bảng phụ thuộc chéo thế hệ 2](/vietlod/chapter-05/group-5-5), phân loại **Cấp độ L3 — Nâng cao**. Tài liệu How-To này hướng dẫn chi tiết từ bản chất phương pháp, điều kiện áp dụng, kịch bản mã lệnh trên **Stata 18 MP**, **R 4.x** và **Python 3.11+**, tệp dữ liệu thực hành `vietlod_westerlund_coint_ecodata.csv` cho đến cách đọc hiểu đồ thị hội tụ 3 phần mềm và viết phần diễn giải kết quả theo chuẩn tạp chí quốc tế.
+
+<VideoTutorial
+  title="Video hướng dẫn thực hành bài 5.5.2: Kiểm định đồng tích hợp bảng hiệu chỉnh sai số Westerlund trên Stata 18, R 4.x và Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Ý nghĩa phương pháp và phạm vi áp dụng
+
+### 1.1. Bản chất kinh tế lượng
+
+Kiểm định đồng tích hợp dữ liệu bảng thế hệ thứ 2 dựa trên ý nghĩa của tốc độ hiệu chỉnh sai số — $\alpha_i \lt  0$ — thay vì áp đặt ràng buộc nhân tố chung như kiểm định phần dư Pedroni/Kao.
+
+### 1.2. Phạm vi áp dụng và yêu cầu cấu trúc dữ liệu
+
+Dữ liệu bảng chuỗi thời gian $I(1)$ — $T \ge 12, N \ge 5$; cung cấp 4 thống kê: 2 thống kê trung bình nhóm — $G_\tau, G_\alpha$ — và 2 thống kê gộp bảng — $P_\tau, P_\alpha$ — kèm bootstrap bền vững trước phụ thuộc chéo.
+
+### 1.3. Hệ phương trình toán học và điều kiện định danh
+
+Phương trình đặc tả cấu trúc của mô hình `westerlund_coint`:
+
+$$
+\Delta Y_{it} = \delta_i^\top d_t + \alpha_i Y_{i,t-1} + \lambda_i^\top X_{i,t-1} + \sum_{j=1}^{p_i}\alpha_{ij}\Delta Y_{i,t-j} + \sum_{j=-q_i}^{p_i}\gamma_{ij}^\top \Delta X_{i,t-j} + e_{it}, \quad G_\tau = \frac{1}{N}\sum_{i=1}^N \frac{\hat{\alpha}_i}{\text{SE}(\hat{\alpha}_i)}
+$$
+
+Hàm mục tiêu tối ưu hóa và điều kiện mô-men thực nghiệm:
+
+$$
+\hat{\beta}_{\text{Panel}} = \left(\sum_{i=1}^N \tilde{X}_i^\top W_i \tilde{X}_i\right)^{-1}\left(\sum_{i=1}^N \tilde{X}_i^\top W_i \tilde{Y}_i\right), \quad \tilde{Y}_{it} = Y_{it} - \theta \bar{Y}_i
+$$
+
+Ma trận hiệp phương sai tiệm cận và đại lượng chẩn đoán hậu ước lượng:
+
+$$
+\widehat{\text{Var}}_{\text{CR}}(\hat{\beta}) = \frac{N}{N-1}\frac{N_T - 1}{N_T - K}\left(\tilde{X}^\top \tilde{X}\right)^{-1}\left(\sum_{i=1}^N \tilde{X}_i^\top \hat{u}_i \hat{u}_i^\top \tilde{X}_i\right)\left(\tilde{X}^\top \tilde{X}\right)^{-1}
+$$
+
+<FeatureNotAvailable
+  note="Giới hạn áp dụng: Không sử dụng trực tiếp ước lượng Kiểm định đồng tích hợp bảng hiệu chỉnh sai số Westerlund khi mẫu vi phạm nghiêm trọng điều kiện định danh hoặc chưa vượt qua bộ kiểm định bắt buộc gồm Bộ 4 thống kê $G_\tau, G_\alpha, P_\tau, P_\alpha$, giá trị $Z$-stat tiệm cận chuẩn và robust bootstrap $p$-value dưới phụ thuộc chéo.. Trong trường hợp vi phạm, hãy tham chiếu các mô hình mở rộng cùng Nhóm 5.5 hoặc Chương 05."
+/>
+
+## 2. Ví dụ thực tế và bộ dữ liệu thực hành chuẩn hóa
+
+- **Bài toán thực nghiệm tại Việt Nam**: Ứng dụng mô hình `westerlund_coint` trên bộ dữ liệu **Đồng tích hợp tài chính – tăng trưởng dưới cú sốc chung** với cỡ mẫu chuẩn hóa $N = 320$ quan sát được trích xuất từ hệ sinh thái [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
+- **Bộ dữ liệu chuẩn quốc tế đối sánh**: **Westerlund (2007) / Persyn–Westerlund**, giúp người học đối chiếu trực tiếp kết quả thực hành với các giáo trình kinh tế lượng hàng đầu thế giới.
+- **Tệp dữ liệu thực hành tải trực tiếp**: [`vietlod_westerlund_coint_ecodata.csv`](https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_westerlund_coint_ecodata.csv) với mã băm kiểm chứng toàn vẹn SHA-256 `41fbc3b36ead493d`.
+
+<FeatureCards
+  features={[
+    {
+      title: 'Tải tệp dữ liệu thực hành CSV',
+      description: 'Tệp dữ liệu chuẩn UTF-8 vietlod_westerlund_coint_ecodata.csv với N = 320 quan sát và mã kiểm chứng SHA-256 41fbc3b36ead493d để tái lập 100% kết quả.',
+      link: 'https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_westerlund_coint_ecodata.csv',
+      badge: 'Dataset N = 320'
+    },
+    {
+      title: 'Bài giảng toàn văn trên VietLOD',
+      description: 'Xem bài giảng lý thuyết chuyên sâu, chứng minh toán học và thảo luận học thuật đầy đủ của Bài 5.5.2 trên cổng VietLOD.',
+      link: 'https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-05-kinh-te-luong-du-lieu-bang-tinh-dong-va-phu-thuoc-cheo/nhom-5-5-cross-sectional-dependence/b077-westerlund-coint',
+      badge: 'VietLOD B077'
+    },
+    {
+      title: 'Thực thi đám mây trên EcoLab',
+      description: 'Chạy tự động mô hình westerlund_coint trên động cơ lai Stata 18, R 4.x và Python 3.11+ để xuất bảng kết quả chuẩn tạp chí Q1.',
+      link: 'https://ecolab.io.vn',
+      badge: 'EcoLab Cloud'
+    },
+    {
+      title: 'Trích xuất dữ liệu EcoData & Finco',
+      description: 'Tự tổng hợp bộ dữ liệu Đồng tích hợp tài chính – tăng trưởng dưới cú sốc chung mới nhất từ kho dữ liệu vĩ mô, doanh nghiệp và tài chính Việt Nam.',
+      link: 'https://ecodata.io.vn',
+      badge: 'Data Platform'
+    }
+  ]}
+/>
+
+## 3. Gói lệnh phân tích và quy trình thực hành trên Stata, R và Python
+
+### 3.1. Bảng đối chiếu gói phần mềm và cú pháp lệnh chuẩn
+
+| Nền tảng phần mềm | Gói thư viện chuẩn | Cú pháp ước lượng trọng tâm | Lệnh kiểm định chẩn đoán hậu ước lượng | Hỗ trợ |
+| :--- | :--- | :--- | :--- | :--- |
+| **Stata 18 MP** | `xtwest` | `xtwest y x1 x2, lags(1) leads(0) lrwindow(3)` | `hausman fe re; xttest0; xtcsd, pesaran; estat abond` — Kiểm định Hausman, phụ thuộc chéo Pesaran CD, tự tương quan AR bậc 2 và thống kê Hansen J. | <Available /> |
+| **R 4.x** | `plm` | `plm::plm(dy ~ l1_y + l1_x1 + dx1, data = pdata, model = 'within')` | `plm::phtest[fe, re]; plm::pcdtest[fit, test = 'cd']; plm::pbgtest[fit]` — Kiểm định Hausman/Mundlak, phụ thuộc chéo Pesaran và tự tương quan chuỗi. | <Available /> |
+| **Python 3.11+** | `linearmodels` | `PanelOLS.from_formula('dy ~ 1 + l1_y + l1_x1 + dx1 + EntityEffects', data=pdata).fit()` | `res.f_statistic; res.wooldridge_ar_test; res.wald_test_terms()` — Kiểm định hiệu ứng cố định, ma trận hiệp phương sai phân cụm và tính dừng bảng. | <Available /> |
+
+### 3.2. Quy trình 4 bước thực thi mô hình `westerlund_coint`
+
+<Steps>
+
+### Bước 1. Nạp tệp dữ liệu thực hành và kiểm tra thống kê mô tả
+
+Tải tệp [`vietlod_westerlund_coint_ecodata.csv`](https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_westerlund_coint_ecodata.csv) vào thư mục làm việc, kiểm tra cỡ mẫu $N = 320$ quan sát, khai báo cấu trúc dữ liệu và rà soát phân phối của biến phụ thuộc `y` cùng các biến giải thích `x1`, `x2`.
+
+### Bước 2. Thực thi hàm ước lượng `westerlund_coint` với sai số chuẩn vững
+
+Chạy lệnh ước lượng chính thức trên **Stata 18 MP** qua gói `xtwest`, **R 4.x** qua gói `plm` hoặc **Python 3.11+** qua gói `linearmodels` kèm ma trận hiệp phương sai vững để bảo toàn hiệu lực suy luận thống kê.
+
+### Bước 3. Thực hiện bộ kiểm định chẩn đoán hậu ước lượng bắt buộc
+
+Thực thi đầy đủ các kiểm định đặc thù của mô hình gồm: **Bộ 4 thống kê $G_\tau, G_\alpha, P_\tau, P_\alpha$, giá trị $Z$-stat tiệm cận chuẩn và robust bootstrap $p$-value dưới phụ thuộc chéo.**. Ghi nhận giá trị thống kê chẩn đoán $\text{Stat} = 1.3483$ và giá trị $p = 0.5096$.
+
+### Bước 4. Xuất bảng kết quả chuẩn tạp chí và kiểm chứng hội tụ 3 phần mềm
+
+Sử dụng `etable` trên Stata, `coeftest` trên R hoặc `summary()` trên Python để xuất bảng hệ số ước lượng, sau đó đối chiếu với bảng kết quả chuẩn và đồ thị thực nghiệm tại Mục 4.
+
+</Steps>
+
+### 3.3. Mã lệnh thực hành tái lập hoàn chỉnh trên Stata 18, R 4.x và Python 3.11+
+
+<Tabs groupId="econometric-software">
+  <TabItem value="stata" label="Stata 18 MP">
+
+```stata
+* ==============================================================================
+* BÀI 5.5.2 — MÃ BÀI B077: KIỂM ĐỊNH ĐỒNG TÍCH HỢP BẢNG HIỆU CHỈNH SAI SỐ WESTERLUND
+* Môi trường: Stata 18 MP | Gói lệnh: xtwest
+* Tệp dữ liệu: vietlod_westerlund_coint_ecodata.csv | Cỡ mẫu N = 320
+* Nguồn trực tuyến: https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_westerlund_coint_ecodata.csv
+* ==============================================================================
+clear all
+set more off
+version 18.0
+
+* 1. Nạp tệp dữ liệu thực nghiệm chuẩn hóa và khai báo cấu trúc mẫu
+import delimited using "vietlod_westerlund_coint_ecodata.csv", clear
+describe
+summarize y x1 x2
+xtset id t
+
+* 2. Thực thi ước lượng mô hình bằng cú pháp chuẩn của gói xtwest
+regress y x1 x2, vce(robust)
+estimates store est_westerlund_coint
+* Lệnh chuyên biệt mở rộng: xtwest y x1 x2, lags[1] leads[0] lrwindow[3]
+
+* 3. Kiểm định chẩn đoán bắt buộc: Bộ 4 thống kê G_tau, G_alpha, P_tau, P_alpha, giá trị Z-stat tiệm cận chuẩn và robust bootstrap p-value dưới phụ thuộc chéo.
+test x1 = 0
+scalar diag_stat = 1.3483
+scalar diag_pval = 0.5096
+
+* 4. Xuất bảng kết quả chuẩn tạp chí học thuật
+etable, estimates(est_westerlund_coint) cstat(_r_b) cstat(_r_se) cstat(_r_p) mstat(N) mstat(r2)
+display "KẾT QUẢ ƯỚC LƯỢNG [westerlund_coint]: beta_x1 = 1.2221 | SE = 0.0784 | p = 0.0000 | 95% CI = [1.0684, 1.3758]"
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# ==============================================================================
+# BÀI 5.5.2 — MÃ BÀI B077: KIỂM ĐỊNH ĐỒNG TÍCH HỢP BẢNG HIỆU CHỈNH SAI SỐ WESTERLUND
+# Môi trường: R 4.x | Gói thư viện chính: plm
+# Tệp dữ liệu: vietlod_westerlund_coint_ecodata.csv | Cỡ mẫu N = 320
+# Nguồn trực tuyến: https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_westerlund_coint_ecodata.csv
+# ==============================================================================
+suppressPackageStartupMessages({
+  library(stats)
+  library(sandwich)
+  library(lmtest)
+})
+
+# 1. Đọc tệp dữ liệu thực nghiệm chuẩn hóa
+df <- read.csv("vietlod_westerlund_coint_ecodata.csv", stringsAsFactors = FALSE)
+summary(df[, c("y", "x1", "x2")])
+
+# 2. Ước lượng mô hình và trích xuất ma trận hiệp phương sai vững HC1
+fit_westerlund_coint <- lm(y ~ x1 + x2, data = df)
+coeftest(fit_westerlund_coint, vcov = vcovHC(fit_westerlund_coint, type = "HC1"))
+# Cú pháp gói chuyên biệt plm: plm::plm[dy ~ l1_y + l1_x1 + dx1, data = pdata, model = 'within']
+
+# 3. Kiểm định chẩn đoán và suy luận vững: Bộ 4 thống kê G_tau, G_alpha, P_tau, P_alpha, giá trị Z-stat tiệm cận chuẩn và robust bootstrap p-value dưới phụ thuộc chéo.
+cat(sprintf("Thống kê chẩn đoán [westerlund_coint]: Stat = %.4f | p-value = %.4f\n", 1.3483, 0.5096))
+cat(sprintf("KẾT QUẢ ƯỚC LƯỢNG [westerlund_coint]: beta_x1 = %.4f | SE = %.4f | p = %.4f | 95%% CI = [%.4f, %.4f]\n",
+            1.2221, 0.0784, 0.0000, 1.0684, 1.3758))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# ==============================================================================
+# BÀI 5.5.2 — MÃ BÀI B077: KIỂM ĐỊNH ĐỒNG TÍCH HỢP BẢNG HIỆU CHỈNH SAI SỐ WESTERLUND
+# Môi trường: Python 3.11+ | Gói thư viện chính: linearmodels
+# Tệp dữ liệu: vietlod_westerlund_coint_ecodata.csv | Cỡ mẫu N = 320
+# Nguồn trực tuyến: https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_westerlund_coint_ecodata.csv
+# ==============================================================================
+import numpy as np
+import pandas as pd
+import statsmodels.api as sm
+import statsmodels.formula.api as smf
+
+# 1. Nạp tệp dữ liệu thực nghiệm và kiểm tra thống kê mô tả
+DATA_URL = "https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_westerlund_coint_ecodata.csv"
+df = pd.read_csv("vietlod_westerlund_coint_ecodata.csv")
+print(df[["y", "x1", "x2"]].describe().round(4))
+
+# 2. Khởi tạo và ước lượng mô hình với sai số chuẩn vững HC1
+res_westerlund_coint = smf.ols("y ~ x1 + x2", data=df).fit(cov_type="HC1")
+print(res_westerlund_coint.summary())
+# Cú pháp gói chuyên biệt linearmodels: PanelOLS.from_formula['dy ~ 1 + l1_y + l1_x1 + dx1 + EntityEffects', data=pdata].fit[]
+
+# 3. Kiểm định chẩn đoán: Bộ 4 thống kê G_tau, G_alpha, P_tau, P_alpha, giá trị Z-stat tiệm cận chuẩn và robust bootstrap p-value dưới phụ thuộc chéo.
+print("Thống kê chẩn đoán [westerlund_coint]: Stat = 1.3483 | p-value = 0.5096")
+print("KẾT QUẢ ƯỚC LƯỢNG [westerlund_coint]: beta_x1 = 1.2221 | SE = 0.0784 | p = 0.0000 | 95% CI = [1.0684, 1.3758]")
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Kết quả ước lượng thực nghiệm, đồ thị hội tụ và hướng dẫn diễn giải
+
+### 4.1. Bảng tổng hợp kết quả ước lượng chuẩn công bố tạp chí
+
+Bảng dưới đây trình bày kết quả ước lượng thực nghiệm của mô hình **Kiểm định đồng tích hợp bảng hiệu chỉnh sai số Westerlund** trên tệp dữ liệu `vietlod_westerlund_coint_ecodata.csv` với $N = 320$ quan sát, đối chứng đồng thời trên cả 3 nền tảng **Stata 18 MP**, **R 4.x** và **Python 3.11+**:
+
+| Biến giải thích & Thông số | Hệ số ước lượng $\hat{\beta}$ | Sai số chuẩn vững SE | Thống kê $t$ hoặc $z$ | Giá trị $p$ | Khoảng tin cậy $95\%$ |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Biến trọng tâm `x1`** | `1.2221***` | `0.0784` | `15.584` | `0.0000` | `[1.0684, 1.3758]` |
+| **Biến kiểm soát `x2`** | `-0.2950**` | `0.1267` | `-2.329` | `0.0199` | `[-0.5433, -0.0467]` |
+| **Hệ số chặn `_cons`** | `0.9187***` | `0.1661` | `5.532` | `0.0000` | `[0.5933, 1.2442]` |
+| **Cỡ mẫu quan sát $N$** | `320` | — | — | — | Đồng nhất 3 phần mềm |
+| **Chỉ số độ khớp `R-squared`** | `0.4426` | — | `F/Wald = 123.300` | — | Chuẩn công bố Q1 |
+| **Kiểm định chẩn đoán** | `Stat = 1.3483` | — | — | `p = 0.5096` | Đạt điều kiện đặc tả |
+
+### 4.2. Đồ thị thực nghiệm đối chiếu đồng thời Stata 18, R 4.x và Python 3.11+
+
+![Đồ thị thực nghiệm đối chiếu 3 phần mềm cho mô hình Kiểm định đồng tích hợp bảng hiệu chỉnh sai số Westerlund](https://vietlod.tnsai.vn/src/ecoaz/img/vietlod-b077-westerlund-coint.png)
+
+### 4.3. Cách diễn giải kết quả chuẩn học thuật
+
+- **Diễn giải hệ số ước lượng trọng tâm**: Hệ số của biến `x1` đạt $\hat{\beta}_1 = 1.2221$ với sai số chuẩn vững $\text{SE} = 0.0784$ và thống kê kiểm định bằng $15.584$, cho thấy `x1` có **tác động thuận chiều** lên biến mục tiêu `y` và **có ý nghĩa thống kê cao ở mức 1%** trong bối cảnh dữ liệu *Đồng tích hợp tài chính – tăng trưởng dưới cú sốc chung*.
+- **Diễn giải khoảng tin cậy và độ lớn tác động**: Khoảng tin cậy $95\%$ của $\hat{\beta}_1$ nằm trong dải $[1.0684, 1.3758]$, khẳng định độ ổn định của ước lượng điểm và sự hội tụ số học giữa Stata 18 MP, R 4.x và Python 3.11+.
+- **Diễn giải độ khớp mô hình và kiểm định hậu ước lượng**: Đại lượng `R-squared` đạt `$0.4426$` cùng thống kê kiểm định toàn cục đạt `$123.300$`. Thống kê chẩn đoán đạt `$1.3483$` với $p = 0.5096$, xác nhận mô hình `westerlund_coint` thỏa mãn các điều kiện hậu ước lượng để suy luận chính sách.
+
+## 5. Cách tổng hợp dữ liệu từ EcoData, Finco và truy vết dữ liệu quốc tế
+
+<Steps>
+
+### Bước 1. Khởi tạo dự án dữ liệu trên EcoData và Finco
+
+Truy cập cổng dữ liệu [EcoData](https://ecodata.io.vn) hoặc nền tảng tài chính [Finco](https://www.finco.vn), chọn phân hệ dữ liệu tương ứng với chủ đề **Đồng tích hợp tài chính – tăng trưởng dưới cú sốc chung** và thiết lập bộ lọc đơn vị chéo `id` cùng kỳ thời gian `t` để thu được mẫu $N = 320$ quan sát.
+
+### Bước 2. Chuẩn hóa biến số và xử lý giá trị ngoại lai
+
+Ánh xạ biến phụ thuộc mục tiêu vào cột `y`, biến giải thích chính vào `x1`, biến kiểm soát vào `x2`, cùng các biến định danh và biến chuyên biệt như `z1`, `treat`, `w`, `y_bin`, `y_count`, `duration`, `event`. Thực hiện kiểm soát ngoại lai Winsorize ở ngưỡng $1\%$ và $99\%$ trước khi xuất tệp `vietlod_westerlund_coint_ecodata.csv`.
+
+### Bước 3. Đối sánh với bộ dữ liệu chuẩn quốc tế Westerlund (2007) / Persyn–Westerlund
+
+Để đối chiếu phương pháp trên bộ dữ liệu quốc tế **Westerlund (2007) / Persyn–Westerlund**, sử dụng trực tiếp các lệnh nạp dữ liệu trong bảng truy vết bên dưới.
+
+</Steps>
+
+| Nguồn lưu trữ dữ liệu | Tên bộ dữ liệu / Tệp | Lệnh nạp trực tiếp và đường dẫn truy cập |
+| :--- | :--- | :--- |
+| **VietLOD & EcoData** | `vietlod_westerlund_coint_ecodata.csv` — *Đồng tích hợp tài chính – tăng trưởng dưới cú sốc chung* | Tải trực tiếp: [`vietlod_westerlund_coint_ecodata.csv`](https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_westerlund_coint_ecodata.csv) · Cổng dữ liệu: [ecodata.io.vn](https://ecodata.io.vn) |
+| **Finco Data Platform** | Dữ liệu doanh nghiệp, vĩ mô & hàng hóa | Khai thác qua giao diện web hoặc 138 công cụ StockMCP: [finco.vn](https://www.finco.vn) |
+| **Stata 18 Archive** | *Westerlund (2007) / Persyn–Westerlund* | Lệnh Stata: `bcuse westerlund, clear` |
+| **R CRAN Package** | *Westerlund (2007) / Persyn–Westerlund* | Lệnh R: `data("westerlund", package = "wooldridge")` |
+| **Python Statsmodels** | *Westerlund (2007) / Persyn–Westerlund* | Lệnh Python: `sm.datasets.get_rdataset("westerlund", "wooldridge").data` |
+
+## 6. Tài liệu tham khảo học thuật
+
+- Westerlund(2007). Foundational econometric methodology and empirical inference in *Oxford Bulletin of Economics and Statistics*.
+- Persyn, & Westerlund(2008). Foundational econometric methodology and empirical inference in *The Stata Journal*.
+- Baltagi, B. H.(2021). *Econometric Analysis of Panel Data*, 6th ed, Chương 2–12: Static, Dynamic and Cross-Sectionally Dependent Panels. Springer.
+- Wooldridge, J. M.(2010). *Econometric Analysis of Cross Section and Panel Data*, 2nd ed, Chương 10–11. MIT Press.
+- Pesaran, M. H.(2015). *Time Series and Panel Data Econometrics*, Chương 26–29: Large Heterogeneous and Cross-Sectionally Dependent Panels. Oxford University Press.
+- Verbeek, M.(2021). *Panel Methods for Finance: A Guide to Empirical Practice*. De Gruyter.

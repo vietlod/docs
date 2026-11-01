@@ -10,11 +10,10 @@ REPO_ROOT = pathlib.Path(__file__).resolve().parents[4]
 EXPECTED_SIDEBARS = [
     "ecodataSidebar",
     "ecolabSidebar",
-    "ecolitSidebar",
-    "pdfhubSidebar",
-    "keywordsSidebar",
+    "fincoSidebar",
+    "vietlodSidebar",
 ]
-DOC_ID_REGEX = re.compile(r"['\"]((?:ecodata|ecolab|ecolit|pdfhub|keywords)/[a-zA-Z0-9_/-]+)['\"]")
+DOC_ID_REGEX = re.compile(r"['\"]((?:ecodata|ecolab|finco|vietlod)/[a-zA-Z0-9_/-]+)['\"]")
 DEPRECATED_SLUGS = ["ecolab/mo-hinh", "mo-hinh/danh-muc"]
 
 
@@ -76,7 +75,7 @@ def main() -> int:
             print(f"[FAIL] Execution time {elapsed_ms:.2f} ms exceeded 500 ms threshold!", file=sys.stderr)
         return 1
 
-    print("[PASS] All 5 app sidebars, navbar bindings, and document routes verified.")
+    print("[PASS] All 4 app sidebars, navbar bindings, and document routes verified.")
     return 0
 
 

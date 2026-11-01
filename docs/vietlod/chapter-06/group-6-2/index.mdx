@@ -1,0 +1,111 @@
+---
+id: index
+title: "Nhóm 6.2: Dự báo chuỗi thời gian đơn biến"
+sidebar_label: "Nhóm 6.2. Dự báo chuỗi thời gian đơn biến"
+sidebar_position: 2
+slug: /vietlod/chapter-06/group-6-2
+description: "Hướng dẫn thực hành Nhóm 6.2 — Dự báo chuỗi thời gian đơn biến thuộc Chương 06: so sánh và thực thi 5 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+keywords:
+  - Nhóm 6.2 VietLOD
+  - Dự báo chuỗi thời gian đơn biến
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Nhóm 6.2: Dự báo chuỗi thời gian đơn biến
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Nhóm phương pháp 6.2 — Dự báo chuỗi thời gian đơn biến** thuộc [Chương 06: Chuỗi thời gian đơn biến, phi tuyến, điểm gãy và bong bóng](/vietlod/chapter-06) cung cấp quy trình thực hành từng bước cho **5 mô hình kinh tế lượng** từ bài `6.2.1` đến `6.2.5`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Nhóm 6.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-06-chuoi-thoi-gian-don-bien-phi-tuyen-diem-gay-va-bong-bong/nhom-6-2-univariate) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Nhóm 6.2: Dự báo chuỗi thời gian đơn biến trên Stata 18, R 4.x và Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Bản chất phương pháp và hệ phương trình định danh
+
+- **Câu hỏi nghiên cứu trọng tâm của nhóm**: Làm thế nào để kiểm định tính dừng, dự báo chuỗi thời gian, ước lượng đồng tích hợp bất đối xứng (ARDL) và (NARDL), lấy mẫu tần suất hỗn hợp (MIDAS) và phát hiện điểm gãy/bong bóng?
+- **Kiểm định chẩn đoán bắt buộc**: Điều kiện dừng nghiệm đa thức đặc trưng nằm ngoài vòng tròn đơn vị $|\lambda_i| \lt 1$, đồ thị hàm tự tương quan riêng phần PACF cắt cụt sau trễ $p$ và kiểm định nhiễu trắng Ljung–Box $Q$.
+
+Phương trình đặc tả cấu trúc của nhóm phương pháp 6.2:
+
+$$
+Y_t = c + \sum_{j=1}^p \phi_j Y_{t-j} + \varepsilon_t
+$$
+
+Điều kiện mô-men và hàm mục tiêu ước lượng:
+
+$$
+\hat{\theta}_T = \arg\max_{\theta \in \Theta} \ell_T\left(Y_1, \dots, Y_T; \theta\right), \quad \Phi(L)(1-L)^d Y_t = \mu + \Theta(L)\varepsilon_t
+$$
+
+<FeatureNotAvailable
+  note="Khi dữ liệu vi phạm giả định định danh của Nhóm 6.2, nhà nghiên cứu cần chuyển sang các nhóm phương pháp mở rộng trong Chương 06 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
+/>
+
+## 2. Danh mục các mô hình trong Nhóm 6.2
+
+<FeatureCards
+  features={[
+    {
+      title: '6.2.1. Mô hình tự hồi quy chuỗi thời gian (AR)',
+      description: 'Mô hình hóa giá trị hiện tại của chuỗi thời gian dừng $Y_t$ như một tổ hợp tuyến tính của $p$ giá trị quá khứ của chính nó cộng với cú sốc n...',
+      link: '/vietlod/chapter-06/group-6-2/b090-ar',
+      badge: 'B090 · ar'
+    },
+    {
+      title: '6.2.2. Mô hình trung bình trượt các cú sốc quá khứ (MA)',
+      description: 'Biểu diễn chuỗi thời gian dừng $Y_t$ như trung bình có trọng số của cú sốc ngẫu nhiên hiện tại $\varepsilon_t$ và $q$ cú sốc ngẫu nhiên tron...',
+      link: '/vietlod/chapter-06/group-6-2/b091-ma',
+      badge: 'B091 · ma'
+    },
+    {
+      title: '6.2.3. Mô hình tự hồi quy trung bình trượt kết hợp (ARMA)',
+      description: 'Kết hợp thành phần tự hồi quy AR bậc $p$ và trung bình trượt MA bậc $q$ để biểu diễn tiết kiệm tham số mọi quá trình dừng hiệp phương sai th...',
+      link: '/vietlod/chapter-06/group-6-2/b092-arma',
+      badge: 'B092 · arma'
+    },
+    {
+      title: '6.2.4. Mô hình tự hồi quy tích hợp trung bình trượt (ARIMA)',
+      description: 'Lấy sai phân bậc $d$ để chuyển chuỗi không dừng có nghiệm đơn vị tích hợp bậc $d$ về trạng thái dừng, sau đó ước lượng cấu trúc ARMA bậc $p,...',
+      link: '/vietlod/chapter-06/group-6-2/b093-arima',
+      badge: 'B093 · arima'
+    },
+    {
+      title: '6.2.5. Mô hình ARIMA có tính mùa vụ nhân tính (SARIMA)',
+      description: 'Mở rộng mô hình (ARIMA) với các toán tử sai phân mùa vụ $(1 - L^s)^D$ và đa thức tự hồi quy / trung bình trượt mùa vụ nhân tính tại chu kỳ $...',
+      link: '/vietlod/chapter-06/group-6-2/b094-sarima',
+      badge: 'B094 · sarima'
+    }
+  ]}
+/>
+
+## 3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
+
+| Bài học & Mô hình | Mã định danh | Cú pháp Stata 18 MP | Cú pháp R 4.x | Cú pháp Python 3.11+ | Hỗ trợ |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `6.2.1` · [Mô hình tự hồi quy chuỗi thời gian (AR)](/vietlod/chapter-06/group-6-2/b090-ar) | `ar` | `arima y, ar(1/2)` | `arima(y, order = c(2, 0, 0))` | `AutoReg(y, lags=2).fit()` | <Available /> |
+| `6.2.2` · [Mô hình trung bình trượt các cú sốc quá khứ (MA)](/vietlod/chapter-06/group-6-2/b091-ma) | `ma` | `arima y, ma(1/2)` | `arima(y, order = c(0, 0, 2))` | `ARIMA(y, order=(0, 0, 2)).fit()` | <Available /> |
+| `6.2.3` · [Mô hình tự hồi quy trung bình trượt kết hợp (ARMA)](/vietlod/chapter-06/group-6-2/b092-arma) | `arma` | `arima y, arima(1,0,1)` | `arima(y, order = c(1, 0, 1))` | `ARIMA(y, order=(1, 0, 1)).fit()` | <Available /> |
+| `6.2.4` · [Mô hình tự hồi quy tích hợp trung bình trượt (ARIMA)](/vietlod/chapter-06/group-6-2/b093-arima) | `arima` | `arima y, arima(1,1,1)` | `arima(y, order = c(1, 1, 1))` | `ARIMA(y, order=(1, 1, 1)).fit()` | <Available /> |
+| `6.2.5` · [Mô hình ARIMA có tính mùa vụ nhân tính (SARIMA)](/vietlod/chapter-06/group-6-2/b094-sarima) | `sarima` | `arima y, arima(1,1,1) sarima(1,1,1,12)` | `arima(y, order = c(1,1,1), seasonal = list(order = c(1,1,1), period = 12))` | `SARIMAX(y, order=(1,1,1), seasonal_order=(1,1,1,12)).fit()` | <Available /> |
+
+## 4. Quy trình thực hành chuẩn cho Nhóm 6.2
+
+<Steps>
+
+### Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco
+
+Tải tệp CSV thực hành của từng mô hình trong Nhóm `6.2` hoặc kết nối dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
+
+### Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu
+
+So sánh các mô hình từ `6.2.1` đến `6.2.5` trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.
+
+### Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab
+
+Thực hiện đầy đủ bộ kiểm định **Điều kiện dừng nghiệm đa thức đặc trưng nằm ngoài vòng tròn đơn vị $|\lambda_i| \lt 1$, đồ thị hàm tự tương quan riêng phần PACF cắt cụt sau trễ $p$ và kiểm định nhiễu trắng Ljung–Box $Q$** và đẩy mã mô hình sang [EcoLab](https://ecolab.io.vn) để xuất bảng kết quả chuẩn công bố quốc tế.
+
+</Steps>

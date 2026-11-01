@@ -1,0 +1,118 @@
+---
+id: index
+title: "Group 1.4: High-Dimensional Fixed Effects and Modern Instrumental Variables"
+sidebar_label: "Group 1.4. High-Dimensional Fixed Effects and Modern Instrumental Variables"
+sidebar_position: 4
+slug: /vietlod/chapter-01/group-1-4
+description: "How-To User Guide for Methodological Group 1.4 — High-Dimensional Fixed Effects and Modern Instrumental Variables in Chapter 01: comparing and executing 6 econometric models across Stata 18 MP, R 4.x, and Python 3.11+."
+keywords:
+  - VietLOD Group 1.4
+  - High-Dimensional Fixed Effects and Modern Instrumental Variables
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Group 1.4: High-Dimensional Fixed Effects and Modern Instrumental Variables
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Methodological Group 1.4 — High-Dimensional Fixed Effects and Modern Instrumental Variables** in [Chapter 01: Classical Linear and Instrumental Variables Regression](/en/vietlod/chapter-01) provides step-by-step How-To implementation guides for **6 econometric models** spanning from Section `1.4.1` to `1.4.6`. Full theoretical derivations are available at [VietLOD Group 1.4](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-01-hoi-quy-tuyen-tinh-co-dien-va-bien-cong-cu/nhom-1-4-high-dim-modern-iv) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="How-To Guide for Group 1.4: High-Dimensional Fixed Effects and Modern Instrumental Variables in Stata 18, R 4.x, and Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Methodological Overview and Structural Equations
+
+- **Methodological Focus**: Provides consistent estimation and robust inference for **High-Dimensional Fixed Effects and Modern Instrumental Variables** specifications within **Classical Linear and Instrumental Variables Regression**.
+- **Mandatory Post-Estimation Diagnostics**: Kiểm định $F$ đồng thời các biến giải thích — within-$F$, kiểm cáo loại singleton, $R^2$ within/projected, VIF sau khử FE..
+
+Core structural specification for Group 1.4:
+
+$$
+Y_{ijt} = X_{ijt}^\top \beta + \alpha_i + \gamma_j + \lambda_t + \varepsilon_{ijt}, \quad \tilde{Y} = M_D Y, \quad \hat{\beta}_{\text{HDFE}} = (\tilde{X}^\top \tilde{X})^{-1}\tilde{X}^\top \tilde{Y}
+$$
+
+Estimator objective and moment conditions:
+
+$$
+\hat{\beta}_N = \arg\min_{\beta \in \mathbb{R}^K} \sum_{i=1}^N w_i \left(Y_i - X_i^\top \beta\right)^2, \quad \text{E}\left[X_i \varepsilon_i\right] = 0
+$$
+
+<FeatureNotAvailable
+  note="When empirical data violate the identification conditions of Group 1.4, researchers should transition to the extended methodological groups in Chapter 01 or apply appropriate instrumental-variable and cluster-robust corrections."
+/>
+
+## 2. Econometric Models in Group 1.4
+
+<FeatureCards
+  features={[
+    {
+      title: '1.4.1. High-Dimensional Fixed Effects OLS',
+      description: 'Absorbs multiple high-dimensional fixed effects simultaneously while dropping singleton groups and clustering standard errors. Across empiri...',
+      link: '/en/vietlod/chapter-01/group-1-4/b009-hdfe-ols',
+      badge: 'B009 · hdfe_ols'
+    },
+    {
+      title: '1.4.2. High-Dimensional Fixed Effects Two-Stage Least Squares',
+      description: 'Estimates causal instrumental-variable regressions while partialling out multi-way high-dimensional fixed effects. Across empirical economet...',
+      link: '/en/vietlod/chapter-01/group-1-4/b010-hdfe-iv',
+      badge: 'B010 · hdfe_iv'
+    },
+    {
+      title: '1.4.3. Shift-Share Bartik Instrumental Variables',
+      description: 'Identifies causal effects from regional exposure shares combined with aggregate sectoral shocks. Across empirical econometrics, `bartik_shif...',
+      link: '/en/vietlod/chapter-01/group-1-4/b011-bartik-shift-share-iv',
+      badge: 'B011 · bartik_shift_share_iv'
+    },
+    {
+      title: '1.4.4. Lewbel Heteroskedasticity-Based Instrumental Variables',
+      description: 'Constructs internal instruments from first-stage residual heteroskedasticity when external instruments are scarce or supplemented. Across em...',
+      link: '/en/vietlod/chapter-01/group-1-4/b012-lewbel-het-iv',
+      badge: 'B012 · lewbel_het_iv'
+    },
+    {
+      title: '1.4.5. Control Function Endogeneity Estimator',
+      description: 'Includes first-stage residuals directly in the structural equation with two-step bootstrap covariance and direct endogeneity test. Across em...',
+      link: '/en/vietlod/chapter-01/group-1-4/b013-control-function-iv',
+      badge: 'B013 · control_function_iv'
+    },
+    {
+      title: '1.4.6. Instrumental Variables Quantile Regression',
+      description: 'Estimates distributional causal effects at target conditional quantiles when treatment or covariates are endogenous. Across empirical econom...',
+      link: '/en/vietlod/chapter-01/group-1-4/b014-iv-quantile',
+      badge: 'B014 · iv_quantile'
+    }
+  ]}
+/>
+
+## 3. Comparative Execution Syntax Across Stata 18, R 4.x, and Python 3.11+
+
+| Section & Model Title | Estimator Key | Stata 18 MP Syntax | R 4.x Syntax | Python 3.11+ Syntax | Support |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `1.4.1` · [High-Dimensional Fixed Effects OLS](/en/vietlod/chapter-01/group-1-4/b009-hdfe-ols) | `hdfe_ols` | `reghdfe y x1 x2, absorb(id1 id2) vce(cluster id1)` | `fixest::feols(y ~ x1 + x2 \| id1 + id2, cluster = ~id1, data = df)` | `pyfixest.feols('y ~ x1 + x2 \| id1 + id2', data=df, vcov={'CRV1': 'id1'})` | <Available /> |
+| `1.4.2` · [High-Dimensional Fixed Effects Two-Stage Least Squares](/en/vietlod/chapter-01/group-1-4/b010-hdfe-iv) | `hdfe_iv` | `ivreghdfe y x1 (endog = z1 z2), absorb(id1 id2) cluster(id1)` | `fixest::feols(y ~ x1 \| id1 + id2 \| endog ~ z1 + z2, cluster = ~id1, data = df)` | `pyfixest.feols('y ~ x1 \| id1 + id2 \| endog ~ z1 + z2', data=df, vcov={'CRV1': 'id1'})` | <Available /> |
+| `1.4.3` · [Shift-Share Bartik Instrumental Variables](/en/vietlod/chapter-01/group-1-4/b011-bartik-shift-share-iv) | `bartik_shift_share_iv` | `ivreg2 y x1 (d = bartik_z), robust` | `ShiftShareSE::ivreg_ss(y ~ x1 \| d ~ bartik_z, shares = W, data = df)` | `IV2SLS.from_formula('y ~ 1 + x1 + [d ~ bartik_z]', data=df).fit(cov_type='robust')` | <Available /> |
+| `1.4.4` · [Lewbel Heteroskedasticity-Based Instrumental Variables](/en/vietlod/chapter-01/group-1-4/b012-lewbel-het-iv) | `lewbel_het_iv` | `ivreg2h y x1 (endog = ), robust` | `REndo::hetErrorsIV(y ~ x1 + endog \| endog \| IIV(x1), data = df)` | `IVGMM.from_formula('y ~ 1 + x1 + [endog ~ z_lewbel]', data=df).fit(cov_type='robust')` | <Available /> |
+| `1.4.5` · [Control Function Endogeneity Estimator](/en/vietlod/chapter-01/group-1-4/b013-control-function-iv) | `control_function_iv` | `etregress y x1 x2, treat(d = z1 z2) twostep` | `fixest::feols(y ~ x1 + d + v_hat, vcov = 'hetero', data = df)` | `smf.ols('y ~ x1 + d + v_hat', data=df).fit(cov_type='HC1')` | <Available /> |
+| `1.4.6` · [Instrumental Variables Quantile Regression](/en/vietlod/chapter-01/group-1-4/b014-iv-quantile) | `iv_quantile` | `ivqregress iqr y x1 (endog = z1 z2), quantile(0.5)` | `quantreg::rq(y ~ x1 + d_hat, tau = 0.5, data = df)` | `smf.quantreg('y ~ x1 + d_hat', data=df).fit(q=0.5)` | <Available /> |
+
+## 4. Standard Implementation Workflow for Group 1.4
+
+<Steps>
+
+### Step 1. Load Standardized Practice Datasets From VietLOD, EcoData, or Finco
+
+Download the model-specific `.csv` practice dataset in Group `1.4` or extract custom empirical panels from [EcoData](https://ecodata.io.vn) and [Finco](https://www.finco.vn).
+
+### Step 2. Select the Optimal Estimator for Your Error and Sample Structure
+
+Compare the estimators from `1.4.1` to `1.4.6` in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.
+
+### Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab
+
+Verify all required diagnostics including **Kiểm định $F$ đồng thời các biến giải thích — within-$F$, kiểm cáo loại singleton, $R^2$ within/projected, VIF sau khử FE.** and dispatch the specification to [EcoLab](https://ecolab.io.vn) for automated journal-grade reporting.
+
+</Steps>

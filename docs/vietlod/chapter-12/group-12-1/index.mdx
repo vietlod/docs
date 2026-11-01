@@ -1,0 +1,104 @@
+---
+id: index
+title: "Nhóm 12.1: Hệ phương trình đồng thời và hệ cầu cấu trúc"
+sidebar_label: "Nhóm 12.1. Hệ phương trình đồng thời và hệ cầu cấu trúc"
+sidebar_position: 1
+slug: /vietlod/chapter-12/group-12-1
+description: "Hướng dẫn thực hành Nhóm 12.1 — Hệ phương trình đồng thời và hệ cầu cấu trúc thuộc Chương 12: so sánh và thực thi 4 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+keywords:
+  - Nhóm 12.1 VietLOD
+  - Hệ phương trình đồng thời và hệ cầu cấu trúc
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Nhóm 12.1: Hệ phương trình đồng thời và hệ cầu cấu trúc
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Nhóm phương pháp 12.1 — Hệ phương trình đồng thời và hệ cầu cấu trúc** thuộc [Chương 12: Hệ phương trình đồng thời, hệ cầu, kinh tế lượng Bayes và học máy](/vietlod/chapter-12) cung cấp quy trình thực hành từng bước cho **4 mô hình kinh tế lượng** từ bài `12.1.1` đến `12.1.4`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Nhóm 12.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-12-he-phuong-trinh-he-cau-kinh-te-luong-bayes-va-hoc-may/nhom-12-1-systems) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Nhóm 12.1: Hệ phương trình đồng thời và hệ cầu cấu trúc trên Stata 18, R 4.x và Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Bản chất phương pháp và hệ phương trình định danh
+
+- **Câu hỏi nghiên cứu trọng tâm của nhóm**: Làm thế nào để ước lượng hệ phương trình đồng thời (SUR) và (3SLS), hệ cầu tiêu dùng thỏa tiên đề Slutsky (QUAIDS), trung bình hóa mô hình Bayes (BMA) và dự báo học máy kinh tế lượng?
+- **Kiểm định chẩn đoán bắt buộc**: Kiểm định nhân tử Lagrange của Breusch–Pagan cho tính độc lập chéo của ma trận hiệp phương sai phần dư giữa các phương trình $H_0: \sigma_{mn} = 0, \forall m \neq n$ và kiểm định Wald cho các ràng buộc hệ số xuyên phương trình.
+
+Phương trình đặc tả cấu trúc của nhóm phương pháp 12.1:
+
+$$
+\hat{\beta}_{\text{SUR}} = \left[X^\top (\hat{\Sigma}^{-1} \otimes I_N) X\right]^{-1} X^\top (\hat{\Sigma}^{-1} \otimes I_N) Y
+$$
+
+Điều kiện mô-men và hàm mục tiêu ước lượng:
+
+$$
+\hat{\theta}_{\text{SYS}} = \arg\min_{\theta \in \Theta} g_N(\theta)^\top \left(\hat{\Sigma}^{-1} \otimes P_Z\right) g_N(\theta), \quad p(\theta \mid Y, X) \propto L(Y \mid X, \theta)\,\pi(\theta)
+$$
+
+<FeatureNotAvailable
+  note="Khi dữ liệu vi phạm giả định định danh của Nhóm 12.1, nhà nghiên cứu cần chuyển sang các nhóm phương pháp mở rộng trong Chương 12 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
+/>
+
+## 2. Danh mục các mô hình trong Nhóm 12.1
+
+<FeatureCards
+  features={[
+    {
+      title: '12.1.1. Hệ phương trình hồi quy dường như không liên quan (SUR)',
+      description: 'Ước lượng đồng thời hệ gồm $M$ phương trình hồi quy có các tập biến giải thích khác nhau nhưng có các sai số ngẫu nhiên tương quan chéo cùng...',
+      link: '/vietlod/chapter-12/group-12-1/b179-sur',
+      badge: 'B179 · sur'
+    },
+    {
+      title: '12.1.2. Ước lượng bình phương nhỏ nhất ba giai đoạn (3SLS)',
+      description: 'Kết hợp phương pháp biến công cụ hai giai đoạn (2SLS) để xử lý các biến nội sinh đồng thời ở từng phương trình với ước lượng (GLS) hệ thống ...',
+      link: '/vietlod/chapter-12/group-12-1/b180-three-stage-ls',
+      badge: 'B180 · three_stage_ls'
+    },
+    {
+      title: '12.1.3. Ước lượng GMM cho hệ phương trình đồng thời dưới phương sai thay đổi',
+      description: 'Ước lượng đồng thời hệ phương trình phi tuyến hoặc tuyến tính có biến nội sinh bằng cách cực tiểu hóa dạng toàn phương của các điều kiện mom...',
+      link: '/vietlod/chapter-12/group-12-1/b181-system-gmm',
+      badge: 'B181 · system_gmm'
+    },
+    {
+      title: '12.1.4. Hệ phương trình cầu hầu như lý tưởng bậc hai (QUAIDS)',
+      description: 'Ước lượng đồng thời hệ phương trình tỷ trọng chi tiêu nhiều nhóm hàng hóa $w_{ik} = \alpha_k + \sum_j \gamma_{kj}\ln p_{ij} + \beta_k \ln[m_...',
+      link: '/vietlod/chapter-12/group-12-1/b182-quaids-demand-system',
+      badge: 'B182 · quaids_demand_system'
+    }
+  ]}
+/>
+
+## 3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
+
+| Bài học & Mô hình | Mã định danh | Cú pháp Stata 18 MP | Cú pháp R 4.x | Cú pháp Python 3.11+ | Hỗ trợ |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `12.1.1` · [Hệ phương trình hồi quy dường như không liên quan (SUR)](/vietlod/chapter-12/group-12-1/b179-sur) | `sur` | `sureg (y1 x1 x2) (y2 x1 z2), corr` | `systemfit::systemfit(list(eq1 = y1 ~ x1 + x2, eq2 = y2 ~ x1 + z2), method = 'SUR', data = df)` | `SUR.from_formula({'eq1': 'y1 ~ 1 + x1 + x2', 'eq2': 'y2 ~ 1 + x1 + z2'}, data=df).fit()` | <Available /> |
+| `12.1.2` · [Ước lượng bình phương nhỏ nhất ba giai đoạn (3SLS)](/vietlod/chapter-12/group-12-1/b180-three-stage-ls) | `three_stage_ls` | `reg3 (y1 y2 x1) (y2 y1 z1), 3sls` | `systemfit::systemfit(list(eq1 = y1 ~ y2 + x1, eq2 = y2 ~ y1 + z1), method = '3SLS', inst = ~ x1 + z1, data = df)` | `IV3SLS.from_formula({'eq1': 'y1 ~ 1 + x1 + [y2 ~ z1]', 'eq2': 'y2 ~ 1 + z1 + [y1 ~ x1]'}, data=df).fit()` | <Available /> |
+| `12.1.3` · [Ước lượng GMM cho hệ phương trình đồng thời dưới phương sai thay đổi](/vietlod/chapter-12/group-12-1/b181-system-gmm) | `system_gmm` | `gmm (eq1: y1 - {b0} - {b1}*y2 - {b2}*x1) (eq2: y2 - {g0} - {g1}*y1 - {g2}*z1), instruments(x1 z1) wmatrix(robust)` | `gmm::sysGmm(list(y1 ~ y2 + x1, y2 ~ y1 + z1), list(~ x1 + z1, ~ x1 + z1), data = df)` | `IVSystemGMM.from_formula({'eq1': 'y1 ~ 1 + x1 + [y2 ~ z1]', 'eq2': 'y2 ~ 1 + z1 + [y1 ~ x1]'}, data=df).fit()` | <Available /> |
+| `12.1.4` · [Hệ phương trình cầu hầu như lý tưởng bậc hai (QUAIDS)](/vietlod/chapter-12/group-12-1/b182-quaids-demand-system) | `quaids_demand_system` | `demandsys quaids w1 w2 w3, prices(p1 p2 p3) expenditure(exp_tot)` | `micEconAids::aidsEst(c('p1', 'p2', 'p3'), c('w1', 'w2', 'w3'), 'exp_tot', data = df)` | `SUR.from_formula(quaids_eqs, data=df).fit(cov_type='robust')` | <Available /> |
+
+## 4. Quy trình thực hành chuẩn cho Nhóm 12.1
+
+<Steps>
+
+### Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco
+
+Tải tệp CSV thực hành của từng mô hình trong Nhóm `12.1` hoặc kết nối dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
+
+### Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu
+
+So sánh các mô hình từ `12.1.1` đến `12.1.4` trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.
+
+### Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab
+
+Thực hiện đầy đủ bộ kiểm định **Kiểm định nhân tử Lagrange của Breusch–Pagan cho tính độc lập chéo của ma trận hiệp phương sai phần dư giữa các phương trình $H_0: \sigma_{mn} = 0, \forall m \neq n$ và kiểm định Wald cho các ràng buộc hệ số xuyên phương trình** và đẩy mã mô hình sang [EcoLab](https://ecolab.io.vn) để xuất bảng kết quả chuẩn công bố quốc tế.
+
+</Steps>

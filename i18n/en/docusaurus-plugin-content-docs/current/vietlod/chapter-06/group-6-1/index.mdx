@@ -1,0 +1,118 @@
+---
+id: index
+title: "Group 6.1: Unit Root and Cointegration Tests"
+sidebar_label: "Group 6.1. Unit Root and Cointegration Tests"
+sidebar_position: 1
+slug: /vietlod/chapter-06/group-6-1
+description: "How-To User Guide for Methodological Group 6.1 — Unit Root and Cointegration Tests in Chapter 06: comparing and executing 6 econometric models across Stata 18 MP, R 4.x, and Python 3.11+."
+keywords:
+  - VietLOD Group 6.1
+  - Unit Root and Cointegration Tests
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Group 6.1: Unit Root and Cointegration Tests
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Methodological Group 6.1 — Unit Root and Cointegration Tests** in [Chapter 06: Univariate, Nonlinear, Structural Break and Bubble Time Series](/en/vietlod/chapter-06) provides step-by-step How-To implementation guides for **6 econometric models** spanning from Section `6.1.1` to `6.1.6`. Full theoretical derivations are available at [VietLOD Group 6.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-06-chuoi-thoi-gian-don-bien-phi-tuyen-diem-gay-va-bong-bong/nhom-6-1-unit-root-cointegration) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="How-To Guide for Group 6.1: Unit Root and Cointegration Tests in Stata 18, R 4.x, and Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Methodological Overview and Structural Equations
+
+- **Methodological Focus**: Provides consistent estimation and robust inference for **Unit Root and Cointegration Tests** specifications within **Univariate, Nonlinear, Structural Break and Bubble Time Series**.
+- **Mandatory Post-Estimation Diagnostics**: Lựa chọn độ trễ $p$ tối ưu theo tiêu chuẩn (AIC) / SBIC hoặc quy tắc tổng quát đến cụ thể của Ng–Perron, đối chiếu giá trị tới hạn MacKinnon (1996) và kiểm định Ljung–Box phần dư.
+
+Core structural specification for Group 6.1:
+
+$$
+\Delta Y_t = \alpha + \beta t + \gamma Y_{t-1} + \sum_{j=1}^p \delta_j \Delta Y_{t-j} + \varepsilon_t
+$$
+
+Estimator objective and moment conditions:
+
+$$
+\hat{\theta}_T = \arg\max_{\theta \in \Theta} \ell_T\left(Y_1, \dots, Y_T; \theta\right), \quad \Phi(L)(1-L)^d Y_t = \mu + \Theta(L)\varepsilon_t
+$$
+
+<FeatureNotAvailable
+  note="When empirical data violate the identification conditions of Group 6.1, researchers should transition to the extended methodological groups in Chapter 06 or apply appropriate instrumental-variable and cluster-robust corrections."
+/>
+
+## 2. Econometric Models in Group 6.1
+
+<FeatureCards
+  features={[
+    {
+      title: '6.1.1. Augmented Dickey-Fuller Unit Root Regression',
+      description: 'Estimates the Augmented Dickey-Fuller Unit Root Regression specification within the Unit Root and Cointegration Tests framework by optimizin...',
+      link: '/en/vietlod/chapter-06/group-6-1/b084-adf',
+      badge: 'B084 · adf'
+    },
+    {
+      title: '6.1.2. Phillips-Perron Nonparametric Unit-Root Test',
+      description: 'Applies nonparametric Newey-West Bartlett long-run variance corrections to Dickey-Fuller statistics for robustness to general serial correla...',
+      link: '/en/vietlod/chapter-06/group-6-1/b085-phillips-perron',
+      badge: 'B085 · phillips_perron'
+    },
+    {
+      title: '6.1.3. Elliott-Rothenberg-Stock DF-GLS Unit-Root Test',
+      description: 'Detrends series under local-to-unity GLS alternatives and selects lags via Ng-Perron Modified AIC for substantially higher finite-sample pow...',
+      link: '/en/vietlod/chapter-06/group-6-1/b086-df-gls',
+      badge: 'B086 · df_gls'
+    },
+    {
+      title: '6.1.4. KPSS Stationarity Regression',
+      description: 'Estimates the KPSS Stationarity Regression specification within the Unit Root and Cointegration Tests framework by optimizing the structural...',
+      link: '/en/vietlod/chapter-06/group-6-1/b087-kpss',
+      badge: 'B087 · kpss'
+    },
+    {
+      title: '6.1.5. Zivot-Andrews Structural-Break Unit-Root Test',
+      description: 'Tests the unit-root null against stationarity around a single endogenously determined structural break in level, trend, or both. Across empi...',
+      link: '/en/vietlod/chapter-06/group-6-1/b088-zivot-andrews',
+      badge: 'B088 · zivot_andrews'
+    },
+    {
+      title: '6.1.6. Johansen Multivariate Cointegration',
+      description: 'Estimates the Johansen Multivariate Cointegration specification within the Unit Root and Cointegration Tests framework by optimizing the str...',
+      link: '/en/vietlod/chapter-06/group-6-1/b089-johansen',
+      badge: 'B089 · johansen'
+    }
+  ]}
+/>
+
+## 3. Comparative Execution Syntax Across Stata 18, R 4.x, and Python 3.11+
+
+| Section & Model Title | Estimator Key | Stata 18 MP Syntax | R 4.x Syntax | Python 3.11+ Syntax | Support |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `6.1.1` · [Augmented Dickey-Fuller Unit Root Regression](/en/vietlod/chapter-06/group-6-1/b084-adf) | `adf` | `dfuller y, lags(2) trend` | `urca::ur.df(df$y, type = 'trend', lags = 2)` | `adfuller(y, maxlag=4, regression='ct', autolag='AIC')` | <Available /> |
+| `6.1.2` · [Phillips-Perron Nonparametric Unit-Root Test](/en/vietlod/chapter-06/group-6-1/b085-phillips-perron) | `phillips_perron` | `pperron y, trend lags(4)` | `urca::ur.pp(df$y, type = 'Z-tau', model = 'trend', lags = 'short')` | `PhillipsPerron(df['y'], trend='ct', test_type='tau')` | <Available /> |
+| `6.1.3` · [Elliott-Rothenberg-Stock DF-GLS Unit-Root Test](/en/vietlod/chapter-06/group-6-1/b086-df-gls) | `df_gls` | `dfgls y, maxlag(4)` | `urca::ur.ers(df$y, type = 'DF-GLS', model = 'trend', lag.max = 4)` | `DFGLS(df['y'], trend='ct', method='aic')` | <Available /> |
+| `6.1.4` · [KPSS Stationarity Regression](/en/vietlod/chapter-06/group-6-1/b087-kpss) | `kpss` | `kpss y, maxlag(4)` | `tseries::kpss.test(df$y, null = 'Trend')` | `kpss(y, regression='ct', nlags='auto')` | <Available /> |
+| `6.1.5` · [Zivot-Andrews Structural-Break Unit-Root Test](/en/vietlod/chapter-06/group-6-1/b088-zivot-andrews) | `zivot_andrews` | `zandrews y, break(both) lagmethod(AIC)` | `urca::ur.za(df$y, model = 'both', lag = 2)` | `ZivotAndrews(df['y'], trend='ct', method='aic')` | <Available /> |
+| `6.1.6` · [Johansen Multivariate Cointegration](/en/vietlod/chapter-06/group-6-1/b089-johansen) | `johansen` | `vecrank y x1 x2, trend(constant) lags(2)` | `urca::ca.jo(df[, c('y', 'x1', 'x2')], type = 'trace', K = 2)` | `coint_johansen(df[['y', 'x1', 'x2']], det_order=0, k_ar_diff=1)` | <Available /> |
+
+## 4. Standard Implementation Workflow for Group 6.1
+
+<Steps>
+
+### Step 1. Load Standardized Practice Datasets From VietLOD, EcoData, or Finco
+
+Download the model-specific `.csv` practice dataset in Group `6.1` or extract custom empirical panels from [EcoData](https://ecodata.io.vn) and [Finco](https://www.finco.vn).
+
+### Step 2. Select the Optimal Estimator for Your Error and Sample Structure
+
+Compare the estimators from `6.1.1` to `6.1.6` in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.
+
+### Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab
+
+Verify all required diagnostics including **Lựa chọn độ trễ $p$ tối ưu theo tiêu chuẩn (AIC) / SBIC hoặc quy tắc tổng quát đến cụ thể của Ng–Perron, đối chiếu giá trị tới hạn MacKinnon (1996) và kiểm định Ljung–Box phần dư** and dispatch the specification to [EcoLab](https://ecolab.io.vn) for automated journal-grade reporting.
+
+</Steps>

@@ -1,0 +1,139 @@
+---
+id: index
+title: "Group 5.1: Static Panel Data Models"
+sidebar_label: "Group 5.1. Static Panel Data Models"
+sidebar_position: 1
+slug: /vietlod/chapter-05/group-5-1
+description: "How-To User Guide for Methodological Group 5.1 — Static Panel Data Models in Chapter 05: comparing and executing 9 econometric models across Stata 18 MP, R 4.x, and Python 3.11+."
+keywords:
+  - VietLOD Group 5.1
+  - Static Panel Data Models
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Group 5.1: Static Panel Data Models
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Methodological Group 5.1 — Static Panel Data Models** in [Chapter 05: Static, Dynamic and Cross-Sectionally Dependent Panel Econometrics](/en/vietlod/chapter-05) provides step-by-step How-To implementation guides for **9 econometric models** spanning from Section `5.1.1` to `5.1.9`. Full theoretical derivations are available at [VietLOD Group 5.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-05-kinh-te-luong-du-lieu-bang-tinh-dong-va-phu-thuoc-cheo/nhom-5-1-static) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="How-To Guide for Group 5.1: Static Panel Data Models in Stata 18, R 4.x, and Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Methodological Overview and Structural Equations
+
+- **Methodological Focus**: Provides consistent estimation and robust inference for **Static Panel Data Models** specifications within **Static, Dynamic and Cross-Sectionally Dependent Panel Econometrics**.
+- **Mandatory Post-Estimation Diagnostics**: Kiểm định nhân tử Lagrange Breusch–Pagan cho hiệu ứng ngẫu nhiên (LM), kiểm định $F$ cho hiệu ứng cố định và sai số chuẩn phân cụm theo đơn vị.
+
+Core structural specification for Group 5.1:
+
+$$
+Y_{it} = \beta_0 + X_{it}^\top \beta + u_{it}, \quad \text{Cov}(u_{it}, u_{is}) \neq 0
+$$
+
+Estimator objective and moment conditions:
+
+$$
+\hat{\beta}_{\text{Panel}} = \left(\sum_{i=1}^N \tilde{X}_i^\top W_i \tilde{X}_i\right)^{-1}\left(\sum_{i=1}^N \tilde{X}_i^\top W_i \tilde{Y}_i\right), \quad \tilde{Y}_{it} = Y_{it} - \theta \bar{Y}_i
+$$
+
+<FeatureNotAvailable
+  note="When empirical data violate the identification conditions of Group 5.1, researchers should transition to the extended methodological groups in Chapter 05 or apply appropriate instrumental-variable and cluster-robust corrections."
+/>
+
+## 2. Econometric Models in Group 5.1
+
+<FeatureCards
+  features={[
+    {
+      title: '5.1.1. Pooled Panel Least Squares',
+      description: 'Estimates the Pooled Panel Least Squares specification within the Static Panel Data Models framework by optimizing the structural objective ...',
+      link: '/en/vietlod/chapter-05/group-5-1/b056-pooled-ols',
+      badge: 'B056 · pooled_ols'
+    },
+    {
+      title: '5.1.2. Panel Fixed Effects Within Estimator',
+      description: 'Estimates the Panel Fixed Effects Within Estimator specification within the Static Panel Data Models framework by optimizing the structural ...',
+      link: '/en/vietlod/chapter-05/group-5-1/b057-panel-fe',
+      badge: 'B057 · panel_fe'
+    },
+    {
+      title: '5.1.3. Panel Random Effects Estimator',
+      description: 'Estimates the Panel Random Effects Estimator specification within the Static Panel Data Models framework by optimizing the structural object...',
+      link: '/en/vietlod/chapter-05/group-5-1/b058-panel-re',
+      badge: 'B058 · panel_re'
+    },
+    {
+      title: '5.1.4. Between-Entities Panel Estimator',
+      description: 'Estimates the Between-Entities Panel Estimator specification within the Static Panel Data Models framework by optimizing the structural obje...',
+      link: '/en/vietlod/chapter-05/group-5-1/b059-between-ols',
+      badge: 'B059 · between_ols'
+    },
+    {
+      title: '5.1.5. First-Difference Panel Estimator',
+      description: 'Estimates the First-Difference Panel Estimator specification within the Static Panel Data Models framework by optimizing the structural obje...',
+      link: '/en/vietlod/chapter-05/group-5-1/b060-first-difference',
+      badge: 'B060 · first_difference'
+    },
+    {
+      title: '5.1.6. Mundlak Correlated Random Effects',
+      description: 'Augments random effects with entity-level time averages of time-varying regressors to recover exact within slopes while identifying time-inv...',
+      link: '/en/vietlod/chapter-05/group-5-1/b061-mundlak-cre',
+      badge: 'B061 · mundlak_cre'
+    },
+    {
+      title: '5.1.7. Fama-MacBeth Two-Step Cross-Sectional Regression',
+      description: 'Estimates the Fama-MacBeth Two-Step Cross-Sectional Regression specification within the Static Panel Data Models framework by optimizing the...',
+      link: '/en/vietlod/chapter-05/group-5-1/b062-fama-macbeth',
+      badge: 'B062 · fama_macbeth'
+    },
+    {
+      title: '5.1.8. Beck-Katz Panel-Corrected Standard Errors',
+      description: 'Estimates time-series cross-section panels with Prais-Winsten AR1 serial correlation and contemporaneous cross-unit sandwich covariance. Acr...',
+      link: '/en/vietlod/chapter-05/group-5-1/b063-pcse-panel',
+      badge: 'B063 · pcse_panel'
+    },
+    {
+      title: '5.1.9. Driscoll-Kraay Spatial-Temporal Panel Fixed Effects',
+      description: 'Applies Newey-West Bartlett kernel smoothing to cross-sectionally averaged moment conditions for inference robust to general spatial and tem...',
+      link: '/en/vietlod/chapter-05/group-5-1/b064-driscoll-kraay-fe',
+      badge: 'B064 · driscoll_kraay_fe'
+    }
+  ]}
+/>
+
+## 3. Comparative Execution Syntax Across Stata 18, R 4.x, and Python 3.11+
+
+| Section & Model Title | Estimator Key | Stata 18 MP Syntax | R 4.x Syntax | Python 3.11+ Syntax | Support |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `5.1.1` · [Pooled Panel Least Squares](/en/vietlod/chapter-05/group-5-1/b056-pooled-ols) | `pooled_ols` | `regress y x1 x2, vce(cluster id)` | `plm::plm(y ~ x1 + x2, data = pdata, model = 'pooling')` | `PooledOLS.from_formula('y ~ 1 + x1 + x2', data=pdata).fit(cov_type='clustered', cluster_entity=True)` | <Available /> |
+| `5.1.2` · [Panel Fixed Effects Within Estimator](/en/vietlod/chapter-05/group-5-1/b057-panel-fe) | `panel_fe` | `xtreg y x1 x2, fe vce(cluster id)` | `plm::plm(y ~ x1 + x2, data = pdata, model = 'within')` | `PanelOLS.from_formula('y ~ 1 + x1 + x2 + EntityEffects', data=pdata).fit(cov_type='clustered', cluster_entity=True)` | <Available /> |
+| `5.1.3` · [Panel Random Effects Estimator](/en/vietlod/chapter-05/group-5-1/b058-panel-re) | `panel_re` | `xtreg y x1 x2, re vce(cluster id)` | `plm::plm(y ~ x1 + x2, data = pdata, model = 'random')` | `RandomEffects.from_formula('y ~ 1 + x1 + x2', data=pdata).fit(cov_type='clustered', cluster_entity=True)` | <Available /> |
+| `5.1.4` · [Between-Entities Panel Estimator](/en/vietlod/chapter-05/group-5-1/b059-between-ols) | `between_ols` | `xtreg y x1 x2, be` | `plm::plm(y ~ x1 + x2, data = pdata, model = 'between')` | `BetweenOLS.from_formula('y ~ 1 + x1 + x2', data=pdata).fit()` | <Available /> |
+| `5.1.5` · [First-Difference Panel Estimator](/en/vietlod/chapter-05/group-5-1/b060-first-difference) | `first_difference` | `regress D.y D.(x1 x2), vce(cluster id)` | `plm::plm(y ~ x1 + x2, data = pdata, model = 'fd')` | `FirstDifferenceOLS.from_formula('y ~ x1 + x2', data=pdata).fit(cov_type='clustered', cluster_entity=True)` | <Available /> |
+| `5.1.6` · [Mundlak Correlated Random Effects](/en/vietlod/chapter-05/group-5-1/b061-mundlak-cre) | `mundlak_cre` | `xtreg y x1 x2, cre vce(cluster id)` | `plm::plm(y ~ x1 + x2 + mean_x1 + mean_x2, data = pdata, model = 'random')` | `RandomEffects.from_formula('y ~ 1 + x1 + x2 + mean_x1 + mean_x2', data=pdata).fit()` | <Available /> |
+| `5.1.7` · [Fama-MacBeth Two-Step Cross-Sectional Regression](/en/vietlod/chapter-05/group-5-1/b062-fama-macbeth) | `fama_macbeth` | `asreg y x1 x2, fmb newey(3)` | `plm::pmg(y ~ x1 + x2, data = pdata, index = c('year', 'id'))` | `FamaMacBeth.from_formula('y ~ 1 + x1 + x2', data=pdata).fit(cov_type='kernel')` | <Available /> |
+| `5.1.8` · [Beck-Katz Panel-Corrected Standard Errors](/en/vietlod/chapter-05/group-5-1/b063-pcse-panel) | `pcse_panel` | `xtpcse y x1 x2, correlation(ar1) hetonly` | `pcse::pcse(lm(y ~ x1 + x2, data = df), groupN = df$id, groupT = df$t)` | `PanelOLS.from_formula('y ~ 1 + x1 + x2', data=pdata).fit(cov_type='kernel')` | <Available /> |
+| `5.1.9` · [Driscoll-Kraay Spatial-Temporal Panel Fixed Effects](/en/vietlod/chapter-05/group-5-1/b064-driscoll-kraay-fe) | `driscoll_kraay_fe` | `xtscc y x1 x2, fe lag(3)` | `lmtest::coeftest(plm_fe, vcov = plm::vcovSCC(plm_fe, maxlag = 3))` | `PanelOLS.from_formula('y ~ 1 + x1 + x2 + EntityEffects', data=pdata).fit(cov_type='kernel', kernel='bartlett', bandwidth=3)` | <Available /> |
+
+## 4. Standard Implementation Workflow for Group 5.1
+
+<Steps>
+
+### Step 1. Load Standardized Practice Datasets From VietLOD, EcoData, or Finco
+
+Download the model-specific `.csv` practice dataset in Group `5.1` or extract custom empirical panels from [EcoData](https://ecodata.io.vn) and [Finco](https://www.finco.vn).
+
+### Step 2. Select the Optimal Estimator for Your Error and Sample Structure
+
+Compare the estimators from `5.1.1` to `5.1.9` in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.
+
+### Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab
+
+Verify all required diagnostics including **Kiểm định nhân tử Lagrange Breusch–Pagan cho hiệu ứng ngẫu nhiên (LM), kiểm định $F$ cho hiệu ứng cố định và sai số chuẩn phân cụm theo đơn vị** and dispatch the specification to [EcoLab](https://ecolab.io.vn) for automated journal-grade reporting.
+
+</Steps>

@@ -1,0 +1,97 @@
+---
+id: index
+title: "Group 6.4: State-Space and Unobserved Components Models"
+sidebar_label: "Group 6.4. State-Space and Unobserved Components Models"
+sidebar_position: 4
+slug: /vietlod/chapter-06/group-6-4
+description: "How-To User Guide for Methodological Group 6.4 — State-Space and Unobserved Components Models in Chapter 06: comparing and executing 3 econometric models across Stata 18 MP, R 4.x, and Python 3.11+."
+keywords:
+  - VietLOD Group 6.4
+  - State-Space and Unobserved Components Models
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Group 6.4: State-Space and Unobserved Components Models
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Methodological Group 6.4 — State-Space and Unobserved Components Models** in [Chapter 06: Univariate, Nonlinear, Structural Break and Bubble Time Series](/en/vietlod/chapter-06) provides step-by-step How-To implementation guides for **3 econometric models** spanning from Section `6.4.1` to `6.4.3`. Full theoretical derivations are available at [VietLOD Group 6.4](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-06-chuoi-thoi-gian-don-bien-phi-tuyen-diem-gay-va-bong-bong/nhom-6-4-state-space) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="How-To Guide for Group 6.4: State-Space and Unobserved Components Models in Stata 18, R 4.x, and Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Methodological Overview and Structural Equations
+
+- **Methodological Focus**: Provides consistent estimation and robust inference for **State-Space and Unobserved Components Models** specifications within **Univariate, Nonlinear, Structural Break and Bubble Time Series**.
+- **Mandatory Post-Estimation Diagnostics**: Kiểm định ý nghĩa thống kê các biến ngoại sinh, kiểm định nhiễu trắng phần dư chuẩn hóa một bước dự báo Kalman và tiêu chuẩn (AIC) và (BIC).
+
+Core structural specification for Group 6.4:
+
+$$
+\Phi_p(L)(1 - L)^d (Y_t - X_t^\top \beta) = \Theta_q(L)\varepsilon_t
+$$
+
+Estimator objective and moment conditions:
+
+$$
+\hat{\theta}_T = \arg\max_{\theta \in \Theta} \ell_T\left(Y_1, \dots, Y_T; \theta\right), \quad \Phi(L)(1-L)^d Y_t = \mu + \Theta(L)\varepsilon_t
+$$
+
+<FeatureNotAvailable
+  note="When empirical data violate the identification conditions of Group 6.4, researchers should transition to the extended methodological groups in Chapter 06 or apply appropriate instrumental-variable and cluster-robust corrections."
+/>
+
+## 2. Econometric Models in Group 6.4
+
+<FeatureCards
+  features={[
+    {
+      title: '6.4.1. Seasonal ARIMA with Exogenous Regressors — SARIMAX',
+      description: 'Estimates the Seasonal ARIMA with Exogenous Regressors — SARIMAX specification within the State-Space and Unobserved Components Models frame...',
+      link: '/en/vietlod/chapter-06/group-6-4/b099-sarimax',
+      badge: 'B099 · sarimax'
+    },
+    {
+      title: '6.4.2. Structural Unobserved Components Time Series',
+      description: 'Estimates the Structural Unobserved Components Time Series specification within the State-Space and Unobserved Components Models framework b...',
+      link: '/en/vietlod/chapter-06/group-6-4/b100-unobserved-components',
+      badge: 'B100 · unobserved_components'
+    },
+    {
+      title: '6.4.3. Dynamic Factor Time-Series Estimator',
+      description: 'Estimates the Dynamic Factor Time-Series Estimator specification within the State-Space and Unobserved Components Models framework by optimi...',
+      link: '/en/vietlod/chapter-06/group-6-4/b101-dynamic-factor',
+      badge: 'B101 · dynamic_factor'
+    }
+  ]}
+/>
+
+## 3. Comparative Execution Syntax Across Stata 18, R 4.x, and Python 3.11+
+
+| Section & Model Title | Estimator Key | Stata 18 MP Syntax | R 4.x Syntax | Python 3.11+ Syntax | Support |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `6.4.1` · [Seasonal ARIMA with Exogenous Regressors — SARIMAX](/en/vietlod/chapter-06/group-6-4/b099-sarimax) | `sarimax` | `arima y x1 x2, arima(1,1,1)` | `arima(y, order = c(1, 1, 1), xreg = as.matrix(df[, c('x1', 'x2')]))` | `SARIMAX(df['y'], exog=df[['x1', 'x2']], order=(1, 1, 1)).fit()` | <Available /> |
+| `6.4.2` · [Structural Unobserved Components Time Series](/en/vietlod/chapter-06/group-6-4/b100-unobserved-components) | `unobserved_components` | `ucm y, model(lltrend)` | `StructTS(y, type = 'trend')` | `UnobservedComponents(y, level='local linear trend').fit()` | <Available /> |
+| `6.4.3` · [Dynamic Factor Time-Series Estimator](/en/vietlod/chapter-06/group-6-4/b101-dynamic-factor) | `dynamic_factor` | `dfactor (y x1 x2 = , noconstant) (f = , ar(1/2))` | `stats::prcomp(df[, c('y', 'x1', 'x2')], scale. = TRUE)` | `DynamicFactor(df[['y', 'x1', 'x2']], k_factors=1, factor_order=1).fit()` | <Available /> |
+
+## 4. Standard Implementation Workflow for Group 6.4
+
+<Steps>
+
+### Step 1. Load Standardized Practice Datasets From VietLOD, EcoData, or Finco
+
+Download the model-specific `.csv` practice dataset in Group `6.4` or extract custom empirical panels from [EcoData](https://ecodata.io.vn) and [Finco](https://www.finco.vn).
+
+### Step 2. Select the Optimal Estimator for Your Error and Sample Structure
+
+Compare the estimators from `6.4.1` to `6.4.3` in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.
+
+### Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab
+
+Verify all required diagnostics including **Kiểm định ý nghĩa thống kê các biến ngoại sinh, kiểm định nhiễu trắng phần dư chuẩn hóa một bước dự báo Kalman và tiêu chuẩn (AIC) và (BIC)** and dispatch the specification to [EcoLab](https://ecolab.io.vn) for automated journal-grade reporting.
+
+</Steps>

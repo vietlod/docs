@@ -1,0 +1,118 @@
+---
+id: index
+title: "Nhóm 9.4: Trọng số xác suất nghịch đảo, đối chứng tổng hợp và học máy nhân quả"
+sidebar_label: "Nhóm 9.4. Trọng số xác suất nghịch đảo, đối chứng tổng hợp và học máy nhân quả"
+sidebar_position: 4
+slug: /vietlod/chapter-09/group-9-4
+description: "Hướng dẫn thực hành Nhóm 9.4 — Trọng số xác suất nghịch đảo, đối chứng tổng hợp và học máy nhân quả thuộc Chương 09: so sánh và thực thi 6 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+keywords:
+  - Nhóm 9.4 VietLOD
+  - Trọng số xác suất nghịch đảo, đối chứng tổng hợp và học máy nhân quả
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Nhóm 9.4: Trọng số xác suất nghịch đảo, đối chứng tổng hợp và học máy nhân quả
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Nhóm phương pháp 9.4 — Trọng số xác suất nghịch đảo, đối chứng tổng hợp và học máy nhân quả** thuộc [Chương 09: Suy luận nhân quả và đánh giá tác động chính sách](/vietlod/chapter-09) cung cấp quy trình thực hành từng bước cho **6 mô hình kinh tế lượng** từ bài `9.4.1` đến `9.4.6`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Nhóm 9.4](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-09-suy-luan-nhan-qua-va-danh-gia-tac-dong-chinh-sach/nhom-9-4-treatment-effects) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Nhóm 9.4: Trọng số xác suất nghịch đảo, đối chứng tổng hợp và học máy nhân quả trên Stata 18, R 4.x và Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Bản chất phương pháp và hệ phương trình định danh
+
+- **Câu hỏi nghiên cứu trọng tâm của nhóm**: Làm sao để nhận dạng tác động nhân quả tin cậy bằng Staggered DID thế hệ mới, Đối chứng tổng hợp (SCM) và (SDID), Hồi quy gián đoạn, MTE, Bunching và Học máy nhân quả?
+- **Kiểm định chẩn đoán bắt buộc**: Kiểm định cân bằng hiệp phương sai có trọng số, kiểm tra xác suất cực đoan gần $0$ hoặc $1$ và sai số chuẩn (GMM) hoặc Bootstrap.
+
+Phương trình đặc tả cấu trúc của nhóm phương pháp 9.4:
+
+$$
+\hat{\tau}_{\text{IPW}} = \frac{1}{N}\sum_{i=1}^N \left[\frac{D_i Y_i}{\hat{e}(X_i)} - \frac{(1 - D_i)Y_i}{1 - \hat{e}(X_i)}\right]
+$$
+
+Điều kiện mô-men và hàm mục tiêu ước lượng:
+
+$$
+\tau_{\text{ATT}} = \text{E}\left[Y_{it}(1) - Y_{it}(0) \;\middle|\; D_i = 1\right], \quad \text{E}_N\left[\psi\left(W_i; \hat{\tau}, \hat{\eta}\right)\right] = 0
+$$
+
+<FeatureNotAvailable
+  note="Khi dữ liệu vi phạm giả định định danh của Nhóm 9.4, nhà nghiên cứu cần chuyển sang các nhóm phương pháp mở rộng trong Chương 09 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
+/>
+
+## 2. Danh mục các mô hình trong Nhóm 9.4
+
+<FeatureCards
+  features={[
+    {
+      title: '9.4.1. Trọng số nghịch đảo xác suất điều trị Horvitz–Thompson (IPW)',
+      description: 'Tái cân bằng mẫu quan sát bằng trọng số nghịch đảo xác suất nhận điều trị thực tế để kiến tạo một tổng thể giả định nơi việc phân bổ điều tr...',
+      link: '/vietlod/chapter-09/group-9-4/b138-ipw',
+      badge: 'B138 · ipw'
+    },
+    {
+      title: '9.4.2. Ước lượng bền vững kép tăng cường trọng số xác suất (AIPW)',
+      description: 'Kết hợp mô hình hồi quy kết quả có điều kiện $\text{E}[Y \mid X, D]$ và mô hình trọng số xác suất nghịch đảo (IPW) vào một hàm ảnh hưởng trự...',
+      link: '/vietlod/chapter-09/group-9-4/b139-aipw',
+      badge: 'B139 · aipw'
+    },
+    {
+      title: '9.4.3. Phương pháp đối chứng tổng hợp Abadie–Diamond–Hainmueller (SCM)',
+      description: 'Kiến tạo một đơn vị đối chứng tổng hợp bằng tổ hợp lồi có trọng số không âm từ tập các đơn vị không chịu chính sách sao cho quỹ đạo kết quả ...',
+      link: '/vietlod/chapter-09/group-9-4/b150-synthetic-control',
+      badge: 'B150 · synthetic_control'
+    },
+    {
+      title: '9.4.4. Đối chứng tổng hợp tăng cường hiệu chỉnh chệch Ridge (ASCM)',
+      description: 'Khắc phục chệch khớp không hoàn hảo trước can thiệp của Synthetic Control cổ điển khi đơn vị xử lý nằm gần hoặc ngoài bao lồi của nhóm đối c...',
+      link: '/vietlod/chapter-09/group-9-4/b151-augmented-synthetic-control',
+      badge: 'B151 · augmented_synthetic_control'
+    },
+    {
+      title: '9.4.5. Học máy nhân quả khử chệch trực giao Neyman (DML)',
+      description: 'Kết hợp điều kiện moment trực giao Neyman với quy trình ước lượng chéo chia mẫu K-Fold để sử dụng các thuật toán học máy hiện đại như (LASSO...',
+      link: '/vietlod/chapter-09/group-9-4/b159-double-ml',
+      badge: 'B159 · double_ml'
+    },
+    {
+      title: '9.4.6. Rừng ngẫu nhiên nhân quả ước lượng hiệu ứng không đồng nhất',
+      description: 'Xây dựng quần thể các cây nhân quả trung thực bằng cách chia tách mẫu dùng để dựng cấu trúc nhánh và mẫu dùng để ước lượng hiệu ứng trong lá...',
+      link: '/vietlod/chapter-09/group-9-4/b160-causal-forest',
+      badge: 'B160 · causal_forest'
+    }
+  ]}
+/>
+
+## 3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
+
+| Bài học & Mô hình | Mã định danh | Cú pháp Stata 18 MP | Cú pháp R 4.x | Cú pháp Python 3.11+ | Hỗ trợ |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `9.4.1` · [Trọng số nghịch đảo xác suất điều trị Horvitz–Thompson (IPW)](/vietlod/chapter-09/group-9-4/b138-ipw) | `ipw` | `teffects ipw (y) (treat x1 x2), ate` | `WeightIt::weightit(treat ~ x1 + x2, data = df, method = 'ps')` | `smf.wls('y ~ treat', data=df, weights=w_ipw).fit(cov_type='HC1')` | <Available /> |
+| `9.4.2` · [Ước lượng bền vững kép tăng cường trọng số xác suất (AIPW)](/vietlod/chapter-09/group-9-4/b139-aipw) | `aipw` | `teffects aipw (y x1 x2) (treat x1 x2), ate` | `AIPW::AIPW$new(Y = df$y, A = df$treat, W = df[, c('x1', 'x2')])$fit()` | `DoubleMLIRM(dml_data, ml_g=RandomForestRegressor(), ml_m=RandomForestClassifier()).fit()` | <Available /> |
+| `9.4.3` · [Phương pháp đối chứng tổng hợp Abadie–Diamond–Hainmueller (SCM)](/vietlod/chapter-09/group-9-4/b150-synthetic-control) | `synthetic_control` | `synth y x1 x2, trunit(1) trperiod(2018) nested` | `Synth::synth(dataprep.res)` | `Synth().fit(dataprep=dataprep_obj)` | <Available /> |
+| `9.4.4` · [Đối chứng tổng hợp tăng cường hiệu chỉnh chệch Ridge (ASCM)](/vietlod/chapter-09/group-9-4/b151-augmented-synthetic-control) | `augmented_synthetic_control` | `synth y x1 x2, trunit(1) trperiod(2018)` | `fect::fect(y ~ treat + x1 + x2, data = df, index = c('id', 'year'), method = 'mc')` | `AugSynth().fit(dataprep=dataprep_obj)` | <Available /> |
+| `9.4.5` · [Học máy nhân quả khử chệch trực giao Neyman (DML)](/vietlod/chapter-09/group-9-4/b159-double-ml) | `double_ml` | `xporegress y d, controls(x1-x10) xfolds(5)` | `DoubleML::DoubleMLPLR$new(data, ml_l, ml_m)$fit()` | `DoubleMLPLR(dml_data, ml_l=RandomForestRegressor(), ml_m=RandomForestRegressor()).fit()` | <Available /> |
+| `9.4.6` · [Rừng ngẫu nhiên nhân quả ước lượng hiệu ứng không đồng nhất](/vietlod/chapter-09/group-9-4/b160-causal-forest) | `causal_forest` | `python: CausalForestDML(n_estimators=500, random_state=42).fit(Y, T, X=X)` | `grf::causal_forest(X, Y, W)` | `CausalForestDML(n_estimators=500, random_state=42).fit(Y, T, X=X)` | <Available /> |
+
+## 4. Quy trình thực hành chuẩn cho Nhóm 9.4
+
+<Steps>
+
+### Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco
+
+Tải tệp CSV thực hành của từng mô hình trong Nhóm `9.4` hoặc kết nối dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
+
+### Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu
+
+So sánh các mô hình từ `9.4.1` đến `9.4.6` trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.
+
+### Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab
+
+Thực hiện đầy đủ bộ kiểm định **Kiểm định cân bằng hiệp phương sai có trọng số, kiểm tra xác suất cực đoan gần $0$ hoặc $1$ và sai số chuẩn (GMM) hoặc Bootstrap** và đẩy mã mô hình sang [EcoLab](https://ecolab.io.vn) để xuất bảng kết quả chuẩn công bố quốc tế.
+
+</Steps>

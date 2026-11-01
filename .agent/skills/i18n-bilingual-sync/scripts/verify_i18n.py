@@ -17,7 +17,7 @@ JSON_CATALOGS = [
 ]
 
 
-APP_DIRS = ("ecodata", "ecolab", "ecolit", "pdfhub", "keywords")
+APP_DIRS = ("ecodata", "ecolab", "finco", "vietlod")
 
 
 def collect_relative_docs(root: pathlib.Path) -> set[str]:

@@ -1,0 +1,97 @@
+---
+id: index
+title: "Nhóm 2.1: Hồi quy chính quy hóa"
+sidebar_label: "Nhóm 2.1. Hồi quy chính quy hóa"
+sidebar_position: 1
+slug: /vietlod/chapter-02/group-2-1
+description: "Hướng dẫn thực hành Nhóm 2.1 — Hồi quy chính quy hóa thuộc Chương 02: so sánh và thực thi 3 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+keywords:
+  - Nhóm 2.1 VietLOD
+  - Hồi quy chính quy hóa
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Nhóm 2.1: Hồi quy chính quy hóa
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Nhóm phương pháp 2.1 — Hồi quy chính quy hóa** thuộc [Chương 02: Mô hình chính quy hóa, suy luận chiều cao và giảm chiều](/vietlod/chapter-02) cung cấp quy trình thực hành từng bước cho **3 mô hình kinh tế lượng** từ bài `2.1.1` đến `2.1.3`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Nhóm 2.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-02-mo-hinh-chinh-quy-hoa-suy-luan-chieu-cao-va-giam-chieu/nhom-2-1-penalized) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Nhóm 2.1: Hồi quy chính quy hóa trên Stata 18, R 4.x và Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Bản chất phương pháp và hệ phương trình định danh
+
+- **Câu hỏi nghiên cứu trọng tâm của nhóm**: Khi số lượng biến giải thích rất lớn hoặc đa cộng tuyến cực đại, làm sao để chọn biến chính xác, trích xuất nhân tố ẩn và suy luận nhân quả không chệch?
+- **Kiểm định chẩn đoán bắt buộc**: Đường cong kiểm định chéo K-Fold (MSE) theo tham số phạt $\lambda$, quỹ đạo nghiệm Ridge trace và bậc tự do hiệu dụng $\text{df}(\lambda) = \text{tr}[X(X^\top X + \lambda I)^{-1}X^\top]$.
+
+Phương trình đặc tả cấu trúc của nhóm phương pháp 2.1:
+
+$$
+\hat{\beta}_{\text{Ridge}} = (X^\top X + \lambda I_p)^{-1} X^\top Y
+$$
+
+Điều kiện mô-men và hàm mục tiêu ước lượng:
+
+$$
+\hat{\beta}(\lambda, \alpha) = \arg\min_{\beta \in \mathbb{R}^p} \left\{\frac{1}{2N}\sum_{i=1}^N \left(Y_i - X_i^\top \beta\right)^2 + \lambda\left(\alpha \|\beta\|_1 + \frac{1-\alpha}{2}\|\beta\|_2^2\right)\right\}
+$$
+
+<FeatureNotAvailable
+  note="Khi dữ liệu vi phạm giả định định danh của Nhóm 2.1, nhà nghiên cứu cần chuyển sang các nhóm phương pháp mở rộng trong Chương 02 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
+/>
+
+## 2. Danh mục các mô hình trong Nhóm 2.1
+
+<FeatureCards
+  features={[
+    {
+      title: '2.1.1. Hồi quy chính quy hóa bậc hai Ridge',
+      description: 'Bổ sung thành phần phạt chuẩn bậc hai $L_2$ là $\lambda \|\beta\|_2^2$ vào hàm bình phương tối thiểu giúp cộng hằng số dương $\lambda$ vào đ...',
+      link: '/vietlod/chapter-02/group-2-1/b015-ridge',
+      badge: 'B015 · ridge'
+    },
+    {
+      title: '2.1.2. Hồi quy co ngót và chọn biến tự động Lasso',
+      description: 'Áp đặt thành phần phạt chuẩn bậc nhất $L_1$ là $\lambda \|\beta\|_1$ có điểm gãy không khả vi tại gốc tọa độ, vừa co ngót hệ số vừa ép chính...',
+      link: '/vietlod/chapter-02/group-2-1/b016-lasso',
+      badge: 'B016 · lasso'
+    },
+    {
+      title: '2.1.3. Hồi quy kết hợp phạt bậc nhất và bậc hai Elastic Net',
+      description: 'Tổ hợp lồi giữa phạt $L_1$ của (LASSO) và phạt $L_2$ của Ridge, khắc phục giới hạn của (LASSO) khi số biến $p \gt N$ và sở hữu hiệu ứng nhóm...',
+      link: '/vietlod/chapter-02/group-2-1/b017-elastic-net',
+      badge: 'B017 · elastic_net'
+    }
+  ]}
+/>
+
+## 3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
+
+| Bài học & Mô hình | Mã định danh | Cú pháp Stata 18 MP | Cú pháp R 4.x | Cú pháp Python 3.11+ | Hỗ trợ |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `2.1.1` · [Hồi quy chính quy hóa bậc hai Ridge](/vietlod/chapter-02/group-2-1/b015-ridge) | `ridge` | `elasticnet linear y x1 x2, alpha(0) selection(cv)` | `glmnet::cv.glmnet(X, y, alpha = 0)` | `RidgeCV(alphas=np.logspace(-3, 3, 50), cv=5).fit(X_std, y)` | <Available /> |
+| `2.1.2` · [Hồi quy co ngót và chọn biến tự động Lasso](/vietlod/chapter-02/group-2-1/b016-lasso) | `lasso` | `lasso linear y x1 x2, selection(cv)` | `glmnet::cv.glmnet(X, y, alpha = 1)` | `LassoCV(cv=5, random_state=42).fit(X_std, y)` | <Available /> |
+| `2.1.3` · [Hồi quy kết hợp phạt bậc nhất và bậc hai Elastic Net](/vietlod/chapter-02/group-2-1/b017-elastic-net) | `elastic_net` | `elasticnet linear y x1 x2, alpha(0.5) selection(cv)` | `glmnet::glmnet(X, y, alpha = 0.5)` | `ElasticNet(alpha=0.1, l1_ratio=0.5, random_state=42).fit(X_std, y)` | <Available /> |
+
+## 4. Quy trình thực hành chuẩn cho Nhóm 2.1
+
+<Steps>
+
+### Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco
+
+Tải tệp CSV thực hành của từng mô hình trong Nhóm `2.1` hoặc kết nối dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
+
+### Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu
+
+So sánh các mô hình từ `2.1.1` đến `2.1.3` trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.
+
+### Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab
+
+Thực hiện đầy đủ bộ kiểm định **Đường cong kiểm định chéo K-Fold (MSE) theo tham số phạt $\lambda$, quỹ đạo nghiệm Ridge trace và bậc tự do hiệu dụng $\text{df}(\lambda) = \text{tr}[X(X^\top X + \lambda I)^{-1}X^\top]$** và đẩy mã mô hình sang [EcoLab](https://ecolab.io.vn) để xuất bảng kết quả chuẩn công bố quốc tế.
+
+</Steps>

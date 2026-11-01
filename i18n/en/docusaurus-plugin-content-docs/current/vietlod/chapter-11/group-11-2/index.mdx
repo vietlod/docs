@@ -1,0 +1,90 @@
+---
+id: index
+title: "Group 11.2: Semiparametric Cox Proportional Hazards Models"
+sidebar_label: "Group 11.2. Semiparametric Cox Proportional Hazards Models"
+sidebar_position: 2
+slug: /vietlod/chapter-11/group-11-2
+description: "How-To User Guide for Methodological Group 11.2 — Semiparametric Cox Proportional Hazards Models in Chapter 11: comparing and executing 2 econometric models across Stata 18 MP, R 4.x, and Python 3.11+."
+keywords:
+  - VietLOD Group 11.2
+  - Semiparametric Cox Proportional Hazards Models
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Group 11.2: Semiparametric Cox Proportional Hazards Models
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Methodological Group 11.2 — Semiparametric Cox Proportional Hazards Models** in [Chapter 11: Survival, Event History and Competing-Risks Analysis](/en/vietlod/chapter-11) provides step-by-step How-To implementation guides for **2 econometric models** spanning from Section `11.2.1` to `11.2.2`. Full theoretical derivations are available at [VietLOD Group 11.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-11-phan-tich-song-sot-thoi-gian-su-kien-va-rui-ro-canh-tranh/nhom-11-2-semiparametric) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="How-To Guide for Group 11.2: Semiparametric Cox Proportional Hazards Models in Stata 18, R 4.x, and Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Methodological Overview and Structural Equations
+
+- **Methodological Focus**: Provides consistent estimation and robust inference for **Semiparametric Cox Proportional Hazards Models** specifications within **Survival, Event History and Competing-Risks Analysis**.
+- **Mandatory Post-Estimation Diagnostics**: Kiểm định giả định nguy cơ tỷ lệ (PH) dựa trên phần dư Schoenfeld của Grambsch–Therneau, đồ thị log-log âm $-\ln[-\ln S(t)]$, phần dư Cox–Snell cho độ khớp tổng thể và phần dư Martingale/Deviance.
+
+Core structural specification for Group 11.2:
+
+$$
+h(t \mid X_i) = h_0(t)\exp(X_i^\top \beta)
+$$
+
+Estimator objective and moment conditions:
+
+$$
+\ell_{\text{partial}}(\beta) = \sum_{i=1}^N \delta_i \left[X_i^\top \beta - \ln\left(\sum_{j \in \mathcal{R}(t_i)} \exp(X_j^\top \beta)\right)\right], \quad S(t \mid X_i) = \exp\left(-H_0(t)\exp(X_i^\top \beta)\right)
+$$
+
+<FeatureNotAvailable
+  note="When empirical data violate the identification conditions of Group 11.2, researchers should transition to the extended methodological groups in Chapter 11 or apply appropriate instrumental-variable and cluster-robust corrections."
+/>
+
+## 2. Econometric Models in Group 11.2
+
+<FeatureCards
+  features={[
+    {
+      title: '11.2.1. Cox Proportional Hazards Regression',
+      description: 'Estimates the Cox Proportional Hazards Regression specification within the Semiparametric Cox Proportional Hazards Models framework by optim...',
+      link: '/en/vietlod/chapter-11/group-11-2/b173-cox-ph',
+      badge: 'B173 · cox_ph'
+    },
+    {
+      title: '11.2.2. Time-Varying Covariate Cox Hazards',
+      description: 'Estimates the Time-Varying Covariate Cox Hazards specification within the Semiparametric Cox Proportional Hazards Models framework by optimi...',
+      link: '/en/vietlod/chapter-11/group-11-2/b174-cox-time-varying',
+      badge: 'B174 · cox_time_varying'
+    }
+  ]}
+/>
+
+## 3. Comparative Execution Syntax Across Stata 18, R 4.x, and Python 3.11+
+
+| Section & Model Title | Estimator Key | Stata 18 MP Syntax | R 4.x Syntax | Python 3.11+ Syntax | Support |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `11.2.1` · [Cox Proportional Hazards Regression](/en/vietlod/chapter-11/group-11-2/b173-cox-ph) | `cox_ph` | `stset duration, failure(event) -> stcox x1 x2, vce(robust) -> estat phtest` | `survival::coxph(Surv(duration, event) ~ x1 + x2, data = df)` | `CoxPHFitter().fit(df[['duration', 'event', 'x1', 'x2']], 'duration', 'event')` | <Available /> |
+| `11.2.2` · [Time-Varying Covariate Cox Hazards](/en/vietlod/chapter-11/group-11-2/b174-cox-time-varying) | `cox_time_varying` | `stset stop, id(id) failure(event) -> stcox x1 x2_tv, vce(cluster id)` | `survival::coxph(Surv(start, stop, event) ~ x1 + x2_tv, data = df_tv)` | `CoxTimeVaryingFitter().fit(df_tv, id_col='id', event_col='event', start_col='start', stop_col='stop')` | <Available /> |
+
+## 4. Standard Implementation Workflow for Group 11.2
+
+<Steps>
+
+### Step 1. Load Standardized Practice Datasets From VietLOD, EcoData, or Finco
+
+Download the model-specific `.csv` practice dataset in Group `11.2` or extract custom empirical panels from [EcoData](https://ecodata.io.vn) and [Finco](https://www.finco.vn).
+
+### Step 2. Select the Optimal Estimator for Your Error and Sample Structure
+
+Compare the estimators from `11.2.1` to `11.2.2` in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.
+
+### Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab
+
+Verify all required diagnostics including **Kiểm định giả định nguy cơ tỷ lệ (PH) dựa trên phần dư Schoenfeld của Grambsch–Therneau, đồ thị log-log âm $-\ln[-\ln S(t)]$, phần dư Cox–Snell cho độ khớp tổng thể và phần dư Martingale/Deviance** and dispatch the specification to [EcoLab](https://ecolab.io.vn) for automated journal-grade reporting.
+
+</Steps>

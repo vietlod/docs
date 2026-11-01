@@ -1,0 +1,97 @@
+---
+id: index
+title: "Group 4.2: Zero-Inflated and Hurdle Count Models"
+sidebar_label: "Group 4.2. Zero-Inflated and Hurdle Count Models"
+sidebar_position: 2
+slug: /vietlod/chapter-04/group-4-2
+description: "How-To User Guide for Methodological Group 4.2 — Zero-Inflated and Hurdle Count Models in Chapter 04: comparing and executing 3 econometric models across Stata 18 MP, R 4.x, and Python 3.11+."
+keywords:
+  - VietLOD Group 4.2
+  - Zero-Inflated and Hurdle Count Models
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Group 4.2: Zero-Inflated and Hurdle Count Models
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Methodological Group 4.2 — Zero-Inflated and Hurdle Count Models** in [Chapter 04: Count Data, Trade Gravity and Limited Dependent Variable Models](/en/vietlod/chapter-04) provides step-by-step How-To implementation guides for **3 econometric models** spanning from Section `4.2.1` to `4.2.3`. Full theoretical derivations are available at [VietLOD Group 4.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-04-mo-hinh-dem-luc-hap-dan-va-bien-phu-thuoc-gioi-han/nhom-4-2-zero-inflated) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="How-To Guide for Group 4.2: Zero-Inflated and Hurdle Count Models in Stata 18, R 4.x, and Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Methodological Overview and Structural Equations
+
+- **Methodological Focus**: Provides consistent estimation and robust inference for **Zero-Inflated and Hurdle Count Models** specifications within **Count Data, Trade Gravity and Limited Dependent Variable Models**.
+- **Mandatory Post-Estimation Diagnostics**: So sánh tiêu chuẩn (AIC) và (BIC) và kiểm định Vuong hiệu chỉnh Wilson (2015) giữa (ZIP) với Poisson chuẩn, kiểm định quá phân tán so với (ZINB).
+
+Core structural specification for Group 4.2:
+
+$$
+P(Y_i = 0) = \pi_i + (1 - \pi_i)e^{-\mu_i}, \quad P(Y_i = y) = (1 - \pi_i)\frac{e^{-\mu_i}\mu_i^y}{y!}
+$$
+
+Estimator objective and moment conditions:
+
+$$
+\hat{\theta}_{\text{QMLE}} = \arg\max_{\theta \in \Theta} \sum_{i=1}^N \ln f\left(Y_i \mid X_i, Z_i; \theta\right), \quad \text{E}[Y_i \mid X_i] = g^{-1}(X_i^\top \beta)
+$$
+
+<FeatureNotAvailable
+  note="When empirical data violate the identification conditions of Group 4.2, researchers should transition to the extended methodological groups in Chapter 04 or apply appropriate instrumental-variable and cluster-robust corrections."
+/>
+
+## 2. Econometric Models in Group 4.2
+
+<FeatureCards
+  features={[
+    {
+      title: '4.2.1. Zero-Inflated Poisson — ZIP',
+      description: 'Estimates the Zero-Inflated Poisson — ZIP specification within the Zero-Inflated and Hurdle Count Models framework by optimizing the structu...',
+      link: '/en/vietlod/chapter-04/group-4-2/b045-zero-inflated-poisson',
+      badge: 'B045 · zero_inflated_poisson'
+    },
+    {
+      title: '4.2.2. Zero-Inflated Negative Binomial — ZINB',
+      description: 'Estimates the Zero-Inflated Negative Binomial — ZINB specification within the Zero-Inflated and Hurdle Count Models framework by optimizing ...',
+      link: '/en/vietlod/chapter-04/group-4-2/b046-zero-inflated-negbin',
+      badge: 'B046 · zero_inflated_negbin'
+    },
+    {
+      title: '4.2.3. Cragg and Mullahy Hurdle Count Model',
+      description: 'Decouples the binary decision to cross zero from the zero-truncated count distribution governing positive outcomes. Across empirical econome...',
+      link: '/en/vietlod/chapter-04/group-4-2/b047-hurdle-count',
+      badge: 'B047 · hurdle_count'
+    }
+  ]}
+/>
+
+## 3. Comparative Execution Syntax Across Stata 18, R 4.x, and Python 3.11+
+
+| Section & Model Title | Estimator Key | Stata 18 MP Syntax | R 4.x Syntax | Python 3.11+ Syntax | Support |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `4.2.1` · [Zero-Inflated Poisson — ZIP](/en/vietlod/chapter-04/group-4-2/b045-zero-inflated-poisson) | `zero_inflated_poisson` | `zip y_count x1 x2, inflate(z1) vce(robust)` | `pscl::zeroinfl(y_count ~ x1 + x2 \| z1, dist = 'poisson', data = df)` | `ZeroInflatedPoisson(endog, exog, exog_infl=exog_infl).fit()` | <Available /> |
+| `4.2.2` · [Zero-Inflated Negative Binomial — ZINB](/en/vietlod/chapter-04/group-4-2/b046-zero-inflated-negbin) | `zero_inflated_negbin` | `zinb y_count x1 x2, inflate(z1) vce(robust)` | `pscl::zeroinfl(y_count ~ x1 + x2 \| z1, dist = 'negbin', data = df)` | `ZeroInflatedNegativeBinomialP(endog, exog, exog_infl=exog_infl).fit()` | <Available /> |
+| `4.2.3` · [Cragg and Mullahy Hurdle Count Model](/en/vietlod/chapter-04/group-4-2/b047-hurdle-count) | `hurdle_count` | `churdle exponential y_count x1 x2, select(z1) vce(robust)` | `pscl::hurdle(y_count ~ x1 + x2 \| z1, dist = 'negbin', data = df)` | `HurdleCountModel(df['y_count'], df[['x1', 'x2']]).fit()` | <Available /> |
+
+## 4. Standard Implementation Workflow for Group 4.2
+
+<Steps>
+
+### Step 1. Load Standardized Practice Datasets From VietLOD, EcoData, or Finco
+
+Download the model-specific `.csv` practice dataset in Group `4.2` or extract custom empirical panels from [EcoData](https://ecodata.io.vn) and [Finco](https://www.finco.vn).
+
+### Step 2. Select the Optimal Estimator for Your Error and Sample Structure
+
+Compare the estimators from `4.2.1` to `4.2.3` in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.
+
+### Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab
+
+Verify all required diagnostics including **So sánh tiêu chuẩn (AIC) và (BIC) và kiểm định Vuong hiệu chỉnh Wilson (2015) giữa (ZIP) với Poisson chuẩn, kiểm định quá phân tán so với (ZINB)** and dispatch the specification to [EcoLab](https://ecolab.io.vn) for automated journal-grade reporting.
+
+</Steps>

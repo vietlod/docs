@@ -1,0 +1,104 @@
+---
+id: index
+title: "Nhóm 2.3: Giảm chiều và nhân tố ẩn"
+sidebar_label: "Nhóm 2.3. Giảm chiều và nhân tố ẩn"
+sidebar_position: 3
+slug: /vietlod/chapter-02/group-2-3
+description: "Hướng dẫn thực hành Nhóm 2.3 — Giảm chiều và nhân tố ẩn thuộc Chương 02: so sánh và thực thi 4 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+keywords:
+  - Nhóm 2.3 VietLOD
+  - Giảm chiều và nhân tố ẩn
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Nhóm 2.3: Giảm chiều và nhân tố ẩn
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Nhóm phương pháp 2.3 — Giảm chiều và nhân tố ẩn** thuộc [Chương 02: Mô hình chính quy hóa, suy luận chiều cao và giảm chiều](/vietlod/chapter-02) cung cấp quy trình thực hành từng bước cho **4 mô hình kinh tế lượng** từ bài `2.3.1` đến `2.3.4`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Nhóm 2.3](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-02-mo-hinh-chinh-quy-hoa-suy-luan-chieu-cao-va-giam-chieu/nhom-2-3-dimension-reduction) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Nhóm 2.3: Giảm chiều và nhân tố ẩn trên Stata 18, R 4.x và Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Bản chất phương pháp và hệ phương trình định danh
+
+- **Câu hỏi nghiên cứu trọng tâm của nhóm**: Khi số lượng biến giải thích rất lớn hoặc đa cộng tuyến cực đại, làm sao để chọn biến chính xác, trích xuất nhân tố ẩn và suy luận nhân quả không chệch?
+- **Kiểm định chẩn đoán bắt buộc**: Tỷ lệ phương sai giải thích tích lũy đạt từ $80\%$ trở lên, biểu đồ Scree plot trị riêng và K-Fold (CV) (MSE) để chọn số thành phần $M$.
+
+Phương trình đặc tả cấu trúc của nhóm phương pháp 2.3:
+
+$$
+Z_m = X V_m, \quad \hat{\beta}_{\text{PCR}} = V_m (Z_m^\top Z_m)^{-1} Z_m^\top Y
+$$
+
+Điều kiện mô-men và hàm mục tiêu ước lượng:
+
+$$
+\hat{\beta}(\lambda, \alpha) = \arg\min_{\beta \in \mathbb{R}^p} \left\{\frac{1}{2N}\sum_{i=1}^N \left(Y_i - X_i^\top \beta\right)^2 + \lambda\left(\alpha \|\beta\|_1 + \frac{1-\alpha}{2}\|\beta\|_2^2\right)\right\}
+$$
+
+<FeatureNotAvailable
+  note="Khi dữ liệu vi phạm giả định định danh của Nhóm 2.3, nhà nghiên cứu cần chuyển sang các nhóm phương pháp mở rộng trong Chương 02 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
+/>
+
+## 2. Danh mục các mô hình trong Nhóm 2.3
+
+<FeatureCards
+  features={[
+    {
+      title: '2.3.1. Hồi quy thành phần chính (PCR)',
+      description: 'Trích xuất các thành phần chính trực giao giữ lại phần lớn phương sai của ma trận $X$ rồi hồi quy $Y$ lên $M$ thành phần chính đầu tiên để t...',
+      link: '/vietlod/chapter-02/group-2-3/b022-pcr',
+      badge: 'B022 · pcr'
+    },
+    {
+      title: '2.3.2. Hồi quy bình phương tối thiểu riêng phần (PLSR)',
+      description: 'Trích xuất các nhân tố ẩn tối đa hóa hiệp phương sai giữa ma trận dự báo $X$ và kết quả $Y$, hiệu quả cao trong dự báo vĩ mô đa cộng tuyến c...',
+      link: '/vietlod/chapter-02/group-2-3/b023-pls-regression',
+      badge: 'B023 · pls_regression'
+    },
+    {
+      title: '2.3.3. Phân tích thành phần chính và chỉ số tổng hợp (PCA)',
+      description: 'Trích xuất thành phần chính trực giao xây dựng chỉ số tổng hợp — chỉ số thể chế, tài chính toàn diện, điều kiện tài chính FCI — và kiểm định...',
+      link: '/vietlod/chapter-02/group-2-3/b024-pca-factors',
+      badge: 'B024 · pca_factors'
+    },
+    {
+      title: '2.3.4. Phân tích nhân tố khám phá và phép xoay trực giao (EFA)',
+      description: 'Tách phương sai chung của các chỉ báo quan sát được thành nhân tố cấu trúc tiềm ẩn và nhiễu đặc thù — $\Sigma = \Lambda\Lambda\' + \Psi$ — kè...',
+      link: '/vietlod/chapter-02/group-2-3/b025-factor-analysis',
+      badge: 'B025 · factor_analysis'
+    }
+  ]}
+/>
+
+## 3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
+
+| Bài học & Mô hình | Mã định danh | Cú pháp Stata 18 MP | Cú pháp R 4.x | Cú pháp Python 3.11+ | Hỗ trợ |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `2.3.1` · [Hồi quy thành phần chính (PCR)](/vietlod/chapter-02/group-2-3/b022-pcr) | `pcr` | `pca x1 x2 x3 -> predict pc1 pc2, score -> regress y pc1 pc2` | `pls::pcr(y ~ x1 + x2, validation = 'CV', data = df)` | `Pipeline([('scaler', StandardScaler()), ('pca', PCA(n_components=2)), ('ols', LinearRegression())]).fit(X, y)` | <Available /> |
+| `2.3.2` · [Hồi quy bình phương tối thiểu riêng phần (PLSR)](/vietlod/chapter-02/group-2-3/b023-pls-regression) | `pls_regression` | `plssem (Y > y) (X > x1 x2), structural(Y X)` | `pls::plsr(y ~ x1 + x2, ncomp = 2, validation = 'CV', data = df)` | `PLSRegression(n_components=2).fit(X, y)` | <Available /> |
+| `2.3.3` · [Phân tích thành phần chính và chỉ số tổng hợp (PCA)](/vietlod/chapter-02/group-2-3/b024-pca-factors) | `pca_factors` | `pca x1 x2 x3, components(2)` | `stats::prcomp(df[, c('x1', 'x2')], scale. = TRUE)` | `PCA(n_components=2).fit_transform(X_std)` | <Available /> |
+| `2.3.4` · [Phân tích nhân tố khám phá và phép xoay trực giao (EFA)](/vietlod/chapter-02/group-2-3/b025-factor-analysis) | `factor_analysis` | `factor x1 x2 x3, ml factors(2)` | `stats::factanal(df[, c('x1', 'x2', 'x3')], factors = 1, rotation = 'varimax')` | `FactorAnalysis(n_components=2, rotation='varimax').fit(X_std)` | <Available /> |
+
+## 4. Quy trình thực hành chuẩn cho Nhóm 2.3
+
+<Steps>
+
+### Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco
+
+Tải tệp CSV thực hành của từng mô hình trong Nhóm `2.3` hoặc kết nối dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
+
+### Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu
+
+So sánh các mô hình từ `2.3.1` đến `2.3.4` trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.
+
+### Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab
+
+Thực hiện đầy đủ bộ kiểm định **Tỷ lệ phương sai giải thích tích lũy đạt từ $80\%$ trở lên, biểu đồ Scree plot trị riêng và K-Fold (CV) (MSE) để chọn số thành phần $M$** và đẩy mã mô hình sang [EcoLab](https://ecolab.io.vn) để xuất bảng kết quả chuẩn công bố quốc tế.
+
+</Steps>

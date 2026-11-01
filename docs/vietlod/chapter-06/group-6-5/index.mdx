@@ -1,0 +1,111 @@
+---
+id: index
+title: "Nhóm 6.5: Chuỗi thời gian phi tuyến, điểm gãy và bong bóng"
+sidebar_label: "Nhóm 6.5. Chuỗi thời gian phi tuyến, điểm gãy và bong bóng"
+sidebar_position: 5
+slug: /vietlod/chapter-06/group-6-5
+description: "Hướng dẫn thực hành Nhóm 6.5 — Chuỗi thời gian phi tuyến, điểm gãy và bong bóng thuộc Chương 06: so sánh và thực thi 5 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+keywords:
+  - Nhóm 6.5 VietLOD
+  - Chuỗi thời gian phi tuyến, điểm gãy và bong bóng
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Nhóm 6.5: Chuỗi thời gian phi tuyến, điểm gãy và bong bóng
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Nhóm phương pháp 6.5 — Chuỗi thời gian phi tuyến, điểm gãy và bong bóng** thuộc [Chương 06: Chuỗi thời gian đơn biến, phi tuyến, điểm gãy và bong bóng](/vietlod/chapter-06) cung cấp quy trình thực hành từng bước cho **5 mô hình kinh tế lượng** từ bài `6.5.1` đến `6.5.5`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Nhóm 6.5](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-06-chuoi-thoi-gian-don-bien-phi-tuyen-diem-gay-va-bong-bong/nhom-6-5-nonlinear-breaks-bubbles) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Nhóm 6.5: Chuỗi thời gian phi tuyến, điểm gãy và bong bóng trên Stata 18, R 4.x và Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Bản chất phương pháp và hệ phương trình định danh
+
+- **Câu hỏi nghiên cứu trọng tâm của nhóm**: Làm thế nào để kiểm định tính dừng, dự báo chuỗi thời gian, ước lượng đồng tích hợp bất đối xứng (ARDL) và (NARDL), lấy mẫu tần suất hỗn hợp (MIDAS) và phát hiện điểm gãy/bong bóng?
+- **Kiểm định chẩn đoán bắt buộc**: Thống kê Sup-Wald / Sup-LM bootstrap $p$-value kiểm định tồn tại ngưỡng, khoảng tin cậy $95\%$ cho điểm ngưỡng $\hat{\gamma}$, kiểm định phương sai thay đổi từng chế độ..
+
+Phương trình đặc tả cấu trúc của nhóm phương pháp 6.5:
+
+$$
+Y_t = X_t^\top \beta_1 \mathbb{I}(q_t \le \gamma) + X_t^\top \beta_2 \mathbb{I}(q_t \gt \gamma) + \varepsilon_t, \quad \text{LR}_T(\gamma) = T\frac{\text{SSR}(\gamma) - \text{SSR}(\hat{\gamma})}{\text{SSR}(\hat{\gamma})}
+$$
+
+Điều kiện mô-men và hàm mục tiêu ước lượng:
+
+$$
+\hat{\theta}_T = \arg\max_{\theta \in \Theta} \ell_T\left(Y_1, \dots, Y_T; \theta\right), \quad \Phi(L)(1-L)^d Y_t = \mu + \Theta(L)\varepsilon_t
+$$
+
+<FeatureNotAvailable
+  note="Khi dữ liệu vi phạm giả định định danh của Nhóm 6.5, nhà nghiên cứu cần chuyển sang các nhóm phương pháp mở rộng trong Chương 06 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
+/>
+
+## 2. Danh mục các mô hình trong Nhóm 6.5
+
+<FeatureCards
+  features={[
+    {
+      title: '6.5.1. Mô hình hồi quy chia mẫu theo ngưỡng Hansen',
+      description: 'Ước lượng hồi quy chuyển chế độ theo biến ngưỡng quan sát được $q_t \le \gamma$ vs $q_t \gt  \gamma$ trên dữ liệu chéo hoặc chuỗi thời gian ...',
+      link: '/vietlod/chapter-06/group-6-5/b102-threshold-regression',
+      badge: 'B102 · threshold_regression'
+    },
+    {
+      title: '6.5.2. Mô hình tự hồi quy chuyển tiếp trơn (LSTAR, ESTAR)',
+      description: 'Mô hình chuyển tiếp trơn giữa hai chế độ cực trị thông qua hàm chuyển tiếp liên tục $G(s_t; \gamma, c) \in [0, 1]$ dạng Logistic (LSTAR) hoặ...',
+      link: '/vietlod/chapter-06/group-6-5/b103-star-smooth-transition',
+      badge: 'B103 · star_smooth_transition'
+    },
+    {
+      title: '6.5.3. Hồi quy lấy mẫu tần suất hỗn hợp Ghysels (MIDAS)',
+      description: 'Dự báo và nowcasting biến vĩ mô tần suất thấp — GDP quý — trực tiếp từ chuỗi chỉ báo tần suất cao — chỉ số sản xuất công nghiệp tháng, tín d...',
+      link: '/vietlod/chapter-06/group-6-5/b104-midas-regression',
+      badge: 'B104 · midas_regression'
+    },
+    {
+      title: '6.5.4. Kiểm định và ước lượng đa điểm gãy cấu trúc Bai–Perron',
+      description: 'Phát hiện đồng thời $m$ điểm gãy cấu trúc chưa biết trước ngày xảy ra trên phương trình hồi quy chuỗi thời gian bằng quy hoạch động tối thiể...',
+      link: '/vietlod/chapter-06/group-6-5/b105-bai-perron-break',
+      badge: 'B105 · bai_perron_break'
+    },
+    {
+      title: '6.5.5. Kiểm định đệ quy đuôi phải phát hiện bong bóng (GSADF)',
+      description: 'Phát hiện và xác định chính xác ngày khởi phát – ngày vỡ của các giai đoạn tăng trưởng bùng nổ / bong bóng đầu cơ — $H_1: \rho \gt  1$ đuôi ...',
+      link: '/vietlod/chapter-06/group-6-5/b106-psy-bubble-gsadf',
+      badge: 'B106 · psy_bubble_gsadf'
+    }
+  ]}
+/>
+
+## 3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
+
+| Bài học & Mô hình | Mã định danh | Cú pháp Stata 18 MP | Cú pháp R 4.x | Cú pháp Python 3.11+ | Hỗ trợ |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `6.5.1` · [Mô hình hồi quy chia mẫu theo ngưỡng Hansen](/vietlod/chapter-06/group-6-5/b102-threshold-regression) | `threshold_regression` | `threshold y, regionvars(x1 x2) threshvar(q_thresh) nthresholds(1)` | `strucchange::Fstats(y ~ x1 + x2, data = df)` | `smf.ols('y ~ x1 * I(q_thresh > gamma) + x2', data=df).fit(cov_type='HC1')` | <Available /> |
+| `6.5.2` · [Mô hình tự hồi quy chuyển tiếp trơn (LSTAR, ESTAR)](/vietlod/chapter-06/group-6-5/b103-star-smooth-transition) | `star_smooth_transition` | `nl (y = ({b0} + {b1}*l1_y) + ({d0} + {d1}*l1_y)/(1 + exp(-{gamma}*(l1_y - {c}))))` | `minpack.lm::nlsLM(y ~ b0 + b1*l1_y + (d0 + d1*l1_y)/(1 + exp(-g*(l1_y - c))), data = df)` | `scipy.optimize.least_squares(lstar_residuals, theta0)` | <Available /> |
+| `6.5.3` · [Hồi quy lấy mẫu tần suất hỗn hợp Ghysels (MIDAS)](/vietlod/chapter-06/group-6-5/b104-midas-regression) | `midas_regression` | `regress y_q x_m_lag0 x_m_lag1 x_m_lag2, vce(hac nwest 4)` | `midasr::midas_r(y_q ~ mls(x_m, 0:11, 3, nealmon), start = list(x_m = c(1, -0.5)))` | `smf.ols('y ~ x1 + x2', data=df).fit(cov_type='HAC', cov_kwds={'maxlags': 4})` | <Available /> |
+| `6.5.4` · [Kiểm định và ước lượng đa điểm gãy cấu trúc Bai–Perron](/vietlod/chapter-06/group-6-5/b105-bai-perron-break) | `bai_perron_break` | `regress y x1 x2 -> estat sbsingle` | `strucchange::breakpoints(y ~ x1 + x2, data = df, h = 0.15)` | `smf.ols('y ~ x1 * I(t >= t_break) + x2', data=df).fit(cov_type='HAC', cov_kwds={'maxlags': 4})` | <Available /> |
+| `6.5.5` · [Kiểm định đệ quy đuôi phải phát hiện bong bóng (GSADF)](/vietlod/chapter-06/group-6-5/b106-psy-bubble-gsadf) | `psy_bubble_gsadf` | `radf y, prefix(bsadf) boot(500)` | `exuber::radf(df$y, lag = 1)` | `adfuller(df['y'], maxlag=2, regression='c', autolag='AIC')` | <Available /> |
+
+## 4. Quy trình thực hành chuẩn cho Nhóm 6.5
+
+<Steps>
+
+### Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco
+
+Tải tệp CSV thực hành của từng mô hình trong Nhóm `6.5` hoặc kết nối dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
+
+### Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu
+
+So sánh các mô hình từ `6.5.1` đến `6.5.5` trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.
+
+### Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab
+
+Thực hiện đầy đủ bộ kiểm định **Thống kê Sup-Wald / Sup-LM bootstrap $p$-value kiểm định tồn tại ngưỡng, khoảng tin cậy $95\%$ cho điểm ngưỡng $\hat{\gamma}$, kiểm định phương sai thay đổi từng chế độ.** và đẩy mã mô hình sang [EcoLab](https://ecolab.io.vn) để xuất bảng kết quả chuẩn công bố quốc tế.
+
+</Steps>

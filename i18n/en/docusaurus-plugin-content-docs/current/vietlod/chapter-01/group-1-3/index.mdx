@@ -1,0 +1,90 @@
+---
+id: index
+title: "Group 1.3: Classical Instrumental Variables"
+sidebar_label: "Group 1.3. Classical Instrumental Variables"
+sidebar_position: 3
+slug: /vietlod/chapter-01/group-1-3
+description: "How-To User Guide for Methodological Group 1.3 — Classical Instrumental Variables in Chapter 01: comparing and executing 2 econometric models across Stata 18 MP, R 4.x, and Python 3.11+."
+keywords:
+  - VietLOD Group 1.3
+  - Classical Instrumental Variables
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Group 1.3: Classical Instrumental Variables
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Methodological Group 1.3 — Classical Instrumental Variables** in [Chapter 01: Classical Linear and Instrumental Variables Regression](/en/vietlod/chapter-01) provides step-by-step How-To implementation guides for **2 econometric models** spanning from Section `1.3.1` to `1.3.2`. Full theoretical derivations are available at [VietLOD Group 1.3](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-01-hoi-quy-tuyen-tinh-co-dien-va-bien-cong-cu/nhom-1-3-instrumental-system) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="How-To Guide for Group 1.3: Classical Instrumental Variables in Stata 18, R 4.x, and Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Methodological Overview and Structural Equations
+
+- **Methodological Focus**: Provides consistent estimation and robust inference for **Classical Instrumental Variables** specifications within **Classical Linear and Instrumental Variables Regression**.
+- **Mandatory Post-Estimation Diagnostics**: Kiểm định nội sinh Durbin–Wu–Hausman, thống kê $F$ giai đoạn 1 Kleibergen–Paap rk Wald $F$ vượt ngưỡng $10$ và kiểm định nhận dạng quá mức Sargan / Hansen $J$.
+
+Core structural specification for Group 1.3:
+
+$$
+\hat{\beta}_{\text{2SLS}} = (X^\top P_Z X)^{-1} X^\top P_Z Y, \quad P_Z = Z(Z^\top Z)^{-1}Z^\top
+$$
+
+Estimator objective and moment conditions:
+
+$$
+\hat{\beta}_{\text{IV}} = \left(X^\top P_Z X\right)^{-1} X^\top P_Z Y, \quad P_Z = Z\left(Z^\top Z\right)^{-1}Z^\top, \quad \text{E}\left[Z_i \varepsilon_i\right] = 0
+$$
+
+<FeatureNotAvailable
+  note="When empirical data violate the identification conditions of Group 1.3, researchers should transition to the extended methodological groups in Chapter 01 or apply appropriate instrumental-variable and cluster-robust corrections."
+/>
+
+## 2. Econometric Models in Group 1.3
+
+<FeatureCards
+  features={[
+    {
+      title: '1.3.1. Two-Stage Least Squares — IV-2SLS',
+      description: 'Estimates the Two-Stage Least Squares — IV-2SLS specification within the Classical Instrumental Variables framework by optimizing the struct...',
+      link: '/en/vietlod/chapter-01/group-1-3/b007-iv-2sls',
+      badge: 'B007 · iv_2sls'
+    },
+    {
+      title: '1.3.2. Limited-Information Maximum Likelihood — LIML',
+      description: 'Estimates the Limited-Information Maximum Likelihood — LIML specification within the Classical Instrumental Variables framework by optimizin...',
+      link: '/en/vietlod/chapter-01/group-1-3/b008-iv-liml',
+      badge: 'B008 · iv_liml'
+    }
+  ]}
+/>
+
+## 3. Comparative Execution Syntax Across Stata 18, R 4.x, and Python 3.11+
+
+| Section & Model Title | Estimator Key | Stata 18 MP Syntax | R 4.x Syntax | Python 3.11+ Syntax | Support |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `1.3.1` · [Two-Stage Least Squares — IV-2SLS](/en/vietlod/chapter-01/group-1-3/b007-iv-2sls) | `iv_2sls` | `ivregress 2sls y x1 (d_endog = z1 z2), vce(robust)` | `AER::ivreg(y ~ x1 + d_endog \| x1 + z1 + z2, data = df)` | `IV2SLS.from_formula('y ~ 1 + x1 + [d_endog ~ z1 + z2]', data=df).fit(cov_type='robust')` | <Available /> |
+| `1.3.2` · [Limited-Information Maximum Likelihood — LIML](/en/vietlod/chapter-01/group-1-3/b008-iv-liml) | `iv_liml` | `ivregress liml y x1 (d_endog = z1 z2), vce(robust)` | `ivmodel::LIML / AER::ivreg` | `IVLIML.from_formula('y ~ 1 + x1 + [d_endog ~ z1 + z2]', data=df).fit(cov_type='robust')` | <Available /> |
+
+## 4. Standard Implementation Workflow for Group 1.3
+
+<Steps>
+
+### Step 1. Load Standardized Practice Datasets From VietLOD, EcoData, or Finco
+
+Download the model-specific `.csv` practice dataset in Group `1.3` or extract custom empirical panels from [EcoData](https://ecodata.io.vn) and [Finco](https://www.finco.vn).
+
+### Step 2. Select the Optimal Estimator for Your Error and Sample Structure
+
+Compare the estimators from `1.3.1` to `1.3.2` in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.
+
+### Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab
+
+Verify all required diagnostics including **Kiểm định nội sinh Durbin–Wu–Hausman, thống kê $F$ giai đoạn 1 Kleibergen–Paap rk Wald $F$ vượt ngưỡng $10$ và kiểm định nhận dạng quá mức Sargan / Hansen $J$** and dispatch the specification to [EcoLab](https://ecolab.io.vn) for automated journal-grade reporting.
+
+</Steps>

@@ -65,12 +65,13 @@ def check_file(filepath: pathlib.Path) -> list[str]:
             continue
 
         # Remove inline math $...$ and inline code `...` before checking for raw LaTeX
-        cleaned = re.sub(r"`[^`]*`", "", line)
-        cleaned = re.sub(r"\$[^$]+\$", "", cleaned)
-        if RAW_LATEX_OUTSIDE_MATH_REGEX.search(cleaned):
-            issues.append(
-                f"{filepath.relative_to(REPO_ROOT)}:{line_no}: Raw LaTeX macro with braces outside math/code block"
-            )
+        if "\\" in line:
+            cleaned = re.sub(r"`[^`]*`", "", line)
+            cleaned = re.sub(r"\$[^$]+\$", "", cleaned)
+            if RAW_LATEX_OUTSIDE_MATH_REGEX.search(cleaned):
+                issues.append(
+                    f"{filepath.relative_to(REPO_ROOT)}:{line_no}: Raw LaTeX macro with braces outside math/code block"
+                )
 
     if in_code_fence:
         issues.append(f"{filepath.relative_to(REPO_ROOT)}: Unclosed code fence block ({fence_marker})")

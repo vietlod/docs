@@ -1,0 +1,104 @@
+---
+id: index
+title: "Nhóm 2.2: Chọn mô hình và suy luận chiều cao"
+sidebar_label: "Nhóm 2.2. Chọn mô hình và suy luận chiều cao"
+sidebar_position: 2
+slug: /vietlod/chapter-02/group-2-2
+description: "Hướng dẫn thực hành Nhóm 2.2 — Chọn mô hình và suy luận chiều cao thuộc Chương 02: so sánh và thực thi 4 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+keywords:
+  - Nhóm 2.2 VietLOD
+  - Chọn mô hình và suy luận chiều cao
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Nhóm 2.2: Chọn mô hình và suy luận chiều cao
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Nhóm phương pháp 2.2 — Chọn mô hình và suy luận chiều cao** thuộc [Chương 02: Mô hình chính quy hóa, suy luận chiều cao và giảm chiều](/vietlod/chapter-02) cung cấp quy trình thực hành từng bước cho **4 mô hình kinh tế lượng** từ bài `2.2.1` đến `2.2.4`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Nhóm 2.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-02-mo-hinh-chinh-quy-hoa-suy-luan-chieu-cao-va-giam-chieu/nhom-2-2-model-selection) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Nhóm 2.2: Chọn mô hình và suy luận chiều cao trên Stata 18, R 4.x và Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Bản chất phương pháp và hệ phương trình định danh
+
+- **Câu hỏi nghiên cứu trọng tâm của nhóm**: Khi số lượng biến giải thích rất lớn hoặc đa cộng tuyến cực đại, làm sao để chọn biến chính xác, trích xuất nhân tố ẩn và suy luận nhân quả không chệch?
+- **Kiểm định chẩn đoán bắt buộc**: Tiêu chuẩn thông tin Mallows $C_p$ dọc theo đường dẫn (LARS), K-Fold Cross-Validation (MSE) và đồ thị tiến hóa hệ số chuẩn hóa.
+
+Phương trình đặc tả cấu trúc của nhóm phương pháp 2.2:
+
+$$
+\hat{\beta}(\lambda) \text{ tiến hóa dọc theo đường đẳng góc } |x_j^\top r(\lambda)| = \lambda
+$$
+
+Điều kiện mô-men và hàm mục tiêu ước lượng:
+
+$$
+\hat{\beta}(\lambda, \alpha) = \arg\min_{\beta \in \mathbb{R}^p} \left\{\frac{1}{2N}\sum_{i=1}^N \left(Y_i - X_i^\top \beta\right)^2 + \lambda\left(\alpha \|\beta\|_1 + \frac{1-\alpha}{2}\|\beta\|_2^2\right)\right\}
+$$
+
+<FeatureNotAvailable
+  note="Khi dữ liệu vi phạm giả định định danh của Nhóm 2.2, nhà nghiên cứu cần chuyển sang các nhóm phương pháp mở rộng trong Chương 02 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
+/>
+
+## 2. Danh mục các mô hình trong Nhóm 2.2
+
+<FeatureCards
+  features={[
+    {
+      title: '2.2.1. Hồi quy góc nhỏ nhất (LARS)',
+      description: 'Thuật toán góc nhỏ nhất xây dựng toàn bộ đường dẫn nghiệm chính xác từng đoạn tuyến tính của (LASSO) với chi phí tính toán chỉ tương đương m...',
+      link: '/vietlod/chapter-02/group-2-2/b018-lasso-lars',
+      badge: 'B018 · lasso_lars'
+    },
+    {
+      title: '2.2.2. Hồi quy Elastic Net tối ưu hóa kiểm định chéo',
+      description: 'Quy trình tối ưu hóa siêu tham số tự động trên lưới kết hợp $\alpha, \lambda$ qua K-Fold Cross-Validation nhằm tìm điểm cân bằng tối ưu giữa...',
+      link: '/vietlod/chapter-02/group-2-2/b019-elastic-net-cv',
+      badge: 'B019 · elastic_net_cv'
+    },
+    {
+      title: '2.2.3. Hồi quy Lasso thích nghi có trọng số',
+      description: 'Phạt $L_1$ có trọng số thích nghi $w_j = 1/|\hat{\beta}_j^{\text{init}}|^\gamma$ giúp đạt tính chất Oracle — chọn đúng tập biến thực và tiệm...',
+      link: '/vietlod/chapter-02/group-2-2/b020-adaptive-lasso',
+      badge: 'B020 · adaptive_lasso'
+    },
+    {
+      title: '2.2.4. Suy luận nhân quả chọn biến đôi (PDS-Lasso)',
+      description: 'Chọn biến kiểm soát qua 2 bước Lasso, trên phương trình kết quả $Y$ và phương trình biến chính $D$, sau đó chạy OLS với hợp tập biến được ch...',
+      link: '/vietlod/chapter-02/group-2-2/b021-post-lasso-ols',
+      badge: 'B021 · post_lasso_ols'
+    }
+  ]}
+/>
+
+## 3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
+
+| Bài học & Mô hình | Mã định danh | Cú pháp Stata 18 MP | Cú pháp R 4.x | Cú pháp Python 3.11+ | Hỗ trợ |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `2.2.1` · [Hồi quy góc nhỏ nhất (LARS)](/vietlod/chapter-02/group-2-2/b018-lasso-lars) | `lasso_lars` | `lasso linear y x1 x2, selection(plugin)` | `lars::lars(X, y, type = 'lasso')` | `LassoLarsCV(cv=5).fit(X_std, y)` | <Available /> |
+| `2.2.2` · [Hồi quy Elastic Net tối ưu hóa kiểm định chéo](/vietlod/chapter-02/group-2-2/b019-elastic-net-cv) | `elastic_net_cv` | `elasticnet linear y x1 x2, alpha(0.25 0.5 0.75) selection(cv, folds(10))` | `glmnet::cv.glmnet(X, y, alpha = 0.5, nfolds = 10)` | `ElasticNetCV(l1_ratio=[0.1, 0.5, 0.9], cv=5, random_state=42).fit(X_std, y)` | <Available /> |
+| `2.2.3` · [Hồi quy Lasso thích nghi có trọng số](/vietlod/chapter-02/group-2-2/b020-adaptive-lasso) | `adaptive_lasso` | `lasso linear y x1 x2, selection(adaptive)` | `glmnet::cv.glmnet(X, y, penalty.factor = w_adap)` | `LassoCV(cv=5, random_state=42).fit(X_weighted, y)` | <Available /> |
+| `2.2.4` · [Suy luận nhân quả chọn biến đôi (PDS-Lasso)](/vietlod/chapter-02/group-2-2/b021-post-lasso-ols) | `post_lasso_ols` | `dsregress y d, controls(x1 x2)` | `hdm::rlassoEffect(x = X, y = y, d = d, method = 'double selection')` | `DoubleMLPLR(dml_data, ml_l=LassoCV(), ml_m=LassoCV()).fit()` | <Available /> |
+
+## 4. Quy trình thực hành chuẩn cho Nhóm 2.2
+
+<Steps>
+
+### Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco
+
+Tải tệp CSV thực hành của từng mô hình trong Nhóm `2.2` hoặc kết nối dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
+
+### Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu
+
+So sánh các mô hình từ `2.2.1` đến `2.2.4` trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.
+
+### Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab
+
+Thực hiện đầy đủ bộ kiểm định **Tiêu chuẩn thông tin Mallows $C_p$ dọc theo đường dẫn (LARS), K-Fold Cross-Validation (MSE) và đồ thị tiến hóa hệ số chuẩn hóa** và đẩy mã mô hình sang [EcoLab](https://ecolab.io.vn) để xuất bảng kết quả chuẩn công bố quốc tế.
+
+</Steps>

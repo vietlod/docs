@@ -1,0 +1,97 @@
+---
+id: index
+title: "Nhóm 12.2: Kinh tế lượng Bayes và trung bình hóa mô hình (BMA)"
+sidebar_label: "Nhóm 12.2. Kinh tế lượng Bayes và trung bình hóa mô hình (BMA)"
+sidebar_position: 2
+slug: /vietlod/chapter-12/group-12-2
+description: "Hướng dẫn thực hành Nhóm 12.2 — Kinh tế lượng Bayes và trung bình hóa mô hình (BMA) thuộc Chương 12: so sánh và thực thi 3 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+keywords:
+  - Nhóm 12.2 VietLOD
+  - Kinh tế lượng Bayes và trung bình hóa mô hình (BMA)
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Nhóm 12.2: Kinh tế lượng Bayes và trung bình hóa mô hình (BMA)
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Nhóm phương pháp 12.2 — Kinh tế lượng Bayes và trung bình hóa mô hình (BMA)** thuộc [Chương 12: Hệ phương trình đồng thời, hệ cầu, kinh tế lượng Bayes và học máy](/vietlod/chapter-12) cung cấp quy trình thực hành từng bước cho **3 mô hình kinh tế lượng** từ bài `12.2.1` đến `12.2.3`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Nhóm 12.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-12-he-phuong-trinh-he-cau-kinh-te-luong-bayes-va-hoc-may/nhom-12-2-bayesian) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Nhóm 12.2: Kinh tế lượng Bayes và trung bình hóa mô hình (BMA) trên Stata 18, R 4.x và Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Bản chất phương pháp và hệ phương trình định danh
+
+- **Câu hỏi nghiên cứu trọng tâm của nhóm**: Làm thế nào để ước lượng hệ phương trình đồng thời (SUR) và (3SLS), hệ cầu tiêu dùng thỏa tiên đề Slutsky (QUAIDS), trung bình hóa mô hình Bayes (BMA) và dự báo học máy kinh tế lượng?
+- **Kiểm định chẩn đoán bắt buộc**: Chẩn đoán hội tụ chuỗi (MCMC): tỷ số tiềm năng giảm thang đo Gelman–Rubin $\hat{R} \lt 1.01$, cỡ mẫu hiệu dụng $\text{ESS} \gt 400$, biểu đồ vết, tự tương quan chuỗi lấy mẫu và khoảng tin cậy mật độ hậu nghiệm cao nhất $95\%$ (HPD).
+
+Phương trình đặc tả cấu trúc của nhóm phương pháp 12.2:
+
+$$
+p(\beta, \sigma^2 \mid Y, X) \propto p(Y \mid X, \beta, \sigma^2)\,p(\beta \mid \sigma^2)\,p(\sigma^2)
+$$
+
+Điều kiện mô-men và hàm mục tiêu ước lượng:
+
+$$
+\hat{\theta}_{\text{SYS}} = \arg\min_{\theta \in \Theta} g_N(\theta)^\top \left(\hat{\Sigma}^{-1} \otimes P_Z\right) g_N(\theta), \quad p(\theta \mid Y, X) \propto L(Y \mid X, \theta)\,\pi(\theta)
+$$
+
+<FeatureNotAvailable
+  note="Khi dữ liệu vi phạm giả định định danh của Nhóm 12.2, nhà nghiên cứu cần chuyển sang các nhóm phương pháp mở rộng trong Chương 12 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
+/>
+
+## 2. Danh mục các mô hình trong Nhóm 12.2
+
+<FeatureCards
+  features={[
+    {
+      title: '12.2.1. Hồi quy tuyến tính Bayes với lấy mẫu chuỗi Markov (MCMC)',
+      description: 'Kết hợp thông tin tiên nghiệm $p(\beta, \sigma^2)$ với hàm hợp lý của dữ liệu $p(Y \mid X, \beta, \sigma^2)$ theo định lý Bayes để suy ra to...',
+      link: '/vietlod/chapter-12/group-12-2/b183-bayesian-linear',
+      badge: 'B183 · bayesian_linear'
+    },
+    {
+      title: '12.2.2. Hệ tự hồi quy vectơ Bayes suy luận hậu nghiệm đa biến',
+      description: 'Suy luận hậu nghiệm toàn diện cho ma trận hệ số tự hồi quy đa biến $B$ và ma trận hiệp phương sai nhiễu $\Sigma$ thông qua tiên nghiệm liên ...',
+      link: '/vietlod/chapter-12/group-12-2/b184-bayesian-var',
+      badge: 'B184 · bayesian_var'
+    },
+    {
+      title: '12.2.3. Trung bình hóa mô hình Bayes giải quyết bất định chọn biến (BMA)',
+      description: 'Giải quyết bài toán bất định lựa chọn mô hình trong không gian $2^K$ tổ hợp biến bằng cách tính trọng số xác suất hậu nghiệm $P(M_m \mid D)$...',
+      link: '/vietlod/chapter-12/group-12-2/b185-bma-model-averaging',
+      badge: 'B185 · bma_model_averaging'
+    }
+  ]}
+/>
+
+## 3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
+
+| Bài học & Mô hình | Mã định danh | Cú pháp Stata 18 MP | Cú pháp R 4.x | Cú pháp Python 3.11+ | Hỗ trợ |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `12.2.1` · [Hồi quy tuyến tính Bayes với lấy mẫu chuỗi Markov (MCMC)](/vietlod/chapter-12/group-12-2/b183-bayesian-linear) | `bayesian_linear` | `bayes, rseed(42) mcmcsize(2500): regress y x1 x2` | `MCMCpack::MCMCregress(y ~ x1 + x2, data = df, mcmc = 5000)` | `smf.ols('y ~ x1 + x2', data=df).fit()` | <Available /> |
+| `12.2.2` · [Hệ tự hồi quy vectơ Bayes suy luận hậu nghiệm đa biến](/vietlod/chapter-12/group-12-2/b184-bayesian-var) | `bayesian_var` | `bayes, rseed(42): var y x1 x2, lags(1/2)` | `BVAR::bvar(df[, c('y', 'x1', 'x2')], lags = 2, n_draw = 5000)` | `VAR(df[['y', 'x1', 'x2']]).fit(maxlags=2)` | <Available /> |
+| `12.2.3` · [Trung bình hóa mô hình Bayes giải quyết bất định chọn biến (BMA)](/vietlod/chapter-12/group-12-2/b185-bma-model-averaging) | `bma_model_averaging` | `bmaregress y x1 x2 x3, gprior(uip) mprior(uniform)` | `BMS::bms(df[, c('y', 'x1', 'x2', 'x3')], g = 'UIP', mprior = 'uniform')` | `smf.ols('y ~ x1 + x2', data=df).fit()` | <Available /> |
+
+## 4. Quy trình thực hành chuẩn cho Nhóm 12.2
+
+<Steps>
+
+### Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco
+
+Tải tệp CSV thực hành của từng mô hình trong Nhóm `12.2` hoặc kết nối dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
+
+### Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu
+
+So sánh các mô hình từ `12.2.1` đến `12.2.3` trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.
+
+### Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab
+
+Thực hiện đầy đủ bộ kiểm định **Chẩn đoán hội tụ chuỗi (MCMC): tỷ số tiềm năng giảm thang đo Gelman–Rubin $\hat{R} \lt 1.01$, cỡ mẫu hiệu dụng $\text{ESS} \gt 400$, biểu đồ vết, tự tương quan chuỗi lấy mẫu và khoảng tin cậy mật độ hậu nghiệm cao nhất $95\%$ (HPD)** và đẩy mã mô hình sang [EcoLab](https://ecolab.io.vn) để xuất bảng kết quả chuẩn công bố quốc tế.
+
+</Steps>

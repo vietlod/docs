@@ -1,0 +1,90 @@
+---
+id: index
+title: "Group 1.2: Robust and Quantile Regression"
+sidebar_label: "Group 1.2. Robust and Quantile Regression"
+sidebar_position: 2
+slug: /vietlod/chapter-01/group-1-2
+description: "How-To User Guide for Methodological Group 1.2 — Robust and Quantile Regression in Chapter 01: comparing and executing 2 econometric models across Stata 18 MP, R 4.x, and Python 3.11+."
+keywords:
+  - VietLOD Group 1.2
+  - Robust and Quantile Regression
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Group 1.2: Robust and Quantile Regression
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Methodological Group 1.2 — Robust and Quantile Regression** in [Chapter 01: Classical Linear and Instrumental Variables Regression](/en/vietlod/chapter-01) provides step-by-step How-To implementation guides for **2 econometric models** spanning from Section `1.2.1` to `1.2.2`. Full theoretical derivations are available at [VietLOD Group 1.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-01-hoi-quy-tuyen-tinh-co-dien-va-bien-cong-cu/nhom-1-2-robust-quantile) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="How-To Guide for Group 1.2: Robust and Quantile Regression in Stata 18, R 4.x, and Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Methodological Overview and Structural Equations
+
+- **Methodological Focus**: Provides consistent estimation and robust inference for **Robust and Quantile Regression** specifications within **Classical Linear and Instrumental Variables Regression**.
+- **Mandatory Post-Estimation Diagnostics**: Phân tích đòn bẩy $h_{ii}$, khoảng cách Cook's $D$, thống kê DFFITS, DFBETAS và kiểm định tính ổn định trọng số hội tụ IRLS.
+
+Core structural specification for Group 1.2:
+
+$$
+\hat{\beta}_{\text{RLM}} = \arg\min_{\beta} \sum_{i=1}^N \rho\left(\frac{Y_i - X_i^\top \beta}{\hat{\sigma}}\right)
+$$
+
+Estimator objective and moment conditions:
+
+$$
+\hat{\beta}(\tau) = \arg\min_{\beta \in \mathbb{R}^K} \sum_{i=1}^N \rho_\tau\left(Y_i - X_i^\top \beta\right), \quad \rho_\tau(u) = u\left(\tau - \mathbb{I}(u \lt 0)\right)
+$$
+
+<FeatureNotAvailable
+  note="When empirical data violate the identification conditions of Group 1.2, researchers should transition to the extended methodological groups in Chapter 01 or apply appropriate instrumental-variable and cluster-robust corrections."
+/>
+
+## 2. Econometric Models in Group 1.2
+
+<FeatureCards
+  features={[
+    {
+      title: '1.2.1. Huber Robust Linear Regression',
+      description: 'Estimates the Huber Robust Linear Regression specification within the Robust and Quantile Regression framework by optimizing the structural ...',
+      link: '/en/vietlod/chapter-01/group-1-2/b005-robust-rlm',
+      badge: 'B005 · robust_rlm'
+    },
+    {
+      title: '1.2.2. Conditional Quantile Regression',
+      description: 'Estimates the Conditional Quantile Regression specification within the Robust and Quantile Regression framework by optimizing the structural...',
+      link: '/en/vietlod/chapter-01/group-1-2/b006-quantile-regression',
+      badge: 'B006 · quantile_regression'
+    }
+  ]}
+/>
+
+## 3. Comparative Execution Syntax Across Stata 18, R 4.x, and Python 3.11+
+
+| Section & Model Title | Estimator Key | Stata 18 MP Syntax | R 4.x Syntax | Python 3.11+ Syntax | Support |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `1.2.1` · [Huber Robust Linear Regression](/en/vietlod/chapter-01/group-1-2/b005-robust-rlm) | `robust_rlm` | `rreg y x1 x2` | `MASS::rlm(y ~ x1 + x2, data = df)` | `smf.rlm('y ~ x1 + x2', data=df, M=sm.robust.norms.HuberT()).fit()` | <Available /> |
+| `1.2.2` · [Conditional Quantile Regression](/en/vietlod/chapter-01/group-1-2/b006-quantile-regression) | `quantile_regression` | `qreg y x1 x2, quantile(0.5) vce(robust)` | `quantreg::rq(y ~ x1 + x2, tau = 0.5, data = df)` | `smf.quantreg('y ~ x1 + x2', data=df).fit(q=0.5)` | <Available /> |
+
+## 4. Standard Implementation Workflow for Group 1.2
+
+<Steps>
+
+### Step 1. Load Standardized Practice Datasets From VietLOD, EcoData, or Finco
+
+Download the model-specific `.csv` practice dataset in Group `1.2` or extract custom empirical panels from [EcoData](https://ecodata.io.vn) and [Finco](https://www.finco.vn).
+
+### Step 2. Select the Optimal Estimator for Your Error and Sample Structure
+
+Compare the estimators from `1.2.1` to `1.2.2` in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.
+
+### Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab
+
+Verify all required diagnostics including **Phân tích đòn bẩy $h_{ii}$, khoảng cách Cook's $D$, thống kê DFFITS, DFBETAS và kiểm định tính ổn định trọng số hội tụ IRLS** and dispatch the specification to [EcoLab](https://ecolab.io.vn) for automated journal-grade reporting.
+
+</Steps>

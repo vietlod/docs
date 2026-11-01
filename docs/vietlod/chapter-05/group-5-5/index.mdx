@@ -1,0 +1,111 @@
+---
+id: index
+title: "Nhóm 5.5: Dữ liệu bảng phụ thuộc chéo thế hệ 2"
+sidebar_label: "Nhóm 5.5. Dữ liệu bảng phụ thuộc chéo thế hệ 2"
+sidebar_position: 5
+slug: /vietlod/chapter-05/group-5-5
+description: "Hướng dẫn thực hành Nhóm 5.5 — Dữ liệu bảng phụ thuộc chéo thế hệ 2 thuộc Chương 05: so sánh và thực thi 5 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+keywords:
+  - Nhóm 5.5 VietLOD
+  - Dữ liệu bảng phụ thuộc chéo thế hệ 2
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Nhóm 5.5: Dữ liệu bảng phụ thuộc chéo thế hệ 2
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Nhóm phương pháp 5.5 — Dữ liệu bảng phụ thuộc chéo thế hệ 2** thuộc [Chương 05: Kinh tế lượng dữ liệu bảng tĩnh, động và phụ thuộc chéo](/vietlod/chapter-05) cung cấp quy trình thực hành từng bước cho **5 mô hình kinh tế lượng** từ bài `5.5.1` đến `5.5.5`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Nhóm 5.5](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-05-kinh-te-luong-du-lieu-bang-tinh-dong-va-phu-thuoc-cheo/nhom-5-5-cross-sectional-dependence) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Nhóm 5.5: Dữ liệu bảng phụ thuộc chéo thế hệ 2 trên Stata 18, R 4.x và Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Bản chất phương pháp và hệ phương trình định danh
+
+- **Câu hỏi nghiên cứu trọng tâm của nhóm**: Làm sao để kiểm soát đại lượng không quan sát được theo cá thể, xử lý nội sinh động (GMM), phụ thuộc chéo thế hệ 2 (ARDL) và hiệu ứng ngưỡng trên dữ liệu bảng?
+- **Kiểm định chẩn đoán bắt buộc**: Thống kê CIPS và CIPS, giá trị tới hạn chính xác theo cặp kích thước mẫu $N$ và $T$ ở mức $1\%, 5\%, 10\%$ — không chặn / có chặn / có xu thế, phân bố $t_i$ CADF..
+
+Phương trình đặc tả cấu trúc của nhóm phương pháp 5.5:
+
+$$
+\Delta Y_{it} = a_i + b_i Y_{i,t-1} + c_i \bar{Y}_{t-1} + \sum_{j=0}^p d_{ij}\Delta \bar{Y}_{t-j} + \sum_{j=1}^p \delta_{ij}\Delta Y_{i,t-j} + e_{it}, \quad \text{CIPS} = \frac{1}{N}\sum_{i=1}^N t_i(N, T)
+$$
+
+Điều kiện mô-men và hàm mục tiêu ước lượng:
+
+$$
+\hat{\beta}_{\text{Panel}} = \left(\sum_{i=1}^N \tilde{X}_i^\top W_i \tilde{X}_i\right)^{-1}\left(\sum_{i=1}^N \tilde{X}_i^\top W_i \tilde{Y}_i\right), \quad \tilde{Y}_{it} = Y_{it} - \theta \bar{Y}_i
+$$
+
+<FeatureNotAvailable
+  note="Khi dữ liệu vi phạm giả định định danh của Nhóm 5.5, nhà nghiên cứu cần chuyển sang các nhóm phương pháp mở rộng trong Chương 05 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
+/>
+
+## 2. Danh mục các mô hình trong Nhóm 5.5
+
+<FeatureCards
+  features={[
+    {
+      title: '5.5.1. Kiểm định nghiệm đơn vị dữ liệu bảng thế hệ 2 Pesaran (CIPS)',
+      description: 'Kiểm định nghiệm đơn vị dữ liệu bảng thế hệ thứ 2 bổ sung trung bình chéo $\bar{Y}_{t-1}$ và $\Delta\bar{Y}_{t-l}$ (CADF) cho từng đơn vị rồ...',
+      link: '/vietlod/chapter-05/group-5-5/b076-pesaran-cips',
+      badge: 'B076 · pesaran_cips'
+    },
+    {
+      title: '5.5.2. Kiểm định đồng tích hợp bảng hiệu chỉnh sai số Westerlund',
+      description: 'Kiểm định đồng tích hợp dữ liệu bảng thế hệ thứ 2 dựa trên ý nghĩa của tốc độ hiệu chỉnh sai số — $\alpha_i \lt  0$ — thay vì áp đặt ràng bu...',
+      link: '/vietlod/chapter-05/group-5-5/b077-westerlund-coint',
+      badge: 'B077 · westerlund_coint'
+    },
+    {
+      title: '5.5.3. Ước lượng trung bình nhóm hiệu ứng tương quan chung (CCEMG)',
+      description: 'Đưa trung bình chéo theo thời gian $\bar{Y}_t, \bar{X}_t$ vào hồi quy riêng của từng đơn vị $i$ để lọc bỏ các nhân tố chung không quan sát đ...',
+      link: '/vietlod/chapter-05/group-5-5/b078-cce-mg',
+      badge: 'B078 · cce_mg'
+    },
+    {
+      title: '5.5.4. Ước lượng gộp hiệu ứng tương quan chung (CCEP)',
+      description: 'Phiên bản gộp hiệu quả cao của Pesaran CCE khi hệ số dốc $\beta$ đồng nhất giữa các đơn vị nhưng tải trọng nhân tố ẩn $\gamma_i$ tác động kh...',
+      link: '/vietlod/chapter-05/group-5-5/b079-ccep',
+      badge: 'B079 · ccep'
+    },
+    {
+      title: '5.5.5. Mô hình ARDL bảng tăng cường trung bình chéo (ARDL)',
+      description: 'Mở rộng CCE sang bảng động có biến trễ $Y_{i,t-p}, X_{i,t-q}$ bằng cách bổ sung $\lfloor T^{1/3} \rfloor$ độ trễ của trung bình chéo $\bar{Y...',
+      link: '/vietlod/chapter-05/group-5-5/b080-cs-ardl',
+      badge: 'B080 · cs_ardl'
+    }
+  ]}
+/>
+
+## 3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
+
+| Bài học & Mô hình | Mã định danh | Cú pháp Stata 18 MP | Cú pháp R 4.x | Cú pháp Python 3.11+ | Hỗ trợ |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `5.5.1` · [Kiểm định nghiệm đơn vị dữ liệu bảng thế hệ 2 Pesaran (CIPS)](/vietlod/chapter-05/group-5-5/b076-pesaran-cips) | `pesaran_cips` | `xtcips y, maxlags(2) bglags(2)` | `plm::cipstest(pdata$y, lags = 2, type = 'drift')` | `smf.ols('dy ~ l1_y + mean_l1_y + mean_dy', data=df).fit()` | <Available /> |
+| `5.5.2` · [Kiểm định đồng tích hợp bảng hiệu chỉnh sai số Westerlund](/vietlod/chapter-05/group-5-5/b077-westerlund-coint) | `westerlund_coint` | `xtwest y x1 x2, lags(1) leads(0) lrwindow(3)` | `plm::plm(dy ~ l1_y + l1_x1 + dx1, data = pdata, model = 'within')` | `PanelOLS.from_formula('dy ~ 1 + l1_y + l1_x1 + dx1 + EntityEffects', data=pdata).fit()` | <Available /> |
+| `5.5.3` · [Ước lượng trung bình nhóm hiệu ứng tương quan chung (CCEMG)](/vietlod/chapter-05/group-5-5/b078-cce-mg) | `cce_mg` | `xtdcce2 y x1 x2, cr(y x1 x2) cr_lags(0)` | `plm::pcce(y ~ x1 + x2, data = pdata, model = 'mg')` | `smf.ols('y ~ x1 + x2 + mean_y + mean_x1 + mean_x2', data=df).fit()` | <Available /> |
+| `5.5.4` · [Ước lượng gộp hiệu ứng tương quan chung (CCEP)](/vietlod/chapter-05/group-5-5/b079-ccep) | `ccep` | `xtdcce2 y x1 x2, cr(y x1 x2) pooled(x1 x2) pooledvce(nw)` | `plm::pcce(y ~ x1 + x2, data = pdata, model = 'p')` | `PanelOLS.from_formula('y ~ 1 + x1 + x2 + mean_y + mean_x1 + EntityEffects', data=pdata).fit()` | <Available /> |
+| `5.5.5` · [Mô hình ARDL bảng tăng cường trung bình chéo (ARDL)](/vietlod/chapter-05/group-5-5/b080-cs-ardl) | `cs_ardl` | `xtdcce2 d.y, lr(l.y x1 x2) lr_options(ardl) cr(y x1 x2) cr_lags(2)` | `plm::pcce(dy ~ l1_y + x1 + x2, data = pdata, model = 'mg')` | `smf.ols('dy ~ l1_y + x1 + x2 + mean_dy + mean_x1', data=df).fit()` | <Available /> |
+
+## 4. Quy trình thực hành chuẩn cho Nhóm 5.5
+
+<Steps>
+
+### Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco
+
+Tải tệp CSV thực hành của từng mô hình trong Nhóm `5.5` hoặc kết nối dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
+
+### Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu
+
+So sánh các mô hình từ `5.5.1` đến `5.5.5` trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.
+
+### Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab
+
+Thực hiện đầy đủ bộ kiểm định **Thống kê CIPS và CIPS, giá trị tới hạn chính xác theo cặp kích thước mẫu $N$ và $T$ ở mức $1\%, 5\%, 10\%$ — không chặn / có chặn / có xu thế, phân bố $t_i$ CADF.** và đẩy mã mô hình sang [EcoLab](https://ecolab.io.vn) để xuất bảng kết quả chuẩn công bố quốc tế.
+
+</Steps>

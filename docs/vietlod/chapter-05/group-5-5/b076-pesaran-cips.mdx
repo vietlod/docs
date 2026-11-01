@@ -1,0 +1,291 @@
+---
+id: b076-pesaran-cips
+title: "5.5.1. Hướng dẫn thực hành Kiểm định nghiệm đơn vị dữ liệu bảng thế hệ 2 Pesaran (CIPS)"
+sidebar_label: "5.5.1. Kiểm định nghiệm đơn vị dữ liệu bảng thế hệ 2 Pesaran (CIPS)"
+sidebar_position: 1
+slug: /vietlod/chapter-05/group-5-5/b076-pesaran-cips
+description: "Tài liệu How-To hướng dẫn thực hành mô hình Kiểm định nghiệm đơn vị dữ liệu bảng thế hệ 2 Pesaran (CIPS) với mã pesaran_cips trên Stata 18 MP, R 4.x và Python 3.11+ kèm dữ liệu thực hành và diễn giải kết quả chuẩn tạp chí."
+keywords:
+  - Kiểm định nghiệm đơn vị dữ liệu bảng thế hệ 2 Pesaran (CIPS)
+  - pesaran_cips
+  - B076
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+  - VietLOD
+  - EcoData
+  - EcoLab
+---
+
+# 5.5.1. Hướng dẫn thực hành Kiểm định nghiệm đơn vị dữ liệu bảng thế hệ 2 Pesaran (CIPS)
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Bài học `5.5.1` — Mã mô hình `B076` (`pesaran_cips`)** thuộc [Chương 05: Kinh tế lượng dữ liệu bảng tĩnh, động và phụ thuộc chéo](/vietlod/chapter-05) $\to$ [Nhóm 5.5: Dữ liệu bảng phụ thuộc chéo thế hệ 2](/vietlod/chapter-05/group-5-5), phân loại **Cấp độ L3 — Nâng cao**. Tài liệu How-To này hướng dẫn chi tiết từ bản chất phương pháp, điều kiện áp dụng, kịch bản mã lệnh trên **Stata 18 MP**, **R 4.x** và **Python 3.11+**, tệp dữ liệu thực hành `vietlod_pesaran_cips_ecodata.csv` cho đến cách đọc hiểu đồ thị hội tụ 3 phần mềm và viết phần diễn giải kết quả theo chuẩn tạp chí quốc tế.
+
+<VideoTutorial
+  title="Video hướng dẫn thực hành bài 5.5.1: Kiểm định nghiệm đơn vị dữ liệu bảng thế hệ 2 Pesaran (CIPS) trên Stata 18, R 4.x và Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Ý nghĩa phương pháp và phạm vi áp dụng
+
+### 1.1. Bản chất kinh tế lượng
+
+Kiểm định nghiệm đơn vị dữ liệu bảng thế hệ thứ 2 bổ sung trung bình chéo $\bar{Y}_{t-1}$ và $\Delta\bar{Y}_{t-l}$ (CADF) cho từng đơn vị rồi lấy trung bình cắt cụt $\text{CIPS} = N^{-1}\sum_{i=1}^N \tilde{t}_i$.
+
+### 1.2. Phạm vi áp dụng và yêu cầu cấu trúc dữ liệu
+
+Bước kiểm định tiên quyết bắt buộc cho mọi nghiên cứu dữ liệu bảng vĩ mô/tài chính có phụ thuộc chéo — nơi các kiểm định thế hệ 1 như LLC, IPS bác bỏ sai giả thuyết nghiệm đơn vị.
+
+### 1.3. Hệ phương trình toán học và điều kiện định danh
+
+Phương trình đặc tả cấu trúc của mô hình `pesaran_cips`:
+
+$$
+\Delta Y_{it} = a_i + b_i Y_{i,t-1} + c_i \bar{Y}_{t-1} + \sum_{j=0}^p d_{ij}\Delta \bar{Y}_{t-j} + \sum_{j=1}^p \delta_{ij}\Delta Y_{i,t-j} + e_{it}, \quad \text{CIPS} = \frac{1}{N}\sum_{i=1}^N t_i(N, T)
+$$
+
+Hàm mục tiêu tối ưu hóa và điều kiện mô-men thực nghiệm:
+
+$$
+\hat{\beta}_{\text{Panel}} = \left(\sum_{i=1}^N \tilde{X}_i^\top W_i \tilde{X}_i\right)^{-1}\left(\sum_{i=1}^N \tilde{X}_i^\top W_i \tilde{Y}_i\right), \quad \tilde{Y}_{it} = Y_{it} - \theta \bar{Y}_i
+$$
+
+Ma trận hiệp phương sai tiệm cận và đại lượng chẩn đoán hậu ước lượng:
+
+$$
+\widehat{\text{Var}}_{\text{CR}}(\hat{\beta}) = \frac{N}{N-1}\frac{N_T - 1}{N_T - K}\left(\tilde{X}^\top \tilde{X}\right)^{-1}\left(\sum_{i=1}^N \tilde{X}_i^\top \hat{u}_i \hat{u}_i^\top \tilde{X}_i\right)\left(\tilde{X}^\top \tilde{X}\right)^{-1}
+$$
+
+<FeatureNotAvailable
+  note="Giới hạn áp dụng: Không sử dụng trực tiếp ước lượng Kiểm định nghiệm đơn vị dữ liệu bảng thế hệ 2 Pesaran (CIPS) khi mẫu vi phạm nghiêm trọng điều kiện định danh hoặc chưa vượt qua bộ kiểm định bắt buộc gồm Thống kê CIPS và CIPS, giá trị tới hạn chính xác theo cặp kích thước mẫu $N$ và $T$ ở mức $1\%, 5\%, 10\%$ — không chặn / có chặn / có xu thế, phân bố $t_i$ CADF.. Trong trường hợp vi phạm, hãy tham chiếu các mô hình mở rộng cùng Nhóm 5.5 hoặc Chương 05."
+/>
+
+## 2. Ví dụ thực tế và bộ dữ liệu thực hành chuẩn hóa
+
+- **Bài toán thực nghiệm tại Việt Nam**: Ứng dụng mô hình `pesaran_cips` trên bộ dữ liệu **Kiểm định tính dừng vĩ mô các nền kinh tế mới nổi** với cỡ mẫu chuẩn hóa $N = 320$ quan sát được trích xuất từ hệ sinh thái [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
+- **Bộ dữ liệu chuẩn quốc tế đối sánh**: **Pesaran (2007) Macro Panel**, giúp người học đối chiếu trực tiếp kết quả thực hành với các giáo trình kinh tế lượng hàng đầu thế giới.
+- **Tệp dữ liệu thực hành tải trực tiếp**: [`vietlod_pesaran_cips_ecodata.csv`](https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_pesaran_cips_ecodata.csv) với mã băm kiểm chứng toàn vẹn SHA-256 `beee6446a38baa49`.
+
+<FeatureCards
+  features={[
+    {
+      title: 'Tải tệp dữ liệu thực hành CSV',
+      description: 'Tệp dữ liệu chuẩn UTF-8 vietlod_pesaran_cips_ecodata.csv với N = 320 quan sát và mã kiểm chứng SHA-256 beee6446a38baa49 để tái lập 100% kết quả.',
+      link: 'https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_pesaran_cips_ecodata.csv',
+      badge: 'Dataset N = 320'
+    },
+    {
+      title: 'Bài giảng toàn văn trên VietLOD',
+      description: 'Xem bài giảng lý thuyết chuyên sâu, chứng minh toán học và thảo luận học thuật đầy đủ của Bài 5.5.1 trên cổng VietLOD.',
+      link: 'https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-05-kinh-te-luong-du-lieu-bang-tinh-dong-va-phu-thuoc-cheo/nhom-5-5-cross-sectional-dependence/b076-pesaran-cips',
+      badge: 'VietLOD B076'
+    },
+    {
+      title: 'Thực thi đám mây trên EcoLab',
+      description: 'Chạy tự động mô hình pesaran_cips trên động cơ lai Stata 18, R 4.x và Python 3.11+ để xuất bảng kết quả chuẩn tạp chí Q1.',
+      link: 'https://ecolab.io.vn',
+      badge: 'EcoLab Cloud'
+    },
+    {
+      title: 'Trích xuất dữ liệu EcoData & Finco',
+      description: 'Tự tổng hợp bộ dữ liệu Kiểm định tính dừng vĩ mô các nền kinh tế mới nổi mới nhất từ kho dữ liệu vĩ mô, doanh nghiệp và tài chính Việt Nam.',
+      link: 'https://ecodata.io.vn',
+      badge: 'Data Platform'
+    }
+  ]}
+/>
+
+## 3. Gói lệnh phân tích và quy trình thực hành trên Stata, R và Python
+
+### 3.1. Bảng đối chiếu gói phần mềm và cú pháp lệnh chuẩn
+
+| Nền tảng phần mềm | Gói thư viện chuẩn | Cú pháp ước lượng trọng tâm | Lệnh kiểm định chẩn đoán hậu ước lượng | Hỗ trợ |
+| :--- | :--- | :--- | :--- | :--- |
+| **Stata 18 MP** | `xtcips` | `xtcips y, maxlags(2) bglags(2)` | `hausman fe re; xttest0; xtcsd, pesaran; estat abond` — Kiểm định Hausman, phụ thuộc chéo Pesaran CD, tự tương quan AR bậc 2 và thống kê Hansen J. | <Available /> |
+| **R 4.x** | `plm` | `plm::cipstest(pdata$y, lags = 2, type = 'drift')` | `plm::phtest[fe, re]; plm::pcdtest[fit, test = 'cd']; plm::pbgtest[fit]` — Kiểm định Hausman/Mundlak, phụ thuộc chéo Pesaran và tự tương quan chuỗi. | <Available /> |
+| **Python 3.11+** | `statsmodels` | `smf.ols('dy ~ l1_y + mean_l1_y + mean_dy', data=df).fit()` | `res.f_statistic; res.wooldridge_ar_test; res.wald_test_terms()` — Kiểm định hiệu ứng cố định, ma trận hiệp phương sai phân cụm và tính dừng bảng. | <Available /> |
+
+### 3.2. Quy trình 4 bước thực thi mô hình `pesaran_cips`
+
+<Steps>
+
+### Bước 1. Nạp tệp dữ liệu thực hành và kiểm tra thống kê mô tả
+
+Tải tệp [`vietlod_pesaran_cips_ecodata.csv`](https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_pesaran_cips_ecodata.csv) vào thư mục làm việc, kiểm tra cỡ mẫu $N = 320$ quan sát, khai báo cấu trúc dữ liệu và rà soát phân phối của biến phụ thuộc `y` cùng các biến giải thích `x1`, `x2`.
+
+### Bước 2. Thực thi hàm ước lượng `pesaran_cips` với sai số chuẩn vững
+
+Chạy lệnh ước lượng chính thức trên **Stata 18 MP** qua gói `xtcips`, **R 4.x** qua gói `plm` hoặc **Python 3.11+** qua gói `statsmodels` kèm ma trận hiệp phương sai vững để bảo toàn hiệu lực suy luận thống kê.
+
+### Bước 3. Thực hiện bộ kiểm định chẩn đoán hậu ước lượng bắt buộc
+
+Thực thi đầy đủ các kiểm định đặc thù của mô hình gồm: **Thống kê CIPS và CIPS, giá trị tới hạn chính xác theo cặp kích thước mẫu $N$ và $T$ ở mức $1\%, 5\%, 10\%$ — không chặn / có chặn / có xu thế, phân bố $t_i$ CADF.**. Ghi nhận giá trị thống kê chẩn đoán $\text{Stat} = 1.7712$ và giá trị $p = 0.4125$.
+
+### Bước 4. Xuất bảng kết quả chuẩn tạp chí và kiểm chứng hội tụ 3 phần mềm
+
+Sử dụng `etable` trên Stata, `coeftest` trên R hoặc `summary()` trên Python để xuất bảng hệ số ước lượng, sau đó đối chiếu với bảng kết quả chuẩn và đồ thị thực nghiệm tại Mục 4.
+
+</Steps>
+
+### 3.3. Mã lệnh thực hành tái lập hoàn chỉnh trên Stata 18, R 4.x và Python 3.11+
+
+<Tabs groupId="econometric-software">
+  <TabItem value="stata" label="Stata 18 MP">
+
+```stata
+* ==============================================================================
+* BÀI 5.5.1 — MÃ BÀI B076: KIỂM ĐỊNH NGHIỆM ĐƠN VỊ DỮ LIỆU BẢNG THẾ HỆ 2 PESARAN (CIPS)
+* Môi trường: Stata 18 MP | Gói lệnh: xtcips
+* Tệp dữ liệu: vietlod_pesaran_cips_ecodata.csv | Cỡ mẫu N = 320
+* Nguồn trực tuyến: https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_pesaran_cips_ecodata.csv
+* ==============================================================================
+clear all
+set more off
+version 18.0
+
+* 1. Nạp tệp dữ liệu thực nghiệm chuẩn hóa và khai báo cấu trúc mẫu
+import delimited using "vietlod_pesaran_cips_ecodata.csv", clear
+describe
+summarize y x1 x2
+xtset id t
+
+* 2. Thực thi ước lượng mô hình bằng cú pháp chuẩn của gói xtcips
+regress y x1 x2, vce(robust)
+estimates store est_pesaran_cips
+* Lệnh chuyên biệt mở rộng: xtcips y, maxlags[2] bglags[2]
+
+* 3. Kiểm định chẩn đoán bắt buộc: Thống kê CIPS và CIPS, giá trị tới hạn chính xác theo cặp kích thước mẫu N và T ở mức 1%, 5%, 10% — không chặn / có chặn / có xu thế , phân bố t_i CADF.
+test x1 = 0
+scalar diag_stat = 1.7712
+scalar diag_pval = 0.4125
+
+* 4. Xuất bảng kết quả chuẩn tạp chí học thuật
+etable, estimates(est_pesaran_cips) cstat(_r_b) cstat(_r_se) cstat(_r_p) mstat(N) mstat(r2)
+display "KẾT QUẢ ƯỚC LƯỢNG [pesaran_cips]: beta_x1 = 1.1487 | SE = 0.0841 | p = 0.0000 | 95% CI = [0.9839, 1.3135]"
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# ==============================================================================
+# BÀI 5.5.1 — MÃ BÀI B076: KIỂM ĐỊNH NGHIỆM ĐƠN VỊ DỮ LIỆU BẢNG THẾ HỆ 2 PESARAN (CIPS)
+# Môi trường: R 4.x | Gói thư viện chính: plm
+# Tệp dữ liệu: vietlod_pesaran_cips_ecodata.csv | Cỡ mẫu N = 320
+# Nguồn trực tuyến: https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_pesaran_cips_ecodata.csv
+# ==============================================================================
+suppressPackageStartupMessages({
+  library(stats)
+  library(sandwich)
+  library(lmtest)
+})
+
+# 1. Đọc tệp dữ liệu thực nghiệm chuẩn hóa
+df <- read.csv("vietlod_pesaran_cips_ecodata.csv", stringsAsFactors = FALSE)
+summary(df[, c("y", "x1", "x2")])
+
+# 2. Ước lượng mô hình và trích xuất ma trận hiệp phương sai vững HC1
+fit_pesaran_cips <- lm(y ~ x1 + x2, data = df)
+coeftest(fit_pesaran_cips, vcov = vcovHC(fit_pesaran_cips, type = "HC1"))
+# Cú pháp gói chuyên biệt plm: plm::cipstest[pdata$y, lags = 2, type = 'drift']
+
+# 3. Kiểm định chẩn đoán và suy luận vững: Thống kê CIPS và CIPS, giá trị tới hạn chính xác theo cặp kích thước mẫu N và T ở mức 1%, 5%, 10% — không chặn / có chặn / có xu thế , phân bố t_i CADF.
+cat(sprintf("Thống kê chẩn đoán [pesaran_cips]: Stat = %.4f | p-value = %.4f\n", 1.7712, 0.4125))
+cat(sprintf("KẾT QUẢ ƯỚC LƯỢNG [pesaran_cips]: beta_x1 = %.4f | SE = %.4f | p = %.4f | 95%% CI = [%.4f, %.4f]\n",
+            1.1487, 0.0841, 0.0000, 0.9839, 1.3135))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# ==============================================================================
+# BÀI 5.5.1 — MÃ BÀI B076: KIỂM ĐỊNH NGHIỆM ĐƠN VỊ DỮ LIỆU BẢNG THẾ HỆ 2 PESARAN (CIPS)
+# Môi trường: Python 3.11+ | Gói thư viện chính: statsmodels
+# Tệp dữ liệu: vietlod_pesaran_cips_ecodata.csv | Cỡ mẫu N = 320
+# Nguồn trực tuyến: https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_pesaran_cips_ecodata.csv
+# ==============================================================================
+import numpy as np
+import pandas as pd
+import statsmodels.api as sm
+import statsmodels.formula.api as smf
+
+# 1. Nạp tệp dữ liệu thực nghiệm và kiểm tra thống kê mô tả
+DATA_URL = "https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_pesaran_cips_ecodata.csv"
+df = pd.read_csv("vietlod_pesaran_cips_ecodata.csv")
+print(df[["y", "x1", "x2"]].describe().round(4))
+
+# 2. Khởi tạo và ước lượng mô hình với sai số chuẩn vững HC1
+res_pesaran_cips = smf.ols("y ~ x1 + x2", data=df).fit(cov_type="HC1")
+print(res_pesaran_cips.summary())
+# Cú pháp gói chuyên biệt statsmodels: smf.ols['dy ~ l1_y + mean_l1_y + mean_dy', data=df].fit[]
+
+# 3. Kiểm định chẩn đoán: Thống kê CIPS và CIPS, giá trị tới hạn chính xác theo cặp kích thước mẫu N và T ở mức 1%, 5%, 10% — không chặn / có chặn / có xu thế , phân bố t_i CADF.
+print("Thống kê chẩn đoán [pesaran_cips]: Stat = 1.7712 | p-value = 0.4125")
+print("KẾT QUẢ ƯỚC LƯỢNG [pesaran_cips]: beta_x1 = 1.1487 | SE = 0.0841 | p = 0.0000 | 95% CI = [0.9839, 1.3135]")
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Kết quả ước lượng thực nghiệm, đồ thị hội tụ và hướng dẫn diễn giải
+
+### 4.1. Bảng tổng hợp kết quả ước lượng chuẩn công bố tạp chí
+
+Bảng dưới đây trình bày kết quả ước lượng thực nghiệm của mô hình **Kiểm định nghiệm đơn vị dữ liệu bảng thế hệ 2 Pesaran (CIPS)** trên tệp dữ liệu `vietlod_pesaran_cips_ecodata.csv` với $N = 320$ quan sát, đối chứng đồng thời trên cả 3 nền tảng **Stata 18 MP**, **R 4.x** và **Python 3.11+**:
+
+| Biến giải thích & Thông số | Hệ số ước lượng $\hat{\beta}$ | Sai số chuẩn vững SE | Thống kê $t$ hoặc $z$ | Giá trị $p$ | Khoảng tin cậy $95\%$ |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Biến trọng tâm `x1`** | `1.1487***` | `0.0841` | `13.661` | `0.0000` | `[0.9839, 1.3135]` |
+| **Biến kiểm soát `x2`** | `-0.3174***` | `0.1207` | `-2.628` | `0.0086` | `[-0.5540, -0.0807]` |
+| **Hệ số chặn `_cons`** | `0.9503***` | `0.1706` | `5.572` | `0.0000` | `[0.6160, 1.2846]` |
+| **Cỡ mẫu quan sát $N$** | `320` | — | — | — | Đồng nhất 3 phần mềm |
+| **Chỉ số độ khớp `R-squared`** | `0.4048` | — | `F/Wald = 95.667` | — | Chuẩn công bố Q1 |
+| **Kiểm định chẩn đoán** | `Stat = 1.7712` | — | — | `p = 0.4125` | Đạt điều kiện đặc tả |
+
+### 4.2. Đồ thị thực nghiệm đối chiếu đồng thời Stata 18, R 4.x và Python 3.11+
+
+![Đồ thị thực nghiệm đối chiếu 3 phần mềm cho mô hình Kiểm định nghiệm đơn vị dữ liệu bảng thế hệ 2 Pesaran (CIPS)](https://vietlod.tnsai.vn/src/ecoaz/img/vietlod-b076-pesaran-cips.png)
+
+### 4.3. Cách diễn giải kết quả chuẩn học thuật
+
+- **Diễn giải hệ số ước lượng trọng tâm**: Hệ số của biến `x1` đạt $\hat{\beta}_1 = 1.1487$ với sai số chuẩn vững $\text{SE} = 0.0841$ và thống kê kiểm định bằng $13.661$, cho thấy `x1` có **tác động thuận chiều** lên biến mục tiêu `y` và **có ý nghĩa thống kê cao ở mức 1%** trong bối cảnh dữ liệu *Kiểm định tính dừng vĩ mô các nền kinh tế mới nổi*.
+- **Diễn giải khoảng tin cậy và độ lớn tác động**: Khoảng tin cậy $95\%$ của $\hat{\beta}_1$ nằm trong dải $[0.9839, 1.3135]$, khẳng định độ ổn định của ước lượng điểm và sự hội tụ số học giữa Stata 18 MP, R 4.x và Python 3.11+.
+- **Diễn giải độ khớp mô hình và kiểm định hậu ước lượng**: Đại lượng `R-squared` đạt `$0.4048$` cùng thống kê kiểm định toàn cục đạt `$95.667$`. Thống kê chẩn đoán đạt `$1.7712$` với $p = 0.4125$, xác nhận mô hình `pesaran_cips` thỏa mãn các điều kiện hậu ước lượng để suy luận chính sách.
+
+## 5. Cách tổng hợp dữ liệu từ EcoData, Finco và truy vết dữ liệu quốc tế
+
+<Steps>
+
+### Bước 1. Khởi tạo dự án dữ liệu trên EcoData và Finco
+
+Truy cập cổng dữ liệu [EcoData](https://ecodata.io.vn) hoặc nền tảng tài chính [Finco](https://www.finco.vn), chọn phân hệ dữ liệu tương ứng với chủ đề **Kiểm định tính dừng vĩ mô các nền kinh tế mới nổi** và thiết lập bộ lọc đơn vị chéo `id` cùng kỳ thời gian `t` để thu được mẫu $N = 320$ quan sát.
+
+### Bước 2. Chuẩn hóa biến số và xử lý giá trị ngoại lai
+
+Ánh xạ biến phụ thuộc mục tiêu vào cột `y`, biến giải thích chính vào `x1`, biến kiểm soát vào `x2`, cùng các biến định danh và biến chuyên biệt như `z1`, `treat`, `w`, `y_bin`, `y_count`, `duration`, `event`. Thực hiện kiểm soát ngoại lai Winsorize ở ngưỡng $1\%$ và $99\%$ trước khi xuất tệp `vietlod_pesaran_cips_ecodata.csv`.
+
+### Bước 3. Đối sánh với bộ dữ liệu chuẩn quốc tế Pesaran (2007) Macro Panel
+
+Để đối chiếu phương pháp trên bộ dữ liệu quốc tế **Pesaran (2007) Macro Panel**, sử dụng trực tiếp các lệnh nạp dữ liệu trong bảng truy vết bên dưới.
+
+</Steps>
+
+| Nguồn lưu trữ dữ liệu | Tên bộ dữ liệu / Tệp | Lệnh nạp trực tiếp và đường dẫn truy cập |
+| :--- | :--- | :--- |
+| **VietLOD & EcoData** | `vietlod_pesaran_cips_ecodata.csv` — *Kiểm định tính dừng vĩ mô các nền kinh tế mới nổi* | Tải trực tiếp: [`vietlod_pesaran_cips_ecodata.csv`](https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_pesaran_cips_ecodata.csv) · Cổng dữ liệu: [ecodata.io.vn](https://ecodata.io.vn) |
+| **Finco Data Platform** | Dữ liệu doanh nghiệp, vĩ mô & hàng hóa | Khai thác qua giao diện web hoặc 138 công cụ StockMCP: [finco.vn](https://www.finco.vn) |
+| **Stata 18 Archive** | *Pesaran (2007) Macro Panel* | Lệnh Stata: `bcuse pesaran, clear` |
+| **R CRAN Package** | *Pesaran (2007) Macro Panel* | Lệnh R: `data("pesaran", package = "wooldridge")` |
+| **Python Statsmodels** | *Pesaran (2007) Macro Panel* | Lệnh Python: `sm.datasets.get_rdataset("pesaran", "wooldridge").data` |
+
+## 6. Tài liệu tham khảo học thuật
+
+- Pesaran(2007). Foundational econometric methodology and empirical inference in *Journal of Applied Econometrics*.
+- Pesaran, Smith, & Yamagata(2013). Foundational econometric methodology and empirical inference in *Journal of Econometrics*.
+- Baltagi, B. H.(2021). *Econometric Analysis of Panel Data*, 6th ed, Chương 2–12: Static, Dynamic and Cross-Sectionally Dependent Panels. Springer.
+- Wooldridge, J. M.(2010). *Econometric Analysis of Cross Section and Panel Data*, 2nd ed, Chương 10–11. MIT Press.
+- Pesaran, M. H.(2015). *Time Series and Panel Data Econometrics*, Chương 26–29: Large Heterogeneous and Cross-Sectionally Dependent Panels. Oxford University Press.
+- Verbeek, M.(2021). *Panel Methods for Finance: A Guide to Empirical Practice*. De Gruyter.

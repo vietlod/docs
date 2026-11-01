@@ -1,0 +1,104 @@
+---
+id: index
+title: "Chương 15: Kinh tế lượng phi tham số và suy luận tái lấy mẫu cụm ít"
+sidebar_label: "Chương 15. Kinh tế lượng phi tham số và suy luận tái lấy mẫu cụm ít"
+sidebar_position: 16
+slug: /vietlod/chapter-15
+description: "Hướng dẫn thực hành Chương 15 — Kinh tế lượng phi tham số và suy luận tái lấy mẫu cụm ít: bao gồm 2 nhóm phương pháp và 4 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+keywords:
+  - Chương 15 VietLOD
+  - Kinh tế lượng phi tham số và suy luận tái lấy mẫu cụm ít
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+  - EcoData
+  - EcoLab
+---
+
+# Chương 15: Kinh tế lượng phi tham số và suy luận tái lấy mẫu cụm ít
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Chương 15 — Kinh tế lượng phi tham số và suy luận tái lấy mẫu cụm ít** hướng dẫn thực hành chi tiết **4 mô hình kinh tế lượng** thuộc **2 nhóm phương pháp** từ mã `B198` đến `B201`. Toàn bộ bài viết trong chương được đồng bộ hóa với giáo trình gốc tại [VietLOD Chương 15](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-15-kinh-te-luong-phi-tham-so-va-suy-luan-tai-lay-mau-cum-it) và hỗ trợ thực thi tự động trên [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 15: Kinh tế lượng phi tham số và suy luận tái lấy mẫu cụm ít trên Stata 18, R 4.x và Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Câu hỏi nghiên cứu trọng tâm và phương trình nền tảng
+
+- **Câu hỏi nghiên cứu trọng tâm**: Khi không muốn áp đặt dạng hàm đại số hoặc khi số lượng cụm quá ít — G &lt; 30 — khiến định lý giới hạn trung tâm thất bại, làm sao để ước lượng và suy luận chính xác?
+- **Phạm vi cấu trúc chương**: Gồm `2` nhóm phương pháp chuyên sâu và `4` mô hình thực nghiệm đối chứng trên dữ liệu Việt Nam từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
+
+Phương trình đặc tả tổng quát của Chương 15:
+
+$$
+Y_i = m(X_i) + \varepsilon_i, \quad p_{\text{boot}} = \frac{1}{B}\sum_{b=1}^B \mathbb{I}\left(|t^{\ast(b)}| \ge |t_{\text{obs}}|\right)
+$$
+
+<FeatureNotAvailable
+  note="Không áp dụng các ước lượng trong Chương 15 khi chưa kiểm tra điều kiện định danh và bộ kiểm định chẩn đoán bắt buộc gồm: Least-Squares Cross-Validation Bandwidth, Hsiao–Li–Racine Specification Test, Rademacher vs Webb 6-Point Wild Cluster Bootstrap p-value, Fisher Exact Permutation p-value."
+/>
+
+## 2. Khám phá 2 nhóm phương pháp trong Chương 15
+
+<FeatureCards
+  features={[
+    {
+      title: 'Nhóm 15.1. Hồi quy phi tham số và bán tham số',
+      description: 'Khi không muốn áp đặt dạng hàm đại số hoặc khi số lượng cụm quá ít — G &lt; 30 — khiến định lý giới hạn trung tâm thất bại, làm sao để ước lượng và suy luận chính xác?',
+      link: '/vietlod/chapter-15/group-15-1',
+      badge: '2 mô hình'
+    },
+    {
+      title: 'Nhóm 15.2. Suy luận tái lấy mẫu cụm ít và ngẫu nhiên hóa',
+      description: 'Khi không muốn áp đặt dạng hàm đại số hoặc khi số lượng cụm quá ít — G &lt; 30 — khiến định lý giới hạn trung tâm thất bại, làm sao để ước lượng và suy luận chính xác?',
+      link: '/vietlod/chapter-15/group-15-2',
+      badge: '2 mô hình'
+    }
+  ]}
+/>
+
+## 3. Quy trình 4 bước lựa chọn và thực thi mô hình trong Chương 15
+
+<Steps>
+
+### Bước 1. Xác định nhóm phương pháp phù hợp trong 2 nhóm của chương
+
+Đối chiếu giả thuyết kinh tế và cấu trúc mẫu thực nghiệm với câu hỏi định danh của từng nhóm phương pháp từ Nhóm `15.1` đến Nhóm `15.2`.
+
+### Bước 2. Chuẩn bị tệp dữ liệu chuẩn hóa từ EcoData hoặc Finco
+
+Tải tệp dữ liệu thực hành `.csv` tương ứng với từng mô hình tại `/src/ecoaz/data/` hoặc trích xuất bảng dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
+
+### Bước 3. Ước lượng tham số và chạy kiểm định chẩn đoán trên Stata 18, R 4.x và Python 3.11+
+
+Thực thi mã lệnh mẫu trong từng bài học và kiểm tra nghiêm ngặt các tiêu chuẩn chẩn đoán bắt buộc của chương: **Least-Squares Cross-Validation Bandwidth, Hsiao–Li–Racine Specification Test, Rademacher vs Webb 6-Point Wild Cluster Bootstrap p-value, Fisher Exact Permutation p-value**.
+
+### Bước 4. Đối chiếu đồ thị hội tụ 3 phần mềm và xuất bảng công bố trên EcoLab
+
+Kiểm tra sự hội tụ của hệ số ước lượng giữa Stata, R và Python trên đồ thị thực nghiệm 3 khung và xuất bảng kết quả chuẩn tạp chí qua [EcoLab](https://ecolab.io.vn).
+
+</Steps>
+
+## 4. Danh mục đầy đủ 4 mô hình kinh tế lượng trong Chương 15
+
+| Mã bài | Tên mô hình kinh tế lượng | Khóa định danh | Cấp độ | Gói phần mềm Stata · R · Python | Hỗ trợ |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `15.1.1` · `B198` | [Hồi quy phi tham số đa thức tuyến tính cục bộ Li–Racine](/vietlod/chapter-15/group-15-1/b198-local-polynomial-npregress) | `local_polynomial_npregress` | `L4` | `Stata 18 npregress` · `np` · `statsmodels` | <Available /> |
+| `15.2.1` · `B200` | [Suy luận Bootstrap cụm Wild nhanh với trọng số Rademacher và Webb](/vietlod/chapter-15/group-15-2/b200-wild-cluster-bootstrap) | `wild_cluster_bootstrap` | `L4` | `boottest` · `sandwich + clubSandwich` · `wildboottest` | <Available /> |
+| `15.1.2` · `B199` | [Mô hình cộng tổng quát bán tham số kết hợp B-Splines (GAM)](/vietlod/chapter-15/group-15-1/b199-gam-semiparametric) | `gam_semiparametric` | `L4` | `Stata 18 npregress` · `mgcv` · `statsmodels` | <Available /> |
+| `15.2.2` · `B201` | [Suy luận ngẫu nhiên hóa chính xác của Fisher và kiểm chứng Alwyn Young](/vietlod/chapter-15/group-15-2/b201-randomization-inference) | `randomization_inference` | `L4` | `ritest` · `ri2` · `scipy / statsmodels` | <Available /> |
+
+## 5. Tài liệu tham khảo học thuật trọng tâm
+
+- Li, & Racine(2007). Econometric specification, identification, and asymptotic inference.
+- Robinson(1988). Econometric specification, identification, and asymptotic inference.
+- Roodman et al.(2019). Econometric specification, identification, and asymptotic inference.
+- MacKinnon, Nielsen, & Webb(2023). Econometric specification, identification, and asymptotic inference.
+- Young(2019). Econometric specification, identification, and asymptotic inference.
+- Cameron, A. C, & Trivedi, P. K.(2022). *Microeconometrics Using Stata*, 2nd ed, Vol. 1 Chương 13: Bootstrap & Cluster-Robust Inference; Vol. 2 Chương 27: Nonparametric & Semiparametric Regression. Stata Press.
+- Hansen, B. E.(2022). *Econometrics*, Chương 10 & 19: Bootstrap Resampling, Nonparametric Kernel and Local Linear Regression. Princeton University Press.
+- Wooldridge, J. M.(2010). *Econometric Analysis of Cross Section and Panel Data*, 2nd ed, Chương 12 & 20: Resampling and Semiparametric Methods. MIT Press.
+- Greene, W. H.(2019). *Econometric Analysis*, 8th ed, Chương 12 & 15: Nonparametric Estimation and Bootstrap Simulation. Pearson.

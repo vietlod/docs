@@ -1,0 +1,83 @@
+---
+id: index
+title: "Nhóm 8.4: Định giá tài sản đa nhân tố"
+sidebar_label: "Nhóm 8.4. Định giá tài sản đa nhân tố"
+sidebar_position: 4
+slug: /vietlod/chapter-08/group-8-4
+description: "Hướng dẫn thực hành Nhóm 8.4 — Định giá tài sản đa nhân tố thuộc Chương 08: so sánh và thực thi 1 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+keywords:
+  - Nhóm 8.4 VietLOD
+  - Định giá tài sản đa nhân tố
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Nhóm 8.4: Định giá tài sản đa nhân tố
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Nhóm phương pháp 8.4 — Định giá tài sản đa nhân tố** thuộc [Chương 08: Độ biến động tài chính, định giá tài sản và rủi ro hệ thống](/vietlod/chapter-08) cung cấp quy trình thực hành từng bước cho **1 mô hình kinh tế lượng** từ bài `8.4.1` đến `8.4.1`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Nhóm 8.4](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-08-do-bien-dong-tai-chinh-dinh-gia-tai-san-va-rui-ro-he-thong/nhom-8-4-factor-asset-pricing) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Nhóm 8.4: Định giá tài sản đa nhân tố trên Stata 18, R 4.x và Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Bản chất phương pháp và hệ phương trình định danh
+
+- **Câu hỏi nghiên cứu trọng tâm của nhóm**: Làm thế nào để mô hình hóa cụm biến động bất đối xứng, tương quan động đa tài sản (GARCH), định giá đa nhân tố (GRS) và đo lường rủi ro đuôi hệ thống (CoVaR)?
+- **Kiểm định chẩn đoán bắt buộc**: Thống kê chính xác $F_{\text{GRS}} \sim F(N, T-N-K)$ & $p$-value, thống kê Wald GMM bền vững phương sai thay đổi, trung bình tuyệt đối định giá sai $\overline{|\hat{\alpha}|}$, tỷ số Sharpe cực đại nhân tố vs tiếp tuyến toàn thể..
+
+Phương trình đặc tả cấu trúc của nhóm phương pháp 8.4:
+
+$$
+R_{it} - R_{ft} = \alpha_i + \beta_i^\top f_t + \varepsilon_{it}, \quad F_{\text{GRS}} = \frac{T - N - K}{N}\left(1 + \bar{f}^\top \hat{\Omega}_f^{-1}\bar{f}\right)^{-1}\hat{\alpha}^\top \hat{\Sigma}_\varepsilon^{-1}\hat{\alpha} \sim F_{N, T-N-K}
+$$
+
+Điều kiện mô-men và hàm mục tiêu ước lượng:
+
+$$
+\ell_T(\theta) = -\frac{1}{2}\sum_{t=1}^T \left[\ln(2\pi) + \ln(\sigma_t^2(\theta)) + \frac{\varepsilon_t^2}{\sigma_t^2(\theta)}\right], \quad z_t = \frac{\varepsilon_t}{\sigma_t} \sim \text{i.i.d. }(0, 1)
+$$
+
+<FeatureNotAvailable
+  note="Khi dữ liệu vi phạm giả định định danh của Nhóm 8.4, nhà nghiên cứu cần chuyển sang các nhóm phương pháp mở rộng trong Chương 08 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
+/>
+
+## 2. Danh mục các mô hình trong Nhóm 8.4
+
+<FeatureCards
+  features={[
+    {
+      title: '8.4.1. Mô hình định giá tài sản đa nhân tố và kiểm định GRS',
+      description: 'Ước lượng đồng thời hệ $N$ danh mục tài sản trên $K$ nhân tố định giá — CAPM, Fama–French 3/5/6 nhân tố, q-factor — và kiểm định chính xác t...',
+      link: '/vietlod/chapter-08/group-8-4/b135-grs-factor-pricing',
+      badge: 'B135 · grs_factor_pricing'
+    }
+  ]}
+/>
+
+## 3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
+
+| Bài học & Mô hình | Mã định danh | Cú pháp Stata 18 MP | Cú pháp R 4.x | Cú pháp Python 3.11+ | Hỗ trợ |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `8.4.1` · [Mô hình định giá tài sản đa nhân tố và kiểm định GRS](/vietlod/chapter-08/group-8-4/b135-grs-factor-pricing) | `grs_factor_pricing` | `grstest r_p1-r_p5, flist(mkt_rf smb hml)` | `systemfit::systemfit(eq_list, method = 'SUR', data = df)` | `SUR.from_formula(eq_dict, data=df).fit(cov_type='kernel')` | <Available /> |
+
+## 4. Quy trình thực hành chuẩn cho Nhóm 8.4
+
+<Steps>
+
+### Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco
+
+Tải tệp CSV thực hành của từng mô hình trong Nhóm `8.4` hoặc kết nối dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
+
+### Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu
+
+So sánh các mô hình từ `8.4.1` đến `8.4.1` trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.
+
+### Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab
+
+Thực hiện đầy đủ bộ kiểm định **Thống kê chính xác $F_{\text{GRS}} \sim F(N, T-N-K)$ & $p$-value, thống kê Wald GMM bền vững phương sai thay đổi, trung bình tuyệt đối định giá sai $\overline{|\hat{\alpha}|}$, tỷ số Sharpe cực đại nhân tố vs tiếp tuyến toàn thể.** và đẩy mã mô hình sang [EcoLab](https://ecolab.io.vn) để xuất bảng kết quả chuẩn công bố quốc tế.
+
+</Steps>

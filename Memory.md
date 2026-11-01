@@ -68,3 +68,11 @@ Tài liệu này lưu trữ các quyết định thiết kế bền vững, bài
     2.  Đồng bộ bản sao vật lý 100% giữa 3 thư mục `.agents/skills/`, `.agent/skills/`, và `.claude/skills/` để tránh lỗi tương thích symlink giữa Windows (Local) và Ubuntu Linux (VPS).
     3.  Áp dụng chính sách **Zero-Token Persistence** cho Git: tuyệt đối không lưu cứng `GITHUB_TOKEN` trong `.git/config`; sử dụng `http.extraHeader` tạm thời khi push/pull và giữ URL `origin` sạch (`https://github.com/vietlod/docs.git`) ở cả Local và VPS.
 
+### Nâng cấp Kiến trúc 4 Ứng dụng Cốt lõi: EcoData, EcoLab, Finco & VietLOD (2026-11-01)
+*   **Context**: Chuyển đổi cổng tài liệu `docs.tnsai.vn` sang tập trung vào 4 nền tảng cốt lõi của hệ sinh thái nghiên cứu định lượng và phân tích đầu tư TNS AI: **EcoData**, **EcoLab**, **Finco** và **VietLOD**; thay thế hoàn toàn các phân hệ cũ (`EcoLit`, `PDFHUB`, `KEYWORDs`).
+*   **Quyết định**:
+    1.  **Bộ tài liệu Finco (`docs/finco/` & `i18n/en/.../finco/`)**: Xây dựng 8 bài viết How-To song ngữ đối xứng 1:1 bao phủ hệ thống 34/63 tỉnh thành, chứng khoán & thuyết minh BCTC, 3.448 chỉ số hàng hóa MXV, 19 thị trường tài chính chủ chốt, vĩ mô Việt Nam, 347 chỉ số quốc tế, xuất Excel 2-sheet chuẩn SPSS và 138 công cụ StockMCP.
+    2.  **Bộ tài liệu VietLOD (`docs/vietlod/` & `i18n/en/.../vietlod/`)**: Chuyển đổi toàn bộ bộ bài giảng kinh tế lượng từ A-Z thành 275 trang How-To MDX mỗi ngôn ngữ (1 trang Tổng quan + 15 Chương + 58 Nhóm phương pháp + 201 Mô hình kinh tế lượng), tích hợp mã lệnh chạy thực tế trên Stata 18 MP, R 4.x, Python 3.11+, tệp dữ liệu thực hành CSV `/src/ecoaz/data/` và đồ thị hội tụ 3 phần mềm `/src/ecoaz/img/`.
+    3.  **Nâng cấp Components & Chuẩn biên tập**: Nâng cấp `VideoTutorial` tự động chuyển đổi `youtu.be` và `youtube.com/watch` sang embed URL giữ nguyên `list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3`; nâng cấp `FeatureCards`, `Available`, `FeatureNotAvailable` hỗ trợ song ngữ hoàn toàn; tuân thủ nghiêm ngặt quy tắc không giải thích trong ngoặc đơn và phân cấp tiêu đề Sentence case cho tiếng Việt, Title Case cho tiếng Anh.
+
+

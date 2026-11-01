@@ -1,0 +1,90 @@
+---
+id: index
+title: "Group 15.1: Nonparametric and Semiparametric Smooth Regression"
+sidebar_label: "Group 15.1. Nonparametric and Semiparametric Smooth Regression"
+sidebar_position: 1
+slug: /vietlod/chapter-15/group-15-1
+description: "How-To User Guide for Methodological Group 15.1 — Nonparametric and Semiparametric Smooth Regression in Chapter 15: comparing and executing 2 econometric models across Stata 18 MP, R 4.x, and Python 3.11+."
+keywords:
+  - VietLOD Group 15.1
+  - Nonparametric and Semiparametric Smooth Regression
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Group 15.1: Nonparametric and Semiparametric Smooth Regression
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Methodological Group 15.1 — Nonparametric and Semiparametric Smooth Regression** in [Chapter 15: Nonparametric Econometrics and Few-Cluster Resampling Inference](/en/vietlod/chapter-15) provides step-by-step How-To implementation guides for **2 econometric models** spanning from Section `15.1.1` to `15.1.2`. Full theoretical derivations are available at [VietLOD Group 15.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-15-kinh-te-luong-phi-tham-so-va-suy-luan-tai-lay-mau-cum-it/nhom-15-1-nonparametric-smooth) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="How-To Guide for Group 15.1: Nonparametric and Semiparametric Smooth Regression in Stata 18, R 4.x, and Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Methodological Overview and Structural Equations
+
+- **Methodological Focus**: Provides consistent estimation and robust inference for **Nonparametric and Semiparametric Smooth Regression** specifications within **Nonparametric Econometrics and Few-Cluster Resampling Inference**.
+- **Mandatory Post-Estimation Diagnostics**: Băng thông tối ưu theo từng biến $h_1\dots h_k$, Average Marginal Effects $\overline{\partial \hat{m}/\partial x_j}$ kèm bootstrap SE, kiểm định đặc tả Hsiao–Li–Racine so với mô hình tuyến tính..
+
+Core structural specification for Group 15.1:
+
+$$
+\min_{\alpha, \beta} \sum_{i=1}^N \left(Y_i - \alpha - (X_i - x)^\top \beta\right)^2 K_H(X_i - x), \quad \hat{m}(x) = \hat{\alpha}(x), \quad \widehat{\nabla m}(x) = \hat{\beta}(x)
+$$
+
+Estimator objective and moment conditions:
+
+$$
+\hat{m}_h(x) = e_1^\top \left(\mathcal{X}_x^\top \mathcal{W}_h(x)\mathcal{X}_x\right)^{-1}\mathcal{X}_x^\top \mathcal{W}_h(x) Y, \quad h_{\text{opt}} = \arg\min_{h \gt 0}\text{CV}(h)
+$$
+
+<FeatureNotAvailable
+  note="When empirical data violate the identification conditions of Group 15.1, researchers should transition to the extended methodological groups in Chapter 15 or apply appropriate instrumental-variable and cluster-robust corrections."
+/>
+
+## 2. Econometric Models in Group 15.1
+
+<FeatureCards
+  features={[
+    {
+      title: '15.1.1. Local-Linear Kernel Nonparametric Regression',
+      description: 'Nonparametrically estimates both the conditional mean surface m — x — = E[Y|X=x] and observation-level partial derivatives nabla m — x — via...',
+      link: '/en/vietlod/chapter-15/group-15-1/b198-local-polynomial-npregress',
+      badge: 'B198 · local_polynomial_npregress'
+    },
+    {
+      title: '15.1.2. Semiparametric Generalized Additive and Partial Linear Model',
+      description: 'Avoids the curse of dimensionality via additive penalized B-splines E[Y|Z,X] = Z*gamma + sum_j f_j — X_j , reporting parametric policy effec...',
+      link: '/en/vietlod/chapter-15/group-15-1/b199-gam-semiparametric',
+      badge: 'B199 · gam_semiparametric'
+    }
+  ]}
+/>
+
+## 3. Comparative Execution Syntax Across Stata 18, R 4.x, and Python 3.11+
+
+| Section & Model Title | Estimator Key | Stata 18 MP Syntax | R 4.x Syntax | Python 3.11+ Syntax | Support |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `15.1.1` · [Local-Linear Kernel Nonparametric Regression](/en/vietlod/chapter-15/group-15-1/b198-local-polynomial-npregress) | `local_polynomial_npregress` | `npregress kernel y x1 x2, estimator(linear) kernel(epanechnikov)` | `np::npreg(y ~ x1 + x2, regtype = 'll', bwmethod = 'cv.aic', data = df)` | `KernelReg(endog=df['y'], exog=df[['x1', 'x2']], var_type='cc', reg_type='ll').fit()` | <Available /> |
+| `15.1.2` · [Semiparametric Generalized Additive and Partial Linear Model](/en/vietlod/chapter-15/group-15-1/b199-gam-semiparametric) | `gam_semiparametric` | `npregress series y x1 x2, spline(bspline)` | `mgcv::gam(y ~ s(x1, bs = 'cr') + s(x2, bs = 'cr'), method = 'REML', data = df)` | `GLMGam.from_formula('y ~ x1 + x2', data=df, smoother=BSplines(df[['x1', 'x2']], df=[6, 6], degree=[3, 3])).fit()` | <Available /> |
+
+## 4. Standard Implementation Workflow for Group 15.1
+
+<Steps>
+
+### Step 1. Load Standardized Practice Datasets From VietLOD, EcoData, or Finco
+
+Download the model-specific `.csv` practice dataset in Group `15.1` or extract custom empirical panels from [EcoData](https://ecodata.io.vn) and [Finco](https://www.finco.vn).
+
+### Step 2. Select the Optimal Estimator for Your Error and Sample Structure
+
+Compare the estimators from `15.1.1` to `15.1.2` in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.
+
+### Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab
+
+Verify all required diagnostics including **Băng thông tối ưu theo từng biến $h_1\dots h_k$, Average Marginal Effects $\overline{\partial \hat{m}/\partial x_j}$ kèm bootstrap SE, kiểm định đặc tả Hsiao–Li–Racine so với mô hình tuyến tính.** and dispatch the specification to [EcoLab](https://ecolab.io.vn) for automated journal-grade reporting.
+
+</Steps>

@@ -1,0 +1,83 @@
+---
+id: index
+title: "Group 8.4: Multi-Factor Asset Pricing Models"
+sidebar_label: "Group 8.4. Multi-Factor Asset Pricing Models"
+sidebar_position: 4
+slug: /vietlod/chapter-08/group-8-4
+description: "How-To User Guide for Methodological Group 8.4 — Multi-Factor Asset Pricing Models in Chapter 08: comparing and executing 1 econometric models across Stata 18 MP, R 4.x, and Python 3.11+."
+keywords:
+  - VietLOD Group 8.4
+  - Multi-Factor Asset Pricing Models
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Group 8.4: Multi-Factor Asset Pricing Models
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Methodological Group 8.4 — Multi-Factor Asset Pricing Models** in [Chapter 08: Financial Volatility, Asset Pricing and Systemic Risk](/en/vietlod/chapter-08) provides step-by-step How-To implementation guides for **1 econometric models** spanning from Section `8.4.1` to `8.4.1`. Full theoretical derivations are available at [VietLOD Group 8.4](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-08-do-bien-dong-tai-chinh-dinh-gia-tai-san-va-rui-ro-he-thong/nhom-8-4-factor-asset-pricing) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="How-To Guide for Group 8.4: Multi-Factor Asset Pricing Models in Stata 18, R 4.x, and Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Methodological Overview and Structural Equations
+
+- **Methodological Focus**: Provides consistent estimation and robust inference for **Multi-Factor Asset Pricing Models** specifications within **Financial Volatility, Asset Pricing and Systemic Risk**.
+- **Mandatory Post-Estimation Diagnostics**: Thống kê chính xác $F_{\text{GRS}} \sim F(N, T-N-K)$ & $p$-value, thống kê Wald GMM bền vững phương sai thay đổi, trung bình tuyệt đối định giá sai $\overline{|\hat{\alpha}|}$, tỷ số Sharpe cực đại nhân tố vs tiếp tuyến toàn thể..
+
+Core structural specification for Group 8.4:
+
+$$
+R_{it} - R_{ft} = \alpha_i + \beta_i^\top f_t + \varepsilon_{it}, \quad F_{\text{GRS}} = \frac{T - N - K}{N}\left(1 + \bar{f}^\top \hat{\Omega}_f^{-1}\bar{f}\right)^{-1}\hat{\alpha}^\top \hat{\Sigma}_\varepsilon^{-1}\hat{\alpha} \sim F_{N, T-N-K}
+$$
+
+Estimator objective and moment conditions:
+
+$$
+\ell_T(\theta) = -\frac{1}{2}\sum_{t=1}^T \left[\ln(2\pi) + \ln(\sigma_t^2(\theta)) + \frac{\varepsilon_t^2}{\sigma_t^2(\theta)}\right], \quad z_t = \frac{\varepsilon_t}{\sigma_t} \sim \text{i.i.d. }(0, 1)
+$$
+
+<FeatureNotAvailable
+  note="When empirical data violate the identification conditions of Group 8.4, researchers should transition to the extended methodological groups in Chapter 08 or apply appropriate instrumental-variable and cluster-robust corrections."
+/>
+
+## 2. Econometric Models in Group 8.4
+
+<FeatureCards
+  features={[
+    {
+      title: '8.4.1. Gibbons-Ross-Shanken Multi-Factor Asset Pricing Test',
+      description: 'Jointly estimates N portfolio excess-return regressions on K pricing factors and tests exact finite-sample mean-variance spanning H0: alpha_...',
+      link: '/en/vietlod/chapter-08/group-8-4/b135-grs-factor-pricing',
+      badge: 'B135 · grs_factor_pricing'
+    }
+  ]}
+/>
+
+## 3. Comparative Execution Syntax Across Stata 18, R 4.x, and Python 3.11+
+
+| Section & Model Title | Estimator Key | Stata 18 MP Syntax | R 4.x Syntax | Python 3.11+ Syntax | Support |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `8.4.1` · [Gibbons-Ross-Shanken Multi-Factor Asset Pricing Test](/en/vietlod/chapter-08/group-8-4/b135-grs-factor-pricing) | `grs_factor_pricing` | `grstest r_p1-r_p5, flist(mkt_rf smb hml)` | `systemfit::systemfit(eq_list, method = 'SUR', data = df)` | `SUR.from_formula(eq_dict, data=df).fit(cov_type='kernel')` | <Available /> |
+
+## 4. Standard Implementation Workflow for Group 8.4
+
+<Steps>
+
+### Step 1. Load Standardized Practice Datasets From VietLOD, EcoData, or Finco
+
+Download the model-specific `.csv` practice dataset in Group `8.4` or extract custom empirical panels from [EcoData](https://ecodata.io.vn) and [Finco](https://www.finco.vn).
+
+### Step 2. Select the Optimal Estimator for Your Error and Sample Structure
+
+Compare the estimators from `8.4.1` to `8.4.1` in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.
+
+### Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab
+
+Verify all required diagnostics including **Thống kê chính xác $F_{\text{GRS}} \sim F(N, T-N-K)$ & $p$-value, thống kê Wald GMM bền vững phương sai thay đổi, trung bình tuyệt đối định giá sai $\overline{|\hat{\alpha}|}$, tỷ số Sharpe cực đại nhân tố vs tiếp tuyến toàn thể.** and dispatch the specification to [EcoLab](https://ecolab.io.vn) for automated journal-grade reporting.
+
+</Steps>

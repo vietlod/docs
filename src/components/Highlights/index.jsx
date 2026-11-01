@@ -29,7 +29,7 @@ const ITEMS = [
     ),
     desc: (
       <Translate id="highlights.item1.desc" description="Highlight 1 description">
-        Toàn bộ dữ liệu được làm sạch và chuẩn hóa theo định dạng panel/time-series, sẵn sàng cho nghiên cứu và công bố quốc tế (ready to publication).
+        Toàn bộ dữ liệu được làm sạch và chuẩn hóa theo định dạng dữ liệu bảng và chuỗi thời gian, sẵn sàng cho nghiên cứu học thuật và công bố quốc tế.
       </Translate>
     ),
   },
@@ -49,7 +49,7 @@ const ITEMS = [
     ),
     desc: (
       <Translate id="highlights.item2.desc" description="Highlight 2 description">
-        Kho dữ liệu đa lĩnh vực, đa nguồn, được cập nhật thường xuyên từ các cơ quan và tổ chức chính thức.
+        Kho dữ liệu đa lĩnh vực, đa nguồn từ Finco và EcoData, được cập nhật thường xuyên từ các cơ quan thống kê và tổ chức tài chính chính thức.
       </Translate>
     ),
   },
@@ -64,12 +64,12 @@ const ITEMS = [
     ),
     title: (
       <Translate id="highlights.item3.title" description="Highlight 3 title">
-        Đầy đủ chỉ số vĩ mô quốc tế
+        Đầy đủ chỉ số vĩ mô và hàng hóa quốc tế
       </Translate>
     ),
     desc: (
       <Translate id="highlights.item3.desc" description="Highlight 3 description">
-        Bao phủ các chỉ số vĩ mô từ những nguồn uy tín: World Bank, IMF, ADB, UN, FRED, OECD, ILO...
+        Bao phủ các chỉ số vĩ mô và thị trường hàng hóa từ những nguồn uy tín: World Bank, IMF, ADB, UN, FRED, OECD, ILO, FAO và MXV.
       </Translate>
     ),
   },
@@ -89,7 +89,7 @@ const ITEMS = [
     ),
     desc: (
       <Translate id="highlights.item4.desc" description="Highlight 4 description">
-        Tổng cục Thống kê (Niên giám thống kê, báo cáo kinh tế – xã hội), Hải quan (xuất nhập khẩu theo mặt hàng), khảo sát (PAPI, PCI, PAR, SIPAS, ICT) và các bộ vi mô VHLSS, VARHS, VES.
+        Cục Thống kê với Niên giám thống kê và báo cáo kinh tế xã hội, Hải quan với xuất nhập khẩu theo mặt hàng, khảo sát PAPI, PCI, PAR, SIPAS, DTI và bộ vi mô VHLSS 34 và 63 tỉnh thành.
       </Translate>
     ),
   },
@@ -107,12 +107,12 @@ export default function Highlights() {
           </span>
           <h2 className={styles.title}>
             <Translate id="highlights.title" description="Highlights title">
-              Vì sao chọn EcoData?
+              Vì sao chọn hệ sinh thái dữ liệu và phân tích TNS AI?
             </Translate>
           </h2>
           <p className={styles.subtitle}>
             <Translate id="highlights.subtitle" description="Highlights subtitle">
-              Nền tảng dữ liệu kinh tế – tài chính được chuẩn hóa cho nghiên cứu và giảng dạy.
+              Nền tảng dữ liệu kinh tế, tài chính và hàng hóa kết hợp 201 mô hình kinh tế lượng chuẩn hóa cho nghiên cứu và giảng dạy.
             </Translate>
           </p>
         </div>

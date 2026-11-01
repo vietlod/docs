@@ -1,0 +1,111 @@
+---
+id: index
+title: "Group 5.5: Second-Generation Cross-Sectionally Dependent Panels"
+sidebar_label: "Group 5.5. Second-Generation Cross-Sectionally Dependent Panels"
+sidebar_position: 5
+slug: /vietlod/chapter-05/group-5-5
+description: "How-To User Guide for Methodological Group 5.5 — Second-Generation Cross-Sectionally Dependent Panels in Chapter 05: comparing and executing 5 econometric models across Stata 18 MP, R 4.x, and Python 3.11+."
+keywords:
+  - VietLOD Group 5.5
+  - Second-Generation Cross-Sectionally Dependent Panels
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Group 5.5: Second-Generation Cross-Sectionally Dependent Panels
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Methodological Group 5.5 — Second-Generation Cross-Sectionally Dependent Panels** in [Chapter 05: Static, Dynamic and Cross-Sectionally Dependent Panel Econometrics](/en/vietlod/chapter-05) provides step-by-step How-To implementation guides for **5 econometric models** spanning from Section `5.5.1` to `5.5.5`. Full theoretical derivations are available at [VietLOD Group 5.5](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-05-kinh-te-luong-du-lieu-bang-tinh-dong-va-phu-thuoc-cheo/nhom-5-5-cross-sectional-dependence) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="How-To Guide for Group 5.5: Second-Generation Cross-Sectionally Dependent Panels in Stata 18, R 4.x, and Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Methodological Overview and Structural Equations
+
+- **Methodological Focus**: Provides consistent estimation and robust inference for **Second-Generation Cross-Sectionally Dependent Panels** specifications within **Static, Dynamic and Cross-Sectionally Dependent Panel Econometrics**.
+- **Mandatory Post-Estimation Diagnostics**: Thống kê CIPS và CIPS, giá trị tới hạn chính xác theo cặp kích thước mẫu $N$ và $T$ ở mức $1\%, 5\%, 10\%$ — không chặn / có chặn / có xu thế, phân bố $t_i$ CADF..
+
+Core structural specification for Group 5.5:
+
+$$
+\Delta Y_{it} = a_i + b_i Y_{i,t-1} + c_i \bar{Y}_{t-1} + \sum_{j=0}^p d_{ij}\Delta \bar{Y}_{t-j} + \sum_{j=1}^p \delta_{ij}\Delta Y_{i,t-j} + e_{it}, \quad \text{CIPS} = \frac{1}{N}\sum_{i=1}^N t_i(N, T)
+$$
+
+Estimator objective and moment conditions:
+
+$$
+\hat{\beta}_{\text{Panel}} = \left(\sum_{i=1}^N \tilde{X}_i^\top W_i \tilde{X}_i\right)^{-1}\left(\sum_{i=1}^N \tilde{X}_i^\top W_i \tilde{Y}_i\right), \quad \tilde{Y}_{it} = Y_{it} - \theta \bar{Y}_i
+$$
+
+<FeatureNotAvailable
+  note="When empirical data violate the identification conditions of Group 5.5, researchers should transition to the extended methodological groups in Chapter 05 or apply appropriate instrumental-variable and cluster-robust corrections."
+/>
+
+## 2. Econometric Models in Group 5.5
+
+<FeatureCards
+  features={[
+    {
+      title: '5.5.1. Pesaran CIPS Second-Generation Panel Unit-Root Test',
+      description: 'Filters unobserved common factors via cross-sectional averages of levels and differences in entity CADF regressions. Across empirical econom...',
+      link: '/en/vietlod/chapter-05/group-5-5/b076-pesaran-cips',
+      badge: 'B076 · pesaran_cips'
+    },
+    {
+      title: '5.5.2. Westerlund Error-Correction Panel Cointegration',
+      description: 'Tests second-generation panel cointegration via structural error-correction speed without imposing common-factor restrictions. Across empiri...',
+      link: '/en/vietlod/chapter-05/group-5-5/b077-westerlund-coint',
+      badge: 'B077 · westerlund_coint'
+    },
+    {
+      title: '5.5.3. Common Correlated Effects Mean Group',
+      description: 'Projects out unobserved common global shocks using cross-sectional time averages of dependent and independent variables in entity-specific r...',
+      link: '/en/vietlod/chapter-05/group-5-5/b078-cce-mg',
+      badge: 'B078 · cce_mg'
+    },
+    {
+      title: '5.5.4. Common Correlated Effects Pooled Estimator',
+      description: 'Pools homogeneous structural slopes after projecting each entity orthogonal to cross-sectional time averages to absorb heterogeneous loading...',
+      link: '/en/vietlod/chapter-05/group-5-5/b079-ccep',
+      badge: 'B079 · ccep'
+    },
+    {
+      title: '5.5.5. Cross-Sectionally Augmented Panel ARDL',
+      description: 'Augments dynamic entity ARDL regressions with contemporaneous and lagged cross-sectional averages to recover consistent long-run effects und...',
+      link: '/en/vietlod/chapter-05/group-5-5/b080-cs-ardl',
+      badge: 'B080 · cs_ardl'
+    }
+  ]}
+/>
+
+## 3. Comparative Execution Syntax Across Stata 18, R 4.x, and Python 3.11+
+
+| Section & Model Title | Estimator Key | Stata 18 MP Syntax | R 4.x Syntax | Python 3.11+ Syntax | Support |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `5.5.1` · [Pesaran CIPS Second-Generation Panel Unit-Root Test](/en/vietlod/chapter-05/group-5-5/b076-pesaran-cips) | `pesaran_cips` | `xtcips y, maxlags(2) bglags(2)` | `plm::cipstest(pdata$y, lags = 2, type = 'drift')` | `smf.ols('dy ~ l1_y + mean_l1_y + mean_dy', data=df).fit()` | <Available /> |
+| `5.5.2` · [Westerlund Error-Correction Panel Cointegration](/en/vietlod/chapter-05/group-5-5/b077-westerlund-coint) | `westerlund_coint` | `xtwest y x1 x2, lags(1) leads(0) lrwindow(3)` | `plm::plm(dy ~ l1_y + l1_x1 + dx1, data = pdata, model = 'within')` | `PanelOLS.from_formula('dy ~ 1 + l1_y + l1_x1 + dx1 + EntityEffects', data=pdata).fit()` | <Available /> |
+| `5.5.3` · [Common Correlated Effects Mean Group](/en/vietlod/chapter-05/group-5-5/b078-cce-mg) | `cce_mg` | `xtdcce2 y x1 x2, cr(y x1 x2) cr_lags(0)` | `plm::pcce(y ~ x1 + x2, data = pdata, model = 'mg')` | `smf.ols('y ~ x1 + x2 + mean_y + mean_x1 + mean_x2', data=df).fit()` | <Available /> |
+| `5.5.4` · [Common Correlated Effects Pooled Estimator](/en/vietlod/chapter-05/group-5-5/b079-ccep) | `ccep` | `xtdcce2 y x1 x2, cr(y x1 x2) pooled(x1 x2) pooledvce(nw)` | `plm::pcce(y ~ x1 + x2, data = pdata, model = 'p')` | `PanelOLS.from_formula('y ~ 1 + x1 + x2 + mean_y + mean_x1 + EntityEffects', data=pdata).fit()` | <Available /> |
+| `5.5.5` · [Cross-Sectionally Augmented Panel ARDL](/en/vietlod/chapter-05/group-5-5/b080-cs-ardl) | `cs_ardl` | `xtdcce2 d.y, lr(l.y x1 x2) lr_options(ardl) cr(y x1 x2) cr_lags(2)` | `plm::pcce(dy ~ l1_y + x1 + x2, data = pdata, model = 'mg')` | `smf.ols('dy ~ l1_y + x1 + x2 + mean_dy + mean_x1', data=df).fit()` | <Available /> |
+
+## 4. Standard Implementation Workflow for Group 5.5
+
+<Steps>
+
+### Step 1. Load Standardized Practice Datasets From VietLOD, EcoData, or Finco
+
+Download the model-specific `.csv` practice dataset in Group `5.5` or extract custom empirical panels from [EcoData](https://ecodata.io.vn) and [Finco](https://www.finco.vn).
+
+### Step 2. Select the Optimal Estimator for Your Error and Sample Structure
+
+Compare the estimators from `5.5.1` to `5.5.5` in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.
+
+### Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab
+
+Verify all required diagnostics including **Thống kê CIPS và CIPS, giá trị tới hạn chính xác theo cặp kích thước mẫu $N$ và $T$ ở mức $1\%, 5\%, 10\%$ — không chặn / có chặn / có xu thế, phân bố $t_i$ CADF.** and dispatch the specification to [EcoLab](https://ecolab.io.vn) for automated journal-grade reporting.
+
+</Steps>

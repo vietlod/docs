@@ -1,0 +1,83 @@
+---
+id: index
+title: "Group 10.4: Network Econometrics and Dyadic Regression"
+sidebar_label: "Group 10.4. Network Econometrics and Dyadic Regression"
+sidebar_position: 4
+slug: /vietlod/chapter-10/group-10-4
+description: "How-To User Guide for Methodological Group 10.4 — Network Econometrics and Dyadic Regression in Chapter 10: comparing and executing 1 econometric models across Stata 18 MP, R 4.x, and Python 3.11+."
+keywords:
+  - VietLOD Group 10.4
+  - Network Econometrics and Dyadic Regression
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Group 10.4: Network Econometrics and Dyadic Regression
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Methodological Group 10.4 — Network Econometrics and Dyadic Regression** in [Chapter 10: Spatial Econometrics, Conley Standard Errors and Dyadic Networks](/en/vietlod/chapter-10) provides step-by-step How-To implementation guides for **1 econometric models** spanning from Section `10.4.1` to `10.4.1`. Full theoretical derivations are available at [VietLOD Group 10.4](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-10-kinh-te-luong-khong-gian-conley-hac-va-mang-cap-doi/nhom-10-4-network) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="How-To Guide for Group 10.4: Network Econometrics and Dyadic Regression in Stata 18, R 4.x, and Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Methodological Overview and Structural Equations
+
+- **Methodological Focus**: Provides consistent estimation and robust inference for **Network Econometrics and Dyadic Regression** specifications within **Spatial Econometrics, Conley Standard Errors and Dyadic Networks**.
+- **Mandatory Post-Estimation Diagnostics**: Kiểm định điều kiện nhận dạng độc lập tuyến tính của các ma trận $I, G, G^2$ theo điều kiện Bramoullé–Djebbari–Fortin, thống kê $F$ giai đoạn 1 cho biến công cụ $G^2 X$ và kiểm định Hansen $J$.
+
+Core structural specification for Group 10.4:
+
+$$
+Y = \alpha \iota + \beta G Y + X\gamma + G X \delta + \varepsilon
+$$
+
+Estimator objective and moment conditions:
+
+$$
+\ell_N(\beta, \rho, \sigma^2) = -\frac{N}{2}\ln(2\pi\sigma^2) + \ln\det\left(I_N - \rho W\right) - \frac{1}{2\sigma^2}\| (I_N - \rho W)Y - X\beta - WX\theta \|_2^2
+$$
+
+<FeatureNotAvailable
+  note="When empirical data violate the identification conditions of Group 10.4, researchers should transition to the extended methodological groups in Chapter 10 or apply appropriate instrumental-variable and cluster-robust corrections."
+/>
+
+## 2. Econometric Models in Group 10.4
+
+<FeatureCards
+  features={[
+    {
+      title: '10.4.1. Bramoulle Linear-in-Means Network Peer Effects',
+      description: 'Estimates the Bramoulle Linear-in-Means Network Peer Effects specification within the Network Econometrics and Dyadic Regression framework b...',
+      link: '/en/vietlod/chapter-10/group-10-4/b170-network-peer-effects',
+      badge: 'B170 · network_peer_effects'
+    }
+  ]}
+/>
+
+## 3. Comparative Execution Syntax Across Stata 18, R 4.x, and Python 3.11+
+
+| Section & Model Title | Estimator Key | Stata 18 MP Syntax | R 4.x Syntax | Python 3.11+ Syntax | Support |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `10.4.1` · [Bramoulle Linear-in-Means Network Peer Effects](/en/vietlod/chapter-10/group-10-4/b170-network-peer-effects) | `network_peer_effects` | `ivregress 2sls y x1 (gy = g2x1), vce(robust)` | `AER::ivreg(y ~ x1 + gy + gx1 \| x1 + gx1 + g2x1, data = df)` | `IV2SLS.from_formula('y ~ 1 + x1 + gx1 + [gy ~ g2x1]', data=df).fit(cov_type='robust')` | <Available /> |
+
+## 4. Standard Implementation Workflow for Group 10.4
+
+<Steps>
+
+### Step 1. Load Standardized Practice Datasets From VietLOD, EcoData, or Finco
+
+Download the model-specific `.csv` practice dataset in Group `10.4` or extract custom empirical panels from [EcoData](https://ecodata.io.vn) and [Finco](https://www.finco.vn).
+
+### Step 2. Select the Optimal Estimator for Your Error and Sample Structure
+
+Compare the estimators from `10.4.1` to `10.4.1` in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.
+
+### Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab
+
+Verify all required diagnostics including **Kiểm định điều kiện nhận dạng độc lập tuyến tính của các ma trận $I, G, G^2$ theo điều kiện Bramoullé–Djebbari–Fortin, thống kê $F$ giai đoạn 1 cho biến công cụ $G^2 X$ và kiểm định Hansen $J$** and dispatch the specification to [EcoLab](https://ecolab.io.vn) for automated journal-grade reporting.
+
+</Steps>

@@ -1,0 +1,97 @@
+---
+id: index
+title: "Nhóm 5.6: Ngưỡng và phân vị dữ liệu bảng"
+sidebar_label: "Nhóm 5.6. Ngưỡng và phân vị dữ liệu bảng"
+sidebar_position: 6
+slug: /vietlod/chapter-05/group-5-6
+description: "Hướng dẫn thực hành Nhóm 5.6 — Ngưỡng và phân vị dữ liệu bảng thuộc Chương 05: so sánh và thực thi 3 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+keywords:
+  - Nhóm 5.6 VietLOD
+  - Ngưỡng và phân vị dữ liệu bảng
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Nhóm 5.6: Ngưỡng và phân vị dữ liệu bảng
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Nhóm phương pháp 5.6 — Ngưỡng và phân vị dữ liệu bảng** thuộc [Chương 05: Kinh tế lượng dữ liệu bảng tĩnh, động và phụ thuộc chéo](/vietlod/chapter-05) cung cấp quy trình thực hành từng bước cho **3 mô hình kinh tế lượng** từ bài `5.6.1` đến `5.6.3`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Nhóm 5.6](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-05-kinh-te-luong-du-lieu-bang-tinh-dong-va-phu-thuoc-cheo/nhom-5-6-nonlinear-quantile-panel) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Nhóm 5.6: Ngưỡng và phân vị dữ liệu bảng trên Stata 18, R 4.x và Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Bản chất phương pháp và hệ phương trình định danh
+
+- **Câu hỏi nghiên cứu trọng tâm của nhóm**: Làm sao để kiểm soát đại lượng không quan sát được theo cá thể, xử lý nội sinh động (GMM), phụ thuộc chéo thế hệ 2 (ARDL) và hiệu ứng ngưỡng trên dữ liệu bảng?
+- **Kiểm định chẩn đoán bắt buộc**: Kiểm định Bootstrap $F_1$ tồn tại hiệu ứng ngưỡng, vì $\gamma$ không định danh dưới $H_0$, khoảng tin cậy tỷ số hợp lý $LR_1(\gamma) \le c(\alpha)$ cho điểm ngưỡng $\hat{\gamma}$..
+
+Phương trình đặc tả cấu trúc của nhóm phương pháp 5.6:
+
+$$
+Y_{it} = \mu_i + X_{it}^\top \beta_1 \mathbb{I}(q_{it} \le \gamma) + X_{it}^\top \beta_2 \mathbb{I}(q_{it} \gt \gamma) + \varepsilon_{it}, \quad \hat{\gamma} = \arg\min_{\gamma} S_1(\gamma)
+$$
+
+Điều kiện mô-men và hàm mục tiêu ước lượng:
+
+$$
+\hat{\beta}_{\text{Panel}} = \left(\sum_{i=1}^N \tilde{X}_i^\top W_i \tilde{X}_i\right)^{-1}\left(\sum_{i=1}^N \tilde{X}_i^\top W_i \tilde{Y}_i\right), \quad \tilde{Y}_{it} = Y_{it} - \theta \bar{Y}_i
+$$
+
+<FeatureNotAvailable
+  note="Khi dữ liệu vi phạm giả định định danh của Nhóm 5.6, nhà nghiên cứu cần chuyển sang các nhóm phương pháp mở rộng trong Chương 05 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
+/>
+
+## 2. Danh mục các mô hình trong Nhóm 5.6
+
+<FeatureCards
+  features={[
+    {
+      title: '5.6.1. Mô hình hồi quy ngưỡng dữ liệu bảng tĩnh Hansen',
+      description: 'Phát hiện nội sinh một hoặc nhiều ngưỡng chuyển chế độ $\gamma$ trên dữ liệu bảng hiệu ứng cố định — $Y_{it} = \mu_i + \beta_1\' X_{it}\mathb...',
+      link: '/vietlod/chapter-05/group-5-6/b081-panel-threshold',
+      badge: 'B081 · panel_threshold'
+    },
+    {
+      title: '5.6.2. Mô hình ngưỡng dữ liệu bảng động có nội sinh Seo–Shin',
+      description: 'Ước lượng mô hình ngưỡng dữ liệu bảng động qua GMM sai phân bậc nhất, cho phép cả biến trễ $Y_{i,t-1}$, biến giải thích lẫn chính biến ngưỡn...',
+      link: '/vietlod/chapter-05/group-5-6/b082-dynamic-panel-threshold',
+      badge: 'B082 · dynamic_panel_threshold'
+    },
+    {
+      title: '5.6.3. Hồi quy phân vị dữ liệu bảng theo phương pháp moment (MM-QR)',
+      description: 'Ước lượng hồi quy phân vị trên dữ liệu bảng có hiệu ứng cố định cá thể $\alpha_i + \delta_i q(\tau)$ qua cấu trúc vị trí – thang đo, đảm bảo...',
+      link: '/vietlod/chapter-05/group-5-6/b083-panel-quantile-mmqr',
+      badge: 'B083 · panel_quantile_mmqr'
+    }
+  ]}
+/>
+
+## 3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
+
+| Bài học & Mô hình | Mã định danh | Cú pháp Stata 18 MP | Cú pháp R 4.x | Cú pháp Python 3.11+ | Hỗ trợ |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `5.6.1` · [Mô hình hồi quy ngưỡng dữ liệu bảng tĩnh Hansen](/vietlod/chapter-05/group-5-6/b081-panel-threshold) | `panel_threshold` | `xthreg y x1 x2, rx(x1) qx(q_thresh) thnum(1) bs(300)` | `pdR::ptm(dep = df$y, indep1 = df$x1, thres = df$q_thresh, bootn = 300)` | `PanelOLS.from_formula('y ~ x1_low + x1_high + x2 + EntityEffects', data=pdata).fit()` | <Available /> |
+| `5.6.2` · [Mô hình ngưỡng dữ liệu bảng động có nội sinh Seo–Shin](/vietlod/chapter-05/group-5-6/b082-dynamic-panel-threshold) | `dynamic_panel_threshold` | `xthenreg y q_thresh x1, endo(l.y) grid_num(100) boost(200)` | `gmm::gmm(dy ~ dl1_y + dx1_low + dx1_high, x = ~ l2_y + dx1, data = df)` | `IVGMM.from_formula('dy ~ dx1_low + dx1_high + [dl1_y ~ l2_y]', data=df).fit()` | <Available /> |
+| `5.6.3` · [Hồi quy phân vị dữ liệu bảng theo phương pháp moment (MM-QR)](/vietlod/chapter-05/group-5-6/b083-panel-quantile-mmqr) | `panel_quantile_mmqr` | `xtqreg y x1 x2, i(id) quantile(0.25 0.5 0.75)` | `quantreg::rq(y_demean ~ x1_demean + x2_demean, tau = 0.5, data = df)` | `smf.quantreg('y_demean ~ x1_demean + x2_demean', data=df).fit(q=0.5)` | <Available /> |
+
+## 4. Quy trình thực hành chuẩn cho Nhóm 5.6
+
+<Steps>
+
+### Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco
+
+Tải tệp CSV thực hành của từng mô hình trong Nhóm `5.6` hoặc kết nối dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
+
+### Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu
+
+So sánh các mô hình từ `5.6.1` đến `5.6.3` trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.
+
+### Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab
+
+Thực hiện đầy đủ bộ kiểm định **Kiểm định Bootstrap $F_1$ tồn tại hiệu ứng ngưỡng, vì $\gamma$ không định danh dưới $H_0$, khoảng tin cậy tỷ số hợp lý $LR_1(\gamma) \le c(\alpha)$ cho điểm ngưỡng $\hat{\gamma}$.** và đẩy mã mô hình sang [EcoLab](https://ecolab.io.vn) để xuất bảng kết quả chuẩn công bố quốc tế.
+
+</Steps>

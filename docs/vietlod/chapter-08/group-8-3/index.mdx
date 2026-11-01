@@ -1,0 +1,90 @@
+---
+id: index
+title: "Nhóm 8.3: Độ biến động đa biến"
+sidebar_label: "Nhóm 8.3. Độ biến động đa biến"
+sidebar_position: 3
+slug: /vietlod/chapter-08/group-8-3
+description: "Hướng dẫn thực hành Nhóm 8.3 — Độ biến động đa biến thuộc Chương 08: so sánh và thực thi 2 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+keywords:
+  - Nhóm 8.3 VietLOD
+  - Độ biến động đa biến
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Nhóm 8.3: Độ biến động đa biến
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Nhóm phương pháp 8.3 — Độ biến động đa biến** thuộc [Chương 08: Độ biến động tài chính, định giá tài sản và rủi ro hệ thống](/vietlod/chapter-08) cung cấp quy trình thực hành từng bước cho **2 mô hình kinh tế lượng** từ bài `8.3.1` đến `8.3.2`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Nhóm 8.3](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-08-do-bien-dong-tai-chinh-dinh-gia-tai-san-va-rui-ro-he-thong/nhom-8-3-multivariate-vol) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Nhóm 8.3: Độ biến động đa biến trên Stata 18, R 4.x và Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Bản chất phương pháp và hệ phương trình định danh
+
+- **Câu hỏi nghiên cứu trọng tâm của nhóm**: Làm thế nào để mô hình hóa cụm biến động bất đối xứng, tương quan động đa tài sản (GARCH), định giá đa nhân tố (GRS) và đo lường rủi ro đuôi hệ thống (CoVaR)?
+- **Kiểm định chẩn đoán bắt buộc**: Kiểm định Tse (2000) / Engle–Sheppard LM về tính hằng định của tương quan — $H_0: \text{CCC}$ vs $H_1: \text{DCC}$, kiểm định xác định dương trị riêng $\lambda_{\min}(\hat{R}) \gt  0$..
+
+Phương trình đặc tả cấu trúc của nhóm phương pháp 8.3:
+
+$$
+H_t = D_t R D_t, \quad D_t = \text{diag}(\sigma_{1,t}, \dots, \sigma_{K,t}), \quad R = [\rho_{ij}]_{K\times K}, \quad \sigma_{k,t}^2 = \omega_k + \alpha_k \varepsilon_{k,t-1}^2 + \beta_k \sigma_{k,t-1}^2
+$$
+
+Điều kiện mô-men và hàm mục tiêu ước lượng:
+
+$$
+\ell_T(\theta) = -\frac{1}{2}\sum_{t=1}^T \left[\ln(2\pi) + \ln(\sigma_t^2(\theta)) + \frac{\varepsilon_t^2}{\sigma_t^2(\theta)}\right], \quad z_t = \frac{\varepsilon_t}{\sigma_t} \sim \text{i.i.d. }(0, 1)
+$$
+
+<FeatureNotAvailable
+  note="Khi dữ liệu vi phạm giả định định danh của Nhóm 8.3, nhà nghiên cứu cần chuyển sang các nhóm phương pháp mở rộng trong Chương 08 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
+/>
+
+## 2. Danh mục các mô hình trong Nhóm 8.3
+
+<FeatureCards
+  features={[
+    {
+      title: '8.3.1. Mô hình GARCH đa biến tương quan có điều kiện hằng số (GARCH)',
+      description: 'Mô hình phương sai đa biến của $k$ tài sản tài chính tách riêng phương sai biên GARCH từng tài sản $D_t = \text{diag}(\sigma_{1t}\dots\sigma...',
+      link: '/vietlod/chapter-08/group-8-3/b133-ccc-garch',
+      badge: 'B133 · ccc_garch'
+    },
+    {
+      title: '8.3.2. Mô hình GARCH đa biến tương quan có điều kiện động (GARCH)',
+      description: 'Ước lượng hai bước của Engle: bước 1 ước lượng (GARCH) đơn biến cho từng tài sản để lấy phần dư chuẩn hóa, bước 2 mô hình hóa ma trận tương ...',
+      link: '/vietlod/chapter-08/group-8-3/b134-dcc-garch',
+      badge: 'B134 · dcc_garch'
+    }
+  ]}
+/>
+
+## 3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
+
+| Bài học & Mô hình | Mã định danh | Cú pháp Stata 18 MP | Cú pháp R 4.x | Cú pháp Python 3.11+ | Hỗ trợ |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `8.3.1` · [Mô hình GARCH đa biến tương quan có điều kiện hằng số (GARCH)](/vietlod/chapter-08/group-8-3/b133-ccc-garch) | `ccc_garch` | `mgarch ccc (ret1 ret2 = ), arch(1) garch(1)` | `rmgarch::cgarchfit(cgarchspec(uspec), data = df[, c('ret1', 'ret2')])` | `arch_model(df['y'], vol='GARCH', p=1, q=1).fit(disp='off')` | <Available /> |
+| `8.3.2` · [Mô hình GARCH đa biến tương quan có điều kiện động (GARCH)](/vietlod/chapter-08/group-8-3/b134-dcc-garch) | `dcc_garch` | `mgarch dcc (ret1 ret2 = ), arch(1) garch(1)` | `rmgarch::dccfit(dccspec(uspec), data = df[, c('ret1', 'ret2')])` | `arch_model(ret1, vol='GARCH', p=1, q=1).fit(disp='off')` | <Available /> |
+
+## 4. Quy trình thực hành chuẩn cho Nhóm 8.3
+
+<Steps>
+
+### Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco
+
+Tải tệp CSV thực hành của từng mô hình trong Nhóm `8.3` hoặc kết nối dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
+
+### Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu
+
+So sánh các mô hình từ `8.3.1` đến `8.3.2` trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.
+
+### Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab
+
+Thực hiện đầy đủ bộ kiểm định **Kiểm định Tse (2000) / Engle–Sheppard LM về tính hằng định của tương quan — $H_0: \text{CCC}$ vs $H_1: \text{DCC}$, kiểm định xác định dương trị riêng $\lambda_{\min}(\hat{R}) \gt  0$.** và đẩy mã mô hình sang [EcoLab](https://ecolab.io.vn) để xuất bảng kết quả chuẩn công bố quốc tế.
+
+</Steps>

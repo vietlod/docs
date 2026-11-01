@@ -7,7 +7,7 @@ import rehypeKatex from 'rehype-katex';
 
 const docsDomain = 'https://docs.tnsai.vn';
 
-// Site-wide structured data (read by search engines and AI/LLM crawlers).
+// Site-wide structured data for search engines and AI crawlers.
 const orgSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
@@ -15,8 +15,15 @@ const orgSchema = {
   name: 'TNS AI',
   url: docsDomain,
   logo: `${docsDomain}/img/ecodata-logo.svg`,
+  sameAs: [
+    'https://www.tnsai.vn',
+    'https://ecodata.io.vn',
+    'https://ecolab.io.vn',
+    'https://www.finco.vn',
+    'https://vietlod.tnsai.vn',
+  ],
   description:
-    'Documentation portal for the TNS AI application ecosystem (EcoData, EcoLab, EcoLit, PDFHUB, KEYWORDs).',
+    'Documentation portal for the TNS AI quantitative research and data platform ecosystem including EcoData, EcoLab, Finco, and VietLOD.',
 };
 
 const websiteSchema = {
@@ -104,7 +111,7 @@ const config = {
           sidebarCollapsible: true,
           editUrl: 'https://github.com/vietlod/docs/tree/main/',
           remarkPlugins: [remarkMath],
-          rehypePlugins: [rehypeKatex],
+          rehypePlugins: [[rehypeKatex, { strict: false }]],
         },
         blog: false,
         theme: {
@@ -125,21 +132,18 @@ const config = {
     [
       'docusaurus-plugin-llms',
       {
-        // Sinh /llms.txt, /llms-full.txt va ban .md tung trang cho AI/LLM crawler
-        // (chuan llmstxt.org). Thay cho file static/llms.txt thu cong truoc day.
         generateLLMsTxt: true,
         generateLLMsFullTxt: true,
         generateMarkdownFiles: true,
         docsDir: 'docs',
         title: 'TNS AI Docs',
         description:
-          'Tai lieu huong dan he sinh thai ung dung TNS AI: EcoData, EcoLab, EcoLit, PDFHUB, KEYWORDs.',
+          'Tài liệu hướng dẫn hệ sinh thái ứng dụng TNS AI: EcoData, EcoLab, Finco và VietLOD.',
         includeOrder: [
           'ecodata/**',
           'ecolab/**',
-          'ecolit/**',
-          'pdfhub/**',
-          'keywords/**',
+          'finco/**',
+          'vietlod/**',
         ],
         includeUnmatchedLast: true,
       },
@@ -179,21 +183,15 @@ const config = {
           },
           {
             type: 'docSidebar',
-            sidebarId: 'ecolitSidebar',
+            sidebarId: 'fincoSidebar',
             position: 'left',
-            label: 'EcoLit',
+            label: 'Finco',
           },
           {
             type: 'docSidebar',
-            sidebarId: 'pdfhubSidebar',
+            sidebarId: 'vietlodSidebar',
             position: 'left',
-            label: 'PDFHUB',
-          },
-          {
-            type: 'docSidebar',
-            sidebarId: 'keywordsSidebar',
-            position: 'left',
-            label: 'KEYWORDs',
+            label: 'VietLOD',
           },
           {
             type: 'localeDropdown',
@@ -220,21 +218,33 @@ const config = {
                 to: '/ecolab/overview',
               },
               {
-                label: 'Tài liệu EcoLit',
-                to: '/ecolit/overview',
+                label: 'Tài liệu Finco',
+                to: '/finco/overview',
+              },
+              {
+                label: 'Tài liệu VietLOD',
+                to: '/vietlod/overview',
               },
             ],
           },
           {
-            title: 'Phân tích & Tiện ích',
+            title: 'Hệ sinh thái TNS AI',
             items: [
               {
-                label: 'Tài liệu PDFHUB',
-                to: '/pdfhub/overview',
+                label: 'Cổng dữ liệu EcoData',
+                href: 'https://ecodata.io.vn',
               },
               {
-                label: 'Tài liệu KEYWORDs',
-                to: '/keywords/overview',
+                label: 'Phòng thí nghiệm EcoLab',
+                href: 'https://ecolab.io.vn',
+              },
+              {
+                label: 'Nền tảng dữ liệu Finco',
+                href: 'https://www.finco.vn',
+              },
+              {
+                label: 'Cổng học thuật VietLOD',
+                href: 'https://vietlod.tnsai.vn',
               },
             ],
           },

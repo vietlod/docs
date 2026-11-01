@@ -1,0 +1,104 @@
+---
+id: index
+title: "Group 2.3: Dimension Reduction and Latent Factors"
+sidebar_label: "Group 2.3. Dimension Reduction and Latent Factors"
+sidebar_position: 3
+slug: /vietlod/chapter-02/group-2-3
+description: "How-To User Guide for Methodological Group 2.3 — Dimension Reduction and Latent Factors in Chapter 02: comparing and executing 4 econometric models across Stata 18 MP, R 4.x, and Python 3.11+."
+keywords:
+  - VietLOD Group 2.3
+  - Dimension Reduction and Latent Factors
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Group 2.3: Dimension Reduction and Latent Factors
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Methodological Group 2.3 — Dimension Reduction and Latent Factors** in [Chapter 02: Regularized, High-Dimensional Inference and Dimension Reduction Models](/en/vietlod/chapter-02) provides step-by-step How-To implementation guides for **4 econometric models** spanning from Section `2.3.1` to `2.3.4`. Full theoretical derivations are available at [VietLOD Group 2.3](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-02-mo-hinh-chinh-quy-hoa-suy-luan-chieu-cao-va-giam-chieu/nhom-2-3-dimension-reduction) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="How-To Guide for Group 2.3: Dimension Reduction and Latent Factors in Stata 18, R 4.x, and Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Methodological Overview and Structural Equations
+
+- **Methodological Focus**: Provides consistent estimation and robust inference for **Dimension Reduction and Latent Factors** specifications within **Regularized, High-Dimensional Inference and Dimension Reduction Models**.
+- **Mandatory Post-Estimation Diagnostics**: Tỷ lệ phương sai giải thích tích lũy đạt từ $80\%$ trở lên, biểu đồ Scree plot trị riêng và K-Fold (CV) (MSE) để chọn số thành phần $M$.
+
+Core structural specification for Group 2.3:
+
+$$
+Z_m = X V_m, \quad \hat{\beta}_{\text{PCR}} = V_m (Z_m^\top Z_m)^{-1} Z_m^\top Y
+$$
+
+Estimator objective and moment conditions:
+
+$$
+\hat{\beta}(\lambda, \alpha) = \arg\min_{\beta \in \mathbb{R}^p} \left\{\frac{1}{2N}\sum_{i=1}^N \left(Y_i - X_i^\top \beta\right)^2 + \lambda\left(\alpha \|\beta\|_1 + \frac{1-\alpha}{2}\|\beta\|_2^2\right)\right\}
+$$
+
+<FeatureNotAvailable
+  note="When empirical data violate the identification conditions of Group 2.3, researchers should transition to the extended methodological groups in Chapter 02 or apply appropriate instrumental-variable and cluster-robust corrections."
+/>
+
+## 2. Econometric Models in Group 2.3
+
+<FeatureCards
+  features={[
+    {
+      title: '2.3.1. Principal Component Regression — PCR',
+      description: 'Estimates the Principal Component Regression — PCR specification within the Dimension Reduction and Latent Factors framework by optimizing t...',
+      link: '/en/vietlod/chapter-02/group-2-3/b022-pcr',
+      badge: 'B022 · pcr'
+    },
+    {
+      title: '2.3.2. Partial Least Squares Regression',
+      description: 'Extracts latent components maximizing predictor-outcome covariance under severe multicollinearity. Across empirical econometrics, `pls_regre...',
+      link: '/en/vietlod/chapter-02/group-2-3/b023-pls-regression',
+      badge: 'B023 · pls_regression'
+    },
+    {
+      title: '2.3.3. Principal Component Analysis and Composite Index',
+      description: 'Extracts orthogonal latent principal components and builds variance-weighted composite indices with KMO and Bai-Ng diagnostics. Across empir...',
+      link: '/en/vietlod/chapter-02/group-2-3/b024-pca-factors',
+      badge: 'B024 · pca_factors'
+    },
+    {
+      title: '2.3.4. Exploratory Factor Analysis',
+      description: 'Decomposes observed indicator covariance into common latent constructs and idiosyncratic measurement uniqueness with Varimax rotation. Acros...',
+      link: '/en/vietlod/chapter-02/group-2-3/b025-factor-analysis',
+      badge: 'B025 · factor_analysis'
+    }
+  ]}
+/>
+
+## 3. Comparative Execution Syntax Across Stata 18, R 4.x, and Python 3.11+
+
+| Section & Model Title | Estimator Key | Stata 18 MP Syntax | R 4.x Syntax | Python 3.11+ Syntax | Support |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `2.3.1` · [Principal Component Regression — PCR](/en/vietlod/chapter-02/group-2-3/b022-pcr) | `pcr` | `pca x1 x2 x3 -> predict pc1 pc2, score -> regress y pc1 pc2` | `pls::pcr(y ~ x1 + x2, validation = 'CV', data = df)` | `Pipeline([('scaler', StandardScaler()), ('pca', PCA(n_components=2)), ('ols', LinearRegression())]).fit(X, y)` | <Available /> |
+| `2.3.2` · [Partial Least Squares Regression](/en/vietlod/chapter-02/group-2-3/b023-pls-regression) | `pls_regression` | `plssem (Y > y) (X > x1 x2), structural(Y X)` | `pls::plsr(y ~ x1 + x2, ncomp = 2, validation = 'CV', data = df)` | `PLSRegression(n_components=2).fit(X, y)` | <Available /> |
+| `2.3.3` · [Principal Component Analysis and Composite Index](/en/vietlod/chapter-02/group-2-3/b024-pca-factors) | `pca_factors` | `pca x1 x2 x3, components(2)` | `stats::prcomp(df[, c('x1', 'x2')], scale. = TRUE)` | `PCA(n_components=2).fit_transform(X_std)` | <Available /> |
+| `2.3.4` · [Exploratory Factor Analysis](/en/vietlod/chapter-02/group-2-3/b025-factor-analysis) | `factor_analysis` | `factor x1 x2 x3, ml factors(2)` | `stats::factanal(df[, c('x1', 'x2', 'x3')], factors = 1, rotation = 'varimax')` | `FactorAnalysis(n_components=2, rotation='varimax').fit(X_std)` | <Available /> |
+
+## 4. Standard Implementation Workflow for Group 2.3
+
+<Steps>
+
+### Step 1. Load Standardized Practice Datasets From VietLOD, EcoData, or Finco
+
+Download the model-specific `.csv` practice dataset in Group `2.3` or extract custom empirical panels from [EcoData](https://ecodata.io.vn) and [Finco](https://www.finco.vn).
+
+### Step 2. Select the Optimal Estimator for Your Error and Sample Structure
+
+Compare the estimators from `2.3.1` to `2.3.4` in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.
+
+### Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab
+
+Verify all required diagnostics including **Tỷ lệ phương sai giải thích tích lũy đạt từ $80\%$ trở lên, biểu đồ Scree plot trị riêng và K-Fold (CV) (MSE) để chọn số thành phần $M$** and dispatch the specification to [EcoLab](https://ecolab.io.vn) for automated journal-grade reporting.
+
+</Steps>

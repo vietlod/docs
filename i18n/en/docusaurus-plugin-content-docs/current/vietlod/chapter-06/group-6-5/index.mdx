@@ -1,0 +1,111 @@
+---
+id: index
+title: "Group 6.5: Nonlinear Time Series, Structural Breaks and Bubbles"
+sidebar_label: "Group 6.5. Nonlinear Time Series, Structural Breaks and Bubbles"
+sidebar_position: 5
+slug: /vietlod/chapter-06/group-6-5
+description: "How-To User Guide for Methodological Group 6.5 — Nonlinear Time Series, Structural Breaks and Bubbles in Chapter 06: comparing and executing 5 econometric models across Stata 18 MP, R 4.x, and Python 3.11+."
+keywords:
+  - VietLOD Group 6.5
+  - Nonlinear Time Series, Structural Breaks and Bubbles
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Group 6.5: Nonlinear Time Series, Structural Breaks and Bubbles
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Methodological Group 6.5 — Nonlinear Time Series, Structural Breaks and Bubbles** in [Chapter 06: Univariate, Nonlinear, Structural Break and Bubble Time Series](/en/vietlod/chapter-06) provides step-by-step How-To implementation guides for **5 econometric models** spanning from Section `6.5.1` to `6.5.5`. Full theoretical derivations are available at [VietLOD Group 6.5](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-06-chuoi-thoi-gian-don-bien-phi-tuyen-diem-gay-va-bong-bong/nhom-6-5-nonlinear-breaks-bubbles) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="How-To Guide for Group 6.5: Nonlinear Time Series, Structural Breaks and Bubbles in Stata 18, R 4.x, and Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Methodological Overview and Structural Equations
+
+- **Methodological Focus**: Provides consistent estimation and robust inference for **Nonlinear Time Series, Structural Breaks and Bubbles** specifications within **Univariate, Nonlinear, Structural Break and Bubble Time Series**.
+- **Mandatory Post-Estimation Diagnostics**: Thống kê Sup-Wald / Sup-LM bootstrap $p$-value kiểm định tồn tại ngưỡng, khoảng tin cậy $95\%$ cho điểm ngưỡng $\hat{\gamma}$, kiểm định phương sai thay đổi từng chế độ..
+
+Core structural specification for Group 6.5:
+
+$$
+Y_t = X_t^\top \beta_1 \mathbb{I}(q_t \le \gamma) + X_t^\top \beta_2 \mathbb{I}(q_t \gt \gamma) + \varepsilon_t, \quad \text{LR}_T(\gamma) = T\frac{\text{SSR}(\gamma) - \text{SSR}(\hat{\gamma})}{\text{SSR}(\hat{\gamma})}
+$$
+
+Estimator objective and moment conditions:
+
+$$
+\hat{\theta}_T = \arg\max_{\theta \in \Theta} \ell_T\left(Y_1, \dots, Y_T; \theta\right), \quad \Phi(L)(1-L)^d Y_t = \mu + \Theta(L)\varepsilon_t
+$$
+
+<FeatureNotAvailable
+  note="When empirical data violate the identification conditions of Group 6.5, researchers should transition to the extended methodological groups in Chapter 06 or apply appropriate instrumental-variable and cluster-robust corrections."
+/>
+
+## 2. Econometric Models in Group 6.5
+
+<FeatureCards
+  features={[
+    {
+      title: '6.5.1. Hansen Sample-Splitting Threshold Regression',
+      description: 'Splits cross-sectional or time-series regressions into distinct regimes around an unknown observable threshold gamma with inverted LR confid...',
+      link: '/en/vietlod/chapter-06/group-6-5/b102-threshold-regression',
+      badge: 'B102 · threshold_regression'
+    },
+    {
+      title: '6.5.2. Smooth Transition Autoregressive Model',
+      description: 'Models continuous nonlinear transitions between extreme regimes via Logistic LSTAR or Exponential ESTAR transition functions selected by Ter...',
+      link: '/en/vietlod/chapter-06/group-6-5/b103-star-smooth-transition',
+      badge: 'B103 · star_smooth_transition'
+    },
+    {
+      title: '6.5.3. Mixed-Data Sampling Regression',
+      description: 'Parsimoniously links low-frequency macro outcomes to high-frequency distributed lags via normalized exponential Almon polynomials and U-MIDA...',
+      link: '/en/vietlod/chapter-06/group-6-5/b104-midas-regression',
+      badge: 'B104 · midas_regression'
+    },
+    {
+      title: '6.5.4. Bai-Perron Multiple Structural Breaks',
+      description: 'Globally partitions time-series regressions into m+1 regimes at unknown break dates via dynamic programming with sup-F, UDmax, and LWZ selec...',
+      link: '/en/vietlod/chapter-06/group-6-5/b105-bai-perron-break',
+      badge: 'B105 · bai_perron_break'
+    },
+    {
+      title: '6.5.5. Phillips-Shi-Yu Recursive Bubble Detection',
+      description: 'Detects and date-stamps origination and collapse of multiple explosive speculative bubbles via double-supremum right-tailed ADF windows and ...',
+      link: '/en/vietlod/chapter-06/group-6-5/b106-psy-bubble-gsadf',
+      badge: 'B106 · psy_bubble_gsadf'
+    }
+  ]}
+/>
+
+## 3. Comparative Execution Syntax Across Stata 18, R 4.x, and Python 3.11+
+
+| Section & Model Title | Estimator Key | Stata 18 MP Syntax | R 4.x Syntax | Python 3.11+ Syntax | Support |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `6.5.1` · [Hansen Sample-Splitting Threshold Regression](/en/vietlod/chapter-06/group-6-5/b102-threshold-regression) | `threshold_regression` | `threshold y, regionvars(x1 x2) threshvar(q_thresh) nthresholds(1)` | `strucchange::Fstats(y ~ x1 + x2, data = df)` | `smf.ols('y ~ x1 * I(q_thresh > gamma) + x2', data=df).fit(cov_type='HC1')` | <Available /> |
+| `6.5.2` · [Smooth Transition Autoregressive Model](/en/vietlod/chapter-06/group-6-5/b103-star-smooth-transition) | `star_smooth_transition` | `nl (y = ({b0} + {b1}*l1_y) + ({d0} + {d1}*l1_y)/(1 + exp(-{gamma}*(l1_y - {c}))))` | `minpack.lm::nlsLM(y ~ b0 + b1*l1_y + (d0 + d1*l1_y)/(1 + exp(-g*(l1_y - c))), data = df)` | `scipy.optimize.least_squares(lstar_residuals, theta0)` | <Available /> |
+| `6.5.3` · [Mixed-Data Sampling Regression](/en/vietlod/chapter-06/group-6-5/b104-midas-regression) | `midas_regression` | `regress y_q x_m_lag0 x_m_lag1 x_m_lag2, vce(hac nwest 4)` | `midasr::midas_r(y_q ~ mls(x_m, 0:11, 3, nealmon), start = list(x_m = c(1, -0.5)))` | `smf.ols('y ~ x1 + x2', data=df).fit(cov_type='HAC', cov_kwds={'maxlags': 4})` | <Available /> |
+| `6.5.4` · [Bai-Perron Multiple Structural Breaks](/en/vietlod/chapter-06/group-6-5/b105-bai-perron-break) | `bai_perron_break` | `regress y x1 x2 -> estat sbsingle` | `strucchange::breakpoints(y ~ x1 + x2, data = df, h = 0.15)` | `smf.ols('y ~ x1 * I(t >= t_break) + x2', data=df).fit(cov_type='HAC', cov_kwds={'maxlags': 4})` | <Available /> |
+| `6.5.5` · [Phillips-Shi-Yu Recursive Bubble Detection](/en/vietlod/chapter-06/group-6-5/b106-psy-bubble-gsadf) | `psy_bubble_gsadf` | `radf y, prefix(bsadf) boot(500)` | `exuber::radf(df$y, lag = 1)` | `adfuller(df['y'], maxlag=2, regression='c', autolag='AIC')` | <Available /> |
+
+## 4. Standard Implementation Workflow for Group 6.5
+
+<Steps>
+
+### Step 1. Load Standardized Practice Datasets From VietLOD, EcoData, or Finco
+
+Download the model-specific `.csv` practice dataset in Group `6.5` or extract custom empirical panels from [EcoData](https://ecodata.io.vn) and [Finco](https://www.finco.vn).
+
+### Step 2. Select the Optimal Estimator for Your Error and Sample Structure
+
+Compare the estimators from `6.5.1` to `6.5.5` in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.
+
+### Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab
+
+Verify all required diagnostics including **Thống kê Sup-Wald / Sup-LM bootstrap $p$-value kiểm định tồn tại ngưỡng, khoảng tin cậy $95\%$ cho điểm ngưỡng $\hat{\gamma}$, kiểm định phương sai thay đổi từng chế độ.** and dispatch the specification to [EcoLab](https://ecolab.io.vn) for automated journal-grade reporting.
+
+</Steps>

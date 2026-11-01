@@ -1,0 +1,90 @@
+---
+id: index
+title: "Nhóm 11.1: Phân tích sống sót phi tham số"
+sidebar_label: "Nhóm 11.1. Phân tích sống sót phi tham số"
+sidebar_position: 1
+slug: /vietlod/chapter-11/group-11-1
+description: "Hướng dẫn thực hành Nhóm 11.1 — Phân tích sống sót phi tham số thuộc Chương 11: so sánh và thực thi 2 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+keywords:
+  - Nhóm 11.1 VietLOD
+  - Phân tích sống sót phi tham số
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Nhóm 11.1: Phân tích sống sót phi tham số
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Nhóm phương pháp 11.1 — Phân tích sống sót phi tham số** thuộc [Chương 11: Phân tích sống sót, thời gian sự kiện và rủi ro cạnh tranh](/vietlod/chapter-11) cung cấp quy trình thực hành từng bước cho **2 mô hình kinh tế lượng** từ bài `11.1.1` đến `11.1.2`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Nhóm 11.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-11-phan-tich-song-sot-thoi-gian-su-kien-va-rui-ro-canh-tranh/nhom-11-1-nonparametric) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Nhóm 11.1: Phân tích sống sót phi tham số trên Stata 18, R 4.x và Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Bản chất phương pháp và hệ phương trình định danh
+
+- **Câu hỏi nghiên cứu trọng tâm của nhóm**: Làm sao để mô hình hóa thời gian tồn tại doanh nghiệp, thời gian thất nghiệp hoặc thời gian vỡ nợ khi dữ liệu bị kiểm duyệt phải và có các sự kiện cạnh tranh loại trừ nhau?
+- **Kiểm định chẩn đoán bắt buộc**: Công thức phương sai Greenwood cho dải tin cậy $95\%$ của đường cong sống sót, ước lượng thời gian sống sót trung vị và các kiểm định so sánh giữa các nhóm Log-Rank, Wilcoxon và Tarone–Ware.
+
+Phương trình đặc tả cấu trúc của nhóm phương pháp 11.1:
+
+$$
+\hat{S}(t) = \prod_{t_j \le t} \left(1 - \frac{d_j}{n_j}\right)
+$$
+
+Điều kiện mô-men và hàm mục tiêu ước lượng:
+
+$$
+\ell_{\text{partial}}(\beta) = \sum_{i=1}^N \delta_i \left[X_i^\top \beta - \ln\left(\sum_{j \in \mathcal{R}(t_i)} \exp(X_j^\top \beta)\right)\right], \quad S(t \mid X_i) = \exp\left(-H_0(t)\exp(X_i^\top \beta)\right)
+$$
+
+<FeatureNotAvailable
+  note="Khi dữ liệu vi phạm giả định định danh của Nhóm 11.1, nhà nghiên cứu cần chuyển sang các nhóm phương pháp mở rộng trong Chương 11 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
+/>
+
+## 2. Danh mục các mô hình trong Nhóm 11.1
+
+<FeatureCards
+  features={[
+    {
+      title: '11.1.1. Ước lượng đường cong sống sót phi tham số Kaplan–Meier',
+      description: 'Ước lượng phi tham số hàm sống sót $S(t) = P(T \gt t)$ bằng tích giới hạn các xác suất sống sót có điều kiện qua từng thời điểm xảy ra sự ki...',
+      link: '/vietlod/chapter-11/group-11-1/b171-kaplan-meier',
+      badge: 'B171 · kaplan_meier'
+    },
+    {
+      title: '11.1.2. Ước lượng hàm nguy cơ tích lũy phi tham số Nelson–Aalen',
+      description: 'Ước lượng phi tham số hàm nguy cơ tích lũy $H(t) = \int_0^t h(u)\,du$ bằng tổng tỉ số số sự kiện xảy ra trên quy mô tập hợp có rủi ro tại mỗ...',
+      link: '/vietlod/chapter-11/group-11-1/b172-nelson-aalen',
+      badge: 'B172 · nelson_aalen'
+    }
+  ]}
+/>
+
+## 3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
+
+| Bài học & Mô hình | Mã định danh | Cú pháp Stata 18 MP | Cú pháp R 4.x | Cú pháp Python 3.11+ | Hỗ trợ |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `11.1.1` · [Ước lượng đường cong sống sót phi tham số Kaplan–Meier](/vietlod/chapter-11/group-11-1/b171-kaplan-meier) | `kaplan_meier` | `stset duration, failure(event) -> sts list -> sts test group` | `survival::survfit(Surv(duration, event) ~ group, data = df)` | `KaplanMeierFitter().fit(df['duration'], event_observed=df['event'])` | <Available /> |
+| `11.1.2` · [Ước lượng hàm nguy cơ tích lũy phi tham số Nelson–Aalen](/vietlod/chapter-11/group-11-1/b172-nelson-aalen) | `nelson_aalen` | `stset duration, failure(event) -> sts list, na` | `survival::survfit(Surv(duration, event) ~ 1, type = 'fh', data = df)` | `NelsonAalenFitter().fit(df['duration'], event_observed=df['event'])` | <Available /> |
+
+## 4. Quy trình thực hành chuẩn cho Nhóm 11.1
+
+<Steps>
+
+### Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco
+
+Tải tệp CSV thực hành của từng mô hình trong Nhóm `11.1` hoặc kết nối dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
+
+### Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu
+
+So sánh các mô hình từ `11.1.1` đến `11.1.2` trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.
+
+### Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab
+
+Thực hiện đầy đủ bộ kiểm định **Công thức phương sai Greenwood cho dải tin cậy $95\%$ của đường cong sống sót, ước lượng thời gian sống sót trung vị và các kiểm định so sánh giữa các nhóm Log-Rank, Wilcoxon và Tarone–Ware** và đẩy mã mô hình sang [EcoLab](https://ecolab.io.vn) để xuất bảng kết quả chuẩn công bố quốc tế.
+
+</Steps>

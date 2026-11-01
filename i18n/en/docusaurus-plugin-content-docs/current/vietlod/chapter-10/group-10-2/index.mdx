@@ -1,0 +1,90 @@
+---
+id: index
+title: "Group 10.2: Spatial Panel Econometrics"
+sidebar_label: "Group 10.2. Spatial Panel Econometrics"
+sidebar_position: 2
+slug: /vietlod/chapter-10/group-10-2
+description: "How-To User Guide for Methodological Group 10.2 — Spatial Panel Econometrics in Chapter 10: comparing and executing 2 econometric models across Stata 18 MP, R 4.x, and Python 3.11+."
+keywords:
+  - VietLOD Group 10.2
+  - Spatial Panel Econometrics
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Group 10.2: Spatial Panel Econometrics
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Methodological Group 10.2 — Spatial Panel Econometrics** in [Chapter 10: Spatial Econometrics, Conley Standard Errors and Dyadic Networks](/en/vietlod/chapter-10) provides step-by-step How-To implementation guides for **2 econometric models** spanning from Section `10.2.1` to `10.2.2`. Full theoretical derivations are available at [VietLOD Group 10.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-10-kinh-te-luong-khong-gian-conley-hac-va-mang-cap-doi/nhom-10-2-spatial-panel) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="How-To Guide for Group 10.2: Spatial Panel Econometrics in Stata 18, R 4.x, and Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Methodological Overview and Structural Equations
+
+- **Methodological Focus**: Provides consistent estimation and robust inference for **Spatial Panel Econometrics** specifications within **Spatial Econometrics, Conley Standard Errors and Dyadic Networks**.
+- **Mandatory Post-Estimation Diagnostics**: Kiểm định Hausman không gian của Mutl–Pfaffermayr đối chiếu Spatial (FE) và Spatial (RE), kiểm định (LR) cho hiệu ứng cố định không gian và thời gian, và phân rã tác động trực tiếp / gián tiếp ngắn hạn và dài hạn.
+
+Core structural specification for Group 10.2:
+
+$$
+Y_{it} = \rho \sum_{j=1}^N w_{ij} Y_{jt} + X_{it}^\top \beta + \mu_i + \lambda_t + \varepsilon_{it}
+$$
+
+Estimator objective and moment conditions:
+
+$$
+\ell_N(\beta, \rho, \sigma^2) = -\frac{N}{2}\ln(2\pi\sigma^2) + \ln\det\left(I_N - \rho W\right) - \frac{1}{2\sigma^2}\| (I_N - \rho W)Y - X\beta - WX\theta \|_2^2
+$$
+
+<FeatureNotAvailable
+  note="When empirical data violate the identification conditions of Group 10.2, researchers should transition to the extended methodological groups in Chapter 10 or apply appropriate instrumental-variable and cluster-robust corrections."
+/>
+
+## 2. Econometric Models in Group 10.2
+
+<FeatureCards
+  features={[
+    {
+      title: '10.2.1. Spatial Panel Fixed Effects',
+      description: 'Estimates the Spatial Panel Fixed Effects specification within the Spatial Panel Econometrics framework by optimizing the structural objecti...',
+      link: '/en/vietlod/chapter-10/group-10-2/b166-spatial-panel-fe',
+      badge: 'B166 · spatial_panel_fe'
+    },
+    {
+      title: '10.2.2. Spatial Panel Random Effects',
+      description: 'Estimates the Spatial Panel Random Effects specification within the Spatial Panel Econometrics framework by optimizing the structural object...',
+      link: '/en/vietlod/chapter-10/group-10-2/b167-spatial-panel-re',
+      badge: 'B167 · spatial_panel_re'
+    }
+  ]}
+/>
+
+## 3. Comparative Execution Syntax Across Stata 18, R 4.x, and Python 3.11+
+
+| Section & Model Title | Estimator Key | Stata 18 MP Syntax | R 4.x Syntax | Python 3.11+ Syntax | Support |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `10.2.1` · [Spatial Panel Fixed Effects](/en/vietlod/chapter-10/group-10-2/b166-spatial-panel-fe) | `spatial_panel_fe` | `spxtregress y x1 x2, fe dvarlag(W)` | `splm::spml(y ~ x1 + x2, data = pdata, listw = lw, model = 'within', lag = TRUE)` | `spreg.Panel_FE_Lag(y, X, w=w)` | <Available /> |
+| `10.2.2` · [Spatial Panel Random Effects](/en/vietlod/chapter-10/group-10-2/b167-spatial-panel-re) | `spatial_panel_re` | `spxtregress y x1 x2, re dvarlag(W)` | `splm::spml(y ~ x1 + x2, data = pdata, listw = lw, model = 'random', lag = TRUE)` | `spreg.Panel_RE_Lag(y, X, w=w)` | <Available /> |
+
+## 4. Standard Implementation Workflow for Group 10.2
+
+<Steps>
+
+### Step 1. Load Standardized Practice Datasets From VietLOD, EcoData, or Finco
+
+Download the model-specific `.csv` practice dataset in Group `10.2` or extract custom empirical panels from [EcoData](https://ecodata.io.vn) and [Finco](https://www.finco.vn).
+
+### Step 2. Select the Optimal Estimator for Your Error and Sample Structure
+
+Compare the estimators from `10.2.1` to `10.2.2` in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.
+
+### Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab
+
+Verify all required diagnostics including **Kiểm định Hausman không gian của Mutl–Pfaffermayr đối chiếu Spatial (FE) và Spatial (RE), kiểm định (LR) cho hiệu ứng cố định không gian và thời gian, và phân rã tác động trực tiếp / gián tiếp ngắn hạn và dài hạn** and dispatch the specification to [EcoLab](https://ecolab.io.vn) for automated journal-grade reporting.
+
+</Steps>

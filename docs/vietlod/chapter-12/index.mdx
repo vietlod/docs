@@ -1,0 +1,124 @@
+---
+id: index
+title: "Chương 12: Hệ phương trình đồng thời, hệ cầu, kinh tế lượng Bayes và học máy"
+sidebar_label: "Chương 12. Hệ phương trình đồng thời, hệ cầu, kinh tế lượng Bayes và học máy"
+sidebar_position: 13
+slug: /vietlod/chapter-12
+description: "Hướng dẫn thực hành Chương 12 — Hệ phương trình đồng thời, hệ cầu, kinh tế lượng Bayes và học máy: bao gồm 4 nhóm phương pháp và 12 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+keywords:
+  - Chương 12 VietLOD
+  - Hệ phương trình đồng thời, hệ cầu, kinh tế lượng Bayes và học máy
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+  - EcoData
+  - EcoLab
+---
+
+# Chương 12: Hệ phương trình đồng thời, hệ cầu, kinh tế lượng Bayes và học máy
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Chương 12 — Hệ phương trình đồng thời, hệ cầu, kinh tế lượng Bayes và học máy** hướng dẫn thực hành chi tiết **12 mô hình kinh tế lượng** thuộc **4 nhóm phương pháp** từ mã `B179` đến `B190`. Toàn bộ bài viết trong chương được đồng bộ hóa với giáo trình gốc tại [VietLOD Chương 12](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-12-he-phuong-trinh-he-cau-kinh-te-luong-bayes-va-hoc-may) và hỗ trợ thực thi tự động trên [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 12: Hệ phương trình đồng thời, hệ cầu, kinh tế lượng Bayes và học máy trên Stata 18, R 4.x và Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Câu hỏi nghiên cứu trọng tâm và phương trình nền tảng
+
+- **Câu hỏi nghiên cứu trọng tâm**: Làm thế nào để ước lượng hệ phương trình đồng thời (SUR) và (3SLS), hệ cầu tiêu dùng thỏa tiên đề Slutsky (QUAIDS), trung bình hóa mô hình Bayes (BMA) và dự báo học máy kinh tế lượng?
+- **Phạm vi cấu trúc chương**: Gồm `4` nhóm phương pháp chuyên sâu và `12` mô hình thực nghiệm đối chứng trên dữ liệu Việt Nam từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
+
+Phương trình đặc tả tổng quát của Chương 12:
+
+$$
+w_{ik} = \alpha_k + \sum_{j=1}^G \gamma_{kj}\ln p_{ij} + \beta_k \ln\left[\frac{m_i}{a(p_i)}\right] + \frac{\lambda_k}{b(p_i)}\left\{\ln\left[\frac{m_i}{a(p_i)}\right]\right\}^2 + u_{ik}
+$$
+
+<FeatureNotAvailable
+  note="Không áp dụng các ước lượng trong Chương 12 khi chưa kiểm tra điều kiện định danh và bộ kiểm định chẩn đoán bắt buộc gồm: Breusch–Pagan Cross-Equation Independence, Slutsky Symmetry & Negativity, Posterior Inclusion Probability (PIP) & Gelman–Rubin R-hat, Out-of-Sample Diebold–Mariano Test."
+/>
+
+## 2. Khám phá 4 nhóm phương pháp trong Chương 12
+
+<FeatureCards
+  features={[
+    {
+      title: 'Nhóm 12.1. Hệ phương trình đồng thời và hệ cầu cấu trúc',
+      description: 'Làm thế nào để ước lượng hệ phương trình đồng thời (SUR) và (3SLS), hệ cầu tiêu dùng thỏa tiên đề Slutsky (QUAIDS), trung bình hóa mô hình Bayes (BMA) và dự báo học máy kinh tế lượng?',
+      link: '/vietlod/chapter-12/group-12-1',
+      badge: '4 mô hình'
+    },
+    {
+      title: 'Nhóm 12.2. Kinh tế lượng Bayes và trung bình hóa mô hình (BMA)',
+      description: 'Làm thế nào để ước lượng hệ phương trình đồng thời (SUR) và (3SLS), hệ cầu tiêu dùng thỏa tiên đề Slutsky (QUAIDS), trung bình hóa mô hình Bayes (BMA) và dự báo học máy kinh tế lượng?',
+      link: '/vietlod/chapter-12/group-12-2',
+      badge: '3 mô hình'
+    },
+    {
+      title: 'Nhóm 12.3. Học máy kinh tế lượng',
+      description: 'Làm thế nào để ước lượng hệ phương trình đồng thời (SUR) và (3SLS), hệ cầu tiêu dùng thỏa tiên đề Slutsky (QUAIDS), trung bình hóa mô hình Bayes (BMA) và dự báo học máy kinh tế lượng?',
+      link: '/vietlod/chapter-12/group-12-3',
+      badge: '4 mô hình'
+    },
+    {
+      title: 'Nhóm 12.4. Mạng nơ-ron chuỗi thời gian',
+      description: 'Làm thế nào để ước lượng hệ phương trình đồng thời (SUR) và (3SLS), hệ cầu tiêu dùng thỏa tiên đề Slutsky (QUAIDS), trung bình hóa mô hình Bayes (BMA) và dự báo học máy kinh tế lượng?',
+      link: '/vietlod/chapter-12/group-12-4',
+      badge: '1 mô hình'
+    }
+  ]}
+/>
+
+## 3. Quy trình 4 bước lựa chọn và thực thi mô hình trong Chương 12
+
+<Steps>
+
+### Bước 1. Xác định nhóm phương pháp phù hợp trong 4 nhóm của chương
+
+Đối chiếu giả thuyết kinh tế và cấu trúc mẫu thực nghiệm với câu hỏi định danh của từng nhóm phương pháp từ Nhóm `12.1` đến Nhóm `12.4`.
+
+### Bước 2. Chuẩn bị tệp dữ liệu chuẩn hóa từ EcoData hoặc Finco
+
+Tải tệp dữ liệu thực hành `.csv` tương ứng với từng mô hình tại `/src/ecoaz/data/` hoặc trích xuất bảng dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
+
+### Bước 3. Ước lượng tham số và chạy kiểm định chẩn đoán trên Stata 18, R 4.x và Python 3.11+
+
+Thực thi mã lệnh mẫu trong từng bài học và kiểm tra nghiêm ngặt các tiêu chuẩn chẩn đoán bắt buộc của chương: **Breusch–Pagan Cross-Equation Independence, Slutsky Symmetry & Negativity, Posterior Inclusion Probability (PIP) & Gelman–Rubin R-hat, Out-of-Sample Diebold–Mariano Test**.
+
+### Bước 4. Đối chiếu đồ thị hội tụ 3 phần mềm và xuất bảng công bố trên EcoLab
+
+Kiểm tra sự hội tụ của hệ số ước lượng giữa Stata, R và Python trên đồ thị thực nghiệm 3 khung và xuất bảng kết quả chuẩn tạp chí qua [EcoLab](https://ecolab.io.vn).
+
+</Steps>
+
+## 4. Danh mục đầy đủ 12 mô hình kinh tế lượng trong Chương 12
+
+| Mã bài | Tên mô hình kinh tế lượng | Khóa định danh | Cấp độ | Gói phần mềm Stata · R · Python | Hỗ trợ |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `12.1.1` · `B179` | [Hệ phương trình hồi quy dường như không liên quan (SUR)](/vietlod/chapter-12/group-12-1/b179-sur) | `sur` | `L1` | `base Stata` · `systemfit` · `linearmodels` | <Available /> |
+| `12.2.1` · `B183` | [Hồi quy tuyến tính Bayes với lấy mẫu chuỗi Markov (MCMC)](/vietlod/chapter-12/group-12-2/b183-bayesian-linear) | `bayesian_linear` | `L2` | `Stata 18 bayes` · `MCMCpack / stats` · `scipy / statsmodels` | <Available /> |
+| `12.3.1` · `B186` | [Hồi quy rừng ngẫu nhiên Breiman và độ quan trọng biến hoán vị](/vietlod/chapter-12/group-12-3/b186-random-forest-regressor) | `random_forest_regressor` | `L4` | `Stata rforest` · `randomForest` · `scikit-learn` | <Available /> |
+| `12.4.1` · `B190` | [Mạng bộ nhớ dài–ngắn hạn dự báo chuỗi thời gian (LSTM)](/vietlod/chapter-12/group-12-4/b190-lstm-forecaster) | `lstm_forecaster` | `L4` | `Stata PyTorch bridge` · `forecast` · `torch` | <Available /> |
+| `12.1.2` · `B180` | [Ước lượng bình phương nhỏ nhất ba giai đoạn (3SLS)](/vietlod/chapter-12/group-12-1/b180-three-stage-ls) | `three_stage_ls` | `L2` | `base Stata` · `systemfit` · `linearmodels` | <Available /> |
+| `12.2.2` · `B184` | [Hệ tự hồi quy vectơ Bayes suy luận hậu nghiệm đa biến](/vietlod/chapter-12/group-12-2/b184-bayesian-var) | `bayesian_var` | `L3` | `Stata 18 bayes` · `BVAR / vars` · `scipy / statsmodels` | <Available /> |
+| `12.3.2` · `B187` | [Hồi quy tăng cường độ dốc Friedman và phân rã tác động biên](/vietlod/chapter-12/group-12-3/b187-gradient-boosting-regressor) | `gradient_boosting_regressor` | `L4` | `Stata boost` · `gbm` · `scikit-learn` | <Available /> |
+| `12.1.3` · `B181` | [Ước lượng GMM cho hệ phương trình đồng thời dưới phương sai thay đổi](/vietlod/chapter-12/group-12-1/b181-system-gmm) | `system_gmm` | `L3` | `base Stata` · `systemfit / gmm` · `linearmodels` | <Available /> |
+| `12.2.3` · `B185` | [Trung bình hóa mô hình Bayes giải quyết bất định chọn biến (BMA)](/vietlod/chapter-12/group-12-2/b185-bma-model-averaging) | `bma_model_averaging` | `L4` | `Stata 18 bmaregress` · `BMS / BAS` · `statsmodels / numpy` | <Available /> |
+| `12.3.3` · `B188` | [Hồi quy vectơ hỗ trợ nhân phi tuyến (SVR)](/vietlod/chapter-12/group-12-3/b188-svr-econometric) | `svr_econometric` | `L4` | `svmachines` · `e1071` · `scikit-learn` | <Available /> |
+| `12.1.4` · `B182` | [Hệ phương trình cầu hầu như lý tưởng bậc hai (QUAIDS)](/vietlod/chapter-12/group-12-1/b182-quaids-demand-system) | `quaids_demand_system` | `L4` | `Stata 18 demandsys` · `micEconAids` · `linearmodels` | <Available /> |
+| `12.3.4` · `B189` | [Mạng nơ-ron đa tầng truyền thẳng và đạo hàm riêng trung bình (MLP)](/vietlod/chapter-12/group-12-3/b189-mlp-regressor) | `mlp_regressor` | `L4` | `Stata Python bridge` · `nnet` · `scikit-learn` | <Available /> |
+
+## 5. Tài liệu tham khảo học thuật trọng tâm
+
+- Zellner, A.(1962). An efficient method of estimating seemingly unrelated regressions and tests for aggregation bias. *Journal of the American Statistical Association*, 57, số 298, 348–368.
+- Banks, Blundell, & Lewbel(1997). Econometric specification, identification, and asymptotic inference.
+- Sala-i-Martin, Doppelhofer, & Miller(2004). Econometric specification, identification, and asymptotic inference.
+- Mullainathan, S, & Spiess, J.(2017). Machine learning: An applied econometric approach. *Journal of Economic Perspectives*, 31, số 2, 87–106.
+- Coulombe et al.(2022). Econometric specification, identification, and asymptotic inference.
+- Greene, W. H.(2019). *Econometric Analysis*, 8th ed, Chương 10 & 16: Systems of Regression Equations, SUR, 3SLS & Bayesian Econometrics. Pearson.
+- Wooldridge, J. M.(2010). *Econometric Analysis of Cross Section and Panel Data*, 2nd ed, Chương 7–9: Estimating Systems of Equations by OLS, GLS and GMM. MIT Press.
+- Cameron, A. C, & Trivedi, P. K.(2022). *Microeconometrics Using Stata*, 2nd ed, Vol. 2, Chương 28 & 30: Machine Learning and Bayesian Methods. Stata Press.
+- Hansen, B. E.(2022). *Econometrics*, Chương 11, 13 & 29: Multivariate Regression, GMM and Machine Learning. Princeton University Press.

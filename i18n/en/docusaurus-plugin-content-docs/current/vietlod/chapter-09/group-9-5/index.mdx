@@ -1,0 +1,132 @@
+---
+id: index
+title: "Group 9.5: Modern Heterogeneity-Robust Staggered Difference-in-Differences"
+sidebar_label: "Group 9.5. Modern Heterogeneity-Robust Staggered Difference-in-Differences"
+sidebar_position: 5
+slug: /vietlod/chapter-09/group-9-5
+description: "How-To User Guide for Methodological Group 9.5 — Modern Heterogeneity-Robust Staggered Difference-in-Differences in Chapter 09: comparing and executing 8 econometric models across Stata 18 MP, R 4.x, and Python 3.11+."
+keywords:
+  - VietLOD Group 9.5
+  - Modern Heterogeneity-Robust Staggered Difference-in-Differences
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Group 9.5: Modern Heterogeneity-Robust Staggered Difference-in-Differences
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Methodological Group 9.5 — Modern Heterogeneity-Robust Staggered Difference-in-Differences** in [Chapter 09: Causal Inference and Modern Policy Evaluation](/en/vietlod/chapter-09) provides step-by-step How-To implementation guides for **8 econometric models** spanning from Section `9.5.1` to `9.5.8`. Full theoretical derivations are available at [VietLOD Group 9.5](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-09-suy-luan-nhan-qua-va-danh-gia-tac-dong-chinh-sach/nhom-9-5-staggered-did-modern) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="How-To Guide for Group 9.5: Modern Heterogeneity-Robust Staggered Difference-in-Differences in Stata 18, R 4.x, and Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Methodological Overview and Structural Equations
+
+- **Methodological Focus**: Provides consistent estimation and robust inference for **Modern Heterogeneity-Robust Staggered Difference-in-Differences** specifications within **Causal Inference and Modern Policy Evaluation**.
+- **Mandatory Post-Estimation Diagnostics**: Tổng tỷ trọng và ước lượng DID trung bình theo 3 nhóm, tỷ phần trọng số bị ô nhiễm động học..
+
+Core structural specification for Group 9.5:
+
+$$
+\hat{\beta}_{\text{TWFE}} = \sum_{k \neq U} s_{kU}\hat{\beta}_{kU}^{2\times 2} + \sum_{k \lt \ell} \left(s_{k\ell}^k \hat{\beta}_{k\ell}^{2\times 2, k} + s_{k\ell}^\ell \hat{\beta}_{k\ell}^{2\times 2, \ell}\right), \quad \sum s_{ab} = 1
+$$
+
+Estimator objective and moment conditions:
+
+$$
+\tau_{\text{ATT}} = \text{E}\left[Y_{it}(1) - Y_{it}(0) \;\middle|\; D_i = 1\right], \quad \text{E}_N\left[\psi\left(W_i; \hat{\tau}, \hat{\eta}\right)\right] = 0
+$$
+
+<FeatureNotAvailable
+  note="When empirical data violate the identification conditions of Group 9.5, researchers should transition to the extended methodological groups in Chapter 09 or apply appropriate instrumental-variable and cluster-robust corrections."
+/>
+
+## 2. Econometric Models in Group 9.5
+
+<FeatureCards
+  features={[
+    {
+      title: '9.5.1. Goodman-Bacon Staggered TWFE Weight Decomposition',
+      description: 'Decomposes the canonical staggered TWFE coefficient into exact 2x2 DID comparisons across Treated vs Untreated, Early vs Late, and forbidden...',
+      link: '/en/vietlod/chapter-09/group-9-5/b142-bacon-decomposition',
+      badge: 'B142 · bacon_decomposition'
+    },
+    {
+      title: '9.5.2. Sun-Abraham Interaction-Weighted Event-Study DID',
+      description: 'Estimates saturated cohort-specific dynamic treatment effects relative to never-treated or last-treated controls and aggregates them by empi...',
+      link: '/en/vietlod/chapter-09/group-9-5/b144-sun-abraham-did',
+      badge: 'B144 · sun_abraham_did'
+    },
+    {
+      title: '9.5.3. Borusyak-Jaravel-Spiess Counterfactual Imputation DID',
+      description: 'Fits unit, time, and covariate effects exclusively on untreated observations Omega_0 to impute counterfactual Y — 0 — and aggregate unbiased...',
+      link: '/en/vietlod/chapter-09/group-9-5/b145-borusyak-imputation-did',
+      badge: 'B145 · borusyak_imputation_did'
+    },
+    {
+      title: '9.5.4. De Chaisemartin Dynamic Switching Treatment DID',
+      description: 'Compares units switching treatment status against clean control units holding the same baseline treatment status unchanged, allowing policie...',
+      link: '/en/vietlod/chapter-09/group-9-5/b146-dechaisemartin-did',
+      badge: 'B146 · dechaisemartin_did'
+    },
+    {
+      title: '9.5.5. Wooldridge Extended Two-Way Mundlak Fixed-Effects DID',
+      description: 'Restores full heterogeneity robustness to two-way fixed effects by saturating cohort-by-post-time cells alongside cohort-demeaned covariate ...',
+      link: '/en/vietlod/chapter-09/group-9-5/b147-wooldridge-etwfe',
+      badge: 'B147 · wooldridge_etwfe'
+    },
+    {
+      title: '9.5.6. Clean-Control Local Projections Difference-in-Differences',
+      description: 'Combines horizon-by-horizon local projections with clean-control sample pruning so already-treated units never contaminate dynamic treatment...',
+      link: '/en/vietlod/chapter-09/group-9-5/b148-lp-did',
+      badge: 'B148 · lp_did'
+    },
+    {
+      title: '9.5.7. Rambachan-Roth HonestDiD Parallel-Trends Sensitivity',
+      description: 'Constructs robust partial-identification confidence intervals when post-treatment trend violations are bounded by M_bar times the worst pre-...',
+      link: '/en/vietlod/chapter-09/group-9-5/b149-honest-did-sensitivity',
+      badge: 'B149 · honest_did_sensitivity'
+    },
+    {
+      title: '9.5.8. Synthetic Difference-in-Differences',
+      description: 'Combines ridge-regularized simplex donor unit weights and pre-treatment time weights inside a two-way fixed-effects regression for doubly ro...',
+      link: '/en/vietlod/chapter-09/group-9-5/b152-synthetic-did',
+      badge: 'B152 · synthetic_did'
+    }
+  ]}
+/>
+
+## 3. Comparative Execution Syntax Across Stata 18, R 4.x, and Python 3.11+
+
+| Section & Model Title | Estimator Key | Stata 18 MP Syntax | R 4.x Syntax | Python 3.11+ Syntax | Support |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `9.5.1` · [Goodman-Bacon Staggered TWFE Weight Decomposition](/en/vietlod/chapter-09/group-9-5/b142-bacon-decomposition) | `bacon_decomposition` | `bacondecomp y treat, ddetail` | `bacondecomp::bacon(y ~ treat, data = df, id_var = 'id', time_var = 'year')` | `PanelOLS.from_formula('y ~ 1 + treat + EntityEffects + TimeEffects', data=pdata).fit()` | <Available /> |
+| `9.5.2` · [Sun-Abraham Interaction-Weighted Event-Study DID](/en/vietlod/chapter-09/group-9-5/b144-sun-abraham-did) | `sun_abraham_did` | `eventstudyinteract y lead* lag*, cohort(first_treat) control_cohort(never) absorb(id year) vce(cluster id)` | `fixest::feols(y ~ x1 + sunab(first_treat, year) \| id + year, cluster = ~id, data = df)` | `pyfixest.event_study(df, yname='y', idname='id', tname='year', gname='first_treat', estimator='saturated')` | <Available /> |
+| `9.5.3` · [Borusyak-Jaravel-Spiess Counterfactual Imputation DID](/en/vietlod/chapter-09/group-9-5/b145-borusyak-imputation-did) | `borusyak_imputation_did` | `did_imputation y id year first_treat, horizons(0/5) pretrends(4)` | `did2s::did2s(df, yname = 'y', first_stage = ~ 0 \| id + year, second_stage = ~ i(rel_time), treatment = 'treat', cluster_var = 'id')` | `pyfixest.did2s(df, yname='y', first_stage='~ 0 \| id + year', second_stage='~ treat', treatment='treat', cluster='id')` | <Available /> |
+| `9.5.4` · [De Chaisemartin Dynamic Switching Treatment DID](/en/vietlod/chapter-09/group-9-5/b146-dechaisemartin-did) | `dechaisemartin_did` | `did_multiplegt_dyn y id year treat, effects(5) placebo(3) cluster(id)` | `DIDmultiplegtDYN::did_multiplegt_dyn(df, 'y', 'id', 'year', 'treat', effects = 5, placebo = 3)` | `PanelOLS.from_formula('dy ~ 1 + d_treat + x1 + TimeEffects', data=pdata).fit(cov_type='clustered', cluster_entity=True)` | <Available /> |
+| `9.5.5` · [Wooldridge Extended Two-Way Mundlak Fixed-Effects DID](/en/vietlod/chapter-09/group-9-5/b147-wooldridge-etwfe) | `wooldridge_etwfe` | `xthdidregress twfe (y x1) (treat), group(id)` | `etwfe::etwfe(fml = y ~ x1, tvar = year, gvar = first_treat, data = df, vcov = ~id)` | `pyfixest.feols('y ~ treat : i(cohort, year) + x1 \| id + year', data=df, vcov={'CRV1': 'id'})` | <Available /> |
+| `9.5.6` · [Clean-Control Local Projections Difference-in-Differences](/en/vietlod/chapter-09/group-9-5/b148-lp-did) | `lp_did` | `lpdid y, unit(id) time(year) treat(treat) pre_window(4) post_window(6)` | `fixest::feols(dy_h ~ d_treat + x1 \| year, subset = clean_sample, cluster = ~id, data = df)` | `pyfixest.lpdid(df, yname='y', idname='id', tname='year', gname='first_treat')` | <Available /> |
+| `9.5.7` · [Rambachan-Roth HonestDiD Parallel-Trends Sensitivity](/en/vietlod/chapter-09/group-9-5/b149-honest-did-sensitivity) | `honest_did_sensitivity` | `honestdid, pre(1/4) post(5/8) mvec(0.5(0.5)2)` | `HonestDiD::createSensitivityResults_relativeMagnitudes(betahat, sigma, numPrePeriods = 4, numPostPeriods = 4)` | `scipy.optimize.linprog(c_obj, A_ub=A_rm, b_ub=b_rm)` | <Available /> |
+| `9.5.8` · [Synthetic Difference-in-Differences](/en/vietlod/chapter-09/group-9-5/b152-synthetic-did) | `synthetic_did` | `sdid y id year treat, vce(placebo) reps(200)` | `synthdid::synthdid_estimate(Y, N0, T0)` | `SynthDID().fit(Y_panel, N0, T0)` | <Available /> |
+
+## 4. Standard Implementation Workflow for Group 9.5
+
+<Steps>
+
+### Step 1. Load Standardized Practice Datasets From VietLOD, EcoData, or Finco
+
+Download the model-specific `.csv` practice dataset in Group `9.5` or extract custom empirical panels from [EcoData](https://ecodata.io.vn) and [Finco](https://www.finco.vn).
+
+### Step 2. Select the Optimal Estimator for Your Error and Sample Structure
+
+Compare the estimators from `9.5.1` to `9.5.8` in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.
+
+### Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab
+
+Verify all required diagnostics including **Tổng tỷ trọng và ước lượng DID trung bình theo 3 nhóm, tỷ phần trọng số bị ô nhiễm động học.** and dispatch the specification to [EcoLab](https://ecolab.io.vn) for automated journal-grade reporting.
+
+</Steps>

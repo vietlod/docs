@@ -1,0 +1,134 @@
+---
+title: "Exploiting Stock Market Intelligence and Financial Notes"
+sidebar_label: "Stock Market & Financial Notes"
+sidebar_position: 2
+description: "Step-by-step guide to retrieving financial statements across 4 accounting regimes, decoding Financial Notes TM, CASA, N1-N5 loan tiers, and Covered Warrants on Finco."
+keywords:
+  - Finco
+  - StockMCP
+  - công cụ phân tích kinh tế
+  - công cụ nghiên cứu định lượng
+  - hỗ trợ nghiên cứu khoa học
+  - dữ liệu kinh tế
+  - dữ liệu nghiên cứu
+  - dữ liệu Việt Nam
+  - EcoData
+  - EcoLab
+  - VietLOD
+---
+
+<script type="application/ld+json">
+  {JSON.stringify({"@context": "https://schema.org", "@graph": [{"@type": ["TechArticle", "HowTo"], "headline": "Exploiting Stock Market Intelligence and Financial Notes", "description": "Step-by-step guide to retrieving financial statements across 4 accounting regimes, decoding Financial Notes TM, CASA, N1-N5 loan tiers, and Covered Warrants on Finco.", "inLanguage": "en-US", "url": "https://docs.tnsai.vn/en/finco/stock-market", "author": {"@type": "Organization", "name": "TNS AI", "url": "https://www.tnsai.vn"}, "publisher": {"@type": "Organization", "name": "TNS AI", "url": "https://docs.tnsai.vn"}, "about": [{"@type": "Thing", "name": "Finco Data Platform"}, {"@type": "Thing", "name": "StockMCP Vietnam Securities"}, {"@type": "Thing", "name": "Quantitative Economic Research"}]}]})}
+</script>
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Exploiting Stock Market Intelligence and Financial Notes
+
+The **Stock Market** module on [Finco](https://www.finco.vn) delivers institutional-grade corporate financial statements, equity trading series, corporate governance structures, and covered warrant analytics across all enterprises listed on **HOSE**, **HNX**, and **UPCOM**. This dataset serves as the empirical foundation for corporate finance research, asset pricing studies, and panel econometrics on [EcoData](https://ecodata.io.vn) and [VietLOD](https://vietlod.tnsai.vn).
+
+<VideoTutorial title="Retrieving Financial Statements and Decoding Financial Notes TM on Finco" src="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3" opened={false} />
+
+## Automated Harmonization Across Four Vietnamese Accounting Regimes
+
+The [Finco](https://www.finco.vn) database automatically classifies and harmonizes financial statement schemas across four distinct institutional accounting frameworks in Vietnam, preventing schema mismatches when constructing multi-sector panel datasets:
+
+| Regime Code | Institutional Sector | Regulatory Accounting Standard | Core Sector-Specific Metrics | Financial Notes TM Support |
+| :--- | :--- | :--- | :--- | :---: |
+| **Corp** | Non-financial manufacturing, trade, and services | Circular 200/2014/TT-BTC | Net revenue, Cost of goods sold, Inventories, Fixed assets, EBITDA | <Available /> |
+| **Bank** | Joint-stock and state-owned commercial banks | State Bank of Vietnam Chart of Accounts | Net interest income, NIM, Demand deposits CASA, Loan tiers N1 to N5 | <Available /> |
+| **Sec** | Securities brokerages and investment banks | Circular 210/2014/TT-BTC | FVTPL financial assets, Margin lending balances, Brokerage and proprietary revenue | <Available /> |
+| **Ins** | Life, non-life, and reinsurance corporations | Circular 199/2014/TT-BTC | Gross written premiums, Technical reserves, Insurance claim payouts | <Available /> |
+
+## Deep Decoding of Financial Statement Notes TM
+
+Unlike conventional portals that only provide headline balance sheets and income statements, [Finco](https://www.finco.vn) extracts granular **Financial Statement Notes** designated as **TM**, unlocking high-value microeconomic variables:
+
+- **Commercial Bank Demand Deposit Ratio CASA**: Automatically aggregates current accounts and non-term deposits in VND and foreign currencies to compute exact quarterly and annual CASA ratios.
+- **Five-Tier Credit Quality Breakdown N1 to N5**: Extracts Pass loans Tier 1, Special Mention loans Tier 2, Substandard loans Tier 3, Doubtful loans Tier 4, and Loss loans Tier 5 to compute non-performing loan ratios NPL and loan-loss coverage ratios LLCR.
+- **Granular Debt Maturity, Fixed Asset Depreciation, and Factor Input Costs**: Enables Stochastic Frontier Analysis SFA and Total Factor Productivity TFP estimation via Olley-Pakes or Levinsohn-Petrin estimators on [EcoLab](https://ecolab.io.vn).
+
+## Step-by-Step Workflow for Retrieving Equity and Covered Warrant Data
+
+<Steps>
+
+### Step 1: Select the Equity or Covered Warrant Sub-Module
+
+Open the **Stock Market** hub on [Finco](https://www.finco.vn) and select one of six specialized sub-modules: Financial Statements, Financial Notes TM, Valuation and Financial Ratios, Foreign and Insider Trading, Corporate Governance, or Covered Warrants CW.
+
+### Step 2: Filter by Ticker Universe, ICB Industry, and Reporting Frequency
+
+Enter specific tickers such as `VCB`, `FPT`, `HPG`, `SSI` or select an entire ICB Level-2 or Level-3 industry group. Choose Quarterly or Annual reporting frequency across the historical timeline.
+
+### Step 3: Verify Academic Variable Definitions in Variable View
+
+Switch to **Variable View** to inspect exact mathematical definitions for valuation multiples including P/E, P/B, EV/EBITDA, ROE, ROA, NIM, CASA, NPL, or Black-Scholes covered warrant metrics including Implied Volatility, Delta, Effective Gearing, and Break-Even Points.
+
+### Step 4: Export Panel Workbooks or Launch Econometric Estimation
+
+Download the 2-Sheet SPSS Excel workbook to run Fixed Effects, Random Effects, or System GMM panel regressions following the step-by-step methodologies at [VietLOD](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z).
+
+</Steps>
+
+## Empirical Code Examples Across Stata, R, and Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Load corporate financial panel exported from Finco
+import delimited "finco_corporate_panel.csv", clear encoding("UTF-8")
+
+* Declare panel structure by firm identifier and fiscal year
+encode ticker, gen(firm_id)
+xtset firm_id fiscal_year
+
+* Estimate two-way Fixed Effects regression with firm-clustered standard errors
+xtreg roe leverage firm_size tangibility revenue_growth i.fiscal_year, fe vce(cluster firm_id)
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+library(readr)
+library(plm)
+library(lmtest)
+
+# Load listed corporate panel dataset from Finco
+df <- read_csv("finco_corporate_panel.csv", show_col_types = FALSE)
+pdata <- pdata.frame(df, index = c("ticker", "fiscal_year"))
+
+# Estimate two-way Fixed Effects model with clustered robust standard errors
+fe_model <- plm(
+  roe ~ leverage + firm_size + tangibility + revenue_growth,
+  data = pdata,
+  model = "within",
+  effect = "twoways"
+)
+coeftest(fe_model, vcov = vcovHC(fe_model, type = "HC1", cluster = "group"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+import pandas as pd
+from linearmodels.panel import PanelOLS
+
+# Load panel dataset exported from Finco and set MultiIndex
+df = pd.read_csv("finco_corporate_panel.csv")
+df = df.set_index(["ticker", "fiscal_year"])
+
+# Estimate Panel OLS with EntityEffects and TimeEffects
+mod = PanelOLS.from_formula(
+    "roe ~ 1 + leverage + firm_size + tangibility + revenue_growth + EntityEffects + TimeEffects",
+    data=df,
+)
+res = mod.fit(cov_type="clustered", cluster_entity=True)
+print(res.summary)
+```
+
+  </TabItem>
+</Tabs>

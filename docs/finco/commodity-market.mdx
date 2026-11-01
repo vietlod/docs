@@ -1,0 +1,75 @@
+---
+title: "Phân tích thị trường hàng hóa với ma trận 5 ngành và 3.448 chỉ báo"
+sidebar_label: "Thị trường hàng hóa MXV"
+sidebar_position: 3
+description: "Hướng dẫn khai thác ma trận 5 nhóm ngành hàng hóa MXV và 5 chiều phân tích với 3.448 chỉ báo thực nghiệm từ 48 tổ chức xuất bản quốc tế trên Finco."
+keywords:
+  - Finco
+  - StockMCP
+  - công cụ phân tích kinh tế
+  - công cụ nghiên cứu định lượng
+  - hỗ trợ nghiên cứu khoa học
+  - dữ liệu kinh tế
+  - dữ liệu nghiên cứu
+  - dữ liệu Việt Nam
+  - EcoData
+  - EcoLab
+  - VietLOD
+---
+
+<script type="application/ld+json">
+  {JSON.stringify({"@context": "https://schema.org", "@graph": [{"@type": ["TechArticle", "HowTo"], "headline": "Phân tích thị trường hàng hóa với ma trận 5 ngành và 3.448 chỉ báo", "description": "Hướng dẫn khai thác ma trận 5 nhóm ngành hàng hóa MXV và 5 chiều phân tích với 3.448 chỉ báo thực nghiệm từ 48 tổ chức xuất bản quốc tế trên Finco.", "inLanguage": "vi-VN", "url": "https://docs.tnsai.vn/finco/commodity-market", "author": {"@type": "Organization", "name": "TNS AI", "url": "https://www.tnsai.vn"}, "publisher": {"@type": "Organization", "name": "TNS AI", "url": "https://docs.tnsai.vn"}, "about": [{"@type": "Thing", "name": "Finco Data Platform"}, {"@type": "Thing", "name": "StockMCP Vietnam Securities"}, {"@type": "Thing", "name": "Quantitative Economic Research"}]}]})}
+</script>
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Phân tích thị trường hàng hóa với ma trận 5 ngành và 3.448 chỉ báo
+
+Phân hệ **Thị trường hàng hóa** trên [Finco](https://www.finco.vn) cung cấp kiến trúc dữ liệu ma trận hai chiều gồm **5 nhóm ngành hàng hóa chuẩn Sở Giao dịch Hàng hóa Việt Nam MXV** kết hợp với **5 chiều phân tích chuyên sâu**, bao phủ tổng cộng **3.448 chỉ báo thực nghiệm** và **53.505 quan sát** từ **48 tổ chức xuất bản nguyên gốc** trên toàn cầu.
+
+<VideoTutorial title="Hướng dẫn khai thác dữ liệu Thị trường hàng hóa MXV trên Finco" src="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3" opened={false} />
+
+## Cấu trúc ma trận 5 nhóm ngành hàng hóa × 5 chiều phân tích
+
+Mỗi mặt hàng chiến lược trên [Finco](https://www.finco.vn) được chuẩn hóa đồng bộ qua năm thẻ chức năng, cho phép nhà nghiên cứu theo dõi trọn vẹn chuỗi giá trị từ sản lượng khai thác, tồn kho, thương mại xuất nhập khẩu đến biến động giá giao ngay và hợp đồng tương lai:
+
+| Nhóm ngành hàng hóa MXV | Mặt hàng đại diện tiêu biểu | 1. Tổng quan & Giá | 2. Cung - Cầu & Tồn kho | 3. Thương mại Quốc tế | 4. Xếp hạng Quốc gia | 5. Chuỗi Giá trị & Chi phí |
+| :--- | :--- | :---: | :---: | :---: | :---: | :---: |
+| **Nông sản** | Đậu tương, Ngô, Lúa mì, Gạo | <Available /> | <Available /> | <Available /> | <Available /> | <Available /> |
+| **Năng lượng** | Dầu thô WTI, Brent, Khí tự nhiên, Than đá | <Available /> | <Available /> | <Available /> | <Available /> | <Available /> |
+| **Kim loại** | Vàng, Bạc, Đồng, Quặng sắt, Thép, Nhôm | <Available /> | <Available /> | <Available /> | <Available /> | <Available /> |
+| **Nguyên liệu công nghiệp** | Cà phê Arabica, Robusta, Cao su, Đường, Bông | <Available /> | <Available /> | <Available /> | <Available /> | <Available /> |
+| **Phân bón & Hóa chất** | Urê, DAP, Kali, Amoniac, Lưu huỳnh | <Available /> | <Available /> | <Available /> | <Available /> | <Available /> |
+
+## Quy ước đặt tên biến học thuật dưới 14 ký tự
+
+Để đảm bảo khả năng tương thích tuyệt đối khi nạp dữ liệu vào **Stata 18 MP**, **SPSS**, **EViews**, **R** và **Python**, toàn bộ 3.448 chỉ báo hàng hóa trên [Finco](https://www.finco.vn) và [EcoData](https://ecodata.io.vn) đều tuân thủ quy ước mã biến học thuật ngắn gọn tối đa 14 ký tự:
+
+- `rank_cmd_prod`: Thứ hạng quốc gia về sản lượng sản xuất mặt hàng trên phạm vi toàn cầu.
+- `rank_cmd_exp`: Thứ hạng quốc gia về kim ngạch hoặc khối lượng xuất khẩu mặt hàng.
+- `rank_cmd_imp`: Thứ hạng quốc gia về kim ngạch hoặc khối lượng nhập khẩu mặt hàng.
+- `cmd_spot_usd`: Giá giao ngay chuẩn hóa theo đơn vị đô la Mỹ trên mỗi đơn vị đo lường quốc tế.
+- `cmd_inv_ratio`: Tỷ lệ tồn kho cuối kỳ trên tổng mức tiêu thụ nội địa và xuất khẩu.
+
+## Quy trình truy xuất dữ liệu hàng hóa phục vụ mô hình chuỗi thời gian và truyền dẫn giá
+
+<Steps>
+
+### Bước 1: Chọn nhóm ngành hàng hóa trong 5 phân khúc MXV
+
+Truy cập mục **Thị trường hàng hóa** trên [Finco](https://www.finco.vn) và chọn nhóm ngành mục tiêu gồm Nông sản, Năng lượng, Kim loại, Nguyên liệu công nghiệp hoặc Phân bón và hóa chất.
+
+### Bước 2: Chuyển đổi linh hoạt giữa 5 thẻ chiều phân tích
+
+Lựa chọn thẻ chức năng phù hợp với câu hỏi nghiên cứu: thẻ **Tổng quan & Giá** cho các mô hình biến động GARCH, hoặc thẻ **Cung - Cầu & Tồn kho** và **Thương mại Quốc tế** cho các mô hình tự hồi quy vectơ cấu trúc SVAR.
+
+### Bước 3: Kiểm tra nguồn xuất bản nguyên gốc trong Variable View
+
+Mở chế độ **Variable View** để xác minh tổ chức công bố dữ liệu gốc trong số 48 nhà xuất bản quốc tế như USDA, EIA, IEA, World Gold Council, ICO, IRSG, FAO hay World Bank Pink Sheet.
+
+### Bước 4: Xuất dữ liệu và kiểm định truyền dẫn giá trên VietLOD và EcoLab
+
+Tải bộ dữ liệu chuỗi thời gian hoặc dữ liệu bảng đa quốc gia về máy để thực hiện kiểm định đồng liên kết Johansen, mô hình hiệu chỉnh sai số VECM hoặc mô hình GARCH đa biến DCC-GARCH theo hướng dẫn tại [VietLOD](https://vietlod.tnsai.vn) và [EcoLab](https://ecolab.io.vn).
+
+</Steps>

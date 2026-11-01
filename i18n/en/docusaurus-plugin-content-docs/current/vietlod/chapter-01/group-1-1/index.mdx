@@ -1,0 +1,104 @@
+---
+id: index
+title: "Group 1.1: Classical Least Squares"
+sidebar_label: "Group 1.1. Classical Least Squares"
+sidebar_position: 1
+slug: /vietlod/chapter-01/group-1-1
+description: "How-To User Guide for Methodological Group 1.1 — Classical Least Squares in Chapter 01: comparing and executing 4 econometric models across Stata 18 MP, R 4.x, and Python 3.11+."
+keywords:
+  - VietLOD Group 1.1
+  - Classical Least Squares
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Group 1.1: Classical Least Squares
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Methodological Group 1.1 — Classical Least Squares** in [Chapter 01: Classical Linear and Instrumental Variables Regression](/en/vietlod/chapter-01) provides step-by-step How-To implementation guides for **4 econometric models** spanning from Section `1.1.1` to `1.1.4`. Full theoretical derivations are available at [VietLOD Group 1.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-01-hoi-quy-tuyen-tinh-co-dien-va-bien-cong-cu/nhom-1-1-least-squares) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="How-To Guide for Group 1.1: Classical Least Squares in Stata 18, R 4.x, and Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Methodological Overview and Structural Equations
+
+- **Methodological Focus**: Provides consistent estimation and robust inference for **Classical Least Squares** specifications within **Classical Linear and Instrumental Variables Regression**.
+- **Mandatory Post-Estimation Diagnostics**: Kiểm định phương sai thay đổi Breusch–Pagan và White, hệ số phóng đại phương sai đa cộng tuyến (VIF), kiểm định dạng hàm Ramsey RESET, kiểm định phân phối chuẩn phần dư Jarque–Bera.
+
+Core structural specification for Group 1.1:
+
+$$
+Y_i = \beta_0 + \sum_{k=1}^K \beta_k X_{ik} + \varepsilon_i, \quad \text{E}[\varepsilon_i \mid X_i] = 0
+$$
+
+Estimator objective and moment conditions:
+
+$$
+\hat{\beta}_N = \arg\min_{\beta \in \mathbb{R}^K} \sum_{i=1}^N w_i \left(Y_i - X_i^\top \beta\right)^2, \quad \text{E}\left[X_i \varepsilon_i\right] = 0
+$$
+
+<FeatureNotAvailable
+  note="When empirical data violate the identification conditions of Group 1.1, researchers should transition to the extended methodological groups in Chapter 01 or apply appropriate instrumental-variable and cluster-robust corrections."
+/>
+
+## 2. Econometric Models in Group 1.1
+
+<FeatureCards
+  features={[
+    {
+      title: '1.1.1. Ordinary Least Squares — OLS',
+      description: 'Estimates the Ordinary Least Squares — OLS specification within the Classical Least Squares framework by optimizing the structural objective...',
+      link: '/en/vietlod/chapter-01/group-1-1/b001-ols',
+      badge: 'B001 · ols'
+    },
+    {
+      title: '1.1.2. Weighted Least Squares — WLS',
+      description: 'Estimates the Weighted Least Squares — WLS specification within the Classical Least Squares framework by optimizing the structural objective...',
+      link: '/en/vietlod/chapter-01/group-1-1/b002-wls',
+      badge: 'B002 · wls'
+    },
+    {
+      title: '1.1.3. Generalized Least Squares — GLS',
+      description: 'Estimates the Generalized Least Squares — GLS specification within the Classical Least Squares framework by optimizing the structural object...',
+      link: '/en/vietlod/chapter-01/group-1-1/b003-gls',
+      badge: 'B003 · gls'
+    },
+    {
+      title: '1.1.4. Feasible Generalized Least Squares — FGLS',
+      description: 'Estimates the Feasible Generalized Least Squares — FGLS specification within the Classical Least Squares framework by optimizing the structu...',
+      link: '/en/vietlod/chapter-01/group-1-1/b004-fgls',
+      badge: 'B004 · fgls'
+    }
+  ]}
+/>
+
+## 3. Comparative Execution Syntax Across Stata 18, R 4.x, and Python 3.11+
+
+| Section & Model Title | Estimator Key | Stata 18 MP Syntax | R 4.x Syntax | Python 3.11+ Syntax | Support |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `1.1.1` · [Ordinary Least Squares — OLS](/en/vietlod/chapter-01/group-1-1/b001-ols) | `ols` | `regress y x1 x2, vce(robust)` | `lm(y ~ x1 + x2, data = df)` | `smf.ols('y ~ x1 + x2', data=df).fit(cov_type='HC1')` | <Available /> |
+| `1.1.2` · [Weighted Least Squares — WLS](/en/vietlod/chapter-01/group-1-1/b002-wls) | `wls` | `regress y x1 x2 [aweight = w], vce(robust)` | `lm(y ~ x1 + x2, data = df, weights = w)` | `smf.wls('y ~ x1 + x2', data=df, weights=df['w']).fit()` | <Available /> |
+| `1.1.3` · [Generalized Least Squares — GLS](/en/vietlod/chapter-01/group-1-1/b003-gls) | `gls` | `gls / vwls y x1 x2, sd(sigma_i)` | `nlme::gls(y ~ x1 + x2, data = df)` | `sm.GLS(y, X, sigma=Omega).fit()` | <Available /> |
+| `1.1.4` · [Feasible Generalized Least Squares — FGLS](/en/vietlod/chapter-01/group-1-1/b004-fgls) | `fgls` | `regress y x1 x2 -> gen ln_e2 = ln(e^2) -> regress y x1 x2 [aw=1/exp(xb)]` | `nlme::gls(y ~ x1 + x2, weights = varExp(), data = df)` | `smf.glsar('y ~ x1 + x2', data=df, rho=1).iterative_fit()` | <Available /> |
+
+## 4. Standard Implementation Workflow for Group 1.1
+
+<Steps>
+
+### Step 1. Load Standardized Practice Datasets From VietLOD, EcoData, or Finco
+
+Download the model-specific `.csv` practice dataset in Group `1.1` or extract custom empirical panels from [EcoData](https://ecodata.io.vn) and [Finco](https://www.finco.vn).
+
+### Step 2. Select the Optimal Estimator for Your Error and Sample Structure
+
+Compare the estimators from `1.1.1` to `1.1.4` in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.
+
+### Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab
+
+Verify all required diagnostics including **Kiểm định phương sai thay đổi Breusch–Pagan và White, hệ số phóng đại phương sai đa cộng tuyến (VIF), kiểm định dạng hàm Ramsey RESET, kiểm định phân phối chuẩn phần dư Jarque–Bera** and dispatch the specification to [EcoLab](https://ecolab.io.vn) for automated journal-grade reporting.
+
+</Steps>

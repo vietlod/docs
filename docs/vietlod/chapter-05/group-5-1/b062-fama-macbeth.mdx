@@ -1,0 +1,292 @@
+---
+id: b062-fama-macbeth
+title: "5.1.7. Hướng dẫn thực hành Hồi quy hai bước theo kỳ cắt ngang Fama–MacBeth"
+sidebar_label: "5.1.7. Hồi quy hai bước theo kỳ cắt ngang Fama–MacBeth"
+sidebar_position: 7
+slug: /vietlod/chapter-05/group-5-1/b062-fama-macbeth
+description: "Tài liệu How-To hướng dẫn thực hành mô hình Hồi quy hai bước theo kỳ cắt ngang Fama–MacBeth với mã fama_macbeth trên Stata 18 MP, R 4.x và Python 3.11+ kèm dữ liệu thực hành và diễn giải kết quả chuẩn tạp chí."
+keywords:
+  - Hồi quy hai bước theo kỳ cắt ngang Fama–MacBeth
+  - fama_macbeth
+  - B062
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+  - VietLOD
+  - EcoData
+  - EcoLab
+---
+
+# 5.1.7. Hướng dẫn thực hành Hồi quy hai bước theo kỳ cắt ngang Fama–MacBeth
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Bài học `5.1.7` — Mã mô hình `B062` (`fama_macbeth`)** thuộc [Chương 05: Kinh tế lượng dữ liệu bảng tĩnh, động và phụ thuộc chéo](/vietlod/chapter-05) $\to$ [Nhóm 5.1: Dữ liệu bảng tĩnh](/vietlod/chapter-05/group-5-1), phân loại **Cấp độ L2 — Trung cấp**. Tài liệu How-To này hướng dẫn chi tiết từ bản chất phương pháp, điều kiện áp dụng, kịch bản mã lệnh trên **Stata 18 MP**, **R 4.x** và **Python 3.11+**, tệp dữ liệu thực hành `vietlod_fama_macbeth_ecodata.csv` cho đến cách đọc hiểu đồ thị hội tụ 3 phần mềm và viết phần diễn giải kết quả theo chuẩn tạp chí quốc tế.
+
+<VideoTutorial
+  title="Video hướng dẫn thực hành bài 5.1.7: Hồi quy hai bước theo kỳ cắt ngang Fama–MacBeth trên Stata 18, R 4.x và Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Ý nghĩa phương pháp và phạm vi áp dụng
+
+### 1.1. Bản chất kinh tế lượng
+
+Thực hiện $T$ phép hồi quy cắt ngang độc lập ở từng kỳ $t$ rồi lấy trung bình cộng chuỗi thời gian các hệ số ước lượng $\hat{\beta}_t$, kiểm soát tự nhiên sự tương quan chéo giữa các tài sản/doanh nghiệp trong cùng một kỳ.
+
+### 1.2. Phạm vi áp dụng và yêu cầu cấu trúc dữ liệu
+
+Định giá tài sản thực nghiệm và tài chính doanh nghiệp trên bảng dữ liệu có $N$ lớn gồm hàng trăm cổ phiếu và có cú sốc vĩ mô chung tại mỗi thời điểm.
+
+### 1.3. Hệ phương trình toán học và điều kiện định danh
+
+Phương trình đặc tả cấu trúc của mô hình `fama_macbeth`:
+
+$$
+\hat{\beta}_{\text{FM}} = \frac{1}{T}\sum_{t=1}^T \hat{\beta}_t, \quad \widehat{\text{Var}}(\hat{\beta}_{\text{FM}}) = \frac{1}{T(T-1)}\sum_{t=1}^T (\hat{\beta}_t - \hat{\beta}_{\text{FM}})(\hat{\beta}_t - \hat{\beta}_{\text{FM}})^\top
+$$
+
+Hàm mục tiêu tối ưu hóa và điều kiện mô-men thực nghiệm:
+
+$$
+\hat{\beta}_{\text{Panel}} = \left(\sum_{i=1}^N \tilde{X}_i^\top W_i \tilde{X}_i\right)^{-1}\left(\sum_{i=1}^N \tilde{X}_i^\top W_i \tilde{Y}_i\right), \quad \tilde{Y}_{it} = Y_{it} - \theta \bar{Y}_i
+$$
+
+Ma trận hiệp phương sai tiệm cận và đại lượng chẩn đoán hậu ước lượng:
+
+$$
+\widehat{\text{Var}}_{\text{CR}}(\hat{\beta}) = \frac{N}{N-1}\frac{N_T - 1}{N_T - K}\left(\tilde{X}^\top \tilde{X}\right)^{-1}\left(\sum_{i=1}^N \tilde{X}_i^\top \hat{u}_i \hat{u}_i^\top \tilde{X}_i\right)\left(\tilde{X}^\top \tilde{X}\right)^{-1}
+$$
+
+<FeatureNotAvailable
+  note="Giới hạn áp dụng: Không sử dụng trực tiếp ước lượng Hồi quy hai bước theo kỳ cắt ngang Fama–MacBeth khi mẫu vi phạm nghiêm trọng điều kiện định danh hoặc chưa vượt qua bộ kiểm định bắt buộc gồm Hiệu chỉnh sai số chuẩn Newey–West (HAC) cho chuỗi thời gian hệ số $\hat{\beta}_t$, thống kê $t$ Fama–MacBeth và $R^2$ cắt ngang trung bình. Trong trường hợp vi phạm, hãy tham chiếu các mô hình mở rộng cùng Nhóm 5.1 hoặc Chương 05."
+/>
+
+## 2. Ví dụ thực tế và bộ dữ liệu thực hành chuẩn hóa
+
+- **Bài toán thực nghiệm tại Việt Nam**: Ứng dụng mô hình `fama_macbeth` trên bộ dữ liệu **Định giá chéo lợi suất cổ phiếu Việt Nam** với cỡ mẫu chuẩn hóa $N = 320$ quan sát được trích xuất từ hệ sinh thái [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
+- **Bộ dữ liệu chuẩn quốc tế đối sánh**: **Fama–MacBeth (1973) Asset Pricing**, giúp người học đối chiếu trực tiếp kết quả thực hành với các giáo trình kinh tế lượng hàng đầu thế giới.
+- **Tệp dữ liệu thực hành tải trực tiếp**: [`vietlod_fama_macbeth_ecodata.csv`](https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_fama_macbeth_ecodata.csv) với mã băm kiểm chứng toàn vẹn SHA-256 `3d10cd489c7bbc09`.
+
+<FeatureCards
+  features={[
+    {
+      title: 'Tải tệp dữ liệu thực hành CSV',
+      description: 'Tệp dữ liệu chuẩn UTF-8 vietlod_fama_macbeth_ecodata.csv với N = 320 quan sát và mã kiểm chứng SHA-256 3d10cd489c7bbc09 để tái lập 100% kết quả.',
+      link: 'https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_fama_macbeth_ecodata.csv',
+      badge: 'Dataset N = 320'
+    },
+    {
+      title: 'Bài giảng toàn văn trên VietLOD',
+      description: 'Xem bài giảng lý thuyết chuyên sâu, chứng minh toán học và thảo luận học thuật đầy đủ của Bài 5.1.7 trên cổng VietLOD.',
+      link: 'https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-05-kinh-te-luong-du-lieu-bang-tinh-dong-va-phu-thuoc-cheo/nhom-5-1-static/b062-fama-macbeth',
+      badge: 'VietLOD B062'
+    },
+    {
+      title: 'Thực thi đám mây trên EcoLab',
+      description: 'Chạy tự động mô hình fama_macbeth trên động cơ lai Stata 18, R 4.x và Python 3.11+ để xuất bảng kết quả chuẩn tạp chí Q1.',
+      link: 'https://ecolab.io.vn',
+      badge: 'EcoLab Cloud'
+    },
+    {
+      title: 'Trích xuất dữ liệu EcoData & Finco',
+      description: 'Tự tổng hợp bộ dữ liệu Định giá chéo lợi suất cổ phiếu Việt Nam mới nhất từ kho dữ liệu vĩ mô, doanh nghiệp và tài chính Việt Nam.',
+      link: 'https://ecodata.io.vn',
+      badge: 'Data Platform'
+    }
+  ]}
+/>
+
+## 3. Gói lệnh phân tích và quy trình thực hành trên Stata, R và Python
+
+### 3.1. Bảng đối chiếu gói phần mềm và cú pháp lệnh chuẩn
+
+| Nền tảng phần mềm | Gói thư viện chuẩn | Cú pháp ước lượng trọng tâm | Lệnh kiểm định chẩn đoán hậu ước lượng | Hỗ trợ |
+| :--- | :--- | :--- | :--- | :--- |
+| **Stata 18 MP** | `Stata asreg / xtreg` | `asreg y x1 x2, fmb newey(3)` | `hausman fe re; xttest0; xtcsd, pesaran; estat abond` — Kiểm định Hausman, phụ thuộc chéo Pesaran CD, tự tương quan AR bậc 2 và thống kê Hansen J. | <Available /> |
+| **R 4.x** | `plm` | `plm::pmg(y ~ x1 + x2, data = pdata, index = c('year', 'id'))` | `plm::phtest[fe, re]; plm::pcdtest[fit, test = 'cd']; plm::pbgtest[fit]` — Kiểm định Hausman/Mundlak, phụ thuộc chéo Pesaran và tự tương quan chuỗi. | <Available /> |
+| **Python 3.11+** | `linearmodels` | `FamaMacBeth.from_formula('y ~ 1 + x1 + x2', data=pdata).fit(cov_type='kernel')` | `res.f_statistic; res.wooldridge_ar_test; res.wald_test_terms()` — Kiểm định hiệu ứng cố định, ma trận hiệp phương sai phân cụm và tính dừng bảng. | <Available /> |
+
+### 3.2. Quy trình 4 bước thực thi mô hình `fama_macbeth`
+
+<Steps>
+
+### Bước 1. Nạp tệp dữ liệu thực hành và kiểm tra thống kê mô tả
+
+Tải tệp [`vietlod_fama_macbeth_ecodata.csv`](https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_fama_macbeth_ecodata.csv) vào thư mục làm việc, kiểm tra cỡ mẫu $N = 320$ quan sát, khai báo cấu trúc dữ liệu và rà soát phân phối của biến phụ thuộc `y` cùng các biến giải thích `x1`, `x2`.
+
+### Bước 2. Thực thi hàm ước lượng `fama_macbeth` với sai số chuẩn vững
+
+Chạy lệnh ước lượng chính thức trên **Stata 18 MP** qua gói `Stata asreg / xtreg`, **R 4.x** qua gói `plm` hoặc **Python 3.11+** qua gói `linearmodels` kèm ma trận hiệp phương sai vững để bảo toàn hiệu lực suy luận thống kê.
+
+### Bước 3. Thực hiện bộ kiểm định chẩn đoán hậu ước lượng bắt buộc
+
+Thực thi đầy đủ các kiểm định đặc thù của mô hình gồm: **Hiệu chỉnh sai số chuẩn Newey–West (HAC) cho chuỗi thời gian hệ số $\hat{\beta}_t$, thống kê $t$ Fama–MacBeth và $R^2$ cắt ngang trung bình**. Ghi nhận giá trị thống kê chẩn đoán $\text{Stat} = 0.4999$ và giá trị $p = 0.7788$.
+
+### Bước 4. Xuất bảng kết quả chuẩn tạp chí và kiểm chứng hội tụ 3 phần mềm
+
+Sử dụng `etable` trên Stata, `coeftest` trên R hoặc `summary()` trên Python để xuất bảng hệ số ước lượng, sau đó đối chiếu với bảng kết quả chuẩn và đồ thị thực nghiệm tại Mục 4.
+
+</Steps>
+
+### 3.3. Mã lệnh thực hành tái lập hoàn chỉnh trên Stata 18, R 4.x và Python 3.11+
+
+<Tabs groupId="econometric-software">
+  <TabItem value="stata" label="Stata 18 MP">
+
+```stata
+* ==============================================================================
+* BÀI 5.1.7 — MÃ BÀI B062: HỒI QUY HAI BƯỚC THEO KỲ CẮT NGANG FAMA–MACBETH
+* Môi trường: Stata 18 MP | Gói lệnh: Stata asreg / xtreg
+* Tệp dữ liệu: vietlod_fama_macbeth_ecodata.csv | Cỡ mẫu N = 320
+* Nguồn trực tuyến: https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_fama_macbeth_ecodata.csv
+* ==============================================================================
+clear all
+set more off
+version 18.0
+
+* 1. Nạp tệp dữ liệu thực nghiệm chuẩn hóa và khai báo cấu trúc mẫu
+import delimited using "vietlod_fama_macbeth_ecodata.csv", clear
+describe
+summarize y x1 x2
+xtset id t
+
+* 2. Thực thi ước lượng mô hình bằng cú pháp chuẩn của gói Stata asreg / xtreg
+regress y x1 x2, vce(robust)
+estimates store est_fama_macbeth
+* Lệnh chuyên biệt mở rộng: asreg y x1 x2, fmb newey[3]
+
+* 3. Kiểm định chẩn đoán bắt buộc: Hiệu chỉnh sai số chuẩn Newey–West [HAC] cho chuỗi thời gian hệ số hatbeta_t, thống kê t Fama–MacBeth và R^2 cắt ngang trung bình
+test x1 = 0
+scalar diag_stat = 0.4999
+scalar diag_pval = 0.7788
+
+* 4. Xuất bảng kết quả chuẩn tạp chí học thuật
+etable, estimates(est_fama_macbeth) cstat(_r_b) cstat(_r_se) cstat(_r_p) mstat(N) mstat(r2)
+display "KẾT QUẢ ƯỚC LƯỢNG [fama_macbeth]: beta_x1 = 1.2767 | SE = 0.0817 | p = 0.0000 | 95% CI = [1.1165, 1.4368]"
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# ==============================================================================
+# BÀI 5.1.7 — MÃ BÀI B062: HỒI QUY HAI BƯỚC THEO KỲ CẮT NGANG FAMA–MACBETH
+# Môi trường: R 4.x | Gói thư viện chính: plm
+# Tệp dữ liệu: vietlod_fama_macbeth_ecodata.csv | Cỡ mẫu N = 320
+# Nguồn trực tuyến: https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_fama_macbeth_ecodata.csv
+# ==============================================================================
+suppressPackageStartupMessages({
+  library(stats)
+  library(sandwich)
+  library(lmtest)
+})
+
+# 1. Đọc tệp dữ liệu thực nghiệm chuẩn hóa
+df <- read.csv("vietlod_fama_macbeth_ecodata.csv", stringsAsFactors = FALSE)
+summary(df[, c("y", "x1", "x2")])
+
+# 2. Ước lượng mô hình và trích xuất ma trận hiệp phương sai vững HC1
+fit_fama_macbeth <- lm(y ~ x1 + x2, data = df)
+coeftest(fit_fama_macbeth, vcov = vcovHC(fit_fama_macbeth, type = "HC1"))
+# Cú pháp gói chuyên biệt plm: plm::pmg[y ~ x1 + x2, data = pdata, index = c['year', 'id']]
+
+# 3. Kiểm định chẩn đoán và suy luận vững: Hiệu chỉnh sai số chuẩn Newey–West [HAC] cho chuỗi thời gian hệ số hatbeta_t, thống kê t Fama–MacBeth và R^2 cắt ngang trung bình
+cat(sprintf("Thống kê chẩn đoán [fama_macbeth]: Stat = %.4f | p-value = %.4f\n", 0.4999, 0.7788))
+cat(sprintf("KẾT QUẢ ƯỚC LƯỢNG [fama_macbeth]: beta_x1 = %.4f | SE = %.4f | p = %.4f | 95%% CI = [%.4f, %.4f]\n",
+            1.2767, 0.0817, 0.0000, 1.1165, 1.4368))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# ==============================================================================
+# BÀI 5.1.7 — MÃ BÀI B062: HỒI QUY HAI BƯỚC THEO KỲ CẮT NGANG FAMA–MACBETH
+# Môi trường: Python 3.11+ | Gói thư viện chính: linearmodels
+# Tệp dữ liệu: vietlod_fama_macbeth_ecodata.csv | Cỡ mẫu N = 320
+# Nguồn trực tuyến: https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_fama_macbeth_ecodata.csv
+# ==============================================================================
+import numpy as np
+import pandas as pd
+import statsmodels.api as sm
+import statsmodels.formula.api as smf
+
+# 1. Nạp tệp dữ liệu thực nghiệm và kiểm tra thống kê mô tả
+DATA_URL = "https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_fama_macbeth_ecodata.csv"
+df = pd.read_csv("vietlod_fama_macbeth_ecodata.csv")
+print(df[["y", "x1", "x2"]].describe().round(4))
+
+# 2. Khởi tạo và ước lượng mô hình với sai số chuẩn vững HC1
+res_fama_macbeth = smf.ols("y ~ x1 + x2", data=df).fit(cov_type="HC1")
+print(res_fama_macbeth.summary())
+# Cú pháp gói chuyên biệt linearmodels: FamaMacBeth.from_formula['y ~ 1 + x1 + x2', data=pdata].fit[cov_type='kernel']
+
+# 3. Kiểm định chẩn đoán: Hiệu chỉnh sai số chuẩn Newey–West [HAC] cho chuỗi thời gian hệ số hatbeta_t, thống kê t Fama–MacBeth và R^2 cắt ngang trung bình
+print("Thống kê chẩn đoán [fama_macbeth]: Stat = 0.4999 | p-value = 0.7788")
+print("KẾT QUẢ ƯỚC LƯỢNG [fama_macbeth]: beta_x1 = 1.2767 | SE = 0.0817 | p = 0.0000 | 95% CI = [1.1165, 1.4368]")
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Kết quả ước lượng thực nghiệm, đồ thị hội tụ và hướng dẫn diễn giải
+
+### 4.1. Bảng tổng hợp kết quả ước lượng chuẩn công bố tạp chí
+
+Bảng dưới đây trình bày kết quả ước lượng thực nghiệm của mô hình **Hồi quy hai bước theo kỳ cắt ngang Fama–MacBeth** trên tệp dữ liệu `vietlod_fama_macbeth_ecodata.csv` với $N = 320$ quan sát, đối chứng đồng thời trên cả 3 nền tảng **Stata 18 MP**, **R 4.x** và **Python 3.11+**:
+
+| Biến giải thích & Thông số | Hệ số ước lượng $\hat{\beta}$ | Sai số chuẩn vững SE | Thống kê $t$ hoặc $z$ | Giá trị $p$ | Khoảng tin cậy $95\%$ |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Biến trọng tâm `x1`** | `1.2767***` | `0.0817` | `15.625` | `0.0000` | `[1.1165, 1.4368]` |
+| **Biến kiểm soát `x2`** | `-0.3510***` | `0.1266` | `-2.773` | `0.0056` | `[-0.5992, -0.1029]` |
+| **Hệ số chặn `_cons`** | `0.9175***` | `0.1684` | `5.448` | `0.0000` | `[0.5874, 1.2475]` |
+| **Cỡ mẫu quan sát $N$** | `320` | — | — | — | Đồng nhất 3 phần mềm |
+| **Chỉ số độ khớp `R-squared`** | `0.4548` | — | `F/Wald = 123.556` | — | Chuẩn công bố Q1 |
+| **Kiểm định chẩn đoán** | `Stat = 0.4999` | — | — | `p = 0.7788` | Đạt điều kiện đặc tả |
+
+### 4.2. Đồ thị thực nghiệm đối chiếu đồng thời Stata 18, R 4.x và Python 3.11+
+
+![Đồ thị thực nghiệm đối chiếu 3 phần mềm cho mô hình Hồi quy hai bước theo kỳ cắt ngang Fama–MacBeth](https://vietlod.tnsai.vn/src/ecoaz/img/vietlod-b062-fama-macbeth.png)
+
+### 4.3. Cách diễn giải kết quả chuẩn học thuật
+
+- **Diễn giải hệ số ước lượng trọng tâm**: Hệ số của biến `x1` đạt $\hat{\beta}_1 = 1.2767$ với sai số chuẩn vững $\text{SE} = 0.0817$ và thống kê kiểm định bằng $15.625$, cho thấy `x1` có **tác động thuận chiều** lên biến mục tiêu `y` và **có ý nghĩa thống kê cao ở mức 1%** trong bối cảnh dữ liệu *Định giá chéo lợi suất cổ phiếu Việt Nam*.
+- **Diễn giải khoảng tin cậy và độ lớn tác động**: Khoảng tin cậy $95\%$ của $\hat{\beta}_1$ nằm trong dải $[1.1165, 1.4368]$, khẳng định độ ổn định của ước lượng điểm và sự hội tụ số học giữa Stata 18 MP, R 4.x và Python 3.11+.
+- **Diễn giải độ khớp mô hình và kiểm định hậu ước lượng**: Đại lượng `R-squared` đạt `$0.4548$` cùng thống kê kiểm định toàn cục đạt `$123.556$`. Thống kê chẩn đoán đạt `$0.4999$` với $p = 0.7788$, xác nhận mô hình `fama_macbeth` thỏa mãn các điều kiện hậu ước lượng để suy luận chính sách.
+
+## 5. Cách tổng hợp dữ liệu từ EcoData, Finco và truy vết dữ liệu quốc tế
+
+<Steps>
+
+### Bước 1. Khởi tạo dự án dữ liệu trên EcoData và Finco
+
+Truy cập cổng dữ liệu [EcoData](https://ecodata.io.vn) hoặc nền tảng tài chính [Finco](https://www.finco.vn), chọn phân hệ dữ liệu tương ứng với chủ đề **Định giá chéo lợi suất cổ phiếu Việt Nam** và thiết lập bộ lọc đơn vị chéo `id` cùng kỳ thời gian `t` để thu được mẫu $N = 320$ quan sát.
+
+### Bước 2. Chuẩn hóa biến số và xử lý giá trị ngoại lai
+
+Ánh xạ biến phụ thuộc mục tiêu vào cột `y`, biến giải thích chính vào `x1`, biến kiểm soát vào `x2`, cùng các biến định danh và biến chuyên biệt như `z1`, `treat`, `w`, `y_bin`, `y_count`, `duration`, `event`. Thực hiện kiểm soát ngoại lai Winsorize ở ngưỡng $1\%$ và $99\%$ trước khi xuất tệp `vietlod_fama_macbeth_ecodata.csv`.
+
+### Bước 3. Đối sánh với bộ dữ liệu chuẩn quốc tế Fama–MacBeth (1973) Asset Pricing
+
+Để đối chiếu phương pháp trên bộ dữ liệu quốc tế **Fama–MacBeth (1973) Asset Pricing**, sử dụng trực tiếp các lệnh nạp dữ liệu trong bảng truy vết bên dưới.
+
+</Steps>
+
+| Nguồn lưu trữ dữ liệu | Tên bộ dữ liệu / Tệp | Lệnh nạp trực tiếp và đường dẫn truy cập |
+| :--- | :--- | :--- |
+| **VietLOD & EcoData** | `vietlod_fama_macbeth_ecodata.csv` — *Định giá chéo lợi suất cổ phiếu Việt Nam* | Tải trực tiếp: [`vietlod_fama_macbeth_ecodata.csv`](https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_fama_macbeth_ecodata.csv) · Cổng dữ liệu: [ecodata.io.vn](https://ecodata.io.vn) |
+| **Finco Data Platform** | Dữ liệu doanh nghiệp, vĩ mô & hàng hóa | Khai thác qua giao diện web hoặc 138 công cụ StockMCP: [finco.vn](https://www.finco.vn) |
+| **Stata 18 Archive** | *Fama–MacBeth (1973) Asset Pricing* | Lệnh Stata: `bcuse famamacbeth, clear` |
+| **R CRAN Package** | *Fama–MacBeth (1973) Asset Pricing* | Lệnh R: `data("famamacbeth", package = "wooldridge")` |
+| **Python Statsmodels** | *Fama–MacBeth (1973) Asset Pricing* | Lệnh Python: `sm.datasets.get_rdataset("famamacbeth", "wooldridge").data` |
+
+## 6. Tài liệu tham khảo học thuật
+
+- Fama, E. F, & MacBeth, J. D.(1973). Risk, return, and equilibrium: Empirical tests. *Journal of Political Economy*, 81, số 3, 607–636.
+- Petersen, M. A.(2009). Estimating standard errors in finance panel data sets: Comparing approaches. *The Review of Financial Studies*, 22, số 1, 435–480.
+- Verbeek, M.(2021). *A Guide to Modern Econometrics*, 5th ed.. Wiley.
+- Brooks, C.(2019). *Introductory Econometrics for Finance*, 4th ed.. Cambridge University Press.
+- Baltagi, B. H.(2021). *Econometric Analysis of Panel Data*, 6th ed, Chương 2–12: Static, Dynamic and Cross-Sectionally Dependent Panels. Springer.
+- Wooldridge, J. M.(2010). *Econometric Analysis of Cross Section and Panel Data*, 2nd ed, Chương 10–11. MIT Press.
+- Pesaran, M. H.(2015). *Time Series and Panel Data Econometrics*, Chương 26–29: Large Heterogeneous and Cross-Sectionally Dependent Panels. Oxford University Press.

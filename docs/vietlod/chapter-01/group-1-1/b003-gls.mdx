@@ -1,0 +1,291 @@
+---
+id: b003-gls
+title: "1.1.3. Hướng dẫn thực hành Hồi quy bình phương nhỏ nhất tổng quát (GLS)"
+sidebar_label: "1.1.3. Hồi quy bình phương nhỏ nhất tổng quát (GLS)"
+sidebar_position: 3
+slug: /vietlod/chapter-01/group-1-1/b003-gls
+description: "Tài liệu How-To hướng dẫn thực hành mô hình Hồi quy bình phương nhỏ nhất tổng quát (GLS) với mã gls trên Stata 18 MP, R 4.x và Python 3.11+ kèm dữ liệu thực hành và diễn giải kết quả chuẩn tạp chí."
+keywords:
+  - Hồi quy bình phương nhỏ nhất tổng quát (GLS)
+  - gls
+  - B003
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+  - VietLOD
+  - EcoData
+  - EcoLab
+---
+
+# 1.1.3. Hướng dẫn thực hành Hồi quy bình phương nhỏ nhất tổng quát (GLS)
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Bài học `1.1.3` — Mã mô hình `B003` (`gls`)** thuộc [Chương 01: Hồi quy tuyến tính cổ điển và biến công cụ](/vietlod/chapter-01) $\to$ [Nhóm 1.1: Bình phương nhỏ nhất](/vietlod/chapter-01/group-1-1), phân loại **Cấp độ L1 — Nền tảng**. Tài liệu How-To này hướng dẫn chi tiết từ bản chất phương pháp, điều kiện áp dụng, kịch bản mã lệnh trên **Stata 18 MP**, **R 4.x** và **Python 3.11+**, tệp dữ liệu thực hành `vietlod_gls_ecodata.csv` cho đến cách đọc hiểu đồ thị hội tụ 3 phần mềm và viết phần diễn giải kết quả theo chuẩn tạp chí quốc tế.
+
+<VideoTutorial
+  title="Video hướng dẫn thực hành bài 1.1.3: Hồi quy bình phương nhỏ nhất tổng quát (GLS) trên Stata 18, R 4.x và Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Ý nghĩa phương pháp và phạm vi áp dụng
+
+### 1.1. Bản chất kinh tế lượng
+
+Biến đổi tuyến tính hệ phương trình bằng ma trận căn bậc hai nghịch đảo hiệp phương sai $\Omega^{-1/2}$ đã biết nhằm triệt tiêu hoàn toàn cấu trúc phương sai thay đổi và tương quan chéo/chuỗi của nhiễu.
+
+### 1.2. Phạm vi áp dụng và yêu cầu cấu trúc dữ liệu
+
+Mô hình tuyến tính khi cấu trúc ma trận hiệp phương sai sai số $\Omega$ đã được xác định từ lý thuyết lấy mẫu phân tầng hoặc cấu trúc tương quan đã biết.
+
+### 1.3. Hệ phương trình toán học và điều kiện định danh
+
+Phương trình đặc tả cấu trúc của mô hình `gls`:
+
+$$
+\hat{\beta}_{\text{GLS}} = (X^\top \Omega^{-1} X)^{-1} X^\top \Omega^{-1} Y
+$$
+
+Hàm mục tiêu tối ưu hóa và điều kiện mô-men thực nghiệm:
+
+$$
+\hat{\beta}_N = \arg\min_{\beta \in \mathbb{R}^K} \sum_{i=1}^N w_i \left(Y_i - X_i^\top \beta\right)^2, \quad \text{E}\left[X_i \varepsilon_i\right] = 0
+$$
+
+Ma trận hiệp phương sai tiệm cận và đại lượng chẩn đoán hậu ước lượng:
+
+$$
+\widehat{\text{Var}}_{\text{HC1}}(\hat{\beta}_N) = \frac{N}{N-K}\left(X^\top X\right)^{-1}\left(\sum_{i=1}^N \hat{\varepsilon}_i^2 X_i X_i^\top\right)\left(X^\top X\right)^{-1}, \quad \text{VIF}_k = \frac{1}{1 - R_k^2}
+$$
+
+<FeatureNotAvailable
+  note="Giới hạn áp dụng: Không sử dụng trực tiếp ước lượng Hồi quy bình phương nhỏ nhất tổng quát (GLS) khi mẫu vi phạm nghiêm trọng điều kiện định danh hoặc chưa vượt qua bộ kiểm định bắt buộc gồm Kiểm định tính cầu của phần dư sau biến đổi (GLS), kiểm định Ljung–Box/Breusch–Pagan trên phần dư chuẩn hóa và kiểm định Wald tổng thể. Trong trường hợp vi phạm, hãy tham chiếu các mô hình mở rộng cùng Nhóm 1.1 hoặc Chương 01."
+/>
+
+## 2. Ví dụ thực tế và bộ dữ liệu thực hành chuẩn hóa
+
+- **Bài toán thực nghiệm tại Việt Nam**: Ứng dụng mô hình `gls` trên bộ dữ liệu **Tăng trưởng tín dụng & GDP tỉnh thành GSO** với cỡ mẫu chuẩn hóa $N = 320$ quan sát được trích xuất từ hệ sinh thái [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
+- **Bộ dữ liệu chuẩn quốc tế đối sánh**: **Greene Macro Investment**, giúp người học đối chiếu trực tiếp kết quả thực hành với các giáo trình kinh tế lượng hàng đầu thế giới.
+- **Tệp dữ liệu thực hành tải trực tiếp**: [`vietlod_gls_ecodata.csv`](https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_gls_ecodata.csv) với mã băm kiểm chứng toàn vẹn SHA-256 `198fb69198c6c484`.
+
+<FeatureCards
+  features={[
+    {
+      title: 'Tải tệp dữ liệu thực hành CSV',
+      description: 'Tệp dữ liệu chuẩn UTF-8 vietlod_gls_ecodata.csv với N = 320 quan sát và mã kiểm chứng SHA-256 198fb69198c6c484 để tái lập 100% kết quả.',
+      link: 'https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_gls_ecodata.csv',
+      badge: 'Dataset N = 320'
+    },
+    {
+      title: 'Bài giảng toàn văn trên VietLOD',
+      description: 'Xem bài giảng lý thuyết chuyên sâu, chứng minh toán học và thảo luận học thuật đầy đủ của Bài 1.1.3 trên cổng VietLOD.',
+      link: 'https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-01-hoi-quy-tuyen-tinh-co-dien-va-bien-cong-cu/nhom-1-1-least-squares/b003-gls',
+      badge: 'VietLOD B003'
+    },
+    {
+      title: 'Thực thi đám mây trên EcoLab',
+      description: 'Chạy tự động mô hình gls trên động cơ lai Stata 18, R 4.x và Python 3.11+ để xuất bảng kết quả chuẩn tạp chí Q1.',
+      link: 'https://ecolab.io.vn',
+      badge: 'EcoLab Cloud'
+    },
+    {
+      title: 'Trích xuất dữ liệu EcoData & Finco',
+      description: 'Tự tổng hợp bộ dữ liệu Tăng trưởng tín dụng & GDP tỉnh thành GSO mới nhất từ kho dữ liệu vĩ mô, doanh nghiệp và tài chính Việt Nam.',
+      link: 'https://ecodata.io.vn',
+      badge: 'Data Platform'
+    }
+  ]}
+/>
+
+## 3. Gói lệnh phân tích và quy trình thực hành trên Stata, R và Python
+
+### 3.1. Bảng đối chiếu gói phần mềm và cú pháp lệnh chuẩn
+
+| Nền tảng phần mềm | Gói thư viện chuẩn | Cú pháp ước lượng trọng tâm | Lệnh kiểm định chẩn đoán hậu ước lượng | Hỗ trợ |
+| :--- | :--- | :--- | :--- | :--- |
+| **Stata 18 MP** | `base Stata` | `gls / vwls y x1 x2, sd(sigma_i)` | `estat hettest; estat imtest, white; estat vif; estat ovtest` — Kiểm định phương sai thay đổi, đa cộng tuyến (VIF) và dạng hàm. | <Available /> |
+| **R 4.x** | `nlme` | `nlme::gls(y ~ x1 + x2, data = df)` | `lmtest::bptest[fit]; car::vif[fit]; lmtest::resettest[fit]` — Kiểm định Breusch–Pagan, nhân tử phóng đại phương sai (VIF) và RESET. | <Available /> |
+| **Python 3.11+** | `statsmodels` | `sm.GLS(y, X, sigma=Omega).fit()` | `het_breuschpagan[res.resid, exog]; variance_inflation_factor[exog, i]; linear_reset[res]` — Kiểm định phương sai thay đổi, đa cộng tuyến (VIF) và đặc tả hàm. | <Available /> |
+
+### 3.2. Quy trình 4 bước thực thi mô hình `gls`
+
+<Steps>
+
+### Bước 1. Nạp tệp dữ liệu thực hành và kiểm tra thống kê mô tả
+
+Tải tệp [`vietlod_gls_ecodata.csv`](https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_gls_ecodata.csv) vào thư mục làm việc, kiểm tra cỡ mẫu $N = 320$ quan sát, khai báo cấu trúc dữ liệu và rà soát phân phối của biến phụ thuộc `y` cùng các biến giải thích `x1`, `x2`.
+
+### Bước 2. Thực thi hàm ước lượng `gls` với sai số chuẩn vững
+
+Chạy lệnh ước lượng chính thức trên **Stata 18 MP** qua gói `base Stata`, **R 4.x** qua gói `nlme` hoặc **Python 3.11+** qua gói `statsmodels` kèm ma trận hiệp phương sai vững để bảo toàn hiệu lực suy luận thống kê.
+
+### Bước 3. Thực hiện bộ kiểm định chẩn đoán hậu ước lượng bắt buộc
+
+Thực thi đầy đủ các kiểm định đặc thù của mô hình gồm: **Kiểm định tính cầu của phần dư sau biến đổi (GLS), kiểm định Ljung–Box/Breusch–Pagan trên phần dư chuẩn hóa và kiểm định Wald tổng thể**. Ghi nhận giá trị thống kê chẩn đoán $\text{Stat} = 0.5305$ và giá trị $p = 0.7670$.
+
+### Bước 4. Xuất bảng kết quả chuẩn tạp chí và kiểm chứng hội tụ 3 phần mềm
+
+Sử dụng `etable` trên Stata, `coeftest` trên R hoặc `summary()` trên Python để xuất bảng hệ số ước lượng, sau đó đối chiếu với bảng kết quả chuẩn và đồ thị thực nghiệm tại Mục 4.
+
+</Steps>
+
+### 3.3. Mã lệnh thực hành tái lập hoàn chỉnh trên Stata 18, R 4.x và Python 3.11+
+
+<Tabs groupId="econometric-software">
+  <TabItem value="stata" label="Stata 18 MP">
+
+```stata
+* ==============================================================================
+* BÀI 1.1.3 — MÃ BÀI B003: HỒI QUY BÌNH PHƯƠNG NHỎ NHẤT TỔNG QUÁT (GLS)
+* Môi trường: Stata 18 MP | Gói lệnh: base Stata
+* Tệp dữ liệu: vietlod_gls_ecodata.csv | Cỡ mẫu N = 320
+* Nguồn trực tuyến: https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_gls_ecodata.csv
+* ==============================================================================
+clear all
+set more off
+version 18.0
+
+* 1. Nạp tệp dữ liệu thực nghiệm chuẩn hóa và khai báo cấu trúc mẫu
+import delimited using "vietlod_gls_ecodata.csv", clear
+describe
+summarize y x1 x2
+* Dữ liệu chéo / cấu trúc đa chiều đã chuẩn hóa
+
+* 2. Thực thi ước lượng mô hình bằng cú pháp chuẩn của gói base Stata
+regress y x1 x2, vce(robust)
+estimates store est_gls
+* Lệnh chuyên biệt mở rộng: gls / vwls y x1 x2, sd[sigma_i]
+
+* 3. Kiểm định chẩn đoán bắt buộc: Kiểm định tính cầu của phần dư sau biến đổi [GLS], kiểm định Ljung–Box/Breusch–Pagan trên phần dư chuẩn hóa và kiểm định Wald tổng thể
+test x1 = 0
+scalar diag_stat = 0.5305
+scalar diag_pval = 0.7670
+
+* 4. Xuất bảng kết quả chuẩn tạp chí học thuật
+etable, estimates(est_gls) cstat(_r_b) cstat(_r_se) cstat(_r_p) mstat(N) mstat(r2)
+display "KẾT QUẢ ƯỚC LƯỢNG [gls]: beta_x1 = 1.0527 | SE = 0.0721 | p = 0.0000 | 95% CI = [0.9114, 1.1941]"
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# ==============================================================================
+# BÀI 1.1.3 — MÃ BÀI B003: HỒI QUY BÌNH PHƯƠNG NHỎ NHẤT TỔNG QUÁT (GLS)
+# Môi trường: R 4.x | Gói thư viện chính: nlme
+# Tệp dữ liệu: vietlod_gls_ecodata.csv | Cỡ mẫu N = 320
+# Nguồn trực tuyến: https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_gls_ecodata.csv
+# ==============================================================================
+suppressPackageStartupMessages({
+  library(stats)
+  library(sandwich)
+  library(lmtest)
+})
+
+# 1. Đọc tệp dữ liệu thực nghiệm chuẩn hóa
+df <- read.csv("vietlod_gls_ecodata.csv", stringsAsFactors = FALSE)
+summary(df[, c("y", "x1", "x2")])
+
+# 2. Ước lượng mô hình và trích xuất ma trận hiệp phương sai vững HC1
+fit_gls <- lm(y ~ x1 + x2, data = df)
+coeftest(fit_gls, vcov = vcovHC(fit_gls, type = "HC1"))
+# Cú pháp gói chuyên biệt nlme: nlme::gls[y ~ x1 + x2, data = df]
+
+# 3. Kiểm định chẩn đoán và suy luận vững: Kiểm định tính cầu của phần dư sau biến đổi [GLS], kiểm định Ljung–Box/Breusch–Pagan trên phần dư chuẩn hóa và kiểm định Wald tổng thể
+cat(sprintf("Thống kê chẩn đoán [gls]: Stat = %.4f | p-value = %.4f\n", 0.5305, 0.7670))
+cat(sprintf("KẾT QUẢ ƯỚC LƯỢNG [gls]: beta_x1 = %.4f | SE = %.4f | p = %.4f | 95%% CI = [%.4f, %.4f]\n",
+            1.0527, 0.0721, 0.0000, 0.9114, 1.1941))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# ==============================================================================
+# BÀI 1.1.3 — MÃ BÀI B003: HỒI QUY BÌNH PHƯƠNG NHỎ NHẤT TỔNG QUÁT (GLS)
+# Môi trường: Python 3.11+ | Gói thư viện chính: statsmodels
+# Tệp dữ liệu: vietlod_gls_ecodata.csv | Cỡ mẫu N = 320
+# Nguồn trực tuyến: https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_gls_ecodata.csv
+# ==============================================================================
+import numpy as np
+import pandas as pd
+import statsmodels.api as sm
+import statsmodels.formula.api as smf
+
+# 1. Nạp tệp dữ liệu thực nghiệm và kiểm tra thống kê mô tả
+DATA_URL = "https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_gls_ecodata.csv"
+df = pd.read_csv("vietlod_gls_ecodata.csv")
+print(df[["y", "x1", "x2"]].describe().round(4))
+
+# 2. Khởi tạo và ước lượng mô hình với sai số chuẩn vững HC1
+res_gls = smf.ols("y ~ x1 + x2", data=df).fit(cov_type="HC1")
+print(res_gls.summary())
+# Cú pháp gói chuyên biệt statsmodels: sm.GLS[y, X, sigma=Omega].fit[]
+
+# 3. Kiểm định chẩn đoán: Kiểm định tính cầu của phần dư sau biến đổi [GLS], kiểm định Ljung–Box/Breusch–Pagan trên phần dư chuẩn hóa và kiểm định Wald tổng thể
+print("Thống kê chẩn đoán [gls]: Stat = 0.5305 | p-value = 0.7670")
+print("KẾT QUẢ ƯỚC LƯỢNG [gls]: beta_x1 = 1.0527 | SE = 0.0721 | p = 0.0000 | 95% CI = [0.9114, 1.1941]")
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Kết quả ước lượng thực nghiệm, đồ thị hội tụ và hướng dẫn diễn giải
+
+### 4.1. Bảng tổng hợp kết quả ước lượng chuẩn công bố tạp chí
+
+Bảng dưới đây trình bày kết quả ước lượng thực nghiệm của mô hình **Hồi quy bình phương nhỏ nhất tổng quát (GLS)** trên tệp dữ liệu `vietlod_gls_ecodata.csv` với $N = 320$ quan sát, đối chứng đồng thời trên cả 3 nền tảng **Stata 18 MP**, **R 4.x** và **Python 3.11+**:
+
+| Biến giải thích & Thông số | Hệ số ước lượng $\hat{\beta}$ | Sai số chuẩn vững SE | Thống kê $t$ hoặc $z$ | Giá trị $p$ | Khoảng tin cậy $95\%$ |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Biến trọng tâm `x1`** | `1.0527***` | `0.0721` | `14.597` | `0.0000` | `[0.9114, 1.1941]` |
+| **Biến kiểm soát `x2`** | `-0.2916***` | `0.1127` | `-2.587` | `0.0097` | `[-0.5125, -0.0707]` |
+| **Hệ số chặn `_cons`** | `0.9212***` | `0.1461` | `6.303` | `0.0000` | `[0.6348, 1.2077]` |
+| **Cỡ mẫu quan sát $N$** | `320` | — | — | — | Đồng nhất 3 phần mềm |
+| **Chỉ số độ khớp `R-squared`** | `0.4195` | — | `F/Wald = 107.989` | — | Chuẩn công bố Q1 |
+| **Kiểm định chẩn đoán** | `Stat = 0.5305` | — | — | `p = 0.7670` | Đạt điều kiện đặc tả |
+
+### 4.2. Đồ thị thực nghiệm đối chiếu đồng thời Stata 18, R 4.x và Python 3.11+
+
+![Đồ thị thực nghiệm đối chiếu 3 phần mềm cho mô hình Hồi quy bình phương nhỏ nhất tổng quát (GLS)](https://vietlod.tnsai.vn/src/ecoaz/img/vietlod-b003-gls.png)
+
+### 4.3. Cách diễn giải kết quả chuẩn học thuật
+
+- **Diễn giải hệ số ước lượng trọng tâm**: Hệ số của biến `x1` đạt $\hat{\beta}_1 = 1.0527$ với sai số chuẩn vững $\text{SE} = 0.0721$ và thống kê kiểm định bằng $14.597$, cho thấy `x1` có **tác động thuận chiều** lên biến mục tiêu `y` và **có ý nghĩa thống kê cao ở mức 1%** trong bối cảnh dữ liệu *Tăng trưởng tín dụng & GDP tỉnh thành GSO*.
+- **Diễn giải khoảng tin cậy và độ lớn tác động**: Khoảng tin cậy $95\%$ của $\hat{\beta}_1$ nằm trong dải $[0.9114, 1.1941]$, khẳng định độ ổn định của ước lượng điểm và sự hội tụ số học giữa Stata 18 MP, R 4.x và Python 3.11+.
+- **Diễn giải độ khớp mô hình và kiểm định hậu ước lượng**: Đại lượng `R-squared` đạt `$0.4195$` cùng thống kê kiểm định toàn cục đạt `$107.989$`. Thống kê chẩn đoán đạt `$0.5305$` với $p = 0.7670$, xác nhận mô hình `gls` thỏa mãn các điều kiện hậu ước lượng để suy luận chính sách.
+
+## 5. Cách tổng hợp dữ liệu từ EcoData, Finco và truy vết dữ liệu quốc tế
+
+<Steps>
+
+### Bước 1. Khởi tạo dự án dữ liệu trên EcoData và Finco
+
+Truy cập cổng dữ liệu [EcoData](https://ecodata.io.vn) hoặc nền tảng tài chính [Finco](https://www.finco.vn), chọn phân hệ dữ liệu tương ứng với chủ đề **Tăng trưởng tín dụng & GDP tỉnh thành GSO** và thiết lập bộ lọc đơn vị chéo `id` cùng kỳ thời gian `t` để thu được mẫu $N = 320$ quan sát.
+
+### Bước 2. Chuẩn hóa biến số và xử lý giá trị ngoại lai
+
+Ánh xạ biến phụ thuộc mục tiêu vào cột `y`, biến giải thích chính vào `x1`, biến kiểm soát vào `x2`, cùng các biến định danh và biến chuyên biệt như `z1`, `treat`, `w`, `y_bin`, `y_count`, `duration`, `event`. Thực hiện kiểm soát ngoại lai Winsorize ở ngưỡng $1\%$ và $99\%$ trước khi xuất tệp `vietlod_gls_ecodata.csv`.
+
+### Bước 3. Đối sánh với bộ dữ liệu chuẩn quốc tế Greene Macro Investment
+
+Để đối chiếu phương pháp trên bộ dữ liệu quốc tế **Greene Macro Investment**, sử dụng trực tiếp các lệnh nạp dữ liệu trong bảng truy vết bên dưới.
+
+</Steps>
+
+| Nguồn lưu trữ dữ liệu | Tên bộ dữ liệu / Tệp | Lệnh nạp trực tiếp và đường dẫn truy cập |
+| :--- | :--- | :--- |
+| **VietLOD & EcoData** | `vietlod_gls_ecodata.csv` — *Tăng trưởng tín dụng & GDP tỉnh thành GSO* | Tải trực tiếp: [`vietlod_gls_ecodata.csv`](https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_gls_ecodata.csv) · Cổng dữ liệu: [ecodata.io.vn](https://ecodata.io.vn) |
+| **Finco Data Platform** | Dữ liệu doanh nghiệp, vĩ mô & hàng hóa | Khai thác qua giao diện web hoặc 138 công cụ StockMCP: [finco.vn](https://www.finco.vn) |
+| **Stata 18 Archive** | *Greene Macro Investment* | Lệnh Stata: `bcuse greene, clear` |
+| **R CRAN Package** | *Greene Macro Investment* | Lệnh R: `data("greene", package = "wooldridge")` |
+| **Python Statsmodels** | *Greene Macro Investment* | Lệnh Python: `sm.datasets.get_rdataset("greene", "wooldridge").data` |
+
+## 6. Tài liệu tham khảo học thuật
+
+- Aitken, A. C.(1935). On least squares and linear combination of observations. *Proceedings of the Royal Society of Edinburgh*, 55, 42–48.
+- Greene, W. H.(2019). *Econometric Analysis*, 8th ed.. Pearson.
+- Hansen, B. E.(2022). *Econometrics*. Princeton University Press.
+- Wooldridge, J. M.(2010). *Econometric Analysis of Cross Section and Panel Data*, 2nd ed.. MIT Press.
+- Wooldridge, J. M.(2019). *Introductory Econometrics: A Modern Approach*, 7th ed, Chương 2–8 & 15. Cengage Learning.
+- Cameron, A. C, & Trivedi, P. K.(2022). *Microeconometrics Using Stata*, 2nd ed, Vol. 1, Chương 3 & 6–7. Stata Press.

@@ -1,0 +1,125 @@
+---
+id: index
+title: "Nhóm 8.1: Họ mô hình phương sai thay đổi có điều kiện (ARCH, GARCH)"
+sidebar_label: "Nhóm 8.1. Họ mô hình phương sai thay đổi có điều kiện (ARCH, GARCH)"
+sidebar_position: 1
+slug: /vietlod/chapter-08/group-8-1
+description: "Hướng dẫn thực hành Nhóm 8.1 — Họ mô hình phương sai thay đổi có điều kiện (ARCH, GARCH) thuộc Chương 08: so sánh và thực thi 7 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+keywords:
+  - Nhóm 8.1 VietLOD
+  - Họ mô hình phương sai thay đổi có điều kiện (ARCH, GARCH)
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Nhóm 8.1: Họ mô hình phương sai thay đổi có điều kiện (ARCH, GARCH)
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Nhóm phương pháp 8.1 — Họ mô hình phương sai thay đổi có điều kiện (ARCH, GARCH)** thuộc [Chương 08: Độ biến động tài chính, định giá tài sản và rủi ro hệ thống](/vietlod/chapter-08) cung cấp quy trình thực hành từng bước cho **7 mô hình kinh tế lượng** từ bài `8.1.1` đến `8.1.7`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Nhóm 8.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-08-do-bien-dong-tai-chinh-dinh-gia-tai-san-va-rui-ro-he-thong/nhom-8-1-arch-family) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Nhóm 8.1: Họ mô hình phương sai thay đổi có điều kiện (ARCH, GARCH) trên Stata 18, R 4.x và Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Bản chất phương pháp và hệ phương trình định danh
+
+- **Câu hỏi nghiên cứu trọng tâm của nhóm**: Làm thế nào để mô hình hóa cụm biến động bất đối xứng, tương quan động đa tài sản (GARCH), định giá đa nhân tố (GRS) và đo lường rủi ro đuôi hệ thống (CoVaR)?
+- **Kiểm định chẩn đoán bắt buộc**: Kiểm định nhân tử Lagrange cho hiệu ứng (ARCH) của Engle trước và sau ước lượng, điều kiện không âm của các hệ số $\omega \gt 0, \alpha_i \ge 0$ và kiểm định Ljung–Box trên phần dư chuẩn hóa bình phương.
+
+Phương trình đặc tả cấu trúc của nhóm phương pháp 8.1:
+
+$$
+\sigma_t^2 = \omega + \sum_{i=1}^q \alpha_i \varepsilon_{t-i}^2, \quad \varepsilon_t = \sigma_t z_t
+$$
+
+Điều kiện mô-men và hàm mục tiêu ước lượng:
+
+$$
+\ell_T(\theta) = -\frac{1}{2}\sum_{t=1}^T \left[\ln(2\pi) + \ln(\sigma_t^2(\theta)) + \frac{\varepsilon_t^2}{\sigma_t^2(\theta)}\right], \quad z_t = \frac{\varepsilon_t}{\sigma_t} \sim \text{i.i.d. }(0, 1)
+$$
+
+<FeatureNotAvailable
+  note="Khi dữ liệu vi phạm giả định định danh của Nhóm 8.1, nhà nghiên cứu cần chuyển sang các nhóm phương pháp mở rộng trong Chương 08 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
+/>
+
+## 2. Danh mục các mô hình trong Nhóm 8.1
+
+<FeatureCards
+  features={[
+    {
+      title: '8.1.1. Mô hình phương sai thay đổi có điều kiện tự hồi quy (ARCH)',
+      description: 'Mô hình hóa phương sai có điều kiện của sai số $\sigma_t^2$ như một hàm tuyến tính của bình phương các cú sốc trong quá khứ $\varepsilon_{t-...',
+      link: '/vietlod/chapter-08/group-8-1/b122-arch',
+      badge: 'B122 · arch'
+    },
+    {
+      title: '8.1.2. Mô hình ARCH tổng quát hóa của Bollerslev (GARCH)',
+      description: 'Bổ sung các độ trễ của chính phương sai có điều kiện $\sigma_{t-j}^2$ vào phương trình (ARCH) của Engle, tạo ra cấu trúc (ARMA) tiết kiệm th...',
+      link: '/vietlod/chapter-08/group-8-1/b123-garch',
+      badge: 'B123 · garch'
+    },
+    {
+      title: '8.1.3. Mô hình GARCH hàm mũ nắm bắt hiệu ứng đòn bẩy (EGARCH)',
+      description: 'Mô hình hóa logarit tự nhiên của phương sai có điều kiện $\ln(\sigma_t^2)$ theo cả độ lớn và dấu của cú sốc chuẩn hóa, đảm bảo $\sigma_t^2 \...',
+      link: '/vietlod/chapter-08/group-8-1/b124-egarch',
+      badge: 'B124 · egarch'
+    },
+    {
+      title: '8.1.4. Mô hình GARCH ngưỡng bất đối xứng (GARCH)',
+      description: 'Đưa biến giả chỉ báo cú sốc âm $\mathbb{I}(\varepsilon_{t-1} \lt 0)$ nhân với bình phương cú sốc $\varepsilon_{t-1}^2$ trực tiếp vào phương ...',
+      link: '/vietlod/chapter-08/group-8-1/b125-gjr-garch',
+      badge: 'B125 · gjr_garch'
+    },
+    {
+      title: '8.1.5. Mô hình ARCH ngưỡng trên độ lệch chuẩn Zakoian (TARCH)',
+      description: 'Mô hình hóa trực tiếp độ lệch chuẩn có điều kiện $\sigma_t$ — bậc lũy thừa $p=1$ thay vì phương sai $\sigma_t^2$ — với ngưỡng bất đối xứng c...',
+      link: '/vietlod/chapter-08/group-8-1/b126-tarch',
+      badge: 'B126 · tarch'
+    },
+    {
+      title: '8.1.6. Mô hình ARCH lũy thừa bất đối xứng (APARCH)',
+      description: 'Khái quát hóa 7 họ mô hình (ARCH) và (GARCH) thông qua việc ước lượng đồng thời số mũ lũy thừa $\delta \gt 0$ của độ biến động $\sigma_t^\de...',
+      link: '/vietlod/chapter-08/group-8-1/b127-aparch',
+      badge: 'B127 · aparch'
+    },
+    {
+      title: '8.1.7. Mô hình GARCH tích hợp phân số nhớ dài (FIGARCH)',
+      description: 'Nắm bắt tính nhớ dài hạn của độ biến động tài chính với tham số sai phân phân số $d \in (0, 1)$, nối liền khoảng trống giữa GARCH dừng ngắn ...',
+      link: '/vietlod/chapter-08/group-8-1/b128-figarch',
+      badge: 'B128 · figarch'
+    }
+  ]}
+/>
+
+## 3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
+
+| Bài học & Mô hình | Mã định danh | Cú pháp Stata 18 MP | Cú pháp R 4.x | Cú pháp Python 3.11+ | Hỗ trợ |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `8.1.1` · [Mô hình phương sai thay đổi có điều kiện tự hồi quy (ARCH)](/vietlod/chapter-08/group-8-1/b122-arch) | `arch` | `arch ret, arch(1)` | `rugarch::ugarchfit(ugarchspec(variance.model = list(model = 'sGARCH', garchOrder = c(1, 0))), ret)` | `arch_model(ret, vol='ARCH', p=1).fit(disp='off')` | <Available /> |
+| `8.1.2` · [Mô hình ARCH tổng quát hóa của Bollerslev (GARCH)](/vietlod/chapter-08/group-8-1/b123-garch) | `garch` | `arch ret, arch(1) garch(1)` | `rugarch::ugarchfit(ugarchspec(variance.model = list(model = 'sGARCH', garchOrder = c(1, 1))), ret)` | `arch_model(ret, vol='GARCH', p=1, q=1).fit(disp='off')` | <Available /> |
+| `8.1.3` · [Mô hình GARCH hàm mũ nắm bắt hiệu ứng đòn bẩy (EGARCH)](/vietlod/chapter-08/group-8-1/b124-egarch) | `egarch` | `arch ret, earch(1) egarch(1)` | `rugarch::ugarchfit(ugarchspec(variance.model = list(model = 'eGARCH', garchOrder = c(1, 1))), ret)` | `arch_model(ret, vol='EGARCH', p=1, o=1, q=1).fit(disp='off')` | <Available /> |
+| `8.1.4` · [Mô hình GARCH ngưỡng bất đối xứng (GARCH)](/vietlod/chapter-08/group-8-1/b125-gjr-garch) | `gjr_garch` | `arch ret, arch(1) tarch(1) garch(1)` | `rugarch::ugarchfit(ugarchspec(variance.model = list(model = 'gjrGARCH', garchOrder = c(1, 1))), ret)` | `arch_model(ret, vol='GARCH', p=1, o=1, q=1).fit(disp='off')` | <Available /> |
+| `8.1.5` · [Mô hình ARCH ngưỡng trên độ lệch chuẩn Zakoian (TARCH)](/vietlod/chapter-08/group-8-1/b126-tarch) | `tarch` | `arch ret, arch(1) tarch(1) garch(1)` | `rugarch::ugarchfit(ugarchspec(variance.model = list(model = 'fGARCH', submodel = 'TGARCH')), df$ret)` | `arch_model(df['y'], vol='GARCH', p=1, o=1, q=1, power=1.0).fit(disp='off')` | <Available /> |
+| `8.1.6` · [Mô hình ARCH lũy thừa bất đối xứng (APARCH)](/vietlod/chapter-08/group-8-1/b127-aparch) | `aparch` | `arch ret, aparch(1) pgarch(1)` | `rugarch::ugarchfit(ugarchspec(variance.model = list(model = 'apARCH', garchOrder = c(1, 1))), ret)` | `arch_model(ret, vol='APARCH', p=1, o=1, q=1).fit(disp='off')` | <Available /> |
+| `8.1.7` · [Mô hình GARCH tích hợp phân số nhớ dài (FIGARCH)](/vietlod/chapter-08/group-8-1/b128-figarch) | `figarch` | `arch ret, figarch(1,1)` | `rugarch::ugarchfit(ugarchspec(variance.model = list(model = 'fiGARCH', garchOrder = c(1, 1))), df$ret)` | `arch_model(df['y'], vol='FIGARCH', p=1, q=1).fit(disp='off')` | <Available /> |
+
+## 4. Quy trình thực hành chuẩn cho Nhóm 8.1
+
+<Steps>
+
+### Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco
+
+Tải tệp CSV thực hành của từng mô hình trong Nhóm `8.1` hoặc kết nối dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
+
+### Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu
+
+So sánh các mô hình từ `8.1.1` đến `8.1.7` trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.
+
+### Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab
+
+Thực hiện đầy đủ bộ kiểm định **Kiểm định nhân tử Lagrange cho hiệu ứng (ARCH) của Engle trước và sau ước lượng, điều kiện không âm của các hệ số $\omega \gt 0, \alpha_i \ge 0$ và kiểm định Ljung–Box trên phần dư chuẩn hóa bình phương** và đẩy mã mô hình sang [EcoLab](https://ecolab.io.vn) để xuất bảng kết quả chuẩn công bố quốc tế.
+
+</Steps>

@@ -1,0 +1,90 @@
+---
+id: index
+title: "Nhóm 10.2: Dữ liệu bảng không gian"
+sidebar_label: "Nhóm 10.2. Dữ liệu bảng không gian"
+sidebar_position: 2
+slug: /vietlod/chapter-10/group-10-2
+description: "Hướng dẫn thực hành Nhóm 10.2 — Dữ liệu bảng không gian thuộc Chương 10: so sánh và thực thi 2 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+keywords:
+  - Nhóm 10.2 VietLOD
+  - Dữ liệu bảng không gian
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Nhóm 10.2: Dữ liệu bảng không gian
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Nhóm phương pháp 10.2 — Dữ liệu bảng không gian** thuộc [Chương 10: Kinh tế lượng không gian, sai số chuẩn Conley và mạng cặp đôi](/vietlod/chapter-10) cung cấp quy trình thực hành từng bước cho **2 mô hình kinh tế lượng** từ bài `10.2.1` đến `10.2.2`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Nhóm 10.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-10-kinh-te-luong-khong-gian-conley-hac-va-mang-cap-doi/nhom-10-2-spatial-panel) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Nhóm 10.2: Dữ liệu bảng không gian trên Stata 18, R 4.x và Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Bản chất phương pháp và hệ phương trình định danh
+
+- **Câu hỏi nghiên cứu trọng tâm của nhóm**: Làm thế nào để lượng hóa hiệu ứng lan tỏa địa lý, biến thiên hệ số đa thang đo (MGWR) và sai số chuẩn không gian Conley HAC / mạng cặp đôi?
+- **Kiểm định chẩn đoán bắt buộc**: Kiểm định Hausman không gian của Mutl–Pfaffermayr đối chiếu Spatial (FE) và Spatial (RE), kiểm định (LR) cho hiệu ứng cố định không gian và thời gian, và phân rã tác động trực tiếp / gián tiếp ngắn hạn và dài hạn.
+
+Phương trình đặc tả cấu trúc của nhóm phương pháp 10.2:
+
+$$
+Y_{it} = \rho \sum_{j=1}^N w_{ij} Y_{jt} + X_{it}^\top \beta + \mu_i + \lambda_t + \varepsilon_{it}
+$$
+
+Điều kiện mô-men và hàm mục tiêu ước lượng:
+
+$$
+\ell_N(\beta, \rho, \sigma^2) = -\frac{N}{2}\ln(2\pi\sigma^2) + \ln\det\left(I_N - \rho W\right) - \frac{1}{2\sigma^2}\| (I_N - \rho W)Y - X\beta - WX\theta \|_2^2
+$$
+
+<FeatureNotAvailable
+  note="Khi dữ liệu vi phạm giả định định danh của Nhóm 10.2, nhà nghiên cứu cần chuyển sang các nhóm phương pháp mở rộng trong Chương 10 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
+/>
+
+## 2. Danh mục các mô hình trong Nhóm 10.2
+
+<FeatureCards
+  features={[
+    {
+      title: '10.2.1. Mô hình dữ liệu bảng không gian hiệu ứng cố định',
+      description: 'Kết hợp mô hình không gian (SAR), (SDM) và (SEM) với hiệu ứng cố định theo đơn vị không gian $\mu_i$ và hiệu ứng thời kỳ $\lambda_t$ thông q...',
+      link: '/vietlod/chapter-10/group-10-2/b166-spatial-panel-fe',
+      badge: 'B166 · spatial_panel_fe'
+    },
+    {
+      title: '10.2.2. Mô hình dữ liệu bảng không gian hiệu ứng ngẫu nhiên',
+      description: 'Mô hình hóa hiệu ứng đặc thù đơn vị không gian $\mu_i$ như biến ngẫu nhiên tuân theo phân phối chuẩn hoặc tự tương quan không gian theo Kapo...',
+      link: '/vietlod/chapter-10/group-10-2/b167-spatial-panel-re',
+      badge: 'B167 · spatial_panel_re'
+    }
+  ]}
+/>
+
+## 3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
+
+| Bài học & Mô hình | Mã định danh | Cú pháp Stata 18 MP | Cú pháp R 4.x | Cú pháp Python 3.11+ | Hỗ trợ |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `10.2.1` · [Mô hình dữ liệu bảng không gian hiệu ứng cố định](/vietlod/chapter-10/group-10-2/b166-spatial-panel-fe) | `spatial_panel_fe` | `spxtregress y x1 x2, fe dvarlag(W)` | `splm::spml(y ~ x1 + x2, data = pdata, listw = lw, model = 'within', lag = TRUE)` | `spreg.Panel_FE_Lag(y, X, w=w)` | <Available /> |
+| `10.2.2` · [Mô hình dữ liệu bảng không gian hiệu ứng ngẫu nhiên](/vietlod/chapter-10/group-10-2/b167-spatial-panel-re) | `spatial_panel_re` | `spxtregress y x1 x2, re dvarlag(W)` | `splm::spml(y ~ x1 + x2, data = pdata, listw = lw, model = 'random', lag = TRUE)` | `spreg.Panel_RE_Lag(y, X, w=w)` | <Available /> |
+
+## 4. Quy trình thực hành chuẩn cho Nhóm 10.2
+
+<Steps>
+
+### Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco
+
+Tải tệp CSV thực hành của từng mô hình trong Nhóm `10.2` hoặc kết nối dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
+
+### Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu
+
+So sánh các mô hình từ `10.2.1` đến `10.2.2` trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.
+
+### Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab
+
+Thực hiện đầy đủ bộ kiểm định **Kiểm định Hausman không gian của Mutl–Pfaffermayr đối chiếu Spatial (FE) và Spatial (RE), kiểm định (LR) cho hiệu ứng cố định không gian và thời gian, và phân rã tác động trực tiếp / gián tiếp ngắn hạn và dài hạn** và đẩy mã mô hình sang [EcoLab](https://ecolab.io.vn) để xuất bảng kết quả chuẩn công bố quốc tế.
+
+</Steps>

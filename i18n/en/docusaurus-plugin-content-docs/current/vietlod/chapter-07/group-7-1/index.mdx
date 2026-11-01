@@ -1,0 +1,104 @@
+---
+id: index
+title: "Group 7.1: Vector Autoregression, VECM and Structural VAR"
+sidebar_label: "Group 7.1. Vector Autoregression, VECM and Structural VAR"
+sidebar_position: 1
+slug: /vietlod/chapter-07/group-7-1
+description: "How-To User Guide for Methodological Group 7.1 — Vector Autoregression, VECM and Structural VAR in Chapter 07: comparing and executing 4 econometric models across Stata 18 MP, R 4.x, and Python 3.11+."
+keywords:
+  - VietLOD Group 7.1
+  - Vector Autoregression, VECM and Structural VAR
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Group 7.1: Vector Autoregression, VECM and Structural VAR
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Methodological Group 7.1 — Vector Autoregression, VECM and Structural VAR** in [Chapter 07: Multivariate Time Series, Local Projections and Spillover Networks](/en/vietlod/chapter-07) provides step-by-step How-To implementation guides for **4 econometric models** spanning from Section `7.1.1` to `7.1.4`. Full theoretical derivations are available at [VietLOD Group 7.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-07-chuoi-thoi-gian-da-bien-chieu-cuc-bo-va-mang-lan-toa/nhom-7-1-var-models) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="How-To Guide for Group 7.1: Vector Autoregression, VECM and Structural VAR in Stata 18, R 4.x, and Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Methodological Overview and Structural Equations
+
+- **Methodological Focus**: Provides consistent estimation and robust inference for **Vector Autoregression, VECM and Structural VAR** specifications within **Multivariate Time Series, Local Projections and Spillover Networks**.
+- **Mandatory Post-Estimation Diagnostics**: Lựa chọn độ trễ tối ưu theo (AIC) / SBIC / (HQIC), điều kiện ổn định nghiệm đặc trưng nằm trong vòng tròn đơn vị và kiểm định tự tương quan (LM) phần dư đa biến.
+
+Core structural specification for Group 7.1:
+
+$$
+Y_t = c + A_1 Y_{t-1} + \dots + A_p Y_{t-p} + u_t, \quad \text{E}[u_t u_t^\top] = \Sigma_u
+$$
+
+Estimator objective and moment conditions:
+
+$$
+Y_t = c + \sum_{\ell=1}^p A_\ell Y_{t-\ell} + B^{-1}\Sigma_u \varepsilon_t, \quad \Psi_h = \frac{\partial Y_{t+h}}{\partial \varepsilon_t^\top} = \Phi_h B^{-1}\Sigma_u
+$$
+
+<FeatureNotAvailable
+  note="When empirical data violate the identification conditions of Group 7.1, researchers should transition to the extended methodological groups in Chapter 07 or apply appropriate instrumental-variable and cluster-robust corrections."
+/>
+
+## 2. Econometric Models in Group 7.1
+
+<FeatureCards
+  features={[
+    {
+      title: '7.1.1. Vector Autoregression — VAR',
+      description: 'Estimates the Vector Autoregression — VAR specification within the Vector Autoregression, VECM and Structural VAR framework by optimizing th...',
+      link: '/en/vietlod/chapter-07/group-7-1/b107-var',
+      badge: 'B107 · var'
+    },
+    {
+      title: '7.1.2. Vector Error-Correction — VECM',
+      description: 'Estimates the Vector Error-Correction — VECM specification within the Vector Autoregression, VECM and Structural VAR framework by optimizing...',
+      link: '/en/vietlod/chapter-07/group-7-1/b110-vecm',
+      badge: 'B110 · vecm'
+    },
+    {
+      title: '7.1.3. Structural Vector Autoregression — SVAR',
+      description: 'Estimates the Structural Vector Autoregression — SVAR specification within the Vector Autoregression, VECM and Structural VAR framework by o...',
+      link: '/en/vietlod/chapter-07/group-7-1/b111-svar',
+      badge: 'B111 · svar'
+    },
+    {
+      title: '7.1.4. Minnesota-Prior Bayesian VAR',
+      description: 'Estimates the Minnesota-Prior Bayesian VAR specification within the Vector Autoregression, VECM and Structural VAR framework by optimizing t...',
+      link: '/en/vietlod/chapter-07/group-7-1/b112-bvar',
+      badge: 'B112 · bvar'
+    }
+  ]}
+/>
+
+## 3. Comparative Execution Syntax Across Stata 18, R 4.x, and Python 3.11+
+
+| Section & Model Title | Estimator Key | Stata 18 MP Syntax | R 4.x Syntax | Python 3.11+ Syntax | Support |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `7.1.1` · [Vector Autoregression — VAR](/en/vietlod/chapter-07/group-7-1/b107-var) | `var` | `var y x1 x2, lags(1/2)` | `vars::VAR(df[, c('y', 'x1', 'x2')], p = 2, type = 'const')` | `VAR(df[['y', 'x1', 'x2']]).fit(maxlags=2)` | <Available /> |
+| `7.1.2` · [Vector Error-Correction — VECM](/en/vietlod/chapter-07/group-7-1/b110-vecm) | `vecm` | `vec y x1 x2, rank(1) lags(2)` | `urca::cajorls(urca::ca.jo(df[, c('y', 'x1', 'x2')], K = 2), r = 1)` | `VECM(df[['y', 'x1', 'x2']], k_ar_diff=1, coint_rank=1).fit()` | <Available /> |
+| `7.1.3` · [Structural Vector Autoregression — SVAR](/en/vietlod/chapter-07/group-7-1/b111-svar) | `svar` | `matrix A = (1, 0 \ ., 1) -> svar y x1, lags(1/2) aeq(A)` | `vars::SVAR(var_fit, Amat = A_mat, Bmat = NULL)` | `SVAR(df[['y', 'x1']], svar_type='A', A=A_mat).fit(maxlags=2)` | <Available /> |
+| `7.1.4` · [Minnesota-Prior Bayesian VAR](/en/vietlod/chapter-07/group-7-1/b112-bvar) | `bvar` | `bayes, rseed(42): var y x1 x2, lags(1/2)` | `BVAR::bvar(df[, c('y', 'x1', 'x2')], lags = 2)` | `VAR(df[['y', 'x1', 'x2']]).fit(maxlags=2)` | <Available /> |
+
+## 4. Standard Implementation Workflow for Group 7.1
+
+<Steps>
+
+### Step 1. Load Standardized Practice Datasets From VietLOD, EcoData, or Finco
+
+Download the model-specific `.csv` practice dataset in Group `7.1` or extract custom empirical panels from [EcoData](https://ecodata.io.vn) and [Finco](https://www.finco.vn).
+
+### Step 2. Select the Optimal Estimator for Your Error and Sample Structure
+
+Compare the estimators from `7.1.1` to `7.1.4` in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.
+
+### Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab
+
+Verify all required diagnostics including **Lựa chọn độ trễ tối ưu theo (AIC) / SBIC / (HQIC), điều kiện ổn định nghiệm đặc trưng nằm trong vòng tròn đơn vị và kiểm định tự tương quan (LM) phần dư đa biến** and dispatch the specification to [EcoLab](https://ecolab.io.vn) for automated journal-grade reporting.
+
+</Steps>

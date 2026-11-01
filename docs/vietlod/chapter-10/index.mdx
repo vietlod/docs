@@ -1,0 +1,123 @@
+---
+id: index
+title: "Chương 10: Kinh tế lượng không gian, sai số chuẩn Conley và mạng cặp đôi"
+sidebar_label: "Chương 10. Kinh tế lượng không gian, sai số chuẩn Conley và mạng cặp đôi"
+sidebar_position: 11
+slug: /vietlod/chapter-10
+description: "Hướng dẫn thực hành Chương 10 — Kinh tế lượng không gian, sai số chuẩn Conley và mạng cặp đôi: bao gồm 4 nhóm phương pháp và 10 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+keywords:
+  - Chương 10 VietLOD
+  - Kinh tế lượng không gian, sai số chuẩn Conley và mạng cặp đôi
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+  - EcoData
+  - EcoLab
+---
+
+# Chương 10: Kinh tế lượng không gian, sai số chuẩn Conley và mạng cặp đôi
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Chương 10 — Kinh tế lượng không gian, sai số chuẩn Conley và mạng cặp đôi** hướng dẫn thực hành chi tiết **10 mô hình kinh tế lượng** thuộc **4 nhóm phương pháp** từ mã `B161` đến `B170`. Toàn bộ bài viết trong chương được đồng bộ hóa với giáo trình gốc tại [VietLOD Chương 10](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-10-kinh-te-luong-khong-gian-conley-hac-va-mang-cap-doi) và hỗ trợ thực thi tự động trên [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 10: Kinh tế lượng không gian, sai số chuẩn Conley và mạng cặp đôi trên Stata 18, R 4.x và Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Câu hỏi nghiên cứu trọng tâm và phương trình nền tảng
+
+- **Câu hỏi nghiên cứu trọng tâm**: Làm thế nào để lượng hóa hiệu ứng lan tỏa địa lý, biến thiên hệ số đa thang đo (MGWR) và sai số chuẩn không gian Conley HAC / mạng cặp đôi?
+- **Phạm vi cấu trúc chương**: Gồm `4` nhóm phương pháp chuyên sâu và `10` mô hình thực nghiệm đối chứng trên dữ liệu Việt Nam từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
+
+Phương trình đặc tả tổng quát của Chương 10:
+
+$$
+Y = \rho W Y + X\beta + W X \theta + u, \quad u = \lambda W u + \varepsilon
+$$
+
+<FeatureNotAvailable
+  note="Không áp dụng các ước lượng trong Chương 10 khi chưa kiểm tra điều kiện định danh và bộ kiểm định chẩn đoán bắt buộc gồm: Global Moran's I & Local LISA, Anselin LM-Lag & Robust LM-Error, LeSage–Pace Direct/Indirect/Total Impacts, AICc Bandwidth Selection, Conley Distance Cutoff Sensitivity."
+/>
+
+## 2. Khám phá 4 nhóm phương pháp trong Chương 10
+
+<FeatureCards
+  features={[
+    {
+      title: 'Nhóm 10.1. Hồi quy không gian cắt ngang',
+      description: 'Làm thế nào để lượng hóa hiệu ứng lan tỏa địa lý, biến thiên hệ số đa thang đo (MGWR) và sai số chuẩn không gian Conley HAC / mạng cặp đôi?',
+      link: '/vietlod/chapter-10/group-10-1',
+      badge: '5 mô hình'
+    },
+    {
+      title: 'Nhóm 10.2. Dữ liệu bảng không gian',
+      description: 'Làm thế nào để lượng hóa hiệu ứng lan tỏa địa lý, biến thiên hệ số đa thang đo (MGWR) và sai số chuẩn không gian Conley HAC / mạng cặp đôi?',
+      link: '/vietlod/chapter-10/group-10-2',
+      badge: '2 mô hình'
+    },
+    {
+      title: 'Nhóm 10.3. Hồi quy địa lý đa thang đo và sai số chuẩn Conley',
+      description: 'Làm thế nào để lượng hóa hiệu ứng lan tỏa địa lý, biến thiên hệ số đa thang đo (MGWR) và sai số chuẩn không gian Conley HAC / mạng cặp đôi?',
+      link: '/vietlod/chapter-10/group-10-3',
+      badge: '2 mô hình'
+    },
+    {
+      title: 'Nhóm 10.4. Kinh tế lượng mạng lưới',
+      description: 'Làm thế nào để lượng hóa hiệu ứng lan tỏa địa lý, biến thiên hệ số đa thang đo (MGWR) và sai số chuẩn không gian Conley HAC / mạng cặp đôi?',
+      link: '/vietlod/chapter-10/group-10-4',
+      badge: '1 mô hình'
+    }
+  ]}
+/>
+
+## 3. Quy trình 4 bước lựa chọn và thực thi mô hình trong Chương 10
+
+<Steps>
+
+### Bước 1. Xác định nhóm phương pháp phù hợp trong 4 nhóm của chương
+
+Đối chiếu giả thuyết kinh tế và cấu trúc mẫu thực nghiệm với câu hỏi định danh của từng nhóm phương pháp từ Nhóm `10.1` đến Nhóm `10.4`.
+
+### Bước 2. Chuẩn bị tệp dữ liệu chuẩn hóa từ EcoData hoặc Finco
+
+Tải tệp dữ liệu thực hành `.csv` tương ứng với từng mô hình tại `/src/ecoaz/data/` hoặc trích xuất bảng dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
+
+### Bước 3. Ước lượng tham số và chạy kiểm định chẩn đoán trên Stata 18, R 4.x và Python 3.11+
+
+Thực thi mã lệnh mẫu trong từng bài học và kiểm tra nghiêm ngặt các tiêu chuẩn chẩn đoán bắt buộc của chương: **Global Moran's I & Local LISA, Anselin LM-Lag & Robust LM-Error, LeSage–Pace Direct/Indirect/Total Impacts, AICc Bandwidth Selection, Conley Distance Cutoff Sensitivity**.
+
+### Bước 4. Đối chiếu đồ thị hội tụ 3 phần mềm và xuất bảng công bố trên EcoLab
+
+Kiểm tra sự hội tụ của hệ số ước lượng giữa Stata, R và Python trên đồ thị thực nghiệm 3 khung và xuất bảng kết quả chuẩn tạp chí qua [EcoLab](https://ecolab.io.vn).
+
+</Steps>
+
+## 4. Danh mục đầy đủ 10 mô hình kinh tế lượng trong Chương 10
+
+| Mã bài | Tên mô hình kinh tế lượng | Khóa định danh | Cấp độ | Gói phần mềm Stata · R · Python | Hỗ trợ |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `10.1.1` · `B161` | [Mô hình trễ không gian của biến giải thích (SLX)](/vietlod/chapter-10/group-10-1/b161-slx-spatial-x) | `slx_spatial_x` | `L1` | `base Stata sp` · `spatialreg` · `spreg` | <Available /> |
+| `10.2.1` · `B166` | [Mô hình dữ liệu bảng không gian hiệu ứng cố định](/vietlod/chapter-10/group-10-2/b166-spatial-panel-fe) | `spatial_panel_fe` | `L3` | `base Stata sp` · `splm / spatialreg` · `spreg / linearmodels` | <Available /> |
+| `10.3.1` · `B168` | [Hồi quy trọng số địa lý và đa thang đo (GWR, MGWR)](/vietlod/chapter-10/group-10-3/b168-mgwr-spatial) | `mgwr_spatial` | `L4` | `gwr` · `GWmodel` · `mgwr` | <Available /> |
+| `10.4.1` · `B170` | [Mô hình hiệu ứng đồng đẳng trên mạng lưới Bramoullé](/vietlod/chapter-10/group-10-4/b170-network-peer-effects) | `network_peer_effects` | `L4` | `base Stata` · `AER / spatialreg` · `linearmodels` | <Available /> |
+| `10.1.2` · `B162` | [Mô hình tự hồi quy trễ không gian của biến phụ thuộc (SAR)](/vietlod/chapter-10/group-10-1/b162-sar-spatial-lag) | `sar_spatial_lag` | `L2` | `base Stata sp` · `spatialreg` · `spreg / scipy` | <Available /> |
+| `10.2.2` · `B167` | [Mô hình dữ liệu bảng không gian hiệu ứng ngẫu nhiên](/vietlod/chapter-10/group-10-2/b167-spatial-panel-re) | `spatial_panel_re` | `L3` | `base Stata sp` · `splm / spatialreg` · `spreg / linearmodels` | <Available /> |
+| `10.3.2` · `B169` | [Sai số chuẩn bền vững không gian–thời gian Conley và mạng cặp đôi](/vietlod/chapter-10/group-10-3/b169-conley-spatial-hac) | `conley_spatial_hac` | `L3` | `acreg` · `fixest` · `statsmodels` | <Available /> |
+| `10.1.3` · `B163` | [Mô hình tự tương quan không gian trong sai số (SEM)](/vietlod/chapter-10/group-10-1/b163-sem-spatial-error) | `sem_spatial_error` | `L2` | `base Stata sp` · `spatialreg` · `spreg / scipy` | <Available /> |
+| `10.1.4` · `B164` | [Mô hình không gian Durbin và phân rã tác động LeSage–Pace (SDM)](/vietlod/chapter-10/group-10-1/b164-sdm-spatial-durbin) | `sdm_spatial_durbin` | `L2` | `base Stata sp` · `spatialreg` · `spreg / scipy` | <Available /> |
+| `10.1.5` · `B165` | [Mô hình kết hợp tự hồi quy trễ và sai số không gian (SARAR)](/vietlod/chapter-10/group-10-1/b165-sarar-sac-spatial) | `sarar_sac_spatial` | `L3` | `base Stata sp` · `spatialreg` · `spreg` | <Available /> |
+
+## 5. Tài liệu tham khảo học thuật trọng tâm
+
+- Anselin, L.(1988). *Spatial Econometrics: Methods and Models*. Kluwer Academic Publishers.
+- LeSage, J, & Pace, R. K.(2009). *Introduction to Spatial Econometrics*. Chapman & Hall/CRC.
+- Elhorst, J. P.(2014). *Spatial Econometrics: From Cross-Sectional Data to Spatial Panels*. Springer.
+- Fotheringham, Yang, & Kang(2017). Econometric specification, identification, and asymptotic inference.
+- Conley(1999). Econometric specification, identification, and asymptotic inference.
+- Bramoullé, Y, Djebbari, H, & Fortin, B.(2009). Identification of peer effects through social networks. *Journal of Econometrics*, 150, số 1, 41–55.
+- Cameron, A. C, & Trivedi, P. K.(2022). *Microeconometrics Using Stata*, 2nd ed, Vol. 2, Chương 26: Spatial Regression Models. Stata Press.
+- Baltagi, B. H.(2021). *Econometric Analysis of Panel Data*, 6th ed, Chương 13: Spatial Panel Data Models. Springer.
+- Pesaran, M. H.(2015). *Time Series and Panel Data Econometrics*, Chương 30: Spatial Econometrics and Network Interdependence. Oxford University Press.
+- Greene, W. H.(2019). *Econometric Analysis*, 8th ed, Chương 11: Spatial Autoregression and Robust Covariance Estimation. Pearson.

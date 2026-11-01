@@ -1,0 +1,97 @@
+---
+id: index
+title: "Nhóm 7.4: Mô hình VAR tham số biến thiên và mạng lan tỏa"
+sidebar_label: "Nhóm 7.4. Mô hình VAR tham số biến thiên và mạng lan tỏa"
+sidebar_position: 4
+slug: /vietlod/chapter-07/group-7-4
+description: "Hướng dẫn thực hành Nhóm 7.4 — Mô hình VAR tham số biến thiên và mạng lan tỏa thuộc Chương 07: so sánh và thực thi 3 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+keywords:
+  - Nhóm 7.4 VietLOD
+  - Mô hình VAR tham số biến thiên và mạng lan tỏa
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# Nhóm 7.4: Mô hình VAR tham số biến thiên và mạng lan tỏa
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Nhóm phương pháp 7.4 — Mô hình VAR tham số biến thiên và mạng lan tỏa** thuộc [Chương 07: Chuỗi thời gian đa biến, chiếu cục bộ và mạng lan tỏa](/vietlod/chapter-07) cung cấp quy trình thực hành từng bước cho **3 mô hình kinh tế lượng** từ bài `7.4.1` đến `7.4.3`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Nhóm 7.4](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-07-chuoi-thoi-gian-da-bien-chieu-cuc-bo-va-mang-lan-toa/nhom-7-4-tvp-factor-spillover) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Nhóm 7.4: Mô hình VAR tham số biến thiên và mạng lan tỏa trên Stata 18, R 4.x và Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 1. Bản chất phương pháp và hệ phương trình định danh
+
+- **Câu hỏi nghiên cứu trọng tâm của nhóm**: Làm sao để phân tích tương tác động học đa chiều, nhận dạng cú sốc cấu trúc — SVAR vs Jordà Local Projections, hệ số biến thiên theo thời gian (VAR) và chỉ số lan tỏa mạng lưới?
+- **Kiểm định chẩn đoán bắt buộc**: Tỷ lệ phương sai toàn tập thông tin được giải thích bởi $r$ nhân tố — Bai–Ng $IC_{p2}$, kiểm định ổn định nghiệm đơn vị hệ FAVAR, FEVD của từng chỉ báo..
+
+Phương trình đặc tả cấu trúc của nhóm phương pháp 7.4:
+
+$$
+\begin{bmatrix} F_t \\ Y_t \end{bmatrix} = \Phi(L)\begin{bmatrix} F_{t-1} \\ Y_{t-1} \end{bmatrix} + v_t, \quad X_t = \Lambda^f F_t + \Lambda^y Y_t + e_t
+$$
+
+Điều kiện mô-men và hàm mục tiêu ước lượng:
+
+$$
+Y_t = c + \sum_{\ell=1}^p A_\ell Y_{t-\ell} + B^{-1}\Sigma_u \varepsilon_t, \quad \Psi_h = \frac{\partial Y_{t+h}}{\partial \varepsilon_t^\top} = \Phi_h B^{-1}\Sigma_u
+$$
+
+<FeatureNotAvailable
+  note="Khi dữ liệu vi phạm giả định định danh của Nhóm 7.4, nhà nghiên cứu cần chuyển sang các nhóm phương pháp mở rộng trong Chương 07 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
+/>
+
+## 2. Danh mục các mô hình trong Nhóm 7.4
+
+<FeatureCards
+  features={[
+    {
+      title: '7.4.1. Mô hình VAR bổ sung nhân tố ẩn Bernanke–Boivin–Eliasz (FAVAR)',
+      description: 'Bổ sung $r$ nhân tố vĩ mô ẩn trích xuất từ hàng chục chuỗi chỉ báo kinh tế vào hệ VAR cùng biến chính sách quan sát được, khắc phục triệt để...',
+      link: '/vietlod/chapter-07/group-7-4/b116-favar',
+      badge: 'B116 · favar'
+    },
+    {
+      title: '7.4.2. Mô hình VAR tham số và phương sai biến thiên theo thời gian (VAR)',
+      description: 'Cho phép cả ma trận hệ số tự hồi quy $B_t$ và ma trận hiệp phương sai cú sốc $\Sigma_t$ tiến hóa liên tục theo thời gian qua bộ lọc không gi...',
+      link: '/vietlod/chapter-07/group-7-4/b117-tvp-var',
+      badge: 'B117 · tvp_var'
+    },
+    {
+      title: '7.4.3. Mô hình đo lường lan tỏa và kết nối mạng lưới Diebold–Yilmaz',
+      description: 'Đo lường ma trận lan tỏa cú sốc định hướng tổng quát — GFEVD Koop–Pesaran–Shin không phụ thuộc thứ tự biến Cholesky, chỉ số kết nối toàn hệ ...',
+      link: '/vietlod/chapter-07/group-7-4/b118-spillover-connectedness',
+      badge: 'B118 · spillover_connectedness'
+    }
+  ]}
+/>
+
+## 3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
+
+| Bài học & Mô hình | Mã định danh | Cú pháp Stata 18 MP | Cú pháp R 4.x | Cú pháp Python 3.11+ | Hỗ trợ |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `7.4.1` · [Mô hình VAR bổ sung nhân tố ẩn Bernanke–Boivin–Eliasz (FAVAR)](/vietlod/chapter-07/group-7-4/b116-favar) | `favar` | `dfactor (y x1 = , noconstant) (f = x2 x3, ar(1/2))` | `vars::VAR(cbind(pc_factors, df$y), p = 2, type = 'const')` | `VAR(df[['f1', 'f2', 'y']]).fit(maxlags=2)` | <Available /> |
+| `7.4.2` · [Mô hình VAR tham số và phương sai biến thiên theo thời gian (VAR)](/vietlod/chapter-07/group-7-4/b117-tvp-var) | `tvp_var` | `sspace (b1 L.b1, state noconstant) (y L.y, state)` | `tvReg::tvVAR(df[, c('y', 'x1', 'x2')], p = 2)` | `UnobservedComponents(df['y'], exog=df[['x1', 'x2']], mle_regression=False).fit()` | <Available /> |
+| `7.4.3` · [Mô hình đo lường lan tỏa và kết nối mạng lưới Diebold–Yilmaz](/vietlod/chapter-07/group-7-4/b118-spillover-connectedness) | `spillover_connectedness` | `var y x1 x2, lags(1/2) -> irf create gfevd, step(10)` | `ConnectednessApproach::ConnectednessApproach(df_zoo, nlag = 2, nfore = 10)` | `VAR(df[['y', 'x1', 'x2']]).fit(maxlags=2).fevd(10)` | <Available /> |
+
+## 4. Quy trình thực hành chuẩn cho Nhóm 7.4
+
+<Steps>
+
+### Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco
+
+Tải tệp CSV thực hành của từng mô hình trong Nhóm `7.4` hoặc kết nối dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
+
+### Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu
+
+So sánh các mô hình từ `7.4.1` đến `7.4.3` trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.
+
+### Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab
+
+Thực hiện đầy đủ bộ kiểm định **Tỷ lệ phương sai toàn tập thông tin được giải thích bởi $r$ nhân tố — Bai–Ng $IC_{p2}$, kiểm định ổn định nghiệm đơn vị hệ FAVAR, FEVD của từng chỉ báo.** và đẩy mã mô hình sang [EcoLab](https://ecolab.io.vn) để xuất bảng kết quả chuẩn công bố quốc tế.
+
+</Steps>
