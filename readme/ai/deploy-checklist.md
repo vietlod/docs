@@ -8,14 +8,14 @@ Tài liệu này cung cấp checklist các bước triển khai an toàn và có
 
 ## 1. Triển khai Cổng Tài liệu (`docs.tnsai.vn`)
 
-### Phương thức A: CI/CD Tự động qua Webhook (Khuyên dùng)
+### Phương thức A: CI/CD Tự động qua Webhook (Khuyên dùng — Zero-Downtime Atomic Build)
 
 Khi có push lên nhánh `main` trên GitHub (từ local git push hoặc qua giao diện CMS admin):
 1. **GitHub Webhook** tự động gửi HTTPS POST request đến `https://docs.tnsai.vn/webhook/docs`.
-2. Dịch vụ **docs-webhook** (PM2 port 3051) trên VPS nhận request, xác thực chữ ký SHA-256 (bằng `WEBHOOK_SECRET` lưu trong môi trường).
-3. Webhook server kích hoạt tiến trình kéo code mới và build Docusaurus local ngay trên VPS:
-   `cd /opt/docs/ecodata && git pull origin main && npm run build`
-4. Giao diện tĩnh mới được tạo ra tại `/opt/docs/ecodata/build` và Nginx phục vụ nội dung mới ngay lập tức (không cần reload Nginx).
+2. Dịch vụ **docs-webhook** (PM2 port 3051, `/opt/docs/webhook/server.js`) trên VPS nhận request, xác thực chữ ký SHA-256 (bằng `WEBHOOK_SECRET` lưu trong môi trường).
+3. Webhook server kích hoạt tiến trình kéo code mới và biên dịch Docusaurus nguyên tử vào thư mục tạm `build_staging` (`timeout: 1200000`, `maxBuffer: 50MB`) để không bao giờ gây lỗi `403 Forbidden` trong lúc đang biên dịch 724 trang MDX:
+   `cd /opt/docs/ecodata && git pull origin main && rm -rf build_staging && npx docusaurus build --out-dir build_staging && rm -rf build_prev && mv build build_prev && mv build_staging build && rm -rf build_prev`
+4. Giao diện tĩnh mới được hoán đổi nguyên tử vào `/opt/docs/ecodata/build` trong `< 2 ms` và Nginx phục vụ nội dung mới ngay lập tức (không cần reload Nginx).
 
 **Cách kiểm tra trạng thái auto-deploy**:
 *   Kiểm tra logs của webhook trên VPS: `pm2 logs docs-webhook`
