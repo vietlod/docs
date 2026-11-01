@@ -64,11 +64,11 @@ Nút **`Publish`** trên giao diện quản trị và API bị khóa cứng ở 
 ### 3. Năm công cụ Admin MCP và đồng bộ nóng `<= 60s` sang EcoLab
 
 Quản trị viên có thể điều khiển toàn bộ vòng đời ngay từ trợ lý AI qua 5 công cụ Admin MCP (chỉ hiển thị cho tài khoản Admin):
-- `admin_econometrics_discover_start`: Khởi chạy tiến trình khám phá Stage A theo chủ đề hoặc họ mô hình.
-- `admin_econometrics_candidates_list`: Truy vấn danh sách ứng viên, điểm ưu tiên và trạng thái kiểm chứng `B1–B4`.
-- `admin_econometrics_verify_candidate`: Kích hoạt kiểm định thực tế 4 cổng `B1–B4` trên bộ 3 động cơ.
-- `admin_econometrics_publish_model`: Xuất bản mô hình đã đạt `4/4` cổng vào danh mục trực tuyến.
-- `admin_econometrics_unpublish_model`: Thu hồi an toàn mô hình khỏi danh mục công khai (giữ nguyên khả năng đọc các gói kết quả lịch sử).
+- `admin_econometrics_discover`: Khởi chạy tiến trình khám phá Stage A theo chủ đề hoặc họ mô hình.
+- `admin_econometrics_list_candidates`: Truy vấn danh sách ứng viên, điểm ưu tiên và trạng thái kiểm chứng `B1–B4`.
+- `admin_econometrics_synthesize_spec`: Tổng hợp bộ 5 hiện vật đặc tả kỹ thuật chuẩn hóa cho Stage B.
+- `admin_econometrics_verify_gates`: Kích hoạt kiểm định thực tế 4 cổng `B1–B4` trên bộ 3 động cơ.
+- `admin_econometrics_publish`: Xuất bản mô hình đã đạt `4/4` cổng vào danh mục trực tuyến hoặc thu hồi an toàn (`unpublish`) khỏi danh mục công khai.
 
 Ngay khi Admin bấm **`Publish`** hoặc **`Unpublish`**, EcoData phát tín hiệu qua Redis Pub/Sub, nâng `catalog_version` tại `GET /api/catalog/manifest` và dịch vụ `CatalogHeartbeatService` của **EcoLab** tự động cập nhật cây mô hình cùng danh sách công cụ Unified MCP trong vòng **`<= 60` giây** mà không cần khởi động lại bất kỳ container nào.
 

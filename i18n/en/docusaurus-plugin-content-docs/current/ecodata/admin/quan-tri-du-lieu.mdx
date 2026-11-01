@@ -64,11 +64,11 @@ The **`Publish`** action is hard-locked in both the backend API and Admin UI unt
 ### 3. Five Admin MCP Tools and `<= 60s` Zero-Downtime Sync to EcoLab
 
 Authenticated administrators can drive the entire curation workflow via five Admin-scoped MCP tools:
-- `admin_econometrics_discover_start`: Launch a Stage A discovery batch filtered by topic or model family.
-- `admin_econometrics_candidates_list`: List discovered candidates, priority scores, and `B1–B4` gate statuses.
-- `admin_econometrics_verify_candidate`: Trigger real Tri-Engine execution across Gates `B1–B4`.
-- `admin_econometrics_publish_model`: Publish a `4/4`-verified estimator into the live catalog.
-- `admin_econometrics_unpublish_model`: Safely retire an estimator from new runs while preserving historical run readability.
+- `admin_econometrics_discover`: Launch a Stage A discovery batch filtered by topic or model family.
+- `admin_econometrics_list_candidates`: List discovered candidates, priority scores, and `B1–B4` gate statuses.
+- `admin_econometrics_synthesize_spec`: Synthesize the five standardized Stage B technical specification artifacts.
+- `admin_econometrics_verify_gates`: Trigger real Tri-Engine execution across Gates `B1–B4`.
+- `admin_econometrics_publish`: Publish a `4/4`-verified estimator into the live catalog or safely unpublish an estimator while preserving historical run readability.
 
 Immediately upon **`Publish`** or **`Unpublish`**, EcoData broadcasts a Redis Pub/Sub catalog event, increments `catalog_version` on `GET /api/catalog/manifest`, and **EcoLab's** `CatalogHeartbeatService` refreshes its dynamic family tree and Unified MCP schemas within **`<= 60` seconds** without restarting any containers.
 
