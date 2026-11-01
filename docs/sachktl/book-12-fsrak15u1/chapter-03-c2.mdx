@@ -1,0 +1,168 @@
+---
+id: chapter-03-c2
+title: "Chương 03: 2. mô hình hồi quy tuyến tính đơn giản"
+sidebar_label: "Chương 03: 2. Mô hình hồi quy tuyến tính đơn giản"
+sidebar_position: 4
+description: "Hướng dẫn thực hành How-To Chương 03: 2. mô hình hồi quy tuyến tính đơn giản thuộc bộ sách Kinh tế phát triển thực nghiệm trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 03: 2. mô hình hồi quy tuyến tính đơn giản
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 03: 2. mô hình hồi quy tuyến tính đơn giản** thuộc [**Bộ sách 12: kinh tế phát triển thực nghiệm**](/sachktl/book-12-fsrak15u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/fsrak15u1/c2/](https://sachktl.tnsai.vn/vi/fsrak15u1/c2/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 03: 2. mô hình hồi quy tuyến tính đơn giản">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 12 · CHƯƠNG 03</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 03: 2. mô hình hồi quy tuyến tính đơn giản</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Kinh tế phát triển thực nghiệm · 4 bài học chuyên sâu</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Mô hình hồi quy tuyến tính đơn giản Chào mừng các bạn sinh viên đã đến với chuỗi bài học nền tảng và quan trọng nhất trong kinh tế lượng! Nếu bạn từng thắc mắc làm thế nào các nhà kinh tế có thể ước tính được những con số như "mỗi năm đi học giúp tăng lương thêm bao nhiêu phần trăm?" hay "chi tiêu quảng cáo ảnh hưởng đến doanh thu như thế nào?", thì chuỗi bài học này chính là câu trả lời. Chúng ta sẽ cùng nhau khám phá công cụ mạnh mẽ và phổ biến nhất để trả lời những câu hỏi đó: Mô hình Hồi quy Tuyến tính và phương pháp ước lượng Bình phương Tối thiểu Thông thường. Đừng lo lắng nếu
+
+- **Chủ đề học thuật trọng tâm**: Cấu trúc chuỗi bài học, PHỤ LỤC: Dữ liệu mô phỏng cho chuỗi bài viết.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 03 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/fsrak15u1/c2/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Nền tảng mô hình hồi quy tuyến tính và quan hệ nhân quả</h3>
+    <p>Chào mừng các bạn đã đến với bài học chính thức đầu tiên trong chuỗi bài về mô hình hồi quy. Trong bài giới thiệu, chúng ta đã cùng nhau phác thảo một bức tranh tổng quan về hành trình sắp tới. Bây giờ là lúc chúng ta bắt đầu đặt những viên gạch nền móng đầu t Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/fsrak15u1/c2/nen-tang-mo-hinh-hoi-quy-tuyen-tinh-va-quan-he-nhan-qua/" target="_blank" rel="noopener">Nền tảng mô hình hồi quy tuyến tính và quan hệ nhân quả</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Giả định cốt lõi và cách xây dựng bộ ước lượng OLS</h3>
+    <p>Ở bài học trước, chúng ta đã làm quen với cấu trúc và ý nghĩa của mô hình hồi quy tuyến tính. Chúng ta đã hiểu rằng mục tiêu của mình là tìm ra các hệ số $\beta_0$ và $\beta_1$ để mô tả mối quan hệ giữa các biến. Tuy nhiên, câu hỏi lớn vẫn còn đó: Làm thế nào  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/fsrak15u1/c2/gia-dinh-cot-loi-va-cach-xay-dung-bo-uoc-luong-ols/" target="_blank" rel="noopener">Giả định cốt lõi và cách xây dựng bộ ước lượng OLS</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Phân tích các tính chất quan trọng của ước lượng OLS</h3>
+    <p>Ở bài học trước, chúng ta đã cùng nhau "xây dựng" thành công công thức toán học cho bộ ước lượng OLS. Chúng ta đã biết cách tính ra các hệ số $\hat&#123;\beta&#125;_0$ và $\hat&#123;\beta&#125;_1$ từ bất kỳ bộ dữ liệu nào. Tuy nhiên, có một công thức không có  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/fsrak15u1/c2/phan-tich-cac-tinh-chat-quan-trong-cua-uoc-luong-ols/" target="_blank" rel="noopener">Phân tích các tính chất quan trọng của ước lượng OLS</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: Hướng dẫn thực hành và bài tập vận dụng với Stata</h3>
+    <p>Chào mừng các bạn đã đến với bài học cuối cùng và cũng là bài học thực hành quan trọng nhất! Trong ba bài vừa qua, chúng ta đã cùng nhau xây dựng một nền tảng lý thuyết vững chắc, từ việc hiểu cấu trúc mô hình, khám phá giả định cốt lõi, cho đến việc phân tích Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/fsrak15u1/c2/huong-dan-thuc-hanh-va-bai-tap-van-dung-voi-stata/" target="_blank" rel="noopener">Hướng dẫn thực hành và bài tập vận dụng với Stata</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_fsrak15u1_c03_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_fsrak15u1_c03_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_fsrak15u1_c03_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 03: 2. mô hình hồi quy tuyến tính đơn giản trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 03 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Nền tảng mô hình hồi quy tuyến tính và quan hệ nhân quả | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/fsrak15u1/c2/nen-tang-mo-hinh-hoi-quy-tuyen-tinh-va-quan-he-nhan-qua/) |
+| **Bài 02** | Giả định cốt lõi và cách xây dựng bộ ước lượng OLS | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/fsrak15u1/c2/gia-dinh-cot-loi-va-cach-xay-dung-bo-uoc-luong-ols/) |
+| **Bài 03** | Phân tích các tính chất quan trọng của ước lượng OLS | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/fsrak15u1/c2/phan-tich-cac-tinh-chat-quan-trong-cua-uoc-luong-ols/) |
+| **Bài 04** | Hướng dẫn thực hành và bài tập vận dụng với Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/fsrak15u1/c2/huong-dan-thuc-hanh-va-bai-tap-van-dung-voi-stata/) |

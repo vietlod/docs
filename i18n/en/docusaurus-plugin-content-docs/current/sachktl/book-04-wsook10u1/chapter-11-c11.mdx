@@ -1,0 +1,179 @@
+---
+id: chapter-11-c11
+title: "Chapter 11: 11. Mô hình dữ liệu bảng nâng cao: GMM, IV và mô hình động — Econometric Analysis of Cross Section and Panel Data"
+sidebar_label: "Chapter 11: 11. Mô hình dữ liệu bảng nâng cao: GMM, IV"
+sidebar_position: 12
+description: "Step-by-step practical how-to guide for Chapter 11: 11. Mô hình dữ liệu bảng nâng cao: GMM, IV và mô hình động from Econometric Analysis of Cross Section and Panel Data on SachKTL with Stata, R, and Python workflows integrated with EcoData, Finco, and EcoLab."
+---
+
+# Chapter 11: 11. Mô hình dữ liệu bảng nâng cao: GMM, IV và mô hình động — Econometric Analysis of Cross Section and Panel Data
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+This practical how-to guide synthesizes the methodology and empirical implementation workflow of **Chapter 11: 11. Mô hình dữ liệu bảng nâng cao: GMM, IV và mô hình động** from [**Book 04: Econometric Analysis of Cross Section and Panel Data**](/en/sachktl/book-04-wsook10u1/), with direct backlinks to the authoritative source material at [https://sachktl.tnsai.vn/vi/wsook10u1/c11/](https://sachktl.tnsai.vn/vi/wsook10u1/c11/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chapter 11: 11. Mô hình dữ liệu bảng nâng cao: GMM, IV và mô hình độ">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BOOK 04 · CHAPTER 11</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chapter 11: 11. Mô hình dữ liệu bảng nâng cao: GMM, IV và mô hình độ</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Part of Textbook: Econometric Analysis of Cross Section and Panel Data · 7 Detailed L</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Methodological Meaning and Scope of Application
+
+Giới thiệu các mô hình dữ liệu bảng nâng cao: GMM, IV và mô hình động Advanced Panel Data methods Chào mừng các bạn sinh viên đã quay trở lại với chuỗi bài học về kinh tế lượng dữ liệu bảng. Ở chương 10, chúng ta đã cùng nhau xây dựng một nền tảng vững chắc với các mô hình hiệu ứng cố định và hiệu ứng ngẫu nhiên tiêu chuẩn. Đó là những công cụ cực kỳ mạnh mẽ, nhưng chúng hoạt động dựa trên một giả định khá nghiêm ngặt: tính ngoại sinh chặt chẽ của các biến giải thích. Tuy nhiên, trong nghiên cứu kinh tế thực tế, giả định này thường bị vi phạm. Các vấn đề như biến thiếu, sai số đo
+
+- **Core Academic Topics**: CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO, PHỤ LỤC: Dữ liệu mô phỏng cho chuỗi bài học.
+- **Supported Analytical Environments**: `Stata 18 MP`.
+- **Recommended Empirical Data Sources**: Vietnamese macroeconomic, corporate, and household survey datasets on [EcoData](https://ecodata.io.vn), capital and commodity market series on [Finco](https://www.finco.vn), model cross-references on [VietLOD](https://vietlod.tnsai.vn), and automated estimation on [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Original Chapter on SachKTL",
+      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for Chapter 11 on SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/wsook10u1/c11/"
+    },
+    {
+      title: "Practice Datasets on EcoData & Finco",
+      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and survey data for hands-on replication.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Automated Estimation on EcoLab",
+      description: "Execute econometric specifications, run diagnostic battery tests, and export publication-grade tables automatically.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Step-by-Step Practical Implementation Across Chapter Lessons
+
+<Steps>
+  <div className="step-item">
+    <h3>Step 1: GMM và Biến công cụ cho mô hình RE và FE</h3>
+    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for GMM và Biến công cụ cho mô hình RE và FE. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/wsook10u1/c11/gmm-va-bien-cong-cu-cho-mo-hinh-re-va-fe/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/wsook10u1/c11/gmm-va-bien-cong-cu-cho-mo-hinh-re-va-fe/</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Step 2: Mô hình Hausman-Taylor và ứng dụng IV nội sinh</h3>
+    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Mô hình Hausman-Taylor và ứng dụng IV nội sinh. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/wsook10u1/c11/mo-hinh-hausman-taylor-va-ung-dung-iv-noi-sinh/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/wsook10u1/c11/mo-hinh-hausman-taylor-va-ung-dung-iv-noi-sinh/</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Step 3: Xử lý nội sinh với sai phân và sai số đo lường</h3>
+    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Xử lý nội sinh với sai phân và sai số đo lường. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/wsook10u1/c11/xu-ly-noi-sinh-voi-sai-phan-va-sai-so-do-luong/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/wsook10u1/c11/xu-ly-noi-sinh-voi-sai-phan-va-sai-so-do-luong/</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Step 4: Mô hình động và giả định ngoại sinh tuần tự</h3>
+    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Mô hình động và giả định ngoại sinh tuần tự. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/wsook10u1/c11/mo-hinh-dong-va-gia-dinh-ngoai-sinh-tuan-tu/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/wsook10u1/c11/mo-hinh-dong-va-gia-dinh-ngoai-sinh-tuan-tu/</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Step 5: Mô hình với hệ số góc và xu hướng đặc thù</h3>
+    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Mô hình với hệ số góc và xu hướng đặc thù. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/wsook10u1/c11/mo-hinh-voi-he-so-goc-va-xu-huong-dac-thu/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/wsook10u1/c11/mo-hinh-voi-he-so-goc-va-xu-huong-dac-thu/</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Step 6: Thực hành và tổng kết chuỗi bài học</h3>
+    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Thực hành và tổng kết chuỗi bài học. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/wsook10u1/c11/thuc-hanh-va-tong-ket-chuoi-bai-hoc/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/wsook10u1/c11/thuc-hanh-va-tong-ket-chuoi-bai-hoc/</a>.</p>
+  </div>
+</Steps>
+
+## 3. Multi-Platform Implementation Examples in Stata, R, and Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Initialize environment and load practice dataset from EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Import standardized empirical dataset
+import delimited "sachktl_wsook10u1_c11_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Estimate baseline specification and run diagnostic checks with robust standard errors
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Load econometric packages and practice dataset from EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_wsook10u1_c11_ecodata.csv")
+summary(df)
+
+# Estimate model and compute heteroskedasticity-robust HC1 standard errors
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Load econometric libraries and practice dataset from EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_wsook10u1_c11_ecodata.csv")
+print(df.describe())
+
+# Fit specification with HC1 robust standard errors
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video Tutorial Walkthrough
+
+<VideoTutorial
+  title="Practical Walkthrough for Chapter 11: 11. Mô hình dữ liệu bảng nâng cao: GMM, IV và mô hình động on SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Complete Lesson Directory and Backlinks to Original SachKTL Articles
+
+| No. | Lesson Title in Chapter 11 | Supported Software | Original Source Link on SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Lesson 01** | GMM và Biến công cụ cho mô hình RE và FE | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c11/gmm-va-bien-cong-cu-cho-mo-hinh-re-va-fe/) |
+| **Lesson 02** | Mô hình Hausman-Taylor và ứng dụng IV nội sinh | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c11/mo-hinh-hausman-taylor-va-ung-dung-iv-noi-sinh/) |
+| **Lesson 03** | Xử lý nội sinh với sai phân và sai số đo lường | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c11/xu-ly-noi-sinh-voi-sai-phan-va-sai-so-do-luong/) |
+| **Lesson 04** | Mô hình động và giả định ngoại sinh tuần tự | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c11/mo-hinh-dong-va-gia-dinh-ngoai-sinh-tuan-tu/) |
+| **Lesson 05** | Mô hình với hệ số góc và xu hướng đặc thù | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c11/mo-hinh-voi-he-so-goc-va-xu-huong-dac-thu/) |
+| **Lesson 06** | Thực hành và tổng kết chuỗi bài học | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c11/thuc-hanh-va-tong-ket-chuoi-bai-hoc/) |
+| **Lesson 07** | Tổng hợp các Mô hình Dữ liệu Bảng Nâng cao | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c11/tong-hop-cac-mo-hinh-du-lieu-bang-nang-cao/) |

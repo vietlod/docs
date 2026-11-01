@@ -1,0 +1,173 @@
+---
+id: chapter-18-c18
+title: "Chapter 18: 18. Mô hình phi tuyến — Interpreting and Visualizing Regression Models Using Stata"
+sidebar_label: "Chapter 18: 18. Mô hình phi tuyến"
+sidebar_position: 19
+description: "Step-by-step practical how-to guide for Chapter 18: 18. Mô hình phi tuyến from Interpreting and Visualizing Regression Models Using Stata on SachKTL with Stata, R, and Python workflows integrated with EcoData, Finco, and EcoLab."
+---
+
+# Chapter 18: 18. Mô hình phi tuyến — Interpreting and Visualizing Regression Models Using Stata
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+This practical how-to guide synthesizes the methodology and empirical implementation workflow of **Chapter 18: 18. Mô hình phi tuyến** from [**Book 07: Interpreting and Visualizing Regression Models Using Stata**](/en/sachktl/book-07-msitk21u1/), with direct backlinks to the authoritative source material at [https://sachktl.tnsai.vn/vi/msitk21u1/c18/](https://sachktl.tnsai.vn/vi/msitk21u1/c18/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chapter 18: 18. Mô hình phi tuyến">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BOOK 07 · CHAPTER 18</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chapter 18: 18. Mô hình phi tuyến</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Part of Textbook: Interpreting and Visualizing Regression Models Using Stata · 5 Deta</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Methodological Meaning and Scope of Application
+
+Giới thiệu về các mô hình phi tuyến trong kinh tế lượng An Introduction to Nonlinear models in Econometrics Tổng quan về chuỗi bài học Chào mừng các bạn đã đến với chuỗi bài học về các mô hình phi tuyến, một trong những công cụ mạnh mẽ và phổ biến nhất trong kho tàng kinh tế lượng ứng dụng. Trong thực tế, rất nhiều biến số kinh tế mà chúng ta quan tâm không phải là biến liên tục. Ví dụ, một người quyết định có mua nhà hay không, một hộ gia đình có bao nhiêu chiếc xe, hay mức độ hài lòng của khách hàng được xếp loại như thế nào . Các mô hình tuyến tính cổ điển như OLS
+
+- **Core Academic Topics**: Tổng quan về chuỗi bài học, Cấu trúc chuỗi bài học về mô hình phi tuyến, Kiến thức tiên quyết cần chuẩn bị, Những gì bạn cần biết trước khi bắt đầu, Mục tiêu học tập của chuỗi bài viết.
+- **Supported Analytical Environments**: `Stata 18 MP`.
+- **Recommended Empirical Data Sources**: Vietnamese macroeconomic, corporate, and household survey datasets on [EcoData](https://ecodata.io.vn), capital and commodity market series on [Finco](https://www.finco.vn), model cross-references on [VietLOD](https://vietlod.tnsai.vn), and automated estimation on [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Original Chapter on SachKTL",
+      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for Chapter 18 on SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/msitk21u1/c18/"
+    },
+    {
+      title: "Practice Datasets on EcoData & Finco",
+      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and survey data for hands-on replication.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Automated Estimation on EcoLab",
+      description: "Execute econometric specifications, run diagnostic battery tests, and export publication-grade tables automatically.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Step-by-Step Practical Implementation Across Chapter Lessons
+
+<Steps>
+  <div className="step-item">
+    <h3>Step 1: Hồi quy Logistic nhị phân - Nền tảng và diễn giải</h3>
+    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Hồi quy Logistic nhị phân - Nền tảng và diễn giải. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c18/hoi-quy-logistic-nhi-phan-nen-tang-va-dien-giai/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/msitk21u1/c18/hoi-quy-logistic-nhi-phan-nen-tang-va-dien-giai/</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Step 2: Mô hình đa thức, thứ tự và poisson</h3>
+    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Mô hình đa thức, thứ tự và poisson. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c18/mo-hinh-da-thuc-thu-tu-va-poisson/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/msitk21u1/c18/mo-hinh-da-thuc-thu-tu-va-poisson/</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Step 3: Tương tác và mô hình gãy khúc trong hồi quy logistic</h3>
+    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Tương tác và mô hình gãy khúc trong hồi quy logistic. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c18/tuong-tac-va-mo-hinh-gay-khuc-trong-hoi-quy-logistic/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/msitk21u1/c18/tuong-tac-va-mo-hinh-gay-khuc-trong-hoi-quy-logistic/</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Step 4: Bài tập thực hành tổng hợp về mô hình phi tuyến</h3>
+    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Bài tập thực hành tổng hợp về mô hình phi tuyến. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c18/bai-tap-thuc-hanh-tong-hop-ve-mo-hinh-phi-tuyen/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/msitk21u1/c18/bai-tap-thuc-hanh-tong-hop-ve-mo-hinh-phi-tuyen/</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Step 5: Tổng quan và lựa chọn mô hình phi tuyến phù hợp</h3>
+    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Tổng quan và lựa chọn mô hình phi tuyến phù hợp. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c18/tong-quan-va-lua-chon-mo-hinh-phi-tuyen-phu-hop/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/msitk21u1/c18/tong-quan-va-lua-chon-mo-hinh-phi-tuyen-phu-hop/</a>.</p>
+  </div>
+</Steps>
+
+## 3. Multi-Platform Implementation Examples in Stata, R, and Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Initialize environment and load practice dataset from EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Import standardized empirical dataset
+import delimited "sachktl_msitk21u1_c18_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Estimate baseline specification and run diagnostic checks with robust standard errors
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Load econometric packages and practice dataset from EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_msitk21u1_c18_ecodata.csv")
+summary(df)
+
+# Estimate model and compute heteroskedasticity-robust HC1 standard errors
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Load econometric libraries and practice dataset from EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_msitk21u1_c18_ecodata.csv")
+print(df.describe())
+
+# Fit specification with HC1 robust standard errors
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video Tutorial Walkthrough
+
+<VideoTutorial
+  title="Practical Walkthrough for Chapter 18: 18. Mô hình phi tuyến on SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Complete Lesson Directory and Backlinks to Original SachKTL Articles
+
+| No. | Lesson Title in Chapter 18 | Supported Software | Original Source Link on SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Lesson 01** | Hồi quy Logistic nhị phân - Nền tảng và diễn giải | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c18/hoi-quy-logistic-nhi-phan-nen-tang-va-dien-giai/) |
+| **Lesson 02** | Mô hình đa thức, thứ tự và poisson | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c18/mo-hinh-da-thuc-thu-tu-va-poisson/) |
+| **Lesson 03** | Tương tác và mô hình gãy khúc trong hồi quy logistic | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c18/tuong-tac-va-mo-hinh-gay-khuc-trong-hoi-quy-logistic/) |
+| **Lesson 04** | Bài tập thực hành tổng hợp về mô hình phi tuyến | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c18/bai-tap-thuc-hanh-tong-hop-ve-mo-hinh-phi-tuyen/) |
+| **Lesson 05** | Tổng quan và lựa chọn mô hình phi tuyến phù hợp | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c18/tong-quan-va-lua-chon-mo-hinh-phi-tuyen-phu-hop/) |

@@ -1,0 +1,178 @@
+---
+id: chapter-28-c28
+title: "Chương 28: 28. tác động điều trị nội sinh"
+sidebar_label: "Chương 28: 28. Tác động điều trị nội sinh"
+sidebar_position: 29
+description: "Hướng dẫn thực hành How-To Chương 28: 28. tác động điều trị nội sinh thuộc bộ sách Kinh tế lượng vi mô sử dụng Stata trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 28: 28. tác động điều trị nội sinh
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 28: 28. tác động điều trị nội sinh** thuộc [**Bộ sách 15: kinh tế lượng vi mô sử dụng Stata**](/sachktl/book-15-csamk22u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/csamk22u1/c28/](https://sachktl.tnsai.vn/vi/csamk22u1/c28/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 28: 28. tác động điều trị nội sinh">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 15 · CHƯƠNG 28</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 28: 28. tác động điều trị nội sinh</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Kinh tế lượng vi mô sử dụng Stata · 6 bài học chuyên sâu</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Tổng quan về các phương pháp ước lượng tác động can thiệp nội sinh An Overview of Methods for Endogenous Treatment Effects Giới thiệu về vấn đề tác động can thiệp nội sinh Chào các bạn, chào mừng đến với chuỗi bài học chuyên sâu về một trong những chủ đề quan trọng và thách thức nhất trong kinh tế lượng ứng dụng: ước lượng tác động can thiệp khi có sự hiện diện của tính nội sinh. Trong thực tế, khi đánh giá hiệu quả của một chính sách, một chương trình đào tạo, hay một chiến dịch marketing, chúng ta thường không thể thực hiện các thí nghiệm ngẫu nhiên có đối chứng hoàn hảo. Thay vào
+
+- **Chủ đề học thuật trọng tâm**: Giới thiệu về vấn đề tác động can thiệp nội sinh, Cấu trúc chuỗi bài học, Kiến thức tiên quyết, Mục tiêu học tập, Tài liệu tham khảo.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 28 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/csamk22u1/c28/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Các phương pháp tham số trong ước lượng tác động can thiệp nội sinh</h3>
+    <p>Các phương pháp tham số trong ước lượng tác động can thiệp nội sinh Parametric methods for endogenous treatment effects Tổng quan về các thách thức trong ước lượng tác động can thiệp Trong kinh tế lượng ứng dụng, một trong những mục tiêu hàng đầu của chúng ta  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c28/cac-phuong-phap-tham-so-trong-uoc-luong-tac-dong-can-thiep-noi-sinh/" target="_blank" rel="noopener">Các phương pháp tham số trong ước lượng tác động can thiệp nội sinh</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Hướng dẫn thực hành với lệnh eregress và etregress trong Stata</h3>
+    <p>Hướng dẫn thực hành với lệnh eregress và etregress trong Stata A practical guide to Stata's ERM and ET commands Từ lý thuyết đến công cụ thực hành Trong bài học trước, chúng ta đã xây dựng một nền tảng lý thuyết vững chắc về các phương pháp tham số để xử lý ca Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c28/huong-dan-thuc-hanh-voi-lenh-eregress-va-etregress-trong-stata/" target="_blank" rel="noopener">Hướng dẫn thực hành với lệnh eregress và etregress trong Stata</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Phương pháp thí nghiệm bán tự nhiên – ước lượng LATE và sai biệt kép</h3>
+    <p>Phương pháp thí nghiệm bán tự nhiên: LATE và sai biệt kép Quasi-experimental methods: LATE and Difference-in-Differences Một cách tiếp cận linh hoạt hơn Trong hai bài học trước, chúng ta đã khám phá các phương pháp tham số để giải quyết vấn đề can thiệp nội si Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c28/phuong-phap-thi-nghiem-ban-tu-nhien-uoc-luong-late-va-sai-biet-kep-did/" target="_blank" rel="noopener">Phương pháp thí nghiệm bán tự nhiên – ước lượng LATE và sai biệt kép</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: Các kỹ thuật nâng cao – phương pháp kiểm soát tổng hợp và hồi quy gián đoạn</h3>
+    <p>Các kỹ thuật nâng cao: Phương pháp kiểm soát tổng hợp và hồi quy gián đoạn Advanced techniques: Synthetic control method and regression discontinuity design Giải quyết các bài toán nhân quả đặc thù Trong bài học trước, chúng ta đã làm quen với hai công cụ mạnh Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c28/cac-ky-thuat-nang-cao-phuong-phap-kiem-soat-tong-hop-va-hoi-quy-gian-doan-rdd/" target="_blank" rel="noopener">Các kỹ thuật nâng cao – phương pháp kiểm soát tổng hợp và hồi quy gián đoạn</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 5: Hồi quy phân vị với biến nội sinh và phân vị vô điều kiện</h3>
+    <p>Hồi quy phân vị với biến nội sinh và phân vị vô điều kiện Quantile regression with endogenous regressors and unconditional quantiles Nhìn xa hơn tác động trung bình Trong suốt các bài học vừa qua, từ các mô hình tham số đến các phương pháp thí nghiệm bán tự nh Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c28/hoi-quy-phan-vi-voi-bien-noi-sinh-va-phan-vi-vo-dieu-kien/" target="_blank" rel="noopener">Hồi quy phân vị với biến nội sinh và phân vị vô điều kiện</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 6: Tổng kết, so sánh và lựa chọn mô hình phù hợp</h3>
+    <p>Tổng hợp chuỗi bài học về tác động can thiệp nội sinh: Từ lý thuyết đến lựa chọn mô hình Synthesis of endogenous treatment effects: From theory to model selection Bức tranh lớn về suy luận nhân quả với dữ liệu quan sát Chào các bạn, chúng ta đã đi đến bài học  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c28/tong-ket-so-sanh-va-lua-chon-mo-hinh-phu-hop/" target="_blank" rel="noopener">Tổng kết, so sánh và lựa chọn mô hình phù hợp</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_csamk22u1_c28_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_csamk22u1_c28_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_csamk22u1_c28_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 28: 28. tác động điều trị nội sinh trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 28 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Các phương pháp tham số trong ước lượng tác động can thiệp nội sinh | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c28/cac-phuong-phap-tham-so-trong-uoc-luong-tac-dong-can-thiep-noi-sinh/) |
+| **Bài 02** | Hướng dẫn thực hành với lệnh eregress và etregress trong Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c28/huong-dan-thuc-hanh-voi-lenh-eregress-va-etregress-trong-stata/) |
+| **Bài 03** | Phương pháp thí nghiệm bán tự nhiên – ước lượng LATE và sai biệt kép | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c28/phuong-phap-thi-nghiem-ban-tu-nhien-uoc-luong-late-va-sai-biet-kep-did/) |
+| **Bài 04** | Các kỹ thuật nâng cao – phương pháp kiểm soát tổng hợp và hồi quy gián đoạn | Stata 18 MP, R 4.x | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c28/cac-ky-thuat-nang-cao-phuong-phap-kiem-soat-tong-hop-va-hoi-quy-gian-doan-rdd/) |
+| **Bài 05** | Hồi quy phân vị với biến nội sinh và phân vị vô điều kiện | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c28/hoi-quy-phan-vi-voi-bien-noi-sinh-va-phan-vi-vo-dieu-kien/) |
+| **Bài 06** | Tổng kết, so sánh và lựa chọn mô hình phù hợp | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c28/tong-ket-so-sanh-va-lua-chon-mo-hinh-phu-hop/) |

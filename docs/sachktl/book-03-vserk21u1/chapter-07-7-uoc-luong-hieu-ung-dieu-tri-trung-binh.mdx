@@ -1,0 +1,178 @@
+---
+id: chapter-07-7-uoc-luong-hieu-ung-dieu-tri-trung-binh
+title: "Chương 07: 7. ước lượng hiệu ứng điều trị trung bình"
+sidebar_label: "Chương 07: 7. Ước lượng hiệu ứng điều trị trung bình"
+sidebar_position: 8
+description: "Hướng dẫn thực hành How-To Chương 07: 7. ước lượng hiệu ứng điều trị trung bình thuộc bộ sách Phương pháp dữ liệu bảng trong tài chính trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 07: 7. ước lượng hiệu ứng điều trị trung bình
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 07: 7. ước lượng hiệu ứng điều trị trung bình** thuộc [**Bộ sách 03: phương pháp dữ liệu bảng trong tài chính**](/sachktl/book-03-vserk21u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/](https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 07: 7. ước lượng hiệu ứng điều trị trung bình">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 03 · CHƯƠNG 07</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 07: 7. ước lượng hiệu ứng điều trị trung bình</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Phương pháp dữ liệu bảng trong tài chính · 6 bài học chuyên sâu</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Ước lượng hiệu ứng điều trị trung bình Trong kinh tế lượng tài chính ứng dụng, một trong những thách thức lớn nhất là xác định các mối quan hệ nhân quả. Liệu một chính sách mới có thực sự cải thiện hiệu suất công ty? Một quyết định quản trị có tác động như thế nào đến giá trị cổ đông? Hay một sự kiện thị trường ảnh hưởng ra sao đến hành vi đầu tư? Để trả lời những câu hỏi này một cách khoa học, các nhà nghiên cứu thường dựa vào các phương pháp ước lượng hiệu ứng điều trị . Đây là thuật ngữ dùng để chỉ tác động nhân quả của một can thiệp lên một kết quả cụ thể. Tuy nhiên, việc ước lượng này
+
+- **Chủ đề học thuật trọng tâm**: Cấu trúc chuỗi bài học, Kiến thức tiên quyết, Mục tiêu học tập, Tài liệu tham khảo chính, Phụ lục: Dữ liệu mô phỏng cho chuỗi bài viết.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 07 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Khung kết quả tiềm năng và các khái niệm nền tảng</h3>
+    <p>Chào mừng bạn đến với bài học đầu tiên trong chuỗi bài về ước lượng hiệu ứng điều trị. Trong bài giới thiệu tổng quan, chúng ta đã phác thảo bức tranh toàn cảnh về tầm quan trọng của việc xác định quan hệ nhân quả trong tài chính. Để xây dựng một nền móng vững Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/khung-ket-qua-tiem-nang-va-cac-khai-niem-nen-tang/" target="_blank" rel="noopener">Khung kết quả tiềm năng và các khái niệm nền tảng</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Ước lượng với giả định độc lập có điều kiện</h3>
+    <p>Trong bài học trước, chúng ta đã thiết lập khung lý thuyết về kết quả tiềm năng và xác định "thiên chệch lựa chọn" là trở ngại chính trong việc ước lượng hiệu ứng điều trị nhân quả. Về cơ bản, vấn đề nảy sinh vì nhóm được điều trị và nhóm kiểm soát không giống Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/uoc-luong-voi-gia-dinh-doc-lap-co-dieu-kien/" target="_blank" rel="noopener">Ước lượng với giả định độc lập có điều kiện</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Thiết kế hồi quy gián đoạn</h3>
+    <p>Trong bài học trước, chúng ta đã tìm hiểu các phương pháp dựa trên Giả định Độc lập có Điều kiện, vốn yêu cầu chúng ta phải quan sát và kiểm soát tất cả các yếu tố ảnh hưởng đến việc lựa chọn điều trị. Đây là một giả định rất mạnh và không phải lúc nào cũng th Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/thiet-ke-hoi-quy-gian-doan-rdd/" target="_blank" rel="noopener">Thiết kế hồi quy gián đoạn</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: Mô hình hồi quy chuyển mạch và biến công cụ</h3>
+    <p>Trong các bài học trước, chúng ta đã khám phá hai cách tiếp cận chính để ước lượng hiệu ứng điều trị. Bài 2 tập trung vào Giả định Độc lập có Điều kiện, vốn cho rằng chúng ta có thể quan sát và kiểm soát tất cả các yếu tố gây ra sự lựa chọn. Bài 3 giới thiệu T Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/mo-hinh-hoi-quy-chuyen-mach-va-bien-cong-cu-late/" target="_blank" rel="noopener">Mô hình hồi quy chuyển mạch và biến công cụ</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 5: Phương pháp khác biệt trong khác biệt</h3>
+    <p>Trong các bài học trước, chúng ta đã khám phá các phương pháp ước lượng hiệu ứng điều trị trong những bối cảnh khác nhau: từ việc kiểm soát các biến quan sát được, khai thác các ngưỡng phân bổ, cho đến việc mô hình hóa các yếu tố không quan sát được . Mỗi phươ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/phuong-phap-khac-biet-trong-khac-biet-did/" target="_blank" rel="noopener">Phương pháp khác biệt trong khác biệt</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 6: Hướng dẫn thực hành ước lượng hiệu ứng điều trị với Stata</h3>
+    <p>Chúng ta đã cùng nhau đi qua một hành trình xuyên suốt các phương pháp luận cốt lõi trong việc ước lượng hiệu ứng điều trị. Từ việc xây dựng nền tảng với khung kết quả tiềm năng, đối mặt với thiên chệch lựa chọn bằng các phương pháp dựa trên Giả định Độc lập c Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/huong-dan-thuc-hanh-uoc-luong-hieu-ung-dieu-tri-voi-stata/" target="_blank" rel="noopener">Hướng dẫn thực hành ước lượng hiệu ứng điều trị với Stata</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_vserk21u1_c07_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_vserk21u1_c07_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_vserk21u1_c07_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 07: 7. ước lượng hiệu ứng điều trị trung bình trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 07 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Khung kết quả tiềm năng và các khái niệm nền tảng | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/khung-ket-qua-tiem-nang-va-cac-khai-niem-nen-tang/) |
+| **Bài 02** | Ước lượng với giả định độc lập có điều kiện | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/uoc-luong-voi-gia-dinh-doc-lap-co-dieu-kien/) |
+| **Bài 03** | Thiết kế hồi quy gián đoạn | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/thiet-ke-hoi-quy-gian-doan-rdd/) |
+| **Bài 04** | Mô hình hồi quy chuyển mạch và biến công cụ | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/mo-hinh-hoi-quy-chuyen-mach-va-bien-cong-cu-late/) |
+| **Bài 05** | Phương pháp khác biệt trong khác biệt | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/phuong-phap-khac-biet-trong-khac-biet-did/) |
+| **Bài 06** | Hướng dẫn thực hành ước lượng hiệu ứng điều trị với Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/huong-dan-thuc-hanh-uoc-luong-hieu-ung-dieu-tri-voi-stata/) |

@@ -49,3 +49,15 @@ Tài liệu này ghi lại các quyết định thiết kế hệ thống quan t
     2.  **Kiến trúc 16 trang MDX cho Finco**: Xây dựng 8 chuyên đề How-To mỗi ngôn ngữ (`docs/finco/` & `i18n/en/.../finco/`) bao phủ dữ liệu vĩ mô, chứng khoán, thuyết minh BCTC, 3.448 chỉ tiêu hàng hóa MXV, xuất Excel 2-sheet chuẩn SPSS và 138 công cụ StockMCP.
     3.  **Zero-Downtime Atomic Build trên `docs-webhook` (Port 3051)**: Thay vì chạy `docusaurus build` trực tiếp vào thư mục `/opt/docs/ecodata/build` (khiến tệp `index.html` bị xóa tạm thời trong ~5 phút biên dịch và gây lỗi `403 Forbidden`), dịch vụ `docs-webhook` biên dịch vào thư mục tạm `build_staging` (`npx docusaurus build --out-dir build_staging`, `timeout: 1200000`, `maxBuffer: 50MB`) rồi thực hiện hoán đổi nguyên tử `mv build_staging build` trong `< 2 ms`.
     4.  **Tối ưu hóa SEO/AEO**: Tích hợp `docusaurus-plugin-llms` sinh tự động `/llms.txt` (`119 KB`) và `/llms-full.txt` (`4.9 MB`) cùng dữ liệu có cấu trúc JSON-LD (`WebSite` & `SoftwareApplication`).
+
+---
+
+## Quyết định 4: Mở rộng sang 5 Ứng dụng Cốt lõi với SachKTL (1.078 Trang MDX Song ngữ)
+
+*   **Ngày quyết định**: 2026-11-01
+*   **Trạng thái**: Đã thực thi (Active)
+*   **Ngữ cảnh (Context)**: Bổ sung thanh điều hướng **SachKTL** ngay sau **VietLOD** trên `docs.tnsai.vn` để cung cấp tài liệu hướng dẫn How-To cho toàn bộ 30 bộ giáo trình (`503` chương, `2.650` bài học) và 4 khóa học Kinh tế lượng ứng dụng (`58` buổi học, `201` bài giảng) tại `https://sachktl.tnsai.vn`.
+*   **Các quyết định kỹ thuật**:
+    1.  **Kiến trúc 539 trang MDX mỗi ngôn ngữ (`1.078` trang tổng cộng)**: Thiết kế 1 trang Tổng quan (`overview.mdx`), 5 trang hướng dẫn 4 Khóa học (`courses/index.mdx` + 4 cấp độ), 30 trang Tổng quan bộ giáo trình (`book-01-{slug}/index.mdx` .. `book-30-{slug}/index.mdx`) và 503 trang Hướng dẫn thực hành cấp Chương (`chapter-{XX}-{sec_slug}.mdx`) tổng hợp toàn bộ 2.650 bài học kèm bảng backlinks trỏ trực tiếp về bài viết gốc trên `sachktl.tnsai.vn`.
+    2.  **Đồng bộ kiểm chứng 5 Sidebars**: Cập nhật `verify_routing.py` và `verify_i18n.py` trên cả 3 thư mục `.agents/skills/`, `.agent/skills/` và `.claude/skills/` để kiểm chứng tự động 5 sidebars và 1.800 tệp MDX (`900` VI + `900` EN).
+

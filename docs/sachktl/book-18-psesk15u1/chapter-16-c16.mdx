@@ -1,0 +1,178 @@
+---
+id: chapter-16-c16
+title: "Chương 16: 16. phân tách xu hướng và chu kỳ"
+sidebar_label: "Chương 16: 16. Phân tách xu hướng và chu kỳ"
+sidebar_position: 17
+description: "Hướng dẫn thực hành How-To Chương 16: 16. phân tách xu hướng và chu kỳ thuộc bộ sách Phân tích chuỗi thời gian và dữ liệu bảng trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 16: 16. phân tách xu hướng và chu kỳ
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 16: 16. phân tách xu hướng và chu kỳ** thuộc [**Bộ sách 18: phân tích chuỗi thời gian và dữ liệu bảng**](/sachktl/book-18-psesk15u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/psesk15u1/c16/](https://sachktl.tnsai.vn/vi/psesk15u1/c16/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 16: 16. phân tách xu hướng và chu kỳ">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 18 · CHƯƠNG 16</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 16: 16. phân tách xu hướng và chu kỳ</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Phân tích chuỗi thời gian và dữ liệu bảng · 6 bài học chuyên sâu</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Giới thiệu về phân rã xu hướng và chu kỳ An Introduction to Trend and Cycle Decomposition Chào mừng các bạn sinh viên đến với chuỗi bài học mới về một trong những chủ đề hấp dẫn và nền tảng nhất của kinh tế lượng chuỗi thời gian: phân rã xu hướng và chu kỳ. Trong thực tế, khi quan sát một chuỗi dữ liệu kinh tế như GDP, lạm phát, hay tỷ lệ thất nghiệp, chúng ta thường thấy sự hòa quyện giữa hai loại chuyển động. Một là sự tăng trưởng hoặc suy giảm dài hạn, mà chúng ta gọi là xu hướng. Hai là những biến động lên xuống có tính lặp lại quanh xu hướng đó, được gọi là chu kỳ, ví dụ
+
+- **Chủ đề học thuật trọng tâm**: TỪ KHÓA CHÍNH CỦA CHUỖI BÀI HỌC, CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 16 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/psesk15u1/c16/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Các bộ lọc hodrick-prescott và band-pass</h3>
+    <p>Các bộ lọc cơ học: hodrick-prescott và band-pass Mechanical filters: hodrick-prescott and band-pass Chào mừng các bạn quay trở lại với chuỗi bài học về phân rã chuỗi thời gian. Trong bài học đầu tiên này, chúng ta sẽ khám phá hai trong số những công cụ phổ biế Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c16/cac-bo-loc-hodrick-prescott-va-band-pass/" target="_blank" rel="noopener">Các bộ lọc Hodrick-Prescott và Band-Pass</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Tiếp cận mô hình cấu trúc và không gian trạng thái</h3>
+    <p>Mô hình cấu trúc và phương pháp không gian trạng thái Structural models and the state space approach Ở bài học trước, chúng ta đã làm quen với các bộ lọc cơ học như HP và Band-Pass. Chúng là những công cụ hữu ích, nhanh chóng, nhưng có một đặc điểm quan trọng: Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c16/tiep-can-mo-hinh-cau-truc-va-khong-gian-trang-thai/" target="_blank" rel="noopener">Tiếp cận mô hình cấu trúc và không gian trạng thái</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Phân rã Beveridge-Nelson cho chuỗi không dừng</h3>
+    <p>Phân rã beveridge-nelson cho chuỗi không dừng Beveridge-nelson decomposition for non-stationary series Trong hai bài học trước, chúng ta đã khám phá các phương pháp phân rã xu hướng và chu kỳ dựa trên ý tưởng làm mượt hoặc mô hình hóa một xu hướng linh hoạt .  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c16/phan-ra-beveridge-nelson-cho-chuoi-khong-dung/" target="_blank" rel="noopener">Phân rã Beveridge-Nelson cho chuỗi không dừng</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: So sánh các phương pháp và phân rã watson</h3>
+    <p>So sánh các phương pháp và phân rã Watson Comparing decomposition methods and Watson decomposition Trong các bài học trước, chúng ta đã khám phá ba cách tiếp cận chính để phân rã chuỗi thời gian thành các thành phần xu hướng và chu kỳ: các bộ lọc cơ học, mô hì Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c16/so-sanh-cac-phuong-phap-va-phan-ra-watson/" target="_blank" rel="noopener">So sánh các phương pháp và phân rã Watson</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 5: Thực hành phân rã chuỗi thời gian với Stata</h3>
+    <p>Hướng dẫn thực hành phân rã chuỗi thời gian với stata A practical guide to time series decomposition in stata Chào mừng các bạn đến với bài học quan trọng nhất của chuỗi bài: buổi thực hành tổng hợp. Đây là thời điểm lý thuyết gặp thực tiễn, nơi chúng ta sẽ vậ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c16/thuc-hanh-phan-ra-chuoi-thoi-gian-voi-stata/" target="_blank" rel="noopener">Thực hành phân rã chuỗi thời gian với Stata</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 6: Tổng hợp và ứng dụng nâng cao</h3>
+    <p>Tổng hợp chuỗi bài học về phân rã xu hướng và chu kỳ Synthesis of the trend and cycle decomposition series Vậy là hành trình của chúng ta qua các phương pháp phân rã chuỗi thời gian đã đi đến hồi kết. Chúng ta đã bắt đầu với những ý tưởng trực quan về việc "là Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c16/tong-hop-va-ung-dung-nang-cao/" target="_blank" rel="noopener">Tổng hợp và ứng dụng nâng cao</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_psesk15u1_c16_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_psesk15u1_c16_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_psesk15u1_c16_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 16: 16. phân tách xu hướng và chu kỳ trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 16 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Các bộ lọc Hodrick-Prescott và Band-Pass | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c16/cac-bo-loc-hodrick-prescott-va-band-pass/) |
+| **Bài 02** | Tiếp cận mô hình cấu trúc và không gian trạng thái | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c16/tiep-can-mo-hinh-cau-truc-va-khong-gian-trang-thai/) |
+| **Bài 03** | Phân rã Beveridge-Nelson cho chuỗi không dừng | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c16/phan-ra-beveridge-nelson-cho-chuoi-khong-dung/) |
+| **Bài 04** | So sánh các phương pháp và phân rã Watson | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c16/so-sanh-cac-phuong-phap-va-phan-ra-watson/) |
+| **Bài 05** | Thực hành phân rã chuỗi thời gian với Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c16/thuc-hanh-phan-ra-chuoi-thoi-gian-voi-stata/) |
+| **Bài 06** | Tổng hợp và ứng dụng nâng cao | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c16/tong-hop-va-ung-dung-nang-cao/) |

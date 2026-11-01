@@ -1,0 +1,168 @@
+---
+id: chapter-05-5-mo-hinh-bang-dong-tuyen-tinh
+title: "Chương 05: 5. mô hình bảng động tuyến tính"
+sidebar_label: "Chương 05: 5. Mô hình bảng động tuyến tính"
+sidebar_position: 6
+description: "Hướng dẫn thực hành How-To Chương 05: 5. mô hình bảng động tuyến tính thuộc bộ sách Phương pháp dữ liệu bảng trong tài chính trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 05: 5. mô hình bảng động tuyến tính
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 05: 5. mô hình bảng động tuyến tính** thuộc [**Bộ sách 03: phương pháp dữ liệu bảng trong tài chính**](/sachktl/book-03-vserk21u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/vserk21u1/5-mo-hinh-bang-dong-tuyen-tinh/](https://sachktl.tnsai.vn/vi/vserk21u1/5-mo-hinh-bang-dong-tuyen-tinh/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 05: 5. mô hình bảng động tuyến tính">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 03 · CHƯƠNG 05</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 05: 5. mô hình bảng động tuyến tính</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Phương pháp dữ liệu bảng trong tài chính · 4 bài học chuyên sâu</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Mô hình bảng động tuyến tính Dữ liệu bảng mở ra một cánh cửa quan trọng cho các nhà nghiên cứu tài chính: khả năng mô hình hóa sự vận động và thay đổi theo thời gian ở cấp độ cá nhân . Tuy nhiên, việc đưa một biến phụ thuộc có độ trễ vào mô hình, kết hợp với sự tồn tại của các yếu tố không đồng nhất không quan sát được , đã tạo ra những thách thức kinh tế lượng đáng kể. Các phương pháp ước lượng tiêu chuẩn như OLS gộp, Fama-MacBeth, hay thậm chí là mô hình hiệu ứng cố định đều trở nên chệch và không nhất quán, đặc biệt khi chuỗi thời gian ngắn. Chuỗi bài viết
+
+- **Chủ đề học thuật trọng tâm**: Cấu trúc chuỗi bài học, Kiến thức tiên quyết, Mục tiêu học tập, Tài liệu tham khảo chính, PHỤ LỤC: Dữ liệu mô phỏng cho chuỗi bài viết.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 05 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/vserk21u1/5-mo-hinh-bang-dong-tuyen-tinh/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Nền tảng và các thiên chệch trong mô hình động</h3>
+    <p>Trong bài giới thiệu, chúng ta đã đề cập đến tầm quan trọng của việc mô hình hóa sự vận động trong tài chính và những thách thức mà biến phụ thuộc có độ trễ gây ra. Bài học đầu tiên này sẽ là nền tảng cho toàn bộ chuỗi bài viết. Chúng ta sẽ mổ xẻ vấn đề từ gốc Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/vserk21u1/5-mo-hinh-bang-dong-tuyen-tinh/nen-tang-va-cac-thien-chech-trong-mo-hinh-dong/" target="_blank" rel="noopener">Nền tảng và các thiên chệch trong mô hình động</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Giải pháp biến công cụ và bộ ước lượng GMM Arellano-Bond</h3>
+    <p>Trong bài học trước, chúng ta đã đi đến một kết luận quan trọng: cả hai phương pháp ước lượng OLS gộp và hiệu ứng cố định đều thất bại trong việc cung cấp một ước lượng nhất quán cho hệ số động trong mô hình dữ liệu bảng có chuỗi thời gian ngắn. OLS bị chệch l Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/vserk21u1/5-mo-hinh-bang-dong-tuyen-tinh/giai-phap-bien-cong-cu-va-bo-uoc-luong-gmm-arellano-bond/" target="_blank" rel="noopener">Giải pháp biến công cụ và bộ ước lượng GMM Arellano-Bond</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Các vấn đề nâng cao và ứng dụng của GMM động</h3>
+    <p>Trong bài học trước, chúng ta đã làm quen với bộ ước lượng GMM sai phân của Arellano-Bond như một giải pháp mạnh mẽ cho vấn đề nội sinh trong mô hình bảng động. Bằng cách sử dụng các giá trị trễ của biến phụ thuộc làm công cụ cho phương trình đã lấy sai phân,  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/vserk21u1/5-mo-hinh-bang-dong-tuyen-tinh/cac-van-de-nang-cao-va-ung-dung-cua-gmm-dong/" target="_blank" rel="noopener">Các vấn đề nâng cao và ứng dụng của GMM động</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: Hướng dẫn thực hành mô hình động tuyến tính với Stata</h3>
+    <p>Hành trình của chúng ta qua ba bài học đầu tiên đã xây dựng một nền tảng lý thuyết vững chắc. Chúng ta đã bắt đầu bằng việc nhận diện các loại thiên chệch cố hữu trong mô hình OLS và Hiệu ứng cố định, sau đó khám phá giải pháp thông qua biến công cụ và cuối cù Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/vserk21u1/5-mo-hinh-bang-dong-tuyen-tinh/huong-dan-thuc-hanh-mo-hinh-dong-tuyen-tinh-voi-stata/" target="_blank" rel="noopener">Hướng dẫn thực hành mô hình động tuyến tính với Stata</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_vserk21u1_c05_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_vserk21u1_c05_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_vserk21u1_c05_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 05: 5. mô hình bảng động tuyến tính trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 05 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Nền tảng và các thiên chệch trong mô hình động | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/5-mo-hinh-bang-dong-tuyen-tinh/nen-tang-va-cac-thien-chech-trong-mo-hinh-dong/) |
+| **Bài 02** | Giải pháp biến công cụ và bộ ước lượng GMM Arellano-Bond | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/5-mo-hinh-bang-dong-tuyen-tinh/giai-phap-bien-cong-cu-va-bo-uoc-luong-gmm-arellano-bond/) |
+| **Bài 03** | Các vấn đề nâng cao và ứng dụng của GMM động | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/5-mo-hinh-bang-dong-tuyen-tinh/cac-van-de-nang-cao-va-ung-dung-cua-gmm-dong/) |
+| **Bài 04** | Hướng dẫn thực hành mô hình động tuyến tính với Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/5-mo-hinh-bang-dong-tuyen-tinh/huong-dan-thuc-hanh-mo-hinh-dong-tuyen-tinh-voi-stata/) |

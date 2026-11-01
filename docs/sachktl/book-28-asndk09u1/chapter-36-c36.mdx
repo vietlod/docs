@@ -1,0 +1,173 @@
+---
+id: chapter-36-c36
+title: "Chương 36: 36. đánh giá dự báo biến động và tương quan"
+sidebar_label: "Chương 36: 36. Đánh giá dự báo biến động và tương qua"
+sidebar_position: 37
+description: "Hướng dẫn thực hành How-To Chương 36: 36. đánh giá dự báo biến động và tương quan thuộc bộ sách Cẩm nang kinh tế lượng chuỗi thời gian tài chính trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 36: 36. đánh giá dự báo biến động và tương quan
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 36: 36. đánh giá dự báo biến động và tương quan** thuộc [**Bộ sách 28: cẩm nang kinh tế lượng chuỗi thời gian tài chính**](/sachktl/book-28-asndk09u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/asndk09u1/c36/](https://sachktl.tnsai.vn/vi/asndk09u1/c36/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 36: 36. đánh giá dự báo biến động và tương quan">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 28 · CHƯƠNG 36</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 36: 36. đánh giá dự báo biến động và tương quan</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Cẩm nang kinh tế lượng chuỗi thời gian tài chính · 5 bài học chu</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Giới thiệu về đánh giá dự báo biến động An Introduction to Evaluating Volatility Forecasts Tổng quan về chủ đề Trong thế giới tài chính, mọi thứ luôn thay đổi, và "biến động" chính là thước đo cho sự thay đổi đó. Đối với các nhà kinh tế, nhà quản lý quỹ hay các nhà hoạch định chính sách, việc dự báo chính xác mức độ biến động của giá tài sản trong tương lai không chỉ là một bài toán học thuật, mà còn là chìa khóa để quản lý rủi ro, phân bổ tài sản hiệu quả và đưa ra các quyết định đầu tư thông minh. Tuy nhiên, có một thách thức lớn: biến động thực sự là một biến ẩn, chúng ta không bao giờ
+
+- **Chủ đề học thuật trọng tâm**: Tổng quan về chủ đề, CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 36 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/asndk09u1/c36/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Nền tảng đánh giá dự báo biến động</h3>
+    <p>Nền tảng đánh giá dự báo biến động Foundations of volatility forecast evaluation Giới thiệu Chào mừng các bạn sinh viên đã quay trở lại với chuỗi bài học của chúng ta! Trong bài giới thiệu, chúng ta đã cùng nhau xác định một thách thức cốt lõi trong tài chính: Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c36/nen-tang-danh-gia-du-bao-bien-dong/" target="_blank" rel="noopener">Nền tảng đánh giá dự báo biến động</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: So sánh các dự báo bằng hàm mất mát</h3>
+    <p>So sánh các dự báo bằng hàm mất mát Comparing forecasts using loss functions Giới thiệu Chào mừng các bạn đã đến với bài học thứ hai trong chuỗi bài về đánh giá dự báo biến động! Ở bài trước, chúng ta đã trang bị được công cụ nền tảng là hồi quy Mincer-Zarnowi Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c36/so-sanh-cac-du-bao-bang-ham-mat-mat/" target="_blank" rel="noopener">So sánh các dự báo bằng hàm mất mát</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Đánh giá gián tiếp qua ứng dụng kinh tế</h3>
+    <p>Đánh giá dự báo qua tối ưu hóa danh mục Evaluating forecasts via portfolio optimization Giới thiệu Chào mừng các bạn sinh viên đã đến với bài học thứ ba! Trong hai bài học trước, chúng ta đã tập trung vào các phương pháp đánh giá "trực tiếp" hay mang tính thốn Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c36/danh-gia-gian-tiep-qua-ung-dung-kinh-te/" target="_blank" rel="noopener">Đánh giá gián tiếp qua ứng dụng kinh tế</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: Thực hành đánh giá dự báo với Stata</h3>
+    <p>Thực hành đánh giá dự báo với Stata A practical guide to forecast evaluation in Stata Giới thiệu Chào mừng các bạn sinh viên đã đến với bài học thực hành của chúng ta! Trong ba bài học vừa qua, chúng ta đã đi từ những khái niệm cơ bản nhất như hồi quy Mincer-Z Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c36/thuc-hanh-danh-gia-du-bao-voi-stata/" target="_blank" rel="noopener">Thực hành đánh giá dự báo với Stata</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 5: Tổng hợp các phương pháp và ứng dụng</h3>
+    <p>Tổng hợp các phương pháp đánh giá dự báo biến động A synthesis of volatility forecast evaluation methods 1. Tổng quan chủ đề và vị trí trong kinh tế lượng Chào mừng các bạn đã đến với bài học cuối cùng trong chuỗi bài của chúng ta! Trong suốt hành trình vừa qu Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c36/tong-hop-cac-phuong-phap-va-ung-dung/" target="_blank" rel="noopener">Tổng hợp các phương pháp và ứng dụng</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_asndk09u1_c36_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_asndk09u1_c36_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_asndk09u1_c36_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 36: 36. đánh giá dự báo biến động và tương quan trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 36 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Nền tảng đánh giá dự báo biến động | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c36/nen-tang-danh-gia-du-bao-bien-dong/) |
+| **Bài 02** | So sánh các dự báo bằng hàm mất mát | R 4.x | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c36/so-sanh-cac-du-bao-bang-ham-mat-mat/) |
+| **Bài 03** | Đánh giá gián tiếp qua ứng dụng kinh tế | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c36/danh-gia-gian-tiep-qua-ung-dung-kinh-te/) |
+| **Bài 04** | Thực hành đánh giá dự báo với Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c36/thuc-hanh-danh-gia-du-bao-voi-stata/) |
+| **Bài 05** | Tổng hợp các phương pháp và ứng dụng | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c36/tong-hop-cac-phuong-phap-va-ung-dung/) |

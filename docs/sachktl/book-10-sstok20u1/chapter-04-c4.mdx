@@ -1,0 +1,179 @@
+---
+id: chapter-04-c4
+title: "Chương 04: 4. hồi quy tuyến tính với một biến hồi quy"
+sidebar_label: "Chương 04: 4. Hồi quy tuyến tính với một biến hồi quy"
+sidebar_position: 5
+description: "Hướng dẫn thực hành How-To Chương 04: 4. hồi quy tuyến tính với một biến hồi quy thuộc bộ sách Giới thiệu về kinh tế lượng trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 04: 4. hồi quy tuyến tính với một biến hồi quy
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 04: 4. hồi quy tuyến tính với một biến hồi quy** thuộc [**Bộ sách 10: giới thiệu về kinh tế lượng**](/sachktl/book-10-sstok20u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/sstok20u1/c4/](https://sachktl.tnsai.vn/vi/sstok20u1/c4/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 04: 4. hồi quy tuyến tính với một biến hồi quy">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 10 · CHƯƠNG 04</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 04: 4. hồi quy tuyến tính với một biến hồi quy</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Giới thiệu về kinh tế lượng · 7 bài học chuyên sâu</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Giới thiệu hồi quy tuyến tính đơn Introduction to Simple Linear Regression Chào mừng các bạn sinh viên đã đến với chuỗi bài học về một trong những công cụ mạnh mẽ và nền tảng nhất của kinh tế lượng: mô hình hồi quy tuyến tính. Hãy tưởng tượng bạn là một nhà hoạch định chính sách giáo dục và cần trả lời câu hỏi: "Việc giảm sĩ số lớp học có thực sự cải thiện kết quả thi của học sinh không?". Hoặc, bạn là một nhà phân tích tài chính muốn dự báo giá cổ phiếu dựa trên các chỉ số kinh tế. Hồi quy tuyến tính chính là chìa khóa giúp chúng ta trả lời những câu hỏi như vậy một cách khoa học, dựa trên
+
+- **Chủ đề học thuật trọng tâm**: CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO, PHỤ LỤC: DỮ LIỆU MÔ PHỎNG CHO SERIES.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 04 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/sstok20u1/c4/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Nền tảng mô hình hồi quy tuyến tính đơn</h3>
+    <p>Nền tảng mô hình hồi quy tuyến tính đơn The linear regression model 1. Giới thiệu Chào mừng các bạn quay trở lại với chuỗi bài học về hồi quy tuyến tính. Ở bài giới thiệu, chúng ta đã đặt ra một câu hỏi thực tế: làm thế nào để dự báo điểm thi của học sinh nếu  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sstok20u1/c4/nen-tang-mo-hinh-hoi-quy-tuyen-tinh-don/" target="_blank" rel="noopener">Nền tảng mô hình hồi quy tuyến tính đơn</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Ước lượng OLS và diễn giải kết quả</h3>
+    <p>Ước lượng OLS và diễn giải kết quả Estimating the coefficients of the linear regression model 1. Giới thiệu Ở bài học trước, chúng ta đã xây dựng được mô hình hồi quy tổng thể: $Y_i = \beta_0 + \beta_1 X_i + u_i$. Đây là một mô tả lý tưởng về mối quan hệ giữa  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sstok20u1/c4/uoc-luong-ols-va-dien-giai-ket-qua/" target="_blank" rel="noopener">Ước lượng OLS và diễn giải kết quả</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Đánh giá độ phù hợp của mô hình</h3>
+    <p>Đánh giá độ phù hợp của mô hình Measures of fit and prediction accuracy 1. Giới thiệu Chào mừng các bạn quay trở lại. Sau khi đã ước lượng được một mô hình hồi quy, chúng ta có một đường thẳng đại diện cho mối quan hệ trung bình giữa hai biến. Tuy nhiên, việc  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sstok20u1/c4/danh-gia-do-phu-hop-cua-mo-hinh/" target="_blank" rel="noopener">Đánh giá độ phù hợp của mô hình</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: Các giả định OLS cho suy diễn nhân quả</h3>
+    <p>Các giả định OLS cho suy diễn nhân quả The least squares assumptions for causal inference 1. Giới thiệu Chào mừng các bạn đến với bài học mang tính nền tảng nhất của chuỗi bài này. Trong các bài trước, chúng ta đã học cách ước lượng một đường thẳng hồi quy và  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sstok20u1/c4/cac-gia-dinh-ols-cho-suy-dien-nhan-qua/" target="_blank" rel="noopener">Các giả định OLS cho suy diễn nhân quả</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 5: Phân phối lấy mẫu của các ước lượng OLS</h3>
+    <p>Phân phối lấy mẫu của các ước lượng OLS The sampling distribution of the OLS estimators 1. Giới thiệu Chào mừng các bạn quay trở lại. Trong bài học trước, chúng ta đã thiết lập ba giả định cốt lõi để đảm bảo rằng ước lượng OLS $\hat&#123;\beta&#125;_1$ là một  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sstok20u1/c4/phan-phoi-lay-mau-cua-cac-uoc-luong-ols/" target="_blank" rel="noopener">Phân phối lấy mẫu của các ước lượng OLS</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 6: Thực hành hồi quy đơn toàn diện với Stata</h3>
+    <p>Thực hành hồi quy đơn toàn diện với Stata A comprehensive practice of simple regression with Stata 1. Tóm tắt tổng hợp kiến thức Trước khi bắt tay vào thực hành, hãy cùng nhau nhìn lại chặng đường đã qua. Chúng ta đã xây dựng một nền tảng vững chắc để hiểu và  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sstok20u1/c4/thuc-hanh-hoi-quy-don-toan-dien-voi-stata/" target="_blank" rel="noopener">Thực hành hồi quy đơn toàn diện với Stata</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_sstok20u1_c04_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_sstok20u1_c04_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_sstok20u1_c04_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 04: 4. hồi quy tuyến tính với một biến hồi quy trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 04 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Nền tảng mô hình hồi quy tuyến tính đơn | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sstok20u1/c4/nen-tang-mo-hinh-hoi-quy-tuyen-tinh-don/) |
+| **Bài 02** | Ước lượng OLS và diễn giải kết quả | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sstok20u1/c4/uoc-luong-ols-va-dien-giai-ket-qua/) |
+| **Bài 03** | Đánh giá độ phù hợp của mô hình | R 4.x | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sstok20u1/c4/danh-gia-do-phu-hop-cua-mo-hinh/) |
+| **Bài 04** | Các giả định OLS cho suy diễn nhân quả | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sstok20u1/c4/cac-gia-dinh-ols-cho-suy-dien-nhan-qua/) |
+| **Bài 05** | Phân phối lấy mẫu của các ước lượng OLS | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sstok20u1/c4/phan-phoi-lay-mau-cua-cac-uoc-luong-ols/) |
+| **Bài 06** | Thực hành hồi quy đơn toàn diện với Stata | Stata 18 MP, R 4.x | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sstok20u1/c4/thuc-hanh-hoi-quy-don-toan-dien-voi-stata/) |
+| **Bài 07** | Tổng hợp và hệ thống hóa kiến thức | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sstok20u1/c4/tong-hop-va-he-thong-hoa-kien-thuc/) |

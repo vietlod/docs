@@ -1,0 +1,180 @@
+---
+id: chapter-22-c22
+title: "Chương 22: 22. phân tích đồng liên kết"
+sidebar_label: "Chương 22: 22. Phân tích đồng liên kết"
+sidebar_position: 23
+description: "Hướng dẫn thực hành How-To Chương 22: 22. phân tích đồng liên kết thuộc bộ sách Phân tích chuỗi thời gian và dữ liệu bảng trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 22: 22. phân tích đồng liên kết
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 22: 22. phân tích đồng liên kết** thuộc [**Bộ sách 18: phân tích chuỗi thời gian và dữ liệu bảng**](/sachktl/book-18-psesk15u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/psesk15u1/c22/](https://sachktl.tnsai.vn/vi/psesk15u1/c22/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 22: 22. phân tích đồng liên kết">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 18 · CHƯƠNG 22</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 22: 22. phân tích đồng liên kết</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Phân tích chuỗi thời gian và dữ liệu bảng · 8 bài học chuyên sâu</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Phân tích đồng liên kết GIỚI THIỆU CHUỖI BÀI HỌC Trong chuỗi bài viết sắp tới, chúng ta sẽ cùng nhau khám phá một trong những chủ đề hấp dẫn và quan trọng bậc nhất trong phân tích chuỗi thời gian hiện đại: Phân tích Đồng liên kết . Đừng lo lắng nếu bạn nghe thấy những thuật ngữ phức tạp. Sứ mệnh của tôi là biến những lý thuyết trừu tượng này thành những công cụ trực quan và dễ áp dụng, giúp bạn tự tin phân tích các mối quan hệ kinh tế trong dài hạn. Hãy tưởng tượng hai người bạn thân, dù mỗi người có thể đi lang thang ngẫu nhiên trong một lễ hội đông đúc, nhưng họ luôn có xu hướng tìm về lại
+
+- **Chủ đề học thuật trọng tâm**: GIỚI THIỆU CHUỖI BÀI HỌC, CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 22 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/psesk15u1/c22/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Nhập môn đồng liên kết</h3>
+    <p>Nhập môn đồng liên kết: Tìm kiếm sự cân bằng dài hạn Introduction to cointegration: The search for long-run equilibrium Câu chuyện về người say và chú chó Chào mừng các bạn đến với bài học đầu tiên về một trong những khái niệm nền tảng của kinh tế lượng chuỗi  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c22/nhap-mon-dong-lien-ket/" target="_blank" rel="noopener">Nhập môn đồng liên kết</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Kiểm định Engle-Granger</h3>
+    <p>Kiểm định Engle-Granger: Phương pháp hai bước cổ điển The Engle-Granger test: A classic two-step method Từ quan sát đến kiểm định chính thức Trong bài học trước, chúng ta đã học cách "nhìn" ra sự khác biệt giữa một mối quan hệ kinh tế thực sự và một hồi quy gi Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c22/kiem-dinh-engle-granger/" target="_blank" rel="noopener">Kiểm định Engle-Granger</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Mô hình ARDL và kiểm định giới hạn</h3>
+    <p>Mô hình ARDL và kiểm định giới hạn: Cách tiếp cận hiện đại ARDL models and the bounds testing approach Vượt qua những rào cản của phương pháp cổ điển Trong bài học trước, chúng ta đã làm quen với phương pháp Engle-Granger, một công cụ tiên phong trong việc kiể Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c22/mo-hinh-ardl-va-kiem-dinh-gioi-han/" target="_blank" rel="noopener">Mô hình ARDL và kiểm định giới hạn</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: Hệ thống VAR và mô hình VECM</h3>
+    <p>Hệ thống VAR và mô hình VECM: Phân tích đa biến VAR systems and the VECM: A multivariate analysis Từ một sợi dây đến một mạng lưới phức tạp Trong các bài học trước, chúng ta đã phân tích các mối quan hệ kinh tế giống như xem xét một "sợi dây" đơn lẻ, ví dụ như Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c22/he-thong-var-va-mo-hinh-vecm/" target="_blank" rel="noopener">Hệ thống VAR và mô hình VECM</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 5: Kiểm định Johansen trong VECM</h3>
+    <p>Kiểm định Johansen: Ước lượng và Suy diễn trong VECM The Johansen test: Estimation and inference in VECM Cuộc họp của hội đồng kinh tế Trong bài học trước, chúng ta đã thiết lập một hệ thống đa biến và nhận ra rằng chìa khóa để mở mô hình VECM chính là việc xá Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c22/kiem-dinh-johansen-trong-vecm/" target="_blank" rel="noopener">Kiểm định Johansen trong VECM</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 6: Các vấn đề nâng cao trong VECM</h3>
+    <p>Các vấn đề nâng cao: Định danh, Xu thế và Mô hình cấu trúc Advanced topics: Identification, trends, and structural modelling Từ thống kê đến kinh tế học Trong các bài học trước, chúng ta đã học cách xác định có bao nhiêu mối quan hệ cân bằng dài hạn tồn tại tr Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c22/cac-van-de-nang-cao-trong-vecm/" target="_blank" rel="noopener">Các vấn đề nâng cao trong VECM</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_psesk15u1_c22_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_psesk15u1_c22_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_psesk15u1_c22_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 22: 22. phân tích đồng liên kết trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 22 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Nhập môn đồng liên kết | Stata 18 MP, R 4.x | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c22/nhap-mon-dong-lien-ket/) |
+| **Bài 02** | Kiểm định Engle-Granger | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c22/kiem-dinh-engle-granger/) |
+| **Bài 03** | Mô hình ARDL và kiểm định giới hạn | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c22/mo-hinh-ardl-va-kiem-dinh-gioi-han/) |
+| **Bài 04** | Hệ thống VAR và mô hình VECM | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c22/he-thong-var-va-mo-hinh-vecm/) |
+| **Bài 05** | Kiểm định Johansen trong VECM | R 4.x | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c22/kiem-dinh-johansen-trong-vecm/) |
+| **Bài 06** | Các vấn đề nâng cao trong VECM | R 4.x | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c22/cac-van-de-nang-cao-trong-vecm/) |
+| **Bài 07** | Thực hành VECM từ A đến Z | Stata 18 MP, R 4.x | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c22/thuc-hanh-vecm-tu-a-den-z/) |
+| **Bài 08** | Tổng kết phân tích đồng liên kết | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c22/tong-ket-phan-tich-dong-lien-ket/) |

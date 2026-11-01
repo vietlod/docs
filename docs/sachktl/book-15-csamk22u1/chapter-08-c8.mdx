@@ -1,0 +1,180 @@
+---
+id: chapter-08-c8
+title: "Chương 08: 8. các mô hình dữ liệu bảng tuyến tính: cơ bản"
+sidebar_label: "Chương 08: 8. Các mô hình dữ liệu bảng tuyến tính: Cơ"
+sidebar_position: 9
+description: "Hướng dẫn thực hành How-To Chương 08: 8. các mô hình dữ liệu bảng tuyến tính: cơ bản thuộc bộ sách Kinh tế lượng vi mô sử dụng Stata trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 08: 8. các mô hình dữ liệu bảng tuyến tính: cơ bản
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 08: 8. các mô hình dữ liệu bảng tuyến tính: cơ bản** thuộc [**Bộ sách 15: kinh tế lượng vi mô sử dụng Stata**](/sachktl/book-15-csamk22u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/csamk22u1/c8/](https://sachktl.tnsai.vn/vi/csamk22u1/c8/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 08: 8. các mô hình dữ liệu bảng tuyến tính: cơ bản">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 15 · CHƯƠNG 08</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 08: 8. các mô hình dữ liệu bảng tuyến tính: cơ bản</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Kinh tế lượng vi mô sử dụng Stata · 8 bài học chuyên sâu</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Giới thiệu về các mô hình dữ liệu bảng tuyến tính Introduction to Linear Panel Data models Chào mừng các bạn sinh viên đã đến với chuỗi bài học về một trong những chủ đề hấp dẫn và mạnh mẽ nhất trong kinh tế lượng hiện đại: phân tích dữ liệu bảng. Trong thực tế, các nhà kinh tế học hiếm khi chỉ có dữ liệu tại một thời điểm hay chỉ theo dõi một chỉ số qua thời gian . Thay vào đó, chúng ta thường theo dõi nhiều đối tượng qua nhiều giai đoạn thời gian. Đây chính là lúc dữ liệu bảng phát huy sức mạnh vượt trội của nó. Dữ liệu bảng cho phép chúng ta kiểm soát những yếu tố không quan
+
+- **Chủ đề học thuật trọng tâm**: BA TỪ KHÓA QUAN TRỌNG, CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 08 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/csamk22u1/c8/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Nền tảng và khám phá dữ liệu bảng trong Stata</h3>
+    <p>Nền tảng dữ liệu bảng và khám phá trong Stata Panel data fundamentals and exploration in Stata Giới thiệu Chào mừng các bạn đến với bài học đầu tiên trong chuỗi bài về mô hình dữ liệu bảng. Trước khi chúng ta có thể xây dựng những mô hình kinh tế lượng phức tạ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c8/nen-tang-va-kham-pha-du-lieu-bang-trong-stata/" target="_blank" rel="noopener">Nền tảng và khám phá dữ liệu bảng trong Stata</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Mô hình OLS gộp và ước lượng FGLS</h3>
+    <p>Mô hình OLS gộp và ước lượng FGLS Pooled OLS model and FGLS estimation Giới thiệu Sau khi đã làm quen với cấu trúc và các đặc điểm của dữ liệu bảng trong bài học trước, câu hỏi tự nhiên tiếp theo là: "Làm thế nào để chúng ta bắt đầu mô hình hóa mối quan hệ giữ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c8/mo-hinh-ols-gop-va-uoc-luong-fgls/" target="_blank" rel="noopener">Mô hình OLS gộp và ước lượng FGLS</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Mô hình ảnh hưởng cố định</h3>
+    <p>Mô hình ảnh hưởng cố định The fixed-effects model Giới thiệu Chào mừng các bạn đến với bài học then chốt về mô hình Ảnh hưởng Cố định. Nếu bài học trước đã chỉ ra "căn bệnh" của mô hình OLS gộp – sự chệch do biến bị bỏ sót – thì bài học này sẽ cung cấp "phương Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c8/mo-hinh-anh-huong-co-dinh-fixed-effects/" target="_blank" rel="noopener">Mô hình ảnh hưởng cố định</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: Mô hình ảnh hưởng ngẫu nhiên</h3>
+    <p>Mô hình ảnh hưởng ngẫu nhiên The random-effects model Giới thiệu Trong bài học trước, chúng ta đã thấy mô hình Ảnh hưởng Cố định là một công cụ cực kỳ mạnh mẽ để loại bỏ sự chệch gây ra bởi các đặc điểm không quan sát được và không đổi theo thời gian. Tuy nhiê Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c8/mo-hinh-anh-huong-ngau-nhien-random-effects/" target="_blank" rel="noopener">Mô hình ảnh hưởng ngẫu nhiên</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 5: Lựa chọn mô hình: FE và RE</h3>
+    <p>Lựa chọn mô hình: FE và RE Model selection: FE vs. RE Giới thiệu Trong hai bài học vừa qua, chúng ta đã khám phá hai phương pháp tiếp cận chính cho dữ liệu bảng: mô hình Ảnh hưởng Cố định và Ảnh hưởng Ngẫu nhiên. Chúng ta đã thấy rằng mỗi mô hình đều có ưu và  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c8/lua-chon-mo-hinh-fe-va-re-kiem-dinh-hausman/" target="_blank" rel="noopener">Lựa chọn mô hình: FE và RE</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 6: Quản lý dữ liệu bảng: chuyển đổi dạng dài-rộng</h3>
+    <p>Quản lý dữ liệu bảng: Chuyển đổi giữa dạng Dài và Rộng Panel data management: Reshaping from long to wide and vice versa Giới thiệu Trong suốt các bài học vừa qua, chúng ta đã làm việc với dữ liệu ở một định dạng cụ thể: mỗi hàng là một quan sát của một cá nhâ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c8/quan-ly-du-lieu-bang-chuyen-doi-dang-dai-rong/" target="_blank" rel="noopener">Quản lý dữ liệu bảng: Chuyển đổi dạng Dài-Rộng</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_csamk22u1_c08_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_csamk22u1_c08_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_csamk22u1_c08_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 08: 8. các mô hình dữ liệu bảng tuyến tính: cơ bản trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 08 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Nền tảng và khám phá dữ liệu bảng trong Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c8/nen-tang-va-kham-pha-du-lieu-bang-trong-stata/) |
+| **Bài 02** | Mô hình OLS gộp và ước lượng FGLS | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c8/mo-hinh-ols-gop-va-uoc-luong-fgls/) |
+| **Bài 03** | Mô hình ảnh hưởng cố định | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c8/mo-hinh-anh-huong-co-dinh-fixed-effects/) |
+| **Bài 04** | Mô hình ảnh hưởng ngẫu nhiên | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c8/mo-hinh-anh-huong-ngau-nhien-random-effects/) |
+| **Bài 05** | Lựa chọn mô hình: FE và RE | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c8/lua-chon-mo-hinh-fe-va-re-kiem-dinh-hausman/) |
+| **Bài 06** | Quản lý dữ liệu bảng: Chuyển đổi dạng Dài-Rộng | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c8/quan-ly-du-lieu-bang-chuyen-doi-dang-dai-rong/) |
+| **Bài 07** | Bài thực hành tổng hợp: Phân tích từ A đến Z | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c8/bai-thuc-hanh-tong-hop-phan-tich-tu-a-den-z/) |
+| **Bài 08** | Bài tổng hợp chuỗi: Hệ thống hóa kiến thức | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c8/bai-tong-hop-chuoi-he-thong-hoa-kien-thuc/) |

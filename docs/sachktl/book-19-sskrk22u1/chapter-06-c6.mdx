@@ -1,0 +1,178 @@
+---
+id: chapter-06-c6
+title: "Chương 06: 6. mô hình biên cho dữ liệu dọc"
+sidebar_label: "Chương 06: 6. Mô hình biên cho dữ liệu dọc"
+sidebar_position: 7
+description: "Hướng dẫn thực hành How-To Chương 06: 6. mô hình biên cho dữ liệu dọc thuộc bộ sách Mô hình đa bậc với Stata trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 06: 6. mô hình biên cho dữ liệu dọc
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 06: 6. mô hình biên cho dữ liệu dọc** thuộc [**Bộ sách 19: mô hình đa bậc với Stata**](/sachktl/book-19-sskrk22u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/sskrk22u1/c6/](https://sachktl.tnsai.vn/vi/sskrk22u1/c6/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 06: 6. mô hình biên cho dữ liệu dọc">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 19 · CHƯƠNG 06</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 06: 6. mô hình biên cho dữ liệu dọc</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Mô hình đa bậc với Stata · 6 bài học chuyên sâu</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Giới thiệu chuỗi bài học về mô hình biên cho dữ liệu dọc An Introduction to the Marginal models for Longitudinal data series Tổng quan về chuỗi bài học Chào mừng các bạn sinh viên đã quay trở lại! Sau khi khám phá thế giới của các mô hình đa cấp với trọng tâm là các hiệu ứng ngẫu nhiên, chuỗi bài học này sẽ giới thiệu một cách tiếp cận khác nhưng không kém phần mạnh mẽ để phân tích dữ liệu dọc và dữ liệu cụm: Mô hình biên . Nếu như mô hình đa cấp tập trung vào việc mô hình hóa các mối quan hệ "đặc thù theo đối tượng" , thì mô hình biên lại tập trung vào một câu hỏi khác: Mối quan hệ "trung
+
+- **Chủ đề học thuật trọng tâm**: Tổng quan về chuỗi bài học, Cấu trúc chuỗi bài học, Kiến thức tiên quyết, Mục tiêu học tập, Tài liệu tham khảo.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 06 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/sskrk22u1/c6/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Các cấu trúc hiệp phương sai cơ bản</h3>
+    <p>Các cấu trúc hiệp phương sai cơ bản trong mô hình biên Basic covariance structures in marginal models Xây dựng bộ công cụ cho ma trận hiệp phương sai Chào mừng các bạn đến với bài học đầu tiên của chuỗi bài về Mô hình Biên! Ở bài giới thiệu, chúng ta đã thiết  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sskrk22u1/c6/cac-cau-truc-hiep-phuong-sai-co-ban/" target="_blank" rel="noopener">Các cấu trúc hiệp phương sai cơ bản</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Các cấu trúc hiệp phương sai cho dữ liệu chuỗi thời gian</h3>
+    <p>Các cấu trúc hiệp phương sai cho dữ liệu chuỗi thời gian Covariance structures for time series data Mô hình hóa sự phụ thuộc giảm dần theo thời gian Trong bài học trước, chúng ta đã khám phá các cấu trúc hiệp phương sai cơ bản. Đặc biệt, chúng ta đã thấy rằng  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sskrk22u1/c6/cac-cau-truc-hiep-phuong-sai-cho-du-lieu-chuoi-thoi-gian/" target="_blank" rel="noopener">Các cấu trúc hiệp phương sai cho dữ liệu chuỗi thời gian</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Các mô hình phức hợp và lựa chọn mô hình tốt nhất</h3>
+    <p>Các mô hình phức hợp và lựa chọn mô hình tốt nhất Hybrid models and selecting the best model Từ việc xây dựng đến việc lựa chọn mô hình Trong hai bài học vừa qua, chúng ta đã xây dựng được một bộ công cụ ấn tượng gồm nhiều cấu trúc hiệp phương sai khác nhau, t Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sskrk22u1/c6/cac-mo-hinh-phuc-hop-va-lua-chon-mo-hinh-tot-nhat/" target="_blank" rel="noopener">Các mô hình phức hợp và lựa chọn mô hình tốt nhất</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: Phương trình ước lượng tổng quát và mô hình cho dữ liệu bảng dài</h3>
+    <p>Phương trình ước lượng tổng quát và mô hình cho dữ liệu bảng dài Generalized estimating equations and models for long panels Các cách tiếp cận thay thế và các loại dữ liệu đặc biệt Trong các bài học trước, chúng ta đã tập trung vào phương pháp Ước lượng Hợp lý Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sskrk22u1/c6/phuong-trinh-uoc-luong-tong-quat-gee-va-mo-hinh-cho-du-lieu-bang-dai/" target="_blank" rel="noopener">Phương trình ước lượng tổng quát và mô hình cho dữ liệu bảng dài</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 5: Bài thực hành với Stata</h3>
+    <p>Phân tích và lựa chọn cấu trúc hiệp phương sai tối ưu Final practice: analysis and selection of the optimal covariance structure Hành trình của một nhà nghiên cứu Chào mừng các bạn đến với bài học thực hành cuối cùng của chuỗi bài về Mô hình Biên! Trong suốt h Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sskrk22u1/c6/bai-thuc-hanh-voi-stata/" target="_blank" rel="noopener">Bài thực hành với Stata</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 6: Hệ thống hóa kiến thức</h3>
+    <p>Hệ thống hóa kiến thức về mô hình biên Synthesis of the learning series: systematizing knowledge of marginal models Hai cách nhìn về cùng một thế giới dữ liệu Chào mừng các bạn đến với bài viết tổng kết chuỗi bài học về Mô hình Biên. Trong suốt hành trình vừa  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sskrk22u1/c6/he-thong-hoa-kien-thuc/" target="_blank" rel="noopener">Hệ thống hóa kiến thức</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_sskrk22u1_c06_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_sskrk22u1_c06_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_sskrk22u1_c06_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 06: 6. mô hình biên cho dữ liệu dọc trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 06 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Các cấu trúc hiệp phương sai cơ bản | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sskrk22u1/c6/cac-cau-truc-hiep-phuong-sai-co-ban/) |
+| **Bài 02** | Các cấu trúc hiệp phương sai cho dữ liệu chuỗi thời gian | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sskrk22u1/c6/cac-cau-truc-hiep-phuong-sai-cho-du-lieu-chuoi-thoi-gian/) |
+| **Bài 03** | Các mô hình phức hợp và lựa chọn mô hình tốt nhất | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sskrk22u1/c6/cac-mo-hinh-phuc-hop-va-lua-chon-mo-hinh-tot-nhat/) |
+| **Bài 04** | Phương trình ước lượng tổng quát và mô hình cho dữ liệu bảng dài | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sskrk22u1/c6/phuong-trinh-uoc-luong-tong-quat-gee-va-mo-hinh-cho-du-lieu-bang-dai/) |
+| **Bài 05** | Bài thực hành với Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sskrk22u1/c6/bai-thuc-hanh-voi-stata/) |
+| **Bài 06** | Hệ thống hóa kiến thức | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sskrk22u1/c6/he-thong-hoa-kien-thuc/) |

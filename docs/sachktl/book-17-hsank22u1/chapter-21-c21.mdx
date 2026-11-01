@@ -1,0 +1,173 @@
+---
+id: chapter-21-c21
+title: "Chương 21: 21. phương pháp hồi quy gián đoạn"
+sidebar_label: "Chương 21: 21. Phương pháp hồi quy gián đoạn"
+sidebar_position: 22
+description: "Hướng dẫn thực hành How-To Chương 21: 21. phương pháp hồi quy gián đoạn thuộc bộ sách Lý thuyết Kinh tế lượng trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 21: 21. phương pháp hồi quy gián đoạn
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 21: 21. phương pháp hồi quy gián đoạn** thuộc [**Bộ sách 17: lý thuyết kinh tế lượng**](/sachktl/book-17-hsank22u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/hsank22u1/c21/](https://sachktl.tnsai.vn/vi/hsank22u1/c21/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 21: 21. phương pháp hồi quy gián đoạn">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 17 · CHƯƠNG 21</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 21: 21. phương pháp hồi quy gián đoạn</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Lý thuyết Kinh tế lượng · 5 bài học chuyên sâu</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Phương pháp hồi quy gián đoạn Chào mừng các bạn sinh viên đến với chuỗi bài học về một trong những kỹ thuật mạnh mẽ và đáng tin cậy nhất trong kinh tế lượng ứng dụng: Thiết kế Gián đoạn Hồi quy, hay còn gọi là RDD. Trong nghiên cứu, chúng ta luôn muốn trả lời câu hỏi "liệu một chính sách hay một sự kiện có thực sự tạo ra tác động hay không?". Tuy nhiên, việc này rất khó vì chúng ta không thể so sánh một người vừa nhận điều trị và vừa không nhận điều trị cùng một lúc. RDD mang đến một giải pháp cực kỳ thông minh cho vấn đề này bằng cách khai thác các quy tắc hoặc ngưỡng tự nhiên trong cuộc
+
+- **Chủ đề học thuật trọng tâm**: PHỤ LỤC: Dữ liệu mô phỏng cho chuỗi bài viết.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 21 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/hsank22u1/c21/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Hiểu bản chất của thiết kế gián đoạn hồi quy</h3>
+    <p>Chào mừng các bạn đã quay trở lại với chuỗi bài học về Thiết kế Gián đoạn Hồi quy. Trong bài giới thiệu, chúng ta đã làm quen với ý tưởng tổng quan về RDD và tạo ra một bộ dữ liệu mô phỏng về việc xét học bổng dựa trên điểm thi. Ý tưởng cốt lõi của RDD là tận  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c21/hieu-ban-chat-cua-thiet-ke-gian-doan-hoi-quy/" target="_blank" rel="noopener">Hiểu bản chất của thiết kế gián đoạn hồi quy</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Định danh và ước lượng trong RDD sắc nét</h3>
+    <p>Trong bài học đầu tiên, chúng ta đã cùng nhau xây dựng một trực giác vững chắc về Thiết kế Gián đoạn Hồi quy. Chúng ta đã hiểu rằng bằng cách so sánh những người "sát nút" ở hai bên của một ngưỡng, chúng ta có thể tạo ra một so sánh gần như ngẫu nhiên. Đây là  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c21/dinh-danh-va-uoc-luong-trong-rdd-sac-net/" target="_blank" rel="noopener">Định danh và ước lượng trong RDD sắc nét</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Suy diễn thống kê và các vấn đề thực hành</h3>
+    <p>Chào mừng các bạn quay trở lại! Trong bài học trước, chúng ta đã tìm hiểu về nền tảng lý thuyết và phương pháp ước lượng cốt lõi của RDD sắc nét. Chúng ta đã biết cách đo lường "bước nhảy" tại ngưỡng cắt để có được một con số ước lượng cho tác động điều trị, k Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c21/suy-dien-thong-ke-va-cac-van-de-thuc-hanh/" target="_blank" rel="noopener">Suy diễn thống kê và các vấn đề thực hành</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: Kiểm định và mô hình gián đoạn hồi quy mờ</h3>
+    <p>Chào mừng các bạn đến với bài học thứ tư trong chuỗi bài về Thiết kế Gián đoạn Hồi quy. Ở các phần trước, chúng ta đã đi sâu vào thế giới của RDD sắc nét, nơi quy tắc tại ngưỡng cắt là tuyệt đối và không có ngoại lệ. Chúng ta đã học cách định danh, ước lượng v Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c21/kiem-dinh-va-mo-hinh-gian-doan-hoi-quy-mo/" target="_blank" rel="noopener">Kiểm định và mô hình gián đoạn hồi quy mờ</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 5: Hướng dẫn thực hành phân tích RDD với Stata</h3>
+    <p>Chào mừng các bạn đến với bài học cuối cùng và cũng là bài học thực hành quan trọng nhất trong chuỗi bài về Thiết kế Gián đoạn Hồi quy! Trong suốt bốn bài học vừa qua, chúng ta đã cùng nhau xây dựng một nền tảng lý thuyết vững chắc, từ việc hiểu trực giác đằng Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c21/huong-dan-thuc-hanh-phan-tich-rdd-voi-stata/" target="_blank" rel="noopener">Hướng dẫn thực hành phân tích RDD với Stata</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_hsank22u1_c21_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_hsank22u1_c21_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_hsank22u1_c21_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 21: 21. phương pháp hồi quy gián đoạn trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 21 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Hiểu bản chất của thiết kế gián đoạn hồi quy | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c21/hieu-ban-chat-cua-thiet-ke-gian-doan-hoi-quy/) |
+| **Bài 02** | Định danh và ước lượng trong RDD sắc nét | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c21/dinh-danh-va-uoc-luong-trong-rdd-sac-net/) |
+| **Bài 03** | Suy diễn thống kê và các vấn đề thực hành | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c21/suy-dien-thong-ke-va-cac-van-de-thuc-hanh/) |
+| **Bài 04** | Kiểm định và mô hình gián đoạn hồi quy mờ | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c21/kiem-dinh-va-mo-hinh-gian-doan-hoi-quy-mo/) |
+| **Bài 05** | Hướng dẫn thực hành phân tích RDD với Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c21/huong-dan-thuc-hanh-phan-tich-rdd-voi-stata/) |

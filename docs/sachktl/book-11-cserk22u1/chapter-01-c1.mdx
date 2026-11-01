@@ -1,0 +1,173 @@
+---
+id: chapter-01-c1
+title: "Chương 01: 1. giới thiệu về kinh tế lượng trong đánh giá chương trình"
+sidebar_label: "Chương 01: 1. Giới thiệu về kinh tế lượng trong đánh "
+sidebar_position: 2
+description: "Hướng dẫn thực hành How-To Chương 01: 1. giới thiệu về kinh tế lượng trong đánh giá chương trình thuộc bộ sách Kinh tế lượng đánh giá tác động chính sách trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 01: 1. giới thiệu về kinh tế lượng trong đánh giá chương trình
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 01: 1. giới thiệu về kinh tế lượng trong đánh giá chương trình** thuộc [**Bộ sách 11: kinh tế lượng đánh giá tác động chính sách**](/sachktl/book-11-cserk22u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/cserk22u1/c1/](https://sachktl.tnsai.vn/vi/cserk22u1/c1/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 01: 1. giới thiệu về kinh tế lượng trong đánh giá chương trìn">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 11 · CHƯƠNG 01</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 01: 1. giới thiệu về kinh tế lượng trong đánh giá chương trìn</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Kinh tế lượng đánh giá tác động chính sách · 5 bài học chuyên sâ</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Giới thiệu về kinh tế lượng trong đánh giá chương trình Chào mừng các bạn sinh viên đến với chuỗi bài học nhập môn về một trong những lĩnh vực hấp dẫn và thực tiễn nhất của kinh tế lượng: Đánh giá tác động chương trình. Chắc hẳn nhiều bạn đã từng tự hỏi: Làm thế nào để chúng ta biết chắc chắn một chính sách của chính phủ có thực sự hiệu quả hay không? Liệu sự thành công mà chúng ta quan sát được là do chính sách, hay do các yếu tố khác? Trả lời những câu hỏi này chính là sứ mệnh của kinh tế lượng đánh giá chương trình. Trong chuỗi bài học này, chúng ta sẽ cùng nhau đi từ những khái niệm cơ
+
+- **Chủ đề học thuật trọng tâm**: Cấu trúc chuỗi bài học, PHỤ LỤC: Dữ liệu mô phỏng cho chuỗi bài viết.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 01 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/cserk22u1/c1/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Nền tảng của đánh giá tác động và các khái niệm cốt lõi</h3>
+    <p>Giới thiệu Chào mừng các bạn đã đến với bài học đầu tiên trong hành trình khám phá lĩnh vực kinh tế lượng đánh giá chương trình! Như đã giới thiệu ở bài tổng quan, mục tiêu của chúng ta là trở thành những "thám tử kinh tế", học cách tìm ra tác động nhân quả th Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/cserk22u1/c1/nen-tang-cua-danh-gia-tac-dong-va-cac-khai-niem-cot-loi/" target="_blank" rel="noopener">Nền tảng của đánh giá tác động và các khái niệm cốt lõi</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Hiểu sâu về vấn đề thiên lệch chọn mẫu</h3>
+    <p>Giới thiệu Chào mừng các bạn quay trở lại với bài học thứ hai! Ở bài học trước, chúng ta đã làm quen với các khái niệm nền tảng của đánh giá tác động trong một thế giới lý tưởng. Chúng ta đã định nghĩa được Hiệu ứng Điều trị Trung bình và các biến thể của nó.  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/cserk22u1/c1/hieu-sau-ve-van-de-thien-lech-chon-mau/" target="_blank" rel="noopener">Hiểu sâu về vấn đề thiên lệch chọn mẫu</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Các giả định nhận dạng cốt lõi trong kinh tế lượng</h3>
+    <p>Giới thiệu Chào mừng các bạn đến với bài học thứ ba! Trong bài học trước, chúng ta đã đi sâu vào "vùng nguy hiểm" của thiên lệch chọn mẫu và thấy rằng việc so sánh đơn giản giữa nhóm tham gia và không tham gia có thể dẫn đến những kết luận hoàn toàn sai lầm. C Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/cserk22u1/c1/cac-gia-dinh-nhan-dang-cot-loi-trong-kinh-te-luong/" target="_blank" rel="noopener">Các giả định nhận dạng cốt lõi trong kinh tế lượng</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: Tổng quan các phương pháp và khung phân tích chính sách</h3>
+    <p>Giới thiệu Chào mừng các bạn đến với bài học thứ tư và cũng là bài học cuối cùng trong phần giới thiệu nền tảng! Trong ba bài học vừa qua, chúng ta đã cùng nhau xây dựng một nền tảng lý thuyết vững chắc. Chúng ta đã hiểu được "linh hồn" của đánh giá tác động q Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/cserk22u1/c1/tong-quan-cac-phuong-phap-va-khung-phan-tich-chinh-sach/" target="_blank" rel="noopener">Tổng quan các phương pháp và khung phân tích chính sách</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 5: Hướng dẫn thực hành đánh giá tác động với Stata</h3>
+    <p>Giới thiệu Chào mừng các bạn đến với bài học thực hành cuối cùng và cũng là quan trọng nhất trong chuỗi bài nhập môn về kinh tế lượng đánh giá chương trình! Trong bốn bài học lý thuyết vừa qua, chúng ta đã cùng nhau xây dựng một nền tảng vững chắc, từ việc hiể Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/cserk22u1/c1/huong-dan-thuc-hanh-danh-gia-tac-dong-voi-stata/" target="_blank" rel="noopener">Hướng dẫn thực hành đánh giá tác động với Stata</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_cserk22u1_c01_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_cserk22u1_c01_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_cserk22u1_c01_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 01: 1. giới thiệu về kinh tế lượng trong đánh giá chương trình trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 01 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Nền tảng của đánh giá tác động và các khái niệm cốt lõi | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c1/nen-tang-cua-danh-gia-tac-dong-va-cac-khai-niem-cot-loi/) |
+| **Bài 02** | Hiểu sâu về vấn đề thiên lệch chọn mẫu | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c1/hieu-sau-ve-van-de-thien-lech-chon-mau/) |
+| **Bài 03** | Các giả định nhận dạng cốt lõi trong kinh tế lượng | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c1/cac-gia-dinh-nhan-dang-cot-loi-trong-kinh-te-luong/) |
+| **Bài 04** | Tổng quan các phương pháp và khung phân tích chính sách | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c1/tong-quan-cac-phuong-phap-va-khung-phan-tich-chinh-sach/) |
+| **Bài 05** | Hướng dẫn thực hành đánh giá tác động với Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c1/huong-dan-thuc-hanh-danh-gia-tac-dong-voi-stata/) |

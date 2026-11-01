@@ -1,0 +1,181 @@
+---
+id: chapter-01-c1
+title: "Chương 01: giới thiệu chuỗi thời gian tài chính"
+sidebar_label: "Chương 01: Giới thiệu chuỗi thời gian tài chính"
+sidebar_position: 2
+description: "Hướng dẫn thực hành How-To Chương 01: giới thiệu chuỗi thời gian tài chính thuộc bộ sách Kinh tế lượng tài chính ứng dụng với Stata trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 01: giới thiệu chuỗi thời gian tài chính
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 01: giới thiệu chuỗi thời gian tài chính** thuộc [**Bộ sách 25: kinh tế lượng tài chính ứng dụng với Stata**](/sachktl/book-25-bsofk16u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/bsofk16u1/c1/](https://sachktl.tnsai.vn/vi/bsofk16u1/c1/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 01: giới thiệu chuỗi thời gian tài chính">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 25 · CHƯƠNG 01</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 01: giới thiệu chuỗi thời gian tài chính</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Kinh tế lượng tài chính ứng dụng với Stata · 9 bài học chuyên sâ</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Giới thiệu chuỗi thời gian tài chính Chuỗi thời gian tài chính là một trong những lĩnh vực quan trọng nhất của kinh tế lượng hiện đại. Khác với dữ liệu kinh tế truyền thống, dữ liệu tài chính có những đặc điểm riêng biệt như tính biến động cao, hiệu ứng phân cụm biến động , và sự vi phạm giả định phân phối chuẩn. Hiểu rõ và mô hình hóa chính xác các đặc điểm này là chìa khóa để đưa ra các quyết định đầu tư và quản lý rủi ro hiệu quả. Series bài viết này sẽ hướng dẫn bạn từ những khái niệm cơ bản nhất về chuỗi thời gian tài chính đến các mô hình phức tạp như GARCH, sử dụng phần mềm Stata để
+
+- **Chủ đề học thuật trọng tâm**: Cấu trúc series bài viết, Kiến thức tiên quyết, Các khái niệm chính, Tại sao nghiên cứu chuỗi thời gian tài chính?, Tài liệu tham khảo chính.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 01 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/bsofk16u1/c1/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Đặc điểm cơ bản của chuỗi thời gian tài chính</h3>
+    <p>Kinh tế lượng tài chính là lĩnh vực chuyên nghiên cứu việc ước lượng các tham số của các mô hình xác suất được định nghĩa rõ ràng, nhằm mô tả hành vi của chuỗi thời gian tài chính, kiểm định các giả thuyết về cách thức các thị trường tài chính tạo ra các chuỗi Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/bsofk16u1/c1/m1/" target="_blank" rel="noopener">Đặc điểm cơ bản của chuỗi thời gian tài chính</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Phân tích tính chuẩn và kiểm định phân phối</h3>
+    <p>Mục này trình bày các phương pháp kiểm định tính bình thường của phân phối tỷ suất sinh lợi, bao gồm kiểm tra trực quan và các kiểm định chính thức . Phân tích cho thấy tỷ suất sinh lợi S&P 500 không tuân theo phân phối chuẩn với đặc trưng đuôi nặng và độ nhọn Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/bsofk16u1/c1/m2/" target="_blank" rel="noopener">Phân tích tính chuẩn và kiểm định phân phối</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Kiểm định tính dừng và nghiệm đơn vị</h3>
+    <p>Trong phân tích chuỗi thời gian tài chính, tính dừng là một trong những khái niệm quan trọng nhất. Khác với giá cả có xu hướng tăng theo thời gian, tỷ suất sinh lời thường thể hiện tính dừng, điều này làm cho chúng phù hợp hơn cho việc phân tích kinh tế lượng. Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/bsofk16u1/c1/m3/" target="_blank" rel="noopener">Kiểm định tính dừng và nghiệm đơn vị</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: Tự tương quan và tự tương quan riêng phần</h3>
+    <p>Tự tương quan và tự tương quan riêng phần Trong phân tích chuỗi thời gian tài chính, tự tương quan là một khái niệm quan trọng giúp chúng ta hiểu về cấu trúc thời gian của dữ liệu. Khác với nhiều chuỗi thời gian kinh tế khác, tỷ suất sinh lời tài chính thường  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/bsofk16u1/c1/m4/" target="_blank" rel="noopener">Tự tương quan và tự tương quan riêng phần</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 5: Phương sai thay đổi và hiệu ứng ARCH</h3>
+    <p>Phần này trình bày các khái niệm nâng cao trong phân tích chuỗi thời gian tài chính, bao gồm hiện tượng phương sai thay đổi và kiểm định ARCH để phát hiện sự phụ thuộc của phương sai theo thời gian. Đồng thời giới thiệu mô hình chuỗi thời gian tuyến tính với q Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/bsofk16u1/c1/m5/" target="_blank" rel="noopener">Phương sai thay đổi và hiệu ứng ARCH</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 6: Mô hình tuyến tính và lựa chọn mô hình</h3>
+    <p>Mục này trình bày định nghĩa chuỗi thời gian tuyến tính như một tổ hợp tuyến tính vô hạn của các quá trình white noise, bao gồm công thức tổng quát và tính chất thống kê. Giải thích ý nghĩa của các shock hoặc innovation trong việc làm cho tỷ suất sinh lợi lệch Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/bsofk16u1/c1/m6/" target="_blank" rel="noopener">Mô hình tuyến tính và lựa chọn mô hình</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_bsofk16u1_c01_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_bsofk16u1_c01_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_bsofk16u1_c01_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 01: giới thiệu chuỗi thời gian tài chính trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 01 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Đặc điểm cơ bản của chuỗi thời gian tài chính | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/bsofk16u1/c1/m1/) |
+| **Bài 02** | Phân tích tính chuẩn và kiểm định phân phối | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/bsofk16u1/c1/m2/) |
+| **Bài 03** | Kiểm định tính dừng và nghiệm đơn vị | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/bsofk16u1/c1/m3/) |
+| **Bài 04** | Tự tương quan và tự tương quan riêng phần | R 4.x | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/bsofk16u1/c1/m4/) |
+| **Bài 05** | Phương sai thay đổi và hiệu ứng ARCH | Stata 18 MP, R 4.x | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/bsofk16u1/c1/m5/) |
+| **Bài 06** | Mô hình tuyến tính và lựa chọn mô hình | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/bsofk16u1/c1/m6/) |
+| **Bài 07** | Hướng dẫn thực hành tổng hợp | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/bsofk16u1/c1/minh-hoa-thuc-hanh/) |
+| **Bài 08** | Thực hành Stata với dữ liệu mô phỏng | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/bsofk16u1/c1/thuc-hanh-stata/) |
+| **Bài 09** | Phụ lục | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/bsofk16u1/c1/phu-luc/) |

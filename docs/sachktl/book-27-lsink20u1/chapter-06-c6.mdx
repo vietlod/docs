@@ -1,0 +1,179 @@
+---
+id: chapter-06-c6
+title: "Chương 06: 6. phân tích nghiên cứu sự kiện"
+sidebar_label: "Chương 06: 6. Phân tích nghiên cứu sự kiện"
+sidebar_position: 7
+description: "Hướng dẫn thực hành How-To Chương 06: 6. phân tích nghiên cứu sự kiện thuộc bộ sách Kinh tế lượng tài chính: Mô hình và Phương pháp trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 06: 6. phân tích nghiên cứu sự kiện
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 06: 6. phân tích nghiên cứu sự kiện** thuộc [**Bộ sách 27: kinh tế lượng tài chính: mô hình và phương pháp**](/sachktl/book-27-lsink20u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/lsink20u1/c6/](https://sachktl.tnsai.vn/vi/lsink20u1/c6/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 06: 6. phân tích nghiên cứu sự kiện">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 27 · CHƯƠNG 06</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 06: 6. phân tích nghiên cứu sự kiện</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Kinh tế lượng tài chính: Mô hình và Phương pháp · 7 bài học chuy</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Giới thiệu phân tích nghiên cứu sự kiện Introduction to event study analysis Chào các bạn sinh viên, chào mừng đến với chuỗi bài học về một trong những công cụ mạnh mẽ và phổ biến nhất trong tài chính thực nghiệm: Phân tích Nghiên cứu Sự kiện. Đây là phương pháp giúp chúng ta trả lời những câu hỏi hấp dẫn như: Liệu việc một công ty chia tách cổ phiếu có thực sự làm tăng giá trị của nó? Tin tức về việc sáp nhập ảnh hưởng đến lợi nhuận của nhà đầu tư như thế nào? Hay một thay đổi chính sách của chính phủ tác động ra sao đến một ngành công nghiệp cụ thể? Về cơ bản, phương pháp này cho phép chúng
+
+- **Chủ đề học thuật trọng tâm**: CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO, PHỤ LỤC: DỮ LIỆU MÔ PHỎNG CHO SERIES.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 06 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/lsink20u1/c6/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Nền tảng và mô hình thị trường</h3>
+    <p>Nền tảng phân tích sự kiện và mô hình thị trường Event study fundamentals and the market model Giới thiệu Chào mừng các bạn quay trở lại với chuỗi bài học về Phân tích Nghiên cứu Sự kiện. Trong bài giới thiệu, chúng ta đã có cái nhìn tổng quan về mục tiêu của  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/lsink20u1/c6/nen-tang-va-mo-hinh-thi-truong/" target="_blank" rel="noopener">Nền tảng và mô hình thị trường</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Đo lường và kiểm định CAR</h3>
+    <p>Đo lường và kiểm định lợi nhuận bất thường Measuring and testing abnormal returns Giới thiệu Ở bài học trước, chúng ta đã học cách sử dụng Mô hình Thị trường để ước lượng lợi nhuận "bình thường" hay "kỳ vọng" của một cổ phiếu. Bằng cách chạy hồi quy trong cửa  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/lsink20u1/c6/do-luong-va-kiem-dinh-car/" target="_blank" rel="noopener">Đo lường và kiểm định CAR</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Tổng hợp kết quả và tương quan chéo</h3>
+    <p>Tổng hợp kết quả và vấn đề tương quan chéo Aggregation and cross-sectional correlation Giới thiệu Trong bài học trước, chúng ta đã thành công trong việc đo lường và kiểm định tác động của một sự kiện lên một công ty duy nhất. Đó là một kỹ năng nền tảng quan tr Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/lsink20u1/c6/tong-hop-ket-qua-va-tuong-quan-cheo/" target="_blank" rel="noopener">Tổng hợp kết quả và tương quan chéo</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: Khung hồi quy và kiểm định phi tham số</h3>
+    <p>Khung hồi quy và các kiểm định phi tham số The regression framework and non-parametric tests Giới thiệu Trong các bài học trước, chúng ta đã tiếp cận phân tích sự kiện theo một quy trình tuần tự: ước lượng mô hình thị trường, tính toán AR, sau đó tổng hợp thàn Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/lsink20u1/c6/khung-hoi-quy-va-kiem-dinh-phi-tham-so/" target="_blank" rel="noopener">Khung hồi quy và kiểm định phi tham số</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 5: Hồi quy bảng và phương pháp đối sánh</h3>
+    <p>Hồi quy bảng và phương pháp đối sánh Panel regression and matching methods Giới thiệu Trong các bài học trước, chúng ta đã dựa vào Mô hình Thị trường để xác định lợi nhuận "bình thường". Mô hình này hoạt động khá tốt, nhưng nó ngầm giả định rằng yếu tố duy nhấ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/lsink20u1/c6/hoi-quy-bang-va-phuong-phap-doi-sanh/" target="_blank" rel="noopener">Hồi quy bảng và phương pháp đối sánh</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 6: Bài thực hành: phân tích bằng Stata</h3>
+    <p>Phân tích tác động của công bố lợi nhuận bằng Stata A practical guide to earnings announcements event study in stata 1. Tóm tắt tổng hợp kiến thức Chào mừng các bạn đến với bài thực hành tổng hợp của chuỗi bài học Phân tích Nghiên cứu Sự kiện! Đây là chặng cuố Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/lsink20u1/c6/bai-thuc-hanh-phan-tich-bang-stata/" target="_blank" rel="noopener">Bài thực hành: Phân tích bằng Stata</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_lsink20u1_c06_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_lsink20u1_c06_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_lsink20u1_c06_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 06: 6. phân tích nghiên cứu sự kiện trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 06 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Nền tảng và mô hình thị trường | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c6/nen-tang-va-mo-hinh-thi-truong/) |
+| **Bài 02** | Đo lường và kiểm định CAR | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c6/do-luong-va-kiem-dinh-car/) |
+| **Bài 03** | Tổng hợp kết quả và tương quan chéo | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c6/tong-hop-ket-qua-va-tuong-quan-cheo/) |
+| **Bài 04** | Khung hồi quy và kiểm định phi tham số | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c6/khung-hoi-quy-va-kiem-dinh-phi-tham-so/) |
+| **Bài 05** | Hồi quy bảng và phương pháp đối sánh | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c6/hoi-quy-bang-va-phuong-phap-doi-sanh/) |
+| **Bài 06** | Bài thực hành: Phân tích bằng Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c6/bai-thuc-hanh-phan-tich-bang-stata/) |
+| **Bài 07** | Bài tổng hợp: Hệ thống hóa kiến thức | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c6/bai-tong-hop-he-thong-hoa-kien-thuc/) |

@@ -1,0 +1,178 @@
+---
+id: chapter-37-c37
+title: "Chương 37: 37. phá vỡ cấu trúc trong chuỗi thời gian tài chính"
+sidebar_label: "Chương 37: 37. Phá vỡ cấu trúc trong chuỗi thời gian "
+sidebar_position: 38
+description: "Hướng dẫn thực hành How-To Chương 37: 37. phá vỡ cấu trúc trong chuỗi thời gian tài chính thuộc bộ sách Cẩm nang kinh tế lượng chuỗi thời gian tài chính trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 37: 37. phá vỡ cấu trúc trong chuỗi thời gian tài chính
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 37: 37. phá vỡ cấu trúc trong chuỗi thời gian tài chính** thuộc [**Bộ sách 28: cẩm nang kinh tế lượng chuỗi thời gian tài chính**](/sachktl/book-28-asndk09u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/asndk09u1/c37/](https://sachktl.tnsai.vn/vi/asndk09u1/c37/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 37: 37. phá vỡ cấu trúc trong chuỗi thời gian tài chính">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 28 · CHƯƠNG 37</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 37: 37. phá vỡ cấu trúc trong chuỗi thời gian tài chính</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Cẩm nang kinh tế lượng chuỗi thời gian tài chính · 6 bài học chu</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Giới thiệu về phá vỡ cấu trúc chuỗi thời gian An Introduction to Structural Breaks in Time Series TÓM TẮT CHỦ ĐỀ Chào các bạn sinh viên, chào mừng đến với chuỗi bài học chuyên sâu về một trong những chủ đề quan trọng và hấp dẫn nhất trong kinh tế lượng tài chính hiện đại: Phá vỡ cấu trúc. Trong thế giới tài chính đầy biến động, các mô hình kinh tế lượng thường giả định rằng các tham số là không đổi theo thời gian. Tuy nhiên, thực tế lại không đơn giản như vậy. Các cuộc khủng hoảng kinh tế, thay đổi chính sách, hay các cú sốc công nghệ đều có thể tạo ra những thay đổi đột ngột, làm cho cấu
+
+- **Chủ đề học thuật trọng tâm**: TÓM TẮT CHỦ ĐỀ, CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 37 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/asndk09u1/c37/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Hậu quả của phá vỡ cấu trúc</h3>
+    <p>Hậu quả của việc bỏ qua phá vỡ cấu trúc The consequences of ignoring structural breaks 1. Giới thiệu Chào các bạn, trong bài học đầu tiên này, chúng ta sẽ cùng nhau trả lời một câu hỏi vô cùng quan trọng: "Điều gì sẽ xảy ra nếu chúng ta bỏ qua các điểm phá vỡ  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c37/hau-qua-cua-pha-vo-cau-truc/" target="_blank" rel="noopener">Hậu quả của phá vỡ cấu trúc</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Phương pháp kiểm định CUSUM</h3>
+    <p>Kiểm định CUSUM để phát hiện điểm gãy The CUSUM test for change-point detection 1. Giới thiệu Chào các bạn sinh viên, chào mừng trở lại với chuỗi bài học của chúng ta. Ở bài học trước, chúng ta đã thấy rõ việc bỏ qua phá vỡ cấu trúc có thể "đánh lừa" các mô hì Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c37/phuong-phap-kiem-dinh-cusum/" target="_blank" rel="noopener">Phương pháp kiểm định CUSUM</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Phát hiện nhiều điểm gãy</h3>
+    <p>Phát hiện nhiều điểm gãy trong chuỗi thời gian Detecting multiple breaks in time series 1. Giới thiệu Chào mừng các bạn quay trở lại. Trong bài học trước, chúng ta đã học cách sử dụng kiểm định CUSUM như một "máy báo khói" hiệu quả để phát hiện một điểm phá vỡ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c37/phat-hien-nhieu-diem-gay/" target="_blank" rel="noopener">Phát hiện nhiều điểm gãy</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: Phá vỡ cấu trúc và trí nhớ dài</h3>
+    <p>Phân biệt phá vỡ cấu trúc và trí nhớ dài Distinguishing between structural breaks and long memory 1. Giới thiệu Chào mừng các bạn đến với bài học thứ tư, một bài học đi sâu vào trung tâm của một cuộc tranh luận học thuật kinh điển trong lĩnh vực chuỗi thời gia Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c37/pha-vo-cau-truc-va-tri-nho-dai/" target="_blank" rel="noopener">Phá vỡ cấu trúc và trí nhớ dài</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 5: Bài thực hành: phân tích với Stata</h3>
+    <p>Bài thực hành: Phân tích phá vỡ cấu trúc với Stata Practice session: Analyzing structural breaks with Stata 1. Tóm tắt tổng hợp kiến thức Chào các bạn sinh viên, chào mừng đến với bài thực hành tổng hợp của chúng ta! Trong suốt bốn bài học vừa qua, chúng ta đã Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c37/bai-thuc-hanh-phan-tich-voi-stata/" target="_blank" rel="noopener">Bài thực hành: Phân tích với Stata</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 6: Bài tổng hợp: tổng kết và định hướng</h3>
+    <p>Tổng hợp về phá vỡ cấu trúc trong chuỗi thời gian Synthesis on structural breaks in time series 1. TỔNG QUAN CHỦ ĐỀ Chào các bạn sinh viên, chúng ta đã cùng nhau đi đến cuối hành trình khám phá về phá vỡ cấu trúc. Đây không chỉ là một chủ đề kỹ thuật đơn lẻ, m Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c37/bai-tong-hop-tong-ket-va-dinh-huong/" target="_blank" rel="noopener">Bài tổng hợp: Tổng kết và định hướng</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_asndk09u1_c37_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_asndk09u1_c37_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_asndk09u1_c37_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 37: 37. phá vỡ cấu trúc trong chuỗi thời gian tài chính trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 37 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Hậu quả của phá vỡ cấu trúc | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c37/hau-qua-cua-pha-vo-cau-truc/) |
+| **Bài 02** | Phương pháp kiểm định CUSUM | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c37/phuong-phap-kiem-dinh-cusum/) |
+| **Bài 03** | Phát hiện nhiều điểm gãy | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c37/phat-hien-nhieu-diem-gay/) |
+| **Bài 04** | Phá vỡ cấu trúc và trí nhớ dài | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c37/pha-vo-cau-truc-va-tri-nho-dai/) |
+| **Bài 05** | Bài thực hành: Phân tích với Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c37/bai-thuc-hanh-phan-tich-voi-stata/) |
+| **Bài 06** | Bài tổng hợp: Tổng kết và định hướng | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c37/bai-tong-hop-tong-ket-va-dinh-huong/) |

@@ -1,0 +1,180 @@
+---
+id: chapter-03-xu-ly-du-lieu
+title: "Chương 03: xử lý dữ liệu"
+sidebar_label: "Chương 03: Xử lý dữ liệu"
+sidebar_position: 4
+description: "Hướng dẫn thực hành How-To Chương 03: xử lý dữ liệu thuộc bộ sách Phân tích dữ liệu với SPSS trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 03: xử lý dữ liệu
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 03: xử lý dữ liệu** thuộc [**Bộ sách 24: phân tích dữ liệu với SPSS**](/sachktl/book-24-spss/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/spss/xu-ly-du-lieu/](https://sachktl.tnsai.vn/vi/spss/xu-ly-du-lieu/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 03: xử lý dữ liệu">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 24 · CHƯƠNG 03</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 03: xử lý dữ liệu</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Phân tích dữ liệu với SPSS · 8 bài học chuyên sâu</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Part 1: Working with Variables Most of the time, you'll need to make modifications to your variables before you can analyze your data. These types of modifications can include changing a variable's type from numeric to string, merging the categories of a nominal or ordinal variable, dichotomizing a continuous variable at a cut point, or computing a new summary variable from existing variables. This section will focus on transformations applied to individual variables, particularly recoding and computing new variables. Computing VariablesThe "Compute Variable" command allows
+
+- **Chủ đề học thuật trọng tâm**: Part 1: Working with Variables, Part 2: Data Management.
+- **Môi trường phần mềm thực hành**: `IBM SPSS 29`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 03 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/spss/xu-ly-du-lieu/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Tính toán các biến</h3>
+    <p>Computing Variables Sometimes you may need to compute a new variable based on existing information in your data. For example, you may want to: Convert the units of a variable from feet to meters Use a subject's height and weight to compute their BMI Compute a  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/spss/xu-ly-du-lieu/tinh-toan-cac-bien/" target="_blank" rel="noopener">Tính toán các biến</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Chuẩn hóa biến</h3>
+    <p>Introduction Mean centering refers to a type of variable transformation wherein the average of a variable is subtracted from every observation of that variable. The result of this transformation is a new variable that retains its original units, but whose mean Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/spss/xu-ly-du-lieu/chuan-hoa-bien/" target="_blank" rel="noopener">Chuẩn hóa biến</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Chuyển hóa biến</h3>
+    <p>Recoding Variables Sometimes you will want to transform a variable by combining some of its categories or values together. For example, you may want to change a continuous variable into an ordinal categorical variable, or you may want to merge the categories o Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/spss/xu-ly-du-lieu/chuyen-hoa-bien/" target="_blank" rel="noopener">Chuyển hóa biến</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: Biến danh mục</h3>
+    <p>Recoding Categorical String Variables to Labeled Numeric Variables using Automatic Recode When writing down the observed values of a categorical variable, you can choose to write the data values as words or as numeric codes. Either method of recording categori Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/spss/xu-ly-du-lieu/bien-danh-muc/" target="_blank" rel="noopener">Biến danh mục</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 5: Biến thứ tự</h3>
+    <p>Introduction A rank variable represents the ordering of the values of a numeric variable from smallest to largest . Ranking is its own type of variable transformation, and is also useful when you want to convert a numeric variable into a categorical variable u Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/spss/xu-ly-du-lieu/bien-thu-tu/" target="_blank" rel="noopener">Biến thứ tự</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 6: Sử dụng trọng số</h3>
+    <p>Weighting Cases In SPSS, weighting cases allows you to assign "importance" or "weight" to the cases in your dataset. Some situations where this can be useful include: Your data is in the form of counts of factors or events. The "weight" is the number of occurr Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/spss/xu-ly-du-lieu/su-dung-trong-so/" target="_blank" rel="noopener">Sử dụng trọng số</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_spss_c03_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_spss_c03_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_spss_c03_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 03: xử lý dữ liệu trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 03 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Tính toán các biến | IBM SPSS 29 | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/spss/xu-ly-du-lieu/tinh-toan-cac-bien/) |
+| **Bài 02** | Chuẩn hóa biến | Stata 18 MP, IBM SPSS 29 | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/spss/xu-ly-du-lieu/chuan-hoa-bien/) |
+| **Bài 03** | Chuyển hóa biến | IBM SPSS 29 | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/spss/xu-ly-du-lieu/chuyen-hoa-bien/) |
+| **Bài 04** | Biến danh mục | IBM SPSS 29 | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/spss/xu-ly-du-lieu/bien-danh-muc/) |
+| **Bài 05** | Biến thứ tự | IBM SPSS 29 | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/spss/xu-ly-du-lieu/bien-thu-tu/) |
+| **Bài 06** | Sử dụng trọng số | IBM SPSS 29 | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/spss/xu-ly-du-lieu/su-dung-trong-so/) |
+| **Bài 07** | Sắp xếp dữ liệu | IBM SPSS 29 | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/spss/xu-ly-du-lieu/sap-xep-du-lieu/) |
+| **Bài 08** | Gộp tách dữ liệu | IBM SPSS 29 | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/spss/xu-ly-du-lieu/gom-tach-du-lieu/) |

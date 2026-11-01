@@ -1,0 +1,178 @@
+---
+id: chapter-12-c12
+title: "Chương 12: 12. đồng liên kết và mô hình VAR"
+sidebar_label: "Chương 12: 12. Đồng liên kết và mô hình VAR"
+sidebar_position: 13
+description: "Hướng dẫn thực hành How-To Chương 12: 12. đồng liên kết và mô hình VAR thuộc bộ sách Kinh tế lượng: lý thuyết và thực hành trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 12: 12. đồng liên kết và mô hình VAR
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 12: 12. đồng liên kết và mô hình VAR** thuộc [**Bộ sách 02: kinh tế lượng: lý thuyết và thực hành**](/sachktl/book-02-dsask19u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/dsask19u1/c12/](https://sachktl.tnsai.vn/vi/dsask19u1/c12/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 12: 12. đồng liên kết và mô hình VAR">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 02 · CHƯƠNG 12</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 12: 12. đồng liên kết và mô hình VAR</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Kinh tế lượng: lý thuyết và thực hành · 6 bài học chuyên sâu</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Đồng liên kết và mô hình VAR Trong phân tích chuỗi thời gian, đặc biệt là với dữ liệu kinh tế vĩ mô, các nhà nghiên cứu thường xuyên đối mặt với các biến không dừng. Việc áp dụng mô hình hồi quy OLS truyền thống cho các biến này có thể dẫn đến một cạm bẫy kinh điển được gọi là "hồi quy giả" – nơi các kết quả thống kê có vẻ ý nghĩa nhưng thực chất lại không phản ánh mối quan hệ kinh tế thực sự. Vấn đề này đặt ra một thách thức lớn: làm thế nào để xây dựng mô hình đáng tin cậy cho các biến số kinh tế vốn có xu hướng vận động cùng nhau trong dài hạn, chẳng hạn như tiêu dùng và
+
+- **Chủ đề học thuật trọng tâm**: Cấu trúc chuỗi bài học, Kiến thức tiên quyết, Mục tiêu học tập, Tài liệu tham khảo chính, PHỤ LỤC: Dữ liệu mô phỏng cho chuỗi bài viết.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 12 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/dsask19u1/c12/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Giới thiệu đồng liên kết và vấn đề hồi quy giả</h3>
+    <p>Một trong những giả định nền tảng của mô hình hồi quy tuyến tính cổ điển là các biến trong mô hình phải có tính dừng. Tuy nhiên, trong thực tế, hầu hết các chuỗi thời gian kinh tế vĩ mô như GDP, tiêu dùng, đầu tư hay giá cả đều biểu hiện tính không dừng, thườn Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/dsask19u1/c12/gioi-thieu-dong-lien-ket/" target="_blank" rel="noopener">Giới thiệu đồng liên kết và vấn đề hồi quy giả</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Kiểm định đồng liên kết và mô hình hiệu chỉnh sai số</h3>
+    <p>Ở bài 1, chúng ta đã xác lập một nguyên tắc nền tảng: khi các chuỗi thời gian không dừng, chúng ta không thể tin tưởng vào kết quả hồi quy OLS thông thường do nguy cơ gặp phải hồi quy giả. Đồng thời, chúng ta cũng đã giới thiệu khái niệm đồng liên kết như một  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/dsask19u1/c12/kiem-dinh-dong-lien-ket/" target="_blank" rel="noopener">Kiểm định đồng liên kết và mô hình hiệu chỉnh sai số</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Nền tảng mô hình véc-tơ tự hồi quy</h3>
+    <p>Trong các bài học trước, chúng ta đã tiếp cận vấn đề đồng liên kết thông qua một lăng kính đơn phương trình, điển hình là phương pháp hai bước của Engle-Granger. Mặc dù trực quan và hữu ích, cách tiếp cận này có một hạn chế cố hữu: nó đòi hỏi chúng ta phải xác Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/dsask19u1/c12/nen-tang-mo-hinh-var/" target="_blank" rel="noopener">Nền tảng mô hình véc-tơ tự hồi quy</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: Phân tích động học trong mô hình VAR</h3>
+    <p>Ở bài học trước, chúng ta đã học cách xây dựng và ước lượng một mô hình véc-tơ tự hồi quy. Tuy nhiên, chúng ta cũng nhận thấy rằng việc diễn giải trực tiếp các hệ số ước lượng của VAR là rất khó khăn và thường không mang lại nhiều ý nghĩa kinh tế. Vậy, giá trị Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/dsask19u1/c12/phan-tich-dong-hoc-trong-mo-hinh-var/" target="_blank" rel="noopener">Phân tích động học trong mô hình VAR</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 5: Kiểm định đồng liên kết trong hệ thống VAR</h3>
+    <p>Trong Bài 2, chúng ta đã học phương pháp Engle-Granger để kiểm định đồng liên kết. Mặc dù trực quan, phương pháp này có hai hạn chế lớn: nó chỉ có thể kiểm định sự tồn tại của tối đa một mối quan hệ đồng liên kết, và kết quả có thể phụ thuộc vào việc chọn biến Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/dsask19u1/c12/kiem-dinh-dong-lien-ket-trong-var/" target="_blank" rel="noopener">Kiểm định đồng liên kết trong hệ thống VAR</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 6: Hướng dẫn thực hành tổng hợp với Stata</h3>
+    <p>Chúng ta đã bắt đầu hành trình từ những cảnh báo về hồi quy giả, đi qua các khái niệm nền tảng về đồng liên kết, khám phá các mô hình VAR mạnh mẽ, và cuối cùng là nắm vững phương pháp kiểm định hệ thống của Johansen. Giờ là lúc chúng ta tổng hợp tất cả những k Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/dsask19u1/c12/huong-dan-thuc-hanh-tong-hop-voi-stata/" target="_blank" rel="noopener">Hướng dẫn thực hành tổng hợp với Stata</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_dsask19u1_c12_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_dsask19u1_c12_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_dsask19u1_c12_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 12: 12. đồng liên kết và mô hình VAR trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 12 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Giới thiệu đồng liên kết và vấn đề hồi quy giả | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c12/gioi-thieu-dong-lien-ket/) |
+| **Bài 02** | Kiểm định đồng liên kết và mô hình hiệu chỉnh sai số | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c12/kiem-dinh-dong-lien-ket/) |
+| **Bài 03** | Nền tảng mô hình véc-tơ tự hồi quy | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c12/nen-tang-mo-hinh-var/) |
+| **Bài 04** | Phân tích động học trong mô hình VAR | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c12/phan-tich-dong-hoc-trong-mo-hinh-var/) |
+| **Bài 05** | Kiểm định đồng liên kết trong hệ thống VAR | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c12/kiem-dinh-dong-lien-ket-trong-var/) |
+| **Bài 06** | Hướng dẫn thực hành tổng hợp với Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c12/huong-dan-thuc-hanh-tong-hop-voi-stata/) |

@@ -1,0 +1,178 @@
+---
+id: chapter-18-c18
+title: "Chương 18: 18. phương pháp sai biệt kép"
+sidebar_label: "Chương 18: 18. Phương pháp sai biệt kép"
+sidebar_position: 19
+description: "Hướng dẫn thực hành How-To Chương 18: 18. phương pháp sai biệt kép thuộc bộ sách Lý thuyết Kinh tế lượng trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 18: 18. phương pháp sai biệt kép
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 18: 18. phương pháp sai biệt kép** thuộc [**Bộ sách 17: lý thuyết kinh tế lượng**](/sachktl/book-17-hsank22u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/hsank22u1/c18/](https://sachktl.tnsai.vn/vi/hsank22u1/c18/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 18: 18. phương pháp sai biệt kép">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 17 · CHƯƠNG 18</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 18: 18. phương pháp sai biệt kép</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Lý thuyết Kinh tế lượng · 6 bài học chuyên sâu</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Phương pháp sai biệt kép Chào mừng các bạn sinh viên đến với chuỗi bài học về một trong những công cụ mạnh mẽ và phổ biến nhất trong kinh tế lượng ứng dụng: phương pháp Khác biệt trong Khác biệt, hay còn gọi là Difference-in-Differences. Nếu bạn từng thắc mắc làm thế nào các nhà kinh tế có thể đo lường tác động thực sự của một chính sách mới, chẳng hạn như việc tăng lương tối thiểu ảnh hưởng đến việc làm, hay một chiến dịch marketing mới tác động đến doanh số, thì DiD chính là câu trả lời. Phương pháp này cung cấp một cách tiếp cận thông minh để tách bạch tác động của chính sách ra khỏi
+
+- **Chủ đề học thuật trọng tâm**: Cấu trúc chuỗi bài học, PHỤ LỤC: Dữ liệu mô phỏng cho chuỗi bài viết.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 18 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/hsank22u1/c18/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Giới thiệu phương pháp DiD</h3>
+    <p>Giới thiệu Chào mừng các bạn quay trở lại với chuỗi bài học về phương pháp Difference-in-Differences! Trong bài giới thiệu tổng quan, chúng ta đã cùng nhau phác thảo bức tranh toàn cảnh về DiD và mục tiêu học tập của toàn bộ series. Bây giờ là lúc chúng ta đi  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c18/gioi-thieu-phuong-phap-did/" target="_blank" rel="noopener">Giới thiệu phương pháp DiD</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Các điều kiện để DiD là một ước lượng nhân quả</h3>
+    <p>Giới thiệu Chào mừng các bạn đến với bài học thứ hai trong chuỗi bài về Difference-in-Differences. Trong bài 1, chúng ta đã cùng nhau khám phá câu chuyện hấp dẫn về nghiên cứu lương tối thiểu của Card và Krueger. Chúng ta đã thấy DiD hoạt động một cách trực qu Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c18/cac-dieu-kien-de-did-la-mot-uoc-luong-nhan-qua/" target="_blank" rel="noopener">Các điều kiện để DiD là một ước lượng nhân quả</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Mở rộng mô hình DiD với nhiều nhóm và nhiều thời kỳ</h3>
+    <p>Giới thiệu Chào mừng các bạn đã quay trở lại! Trong bài học trước, chúng ta đã đi sâu vào các điều kiện lý thuyết để một ước lượng DiD có thể được coi là tác động nhân quả. Chúng ta đã học về "checklist" chất lượng, đặc biệt là tầm quan trọng của Giả định Xu h Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c18/mo-rong-mo-hinh-did-voi-nhieu-nhom-va-nhieu-thoi-ky/" target="_blank" rel="noopener">Mở rộng mô hình DiD với nhiều nhóm và nhiều thời kỳ</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: Tầm quan trọng của đặc tả xu hướng trong mô hình DiD</h3>
+    <p>Giới thiệu Chào mừng các bạn đến với bài học thứ tư! Trong các bài học trước, chúng ta đã xây dựng một nền tảng vững chắc về phương pháp DiD, từ trực giác cơ bản, các giả định lý thuyết, đến việc mở rộng mô hình cho nhiều nhóm. Các ví dụ chúng ta phân tích đều Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c18/tam-quan-trong-cua-dac-ta-xu-huong-trong-mo-hinh-did/" target="_blank" rel="noopener">Tầm quan trọng của đặc tả xu hướng trong mô hình DiD</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 5: Suy luận thống kê và các lỗi cần tránh khi thực hành</h3>
+    <p>Giới thiệu Chào mừng các bạn đến với bài học thứ năm và cũng là bài học lý thuyết cuối cùng trong chuỗi bài về Difference-in-Differences! Chúng ta đã cùng nhau đi một chặng đường dài, từ việc tìm hiểu trực giác cơ bản, các giả định nhận dạng, cách mở rộng mô h Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c18/suy-luan-thong-ke-va-cac-loi-can-tranh-khi-thuc-hanh/" target="_blank" rel="noopener">Suy luận thống kê và các lỗi cần tránh khi thực hành</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 6: Hướng dẫn thực hành phân tích DiD từ A-Z với Stata</h3>
+    <p>Chào mừng các bạn đến với bài học cuối cùng và cũng là bài thực hành quan trọng nhất trong chuỗi bài về phương pháp Difference-in-Differences! Trong suốt năm bài học vừa qua, chúng ta đã cùng nhau xây dựng một nền tảng lý thuyết vững chắc, từ trực giác ban đầu Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c18/huong-dan-thuc-hanh-phan-tich-did-tu-a-z-voi-stata/" target="_blank" rel="noopener">Hướng dẫn thực hành phân tích DiD từ A-Z với Stata</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_hsank22u1_c18_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_hsank22u1_c18_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_hsank22u1_c18_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 18: 18. phương pháp sai biệt kép trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 18 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Giới thiệu phương pháp DiD | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c18/gioi-thieu-phuong-phap-did/) |
+| **Bài 02** | Các điều kiện để DiD là một ước lượng nhân quả | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c18/cac-dieu-kien-de-did-la-mot-uoc-luong-nhan-qua/) |
+| **Bài 03** | Mở rộng mô hình DiD với nhiều nhóm và nhiều thời kỳ | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c18/mo-rong-mo-hinh-did-voi-nhieu-nhom-va-nhieu-thoi-ky/) |
+| **Bài 04** | Tầm quan trọng của đặc tả xu hướng trong mô hình DiD | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c18/tam-quan-trong-cua-dac-ta-xu-huong-trong-mo-hinh-did/) |
+| **Bài 05** | Suy luận thống kê và các lỗi cần tránh khi thực hành | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c18/suy-luan-thong-ke-va-cac-loi-can-tranh-khi-thuc-hanh/) |
+| **Bài 06** | Hướng dẫn thực hành phân tích DiD từ A-Z với Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c18/huong-dan-thuc-hanh-phan-tich-did-tu-a-z-voi-stata/) |

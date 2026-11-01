@@ -1,0 +1,178 @@
+---
+id: chapter-05-c5
+title: "Chương 05: 5. hồi quy với một biến hồi quy: kiểm định giả thuyết và khoảng tin cậy"
+sidebar_label: "Chương 05: 5. Hồi quy với một biến hồi quy: Kiểm định"
+sidebar_position: 6
+description: "Hướng dẫn thực hành How-To Chương 05: 5. hồi quy với một biến hồi quy: kiểm định giả thuyết và khoảng tin cậy thuộc bộ sách Giới thiệu về kinh tế lượng trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 05: 5. hồi quy với một biến hồi quy: kiểm định giả thuyết và khoảng tin cậy
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 05: 5. hồi quy với một biến hồi quy: kiểm định giả thuyết và khoảng tin cậy** thuộc [**Bộ sách 10: giới thiệu về kinh tế lượng**](/sachktl/book-10-sstok20u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/sstok20u1/c5/](https://sachktl.tnsai.vn/vi/sstok20u1/c5/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 05: 5. hồi quy với một biến hồi quy: kiểm định giả thuyết và ">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 10 · CHƯƠNG 05</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 05: 5. hồi quy với một biến hồi quy: kiểm định giả thuyết và </text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Giới thiệu về kinh tế lượng · 6 bài học chuyên sâu</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Giới thiệu về kiểm định giả thuyết và khoảng tin cậy Introduction to Hypothesis tests and Confidence Intervals Tổng quan về chuỗi bài học Chào mừng các bạn sinh viên đã quay trở lại với chuỗi bài học về kinh tế lượng ứng dụng. Ở các chương trước, chúng ta đã học cách ước lượng một đường thẳng hồi quy bằng phương pháp Bình phương nhỏ nhất. Chúng ta đã có trong tay các hệ số ước lượng, chẳng hạn như tác động của quy mô lớp học đến điểm thi. Tuy nhiên, một câu hỏi quan trọng vẫn còn bỏ ngỏ: Liệu kết quả chúng ta tìm thấy từ một mẫu dữ liệu có đủ tin cậy để khái quát hóa cho toàn bộ tổng
+
+- **Chủ đề học thuật trọng tâm**: Tổng quan về chuỗi bài học, BA TỪ KHÓA CỐT LÕI, CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 05 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/sstok20u1/c5/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Kiểm định giả thuyết cho hệ số hồi quy</h3>
+    <p>Kiểm định giả thuyết cho hệ số hồi quy Hypothesis testing for regression coefficients Từ ước lượng đến suy diễn Trong các bài học trước, chúng ta đã học cách sử dụng phương pháp Bình phương nhỏ nhất để tìm ra một đường thẳng phù hợp nhất với dữ liệu, qua đó ướ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sstok20u1/c5/kiem-dinh-gia-thuyet-cho-he-so-hoi-quy/" target="_blank" rel="noopener">Kiểm định giả thuyết cho hệ số hồi quy</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Xây dựng khoảng tin cậy và diễn giải</h3>
+    <p>Xây dựng khoảng tin cậy và diễn giải Constructing and interpreting confidence intervals Vượt ra ngoài câu trả lời "Có/Không" Chào mừng các bạn đã quay trở lại. Trong bài học trước, chúng ta đã học cách thực hiện kiểm định giả thuyết, một công cụ mạnh mẽ cho ph Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sstok20u1/c5/xay-dung-khoang-tin-cay-va-dien-giai/" target="_blank" rel="noopener">Xây dựng khoảng tin cậy và diễn giải</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Hồi quy với biến độc lập nhị phân</h3>
+    <p>Hồi quy với biến độc lập nhị phân Regression with a binary independent variable Khi biến độc lập chỉ có hai lựa chọn Chào mừng các bạn đến với bài học tiếp theo. Cho đến nay, chúng ta đã làm việc với các biến độc lập liên tục, như tỷ lệ sinh viên/giáo viên, có Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sstok20u1/c5/hoi-quy-voi-bien-doc-lap-nhi-phan/" target="_blank" rel="noopener">Hồi quy với biến độc lập nhị phân</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: Phương sai sai số thay đổi và không đổi</h3>
+    <p>Phương sai sai số thay đổi và không đổi Heteroskedasticity and homoskedasticity Nhìn xa hơn giá trị trung bình của sai số Chào mừng các bạn quay trở lại. Trong tất cả các bài học từ trước đến nay, chúng ta đã dựa trên một giả định cốt lõi của OLS: giá trị kỳ v Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sstok20u1/c5/phuong-sai-sai-so-thay-doi-va-khong-doi/" target="_blank" rel="noopener">Phương sai sai số thay đổi và không đổi</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 5: Phân tích thực hành với Stata từ A-Z</h3>
+    <p>Phân tích thực hành từ A đến Z A to Z practical analysis exercise 1. Tóm tắt tổng hợp kiến thức đã học Chào mừng các bạn đến với bài thực hành tổng hợp. Trong bốn bài học vừa qua, chúng ta đã thực hiện một hành trình quan trọng: từ việc ước lượng một con số du Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sstok20u1/c5/phan-tich-thuc-hanh-voi-stata-tu-a-z/" target="_blank" rel="noopener">Phân tích thực hành với Stata từ A-Z</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 6: Tổng hợp và lý thuyết nâng cao</h3>
+    <p>Tổng hợp: Suy diễn thống kê trong hồi quy đơn Synthesis: Statistical inference in single regression 1. Bức tranh lớn của suy diễn thống kê Chào mừng các bạn đến với bài học cuối cùng trong chuỗi bài viết về suy diễn thống kê trong mô hình hồi quy đơn. Chúng ta Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sstok20u1/c5/tong-hop-va-ly-thuyet-nang-cao/" target="_blank" rel="noopener">Tổng hợp và lý thuyết nâng cao</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_sstok20u1_c05_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_sstok20u1_c05_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_sstok20u1_c05_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 05: 5. hồi quy với một biến hồi quy: kiểm định giả thuyết và khoảng tin cậy trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 05 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Kiểm định giả thuyết cho hệ số hồi quy | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sstok20u1/c5/kiem-dinh-gia-thuyet-cho-he-so-hoi-quy/) |
+| **Bài 02** | Xây dựng khoảng tin cậy và diễn giải | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sstok20u1/c5/xay-dung-khoang-tin-cay-va-dien-giai/) |
+| **Bài 03** | Hồi quy với biến độc lập nhị phân | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sstok20u1/c5/hoi-quy-voi-bien-doc-lap-nhi-phan/) |
+| **Bài 04** | Phương sai sai số thay đổi và không đổi | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sstok20u1/c5/phuong-sai-sai-so-thay-doi-va-khong-doi/) |
+| **Bài 05** | Phân tích thực hành với Stata từ A-Z | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sstok20u1/c5/phan-tich-thuc-hanh-voi-stata-tu-a-z/) |
+| **Bài 06** | Tổng hợp và lý thuyết nâng cao | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sstok20u1/c5/tong-hop-va-ly-thuyet-nang-cao/) |

@@ -1,0 +1,178 @@
+---
+id: chapter-02-c2
+title: "Chương 02: 2. nền tảng kinh tế lượng"
+sidebar_label: "Chương 02: 2. Nền tảng kinh tế lượng"
+sidebar_position: 3
+description: "Hướng dẫn thực hành How-To Chương 02: 2. nền tảng kinh tế lượng thuộc bộ sách Kinh tế lượng tài chính: Mô hình và Phương pháp trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 02: 2. nền tảng kinh tế lượng
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 02: 2. nền tảng kinh tế lượng** thuộc [**Bộ sách 27: kinh tế lượng tài chính: mô hình và phương pháp**](/sachktl/book-27-lsink20u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/lsink20u1/c2/](https://sachktl.tnsai.vn/vi/lsink20u1/c2/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 02: 2. nền tảng kinh tế lượng">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 27 · CHƯƠNG 02</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 02: 2. nền tảng kinh tế lượng</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Kinh tế lượng tài chính: Mô hình và Phương pháp · 6 bài học chuy</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Giới thiệu nền tảng kinh tế lượng hiện đại An introduction to modern econometric background Tóm tắt chủ đề Chào mừng các bạn đến với chuỗi bài học về nền tảng kinh tế lượng hiện đại! Trong thế giới dựa trên dữ liệu ngày nay, khả năng phân tích và rút ra những hiểu biết sâu sắc từ các con số là một kỹ năng vô giá. Kinh tế lượng chính là cây cầu nối giữa lý thuyết kinh tế và thực tiễn thế giới thực thông qua các công cụ thống kê. Chuỗi bài viết này được thiết kế đặc biệt cho các bạn sinh viên mới bắt đầu, nhằm cung cấp một nền tảng vững chắc về hai trong số những công cụ mạnh mẽ nhất trong kho
+
+- **Chủ đề học thuật trọng tâm**: Tóm tắt chủ đề, CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 02 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/lsink20u1/c2/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Nền tảng hồi quy tuyến tính và ước lượng OLS</h3>
+    <p>Nền tảng hồi quy tuyến tính và ước lượng OLS Linear regression fundamentals and OLS estimation Giới thiệu: Mô hình hóa các mối quan hệ kinh tế Chào mừng các bạn đến với bài học đầu tiên trong chuỗi bài về nền tảng kinh tế lượng! Một trong những câu hỏi cốt lõi Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/lsink20u1/c2/nen-tang-hoi-quy-tuyen-tinh-va-uoc-luong-ols/" target="_blank" rel="noopener">Nền tảng hồi quy tuyến tính và ước lượng OLS</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Suy diễn thống kê và các kiểm định trong hồi quy</h3>
+    <p>Suy diễn thống kê và các kiểm định trong hồi quy Statistical inference and hypothesis testing in regression Giới thiệu: Từ ước lượng đến suy diễn Trong bài học trước, chúng ta đã học cách ước lượng các hệ số của một mô hình hồi quy tuyến tính bằng phương pháp  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/lsink20u1/c2/suy-dien-thong-ke-va-cac-kiem-dinh-trong-hoi-quy/" target="_blank" rel="noopener">Suy diễn thống kê và các kiểm định trong hồi quy</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Giới thiệu phân tích chuỗi thời gian và tính dừng</h3>
+    <p>Giới thiệu phân tích chuỗi thời gian và tính dừng Introduction to time series analysis and stationarity Khi dữ liệu có thêm chiều thời gian Chào mừng các bạn đến với bài học thứ ba! Trong hai bài học trước, chúng ta đã làm việc với dữ liệu chéo, nơi mỗi quan s Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/lsink20u1/c2/gioi-thieu-phan-tich-chuoi-thoi-gian-va-tinh-dung/" target="_blank" rel="noopener">Giới thiệu phân tích chuỗi thời gian và tính dừng</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: Hồi quy về trung bình, nghiệm đơn vị và dự báo</h3>
+    <p>Hồi quy về trung bình, nghiệm đơn vị và dự báo Mean reversion, unit roots, and forecasting Hành vi dài hạn của chuỗi thời gian Trong bài học trước, chúng ta đã học cách xác định một chuỗi thời gian có "ổn định" hay không thông qua khái niệm tính dừng. Giờ đây, Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/lsink20u1/c2/hoi-quy-ve-trung-binh-nghiem-don-vi-va-du-bao/" target="_blank" rel="noopener">Hồi quy về trung bình, nghiệm đơn vị và dự báo</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 5: Thực hành kinh tế lượng từ a đến z với Stata</h3>
+    <p>Thực hành kinh tế lượng từ A đến Z với Stata A-to-Z econometric practice with Stata 1. Tóm tắt tổng hợp kiến thức Chào mừng các bạn đến với bài học thực hành cuối cùng và quan trọng nhất trong chuỗi bài của chúng ta! Trong suốt bốn bài học vừa qua, chúng ta đã Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/lsink20u1/c2/thuc-hanh-kinh-te-luong-tu-a-den-z-voi-stata/" target="_blank" rel="noopener">Thực hành kinh tế lượng từ A đến Z với Stata</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 6: Hệ thống hóa kiến thức và hướng phát triển</h3>
+    <p>Tổng hợp nền tảng kinh tế lượng: Từ hồi quy đến dự báo Synthesizing econometric foundations: From regression to forecasting 1. BỨC TRANH LỚN CỦA PHÂN TÍCH DỮ LIỆU KINH TẾ Chúng ta đã hoàn thành một hành trình khám phá đầy ý nghĩa qua những nền tảng cốt lõi của Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/lsink20u1/c2/he-thong-hoa-kien-thuc-va-huong-phat-trien/" target="_blank" rel="noopener">Hệ thống hóa kiến thức và hướng phát triển</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_lsink20u1_c02_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_lsink20u1_c02_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_lsink20u1_c02_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 02: 2. nền tảng kinh tế lượng trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 02 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Nền tảng hồi quy tuyến tính và ước lượng OLS | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c2/nen-tang-hoi-quy-tuyen-tinh-va-uoc-luong-ols/) |
+| **Bài 02** | Suy diễn thống kê và các kiểm định trong hồi quy | Stata 18 MP, R 4.x | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c2/suy-dien-thong-ke-va-cac-kiem-dinh-trong-hoi-quy/) |
+| **Bài 03** | Giới thiệu phân tích chuỗi thời gian và tính dừng | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c2/gioi-thieu-phan-tich-chuoi-thoi-gian-va-tinh-dung/) |
+| **Bài 04** | Hồi quy về trung bình, nghiệm đơn vị và dự báo | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c2/hoi-quy-ve-trung-binh-nghiem-don-vi-va-du-bao/) |
+| **Bài 05** | Thực hành kinh tế lượng từ A đến Z với Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c2/thuc-hanh-kinh-te-luong-tu-a-den-z-voi-stata/) |
+| **Bài 06** | Hệ thống hóa kiến thức và hướng phát triển | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c2/he-thong-hoa-kien-thuc-va-huong-phat-trien/) |

@@ -1,0 +1,178 @@
+---
+id: chapter-17-c17
+title: "Chương 17: 17. thời gian như một biến dự báo định tính"
+sidebar_label: "Chương 17: 17. Thời gian như một biến dự báo định tín"
+sidebar_position: 18
+description: "Hướng dẫn thực hành How-To Chương 17: 17. thời gian như một biến dự báo định tính thuộc bộ sách Diễn giải và trực quan hóa mô hình hồi quy bằng Stata trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 17: 17. thời gian như một biến dự báo định tính
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 17: 17. thời gian như một biến dự báo định tính** thuộc [**Bộ sách 07: diễn giải và trực quan hóa mô hình hồi quy bằng Stata**](/sachktl/book-07-msitk21u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/msitk21u1/c17/](https://sachktl.tnsai.vn/vi/msitk21u1/c17/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 17: 17. thời gian như một biến dự báo định tính">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 07 · CHƯƠNG 17</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 17: 17. thời gian như một biến dự báo định tính</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Diễn giải và trực quan hóa mô hình hồi quy bằng Stata · 6 bài họ</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Mô hình hóa thời gian như một biến phân loại trong Stata Modeling Time as a Categorical Predictor in Stata Giới thiệu chuỗi bài học Chào mừng các bạn sinh viên đến với chuỗi bài học chuyên sâu về một kỹ thuật quan trọng trong phân tích dữ liệu dọc: xem xét thời gian như một biến dự báo phân loại. Trong các phân tích kinh tế lượng, chúng ta thường đối mặt với dữ liệu được thu thập qua nhiều thời điểm khác nhau, ví dụ như theo dõi hiệu quả của một chính sách qua các quý, hoặc sự thay đổi trong hành vi của người tiêu dùng qua các tháng. Thay vì coi thời gian là một đường thẳng liên tục, việc xem
+
+- **Chủ đề học thuật trọng tâm**: Giới thiệu chuỗi bài học, Cấu trúc chuỗi bài học, Kiến thức tiên quyết, Mục tiêu học tập, Tài liệu tham khảo.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 17 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/msitk21u1/c17/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Phân tích thời gian như một biến dự báo phân loại duy nhất</h3>
+    <p>Phân tích thời gian như một biến dự báo phân loại duy nhất Analyzing time as a single categorical predictor Tổng quan kiến thức và bối cảnh nghiên cứu Chào mừng các bạn đến với bài học đầu tiên trong chuỗi bài về mô hình hóa thời gian. Trong thực tế, khi làm v Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c17/phan-tich-thoi-gian-nhu-mot-bien-du-bao-phan-loai-duy-nhat/" target="_blank" rel="noopener">Phân tích thời gian như một biến dự báo phân loại duy nhất</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Phân tích tương tác giữa thời gian và biến phân loại hai nhóm</h3>
+    <p>Phân tích tương tác giữa thời gian và biến phân loại hai nhóm Analyzing the interaction between time and a two-level categorical variable Tổng quan kiến thức và bối cảnh nghiên cứu Trong bài học trước, chúng ta đã học cách mô hình hóa sự thay đổi của một biến  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c17/phan-tich-tuong-tac-giua-thoi-gian-va-bien-phan-loai-hai-nhom/" target="_blank" rel="noopener">Phân tích tương tác giữa thời gian và biến phân loại hai nhóm</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Mở rộng phân tích tương tác với biến phân loại ba nhóm</h3>
+    <p>Mở rộng phân tích tương tác với biến phân loại ba nhóm Extending interaction analysis with a three-level categorical variable Tổng quan kiến thức và bối cảnh nghiên cứu Trong các bài học trước, chúng ta đã đi từ việc phân tích sự thay đổi theo thời gian của mộ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c17/mo-rong-phan-tich-tuong-tac-voi-bien-phan-loai-ba-nhom/" target="_blank" rel="noopener">Mở rộng phân tích tương tác với biến phân loại ba nhóm</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: So sánh các cấu trúc hiệp phương sai phần dư</h3>
+    <p>So sánh các mô hình với cấu trúc hiệp phương sai phần dư khác nhau Comparing models with different residual covariance structures Tổng quan kiến thức và bối cảnh nghiên cứu Trong suốt các bài học vừa qua, khi sử dụng lệnh mixed, chúng ta đã luôn thêm một tùy c Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c17/so-sanh-cac-cau-truc-hiep-phuong-sai-phan-du/" target="_blank" rel="noopener">So sánh các cấu trúc hiệp phương sai phần dư</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 5: Phân tích dữ liệu với mẫu nhỏ và các hiệu chỉnh</h3>
+    <p>Phân tích dữ liệu với mẫu nhỏ và các hiệu chỉnh Analyzing data with small samples and adjustments Tổng quan kiến thức và bối cảnh nghiên cứu Tất cả các ví dụ chúng ta đã phân tích cho đến nay đều dựa trên các bộ dữ liệu có kích thước mẫu tương đối lớn . Trong  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c17/phan-tich-du-lieu-voi-mau-nho-va-cac-hieu-chinh/" target="_blank" rel="noopener">Phân tích dữ liệu với mẫu nhỏ và các hiệu chỉnh</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 6: Tổng hợp và mở rộng các mô hình thời gian dạng phân loại</h3>
+    <p>Tổng hợp và mở rộng mô hình hóa thời gian như một biến phân loại Synthesizing and extending models of time as a categorical predictor Tổng quan về chuỗi bài học và vị thế trong kinh tế lượng Chào mừng các bạn đã đến với bài học cuối cùng, nơi chúng ta sẽ cùng  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c17/tong-hop-va-mo-rong-cac-mo-hinh-thoi-gian-dang-phan-loai/" target="_blank" rel="noopener">Tổng hợp và mở rộng các mô hình thời gian dạng phân loại</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_msitk21u1_c17_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_msitk21u1_c17_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_msitk21u1_c17_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 17: 17. thời gian như một biến dự báo định tính trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 17 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Phân tích thời gian như một biến dự báo phân loại duy nhất | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c17/phan-tich-thoi-gian-nhu-mot-bien-du-bao-phan-loai-duy-nhat/) |
+| **Bài 02** | Phân tích tương tác giữa thời gian và biến phân loại hai nhóm | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c17/phan-tich-tuong-tac-giua-thoi-gian-va-bien-phan-loai-hai-nhom/) |
+| **Bài 03** | Mở rộng phân tích tương tác với biến phân loại ba nhóm | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c17/mo-rong-phan-tich-tuong-tac-voi-bien-phan-loai-ba-nhom/) |
+| **Bài 04** | So sánh các cấu trúc hiệp phương sai phần dư | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c17/so-sanh-cac-cau-truc-hiep-phuong-sai-phan-du/) |
+| **Bài 05** | Phân tích dữ liệu với mẫu nhỏ và các hiệu chỉnh | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c17/phan-tich-du-lieu-voi-mau-nho-va-cac-hieu-chinh/) |
+| **Bài 06** | Tổng hợp và mở rộng các mô hình thời gian dạng phân loại | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c17/tong-hop-va-mo-rong-cac-mo-hinh-thoi-gian-dang-phan-loai/) |

@@ -1,0 +1,178 @@
+---
+id: chapter-06-c6
+title: "Chương 06: 6. biểu đồ điểm"
+sidebar_label: "Chương 06: 6. Biểu đồ điểm"
+sidebar_position: 7
+description: "Hướng dẫn thực hành How-To Chương 06: 6. biểu đồ điểm thuộc bộ sách Hướng dẫn trực quan về đồ họa với Stata trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 06: 6. biểu đồ điểm
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 06: 6. biểu đồ điểm** thuộc [**Bộ sách 06: hướng dẫn trực quan về đồ họa với Stata**](/sachktl/book-06-msitk22u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/msitk22u1/c6/](https://sachktl.tnsai.vn/vi/msitk22u1/c6/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 06: 6. biểu đồ điểm">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 06 · CHƯƠNG 06</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 06: 6. biểu đồ điểm</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Hướng dẫn trực quan về đồ họa với Stata · 6 bài học chuyên sâu</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Giới thiệu chuỗi bài học về biểu đồ điểm trong Stata An Introduction to the Dot plots in Stata Chào các bạn sinh viên, chào mừng đến với chuỗi bài học chuyên sâu về một trong những công cụ trực quan hóa dữ liệu linh hoạt và hiệu quả nhất trong Stata: biểu đồ điểm. Trong nghiên cứu kinh tế, việc trình bày dữ liệu một cách rõ ràng, súc tích và có ý nghĩa là một kỹ năng cực kỳ quan trọng. Biểu đồ điểm cho phép chúng ta so sánh các giá trị thống kê qua nhiều nhóm phân loại khác nhau một cách trực quan, giúp phát hiện các xu hướng và điểm nổi bật mà các bảng số liệu có thể che giấu.
+
+- **Chủ đề học thuật trọng tâm**: Cấu trúc chuỗi bài học về biểu đồ điểm, Kiến thức tiên quyết, Yêu cầu cần có:, Mục tiêu học tập, Tài liệu tham khảo.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 06 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/msitk22u1/c6/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Biểu đồ điểm cơ bản - chỉ định biến và nhóm</h3>
+    <p>Biểu đồ điểm cơ bản - Chỉ định biến và nhóm Basic dot plots - Specifying variables and groups Chào mừng các bạn quay trở lại với chuỗi bài học về trực quan hóa dữ liệu bằng biểu đồ điểm trong Stata. Trong bài giới thiệu, chúng ta đã cùng nhau tìm hiểu về tầm q Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk22u1/c6/bieu-do-diem-co-ban-chi-dinh-bien-va-nhom/" target="_blank" rel="noopener">Biểu đồ điểm cơ bản - Chỉ định biến và nhóm</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Tùy chỉnh khoảng cách và thứ tự các điểm</h3>
+    <p>Tùy chỉnh khoảng cách và thứ tự các điểm Customizing gaps and sorting dots Chào mừng các bạn đến với bài học thứ hai trong chuỗi hướng dẫn về biểu đồ điểm. Ở bài 1, chúng ta đã thành thạo việc tạo ra các biểu đồ điểm cơ bản bằng cách chỉ định biến y và sử dụng Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk22u1/c6/tuy-chinh-khoang-cach-va-thu-tu-cac-diem/" target="_blank" rel="noopener">Tùy chỉnh khoảng cách và thứ tự các điểm</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Làm chủ trục và chú giải</h3>
+    <p>Làm chủ trục và chú giải trong biểu đồ điểm Mastering axes and the legend in dot plots Chào mừng các bạn đã quay trở lại! Trong hai bài học trước, chúng ta đã tập trung vào "nội dung" của biểu đồ - tức là các điểm dữ liệu, cách tạo ra và sắp xếp chúng. Giờ đây Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk22u1/c6/lam-chu-truc-va-chu-giai-legend/" target="_blank" rel="noopener">Làm chủ trục và chú giải</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: Thay đổi giao diện và vẽ đồ thị theo nhóm</h3>
+    <p>Thay đổi giao diện và vẽ đồ thị theo nhóm Changing the look and graphing by groups Chào mừng các bạn đến với bài học thứ tư trong chuỗi hướng dẫn về biểu đồ điểm. Sau khi đã nắm vững cách tạo, sắp xếp và gán nhãn cho các thành phần của biểu đồ, chúng ta sẽ tiế Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk22u1/c6/thay-doi-giao-dien-va-ve-do-thi-theo-nhom/" target="_blank" rel="noopener">Thay đổi giao diện và vẽ đồ thị theo nhóm</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 5: Bài tập thực hành tổng hợp</h3>
+    <p>Bài tập thực hành tổng hợp - Xây dựng biểu đồ từ A đến Z Comprehensive practice exercise - Building a graph from A to Z Chào mừng các bạn đến với bài học cuối cùng trong chuỗi bài thực hành về biểu đồ điểm. Đây là bài học mang tính tổng kết, nơi chúng ta sẽ cù Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk22u1/c6/bai-tap-thuc-hanh-tong-hop/" target="_blank" rel="noopener">Bài tập thực hành tổng hợp</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 6: Tổng kết và ứng dụng nâng cao</h3>
+    <p>Tổng hợp chuỗi bài học về biểu đồ điểm trong Stata Synthesis of the dot plots series in Stata Tổng quan và vị thế của biểu đồ điểm Chúc mừng các bạn đã hoàn thành một hành trình học tập đầy thử thách và bổ ích! Chúng ta đã cùng nhau đi từ những bước đi đầu tiê Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk22u1/c6/tong-ket-va-ung-dung-nang-cao/" target="_blank" rel="noopener">Tổng kết và ứng dụng nâng cao</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_msitk22u1_c06_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_msitk22u1_c06_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_msitk22u1_c06_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 06: 6. biểu đồ điểm trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 06 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Biểu đồ điểm cơ bản - Chỉ định biến và nhóm | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c6/bieu-do-diem-co-ban-chi-dinh-bien-va-nhom/) |
+| **Bài 02** | Tùy chỉnh khoảng cách và thứ tự các điểm | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c6/tuy-chinh-khoang-cach-va-thu-tu-cac-diem/) |
+| **Bài 03** | Làm chủ trục và chú giải | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c6/lam-chu-truc-va-chu-giai-legend/) |
+| **Bài 04** | Thay đổi giao diện và vẽ đồ thị theo nhóm | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c6/thay-doi-giao-dien-va-ve-do-thi-theo-nhom/) |
+| **Bài 05** | Bài tập thực hành tổng hợp | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c6/bai-tap-thuc-hanh-tong-hop/) |
+| **Bài 06** | Tổng kết và ứng dụng nâng cao | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c6/tong-ket-va-ung-dung-nang-cao/) |

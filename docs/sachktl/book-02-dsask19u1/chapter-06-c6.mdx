@@ -1,0 +1,163 @@
+---
+id: chapter-06-c6
+title: "Chương 06: 6. mô hình hồi quy với biến định tính"
+sidebar_label: "Chương 06: 6. Mô hình hồi quy với biến định tính"
+sidebar_position: 7
+description: "Hướng dẫn thực hành How-To Chương 06: 6. mô hình hồi quy với biến định tính thuộc bộ sách Kinh tế lượng: lý thuyết và thực hành trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 06: 6. mô hình hồi quy với biến định tính
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 06: 6. mô hình hồi quy với biến định tính** thuộc [**Bộ sách 02: kinh tế lượng: lý thuyết và thực hành**](/sachktl/book-02-dsask19u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/dsask19u1/c6/](https://sachktl.tnsai.vn/vi/dsask19u1/c6/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 06: 6. mô hình hồi quy với biến định tính">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 02 · CHƯƠNG 06</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 06: 6. mô hình hồi quy với biến định tính</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Kinh tế lượng: lý thuyết và thực hành · 3 bài học chuyên sâu</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Mô hình hồi quy với biến định tính Trong phân tích kinh tế lượng, chúng ta thường xuyên làm việc với các biến số có thể đo lường được như thu nhập, chi tiêu, hay số năm đi học. Tuy nhiên, thực tế kinh tế-xã hội phức tạp hơn nhiều và thường bị ảnh hưởng bởi các yếu tố không thể định lượng một cách trực tiếp, chẳng hạn như giới tính, khu vực địa lý, ngành nghề, hay tình trạng hôn nhân. Vậy làm thế nào để đưa những yếu tố định tính này vào một mô hình hồi quy tuyến tính một cách khoa học và hiệu quả? Câu trả lời nằm ở một công cụ mạnh mẽ và linh hoạt: biến giả . Chuỗi bài viết này sẽ cung cấp
+
+- **Chủ đề học thuật trọng tâm**: Cấu trúc chuỗi bài học, Kiến thức tiên quyết, Mục tiêu học tập, Tài liệu tham khảo chính, Phụ lục: Dữ liệu mô phỏng cho chuỗi bài viết.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 06 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/dsask19u1/c6/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Giới thiệu biến giả trong mô hình hồi quy</h3>
+    <p>Tiếp nối bài giới thiệu tổng quan, bài học đầu tiên này sẽ đặt những viên gạch nền tảng vững chắc nhất cho việc sử dụng biến định tính trong phân tích hồi quy. Mục tiêu cốt lõi của chúng ta là hiểu rõ bản chất của biến giả, một công cụ cho phép "lượng hóa" các Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/dsask19u1/c6/hoi-quy-voi-bien-gia/" target="_blank" rel="noopener">Giới thiệu biến giả trong mô hình hồi quy</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Tương tác biến giả và ứng dụng với Stata</h3>
+    <p>Trong bài học trước, chúng ta đã tìm hiểu cách sử dụng biến giả để tạo ra các mô hình có điểm chặn khác nhau cho từng nhóm, giả định rằng tác động của các biến giải thích khác là như nhau trên mọi nhóm. Tuy nhiên, giả định này có thể quá cứng nhắc trong nhiều  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/dsask19u1/c6/tuong-tac-bien-gia/" target="_blank" rel="noopener">Tương tác biến giả và ứng dụng với stata</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Hướng dẫn thực hành với Stata</h3>
+    <p>Chào mừng bạn đến với bài học cuối cùng trong hành trình khám phá vai trò của biến định tính trong mô hình hồi quy. Sau khi đã xây dựng nền tảng vững chắc về biến giả chặn ở Bài 1 và khám phá sức mạnh của biến giả tương tác ở Bài 2, bài học này sẽ là nơi chúng Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/dsask19u1/c6/huong-dan-thuc-hanh-voi-stata/" target="_blank" rel="noopener">Hướng dẫn thực hành với Stata</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_dsask19u1_c06_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_dsask19u1_c06_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_dsask19u1_c06_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 06: 6. mô hình hồi quy với biến định tính trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 06 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Giới thiệu biến giả trong mô hình hồi quy | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c6/hoi-quy-voi-bien-gia/) |
+| **Bài 02** | Tương tác biến giả và ứng dụng với stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c6/tuong-tac-bien-gia/) |
+| **Bài 03** | Hướng dẫn thực hành với Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c6/huong-dan-thuc-hanh-voi-stata/) |

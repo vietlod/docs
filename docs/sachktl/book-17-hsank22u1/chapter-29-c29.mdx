@@ -1,0 +1,180 @@
+---
+id: chapter-29-c29
+title: "Chương 29: 29. học máy"
+sidebar_label: "Chương 29: 29. Học máy"
+sidebar_position: 30
+description: "Hướng dẫn thực hành How-To Chương 29: 29. học máy thuộc bộ sách Lý thuyết Kinh tế lượng trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 29: 29. học máy
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 29: 29. học máy** thuộc [**Bộ sách 17: lý thuyết kinh tế lượng**](/sachktl/book-17-hsank22u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/hsank22u1/c29/](https://sachktl.tnsai.vn/vi/hsank22u1/c29/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 29: 29. học máy">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 17 · CHƯƠNG 29</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 29: 29. học máy</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Lý thuyết Kinh tế lượng · 8 bài học chuyên sâu</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Học máy Chào mừng các bạn đến với Chương 29, một chương cực kỳ thú vị và hiện đại trong lĩnh vực Kinh tế lượng: Học máy . Đây là một chủ đề lớn và đang phát triển nhanh chóng, mở ra những cánh cửa mới cho việc phân tích dữ liệu kinh tế phức tạp. Với vai trò là Giáo sư của các bạn, tôi cam kết sẽ giúp các bạn tiếp cận những khái niệm nâng cao này một cách dễ hiểu nhất, từng bước một. Trong chuỗi bài học này, chúng ta sẽ khám phá một tập hợp các phương pháp thuật toán được thiết kế để xử lý các tình huống mà các mô hình kinh tế lượng truyền thống gặp khó khăn, đặc biệt là khi chúng ta có quá
+
+- **Chủ đề học thuật trọng tâm**: 1. Ba khái niệm cốt lõi: Dữ liệu lớn, Số chiều lớn, và Học máy, 1.1. Dữ liệu lớn, 1.2. Số chiều lớn, 1.3. Học máy, 2. Hồi quy đa chiều.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 29 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/hsank22u1/c29/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Nền tảng thu hẹp và hồi quy ridge</h3>
+    <p>Chào mừng các bạn đến với bài học đầu tiên trong chuỗi bài về Học máy trong Kinh tế lượng! Trong bài giới thiệu, chúng ta đã thảo luận về một thách thức lớn trong phân tích dữ liệu hiện đại: hồi quy đa chiều, đặc biệt là khi số lượng biến hồi quy lớn hơn số qu Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c29/nen-tang-thu-hep-va-hoi-quy-ridge/" target="_blank" rel="noopener">Nền tảng Thu hẹp và Hồi quy Ridge</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Lasso, elastic net và lựa chọn biến</h3>
+    <p>Chào mừng các bạn quay trở lại! Trong bài học trước, chúng ta đã khám phá Hồi quy Ridge, một kỹ thuật mạnh mẽ để xử lý đa cộng tuyến và giảm phương sai của ước lượng bằng cách "thu hẹp" các hệ số hồi quy. Chúng ta đã học rằng Ridge sử dụng hình phạt dựa trên c Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c29/lasso-elastic-net-va-lua-chon-bien/" target="_blank" rel="noopener">Lasso, Elastic Net và Lựa chọn biến</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Lý thuyết tiệm cận LASSO và tính thưa</h3>
+    <p>Chào các bạn, chúng ta lại gặp nhau trong bài học thứ ba. Ở bài trước, chúng ta đã thấy Lasso hoạt động một cách ấn tượng qua ví dụ thực hành: nó đã thành công trong việc "lọc nhiễu" và chọn ra đúng các biến quan trọng từ một tập hợp rất lớn các biến tiềm năng Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c29/ly-thuyet-tiem-can-lasso-va-tinh-thua/" target="_blank" rel="noopener">Lý thuyết Tiệm cận Lasso và Tính thưa</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: Học máy dựa trên cây và rừng ngẫu nhiên</h3>
+    <p>Chào mừng các bạn đã quay trở lại! Trong ba bài học đầu tiên, chúng ta đã tập trung vào các phương pháp tinh chỉnh mô hình hồi quy tuyến tính, như Ridge và Lasso. Các phương pháp này hoạt động dựa trên việc "thu hẹp" các hệ số trong một khuôn khổ tuyến tính có Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c29/hoc-may-dua-tren-cay-va-rung-ngau-nhien/" target="_blank" rel="noopener">Học máy dựa trên Cây và Rừng ngẫu nhiên</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 5: Lasso trong hồi quy biến công cụ</h3>
+    <p>Chào mừng các bạn đến với bài học thứ năm! Trong các bài học trước, chúng ta đã khám phá các phương pháp như Lasso và Rừng ngẫu nhiên, chủ yếu cho mục đích dự báo và lựa chọn biến trong một mô hình hồi quy tiêu chuẩn. Hôm nay, chúng ta sẽ quay trở lại một tron Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c29/lasso-trong-hoi-quy-bien-cong-cu-lasso-iv/" target="_blank" rel="noopener">Lasso trong Hồi quy Biến công cụ</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 6: Suy luận hậu lựa chọn</h3>
+    <p>Chào mừng các bạn đã quay trở lại! Trong các bài học trước, chúng ta đã thấy Lasso là một công cụ tuyệt vời để lựa chọn biến trong môi trường đa chiều. Tuy nhiên, chúng ta đã bỏ qua một câu hỏi cực kỳ quan trọng: Sau khi Lasso đã chọn ra một tập hợp các biến,  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c29/suy-luan-hau-lua-chon-ds-va-pr-lasso/" target="_blank" rel="noopener">Suy luận Hậu Lựa chọn</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_hsank22u1_c29_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_hsank22u1_c29_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_hsank22u1_c29_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 29: 29. học máy trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 29 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Nền tảng Thu hẹp và Hồi quy Ridge | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c29/nen-tang-thu-hep-va-hoi-quy-ridge/) |
+| **Bài 02** | Lasso, Elastic Net và Lựa chọn biến | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c29/lasso-elastic-net-va-lua-chon-bien/) |
+| **Bài 03** | Lý thuyết Tiệm cận Lasso và Tính thưa | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c29/ly-thuyet-tiem-can-lasso-va-tinh-thua/) |
+| **Bài 04** | Học máy dựa trên Cây và Rừng ngẫu nhiên | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c29/hoc-may-dua-tren-cay-va-rung-ngau-nhien/) |
+| **Bài 05** | Lasso trong Hồi quy Biến công cụ | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c29/lasso-trong-hoi-quy-bien-cong-cu-lasso-iv/) |
+| **Bài 06** | Suy luận Hậu Lựa chọn | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c29/suy-luan-hau-lua-chon-ds-va-pr-lasso/) |
+| **Bài 07** | Học máy Kép/Đã điều chỉnh | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c29/hoc-may-kep-da-dieu-chinh-dml/) |
+| **Bài 08** | Hướng dẫn thực hành tổng hợp với Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c29/huong-dan-thuc-hanh-tong-hop-voi-stata/) |

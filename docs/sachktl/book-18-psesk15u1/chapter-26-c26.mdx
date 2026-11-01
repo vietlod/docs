@@ -1,0 +1,180 @@
+---
+id: chapter-26-c26
+title: "Chương 26: 26. mô hình dữ liệu bảng với biến giải thích ngoại sinh tuyệt đối"
+sidebar_label: "Chương 26: 26. Mô hình dữ liệu bảng với biến giải thí"
+sidebar_position: 27
+description: "Hướng dẫn thực hành How-To Chương 26: 26. mô hình dữ liệu bảng với biến giải thích ngoại sinh tuyệt đối thuộc bộ sách Phân tích chuỗi thời gian và dữ liệu bảng trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 26: 26. mô hình dữ liệu bảng với biến giải thích ngoại sinh tuyệt đối
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 26: 26. mô hình dữ liệu bảng với biến giải thích ngoại sinh tuyệt đối** thuộc [**Bộ sách 18: phân tích chuỗi thời gian và dữ liệu bảng**](/sachktl/book-18-psesk15u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/psesk15u1/c26/](https://sachktl.tnsai.vn/vi/psesk15u1/c26/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 26: 26. mô hình dữ liệu bảng với biến giải thích ngoại sinh t">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 18 · CHƯƠNG 26</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 26: 26. mô hình dữ liệu bảng với biến giải thích ngoại sinh t</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Phân tích chuỗi thời gian và dữ liệu bảng · 8 bài học chuyên sâu</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Giới thiệu về mô hình dữ liệu bảng An Introduction to Panel Data models Chào mừng các bạn sinh viên đã đến với chuỗi bài học về một trong những công cụ mạnh mẽ và phổ biến nhất trong kinh tế lượng hiện đại: Mô hình Dữ liệu Bảng. Nếu như dữ liệu chéo cho chúng ta một "bức ảnh chụp nhanh" tại một thời điểm, và dữ liệu chuỗi thời gian cho chúng ta một "cuốn phim" về một đối tượng duy nhất, thì dữ liệu bảng chính là một "bộ sưu tập phim" về nhiều đối tượng khác nhau. Bằng cách kết hợp cả hai chiều không gian và thời gian, dữ liệu bảng mở ra những khả năng phân tích sâu sắc mà các loại
+
+- **Chủ đề học thuật trọng tâm**: BA TỪ KHÓA QUAN TRỌNG, CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 26 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/psesk15u1/c26/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Nền tảng và ước lượng OLS gộp</h3>
+    <p>Nền tảng dữ liệu bảng và ước lượng OLS gộp Panel data fundamentals and pooled OLS estimation Giới thiệu Chào mừng các bạn đến với bài học đầu tiên trong hành trình khám phá thế giới của dữ liệu bảng. Trước khi chúng ta đi sâu vào các mô hình phức tạp, điều qua Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c26/nen-tang-va-uoc-luong-ols-gop/" target="_blank" rel="noopener">Nền tảng và ước lượng OLS gộp</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Mô hình tác động cố định</h3>
+    <p>Mô hình tác động cố định The fixed effects model Giới thiệu Ở bài học trước, chúng ta đã làm quen với phương pháp OLS Gộp và nhận ra một hạn chế lớn của nó: giả định rằng không có sự khác biệt cố hữu nào giữa các đối tượng trong mẫu. Giả định này hiếm khi đúng Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c26/mo-hinh-tac-dong-co-dinh-fe/" target="_blank" rel="noopener">Mô hình tác động cố định</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Mô hình tác động ngẫu nhiên</h3>
+    <p>Mô hình tác động ngẫu nhiên The random effects model Giới thiệu Trong bài học trước, chúng ta đã khám phá sức mạnh của mô hình Tác động Cố định trong việc loại bỏ sai lệch gây ra bởi các yếu tố không quan sát được và không đổi theo thời gian. Tuy nhiên, phương Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c26/mo-hinh-tac-dong-ngau-nhien-re/" target="_blank" rel="noopener">Mô hình tác động ngẫu nhiên</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: Lựa chọn mô hình và kiểm định Hausman</h3>
+    <p>Lựa chọn mô hình: FE vs RE và kiểm định Hausman Model selection: FE vs RE and the Hausman test Giới thiệu Trong các bài học trước, chúng ta đã tìm hiểu ba phương pháp ước lượng cho dữ liệu bảng: OLS Gộp, Tác động Cố định, và Tác động Ngẫu nhiên. Mỗi phương phá Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c26/lua-chon-mo-hinh-va-kiem-dinh-hausman/" target="_blank" rel="noopener">Lựa chọn mô hình và kiểm định Hausman</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 5: Các chủ đề nâng cao trong dữ liệu bảng</h3>
+    <p>Các chủ đề nâng cao trong dữ liệu bảng Advanced topics in panel data models Giới thiệu Đến thời điểm này, chúng ta đã xây dựng được một bộ công cụ vững chắc để phân tích dữ liệu bảng. Các mô hình OLS Gộp, Tác động Cố định và Tác động Ngẫu nhiên đều tập trung v Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c26/cac-chu-de-nang-cao-trong-du-lieu-bang/" target="_blank" rel="noopener">Các chủ đề nâng cao trong dữ liệu bảng</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 6: Dữ liệu không cân bằng và sai số vững</h3>
+    <p>Dữ liệu không cân bằng và sai số chuẩn vững Unbalanced panels and robust standard errors Giới thiệu Trong suốt các bài học vừa qua, chúng ta đã làm việc với một giả định ngầm khá lý tưởng: bộ dữ liệu của chúng ta là "cân bằng", nghĩa là chúng ta có đầy đủ quan Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c26/du-lieu-khong-can-bang-va-sai-so-vung/" target="_blank" rel="noopener">Dữ liệu không cân bằng và sai số vững</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_psesk15u1_c26_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_psesk15u1_c26_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_psesk15u1_c26_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 26: 26. mô hình dữ liệu bảng với biến giải thích ngoại sinh tuyệt đối trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 26 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Nền tảng và ước lượng OLS gộp | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c26/nen-tang-va-uoc-luong-ols-gop/) |
+| **Bài 02** | Mô hình tác động cố định | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c26/mo-hinh-tac-dong-co-dinh-fe/) |
+| **Bài 03** | Mô hình tác động ngẫu nhiên | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c26/mo-hinh-tac-dong-ngau-nhien-re/) |
+| **Bài 04** | Lựa chọn mô hình và kiểm định Hausman | R 4.x | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c26/lua-chon-mo-hinh-va-kiem-dinh-hausman/) |
+| **Bài 05** | Các chủ đề nâng cao trong dữ liệu bảng | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c26/cac-chu-de-nang-cao-trong-du-lieu-bang/) |
+| **Bài 06** | Dữ liệu không cân bằng và sai số vững | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c26/du-lieu-khong-can-bang-va-sai-so-vung/) |
+| **Bài 07** | Thực hành phân tích với Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c26/thuc-hanh-phan-tich-voi-stata/) |
+| **Bài 08** | Tổng hợp toàn diện về dữ liệu bảng | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c26/tong-hop-toan-dien-ve-du-lieu-bang/) |

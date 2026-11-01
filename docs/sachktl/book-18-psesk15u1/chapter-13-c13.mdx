@@ -1,0 +1,173 @@
+---
+id: chapter-13-c13
+title: "Chương 13: 13. giới thiệu tổng quan về phân tích phổ"
+sidebar_label: "Chương 13: 13. Giới thiệu tổng quan về phân tích phổ"
+sidebar_position: 14
+description: "Hướng dẫn thực hành How-To Chương 13: 13. giới thiệu tổng quan về phân tích phổ thuộc bộ sách Phân tích chuỗi thời gian và dữ liệu bảng trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 13: 13. giới thiệu tổng quan về phân tích phổ
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 13: 13. giới thiệu tổng quan về phân tích phổ** thuộc [**Bộ sách 18: phân tích chuỗi thời gian và dữ liệu bảng**](/sachktl/book-18-psesk15u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/psesk15u1/c13/](https://sachktl.tnsai.vn/vi/psesk15u1/c13/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 13: 13. giới thiệu tổng quan về phân tích phổ">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 18 · CHƯƠNG 13</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 13: 13. giới thiệu tổng quan về phân tích phổ</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Phân tích chuỗi thời gian và dữ liệu bảng · 5 bài học chuyên sâu</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Giới thiệu tổng quan về phân tích phổ An Introduction to Spectral Analysis TÓM TẮT CHỦ ĐỀ Chào các bạn sinh viên, trong các học phần kinh tế lượng trước đây, chúng ta đã quen thuộc với việc phân tích chuỗi thời gian trong miền thời gian. Chúng ta xem xét mối quan hệ của một biến theo các giá trị trễ của chính nó, ví dụ như trong các mô hình ARMA. Tuy nhiên, có một cách tiếp cận hoàn toàn khác nhưng vô cùng mạnh mẽ, đó là phân tích trong miền tần số . Phân tích phổ chính là công cụ cốt lõi của phương pháp này. Hãy tưởng tượng một chuỗi thời gian, ví dụ như GDP hàng quý, không
+
+- **Chủ đề học thuật trọng tâm**: TÓM TẮT CHỦ ĐỀ, CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 13 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/psesk15u1/c13/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Nền tảng phân tích phổ và định lý biểu diễn</h3>
+    <p>Nền tảng phân tích phổ và định lý biểu diễn Foundations of spectral analysis and representation theorem Giới thiệu Chào mừng các bạn quay trở lại với chuỗi bài học về phân tích phổ. Trong bài giới thiệu, chúng ta đã hình dung phân tích phổ như một chiếc lăng k Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c13/nen-tang-phan-tich-pho-va-dinh-ly-bieu-dien/" target="_blank" rel="noopener">Nền tảng phân tích phổ và định lý biểu diễn</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Hàm mật độ phổ và các tính chất cốt lõi</h3>
+    <p>Hàm mật độ phổ và các tính chất cốt lõi The spectral density function and its core properties Giới thiệu Chào mừng các bạn đến với bài học thứ hai. Trong bài học trước, chúng ta đã thiết lập một ý tưởng nền tảng: phương sai của một chuỗi thời gian dừng có thể  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c13/ham-mat-do-pho-va-cac-tinh-chat-cot-loi/" target="_blank" rel="noopener">Hàm mật độ phổ và các tính chất cốt lõi</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Mối liên hệ và ứng dụng mật độ phổ</h3>
+    <p>Mối liên hệ và ứng dụng mật độ phổ Relation and application of spectral density Giới thiệu Chào mừng các bạn đã quay trở lại. Trong hai bài học đầu tiên, chúng ta đã cùng nhau xây dựng một nền tảng lý thuyết vững chắc. Chúng ta đã hiểu rằng một chuỗi thời gian Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c13/moi-lien-he-va-ung-dung-mat-do-pho/" target="_blank" rel="noopener">Mối liên hệ và ứng dụng mật độ phổ</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: Thực hành phân tích phổ trong Stata</h3>
+    <p>Thực hành phân tích phổ trong Stata Spectral analysis in Stata a practical guide Giới thiệu Chào mừng các bạn đến với bài thực hành của chuỗi bài học về phân tích phổ. Trong ba bài học trước, chúng ta đã đi qua một hành trình lý thuyết khá dài, từ việc hiểu mộ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c13/thuc-hanh-phan-tich-pho-trong-stata/" target="_blank" rel="noopener">Thực hành phân tích phổ trong Stata</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 5: Tổng hợp phân tích phổ và hướng nghiên cứu</h3>
+    <p>Tổng hợp phân tích phổ và hướng nghiên cứu Synthesis of spectral analysis and future directions Tổng quan chủ đề Chào mừng các bạn đến với bài học cuối cùng trong chuỗi bài viết về Phân tích Phổ. Chúng ta đã cùng nhau trải qua một hành trình khám phá đầy thú v Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c13/tong-hop-phan-tich-pho-va-huong-nghien-cuu/" target="_blank" rel="noopener">Tổng hợp phân tích phổ và hướng nghiên cứu</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_psesk15u1_c13_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_psesk15u1_c13_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_psesk15u1_c13_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 13: 13. giới thiệu tổng quan về phân tích phổ trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 13 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Nền tảng phân tích phổ và định lý biểu diễn | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c13/nen-tang-phan-tich-pho-va-dinh-ly-bieu-dien/) |
+| **Bài 02** | Hàm mật độ phổ và các tính chất cốt lõi | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c13/ham-mat-do-pho-va-cac-tinh-chat-cot-loi/) |
+| **Bài 03** | Mối liên hệ và ứng dụng mật độ phổ | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c13/moi-lien-he-va-ung-dung-mat-do-pho/) |
+| **Bài 04** | Thực hành phân tích phổ trong Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c13/thuc-hanh-phan-tich-pho-trong-stata/) |
+| **Bài 05** | Tổng hợp phân tích phổ và hướng nghiên cứu | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c13/tong-hop-phan-tich-pho-va-huong-nghien-cuu/) |

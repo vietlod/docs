@@ -1,0 +1,173 @@
+---
+id: chapter-07-c7
+title: "Chương 07: 7. mô hình biến phụ thuộc giới hạn"
+sidebar_label: "Chương 07: 7. Mô hình biến phụ thuộc giới hạn"
+sidebar_position: 8
+description: "Hướng dẫn thực hành How-To Chương 07: 7. mô hình biến phụ thuộc giới hạn thuộc bộ sách Kinh tế lượng: lý thuyết và thực hành trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 07: 7. mô hình biến phụ thuộc giới hạn
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 07: 7. mô hình biến phụ thuộc giới hạn** thuộc [**Bộ sách 02: kinh tế lượng: lý thuyết và thực hành**](/sachktl/book-02-dsask19u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/dsask19u1/c7/](https://sachktl.tnsai.vn/vi/dsask19u1/c7/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 07: 7. mô hình biến phụ thuộc giới hạn">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 02 · CHƯƠNG 07</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 07: 7. mô hình biến phụ thuộc giới hạn</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Kinh tế lượng: lý thuyết và thực hành · 5 bài học chuyên sâu</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Mô hình biến phụ thuộc giới hạn Trong kinh tế lượng cổ điển, mô hình hồi quy tuyến tính là công cụ nền tảng, nhưng nó đòi hỏi một giả định quan trọng: biến phụ thuộc phải có khả năng nhận giá trị trên toàn bộ trục số thực, từ âm vô cùng đến dương vô cùng. Tuy nhiên, trong thực tế, rất nhiều biến số kinh tế mà chúng ta quan tâm lại không tuân thủ giả định này. Chẳng hạn, một người chỉ có hai lựa chọn: tham gia hoặc không tham gia lực lượng lao động; một hộ gia đình quyết định mua hoặc không mua ô tô; số giờ làm việc không thể là một giá trị âm. Những biến số có phạm vi giá trị bị giới
+
+- **Chủ đề học thuật trọng tâm**: Cấu trúc chuỗi bài học, Kiến thức tiên quyết, Mục tiêu học tập, Tài liệu tham khảo chính, PHỤ LỤC: Dữ liệu mô phỏng cho chuỗi bài viết.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 07 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/dsask19u1/c7/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Nền tảng mô hình lựa chọn nhị phân và mô hình xác suất tuyến tính</h3>
+    <p>Chào mừng các bạn đã đến với bài học đầu tiên trong chuỗi bài viết về Mô hình Biến phụ thuộc Hạn chế. Như đã giới thiệu, thế giới kinh tế chứa đầy những quyết định và lựa chọn không thể biểu diễn trên một thang đo liên tục. Việc một cá nhân quyết định đi làm h Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/dsask19u1/c7/mo-hinh-xac-suat-tuyen-tinh/" target="_blank" rel="noopener">Nền tảng Mô hình Lựa chọn Nhị phân và Mô hình Xác suất Tuyến tính</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Mô hình Logit và Probit - lý thuyết và ước lượng</h3>
+    <p>Trong bài học trước, chúng ta đã phân tích kỹ lưỡng Mô hình Xác suất Tuyến tính và nhận thấy những hạn chế nghiêm trọng của nó, đặc biệt là khả năng đưa ra các dự báo xác suất vô nghĩa và giả định thiếu thực tế về tác động biên không đổi. Những vấn đề này thôi Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/dsask19u1/c7/mo-hinh-logit-va-probit/" target="_blank" rel="noopener">Mô hình Logit và Probit - Lý thuyết và Ước lượng</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Hồi quy với dữ liệu cắt ngắn và kiểm duyệt - mô hình Tobit</h3>
+    <p>Trong hai bài học đầu tiên, chúng ta đã xây dựng một nền tảng vững chắc để phân tích các biến phụ thuộc nhị phân. Tuy nhiên, thế giới dữ liệu kinh tế còn ẩn chứa nhiều thách thức phức tạp hơn. Hãy tưởng tượng bạn đang nghiên cứu chi tiêu của hộ gia đình cho mộ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/dsask19u1/c7/hoi-quy-voi-du-lieu-truncated-va-censored/" target="_blank" rel="noopener">Hồi quy với Dữ liệu Cắt ngắn và Kiểm duyệt - Mô hình Tobit</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: Xử lý thiên lệch chọn mẫu và mô hình Logit đa thức</h3>
+    <p>Trong các bài học trước, chúng ta đã xây dựng một bộ công cụ vững chắc để xử lý các biến phụ thuộc nhị phân và biến liên tục bị kiểm duyệt. Tuy nhiên, các mô hình này đều dựa trên một giả định ngầm quan trọng: mẫu dữ liệu mà chúng ta có trong tay là một mẫu ng Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/dsask19u1/c7/mo-hinh-logit-da-thuc/" target="_blank" rel="noopener">Xử lý thiên lệch chọn mẫu và Mô hình Logit đa thức</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 5: Hướng dẫn thực hành với Stata</h3>
+    <p>Chào mừng các bạn đến với bài học cuối cùng trong chuỗi bài viết về Mô hình Biến phụ thuộc Hạn chế. Trải qua bốn bài học trước, chúng ta đã xây dựng một nền tảng lý thuyết vững chắc, từ những khái niệm cơ bản của Mô hình Xác suất Tuyến tính, đi sâu vào cơ chế  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/dsask19u1/c7/huong-dan-thuc-hanh-voi-stata/" target="_blank" rel="noopener">Hướng dẫn thực hành với Stata</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_dsask19u1_c07_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_dsask19u1_c07_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_dsask19u1_c07_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 07: 7. mô hình biến phụ thuộc giới hạn trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 07 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Nền tảng Mô hình Lựa chọn Nhị phân và Mô hình Xác suất Tuyến tính | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c7/mo-hinh-xac-suat-tuyen-tinh/) |
+| **Bài 02** | Mô hình Logit và Probit - Lý thuyết và Ước lượng | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c7/mo-hinh-logit-va-probit/) |
+| **Bài 03** | Hồi quy với Dữ liệu Cắt ngắn và Kiểm duyệt - Mô hình Tobit | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c7/hoi-quy-voi-du-lieu-truncated-va-censored/) |
+| **Bài 04** | Xử lý thiên lệch chọn mẫu và Mô hình Logit đa thức | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c7/mo-hinh-logit-da-thuc/) |
+| **Bài 05** | Hướng dẫn thực hành với Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c7/huong-dan-thuc-hanh-voi-stata/) |

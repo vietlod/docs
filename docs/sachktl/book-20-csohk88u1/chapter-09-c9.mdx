@@ -1,0 +1,178 @@
+---
+id: chapter-09-c9
+title: "Chương 09: 9. hồi quy đa biến và phân tích tương quan"
+sidebar_label: "Chương 09: 9. Hồi quy đa biến và phân tích tương quan"
+sidebar_position: 10
+description: "Hướng dẫn thực hành How-To Chương 09: 9. hồi quy đa biến và phân tích tương quan thuộc bộ sách Phân tích sức mạnh thống kê trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 09: 9. hồi quy đa biến và phân tích tương quan
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 09: 9. hồi quy đa biến và phân tích tương quan** thuộc [**Bộ sách 20: phân tích sức mạnh thống kê**](/sachktl/book-20-csohk88u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/csohk88u1/c9/](https://sachktl.tnsai.vn/vi/csohk88u1/c9/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 09: 9. hồi quy đa biến và phân tích tương quan">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 20 · CHƯƠNG 09</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 09: 9. hồi quy đa biến và phân tích tương quan</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Phân tích sức mạnh thống kê · 6 bài học chuyên sâu</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Giới thiệu về phân tích hồi quy và tương quan bội Introduction to Multiple Regression and Correlation Analysis Tổng quan về chuỗi bài học Chào mừng các bạn sinh viên đến với một trong những hệ thống phân tích dữ liệu mạnh mẽ, linh hoạt và quan trọng nhất trong kinh tế lượng hiện đại: Phân tích Hồi quy và Tương quan Bội . Nếu các phương pháp chúng ta đã học trước đây như kiểm định t hay phân tích tương quan đơn giúp trả lời các câu hỏi về mối quan hệ giữa hai biến, thì MRC mở ra một chân trời hoàn toàn mới, cho phép chúng ta nghiên cứu mối quan hệ giữa một biến phụ thuộc và nhiều biến độc
+
+- **Chủ đề học thuật trọng tâm**: Tổng quan về chuỗi bài học, Cấu trúc chuỗi bài học, Kiến thức tiên quyết, Để bắt đầu, bạn cần:, Mục tiêu học tập.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 09 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/csohk88u1/c9/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Giới thiệu hồi quy bội và độ ảnh hưởng f²</h3>
+    <p>Giới thiệu hồi quy bội và độ ảnh hưởng f² Introduction to multiple regression and the f² effect size Sức mạnh của việc phân tích đa biến Trong các phân tích trước đây, chúng ta đã tập trung vào mối quan hệ giữa hai biến số, chẳng hạn như tương quan giữa kinh n Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csohk88u1/c9/gioi-thieu-hoi-quy-boi-va-do-anh-huong-f%c2%b2/" target="_blank" rel="noopener">Giới thiệu hồi quy bội và độ ảnh hưởng f²</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Phân tích hiệu năng cho kiểm định r² tổng thể</h3>
+    <p>Phân tích hiệu năng cho kiểm định R² trong hồi quy bội Power analysis for the test of R² in multiple regression Làm thế nào để đo lường sức mạnh của toàn bộ mô hình? Trong bài học trước, chúng ta đã được giới thiệu về Phân tích Hồi quy Bội như một hệ thống phâ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csohk88u1/c9/phan-tich-hieu-nang-cho-kiem-dinh-r%c2%b2-tong-the/" target="_blank" rel="noopener">Phân tích hiệu năng cho kiểm định R² tổng thể</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Phân tích hiệu năng cho sự đóng góp thêm của biến</h3>
+    <p>Phân tích hiệu năng cho sự đóng góp thêm của biến Power analysis for the incremental contribution of variables Vượt ra ngoài R² tổng thể Trong bài học trước, chúng ta đã tập trung vào Case 0, kiểm định xem liệu toàn bộ tập hợp các biến độc lập có giải thích đư Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csohk88u1/c9/phan-tich-hieu-nang-cho-su-dong-gop-them-cua-bien/" target="_blank" rel="noopener">Phân tích hiệu năng cho sự đóng góp thêm của biến</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: Phân tích hiệu năng trong các mô hình có biến kiểm soát</h3>
+    <p>Phân tích hiệu năng trong các mô hình phức tạp Power analysis in complex models Tối ưu hóa hiệu năng bằng cách giảm "nhiễu" Trong các bài học trước, chúng ta đã tìm hiểu Case 0 và Case 1 . Cả hai trường hợp này đều có một điểm chung: phương sai sai số được địn Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csohk88u1/c9/phan-tich-hieu-nang-trong-cac-mo-hinh-co-bien-kiem-soat/" target="_blank" rel="noopener">Phân tích hiệu năng trong các mô hình có biến kiểm soát</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 5: Xác định cỡ mẫu trong hồi quy bội</h3>
+    <p>Xác định cỡ mẫu trong hồi quy bội Sample size determination in multiple regression Hoàn thiện quy trình thiết kế nghiên cứu Chúng ta đã đi qua một hành trình đầy đủ để hiểu về phân tích hiệu năng trong các kịch bản hồi quy bội khác nhau, từ Case 0 đến Case 2.  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csohk88u1/c9/xac-dinh-co-mau-trong-hoi-quy-boi/" target="_blank" rel="noopener">Xác định cỡ mẫu trong hồi quy bội</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 6: Tổng hợp nâng cao về phân tích hiệu năng trong MRC</h3>
+    <p>Tổng hợp nâng cao về phân tích hiệu năng trong hồi quy bội A comprehensive synthesis of power analysis in multiple regression and correlation Hồi quy bội như một lăng kính thống nhất Chúng ta đã cùng nhau đi qua một hành trình khám phá chi tiết và đầy thử thác Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csohk88u1/c9/tong-hop-nang-cao-ve-phan-tich-hieu-nang-trong-mrc/" target="_blank" rel="noopener">Tổng hợp nâng cao về phân tích hiệu năng trong MRC</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_csohk88u1_c09_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_csohk88u1_c09_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_csohk88u1_c09_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 09: 9. hồi quy đa biến và phân tích tương quan trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 09 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Giới thiệu hồi quy bội và độ ảnh hưởng f² | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csohk88u1/c9/gioi-thieu-hoi-quy-boi-va-do-anh-huong-f%c2%b2/) |
+| **Bài 02** | Phân tích hiệu năng cho kiểm định R² tổng thể | Stata 18 MP, R 4.x | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csohk88u1/c9/phan-tich-hieu-nang-cho-kiem-dinh-r%c2%b2-tong-the/) |
+| **Bài 03** | Phân tích hiệu năng cho sự đóng góp thêm của biến | Stata 18 MP, R 4.x | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csohk88u1/c9/phan-tich-hieu-nang-cho-su-dong-gop-them-cua-bien/) |
+| **Bài 04** | Phân tích hiệu năng trong các mô hình có biến kiểm soát | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csohk88u1/c9/phan-tich-hieu-nang-trong-cac-mo-hinh-co-bien-kiem-soat/) |
+| **Bài 05** | Xác định cỡ mẫu trong hồi quy bội | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csohk88u1/c9/xac-dinh-co-mau-trong-hoi-quy-boi/) |
+| **Bài 06** | Tổng hợp nâng cao về phân tích hiệu năng trong MRC | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csohk88u1/c9/tong-hop-nang-cao-ve-phan-tich-hieu-nang-trong-mrc/) |

@@ -21,9 +21,10 @@ const orgSchema = {
     'https://ecolab.io.vn',
     'https://www.finco.vn',
     'https://vietlod.tnsai.vn',
+    'https://sachktl.tnsai.vn',
   ],
   description:
-    'Documentation portal for the TNS AI quantitative research and data platform ecosystem including EcoData, EcoLab, Finco, and VietLOD.',
+    'Documentation portal for the TNS AI quantitative research and data platform ecosystem including EcoData, EcoLab, Finco, VietLOD, and SachKTL.',
 };
 
 const websiteSchema = {
@@ -138,12 +139,13 @@ const config = {
         docsDir: 'docs',
         title: 'TNS AI Docs',
         description:
-          'Tài liệu hướng dẫn hệ sinh thái ứng dụng TNS AI: EcoData, EcoLab, Finco và VietLOD.',
+          'Tài liệu hướng dẫn hệ sinh thái ứng dụng TNS AI: EcoData, EcoLab, Finco, VietLOD và SachKTL.',
         includeOrder: [
           'ecodata/**',
           'ecolab/**',
           'finco/**',
           'vietlod/**',
+          'sachktl/**',
         ],
         includeUnmatchedLast: true,
       },
@@ -194,6 +196,12 @@ const config = {
             label: 'VietLOD',
           },
           {
+            type: 'docSidebar',
+            sidebarId: 'sachktlSidebar',
+            position: 'left',
+            label: 'SachKTL',
+          },
+          {
             type: 'localeDropdown',
             position: 'right',
           },
@@ -225,6 +233,10 @@ const config = {
                 label: 'Tài liệu VietLOD',
                 to: '/vietlod/overview',
               },
+              {
+                label: 'Tài liệu SachKTL',
+                to: '/sachktl/overview',
+              },
             ],
           },
           {
@@ -245,6 +257,10 @@ const config = {
               {
                 label: 'Cổng học thuật VietLOD',
                 href: 'https://vietlod.tnsai.vn',
+              },
+              {
+                label: 'Thư viện giáo trình SachKTL',
+                href: 'https://sachktl.tnsai.vn',
               },
             ],
           },

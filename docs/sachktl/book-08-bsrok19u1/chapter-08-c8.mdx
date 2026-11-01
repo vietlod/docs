@@ -1,0 +1,180 @@
+---
+id: chapter-08-c8
+title: "Chương 08: 8. mô hình các mối quan hệ dài hạn trong tài chính"
+sidebar_label: "Chương 08: 8. Mô hình các mối quan hệ dài hạn trong t"
+sidebar_position: 9
+description: "Hướng dẫn thực hành How-To Chương 08: 8. mô hình các mối quan hệ dài hạn trong tài chính thuộc bộ sách Kinh tế lượng trong tài chính trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 08: 8. mô hình các mối quan hệ dài hạn trong tài chính
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 08: 8. mô hình các mối quan hệ dài hạn trong tài chính** thuộc [**Bộ sách 08: kinh tế lượng trong tài chính**](/sachktl/book-08-bsrok19u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/bsrok19u1/c8/](https://sachktl.tnsai.vn/vi/bsrok19u1/c8/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 08: 8. mô hình các mối quan hệ dài hạn trong tài chính">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 08 · CHƯƠNG 08</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 08: 8. mô hình các mối quan hệ dài hạn trong tài chính</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Kinh tế lượng trong tài chính · 8 bài học chuyên sâu</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Mô hình các mối quan hệ dài hạn trong tài chính Chào mừng các bạn sinh viên đến với chuỗi bài học chuyên sâu về một trong những chủ đề hấp dẫn và quan trọng nhất trong kinh tế lượng tài chính: mô hình hóa các mối quan hệ dài hạn. Có bao giờ bạn tự hỏi tại sao khi hồi quy hai chuỗi dữ liệu thời gian , chúng ta lại nhận được kết quả R-bình phương rất cao nhưng thực chất lại vô nghĩa không? Đó chính là hiện tượng "hồi quy giả" - một cái bẫy phổ biến mà rất nhiều nhà phân tích trẻ gặp phải. Chuỗi bài học này sẽ trang bị cho các bạn kiến thức nền tảng và công cụ cần thiết để tránh những sai lầm đó
+
+- **Chủ đề học thuật trọng tâm**: PHỤ LỤC: Dữ liệu mô phỏng cho chuỗi bài viết.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 08 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/bsrok19u1/c8/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Tại sao dữ liệu chuỗi thời gian lại đặc biệt?</h3>
+    <p>Chào mừng các bạn quay trở lại với chuỗi bài học của chúng ta! Ở bài giới thiệu, chúng ta đã nói về một "cái bẫy" nguy hiểm trong kinh tế lượng gọi là hồi quy giả. Trong bài học đầu tiên này, chúng ta sẽ mổ xẻ tận gốc rễ của vấn đề đó. Chúng ta sẽ cùng nhau tr Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/bsrok19u1/c8/tai-sao-du-lieu-chuoi-thoi-gian-lai-dac-biet/" target="_blank" rel="noopener">Tại sao dữ liệu chuỗi thời gian lại đặc biệt?</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Nghiệm đơn vị là gì và cách kiểm định bằng DF, ADF</h3>
+    <p>Chào mừng các bạn đến với bài học thứ hai! Trong bài học trước, chúng ta đã xây dựng được một trực giác quan trọng: hầu hết các chuỗi giá tài chính đều không dừng và việc hồi quy chúng một cách ngây thơ có thể dẫn đến những kết luận sai lầm. Chúng ta cũng đã t Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/bsrok19u1/c8/goc-don-vi-la-gi-va-cach-kiem-dinh-bang-dickey-fuller-df-ezd_ampersand-adf/" target="_blank" rel="noopener">Nghiệm đơn vị là gì và cách kiểm định bằng DF, ADF</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Các vấn đề nâng cao trong kiểm định nghiệm đơn vị</h3>
+    <p>Chào mừng các bạn quay trở lại! Trong bài học trước, chúng ta đã nắm vững cách sử dụng kiểm định Dickey-Fuller tăng cường để xác định xem một chuỗi thời gian có nghiệm đơn vị hay không. Đây là một kỹ năng nền tảng và cực kỳ quan trọng. Tuy nhiên, thế giới thực Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/bsrok19u1/c8/cac-van-de-nang-cao-trong-kiem-dinh-goc-don-vi/" target="_blank" rel="noopener">Các vấn đề nâng cao trong kiểm định nghiệm đơn vị</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: Đồng tích hợp - khi các chuỗi thời gian &quot;sánh bước&quot; cùng nhau trong dài hạn</h3>
+    <p>Chào mừng các bạn đã quay trở lại! Ở các bài học trước, chúng ta đã tập trung vào việc xác định "tính cách" của từng chuỗi thời gian riêng lẻ, cụ thể là liệu chúng có dừng) hay không dừng). Chúng ta đã học được một quy tắc quan trọng: hãy cẩn thận khi làm việc Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/bsrok19u1/c8/dong-tich-hop-khi-cac-chuoi-thoi-gian-sanh-buoc-cung-nhau-trong-dai-han/" target="_blank" rel="noopener">Đồng tích hợp - Khi các chuỗi thời gian &quot;sánh bước&quot; cùng nhau trong dài hạn</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 5: Mô hình hiệu chỉnh sai số và phương pháp Engle-Granger hai bước</h3>
+    <p>Chào mừng các bạn đã quay trở lại! Trong bài học trước, chúng ta đã khám phá ra một ý tưởng đầy sức mạnh: ngay cả khi các chuỗi thời gian tài chính riêng lẻ có vẻ "lang thang" không định hướng), chúng vẫn có thể bị ràng buộc với nhau bởi một mối quan hệ cân bằ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/bsrok19u1/c8/mo-hinh-hieu-chinh-sai-so-ecm-va-phuong-phap-engle-granger-hai-buoc/" target="_blank" rel="noopener">Mô hình hiệu chỉnh sai số và phương pháp Engle-Granger hai bước</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 6: Tiếp cận hệ thống với kỹ thuật Johansen - phần 1: nền tảng lý thuyết</h3>
+    <p>Thực hành ước lượng và kiểm định cho chủ đề Tiếp cận hệ thống với kỹ thuật Johansen - Phần 1: Nền tảng lý thuyết. Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/bsrok19u1/c8/tiep-can-he-thong-voi-ky-thuat-johansen-phan-1-nen-tang-ly-thuyet/" target="_blank" rel="noopener">Tiếp cận hệ thống với kỹ thuật Johansen - Phần 1: Nền tảng lý thuyết</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_bsrok19u1_c08_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_bsrok19u1_c08_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_bsrok19u1_c08_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 08: 8. mô hình các mối quan hệ dài hạn trong tài chính trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 08 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Tại sao dữ liệu chuỗi thời gian lại đặc biệt? | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/bsrok19u1/c8/tai-sao-du-lieu-chuoi-thoi-gian-lai-dac-biet/) |
+| **Bài 02** | Nghiệm đơn vị là gì và cách kiểm định bằng DF, ADF | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/bsrok19u1/c8/goc-don-vi-la-gi-va-cach-kiem-dinh-bang-dickey-fuller-df-ezd_ampersand-adf/) |
+| **Bài 03** | Các vấn đề nâng cao trong kiểm định nghiệm đơn vị | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/bsrok19u1/c8/cac-van-de-nang-cao-trong-kiem-dinh-goc-don-vi/) |
+| **Bài 04** | Đồng tích hợp - Khi các chuỗi thời gian &quot;sánh bước&quot; cùng nhau trong dài hạn | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/bsrok19u1/c8/dong-tich-hop-khi-cac-chuoi-thoi-gian-sanh-buoc-cung-nhau-trong-dai-han/) |
+| **Bài 05** | Mô hình hiệu chỉnh sai số và phương pháp Engle-Granger hai bước | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/bsrok19u1/c8/mo-hinh-hieu-chinh-sai-so-ecm-va-phuong-phap-engle-granger-hai-buoc/) |
+| **Bài 06** | Tiếp cận hệ thống với kỹ thuật Johansen - Phần 1: Nền tảng lý thuyết | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/bsrok19u1/c8/tiep-can-he-thong-voi-ky-thuat-johansen-phan-1-nen-tang-ly-thuyet/) |
+| **Bài 07** | Tiếp cận hệ thống với kỹ thuật Johansen - Phần 2 | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/bsrok19u1/c8/tiep-can-he-thong-voi-ky-thuat-johansen-phan-2/) |
+| **Bài 08** | Hướng dẫn thực hành phân tích đồng tích hợp với Stata từ A đến Z | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/bsrok19u1/c8/huong-dan-thuc-hanh-phan-tich-dong-tich-hop-voi-stata-tu-a-den-z/) |

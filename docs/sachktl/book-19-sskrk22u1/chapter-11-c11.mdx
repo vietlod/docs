@@ -1,0 +1,168 @@
+---
+id: chapter-11-c11
+title: "Chương 11: 11. phản hồi thứ tự"
+sidebar_label: "Chương 11: 11. Phản hồi thứ tự"
+sidebar_position: 12
+description: "Hướng dẫn thực hành How-To Chương 11: 11. phản hồi thứ tự thuộc bộ sách Mô hình đa bậc với Stata trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 11: 11. phản hồi thứ tự
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 11: 11. phản hồi thứ tự** thuộc [**Bộ sách 19: mô hình đa bậc với Stata**](/sachktl/book-19-sskrk22u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/sskrk22u1/c11/](https://sachktl.tnsai.vn/vi/sskrk22u1/c11/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 11: 11. phản hồi thứ tự">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 19 · CHƯƠNG 11</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 11: 11. phản hồi thứ tự</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Mô hình đa bậc với Stata · 4 bài học chuyên sâu</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Giới thiệu các mô hình hồi quy cho biến phản hồi thứ tự Introduction to Regression models for Ordinal Responses Tóm tắt loạt bài viết Chào mừng các bạn đến với một chủ đề nâng cao và cực kỳ hữu ích trong phân tích dữ liệu thực tế: các mô hình cho biến phản hồi thứ tự . Trong nghiên cứu, chúng ta thường xuyên gặp phải các biến kết quả không phải là số liên tục, cũng không phải là biến nhị phân đơn thuần, mà là các phạm trù có sự sắp xếp thứ bậc rõ ràng. Hãy nghĩ về các thang đo Likert trong khảo sát xã hội , các mức độ đánh giá trong y học , hay các bậc xếp hạng tín dụng. Những biến này chứa
+
+- **Chủ đề học thuật trọng tâm**: Tóm tắt loạt bài viết, Cấu trúc chuỗi bài học, Kiến thức tiên quyết, Để bắt đầu, bạn cần:, Mục tiêu học tập.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 11 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/sskrk22u1/c11/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Mô hình hồi quy thứ tự đơn cấp</h3>
+    <p>Mô hình hồi quy thứ tự đơn cấp - proportional odds model Single-level ordinal regression - the proportional odds model Vượt qua giới hạn của mô hình nhị phân Trong các phân tích trước đây, chúng ta đã làm quen với mô hình logistic cho các biến kết quả nhị phân Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sskrk22u1/c11/mo-hinh-hoi-quy-thu-tu-don-cap/" target="_blank" rel="noopener">Mô hình hồi quy thứ tự đơn cấp</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Mở rộng sang bối cảnh đa cấp</h3>
+    <p>Mở rộng sang bối cảnh đa cấp - mô hình chặn ngẫu nhiên thứ tự Extending to a multilevel context - the ordinal random-intercept model Khi dữ liệu thứ tự có cấu trúc lồng nhau Trong bài học trước, chúng ta đã làm chủ mô hình logit thứ tự, một công cụ mạnh mẽ để  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sskrk22u1/c11/mo-rong-sang-boi-canh-da-cap/" target="_blank" rel="noopener">Mở rộng sang bối cảnh đa cấp</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Mô hình hệ số ngẫu nhiên thứ tự</h3>
+    <p>Mô hình hệ số ngẫu nhiên thứ tự và kiểm định giả thuyết Ordinal random-coefficient models and hypothesis testing Khi tác động thay đổi giữa các cá nhân Trong các bài học trước, chúng ta đã xây dựng được mô hình chặn ngẫu nhiên thứ tự, cho phép mức độ trung bìn Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sskrk22u1/c11/mo-hinh-he-so-ngau-nhien-thu-tu/" target="_blank" rel="noopener">Mô hình hệ số ngẫu nhiên thứ tự</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: Lựa chọn mô hình và các phương pháp nâng cao</h3>
+    <p>Tổng hợp chuỗi bài học về các mô hình cho biến phản hồi thứ tự Synthesis of the series on models for ordinal responses Giải mã thông tin từ các biến có thứ bậc Chúc mừng các bạn đã hoàn thành một trong những chuỗi bài học có yêu cầu kỹ thuật và lý thuyết cao n Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sskrk22u1/c11/lua-chon-mo-hinh-va-cac-phuong-phap-nang-cao/" target="_blank" rel="noopener">Lựa chọn mô hình và các phương pháp nâng cao</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_sskrk22u1_c11_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_sskrk22u1_c11_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_sskrk22u1_c11_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 11: 11. phản hồi thứ tự trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 11 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Mô hình hồi quy thứ tự đơn cấp | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sskrk22u1/c11/mo-hinh-hoi-quy-thu-tu-don-cap/) |
+| **Bài 02** | Mở rộng sang bối cảnh đa cấp | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sskrk22u1/c11/mo-rong-sang-boi-canh-da-cap/) |
+| **Bài 03** | Mô hình hệ số ngẫu nhiên thứ tự | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sskrk22u1/c11/mo-hinh-he-so-ngau-nhien-thu-tu/) |
+| **Bài 04** | Lựa chọn mô hình và các phương pháp nâng cao | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sskrk22u1/c11/lua-chon-mo-hinh-va-cac-phuong-phap-nang-cao/) |

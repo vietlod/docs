@@ -1,0 +1,173 @@
+---
+id: chapter-04-c4
+title: "Chương 04: 4. biến dự báo liên tục: mô hình từng đoạn"
+sidebar_label: "Chương 04: 4. Biến dự báo liên tục: Mô hình từng đoạn"
+sidebar_position: 5
+description: "Hướng dẫn thực hành How-To Chương 04: 4. biến dự báo liên tục: mô hình từng đoạn thuộc bộ sách Diễn giải và trực quan hóa mô hình hồi quy bằng Stata trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 04: 4. biến dự báo liên tục: mô hình từng đoạn
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 04: 4. biến dự báo liên tục: mô hình từng đoạn** thuộc [**Bộ sách 07: diễn giải và trực quan hóa mô hình hồi quy bằng Stata**](/sachktl/book-07-msitk21u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/msitk21u1/c4/](https://sachktl.tnsai.vn/vi/msitk21u1/c4/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 04: 4. biến dự báo liên tục: mô hình từng đoạn">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 07 · CHƯƠNG 04</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 04: 4. biến dự báo liên tục: mô hình từng đoạn</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Diễn giải và trực quan hóa mô hình hồi quy bằng Stata · 5 bài họ</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Giới thiệu hồi quy từng đoạn: Mô hình hóa các mối quan hệ phi tuyến An Introduction to Piecewise models: Modeling Nonlinear Relationships Tổng quan về chuỗi bài học Chào mừng các bạn sinh viên đến với chuỗi bài học chuyên sâu về Hồi quy từng đoạn, một công cụ cực kỳ mạnh mẽ và linh hoạt trong kho tàng kinh tế lượng. Trong thực tế, không phải lúc nào mối quan hệ giữa các biến kinh tế cũng đi theo một đường thẳng tắp. Ví dụ, lợi tức của giáo dục có thể tăng rất nhanh trong những năm đầu đại học, nhưng lại chậm lại sau khi tốt nghiệp. Hay hiệu quả của chi tiêu quảng cáo có thể rất lớn ở giai
+
+- **Chủ đề học thuật trọng tâm**: Tổng quan về chuỗi bài học, Cấu trúc chuỗi bài học, Kiến thức tiên quyết, Những gì bạn cần chuẩn bị, Mục tiêu học tập.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 04 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/msitk21u1/c4/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Hồi quy từng đoạn với một điểm nút đã biết</h3>
+    <p>Hồi quy từng đoạn: Mô hình với một điểm nút đã biết Piecewise models: A model with one known knot Khi nào một đường thẳng là không đủ? Chào mừng các bạn quay trở lại với bài học đầu tiên trong chuỗi bài về hồi quy từng đoạn. Trong bài giới thiệu, chúng ta đã b Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c4/hoi-quy-tung-doan-voi-mot-diem-nut-da-biet/" target="_blank" rel="noopener">Hồi quy từng đoạn với một điểm nút đã biết</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Mô hình từng đoạn nâng cao với nhiều điểm nút và bước nhảy</h3>
+    <p>Mô hình từng đoạn nâng cao: Nhiều điểm nút và bước nhảy Advanced piecewise models: Multiple knots and jumps Vượt ra ngoài một điểm gãy duy nhất Trong bài học trước, chúng ta đã thành công trong việc mô hình hóa mối quan hệ thu nhập-học vấn với một điểm gãy tại Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c4/mo-hinh-tung-doan-nang-cao-voi-nhieu-diem-nut-va-buoc-nhay/" target="_blank" rel="noopener">Mô hình từng đoạn nâng cao với nhiều điểm nút và bước nhảy</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Tìm kiếm điểm nút tối ưu với điểm nút chưa biết</h3>
+    <p>Tìm kiếm điểm nút tối ưu: Hồi quy từng đoạn với điểm nút chưa biết Finding the optimal knot: Piecewise regression with an unknown knot Khi lý thuyết không chỉ lối Trong hai bài học trước, chúng ta đã làm việc với một giả định rất mạnh: chúng ta biết chính xác  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c4/tim-kiem-diem-nut-toi-uu-voi-diem-nut-chua-biet/" target="_blank" rel="noopener">Tìm kiếm điểm nút tối ưu với điểm nút chưa biết</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: Thực hành trực quan hóa và tự động hóa kết quả</h3>
+    <p>Thực hành trực quan hóa và tự động hóa kết quả hồi quy từng đoạn Visualizing and automating results from piecewise models Thách thức của việc trực quan hóa Chào mừng các bạn đến với bài học thứ tư trong chuỗi bài về hồi quy từng đoạn. Đến thời điểm này, chúng  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c4/thuc-hanh-truc-quan-hoa-va-tu-dong-hoa-ket-qua/" target="_blank" rel="noopener">Thực hành trực quan hóa và tự động hóa kết quả</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 5: Tổng kết và định hướng nghiên cứu</h3>
+    <p>Tổng hợp hồi quy từng đoạn: Từ lý thuyết đến chiến lược phân tích Synthesizing piecewise regression: From theory to analytical strategy 1. Tổng quan và Vị thế trong Kinh tế lượng Chúc mừng các bạn đã đi đến bài học cuối cùng trong chuỗi bài chuyên sâu về hồi q Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c4/tong-ket-va-dinh-huong-nghien-cuu/" target="_blank" rel="noopener">Tổng kết và định hướng nghiên cứu</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_msitk21u1_c04_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_msitk21u1_c04_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_msitk21u1_c04_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 04: 4. biến dự báo liên tục: mô hình từng đoạn trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 04 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Hồi quy từng đoạn với một điểm nút đã biết | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c4/hoi-quy-tung-doan-voi-mot-diem-nut-da-biet/) |
+| **Bài 02** | Mô hình từng đoạn nâng cao với nhiều điểm nút và bước nhảy | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c4/mo-hinh-tung-doan-nang-cao-voi-nhieu-diem-nut-va-buoc-nhay/) |
+| **Bài 03** | Tìm kiếm điểm nút tối ưu với điểm nút chưa biết | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c4/tim-kiem-diem-nut-toi-uu-voi-diem-nut-chua-biet/) |
+| **Bài 04** | Thực hành trực quan hóa và tự động hóa kết quả | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c4/thuc-hanh-truc-quan-hoa-va-tu-dong-hoa-ket-qua/) |
+| **Bài 05** | Tổng kết và định hướng nghiên cứu | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c4/tong-ket-va-dinh-huong-nghien-cuu/) |

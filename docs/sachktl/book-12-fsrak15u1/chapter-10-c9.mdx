@@ -1,0 +1,168 @@
+---
+id: chapter-10-c9
+title: "Chương 10: 9. dữ liệu bảng: giới thiệu"
+sidebar_label: "Chương 10: 9. Dữ liệu bảng: giới thiệu"
+sidebar_position: 11
+description: "Hướng dẫn thực hành How-To Chương 10: 9. dữ liệu bảng: giới thiệu thuộc bộ sách Kinh tế phát triển thực nghiệm trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 10: 9. dữ liệu bảng: giới thiệu
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 10: 9. dữ liệu bảng: giới thiệu** thuộc [**Bộ sách 12: kinh tế phát triển thực nghiệm**](/sachktl/book-12-fsrak15u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/fsrak15u1/c9/](https://sachktl.tnsai.vn/vi/fsrak15u1/c9/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 10: 9. dữ liệu bảng: giới thiệu">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 12 · CHƯƠNG 10</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 10: 9. dữ liệu bảng: giới thiệu</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Kinh tế phát triển thực nghiệm · 4 bài học chuyên sâu</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Dữ liệu bảng: giới thiệu Chào mừng các bạn sinh viên đến với chuỗi bài học về một trong những công cụ mạnh mẽ nhất của kinh tế lượng hiện đại: Dữ liệu Bảng. Nếu các bạn đã từng băn khoăn về việc làm thế nào để chứng minh một mối quan hệ nhân quả, hay luôn đối mặt với câu hỏi "liệu có một yếu tố nào đó mà chúng ta không đo lường được đang ảnh hưởng đến kết quả không?", thì chuỗi bài học này chính là câu trả lời mà các bạn đang tìm kiếm. Dữ liệu bảng mang trong mình một yếu tố "kỳ diệu", đó là khả năng cho phép chúng ta "quan sát" và kiểm soát những yếu tố không thể quan sát được, chẳng hạn như
+
+- **Chủ đề học thuật trọng tâm**: Cấu trúc chuỗi bài học, PHỤ LỤC: Dữ liệu mô phỏng cho chuỗi bài viết.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 10 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/fsrak15u1/c9/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Giới thiệu dữ liệu bảng và vấn đề nội sinh</h3>
+    <p>Chào mừng các bạn đã quay trở lại! Trong bài học giới thiệu, chúng ta đã có cái nhìn tổng quan về sức mạnh của dữ liệu bảng. Bây giờ là lúc đi sâu vào những khái niệm nền tảng đầu tiên. Bài học hôm nay sẽ là chìa khóa giúp các bạn hiểu được tại sao dữ liệu bản Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/fsrak15u1/c9/gioi-thieu-du-lieu-bang-va-van-de-noi-sinh/" target="_blank" rel="noopener">Giới thiệu dữ liệu bảng và vấn đề nội sinh</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Ước lượng hiệu ứng cố định trong hàm sản xuất</h3>
+    <p>Chào mừng các bạn đến với bài học thứ hai trong chuỗi bài về dữ liệu bảng! Ở bài 1, chúng ta đã xác định được "kẻ thù" chính gây ra sai lệch trong ước lượng chính là các yếu tố không quan sát được và không đổi theo thời gian, hay còn gọi là hiệu ứng cố định, k Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/fsrak15u1/c9/uoc-luong-hieu-ung-co-dinh-trong-ham-san-xuat/" target="_blank" rel="noopener">Ước lượng hiệu ứng cố định trong hàm sản xuất</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Diễn giải, hạn chế và thực hành Stata</h3>
+    <p>Chào mừng các bạn đã quay trở lại! Trong bài học trước, chúng ta đã học được cách sử dụng hai phương pháp mạnh mẽ là Hiệu ứng Cố định và Sai phân Bậc nhất để loại bỏ ảnh hưởng của các yếu tố không quan sát được và không đổi theo thời gian). Chúng ta đã thấy rằ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/fsrak15u1/c9/dien-giai-han-che-va-thuc-hanh-stata/" target="_blank" rel="noopener">Diễn giải, hạn chế và thực hành Stata</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: Hướng dẫn thực hành với Stata từ A-Z</h3>
+    <p>Chào mừng các bạn đến với bài học cuối cùng trong chuỗi bài về Dữ liệu Bảng! Trong ba bài học vừa qua, chúng ta đã cùng nhau xây dựng một nền tảng lý thuyết vững chắc, từ việc hiểu "phép màu" của dữ liệu bảng, học các phương pháp ước lượng mạnh mẽ như FE và FD Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/fsrak15u1/c9/huong-dan-thuc-hanh-voi-stata-tu-a-z/" target="_blank" rel="noopener">Hướng dẫn thực hành với Stata từ A-Z</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_fsrak15u1_c10_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_fsrak15u1_c10_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_fsrak15u1_c10_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 10: 9. dữ liệu bảng: giới thiệu trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 10 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Giới thiệu dữ liệu bảng và vấn đề nội sinh | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/fsrak15u1/c9/gioi-thieu-du-lieu-bang-va-van-de-noi-sinh/) |
+| **Bài 02** | Ước lượng hiệu ứng cố định trong hàm sản xuất | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/fsrak15u1/c9/uoc-luong-hieu-ung-co-dinh-trong-ham-san-xuat/) |
+| **Bài 03** | Diễn giải, hạn chế và thực hành Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/fsrak15u1/c9/dien-giai-han-che-va-thuc-hanh-stata/) |
+| **Bài 04** | Hướng dẫn thực hành với Stata từ A-Z | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/fsrak15u1/c9/huong-dan-thuc-hanh-voi-stata-tu-a-z/) |

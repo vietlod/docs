@@ -1,0 +1,179 @@
+---
+id: chapter-13-c13
+title: "Chapter 13: 13. Phương pháp hồi quy phi tuyến — Microeconometrics Using Stata"
+sidebar_label: "Chapter 13: 13. Phương pháp hồi quy phi tuyến"
+sidebar_position: 14
+description: "Step-by-step practical how-to guide for Chapter 13: 13. Phương pháp hồi quy phi tuyến from Microeconometrics Using Stata on SachKTL with Stata, R, and Python workflows integrated with EcoData, Finco, and EcoLab."
+---
+
+# Chapter 13: 13. Phương pháp hồi quy phi tuyến — Microeconometrics Using Stata
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+This practical how-to guide synthesizes the methodology and empirical implementation workflow of **Chapter 13: 13. Phương pháp hồi quy phi tuyến** from [**Book 15: Microeconometrics Using Stata**](/en/sachktl/book-15-csamk22u1/), with direct backlinks to the authoritative source material at [https://sachktl.tnsai.vn/vi/csamk22u1/c13/](https://sachktl.tnsai.vn/vi/csamk22u1/c13/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chapter 13: 13. Phương pháp hồi quy phi tuyến">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BOOK 15 · CHAPTER 13</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chapter 13: 13. Phương pháp hồi quy phi tuyến</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Part of Textbook: Microeconometrics Using Stata · 7 Detailed Lessons</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Methodological Meaning and Scope of Application
+
+Giới thiệu chuỗi bài học về các phương pháp hồi quy phi tuyến An Introduction to Nonlinear Regression Methods Chào mừng các bạn sinh viên đã quay trở lại với chuỗi bài học kinh tế lượng ứng dụng! Trong học phần nhập môn, chúng ta đã dành phần lớn thời gian làm việc với mô hình hồi quy tuyến tính, một công cụ cực kỳ mạnh mẽ. Tuy nhiên, thế giới kinh tế không phải lúc nào cũng vận hành theo một đường thẳng. Rất nhiều mối quan hệ kinh tế trong thực tế lại có dạng phi tuyến, ví dụ như lợi tức giảm dần của giáo dục, tác động của chi tiêu quảng cáo đến doanh thu, hay các biến số chỉ có thể
+
+- **Core Academic Topics**: CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO, PHỤ LỤC: Dữ liệu mô phỏng cho chuỗi bài học.
+- **Supported Analytical Environments**: `Stata 18 MP`.
+- **Recommended Empirical Data Sources**: Vietnamese macroeconomic, corporate, and household survey datasets on [EcoData](https://ecodata.io.vn), capital and commodity market series on [Finco](https://www.finco.vn), model cross-references on [VietLOD](https://vietlod.tnsai.vn), and automated estimation on [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Original Chapter on SachKTL",
+      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for Chapter 13 on SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/csamk22u1/c13/"
+    },
+    {
+      title: "Practice Datasets on EcoData & Finco",
+      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and survey data for hands-on replication.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Automated Estimation on EcoLab",
+      description: "Execute econometric specifications, run diagnostic battery tests, and export publication-grade tables automatically.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Step-by-Step Practical Implementation Across Chapter Lessons
+
+<Steps>
+  <div className="step-item">
+    <h3>Step 1: Nền tảng hồi quy phi tuyến và mô hình Poisson</h3>
+    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Nền tảng hồi quy phi tuyến và mô hình Poisson. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c13/nen-tang-hoi-quy-phi-tuyen-va-mo-hinh-poisson/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csamk22u1/c13/nen-tang-hoi-quy-phi-tuyen-va-mo-hinh-poisson/</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Step 2: Các phương pháp ước lượng phi tuyến phổ biến</h3>
+    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Các phương pháp ước lượng phi tuyến phổ biến. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c13/cac-phuong-phap-uoc-luong-phi-tuyen-pho-bien/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csamk22u1/c13/cac-phuong-phap-uoc-luong-phi-tuyen-pho-bien/</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Step 3: Tiên đoán và ý nghĩa của tác động biên</h3>
+    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Tiên đoán và ý nghĩa của tác động biên. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c13/tien-doan-va-y-nghia-cua-tac-dong-bien/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csamk22u1/c13/tien-doan-va-y-nghia-cua-tac-dong-bien/</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Step 4: Sai số chuẩn và các chẩn đoán mô hình</h3>
+    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Sai số chuẩn và các chẩn đoán mô hình. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c13/sai-so-chuan-va-cac-chan-doan-mo-hinh/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csamk22u1/c13/sai-so-chuan-va-cac-chan-doan-mo-hinh/</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Step 5: Phân tích dữ liệu cụm trong mô hình phi tuyến</h3>
+    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Phân tích dữ liệu cụm trong mô hình phi tuyến. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c13/phan-tich-du-lieu-cum-trong-mo-hinh-phi-tuyen/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csamk22u1/c13/phan-tich-du-lieu-cum-trong-mo-hinh-phi-tuyen/</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Step 6: Phân tích một case study hoàn chỉnh</h3>
+    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Phân tích một case study hoàn chỉnh. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c13/phan-tich-mot-case-study-hoan-chinh/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csamk22u1/c13/phan-tich-mot-case-study-hoan-chinh/</a>.</p>
+  </div>
+</Steps>
+
+## 3. Multi-Platform Implementation Examples in Stata, R, and Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Initialize environment and load practice dataset from EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Import standardized empirical dataset
+import delimited "sachktl_csamk22u1_c13_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Estimate baseline specification and run diagnostic checks with robust standard errors
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Load econometric packages and practice dataset from EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_csamk22u1_c13_ecodata.csv")
+summary(df)
+
+# Estimate model and compute heteroskedasticity-robust HC1 standard errors
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Load econometric libraries and practice dataset from EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_csamk22u1_c13_ecodata.csv")
+print(df.describe())
+
+# Fit specification with HC1 robust standard errors
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video Tutorial Walkthrough
+
+<VideoTutorial
+  title="Practical Walkthrough for Chapter 13: 13. Phương pháp hồi quy phi tuyến on SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Complete Lesson Directory and Backlinks to Original SachKTL Articles
+
+| No. | Lesson Title in Chapter 13 | Supported Software | Original Source Link on SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Lesson 01** | Nền tảng hồi quy phi tuyến và mô hình Poisson | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c13/nen-tang-hoi-quy-phi-tuyen-va-mo-hinh-poisson/) |
+| **Lesson 02** | Các phương pháp ước lượng phi tuyến phổ biến | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c13/cac-phuong-phap-uoc-luong-phi-tuyen-pho-bien/) |
+| **Lesson 03** | Tiên đoán và ý nghĩa của tác động biên | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c13/tien-doan-va-y-nghia-cua-tac-dong-bien/) |
+| **Lesson 04** | Sai số chuẩn và các chẩn đoán mô hình | Stata 18 MP, R 4.x | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c13/sai-so-chuan-va-cac-chan-doan-mo-hinh/) |
+| **Lesson 05** | Phân tích dữ liệu cụm trong mô hình phi tuyến | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c13/phan-tich-du-lieu-cum-trong-mo-hinh-phi-tuyen/) |
+| **Lesson 06** | Phân tích một case study hoàn chỉnh | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c13/phan-tich-mot-case-study-hoan-chinh/) |
+| **Lesson 07** | Hệ thống hóa kiến thức và định hướng nâng cao | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c13/he-thong-hoa-kien-thuc-va-dinh-huong-nang-cao/) |

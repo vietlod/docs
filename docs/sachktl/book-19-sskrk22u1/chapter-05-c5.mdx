@@ -1,0 +1,173 @@
+---
+id: chapter-05-c5
+title: "Chương 05: 5. mô hình cho dữ liệu dọc và dữ liệu bảng"
+sidebar_label: "Chương 05: 5. Mô hình cho dữ liệu dọc và dữ liệu bảng"
+sidebar_position: 6
+description: "Hướng dẫn thực hành How-To Chương 05: 5. mô hình cho dữ liệu dọc và dữ liệu bảng thuộc bộ sách Mô hình đa bậc với Stata trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 05: 5. mô hình cho dữ liệu dọc và dữ liệu bảng
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 05: 5. mô hình cho dữ liệu dọc và dữ liệu bảng** thuộc [**Bộ sách 19: mô hình đa bậc với Stata**](/sachktl/book-19-sskrk22u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/sskrk22u1/c5/](https://sachktl.tnsai.vn/vi/sskrk22u1/c5/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 05: 5. mô hình cho dữ liệu dọc và dữ liệu bảng">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 19 · CHƯƠNG 05</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 05: 5. mô hình cho dữ liệu dọc và dữ liệu bảng</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Mô hình đa bậc với Stata · 5 bài học chuyên sâu</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Giới thiệu các mô hình cho dữ liệu dọc và dữ liệu bảng Introduction to Models for Longitudinal and Panel data Tóm tắt loạt bài viết Chào mừng các bạn quay trở lại với một chương mới trong hành trình chinh phục kinh tế lượng! Sau khi đã làm chủ các mô hình đa cấp với dữ liệu cắt ngang, giờ đây chúng ta sẽ bước vào một lĩnh vực thậm chí còn mạnh mẽ và hấp dẫn hơn: phân tích dữ liệu dọc và dữ liệu bảng . Đây là loại dữ liệu theo dõi cùng một đối tượng qua nhiều thời điểm khác nhau. Sức mạnh của nó nằm ở chỗ cho phép chúng ta làm một điều mà dữ liệu cắt ngang không thể: kiểm soát các yếu tố không
+
+- **Chủ đề học thuật trọng tâm**: Tóm tắt loạt bài viết, Cấu trúc chuỗi bài học, Kiến thức tiên quyết, Để bắt đầu, bạn cần:, Mục tiêu học tập.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 05 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/sskrk22u1/c5/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Mô hình hiệu ứng cố định</h3>
+    <p>Mô hình hiệu ứng cố định - công cụ kiểm soát yếu tố không đổi Fixed-effects model - the tool for controlling time-invariant factors Vấn đề của những yếu tố "vô hình" Trong nghiên cứu kinh tế xã hội, chúng ta thường phải đối mặt với một sự thật khó chịu: những  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sskrk22u1/c5/mo-hinh-hieu-ung-co-dinh/" target="_blank" rel="noopener">Mô hình hiệu ứng cố định</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Lựa chọn giữa hiệu ứng cố định và ngẫu nhiên</h3>
+    <p>Lựa chọn giữa hiệu ứng cố định và ngẫu nhiên - kiểm định hausman Choosing between fixed and random effects - the Hausman test Cuộc tranh luận kinh điển giữa hiệu ứng cố định và ngẫu nhiên Trong bài học trước, chúng ta đã khám phá sức mạnh của Mô hình Hiệu ứng  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sskrk22u1/c5/lua-chon-giua-hieu-ung-co-dinh-va-ngau-nhien/" target="_blank" rel="noopener">Lựa chọn giữa hiệu ứng cố định và ngẫu nhiên</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Mô hình động trong dữ liệu bảng</h3>
+    <p>Mô hình động trong dữ liệu bảng - khi quá khứ ảnh hưởng đến hiện tại Dynamic panel data models - when the past affects the present Sức ì của quá khứ và sự phụ thuộc vào trạng thái Trong thế giới thực, các quyết định và kết quả kinh tế hiếm khi được hình thành  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sskrk22u1/c5/mo-hinh-dong-trong-du-lieu-bang/" target="_blank" rel="noopener">Mô hình động trong dữ liệu bảng</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: Thực hành đánh giá tác động với phương pháp sai biệt kép</h3>
+    <p>Thực hành đánh giá tác động với phương pháp sai biệt kép Impact evaluation practice with Difference-in-Differences Bài toán đánh giá tác động và thách thức phản thực Một trong những câu hỏi quan trọng nhất mà các nhà kinh tế và nhà hoạch định chính sách luôn t Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sskrk22u1/c5/thuc-hanh-danh-gia-tac-dong-voi-phuong-phap-sai-biet-kep/" target="_blank" rel="noopener">Thực hành đánh giá tác động với phương pháp sai biệt kép</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 5: Cây quyết định lựa chọn mô hình và các phương pháp nâng cao</h3>
+    <p>Tổng hợp chuỗi bài học về các mô hình cho dữ liệu dọc và dữ liệu bảng Synthesis of the series on models for longitudinal and panel data Sức mạnh của dữ liệu bảng trong suy luận nhân quả Chúc mừng các bạn đã đi đến cuối một chặng đường học thuật đầy ý nghĩa! Ch Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sskrk22u1/c5/cay-quyet-dinh-lua-chon-mo-hinh-va-cac-phuong-phap-nang-cao/" target="_blank" rel="noopener">Cây quyết định lựa chọn mô hình và các phương pháp nâng cao</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_sskrk22u1_c05_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_sskrk22u1_c05_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_sskrk22u1_c05_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 05: 5. mô hình cho dữ liệu dọc và dữ liệu bảng trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 05 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Mô hình hiệu ứng cố định | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sskrk22u1/c5/mo-hinh-hieu-ung-co-dinh/) |
+| **Bài 02** | Lựa chọn giữa hiệu ứng cố định và ngẫu nhiên | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sskrk22u1/c5/lua-chon-giua-hieu-ung-co-dinh-va-ngau-nhien/) |
+| **Bài 03** | Mô hình động trong dữ liệu bảng | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sskrk22u1/c5/mo-hinh-dong-trong-du-lieu-bang/) |
+| **Bài 04** | Thực hành đánh giá tác động với phương pháp sai biệt kép | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sskrk22u1/c5/thuc-hanh-danh-gia-tac-dong-voi-phuong-phap-sai-biet-kep/) |
+| **Bài 05** | Cây quyết định lựa chọn mô hình và các phương pháp nâng cao | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sskrk22u1/c5/cay-quyet-dinh-lua-chon-mo-hinh-va-cac-phuong-phap-nang-cao/) |

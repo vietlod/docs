@@ -1,0 +1,168 @@
+---
+id: chapter-14-c14
+title: "Chapter 14: 14. Mô hình thời đoạn rời rạc — Multilevel and Mixed-Effects Modeling Using Stata"
+sidebar_label: "Chapter 14: 14. Mô hình thời đoạn rời rạc"
+sidebar_position: 15
+description: "Step-by-step practical how-to guide for Chapter 14: 14. Mô hình thời đoạn rời rạc from Multilevel and Mixed-Effects Modeling Using Stata on SachKTL with Stata, R, and Python workflows integrated with EcoData, Finco, and EcoLab."
+---
+
+# Chapter 14: 14. Mô hình thời đoạn rời rạc — Multilevel and Mixed-Effects Modeling Using Stata
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+This practical how-to guide synthesizes the methodology and empirical implementation workflow of **Chapter 14: 14. Mô hình thời đoạn rời rạc** from [**Book 19: Multilevel and Mixed-Effects Modeling Using Stata**](/en/sachktl/book-19-sskrk22u1/), with direct backlinks to the authoritative source material at [https://sachktl.tnsai.vn/vi/sskrk22u1/c14/](https://sachktl.tnsai.vn/vi/sskrk22u1/c14/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chapter 14: 14. Mô hình thời đoạn rời rạc">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BOOK 19 · CHAPTER 14</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chapter 14: 14. Mô hình thời đoạn rời rạc</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Part of Textbook: Multilevel and Mixed-Effects Modeling Using Stata · 4 Detailed Less</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Methodological Meaning and Scope of Application
+
+Giới thiệu các mô hình cho dữ liệu sống còn hoặc dữ liệu thời lượng Introduction to Models for Survival or Duration data Tóm tắt loạt bài viết Chào mừng các bạn đến với một lĩnh vực hoàn toàn mới và vô cùng mạnh mẽ trong kinh tế lượng: Phân tích Sống còn , hay còn được biết đến với các tên gọi khác như phân tích thời gian sự kiện hoặc phân tích thời lượng . Lĩnh vực này tập trung vào việc trả lời một loại câu hỏi rất đặc biệt: "Bao lâu cho đến khi một sự kiện cụ thể xảy ra?". Các câu hỏi này xuất hiện ở khắp mọi nơi: trong y học , trong kinh tế học , trong kỹ thuật , hay trong
+
+- **Core Academic Topics**: Tóm tắt loạt bài viết, Cấu trúc chuỗi bài học, Kiến thức tiên quyết, Để bắt đầu, bạn cần:, Mục tiêu học tập.
+- **Supported Analytical Environments**: `Stata 18 MP`.
+- **Recommended Empirical Data Sources**: Vietnamese macroeconomic, corporate, and household survey datasets on [EcoData](https://ecodata.io.vn), capital and commodity market series on [Finco](https://www.finco.vn), model cross-references on [VietLOD](https://vietlod.tnsai.vn), and automated estimation on [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Original Chapter on SachKTL",
+      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for Chapter 14 on SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/sskrk22u1/c14/"
+    },
+    {
+      title: "Practice Datasets on EcoData & Finco",
+      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and survey data for hands-on replication.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Automated Estimation on EcoLab",
+      description: "Execute econometric specifications, run diagnostic battery tests, and export publication-grade tables automatically.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Step-by-Step Practical Implementation Across Chapter Lessons
+
+<Steps>
+  <div className="step-item">
+    <h3>Step 1: Phân tích phi tham số và kỹ thuật mở rộng dữ liệu</h3>
+    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Phân tích phi tham số và kỹ thuật mở rộng dữ liệu. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/sskrk22u1/c14/phan-tich-phi-tham-so-va-ky-thuat-mo-rong-du-lieu/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/sskrk22u1/c14/phan-tich-phi-tham-so-va-ky-thuat-mo-rong-du-lieu/</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Step 2: Mô hình hồi quy nguy cơ thời gian rời rạc</h3>
+    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Mô hình hồi quy nguy cơ thời gian rời rạc. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/sskrk22u1/c14/mo-hinh-hoi-quy-nguy-co-thoi-gian-roi-rac/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/sskrk22u1/c14/mo-hinh-hoi-quy-nguy-co-thoi-gian-roi-rac/</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Step 3: Mô hình sống còn đa cấp</h3>
+    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Mô hình sống còn đa cấp. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/sskrk22u1/c14/mo-hinh-song-con-da-cap/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/sskrk22u1/c14/mo-hinh-song-con-da-cap/</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Step 4: Lựa chọn mô hình và các chủ đề nâng cao</h3>
+    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Lựa chọn mô hình và các chủ đề nâng cao. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/sskrk22u1/c14/lua-chon-mo-hinh-va-cac-chu-de-nang-cao/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/sskrk22u1/c14/lua-chon-mo-hinh-va-cac-chu-de-nang-cao/</a>.</p>
+  </div>
+</Steps>
+
+## 3. Multi-Platform Implementation Examples in Stata, R, and Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Initialize environment and load practice dataset from EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Import standardized empirical dataset
+import delimited "sachktl_sskrk22u1_c14_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Estimate baseline specification and run diagnostic checks with robust standard errors
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Load econometric packages and practice dataset from EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_sskrk22u1_c14_ecodata.csv")
+summary(df)
+
+# Estimate model and compute heteroskedasticity-robust HC1 standard errors
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Load econometric libraries and practice dataset from EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_sskrk22u1_c14_ecodata.csv")
+print(df.describe())
+
+# Fit specification with HC1 robust standard errors
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video Tutorial Walkthrough
+
+<VideoTutorial
+  title="Practical Walkthrough for Chapter 14: 14. Mô hình thời đoạn rời rạc on SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Complete Lesson Directory and Backlinks to Original SachKTL Articles
+
+| No. | Lesson Title in Chapter 14 | Supported Software | Original Source Link on SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Lesson 01** | Phân tích phi tham số và kỹ thuật mở rộng dữ liệu | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/sskrk22u1/c14/phan-tich-phi-tham-so-va-ky-thuat-mo-rong-du-lieu/) |
+| **Lesson 02** | Mô hình hồi quy nguy cơ thời gian rời rạc | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/sskrk22u1/c14/mo-hinh-hoi-quy-nguy-co-thoi-gian-roi-rac/) |
+| **Lesson 03** | Mô hình sống còn đa cấp | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/sskrk22u1/c14/mo-hinh-song-con-da-cap/) |
+| **Lesson 04** | Lựa chọn mô hình và các chủ đề nâng cao | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/sskrk22u1/c14/lua-chon-mo-hinh-va-cac-chu-de-nang-cao/) |

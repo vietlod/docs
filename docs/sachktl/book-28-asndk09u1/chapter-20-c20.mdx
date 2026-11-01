@@ -1,0 +1,178 @@
+---
+id: chapter-20-c20
+title: "Chương 20: 20. quá trình CARMA điều khiển bởi lévy"
+sidebar_label: "Chương 20: 20. Quá trình CARMA điều khiển bởi Lévy"
+sidebar_position: 21
+description: "Hướng dẫn thực hành How-To Chương 20: 20. quá trình CARMA điều khiển bởi lévy thuộc bộ sách Cẩm nang kinh tế lượng chuỗi thời gian tài chính trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 20: 20. quá trình CARMA điều khiển bởi lévy
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 20: 20. quá trình CARMA điều khiển bởi lévy** thuộc [**Bộ sách 28: cẩm nang kinh tế lượng chuỗi thời gian tài chính**](/sachktl/book-28-asndk09u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/asndk09u1/c20/](https://sachktl.tnsai.vn/vi/asndk09u1/c20/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 20: 20. quá trình CARMA điều khiển bởi lévy">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 28 · CHƯƠNG 20</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 20: 20. quá trình CARMA điều khiển bởi lévy</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Cẩm nang kinh tế lượng chuỗi thời gian tài chính · 6 bài học chu</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Giới thiệu mô hình CARMA điều khiển bởi quá trình lévy An Introduction to Lévy-Driven CARMA Models Chào các bạn sinh viên, chào mừng đến với chuỗi bài học chuyên sâu về một trong những chủ đề hấp dẫn và hiện đại nhất của kinh tế lượng tài chính: Mô hình ARMA Thời gian Liên tục được điều khiển bởi quá trình Lévy. Trong thế giới tài chính ngày nay, dữ liệu không còn chỉ được thu thập theo ngày hay theo quý, mà là theo từng phút, từng giây. Các mô hình thời gian rời rạc truyền thống như ARMA hay GARCH đôi khi không đủ linh hoạt để nắm bắt trọn vẹn động lực của thị trường. Đây chính là
+
+- **Chủ đề học thuật trọng tâm**: CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO, PHỤ LỤC: Dữ liệu mô phỏng cho series.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 20 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/asndk09u1/c20/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Nền tảng về quá trình lévy và mô hình CARMA</h3>
+    <p>Nền tảng về quá trình lévy và mô hình CARMA Foundations of lévy processes and CARMA models Giới thiệu Chào mừng các bạn đến với bài học đầu tiên trong chuỗi bài về mô hình CARMA. Trong kinh tế lượng truyền thống, chúng ta đã quen thuộc với các mô hình thời gia Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c20/nen-tang-ve-qua-trinh-levy-va-mo-hinh-carma/" target="_blank" rel="noopener">Nền tảng về quá trình lévy và mô hình CARMA</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Tính chất và biểu diễn của mô hình CARMA</h3>
+    <p>Tính chất và biểu diễn của mô hình CARMA Properties and representation of CARMA models Giới thiệu Trong bài học trước, chúng ta đã xây dựng thành công một mô hình CARMA từ các khối cơ bản: quá trình Lévy và biểu diễn không gian trạng thái. Chúng ta đã biết các Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c20/tinh-chat-va-bieu-dien-cua-mo-hinh-carma/" target="_blank" rel="noopener">Tính chất và biểu diễn của mô hình CARMA</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Từ ARMA rời rạc đến CARMA liên tục</h3>
+    <p>Từ ARMA rời rạc đến CARMA liên tục From discrete-time ARMA to continuous-time CARMA Giới thiệu Chào các bạn, trong hai bài học vừa qua, chúng ta đã đi sâu vào thế giới của các mô hình thời gian liên tục. Tuy nhiên, trong thực tế, hầu hết dữ liệu chúng ta có tr Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c20/tu-arma-roi-rac-den-carma-lien-tuc/" target="_blank" rel="noopener">Từ ARMA rời rạc đến CARMA liên tục</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: Ứng dụng CARMA trong tài chính</h3>
+    <p>Ứng dụng CARMA trong tài chính Financial applications of CARMA models Giới thiệu Chào mừng các bạn quay trở lại! Trong ba bài học vừa qua, chúng ta đã thực hiện một hành trình khá trừu tượng, từ việc tìm hiểu quá trình Lévy, xây dựng mô hình CARMA bằng không g Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c20/ung-dung-carma-trong-tai-chinh/" target="_blank" rel="noopener">Ứng dụng CARMA trong tài chính</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 5: Ước lượng và suy diễn cho mô hình CARMA bằng Stata</h3>
+    <p>Ước lượng và suy diễn cho mô hình CARMA bằng Stata Estimation and inference for CARMA models in Stata Giới thiệu Chào mừng các bạn đến với bài học thực hành quan trọng nhất của chuỗi bài. Trong các phần trước, chúng ta đã khám phá thế giới lý thuyết phong phú  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c20/uoc-luong-va-suy-dien-cho-mo-hinh-carma-bang-stata/" target="_blank" rel="noopener">Ước lượng và suy diễn cho mô hình CARMA bằng Stata</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 6: Hệ thống hóa kiến thức và hướng phát triển</h3>
+    <p>Tổng hợp chuỗi bài học về mô hình CARMA Synthesis of the lévy-driven CARMA model series 1. Vị trí của CARMA trong Kinh tế lượng Hiện đại Khi bắt đầu hành trình này, chúng ta đã xuất phát từ một câu hỏi nền tảng: Tại sao các mô hình thời gian rời rạc như ARMA h Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c20/he-thong-hoa-kien-thuc-va-huong-phat-trien/" target="_blank" rel="noopener">Hệ thống hóa kiến thức và hướng phát triển</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_asndk09u1_c20_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_asndk09u1_c20_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_asndk09u1_c20_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 20: 20. quá trình CARMA điều khiển bởi lévy trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 20 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Nền tảng về quá trình lévy và mô hình CARMA | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c20/nen-tang-ve-qua-trinh-levy-va-mo-hinh-carma/) |
+| **Bài 02** | Tính chất và biểu diễn của mô hình CARMA | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c20/tinh-chat-va-bieu-dien-cua-mo-hinh-carma/) |
+| **Bài 03** | Từ ARMA rời rạc đến CARMA liên tục | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c20/tu-arma-roi-rac-den-carma-lien-tuc/) |
+| **Bài 04** | Ứng dụng CARMA trong tài chính | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c20/ung-dung-carma-trong-tai-chinh/) |
+| **Bài 05** | Ước lượng và suy diễn cho mô hình CARMA bằng Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c20/uoc-luong-va-suy-dien-cho-mo-hinh-carma-bang-stata/) |
+| **Bài 06** | Hệ thống hóa kiến thức và hướng phát triển | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c20/he-thong-hoa-kien-thuc-va-huong-phat-trien/) |

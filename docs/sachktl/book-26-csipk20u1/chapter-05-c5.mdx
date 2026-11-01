@@ -1,0 +1,163 @@
+---
+id: chapter-05-c5
+title: "Chương 05: 5. phân tích thành phần phần dư"
+sidebar_label: "Chương 05: 5. Phân tích thành phần phần dư"
+sidebar_position: 6
+description: "Hướng dẫn thực hành How-To Chương 05: 5. phân tích thành phần phần dư thuộc bộ sách Phân tích Chuỗi thời gian Kinh tế và Tài chính trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 05: 5. phân tích thành phần phần dư
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 05: 5. phân tích thành phần phần dư** thuộc [**Bộ sách 26: phân tích chuỗi thời gian kinh tế và tài chính**](/sachktl/book-26-csipk20u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/csipk20u1/c5/](https://sachktl.tnsai.vn/vi/csipk20u1/c5/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 05: 5. phân tích thành phần phần dư">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 26 · CHƯƠNG 05</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 05: 5. phân tích thành phần phần dư</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Phân tích Chuỗi thời gian Kinh tế và Tài chính · 3 bài học chuyê</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Giới thiệu về kiểm định tính ngẫu nhiên trong chuỗi thời gian An Introduction to Tests of Randomness in Time Series TÓM TẮT CHỦ ĐỀ Chào mừng các bạn sinh viên đến với một chủ đề cực kỳ quan trọng trong phân tích chuỗi thời gian: phân tích thành phần dư. Sau khi xây dựng một mô hình kinh tế lượng, làm thế nào chúng ta biết được mô hình đó đã "nắm bắt" hết các quy luật có hệ thống trong dữ liệu hay chưa? Câu trả lời nằm ở chính phần còn lại – hay còn gọi là phần dư. Một mô hình tốt sẽ để lại phần dư hoàn toàn ngẫu nhiên, giống như những "tiếng ồn" không thể dự báo được. Nếu phần dư vẫn còn chứa
+
+- **Chủ đề học thuật trọng tâm**: TÓM TẮT CHỦ ĐỀ, CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 05 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/csipk20u1/c5/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Nền tảng lý thuyết về kiểm định tính ngẫu nhiên</h3>
+    <p>Nền tảng lý thuyết về kiểm định tính ngẫu nhiên Theoretical foundations of randomness tests Giới thiệu: Tại sao phải kiểm định tính ngẫu nhiên? Trong hành trình chinh phục kinh tế lượng, một trong những mục tiêu quan trọng nhất của chúng ta là xây dựng các mô  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csipk20u1/c5/nen-tang-ly-thuyet-ve-kiem-dinh-tinh-ngau-nhien/" target="_blank" rel="noopener">Nền tảng lý thuyết về kiểm định tính ngẫu nhiên</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Hướng dẫn thực hành kiểm định tính ngẫu nhiên trong Stata</h3>
+    <p>Thực hành kiểm định tính ngẫu nhiên trong stata A practical guide to randomness tests in stata Tóm tắt và mục tiêu thực hành Chào mừng các bạn quay trở lại với chuỗi bài học về phân tích thành phần dư! Trong bài học trước, chúng ta đã cùng nhau xây dựng một nề Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csipk20u1/c5/huong-dan-thuc-hanh-kiem-dinh-tinh-ngau-nhien-trong-stata/" target="_blank" rel="noopener">Hướng dẫn thực hành kiểm định tính ngẫu nhiên trong Stata</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Tổng hợp chuỗi tính thời vụ và tính chu kỳ</h3>
+    <p>Tổng hợp về kiểm định tính ngẫu nhiên trong chuỗi thời gian A synthesis of randomness tests in time series analysis 1. Vị trí của kiểm định tính ngẫu nhiên Chúng ta đã cùng nhau đi qua một hành trình chi tiết để khám phá các công cụ dùng để kiểm định tính ngẫu Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csipk20u1/c5/tong-hop-chuoi-tinh-thoi-vu-va-tinh-chu-ky/" target="_blank" rel="noopener">Tổng hợp chuỗi Tính thời vụ và tính chu kỳ</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_csipk20u1_c05_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_csipk20u1_c05_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_csipk20u1_c05_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 05: 5. phân tích thành phần phần dư trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 05 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Nền tảng lý thuyết về kiểm định tính ngẫu nhiên | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csipk20u1/c5/nen-tang-ly-thuyet-ve-kiem-dinh-tinh-ngau-nhien/) |
+| **Bài 02** | Hướng dẫn thực hành kiểm định tính ngẫu nhiên trong Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csipk20u1/c5/huong-dan-thuc-hanh-kiem-dinh-tinh-ngau-nhien-trong-stata/) |
+| **Bài 03** | Tổng hợp chuỗi Tính thời vụ và tính chu kỳ | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csipk20u1/c5/tong-hop-chuoi-tinh-thoi-vu-va-tinh-chu-ky/) |

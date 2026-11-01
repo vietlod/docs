@@ -1226,6 +1226,834 @@ const sidebars = {
         }
       ]
     }
+  ],
+  "sachktlSidebar": [
+    {
+      "type": "category",
+      "label": "Bắt đầu",
+      "collapsed": false,
+      "items": [
+        "sachktl/overview"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Chương trình 4 Khóa học Kinh tế lượng",
+      "collapsed": false,
+      "link": {
+        "type": "doc",
+        "id": "sachktl/courses/index"
+      },
+      "items": [
+        "sachktl/courses/course-01-beginner",
+        "sachktl/courses/course-02-intermediate",
+        "sachktl/courses/course-03-expert",
+        "sachktl/courses/course-04-masterclass"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Sách 01: Phương pháp phân tích dữ liệu bảng",
+      "link": {
+        "type": "doc",
+        "id": "sachktl/book-01-bsalk21u1/index"
+      },
+      "items": [
+        "sachktl/book-01-bsalk21u1/chapter-01-c1",
+        "sachktl/book-01-bsalk21u1/chapter-02-c2",
+        "sachktl/book-01-bsalk21u1/chapter-03-c3",
+        "sachktl/book-01-bsalk21u1/chapter-04-c4",
+        "sachktl/book-01-bsalk21u1/chapter-05-c5",
+        "sachktl/book-01-bsalk21u1/chapter-06-c6",
+        "sachktl/book-01-bsalk21u1/chapter-07-c7",
+        "sachktl/book-01-bsalk21u1/chapter-08-c8",
+        "sachktl/book-01-bsalk21u1/chapter-09-c9",
+        "sachktl/book-01-bsalk21u1/chapter-10-c10",
+        "sachktl/book-01-bsalk21u1/chapter-11-c11",
+        "sachktl/book-01-bsalk21u1/chapter-12-c12",
+        "sachktl/book-01-bsalk21u1/chapter-13-c13"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Sách 02: Kinh tế lượng: lý thuyết và thực hành",
+      "link": {
+        "type": "doc",
+        "id": "sachktl/book-02-dsask19u1/index"
+      },
+      "items": [
+        "sachktl/book-02-dsask19u1/chapter-01-c1",
+        "sachktl/book-02-dsask19u1/chapter-02-c2",
+        "sachktl/book-02-dsask19u1/chapter-03-c3",
+        "sachktl/book-02-dsask19u1/chapter-04-c4",
+        "sachktl/book-02-dsask19u1/chapter-05-c5",
+        "sachktl/book-02-dsask19u1/chapter-06-c6",
+        "sachktl/book-02-dsask19u1/chapter-07-c7",
+        "sachktl/book-02-dsask19u1/chapter-08-c8",
+        "sachktl/book-02-dsask19u1/chapter-09-c9",
+        "sachktl/book-02-dsask19u1/chapter-10-c10",
+        "sachktl/book-02-dsask19u1/chapter-11-c11",
+        "sachktl/book-02-dsask19u1/chapter-12-c12",
+        "sachktl/book-02-dsask19u1/chapter-13-c13",
+        "sachktl/book-02-dsask19u1/chapter-14-c14",
+        "sachktl/book-02-dsask19u1/chapter-15-c15",
+        "sachktl/book-02-dsask19u1/chapter-16-c16",
+        "sachktl/book-02-dsask19u1/chapter-17-c17",
+        "sachktl/book-02-dsask19u1/chapter-18-c18"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Sách 03: Phương pháp dữ liệu bảng trong tài chính",
+      "link": {
+        "type": "doc",
+        "id": "sachktl/book-03-vserk21u1/index"
+      },
+      "items": [
+        "sachktl/book-03-vserk21u1/chapter-01-c1",
+        "sachktl/book-03-vserk21u1/chapter-02-2-linear-static-models",
+        "sachktl/book-03-vserk21u1/chapter-03-3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-no",
+        "sachktl/book-03-vserk21u1/chapter-04-4-xu-ly-cac-van-de-du-lieu-thuc-te",
+        "sachktl/book-03-vserk21u1/chapter-05-5-mo-hinh-bang-dong-tuyen-tinh",
+        "sachktl/book-03-vserk21u1/chapter-06-6-mo-hinh-voi-bien-phu-thuoc-gioi-han",
+        "sachktl/book-03-vserk21u1/chapter-07-7-uoc-luong-hieu-ung-dieu-tri-trung-binh"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Sách 04: Mô hình dữ liệu chéo và dữ liệu bảng",
+      "link": {
+        "type": "doc",
+        "id": "sachktl/book-04-wsook10u1/index"
+      },
+      "items": [
+        "sachktl/book-04-wsook10u1/chapter-01-c1",
+        "sachktl/book-04-wsook10u1/chapter-02-c2",
+        "sachktl/book-04-wsook10u1/chapter-03-c3",
+        "sachktl/book-04-wsook10u1/chapter-04-c4",
+        "sachktl/book-04-wsook10u1/chapter-05-c5",
+        "sachktl/book-04-wsook10u1/chapter-06-c6",
+        "sachktl/book-04-wsook10u1/chapter-07-c7",
+        "sachktl/book-04-wsook10u1/chapter-08-c8",
+        "sachktl/book-04-wsook10u1/chapter-09-c9",
+        "sachktl/book-04-wsook10u1/chapter-10-c10",
+        "sachktl/book-04-wsook10u1/chapter-11-c11",
+        "sachktl/book-04-wsook10u1/chapter-12-c12",
+        "sachktl/book-04-wsook10u1/chapter-13-c13",
+        "sachktl/book-04-wsook10u1/chapter-14-c14",
+        "sachktl/book-04-wsook10u1/chapter-15-c15",
+        "sachktl/book-04-wsook10u1/chapter-16-c16",
+        "sachktl/book-04-wsook10u1/chapter-17-c17",
+        "sachktl/book-04-wsook10u1/chapter-18-c18",
+        "sachktl/book-04-wsook10u1/chapter-19-c19",
+        "sachktl/book-04-wsook10u1/chapter-20-c20",
+        "sachktl/book-04-wsook10u1/chapter-21-c21",
+        "sachktl/book-04-wsook10u1/chapter-22-c22"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Sách 05: Nhập môn Kinh tế lượng - Cách tiếp cận hiện đại",
+      "link": {
+        "type": "doc",
+        "id": "sachktl/book-05-wsook19u1/index"
+      },
+      "items": [
+        "sachktl/book-05-wsook19u1/chapter-01-c1",
+        "sachktl/book-05-wsook19u1/chapter-02-c2",
+        "sachktl/book-05-wsook19u1/chapter-03-c3",
+        "sachktl/book-05-wsook19u1/chapter-04-c4",
+        "sachktl/book-05-wsook19u1/chapter-05-c5",
+        "sachktl/book-05-wsook19u1/chapter-06-c6",
+        "sachktl/book-05-wsook19u1/chapter-07-c7",
+        "sachktl/book-05-wsook19u1/chapter-08-c8",
+        "sachktl/book-05-wsook19u1/chapter-09-c9",
+        "sachktl/book-05-wsook19u1/chapter-10-c10",
+        "sachktl/book-05-wsook19u1/chapter-11-c11",
+        "sachktl/book-05-wsook19u1/chapter-12-c12",
+        "sachktl/book-05-wsook19u1/chapter-13-c13",
+        "sachktl/book-05-wsook19u1/chapter-14-c14",
+        "sachktl/book-05-wsook19u1/chapter-15-c15",
+        "sachktl/book-05-wsook19u1/chapter-16-c16",
+        "sachktl/book-05-wsook19u1/chapter-17-c17",
+        "sachktl/book-05-wsook19u1/chapter-18-c18",
+        "sachktl/book-05-wsook19u1/chapter-19-c19"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Sách 06: Hướng dẫn trực quan về đồ họa với Stata",
+      "link": {
+        "type": "doc",
+        "id": "sachktl/book-06-msitk22u1/index"
+      },
+      "items": [
+        "sachktl/book-06-msitk22u1/chapter-01-c1",
+        "sachktl/book-06-msitk22u1/chapter-02-c2",
+        "sachktl/book-06-msitk22u1/chapter-03-c3",
+        "sachktl/book-06-msitk22u1/chapter-04-c4",
+        "sachktl/book-06-msitk22u1/chapter-05-c5",
+        "sachktl/book-06-msitk22u1/chapter-06-c6",
+        "sachktl/book-06-msitk22u1/chapter-07-c7",
+        "sachktl/book-06-msitk22u1/chapter-08-c8",
+        "sachktl/book-06-msitk22u1/chapter-09-c9",
+        "sachktl/book-06-msitk22u1/chapter-10-c10",
+        "sachktl/book-06-msitk22u1/chapter-11-c11"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Sách 07: Diễn giải và trực quan hóa mô hình hồi quy bằng Stata",
+      "link": {
+        "type": "doc",
+        "id": "sachktl/book-07-msitk21u1/index"
+      },
+      "items": [
+        "sachktl/book-07-msitk21u1/chapter-01-c1",
+        "sachktl/book-07-msitk21u1/chapter-02-c2",
+        "sachktl/book-07-msitk21u1/chapter-03-c3",
+        "sachktl/book-07-msitk21u1/chapter-04-c4",
+        "sachktl/book-07-msitk21u1/chapter-05-c5",
+        "sachktl/book-07-msitk21u1/chapter-06-c6",
+        "sachktl/book-07-msitk21u1/chapter-07-c7",
+        "sachktl/book-07-msitk21u1/chapter-08-c8",
+        "sachktl/book-07-msitk21u1/chapter-09-c9",
+        "sachktl/book-07-msitk21u1/chapter-10-c10",
+        "sachktl/book-07-msitk21u1/chapter-11-c11",
+        "sachktl/book-07-msitk21u1/chapter-12-c12",
+        "sachktl/book-07-msitk21u1/chapter-13-c13",
+        "sachktl/book-07-msitk21u1/chapter-14-c14",
+        "sachktl/book-07-msitk21u1/chapter-15-c15",
+        "sachktl/book-07-msitk21u1/chapter-16-c16",
+        "sachktl/book-07-msitk21u1/chapter-17-c17",
+        "sachktl/book-07-msitk21u1/chapter-18-c18",
+        "sachktl/book-07-msitk21u1/chapter-19-c19"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Sách 08: Kinh tế lượng trong tài chính",
+      "link": {
+        "type": "doc",
+        "id": "sachktl/book-08-bsrok19u1/index"
+      },
+      "items": [
+        "sachktl/book-08-bsrok19u1/chapter-01-c1",
+        "sachktl/book-08-bsrok19u1/chapter-02-c2",
+        "sachktl/book-08-bsrok19u1/chapter-03-c3",
+        "sachktl/book-08-bsrok19u1/chapter-04-c4",
+        "sachktl/book-08-bsrok19u1/chapter-05-c5",
+        "sachktl/book-08-bsrok19u1/chapter-06-c6",
+        "sachktl/book-08-bsrok19u1/chapter-07-c7",
+        "sachktl/book-08-bsrok19u1/chapter-08-c8",
+        "sachktl/book-08-bsrok19u1/chapter-09-c9",
+        "sachktl/book-08-bsrok19u1/chapter-10-c10",
+        "sachktl/book-08-bsrok19u1/chapter-11-c11",
+        "sachktl/book-08-bsrok19u1/chapter-12-c12",
+        "sachktl/book-08-bsrok19u1/chapter-13-c13",
+        "sachktl/book-08-bsrok19u1/chapter-14-c14",
+        "sachktl/book-08-bsrok19u1/chapter-15-c15"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Sách 09: Phân tích chuỗi thời gian với Stata",
+      "link": {
+        "type": "doc",
+        "id": "sachktl/book-09-sseak20u1/index"
+      },
+      "items": [
+        "sachktl/book-09-sseak20u1/chapter-01-c1",
+        "sachktl/book-09-sseak20u1/chapter-02-c2",
+        "sachktl/book-09-sseak20u1/chapter-03-c3",
+        "sachktl/book-09-sseak20u1/chapter-04-c4",
+        "sachktl/book-09-sseak20u1/chapter-05-c5",
+        "sachktl/book-09-sseak20u1/chapter-06-c6",
+        "sachktl/book-09-sseak20u1/chapter-07-c7",
+        "sachktl/book-09-sseak20u1/chapter-08-c8",
+        "sachktl/book-09-sseak20u1/chapter-09-c9",
+        "sachktl/book-09-sseak20u1/chapter-10-c10",
+        "sachktl/book-09-sseak20u1/chapter-11-c11"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Sách 10: Giới thiệu về kinh tế lượng",
+      "link": {
+        "type": "doc",
+        "id": "sachktl/book-10-sstok20u1/index"
+      },
+      "items": [
+        "sachktl/book-10-sstok20u1/chapter-01-c1",
+        "sachktl/book-10-sstok20u1/chapter-02-c2",
+        "sachktl/book-10-sstok20u1/chapter-03-c3",
+        "sachktl/book-10-sstok20u1/chapter-04-c4",
+        "sachktl/book-10-sstok20u1/chapter-05-c5",
+        "sachktl/book-10-sstok20u1/chapter-06-c6",
+        "sachktl/book-10-sstok20u1/chapter-07-c7",
+        "sachktl/book-10-sstok20u1/chapter-08-c8",
+        "sachktl/book-10-sstok20u1/chapter-09-c9",
+        "sachktl/book-10-sstok20u1/chapter-10-c10",
+        "sachktl/book-10-sstok20u1/chapter-11-c11",
+        "sachktl/book-10-sstok20u1/chapter-12-c12",
+        "sachktl/book-10-sstok20u1/chapter-13-c13",
+        "sachktl/book-10-sstok20u1/chapter-14-c14",
+        "sachktl/book-10-sstok20u1/chapter-15-c15",
+        "sachktl/book-10-sstok20u1/chapter-16-c16",
+        "sachktl/book-10-sstok20u1/chapter-17-c17",
+        "sachktl/book-10-sstok20u1/chapter-18-c18",
+        "sachktl/book-10-sstok20u1/chapter-19-c19"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Sách 11: Kinh tế lượng đánh giá tác động chính sách",
+      "link": {
+        "type": "doc",
+        "id": "sachktl/book-11-cserk22u1/index"
+      },
+      "items": [
+        "sachktl/book-11-cserk22u1/chapter-01-c1",
+        "sachktl/book-11-cserk22u1/chapter-02-c2",
+        "sachktl/book-11-cserk22u1/chapter-03-c3",
+        "sachktl/book-11-cserk22u1/chapter-04-c4",
+        "sachktl/book-11-cserk22u1/chapter-05-c5",
+        "sachktl/book-11-cserk22u1/chapter-06-c6"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Sách 12: Kinh tế phát triển thực nghiệm",
+      "link": {
+        "type": "doc",
+        "id": "sachktl/book-12-fsrak15u1/index"
+      },
+      "items": [
+        "sachktl/book-12-fsrak15u1/chapter-01-loi-mo-dau",
+        "sachktl/book-12-fsrak15u1/chapter-02-c1",
+        "sachktl/book-12-fsrak15u1/chapter-03-c2",
+        "sachktl/book-12-fsrak15u1/chapter-04-c3",
+        "sachktl/book-12-fsrak15u1/chapter-05-c4",
+        "sachktl/book-12-fsrak15u1/chapter-06-c5",
+        "sachktl/book-12-fsrak15u1/chapter-07-c6",
+        "sachktl/book-12-fsrak15u1/chapter-08-c7",
+        "sachktl/book-12-fsrak15u1/chapter-09-c8",
+        "sachktl/book-12-fsrak15u1/chapter-10-c9",
+        "sachktl/book-12-fsrak15u1/chapter-11-c10",
+        "sachktl/book-12-fsrak15u1/chapter-12-c11",
+        "sachktl/book-12-fsrak15u1/chapter-13-c12",
+        "sachktl/book-12-fsrak15u1/chapter-14-c13",
+        "sachktl/book-12-fsrak15u1/chapter-15-c14",
+        "sachktl/book-12-fsrak15u1/chapter-16-c15",
+        "sachktl/book-12-fsrak15u1/chapter-17-c16",
+        "sachktl/book-12-fsrak15u1/chapter-18-c17",
+        "sachktl/book-12-fsrak15u1/chapter-19-c18",
+        "sachktl/book-12-fsrak15u1/chapter-20-c19",
+        "sachktl/book-12-fsrak15u1/chapter-21-c20",
+        "sachktl/book-12-fsrak15u1/chapter-22-c21",
+        "sachktl/book-12-fsrak15u1/chapter-23-c22",
+        "sachktl/book-12-fsrak15u1/chapter-24-c23",
+        "sachktl/book-12-fsrak15u1/chapter-25-c24",
+        "sachktl/book-12-fsrak15u1/chapter-26-c25",
+        "sachktl/book-12-fsrak15u1/chapter-27-c26",
+        "sachktl/book-12-fsrak15u1/chapter-28-c27",
+        "sachktl/book-12-fsrak15u1/chapter-29-c28",
+        "sachktl/book-12-fsrak15u1/chapter-30-c29"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Sách 13: Thống kê ứng dụng với Stata",
+      "link": {
+        "type": "doc",
+        "id": "sachktl/book-13-msehk22u1/index"
+      },
+      "items": [
+        "sachktl/book-13-msehk22u1/chapter-01-c1",
+        "sachktl/book-13-msehk22u1/chapter-02-c2",
+        "sachktl/book-13-msehk22u1/chapter-03-c3",
+        "sachktl/book-13-msehk22u1/chapter-04-c4",
+        "sachktl/book-13-msehk22u1/chapter-05-c5",
+        "sachktl/book-13-msehk22u1/chapter-06-c6",
+        "sachktl/book-13-msehk22u1/chapter-07-c7",
+        "sachktl/book-13-msehk22u1/chapter-08-c8",
+        "sachktl/book-13-msehk22u1/chapter-09-c9",
+        "sachktl/book-13-msehk22u1/chapter-10-c10",
+        "sachktl/book-13-msehk22u1/chapter-11-c11",
+        "sachktl/book-13-msehk22u1/chapter-12-c12",
+        "sachktl/book-13-msehk22u1/chapter-13-c13"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Sách 14: Lý thuyết và mô hình IRT với Stata",
+      "link": {
+        "type": "doc",
+        "id": "sachktl/book-14-tsenk18u1/index"
+      },
+      "items": [
+        "sachktl/book-14-tsenk18u1/chapter-01-c1",
+        "sachktl/book-14-tsenk18u1/chapter-02-c2",
+        "sachktl/book-14-tsenk18u1/chapter-03-c3",
+        "sachktl/book-14-tsenk18u1/chapter-04-c4",
+        "sachktl/book-14-tsenk18u1/chapter-05-c5",
+        "sachktl/book-14-tsenk18u1/chapter-06-c6",
+        "sachktl/book-14-tsenk18u1/chapter-07-c7",
+        "sachktl/book-14-tsenk18u1/chapter-08-c8",
+        "sachktl/book-14-tsenk18u1/chapter-09-c9",
+        "sachktl/book-14-tsenk18u1/chapter-10-c10",
+        "sachktl/book-14-tsenk18u1/chapter-11-c11",
+        "sachktl/book-14-tsenk18u1/chapter-12-c12",
+        "sachktl/book-14-tsenk18u1/chapter-13-c13"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Sách 15: Kinh tế lượng vi mô sử dụng Stata",
+      "link": {
+        "type": "doc",
+        "id": "sachktl/book-15-csamk22u1/index"
+      },
+      "items": [
+        "sachktl/book-15-csamk22u1/chapter-01-c1",
+        "sachktl/book-15-csamk22u1/chapter-02-c2",
+        "sachktl/book-15-csamk22u1/chapter-03-c3",
+        "sachktl/book-15-csamk22u1/chapter-04-c4",
+        "sachktl/book-15-csamk22u1/chapter-05-c5",
+        "sachktl/book-15-csamk22u1/chapter-06-c6",
+        "sachktl/book-15-csamk22u1/chapter-07-c7",
+        "sachktl/book-15-csamk22u1/chapter-08-c8",
+        "sachktl/book-15-csamk22u1/chapter-09-c9",
+        "sachktl/book-15-csamk22u1/chapter-10-c10",
+        "sachktl/book-15-csamk22u1/chapter-11-c11",
+        "sachktl/book-15-csamk22u1/chapter-12-c12",
+        "sachktl/book-15-csamk22u1/chapter-13-c13",
+        "sachktl/book-15-csamk22u1/chapter-14-c14",
+        "sachktl/book-15-csamk22u1/chapter-15-c15",
+        "sachktl/book-15-csamk22u1/chapter-16-c16",
+        "sachktl/book-15-csamk22u1/chapter-17-c17",
+        "sachktl/book-15-csamk22u1/chapter-18-c18",
+        "sachktl/book-15-csamk22u1/chapter-19-c19",
+        "sachktl/book-15-csamk22u1/chapter-20-c20",
+        "sachktl/book-15-csamk22u1/chapter-21-c21",
+        "sachktl/book-15-csamk22u1/chapter-22-c22",
+        "sachktl/book-15-csamk22u1/chapter-23-c23",
+        "sachktl/book-15-csamk22u1/chapter-24-c24",
+        "sachktl/book-15-csamk22u1/chapter-25-c25",
+        "sachktl/book-15-csamk22u1/chapter-26-c26",
+        "sachktl/book-15-csamk22u1/chapter-27-c27",
+        "sachktl/book-15-csamk22u1/chapter-28-c28",
+        "sachktl/book-15-csamk22u1/chapter-29-c29",
+        "sachktl/book-15-csamk22u1/chapter-30-c30",
+        "sachktl/book-15-csamk22u1/chapter-31-c31",
+        "sachktl/book-15-csamk22u1/chapter-32-c32",
+        "sachktl/book-15-csamk22u1/chapter-33-c33"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Sách 16: Phân tích kinh tế lượng",
+      "link": {
+        "type": "doc",
+        "id": "sachktl/book-16-gsrek19u1/index"
+      },
+      "items": [
+        "sachktl/book-16-gsrek19u1/chapter-01-c1",
+        "sachktl/book-16-gsrek19u1/chapter-02-c2",
+        "sachktl/book-16-gsrek19u1/chapter-03-c3",
+        "sachktl/book-16-gsrek19u1/chapter-04-c4",
+        "sachktl/book-16-gsrek19u1/chapter-05-c5",
+        "sachktl/book-16-gsrek19u1/chapter-06-c6",
+        "sachktl/book-16-gsrek19u1/chapter-07-c7",
+        "sachktl/book-16-gsrek19u1/chapter-08-c8",
+        "sachktl/book-16-gsrek19u1/chapter-09-c9",
+        "sachktl/book-16-gsrek19u1/chapter-10-c10",
+        "sachktl/book-16-gsrek19u1/chapter-11-c11",
+        "sachktl/book-16-gsrek19u1/chapter-12-c12",
+        "sachktl/book-16-gsrek19u1/chapter-13-c13",
+        "sachktl/book-16-gsrek19u1/chapter-14-c14",
+        "sachktl/book-16-gsrek19u1/chapter-15-c15",
+        "sachktl/book-16-gsrek19u1/chapter-16-c16",
+        "sachktl/book-16-gsrek19u1/chapter-17-c17",
+        "sachktl/book-16-gsrek19u1/chapter-18-c18",
+        "sachktl/book-16-gsrek19u1/chapter-19-c19",
+        "sachktl/book-16-gsrek19u1/chapter-20-c20",
+        "sachktl/book-16-gsrek19u1/chapter-21-c21"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Sách 17: Lý thuyết Kinh tế lượng",
+      "link": {
+        "type": "doc",
+        "id": "sachktl/book-17-hsank22u1/index"
+      },
+      "items": [
+        "sachktl/book-17-hsank22u1/chapter-01-c1",
+        "sachktl/book-17-hsank22u1/chapter-02-c2",
+        "sachktl/book-17-hsank22u1/chapter-03-c3",
+        "sachktl/book-17-hsank22u1/chapter-04-c4",
+        "sachktl/book-17-hsank22u1/chapter-05-c5",
+        "sachktl/book-17-hsank22u1/chapter-06-c6",
+        "sachktl/book-17-hsank22u1/chapter-07-c7",
+        "sachktl/book-17-hsank22u1/chapter-08-c8",
+        "sachktl/book-17-hsank22u1/chapter-09-c9",
+        "sachktl/book-17-hsank22u1/chapter-10-c10",
+        "sachktl/book-17-hsank22u1/chapter-11-c11",
+        "sachktl/book-17-hsank22u1/chapter-12-c12",
+        "sachktl/book-17-hsank22u1/chapter-13-c13",
+        "sachktl/book-17-hsank22u1/chapter-14-c14",
+        "sachktl/book-17-hsank22u1/chapter-15-c15",
+        "sachktl/book-17-hsank22u1/chapter-16-c16",
+        "sachktl/book-17-hsank22u1/chapter-17-c17",
+        "sachktl/book-17-hsank22u1/chapter-18-c18",
+        "sachktl/book-17-hsank22u1/chapter-19-c19",
+        "sachktl/book-17-hsank22u1/chapter-20-c20",
+        "sachktl/book-17-hsank22u1/chapter-21-c21",
+        "sachktl/book-17-hsank22u1/chapter-22-c22",
+        "sachktl/book-17-hsank22u1/chapter-23-c23",
+        "sachktl/book-17-hsank22u1/chapter-24-c24",
+        "sachktl/book-17-hsank22u1/chapter-25-c25",
+        "sachktl/book-17-hsank22u1/chapter-26-c26",
+        "sachktl/book-17-hsank22u1/chapter-27-c27",
+        "sachktl/book-17-hsank22u1/chapter-28-c28",
+        "sachktl/book-17-hsank22u1/chapter-29-c29"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Sách 18: Phân tích chuỗi thời gian và dữ liệu bảng",
+      "link": {
+        "type": "doc",
+        "id": "sachktl/book-18-psesk15u1/index"
+      },
+      "items": [
+        "sachktl/book-18-psesk15u1/chapter-01-c1",
+        "sachktl/book-18-psesk15u1/chapter-02-c2",
+        "sachktl/book-18-psesk15u1/chapter-03-c3",
+        "sachktl/book-18-psesk15u1/chapter-04-c4",
+        "sachktl/book-18-psesk15u1/chapter-05-c5",
+        "sachktl/book-18-psesk15u1/chapter-06-c6",
+        "sachktl/book-18-psesk15u1/chapter-07-c7",
+        "sachktl/book-18-psesk15u1/chapter-08-c8",
+        "sachktl/book-18-psesk15u1/chapter-09-c9",
+        "sachktl/book-18-psesk15u1/chapter-10-c10",
+        "sachktl/book-18-psesk15u1/chapter-11-c11",
+        "sachktl/book-18-psesk15u1/chapter-12-c12",
+        "sachktl/book-18-psesk15u1/chapter-13-c13",
+        "sachktl/book-18-psesk15u1/chapter-14-c14",
+        "sachktl/book-18-psesk15u1/chapter-15-c15",
+        "sachktl/book-18-psesk15u1/chapter-16-c16",
+        "sachktl/book-18-psesk15u1/chapter-17-c17",
+        "sachktl/book-18-psesk15u1/chapter-18-c18",
+        "sachktl/book-18-psesk15u1/chapter-19-c19",
+        "sachktl/book-18-psesk15u1/chapter-20-c20",
+        "sachktl/book-18-psesk15u1/chapter-21-c21",
+        "sachktl/book-18-psesk15u1/chapter-22-c22",
+        "sachktl/book-18-psesk15u1/chapter-23-c23",
+        "sachktl/book-18-psesk15u1/chapter-24-c24",
+        "sachktl/book-18-psesk15u1/chapter-25-c25",
+        "sachktl/book-18-psesk15u1/chapter-26-c26",
+        "sachktl/book-18-psesk15u1/chapter-27-c27",
+        "sachktl/book-18-psesk15u1/chapter-28-c28",
+        "sachktl/book-18-psesk15u1/chapter-29-c29",
+        "sachktl/book-18-psesk15u1/chapter-30-c30",
+        "sachktl/book-18-psesk15u1/chapter-31-c31",
+        "sachktl/book-18-psesk15u1/chapter-32-c32",
+        "sachktl/book-18-psesk15u1/chapter-33-c33"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Sách 19: Mô hình đa bậc với Stata",
+      "link": {
+        "type": "doc",
+        "id": "sachktl/book-19-sskrk22u1/index"
+      },
+      "items": [
+        "sachktl/book-19-sskrk22u1/chapter-01-c1",
+        "sachktl/book-19-sskrk22u1/chapter-02-c2",
+        "sachktl/book-19-sskrk22u1/chapter-03-c3",
+        "sachktl/book-19-sskrk22u1/chapter-04-c4",
+        "sachktl/book-19-sskrk22u1/chapter-05-c5",
+        "sachktl/book-19-sskrk22u1/chapter-06-c6",
+        "sachktl/book-19-sskrk22u1/chapter-07-c7",
+        "sachktl/book-19-sskrk22u1/chapter-08-c8",
+        "sachktl/book-19-sskrk22u1/chapter-09-c9",
+        "sachktl/book-19-sskrk22u1/chapter-10-c10",
+        "sachktl/book-19-sskrk22u1/chapter-11-c11",
+        "sachktl/book-19-sskrk22u1/chapter-12-c12",
+        "sachktl/book-19-sskrk22u1/chapter-13-c13",
+        "sachktl/book-19-sskrk22u1/chapter-14-c14",
+        "sachktl/book-19-sskrk22u1/chapter-15-c15",
+        "sachktl/book-19-sskrk22u1/chapter-16-c16",
+        "sachktl/book-19-sskrk22u1/chapter-17-c17"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Sách 20: Phân tích sức mạnh thống kê",
+      "link": {
+        "type": "doc",
+        "id": "sachktl/book-20-csohk88u1/index"
+      },
+      "items": [
+        "sachktl/book-20-csohk88u1/chapter-01-c1",
+        "sachktl/book-20-csohk88u1/chapter-02-c2",
+        "sachktl/book-20-csohk88u1/chapter-03-c3",
+        "sachktl/book-20-csohk88u1/chapter-04-c4",
+        "sachktl/book-20-csohk88u1/chapter-05-c5",
+        "sachktl/book-20-csohk88u1/chapter-06-c6",
+        "sachktl/book-20-csohk88u1/chapter-07-c7",
+        "sachktl/book-20-csohk88u1/chapter-08-c8",
+        "sachktl/book-20-csohk88u1/chapter-09-c9",
+        "sachktl/book-20-csohk88u1/chapter-10-c10",
+        "sachktl/book-20-csohk88u1/chapter-11-c11",
+        "sachktl/book-20-csohk88u1/chapter-12-c12"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Sách 21: Giới thiệu về phân tích tổng hợp",
+      "link": {
+        "type": "doc",
+        "id": "sachktl/book-21-bsrok21u1/index"
+      },
+      "items": [
+        "sachktl/book-21-bsrok21u1/chapter-01-c1",
+        "sachktl/book-21-bsrok21u1/chapter-02-c2",
+        "sachktl/book-21-bsrok21u1/chapter-03-c3",
+        "sachktl/book-21-bsrok21u1/chapter-04-c4",
+        "sachktl/book-21-bsrok21u1/chapter-05-c5",
+        "sachktl/book-21-bsrok21u1/chapter-06-c6",
+        "sachktl/book-21-bsrok21u1/chapter-07-c7",
+        "sachktl/book-21-bsrok21u1/chapter-08-c8",
+        "sachktl/book-21-bsrok21u1/chapter-09-c9",
+        "sachktl/book-21-bsrok21u1/chapter-10-c10",
+        "sachktl/book-21-bsrok21u1/chapter-11-c11"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Sách 22: Phân tích meta với Stata",
+      "link": {
+        "type": "doc",
+        "id": "sachktl/book-22-cshek21u1/index"
+      },
+      "items": [
+        "sachktl/book-22-cshek21u1/chapter-01-c1",
+        "sachktl/book-22-cshek21u1/chapter-02-c2",
+        "sachktl/book-22-cshek21u1/chapter-03-c3",
+        "sachktl/book-22-cshek21u1/chapter-04-c4",
+        "sachktl/book-22-cshek21u1/chapter-05-c5",
+        "sachktl/book-22-cshek21u1/chapter-06-c6",
+        "sachktl/book-22-cshek21u1/chapter-07-c7",
+        "sachktl/book-22-cshek21u1/chapter-08-c8",
+        "sachktl/book-22-cshek21u1/chapter-09-c9",
+        "sachktl/book-22-cshek21u1/chapter-10-c10",
+        "sachktl/book-22-cshek21u1/chapter-11-c11",
+        "sachktl/book-22-cshek21u1/chapter-12-c12",
+        "sachktl/book-22-cshek21u1/chapter-13-c13",
+        "sachktl/book-22-cshek21u1/chapter-14-c14",
+        "sachktl/book-22-cshek21u1/chapter-15-c15"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Sách 23: Tổng quan tài liệu: cách tiếp cận mới",
+      "link": {
+        "type": "doc",
+        "id": "sachktl/book-23-esrmk21u1/index"
+      },
+      "items": [
+        "sachktl/book-23-esrmk21u1/chapter-01-1-gioi-thieu",
+        "sachktl/book-23-esrmk21u1/chapter-02-2-nhung-dong-gop-khoa-hoc-cua-cac-tong-quan-t",
+        "sachktl/book-23-esrmk21u1/chapter-03-3-tong-quan-tai-lieu-co-he-thong",
+        "sachktl/book-23-esrmk21u1/chapter-04-4-phan-tich-tai-lieu",
+        "sachktl/book-23-esrmk21u1/chapter-05-5-tong-hop-tai-lieu",
+        "sachktl/book-23-esrmk21u1/chapter-06-6-ly-thuyet-co-so-tai-lieu",
+        "sachktl/book-23-esrmk21u1/chapter-07-7-cong-cu-tinh-toan-cho-tong-quan-phan-tich-v",
+        "sachktl/book-23-esrmk21u1/chapter-08-8-nhung-dieu-can-xem-xet-trong-tong-quan-tai-",
+        "sachktl/book-23-esrmk21u1/chapter-09-9-trien-vong-tuong-lai"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Sách 24: Phân tích dữ liệu với SPSS",
+      "link": {
+        "type": "doc",
+        "id": "sachktl/book-24-spss/index"
+      },
+      "items": [
+        "sachktl/book-24-spss/chapter-01-gioi-thieu",
+        "sachktl/book-24-spss/chapter-02-nhap-xuat-du-lieu",
+        "sachktl/book-24-spss/chapter-03-xu-ly-du-lieu",
+        "sachktl/book-24-spss/chapter-04-khai-pha-du-lieu",
+        "sachktl/book-24-spss/chapter-05-phan-tich-du-lieu"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Sách 25: Kinh tế lượng tài chính ứng dụng với Stata",
+      "link": {
+        "type": "doc",
+        "id": "sachktl/book-25-bsofk16u1/index"
+      },
+      "items": [
+        "sachktl/book-25-bsofk16u1/chapter-01-c1",
+        "sachktl/book-25-bsofk16u1/chapter-02-c2",
+        "sachktl/book-25-bsofk16u1/chapter-03-c3",
+        "sachktl/book-25-bsofk16u1/chapter-04-c4",
+        "sachktl/book-25-bsofk16u1/chapter-05-c5",
+        "sachktl/book-25-bsofk16u1/chapter-06-c6"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Sách 26: Phân tích Chuỗi thời gian Kinh tế và Tài chính",
+      "link": {
+        "type": "doc",
+        "id": "sachktl/book-26-csipk20u1/index"
+      },
+      "items": [
+        "sachktl/book-26-csipk20u1/chapter-01-c1",
+        "sachktl/book-26-csipk20u1/chapter-02-c2",
+        "sachktl/book-26-csipk20u1/chapter-03-c3",
+        "sachktl/book-26-csipk20u1/chapter-04-c4",
+        "sachktl/book-26-csipk20u1/chapter-05-c5",
+        "sachktl/book-26-csipk20u1/chapter-06-c6",
+        "sachktl/book-26-csipk20u1/chapter-07-c7",
+        "sachktl/book-26-csipk20u1/chapter-08-c8",
+        "sachktl/book-26-csipk20u1/chapter-09-c9",
+        "sachktl/book-26-csipk20u1/chapter-10-c10",
+        "sachktl/book-26-csipk20u1/chapter-11-c11",
+        "sachktl/book-26-csipk20u1/chapter-12-c12",
+        "sachktl/book-26-csipk20u1/chapter-13-c13",
+        "sachktl/book-26-csipk20u1/chapter-14-c14"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Sách 27: Kinh tế lượng tài chính: Mô hình và Phương pháp",
+      "link": {
+        "type": "doc",
+        "id": "sachktl/book-27-lsink20u1/index"
+      },
+      "items": [
+        "sachktl/book-27-lsink20u1/chapter-01-c1",
+        "sachktl/book-27-lsink20u1/chapter-02-c2",
+        "sachktl/book-27-lsink20u1/chapter-03-c3",
+        "sachktl/book-27-lsink20u1/chapter-04-c4",
+        "sachktl/book-27-lsink20u1/chapter-05-c5",
+        "sachktl/book-27-lsink20u1/chapter-06-c6",
+        "sachktl/book-27-lsink20u1/chapter-07-c7",
+        "sachktl/book-27-lsink20u1/chapter-08-c8",
+        "sachktl/book-27-lsink20u1/chapter-09-c9",
+        "sachktl/book-27-lsink20u1/chapter-10-c10",
+        "sachktl/book-27-lsink20u1/chapter-11-c11",
+        "sachktl/book-27-lsink20u1/chapter-12-c12",
+        "sachktl/book-27-lsink20u1/chapter-13-c13",
+        "sachktl/book-27-lsink20u1/chapter-14-c14",
+        "sachktl/book-27-lsink20u1/chapter-15-c15",
+        "sachktl/book-27-lsink20u1/chapter-16-c16"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Sách 28: Cẩm nang kinh tế lượng chuỗi thời gian tài chính",
+      "link": {
+        "type": "doc",
+        "id": "sachktl/book-28-asndk09u1/index"
+      },
+      "items": [
+        "sachktl/book-28-asndk09u1/chapter-01-c1",
+        "sachktl/book-28-asndk09u1/chapter-02-c2",
+        "sachktl/book-28-asndk09u1/chapter-03-c3",
+        "sachktl/book-28-asndk09u1/chapter-04-c4",
+        "sachktl/book-28-asndk09u1/chapter-05-c5",
+        "sachktl/book-28-asndk09u1/chapter-06-c6",
+        "sachktl/book-28-asndk09u1/chapter-07-c7",
+        "sachktl/book-28-asndk09u1/chapter-08-c8",
+        "sachktl/book-28-asndk09u1/chapter-09-c9",
+        "sachktl/book-28-asndk09u1/chapter-10-c10",
+        "sachktl/book-28-asndk09u1/chapter-11-c11",
+        "sachktl/book-28-asndk09u1/chapter-12-c12",
+        "sachktl/book-28-asndk09u1/chapter-13-c13",
+        "sachktl/book-28-asndk09u1/chapter-14-c14",
+        "sachktl/book-28-asndk09u1/chapter-15-c15",
+        "sachktl/book-28-asndk09u1/chapter-16-c16",
+        "sachktl/book-28-asndk09u1/chapter-17-c17",
+        "sachktl/book-28-asndk09u1/chapter-18-c18",
+        "sachktl/book-28-asndk09u1/chapter-19-c19",
+        "sachktl/book-28-asndk09u1/chapter-20-c20",
+        "sachktl/book-28-asndk09u1/chapter-21-c21",
+        "sachktl/book-28-asndk09u1/chapter-22-c22",
+        "sachktl/book-28-asndk09u1/chapter-23-c23",
+        "sachktl/book-28-asndk09u1/chapter-24-c24",
+        "sachktl/book-28-asndk09u1/chapter-25-c25",
+        "sachktl/book-28-asndk09u1/chapter-26-c26",
+        "sachktl/book-28-asndk09u1/chapter-27-c27",
+        "sachktl/book-28-asndk09u1/chapter-28-c28",
+        "sachktl/book-28-asndk09u1/chapter-29-c29",
+        "sachktl/book-28-asndk09u1/chapter-30-c30",
+        "sachktl/book-28-asndk09u1/chapter-31-c31",
+        "sachktl/book-28-asndk09u1/chapter-32-c32",
+        "sachktl/book-28-asndk09u1/chapter-33-c33",
+        "sachktl/book-28-asndk09u1/chapter-34-c34",
+        "sachktl/book-28-asndk09u1/chapter-35-c35",
+        "sachktl/book-28-asndk09u1/chapter-36-c36",
+        "sachktl/book-28-asndk09u1/chapter-37-c37",
+        "sachktl/book-28-asndk09u1/chapter-38-c38",
+        "sachktl/book-28-asndk09u1/chapter-39-c39",
+        "sachktl/book-28-asndk09u1/chapter-40-c40",
+        "sachktl/book-28-asndk09u1/chapter-41-c41",
+        "sachktl/book-28-asndk09u1/chapter-42-c42",
+        "sachktl/book-28-asndk09u1/chapter-43-c43",
+        "sachktl/book-28-asndk09u1/chapter-44-c44"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Sách 29: Phân tích SEM với PLS sử dụng Stata",
+      "link": {
+        "type": "doc",
+        "id": "sachktl/book-29-msehk21u1/index"
+      },
+      "items": [
+        "sachktl/book-29-msehk21u1/chapter-01-c1",
+        "sachktl/book-29-msehk21u1/chapter-02-c2",
+        "sachktl/book-29-msehk21u1/chapter-03-c3",
+        "sachktl/book-29-msehk21u1/chapter-04-c4",
+        "sachktl/book-29-msehk21u1/chapter-05-c5",
+        "sachktl/book-29-msehk21u1/chapter-06-c6",
+        "sachktl/book-29-msehk21u1/chapter-07-c7",
+        "sachktl/book-29-msehk21u1/chapter-08-c8",
+        "sachktl/book-29-msehk21u1/chapter-09-c9"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Sách 30: Phân tích dữ liệu đa biến ứng dụng trong nghiên cứu",
+      "link": {
+        "type": "doc",
+        "id": "sachktl/book-30-hsaik19u1/index"
+      },
+      "items": [
+        "sachktl/book-30-hsaik19u1/chapter-01-c1",
+        "sachktl/book-30-hsaik19u1/chapter-02-c2",
+        "sachktl/book-30-hsaik19u1/chapter-03-c3",
+        "sachktl/book-30-hsaik19u1/chapter-04-c4",
+        "sachktl/book-30-hsaik19u1/chapter-05-c5",
+        "sachktl/book-30-hsaik19u1/chapter-06-c6",
+        "sachktl/book-30-hsaik19u1/chapter-07-c7",
+        "sachktl/book-30-hsaik19u1/chapter-08-c8",
+        "sachktl/book-30-hsaik19u1/chapter-09-c9",
+        "sachktl/book-30-hsaik19u1/chapter-10-c10",
+        "sachktl/book-30-hsaik19u1/chapter-11-c11",
+        "sachktl/book-30-hsaik19u1/chapter-12-c12",
+        "sachktl/book-30-hsaik19u1/chapter-13-c13"
+      ]
+    }
   ]
 };
 

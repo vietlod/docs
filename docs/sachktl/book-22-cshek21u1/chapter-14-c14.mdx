@@ -1,0 +1,168 @@
+---
+id: chapter-14-c14
+title: "Chương 14: 14. phân tích tổng hợp với dữ liệu cấp cá nhân"
+sidebar_label: "Chương 14: 14. Phân tích tổng hợp với dữ liệu cấp cá "
+sidebar_position: 15
+description: "Hướng dẫn thực hành How-To Chương 14: 14. phân tích tổng hợp với dữ liệu cấp cá nhân thuộc bộ sách Phân tích meta với Stata trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 14: 14. phân tích tổng hợp với dữ liệu cấp cá nhân
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 14: 14. phân tích tổng hợp với dữ liệu cấp cá nhân** thuộc [**Bộ sách 22: phân tích meta với Stata**](/sachktl/book-22-cshek21u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/cshek21u1/c14/](https://sachktl.tnsai.vn/vi/cshek21u1/c14/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 14: 14. phân tích tổng hợp với dữ liệu cấp cá nhân">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 22 · CHƯƠNG 14</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 14: 14. phân tích tổng hợp với dữ liệu cấp cá nhân</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Phân tích meta với Stata · 4 bài học chuyên sâu</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Giới thiệu phân tích tổng hợp: Dữ liệu bệnh nhân cá nhân và dữ liệu tóm tắt An Introduction to Meta-Analysis: Individual Patient-Level data vs. Summary Sstatistics Giới thiệu Cuộc tranh luận về "tiêu chuẩn vàng" Trong thế giới của phân tích tổng hợp, việc có được dữ liệu cấp độ bệnh nhân cá nhân từ các nghiên cứu gốc thường được coi là "tiêu chuẩn vàng". Về mặt lý thuyết, việc phân tích dữ liệu thô cho phép chúng ta thực hiện các mô hình phức tạp hơn, kiểm tra các tương tác ở cấp độ cá nhân, và chuẩn hóa các biến số một cách nhất quán, hứa hẹn mang lại các kết quả
+
+- **Chủ đề học thuật trọng tâm**: Giới thiệu Cuộc tranh luận về "tiêu chuẩn vàng", Cấu trúc chuỗi bài học: Đối đầu hai phương pháp, Kiến thức tiên quyết cần chuẩn bị, Mục tiêu học tập của chuỗi bài viết, Tài liệu tham khảo chính.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 14 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/cshek21u1/c14/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Phân tích dữ liệu bệnh nhân cá nhân</h3>
+    <p>Phân tích dữ liệu bệnh nhân cá nhân: Phương pháp tiếp cận "tiêu chuẩn vàng" Individual patient-level data analysis: The "gold standard" approach Khai thác sức mạnh từ dữ liệu thô Chào mừng các bạn đến với bài học thực hành đầu tiên, nơi chúng ta sẽ khám phá ph Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/cshek21u1/c14/phan-tich-du-lieu-benh-nhan-ca-nhan-ipd/" target="_blank" rel="noopener">Phân tích dữ liệu bệnh nhân cá nhân</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Từ IPD đến phân tích dữ liệu tóm tắt</h3>
+    <p>Từ IPD đến phân tích dữ liệu tóm tắt và so sánh From IPD to summary statistics analysis and comparison Giả lập kịch bản nghiên cứu phổ biến Trong bài học trước, chúng ta đã được trải nghiệm sự xa xỉ của việc có trong tay dữ liệu cấp độ bệnh nhân cá nhân . Chún Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/cshek21u1/c14/tu-ipd-den-phan-tich-du-lieu-tom-tat-ss/" target="_blank" rel="noopener">Từ IPD đến phân tích dữ liệu tóm tắt</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Thực hành mô phỏng để kiểm chứng hiệu quả IPD và SS</h3>
+    <p>Thực hành mô phỏng để kiểm chứng hiệu quả IPD và SS A simulation study to verify the efficiency of IPD and SS analyses Từ một ví dụ đến một kết luận tổng quát Trong bài học trước, chúng ta đã thực hiện một so sánh trực tiếp giữa phân tích IPD và SS trên một bộ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/cshek21u1/c14/thuc-hanh-mo-phong-de-kiem-chung-hieu-qua-ipd-va-ss/" target="_blank" rel="noopener">Thực hành mô phỏng để kiểm chứng hiệu quả IPD và SS</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: Rút ra kết luận và khuyến nghị thực tiễn</h3>
+    <p>Tổng hợp phân tích IPD và SS: Hiệu quả và khuyến nghị thực tiễn Synthesizing IPD and SS analysis: Efficiency and practical recommendations Nhìn lại cuộc tranh luận và những phát hiện bất ngờ Xin chúc mừng bạn đã hoàn thành một trong những chuỗi bài học mang tí Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/cshek21u1/c14/rut-ra-ket-luan-va-khuyen-nghi-thuc-tien/" target="_blank" rel="noopener">Rút ra kết luận và khuyến nghị thực tiễn</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_cshek21u1_c14_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_cshek21u1_c14_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_cshek21u1_c14_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 14: 14. phân tích tổng hợp với dữ liệu cấp cá nhân trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 14 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Phân tích dữ liệu bệnh nhân cá nhân | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/cshek21u1/c14/phan-tich-du-lieu-benh-nhan-ca-nhan-ipd/) |
+| **Bài 02** | Từ IPD đến phân tích dữ liệu tóm tắt | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/cshek21u1/c14/tu-ipd-den-phan-tich-du-lieu-tom-tat-ss/) |
+| **Bài 03** | Thực hành mô phỏng để kiểm chứng hiệu quả IPD và SS | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/cshek21u1/c14/thuc-hanh-mo-phong-de-kiem-chung-hieu-qua-ipd-va-ss/) |
+| **Bài 04** | Rút ra kết luận và khuyến nghị thực tiễn | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/cshek21u1/c14/rut-ra-ket-luan-va-khuyen-nghi-thuc-tien/) |

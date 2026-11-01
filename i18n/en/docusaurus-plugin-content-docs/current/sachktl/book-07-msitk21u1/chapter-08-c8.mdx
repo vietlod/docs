@@ -1,0 +1,173 @@
+---
+id: chapter-08-c8
+title: "Chapter 08: 8. Tương tác giữa các biến định tính — Interpreting and Visualizing Regression Models Using Stata"
+sidebar_label: "Chapter 08: 8. Tương tác giữa các biến định tính"
+sidebar_position: 9
+description: "Step-by-step practical how-to guide for Chapter 08: 8. Tương tác giữa các biến định tính from Interpreting and Visualizing Regression Models Using Stata on SachKTL with Stata, R, and Python workflows integrated with EcoData, Finco, and EcoLab."
+---
+
+# Chapter 08: 8. Tương tác giữa các biến định tính — Interpreting and Visualizing Regression Models Using Stata
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+This practical how-to guide synthesizes the methodology and empirical implementation workflow of **Chapter 08: 8. Tương tác giữa các biến định tính** from [**Book 07: Interpreting and Visualizing Regression Models Using Stata**](/en/sachktl/book-07-msitk21u1/), with direct backlinks to the authoritative source material at [https://sachktl.tnsai.vn/vi/msitk21u1/c8/](https://sachktl.tnsai.vn/vi/msitk21u1/c8/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chapter 08: 8. Tương tác giữa các biến định tính">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BOOK 07 · CHAPTER 08</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chapter 08: 8. Tương tác giữa các biến định tính</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Part of Textbook: Interpreting and Visualizing Regression Models Using Stata · 5 Deta</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Methodological Meaning and Scope of Application
+
+Phân tích tương tác giữa các biến phân loại: Hướng dẫn toàn diện A Comprehensive guide to Categorical by Categorical Interactions Khám phá sức mạnh của các mối quan hệ phụ thuộc Trong thế giới thực, các mối quan hệ kinh tế hiếm khi đơn giản. Hiệu quả của một chính sách giáo dục có thể khác nhau giữa nam và nữ, tác động của một liệu pháp điều trị có thể phụ thuộc vào tình trạng bệnh lý ban đầu của bệnh nhân, và sự thành công của một chiến dịch marketing có thể thay đổi theo nhóm tuổi khách hàng. Những tình huống này, nơi tác động của một biến số thay đổi tùy thuộc vào giá trị của một biến số
+
+- **Core Academic Topics**: Khám phá sức mạnh của các mối quan hệ phụ thuộc, Cấu trúc chuỗi bài học, Kiến thức tiên quyết, Bạn cần chuẩn bị gì?, Mục tiêu học tập.
+- **Supported Analytical Environments**: `Stata 18 MP`.
+- **Recommended Empirical Data Sources**: Vietnamese macroeconomic, corporate, and household survey datasets on [EcoData](https://ecodata.io.vn), capital and commodity market series on [Finco](https://www.finco.vn), model cross-references on [VietLOD](https://vietlod.tnsai.vn), and automated estimation on [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Original Chapter on SachKTL",
+      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for Chapter 08 on SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/msitk21u1/c8/"
+    },
+    {
+      title: "Practice Datasets on EcoData & Finco",
+      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and survey data for hands-on replication.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Automated Estimation on EcoLab",
+      description: "Execute econometric specifications, run diagnostic battery tests, and export publication-grade tables automatically.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Step-by-Step Practical Implementation Across Chapter Lessons
+
+<Steps>
+  <div className="step-item">
+    <h3>Step 1: Phân tích tương tác 2x2</h3>
+    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Phân tích tương tác 2x2. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c8/phan-tich-tuong-tac-2x2/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/msitk21u1/c8/phan-tich-tuong-tac-2x2/</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Step 2: Phân tích tương tác 2x3</h3>
+    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Phân tích tương tác 2x3. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c8/phan-tich-tuong-tac-2x3/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/msitk21u1/c8/phan-tich-tuong-tac-2x3/</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Step 3: Phân tích tương tác 3×3</h3>
+    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Phân tích tương tác 3×3. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c8/phan-tich-tuong-tac-3x3/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/msitk21u1/c8/phan-tich-tuong-tac-3x3/</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Step 4: Các chủ đề nâng cao và lưu ý thực tiễn</h3>
+    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Các chủ đề nâng cao và lưu ý thực tiễn. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c8/cac-chu-de-nang-cao-va-luu-y-thuc-tien/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/msitk21u1/c8/cac-chu-de-nang-cao-va-luu-y-thuc-tien/</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Step 5: Tổng kết và ứng dụng nâng cao về tương tác biến phân loại</h3>
+    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Tổng kết và ứng dụng nâng cao về tương tác biến phân loại. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c8/tong-ket-va-ung-dung-nang-cao-ve-tuong-tac-bien-phan-loai/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/msitk21u1/c8/tong-ket-va-ung-dung-nang-cao-ve-tuong-tac-bien-phan-loai/</a>.</p>
+  </div>
+</Steps>
+
+## 3. Multi-Platform Implementation Examples in Stata, R, and Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Initialize environment and load practice dataset from EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Import standardized empirical dataset
+import delimited "sachktl_msitk21u1_c08_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Estimate baseline specification and run diagnostic checks with robust standard errors
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Load econometric packages and practice dataset from EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_msitk21u1_c08_ecodata.csv")
+summary(df)
+
+# Estimate model and compute heteroskedasticity-robust HC1 standard errors
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Load econometric libraries and practice dataset from EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_msitk21u1_c08_ecodata.csv")
+print(df.describe())
+
+# Fit specification with HC1 robust standard errors
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video Tutorial Walkthrough
+
+<VideoTutorial
+  title="Practical Walkthrough for Chapter 08: 8. Tương tác giữa các biến định tính on SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Complete Lesson Directory and Backlinks to Original SachKTL Articles
+
+| No. | Lesson Title in Chapter 08 | Supported Software | Original Source Link on SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Lesson 01** | Phân tích tương tác 2x2 | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c8/phan-tich-tuong-tac-2x2/) |
+| **Lesson 02** | Phân tích tương tác 2x3 | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c8/phan-tich-tuong-tac-2x3/) |
+| **Lesson 03** | Phân tích tương tác 3×3 | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c8/phan-tich-tuong-tac-3x3/) |
+| **Lesson 04** | Các chủ đề nâng cao và lưu ý thực tiễn | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c8/cac-chu-de-nang-cao-va-luu-y-thuc-tien/) |
+| **Lesson 05** | Tổng kết và ứng dụng nâng cao về tương tác biến phân loại | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c8/tong-ket-va-ung-dung-nang-cao-ve-tuong-tac-bien-phan-loai/) |

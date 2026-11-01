@@ -1,0 +1,178 @@
+---
+id: chapter-25-c25
+title: "Chương 25: 25. mô hình hóa tương quan có điều kiện của lợi nhuận tài sản"
+sidebar_label: "Chương 25: 25. Mô hình hóa tương quan có điều kiện củ"
+sidebar_position: 26
+description: "Hướng dẫn thực hành How-To Chương 25: 25. mô hình hóa tương quan có điều kiện của lợi nhuận tài sản thuộc bộ sách Phân tích chuỗi thời gian và dữ liệu bảng trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 25: 25. mô hình hóa tương quan có điều kiện của lợi nhuận tài sản
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 25: 25. mô hình hóa tương quan có điều kiện của lợi nhuận tài sản** thuộc [**Bộ sách 18: phân tích chuỗi thời gian và dữ liệu bảng**](/sachktl/book-18-psesk15u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/psesk15u1/c25/](https://sachktl.tnsai.vn/vi/psesk15u1/c25/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 25: 25. mô hình hóa tương quan có điều kiện của lợi nhuận tài">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 18 · CHƯƠNG 25</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 25: 25. mô hình hóa tương quan có điều kiện của lợi nhuận tài</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Phân tích chuỗi thời gian và dữ liệu bảng · 6 bài học chuyên sâu</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Giới thiệu mô hình tương quan có điều kiện động Introduction to Dynamic Conditional Correlation models Chào các bạn sinh viên, chúng ta sắp bước vào một trong những chủ đề hấp dẫn và thực tiễn nhất của tài chính kinh tế lượng hiện đại. Việc hiểu được sự thay đổi của biến động và tương quan là chìa khóa để quản lý rủi ro và ra quyết định đầu tư thông minh. Hãy cùng nhau chinh phục chủ đề này nhé! TÓM TẮT CHỦ ĐỀ Trong thế giới tài chính, mối quan hệ giữa các tài sản không bao giờ đứng yên. Sự biến động của một cổ phiếu hay mối tương quan giữa hai loại tiền tệ có thể thay đổi đột ngột do các sự
+
+- **Chủ đề học thuật trọng tâm**: TÓM TẮT CHỦ ĐỀ, CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 25 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/psesk15u1/c25/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Các mô hình ước lượng hiệp phương sai giản đơn</h3>
+    <p>Các mô hình ước lượng hiệp phương sai giản đơn Simple models for covariance estimation 1. Giới thiệu Chào mừng các bạn đã quay trở lại với chuỗi bài học về mô hình hóa tương quan tài sản. Trong bài giới thiệu, chúng ta đã cùng nhau khẳng định rằng trong thế gi Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c25/cac-mo-hinh-uoc-luong-hiep-phuong-sai-gian-don/" target="_blank" rel="noopener">Các mô hình ước lượng hiệp phương sai giản đơn</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Nền tảng lý thuyết mô hình DCC</h3>
+    <p>Nền tảng lý thuyết của mô hình DCC Theoretical foundation of the DCC model 1. Giới thiệu Ở bài học trước, chúng ta đã khám phá các mô hình EWMA và thấy rằng chúng là một bước đi đầu tiên hợp lý để nắm bắt sự thay đổi của hiệp phương sai. Tuy nhiên, các mô hình Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c25/nen-tang-ly-thuyet-mo-hinh-dcc/" target="_blank" rel="noopener">Nền tảng lý thuyết mô hình DCC</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Ước lượng và kiểm định mô hình DCC</h3>
+    <p>Ước lượng và kiểm định mô hình DCC DCC model estimation and diagnostics 1. Giới thiệu Trong bài học trước, chúng ta đã cùng nhau "mổ xẻ" cấu trúc lý thuyết tinh巧 của mô hình DCC. Chúng ta đã hiểu được nguyên lý "chia để trị" thông qua việc tách biệt mô hình hó Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c25/uoc-luong-va-kiem-dinh-mo-hinh-dcc/" target="_blank" rel="noopener">Ước lượng và kiểm định mô hình DCC</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: Dự báo và ứng dụng mô hình DCC</h3>
+    <p>Dự báo và ứng dụng thực tế của mô hình DCC Forecasting and applying the DCC model in practice 1. Giới thiệu Trong các bài học trước, chúng ta đã xây dựng một nền tảng vững chắc về mô hình DCC, từ cấu trúc lý thuyết đến quy trình ước lượng và kiểm định. Chúng t Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c25/du-bao-va-ung-dung-mo-hinh-dcc/" target="_blank" rel="noopener">Dự báo và ứng dụng mô hình DCC</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 5: Phân tích mô hình DCC với Stata</h3>
+    <p>Phân tích mô hình DCC với Stata DCC model analysis with Stata 1. Giới thiệu Chào mừng các bạn đã đến với bài học thực hành cuối cùng và quan trọng nhất! Trong suốt bốn bài học vừa qua, chúng ta đã cùng nhau xây dựng một kim tự tháp kiến thức vững chắc, từ nhữn Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c25/phan-tich-mo-hinh-dcc-voi-stata/" target="_blank" rel="noopener">Phân tích mô hình DCC với Stata</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 6: Tổng hợp và hệ thống hóa kiến thức</h3>
+    <p>Tổng hợp mô hình DCC: Lý thuyết, phương pháp và ứng dụng Synthesizing DCC models: Theory, methods, and applications 1. TỔNG QUAN CHỦ ĐỀ Chúng ta đã cùng nhau đi qua một hành trình khám phá chi tiết về mô hình Tương quan có điều kiện động, một trong những công  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c25/tong-hop-va-he-thong-hoa-kien-thuc/" target="_blank" rel="noopener">Tổng hợp và hệ thống hóa kiến thức</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_psesk15u1_c25_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_psesk15u1_c25_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_psesk15u1_c25_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 25: 25. mô hình hóa tương quan có điều kiện của lợi nhuận tài sản trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 25 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Các mô hình ước lượng hiệp phương sai giản đơn | R 4.x | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c25/cac-mo-hinh-uoc-luong-hiep-phuong-sai-gian-don/) |
+| **Bài 02** | Nền tảng lý thuyết mô hình DCC | R 4.x | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c25/nen-tang-ly-thuyet-mo-hinh-dcc/) |
+| **Bài 03** | Ước lượng và kiểm định mô hình DCC | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c25/uoc-luong-va-kiem-dinh-mo-hinh-dcc/) |
+| **Bài 04** | Dự báo và ứng dụng mô hình DCC | R 4.x | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c25/du-bao-va-ung-dung-mo-hinh-dcc/) |
+| **Bài 05** | Phân tích mô hình DCC với Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c25/phan-tich-mo-hinh-dcc-voi-stata/) |
+| **Bài 06** | Tổng hợp và hệ thống hóa kiến thức | Stata 18 MP, R 4.x | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c25/tong-hop-va-he-thong-hoa-kien-thuc/) |

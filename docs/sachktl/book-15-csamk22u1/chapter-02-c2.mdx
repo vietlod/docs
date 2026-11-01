@@ -1,0 +1,178 @@
+---
+id: chapter-02-c2
+title: "Chương 02: 2. quản lý dữ liệu và đồ họa"
+sidebar_label: "Chương 02: 2. Quản lý dữ liệu và đồ họa"
+sidebar_position: 3
+description: "Hướng dẫn thực hành How-To Chương 02: 2. quản lý dữ liệu và đồ họa thuộc bộ sách Kinh tế lượng vi mô sử dụng Stata trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 02: 2. quản lý dữ liệu và đồ họa
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 02: 2. quản lý dữ liệu và đồ họa** thuộc [**Bộ sách 15: kinh tế lượng vi mô sử dụng Stata**](/sachktl/book-15-csamk22u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/csamk22u1/c2/](https://sachktl.tnsai.vn/vi/csamk22u1/c2/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 02: 2. quản lý dữ liệu và đồ họa">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 15 · CHƯƠNG 02</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 02: 2. quản lý dữ liệu và đồ họa</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Kinh tế lượng vi mô sử dụng Stata · 6 bài học chuyên sâu</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Quản lý dữ liệu và đồ họa Chào các bạn sinh viên, chào mừng đến với chuỗi bài học nền tảng nhưng vô cùng quan trọng trong hành trình chinh phục kinh tế lượng. Trước khi chúng ta có thể xây dựng những mô hình phức tạp hay đưa ra những kết luận đột phá, có một công việc thầm lặng nhưng mang tính quyết định: đó là quản lý dữ liệu. Đây là quá trình biến những con số thô, lộn xộn từ các cuộc khảo sát hoặc nguồn dữ liệu thứ cấp thành một bộ dữ liệu sạch, có cấu trúc và sẵn sàng cho việc phân tích. Trong nghiên cứu thực tế, các nhà kinh tế lượng thường dành tới 80% thời gian cho công việc này. Một
+
+- **Chủ đề học thuật trọng tâm**: CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO, PHỤ LỤC: DỮ LIỆU MÔ PHỎNG CHO CHUỖI BÀI HỌC.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 02 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/csamk22u1/c2/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Nền tảng quản lý dữ liệu trong Stata</h3>
+    <p>Nền tảng quản lý dữ liệu trong Stata Data management fundamentals in Stata Bước khởi đầu của mọi phân tích Chào mừng các bạn quay trở lại với bài học đầu tiên trong chuỗi bài về quản lý dữ liệu. Như đã đề cập ở bài giới thiệu, điểm xuất phát của bất kỳ một cuộ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c2/nen-tang-quan-ly-du-lieu-trong-stata/" target="_blank" rel="noopener">Nền tảng Quản lý Dữ liệu trong Stata</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Các kỹ thuật xử lý và biến đổi dữ liệu</h3>
+    <p>Các kỹ thuật xử lý và biến đổi dữ liệu Data processing and transformation techniques Đánh bóng viên kim cương thô Chào mừng các bạn đến với bài học thứ hai. Ở bài trước, chúng ta đã thành công trong việc đưa dữ liệu thô từ nhiều nguồn khác nhau vào Stata. Tuy  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c2/cac-ky-thuat-xu-ly-va-bien-doi-du-lieu/" target="_blank" rel="noopener">Các Kỹ thuật Xử lý và Biến đổi Dữ liệu</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Thao tác nâng cao với tập dữ liệu</h3>
+    <p>Thao tác nâng cao với tập dữ liệu Advanced dataset manipulation Trở thành kiến trúc sư dữ liệu Chào mừng các bạn đã quay trở lại. Trong các bài học trước, chúng ta đã tập trung vào việc "chăm sóc" từng quan sát và biến riêng lẻ - giống như việc đảm bảo mỗi viê Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c2/thao-tac-nang-cao-voi-tap-du-lieu/" target="_blank" rel="noopener">Thao tác Nâng cao với Tập dữ liệu</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: Trực quan hóa dữ liệu kinh tế lượng</h3>
+    <p>Trực quan hóa dữ liệu kinh tế lượng Econometric data visualization Khi dữ liệu biết kể chuyện Chào mừng các bạn đến với bài học thứ tư trong chuỗi bài về quản lý dữ liệu. Cho đến nay, chúng ta đã tập trung vào việc xử lý "phần chìm của tảng băng" - những công  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c2/truc-quan-hoa-du-lieu-kinh-te-luong/" target="_blank" rel="noopener">Trực quan hóa Dữ liệu Kinh tế lượng</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 5: Thực hành quản lý và trực quan hóa dữ liệu</h3>
+    <p>Thực hành quản lý và trực quan hóa dữ liệu Data management and visualization in practice Từ dữ liệu thô đến khám phá ban đầu Chào mừng các bạn đến với bài học cuối cùng và cũng là bài học quan trọng nhất trong chuỗi bài của chúng ta. Trong bốn bài trước, chúng Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c2/thuc-hanh-quan-ly-va-truc-quan-hoa-du-lieu/" target="_blank" rel="noopener">Thực hành Quản lý và Trực quan hóa Dữ liệu</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 6: Tổng hợp chuỗi quản lý dữ liệu và đồ thị</h3>
+    <p>Tư duy quản lý dữ liệu trong nghiên cứu kinh tế lượng Synthesis: The data management mindset in econometric research Nền tảng vô hình của nghiên cứu đáng tin cậy Trong suốt chuỗi bài học vừa qua, chúng ta đã cùng nhau khám phá một thế giới thường bị xem nhẹ nh Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c2/tong-hop-chuoi-quan-ly-du-lieu-va-do-thi/" target="_blank" rel="noopener">Tổng hợp chuỗi Quản lý Dữ liệu và Đồ thị</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_csamk22u1_c02_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_csamk22u1_c02_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_csamk22u1_c02_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 02: 2. quản lý dữ liệu và đồ họa trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 02 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Nền tảng Quản lý Dữ liệu trong Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c2/nen-tang-quan-ly-du-lieu-trong-stata/) |
+| **Bài 02** | Các Kỹ thuật Xử lý và Biến đổi Dữ liệu | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c2/cac-ky-thuat-xu-ly-va-bien-doi-du-lieu/) |
+| **Bài 03** | Thao tác Nâng cao với Tập dữ liệu | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c2/thao-tac-nang-cao-voi-tap-du-lieu/) |
+| **Bài 04** | Trực quan hóa Dữ liệu Kinh tế lượng | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c2/truc-quan-hoa-du-lieu-kinh-te-luong/) |
+| **Bài 05** | Thực hành Quản lý và Trực quan hóa Dữ liệu | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c2/thuc-hanh-quan-ly-va-truc-quan-hoa-du-lieu/) |
+| **Bài 06** | Tổng hợp chuỗi Quản lý Dữ liệu và Đồ thị | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c2/tong-hop-chuoi-quan-ly-du-lieu-va-do-thi/) |

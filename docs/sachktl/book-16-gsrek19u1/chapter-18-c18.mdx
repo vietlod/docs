@@ -1,0 +1,179 @@
+---
+id: chapter-18-c18
+title: "Chương 18: 18. lựa chọn đa thức và số lần xảy ra sự kiện"
+sidebar_label: "Chương 18: 18. Lựa chọn đa thức và số lần xảy ra sự k"
+sidebar_position: 19
+description: "Hướng dẫn thực hành How-To Chương 18: 18. lựa chọn đa thức và số lần xảy ra sự kiện thuộc bộ sách Phân tích kinh tế lượng trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 18: 18. lựa chọn đa thức và số lần xảy ra sự kiện
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 18: 18. lựa chọn đa thức và số lần xảy ra sự kiện** thuộc [**Bộ sách 16: phân tích kinh tế lượng**](/sachktl/book-16-gsrek19u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/gsrek19u1/c18/](https://sachktl.tnsai.vn/vi/gsrek19u1/c18/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 18: 18. lựa chọn đa thức và số lần xảy ra sự kiện">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 16 · CHƯƠNG 18</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 18: 18. lựa chọn đa thức và số lần xảy ra sự kiện</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Phân tích kinh tế lượng · 7 bài học chuyên sâu</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Lựa chọn đa thức và số lần xảy ra sự kiện Giới thiệu về các mô hình lựa chọn đa phương và đếm sự kiện Chào mừng các bạn sinh viên đến với một trong những chủ đề thú vị và có tính ứng dụng cao nhất trong kinh tế lượng vi mô! Trong các học phần trước, chúng ta đã làm quen với các mô hình lựa chọn nhị phân, nơi người ra quyết định chỉ có hai phương án . Tuy nhiên, thực tế cuộc sống phức tạp hơn nhiều. Chúng ta thường xuyên phải đối mặt với những lựa chọn có nhiều hơn hai khả năng: chọn trường đại học nào trong danh sách, đi làm bằng phương tiện gì, hay đánh giá mức độ hài lòng về một dịch vụ
+
+- **Chủ đề học thuật trọng tâm**: Cấu trúc chuỗi bài học, Kiến thức tiên quyết cần chuẩn bị, Mục tiêu học tập của chuỗi bài viết, Tài liệu tham khảo chính, PHỤ LỤC: Dữ liệu mô phỏng cho chuỗi bài viết.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 18 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/gsrek19u1/c18/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Nền tảng về lựa chọn đa phương và mô hình multinomial Logit</h3>
+    <p>Bài 1: Nền tảng về lựa chọn đa phương và mô hình Multinomial Logit Chào mừng các bạn đã quay trở lại với chuỗi bài học về các mô hình lựa chọn rời rạc. Ở các học phần trước, chúng ta đã làm quen với mô hình Logit và Probit, những công cụ rất mạnh để phân tích  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/gsrek19u1/c18/nen-tang-ve-lua-chon-da-phuong-va-mo-hinh-multinomial-logit-mnl/" target="_blank" rel="noopener">Nền tảng về lựa chọn đa phương và mô hình Multinomial Logit</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Vấn đề IIA và các mô hình thay thế cho lựa chọn không có thứ tự</h3>
+    <p>Trong bài học đầu tiên, chúng ta đã xây dựng mô hình Multinomial Logit dựa trên nền tảng tiện ích ngẫu nhiên và giả định về sai số theo phân phối Gumbel. Giả định này giúp chúng ta có được một công thức xác suất gọn gàng, nhưng nó cũng tạo ra một thuộc tính gọ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/gsrek19u1/c18/van-de-iia-va-cac-mo-hinh-thay-the-cho-lua-chon-khong-co-thu-tu/" target="_blank" rel="noopener">Vấn đề IIA và các mô hình thay thế cho lựa chọn không có thứ tự</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Mô hình hóa tính không đồng nhất và ước lượng willingness-to-pay</h3>
+    <p>Chào mừng các bạn đến với bài học thứ ba trong chuỗi bài về mô hình lựa chọn. Một trong những bước tiến lớn nhất trong lĩnh vực này trong những thập kỷ gần đây là khả năng mô hình hóa sự thật rằng mỗi cá nhân là duy nhất. Các mô hình chúng ta đã học, như MNL h Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/gsrek19u1/c18/mo-hinh-hoa-tinh-khong-dong-nhat-va-uoc-luong-willingness-to-pay-wtp/" target="_blank" rel="noopener">Mô hình hóa tính không đồng nhất và ước lượng Willingness-to-Pay</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: Mô hình lựa chọn có thứ tự</h3>
+    <p>Chào mừng các bạn đã quay trở lại! Hãy nghĩ về những lần bạn được yêu cầu đánh giá một sản phẩm trên thang điểm từ 1 đến 5 sao, hoặc khi bạn thấy các mức xếp hạng tín dụng của một công ty, hay thậm chí là kết quả học tập của sinh viên . Tất cả những ví dụ này  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/gsrek19u1/c18/mo-hinh-lua-chon-co-thu-tu-ordered-choice-models/" target="_blank" rel="noopener">Mô hình lựa chọn có thứ tự</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 5: Giới thiệu mô hình đếm sự kiện</h3>
+    <p>Chào mừng các bạn quay trở lại với chuỗi bài học của chúng ta! Hãy nghĩ về các câu hỏi nghiên cứu như: "Một cá nhân đi khám bác sĩ bao nhiêu lần trong một năm?", "Một công ty đăng ký bao nhiêu bằng sáng chế trong một quý?", hay "Có bao nhiêu vụ tai nạn xảy ra  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/gsrek19u1/c18/gioi-thieu-mo-hinh-dem-su-kien-event-count-models/" target="_blank" rel="noopener">Giới thiệu mô hình đếm sự kiện</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 6: Các mô hình đếm nâng cao và ứng dụng dữ liệu bảng</h3>
+    <p>Chào mừng các bạn đến với bài học nâng cao về mô hình đếm sự kiện. Trong thực tế, khi làm việc với dữ liệu đếm, chúng ta thường gặp phải một hiện tượng rất đặc trưng: số lượng các quan sát có giá trị bằng 0 nhiều hơn đáng kể so với những gì mô hình Poisson hay Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/gsrek19u1/c18/cac-mo-hinh-dem-nang-cao-va-ung-dung-du-lieu-bang/" target="_blank" rel="noopener">Các mô hình đếm nâng cao và ứng dụng dữ liệu bảng</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_gsrek19u1_c18_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_gsrek19u1_c18_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_gsrek19u1_c18_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 18: 18. lựa chọn đa thức và số lần xảy ra sự kiện trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 18 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Nền tảng về lựa chọn đa phương và mô hình Multinomial Logit | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c18/nen-tang-ve-lua-chon-da-phuong-va-mo-hinh-multinomial-logit-mnl/) |
+| **Bài 02** | Vấn đề IIA và các mô hình thay thế cho lựa chọn không có thứ tự | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c18/van-de-iia-va-cac-mo-hinh-thay-the-cho-lua-chon-khong-co-thu-tu/) |
+| **Bài 03** | Mô hình hóa tính không đồng nhất và ước lượng Willingness-to-Pay | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c18/mo-hinh-hoa-tinh-khong-dong-nhat-va-uoc-luong-willingness-to-pay-wtp/) |
+| **Bài 04** | Mô hình lựa chọn có thứ tự | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c18/mo-hinh-lua-chon-co-thu-tu-ordered-choice-models/) |
+| **Bài 05** | Giới thiệu mô hình đếm sự kiện | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c18/gioi-thieu-mo-hinh-dem-su-kien-event-count-models/) |
+| **Bài 06** | Các mô hình đếm nâng cao và ứng dụng dữ liệu bảng | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c18/cac-mo-hinh-dem-nang-cao-va-ung-dung-du-lieu-bang/) |
+| **Bài 07** | Hướng dẫn thực hành tổng hợp với Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c18/huong-dan-thuc-hanh-tong-hop-voi-stata/) |

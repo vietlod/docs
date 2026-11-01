@@ -1,0 +1,178 @@
+---
+id: chapter-01-c1
+title: "Chương 01: 1. giới thiệu mô hình GARCH đơn biến"
+sidebar_label: "Chương 01: 1. Giới thiệu mô hình GARCH đơn biến"
+sidebar_position: 2
+description: "Hướng dẫn thực hành How-To Chương 01: 1. giới thiệu mô hình GARCH đơn biến thuộc bộ sách Cẩm nang kinh tế lượng chuỗi thời gian tài chính trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 01: 1. giới thiệu mô hình GARCH đơn biến
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 01: 1. giới thiệu mô hình GARCH đơn biến** thuộc [**Bộ sách 28: cẩm nang kinh tế lượng chuỗi thời gian tài chính**](/sachktl/book-28-asndk09u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/asndk09u1/c1/](https://sachktl.tnsai.vn/vi/asndk09u1/c1/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 01: 1. giới thiệu mô hình GARCH đơn biến">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 28 · CHƯƠNG 01</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 01: 1. giới thiệu mô hình GARCH đơn biến</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Cẩm nang kinh tế lượng chuỗi thời gian tài chính · 6 bài học chu</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Giới thiệu mô hình GARCH đơn biến An Introduction to Univariate GARCH models Chào các bạn sinh viên, chào mừng đến với chuỗi bài học chuyên sâu về các mô hình GARCH! Trong thế giới tài chính, "biến động" là một khái niệm không thể thiếu. Nó không chỉ là một con số thống kê, mà còn là thước đo của rủi ro, sự bất ổn, và cả cơ hội. Tại sao giá cổ phiếu hôm nay biến động mạnh hơn hôm qua? Làm thế nào để dự báo rủi ro cho danh mục đầu tư trong tuần tới? Các mô hình GARCH ra đời để trả lời những câu hỏi đó. Đây là một trong những công cụ mạnh mẽ và phổ biến nhất trong kinh tế lượng tài chính, giúp
+
+- **Chủ đề học thuật trọng tâm**: CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO, PHỤ LỤC: DỮ LIỆU MÔ PHỎNG CHO SERIES.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 01 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/asndk09u1/c1/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Nền tảng mô hình ARCH và GARCH</h3>
+    <p>Nền tảng mô hình ARCH và GARCH Foundations of ARCH and GARCH models Giới thiệu Chào mừng các bạn đã quay trở lại! Trong bài học đầu tiên này, chúng ta sẽ cùng nhau xây dựng những viên gạch nền tảng quan trọng nhất để hiểu về thế giới của các mô hình biến động. Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c1/nen-tang-mo-hinh-arch-va-garch/" target="_blank" rel="noopener">Nền tảng mô hình ARCH và GARCH</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Các họ mô hình GARCH mở rộng</h3>
+    <p>Các họ mô hình GARCH mở rộng Families of extended GARCH models Giới thiệu Chào mừng các bạn quay trở lại với chuỗi bài học về GARCH! Ở bài học trước, chúng ta đã xây dựng một nền tảng vững chắc với mô hình GARCH, một công cụ mạnh mẽ để mô hình hóa hiện tượng c Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c1/cac-ho-mo-hinh-garch-mo-rong/" target="_blank" rel="noopener">Các họ mô hình GARCH mở rộng</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Các mô hình GARCH phi tuyến</h3>
+    <p>Các mô hình GARCH phi tuyến Nonlinear GARCH models Giới thiệu Chào mừng các bạn đến với bài học thứ ba! Trong các bài học trước, chúng ta đã đi từ mô hình GARCH tiêu chuẩn đến các biến thể bất đối xứng như GJR-GARCH. Những mô hình này giả định rằng quy luật ch Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c1/cac-mo-hinh-garch-phi-tuyen/" target="_blank" rel="noopener">Các mô hình GARCH phi tuyến</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: Tính bền và bộ nhớ dài trong GARCH</h3>
+    <p>Tính bền và bộ nhớ dài trong GARCH Persistence and long memory in GARCH models Giới thiệu Chào các bạn đã quay trở lại! Trong các bài học trước, chúng ta đã khám phá các mô hình GARCH từ tiêu chuẩn, bất đối xứng đến phi tuyến. Một điểm chung bạn có thể nhận th Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c1/tinh-ben-va-bo-nho-dai-trong-garch/" target="_blank" rel="noopener">Tính bền và bộ nhớ dài trong GARCH</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 5: Thực hành toàn diện GARCH trên Stata</h3>
+    <p>Thực hành toàn diện GARCH trên Stata Comprehensive GARCH practice in Stata Tóm tắt tổng hợp kiến thức đã học Chào mừng các bạn đến với bài học thực hành quan trọng nhất trong chuỗi bài của chúng ta! Trong bốn bài học vừa qua, chúng ta đã cùng nhau xây dựng một Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c1/thuc-hanh-toan-dien-garch-tren-stata/" target="_blank" rel="noopener">Thực hành toàn diện GARCH trên Stata</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 6: Hệ thống hóa kiến thức GARCH</h3>
+    <p>Tổng hợp chuỗi bài học về các mô hình GARCH A synthesis of the GARCH models series Tổng quan chủ đề Chào mừng các bạn đến với bài học cuối cùng và quan trọng nhất trong hành trình khám phá các mô hình GARCH. Trong suốt chuỗi bài học, chúng ta đã đi từ những kh Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c1/he-thong-hoa-kien-thuc-garch/" target="_blank" rel="noopener">Hệ thống hóa kiến thức GARCH</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_asndk09u1_c01_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_asndk09u1_c01_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_asndk09u1_c01_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 01: 1. giới thiệu mô hình GARCH đơn biến trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 01 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Nền tảng mô hình ARCH và GARCH | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c1/nen-tang-mo-hinh-arch-va-garch/) |
+| **Bài 02** | Các họ mô hình GARCH mở rộng | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c1/cac-ho-mo-hinh-garch-mo-rong/) |
+| **Bài 03** | Các mô hình GARCH phi tuyến | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c1/cac-mo-hinh-garch-phi-tuyen/) |
+| **Bài 04** | Tính bền và bộ nhớ dài trong GARCH | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c1/tinh-ben-va-bo-nho-dai-trong-garch/) |
+| **Bài 05** | Thực hành toàn diện GARCH trên Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c1/thuc-hanh-toan-dien-garch-tren-stata/) |
+| **Bài 06** | Hệ thống hóa kiến thức GARCH | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c1/he-thong-hoa-kien-thuc-garch/) |

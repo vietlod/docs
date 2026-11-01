@@ -1,0 +1,173 @@
+---
+id: chapter-02-c2
+title: "Chương 02: 2. mô hình hồi quy tuyến tính: tính chất và phương pháp ước lượng"
+sidebar_label: "Chương 02: 2. Mô hình hồi quy tuyến tính: Tính chất v"
+sidebar_position: 3
+description: "Hướng dẫn thực hành How-To Chương 02: 2. mô hình hồi quy tuyến tính: tính chất và phương pháp ước lượng thuộc bộ sách Kinh tế lượng: lý thuyết và thực hành trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+---
+
+# Chương 02: 2. mô hình hồi quy tuyến tính: tính chất và phương pháp ước lượng
+
+<Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
+
+Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 02: 2. mô hình hồi quy tuyến tính: tính chất và phương pháp ước lượng** thuộc [**Bộ sách 02: kinh tế lượng: lý thuyết và thực hành**](/sachktl/book-02-dsask19u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/dsask19u1/c2/](https://sachktl.tnsai.vn/vi/dsask19u1/c2/).
+
+<div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 02: 2. mô hình hồi quy tuyến tính: tính chất và phương pháp ư">
+    <defs>
+      <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#0f172a" />
+        <stop offset="55%" stopColor="#1e293b" />
+        <stop offset="100%" stopColor="#0f3460" />
+      </linearGradient>
+    </defs>
+    <rect width="960" height="190" fill="url(#sachktlGrad)" rx="14" />
+    <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
+    <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
+    <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 02 · CHƯƠNG 02</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 02: 2. mô hình hồi quy tuyến tính: tính chất và phương pháp ư</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Kinh tế lượng: lý thuyết và thực hành · 5 bài học chuyên sâu</text>
+    <g transform="translate(32, 150)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
+      <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
+      <rect x="122" y="0" width="90" height="22" rx="6" fill="#3b82f6" fillOpacity="0.2" />
+      <text x="167" y="15" fill="#93c5fd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">R 4.x</text>
+      <rect x="224" y="0" width="110" height="22" rx="6" fill="#f59e0b" fillOpacity="0.2" />
+      <text x="279" y="15" fill="#fcd34d" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Python 3.11+</text>
+      <rect x="346" y="0" width="130" height="22" rx="6" fill="#a855f7" fillOpacity="0.2" />
+      <text x="411" y="15" fill="#d8b4fe" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">TNSAI Ecosystem</text>
+    </g>
+  </svg>
+</div>
+
+## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+
+Mô hình hồi quy tuyến tính: Tính chất và phương pháp ước lượng Sau khi nắm vững những khái niệm nền tảng về kinh tế lượng trong chuỗi bài học trước, giờ là lúc chúng ta bước vào trung tâm của phân tích kinh tế lượng ứng dụng: Mô hình Hồi quy Tuyến tính. Đây không chỉ là một kỹ thuật, mà là công cụ lao động chính của hầu hết các nhà kinh tế lượng, cho phép chúng ta lượng hóa và kiểm định các mối quan hệ giữa các biến kinh tế. Mục tiêu cốt lõi của phân tích hồi quy là ước lượng các tham số chưa biết của mô hình, kiểm tra xem lý thuyết kinh tế có phù hợp với dữ liệu thực tế hay không, và cuối
+
+- **Chủ đề học thuật trọng tâm**: Cấu trúc chuỗi bài học, Kiến thức tiên quyết, Mục tiêu học tập, PHỤ LỤC: Dữ liệu thực hành cho chuỗi bài học, Mô tả dữ liệu.
+- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
+- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+
+<FeatureCards
+  features={[
+    {
+      title: "Học liệu gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 02 trên chuyên trang SachKTL.",
+      icon: "📖",
+      link: "https://sachktl.tnsai.vn/vi/dsask19u1/c2/"
+    },
+    {
+      title: "Dữ liệu thực hành EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      icon: "📊",
+      link: "https://ecodata.io.vn"
+    },
+    {
+      title: "Phòng thí nghiệm tự động EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      icon: "⚡",
+      link: "https://ecolab.io.vn"
+    }
+  ]}
+/>
+
+## 2. Quy trình thực hành từng bước cho các bài học trong chương
+
+<Steps>
+  <div className="step-item">
+    <h3>Bước 1: Giới thiệu hồi quy tuyến tính và mô hình hồi quy đơn</h3>
+    <p>Chào mừng bạn đến với bài học đầu tiên trong chuỗi bài về Mô hình Hồi quy Tuyến tính. Trong phần giới thiệu tổng quan, chúng ta đã xác định hồi quy là công cụ trung tâm của kinh tế lượng, giúp lượng hóa các mối quan hệ kinh tế. Bài học hôm nay sẽ đặt những viê Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/dsask19u1/c2/gioi-thieu-hoi-quy-tuyen-tinh/" target="_blank" rel="noopener">Giới thiệu hồi quy tuyến tính và mô hình hồi quy đơn</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2: Mô hình hồi quy tuyến tính bội và diễn giải ceteris paribus</h3>
+    <p>Ở bài học trước, chúng ta đã tìm hiểu kỹ lưỡng về mô hình hồi quy tuyến tính đơn, một công cụ hữu ích để phân tích mối quan hệ giữa hai biến. Tuy nhiên, chúng ta cũng nhận thấy một hạn chế lớn của nó: trong thực tế, một biến kinh tế hiếm khi chỉ chịu tác động  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/dsask19u1/c2/mo-hinh-hoi-quy-tuyen-tinh-boi/" target="_blank" rel="noopener">Mô hình hồi quy tuyến tính bội và diễn giải ceteris paribus</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3: Các giả định cổ điển của mô hình hồi quy tuyến tính</h3>
+    <p>Trong các bài học trước, chúng ta đã xây dựng được cấu trúc của mô hình hồi quy tuyến tính, từ dạng đơn giản đến dạng bội, và hiểu được sức mạnh của nó trong việc phân tích các mối quan hệ ceteris paribus. Chúng ta đã biết rằng mục tiêu của mình là sử dụng dữ  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/dsask19u1/c2/cac-gia-dinh-co-dien/" target="_blank" rel="noopener">Các giả định cổ điển của mô hình hồi quy tuyến tính</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4: Các phương pháp ước lượng tham số</h3>
+    <p>Ở bài học trước, chúng ta đã thiết lập một bộ "luật chơi" quan trọng—các giả định của mô hình hồi quy tuyến tính cổ điển. Những giả định này, đặc biệt là giả định về tính ngoại sinh, tạo ra một môi trường lý tưởng để chúng ta có thể tin tưởng vào kết quả ước l Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/dsask19u1/c2/cac-phuong-phap-uoc-luong/" target="_blank" rel="noopener">Các phương pháp ước lượng tham số</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 5: Tính chất của ước lượng OLS và định lý Gauss-Markov</h3>
+    <p>Trong bài học trước, chúng ta đã khám phá các "cơ chế" kỹ thuật để tìm ra các ước lượng tham số, tập trung vào ba phương pháp chính: MM, OLS và ML. Chúng ta đã thấy một kết quả đáng chú ý rằng, trong bối cảnh của mô hình hồi quy tuyến tính, cả ba phương pháp n Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/dsask19u1/c2/tinh-chat-cua-uoc-luong-ols/" target="_blank" rel="noopener">Tính chất của ước lượng OLS và định lý Gauss-Markov</a>.</p>
+  </div>
+</Steps>
+
+## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+
+<Tabs>
+  <TabItem value="stata" label="Stata 18 MP" default>
+
+```stata
+* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+version 18.0
+clear all
+set more off
+
+* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
+import delimited "sachktl_dsask19u1_c02_ecodata.csv", clear encoding("utf-8")
+describe
+summarize
+
+* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
+regress y x1 x2 x3, vce(robust)
+estat hettest
+estat vif
+```
+
+  </TabItem>
+  <TabItem value="r" label="R 4.x">
+
+```r
+# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+library(tidyverse)
+library(lmtest)
+library(sandwich)
+
+df <- read.csv("sachktl_dsask19u1_c02_ecodata.csv")
+summary(df)
+
+# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+fit <- lm(y ~ x1 + x2 + x3, data = df)
+coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+```
+
+  </TabItem>
+  <TabItem value="python" label="Python 3.11+">
+
+```python
+# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df = pd.read_csv("sachktl_dsask19u1_c02_ecodata.csv")
+print(df.describe())
+
+# Ước lượng mô hình với sai số chuẩn vững HC1
+model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
+print(model.summary())
+```
+
+  </TabItem>
+</Tabs>
+
+## 4. Video bài giảng hướng dẫn thực hành
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Chương 02: 2. mô hình hồi quy tuyến tính: tính chất và phương pháp ước lượng trên SachKTL"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+
+| Thứ tự | Tên bài học chuyên đề trong Chương 02 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| :---: | :--- | :--- | :--- |
+| **Bài 01** | Giới thiệu hồi quy tuyến tính và mô hình hồi quy đơn | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c2/gioi-thieu-hoi-quy-tuyen-tinh/) |
+| **Bài 02** | Mô hình hồi quy tuyến tính bội và diễn giải ceteris paribus | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c2/mo-hinh-hoi-quy-tuyen-tinh-boi/) |
+| **Bài 03** | Các giả định cổ điển của mô hình hồi quy tuyến tính | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c2/cac-gia-dinh-co-dien/) |
+| **Bài 04** | Các phương pháp ước lượng tham số | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c2/cac-phuong-phap-uoc-luong/) |
+| **Bài 05** | Tính chất của ước lượng OLS và định lý Gauss-Markov | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c2/tinh-chat-cua-uoc-luong-ols/) |
