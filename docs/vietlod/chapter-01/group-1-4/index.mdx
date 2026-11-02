@@ -1,35 +1,35 @@
 ---
 id: index
-title: "Nhóm 1.4: Hiệu ứng cố định đa chiều và biến công cụ hiện đại"
-sidebar_label: "Nhóm 1.4. Hiệu ứng cố định đa chiều và biến công cụ hiện đại"
+title: "1.4. Hiệu ứng cố định đa chiều và biến công cụ hiện đại"
+sidebar_label: "1.4. Hiệu ứng cố định đa chiều và biến công cụ hiện đại"
 sidebar_position: 4
 slug: /vietlod/chapter-01/group-1-4
-description: "Hướng dẫn thực hành Nhóm 1.4 — Hiệu ứng cố định đa chiều và biến công cụ hiện đại thuộc Chương 01: so sánh và thực thi 6 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Phần 1.4 — Hiệu ứng cố định đa chiều và biến công cụ hiện đại thuộc Chương 1: so sánh và thực thi 6 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
-  - Nhóm 1.4 VietLOD
+  - Phần 1.4 VietLOD
   - Hiệu ứng cố định đa chiều và biến công cụ hiện đại
   - Stata 18
   - R 4.x
   - Python 3.11
 ---
 
-# Nhóm 1.4: Hiệu ứng cố định đa chiều và biến công cụ hiện đại
+# 1.4. Hiệu ứng cố định đa chiều và biến công cụ hiện đại
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Nhóm phương pháp 1.4 — Hiệu ứng cố định đa chiều và biến công cụ hiện đại** thuộc [Chương 01: Hồi quy tuyến tính cổ điển và biến công cụ](/vietlod/chapter-01) cung cấp quy trình thực hành từng bước cho **6 mô hình kinh tế lượng** từ bài `1.4.1` đến `1.4.6`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Nhóm 1.4](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-01-hoi-quy-tuyen-tinh-co-dien-va-bien-cong-cu/nhom-1-4-high-dim-modern-iv) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+**Phần 1.4. Hiệu ứng cố định đa chiều và biến công cụ hiện đại** thuộc [1. Hồi quy tuyến tính cổ điển và biến công cụ](/vietlod/chapter-01) cung cấp quy trình thực hành từng bước cho **6 bài học mô hình kinh tế lượng** từ mục `1.4.1` đến `1.4.6`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 1.4](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-01-hoi-quy-tuyen-tinh-co-dien-va-bien-cong-cu/nhom-1-4-high-dim-modern-iv) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Nhóm 1.4: Hiệu ứng cố định đa chiều và biến công cụ hiện đại trên Stata 18, R 4.x và Python 3.11+"
+  title="Hướng dẫn thực hành Phần 1.4: Hiệu ứng cố định đa chiều và biến công cụ hiện đại trên Stata 18, R 4.x và Python 3.11+"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 1. Bản chất phương pháp và hệ phương trình định danh
+## 1.4.1. Bản chất phương pháp và hệ phương trình định danh
 
-- **Câu hỏi nghiên cứu trọng tâm của nhóm**: Làm thế nào để ước lượng tác động tuyến tính vững chắc khi tồn tại phương sai thay đổi, điểm ngoại lai, hiệu ứng cố định đa chiều và biến giải thích nội sinh?
+- **Câu hỏi nghiên cứu trọng tâm**: Làm thế nào để ước lượng tác động tuyến tính vững chắc khi tồn tại phương sai thay đổi, điểm ngoại lai, hiệu ứng cố định đa chiều và biến giải thích nội sinh?
 - **Kiểm định chẩn đoán bắt buộc**: Kiểm định $F$ đồng thời các biến giải thích — within-$F$, kiểm cáo loại singleton, $R^2$ within/projected, VIF sau khử FE..
 
-Phương trình đặc tả cấu trúc của nhóm phương pháp 1.4:
+Phương trình đặc tả cấu trúc của phần phương pháp 1.4:
 
 $$
 Y_{ijt} = X_{ijt}^\top \beta + \alpha_i + \gamma_j + \lambda_t + \varepsilon_{ijt}, \quad \tilde{Y} = M_D Y, \quad \hat{\beta}_{\text{HDFE}} = (\tilde{X}^\top \tilde{X})^{-1}\tilde{X}^\top \tilde{Y}
@@ -42,10 +42,10 @@ $$
 $$
 
 <FeatureNotAvailable
-  note="Khi dữ liệu vi phạm giả định định danh của Nhóm 1.4, nhà nghiên cứu cần chuyển sang các nhóm phương pháp mở rộng trong Chương 01 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
+  note="Khi dữ liệu vi phạm giả định định danh của Phần 1.4, nhà nghiên cứu cần chuyển sang các phần phương pháp mở rộng trong Chương 1 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
 />
 
-## 2. Danh mục các mô hình trong Nhóm 1.4
+## 1.4.2. Danh mục các bài học mô hình trong Phần 1.4
 
 <FeatureCards
   features={[
@@ -53,66 +53,65 @@ $$
       title: '1.4.1. Hồi quy tuyến tính hiệu ứng cố định đa chiều (HDFE)',
       description: 'Ước lượng tuyến tính hấp thụ đồng thời nhiều chiều hiệu ứng cố định, doanh nghiệp × năm, ngành × năm, tỉnh × quý, với sai số chuẩn cụm đa ch...',
       link: '/vietlod/chapter-01/group-1-4/b009-hdfe-ols',
-      badge: 'B009 · hdfe_ols'
+      badge: '1.4.1 · hdfe_ols'
     },
     {
       title: '1.4.2. Hồi quy biến công cụ hiệu ứng cố định đa chiều (HDFE)',
       description: 'Ước lượng biến công cụ 2SLS khi mô hình đồng thời có biến nội sinh và nhiều tầng hiệu ứng cố định chiều cao.',
       link: '/vietlod/chapter-01/group-1-4/b010-hdfe-iv',
-      badge: 'B010 · hdfe_iv'
+      badge: '1.4.2 · hdfe_iv'
     },
     {
       title: '1.4.3. Biến công cụ cấu trúc ngành–vùng Bartik',
       description: 'Nhận dạng nhân quả từ biến công cụ cấu trúc ngành–vùng $B_i = \sum_s w_{is} g_s$ với sai số chuẩn hiệu chỉnh tương quan chéo theo cú sốc ngà...',
       link: '/vietlod/chapter-01/group-1-4/b011-bartik-shift-share-iv',
-      badge: 'B011 · bartik_shift_share_iv'
+      badge: '1.4.3 · bartik_shift_share_iv'
     },
     {
       title: '1.4.4. Biến công cụ kiến tạo từ phương sai thay đổi Lewbel',
       description: 'Kiến tạo biến công cụ nội tại $(Z - \bar{Z})\hat{\varepsilon}_1$ từ phương sai thay đổi của phương trình giai đoạn 1 khi thiếu biến công cụ ...',
       link: '/vietlod/chapter-01/group-1-4/b012-lewbel-het-iv',
-      badge: 'B012 · lewbel_het_iv'
+      badge: '1.4.4 · lewbel_het_iv'
     },
     {
       title: '1.4.5. Phương pháp hàm kiểm soát xử lý nội sinh (CF)',
       description: 'Khắc phục nội sinh trong mô hình tuyến tính/phi tuyến bằng cách đưa phần dư giai đoạn 1 $\hat{v}_2$ trực tiếp vào phương trình cấu trúc kèm ...',
       link: '/vietlod/chapter-01/group-1-4/b013-control-function-iv',
-      badge: 'B013 · control_function_iv'
+      badge: '1.4.5 · control_function_iv'
     },
     {
       title: '1.4.6. Hồi quy phân vị biến công cụ (IVQR)',
       description: 'Ước lượng tác động nhân quả không đồng nhất trên từng phân vị $\tau \in (0,1)$ của biến kết quả khi biến giải thích chính bị nội sinh.',
       link: '/vietlod/chapter-01/group-1-4/b014-iv-quantile',
-      badge: 'B014 · iv_quantile'
+      badge: '1.4.6 · iv_quantile'
     }
   ]}
 />
 
-## 3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
+## 1.4.3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
 
 | Bài học & Mô hình | Mã định danh | Cú pháp Stata 18 MP | Cú pháp R 4.x | Cú pháp Python 3.11+ | Hỗ trợ |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `1.4.1` · [Hồi quy tuyến tính hiệu ứng cố định đa chiều (HDFE)](/vietlod/chapter-01/group-1-4/b009-hdfe-ols) | `hdfe_ols` | `reghdfe y x1 x2, absorb(id1 id2) vce(cluster id1)` | `fixest::feols(y ~ x1 + x2 \| id1 + id2, cluster = ~id1, data = df)` | `pyfixest.feols('y ~ x1 + x2 \| id1 + id2', data=df, vcov={'CRV1': 'id1'})` | <Available /> |
-| `1.4.2` · [Hồi quy biến công cụ hiệu ứng cố định đa chiều (HDFE)](/vietlod/chapter-01/group-1-4/b010-hdfe-iv) | `hdfe_iv` | `ivreghdfe y x1 (endog = z1 z2), absorb(id1 id2) cluster(id1)` | `fixest::feols(y ~ x1 \| id1 + id2 \| endog ~ z1 + z2, cluster = ~id1, data = df)` | `pyfixest.feols('y ~ x1 \| id1 + id2 \| endog ~ z1 + z2', data=df, vcov={'CRV1': 'id1'})` | <Available /> |
-| `1.4.3` · [Biến công cụ cấu trúc ngành–vùng Bartik](/vietlod/chapter-01/group-1-4/b011-bartik-shift-share-iv) | `bartik_shift_share_iv` | `ivreg2 y x1 (d = bartik_z), robust` | `ShiftShareSE::ivreg_ss(y ~ x1 \| d ~ bartik_z, shares = W, data = df)` | `IV2SLS.from_formula('y ~ 1 + x1 + [d ~ bartik_z]', data=df).fit(cov_type='robust')` | <Available /> |
-| `1.4.4` · [Biến công cụ kiến tạo từ phương sai thay đổi Lewbel](/vietlod/chapter-01/group-1-4/b012-lewbel-het-iv) | `lewbel_het_iv` | `ivreg2h y x1 (endog = ), robust` | `REndo::hetErrorsIV(y ~ x1 + endog \| endog \| IIV(x1), data = df)` | `IVGMM.from_formula('y ~ 1 + x1 + [endog ~ z_lewbel]', data=df).fit(cov_type='robust')` | <Available /> |
-| `1.4.5` · [Phương pháp hàm kiểm soát xử lý nội sinh (CF)](/vietlod/chapter-01/group-1-4/b013-control-function-iv) | `control_function_iv` | `etregress y x1 x2, treat(d = z1 z2) twostep` | `fixest::feols(y ~ x1 + d + v_hat, vcov = 'hetero', data = df)` | `smf.ols('y ~ x1 + d + v_hat', data=df).fit(cov_type='HC1')` | <Available /> |
-| `1.4.6` · [Hồi quy phân vị biến công cụ (IVQR)](/vietlod/chapter-01/group-1-4/b014-iv-quantile) | `iv_quantile` | `ivqregress iqr y x1 (endog = z1 z2), quantile(0.5)` | `quantreg::rq(y ~ x1 + d_hat, tau = 0.5, data = df)` | `smf.quantreg('y ~ x1 + d_hat', data=df).fit(q=0.5)` | <Available /> |
+| **1.4.1** · [Hồi quy tuyến tính hiệu ứng cố định đa chiều (HDFE)](/vietlod/chapter-01/group-1-4/b009-hdfe-ols) | `hdfe_ols` | `reghdfe y x1 x2, absorb(id1 id2) vce(cluster id1)` | `fixest::feols(y ~ x1 + x2 \| id1 + id2, cluster = ~id1, data = df)` | `pyfixest.feols('y ~ x1 + x2 \| id1 + id2', data=df, vcov={'CRV1': 'id1'})` | <Available /> |
+| **1.4.2** · [Hồi quy biến công cụ hiệu ứng cố định đa chiều (HDFE)](/vietlod/chapter-01/group-1-4/b010-hdfe-iv) | `hdfe_iv` | `ivreghdfe y x1 (endog = z1 z2), absorb(id1 id2) cluster(id1)` | `fixest::feols(y ~ x1 \| id1 + id2 \| endog ~ z1 + z2, cluster = ~id1, data = df)` | `pyfixest.feols('y ~ x1 \| id1 + id2 \| endog ~ z1 + z2', data=df, vcov={'CRV1': 'id1'})` | <Available /> |
+| **1.4.3** · [Biến công cụ cấu trúc ngành–vùng Bartik](/vietlod/chapter-01/group-1-4/b011-bartik-shift-share-iv) | `bartik_shift_share_iv` | `ivreg2 y x1 (d = bartik_z), robust` | `ShiftShareSE::ivreg_ss(y ~ x1 \| d ~ bartik_z, shares = W, data = df)` | `IV2SLS.from_formula('y ~ 1 + x1 + [d ~ bartik_z]', data=df).fit(cov_type='robust')` | <Available /> |
+| **1.4.4** · [Biến công cụ kiến tạo từ phương sai thay đổi Lewbel](/vietlod/chapter-01/group-1-4/b012-lewbel-het-iv) | `lewbel_het_iv` | `ivreg2h y x1 (endog = ), robust` | `REndo::hetErrorsIV(y ~ x1 + endog \| endog \| IIV(x1), data = df)` | `IVGMM.from_formula('y ~ 1 + x1 + [endog ~ z_lewbel]', data=df).fit(cov_type='robust')` | <Available /> |
+| **1.4.5** · [Phương pháp hàm kiểm soát xử lý nội sinh (CF)](/vietlod/chapter-01/group-1-4/b013-control-function-iv) | `control_function_iv` | `etregress y x1 x2, treat(d = z1 z2) twostep` | `fixest::feols(y ~ x1 + d + v_hat, vcov = 'hetero', data = df)` | `smf.ols('y ~ x1 + d + v_hat', data=df).fit(cov_type='HC1')` | <Available /> |
+| **1.4.6** · [Hồi quy phân vị biến công cụ (IVQR)](/vietlod/chapter-01/group-1-4/b014-iv-quantile) | `iv_quantile` | `ivqregress iqr y x1 (endog = z1 z2), quantile(0.5)` | `quantreg::rq(y ~ x1 + d_hat, tau = 0.5, data = df)` | `smf.quantreg('y ~ x1 + d_hat', data=df).fit(q=0.5)` | <Available /> |
 
-## 4. Quy trình thực hành chuẩn cho Nhóm 1.4
+## 1.4.4. Quy trình thực hành chuẩn cho Phần 1.4
 
 <Steps>
-
-### Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco
-
-Tải tệp CSV thực hành của từng mô hình trong Nhóm `1.4` hoặc kết nối dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
-
-### Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu
-
-So sánh các mô hình từ `1.4.1` đến `1.4.6` trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.
-
-### Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab
-
-Thực hiện đầy đủ bộ kiểm định **Kiểm định $F$ đồng thời các biến giải thích — within-$F$, kiểm cáo loại singleton, $R^2$ within/projected, VIF sau khử FE.** và đẩy mã mô hình sang [EcoLab](https://ecolab.io.vn) để xuất bảng kết quả chuẩn công bố quốc tế.
-
+  <div className="step-item">
+    <h3>Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco</h3>
+    <p>Tải tệp CSV thực hành của từng bài học trong Phần <code>1.4</code> hoặc kết nối dữ liệu thực tế từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> và <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu</h3>
+    <p>So sánh các bài học mô hình từ <code>1.4.1</code> đến <code>1.4.6</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab</h3>
+    <p>Thực hiện đầy đủ bộ kiểm định <strong>Kiểm định $F$ đồng thời các biến giải thích — within-$F$, kiểm cáo loại singleton, $R^2$ within/projected, VIF sau khử FE.</strong> và đẩy mã mô hình sang <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> để xuất bảng kết quả chuẩn công bố quốc tế.</p>
+  </div>
 </Steps>

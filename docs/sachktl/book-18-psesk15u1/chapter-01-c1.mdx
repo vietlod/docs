@@ -1,19 +1,19 @@
 ---
 id: chapter-01-c1
-title: "Chương 01: 1. mối quan hệ giữa hai biến"
-sidebar_label: "Chương 01: 1. Mối quan hệ giữa hai biến"
+title: "1. Mối quan hệ giữa hai biến"
+sidebar_label: "1. Mối quan hệ giữa hai biến"
 sidebar_position: 2
-description: "Hướng dẫn thực hành How-To Chương 01: 1. mối quan hệ giữa hai biến thuộc bộ sách Phân tích chuỗi thời gian và dữ liệu bảng trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 1. Mối quan hệ giữa hai biến thuộc giáo trình Phân tích chuỗi thời gian và dữ liệu bảng trên SachKTL kèm công thức toán học, phân tích 6 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 01: 1. mối quan hệ giữa hai biến
+# 1. Mối quan hệ giữa hai biến
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 01: 1. mối quan hệ giữa hai biến** thuộc [**Bộ sách 18: phân tích chuỗi thời gian và dữ liệu bảng**](/sachktl/book-18-psesk15u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/psesk15u1/c1/](https://sachktl.tnsai.vn/vi/psesk15u1/c1/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **6 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **1. Mối quan hệ giữa hai biến** thuộc bộ giáo trình [**Phân tích chuỗi thời gian và dữ liệu bảng**](/sachktl/book-18-psesk15u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/psesk15u1/c1/](https://sachktl.tnsai.vn/vi/psesk15u1/c1/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 01: 1. mối quan hệ giữa hai biến">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="1. Mối quan hệ giữa hai biến">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 18 · CHƯƠNG 01</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 01: 1. mối quan hệ giữa hai biến</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Phân tích chuỗi thời gian và dữ liệu bảng · 6 bài học chuyên sâu</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Phân tích chuỗi thời gian và dữ liệu</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">1. Mối quan hệ giữa hai biến</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng chuỗi thời gian, đồng liên kết và biến động tài chính · 6 bài học chuyê</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,138 +41,272 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Giới thiệu về hồi quy hai biến An Introduction to Bivariate Regression Chào mừng các bạn sinh viên đã đến với chuỗi bài học đầu tiên và quan trọng nhất trong hành trình chinh phục kinh tế lượng: phân tích mối quan hệ giữa hai biến. Trong kinh tế học và tài chính, chúng ta luôn muốn trả lời những câu hỏi như: liệu tăng thêm một năm đi học có giúp tăng lương không? Chi tiêu cho quảng cáo có thực sự làm tăng doanh thu? Hay lãi suất thay đổi ảnh hưởng thế nào đến thị trường chứng khoán? Tất cả những câu hỏi này đều xoay quanh việc tìm hiểu mối quan hệ giữa hai biến số. Chuỗi bài học này sẽ trang
+Giới thiệu về hồi quy hai biến An Introduction to Bivariate Regression Chào mừng các bạn sinh viên đã đến với chuỗi bài học đầu tiên và quan trọng nhất trong hành trình chinh phục kinh tế lượng: phân tích mối quan hệ giữa hai biến. Trong kinh tế học và tài chính, chúng ta luôn muốn trả lời những câu hỏi như: liệu tăng thêm một năm đi học có giúp tăng lương không? Chi tiêu cho quảng cáo có thực sự làm tăng doanh thu? Hay lãi suất thay đổi ảnh hưởng thế nào đến thị trường chứng khoán? Tất cả những câu hỏi này đều xoay quanh việc tìm hiểu mối quan hệ giữa hai biến số.
 
-- **Chủ đề học thuật trọng tâm**: CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO, PHỤ LỤC: Dữ liệu mô phỏng cho series.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+\Phi(L)(1 - L)^d Y_t = \mu + \Theta(L)\varepsilon_t, \quad \varepsilon_t \mid \mathcal{F}_{t-1} \sim \mathcal{N}(0, \sigma_t^2) \tag*{[1]}
+$$
+
+$$
+\sigma_t^2 = \omega + \sum_{i=1}^p \alpha_i \varepsilon_{t-i}^2 + \sum_{j=1}^q \beta_j \sigma_{t-j}^2, \quad \omega > 0, \; \alpha_i, \beta_j \ge 0 \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Chuỗi thời gian phải thỏa mãn điều kiện dừng hiệp phương sai hoặc được sai phân hóa đến bậc tích hợp $I(d)$ phù hợp trước khi ước lượng.
+2. Điều kiện khả nghịch và nghiệm ngoài vòng tròn đơn vị của đa thức trễ $\Phi(L)$ và $\Theta(L)$ đảm bảo tính ổn định động học.
+3. Trong mô hình phương sai có điều kiện thay đổi GARCH, tổng hệ số $\sum \alpha_i + \sum \beta_j < 1$ bảo đảm phương sai không điều kiện hữu hạn.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 01 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/psesk15u1/c1/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Hồi quy chuỗi thời gian không dừng chưa qua kiểm định nghiệm đơn vị ADF/PP và đồng liên kết Johansen dễ dẫn đến hồi quy giả mạo với thống kê $t$ và $R^2$ bị thổi phồng."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Nền tảng hồi quy hai biến và phương pháp OLS
+
+Nền tảng hồi quy hai biến và phương pháp OLS Bivariate regression and the OLS method Giới thiệu Chào mừng các bạn đến với bài học đầu tiên trong chuỗi bài về hồi quy hai biến. Hãy tưởng tượng bạn có một biểu đồ tán xạ thể hiện mối quan hệ giữa số năm kinh nghiệm và mức lương của nhân viên. Rõ ràng, các điểm dữ liệu không nằm trên một đường thẳng hoàn hảo, nhưng dường như có một xu hướng chung: kinh nghiệm càng cao, lương càng cao.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Nền tảng lý thuyết của hồi quy**
+- **Tiếp cận dưới góc độ khớp đường cong**
+- **Phương pháp bình phương nhỏ nhất thông thường**
+- **Ví dụ minh họa với Stata**
+- **Tổng kết**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c1/nen-tang-hoi-quy-hai-bien-va-phuong-phap-ols/)
+
+### 2.2. Hệ số tương quan và phân rã phương sai
+
+Hệ số tương quan và phân rã phương sai Correlation and variance decomposition Giới thiệu Trong bài học trước, chúng ta đã học cách tìm ra đường thẳng "phù hợp nhất" để mô tả mối quan hệ giữa hai biến bằng phương pháp OLS. Tuy nhiên, việc tìm ra đường thẳng đó mới chỉ là bước đầu tiên. Một đường thẳng, dù là "tốt nhất" theo tiêu chí OLS, có thể mô tả một mối quan hệ rất mạnh hoặc một mối quan hệ rất yếu . Do đó, chúng ta cần những công cụ để lượng hóa hai khía cạnh quan trọng: sức mạnh của mối quan hệ và mức độ phù hợp của mô hình.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Các loại hệ số tương quan**
+- **Hệ số tương quan pearson**
+- **Các hệ số tương quan hạng**
+- **Phân rã phương sai và R-bình phương**
+- **Tổng bình phương các sai lệch**
+
+- **Môi trường thực hành:** `R 4.x` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c1/he-so-tuong-quan-va-phan-ra-phuong-sai/)
+
+### 2.3. Các cách tiếp cận ước lượng trong hồi quy
+
+Các cách tiếp cận ước lượng trong hồi quy Different approaches to estimation in regression Giới thiệu Trong hai bài học đầu tiên, chúng ta đã tiếp cận hồi quy như một bài toán hình học: tìm một đường thẳng "khớp" tốt nhất với dữ liệu. Chúng ta đã học cách ước lượng đường thẳng đó bằng OLS và đánh giá mức độ phù hợp của nó bằng R-bình phương. Cách tiếp cận này rất trực quan, nhưng nó chỉ mang tính mô tả.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Mô hình hồi quy tuyến tính cổ điển**
+- **Các giả định của CLRM**
+- **Phương pháp mô-men**
+- **Phương pháp hợp lý tối đa**
+- **Ví dụ minh họa: Ba góc nhìn cho một kết quả**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c1/cac-cach-tiep-can-uoc-luong-trong-hoi-quy/)
+
+### 2.4. Tính chất của ước lượng OLS và bài toán dự báo
+
+Tính chất của ước lượng OLS và bài toán dự báo Properties of OLS estimators and the prediction problem Giới thiệu Trong các bài học trước, chúng ta đã thấy rằng phương pháp OLS có thể được biện minh từ nhiều góc độ: hình học, phương pháp mô-men và hợp lý tối đa. Điều này cho thấy sự nhất quán của OLS, nhưng vẫn chưa trả lời câu hỏi cốt lõi: trong vô số các phương pháp ước lượng khả dĩ, tại sao OLS lại là tiêu chuẩn vàng trong kinh tế lượng?
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Các tính chất của ước lượng OLS**
+- **Tính tuyến tính**
+- **Tính không chệch**
+- **Tính hiệu quả - Định lý Gauss-Markov**
+- **Bài toán dự báo**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c1/tinh-chat-cua-uoc-luong-ols-va-bai-toan-du-bao/)
+
+### 2.5. Thực hành phân tích hồi quy hai biến với Stata
+
+Thực hành phân tích hồi quy hai biến với Stata A practical guide to bivariate regression in Stata Giới thiệu Chào mừng các bạn đến với bài học mang tính ứng dụng cao nhất trong chuỗi bài của chúng ta. Qua bốn bài học trước, chúng ta đã xây dựng một nền tảng lý thuyết vững chắc: từ ý tưởng trực quan về việc "khớp" một đường thẳng, tìm hiểu phương pháp OLS, đánh giá mô hình bằng R-bình phương, khám phá các nền tảng thống kê, cho đến việc hiểu rõ các tính chất ưu việt của ước lượng OLS.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Quy trình phân tích hồi quy**
+- **CÁC bước thực hiện phân tích**
+- **Hướng dẫn thực hành từng bước với Stata**
+- **Bước 1: Chuẩn bị và khám phá dữ liệu**
+- **Bước 2: Trực quan hóa mối quan hệ**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c1/thuc-hanh-phan-tich-hoi-quy-hai-bien-voi-stata/)
+
+### 2.6. Bài tổng hợp: Hệ thống hóa kiến thức và định hướng
+
+Tổng hợp về hồi quy hai biến Synthesis of bivariate regression analysis Tổng quan chủ đề Chúng ta đã cùng nhau trải qua một hành trình khám phá những nguyên lý đầu tiên nhưng quan trọng nhất của kinh tế lượng: phân tích hồi quy hai biến. Đây không chỉ là một chủ đề nhập môn, mà chính là nền móng vững chắc cho gần như toàn bộ các kỹ thuật phân tích phức tạp hơn sau này, từ hồi quy đa biến, dữ liệu bảng, cho đến chuỗi thời gian.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Tổng quan chủ đề**
+- **Hệ thống lý thuyết**
+- **Hệ thống phương pháp**
+- **Ví dụ thực hành tổng hợp**
+- **Tổng kết và hướng phát triển**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c1/bai-tong-hop-he-thong-hoa-kien-thuc-va-dinh-huong/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Nền tảng hồi quy hai biến và phương pháp OLS</h3>
-    <p>Nền tảng hồi quy hai biến và phương pháp OLS Bivariate regression and the OLS method Giới thiệu Chào mừng các bạn đến với bài học đầu tiên trong chuỗi bài về hồi quy hai biến. Hãy tưởng tượng bạn có một biểu đồ tán xạ thể hiện mối quan hệ giữa số năm kinh nghi Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c1/nen-tang-hoi-quy-hai-bien-va-phuong-phap-ols/" target="_blank" rel="noopener">Nền tảng hồi quy hai biến và phương pháp OLS</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>1. Mối quan hệ giữa hai biến</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Hệ số tương quan và phân rã phương sai</h3>
-    <p>Hệ số tương quan và phân rã phương sai Correlation and variance decomposition Giới thiệu Trong bài học trước, chúng ta đã học cách tìm ra đường thẳng "phù hợp nhất" để mô tả mối quan hệ giữa hai biến bằng phương pháp OLS. Tuy nhiên, việc tìm ra đường thẳng đó  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c1/he-so-tuong-quan-va-phan-ra-phuong-sai/" target="_blank" rel="noopener">Hệ số tương quan và phân rã phương sai</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Các cách tiếp cận ước lượng trong hồi quy</h3>
-    <p>Các cách tiếp cận ước lượng trong hồi quy Different approaches to estimation in regression Giới thiệu Trong hai bài học đầu tiên, chúng ta đã tiếp cận hồi quy như một bài toán hình học: tìm một đường thẳng "khớp" tốt nhất với dữ liệu. Chúng ta đã học cách ước  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c1/cac-cach-tiep-can-uoc-luong-trong-hoi-quy/" target="_blank" rel="noopener">Các cách tiếp cận ước lượng trong hồi quy</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c1/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Tính chất của ước lượng OLS và bài toán dự báo</h3>
-    <p>Tính chất của ước lượng OLS và bài toán dự báo Properties of OLS estimators and the prediction problem Giới thiệu Trong các bài học trước, chúng ta đã thấy rằng phương pháp OLS có thể được biện minh từ nhiều góc độ: hình học, phương pháp mô-men và hợp lý tối đ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c1/tinh-chat-cua-uoc-luong-ols-va-bai-toan-du-bao/" target="_blank" rel="noopener">Tính chất của ước lượng OLS và bài toán dự báo</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 5: Thực hành phân tích hồi quy hai biến với Stata</h3>
-    <p>Thực hành phân tích hồi quy hai biến với Stata A practical guide to bivariate regression in Stata Giới thiệu Chào mừng các bạn đến với bài học mang tính ứng dụng cao nhất trong chuỗi bài của chúng ta. Qua bốn bài học trước, chúng ta đã xây dựng một nền tảng lý Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c1/thuc-hanh-phan-tich-hoi-quy-hai-bien-voi-stata/" target="_blank" rel="noopener">Thực hành phân tích hồi quy hai biến với Stata</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Bước 6: Bài tổng hợp: hệ thống hóa kiến thức và định hướng</h3>
-    <p>Tổng hợp về hồi quy hai biến Synthesis of bivariate regression analysis Tổng quan chủ đề Chúng ta đã cùng nhau trải qua một hành trình khám phá những nguyên lý đầu tiên nhưng quan trọng nhất của kinh tế lượng: phân tích hồi quy hai biến. Đây không chỉ là một c Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c1/bai-tong-hop-he-thong-hoa-kien-thuc-va-dinh-huong/" target="_blank" rel="noopener">Bài tổng hợp: Hệ thống hóa kiến thức và định hướng</a>.</p>
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập chuỗi thời gian, kiểm định nghiệm đơn vị và ước lượng ARIMA / GARCH
 version 18.0
 clear all
 set more off
+import delimited "sachktl_timeseries_finco.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_psesk15u1_c01_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+tsset time_id
+dfuller y, lags(4) trend regress
+pperron y, lags(4) trend
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 1. Ước lượng mô hình ARIMA và kiểm định nhiễu trắng phần dư
+arima y, arima(1,1,1) vce(robust)
+predict resid_arima, resid
+wntestq resid_arima, lags(12)
+
+* 2. Ước lượng mô hình phương sai có điều kiện thay đổi ARCH/GARCH(1,1)
+arch d.y x1 x2, arch(1) garch(1) vce(robust)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
-library(tidyverse)
-library(lmtest)
-library(sandwich)
+# Nạp thư viện chuỗi thời gian và ước lượng ARIMA / GARCH(1,1)
+library(tseries)
+library(forecast)
+library(rugarch)
 
-df <- read.csv("sachktl_psesk15u1_c01_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_timeseries_finco.csv")
+y_ts <- ts(df$y, frequency = 12)
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA tối ưu theo AICc
+adf.test(y_ts)
+fit_arima <- auto.arima(y_ts, seasonal = FALSE, ic = "aicc")
+summary(fit_arima)
+checkresiduals(fit_arima)
+
+# 2. Ước lượng mô hình GARCH(1,1) cho chuỗi lợi suất
+spec <- ugarchspec(variance.model = list(model = "sGARCH", garchOrder = c(1, 1)),
+                   mean.model = list(armaOrder = c(1, 0), include.mean = TRUE))
+fit_garch <- ugarchfit(spec = spec, data = diff(y_ts))
+show(fit_garch)
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và arch để phân tích chuỗi thời gian & biến động
 import pandas as pd
-import statsmodels.formula.api as smf
+from statsmodels.tsa.stattools import adfuller
+from statsmodels.tsa.arima.model import ARIMA
+from arch import arch_model
 
-df = pd.read_csv("sachktl_psesk15u1_c01_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_timeseries_finco.csv")
+y = df["y"].dropna()
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA(1,1,1)
+adf_stat, p_val, *_ = adfuller(y, autolag="AIC")
+print(f"ADF Statistic: {adf_stat:.4f}, p-value: {p_val:.4f}")
+arima_res = ARIMA(y, order=(1, 1, 1)).fit()
+print(arima_res.summary())
+
+# 2. Ước lượng mô hình GARCH(1,1) với phân phối Student-t
+ret = y.diff().dropna() * 100
+garch_res = arch_model(ret, vol="Garch", p=1, q=1, dist="t").fit(disp="off")
+print(garch_res.summary())
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 01: 1. mối quan hệ giữa hai biến trên SachKTL"
+  title="Hướng dẫn thực hành 1. Mối quan hệ giữa hai biến trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 01 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Nền tảng hồi quy hai biến và phương pháp OLS | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c1/nen-tang-hoi-quy-hai-bien-va-phuong-phap-ols/) |
-| **Bài 02** | Hệ số tương quan và phân rã phương sai | R 4.x | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c1/he-so-tuong-quan-va-phan-ra-phuong-sai/) |
-| **Bài 03** | Các cách tiếp cận ước lượng trong hồi quy | Stata 18 MP, R 4.x | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c1/cac-cach-tiep-can-uoc-luong-trong-hoi-quy/) |
-| **Bài 04** | Tính chất của ước lượng OLS và bài toán dự báo | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c1/tinh-chat-cua-uoc-luong-ols-va-bai-toan-du-bao/) |
-| **Bài 05** | Thực hành phân tích hồi quy hai biến với Stata | Stata 18 MP, R 4.x | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c1/thuc-hanh-phan-tich-hoi-quy-hai-bien-voi-stata/) |
-| **Bài 06** | Bài tổng hợp: Hệ thống hóa kiến thức và định hướng | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c1/bai-tong-hop-he-thong-hoa-kien-thuc-va-dinh-huong/) |
+| **1.1** | Nền tảng hồi quy hai biến và phương pháp OLS | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c1/nen-tang-hoi-quy-hai-bien-va-phuong-phap-ols/) |
+| **1.2** | Hệ số tương quan và phân rã phương sai | `R 4.x` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c1/he-so-tuong-quan-va-phan-ra-phuong-sai/) |
+| **1.3** | Các cách tiếp cận ước lượng trong hồi quy | `Stata 18 MP, R 4.x` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c1/cac-cach-tiep-can-uoc-luong-trong-hoi-quy/) |
+| **1.4** | Tính chất của ước lượng OLS và bài toán dự báo | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c1/tinh-chat-cua-uoc-luong-ols-va-bai-toan-du-bao/) |
+| **1.5** | Thực hành phân tích hồi quy hai biến với Stata | `Stata 18 MP, R 4.x` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c1/thuc-hanh-phan-tich-hoi-quy-hai-bien-voi-stata/) |
+| **1.6** | Bài tổng hợp: Hệ thống hóa kiến thức và định hướng | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c1/bai-tong-hop-he-thong-hoa-kien-thuc-va-dinh-huong/) |

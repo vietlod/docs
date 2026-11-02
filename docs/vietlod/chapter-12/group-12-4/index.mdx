@@ -1,35 +1,35 @@
 ---
 id: index
-title: "Nhóm 12.4: Mạng nơ-ron chuỗi thời gian"
-sidebar_label: "Nhóm 12.4. Mạng nơ-ron chuỗi thời gian"
+title: "12.4. Mạng nơ-ron chuỗi thời gian"
+sidebar_label: "12.4. Mạng nơ-ron chuỗi thời gian"
 sidebar_position: 4
 slug: /vietlod/chapter-12/group-12-4
-description: "Hướng dẫn thực hành Nhóm 12.4 — Mạng nơ-ron chuỗi thời gian thuộc Chương 12: so sánh và thực thi 1 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Phần 12.4 — Mạng nơ-ron chuỗi thời gian thuộc Chương 12: so sánh và thực thi 1 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
-  - Nhóm 12.4 VietLOD
+  - Phần 12.4 VietLOD
   - Mạng nơ-ron chuỗi thời gian
   - Stata 18
   - R 4.x
   - Python 3.11
 ---
 
-# Nhóm 12.4: Mạng nơ-ron chuỗi thời gian
+# 12.4. Mạng nơ-ron chuỗi thời gian
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Nhóm phương pháp 12.4 — Mạng nơ-ron chuỗi thời gian** thuộc [Chương 12: Hệ phương trình đồng thời, hệ cầu, kinh tế lượng Bayes và học máy](/vietlod/chapter-12) cung cấp quy trình thực hành từng bước cho **1 mô hình kinh tế lượng** từ bài `12.4.1` đến `12.4.1`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Nhóm 12.4](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-12-he-phuong-trinh-he-cau-kinh-te-luong-bayes-va-hoc-may/nhom-12-4-deep-sequence) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+**Phần 12.4. Mạng nơ-ron chuỗi thời gian** thuộc [12. Hệ phương trình đồng thời, hệ cầu, kinh tế lượng Bayes và học máy](/vietlod/chapter-12) cung cấp quy trình thực hành từng bước cho **1 bài học mô hình kinh tế lượng** từ mục `12.4.1` đến `12.4.1`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 12.4](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-12-he-phuong-trinh-he-cau-kinh-te-luong-bayes-va-hoc-may/nhom-12-4-deep-sequence) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Nhóm 12.4: Mạng nơ-ron chuỗi thời gian trên Stata 18, R 4.x và Python 3.11+"
+  title="Hướng dẫn thực hành Phần 12.4: Mạng nơ-ron chuỗi thời gian trên Stata 18, R 4.x và Python 3.11+"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 1. Bản chất phương pháp và hệ phương trình định danh
+## 12.4.1. Bản chất phương pháp và hệ phương trình định danh
 
-- **Câu hỏi nghiên cứu trọng tâm của nhóm**: Làm thế nào để ước lượng hệ phương trình đồng thời (SUR) và (3SLS), hệ cầu tiêu dùng thỏa tiên đề Slutsky (QUAIDS), trung bình hóa mô hình Bayes (BMA) và dự báo học máy kinh tế lượng?
+- **Câu hỏi nghiên cứu trọng tâm**: Làm thế nào để ước lượng hệ phương trình đồng thời (SUR) và (3SLS), hệ cầu tiêu dùng thỏa tiên đề Slutsky (QUAIDS), trung bình hóa mô hình Bayes (BMA) và dự báo học máy kinh tế lượng?
 - **Kiểm định chẩn đoán bắt buộc**: Out-of-sample Walk-Forward RMSE, MAE, MAPE, thống kê kiểm định Diebold–Mariano so với benchmark AR, Ljung–Box forecast error..
 
-Phương trình đặc tả cấu trúc của nhóm phương pháp 12.4:
+Phương trình đặc tả cấu trúc của phần phương pháp 12.4:
 
 $$
 f_t = \sigma(W_f X_t + U_f h_{t-1} + b_f), \quad c_t = f_t \odot c_{t-1} + i_t \odot \tanh(W_c X_t + U_c h_{t-1} + b_c), \quad h_t = o_t \odot \tanh(c_t)
@@ -42,10 +42,10 @@ $$
 $$
 
 <FeatureNotAvailable
-  note="Khi dữ liệu vi phạm giả định định danh của Nhóm 12.4, nhà nghiên cứu cần chuyển sang các nhóm phương pháp mở rộng trong Chương 12 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
+  note="Khi dữ liệu vi phạm giả định định danh của Phần 12.4, nhà nghiên cứu cần chuyển sang các phần phương pháp mở rộng trong Chương 12 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
 />
 
-## 2. Danh mục các mô hình trong Nhóm 12.4
+## 12.4.2. Danh mục các bài học mô hình trong Phần 12.4
 
 <FeatureCards
   features={[
@@ -53,31 +53,30 @@ $$
       title: '12.4.1. Mạng bộ nhớ dài–ngắn hạn dự báo chuỗi thời gian (LSTM)',
       description: 'Mạng hồi quy có cổng nhớ dài–ngắn hạn (LSTM) huấn luyện theo cửa sổ trượt thời gian nghiêm ngặt — walk-forward chronological split, không rò...',
       link: '/vietlod/chapter-12/group-12-4/b190-lstm-forecaster',
-      badge: 'B190 · lstm_forecaster'
+      badge: '12.4.1 · lstm_forecaster'
     }
   ]}
 />
 
-## 3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
+## 12.4.3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
 
 | Bài học & Mô hình | Mã định danh | Cú pháp Stata 18 MP | Cú pháp R 4.x | Cú pháp Python 3.11+ | Hỗ trợ |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `12.4.1` · [Mạng bộ nhớ dài–ngắn hạn dự báo chuỗi thời gian (LSTM)](/vietlod/chapter-12/group-12-4/b190-lstm-forecaster) | `lstm_forecaster` | `python: LSTMForecaster(input_dim=3, hidden_dim=32).fit(X_seq, y_seq)` | `forecast::nnetar(df$y, xreg = as.matrix(df[, c('x1', 'x2')]))` | `nn.LSTM(input_size=3, hidden_size=32, num_layers=2, batch_first=True)` | <Available /> |
+| **12.4.1** · [Mạng bộ nhớ dài–ngắn hạn dự báo chuỗi thời gian (LSTM)](/vietlod/chapter-12/group-12-4/b190-lstm-forecaster) | `lstm_forecaster` | `python: LSTMForecaster(input_dim=3, hidden_dim=32).fit(X_seq, y_seq)` | `forecast::nnetar(df$y, xreg = as.matrix(df[, c('x1', 'x2')]))` | `nn.LSTM(input_size=3, hidden_size=32, num_layers=2, batch_first=True)` | <Available /> |
 
-## 4. Quy trình thực hành chuẩn cho Nhóm 12.4
+## 12.4.4. Quy trình thực hành chuẩn cho Phần 12.4
 
 <Steps>
-
-### Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco
-
-Tải tệp CSV thực hành của từng mô hình trong Nhóm `12.4` hoặc kết nối dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
-
-### Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu
-
-So sánh các mô hình từ `12.4.1` đến `12.4.1` trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.
-
-### Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab
-
-Thực hiện đầy đủ bộ kiểm định **Out-of-sample Walk-Forward RMSE, MAE, MAPE, thống kê kiểm định Diebold–Mariano so với benchmark AR, Ljung–Box forecast error.** và đẩy mã mô hình sang [EcoLab](https://ecolab.io.vn) để xuất bảng kết quả chuẩn công bố quốc tế.
-
+  <div className="step-item">
+    <h3>Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco</h3>
+    <p>Tải tệp CSV thực hành của từng bài học trong Phần <code>12.4</code> hoặc kết nối dữ liệu thực tế từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> và <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu</h3>
+    <p>So sánh các bài học mô hình từ <code>12.4.1</code> đến <code>12.4.1</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab</h3>
+    <p>Thực hiện đầy đủ bộ kiểm định <strong>Out-of-sample Walk-Forward RMSE, MAE, MAPE, thống kê kiểm định Diebold–Mariano so với benchmark AR, Ljung–Box forecast error.</strong> và đẩy mã mô hình sang <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> để xuất bảng kết quả chuẩn công bố quốc tế.</p>
+  </div>
 </Steps>

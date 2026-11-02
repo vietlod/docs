@@ -1,10 +1,10 @@
 ---
 id: b161-slx-spatial-x
-title: "10.1.1. Hướng dẫn thực hành Mô hình trễ không gian của biến giải thích (SLX)"
+title: "10.1.1. Mô hình trễ không gian của biến giải thích (SLX)"
 sidebar_label: "10.1.1. Mô hình trễ không gian của biến giải thích (SLX)"
 sidebar_position: 1
 slug: /vietlod/chapter-10/group-10-1/b161-slx-spatial-x
-description: "Tài liệu How-To hướng dẫn thực hành mô hình Mô hình trễ không gian của biến giải thích (SLX) với mã slx_spatial_x trên Stata 18 MP, R 4.x và Python 3.11+ kèm dữ liệu thực hành và diễn giải kết quả chuẩn tạp chí."
+description: "Tài liệu How-To hướng dẫn thực hành bài 10.1.1 — Mô hình trễ không gian của biến giải thích (SLX) với mã slx_spatial_x trên Stata 18 MP, R 4.x và Python 3.11+ kèm dữ liệu thực hành và diễn giải kết quả chuẩn tạp chí."
 keywords:
   - Mô hình trễ không gian của biến giải thích (SLX)
   - slx_spatial_x
@@ -17,28 +17,28 @@ keywords:
   - EcoLab
 ---
 
-# 10.1.1. Hướng dẫn thực hành Mô hình trễ không gian của biến giải thích (SLX)
+# 10.1.1. Mô hình trễ không gian của biến giải thích (SLX)
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Bài học `10.1.1` — Mã mô hình `B161` (`slx_spatial_x`)** thuộc [Chương 10: Kinh tế lượng không gian, sai số chuẩn Conley và mạng cặp đôi](/vietlod/chapter-10) $\to$ [Nhóm 10.1: Hồi quy không gian cắt ngang](/vietlod/chapter-10/group-10-1), phân loại **Cấp độ L1 — Nền tảng**. Tài liệu How-To này hướng dẫn chi tiết từ bản chất phương pháp, điều kiện áp dụng, kịch bản mã lệnh trên **Stata 18 MP**, **R 4.x** và **Python 3.11+**, tệp dữ liệu thực hành `vietlod_slx_spatial_x_ecodata.csv` cho đến cách đọc hiểu đồ thị hội tụ 3 phần mềm và viết phần diễn giải kết quả theo chuẩn tạp chí quốc tế.
+**Bài học `10.1.1` — Mã mô hình `B161` — Khóa định danh `slx_spatial_x`** thuộc [10. Kinh tế lượng không gian, sai số chuẩn Conley và mạng cặp đôi](/vietlod/chapter-10) $\to$ [10.1. Hồi quy không gian cắt ngang](/vietlod/chapter-10/group-10-1), phân loại **Cấp độ L1 — Nền tảng**. Tài liệu How-To này hướng dẫn chi tiết từ bản chất phương pháp, điều kiện áp dụng, kịch bản mã lệnh trên **Stata 18 MP**, **R 4.x** và **Python 3.11+**, tệp dữ liệu thực hành `vietlod_slx_spatial_x_ecodata.csv` cho đến cách đọc hiểu đồ thị hội tụ 3 phần mềm và viết phần diễn giải kết quả theo chuẩn tạp chí quốc tế.
 
 <VideoTutorial
   title="Video hướng dẫn thực hành bài 10.1.1: Mô hình trễ không gian của biến giải thích (SLX) trên Stata 18, R 4.x và Python 3.11+"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 1. Ý nghĩa phương pháp và phạm vi áp dụng
+## 10.1.1.1. Ý nghĩa phương pháp và phạm vi áp dụng
 
-### 1.1. Bản chất kinh tế lượng
+### 10.1.1.1.1. Bản chất kinh tế lượng
 
 Mô hình hóa lan tỏa không gian cục bộ trực tiếp qua biến giải thích trễ không gian $Y = X\beta + WX\theta + \varepsilon$, cho phép tách bạch rõ ràng tác động trực tiếp — $\beta$ — và tác động tràn sang láng giềng — $\theta$ — mà không bị cứng nhắc tỷ lệ cố định $\theta/\beta$ của SAR.
 
-### 1.2. Phạm vi áp dụng và yêu cầu cấu trúc dữ liệu
+### 10.1.1.1.2. Phạm vi áp dụng và yêu cầu cấu trúc dữ liệu
 
 Được Gibbons & Overman và Vega & Elhorst khuyến nghị làm điểm xuất phát chuẩn mực trước khi áp đặt cấu trúc tự hồi quy không gian toàn cục; tương thích tự nhiên với biến công cụ cho $X$ và $WX$.
 
-### 1.3. Hệ phương trình toán học và điều kiện định danh
+### 10.1.1.1.3. Hệ phương trình toán học và điều kiện định danh
 
 Phương trình đặc tả cấu trúc của mô hình `slx_spatial_x`:
 
@@ -59,10 +59,10 @@ S_k(W) = \left(I_N - \rho W\right)^{-1}\left(I_N \beta_k + W \theta_k\right), \q
 $$
 
 <FeatureNotAvailable
-  note="Giới hạn áp dụng: Không sử dụng trực tiếp ước lượng Mô hình trễ không gian của biến giải thích (SLX) khi mẫu vi phạm nghiêm trọng điều kiện định danh hoặc chưa vượt qua bộ kiểm định bắt buộc gồm Bảng phân rã Direct, Indirect — Spillover $\theta$ — và Total Effects kèm $p$-value, kiểm định Wald đồng thời $H_0: \theta = 0$, kiểm định Moran's $I$ & LM-Error trên phần dư.. Trong trường hợp vi phạm, hãy tham chiếu các mô hình mở rộng cùng Nhóm 10.1 hoặc Chương 10."
+  note="Giới hạn áp dụng: Không sử dụng trực tiếp ước lượng Mô hình trễ không gian của biến giải thích (SLX) khi mẫu vi phạm nghiêm trọng điều kiện định danh hoặc chưa vượt qua bộ kiểm định bắt buộc gồm Bảng phân rã Direct, Indirect — Spillover $\theta$ — và Total Effects kèm $p$-value, kiểm định Wald đồng thời $H_0: \theta = 0$, kiểm định Moran's $I$ & LM-Error trên phần dư.. Trong trường hợp vi phạm, hãy tham chiếu các mô hình mở rộng cùng Phần 10.1 hoặc Chương 10."
 />
 
-## 2. Ví dụ thực tế và bộ dữ liệu thực hành chuẩn hóa
+## 10.1.1.2. Ví dụ thực tế và bộ dữ liệu thực hành chuẩn hóa
 
 - **Bài toán thực nghiệm tại Việt Nam**: Ứng dụng mô hình `slx_spatial_x` trên bộ dữ liệu **Lan tỏa đầu tư hạ tầng giữa các tỉnh giáp ranh Việt Nam** với cỡ mẫu chuẩn hóa $N = 320$ quan sát được trích xuất từ hệ sinh thái [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
 - **Bộ dữ liệu chuẩn quốc tế đối sánh**: **Columbus Spatial Dataset**, giúp người học đối chiếu trực tiếp kết quả thực hành với các giáo trình kinh tế lượng hàng đầu thế giới.
@@ -80,7 +80,7 @@ $$
       title: 'Bài giảng toàn văn trên VietLOD',
       description: 'Xem bài giảng lý thuyết chuyên sâu, chứng minh toán học và thảo luận học thuật đầy đủ của Bài 10.1.1 trên cổng VietLOD.',
       link: 'https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-10-kinh-te-luong-khong-gian-conley-hac-va-mang-cap-doi/nhom-10-1-spatial-regression/b161-slx-spatial-x',
-      badge: 'VietLOD B161'
+      badge: 'VietLOD 10.1.1'
     },
     {
       title: 'Thực thi đám mây trên EcoLab',
@@ -97,9 +97,9 @@ $$
   ]}
 />
 
-## 3. Gói lệnh phân tích và quy trình thực hành trên Stata, R và Python
+## 10.1.1.3. Gói lệnh phân tích và quy trình thực hành trên Stata, R và Python
 
-### 3.1. Bảng đối chiếu gói phần mềm và cú pháp lệnh chuẩn
+### 10.1.1.3.1. Bảng đối chiếu gói phần mềm và cú pháp lệnh chuẩn
 
 | Nền tảng phần mềm | Gói thư viện chuẩn | Cú pháp ước lượng trọng tâm | Lệnh kiểm định chẩn đoán hậu ước lượng | Hỗ trợ |
 | :--- | :--- | :--- | :--- | :--- |
@@ -107,29 +107,28 @@ $$
 | **R 4.x** | `spatialreg` | `spatialreg::lmSLX(y ~ x1 + x2, data = df, listw = lw)` | `spdep::moran.test[resid[fit], lw]; spatialreg::impacts[fit, listw = lw, R = 500]` — Kiểm định nhân tử Lagrange Anselin LM-Lag, LM-Error và phân rã tác động trực tiếp, gián tiếp. | <Available /> |
 | **Python 3.11+** | `spreg` | `spreg.OLS(y, X, w=w, slx_lags=1)` | `esda.Moran[resid, w]; spreg.diagnostics_sp.LMtests[ols_res, w]` — Kiểm định Moran's I, kiểm định LM không gian và độ nhạy bán kính khoảng cách Conley. | <Available /> |
 
-### 3.2. Quy trình 4 bước thực thi mô hình `slx_spatial_x`
+### 10.1.1.3.2. Quy trình 4 bước thực thi mô hình `slx_spatial_x`
 
 <Steps>
-
-### Bước 1. Nạp tệp dữ liệu thực hành và kiểm tra thống kê mô tả
-
-Tải tệp [`vietlod_slx_spatial_x_ecodata.csv`](https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_slx_spatial_x_ecodata.csv) vào thư mục làm việc, kiểm tra cỡ mẫu $N = 320$ quan sát, khai báo cấu trúc dữ liệu và rà soát phân phối của biến phụ thuộc `y` cùng các biến giải thích `x1`, `x2`.
-
-### Bước 2. Thực thi hàm ước lượng `slx_spatial_x` với sai số chuẩn vững
-
-Chạy lệnh ước lượng chính thức trên **Stata 18 MP** qua gói `base Stata sp`, **R 4.x** qua gói `spatialreg` hoặc **Python 3.11+** qua gói `spreg` kèm ma trận hiệp phương sai vững để bảo toàn hiệu lực suy luận thống kê.
-
-### Bước 3. Thực hiện bộ kiểm định chẩn đoán hậu ước lượng bắt buộc
-
-Thực thi đầy đủ các kiểm định đặc thù của mô hình gồm: **Bảng phân rã Direct, Indirect — Spillover $\theta$ — và Total Effects kèm $p$-value, kiểm định Wald đồng thời $H_0: \theta = 0$, kiểm định Moran's $I$ & LM-Error trên phần dư.**. Ghi nhận giá trị thống kê chẩn đoán $\text{Stat} = 0.3536$ và giá trị $p = 0.8380$.
-
-### Bước 4. Xuất bảng kết quả chuẩn tạp chí và kiểm chứng hội tụ 3 phần mềm
-
-Sử dụng `etable` trên Stata, `coeftest` trên R hoặc `summary()` trên Python để xuất bảng hệ số ước lượng, sau đó đối chiếu với bảng kết quả chuẩn và đồ thị thực nghiệm tại Mục 4.
-
+  <div className="step-item">
+    <h3>Bước 1. Nạp tệp dữ liệu thực hành và kiểm tra thống kê mô tả</h3>
+    <p>Tải tệp <a href="https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_slx_spatial_x_ecodata.csv"><code>vietlod_slx_spatial_x_ecodata.csv</code></a> vào thư mục làm việc, kiểm tra cỡ mẫu $N = 320$ quan sát, khai báo cấu trúc dữ liệu và rà soát phân phối của biến phụ thuộc <code>y</code> cùng các biến giải thích <code>x1</code>, <code>x2</code>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2. Thực thi hàm ước lượng slx_spatial_x với sai số chuẩn vững</h3>
+    <p>Chạy lệnh ước lượng chính thức trên <strong>Stata 18 MP</strong> qua gói <code>base Stata sp</code>, <strong>R 4.x</strong> qua gói <code>spatialreg</code> hoặc <strong>Python 3.11+</strong> qua gói <code>spreg</code> kèm ma trận hiệp phương sai vững để bảo toàn hiệu lực suy luận thống kê.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3. Thực hiện bộ kiểm định chẩn đoán hậu ước lượng bắt buộc</h3>
+    <p>Thực thi đầy đủ các kiểm định đặc thù của mô hình gồm: <strong>Bảng phân rã Direct, Indirect — Spillover $\theta$ — và Total Effects kèm $p$-value, kiểm định Wald đồng thời $H_0: \theta = 0$, kiểm định Moran's $I$ & LM-Error trên phần dư.</strong>. Ghi nhận giá trị thống kê chẩn đoán $\text{Stat} = 0.3536$ và giá trị $p = 0.8380$.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4. Xuất bảng kết quả chuẩn tạp chí và kiểm chứng hội tụ 3 phần mềm</h3>
+    <p>Sử dụng <code>etable</code> trên Stata, <code>coeftest</code> trên R hoặc <code>summary()</code> trên Python để xuất bảng hệ số ước lượng, sau đó đối chiếu với bảng kết quả chuẩn và đồ thị thực nghiệm tại Mục 10.1.1.4.</p>
+  </div>
 </Steps>
 
-### 3.3. Mã lệnh thực hành tái lập hoàn chỉnh trên Stata 18, R 4.x và Python 3.11+
+### 10.1.1.3.3. Mã lệnh thực hành tái lập hoàn chỉnh trên Stata 18, R 4.x và Python 3.11+
 
 <Tabs groupId="econometric-software">
   <TabItem value="stata" label="Stata 18 MP">
@@ -230,9 +229,9 @@ print("KẾT QUẢ ƯỚC LƯỢNG [slx_spatial_x]: beta_x1 = 1.1777 | SE = 0.07
   </TabItem>
 </Tabs>
 
-## 4. Kết quả ước lượng thực nghiệm, đồ thị hội tụ và hướng dẫn diễn giải
+## 10.1.1.4. Kết quả ước lượng thực nghiệm, đồ thị hội tụ và hướng dẫn diễn giải
 
-### 4.1. Bảng tổng hợp kết quả ước lượng chuẩn công bố tạp chí
+### 10.1.1.4.1. Bảng tổng hợp kết quả ước lượng chuẩn công bố tạp chí
 
 Bảng dưới đây trình bày kết quả ước lượng thực nghiệm của mô hình **Mô hình trễ không gian của biến giải thích (SLX)** trên tệp dữ liệu `vietlod_slx_spatial_x_ecodata.csv` với $N = 320$ quan sát, đối chứng đồng thời trên cả 3 nền tảng **Stata 18 MP**, **R 4.x** và **Python 3.11+**:
 
@@ -245,32 +244,31 @@ Bảng dưới đây trình bày kết quả ước lượng thực nghiệm c�
 | **Chỉ số độ khớp `R-squared`** | `0.4153` | — | `F/Wald = 109.772` | — | Chuẩn công bố Q1 |
 | **Kiểm định chẩn đoán** | `Stat = 0.3536` | — | — | `p = 0.8380` | Đạt điều kiện đặc tả |
 
-### 4.2. Đồ thị thực nghiệm đối chiếu đồng thời Stata 18, R 4.x và Python 3.11+
+### 10.1.1.4.2. Đồ thị thực nghiệm đối chiếu đồng thời Stata 18, R 4.x và Python 3.11+
 
 ![Đồ thị thực nghiệm đối chiếu 3 phần mềm cho mô hình Mô hình trễ không gian của biến giải thích (SLX)](https://vietlod.tnsai.vn/src/ecoaz/img/vietlod-b161-slx-spatial-x.png)
 
-### 4.3. Cách diễn giải kết quả chuẩn học thuật
+### 10.1.1.4.3. Cách diễn giải kết quả chuẩn học thuật
 
 - **Diễn giải hệ số ước lượng trọng tâm**: Hệ số của biến `x1` đạt $\hat{\beta}_1 = 1.1777$ với sai số chuẩn vững $\text{SE} = 0.0797$ và thống kê kiểm định bằng $14.779$, cho thấy `x1` có **tác động thuận chiều** lên biến mục tiêu `y` và **có ý nghĩa thống kê cao ở mức 1%** trong bối cảnh dữ liệu *Lan tỏa đầu tư hạ tầng giữa các tỉnh giáp ranh Việt Nam*.
 - **Diễn giải khoảng tin cậy và độ lớn tác động**: Khoảng tin cậy $95\%$ của $\hat{\beta}_1$ nằm trong dải $[1.0215, 1.3339]$, khẳng định độ ổn định của ước lượng điểm và sự hội tụ số học giữa Stata 18 MP, R 4.x và Python 3.11+.
 - **Diễn giải độ khớp mô hình và kiểm định hậu ước lượng**: Đại lượng `R-squared` đạt `$0.4153$` cùng thống kê kiểm định toàn cục đạt `$109.772$`. Thống kê chẩn đoán đạt `$0.3536$` với $p = 0.8380$, xác nhận mô hình `slx_spatial_x` thỏa mãn các điều kiện hậu ước lượng để suy luận chính sách.
 
-## 5. Cách tổng hợp dữ liệu từ EcoData, Finco và truy vết dữ liệu quốc tế
+## 10.1.1.5. Cách tổng hợp dữ liệu từ EcoData, Finco và truy vết dữ liệu quốc tế
 
 <Steps>
-
-### Bước 1. Khởi tạo dự án dữ liệu trên EcoData và Finco
-
-Truy cập cổng dữ liệu [EcoData](https://ecodata.io.vn) hoặc nền tảng tài chính [Finco](https://www.finco.vn), chọn phân hệ dữ liệu tương ứng với chủ đề **Lan tỏa đầu tư hạ tầng giữa các tỉnh giáp ranh Việt Nam** và thiết lập bộ lọc đơn vị chéo `id` cùng kỳ thời gian `t` để thu được mẫu $N = 320$ quan sát.
-
-### Bước 2. Chuẩn hóa biến số và xử lý giá trị ngoại lai
-
-Ánh xạ biến phụ thuộc mục tiêu vào cột `y`, biến giải thích chính vào `x1`, biến kiểm soát vào `x2`, cùng các biến định danh và biến chuyên biệt như `z1`, `treat`, `w`, `y_bin`, `y_count`, `duration`, `event`. Thực hiện kiểm soát ngoại lai Winsorize ở ngưỡng $1\%$ và $99\%$ trước khi xuất tệp `vietlod_slx_spatial_x_ecodata.csv`.
-
-### Bước 3. Đối sánh với bộ dữ liệu chuẩn quốc tế Columbus Spatial Dataset
-
-Để đối chiếu phương pháp trên bộ dữ liệu quốc tế **Columbus Spatial Dataset**, sử dụng trực tiếp các lệnh nạp dữ liệu trong bảng truy vết bên dưới.
-
+  <div className="step-item">
+    <h3>Bước 1. Khởi tạo dự án dữ liệu trên EcoData và Finco</h3>
+    <p>Truy cập cổng dữ liệu <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc nền tảng tài chính <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, chọn phân hệ dữ liệu tương ứng với chủ đề <strong>Lan tỏa đầu tư hạ tầng giữa các tỉnh giáp ranh Việt Nam</strong> và thiết lập bộ lọc đơn vị chéo <code>id</code> cùng kỳ thời gian <code>t</code> để thu được mẫu $N = 320$ quan sát.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2. Chuẩn hóa biến số và xử lý giá trị ngoại lai</h3>
+    <p>Ánh xạ biến phụ thuộc mục tiêu vào cột <code>y</code>, biến giải thích chính vào <code>x1</code>, biến kiểm soát vào <code>x2</code>, cùng các biến định danh và biến chuyên biệt như <code>z1</code>, <code>treat</code>, <code>w</code>, <code>y_bin</code>, <code>y_count</code>, <code>duration</code>, <code>event</code>. Thực hiện kiểm soát ngoại lai Winsorize ở ngưỡng $1\%$ và $99\%$ trước khi xuất tệp <code>vietlod_slx_spatial_x_ecodata.csv</code>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3. Đối sánh với bộ dữ liệu chuẩn quốc tế Columbus Spatial Dataset</h3>
+    <p>Để đối chiếu phương pháp trên bộ dữ liệu quốc tế <strong>Columbus Spatial Dataset</strong>, sử dụng trực tiếp các lệnh nạp dữ liệu trong bảng truy vết bên dưới.</p>
+  </div>
 </Steps>
 
 | Nguồn lưu trữ dữ liệu | Tên bộ dữ liệu / Tệp | Lệnh nạp trực tiếp và đường dẫn truy cập |
@@ -281,7 +279,7 @@ Truy cập cổng dữ liệu [EcoData](https://ecodata.io.vn) hoặc nền tả
 | **R CRAN Package** | *Columbus Spatial Dataset* | Lệnh R: `data("columbus", package = "wooldridge")` |
 | **Python Statsmodels** | *Columbus Spatial Dataset* | Lệnh Python: `sm.datasets.get_rdataset("columbus", "wooldridge").data` |
 
-## 6. Tài liệu tham khảo học thuật
+## 10.1.1.6. Tài liệu tham khảo học thuật
 
 - Vega, & Elhorst(2015). The SLX Model. *Journal of Regional Science*.
 - Gibbons, & Overman(2012). Mostly Pointless Spatial Econometrics?. *Journal of Regional Science*.

@@ -1,19 +1,19 @@
 ---
 id: chapter-40-c40
-title: "Chương 40: 40. mô hình hóa phi tham số trong chuỗi thời gian"
-sidebar_label: "Chương 40: 40. Mô hình hóa phi tham số trong chuỗi th"
+title: "40. Mô hình hóa phi tham số trong chuỗi thời gian"
+sidebar_label: "40. Mô hình hóa phi tham số trong chuỗi thời gian"
 sidebar_position: 41
-description: "Hướng dẫn thực hành How-To Chương 40: 40. mô hình hóa phi tham số trong chuỗi thời gian thuộc bộ sách Cẩm nang kinh tế lượng chuỗi thời gian tài chính trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 40. Mô hình hóa phi tham số trong chuỗi thời gian thuộc giáo trình Cẩm nang kinh tế lượng chuỗi thời gian tài chính trên SachKTL kèm công thức toán học, phân tích 8 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 40: 40. mô hình hóa phi tham số trong chuỗi thời gian
+# 40. Mô hình hóa phi tham số trong chuỗi thời gian
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 40: 40. mô hình hóa phi tham số trong chuỗi thời gian** thuộc [**Bộ sách 28: cẩm nang kinh tế lượng chuỗi thời gian tài chính**](/sachktl/book-28-asndk09u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/asndk09u1/c40/](https://sachktl.tnsai.vn/vi/asndk09u1/c40/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **8 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **40. Mô hình hóa phi tham số trong chuỗi thời gian** thuộc bộ giáo trình [**Cẩm nang kinh tế lượng chuỗi thời gian tài chính**](/sachktl/book-28-asndk09u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/asndk09u1/c40/](https://sachktl.tnsai.vn/vi/asndk09u1/c40/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 40: 40. mô hình hóa phi tham số trong chuỗi thời gian">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="40. Mô hình hóa phi tham số trong chuỗi thời gian">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 28 · CHƯƠNG 40</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 40: 40. mô hình hóa phi tham số trong chuỗi thời gian</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Cẩm nang kinh tế lượng chuỗi thời gian tài chính · 8 bài học chu</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Cẩm nang kinh tế lượng chuỗi thời gi</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">40. Mô hình hóa phi tham số trong chuỗi thời gian</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng chuỗi thời gian, đồng liên kết và biến động tài chính · 8 bài học chuyê</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,140 +41,304 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Giới thiệu về mô hình hóa phi tham số An Introduction to Nonparametric Modeling Chào mừng các bạn đến với chuỗi bài học về một trong những lĩnh vực hấp dẫn và mạnh mẽ nhất của kinh tế lượng hiện đại: Mô hình hóa phi tham số. Trong nghiên cứu kinh tế, chúng ta thường phải đối mặt với những mối quan hệ phức tạp mà các mô hình tuyến tính hay các giả định chặt chẽ không thể nắm bắt hết được. Vậy làm thế nào để xây dựng một mô hình linh hoạt hơn, một mô hình thực sự "để cho dữ liệu tự lên tiếng"? Câu trả lời nằm ở các phương pháp phi tham số. Hãy tưởng tượng thay vì ép buộc dữ liệu phải đi theo
+Giới thiệu về mô hình hóa phi tham số An Introduction to Nonparametric Modeling Chào mừng các bạn đến với chuỗi bài học về một trong những lĩnh vực hấp dẫn và mạnh mẽ nhất của kinh tế lượng hiện đại: Mô hình hóa phi tham số. Trong nghiên cứu kinh tế, chúng ta thường phải đối mặt với những mối quan hệ phức tạp mà các mô hình tuyến tính hay các giả định chặt chẽ không thể nắm bắt hết được. Vậy làm thế nào để xây dựng một mô hình linh hoạt hơn, một mô hình thực sự "để cho dữ liệu tự lên tiếng"? Câu trả lời nằm ở các phương pháp phi tham số.
 
-- **Chủ đề học thuật trọng tâm**: BA TỪ KHÓA QUAN TRỌNG, CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+\Phi(L)(1 - L)^d Y_t = \mu + \Theta(L)\varepsilon_t, \quad \varepsilon_t \mid \mathcal{F}_{t-1} \sim \mathcal{N}(0, \sigma_t^2) \tag*{[1]}
+$$
+
+$$
+\sigma_t^2 = \omega + \sum_{i=1}^p \alpha_i \varepsilon_{t-i}^2 + \sum_{j=1}^q \beta_j \sigma_{t-j}^2, \quad \omega > 0, \; \alpha_i, \beta_j \ge 0 \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Chuỗi thời gian phải thỏa mãn điều kiện dừng hiệp phương sai hoặc được sai phân hóa đến bậc tích hợp $I(d)$ phù hợp trước khi ước lượng.
+2. Điều kiện khả nghịch và nghiệm ngoài vòng tròn đơn vị của đa thức trễ $\Phi(L)$ và $\Theta(L)$ đảm bảo tính ổn định động học.
+3. Trong mô hình phương sai có điều kiện thay đổi GARCH, tổng hệ số $\sum \alpha_i + \sum \beta_j < 1$ bảo đảm phương sai không điều kiện hữu hạn.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 40 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/asndk09u1/c40/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Hồi quy chuỗi thời gian không dừng chưa qua kiểm định nghiệm đơn vị ADF/PP và đồng liên kết Johansen dễ dẫn đến hồi quy giả mạo với thống kê $t$ và $R^2$ bị thổi phồng."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Nền tảng ước lượng mật độ kernel
+
+Nền tảng ước lượng mật độ bằng Kernel Foundations of kernel density estimation 1. Giới thiệu Chào mừng các bạn đến với bài học chính thức đầu tiên! Hãy bắt đầu với một câu hỏi rất cơ bản nhưng vô cùng quan trọng trong phân tích dữ liệu: Làm thế nào để chúng ta hiểu được hình dạng phân phối của một biến?
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Giới thiệu**
+- **2. Nền tảng lý thuyết của ước lượng mật độ kernel**
+- **2.1. Vai trò quyết định của băng thông**
+- **2.2. Áp dụng cho dữ liệu chuỗi thời gian**
+- **3. Quy trình thực hiện ước lượng**
+- **4. Ví dụ minh họa với Stata**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c40/nen-tang-uoc-luong-mat-do-kernel/)
+
+### 2.2. Hồi quy phi tham số
+
+Khám phá mối quan hệ phi tuyến với hồi quy Kernel Exploring nonlinear relationships with kernel regression 1. Giới thiệu Trong bài học trước, chúng ta đã học cách sử dụng phương pháp Kernel để khám phá hình dạng phân phối của một biến. Đó là một bước khởi đầu tuyệt vời. Tuy nhiên, phần lớn các câu hỏi trong kinh tế và tài chính không chỉ dừng lại ở việc mô tả một biến đơn lẻ, mà còn tập trung vào việc tìm hiểu mối quan hệ giữa các biến. Ví dụ, lợi suất của một cổ phiếu phụ thuộc vào lợi suất của thị trường như thế nào?
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Giới thiệu**
+- **2. Nền tảng lý thuyết của hồi quy kernel**
+- **2.1. Từ hồi quy kernel đến ước lượng đa thức cục bộ**
+- **3. Quy trình thực hiện hồi quy kernel**
+- **4. Ví dụ minh họa với Stata**
+- **5. Tổng kết**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c40/hoi-quy-phi-tham-so/)
+
+### 2.3. Mô hình khuếch tán thời gian liên tục
+
+Mô hình hóa khuếch tán thời gian liên tục Modeling continuous-time diffusion processes 1. Giới thiệu Trong hai bài học trước, chúng ta đã làm việc với dữ liệu được quan sát tại các thời điểm rời rạc . Tuy nhiên, trong thực tế, giá tài sản tài chính, lãi suất, hay tỷ giá hối đoái biến động liên tục theo từng khoảnh khắc. Để nắm bắt được trọn vẹn động lực của thị trường, các nhà tài chính định lượng thường sử dụng các mô hình thời gian liên tục.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Giới thiệu**
+- **2. Nền tảng lý thuyết của mô hình khuếch tán**
+- **2.1. Từ liên tục đến rời rạc: Xấp xỉ euler**
+- **2.2. Liên kết với hồi quy kernel**
+- **3. Quy trình thực hiện ước lượng**
+- **4. Ví dụ minh họa với Stata**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c40/mo-hinh-khuech-tan-thoi-gian-lien-tuc/)
+
+### 2.4. Kiểm định và xác thực mô hình
+
+Kiểm định và xác thực mô hình phi tham số Nonparametric model checking and validation 1. Giới thiệu Trong suốt quá trình học kinh tế lượng, chúng ta thường bắt đầu với các mô hình tham số. Đó là những mô hình được xây dựng dựa trên các giả định chặt chẽ về dạng hàm, ví dụ như mô hình hồi quy tuyến tính, mô hình GARCH hay mô hình Black-Scholes. Những mô hình này rất mạnh mẽ vì chúng đơn giản, dễ diễn giải và hiệu quả về mặt thống kê nếu các giả định của chúng là đúng.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Giới thiệu**
+- **2. Nền tảng lý thuyết của kiểm định phi tham số**
+- **2.1. Thống kê kiểm định**
+- **3. Quy trình thực hiện kiểm định bằng trực quan hóa**
+- **4. Ví dụ minh họa với Stata**
+- **5. Tổng kết**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c40/kiem-dinh-va-xac-thuc-mo-hinh/)
+
+### 2.5. Đo lường rủi ro với ước lượng phân vị
+
+Đo lường rủi ro với ước lượng phân vị phi tham số Risk measurement with nonparametric quantile estimation 1. Giới thiệu Trong thế giới tài chính, một trong những câu hỏi quan trọng nhất mà các nhà quản lý danh mục, ngân hàng và nhà đầu tư phải đối mặt hàng ngày là: "Mức lỗ tối đa mà chúng ta có thể gặp phải vào ngày mai là bao nhiêu, với một mức độ tin cậy nhất định?". Câu trả lời cho câu hỏi này thường được định lượng bằng một thước đo rủi ro cực kỳ phổ biến: Value-at-Risk.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Giới thiệu**
+- **2. Nền tảng lý thuyết của ước lượng phân vị**
+- **2.1. Hồi quy phân vị kernel**
+- **3. Quy trình thực hiện ước lượng VaR phi tham số**
+- **4. Ví dụ minh họa với Stata**
+- **5. Tổng kết**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c40/do-luong-rui-ro-voi-uoc-luong-phan-vi/)
+
+### 2.6. Khám phá các kỹ thuật nâng cao
+
+Khám phá các kỹ thuật nâng cao trong mô hình phi tham số Exploring advanced nonparametric techniques 1. Giới thiệu Trong suốt các bài học vừa qua, chúng ta đã tập trung vào các bài toán với một biến độc lập duy nhất. Các phương pháp làm trơn Kernel đã hoạt động rất hiệu quả trong những trường hợp này. Tuy nhiên, trong thực tế, hầu hết các hiện tượng kinh tế đều phụ thuộc vào rất nhiều yếu tố.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Giới thiệu**
+- **2. Nền tảng lý thuyết của các phương pháp nâng cao**
+- **2.1. Vấn đề cốt lõi: Lời nguyền số chiều**
+- **2.2. Chiến lược 1: Mô hình cộng tính**
+- **2.3. Chiến lược 2: Phương pháp sàng lọc**
+- **3. Quy trình thực hiện**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c40/kham-pha-cac-ky-thuat-nang-cao/)
+
+### 2.7. Xây dựng một dự án phân tích hoàn chỉnh
+
+Bài thực hành cuối: Xây dựng dự án phân tích phi tham số Final project: A complete nonparametric analysis 1. Tóm tắt tổng hợp kiến thức Trước khi bắt đầu, hãy cùng nhau điểm lại những công cụ chính mà chúng ta đã trang bị trong suốt chuỗi bài học này. Trong dự án hôm nay, chúng ta sẽ vận dụng tất cả chúng một cách có hệ thống: Ước lượng Mật độ Kernel: Chúng ta sẽ bắt đầu bằng việc khám phá phân phối của chuỗi lợi suất, kiểm tra các đặc điểm quan trọng như "đuôi dày" và độ nhọn so với phân phối chuẩn.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Tóm tắt tổng hợp kiến thức**
+- **2. Chuẩn bị dữ liệu**
+- **3. Quy trình phân tích step-by-step**
+- **4. Hướng dẫn thực hành chi tiết**
+- **Bước 1: Khám phá phân phối lợi suất**
+- **Bước 2: Phân tích hàm hồi quy có điều kiện**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c40/xay-dung-mot-du-an-phan-tich-hoan-chinh/)
+
+### 2.8. Tổng hợp chuỗi mô hình hóa phi tham số
+
+Tổng hợp chuỗi bài học về mô hình hóa phi tham số A synthesis of nonparametric modeling 1. Tổng quan chủ đề: Bức tranh lớn Chúng ta đã cùng nhau hoàn thành một hành trình khám phá thế giới hấp dẫn của kinh tế lượng phi tham số. Bắt đầu từ những câu hỏi cơ bản nhất về hình dạng của dữ liệu, chúng ta đã từng bước xây dựng một bộ công cụ mạnh mẽ cho phép "dữ liệu tự lên tiếng".
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Tổng quan chủ đề: Bức tranh lớn**
+- **2. Hệ thống hóa lý thuyết cốt lõi**
+- **3. Tích hợp các phương pháp: Một quy trình làm việc**
+- **4. Ví dụ tổng hợp: Phân tích dữ liệu vn-index**
+- **5. Tổng kết và hướng phát triển**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c40/tong-hop-chuoi-mo-hinh-hoa-phi-tham-so/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Nền tảng ước lượng mật độ kernel</h3>
-    <p>Nền tảng ước lượng mật độ bằng Kernel Foundations of kernel density estimation 1. Giới thiệu Chào mừng các bạn đến với bài học chính thức đầu tiên! Hãy bắt đầu với một câu hỏi rất cơ bản nhưng vô cùng quan trọng trong phân tích dữ liệu: Làm thế nào để chúng ta Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c40/nen-tang-uoc-luong-mat-do-kernel/" target="_blank" rel="noopener">Nền tảng ước lượng mật độ Kernel</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>40. Mô hình hóa phi tham số trong chuỗi thời gian</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Hồi quy phi tham số</h3>
-    <p>Khám phá mối quan hệ phi tuyến với hồi quy Kernel Exploring nonlinear relationships with kernel regression 1. Giới thiệu Trong bài học trước, chúng ta đã học cách sử dụng phương pháp Kernel để khám phá hình dạng phân phối của một biến. Đó là một bước khởi đầu  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c40/hoi-quy-phi-tham-so/" target="_blank" rel="noopener">Hồi quy phi tham số</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Mô hình khuếch tán thời gian liên tục</h3>
-    <p>Mô hình hóa khuếch tán thời gian liên tục Modeling continuous-time diffusion processes 1. Giới thiệu Trong hai bài học trước, chúng ta đã làm việc với dữ liệu được quan sát tại các thời điểm rời rạc . Tuy nhiên, trong thực tế, giá tài sản tài chính, lãi suất,  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c40/mo-hinh-khuech-tan-thoi-gian-lien-tuc/" target="_blank" rel="noopener">Mô hình khuếch tán thời gian liên tục</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c40/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Kiểm định và xác thực mô hình</h3>
-    <p>Kiểm định và xác thực mô hình phi tham số Nonparametric model checking and validation 1. Giới thiệu Trong suốt quá trình học kinh tế lượng, chúng ta thường bắt đầu với các mô hình tham số. Đó là những mô hình được xây dựng dựa trên các giả định chặt chẽ về dạn Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c40/kiem-dinh-va-xac-thuc-mo-hinh/" target="_blank" rel="noopener">Kiểm định và xác thực mô hình</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 5: Đo lường rủi ro với ước lượng phân vị</h3>
-    <p>Đo lường rủi ro với ước lượng phân vị phi tham số Risk measurement with nonparametric quantile estimation 1. Giới thiệu Trong thế giới tài chính, một trong những câu hỏi quan trọng nhất mà các nhà quản lý danh mục, ngân hàng và nhà đầu tư phải đối mặt hàng ngà Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c40/do-luong-rui-ro-voi-uoc-luong-phan-vi/" target="_blank" rel="noopener">Đo lường rủi ro với ước lượng phân vị</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Bước 6: Khám phá các kỹ thuật nâng cao</h3>
-    <p>Khám phá các kỹ thuật nâng cao trong mô hình phi tham số Exploring advanced nonparametric techniques 1. Giới thiệu Trong suốt các bài học vừa qua, chúng ta đã tập trung vào các bài toán với một biến độc lập duy nhất. Các phương pháp làm trơn Kernel đã hoạt độn Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c40/kham-pha-cac-ky-thuat-nang-cao/" target="_blank" rel="noopener">Khám phá các kỹ thuật nâng cao</a>.</p>
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập chuỗi thời gian, kiểm định nghiệm đơn vị và ước lượng ARIMA / GARCH
 version 18.0
 clear all
 set more off
+import delimited "sachktl_timeseries_finco.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_asndk09u1_c40_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+tsset time_id
+dfuller y, lags(4) trend regress
+pperron y, lags(4) trend
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 1. Ước lượng mô hình ARIMA và kiểm định nhiễu trắng phần dư
+arima y, arima(1,1,1) vce(robust)
+predict resid_arima, resid
+wntestq resid_arima, lags(12)
+
+* 2. Ước lượng mô hình phương sai có điều kiện thay đổi ARCH/GARCH(1,1)
+arch d.y x1 x2, arch(1) garch(1) vce(robust)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
-library(tidyverse)
-library(lmtest)
-library(sandwich)
+# Nạp thư viện chuỗi thời gian và ước lượng ARIMA / GARCH(1,1)
+library(tseries)
+library(forecast)
+library(rugarch)
 
-df <- read.csv("sachktl_asndk09u1_c40_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_timeseries_finco.csv")
+y_ts <- ts(df$y, frequency = 12)
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA tối ưu theo AICc
+adf.test(y_ts)
+fit_arima <- auto.arima(y_ts, seasonal = FALSE, ic = "aicc")
+summary(fit_arima)
+checkresiduals(fit_arima)
+
+# 2. Ước lượng mô hình GARCH(1,1) cho chuỗi lợi suất
+spec <- ugarchspec(variance.model = list(model = "sGARCH", garchOrder = c(1, 1)),
+                   mean.model = list(armaOrder = c(1, 0), include.mean = TRUE))
+fit_garch <- ugarchfit(spec = spec, data = diff(y_ts))
+show(fit_garch)
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và arch để phân tích chuỗi thời gian & biến động
 import pandas as pd
-import statsmodels.formula.api as smf
+from statsmodels.tsa.stattools import adfuller
+from statsmodels.tsa.arima.model import ARIMA
+from arch import arch_model
 
-df = pd.read_csv("sachktl_asndk09u1_c40_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_timeseries_finco.csv")
+y = df["y"].dropna()
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA(1,1,1)
+adf_stat, p_val, *_ = adfuller(y, autolag="AIC")
+print(f"ADF Statistic: {adf_stat:.4f}, p-value: {p_val:.4f}")
+arima_res = ARIMA(y, order=(1, 1, 1)).fit()
+print(arima_res.summary())
+
+# 2. Ước lượng mô hình GARCH(1,1) với phân phối Student-t
+ret = y.diff().dropna() * 100
+garch_res = arch_model(ret, vol="Garch", p=1, q=1, dist="t").fit(disp="off")
+print(garch_res.summary())
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 40: 40. mô hình hóa phi tham số trong chuỗi thời gian trên SachKTL"
+  title="Hướng dẫn thực hành 40. Mô hình hóa phi tham số trong chuỗi thời gian trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 40 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Nền tảng ước lượng mật độ Kernel | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c40/nen-tang-uoc-luong-mat-do-kernel/) |
-| **Bài 02** | Hồi quy phi tham số | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c40/hoi-quy-phi-tham-so/) |
-| **Bài 03** | Mô hình khuếch tán thời gian liên tục | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c40/mo-hinh-khuech-tan-thoi-gian-lien-tuc/) |
-| **Bài 04** | Kiểm định và xác thực mô hình | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c40/kiem-dinh-va-xac-thuc-mo-hinh/) |
-| **Bài 05** | Đo lường rủi ro với ước lượng phân vị | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c40/do-luong-rui-ro-voi-uoc-luong-phan-vi/) |
-| **Bài 06** | Khám phá các kỹ thuật nâng cao | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c40/kham-pha-cac-ky-thuat-nang-cao/) |
-| **Bài 07** | Xây dựng một dự án phân tích hoàn chỉnh | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c40/xay-dung-mot-du-an-phan-tich-hoan-chinh/) |
-| **Bài 08** | Tổng hợp chuỗi Mô hình hóa phi tham số | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c40/tong-hop-chuoi-mo-hinh-hoa-phi-tham-so/) |
+| **40.1** | Nền tảng ước lượng mật độ kernel | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c40/nen-tang-uoc-luong-mat-do-kernel/) |
+| **40.2** | Hồi quy phi tham số | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c40/hoi-quy-phi-tham-so/) |
+| **40.3** | Mô hình khuếch tán thời gian liên tục | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c40/mo-hinh-khuech-tan-thoi-gian-lien-tuc/) |
+| **40.4** | Kiểm định và xác thực mô hình | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c40/kiem-dinh-va-xac-thuc-mo-hinh/) |
+| **40.5** | Đo lường rủi ro với ước lượng phân vị | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c40/do-luong-rui-ro-voi-uoc-luong-phan-vi/) |
+| **40.6** | Khám phá các kỹ thuật nâng cao | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c40/kham-pha-cac-ky-thuat-nang-cao/) |
+| **40.7** | Xây dựng một dự án phân tích hoàn chỉnh | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c40/xay-dung-mot-du-an-phan-tich-hoan-chinh/) |
+| **40.8** | Tổng hợp chuỗi mô hình hóa phi tham số | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c40/tong-hop-chuoi-mo-hinh-hoa-phi-tham-so/) |

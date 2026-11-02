@@ -1,19 +1,19 @@
 ---
 id: chapter-15-c15
-title: "Chương 15: 15. giới thiệu về hồi quy chuỗi thời gian và dự báo"
-sidebar_label: "Chương 15: 15. Giới thiệu về hồi quy chuỗi thời gian "
+title: "15. Giới thiệu về hồi quy chuỗi thời gian và dự báo"
+sidebar_label: "15. Giới thiệu về hồi quy chuỗi thời gian và dự báo"
 sidebar_position: 16
-description: "Hướng dẫn thực hành How-To Chương 15: 15. giới thiệu về hồi quy chuỗi thời gian và dự báo thuộc bộ sách Giới thiệu về kinh tế lượng trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 15. Giới thiệu về hồi quy chuỗi thời gian và dự báo thuộc giáo trình Giới thiệu về kinh tế lượng trên SachKTL kèm công thức toán học, phân tích 8 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 15: 15. giới thiệu về hồi quy chuỗi thời gian và dự báo
+# 15. Giới thiệu về hồi quy chuỗi thời gian và dự báo
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 15: 15. giới thiệu về hồi quy chuỗi thời gian và dự báo** thuộc [**Bộ sách 10: giới thiệu về kinh tế lượng**](/sachktl/book-10-sstok20u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/sstok20u1/c15/](https://sachktl.tnsai.vn/vi/sstok20u1/c15/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **8 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **15. Giới thiệu về hồi quy chuỗi thời gian và dự báo** thuộc bộ giáo trình [**Giới thiệu về kinh tế lượng**](/sachktl/book-10-sstok20u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/sstok20u1/c15/](https://sachktl.tnsai.vn/vi/sstok20u1/c15/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 15: 15. giới thiệu về hồi quy chuỗi thời gian và dự báo">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="15. Giới thiệu về hồi quy chuỗi thời gian và dự báo">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 10 · CHƯƠNG 15</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 15: 15. giới thiệu về hồi quy chuỗi thời gian và dự báo</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Giới thiệu về kinh tế lượng · 8 bài học chuyên sâu</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Giới thiệu về kinh tế lượng</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">15. Giới thiệu về hồi quy chuỗi thời gian và dự báo</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng chuỗi thời gian, đồng liên kết và biến động tài chính · 8 bài học chuyê</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,140 +41,304 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Giới thiệu về hồi quy chuỗi thời gian và dự báo Chào mừng các bạn sinh viên đến với chuỗi bài học "Giới thiệu Hồi quy Chuỗi thời gian và Dự báo". Đây là một trong những lĩnh vực hấp dẫn và có tính ứng dụng cao nhất trong kinh tế lượng hiện đại. Từ việc dự báo tăng trưởng GDP, lạm phát, giá cổ phiếu cho đến phân tích tác động của chính sách kinh tế, kiến thức về chuỗi thời gian là một công cụ không thể thiếu cho bất kỳ nhà kinh tế học hay nhà phân tích dữ liệu nào. Trong chuỗi bài này, chúng ta sẽ cùng nhau bắt đầu một hành trình thú vị, biến những khái niệm có vẻ phức tạp thành những công cụ
+Giới thiệu về hồi quy chuỗi thời gian và dự báo Chào mừng các bạn sinh viên đến với chuỗi bài học "Giới thiệu Hồi quy Chuỗi thời gian và Dự báo". Đây là một trong những lĩnh vực hấp dẫn và có tính ứng dụng cao nhất trong kinh tế lượng hiện đại. Từ việc dự báo tăng trưởng GDP, lạm phát, giá cổ phiếu cho đến phân tích tác động của chính sách kinh tế, kiến thức về chuỗi thời gian là một công cụ không thể thiếu cho bất kỳ nhà kinh tế học hay nhà phân tích dữ liệu nào.
 
-- **Chủ đề học thuật trọng tâm**: CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO, PHỤ LỤC: DỮ LIỆU MÔ PHỎNG CHO SERIES.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+\Phi(L)(1 - L)^d Y_t = \mu + \Theta(L)\varepsilon_t, \quad \varepsilon_t \mid \mathcal{F}_{t-1} \sim \mathcal{N}(0, \sigma_t^2) \tag*{[1]}
+$$
+
+$$
+\sigma_t^2 = \omega + \sum_{i=1}^p \alpha_i \varepsilon_{t-i}^2 + \sum_{j=1}^q \beta_j \sigma_{t-j}^2, \quad \omega > 0, \; \alpha_i, \beta_j \ge 0 \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Chuỗi thời gian phải thỏa mãn điều kiện dừng hiệp phương sai hoặc được sai phân hóa đến bậc tích hợp $I(d)$ phù hợp trước khi ước lượng.
+2. Điều kiện khả nghịch và nghiệm ngoài vòng tròn đơn vị của đa thức trễ $\Phi(L)$ và $\Theta(L)$ đảm bảo tính ổn định động học.
+3. Trong mô hình phương sai có điều kiện thay đổi GARCH, tổng hệ số $\sum \alpha_i + \sum \beta_j < 1$ bảo đảm phương sai không điều kiện hữu hạn.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 15 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/sstok20u1/c15/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Hồi quy chuỗi thời gian không dừng chưa qua kiểm định nghiệm đơn vị ADF/PP và đồng liên kết Johansen dễ dẫn đến hồi quy giả mạo với thống kê $t$ và $R^2$ bị thổi phồng."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Nền tảng về dữ liệu chuỗi thời gian
+
+Nền tảng về dữ liệu chuỗi thời gian Foundations of time series data Làm quen với dữ liệu theo thời gian Trong bài giới thiệu, chúng ta đã có cái nhìn tổng quan về tầm quan trọng của việc phân tích chuỗi thời gian. Giống như một bác sĩ cần kiểm tra các dấu hiệu sinh tồn của bệnh nhân trước khi chẩn đoán, một nhà kinh tế lượng cũng cần "bắt mạch" dữ liệu của mình trước khi xây dựng mô hình. Dữ liệu chuỗi thời gian có những đặc tính rất riêng biệt so với dữ liệu chéo mà chúng ta đã quen thuộc.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Làm quen với dữ liệu theo thời gian**
+- **Các khái niệm lý thuyết cốt lõi**
+- **Dữ liệu chuỗi thời gian là gì?**
+- **Các phép biến đổi cơ bản và ý nghĩa kinh tế**
+- **1. Độ trễ**
+- **2. Sai phân bậc một**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/sstok20u1/c15/nen-tang-ve-du-lieu-chuoi-thoi-gian/)
+
+### 2.2. Dự báo, sai số và khái niệm tính dừng
+
+Dự báo, sai số và khái niệm tính dừng Forecasting, forecast errors, and the concept of stationarity Mục tiêu và quy tắc của trò chơi dự báo Ở bài học trước, chúng ta đã làm quen với các đặc tính cơ bản của dữ liệu chuỗi thời gian. Bây giờ, chúng ta sẽ tiến một bước xa hơn để trả lời câu hỏi cốt lõi: Làm thế nào chúng ta có thể sử dụng thông tin trong quá khứ để dự đoán tương lai? Đây chính là bản chất của việc dự báo. Hãy tưởng tượng việc dự báo kinh tế cũng giống như dự báo thời tiết.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Mục tiêu và quy tắc của trò chơi dự báo**
+- **Nền tảng lý thuyết của dự báo**
+- **Bài toán dự báo và sai số dự báo**
+- **Sai số dự báo bình phương trung bình**
+- **Hai nguồn gốc của sai số dự báo**
+- **Tính dừng : Giả định nền tảng**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/sstok20u1/c15/du-bao-sai-so-va-khai-niem-tinh-dung/)
+
+### 2.3. Mô hình tự hồi quy
+
+Mô hình tự hồi quy The autoregressive model Để quá khứ dự báo tương lai Trong hai bài học trước, chúng ta đã học cách mô tả và chuẩn bị dữ liệu chuỗi thời gian. Chúng ta đã biết rằng giá trị của một biến hôm nay thường liên quan đến giá trị của nó ngày hôm qua, một đặc tính gọi là tự tương quan. Một câu hỏi tự nhiên nảy sinh: Nếu chúng có liên quan, liệu chúng ta có thể sử dụng mối quan hệ đó để dự báo không? Câu trả lời là có, và đó chính là ý tưởng cốt lõi đằng sau mô hình Tự hồi quy.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Để quá khứ dự báo tương lai**
+- **Lý thuyết về mô hình tự hồi quy**
+- **Mô hình tự hồi quy bậc một - AR**
+- **Mô hình tự hồi quy bậc p - AR**
+- **Ước lượng và dự báo**
+- **Phương pháp xây dựng mô hình AR trong Stata**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/sstok20u1/c15/mo-hinh-tu-hoi-quy-ar/)
+
+### 2.4. Mô hình hồi quy phân phối trễ
+
+Mô hình hồi quy phân phối trễ The autoregressive distributed lag model Vượt ra ngoài giới hạn của quá khứ Trong bài học trước, chúng ta đã xây dựng thành công mô hình Tự hồi quy, một công cụ mạnh mẽ dựa trên ý tưởng rằng quá khứ của một biến chứa thông tin để dự báo tương lai của chính nó. Tuy nhiên, việc chỉ nhìn vào chính bản thân một biến có thể là một hạn chế. Lý thuyết kinh tế thường cho chúng ta biết rằng các biến số không tồn tại một cách cô lập; chúng tương tác và ảnh hưởng lẫn nhau.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Vượt ra ngoài giới hạn của quá khứ**
+- **Lý thuyết về mô hình ADL**
+- **Cấu trúc mô hình ADL**
+- **Phương pháp xây dựng mô hình ADL trong Stata**
+- **Dùng chênh lệch lãi suất để dự báo tăng trưởng GDP**
+- **Tổng kết bài học**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/sstok20u1/c15/mo-hinh-hoi-quy-phan-phoi-tre-adl/)
+
+### 2.5. Vấn đề phi dừng – Xu thế và nghiệm đơn vị
+
+Vấn đề phi dừng: Xu thế và nghiệm đơn vị Nonstationarity I: Trends and unit roots Khi quá khứ không còn là kim chỉ nam đáng tin cậy Trong các bài học trước, chúng ta đã hoạt động dưới một giả định nền tảng là "tính dừng" - tức là các quy luật thống kê chi phối dữ liệu không thay đổi theo thời gian. Giả định này cho phép chúng ta tự tin sử dụng các mối quan hệ trong quá khứ để dự báo tương lai. Nhưng điều gì sẽ xảy ra nếu giả định này bị vi phạm? Hãy tưởng tượng bạn đang cố gắng dự báo chiều cao của một đứa trẻ đang lớn.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Khi quá khứ không còn là kim chỉ Nam đáng tin cậy**
+- **Lý thuyết về xu thế và nghiệm đơn vị**
+- **Xu thế là gì? các loại xu thế**
+- **Mô hình bước ngẫu nhiên và nghiệm đơn vị**
+- **Các vấn đề do xu thế ngẫu nhiên gây ra**
+- **Giải pháp: Lấy sai phân**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/sstok20u1/c15/van-de-phi-dung-xu-the-va-nghiem-don-vi/)
+
+### 2.6. Vấn đề phi dừng – Gãy cấu trúc
+
+Vấn đề phi dừng: Gãy cấu trúc Nonstationarity II: Structural breaks Khi "quy luật của trò chơi" thay đổi Trong bài học trước, chúng ta đã đối mặt với vấn đề xu thế, khi một biến số dường như di chuyển theo một hướng nhất định trong dài hạn. Tuy nhiên, còn một dạng phi dừng khác có thể làm sai lệch hoàn toàn kết quả phân tích của chúng ta: đó là khi mối quan hệ giữa các biến số đột ngột thay đổi. Hãy tưởng tượng bạn đang xây dựng một mô hình dự báo doanh số bán hàng dựa trên chi tiêu quảng cáo. Mô hình của bạn hoạt động rất tốt trong nhiều năm.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Khi "quy luật của trò chơi" thay đổi**
+- **Lý thuyết về gãy cấu trúc và các kiểm định**
+- **Gãy cấu trúc là gì?**
+- **Kiểm định gãy cấu trúc tại một ngày đã biết**
+- **Kiểm định gãy cấu trúc tại một ngày chưa biết**
+- **Phương pháp kiểm định gãy cấu trúc trong Stata**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/sstok20u1/c15/van-de-phi-dung-gay-cau-truc/)
+
+### 2.7. Thực hành và tổng kết chuỗi bài học
+
+Thực hành và tổng kết chuỗi bài học Practice and series wrap-up Tóm tắt tổng hợp kiến thức đã học Chào mừng các bạn đến với bài học cuối cùng! Trong suốt hành trình vừa qua, chúng ta đã đi từ những khái niệm cơ bản nhất đến các kỹ thuật phân tích phức tạp. Hãy cùng nhau nhìn lại chặng đường đã qua. Chúng ta bắt đầu bằng việc làm quen với các đặc tính của dữ liệu chuỗi thời gian như độ trễ và tự tương quan.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Tóm tắt tổng hợp kiến thức đã học**
+- **Chuẩn bị dữ liệu**
+- **Quy trình phân tích step-by-step**
+- **Hướng dẫn thực hành từng bước với Stata**
+- **Bước 1: Khám phá và trực quan hóa dữ liệu**
+- **Bước 2: Kiểm tra tính dừng**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/sstok20u1/c15/thuc-hanh-va-tong-ket-chuoi-bai-hoc/)
+
+### 2.8. Bài tổng hợp
+
+Từ nền tảng đến ứng dụng trong hồi quy chuỗi thời gian Series synthesis: From foundations to applications in time series regression 1. Vị trí của hồi quy chuỗi thời gian trong kinh tế lượng Chúng ta đã cùng nhau trải qua một hành trình khám phá các kỹ thuật nền tảng của hồi quy chuỗi thời gian và dự báo. Nhưng trước khi đi sâu vào tổng hợp kiến thức, điều quan trọng là phải lùi lại một bước và nhìn nhận vị trí của chủ đề này trong bức tranh lớn của kinh tế lượng.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Vị trí của hồi quy chuỗi thời gian trong kinh tế lượng**
+- **2. Các khái niệm cốt lõi và mối liên kết**
+- **3. Một quy trình làm việc hoàn chỉnh**
+- **4. Phân tích và dự báo lạm phát**
+- **5. Tổng kết và hướng phát triển**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/sstok20u1/c15/bai-tong-hop/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Nền tảng về dữ liệu chuỗi thời gian</h3>
-    <p>Nền tảng về dữ liệu chuỗi thời gian Foundations of time series data Làm quen với dữ liệu theo thời gian Trong bài giới thiệu, chúng ta đã có cái nhìn tổng quan về tầm quan trọng của việc phân tích chuỗi thời gian. Giống như một bác sĩ cần kiểm tra các dấu hiệu Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sstok20u1/c15/nen-tang-ve-du-lieu-chuoi-thoi-gian/" target="_blank" rel="noopener">Nền tảng về dữ liệu chuỗi thời gian</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>15. Giới thiệu về hồi quy chuỗi thời gian và dự báo</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Dự báo, sai số và khái niệm tính dừng</h3>
-    <p>Dự báo, sai số và khái niệm tính dừng Forecasting, forecast errors, and the concept of stationarity Mục tiêu và quy tắc của trò chơi dự báo Ở bài học trước, chúng ta đã làm quen với các đặc tính cơ bản của dữ liệu chuỗi thời gian. Bây giờ, chúng ta sẽ tiến một Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sstok20u1/c15/du-bao-sai-so-va-khai-niem-tinh-dung/" target="_blank" rel="noopener">Dự báo, sai số và khái niệm tính dừng</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Mô hình tự hồi quy</h3>
-    <p>Mô hình tự hồi quy The autoregressive model Để quá khứ dự báo tương lai Trong hai bài học trước, chúng ta đã học cách mô tả và chuẩn bị dữ liệu chuỗi thời gian. Chúng ta đã biết rằng giá trị của một biến hôm nay thường liên quan đến giá trị của nó ngày hôm qua Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sstok20u1/c15/mo-hinh-tu-hoi-quy-ar/" target="_blank" rel="noopener">Mô hình tự hồi quy</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sstok20u1/c15/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Mô hình hồi quy phân phối trễ</h3>
-    <p>Mô hình hồi quy phân phối trễ The autoregressive distributed lag model Vượt ra ngoài giới hạn của quá khứ Trong bài học trước, chúng ta đã xây dựng thành công mô hình Tự hồi quy, một công cụ mạnh mẽ dựa trên ý tưởng rằng quá khứ của một biến chứa thông tin để  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sstok20u1/c15/mo-hinh-hoi-quy-phan-phoi-tre-adl/" target="_blank" rel="noopener">Mô hình hồi quy phân phối trễ</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 5: Vấn đề phi dừng – xu thế và nghiệm đơn vị</h3>
-    <p>Vấn đề phi dừng: Xu thế và nghiệm đơn vị Nonstationarity I: Trends and unit roots Khi quá khứ không còn là kim chỉ nam đáng tin cậy Trong các bài học trước, chúng ta đã hoạt động dưới một giả định nền tảng là "tính dừng" - tức là các quy luật thống kê chi phối Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sstok20u1/c15/van-de-phi-dung-xu-the-va-nghiem-don-vi/" target="_blank" rel="noopener">Vấn đề phi dừng – Xu thế và nghiệm đơn vị</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Bước 6: Vấn đề phi dừng – gãy cấu trúc</h3>
-    <p>Vấn đề phi dừng: Gãy cấu trúc Nonstationarity II: Structural breaks Khi "quy luật của trò chơi" thay đổi Trong bài học trước, chúng ta đã đối mặt với vấn đề xu thế, khi một biến số dường như di chuyển theo một hướng nhất định trong dài hạn. Tuy nhiên, còn một  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sstok20u1/c15/van-de-phi-dung-gay-cau-truc/" target="_blank" rel="noopener">Vấn đề phi dừng – Gãy cấu trúc</a>.</p>
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập chuỗi thời gian, kiểm định nghiệm đơn vị và ước lượng ARIMA / GARCH
 version 18.0
 clear all
 set more off
+import delimited "sachktl_timeseries_finco.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_sstok20u1_c15_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+tsset time_id
+dfuller y, lags(4) trend regress
+pperron y, lags(4) trend
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 1. Ước lượng mô hình ARIMA và kiểm định nhiễu trắng phần dư
+arima y, arima(1,1,1) vce(robust)
+predict resid_arima, resid
+wntestq resid_arima, lags(12)
+
+* 2. Ước lượng mô hình phương sai có điều kiện thay đổi ARCH/GARCH(1,1)
+arch d.y x1 x2, arch(1) garch(1) vce(robust)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
-library(tidyverse)
-library(lmtest)
-library(sandwich)
+# Nạp thư viện chuỗi thời gian và ước lượng ARIMA / GARCH(1,1)
+library(tseries)
+library(forecast)
+library(rugarch)
 
-df <- read.csv("sachktl_sstok20u1_c15_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_timeseries_finco.csv")
+y_ts <- ts(df$y, frequency = 12)
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA tối ưu theo AICc
+adf.test(y_ts)
+fit_arima <- auto.arima(y_ts, seasonal = FALSE, ic = "aicc")
+summary(fit_arima)
+checkresiduals(fit_arima)
+
+# 2. Ước lượng mô hình GARCH(1,1) cho chuỗi lợi suất
+spec <- ugarchspec(variance.model = list(model = "sGARCH", garchOrder = c(1, 1)),
+                   mean.model = list(armaOrder = c(1, 0), include.mean = TRUE))
+fit_garch <- ugarchfit(spec = spec, data = diff(y_ts))
+show(fit_garch)
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và arch để phân tích chuỗi thời gian & biến động
 import pandas as pd
-import statsmodels.formula.api as smf
+from statsmodels.tsa.stattools import adfuller
+from statsmodels.tsa.arima.model import ARIMA
+from arch import arch_model
 
-df = pd.read_csv("sachktl_sstok20u1_c15_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_timeseries_finco.csv")
+y = df["y"].dropna()
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA(1,1,1)
+adf_stat, p_val, *_ = adfuller(y, autolag="AIC")
+print(f"ADF Statistic: {adf_stat:.4f}, p-value: {p_val:.4f}")
+arima_res = ARIMA(y, order=(1, 1, 1)).fit()
+print(arima_res.summary())
+
+# 2. Ước lượng mô hình GARCH(1,1) với phân phối Student-t
+ret = y.diff().dropna() * 100
+garch_res = arch_model(ret, vol="Garch", p=1, q=1, dist="t").fit(disp="off")
+print(garch_res.summary())
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 15: 15. giới thiệu về hồi quy chuỗi thời gian và dự báo trên SachKTL"
+  title="Hướng dẫn thực hành 15. Giới thiệu về hồi quy chuỗi thời gian và dự báo trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 15 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Nền tảng về dữ liệu chuỗi thời gian | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sstok20u1/c15/nen-tang-ve-du-lieu-chuoi-thoi-gian/) |
-| **Bài 02** | Dự báo, sai số và khái niệm tính dừng | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sstok20u1/c15/du-bao-sai-so-va-khai-niem-tinh-dung/) |
-| **Bài 03** | Mô hình tự hồi quy | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sstok20u1/c15/mo-hinh-tu-hoi-quy-ar/) |
-| **Bài 04** | Mô hình hồi quy phân phối trễ | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sstok20u1/c15/mo-hinh-hoi-quy-phan-phoi-tre-adl/) |
-| **Bài 05** | Vấn đề phi dừng – Xu thế và nghiệm đơn vị | Stata 18 MP, R 4.x | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sstok20u1/c15/van-de-phi-dung-xu-the-va-nghiem-don-vi/) |
-| **Bài 06** | Vấn đề phi dừng – Gãy cấu trúc | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sstok20u1/c15/van-de-phi-dung-gay-cau-truc/) |
-| **Bài 07** | Thực hành và tổng kết chuỗi bài học | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sstok20u1/c15/thuc-hanh-va-tong-ket-chuoi-bai-hoc/) |
-| **Bài 08** | Bài tổng hợp | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sstok20u1/c15/bai-tong-hop/) |
+| **15.1** | Nền tảng về dữ liệu chuỗi thời gian | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sstok20u1/c15/nen-tang-ve-du-lieu-chuoi-thoi-gian/) |
+| **15.2** | Dự báo, sai số và khái niệm tính dừng | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sstok20u1/c15/du-bao-sai-so-va-khai-niem-tinh-dung/) |
+| **15.3** | Mô hình tự hồi quy | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sstok20u1/c15/mo-hinh-tu-hoi-quy-ar/) |
+| **15.4** | Mô hình hồi quy phân phối trễ | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sstok20u1/c15/mo-hinh-hoi-quy-phan-phoi-tre-adl/) |
+| **15.5** | Vấn đề phi dừng – Xu thế và nghiệm đơn vị | `Stata 18 MP, R 4.x` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sstok20u1/c15/van-de-phi-dung-xu-the-va-nghiem-don-vi/) |
+| **15.6** | Vấn đề phi dừng – Gãy cấu trúc | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sstok20u1/c15/van-de-phi-dung-gay-cau-truc/) |
+| **15.7** | Thực hành và tổng kết chuỗi bài học | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sstok20u1/c15/thuc-hanh-va-tong-ket-chuoi-bai-hoc/) |
+| **15.8** | Bài tổng hợp | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sstok20u1/c15/bai-tong-hop/) |

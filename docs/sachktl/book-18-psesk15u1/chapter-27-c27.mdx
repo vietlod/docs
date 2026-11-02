@@ -1,19 +1,19 @@
 ---
 id: chapter-27-c27
-title: "Chương 27: 27. mô hình dữ liệu bảng động ngắn hạn"
-sidebar_label: "Chương 27: 27. Mô hình dữ liệu bảng động ngắn hạn"
+title: "27. Mô hình dữ liệu bảng động ngắn hạn"
+sidebar_label: "27. Mô hình dữ liệu bảng động ngắn hạn"
 sidebar_position: 28
-description: "Hướng dẫn thực hành How-To Chương 27: 27. mô hình dữ liệu bảng động ngắn hạn thuộc bộ sách Phân tích chuỗi thời gian và dữ liệu bảng trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 27. Mô hình dữ liệu bảng động ngắn hạn thuộc giáo trình Phân tích chuỗi thời gian và dữ liệu bảng trên SachKTL kèm công thức toán học, phân tích 6 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 27: 27. mô hình dữ liệu bảng động ngắn hạn
+# 27. Mô hình dữ liệu bảng động ngắn hạn
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 27: 27. mô hình dữ liệu bảng động ngắn hạn** thuộc [**Bộ sách 18: phân tích chuỗi thời gian và dữ liệu bảng**](/sachktl/book-18-psesk15u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/psesk15u1/c27/](https://sachktl.tnsai.vn/vi/psesk15u1/c27/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **6 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **27. Mô hình dữ liệu bảng động ngắn hạn** thuộc bộ giáo trình [**Phân tích chuỗi thời gian và dữ liệu bảng**](/sachktl/book-18-psesk15u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/psesk15u1/c27/](https://sachktl.tnsai.vn/vi/psesk15u1/c27/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 27: 27. mô hình dữ liệu bảng động ngắn hạn">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="27. Mô hình dữ liệu bảng động ngắn hạn">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 18 · CHƯƠNG 27</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 27: 27. mô hình dữ liệu bảng động ngắn hạn</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Phân tích chuỗi thời gian và dữ liệu bảng · 6 bài học chuyên sâu</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Phân tích chuỗi thời gian và dữ liệu</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">27. Mô hình dữ liệu bảng động ngắn hạn</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng dữ liệu bảng và kiểm soát dị biệt không quan sát được · 6 bài học chuyê</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,138 +41,265 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Giới thiệu mô hình dữ liệu bảng động An Introduction to Dynamic Panel Data models Chào các bạn sinh viên, chào mừng đến với chuỗi bài học chuyên sâu về một trong những chủ đề hấp dẫn và mạnh mẽ nhất trong kinh tế lượng hiện đại: Mô hình Dữ liệu Bảng Động. Trong nghiên cứu kinh tế, rất nhiều mối quan hệ không chỉ xảy ra tức thời mà còn có độ trễ và tính ì tâm lý, nghĩa là giá trị của một biến ở hiện tại phụ thuộc vào chính giá trị của nó trong quá khứ. Ví dụ, mức tiêu dùng hôm nay của một hộ gia đình phụ thuộc vào mức tiêu dùng hôm qua, hay quyết định đầu tư của một công ty năm nay chịu ảnh
+Giới thiệu mô hình dữ liệu bảng động An Introduction to Dynamic Panel Data models Chào các bạn sinh viên, chào mừng đến với chuỗi bài học chuyên sâu về một trong những chủ đề hấp dẫn và mạnh mẽ nhất trong kinh tế lượng hiện đại: Mô hình Dữ liệu Bảng Động. Trong nghiên cứu kinh tế, rất nhiều mối quan hệ không chỉ xảy ra tức thời mà còn có độ trễ và tính ì tâm lý, nghĩa là giá trị của một biến ở hiện tại phụ thuộc vào chính giá trị của nó trong quá khứ.
 
-- **Chủ đề học thuật trọng tâm**: CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO, PHỤ LỤC: Dữ liệu mô phỏng cho series.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+Y_{it} = \alpha + \mathbf{X}_{it}'\boldsymbol{\beta} + \mu_i + \lambda_t + \varepsilon_{it}, \quad i = 1,\dots,N; \; t = 1,\dots,T \tag*{[1]}
+$$
+
+$$
+\hat{\boldsymbol{\beta}}_{\text{FE}} = \left(\sum_{i=1}^N \sum_{t=1}^T \tilde{\mathbf{X}}_{it}\tilde{\mathbf{X}}_{it}'\right)^{-1} \left(\sum_{i=1}^N \sum_{t=1}^T \tilde{\mathbf{X}}_{it}\tilde{Y}_{it}\right), \quad \tilde{Z}_{it} = Z_{it} - \bar{Z}_i \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Tính ngoại sinh nghiêm ngặt của các biến giải thích đối với thành phần nhiễu đặc thù theo cả chiều chéo và chiều thời gian.
+2. Thành phần hiệu ứng cá thể $\mu_i$ có thể tương quan tùy ý với $\mathbf{X}_{it}$ trong mô hình tác động cố định FE hoặc độc lập tuyến tính trong mô hình tác động ngẫu nhiên RE.
+3. Ma trận hiệp phương sai của sai số cần được hiệu chỉnh vững theo cụm cá thể để kiểm soát tự tương quan chuỗi và phương sai thay đổi.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 27 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/psesk15u1/c27/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Ước lượng tác động cố định FE và tác động ngẫu nhiên RE bị chệch Nickell khi có biến trễ của biến phụ thuộc $Y_{i,t-1}$ với chiều thời gian $T$ ngắn; khi đó cần chuyển sang ước lượng Difference GMM hoặc System GMM."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Giới thiệu và vấn đề nội sinh
+
+Vấn đề nội sinh trong mô hình bảng động The endogeneity problem in dynamic panel models Tại sao các phương pháp cũ không còn hiệu quả? Trong bài học giới thiệu, chúng ta đã cùng nhau tìm hiểu về sức mạnh của mô hình dữ liệu bảng động – khả năng mô tả những quá trình kinh tế có tính ì hoặc phụ thuộc vào lịch sử. Chìa khóa của mô hình này nằm ở việc đưa biến trễ của chính biến phụ thuộc vào làm một biến giải thích cho lương ở kỳ này.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Tại sao các phương pháp cũ không còn hiệu quả?**
+- **Nguồn gốc của vấn đề nội sinh**
+- **Tại sao ước lượng tác động cố định lại thất bại? chệch nickell**
+- **TÓM tắt về chệch NICKELL**
+- **Chứng minh sự tồn tại của chệch nickell bằng Stata**
+- **Bước 1: Ước lượng bằng OLS gộp - Cách tiếp cận sai lầm**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c27/gioi-thieu-va-van-de-noi-sinh/)
+
+### 2.2. Phương pháp IV và GMM sai phân
+
+Giải pháp cho nội sinh: IV và GMM sai phân Solutions for endogeneity: IV and difference GMM Giới thiệu: Hành trình tìm kiếm một ước lượng vững Ở bài học trước, chúng ta đã đi đến một kết luận quan trọng: trong mô hình dữ liệu bảng động với số kỳ thời gian ngắn, ước lượng Tác động Cố định bị chệch một cách có hệ thống, một hiện tượng được gọi là Chệch Nickell. Điều này đặt ra một câu hỏi cấp thiết: nếu các phương pháp quen thuộc không còn đáng tin cậy, làm thế nào chúng ta có thể thu được một ước lượng chính xác cho hệ số của biến trễ?
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu: Hành trình tìm kiếm một ước lượng vững**
+- **Nền tảng lý thuyết: Từ biến công cụ đến GMM**
+- **1. Giải pháp biến công cụ của anderson-Hsiao**
+- **2. GMM sai phân của Arellano-Bond**
+- **TÓM tắt về GMM SAI phân**
+- **Quy trình ước lượng GMM sai phân**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c27/phuong-phap-iv-va-gmm-sai-phan/)
+
+### 2.3. GMM hệ thống và các mở rộng
+
+GMM hệ thống và vấn đề biến công cụ yếu System GMM and the weak instrument problem Khi GMM sai phân là chưa đủ Ở bài học trước, chúng ta đã khám phá ra sức mạnh của GMM Sai phân do Arellano và Bond đề xuất. Bằng cách sử dụng các giá trị trễ của biến phụ thuộc làm công cụ cho phương trình sai phân, phương pháp này đã giúp chúng ta khắc phục thành công Chệch Nickell và thu được ước lượng vững. Tuy nhiên, trong thế giới kinh tế lượng, không có một giải pháp nào là hoàn hảo cho mọi tình huống.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Khi GMM sai phân là chưa đủ**
+- **Từ công cụ yếu đến một hệ thống mạnh mẽ hơn**
+- **1. Vấn đề biến công cụ yếu**
+- **2. Giải pháp GMM hệ thống**
+- **Một giả định quan trọng bổ sung**
+- **TÓM tắt về GMM hệ thống**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c27/gmm-he-thong-va-cac-mo-rong/)
+
+### 2.4. Kiểm định giả thuyết và chủ đề nâng cao
+
+Kiểm định giả thuyết cho mô hình GMM Specification testing for GMM models Làm thế nào để tin tưởng vào kết quả? Trong các bài học trước, chúng ta đã đi một chặng đường dài từ việc xác định vấn đề nội sinh đến việc áp dụng các phương pháp ước lượng tinh vi như GMM Sai phân và GMM Hệ thống. Chúng ta đã có thể chạy các lệnh trong Stata và thu được kết quả. Tuy nhiên, một câu hỏi quan trọng vẫn còn bỏ ngỏ: "Làm sao chúng ta biết được các giả định đằng sau những phương pháp này là đúng?
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Làm thế nào để tin tưởng vào kết quả?**
+- **Các bài kiểm định chẩn đoán chính**
+- **1. Kiểm định sargan/hansen cho các ràng buộc vượt định danh**
+- **2. Kiểm định tự tương quan Arellano-Bond**
+- **TÓM tắt các bài kiểm định**
+- **Quy trình kiểm định mô hình**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c27/kiem-dinh-gia-thuyet-va-chu-de-nang-cao/)
+
+### 2.5. Hướng dẫn thực hành GMM trên Stata
+
+Hướng dẫn thực hành GMM trên Stata từ A-Z A step-by-step guide to GMM in Stata Từ lý thuyết đến kết quả nghiên cứu Chào mừng các bạn đến với bài học cuối cùng và quan trọng nhất trong chuỗi bài về mô hình dữ liệu bảng động. Trong suốt bốn bài học vừa qua, chúng ta đã cùng nhau xây dựng một nền tảng lý thuyết vững chắc: từ việc hiểu rõ vấn đề nội sinh và Chệch Nickell, khám phá các giải pháp như GMM Sai phân và GMM Hệ thống, cho đến việc học cách kiểm định và xác thực mô hình của mình.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Từ lý thuyết đến kết quả nghiên cứu**
+- **Chuẩn bị dữ liệu**
+- **Quy trình phân tích từng bước**
+- **Bước 1: Ước lượng OLS và FE**
+- **Bước 2: Ước lượng GMM sai phân**
+- **Bước 3: Ước lượng GMM hệ thống**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c27/huong-dan-thuc-hanh-gmm-tren-stata/)
+
+### 2.6. Bài tổng hợp chuỗi mô hình bảng động
+
+Tổng hợp chuỗi bài học mô hình bảng động Synthesizing the dynamic panel data models series 1. Bức tranh lớn về mô hình bảng động Chào mừng các bạn đã quay trở lại trong bài viết cuối cùng của chuỗi bài học chuyên sâu về Mô hình Dữ liệu Bảng Động. Sau khi đã cùng nhau đi qua từng khái niệm, từng phương pháp và từng bài thực hành, giờ là lúc chúng ta lùi lại một bước để nhìn vào bức tranh toàn cảnh.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Bức tranh lớn về mô hình bảng động**
+- **2. Các khái niệm cốt lõi và mối liên kết**
+- **3. Quy trình chuẩn cho nhà nghiên cứu**
+- **4. Phân tích tổng hợp với Stata**
+- **5. Tổng kết và hướng phát triển**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c27/bai-tong-hop-chuoi-mo-hinh-bang-dong/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Giới thiệu và vấn đề nội sinh</h3>
-    <p>Vấn đề nội sinh trong mô hình bảng động The endogeneity problem in dynamic panel models Tại sao các phương pháp cũ không còn hiệu quả? Trong bài học giới thiệu, chúng ta đã cùng nhau tìm hiểu về sức mạnh của mô hình dữ liệu bảng động – khả năng mô tả những quá Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c27/gioi-thieu-va-van-de-noi-sinh/" target="_blank" rel="noopener">Giới thiệu và vấn đề nội sinh</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>27. Mô hình dữ liệu bảng động ngắn hạn</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Phương pháp IV và GMM sai phân</h3>
-    <p>Giải pháp cho nội sinh: IV và GMM sai phân Solutions for endogeneity: IV and difference GMM Giới thiệu: Hành trình tìm kiếm một ước lượng vững Ở bài học trước, chúng ta đã đi đến một kết luận quan trọng: trong mô hình dữ liệu bảng động với số kỳ thời gian ngắn Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c27/phuong-phap-iv-va-gmm-sai-phan/" target="_blank" rel="noopener">Phương pháp IV và GMM sai phân</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: GMM hệ thống và các mở rộng</h3>
-    <p>GMM hệ thống và vấn đề biến công cụ yếu System GMM and the weak instrument problem Khi GMM sai phân là chưa đủ Ở bài học trước, chúng ta đã khám phá ra sức mạnh của GMM Sai phân do Arellano và Bond đề xuất. Bằng cách sử dụng các giá trị trễ của biến phụ thuộc  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c27/gmm-he-thong-va-cac-mo-rong/" target="_blank" rel="noopener">GMM hệ thống và các mở rộng</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c27/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Kiểm định giả thuyết và chủ đề nâng cao</h3>
-    <p>Kiểm định giả thuyết cho mô hình GMM Specification testing for GMM models Làm thế nào để tin tưởng vào kết quả? Trong các bài học trước, chúng ta đã đi một chặng đường dài từ việc xác định vấn đề nội sinh đến việc áp dụng các phương pháp ước lượng tinh vi như  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c27/kiem-dinh-gia-thuyet-va-chu-de-nang-cao/" target="_blank" rel="noopener">Kiểm định giả thuyết và chủ đề nâng cao</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 5: Hướng dẫn thực hành GMM trên Stata</h3>
-    <p>Hướng dẫn thực hành GMM trên Stata từ A-Z A step-by-step guide to GMM in Stata Từ lý thuyết đến kết quả nghiên cứu Chào mừng các bạn đến với bài học cuối cùng và quan trọng nhất trong chuỗi bài về mô hình dữ liệu bảng động. Trong suốt bốn bài học vừa qua, chún Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c27/huong-dan-thuc-hanh-gmm-tren-stata/" target="_blank" rel="noopener">Hướng dẫn thực hành GMM trên Stata</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Bước 6: Bài tổng hợp chuỗi mô hình bảng động</h3>
-    <p>Tổng hợp chuỗi bài học mô hình bảng động Synthesizing the dynamic panel data models series 1. Bức tranh lớn về mô hình bảng động Chào mừng các bạn đã quay trở lại trong bài viết cuối cùng của chuỗi bài học chuyên sâu về Mô hình Dữ liệu Bảng Động. Sau khi đã cù Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c27/bai-tong-hop-chuoi-mo-hinh-bang-dong/" target="_blank" rel="noopener">Bài tổng hợp chuỗi mô hình bảng động</a>.</p>
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập cấu trúc dữ liệu bảng và ước lượng FE / RE / Hausman
 version 18.0
 clear all
 set more off
+import delimited "sachktl_panel_ecodata.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_psesk15u1_c27_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+xtset id year
+xtdescribe
+xtsum y x1 x2 x3
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 1. Ước lượng tác động cố định (Fixed Effects) và tác động ngẫu nhiên (Random Effects)
+xtreg y x1 x2 x3, fe
+estimates store FE_model
+xtreg y x1 x2 x3, re
+estimates store RE_model
+
+* 2. Kiểm định Hausman lựa chọn mô hình và ước lượng sai số chuẩn vững theo cụm
+hausman FE_model RE_model, sigmamore
+xtreg y x1 x2 x3 i.year, fe vce(cluster id)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
-library(tidyverse)
+# Nạp thư viện dữ liệu bảng và ước lượng FE / RE / Cluster-Robust SE
+library(plm)
 library(lmtest)
 library(sandwich)
 
-df <- read.csv("sachktl_psesk15u1_c27_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_panel_ecodata.csv")
+pdata <- pdata.frame(df, index = c("id", "year"))
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Ước lượng mô hình Within FE và Swamy-Arora RE
+fe_mod <- plm(y ~ x1 + x2 + x3, data = pdata, model = "within", effect = "twoways")
+re_mod <- plm(y ~ x1 + x2 + x3, data = pdata, model = "random")
+
+# 2. Kiểm định Hausman và xuất sai số chuẩn vững Arellano theo cụm
+phtest(fe_mod, re_mod)
+coeftest(fe_mod, vcov = vcovHC(fe_mod, method = "arellano", type = "HC1", cluster = "group"))
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện linearmodels và ước lượng PanelOLS / RandomEffects
 import pandas as pd
-import statsmodels.formula.api as smf
+from linearmodels.panel import PanelOLS, RandomEffects, compare
 
-df = pd.read_csv("sachktl_psesk15u1_c27_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_panel_ecodata.csv").set_index(["id", "year"])
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Ước lượng mô hình Fixed Effects hai chiều với sai số chuẩn cụm
+fe_mod = PanelOLS.from_formula("y ~ 1 + x1 + x2 + x3 + EntityEffects + TimeEffects", data=df)
+fe_res = fe_mod.fit(cov_type="clustered", cluster_entity=True)
+
+# 2. Ước lượng mô hình Random Effects và đối chiếu kết quả
+re_mod = RandomEffects.from_formula("y ~ 1 + x1 + x2 + x3", data=df)
+re_res = re_mod.fit(cov_type="clustered", cluster_entity=True)
+print(compare({"Fixed Effects": fe_res, "Random Effects": re_res}))
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 27: 27. mô hình dữ liệu bảng động ngắn hạn trên SachKTL"
+  title="Hướng dẫn thực hành 27. Mô hình dữ liệu bảng động ngắn hạn trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 27 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Giới thiệu và vấn đề nội sinh | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c27/gioi-thieu-va-van-de-noi-sinh/) |
-| **Bài 02** | Phương pháp IV và GMM sai phân | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c27/phuong-phap-iv-va-gmm-sai-phan/) |
-| **Bài 03** | GMM hệ thống và các mở rộng | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c27/gmm-he-thong-va-cac-mo-rong/) |
-| **Bài 04** | Kiểm định giả thuyết và chủ đề nâng cao | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c27/kiem-dinh-gia-thuyet-va-chu-de-nang-cao/) |
-| **Bài 05** | Hướng dẫn thực hành GMM trên Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c27/huong-dan-thuc-hanh-gmm-tren-stata/) |
-| **Bài 06** | Bài tổng hợp chuỗi mô hình bảng động | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c27/bai-tong-hop-chuoi-mo-hinh-bang-dong/) |
+| **27.1** | Giới thiệu và vấn đề nội sinh | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c27/gioi-thieu-va-van-de-noi-sinh/) |
+| **27.2** | Phương pháp IV và GMM sai phân | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c27/phuong-phap-iv-va-gmm-sai-phan/) |
+| **27.3** | GMM hệ thống và các mở rộng | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c27/gmm-he-thong-va-cac-mo-rong/) |
+| **27.4** | Kiểm định giả thuyết và chủ đề nâng cao | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c27/kiem-dinh-gia-thuyet-va-chu-de-nang-cao/) |
+| **27.5** | Hướng dẫn thực hành GMM trên Stata | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c27/huong-dan-thuc-hanh-gmm-tren-stata/) |
+| **27.6** | Bài tổng hợp chuỗi mô hình bảng động | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c27/bai-tong-hop-chuoi-mo-hinh-bang-dong/) |

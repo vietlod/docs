@@ -1,19 +1,19 @@
 ---
 id: chapter-11-c11
-title: "Chương 11: 11. một số vấn đề trong phân tích hiệu năng kiểm định"
-sidebar_label: "Chương 11: 11. Một số vấn đề trong phân tích hiệu năn"
+title: "11. Một số vấn đề trong phân tích hiệu năng kiểm định"
+sidebar_label: "11. Một số vấn đề trong phân tích hiệu năng kiểm định"
 sidebar_position: 12
-description: "Hướng dẫn thực hành How-To Chương 11: 11. một số vấn đề trong phân tích hiệu năng kiểm định thuộc bộ sách Phân tích sức mạnh thống kê trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 11. Một số vấn đề trong phân tích hiệu năng kiểm định thuộc giáo trình Phân tích sức mạnh thống kê trên SachKTL kèm công thức toán học, phân tích 4 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 11: 11. một số vấn đề trong phân tích hiệu năng kiểm định
+# 11. Một số vấn đề trong phân tích hiệu năng kiểm định
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 11: 11. một số vấn đề trong phân tích hiệu năng kiểm định** thuộc [**Bộ sách 20: phân tích sức mạnh thống kê**](/sachktl/book-20-csohk88u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/csohk88u1/c11/](https://sachktl.tnsai.vn/vi/csohk88u1/c11/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **4 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **11. Một số vấn đề trong phân tích hiệu năng kiểm định** thuộc bộ giáo trình [**Phân tích sức mạnh thống kê**](/sachktl/book-20-csohk88u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/csohk88u1/c11/](https://sachktl.tnsai.vn/vi/csohk88u1/c11/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 11: 11. một số vấn đề trong phân tích hiệu năng kiểm định">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="11. Một số vấn đề trong phân tích hiệu năng kiểm định">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 20 · CHƯƠNG 11</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 11: 11. một số vấn đề trong phân tích hiệu năng kiểm định</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Phân tích sức mạnh thống kê · 4 bài học chuyên sâu</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Phân tích sức mạnh thống kê</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">11. Một số vấn đề trong phân tích hiệu năng kiểm định</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng ứng dụng, mô hình hóa thống kê và kiểm định giả thuyết · 4 bài học chuy</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,94 +41,189 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Giới thiệu các vấn đề nâng cao trong phân tích hiệu năng An Introduction to Advanced Issues in Power Analysis Tóm tắt nội dung chuỗi bài viết Sau khi đã đi qua các kỹ thuật cụ thể để phân tích hiệu năng cho kiểm định t, kiểm định tỷ lệ và ANOVA, đã đến lúc chúng ta lùi lại một bước để nhìn vào bức tranh lớn hơn. Việc thực hành phân tích hiệu năng không chỉ đơn thuần là áp dụng các công thức hay chạy các dòng lệnh; nó đòi hỏi một sự hiểu biết sâu sắc về các nguyên tắc nền tảng và những sắc thái tinh tế có thể ảnh hưởng lớn đến kết quả nghiên cứu của chúng ta. Chuỗi bài viết này sẽ đưa chúng ta
+Giới thiệu các vấn đề nâng cao trong phân tích hiệu năng An Introduction to Advanced Issues in Power Analysis Tóm tắt nội dung chuỗi bài viết Sau khi đã đi qua các kỹ thuật cụ thể để phân tích hiệu năng cho kiểm định t, kiểm định tỷ lệ và ANOVA, đã đến lúc chúng ta lùi lại một bước để nhìn vào bức tranh lớn hơn. Việc thực hành phân tích hiệu năng không chỉ đơn thuần là áp dụng các công thức hay chạy các dòng lệnh; nó đòi hỏi một sự hiểu biết sâu sắc về các nguyên tắc nền tảng và những sắc thái tinh tế có thể ảnh hưởng lớn đến kết quả nghiên cứu của chúng ta.
 
-- **Chủ đề học thuật trọng tâm**: Tóm tắt nội dung chuỗi bài viết, Cấu trúc chuỗi bài học, Kiến thức tiên quyết, Mục tiêu học tập, Tài liệu tham khảo.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+Y_i = \beta_0 + \sum_{k=1}^K \beta_k X_{ik} + \varepsilon_i, \quad \mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0 \tag*{[1]}
+$$
+
+$$
+\widehat{\text{Var}}_{\text{HC1}}(\hat{\boldsymbol{\beta}}) = \frac{N}{N - K - 1}\left(\mathbf{X}'\mathbf{X}\right)^{-1}\left(\sum_{i=1}^N \hat{\varepsilon}_i^2 \mathbf{x}_i \mathbf{x}_i'\right)\left(\mathbf{X}'\mathbf{X}\right)^{-1} \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Dạng hàm tuyến tính theo tham số được xác định đúng, không bỏ sót biến giải thích quan trọng có tương quan với các biến trong mô hình.
+2. Kỳ vọng có điều kiện của sai số bằng không $\mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0$, đảm bảo tính không chệch và vững tiệm cận của ước lượng.
+3. Ma trận thiết kế $\mathbf{X}$ có hạng cột đầy đủ, không xảy ra đa cộng tuyến hoàn hảo và sử dụng sai số chuẩn vững HC1/Cluster khi có phương sai thay đổi.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 11 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/csohk88u1/c11/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Khi tồn tại biến giải thích nội sinh do đồng thời hai chiều, sai số đo lường hoặc bỏ sót biến không quan sát được, ước lượng OLS bị chệch và không vững; cần chuyển sang ước lượng biến công cụ IV/2SLS hoặc GMM."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Diễn giải độ ảnh hưởng - Vượt ra ngoài những con số
+
+Diễn giải độ ảnh hưởng - vượt ra ngoài những con số Interpreting effect size - beyond the numbers Tổng quan kiến thức Trong hành trình học kinh tế lượng, chúng ta được trang bị các quy ước của Cohen—nhỏ, trung bình, lớn—như những chiếc phao cứu sinh tiện lợi. Chúng cung cấp một hệ quy chiếu nhanh chóng để đánh giá tầm quan trọng của một kết quả. Một hiệu ứng r=0.1 là nhỏ, r=0.3 là trung bình, và r=0.5 là lớn.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Tổng quan kiến thức**
+- **Những ngộ nhận phổ biến về độ ảnh hưởng**
+- **`R và r²: Nhỏ hơn bạn nghĩ, và lớn hơn bạn tưởng**
+- **Hiển thị độ ảnh hưởng nhị thức**
+- **Bối cảnh là vua: Nghịch lý của abelson**
+- **Minh họa bằng mô phỏng Stata**
+
+- **Môi trường thực hành:** `R 4.x` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csohk88u1/c11/dien-giai-do-anh-huong-vuot-ra-ngoai-nhung-con-so/)
+
+### 2.2. Tác động của độ tin cậy đo lường đến hiệu năng thống kê
+
+Tác động của độ tin cậy đo lường đến hiệu năng thống kê The impact of measurement reliability on statistical power Tổng quan kiến thức Trong tất cả các phân tích của chúng ta cho đến nay, chúng ta đã ngầm giả định một điều: các công cụ đo lường của chúng ta là hoàn hảo. Khi chúng ta đo lường "năng suất", "sự hài lòng" hay "điểm thi", chúng ta đã giả định rằng con số mà chúng ta nhận được phản ánh chính xác giá trị "thực" của khái niệm đó.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Tổng quan kiến thức**
+- **Điểm số thực, sai số và độ tin cậy**
+- **Điểm số quan sát được = điểm số thực + sai số**
+- **Hệ số tin cậy**
+- **Công thức suy yếu**
+- **Phương pháp mô phỏng tác động của độ tin cậy trong Stata**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csohk88u1/c11/tac-dong-cua-do-tin-cay-do-luong-den-hieu-nang-thong-ke/)
+
+### 2.3. Tăng cường hiệu năng bằng biến điều chỉnh - ANCOVA vs. điểm số khác biệt
+
+Tăng cường hiệu năng bằng biến điều chỉnh: ANCOVA và điểm số khác biệt Increasing power with qualifying variables: ancova vs. difference scores Tổng quan kiến thức Trong bài học trước, chúng ta đã thấy rằng sai số đo lường có thể làm suy yếu độ ảnh hưởng và giảm hiệu năng thống kê. Một cách để chống lại điều này là cải thiện các công cụ đo lường.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Tổng quan kiến thức**
+- **Hai cách để loại bỏ nhiễu**
+- **1. Điểm số khác biệt**
+- **2. Phân tích hiệp phương sai**
+- **Tỷ lệ kích thước mẫu cần thiết**
+- **Phương pháp mô phỏng và so sánh trong Stata**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csohk88u1/c11/tang-cuong-hieu-nang-bang-bien-dieu-chinh-ancova-vs-diem-so-khac-biet/)
+
+### 2.4. Hướng tới một thực hành nghiên cứu có hiệu năng và trách nhiệm
+
+Tổng hợp các vấn đề nâng cao - hướng tới một thực hành nghiên cứu có hiệu năng và trách nhiệm Synthesizing advanced issues - towards a powerful and responsible research practice Từ kỹ thuật viên đến chiến lược gia nghiên cứu Hành trình của chúng ta qua các chuỗi bài học về phân tích hiệu năng đã đi từ việc nắm vững các kỹ thuật cơ bản đến việc khám phá những sắc thái tinh tế định hình nên một nghiên cứu thực sự xuất sắc.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Từ kỹ thuật viên đến chiến lược gia nghiên cứu**
+- **Ba lăng kính để đánh giá một thiết kế nghiên cứu**
+- **1. Lăng kính bối cảnh: Độ ảnh hưởng có ý nghĩa gì?**
+- **2. Lăng kính độ tin cậy: Chúng ta đang đo lường "tín hiệu" hay "nhiễu"?**
+- **3. Lăng kính hiệu quả: Làm thế nào để tăng tỷ lệ tín hiệu/nhiễu?**
+- **Danh sách kiểm tra cho nhà nghiên cứu**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csohk88u1/c11/huong-toi-mot-thuc-hanh-nghien-cuu-co-hieu-nang-va-trach-nhiem/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Diễn giải độ ảnh hưởng - vượt ra ngoài những con số</h3>
-    <p>Diễn giải độ ảnh hưởng - vượt ra ngoài những con số Interpreting effect size - beyond the numbers Tổng quan kiến thức Trong hành trình học kinh tế lượng, chúng ta được trang bị các quy ước của Cohen—nhỏ, trung bình, lớn—như những chiếc phao cứu sinh tiện lợi.  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csohk88u1/c11/dien-giai-do-anh-huong-vuot-ra-ngoai-nhung-con-so/" target="_blank" rel="noopener">Diễn giải độ ảnh hưởng - vượt ra ngoài những con số</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>11. Một số vấn đề trong phân tích hiệu năng kiểm định</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Tác động của độ tin cậy đo lường đến hiệu năng thống kê</h3>
-    <p>Tác động của độ tin cậy đo lường đến hiệu năng thống kê The impact of measurement reliability on statistical power Tổng quan kiến thức Trong tất cả các phân tích của chúng ta cho đến nay, chúng ta đã ngầm giả định một điều: các công cụ đo lường của chúng ta là Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csohk88u1/c11/tac-dong-cua-do-tin-cay-do-luong-den-hieu-nang-thong-ke/" target="_blank" rel="noopener">Tác động của độ tin cậy đo lường đến hiệu năng thống kê</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Tăng cường hiệu năng bằng biến điều chỉnh - ANCOVA vs. điểm số khác biệt</h3>
-    <p>Tăng cường hiệu năng bằng biến điều chỉnh: ANCOVA và điểm số khác biệt Increasing power with qualifying variables: ancova vs. difference scores Tổng quan kiến thức Trong bài học trước, chúng ta đã thấy rằng sai số đo lường có thể làm suy yếu độ ảnh hưởng và gi Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csohk88u1/c11/tang-cuong-hieu-nang-bang-bien-dieu-chinh-ancova-vs-diem-so-khac-biet/" target="_blank" rel="noopener">Tăng cường hiệu năng bằng biến điều chỉnh - ANCOVA vs. điểm số khác biệt</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csohk88u1/c11/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Hướng tới một thực hành nghiên cứu có hiệu năng và trách nhiệm</h3>
-    <p>Tổng hợp các vấn đề nâng cao - hướng tới một thực hành nghiên cứu có hiệu năng và trách nhiệm Synthesizing advanced issues - towards a powerful and responsible research practice Từ kỹ thuật viên đến chiến lược gia nghiên cứu Hành trình của chúng ta qua các chu Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csohk88u1/c11/huong-toi-mot-thuc-hanh-nghien-cuu-co-hieu-nang-va-trach-nhiem/" target="_blank" rel="noopener">Hướng tới một thực hành nghiên cứu có hiệu năng và trách nhiệm</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
+  </div>
+  <div className="step-item">
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập môi trường, ước lượng mô hình và kiểm định chẩn đoán toàn diện
 version 18.0
 clear all
 set more off
+import delimited "sachktl_empirical_ecodata.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_csohk88u1_c11_ecodata.csv", clear encoding("utf-8")
 describe
-summarize
+summarize y x1 x2 x3, detail
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
+* 1. Ước lượng mô hình cơ sở và kiểm định phương sai thay đổi / đa cộng tuyến / dạng hàm
+regress y x1 x2 x3
 estat hettest
+estat imtest, white
 estat vif
+estat ovtest
+
+* 2. Ước lượng với sai số chuẩn vững White HC1 và xuất tác động biên
+regress y c.x1##c.x2 x3, vce(robust)
+margins, dydx(x1 x2 x3)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện phân tích kinh tế lượng và thực thi kiểm định chẩn đoán
 library(tidyverse)
 library(lmtest)
 library(sandwich)
+library(car)
 
-df <- read.csv("sachktl_csohk88u1_c11_ecodata.csv")
+df <- read.csv("sachktl_empirical_ecodata.csv")
 summary(df)
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+# 1. Ước lượng mô hình tuyến tính và kiểm định Breusch-Pagan, RESET, VIF
 fit <- lm(y ~ x1 + x2 + x3, data = df)
+bptest(fit)
+resettest(fit, power = 2:3, type = "fitted")
+vif(fit)
+
+# 2. Xuất bảng hệ số ước lượng với sai số chuẩn vững HC1
 coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
 ```
 
@@ -136,33 +231,51 @@ coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và thực thi ước lượng kèm chẩn đoán phần dư
 import pandas as pd
+import statsmodels.api as sm
 import statsmodels.formula.api as smf
+from statsmodels.stats.diagnostic import het_breuschpagan, linear_reset
+from statsmodels.stats.outliers_influence import variance_inflation_factor
 
-df = pd.read_csv("sachktl_csohk88u1_c11_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_empirical_ecodata.csv")
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
+# 1. Ước lượng mô hình với sai số chuẩn vững HC1
 model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
 print(model.summary())
+
+# 2. Kiểm định phương sai thay đổi Breusch-Pagan, Ramsey RESET và hệ số VIF
+bp_lm, bp_pval, _, _ = het_breuschpagan(model.resid, model.model.exog)
+reset_res = linear_reset(model, power=2, use_f=True)
+X = sm.add_constant(df[["x1", "x2", "x3"]].dropna())
+vifs = {col: variance_inflation_factor(X.values, i) for i, col in enumerate(X.columns)}
+print(f"Breusch-Pagan p={bp_pval:.4f} | RESET p={reset_res.pvalue:.4f} | VIF={vifs}")
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 11: 11. một số vấn đề trong phân tích hiệu năng kiểm định trên SachKTL"
+  title="Hướng dẫn thực hành 11. Một số vấn đề trong phân tích hiệu năng kiểm định trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 11 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Diễn giải độ ảnh hưởng - vượt ra ngoài những con số | R 4.x | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csohk88u1/c11/dien-giai-do-anh-huong-vuot-ra-ngoai-nhung-con-so/) |
-| **Bài 02** | Tác động của độ tin cậy đo lường đến hiệu năng thống kê | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csohk88u1/c11/tac-dong-cua-do-tin-cay-do-luong-den-hieu-nang-thong-ke/) |
-| **Bài 03** | Tăng cường hiệu năng bằng biến điều chỉnh - ANCOVA vs. điểm số khác biệt | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csohk88u1/c11/tang-cuong-hieu-nang-bang-bien-dieu-chinh-ancova-vs-diem-so-khac-biet/) |
-| **Bài 04** | Hướng tới một thực hành nghiên cứu có hiệu năng và trách nhiệm | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csohk88u1/c11/huong-toi-mot-thuc-hanh-nghien-cuu-co-hieu-nang-va-trach-nhiem/) |
+| **11.1** | Diễn giải độ ảnh hưởng - Vượt ra ngoài những con số | `R 4.x` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csohk88u1/c11/dien-giai-do-anh-huong-vuot-ra-ngoai-nhung-con-so/) |
+| **11.2** | Tác động của độ tin cậy đo lường đến hiệu năng thống kê | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csohk88u1/c11/tac-dong-cua-do-tin-cay-do-luong-den-hieu-nang-thong-ke/) |
+| **11.3** | Tăng cường hiệu năng bằng biến điều chỉnh - ANCOVA vs. điểm số khác biệt | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csohk88u1/c11/tang-cuong-hieu-nang-bang-bien-dieu-chinh-ancova-vs-diem-so-khac-biet/) |
+| **11.4** | Hướng tới một thực hành nghiên cứu có hiệu năng và trách nhiệm | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csohk88u1/c11/huong-toi-mot-thuc-hanh-nghien-cuu-co-hieu-nang-va-trach-nhiem/) |

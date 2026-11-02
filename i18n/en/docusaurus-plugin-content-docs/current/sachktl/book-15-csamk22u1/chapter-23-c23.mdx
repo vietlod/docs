@@ -1,19 +1,19 @@
 ---
 id: chapter-23-c23
-title: "Chapter 23: 23. Mô hình dữ liệu đếm — Microeconometrics Using Stata"
-sidebar_label: "Chapter 23: 23. Mô hình dữ liệu đếm"
+title: "23. Mô hình dữ liệu đếm"
+sidebar_label: "23. Mô hình dữ liệu đếm"
 sidebar_position: 24
-description: "Step-by-step practical how-to guide for Chapter 23: 23. Mô hình dữ liệu đếm from Microeconometrics Using Stata on SachKTL with Stata, R, and Python workflows integrated with EcoData, Finco, and EcoLab."
+description: "Comprehensive practical how-to guide for 23. Mô hình dữ liệu đếm from Microeconometrics Using Stata on SachKTL featuring structural equations, 6 lesson breakdowns, and Stata, R, and Python scripts."
 ---
 
-# Chapter 23: 23. Mô hình dữ liệu đếm — Microeconometrics Using Stata
+# 23. Mô hình dữ liệu đếm
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-This practical how-to guide synthesizes the methodology and empirical implementation workflow of **Chapter 23: 23. Mô hình dữ liệu đếm** from [**Book 15: Microeconometrics Using Stata**](/en/sachktl/book-15-csamk22u1/), with direct backlinks to the authoritative source material at [https://sachktl.tnsai.vn/vi/csamk22u1/c23/](https://sachktl.tnsai.vn/vi/csamk22u1/c23/).
+This practical how-to guide presents the theoretical foundations, structural mathematical equations, detailed breakdown of **6 specialized lessons**, and multi-platform replication workflows for **23. Mô hình dữ liệu đếm** from the textbook [**Microeconometrics Using Stata**](/en/sachktl/book-15-csamk22u1/), with direct cross-references to the authoritative source material at [https://sachktl.tnsai.vn/vi/csamk22u1/c23/](https://sachktl.tnsai.vn/vi/csamk22u1/c23/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chapter 23: 23. Mô hình dữ liệu đếm">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="23. Mô hình dữ liệu đếm">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ This practical how-to guide synthesizes the methodology and empirical implementa
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BOOK 15 · CHAPTER 23</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chapter 23: 23. Mô hình dữ liệu đếm</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Part of Textbook: Microeconometrics Using Stata · 6 Detailed Lessons</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Microeconometrics Using Stata</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">23. Mô hình dữ liệu đếm</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Applied Econometrics, Statistical Modeling, and Hypothesis Testing · 6 Detailed Lesso</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,102 +41,218 @@ This practical how-to guide synthesizes the methodology and empirical implementa
   </svg>
 </div>
 
-## 1. Methodological Meaning and Scope of Application
+## 1. Methodological Foundations, Mathematical Specification, and Identification
 
-Giới thiệu chuỗi bài học về mô hình dữ liệu đếm An Introduction to Count Data Models series TÓM TẮT CHỦ ĐỀ Chào mừng các bạn sinh viên đến với chuỗi bài học chuyên sâu về Mô hình Dữ liệu Đếm . Trong kinh tế lượng và nhiều lĩnh vực khác, chúng ta thường xuyên gặp phải các biến số không thể nhận giá trị âm và chỉ là các số nguyên, ví dụ như số lần khám bệnh của một cá nhân trong năm, số bằng sáng chế một công ty đăng ký, hay số vụ tai nạn trên một tuyến đường. Những biến này được gọi là "dữ liệu đếm". Việc sử dụng mô hình hồi quy tuyến tính thông thường cho loại dữ liệu này thường dẫn đến
+Giới thiệu chuỗi bài học về mô hình dữ liệu đếm An Introduction to Count Data Models series TÓM TẮT CHỦ ĐỀ Chào mừng các bạn sinh viên đến với chuỗi bài học chuyên sâu về Mô hình Dữ liệu Đếm . Trong kinh tế lượng và nhiều lĩnh vực khác, chúng ta thường xuyên gặp phải các biến số không thể nhận giá trị âm và chỉ là các số nguyên, ví dụ như số lần khám bệnh của một cá nhân trong năm, số bằng sáng chế một công ty đăng ký, hay số vụ tai nạn trên một tuyến đường. Những biến này được gọi là "dữ liệu đếm".
 
-- **Core Academic Topics**: TÓM TẮT CHỦ ĐỀ, CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO.
-- **Supported Analytical Environments**: `Stata 18 MP`.
-- **Recommended Empirical Data Sources**: Vietnamese macroeconomic, corporate, and household survey datasets on [EcoData](https://ecodata.io.vn), capital and commodity market series on [Finco](https://www.finco.vn), model cross-references on [VietLOD](https://vietlod.tnsai.vn), and automated estimation on [EcoLab](https://ecolab.io.vn).
+### 1.1. Structural Equations and Representative Estimator
+
+$$
+Y_i = \beta_0 + \sum_{k=1}^K \beta_k X_{ik} + \varepsilon_i, \quad \mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0 \tag*{[1]}
+$$
+
+$$
+\widehat{\text{Var}}_{\text{HC1}}(\hat{\boldsymbol{\beta}}) = \frac{N}{N - K - 1}\left(\mathbf{X}'\mathbf{X}\right)^{-1}\left(\sum_{i=1}^N \hat{\varepsilon}_i^2 \mathbf{x}_i \mathbf{x}_i'\right)\left(\mathbf{X}'\mathbf{X}\right)^{-1} \tag*{[2]}
+$$
+
+### 1.2. Core Identification Assumptions and Applicability Conditions
+
+1. Correct functional form specification in parameters without omitting relevant covariates correlated with included regressors.
+2. Zero conditional mean of disturbances $\mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0$, ensuring unbiasedness and asymptotic consistency.
+3. Full column rank of the design matrix $\mathbf{X}$ without exact multicollinearity, paired with HC1 or cluster-robust standard errors under heteroskedasticity.
 
 <FeatureCards
   features={[
     {
-      title: "Original Chapter on SachKTL",
-      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for Chapter 23 on SachKTL.",
+      title: "Authoritative Chapter on SachKTL",
+      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for this chapter on SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/csamk22u1/c23/"
     },
     {
       title: "Practice Datasets on EcoData & Finco",
-      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and survey data for hands-on replication.",
+      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and household survey data for hands-on replication.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
       title: "Automated Estimation on EcoLab",
-      description: "Execute econometric specifications, run diagnostic battery tests, and export publication-grade tables automatically.",
+      description: "Execute econometric specifications, run diagnostic battery tests, and export APA 7th / AER publication-grade tables automatically.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Step-by-Step Practical Implementation Across Chapter Lessons
+<FeatureNotAvailable
+  feature="Unconditional Baseline Estimation Under Violated Identification Assumptions"
+  reason="When explanatory variables are endogenous due to simultaneity, measurement error, or omitted confounders, OLS estimates are biased and inconsistent; transition to IV/2SLS or GMM estimation."
+  alternative="Run the complete diagnostic battery in Step 4 and transition to the appropriate corrective estimator on VietLOD or EcoLab."
+/>
+
+## 2. Lesson-by-Lesson Academic Breakdown
+
+### 2.1. Nền tảng mô hình Poisson và Negative Binomial
+
+Nền tảng mô hình Poisson và Negative Binomial Poisson and Negative Binomial model fundamentals Xây dựng nền móng cho phân tích dữ liệu đếm Chào mừng các bạn đến với bài học đầu tiên trong chuỗi bài về mô hình dữ liệu đếm. Như đã giới thiệu, khi biến phụ thuộc của chúng ta là các số đếm, việc áp dụng hồi quy OLS thông thường sẽ không còn phù hợp. Thay vào đó, chúng ta cần những công cụ được thiết kế riêng cho loại dữ liệu này. Điểm khởi đầu tự nhiên và phổ biến nhất chính là mô hình Poisson.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Xây dựng nền móng cho phân tích dữ liệu đếm**
+- **Nền tảng lý thuyết**
+- **Mô hình Poisson - Điểm khởi đầu tự nhiên**
+- **Vấn đề Phân tán quá mức**
+- **Mô hình Negative Binomial - Giải pháp cho Overdispersion**
+- **Phương pháp nghiên cứu**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c23/nen-tang-mo-hinh-poisson-va-negative-binomial/)
+
+### 2.2. Các mô hình xử lý số 0: Hurdle và Zero-Inflated
+
+Mô hình xử lý số 0: Hurdle và Zero-Inflated Hurdle and Zero-Inflated models for excess zeros Khi số 0 chiếm đa số Trong bài học trước, chúng ta đã tìm hiểu cách mô hình Negative Binomial giải quyết vấn đề phân tán quá mức. Tuy nhiên, trong nhiều bộ dữ liệu thực tế, đặc biệt là trong các lĩnh vực như y tế, kinh tế học hành vi hay bảo hiểm, chúng ta còn đối mặt với một vấn đề hóc búa hơn: sự hiện diện của một lượng lớn các quan sát có giá trị bằng không. Hiện tượng này được gọi là số 0 dư thừa.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Khi số 0 chiếm đa số**
+- **Hai cách lý giải cho "số 0 dư thừa"**
+- **Mô hình Vượt ngưỡng : Quyết định hai giai đoạn**
+- **Mô hình Lạm phát số không : Hai nguồn gốc của số 0**
+- **Phương pháp nghiên cứu**
+- **Ví dụ minh họa: Phân tích số lần đi cấp cứu**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c23/cac-mo-hinh-xu-ly-so-0-hurdle-va-zero-inflated/)
+
+### 2.3. Mô hình Hỗn hợp Hữu hạn
+
+Mô hình Hỗn hợp Hữu hạn An introduction to Finite-Mixture Models Khám phá các nhóm tiềm ẩn trong dữ liệu Trong các bài học trước, chúng ta đã học cách xử lý các vấn đề như phân tán quá mức và số 0 dư thừa . Các mô hình này đều cố gắng làm cho mô hình linh hoạt hơn để khớp với dữ liệu. Tuy nhiên, chúng đều dựa trên một giả định ngầm rằng mẫu của chúng ta đến từ một tổng thể đồng nhất duy nhất. Nhưng điều gì sẽ xảy ra nếu giả định này không đúng?
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Khám phá các nhóm tiềm ẩn trong dữ liệu**
+- **Dữ liệu như một sự pha trộn**
+- **Phương pháp nghiên cứu**
+- **Ví dụ minh họa: Phân tích lại số lần khám bệnh**
+- **Ước lượng mô hình FMM Poisson**
+- **Ước lượng mô hình FMM Negative Binomial**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c23/mo-hinh-hon-hop-huu-han-finite-mixture-models/)
+
+### 2.4. Xử lý Nội sinh và các vấn đề nâng cao
+
+Xử lý Nội sinh và các vấn đề nâng cao Endogeneity and advanced topics in count models Khi biến giải thích không còn "ngoại sinh" Trong tất cả các mô hình chúng ta đã thảo luận từ đầu chuỗi bài học, chúng ta đều ngầm đưa ra một giả định cực kỳ quan trọng: tất cả các biến giải thích đều là ngoại sinh. Điều này có nghĩa là chúng không tương quan với các yếu tố không quan sát được nằm trong sai số của mô hình. Tuy nhiên, trong kinh tế học, giả định này thường xuyên bị vi phạm.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Khi biến giải thích không còn "ngoại sinh"**
+- **Vấn đề Nội sinh và Biến công cụ**
+- **Phương pháp Hàm kiểm soát**
+- **Phương pháp Mô-men Tổng quát**
+- **Phương pháp nghiên cứu và Ví dụ minh họa**
+- **Bối cảnh và Biến công cụ**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c23/xu-ly-noi-sinh-va-cac-van-de-nang-cao/)
+
+### 2.5. Thực hành tổng hợp với Stata
+
+Thực hành tổng hợp: Phân tích toàn diện dữ liệu đếm với Stata Comprehensive practice: A complete count data analysis with Stata 1. Kết nối các mảnh ghép Chào mừng các bạn đến với bài học thực hành tổng hợp của chúng ta! Trong bốn bài học vừa qua, chúng ta đã cùng nhau xây dựng một bức tranh toàn cảnh về phân tích dữ liệu đếm. Hãy dành một chút thời gian để nhìn lại hành trình này và kết nối các mảnh ghép kiến thức lại với nhau.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **1. Kết nối các mảnh ghép**
+- **2. Chuẩn bị dữ liệu: Nghiên cứu và Phát triển của các công ty**
+- **3. Quy trình phân tích: Từ khám phá đến kết luận**
+- **4. Hướng dẫn từng bước và Phân tích kết quả**
+- **Bước 1: Khám phá dữ liệu**
+- **Bước 2 & 3: Từ Poisson đến NB2**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c23/thuc-hanh-tong-hop-voi-stata/)
+
+### 2.6. Hệ thống hóa kiến thức
+
+Tổng hợp chuỗi bài học về mô hình dữ liệu đếm A synthesis of the count data models series 1. Bức tranh lớn về phân tích dữ liệu đếm Chào mừng các bạn đến với bài viết cuối cùng, nơi chúng ta sẽ cùng nhau hệ thống hóa toàn bộ kiến thức trong chuỗi bài học về Mô hình Dữ liệu Đếm. Trong suốt hành trình vừa qua, chúng ta đã đi từ những viên gạch nền móng đầu tiên đến việc xây dựng những cấu trúc phân tích phức tạp, phản ánh sự đa dạng của các vấn đề kinh tế lượng trong thực tế.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **1. Bức tranh lớn về phân tích dữ liệu đếm**
+- **2. Cây quyết định của các mô hình đếm**
+- **3. Quy trình làm việc của nhà nghiên cứu**
+- **4. Phân tích số bài báo được xuất bản**
+- **5. Tổng kết và hướng phát triển**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c23/he-thong-hoa-kien-thuc/)
+
+## 3. Step-by-Step Empirical Implementation Workflow
 
 <Steps>
   <div className="step-item">
-    <h3>Step 1: Nền tảng mô hình Poisson và Negative Binomial</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Nền tảng mô hình Poisson và Negative Binomial. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c23/nen-tang-mo-hinh-poisson-va-negative-binomial/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csamk22u1/c23/nen-tang-mo-hinh-poisson-va-negative-binomial/</a>.</p>
+    <h3>1. Formulate the Research Question and Prepare Data on EcoData & Finco</h3>
+    <p>Define the dependent variable, core explanatory variables, and control covariates aligned with <strong>23. Mô hình dữ liệu đếm</strong>. Extract standardized Vietnamese empirical series from <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> or <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, and screen for missing observations and extreme outliers.</p>
   </div>
   <div className="step-item">
-    <h3>Step 2: Các mô hình xử lý số 0: Hurdle và Zero-Inflated</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Các mô hình xử lý số 0: Hurdle và Zero-Inflated. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c23/cac-mo-hinh-xu-ly-so-0-hurdle-va-zero-inflated/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csamk22u1/c23/cac-mo-hinh-xu-ly-so-0-hurdle-va-zero-inflated/</a>.</p>
+    <h3>2. Conduct Descriptive Profiling, Correlation Analysis, and Pre-Estimation Checks</h3>
+    <p>Examine empirical distributions, construct summary statistics tables, and evaluate collinearity using pairwise correlation matrices and Variance Inflation Factors (VIF).</p>
   </div>
   <div className="step-item">
-    <h3>Step 3: Mô hình Hỗn hợp Hữu hạn</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Mô hình Hỗn hợp Hữu hạn. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c23/mo-hinh-hon-hop-huu-han-finite-mixture-models/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csamk22u1/c23/mo-hinh-hon-hop-huu-han-finite-mixture-models/</a>.</p>
+    <h3>3. Estimate the Model Across Stata 18 MP, R 4.x, and Python 3.11+</h3>
+    <p>Execute the parameter estimation scripts matching the structural equations in Section 1.1 while cross-checking theoretical derivations at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c23/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Step 4: Xử lý Nội sinh và các vấn đề nâng cao</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Xử lý Nội sinh và các vấn đề nâng cao. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c23/xu-ly-noi-sinh-va-cac-van-de-nang-cao/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csamk22u1/c23/xu-ly-noi-sinh-va-cac-van-de-nang-cao/</a>.</p>
+    <h3>4. Perform Post-Estimation Diagnostics and Robust Variance Correction</h3>
+    <p>Test for heteroskedasticity, serial correlation, Ramsey RESET functional form misspecification, and regressor endogeneity. Apply White HC1 or cluster-robust standard errors for valid inference.</p>
   </div>
   <div className="step-item">
-    <h3>Step 5: Thực hành tổng hợp với Stata</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Thực hành tổng hợp với Stata. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c23/thuc-hanh-tong-hop-voi-stata/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csamk22u1/c23/thuc-hanh-tong-hop-voi-stata/</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Step 6: Hệ thống hóa kiến thức</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Hệ thống hóa kiến thức. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c23/he-thong-hoa-kien-thuc/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csamk22u1/c23/he-thong-hoa-kien-thuc/</a>.</p>
+    <h3>5. Format Journal-Grade Tables and Cross-Verify on EcoLab</h3>
+    <p>Report point estimates, standard errors in parentheses, and statistical significance stars following APA 7th / AER Booktabs standards, or automate the entire reporting pipeline on <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> and <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Multi-Platform Implementation Examples in Stata, R, and Python
+## 4. Multi-Platform Implementation Scripts in Stata, R, and Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Initialize environment and load practice dataset from EcoData / SachKTL
+* Thiết lập môi trường, ước lượng mô hình và kiểm định chẩn đoán toàn diện
 version 18.0
 clear all
 set more off
+import delimited "sachktl_empirical_ecodata.csv", clear encoding("utf-8")
 
-* Import standardized empirical dataset
-import delimited "sachktl_csamk22u1_c23_ecodata.csv", clear encoding("utf-8")
 describe
-summarize
+summarize y x1 x2 x3, detail
 
-* Estimate baseline specification and run diagnostic checks with robust standard errors
-regress y x1 x2 x3, vce(robust)
+* 1. Ước lượng mô hình cơ sở và kiểm định phương sai thay đổi / đa cộng tuyến / dạng hàm
+regress y x1 x2 x3
 estat hettest
+estat imtest, white
 estat vif
+estat ovtest
+
+* 2. Ước lượng với sai số chuẩn vững White HC1 và xuất tác động biên
+regress y c.x1##c.x2 x3, vce(robust)
+margins, dydx(x1 x2 x3)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Load econometric packages and practice dataset from EcoData / SachKTL
+# Nạp thư viện phân tích kinh tế lượng và thực thi kiểm định chẩn đoán
 library(tidyverse)
 library(lmtest)
 library(sandwich)
+library(car)
 
-df <- read.csv("sachktl_csamk22u1_c23_ecodata.csv")
+df <- read.csv("sachktl_empirical_ecodata.csv")
 summary(df)
 
-# Estimate model and compute heteroskedasticity-robust HC1 standard errors
+# 1. Ước lượng mô hình tuyến tính và kiểm định Breusch-Pagan, RESET, VIF
 fit <- lm(y ~ x1 + x2 + x3, data = df)
+bptest(fit)
+resettest(fit, power = 2:3, type = "fitted")
+vif(fit)
+
+# 2. Xuất bảng hệ số ước lượng với sai số chuẩn vững HC1
 coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
 ```
 
@@ -144,35 +260,53 @@ coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Load econometric libraries and practice dataset from EcoData / SachKTL
+# Nạp thư viện statsmodels và thực thi ước lượng kèm chẩn đoán phần dư
 import pandas as pd
+import statsmodels.api as sm
 import statsmodels.formula.api as smf
+from statsmodels.stats.diagnostic import het_breuschpagan, linear_reset
+from statsmodels.stats.outliers_influence import variance_inflation_factor
 
-df = pd.read_csv("sachktl_csamk22u1_c23_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_empirical_ecodata.csv")
 
-# Fit specification with HC1 robust standard errors
+# 1. Ước lượng mô hình với sai số chuẩn vững HC1
 model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
 print(model.summary())
+
+# 2. Kiểm định phương sai thay đổi Breusch-Pagan, Ramsey RESET và hệ số VIF
+bp_lm, bp_pval, _, _ = het_breuschpagan(model.resid, model.model.exog)
+reset_res = linear_reset(model, power=2, use_f=True)
+X = sm.add_constant(df[["x1", "x2", "x3"]].dropna())
+vifs = {col: variance_inflation_factor(X.values, i) for i, col in enumerate(X.columns)}
+print(f"Breusch-Pagan p={bp_pval:.4f} | RESET p={reset_res.pvalue:.4f} | VIF={vifs}")
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video Tutorial Walkthrough
+## 5. Post-Estimation Diagnostic and Interpretation Guide
+
+| Diagnostic Criterion | Null Hypothesis $H_0$ | Benchmark Threshold | Corrective Action When $H_0$ Is Rejected |
+| :--- | :--- | :--- | :--- |
+| **Heteroskedasticity** | Constant error variance $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ rejects $H_0$ | Apply `vce(robust)`, `vcovHC(HC1)`, or FGLS/WLS weighted estimation |
+| **Multicollinearity** | No severe linear dependence among regressors | $\text{VIF} < 10$ acceptable | Drop redundant covariates, center interactions, or apply LASSO/Ridge regularization |
+| **Ramsey RESET Functional Form** | No omitted nonlinear or higher-order terms | $p\text{-value} > 0.05$ retains $H_0$ | Add interaction terms, quadratic polynomials, or log-transform skewed positive variables |
+| **Regressor Exogeneity** | Orthogonality $\text{Cov}(X, \varepsilon)=0$ | Durbin-Wu-Hausman $p > 0.05$ | Transition to IV/2SLS, LIML, or GMM estimation with validated instruments |
+
+## 6. Video Tutorial Walkthrough
 
 <VideoTutorial
-  title="Practical Walkthrough for Chapter 23: 23. Mô hình dữ liệu đếm on SachKTL"
+  title="Practical Walkthrough for 23. Mô hình dữ liệu đếm on SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Complete Lesson Directory and Backlinks to Original SachKTL Articles
+## 7. Complete Lesson Directory and Backlinks to Original SachKTL Articles
 
-| No. | Lesson Title in Chapter 23 | Supported Software | Original Source Link on SachKTL |
+| Lesson Code | Lesson Title | Supported Software | Original Source Link on SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Lesson 01** | Nền tảng mô hình Poisson và Negative Binomial | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c23/nen-tang-mo-hinh-poisson-va-negative-binomial/) |
-| **Lesson 02** | Các mô hình xử lý số 0: Hurdle và Zero-Inflated | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c23/cac-mo-hinh-xu-ly-so-0-hurdle-va-zero-inflated/) |
-| **Lesson 03** | Mô hình Hỗn hợp Hữu hạn | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c23/mo-hinh-hon-hop-huu-han-finite-mixture-models/) |
-| **Lesson 04** | Xử lý Nội sinh và các vấn đề nâng cao | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c23/xu-ly-noi-sinh-va-cac-van-de-nang-cao/) |
-| **Lesson 05** | Thực hành tổng hợp với Stata | Stata 18 MP, R 4.x | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c23/thuc-hanh-tong-hop-voi-stata/) |
-| **Lesson 06** | Hệ thống hóa kiến thức | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c23/he-thong-hoa-kien-thuc/) |
+| **23.1** | Nền tảng mô hình Poisson và Negative Binomial | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c23/nen-tang-mo-hinh-poisson-va-negative-binomial/) |
+| **23.2** | Các mô hình xử lý số 0: Hurdle và Zero-Inflated | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c23/cac-mo-hinh-xu-ly-so-0-hurdle-va-zero-inflated/) |
+| **23.3** | Mô hình Hỗn hợp Hữu hạn | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c23/mo-hinh-hon-hop-huu-han-finite-mixture-models/) |
+| **23.4** | Xử lý Nội sinh và các vấn đề nâng cao | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c23/xu-ly-noi-sinh-va-cac-van-de-nang-cao/) |
+| **23.5** | Thực hành tổng hợp với Stata | `Stata 18 MP, R 4.x` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c23/thuc-hanh-tong-hop-voi-stata/) |
+| **23.6** | Hệ thống hóa kiến thức | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c23/he-thong-hoa-kien-thuc/) |

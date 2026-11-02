@@ -1,19 +1,19 @@
 ---
 id: chapter-04-c4
-title: "Chương 04: 4. mô hình hệ số ngẫu nhiên"
-sidebar_label: "Chương 04: 4. Mô hình hệ số ngẫu nhiên"
+title: "4. Mô hình hệ số ngẫu nhiên"
+sidebar_label: "4. Mô hình hệ số ngẫu nhiên"
 sidebar_position: 5
-description: "Hướng dẫn thực hành How-To Chương 04: 4. mô hình hệ số ngẫu nhiên thuộc bộ sách Mô hình đa bậc với Stata trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 4. Mô hình hệ số ngẫu nhiên thuộc giáo trình Mô hình đa bậc với Stata trên SachKTL kèm công thức toán học, phân tích 5 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 04: 4. mô hình hệ số ngẫu nhiên
+# 4. Mô hình hệ số ngẫu nhiên
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 04: 4. mô hình hệ số ngẫu nhiên** thuộc [**Bộ sách 19: mô hình đa bậc với Stata**](/sachktl/book-19-sskrk22u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/sskrk22u1/c4/](https://sachktl.tnsai.vn/vi/sskrk22u1/c4/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **5 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **4. Mô hình hệ số ngẫu nhiên** thuộc bộ giáo trình [**Mô hình đa bậc với Stata**](/sachktl/book-19-sskrk22u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/sskrk22u1/c4/](https://sachktl.tnsai.vn/vi/sskrk22u1/c4/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 04: 4. mô hình hệ số ngẫu nhiên">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="4. Mô hình hệ số ngẫu nhiên">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 19 · CHƯƠNG 04</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 04: 4. mô hình hệ số ngẫu nhiên</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Mô hình đa bậc với Stata · 5 bài học chuyên sâu</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Mô hình đa bậc với Stata</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">4. Mô hình hệ số ngẫu nhiên</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng ứng dụng, mô hình hóa thống kê và kiểm định giả thuyết · 5 bài học chuy</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,98 +41,204 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Giới thiệu mô hình hệ số ngẫu nhiên và lộ trình học tập Introduction to Random-Coefficient models and the Learning Path Giới thiệu chung về chuỗi bài học Chào mừng các bạn đã quay trở lại! Trong chuỗi bài học trước về hồi quy tuyến tính, chúng ta đã xây dựng được những mô hình mạnh mẽ. Tuy nhiên, các mô hình đó đều dựa trên một giả định ngầm: tác động của một biến lên kết quả là như nhau cho tất cả mọi người, mọi công ty, hay mọi quốc gia. Nhưng trong thực tế, liệu điều này có luôn đúng? Liệu một phương pháp giảng dạy mới có hiệu quả như nhau ở mọi trường học? Liệu tác động của
+Giới thiệu mô hình hệ số ngẫu nhiên và lộ trình học tập Introduction to Random-Coefficient models and the Learning Path Giới thiệu chung về chuỗi bài học Chào mừng các bạn đã quay trở lại! Trong chuỗi bài học trước về hồi quy tuyến tính, chúng ta đã xây dựng được những mô hình mạnh mẽ. Tuy nhiên, các mô hình đó đều dựa trên một giả định ngầm: tác động của một biến lên kết quả là như nhau cho tất cả mọi người, mọi công ty, hay mọi quốc gia. Nhưng trong thực tế, liệu điều này có luôn đúng? Liệu một phương pháp giảng dạy mới có hiệu quả như nhau ở mọi trường học?
 
-- **Chủ đề học thuật trọng tâm**: Giới thiệu chung về chuỗi bài học, Cấu trúc chuỗi bài học, Kiến thức tiên quyết, Mục tiêu học tập, Tài liệu tham khảo.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+Y_i = \beta_0 + \sum_{k=1}^K \beta_k X_{ik} + \varepsilon_i, \quad \mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0 \tag*{[1]}
+$$
+
+$$
+\widehat{\text{Var}}_{\text{HC1}}(\hat{\boldsymbol{\beta}}) = \frac{N}{N - K - 1}\left(\mathbf{X}'\mathbf{X}\right)^{-1}\left(\sum_{i=1}^N \hat{\varepsilon}_i^2 \mathbf{x}_i \mathbf{x}_i'\right)\left(\mathbf{X}'\mathbf{X}\right)^{-1} \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Dạng hàm tuyến tính theo tham số được xác định đúng, không bỏ sót biến giải thích quan trọng có tương quan với các biến trong mô hình.
+2. Kỳ vọng có điều kiện của sai số bằng không $\mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0$, đảm bảo tính không chệch và vững tiệm cận của ước lượng.
+3. Ma trận thiết kế $\mathbf{X}$ có hạng cột đầy đủ, không xảy ra đa cộng tuyến hoàn hảo và sử dụng sai số chuẩn vững HC1/Cluster khi có phương sai thay đổi.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 04 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/sskrk22u1/c4/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Khi tồn tại biến giải thích nội sinh do đồng thời hai chiều, sai số đo lường hoặc bỏ sót biến không quan sát được, ước lượng OLS bị chệch và không vững; cần chuyển sang ước lượng biến công cụ IV/2SLS hoặc GMM."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Tại sao cần hệ số ngẫu nhiên? phân tích hồi quy riêng lẻ cho từng nhóm
+
+Tại sao cần hệ số ngẫu nhiên? Phân tích hồi quy riêng lẻ cho từng nhóm Why random coefficients? Analyzing separate regressions for each group Một câu hỏi sâu hơn về hiệu quả của trường học Trong phân tích chính sách giáo dục, một câu hỏi cốt lõi là làm thế nào để đo lường "hiệu quả" của một trường học. Liệu một trường có điểm thi đầu ra trung bình cao có thực sự là một trường "tốt"? Câu trả lời là chưa chắc. Một trường học có thể có điểm số cao đơn giản vì họ tuyển sinh những học sinh có năng lực đầu vào vượt trội.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Một câu hỏi sâu hơn về hiệu quả của trường học**
+- **Mô hình hóa sự khác biệt giữa các nhóm**
+- **Cách tiếp cận 1: Hồi quy riêng lẻ cho từng nhóm**
+- **Cách tiếp cận 2: Mô hình biến giả**
+- **Sự cần thiết của một cách tiếp cận mới**
+- **Quy trình phân tích hồi quy riêng lẻ trong Stata**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/sskrk22u1/c4/tai-sao-can-he-so-ngau-nhien-phan-tich-hoi-quy-rieng-le-cho-tung-nhom/)
+
+### 2.2. Xây dựng và diễn giải mô hình hệ số ngẫu nhiên
+
+Xây dựng và diễn giải mô hình hệ số ngẫu nhiên Building and interpreting random-coefficient models Một cách tiếp cận mới để mô hình hóa sự đa dạng Ở bài học trước, chúng ta đã đi đến một kết luận quan trọng thông qua phân tích khám phá: mối quan hệ giữa thành tích đầu vào và kết quả học tập không hề giống nhau ở tất cả 65 trường học. Các đường hồi quy riêng lẻ cho thấy cả điểm khởi đầu và mức độ "giá trị gia tăng" đều biến thiên một cách đáng kể.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Một cách tiếp cận mới để mô hình hóa sự đa dạng**
+- **Giải phẫu một mô hình hệ số ngẫu nhiên**
+- **Phương trình mô hình**
+- **Ma trận phương sai - Hiệp phương sai**
+- **Quy trình diễn giải các tham số của mô hình**
+- **Ví dụ minh họa: Diễn giải một kết quả mô hình giả định**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/sskrk22u1/c4/xay-dung-va-dien-giai-mo-hinh-he-so-ngau-nhien/)
+
+### 2.3. Ước lượng và kiểm định trong Stata với lệnh mixed
+
+Ước lượng và kiểm định trong Stata với lệnh mixed Estimation and testing in Stata with the mixed command Từ lý thuyết đến câu lệnh thực hành Trong bài học trước, chúng ta đã xây dựng một khung lý thuyết chi tiết cho mô hình hệ số ngẫu nhiên. Chúng ta đã hiểu rằng mô hình này bao gồm cả phần hiệu ứng cố định và phần hiệu ứng ngẫu nhiên . Chúng ta cũng đã tìm hiểu cách diễn giải các thành phần phức tạp như phương sai và hiệp phương sai của các hiệu ứng ngẫu nhiên.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Từ lý thuyết đến câu lệnh thực hành**
+- **Cú pháp của lệnh mixed**
+- **Quy trình ước lượng và kiểm định mô hình trong Stata**
+- **Ví dụ minh họa: So sánh mô hình cho dữ liệu trường học**
+- **Bước 1: Ước lượng mô hình hệ số chặn ngẫu nhiên**
+- **Bước 2: Ước lượng mô hình hệ số ngẫu nhiên**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/sskrk22u1/c4/uoc-luong-va-kiem-dinh-trong-stata-voi-lenh-mixed/)
+
+### 2.4. Sức mạnh của dự báo Bayes - Ước tính và trực quan hóa hiệu ứng riêng lẻ
+
+Sức mạnh của dự báo Bayes: Ước tính và trực quan hóa hiệu ứng riêng lẻ The power of bayesian prediction: Estimating and visualizing individual effects Nhìn vào từng trường học cụ thể Trong các bài học trước, chúng ta đã tập trung vào việc ước lượng các tham số của "tổng thể" các trường học. Chúng ta đã trả lời các câu hỏi như: "Giá trị gia tăng trung bình của các trường là bao nhiêu?" và "Mức độ biến thiên của giá trị gia tăng giữa các trường là lớn hay nhỏ?".
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Nhìn vào từng trường học cụ thể**
+- **Dự báo Bayes thực nghiệm và sự co ngót**
+- **Ước lượng hợp lý tối đa vs. dự báo Bayes thực nghiệm**
+- **Quy trình dự báo và trực quan hóa trong Stata**
+- **Ví dụ minh họa: So sánh hiệu quả của 65 Trường học**
+- **Bước 1 & 2: Ước lượng và tạo dự báo EB**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/sskrk22u1/c4/suc-manh-cua-du-bao-bayes-uoc-tinh-va-truc-quan-hoa-hieu-ung-rieng-le/)
+
+### 2.5. Từ lý thuyết đến thực hành nâng cao
+
+Tổng hợp mô hình hệ số ngẫu nhiên: Từ lý thuyết đến thực hành nâng cao Synthesizing random-coefficient models: From theory to advanced practice Một bước nhảy vọt trong tư duy mô hình hóa Chào mừng các bạn đến với bài viết tổng kết chuỗi bài học về mô hình hệ số ngẫu nhiên. Chúng ta đã cùng nhau thực hiện một hành trình đầy thử thách nhưng cũng vô cùng bổ ích, đi từ việc nhận ra những hạn chế của mô hình hồi quy truyền thống đến việc xây dựng, ước lượng và diễn giải các mô hình phân cấp phức tạp.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Một bước nhảy vọt trong tư duy mô hình hóa**
+- **Hai cách nhìn về cùng một mô hình**
+- **Cách 1: Công thức dạng rút gọn**
+- **Cách 2: Công thức hai giai đoạn**
+- **Quy trình làm việc với mô hình mixed**
+- **Những cảnh báo quan trọng khi sử dụng mô hình hệ số ngẫu nhiên**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/sskrk22u1/c4/tu-ly-thuyet-den-thuc-hanh-nang-cao/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Tại sao cần hệ số ngẫu nhiên? phân tích hồi quy riêng lẻ cho từng nhóm</h3>
-    <p>Tại sao cần hệ số ngẫu nhiên? Phân tích hồi quy riêng lẻ cho từng nhóm Why random coefficients? Analyzing separate regressions for each group Một câu hỏi sâu hơn về hiệu quả của trường học Trong phân tích chính sách giáo dục, một câu hỏi cốt lõi là làm thế nào Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sskrk22u1/c4/tai-sao-can-he-so-ngau-nhien-phan-tich-hoi-quy-rieng-le-cho-tung-nhom/" target="_blank" rel="noopener">Tại sao cần hệ số ngẫu nhiên? Phân tích hồi quy riêng lẻ cho từng nhóm</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>4. Mô hình hệ số ngẫu nhiên</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Xây dựng và diễn giải mô hình hệ số ngẫu nhiên</h3>
-    <p>Xây dựng và diễn giải mô hình hệ số ngẫu nhiên Building and interpreting random-coefficient models Một cách tiếp cận mới để mô hình hóa sự đa dạng Ở bài học trước, chúng ta đã đi đến một kết luận quan trọng thông qua phân tích khám phá: mối quan hệ giữa thành  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sskrk22u1/c4/xay-dung-va-dien-giai-mo-hinh-he-so-ngau-nhien/" target="_blank" rel="noopener">Xây dựng và diễn giải mô hình hệ số ngẫu nhiên</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Ước lượng và kiểm định trong Stata với lệnh mixed</h3>
-    <p>Ước lượng và kiểm định trong Stata với lệnh mixed Estimation and testing in Stata with the mixed command Từ lý thuyết đến câu lệnh thực hành Trong bài học trước, chúng ta đã xây dựng một khung lý thuyết chi tiết cho mô hình hệ số ngẫu nhiên. Chúng ta đã hiểu r Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sskrk22u1/c4/uoc-luong-va-kiem-dinh-trong-stata-voi-lenh-mixed/" target="_blank" rel="noopener">Ước lượng và kiểm định trong Stata với lệnh mixed</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sskrk22u1/c4/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Sức mạnh của dự báo Bayes - ước tính và trực quan hóa hiệu ứng riêng lẻ</h3>
-    <p>Sức mạnh của dự báo Bayes: Ước tính và trực quan hóa hiệu ứng riêng lẻ The power of bayesian prediction: Estimating and visualizing individual effects Nhìn vào từng trường học cụ thể Trong các bài học trước, chúng ta đã tập trung vào việc ước lượng các tham số Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sskrk22u1/c4/suc-manh-cua-du-bao-bayes-uoc-tinh-va-truc-quan-hoa-hieu-ung-rieng-le/" target="_blank" rel="noopener">Sức mạnh của dự báo Bayes - Ước tính và trực quan hóa hiệu ứng riêng lẻ</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 5: Từ lý thuyết đến thực hành nâng cao</h3>
-    <p>Tổng hợp mô hình hệ số ngẫu nhiên: Từ lý thuyết đến thực hành nâng cao Synthesizing random-coefficient models: From theory to advanced practice Một bước nhảy vọt trong tư duy mô hình hóa Chào mừng các bạn đến với bài viết tổng kết chuỗi bài học về mô hình hệ s Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sskrk22u1/c4/tu-ly-thuyet-den-thuc-hanh-nang-cao/" target="_blank" rel="noopener">Từ lý thuyết đến thực hành nâng cao</a>.</p>
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập môi trường, ước lượng mô hình và kiểm định chẩn đoán toàn diện
 version 18.0
 clear all
 set more off
+import delimited "sachktl_empirical_ecodata.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_sskrk22u1_c04_ecodata.csv", clear encoding("utf-8")
 describe
-summarize
+summarize y x1 x2 x3, detail
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
+* 1. Ước lượng mô hình cơ sở và kiểm định phương sai thay đổi / đa cộng tuyến / dạng hàm
+regress y x1 x2 x3
 estat hettest
+estat imtest, white
 estat vif
+estat ovtest
+
+* 2. Ước lượng với sai số chuẩn vững White HC1 và xuất tác động biên
+regress y c.x1##c.x2 x3, vce(robust)
+margins, dydx(x1 x2 x3)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện phân tích kinh tế lượng và thực thi kiểm định chẩn đoán
 library(tidyverse)
 library(lmtest)
 library(sandwich)
+library(car)
 
-df <- read.csv("sachktl_sskrk22u1_c04_ecodata.csv")
+df <- read.csv("sachktl_empirical_ecodata.csv")
 summary(df)
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+# 1. Ước lượng mô hình tuyến tính và kiểm định Breusch-Pagan, RESET, VIF
 fit <- lm(y ~ x1 + x2 + x3, data = df)
+bptest(fit)
+resettest(fit, power = 2:3, type = "fitted")
+vif(fit)
+
+# 2. Xuất bảng hệ số ước lượng với sai số chuẩn vững HC1
 coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
 ```
 
@@ -140,34 +246,52 @@ coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và thực thi ước lượng kèm chẩn đoán phần dư
 import pandas as pd
+import statsmodels.api as sm
 import statsmodels.formula.api as smf
+from statsmodels.stats.diagnostic import het_breuschpagan, linear_reset
+from statsmodels.stats.outliers_influence import variance_inflation_factor
 
-df = pd.read_csv("sachktl_sskrk22u1_c04_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_empirical_ecodata.csv")
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
+# 1. Ước lượng mô hình với sai số chuẩn vững HC1
 model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
 print(model.summary())
+
+# 2. Kiểm định phương sai thay đổi Breusch-Pagan, Ramsey RESET và hệ số VIF
+bp_lm, bp_pval, _, _ = het_breuschpagan(model.resid, model.model.exog)
+reset_res = linear_reset(model, power=2, use_f=True)
+X = sm.add_constant(df[["x1", "x2", "x3"]].dropna())
+vifs = {col: variance_inflation_factor(X.values, i) for i, col in enumerate(X.columns)}
+print(f"Breusch-Pagan p={bp_pval:.4f} | RESET p={reset_res.pvalue:.4f} | VIF={vifs}")
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 04: 4. mô hình hệ số ngẫu nhiên trên SachKTL"
+  title="Hướng dẫn thực hành 4. Mô hình hệ số ngẫu nhiên trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 04 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Tại sao cần hệ số ngẫu nhiên? Phân tích hồi quy riêng lẻ cho từng nhóm | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sskrk22u1/c4/tai-sao-can-he-so-ngau-nhien-phan-tich-hoi-quy-rieng-le-cho-tung-nhom/) |
-| **Bài 02** | Xây dựng và diễn giải mô hình hệ số ngẫu nhiên | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sskrk22u1/c4/xay-dung-va-dien-giai-mo-hinh-he-so-ngau-nhien/) |
-| **Bài 03** | Ước lượng và kiểm định trong Stata với lệnh mixed | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sskrk22u1/c4/uoc-luong-va-kiem-dinh-trong-stata-voi-lenh-mixed/) |
-| **Bài 04** | Sức mạnh của dự báo Bayes - Ước tính và trực quan hóa hiệu ứng riêng lẻ | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sskrk22u1/c4/suc-manh-cua-du-bao-bayes-uoc-tinh-va-truc-quan-hoa-hieu-ung-rieng-le/) |
-| **Bài 05** | Từ lý thuyết đến thực hành nâng cao | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sskrk22u1/c4/tu-ly-thuyet-den-thuc-hanh-nang-cao/) |
+| **4.1** | Tại sao cần hệ số ngẫu nhiên? phân tích hồi quy riêng lẻ cho từng nhóm | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sskrk22u1/c4/tai-sao-can-he-so-ngau-nhien-phan-tich-hoi-quy-rieng-le-cho-tung-nhom/) |
+| **4.2** | Xây dựng và diễn giải mô hình hệ số ngẫu nhiên | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sskrk22u1/c4/xay-dung-va-dien-giai-mo-hinh-he-so-ngau-nhien/) |
+| **4.3** | Ước lượng và kiểm định trong Stata với lệnh mixed | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sskrk22u1/c4/uoc-luong-va-kiem-dinh-trong-stata-voi-lenh-mixed/) |
+| **4.4** | Sức mạnh của dự báo Bayes - Ước tính và trực quan hóa hiệu ứng riêng lẻ | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sskrk22u1/c4/suc-manh-cua-du-bao-bayes-uoc-tinh-va-truc-quan-hoa-hieu-ung-rieng-le/) |
+| **4.5** | Từ lý thuyết đến thực hành nâng cao | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sskrk22u1/c4/tu-ly-thuyet-den-thuc-hanh-nang-cao/) |

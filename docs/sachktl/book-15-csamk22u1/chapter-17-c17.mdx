@@ -1,19 +1,19 @@
 ---
 id: chapter-17-c17
-title: "Chương 17: 17. ngôn ngữ lập trình MA trận cho Stata"
-sidebar_label: "Chương 17: 17. Ngôn ngữ lập trình ma trận cho Stata"
+title: "17. Ngôn ngữ lập trình MA trận cho Stata"
+sidebar_label: "17. Ngôn ngữ lập trình MA trận cho Stata"
 sidebar_position: 18
-description: "Hướng dẫn thực hành How-To Chương 17: 17. ngôn ngữ lập trình MA trận cho Stata thuộc bộ sách Kinh tế lượng vi mô sử dụng Stata trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 17. Ngôn ngữ lập trình MA trận cho Stata thuộc giáo trình Kinh tế lượng vi mô sử dụng Stata trên SachKTL kèm công thức toán học, phân tích 5 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 17: 17. ngôn ngữ lập trình MA trận cho Stata
+# 17. Ngôn ngữ lập trình MA trận cho Stata
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 17: 17. ngôn ngữ lập trình MA trận cho Stata** thuộc [**Bộ sách 15: kinh tế lượng vi mô sử dụng Stata**](/sachktl/book-15-csamk22u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/csamk22u1/c17/](https://sachktl.tnsai.vn/vi/csamk22u1/c17/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **5 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **17. Ngôn ngữ lập trình MA trận cho Stata** thuộc bộ giáo trình [**Kinh tế lượng vi mô sử dụng Stata**](/sachktl/book-15-csamk22u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/csamk22u1/c17/](https://sachktl.tnsai.vn/vi/csamk22u1/c17/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 17: 17. ngôn ngữ lập trình MA trận cho Stata">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="17. Ngôn ngữ lập trình MA trận cho Stata">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 15 · CHƯƠNG 17</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 17: 17. ngôn ngữ lập trình MA trận cho Stata</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Kinh tế lượng vi mô sử dụng Stata · 5 bài học chuyên sâu</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng vi mô sử dụng Stata</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">17. Ngôn ngữ lập trình MA trận cho Stata</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng ứng dụng, mô hình hóa thống kê và kiểm định giả thuyết · 5 bài học chuy</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,98 +41,204 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Giới thiệu Mata: Ngôn ngữ lập trình ma trận cho Stata Introduction to Mata: The Matrix Programming Language for Stata Tổng quan về chuỗi bài học Chào các bạn sinh viên, chào mừng đến với chuỗi bài học khám phá Mata, một công cụ cực kỳ mạnh mẽ được tích hợp sẵn trong Stata nhưng không phải ai cũng biết đến và tận dụng. Nếu bạn đã từng cảm thấy các lệnh matrix của Stata có phần hạn chế, hoặc muốn thực hiện các tính toán phức tạp một cách hiệu quả hơn, thì Mata chính là câu trả lời bạn đang tìm kiếm. Mata là một ngôn ngữ lập trình ma trận hoàn chỉnh, có tốc độ xử lý nhanh, cú pháp gần gũi với ký
+Giới thiệu Mata: Ngôn ngữ lập trình ma trận cho Stata Introduction to Mata: The Matrix Programming Language for Stata Tổng quan về chuỗi bài học Chào các bạn sinh viên, chào mừng đến với chuỗi bài học khám phá Mata, một công cụ cực kỳ mạnh mẽ được tích hợp sẵn trong Stata nhưng không phải ai cũng biết đến và tận dụng. Nếu bạn đã từng cảm thấy các lệnh matrix của Stata có phần hạn chế, hoặc muốn thực hiện các tính toán phức tạp một cách hiệu quả hơn, thì Mata chính là câu trả lời bạn đang tìm kiếm.
 
-- **Chủ đề học thuật trọng tâm**: Tổng quan về chuỗi bài học, CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+Y_i = \beta_0 + \sum_{k=1}^K \beta_k X_{ik} + \varepsilon_i, \quad \mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0 \tag*{[1]}
+$$
+
+$$
+\widehat{\text{Var}}_{\text{HC1}}(\hat{\boldsymbol{\beta}}) = \frac{N}{N - K - 1}\left(\mathbf{X}'\mathbf{X}\right)^{-1}\left(\sum_{i=1}^N \hat{\varepsilon}_i^2 \mathbf{x}_i \mathbf{x}_i'\right)\left(\mathbf{X}'\mathbf{X}\right)^{-1} \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Dạng hàm tuyến tính theo tham số được xác định đúng, không bỏ sót biến giải thích quan trọng có tương quan với các biến trong mô hình.
+2. Kỳ vọng có điều kiện của sai số bằng không $\mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0$, đảm bảo tính không chệch và vững tiệm cận của ước lượng.
+3. Ma trận thiết kế $\mathbf{X}$ có hạng cột đầy đủ, không xảy ra đa cộng tuyến hoàn hảo và sử dụng sai số chuẩn vững HC1/Cluster khi có phương sai thay đổi.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 17 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/csamk22u1/c17/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Khi tồn tại biến giải thích nội sinh do đồng thời hai chiều, sai số đo lường hoặc bỏ sót biến không quan sát được, ước lượng OLS bị chệch và không vững; cần chuyển sang ước lượng biến công cụ IV/2SLS hoặc GMM."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Nền tảng mata và cách tạo MA trận
+
+Nền tảng Mata và cách tạo ma trận Mata fundamentals and matrix creation Bước chân đầu tiên vào thế giới Mata Chào mừng các bạn quay trở lại! Trong bài học đầu tiên này, chúng ta sẽ cùng nhau thực hiện những bước đi đầu tiên vào thế giới lập trình ma trận của Mata. Hãy tưởng tượng bạn đang học một ngôn ngữ mới; trước khi có thể viết những bài văn phức tạp, bạn cần học bảng chữ cái và cách ghép từ.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Bước chân đầu tiên vào thế giới mata**
+- **Tương tác với mata: Cửa sổ lệnh và cú pháp**
+- **1. Khởi chạy và thoát khỏi mata**
+- **2. Thực thi lệnh mata từ Stata**
+- **3. Thực thi lệnh Stata từ mata**
+- **Các phương pháp tạo MA trận**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c17/nen-tang-mata-va-cach-tao-ma-tran/)
+
+### 2.2. Các phép toán và hàm MA trận trong mata
+
+Các phép toán và hàm ma trận trong Mata Mata matrix operations and functions "Ngữ pháp" của ngôn ngữ ma trận Chào mừng các bạn đã quay trở lại với bài học thứ hai trong chuỗi bài về Mata! Ở bài trước, chúng ta đã học cách tạo ra các "vật liệu" cơ bản – đó là các ma trận và véc-tơ. Bây giờ, chúng ta sẽ học cách sử dụng các "dụng cụ" để xử lý những vật liệu đó. Nếu việc tạo ma trận giống như chuẩn bị nguyên liệu, thì các phép toán và hàm ma trận chính là những kỹ thuật nấu nướng giúp bạn tạo ra một món ăn hoàn chỉnh.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **"Ngữ pháp" của ngôn ngữ MA trận**
+- **Bộ công cụ tính toán của mata**
+- **1. Các toán tử MA trận**
+- **2. Các hàm MA trận**
+- **Hàm trả về một giá trị vô hướng**
+- **Hàm nghịch đảo MA trận**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c17/cac-phep-toan-va-ham-ma-tran-trong-mata/)
+
+### 2.3. Thao tác MA trận và lập trình cơ bản
+
+Thao tác ma trận và lập trình cơ bản Matrix manipulation and basic programming Từ tính toán đến ứng dụng Chào mừng các bạn đã đến với bài học thứ ba! Nếu ở bài 1, chúng ta học "bảng chữ cái" và bài 2 học "ngữ pháp", thì hôm nay chúng ta sẽ học cách viết những "câu văn" hoàn chỉnh đầu tiên. Chúng ta đã tính toán thành công véc-tơ hệ số OLS beta, nhưng nó vẫn đang "mắc kẹt" bên trong môi trường Mata. Làm thế nào để lấy kết quả đó ra, trình bày nó, hoặc sử dụng nó để tạo ra các biến mới trong Stata?
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Từ tính toán đến ứng dụng**
+- **Các kỹ thuật thao tác và chuyển đổi dữ liệu**
+- **1. Truy cập và kết hợp MA trận**
+- **2. Chuyển dữ liệu từ mata về Stata**
+- **Quy trình xuất kết quả hồi quy từ mata sang Stata**
+- **Ví dụ minh họa: Hoàn thiện quy trình OLS**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c17/thao-tac-ma-tran-va-lap-trinh-co-ban/)
+
+### 2.4. Thực hành: Xây dựng ước lượng OLS
+
+Thực hành: Xây dựng chương trình ước lượng OLS Practice: Building an OLS estimation program Lắp ráp tất cả các mảnh ghép Chúc mừng các bạn đã đi đến bài học cuối cùng và quan trọng nhất trong chuỗi bài học về Mata! Ở ba bài trước, chúng ta đã lần lượt thu thập các mảnh ghép cần thiết: Bài 1 giúp chúng ta tạo ra các ma trận từ dữ liệu Stata, Bài 2 trang bị cho chúng ta các công cụ tính toán, và Bài 3 chỉ cho chúng ta cách đưa kết quả trở lại Stata .
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Lắp ráp tất cả các mảnh ghép**
+- **Chuẩn bị dữ liệu**
+- **Quy trình phân tích tổng thể**
+- **Hướng dẫn thực hành từng bước**
+- **Phân tích kết quả**
+- **Tổng kết**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c17/thuc-hanh-xay-dung-uoc-luong-ols/)
+
+### 2.5. Tổng hợp chuỗi bài học mata: Từ nền tảng đến ứng dụng
+
+Tổng hợp chuỗi bài học Mata: Từ nền tảng đến ứng dụng Mata series synthesis: From fundamentals to application 1. Mata trong hệ sinh thái kinh tế lượng Chào các bạn sinh viên, trước hết, tôi xin chúc mừng các bạn đã hoàn thành xuất sắc chuỗi bài học nền tảng về Mata. Đây là một thành tựu đáng kể, bởi các bạn không chỉ học thêm một vài câu lệnh, mà đã trang bị cho mình một tư duy hoàn toàn mới về việc phân tích dữ liệu.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Mata trong hệ sinh thái kinh tế lượng**
+- **2. Các trụ cột cốt lõi của mata**
+- **3. Quy trình làm việc chuẩn với mata**
+- **Khi nào nên sử dụng mata?**
+- **4. Ví dụ thực hành tổng hợp: Ước lượng OLS và hơn thế nữa**
+- **5. Tổng kết và hướng phát triển**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c17/tong-hop-chuoi-bai-hoc-mata-tu-nen-tang-den-ung-dung/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Nền tảng mata và cách tạo MA trận</h3>
-    <p>Nền tảng Mata và cách tạo ma trận Mata fundamentals and matrix creation Bước chân đầu tiên vào thế giới Mata Chào mừng các bạn quay trở lại! Trong bài học đầu tiên này, chúng ta sẽ cùng nhau thực hiện những bước đi đầu tiên vào thế giới lập trình ma trận của M Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c17/nen-tang-mata-va-cach-tao-ma-tran/" target="_blank" rel="noopener">Nền tảng Mata và cách tạo ma trận</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>17. Ngôn ngữ lập trình MA trận cho Stata</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Các phép toán và hàm MA trận trong mata</h3>
-    <p>Các phép toán và hàm ma trận trong Mata Mata matrix operations and functions "Ngữ pháp" của ngôn ngữ ma trận Chào mừng các bạn đã quay trở lại với bài học thứ hai trong chuỗi bài về Mata! Ở bài trước, chúng ta đã học cách tạo ra các "vật liệu" cơ bản – đó là c Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c17/cac-phep-toan-va-ham-ma-tran-trong-mata/" target="_blank" rel="noopener">Các phép toán và hàm ma trận trong Mata</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Thao tác MA trận và lập trình cơ bản</h3>
-    <p>Thao tác ma trận và lập trình cơ bản Matrix manipulation and basic programming Từ tính toán đến ứng dụng Chào mừng các bạn đã đến với bài học thứ ba! Nếu ở bài 1, chúng ta học "bảng chữ cái" và bài 2 học "ngữ pháp", thì hôm nay chúng ta sẽ học cách viết những  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c17/thao-tac-ma-tran-va-lap-trinh-co-ban/" target="_blank" rel="noopener">Thao tác ma trận và lập trình cơ bản</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c17/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Thực hành: xây dựng ước lượng OLS</h3>
-    <p>Thực hành: Xây dựng chương trình ước lượng OLS Practice: Building an OLS estimation program Lắp ráp tất cả các mảnh ghép Chúc mừng các bạn đã đi đến bài học cuối cùng và quan trọng nhất trong chuỗi bài học về Mata! Ở ba bài trước, chúng ta đã lần lượt thu thập Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c17/thuc-hanh-xay-dung-uoc-luong-ols/" target="_blank" rel="noopener">Thực hành: Xây dựng ước lượng OLS</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 5: Tổng hợp chuỗi bài học mata: từ nền tảng đến ứng dụng</h3>
-    <p>Tổng hợp chuỗi bài học Mata: Từ nền tảng đến ứng dụng Mata series synthesis: From fundamentals to application 1. Mata trong hệ sinh thái kinh tế lượng Chào các bạn sinh viên, trước hết, tôi xin chúc mừng các bạn đã hoàn thành xuất sắc chuỗi bài học nền tảng về Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c17/tong-hop-chuoi-bai-hoc-mata-tu-nen-tang-den-ung-dung/" target="_blank" rel="noopener">Tổng hợp chuỗi bài học Mata: Từ nền tảng đến ứng dụng</a>.</p>
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập môi trường, ước lượng mô hình và kiểm định chẩn đoán toàn diện
 version 18.0
 clear all
 set more off
+import delimited "sachktl_empirical_ecodata.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_csamk22u1_c17_ecodata.csv", clear encoding("utf-8")
 describe
-summarize
+summarize y x1 x2 x3, detail
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
+* 1. Ước lượng mô hình cơ sở và kiểm định phương sai thay đổi / đa cộng tuyến / dạng hàm
+regress y x1 x2 x3
 estat hettest
+estat imtest, white
 estat vif
+estat ovtest
+
+* 2. Ước lượng với sai số chuẩn vững White HC1 và xuất tác động biên
+regress y c.x1##c.x2 x3, vce(robust)
+margins, dydx(x1 x2 x3)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện phân tích kinh tế lượng và thực thi kiểm định chẩn đoán
 library(tidyverse)
 library(lmtest)
 library(sandwich)
+library(car)
 
-df <- read.csv("sachktl_csamk22u1_c17_ecodata.csv")
+df <- read.csv("sachktl_empirical_ecodata.csv")
 summary(df)
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+# 1. Ước lượng mô hình tuyến tính và kiểm định Breusch-Pagan, RESET, VIF
 fit <- lm(y ~ x1 + x2 + x3, data = df)
+bptest(fit)
+resettest(fit, power = 2:3, type = "fitted")
+vif(fit)
+
+# 2. Xuất bảng hệ số ước lượng với sai số chuẩn vững HC1
 coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
 ```
 
@@ -140,34 +246,52 @@ coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và thực thi ước lượng kèm chẩn đoán phần dư
 import pandas as pd
+import statsmodels.api as sm
 import statsmodels.formula.api as smf
+from statsmodels.stats.diagnostic import het_breuschpagan, linear_reset
+from statsmodels.stats.outliers_influence import variance_inflation_factor
 
-df = pd.read_csv("sachktl_csamk22u1_c17_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_empirical_ecodata.csv")
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
+# 1. Ước lượng mô hình với sai số chuẩn vững HC1
 model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
 print(model.summary())
+
+# 2. Kiểm định phương sai thay đổi Breusch-Pagan, Ramsey RESET và hệ số VIF
+bp_lm, bp_pval, _, _ = het_breuschpagan(model.resid, model.model.exog)
+reset_res = linear_reset(model, power=2, use_f=True)
+X = sm.add_constant(df[["x1", "x2", "x3"]].dropna())
+vifs = {col: variance_inflation_factor(X.values, i) for i, col in enumerate(X.columns)}
+print(f"Breusch-Pagan p={bp_pval:.4f} | RESET p={reset_res.pvalue:.4f} | VIF={vifs}")
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 17: 17. ngôn ngữ lập trình MA trận cho Stata trên SachKTL"
+  title="Hướng dẫn thực hành 17. Ngôn ngữ lập trình MA trận cho Stata trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 17 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Nền tảng Mata và cách tạo ma trận | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c17/nen-tang-mata-va-cach-tao-ma-tran/) |
-| **Bài 02** | Các phép toán và hàm ma trận trong Mata | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c17/cac-phep-toan-va-ham-ma-tran-trong-mata/) |
-| **Bài 03** | Thao tác ma trận và lập trình cơ bản | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c17/thao-tac-ma-tran-va-lap-trinh-co-ban/) |
-| **Bài 04** | Thực hành: Xây dựng ước lượng OLS | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c17/thuc-hanh-xay-dung-uoc-luong-ols/) |
-| **Bài 05** | Tổng hợp chuỗi bài học Mata: Từ nền tảng đến ứng dụng | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c17/tong-hop-chuoi-bai-hoc-mata-tu-nen-tang-den-ung-dung/) |
+| **17.1** | Nền tảng mata và cách tạo MA trận | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c17/nen-tang-mata-va-cach-tao-ma-tran/) |
+| **17.2** | Các phép toán và hàm MA trận trong mata | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c17/cac-phep-toan-va-ham-ma-tran-trong-mata/) |
+| **17.3** | Thao tác MA trận và lập trình cơ bản | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c17/thao-tac-ma-tran-va-lap-trinh-co-ban/) |
+| **17.4** | Thực hành: Xây dựng ước lượng OLS | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c17/thuc-hanh-xay-dung-uoc-luong-ols/) |
+| **17.5** | Tổng hợp chuỗi bài học mata: Từ nền tảng đến ứng dụng | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c17/tong-hop-chuoi-bai-hoc-mata-tu-nen-tang-den-ung-dung/) |

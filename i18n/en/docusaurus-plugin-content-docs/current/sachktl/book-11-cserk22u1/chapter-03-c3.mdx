@@ -1,19 +1,19 @@
 ---
 id: chapter-03-c3
-title: "Chapter 03: 3. Các phương pháp dựa trên lựa chọn các biến không quan sát được — Causal Inference and Policy Impact Evaluation Econometrics"
-sidebar_label: "Chapter 03: 3. Các phương pháp dựa trên lựa chọn các b"
+title: "3. Các phương pháp dựa trên lựa chọn các biến không quan sát được"
+sidebar_label: "3. Các phương pháp dựa trên lựa chọn các biến không quan sát được"
 sidebar_position: 4
-description: "Step-by-step practical how-to guide for Chapter 03: 3. Các phương pháp dựa trên lựa chọn các biến không quan sát được from Causal Inference and Policy Impact Evaluation Econometrics on SachKTL with Stata, R, and Python workflows integrated with EcoData, Finco, and EcoLab."
+description: "Comprehensive practical how-to guide for 3. Các phương pháp dựa trên lựa chọn các biến không quan sát được from Causal Inference and Policy Impact Evaluation Econometrics on SachKTL featuring structural equations, 7 lesson breakdowns, and Stata, R, and Python scripts."
 ---
 
-# Chapter 03: 3. Các phương pháp dựa trên lựa chọn các biến không quan sát được — Causal Inference and Policy Impact Evaluation Econometrics
+# 3. Các phương pháp dựa trên lựa chọn các biến không quan sát được
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-This practical how-to guide synthesizes the methodology and empirical implementation workflow of **Chapter 03: 3. Các phương pháp dựa trên lựa chọn các biến không quan sát được** from [**Book 11: Causal Inference and Policy Impact Evaluation Econometrics**](/en/sachktl/book-11-cserk22u1/), with direct backlinks to the authoritative source material at [https://sachktl.tnsai.vn/vi/cserk22u1/c3/](https://sachktl.tnsai.vn/vi/cserk22u1/c3/).
+This practical how-to guide presents the theoretical foundations, structural mathematical equations, detailed breakdown of **7 specialized lessons**, and multi-platform replication workflows for **3. Các phương pháp dựa trên lựa chọn các biến không quan sát được** from the textbook [**Causal Inference and Policy Impact Evaluation Econometrics**](/en/sachktl/book-11-cserk22u1/), with direct cross-references to the authoritative source material at [https://sachktl.tnsai.vn/vi/cserk22u1/c3/](https://sachktl.tnsai.vn/vi/cserk22u1/c3/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chapter 03: 3. Các phương pháp dựa trên lựa chọn các biến không quan">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="3. Các phương pháp dựa trên lựa chọn các biến không quan sát được">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ This practical how-to guide synthesizes the methodology and empirical implementa
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BOOK 11 · CHAPTER 03</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chapter 03: 3. Các phương pháp dựa trên lựa chọn các biến không quan</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Part of Textbook: Causal Inference and Policy Impact Evaluation Econometrics · 7 Deta</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Causal Inference and Policy Impact E</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">3. Các phương pháp dựa trên lựa chọn các biến không quan sát được</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Causal Inference and Empirical Policy Impact Evaluation · 7 Detailed Lessons</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,139 +41,270 @@ This practical how-to guide synthesizes the methodology and empirical implementa
   </svg>
 </div>
 
-## 1. Methodological Meaning and Scope of Application
+## 1. Methodological Foundations, Mathematical Specification, and Identification
 
-Các phương pháp dựa trên lựa chọn các biến không quan sát được Chào mừng các bạn sinh viên đã quay trở lại với chuỗi bài học về kinh tế lượng đánh giá chương trình! Ở chương trước, chúng ta đã cùng nhau tìm hiểu các phương pháp xử lý "thiên lệch công khai", tức là những sai lệch gây ra bởi các yếu tố mà chúng ta có thể quan sát và đo lường được trong bộ dữ liệu. Tuy nhiên, trong thực tế, bài toán khó khăn và phổ biến hơn rất nhiều là khi quyết định tham gia một chương trình lại phụ thuộc vào những yếu tố mà chúng ta không thể thấy được, chẳng hạn như năng lực bẩm sinh, động lực
+Các phương pháp dựa trên lựa chọn các biến không quan sát được Chào mừng các bạn sinh viên đã quay trở lại với chuỗi bài học về kinh tế lượng đánh giá chương trình! Ở chương trước, chúng ta đã cùng nhau tìm hiểu các phương pháp xử lý "thiên lệch công khai", tức là những sai lệch gây ra bởi các yếu tố mà chúng ta có thể quan sát và đo lường được trong bộ dữ liệu.
 
-- **Core Academic Topics**: Cấu trúc chuỗi bài học.
-- **Supported Analytical Environments**: `Stata 18 MP`.
-- **Recommended Empirical Data Sources**: Vietnamese macroeconomic, corporate, and household survey datasets on [EcoData](https://ecodata.io.vn), capital and commodity market series on [Finco](https://www.finco.vn), model cross-references on [VietLOD](https://vietlod.tnsai.vn), and automated estimation on [EcoLab](https://ecolab.io.vn).
+### 1.1. Structural Equations and Representative Estimator
+
+$$
+\tau_{\text{ATT}} = \mathbb{E}\left[Y_i(1) - Y_i(0) \mid D_i = 1\right] = \mathbb{E}\left[\mathbb{E}[Y_{it} - Y_{i,t-1} \mid D_i=1] - \mathbb{E}[Y_{it} - Y_{i,t-1} \mid D_i=0]\right] \tag*{[1]}
+$$
+
+$$
+Y_{it} = \alpha_i + \lambda_t + \sum_{k \neq -1} \delta_k \cdot \mathbb{I}(t - G_i = k) + \mathbf{X}_{it}'\boldsymbol{\beta} + \varepsilon_{it} \tag*{[2]}
+$$
+
+### 1.2. Core Identification Assumptions and Applicability Conditions
+
+1. Conditional parallel trends ensure the comparison group validly represents the counterfactual trajectory of treated units in the absence of intervention.
+2. No anticipation prior to treatment onset and common support overlap $0 < P(D_i=1 \mid \mathbf{X}_i) < 1$ are required for point identification of $\tau_{\text{ATT}}$.
+3. The Stable Unit Treatment Value Assumption (SUTVA) rules out unmodeled spillover interference across treated and control units.
 
 <FeatureCards
   features={[
     {
-      title: "Original Chapter on SachKTL",
-      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for Chapter 03 on SachKTL.",
+      title: "Authoritative Chapter on SachKTL",
+      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for this chapter on SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/cserk22u1/c3/"
     },
     {
       title: "Practice Datasets on EcoData & Finco",
-      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and survey data for hands-on replication.",
+      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and household survey data for hands-on replication.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
       title: "Automated Estimation on EcoLab",
-      description: "Execute econometric specifications, run diagnostic battery tests, and export publication-grade tables automatically.",
+      description: "Execute econometric specifications, run diagnostic battery tests, and export APA 7th / AER publication-grade tables automatically.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Step-by-Step Practical Implementation Across Chapter Lessons
+<FeatureNotAvailable
+  feature="Unconditional Baseline Estimation Under Violated Identification Assumptions"
+  reason="Conventional Two-Way Fixed Effects (TWFE) regressions suffer from negative weighting bias under staggered adoption and heterogeneous treatment effects; use Callaway-Sant'Anna or Sun-Abraham estimators instead."
+  alternative="Run the complete diagnostic battery in Step 4 and transition to the appropriate corrective estimator on VietLOD or EcoLab."
+/>
+
+## 2. Lesson-by-Lesson Academic Breakdown
+
+### 2.1. Giới thiệu về thiên lệch ẩn và biến công cụ
+
+Chào mừng các bạn đến với bài học đầu tiên trong chuỗi bài về các phương pháp xử lý "lựa chọn dựa trên các yếu tố không quan sát được". Ở các bài học trước, chúng ta đã làm quen với việc điều chỉnh sai lệch khi có đủ thông tin về các biến gây nhiễu. Nhưng trong thực tế, chúng ta thường phải đối mặt với một vấn đề nan giải hơn nhiều: điều gì sẽ xảy ra nếu những yếu tố quan trọng nhất ảnh hưởng đến cả quyết định tham gia chương trình và kết quả lại là những thứ chúng ta không thể đo lường được?
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **1. Nền tảng lý thuyết: Tại sao OLS thất bại khi có thiên lệch ẩn?**
+- **2. Giải pháp biến công cụ : Ý tưởng và cơ chế hoạt động**
+- **3. Tổng kết bài học**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/gioi-thieu-ve-thien-lech-an-va-bien-cong-cu/)
+
+### 2.2. Các kỹ thuật ước lượng IV và xử lý tính dị biệt
+
+Ở bài học trước, chúng ta đã hiểu được tại sao OLS thất bại khi có thiên lệch ẩn và làm quen với ý tưởng cơ bản của phương pháp Biến công cụ. Chúng ta đã biết rằng, về mặt lý thuyết, IV có thể khôi phục lại ước lượng nhất quán cho tác động của chương trình. Trong bài học hôm nay, chúng ta sẽ trả lời câu hỏi: "Vậy, làm thế nào để thực hiện ước lượng IV trong thực tế?" và "Điều gì xảy ra nếu tác động của chương trình không giống nhau cho tất cả mọi người?".
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **1. Nền tảng lý thuyết: Mô hình hệ số ngẫu nhiên và các trường hợp**
+- **2. Các phương pháp ước lượng IV trong trường hợp hiệu ứng đồng nhất**
+- **2.1. Phương pháp hai giai đoạn OLS trực tiếp**
+- **2.2. Phương pháp Probit-OLS**
+- **2.3. Phương pháp Probit-2SLS**
+- **3. Mở rộng: IV với hiệu ứng dị biệt quan sát được**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/cac-ky-thuat-uoc-luong-iv-va-xu-ly-tinh-di-biet/)
+
+### 2.3. Các vấn đề thực tế khi sử dụng biến công cụ
+
+Chào mừng các bạn quay trở lại! Trong các bài học trước, chúng ta đã khám phá sức mạnh của phương pháp Biến công cụ như một giải pháp thanh lịch cho vấn đề nội sinh. Về mặt lý thuyết, chỉ cần tìm được một biến công cụ thỏa mãn hai điều kiện "tương quan" và "ràng buộc loại trừ", chúng ta có thể tự tin thu được một ước lượng nhất quán. Tuy nhiên, con đường từ lý thuyết đến thực hành luôn đầy rẫy những thách thức. Việc tìm kiếm một "biến công cụ hoàn hảo" trong thực tế giống như đi tìm Chén Thánh vậy - cực kỳ khó khăn và hiếm có.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **1. Vấn đề 1: Tính không nhất quán khi công cụ không ngoại sinh**
+- **2. Vấn đề 2: Hiệu quả thấp khi công cụ yếu**
+- **3. Vấn đề 3: Sai lệch trong mẫu nhỏ của 2SLS**
+- **4. Tổng kết và khuyến nghị cho sinh viên**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/cac-van-de-thuc-te-khi-su-dung-bien-cong-cu/)
+
+### 2.4. Mô hình lựa chọn Heckman
+
+Chào mừng các bạn đến với bài học thứ tư! Trong các bài học trước, chúng ta đã dành nhiều thời gian với phương pháp Biến công cụ, một kỹ thuật dựa vào việc tìm kiếm một biến ngoại sinh \ để giải quyết vấn đề nội sinh. Tuy nhiên, như chúng ta đã thảo luận, việc tìm được một biến công cụ hoàn hảo trong thực tế là một thách thức lớn. Điều này đặt ra một câu hỏi quan trọng: Liệu có cách nào ước lượng tác động nhân quả khi có thiên lệch ẩn mà không cần đến biến công cụ không?
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **1. Nền tảng lý thuyết: Đặc trưng hóa sai lệch OLS trong mô hình lựa chọn**
+- **2. Phương pháp ước lượng: Quy trình hai bước của Heckman**
+- **3. Mở rộng: Mô hình Heckit với hiệu ứng dị biệt**
+- **4. Tổng kết bài học**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/mo-hinh-lua-chon-heckman-heckit/)
+
+### 2.5. Phương pháp sai biệt kép
+
+Chào mừng các bạn đến với bài học thứ năm! Cho đến nay, chúng ta đã tìm hiểu hai cách tiếp cận để giải quyết vấn đề thiên lệch ẩn: sử dụng một biến công cụ hoặc mô hình hóa trực tiếp quá trình lựa chọn. Cả hai phương pháp này đều là những công cụ mạnh mẽ, nhưng chúng cũng đòi hỏi những điều kiện không dễ dàng có được trong thực tế. Hôm nay, chúng ta sẽ học một phương pháp thứ ba, một cách tiếp cận hoàn toàn khác, không cần đến biến công cụ hay các giả định phân phối phức tạp.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **1. Nền tảng lý thuyết: Giả định xu hướng song song**
+- **2. Phương pháp ước lượng DID bằng hồi quy OLS**
+- **3. Các loại dữ liệu và biến thể của DID**
+- **3.1. DID với dữ liệu cắt ngang lặp lại**
+- **3.2. DID với dữ liệu bảng**
+- **3.3. DID với Ghép cặp**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/phuong-phap-sai-biet-kep/)
+
+### 2.6. Hướng dẫn thực hành IV và mô hình lựa chọn với Stata
+
+Chào mừng các bạn đến với bài học thực hành đầu tiên trong chuỗi bài! Trong suốt các bài học vừa qua, chúng ta đã cùng nhau xây dựng một nền tảng lý thuyết vững chắc về các phương pháp xử lý thiên lệch ẩn. Giờ là lúc chúng ta biến những lý thuyết đó thành kỹ năng thực hành cụ thể. Trong bài học hôm nay, chúng ta sẽ cùng nhau thực hiện một phân tích kinh tế lượng hoàn chỉnh từ A đến Z bằng phần mềm Stata, tập trung vào hai phương pháp đã học: Biến công cụ và Mô hình lựa chọn Heckman.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **1. Chuẩn bị dữ liệu và công cụ**
+- **2. Phân tích từng bước với Stata**
+- **Bước 1: Phân tích ban đầu - So sánh trung bình và hồi quy OLS**
+- **Bước 2: Ước lượng bằng Biến công cụ**
+- **Bước 3: Ước lượng bằng Mô hình lựa chọn Heckman**
+- **Bước 4: So sánh các mô hình**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/huong-dan-thuc-hanh-iv-va-mo-hinh-lua-chon-voi-stata/)
+
+### 2.7. Hướng dẫn thực hành phương pháp DID với Stata
+
+Chào mừng các bạn đến với bài học thực hành cuối cùng và cũng là bài học quan trọng nhất trong chuỗi bài về các phương pháp xử lý thiên lệch ẩn! Trong các bài học trước, chúng ta đã tập trung vào các kỹ thuật áp dụng cho dữ liệu cắt ngang. Hôm nay, chúng ta sẽ chuyển sang một lĩnh vực khác, khai thác sức mạnh của dữ liệu được thu thập theo thời gian thông qua Phương pháp Sai biệt kép.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **1. Thực hành DID với dữ liệu cắt ngang lặp lại**
+- **2. Thực hành DID với dữ liệu bảng**
+- **3. Tổng kết và các bước tiếp theo**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/huong-dan-thuc-hanh-phuong-phap-did-voi-stata/)
+
+## 3. Step-by-Step Empirical Implementation Workflow
 
 <Steps>
   <div className="step-item">
-    <h3>Step 1: Giới thiệu về thiên lệch ẩn và biến công cụ</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Giới thiệu về thiên lệch ẩn và biến công cụ. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/cserk22u1/c3/gioi-thieu-ve-thien-lech-an-va-bien-cong-cu/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/cserk22u1/c3/gioi-thieu-ve-thien-lech-an-va-bien-cong-cu/</a>.</p>
+    <h3>1. Formulate the Research Question and Prepare Data on EcoData & Finco</h3>
+    <p>Define the dependent variable, core explanatory variables, and control covariates aligned with <strong>3. Các phương pháp dựa trên lựa chọn các biến không quan sát được</strong>. Extract standardized Vietnamese empirical series from <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> or <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, and screen for missing observations and extreme outliers.</p>
   </div>
   <div className="step-item">
-    <h3>Step 2: Các kỹ thuật ước lượng IV và xử lý tính dị biệt</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Các kỹ thuật ước lượng IV và xử lý tính dị biệt. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/cserk22u1/c3/cac-ky-thuat-uoc-luong-iv-va-xu-ly-tinh-di-biet/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/cserk22u1/c3/cac-ky-thuat-uoc-luong-iv-va-xu-ly-tinh-di-biet/</a>.</p>
+    <h3>2. Conduct Descriptive Profiling, Correlation Analysis, and Pre-Estimation Checks</h3>
+    <p>Examine empirical distributions, construct summary statistics tables, and evaluate collinearity using pairwise correlation matrices and Variance Inflation Factors (VIF).</p>
   </div>
   <div className="step-item">
-    <h3>Step 3: Các vấn đề thực tế khi sử dụng biến công cụ</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Các vấn đề thực tế khi sử dụng biến công cụ. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/cserk22u1/c3/cac-van-de-thuc-te-khi-su-dung-bien-cong-cu/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/cserk22u1/c3/cac-van-de-thuc-te-khi-su-dung-bien-cong-cu/</a>.</p>
+    <h3>3. Estimate the Model Across Stata 18 MP, R 4.x, and Python 3.11+</h3>
+    <p>Execute the parameter estimation scripts matching the structural equations in Section 1.1 while cross-checking theoretical derivations at <a href="https://sachktl.tnsai.vn/vi/cserk22u1/c3/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Step 4: Mô hình lựa chọn Heckman</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Mô hình lựa chọn Heckman. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/cserk22u1/c3/mo-hinh-lua-chon-heckman-heckit/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/cserk22u1/c3/mo-hinh-lua-chon-heckman-heckit/</a>.</p>
+    <h3>4. Perform Post-Estimation Diagnostics and Robust Variance Correction</h3>
+    <p>Test for heteroskedasticity, serial correlation, Ramsey RESET functional form misspecification, and regressor endogeneity. Apply White HC1 or cluster-robust standard errors for valid inference.</p>
   </div>
   <div className="step-item">
-    <h3>Step 5: Phương pháp sai biệt kép</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Phương pháp sai biệt kép. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/cserk22u1/c3/phuong-phap-sai-biet-kep/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/cserk22u1/c3/phuong-phap-sai-biet-kep/</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Step 6: Hướng dẫn thực hành IV và mô hình lựa chọn với Stata</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Hướng dẫn thực hành IV và mô hình lựa chọn với Stata. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/cserk22u1/c3/huong-dan-thuc-hanh-iv-va-mo-hinh-lua-chon-voi-stata/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/cserk22u1/c3/huong-dan-thuc-hanh-iv-va-mo-hinh-lua-chon-voi-stata/</a>.</p>
+    <h3>5. Format Journal-Grade Tables and Cross-Verify on EcoLab</h3>
+    <p>Report point estimates, standard errors in parentheses, and statistical significance stars following APA 7th / AER Booktabs standards, or automate the entire reporting pipeline on <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> and <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Multi-Platform Implementation Examples in Stata, R, and Python
+## 4. Multi-Platform Implementation Scripts in Stata, R, and Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Initialize environment and load practice dataset from EcoData / SachKTL
+* Ước lượng tác động nhân quả với DiD, Event Study và Propensity Score Matching
 version 18.0
 clear all
 set more off
+import delimited "sachktl_causal_ecodata.csv", clear encoding("utf-8")
 
-* Import standardized empirical dataset
-import delimited "sachktl_cserk22u1_c03_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+* 1. Ước lượng Difference-in-Differences hai chiều và kiểm định xu hướng song song
+xtset id year
+xtdidregress (y x1 x2) (treated_post), group(id) time(year) vce(cluster id)
+estat trendplots
+estat ptrends
 
-* Estimate baseline specification and run diagnostic checks with robust standard errors
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 2. Ước lượng ghép cặp điểm xu hướng (PSM) và nghịch đảo xác suất trọng số (IPWRA)
+teffects psmatch (y) (treat x1 x2 x3, probit), atet vce(iid)
+teffects ipwra (y x1 x2) (treat x1 x2 x3, logit), atet
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Load econometric packages and practice dataset from EcoData / SachKTL
-library(tidyverse)
-library(lmtest)
-library(sandwich)
+# Nạp thư viện suy diễn nhân quả fixest, did và MatchIt
+library(fixest)
+library(did)
+library(MatchIt)
 
-df <- read.csv("sachktl_cserk22u1_c03_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_causal_ecodata.csv")
 
-# Estimate model and compute heteroskedasticity-robust HC1 standard errors
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Ước lượng mô hình DiD và Event Study với sai số chuẩn cụm
+mod_did <- feols(y ~ treated_post + x1 + x2 | id + year, data = df, cluster = ~id)
+summary(mod_did)
+
+# 2. Ước lượng Callaway & Sant'Anna (2021) cho DiD đa thời điểm
+cs_out <- att_gt(yname = "y", tname = "year", idname = "id", gname = "first_treat",
+                 xformla = ~ x1 + x2, data = df, control_group = "nevertreated")
+summary(aggte(cs_out, type = "dynamic"))
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Load econometric libraries and practice dataset from EcoData / SachKTL
+# Nạp thư viện statsmodels và linearmodels để ước lượng DiD & IPW
 import pandas as pd
 import statsmodels.formula.api as smf
+from linearmodels.panel import PanelOLS
 
-df = pd.read_csv("sachktl_cserk22u1_c03_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_causal_ecodata.csv")
 
-# Fit specification with HC1 robust standard errors
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Ước lượng điểm xu hướng Propensity Score bằng Logit
+ps_mod = smf.logit("treat ~ x1 + x2 + x3", data=df).fit(disp=False)
+df["pscore"] = ps_mod.predict(df)
+
+# 2. Ước lượng Difference-in-Differences hai chiều với sai số chuẩn cụm
+df_panel = df.set_index(["id", "year"])
+did_mod = PanelOLS.from_formula("y ~ 1 + treated_post + x1 + x2 + EntityEffects + TimeEffects", data=df_panel)
+did_res = did_mod.fit(cov_type="clustered", cluster_entity=True)
+print(did_res.summary)
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video Tutorial Walkthrough
+## 5. Post-Estimation Diagnostic and Interpretation Guide
+
+| Diagnostic Criterion | Null Hypothesis $H_0$ | Benchmark Threshold | Corrective Action When $H_0$ Is Rejected |
+| :--- | :--- | :--- | :--- |
+| **Heteroskedasticity** | Constant error variance $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ rejects $H_0$ | Apply `vce(robust)`, `vcovHC(HC1)`, or FGLS/WLS weighted estimation |
+| **Multicollinearity** | No severe linear dependence among regressors | $\text{VIF} < 10$ acceptable | Drop redundant covariates, center interactions, or apply LASSO/Ridge regularization |
+| **Ramsey RESET Functional Form** | No omitted nonlinear or higher-order terms | $p\text{-value} > 0.05$ retains $H_0$ | Add interaction terms, quadratic polynomials, or log-transform skewed positive variables |
+| **Regressor Exogeneity** | Orthogonality $\text{Cov}(X, \varepsilon)=0$ | Durbin-Wu-Hausman $p > 0.05$ | Transition to IV/2SLS, LIML, or GMM estimation with validated instruments |
+
+## 6. Video Tutorial Walkthrough
 
 <VideoTutorial
-  title="Practical Walkthrough for Chapter 03: 3. Các phương pháp dựa trên lựa chọn các biến không quan sát được on SachKTL"
+  title="Practical Walkthrough for 3. Các phương pháp dựa trên lựa chọn các biến không quan sát được on SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Complete Lesson Directory and Backlinks to Original SachKTL Articles
+## 7. Complete Lesson Directory and Backlinks to Original SachKTL Articles
 
-| No. | Lesson Title in Chapter 03 | Supported Software | Original Source Link on SachKTL |
+| Lesson Code | Lesson Title | Supported Software | Original Source Link on SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Lesson 01** | Giới thiệu về thiên lệch ẩn và biến công cụ | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/gioi-thieu-ve-thien-lech-an-va-bien-cong-cu/) |
-| **Lesson 02** | Các kỹ thuật ước lượng IV và xử lý tính dị biệt | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/cac-ky-thuat-uoc-luong-iv-va-xu-ly-tinh-di-biet/) |
-| **Lesson 03** | Các vấn đề thực tế khi sử dụng biến công cụ | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/cac-van-de-thuc-te-khi-su-dung-bien-cong-cu/) |
-| **Lesson 04** | Mô hình lựa chọn Heckman | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/mo-hinh-lua-chon-heckman-heckit/) |
-| **Lesson 05** | Phương pháp sai biệt kép | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/phuong-phap-sai-biet-kep/) |
-| **Lesson 06** | Hướng dẫn thực hành IV và mô hình lựa chọn với Stata | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/huong-dan-thuc-hanh-iv-va-mo-hinh-lua-chon-voi-stata/) |
-| **Lesson 07** | Hướng dẫn thực hành phương pháp DID với Stata | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/huong-dan-thuc-hanh-phuong-phap-did-voi-stata/) |
+| **3.1** | Giới thiệu về thiên lệch ẩn và biến công cụ | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/gioi-thieu-ve-thien-lech-an-va-bien-cong-cu/) |
+| **3.2** | Các kỹ thuật ước lượng IV và xử lý tính dị biệt | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/cac-ky-thuat-uoc-luong-iv-va-xu-ly-tinh-di-biet/) |
+| **3.3** | Các vấn đề thực tế khi sử dụng biến công cụ | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/cac-van-de-thuc-te-khi-su-dung-bien-cong-cu/) |
+| **3.4** | Mô hình lựa chọn Heckman | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/mo-hinh-lua-chon-heckman-heckit/) |
+| **3.5** | Phương pháp sai biệt kép | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/phuong-phap-sai-biet-kep/) |
+| **3.6** | Hướng dẫn thực hành IV và mô hình lựa chọn với Stata | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/huong-dan-thuc-hanh-iv-va-mo-hinh-lua-chon-voi-stata/) |
+| **3.7** | Hướng dẫn thực hành phương pháp DID với Stata | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/huong-dan-thuc-hanh-phuong-phap-did-voi-stata/) |

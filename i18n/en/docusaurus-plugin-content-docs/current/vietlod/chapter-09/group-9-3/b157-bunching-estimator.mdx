@@ -1,10 +1,10 @@
 ---
 id: b157-bunching-estimator
-title: "9.3.5. How-To Guide for Saez-Kleven Counterfactual Density Bunching Estimator"
+title: "9.3.5. Saez-Kleven Counterfactual Density Bunching Estimator"
 sidebar_label: "9.3.5. Saez-Kleven Counterfactual Density Bunching Estimator"
 sidebar_position: 5
 slug: /vietlod/chapter-09/group-9-3/b157-bunching-estimator
-description: "Step-by-step How-To implementation guide for Saez-Kleven Counterfactual Density Bunching Estimator with estimator key bunching_estimator across Stata 18 MP, R 4.x, and Python 3.11+ including practice datasets and journal-grade interpretation."
+description: "Step-by-step How-To implementation guide for Section 9.3.5 — Saez-Kleven Counterfactual Density Bunching Estimator with estimator key bunching_estimator across Stata 18 MP, R 4.x, and Python 3.11+ including practice datasets and journal-grade interpretation."
 keywords:
   - Saez-Kleven Counterfactual Density Bunching Estimator
   - bunching_estimator
@@ -17,28 +17,28 @@ keywords:
   - EcoLab
 ---
 
-# 9.3.5. How-To Guide for Saez-Kleven Counterfactual Density Bunching Estimator
+# 9.3.5. Saez-Kleven Counterfactual Density Bunching Estimator
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Section `9.3.5` — Model Code `B157` (`bunching_estimator`)** belongs to [Chapter 09: Causal Inference and Modern Policy Evaluation](/en/vietlod/chapter-09) $\to$ [Group 9.3: Regression Discontinuity, Kink, Bunching and Marginal Effects](/en/vietlod/chapter-09/group-9-3), classified at **Level L4 — Frontier Research**. This How-To guide walks through the methodological foundations, scope of application, runnable scripts across **Stata 18 MP**, **R 4.x**, and **Python 3.11+**, the standardized `vietlod_bunching_estimator_ecodata.csv` practice dataset, three-software convergence visualization, and Q1 journal result interpretation.
+**Section `9.3.5` — Model Code `B157` — Estimator Key `bunching_estimator`** belongs to [9. Causal Inference and Modern Policy Evaluation](/en/vietlod/chapter-09) $\to$ [9.3. Regression Discontinuity, Kink, Bunching and Marginal Effects](/en/vietlod/chapter-09/group-9-3), classified at **Level L4 — Frontier Research**. This How-To guide walks through the methodological foundations, scope of application, runnable scripts across **Stata 18 MP**, **R 4.x**, and **Python 3.11+**, the standardized `vietlod_bunching_estimator_ecodata.csv` practice dataset, three-software convergence visualization, and Q1 journal result interpretation.
 
 <VideoTutorial
   title="Video Tutorial for Section 9.3.5: Saez-Kleven Counterfactual Density Bunching Estimator in Stata 18, R 4.x, and Python 3.11+"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 1. Methodological Meaning and Scope of Application
+## 9.3.5.1. Methodological Meaning and Scope of Application
 
-### 1.1. Econometric Foundation and Identification Mechanism
+### 9.3.5.1.1. Econometric Foundation and Identification Mechanism
 
 Fits an integration-constrained counterfactual polynomial histogram excluding the manipulation window around threshold z* to quantify normalized excess bunching mass b and behavioral elasticity e. Across empirical econometrics, `bunching_estimator` enables researchers to isolate structural parameters while controlling for confounding covariates and verifying identification assumptions via `bunchit` in Stata 18 MP, `bunching` in R 4.x, and `statsmodels` in Python 3.11+.
 
-### 1.2. Scope of Application and Sample Structure Requirements
+### 9.3.5.1.2. Scope of Application and Sample Structure Requirements
 
 Micro-level income, firm-size, tax, or credit distributions exhibiting behavioral clustering at statutory kink or notch cutoffs. Mandatory post-estimation verification includes testing identification restrictions, evaluating goodness-of-fit metrics, and confirming numerical convergence across all three econometric engines.
 
-### 1.3. Structural Equations and Asymptotic Covariance Specification
+### 9.3.5.1.3. Structural Equations and Asymptotic Covariance Specification
 
 Core structural equation for `bunching_estimator`:
 
@@ -59,10 +59,10 @@ $$
 $$
 
 <FeatureNotAvailable
-  note="Methodological Boundary: Do not apply Saez-Kleven Counterfactual Density Bunching Estimator blindly when identification assumptions fail or when mandatory diagnostics are violated. Always verify Khối lượng tích tụ tuyệt đối $\hat{B}$ & chuẩn hóa $\hat{b}$ kèm bootstrap $z$-stat, độ co giãn thu nhập/quy mô suy diễn $\hat{e}$, tỷ lệ phản ứng trì trệ — optimization frictions share tại notch, kiểm định độ nhạy bậc đa thức $p \in \{3..7\}$. and consult companion estimators in Group 9.3 or Chapter 09 when specification tests reject."
+  note="Methodological Boundary: Do not apply Saez-Kleven Counterfactual Density Bunching Estimator blindly when identification assumptions fail or when mandatory diagnostics are violated. Always verify Khối lượng tích tụ tuyệt đối $\hat{B}$ & chuẩn hóa $\hat{b}$ kèm bootstrap $z$-stat, độ co giãn thu nhập/quy mô suy diễn $\hat{e}$, tỷ lệ phản ứng trì trệ — optimization frictions share tại notch, kiểm định độ nhạy bậc đa thức $p \in \{3..7\}$. and consult companion estimators in Part 9.3 or Chapter 9 when specification tests reject."
 />
 
-## 2. Real-World Empirical Scenario and Standardized Practice Dataset
+## 9.3.5.2. Real-World Empirical Scenario and Standardized Practice Dataset
 
 - **Vietnamese Empirical Benchmark**: Evaluates `bunching_estimator` on the **Phản ứng của doanh nghiệp tại ngưỡng thuế SME** empirical dataset with a standardized sample size of $N = 320$ observations curated via [EcoData](https://ecodata.io.vn) and [Finco](https://www.finco.vn).
 - **International Textbook Benchmark**: **Saez (2010) / Kleven–Waseem (2013) Tax Bunching**, allowing researchers to cross-reference empirical outputs with canonical graduate econometrics textbooks.
@@ -80,7 +80,7 @@ $$
       title: 'Full Academic Lecture on VietLOD',
       description: 'Read the complete mathematical derivations and theoretical lecture for Section 9.3.5 on the VietLOD portal.',
       link: 'https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-09-suy-luan-nhan-qua-va-danh-gia-tac-dong-chinh-sach/nhom-9-3-rdd/b157-bunching-estimator',
-      badge: 'VietLOD B157'
+      badge: 'VietLOD 9.3.5'
     },
     {
       title: 'Cloud Execution on EcoLab',
@@ -97,9 +97,9 @@ $$
   ]}
 />
 
-## 3. Software Packages and Step-by-Step Implementation Across Stata, R, and Python
+## 9.3.5.3. Software Packages and Step-by-Step Implementation Across Stata, R, and Python
 
-### 3.1. Software Package and Command Comparison Matrix
+### 9.3.5.3.1. Software Package and Command Comparison Matrix
 
 | Statistical Platform | Primary Package | Core Estimation Syntax | Mandatory Diagnostic Command | Support |
 | :--- | :--- | :--- | :--- | :--- |
@@ -107,29 +107,28 @@ $$
 | **R 4.x** | `bunching` | `bunching::bunchit(z_vector = df$z_var, zstar = 0, binwidth = 0.1, bins_l = 20, bins_r = 20, poly = 5)` | `did::ggdid(fit); cobalt::bal.tab(match_obj); rddensity::rddensity(x_run, c = 0)` | <Available /> |
 | **Python 3.11+** | `statsmodels` | `smf.ols('bin_count ~ z_pow1 + z_pow2 + z_pow3 + excl_window', data=hist_df).fit()` | `res.wald_test(pre_trend_matrix); rddensity(x_run, c=0); cross_val_score(ml_model, X, y)` | <Available /> |
 
-### 3.2. Four-Step Execution Workflow for `bunching_estimator`
+### 9.3.5.3.2. Four-Step Execution Workflow for `bunching_estimator`
 
 <Steps>
-
-### Step 1. Load the Practice Dataset and Inspect Summary Statistics
-
-Download [`vietlod_bunching_estimator_ecodata.csv`](https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_bunching_estimator_ecodata.csv) into your working directory, verify the sample size $N = 320$, declare the cross-sectional, panel, or time-series index, and inspect the distribution of the outcome `y` and covariates `x1`, `x2`.
-
-### Step 2. Estimate `bunching_estimator` With Robust Covariance Correction
-
-Execute the canonical estimator in **Stata 18 MP** via `bunchit`, **R 4.x** via `bunching`, or **Python 3.11+** via `statsmodels` with heteroskedasticity- or cluster-robust standard errors enabled.
-
-### Step 3. Run Mandatory Post-Estimation Diagnostics
-
-Execute the required specification and diagnostic suite: **Khối lượng tích tụ tuyệt đối $\hat{B}$ & chuẩn hóa $\hat{b}$ kèm bootstrap $z$-stat, độ co giãn thu nhập/quy mô suy diễn $\hat{e}$, tỷ lệ phản ứng trì trệ — optimization frictions share tại notch, kiểm định độ nhạy bậc đa thức $p \in \{3..7\}$.**. Record the diagnostic test statistic $\text{Stat} = 1.3524$ and $p$-value $= 0.5085$.
-
-### Step 4. Export Publication Tables and Verify Tri-Engine Convergence
-
-Format the estimation output using `etable` in Stata, `coeftest` in R, or `summary()` in Python, and verify that the point estimates and standard errors match the benchmark table and three-panel figure in Section 4.
-
+  <div className="step-item">
+    <h3>Step 1. Load the Practice Dataset and Inspect Summary Statistics</h3>
+    <p>Download <a href="https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_bunching_estimator_ecodata.csv"><code>vietlod_bunching_estimator_ecodata.csv</code></a> into your working directory, verify the sample size $N = 320$, declare the cross-sectional, panel, or time-series index, and inspect the distribution of the outcome <code>y</code> and covariates <code>x1</code>, <code>x2</code>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Step 2. Estimate bunching_estimator With Robust Covariance Correction</h3>
+    <p>Execute the canonical estimator in <strong>Stata 18 MP</strong> via <code>bunchit</code>, <strong>R 4.x</strong> via <code>bunching</code>, or <strong>Python 3.11+</strong> via <code>statsmodels</code> with heteroskedasticity- or cluster-robust standard errors enabled.</p>
+  </div>
+  <div className="step-item">
+    <h3>Step 3. Run Mandatory Post-Estimation Diagnostics</h3>
+    <p>Execute the required specification and diagnostic suite: <strong>Khối lượng tích tụ tuyệt đối $\hat{B}$ & chuẩn hóa $\hat{b}$ kèm bootstrap $z$-stat, độ co giãn thu nhập/quy mô suy diễn $\hat{e}$, tỷ lệ phản ứng trì trệ — optimization frictions share tại notch, kiểm định độ nhạy bậc đa thức $p \in \{3..7\}$.</strong>. Record the diagnostic test statistic $\text{Stat} = 1.3524$ and $p$-value $= 0.5085$.</p>
+  </div>
+  <div className="step-item">
+    <h3>Step 4. Export Publication Tables and Verify Tri-Engine Convergence</h3>
+    <p>Format the estimation output using <code>etable</code> in Stata, <code>coeftest</code> in R, or <code>summary()</code> in Python, and verify that the point estimates and standard errors match the benchmark table and three-panel figure in Section 9.3.5.4.</p>
+  </div>
 </Steps>
 
-### 3.3. Complete Runnable Scripts in Stata 18, R 4.x, and Python 3.11+
+### 9.3.5.3.3. Complete Runnable Scripts in Stata 18, R 4.x, and Python 3.11+
 
 <Tabs groupId="econometric-software">
   <TabItem value="stata" label="Stata 18 MP">
@@ -230,9 +229,9 @@ print("ESTIMATION RESULT [bunching_estimator]: beta_x1 = 1.1950 | SE = 0.0758 | 
   </TabItem>
 </Tabs>
 
-## 4. Empirical Estimation Output, Tri-Engine Convergence Plot, and Academic Interpretation
+## 9.3.5.4. Empirical Estimation Output, Tri-Engine Convergence Plot, and Academic Interpretation
 
-### 4.1. Journal-Grade Empirical Estimation Table
+### 9.3.5.4.1. Journal-Grade Empirical Estimation Table
 
 The table below reports the empirical estimation results for **Saez-Kleven Counterfactual Density Bunching Estimator** on `vietlod_bunching_estimator_ecodata.csv` across $N = 320$ observations, verified simultaneously across **Stata 18 MP**, **R 4.x**, and **Python 3.11+**:
 
@@ -245,32 +244,31 @@ The table below reports the empirical estimation results for **Saez-Kleven Count
 | **Goodness-of-Fit `R-squared`** | `0.4272` | — | `F/Wald = 126.221` | — | Q1 Journal Standard |
 | **Post-Estimation Diagnostic** | `Stat = 1.3524` | — | — | `p = 0.5085` | Specification Passed |
 
-### 4.2. Simultaneous Three-Software Empirical Convergence Figure
+### 9.3.5.4.2. Simultaneous Three-Software Empirical Convergence Figure
 
 ![Three-Software Empirical Convergence Plot for Saez-Kleven Counterfactual Density Bunching Estimator](https://vietlod.tnsai.vn/src/ecoaz/img/vietlod-b157-bunching-estimator.png)
 
-### 4.3. How to Interpret the Empirical Results for Academic Publication
+### 9.3.5.4.3. How to Interpret the Empirical Results for Academic Publication
 
 - **Primary Slope Coefficient Interpretation**: The estimated coefficient on `x1` is $\hat{\beta}_1 = 1.1950$ with a robust standard error of $\text{SE} = 0.0758$ and test statistic of $15.757$, indicating **a positive effect** on the target outcome `y` that is **statistically significant at the 1% level** in the empirical setting of *Phản ứng của doanh nghiệp tại ngưỡng thuế SME*.
 - **Confidence Interval and Cross-Software Precision**: The $95\%$ confidence interval $[1.0464, 1.3437]$ confirms parameter stability and exact numerical convergence across Stata 18 MP, R 4.x, and Python 3.11+.
 - **Model Fit and Diagnostic Validation**: The `R-squared` metric reaches `$0.4272$` with an overall joint test statistic of `$126.221$`. The mandatory diagnostic statistic equals `$1.3524$` with $p = 0.5085$, confirming that `bunching_estimator` satisfies post-estimation specification requirements for policy inference.
 
-## 5. How to Synthesize Data via EcoData and Finco and Load Classic Benchmarks
+## 9.3.5.5. How to Synthesize Data via EcoData and Finco and Load Classic Benchmarks
 
 <Steps>
-
-### Step 1. Initialize a Data Extraction Query on EcoData or Finco
-
-Log in to [EcoData](https://ecodata.io.vn) or [Finco](https://www.finco.vn), select the empirical module corresponding to **Phản ứng của doanh nghiệp tại ngưỡng thuế SME**, and configure cross-sectional unit identifiers `id` and time periods `t` to assemble the $N = 320$ sample.
-
-### Step 2. Harmonize Variables and Apply Outlier Treatment
-
-Map the dependent variable to `y`, the primary regressor to `x1`, the control covariate to `x2`, and specialized structural variables to `z1`, `treat`, `w`, `y_bin`, `y_count`, `duration`, and `event`. Apply $1\%$ and $99\%$ Winsorization prior to exporting `vietlod_bunching_estimator_ecodata.csv`.
-
-### Step 3. Cross-Check With the International Benchmark Dataset Saez (2010) / Kleven–Waseem (2013) Tax Bunching
-
-To replicate the estimator on the classic international dataset **Saez (2010) / Kleven–Waseem (2013) Tax Bunching**, run the direct archive loading commands listed in the provenance table below.
-
+  <div className="step-item">
+    <h3>Step 1. Initialize a Data Extraction Query on EcoData or Finco</h3>
+    <p>Log in to <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> or <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, select the empirical module corresponding to <strong>Phản ứng của doanh nghiệp tại ngưỡng thuế SME</strong>, and configure cross-sectional unit identifiers <code>id</code> and time periods <code>t</code> to assemble the $N = 320$ sample.</p>
+  </div>
+  <div className="step-item">
+    <h3>Step 2. Harmonize Variables and Apply Outlier Treatment</h3>
+    <p>Map the dependent variable to <code>y</code>, the primary regressor to <code>x1</code>, the control covariate to <code>x2</code>, and specialized structural variables to <code>z1</code>, <code>treat</code>, <code>w</code>, <code>y_bin</code>, <code>y_count</code>, <code>duration</code>, and <code>event</code>. Apply $1\%$ and $99\%$ Winsorization prior to exporting <code>vietlod_bunching_estimator_ecodata.csv</code>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Step 3. Cross-Check With the International Benchmark Dataset Saez (2010) / Kleven–Waseem (2013) Tax Bunching</h3>
+    <p>To replicate the estimator on the classic international dataset <strong>Saez (2010) / Kleven–Waseem (2013) Tax Bunching</strong>, run the direct archive loading commands listed in the provenance table below.</p>
+  </div>
 </Steps>
 
 | Data Repository | Dataset / File Name | Direct Loading Syntax and Access Link |
@@ -281,7 +279,7 @@ To replicate the estimator on the classic international dataset **Saez (2010) / 
 | **R CRAN Package** | *Saez (2010) / Kleven–Waseem (2013) Tax Bunching* | R Command: `data("saez", package = "wooldridge")` |
 | **Python Statsmodels** | *Saez (2010) / Kleven–Waseem (2013) Tax Bunching* | Python Command: `sm.datasets.get_rdataset("saez", "wooldridge").data` |
 
-## 6. Key Academic Literature References
+## 9.3.5.6. Key Academic Literature References
 
 - Saez(2010). Do Taxpayers Bunch at Kink Points?. *American Economic Journal: Economic Policy*.
 - Kleven, & Waseem(2013). Using Notches to Uncover Optimization Frictions. *The Quarterly Journal of Economics*.

@@ -1,19 +1,19 @@
 ---
 id: chapter-01-c1
-title: "Chương 01: 1. giới thiệu"
-sidebar_label: "Chương 01: 1. Giới thiệu"
+title: "1. Giới thiệu"
+sidebar_label: "1. Giới thiệu"
 sidebar_position: 2
-description: "Hướng dẫn thực hành How-To Chương 01: 1. giới thiệu thuộc bộ sách Hướng dẫn trực quan về đồ họa với Stata trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 1. Giới thiệu thuộc giáo trình Hướng dẫn trực quan về đồ họa với Stata trên SachKTL kèm công thức toán học, phân tích 8 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 01: 1. giới thiệu
+# 1. Giới thiệu
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 01: 1. giới thiệu** thuộc [**Bộ sách 06: hướng dẫn trực quan về đồ họa với Stata**](/sachktl/book-06-msitk22u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/msitk22u1/c1/](https://sachktl.tnsai.vn/vi/msitk22u1/c1/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **8 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **1. Giới thiệu** thuộc bộ giáo trình [**Hướng dẫn trực quan về đồ họa với Stata**](/sachktl/book-06-msitk22u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/msitk22u1/c1/](https://sachktl.tnsai.vn/vi/msitk22u1/c1/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 01: 1. giới thiệu">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="1. Giới thiệu">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 06 · CHƯƠNG 01</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 01: 1. giới thiệu</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Hướng dẫn trực quan về đồ họa với Stata · 8 bài học chuyên sâu</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Hướng dẫn trực quan về đồ họa với St</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">1. Giới thiệu</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng ứng dụng, mô hình hóa thống kê và kiểm định giả thuyết · 8 bài học chuy</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,102 +41,249 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Bắt đầu hành trình trực quan hóa dữ liệu với Stata A Beginner's Journey into Data Visualization with Stata Chào mừng các bạn sinh viên đến với chuỗi bài học đầu tiên trong hành trình chinh phục nghệ thuật trực quan hóa dữ liệu bằng Stata! Trong nghiên cứu kinh tế lượng, việc biến những con số khô khan thành các biểu đồ, đồ thị có ý nghĩa không chỉ là một kỹ năng kỹ thuật, mà còn là một nghệ thuật. Một đồ thị tốt có thể truyền tải một câu chuyện phức tạp, làm nổi bật những xu hướng quan trọng và giúp chúng ta đưa ra những kết luận thuyết phục hơn bất kỳ bảng số liệu nào. Tuy nhiên, nhiều sinh
+Bắt đầu hành trình trực quan hóa dữ liệu với Stata A Beginner's Journey into Data Visualization with Stata Chào mừng các bạn sinh viên đến với chuỗi bài học đầu tiên trong hành trình chinh phục nghệ thuật trực quan hóa dữ liệu bằng Stata! Trong nghiên cứu kinh tế lượng, việc biến những con số khô khan thành các biểu đồ, đồ thị có ý nghĩa không chỉ là một kỹ năng kỹ thuật, mà còn là một nghệ thuật. Một đồ thị tốt có thể truyền tải một câu chuyện phức tạp, làm nổi bật những xu hướng quan trọng và giúp chúng ta đưa ra những kết luận thuyết phục hơn bất kỳ bảng số liệu nào.
 
-- **Chủ đề học thuật trọng tâm**: Cấu trúc chuỗi bài học về đồ họa Stata, Kiến thức tiên quyết cần chuẩn bị, Yêu cầu cần thiết, Mục tiêu học tập của chuỗi bài viết, Tài liệu tham khảo và học liệu.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+Y_i = \beta_0 + \sum_{k=1}^K \beta_k X_{ik} + \varepsilon_i, \quad \mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0 \tag*{[1]}
+$$
+
+$$
+\widehat{\text{Var}}_{\text{HC1}}(\hat{\boldsymbol{\beta}}) = \frac{N}{N - K - 1}\left(\mathbf{X}'\mathbf{X}\right)^{-1}\left(\sum_{i=1}^N \hat{\varepsilon}_i^2 \mathbf{x}_i \mathbf{x}_i'\right)\left(\mathbf{X}'\mathbf{X}\right)^{-1} \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Dạng hàm tuyến tính theo tham số được xác định đúng, không bỏ sót biến giải thích quan trọng có tương quan với các biến trong mô hình.
+2. Kỳ vọng có điều kiện của sai số bằng không $\mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0$, đảm bảo tính không chệch và vững tiệm cận của ước lượng.
+3. Ma trận thiết kế $\mathbf{X}$ có hạng cột đầy đủ, không xảy ra đa cộng tuyến hoàn hảo và sử dụng sai số chuẩn vững HC1/Cluster khi có phương sai thay đổi.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 01 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/msitk22u1/c1/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Khi tồn tại biến giải thích nội sinh do đồng thời hai chiều, sai số đo lường hoặc bỏ sót biến không quan sát được, ước lượng OLS bị chệch và không vững; cần chuyển sang ước lượng biến công cụ IV/2SLS hoặc GMM."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Thiết lập và hướng dẫn sử dụng hiệu quả
+
+Bắt đầu với Đồ họa Stata: Thiết lập và Hướng dẫn sử dụng Getting started with Stata graphics: Setup and user guide Tổng quan kiến thức cần nắm vững trong bài học Chào mừng các bạn đến với bài học chính thức đầu tiên trong chuỗi bài về đồ họa Stata! Giống như một người đầu bếp cần chuẩn bị kỹ lưỡng nguyên liệu và dụng cụ trước khi nấu một món ăn ngon, một nhà phân tích dữ liệu cũng cần thiết lập môi trường làm việc một cách chu đáo trước khi bắt tay vào trực quan hóa.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Tổng quan kiến thức cần nắm vững trong bài học**
+- **Làm thế nào để học hiệu quả nhất?**
+- **Đừng đọc từ đầu đến cuối một cách máy móc**
+- **Hãy "lướt" đồ thị thay vì chỉ đọc chữ**
+- **Sử dụng "mục lục trực quan" để tra cứu nhanh**
+- **Quy trình thiết lập môi trường thực hành**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c1/thiet-lap-va-huong-dan-su-dung-hieu-qua/)
+
+### 2.2. Khám phá các loại đồ thị twoway trong Stata
+
+Khám phá thế giới đồ thị twoway trong Stata: Từ cơ bản đến kết hợp Exploring twoway graphs in Stata: From basics to overlays Tổng quan kiến thức cần nắm vững trong bài học Chào mừng các bạn đã quay trở lại! Ở bài học này, chúng ta sẽ đi sâu vào "trái tim" của hệ thống đồ họa Stata: họ lệnh twoway. Nếu bạn có thể làm chủ được họ lệnh này, bạn đã nắm trong tay khoảng 80% sức mạnh trực quan hóa dữ liệu hai chiều của Stata. Cái tên twoway có nghĩa là "hai chiều", ám chỉ các loại đồ thị biểu diễn mối quan hệ giữa một biến y và một biến x .
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Tổng quan kiến thức cần nắm vững trong bài học**
+- **Nền tảng lý thuyết: Cú pháp của họ lệnh twoway**
+- **Cú pháp cơ bản**
+- **Sức mạnh của việc chồng lớp**
+- **Thực hành với các loại đồ thị twoway phổ biến**
+- **1. Biểu đồ phân tán và các đường khớp**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c1/kham-pha-cac-loai-do-thi-twoway-trong-stata/)
+
+### 2.3. Các loại đồ thị Stata khác từ phân phối đến so sánh
+
+Mở rộng hộp công cụ trực quan hóa: So sánh nhóm và khám phá đa biến Expanding the visualization toolbox: Group comparisons and multivariate exploration Tổng quan kiến thức cần nắm vững trong bài học Ở bài học trước, chúng ta đã dành thời gian để khám phá sự linh hoạt đáng kinh ngạc của họ lệnh twoway. Bạn đã học cách vẽ các biểu đồ phân tán, biểu đồ đường, và quan trọng nhất là cách "chồng lớp" chúng lên nhau để tạo ra những đồ thị phức hợp.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Tổng quan kiến thức cần nắm vững trong bài học**
+- **Khi nào nên sử dụng các loại đồ thị khác nhau?**
+- **Graph matrix: Khi cần khám phá mối quan hệ đa biến**
+- **Graph bar hoặc graph hbar: Khi cần so sánh giá trị trung bình giữa các nhóm**
+- **Graph box hoặc graph hbox: Khi cần so sánh sự phân phối giữa các nhóm**
+- **Graph dot: Khi cần so sánh nhiều nhóm một cách gọn gàng**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c1/cac-loai-do-thi-stata-khac-tu-phan-phoi-den-so-sanh/)
+
+### 2.4. Tùy chỉnh giao diện đồ thị với schemes
+
+Tùy chỉnh giao diện đồ thị với schemes trong Stata Customizing graph appearance with schemes in Stata Tổng quan kiến thức cần nắm vững trong bài học Chào mừng các bạn đến với bài học thứ tư! Trong các bài trước, chúng ta đã học cách tạo ra nhiều loại đồ thị khác nhau. Bây giờ, chúng ta sẽ đi vào một khía cạnh đầy tính nghệ thuật của việc trực quan hóa dữ liệu: làm thế nào để đồ thị trông chuyên nghiệp và đẹp mắt? Hãy tưởng tượng dữ liệu của bạn là nội dung của một bài thuyết trình, còn giao diện của đồ thị chính là cách bạn thiết kế các slide.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Tổng quan kiến thức cần nắm vững trong bài học**
+- **Nền tảng lý thuyết: Scheme là gì và nó hoạt động như thế nào?**
+- **Định nghĩa một scheme**
+- **Vùng đồ thị và vùng vẽ**
+- **Phương pháp áp dụng schemes: Tạm thời và vĩnh viễn**
+- **Ví dụ minh họa: Sức mạnh biến đổi của các schemes**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c1/tuy-chinh-giao-dien-do-thi-voi-schemes/)
+
+### 2.5. Làm chủ các tùy chọn trong đồ thị Stata
+
+Làm chủ các tùy chọn trong đồ thị Stata Mastering options for customizing Stata graphs Tổng quan kiến thức cần nắm vững trong bài học Chào mừng các bạn đến với bài học thứ năm, nơi chúng ta sẽ đi từ việc "chọn" một giao diện đẹp sang "tạo" một giao diện hoàn hảo theo ý muốn. Ở bài trước, chúng ta đã khám phá sức mạnh của scheme - công cụ giúp thay đổi toàn bộ diện mạo của đồ thị chỉ bằng một lệnh. scheme giống như việc bạn chọn một bộ trang phục có sẵn.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Tổng quan kiến thức cần nắm vững trong bài học**
+- **Nền tảng lý thuyết: Giải mã cú pháp của các tùy chọn**
+- **Quy tắc cơ bản: Dấu phẩy**
+- **Các loại options**
+- **Quy tắc đặc biệt: Dấu phẩy bên trong options**
+- **Phương pháp xây dựng đồ thị: Thêm tùy chọn từng bước một**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c1/lam-chu-cac-tuy-chon-options-trong-do-thi-stata/)
+
+### 2.6. Quy trình xây dựng đồ thị và giao diện point-and-click
+
+Từ ý tưởng đến đồ thị hoàn chỉnh: Quy trình làm việc hiệu quả From idea to a finished graph: An effective workflow Tổng quan kiến thức cần nắm vững trong bài học Chào mừng các bạn đến với bài học thứ sáu! Đến thời điểm này, bạn đã được trang bị một kho tàng kiến thức về các loại đồ thị và vô số tùy chọn để tùy chỉnh chúng. Tuy nhiên, khi đối mặt với một yêu cầu thực tế, việc kết hợp tất cả những yếu tố này lại với nhau để tạo ra một đồ thị phức tạp, hoàn chỉnh có thể khiến bạn cảm thấy choáng ngợp.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Tổng quan kiến thức cần nắm vững trong bài học**
+- **Tư duy xây dựng và vai trò của các công cụ**
+- **Triết lý "xây dựng từng viên gạch"**
+- **Vai trò chiến lược của giao diện point-and-click**
+- **Quy trình xây dựng một biểu đồ thanh phức tạp**
+- **Sử dụng giao diện point-and-click**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c1/quy-trinh-xay-dung-do-thi-va-giao-dien-point-and-click/)
+
+### 2.7. Xây dựng một đồ thị tổng hợp
+
+Xây dựng một đồ thị phân tích đa chiều Final practice: Building a multidimensional analysis graph Tổng hợp kiến thức đã học Trước khi bắt tay vào thử thách cuối cùng, chúng ta hãy cùng nhau nhìn lại chặng đường đã qua. Trong sáu bài học, bạn đã đi từ những bước làm quen đầu tiên cho đến việc nắm vững các kỹ thuật đồ họa tinh vi trong Stata. Chúng ta đã bắt đầu với việc thiết lập một môi trường làm việc chuẩn mực, đảm bảo bạn có đủ công cụ và dữ liệu.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Tổng hợp kiến thức đã học**
+- **Chuẩn bị dữ liệu và xác định câu hỏi nghiên cứu**
+- **Quy trình phân tích: Kế hoạch xây dựng đồ thị**
+- **Hướng dẫn thực hành từng bước**
+- **Bước 1 & 2: Tạo biểu đồ hộp phân cấp**
+- **Bước 3: Chuẩn bị dữ liệu trung bình**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c1/xay-dung-mot-do-thi-tong-hop/)
+
+### 2.8. Đúc kết và định hướng phát triển kỹ năng
+
+Đồ họa Stata: Từ công cụ đến nghệ thuật kể chuyện bằng dữ liệu Stata graphics: From a tool to the art of data storytelling Tổng quan và vị thế của trực quan hóa dữ liệu trong kinh tế lượng Xin chúc mừng các bạn đã hoàn thành một hành trình đầy ý nghĩa, đi từ những dòng lệnh đồ họa đầu tiên cho đến việc có thể tự tay xây dựng những đồ thị phức tạp, đa chiều. Nếu các mô hình kinh tế lượng là bộ não của một công trình nghiên cứu, giúp chúng ta ước lượng, kiểm định và suy luận, thì trực quan hóa dữ liệu chính là trái tim và tiếng nói của nó.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Tổng quan và vị thế của trực quan hóa dữ liệu trong kinh tế lượng**
+- **Hệ thống hóa các nguyên tắc lý thuyết cốt lõi**
+- **1. Nguyên tắc "ngữ pháp của đồ thị": Mọi đồ thị đều là sự kết hợp của các lớp**
+- **2. Nguyên tắc ánh xạ: Biến dữ liệu thành các thuộc tính thẩm mỹ**
+- **3. Nguyên tắc tách biệt: Giao diện tổng thể và tinh chỉnh chi tiết**
+- **Hệ thống hóa quy trình làm việc chuyên nghiệp**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c1/duc-ket-va-dinh-huong-phat-trien-ky-nang/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Thiết lập và hướng dẫn sử dụng hiệu quả</h3>
-    <p>Bắt đầu với Đồ họa Stata: Thiết lập và Hướng dẫn sử dụng Getting started with Stata graphics: Setup and user guide Tổng quan kiến thức cần nắm vững trong bài học Chào mừng các bạn đến với bài học chính thức đầu tiên trong chuỗi bài về đồ họa Stata! Giống như m Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk22u1/c1/thiet-lap-va-huong-dan-su-dung-hieu-qua/" target="_blank" rel="noopener">Thiết lập và hướng dẫn sử dụng hiệu quả</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>1. Giới thiệu</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Khám phá các loại đồ thị twoway trong Stata</h3>
-    <p>Khám phá thế giới đồ thị twoway trong Stata: Từ cơ bản đến kết hợp Exploring twoway graphs in Stata: From basics to overlays Tổng quan kiến thức cần nắm vững trong bài học Chào mừng các bạn đã quay trở lại! Ở bài học này, chúng ta sẽ đi sâu vào "trái tim" của  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk22u1/c1/kham-pha-cac-loai-do-thi-twoway-trong-stata/" target="_blank" rel="noopener">Khám phá các loại đồ thị twoway trong Stata</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Các loại đồ thị Stata khác từ phân phối đến so sánh</h3>
-    <p>Mở rộng hộp công cụ trực quan hóa: So sánh nhóm và khám phá đa biến Expanding the visualization toolbox: Group comparisons and multivariate exploration Tổng quan kiến thức cần nắm vững trong bài học Ở bài học trước, chúng ta đã dành thời gian để khám phá sự li Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk22u1/c1/cac-loai-do-thi-stata-khac-tu-phan-phoi-den-so-sanh/" target="_blank" rel="noopener">Các loại đồ thị Stata khác từ phân phối đến so sánh</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk22u1/c1/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Tùy chỉnh giao diện đồ thị với schemes</h3>
-    <p>Tùy chỉnh giao diện đồ thị với schemes trong Stata Customizing graph appearance with schemes in Stata Tổng quan kiến thức cần nắm vững trong bài học Chào mừng các bạn đến với bài học thứ tư! Trong các bài trước, chúng ta đã học cách tạo ra nhiều loại đồ thị kh Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk22u1/c1/tuy-chinh-giao-dien-do-thi-voi-schemes/" target="_blank" rel="noopener">Tùy chỉnh giao diện đồ thị với schemes</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 5: Làm chủ các tùy chọn trong đồ thị Stata</h3>
-    <p>Làm chủ các tùy chọn trong đồ thị Stata Mastering options for customizing Stata graphs Tổng quan kiến thức cần nắm vững trong bài học Chào mừng các bạn đến với bài học thứ năm, nơi chúng ta sẽ đi từ việc "chọn" một giao diện đẹp sang "tạo" một giao diện hoàn h Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk22u1/c1/lam-chu-cac-tuy-chon-options-trong-do-thi-stata/" target="_blank" rel="noopener">Làm chủ các tùy chọn trong đồ thị Stata</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Bước 6: Quy trình xây dựng đồ thị và giao diện point-and-click</h3>
-    <p>Từ ý tưởng đến đồ thị hoàn chỉnh: Quy trình làm việc hiệu quả From idea to a finished graph: An effective workflow Tổng quan kiến thức cần nắm vững trong bài học Chào mừng các bạn đến với bài học thứ sáu! Đến thời điểm này, bạn đã được trang bị một kho tàng ki Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk22u1/c1/quy-trinh-xay-dung-do-thi-va-giao-dien-point-and-click/" target="_blank" rel="noopener">Quy trình xây dựng đồ thị và giao diện point-and-click</a>.</p>
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập môi trường, ước lượng mô hình và kiểm định chẩn đoán toàn diện
 version 18.0
 clear all
 set more off
+import delimited "sachktl_empirical_ecodata.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_msitk22u1_c01_ecodata.csv", clear encoding("utf-8")
 describe
-summarize
+summarize y x1 x2 x3, detail
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
+* 1. Ước lượng mô hình cơ sở và kiểm định phương sai thay đổi / đa cộng tuyến / dạng hàm
+regress y x1 x2 x3
 estat hettest
+estat imtest, white
 estat vif
+estat ovtest
+
+* 2. Ước lượng với sai số chuẩn vững White HC1 và xuất tác động biên
+regress y c.x1##c.x2 x3, vce(robust)
+margins, dydx(x1 x2 x3)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện phân tích kinh tế lượng và thực thi kiểm định chẩn đoán
 library(tidyverse)
 library(lmtest)
 library(sandwich)
+library(car)
 
-df <- read.csv("sachktl_msitk22u1_c01_ecodata.csv")
+df <- read.csv("sachktl_empirical_ecodata.csv")
 summary(df)
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+# 1. Ước lượng mô hình tuyến tính và kiểm định Breusch-Pagan, RESET, VIF
 fit <- lm(y ~ x1 + x2 + x3, data = df)
+bptest(fit)
+resettest(fit, power = 2:3, type = "fitted")
+vif(fit)
+
+# 2. Xuất bảng hệ số ước lượng với sai số chuẩn vững HC1
 coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
 ```
 
@@ -144,37 +291,55 @@ coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và thực thi ước lượng kèm chẩn đoán phần dư
 import pandas as pd
+import statsmodels.api as sm
 import statsmodels.formula.api as smf
+from statsmodels.stats.diagnostic import het_breuschpagan, linear_reset
+from statsmodels.stats.outliers_influence import variance_inflation_factor
 
-df = pd.read_csv("sachktl_msitk22u1_c01_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_empirical_ecodata.csv")
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
+# 1. Ước lượng mô hình với sai số chuẩn vững HC1
 model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
 print(model.summary())
+
+# 2. Kiểm định phương sai thay đổi Breusch-Pagan, Ramsey RESET và hệ số VIF
+bp_lm, bp_pval, _, _ = het_breuschpagan(model.resid, model.model.exog)
+reset_res = linear_reset(model, power=2, use_f=True)
+X = sm.add_constant(df[["x1", "x2", "x3"]].dropna())
+vifs = {col: variance_inflation_factor(X.values, i) for i, col in enumerate(X.columns)}
+print(f"Breusch-Pagan p={bp_pval:.4f} | RESET p={reset_res.pvalue:.4f} | VIF={vifs}")
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 01: 1. giới thiệu trên SachKTL"
+  title="Hướng dẫn thực hành 1. Giới thiệu trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 01 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Thiết lập và hướng dẫn sử dụng hiệu quả | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c1/thiet-lap-va-huong-dan-su-dung-hieu-qua/) |
-| **Bài 02** | Khám phá các loại đồ thị twoway trong Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c1/kham-pha-cac-loai-do-thi-twoway-trong-stata/) |
-| **Bài 03** | Các loại đồ thị Stata khác từ phân phối đến so sánh | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c1/cac-loai-do-thi-stata-khac-tu-phan-phoi-den-so-sanh/) |
-| **Bài 04** | Tùy chỉnh giao diện đồ thị với schemes | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c1/tuy-chinh-giao-dien-do-thi-voi-schemes/) |
-| **Bài 05** | Làm chủ các tùy chọn trong đồ thị Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c1/lam-chu-cac-tuy-chon-options-trong-do-thi-stata/) |
-| **Bài 06** | Quy trình xây dựng đồ thị và giao diện point-and-click | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c1/quy-trinh-xay-dung-do-thi-va-giao-dien-point-and-click/) |
-| **Bài 07** | Xây dựng một đồ thị tổng hợp | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c1/xay-dung-mot-do-thi-tong-hop/) |
-| **Bài 08** | Đúc kết và định hướng phát triển kỹ năng | Stata 18 MP, R 4.x | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c1/duc-ket-va-dinh-huong-phat-trien-ky-nang/) |
+| **1.1** | Thiết lập và hướng dẫn sử dụng hiệu quả | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c1/thiet-lap-va-huong-dan-su-dung-hieu-qua/) |
+| **1.2** | Khám phá các loại đồ thị twoway trong Stata | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c1/kham-pha-cac-loai-do-thi-twoway-trong-stata/) |
+| **1.3** | Các loại đồ thị Stata khác từ phân phối đến so sánh | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c1/cac-loai-do-thi-stata-khac-tu-phan-phoi-den-so-sanh/) |
+| **1.4** | Tùy chỉnh giao diện đồ thị với schemes | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c1/tuy-chinh-giao-dien-do-thi-voi-schemes/) |
+| **1.5** | Làm chủ các tùy chọn trong đồ thị Stata | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c1/lam-chu-cac-tuy-chon-options-trong-do-thi-stata/) |
+| **1.6** | Quy trình xây dựng đồ thị và giao diện point-and-click | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c1/quy-trinh-xay-dung-do-thi-va-giao-dien-point-and-click/) |
+| **1.7** | Xây dựng một đồ thị tổng hợp | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c1/xay-dung-mot-do-thi-tong-hop/) |
+| **1.8** | Đúc kết và định hướng phát triển kỹ năng | `Stata 18 MP, R 4.x` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c1/duc-ket-va-dinh-huong-phat-trien-ky-nang/) |

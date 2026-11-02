@@ -1,12 +1,12 @@
 ---
 id: index
-title: "Chương 05: Kinh tế lượng dữ liệu bảng tĩnh, động và phụ thuộc chéo"
-sidebar_label: "Chương 05. Kinh tế lượng dữ liệu bảng tĩnh, động và phụ thuộc chéo"
+title: "5. Kinh tế lượng dữ liệu bảng tĩnh, động và phụ thuộc chéo"
+sidebar_label: "5. Kinh tế lượng dữ liệu bảng tĩnh, động và phụ thuộc chéo"
 sidebar_position: 6
 slug: /vietlod/chapter-05
-description: "Hướng dẫn thực hành Chương 05 — Kinh tế lượng dữ liệu bảng tĩnh, động và phụ thuộc chéo: bao gồm 6 nhóm phương pháp và 28 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Chương 5 — Kinh tế lượng dữ liệu bảng tĩnh, động và phụ thuộc chéo: bao gồm 6 phần phương pháp và 28 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
-  - Chương 05 VietLOD
+  - Chương 5 VietLOD
   - Kinh tế lượng dữ liệu bảng tĩnh, động và phụ thuộc chéo
   - Stata 18
   - R 4.x
@@ -15,131 +15,130 @@ keywords:
   - EcoLab
 ---
 
-# Chương 05: Kinh tế lượng dữ liệu bảng tĩnh, động và phụ thuộc chéo
+# 5. Kinh tế lượng dữ liệu bảng tĩnh, động và phụ thuộc chéo
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Chương 05 — Kinh tế lượng dữ liệu bảng tĩnh, động và phụ thuộc chéo** hướng dẫn thực hành chi tiết **28 mô hình kinh tế lượng** thuộc **6 nhóm phương pháp** từ mã `B056` đến `B083`. Toàn bộ bài viết trong chương được đồng bộ hóa với giáo trình gốc tại [VietLOD Chương 05](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-05-kinh-te-luong-du-lieu-bang-tinh-dong-va-phu-thuoc-cheo) và hỗ trợ thực thi tự động trên [EcoLab](https://ecolab.io.vn).
+**Chương 5. Kinh tế lượng dữ liệu bảng tĩnh, động và phụ thuộc chéo** hướng dẫn thực hành chi tiết **28 bài học mô hình kinh tế lượng** thuộc **6 phần phương pháp** từ mục `5.1.1` đến `5.6.3`. Toàn bộ bài viết trong chương được đồng bộ hóa với giáo trình gốc tại [VietLOD Chương 5](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-05-kinh-te-luong-du-lieu-bang-tinh-dong-va-phu-thuoc-cheo) và hỗ trợ thực thi tự động trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 05: Kinh tế lượng dữ liệu bảng tĩnh, động và phụ thuộc chéo trên Stata 18, R 4.x và Python 3.11+"
+  title="Hướng dẫn thực hành Chương 5: Kinh tế lượng dữ liệu bảng tĩnh, động và phụ thuộc chéo trên Stata 18, R 4.x và Python 3.11+"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 1. Câu hỏi nghiên cứu trọng tâm và phương trình nền tảng
+## 5.1. Câu hỏi nghiên cứu trọng tâm và phương trình nền tảng
 
 - **Câu hỏi nghiên cứu trọng tâm**: Làm sao để kiểm soát đại lượng không quan sát được theo cá thể, xử lý nội sinh động (GMM), phụ thuộc chéo thế hệ 2 (ARDL) và hiệu ứng ngưỡng trên dữ liệu bảng?
-- **Phạm vi cấu trúc chương**: Gồm `6` nhóm phương pháp chuyên sâu và `28` mô hình thực nghiệm đối chứng trên dữ liệu Việt Nam từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
+- **Phạm vi cấu trúc chương**: Gồm `6` phần phương pháp chuyên sâu từ `5.1` đến `5.6` và `28` bài học thực nghiệm đối chứng trên dữ liệu Việt Nam từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
 
-Phương trình đặc tả tổng quát của Chương 05:
+Phương trình đặc tả tổng quát của Chương 5:
 
 $$
 Y_{it} = \rho Y_{i,t-1} + X_{it}^\top \beta + \mu_i + \lambda_t + \varepsilon_{it}
 $$
 
 <FeatureNotAvailable
-  note="Không áp dụng các ước lượng trong Chương 05 khi chưa kiểm tra điều kiện định danh và bộ kiểm định chẩn đoán bắt buộc gồm: Hausman & Mundlak CRE Test, Pesaran CD Test, Pesaran CIPS Unit Root, Westerlund Cointegration, Arellano–Bond AR bậc 2 & Hansen J, Bootstrap Threshold F-test."
+  note="Không áp dụng các ước lượng trong Chương 5 khi chưa kiểm tra điều kiện định danh và bộ kiểm định chẩn đoán bắt buộc gồm: Hausman & Mundlak CRE Test, Pesaran CD Test, Pesaran CIPS Unit Root, Westerlund Cointegration, Arellano–Bond AR bậc 2 & Hansen J, Bootstrap Threshold F-test."
 />
 
-## 2. Khám phá 6 nhóm phương pháp trong Chương 05
+## 5.2. Hệ thống 6 phần phương pháp trong Chương 5
 
 <FeatureCards
   features={[
     {
-      title: 'Nhóm 5.1. Dữ liệu bảng tĩnh',
+      title: '5.1. Dữ liệu bảng tĩnh',
       description: 'Làm sao để kiểm soát đại lượng không quan sát được theo cá thể, xử lý nội sinh động (GMM), phụ thuộc chéo thế hệ 2 (ARDL) và hiệu ứng ngưỡng trên dữ liệu bảng?',
       link: '/vietlod/chapter-05/group-5-1',
-      badge: '9 mô hình'
+      badge: '9 bài học'
     },
     {
-      title: 'Nhóm 5.2. Dữ liệu bảng động',
+      title: '5.2. Dữ liệu bảng động',
       description: 'Làm sao để kiểm soát đại lượng không quan sát được theo cá thể, xử lý nội sinh động (GMM), phụ thuộc chéo thế hệ 2 (ARDL) và hiệu ứng ngưỡng trên dữ liệu bảng?',
       link: '/vietlod/chapter-05/group-5-2',
-      badge: '3 mô hình'
+      badge: '3 bài học'
     },
     {
-      title: 'Nhóm 5.3. Biến công cụ dữ liệu bảng',
+      title: '5.3. Biến công cụ dữ liệu bảng',
       description: 'Làm sao để kiểm soát đại lượng không quan sát được theo cá thể, xử lý nội sinh động (GMM), phụ thuộc chéo thế hệ 2 (ARDL) và hiệu ứng ngưỡng trên dữ liệu bảng?',
       link: '/vietlod/chapter-05/group-5-3',
-      badge: '3 mô hình'
+      badge: '3 bài học'
     },
     {
-      title: 'Nhóm 5.4. Đồng tích hợp và ARDL dữ liệu bảng',
+      title: '5.4. Đồng tích hợp và ARDL dữ liệu bảng',
       description: 'Làm sao để kiểm soát đại lượng không quan sát được theo cá thể, xử lý nội sinh động (GMM), phụ thuộc chéo thế hệ 2 (ARDL) và hiệu ứng ngưỡng trên dữ liệu bảng?',
       link: '/vietlod/chapter-05/group-5-4',
-      badge: '5 mô hình'
+      badge: '5 bài học'
     },
     {
-      title: 'Nhóm 5.5. Dữ liệu bảng phụ thuộc chéo thế hệ 2',
+      title: '5.5. Dữ liệu bảng phụ thuộc chéo thế hệ 2',
       description: 'Làm sao để kiểm soát đại lượng không quan sát được theo cá thể, xử lý nội sinh động (GMM), phụ thuộc chéo thế hệ 2 (ARDL) và hiệu ứng ngưỡng trên dữ liệu bảng?',
       link: '/vietlod/chapter-05/group-5-5',
-      badge: '5 mô hình'
+      badge: '5 bài học'
     },
     {
-      title: 'Nhóm 5.6. Ngưỡng và phân vị dữ liệu bảng',
+      title: '5.6. Ngưỡng và phân vị dữ liệu bảng',
       description: 'Làm sao để kiểm soát đại lượng không quan sát được theo cá thể, xử lý nội sinh động (GMM), phụ thuộc chéo thế hệ 2 (ARDL) và hiệu ứng ngưỡng trên dữ liệu bảng?',
       link: '/vietlod/chapter-05/group-5-6',
-      badge: '3 mô hình'
+      badge: '3 bài học'
     }
   ]}
 />
 
-## 3. Quy trình 4 bước lựa chọn và thực thi mô hình trong Chương 05
+## 5.3. Quy trình 4 bước lựa chọn và thực thi mô hình trong Chương 5
 
 <Steps>
-
-### Bước 1. Xác định nhóm phương pháp phù hợp trong 6 nhóm của chương
-
-Đối chiếu giả thuyết kinh tế và cấu trúc mẫu thực nghiệm với câu hỏi định danh của từng nhóm phương pháp từ Nhóm `5.1` đến Nhóm `5.6`.
-
-### Bước 2. Chuẩn bị tệp dữ liệu chuẩn hóa từ EcoData hoặc Finco
-
-Tải tệp dữ liệu thực hành `.csv` tương ứng với từng mô hình tại `/src/ecoaz/data/` hoặc trích xuất bảng dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
-
-### Bước 3. Ước lượng tham số và chạy kiểm định chẩn đoán trên Stata 18, R 4.x và Python 3.11+
-
-Thực thi mã lệnh mẫu trong từng bài học và kiểm tra nghiêm ngặt các tiêu chuẩn chẩn đoán bắt buộc của chương: **Hausman & Mundlak CRE Test, Pesaran CD Test, Pesaran CIPS Unit Root, Westerlund Cointegration, Arellano–Bond AR bậc 2 & Hansen J, Bootstrap Threshold F-test**.
-
-### Bước 4. Đối chiếu đồ thị hội tụ 3 phần mềm và xuất bảng công bố trên EcoLab
-
-Kiểm tra sự hội tụ của hệ số ước lượng giữa Stata, R và Python trên đồ thị thực nghiệm 3 khung và xuất bảng kết quả chuẩn tạp chí qua [EcoLab](https://ecolab.io.vn).
-
+  <div className="step-item">
+    <h3>Bước 1. Xác định phần phương pháp phù hợp từ 5.1 đến 5.6</h3>
+    <p>Đối chiếu giả thuyết kinh tế và cấu trúc mẫu thực nghiệm với câu hỏi định danh của từng phần phương pháp trong Chương 5 để lựa chọn đúng bài học mô hình <code>A.B.C</code>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2. Chuẩn bị tệp dữ liệu chuẩn hóa từ EcoData hoặc Finco</h3>
+    <p>Tải tệp dữ liệu thực hành <code>.csv</code> tương ứng với từng bài học tại <code>/src/ecoaz/data/</code> hoặc trích xuất bảng dữ liệu thực tế từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> và <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3. Ước lượng tham số và chạy kiểm định chẩn đoán trên Stata 18, R 4.x và Python 3.11+</h3>
+    <p>Thực thi mã lệnh mẫu trong từng bài học và kiểm tra nghiêm ngặt các tiêu chuẩn chẩn đoán bắt buộc của chương: <strong>Hausman & Mundlak CRE Test, Pesaran CD Test, Pesaran CIPS Unit Root, Westerlund Cointegration, Arellano–Bond AR bậc 2 & Hansen J, Bootstrap Threshold F-test</strong>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4. Đối chiếu đồ thị hội tụ 3 phần mềm và xuất bảng công bố trên EcoLab</h3>
+    <p>Kiểm tra sự hội tụ của hệ số ước lượng giữa Stata, R và Python trên đồ thị thực nghiệm 3 khung và xuất bảng kết quả chuẩn tạp chí qua <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a>.</p>
+  </div>
 </Steps>
 
-## 4. Danh mục đầy đủ 28 mô hình kinh tế lượng trong Chương 05
+## 5.4. Danh mục đầy đủ 28 bài học mô hình kinh tế lượng trong Chương 5
 
-| Mã bài | Tên mô hình kinh tế lượng | Khóa định danh | Cấp độ | Gói phần mềm Stata · R · Python | Hỗ trợ |
+| Đề mục | Tên bài học và mô hình kinh tế lượng | Khóa định danh | Cấp độ | Gói phần mềm Stata · R · Python | Hỗ trợ |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `5.1.1` · `B056` | [Hồi quy gộp dữ liệu bảng và sai số chuẩn phân cụm](/vietlod/chapter-05/group-5-1/b056-pooled-ols) | `pooled_ols` | `L1` | `base Stata` · `plm` · `linearmodels` | <Available /> |
-| `5.2.1` · `B065` | [Ước lượng GMM sai phân dữ liệu bảng động Arellano–Bond](/vietlod/chapter-05/group-5-2/b065-arellano-bond) | `arellano_bond` | `L2` | `base Stata / xtabond2` · `plm` · `pydynpd / linearmodels` | <Available /> |
-| `5.3.1` · `B068` | [Ước lượng biến công cụ hai giai đoạn dữ liệu bảng](/vietlod/chapter-05/group-5-3/b068-panel-iv-2sls) | `panel_iv_2sls` | `L2` | `base Stata` · `plm` · `linearmodels` | <Available /> |
-| `5.4.1` · `B071` | [Hồi quy OLS hiệu chỉnh toàn phần trên bảng đồng tích hợp (FMOLS)](/vietlod/chapter-05/group-5-4/b071-panel-fmols) | `panel_fmols` | `L3` | `Stata xtcointreg` · `plm / cointReg` · `statsmodels / numpy` | <Available /> |
-| `5.5.1` · `B076` | [Kiểm định nghiệm đơn vị dữ liệu bảng thế hệ 2 Pesaran (CIPS)](/vietlod/chapter-05/group-5-5/b076-pesaran-cips) | `pesaran_cips` | `L3` | `xtcips` · `plm` · `statsmodels` | <Available /> |
-| `5.6.1` · `B081` | [Mô hình hồi quy ngưỡng dữ liệu bảng tĩnh Hansen](/vietlod/chapter-05/group-5-6/b081-panel-threshold) | `panel_threshold` | `L4` | `xthreg` · `pdR` · `linearmodels` | <Available /> |
-| `5.1.2` · `B057` | [Mô hình hiệu ứng cố định và phép biến đổi nội nhóm (FE)](/vietlod/chapter-05/group-5-1/b057-panel-fe) | `panel_fe` | `L1` | `base Stata` · `plm / fixest` · `linearmodels` | <Available /> |
-| `5.2.2` · `B066` | [Ước lượng GMM hệ thống dữ liệu bảng động Blundell–Bond](/vietlod/chapter-05/group-5-2/b066-blundell-bond) | `blundell_bond` | `L2` | `base Stata / xtabond2` · `plm` · `pydynpd / linearmodels` | <Available /> |
-| `5.3.2` · `B069` | [Ước lượng phương pháp moment tổng quát dữ liệu bảng (GMM)](/vietlod/chapter-05/group-5-3/b069-panel-gmm) | `panel_gmm` | `L3` | `Stata xtivreg2` · `plm / fixest` · `linearmodels` | <Available /> |
-| `5.4.2` · `B072` | [Hồi quy OLS động dẫn–trễ trên bảng đồng tích hợp (DOLS)](/vietlod/chapter-05/group-5-4/b072-panel-dols) | `panel_dols` | `L3` | `Stata xtcointreg` · `plm / cointReg` · `statsmodels / numpy` | <Available /> |
-| `5.5.2` · `B077` | [Kiểm định đồng tích hợp bảng hiệu chỉnh sai số Westerlund](/vietlod/chapter-05/group-5-5/b077-westerlund-coint) | `westerlund_coint` | `L3` | `xtwest` · `plm` · `linearmodels` | <Available /> |
-| `5.6.2` · `B082` | [Mô hình ngưỡng dữ liệu bảng động có nội sinh Seo–Shin](/vietlod/chapter-05/group-5-6/b082-dynamic-panel-threshold) | `dynamic_panel_threshold` | `L4` | `xthenreg` · `gmm` · `linearmodels` | <Available /> |
-| `5.1.3` · `B058` | [Mô hình hiệu ứng ngẫu nhiên và kiểm định Hausman (RE)](/vietlod/chapter-05/group-5-1/b058-panel-re) | `panel_re` | `L1` | `base Stata` · `plm` · `linearmodels` | <Available /> |
-| `5.2.3` · `B067` | [Ước lượng biến giả hiệu chỉnh chệch Nickell (LSDVC)](/vietlod/chapter-05/group-5-2/b067-bias-corrected-lsdv) | `bias_corrected_lsdv` | `L4` | `Stata xtlsdvc` · `plm` · `statsmodels / numpy` | <Available /> |
-| `5.3.3` · `B070` | [Ước lượng biến công cụ nội tại Hausman–Taylor](/vietlod/chapter-05/group-5-3/b070-hausman-taylor) | `hausman_taylor` | `L3` | `base Stata` · `plm` · `linearmodels / statsmodels` | <Available /> |
-| `5.4.3` · `B073` | [Ước lượng trung bình nhóm gộp dữ liệu bảng (PMG)](/vietlod/chapter-05/group-5-4/b073-pmg) | `pmg` | `L2` | `xtpmg` · `plm` · `statsmodels / scipy` | <Available /> |
-| `5.5.3` · `B078` | [Ước lượng trung bình nhóm hiệu ứng tương quan chung (CCEMG)](/vietlod/chapter-05/group-5-5/b078-cce-mg) | `cce_mg` | `L3` | `xtdcce2` · `plm` · `statsmodels` | <Available /> |
-| `5.6.3` · `B083` | [Hồi quy phân vị dữ liệu bảng theo phương pháp moment (MM-QR)](/vietlod/chapter-05/group-5-6/b083-panel-quantile-mmqr) | `panel_quantile_mmqr` | `L4` | `xtqreg` · `quantreg` · `statsmodels` | <Available /> |
-| `5.1.4` · `B059` | [Ước lượng trung bình giữa các đơn vị cắt ngang (BE)](/vietlod/chapter-05/group-5-1/b059-between-ols) | `between_ols` | `L1` | `base Stata` · `plm` · `linearmodels` | <Available /> |
-| `5.4.4` · `B074` | [Ước lượng trung bình nhóm hệ số không đồng nhất (MG)](/vietlod/chapter-05/group-5-4/b074-mg) | `mg` | `L3` | `xtmg` · `plm` · `statsmodels` | <Available /> |
-| `5.5.4` · `B079` | [Ước lượng gộp hiệu ứng tương quan chung (CCEP)](/vietlod/chapter-05/group-5-5/b079-ccep) | `ccep` | `L4` | `xtdcce2` · `plm` · `linearmodels` | <Available /> |
-| `5.1.5` · `B060` | [Ước lượng sai phân bậc nhất khử hiệu ứng cố định (FD)](/vietlod/chapter-05/group-5-1/b060-first-difference) | `first_difference` | `L1` | `base Stata` · `plm` · `linearmodels` | <Available /> |
-| `5.4.5` · `B075` | [Mô hình hiệu chỉnh sai số hiệu ứng cố định động (DFE)](/vietlod/chapter-05/group-5-4/b075-dfe-panel-ardl) | `dfe_panel_ardl` | `L3` | `xtpmg` · `fixest` · `linearmodels` | <Available /> |
-| `5.5.5` · `B080` | [Mô hình ARDL bảng tăng cường trung bình chéo (ARDL)](/vietlod/chapter-05/group-5-5/b080-cs-ardl) | `cs_ardl` | `L3` | `xtdcce2` · `plm` · `statsmodels` | <Available /> |
-| `5.1.6` · `B061` | [Mô hình hiệu ứng ngẫu nhiên tương quan Mundlak (CRE)](/vietlod/chapter-05/group-5-1/b061-mundlak-cre) | `mundlak_cre` | `L2` | `Stata 18 xtreg` · `plm` · `linearmodels` | <Available /> |
-| `5.1.7` · `B062` | [Hồi quy hai bước theo kỳ cắt ngang Fama–MacBeth](/vietlod/chapter-05/group-5-1/b062-fama-macbeth) | `fama_macbeth` | `L2` | `Stata asreg / xtreg` · `plm` · `linearmodels` | <Available /> |
-| `5.1.8` · `B063` | [Sai số chuẩn hiệu chỉnh dữ liệu bảng Beck–Katz (PCSE)](/vietlod/chapter-05/group-5-1/b063-pcse-panel) | `pcse_panel` | `L2` | `base Stata xtpcse` · `pcse` · `linearmodels` | <Available /> |
-| `5.1.9` · `B064` | [Sai số chuẩn bền vững không gian–thời gian Driscoll–Kraay](/vietlod/chapter-05/group-5-1/b064-driscoll-kraay-fe) | `driscoll_kraay_fe` | `L2` | `xtscc` · `plm` · `linearmodels` | <Available /> |
+| **5.1.1** | [5.1.1. Hồi quy gộp dữ liệu bảng và sai số chuẩn phân cụm](/vietlod/chapter-05/group-5-1/b056-pooled-ols) | `pooled_ols` | `L1` | `base Stata` · `plm` · `linearmodels` | <Available /> |
+| **5.1.2** | [5.1.2. Mô hình hiệu ứng cố định và phép biến đổi nội nhóm (FE)](/vietlod/chapter-05/group-5-1/b057-panel-fe) | `panel_fe` | `L1` | `base Stata` · `plm / fixest` · `linearmodels` | <Available /> |
+| **5.1.3** | [5.1.3. Mô hình hiệu ứng ngẫu nhiên và kiểm định Hausman (RE)](/vietlod/chapter-05/group-5-1/b058-panel-re) | `panel_re` | `L1` | `base Stata` · `plm` · `linearmodels` | <Available /> |
+| **5.1.4** | [5.1.4. Ước lượng trung bình giữa các đơn vị cắt ngang (BE)](/vietlod/chapter-05/group-5-1/b059-between-ols) | `between_ols` | `L1` | `base Stata` · `plm` · `linearmodels` | <Available /> |
+| **5.1.5** | [5.1.5. Ước lượng sai phân bậc nhất khử hiệu ứng cố định (FD)](/vietlod/chapter-05/group-5-1/b060-first-difference) | `first_difference` | `L1` | `base Stata` · `plm` · `linearmodels` | <Available /> |
+| **5.1.6** | [5.1.6. Mô hình hiệu ứng ngẫu nhiên tương quan Mundlak (CRE)](/vietlod/chapter-05/group-5-1/b061-mundlak-cre) | `mundlak_cre` | `L2` | `Stata 18 xtreg` · `plm` · `linearmodels` | <Available /> |
+| **5.1.7** | [5.1.7. Hồi quy hai bước theo kỳ cắt ngang Fama–MacBeth](/vietlod/chapter-05/group-5-1/b062-fama-macbeth) | `fama_macbeth` | `L2` | `Stata asreg / xtreg` · `plm` · `linearmodels` | <Available /> |
+| **5.1.8** | [5.1.8. Sai số chuẩn hiệu chỉnh dữ liệu bảng Beck–Katz (PCSE)](/vietlod/chapter-05/group-5-1/b063-pcse-panel) | `pcse_panel` | `L2` | `base Stata xtpcse` · `pcse` · `linearmodels` | <Available /> |
+| **5.1.9** | [5.1.9. Sai số chuẩn bền vững không gian–thời gian Driscoll–Kraay](/vietlod/chapter-05/group-5-1/b064-driscoll-kraay-fe) | `driscoll_kraay_fe` | `L2` | `xtscc` · `plm` · `linearmodels` | <Available /> |
+| **5.2.1** | [5.2.1. Ước lượng GMM sai phân dữ liệu bảng động Arellano–Bond](/vietlod/chapter-05/group-5-2/b065-arellano-bond) | `arellano_bond` | `L2` | `base Stata / xtabond2` · `plm` · `pydynpd / linearmodels` | <Available /> |
+| **5.2.2** | [5.2.2. Ước lượng GMM hệ thống dữ liệu bảng động Blundell–Bond](/vietlod/chapter-05/group-5-2/b066-blundell-bond) | `blundell_bond` | `L2` | `base Stata / xtabond2` · `plm` · `pydynpd / linearmodels` | <Available /> |
+| **5.2.3** | [5.2.3. Ước lượng biến giả hiệu chỉnh chệch Nickell (LSDVC)](/vietlod/chapter-05/group-5-2/b067-bias-corrected-lsdv) | `bias_corrected_lsdv` | `L4` | `Stata xtlsdvc` · `plm` · `statsmodels / numpy` | <Available /> |
+| **5.3.1** | [5.3.1. Ước lượng biến công cụ hai giai đoạn dữ liệu bảng](/vietlod/chapter-05/group-5-3/b068-panel-iv-2sls) | `panel_iv_2sls` | `L2` | `base Stata` · `plm` · `linearmodels` | <Available /> |
+| **5.3.2** | [5.3.2. Ước lượng phương pháp moment tổng quát dữ liệu bảng (GMM)](/vietlod/chapter-05/group-5-3/b069-panel-gmm) | `panel_gmm` | `L3` | `Stata xtivreg2` · `plm / fixest` · `linearmodels` | <Available /> |
+| **5.3.3** | [5.3.3. Ước lượng biến công cụ nội tại Hausman–Taylor](/vietlod/chapter-05/group-5-3/b070-hausman-taylor) | `hausman_taylor` | `L3` | `base Stata` · `plm` · `linearmodels / statsmodels` | <Available /> |
+| **5.4.1** | [5.4.1. Hồi quy OLS hiệu chỉnh toàn phần trên bảng đồng tích hợp (FMOLS)](/vietlod/chapter-05/group-5-4/b071-panel-fmols) | `panel_fmols` | `L3` | `Stata xtcointreg` · `plm / cointReg` · `statsmodels / numpy` | <Available /> |
+| **5.4.2** | [5.4.2. Hồi quy OLS động dẫn–trễ trên bảng đồng tích hợp (DOLS)](/vietlod/chapter-05/group-5-4/b072-panel-dols) | `panel_dols` | `L3` | `Stata xtcointreg` · `plm / cointReg` · `statsmodels / numpy` | <Available /> |
+| **5.4.3** | [5.4.3. Ước lượng trung bình nhóm gộp dữ liệu bảng (PMG)](/vietlod/chapter-05/group-5-4/b073-pmg) | `pmg` | `L2` | `xtpmg` · `plm` · `statsmodels / scipy` | <Available /> |
+| **5.4.4** | [5.4.4. Ước lượng trung bình nhóm hệ số không đồng nhất (MG)](/vietlod/chapter-05/group-5-4/b074-mg) | `mg` | `L3` | `xtmg` · `plm` · `statsmodels` | <Available /> |
+| **5.4.5** | [5.4.5. Mô hình hiệu chỉnh sai số hiệu ứng cố định động (DFE)](/vietlod/chapter-05/group-5-4/b075-dfe-panel-ardl) | `dfe_panel_ardl` | `L3` | `xtpmg` · `fixest` · `linearmodels` | <Available /> |
+| **5.5.1** | [5.5.1. Kiểm định nghiệm đơn vị dữ liệu bảng thế hệ 2 Pesaran (CIPS)](/vietlod/chapter-05/group-5-5/b076-pesaran-cips) | `pesaran_cips` | `L3` | `xtcips` · `plm` · `statsmodels` | <Available /> |
+| **5.5.2** | [5.5.2. Kiểm định đồng tích hợp bảng hiệu chỉnh sai số Westerlund](/vietlod/chapter-05/group-5-5/b077-westerlund-coint) | `westerlund_coint` | `L3` | `xtwest` · `plm` · `linearmodels` | <Available /> |
+| **5.5.3** | [5.5.3. Ước lượng trung bình nhóm hiệu ứng tương quan chung (CCEMG)](/vietlod/chapter-05/group-5-5/b078-cce-mg) | `cce_mg` | `L3` | `xtdcce2` · `plm` · `statsmodels` | <Available /> |
+| **5.5.4** | [5.5.4. Ước lượng gộp hiệu ứng tương quan chung (CCEP)](/vietlod/chapter-05/group-5-5/b079-ccep) | `ccep` | `L4` | `xtdcce2` · `plm` · `linearmodels` | <Available /> |
+| **5.5.5** | [5.5.5. Mô hình ARDL bảng tăng cường trung bình chéo (ARDL)](/vietlod/chapter-05/group-5-5/b080-cs-ardl) | `cs_ardl` | `L3` | `xtdcce2` · `plm` · `statsmodels` | <Available /> |
+| **5.6.1** | [5.6.1. Mô hình hồi quy ngưỡng dữ liệu bảng tĩnh Hansen](/vietlod/chapter-05/group-5-6/b081-panel-threshold) | `panel_threshold` | `L4` | `xthreg` · `pdR` · `linearmodels` | <Available /> |
+| **5.6.2** | [5.6.2. Mô hình ngưỡng dữ liệu bảng động có nội sinh Seo–Shin](/vietlod/chapter-05/group-5-6/b082-dynamic-panel-threshold) | `dynamic_panel_threshold` | `L4` | `xthenreg` · `gmm` · `linearmodels` | <Available /> |
+| **5.6.3** | [5.6.3. Hồi quy phân vị dữ liệu bảng theo phương pháp moment (MM-QR)](/vietlod/chapter-05/group-5-6/b083-panel-quantile-mmqr) | `panel_quantile_mmqr` | `L4` | `xtqreg` · `quantreg` · `statsmodels` | <Available /> |
 
-## 5. Tài liệu tham khảo học thuật trọng tâm
+## 5.5. Tài liệu tham khảo học thuật trọng tâm
 
 - Arellano, M, & Bond, S.(1991). Some tests of specification for panel data: Monte Carlo evidence and an application to employment equations. *The Review of Economic Studies*, 58, số 2, 277–297.
 - Blundell, R, & Bond, S.(1998). Initial conditions and moment restrictions in dynamic panel data models. *Journal of Econometrics*, 87, số 1, 115–143.

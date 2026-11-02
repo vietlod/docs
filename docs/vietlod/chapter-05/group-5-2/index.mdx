@@ -1,35 +1,35 @@
 ---
 id: index
-title: "Nhóm 5.2: Dữ liệu bảng động"
-sidebar_label: "Nhóm 5.2. Dữ liệu bảng động"
+title: "5.2. Dữ liệu bảng động"
+sidebar_label: "5.2. Dữ liệu bảng động"
 sidebar_position: 2
 slug: /vietlod/chapter-05/group-5-2
-description: "Hướng dẫn thực hành Nhóm 5.2 — Dữ liệu bảng động thuộc Chương 05: so sánh và thực thi 3 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Phần 5.2 — Dữ liệu bảng động thuộc Chương 5: so sánh và thực thi 3 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
-  - Nhóm 5.2 VietLOD
+  - Phần 5.2 VietLOD
   - Dữ liệu bảng động
   - Stata 18
   - R 4.x
   - Python 3.11
 ---
 
-# Nhóm 5.2: Dữ liệu bảng động
+# 5.2. Dữ liệu bảng động
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Nhóm phương pháp 5.2 — Dữ liệu bảng động** thuộc [Chương 05: Kinh tế lượng dữ liệu bảng tĩnh, động và phụ thuộc chéo](/vietlod/chapter-05) cung cấp quy trình thực hành từng bước cho **3 mô hình kinh tế lượng** từ bài `5.2.1` đến `5.2.3`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Nhóm 5.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-05-kinh-te-luong-du-lieu-bang-tinh-dong-va-phu-thuoc-cheo/nhom-5-2-dynamic) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+**Phần 5.2. Dữ liệu bảng động** thuộc [5. Kinh tế lượng dữ liệu bảng tĩnh, động và phụ thuộc chéo](/vietlod/chapter-05) cung cấp quy trình thực hành từng bước cho **3 bài học mô hình kinh tế lượng** từ mục `5.2.1` đến `5.2.3`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 5.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-05-kinh-te-luong-du-lieu-bang-tinh-dong-va-phu-thuoc-cheo/nhom-5-2-dynamic) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Nhóm 5.2: Dữ liệu bảng động trên Stata 18, R 4.x và Python 3.11+"
+  title="Hướng dẫn thực hành Phần 5.2: Dữ liệu bảng động trên Stata 18, R 4.x và Python 3.11+"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 1. Bản chất phương pháp và hệ phương trình định danh
+## 5.2.1. Bản chất phương pháp và hệ phương trình định danh
 
-- **Câu hỏi nghiên cứu trọng tâm của nhóm**: Làm sao để kiểm soát đại lượng không quan sát được theo cá thể, xử lý nội sinh động (GMM), phụ thuộc chéo thế hệ 2 (ARDL) và hiệu ứng ngưỡng trên dữ liệu bảng?
+- **Câu hỏi nghiên cứu trọng tâm**: Làm sao để kiểm soát đại lượng không quan sát được theo cá thể, xử lý nội sinh động (GMM), phụ thuộc chéo thế hệ 2 (ARDL) và hiệu ứng ngưỡng trên dữ liệu bảng?
 - **Kiểm định chẩn đoán bắt buộc**: Kiểm định tự tương quan bậc 2 của phần dư sai phân Arellano–Bond AR bậc 2 yêu cầu $p \gt 0.05$, kiểm định Hansen $J$ cho tính hợp lệ của biến công cụ và quy tắc số công cụ nhỏ hơn hoặc bằng số nhóm $N$.
 
-Phương trình đặc tả cấu trúc của nhóm phương pháp 5.2:
+Phương trình đặc tả cấu trúc của phần phương pháp 5.2:
 
 $$
 \Delta Y_{it} = \rho \Delta Y_{i,t-1} + \Delta X_{it}^\top \beta + \Delta \varepsilon_{it}, \quad \text{E}[Y_{i,t-s}\Delta \varepsilon_{it}] = 0 \;\; (s \ge 2)
@@ -42,10 +42,10 @@ $$
 $$
 
 <FeatureNotAvailable
-  note="Khi dữ liệu vi phạm giả định định danh của Nhóm 5.2, nhà nghiên cứu cần chuyển sang các nhóm phương pháp mở rộng trong Chương 05 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
+  note="Khi dữ liệu vi phạm giả định định danh của Phần 5.2, nhà nghiên cứu cần chuyển sang các phần phương pháp mở rộng trong Chương 5 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
 />
 
-## 2. Danh mục các mô hình trong Nhóm 5.2
+## 5.2.2. Danh mục các bài học mô hình trong Phần 5.2
 
 <FeatureCards
   features={[
@@ -53,45 +53,44 @@ $$
       title: '5.2.1. Ước lượng GMM sai phân dữ liệu bảng động Arellano–Bond',
       description: 'Lấy sai phân bậc nhất phương trình bảng động để khử hiệu ứng cố định rồi dùng các biến trễ dạng mức $Y_{i,t-2}, Y_{i,t-3}, \dots$ làm biến c...',
       link: '/vietlod/chapter-05/group-5-2/b065-arellano-bond',
-      badge: 'B065 · arellano_bond'
+      badge: '5.2.1 · arellano_bond'
     },
     {
       title: '5.2.2. Ước lượng GMM hệ thống dữ liệu bảng động Blundell–Bond',
       description: 'Ghép nối hệ phương trình sai phân dùng trễ mức làm công cụ và phương trình mức dùng trễ sai phân làm công cụ thành bộ ước lượng System (GMM)...',
       link: '/vietlod/chapter-05/group-5-2/b066-blundell-bond',
-      badge: 'B066 · blundell_bond'
+      badge: '5.2.2 · blundell_bond'
     },
     {
       title: '5.2.3. Ước lượng biến giả hiệu chỉnh chệch Nickell (LSDVC)',
       description: 'Hiệu chỉnh giải tích trực tiếp độ chệch hữu hạn mẫu bậc $\mathcal{O}(T^{-1})$ và $\mathcal{O}(N^{-1} T^{-1})$ của bộ ước lượng biến giả hiệu...',
       link: '/vietlod/chapter-05/group-5-2/b067-bias-corrected-lsdv',
-      badge: 'B067 · bias_corrected_lsdv'
+      badge: '5.2.3 · bias_corrected_lsdv'
     }
   ]}
 />
 
-## 3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
+## 5.2.3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
 
 | Bài học & Mô hình | Mã định danh | Cú pháp Stata 18 MP | Cú pháp R 4.x | Cú pháp Python 3.11+ | Hỗ trợ |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `5.2.1` · [Ước lượng GMM sai phân dữ liệu bảng động Arellano–Bond](/vietlod/chapter-05/group-5-2/b065-arellano-bond) | `arellano_bond` | `xtabond y x1 x2, lags(1) vce(robust)` | `plm::pgmm(y ~ lag(y, 1) + x1 + x2 \| lag(y, 2:4), data = pdata, transformation = 'd')` | `abond('y L1.y x1 x2 \| gmm(y, 2:4) \| iv(x1 x2)', df, ['id', 't'])` | <Available /> |
-| `5.2.2` · [Ước lượng GMM hệ thống dữ liệu bảng động Blundell–Bond](/vietlod/chapter-05/group-5-2/b066-blundell-bond) | `blundell_bond` | `xtdpdsys y x1 x2, lags(1) vce(robust)` | `plm::pgmm(y ~ lag(y, 1) + x1 + x2 \| lag(y, 2:4), data = pdata, transformation = 'ld')` | `abond('y L1.y x1 x2 \| gmm(y, 2:4) \| iv(x1 x2)', df, ['id', 't'])` | <Available /> |
-| `5.2.3` · [Ước lượng biến giả hiệu chỉnh chệch Nickell (LSDVC)](/vietlod/chapter-05/group-5-2/b067-bias-corrected-lsdv) | `bias_corrected_lsdv` | `xtlsdvc y x1 x2, initial(ab) vcov(50)` | `plm::plm(y ~ lag(y, 1) + x1 + x2, data = pdata, model = 'within')` | `PanelOLS.from_formula('y ~ l1_y + x1 + x2 + EntityEffects', data=pdata).fit()` | <Available /> |
+| **5.2.1** · [Ước lượng GMM sai phân dữ liệu bảng động Arellano–Bond](/vietlod/chapter-05/group-5-2/b065-arellano-bond) | `arellano_bond` | `xtabond y x1 x2, lags(1) vce(robust)` | `plm::pgmm(y ~ lag(y, 1) + x1 + x2 \| lag(y, 2:4), data = pdata, transformation = 'd')` | `abond('y L1.y x1 x2 \| gmm(y, 2:4) \| iv(x1 x2)', df, ['id', 't'])` | <Available /> |
+| **5.2.2** · [Ước lượng GMM hệ thống dữ liệu bảng động Blundell–Bond](/vietlod/chapter-05/group-5-2/b066-blundell-bond) | `blundell_bond` | `xtdpdsys y x1 x2, lags(1) vce(robust)` | `plm::pgmm(y ~ lag(y, 1) + x1 + x2 \| lag(y, 2:4), data = pdata, transformation = 'ld')` | `abond('y L1.y x1 x2 \| gmm(y, 2:4) \| iv(x1 x2)', df, ['id', 't'])` | <Available /> |
+| **5.2.3** · [Ước lượng biến giả hiệu chỉnh chệch Nickell (LSDVC)](/vietlod/chapter-05/group-5-2/b067-bias-corrected-lsdv) | `bias_corrected_lsdv` | `xtlsdvc y x1 x2, initial(ab) vcov(50)` | `plm::plm(y ~ lag(y, 1) + x1 + x2, data = pdata, model = 'within')` | `PanelOLS.from_formula('y ~ l1_y + x1 + x2 + EntityEffects', data=pdata).fit()` | <Available /> |
 
-## 4. Quy trình thực hành chuẩn cho Nhóm 5.2
+## 5.2.4. Quy trình thực hành chuẩn cho Phần 5.2
 
 <Steps>
-
-### Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco
-
-Tải tệp CSV thực hành của từng mô hình trong Nhóm `5.2` hoặc kết nối dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
-
-### Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu
-
-So sánh các mô hình từ `5.2.1` đến `5.2.3` trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.
-
-### Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab
-
-Thực hiện đầy đủ bộ kiểm định **Kiểm định tự tương quan bậc 2 của phần dư sai phân Arellano–Bond AR bậc 2 yêu cầu $p \gt 0.05$, kiểm định Hansen $J$ cho tính hợp lệ của biến công cụ và quy tắc số công cụ nhỏ hơn hoặc bằng số nhóm $N$** và đẩy mã mô hình sang [EcoLab](https://ecolab.io.vn) để xuất bảng kết quả chuẩn công bố quốc tế.
-
+  <div className="step-item">
+    <h3>Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco</h3>
+    <p>Tải tệp CSV thực hành của từng bài học trong Phần <code>5.2</code> hoặc kết nối dữ liệu thực tế từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> và <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu</h3>
+    <p>So sánh các bài học mô hình từ <code>5.2.1</code> đến <code>5.2.3</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab</h3>
+    <p>Thực hiện đầy đủ bộ kiểm định <strong>Kiểm định tự tương quan bậc 2 của phần dư sai phân Arellano–Bond AR bậc 2 yêu cầu $p \gt 0.05$, kiểm định Hansen $J$ cho tính hợp lệ của biến công cụ và quy tắc số công cụ nhỏ hơn hoặc bằng số nhóm $N$</strong> và đẩy mã mô hình sang <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> để xuất bảng kết quả chuẩn công bố quốc tế.</p>
+  </div>
 </Steps>

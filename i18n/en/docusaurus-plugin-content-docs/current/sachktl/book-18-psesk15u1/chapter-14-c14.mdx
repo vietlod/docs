@@ -1,19 +1,19 @@
 ---
 id: chapter-14-c14
-title: "Chapter 14: 14. Ước lượng quá trình chuỗi thời gian dừng — Time Series and Panel Data Econometrics"
-sidebar_label: "Chapter 14: 14. Ước lượng quá trình chuỗi thời gian dừ"
+title: "14. Ước lượng quá trình chuỗi thời gian dừng"
+sidebar_label: "14. Ước lượng quá trình chuỗi thời gian dừng"
 sidebar_position: 15
-description: "Step-by-step practical how-to guide for Chapter 14: 14. Ước lượng quá trình chuỗi thời gian dừng from Time Series and Panel Data Econometrics on SachKTL with Stata, R, and Python workflows integrated with EcoData, Finco, and EcoLab."
+description: "Comprehensive practical how-to guide for 14. Ước lượng quá trình chuỗi thời gian dừng from Time Series and Panel Data Econometrics on SachKTL featuring structural equations, 7 lesson breakdowns, and Stata, R, and Python scripts."
 ---
 
-# Chapter 14: 14. Ước lượng quá trình chuỗi thời gian dừng — Time Series and Panel Data Econometrics
+# 14. Ước lượng quá trình chuỗi thời gian dừng
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-This practical how-to guide synthesizes the methodology and empirical implementation workflow of **Chapter 14: 14. Ước lượng quá trình chuỗi thời gian dừng** from [**Book 18: Time Series and Panel Data Econometrics**](/en/sachktl/book-18-psesk15u1/), with direct backlinks to the authoritative source material at [https://sachktl.tnsai.vn/vi/psesk15u1/c14/](https://sachktl.tnsai.vn/vi/psesk15u1/c14/).
+This practical how-to guide presents the theoretical foundations, structural mathematical equations, detailed breakdown of **7 specialized lessons**, and multi-platform replication workflows for **14. Ước lượng quá trình chuỗi thời gian dừng** from the textbook [**Time Series and Panel Data Econometrics**](/en/sachktl/book-18-psesk15u1/), with direct cross-references to the authoritative source material at [https://sachktl.tnsai.vn/vi/psesk15u1/c14/](https://sachktl.tnsai.vn/vi/psesk15u1/c14/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chapter 14: 14. Ước lượng quá trình chuỗi thời gian dừng">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="14. Ước lượng quá trình chuỗi thời gian dừng">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ This practical how-to guide synthesizes the methodology and empirical implementa
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BOOK 18 · CHAPTER 14</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chapter 14: 14. Ước lượng quá trình chuỗi thời gian dừng</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Part of Textbook: Time Series and Panel Data Econometrics · 7 Detailed Lessons</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Time Series and Panel Data Econometr</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">14. Ước lượng quá trình chuỗi thời gian dừng</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Time Series Econometrics, Cointegration, and Financial Volatility · 7 Detailed Lesson</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,139 +41,289 @@ This practical how-to guide synthesizes the methodology and empirical implementa
   </svg>
 </div>
 
-## 1. Methodological Meaning and Scope of Application
+## 1. Methodological Foundations, Mathematical Specification, and Identification
 
-Giới thiệu ước lượng chuỗi thời gian dừng Introduction to Estimation of Stationary Time Series Chào mừng các bạn đến với chuỗi bài học mới về Kinh tế lượng Chuỗi thời gian! Trong các chương trước, chúng ta đã khám phá lý thuyết về các quy trình dừng, bao gồm các mô hình AR, MA, và ARMA. Chúng ta đã học cách xác định các đặc tính của chúng như kỳ vọng, phương sai, và hàm tự hiệp phương sai. Tuy nhiên, trong thực tế, chúng ta không bao giờ biết trước các tham số thực sự . Chúng ta chỉ có trong tay một mẫu dữ liệu quan sát được. Vậy, làm thế nào để chúng ta đi từ dữ liệu thô đến việc "tìm ra"
+Giới thiệu ước lượng chuỗi thời gian dừng Introduction to Estimation of Stationary Time Series Chào mừng các bạn đến với chuỗi bài học mới về Kinh tế lượng Chuỗi thời gian! Trong các chương trước, chúng ta đã khám phá lý thuyết về các quy trình dừng, bao gồm các mô hình AR, MA, và ARMA. Chúng ta đã học cách xác định các đặc tính của chúng như kỳ vọng, phương sai, và hàm tự hiệp phương sai. Tuy nhiên, trong thực tế, chúng ta không bao giờ biết trước các tham số thực sự . Chúng ta chỉ có trong tay một mẫu dữ liệu quan sát được.
 
-- **Core Academic Topics**: CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO, PHỤ LỤC: DỮ LIỆU MÔ PHỎNG CHO SERIES.
-- **Supported Analytical Environments**: `Stata 18 MP`.
-- **Recommended Empirical Data Sources**: Vietnamese macroeconomic, corporate, and household survey datasets on [EcoData](https://ecodata.io.vn), capital and commodity market series on [Finco](https://www.finco.vn), model cross-references on [VietLOD](https://vietlod.tnsai.vn), and automated estimation on [EcoLab](https://ecolab.io.vn).
+### 1.1. Structural Equations and Representative Estimator
+
+$$
+\Phi(L)(1 - L)^d Y_t = \mu + \Theta(L)\varepsilon_t, \quad \varepsilon_t \mid \mathcal{F}_{t-1} \sim \mathcal{N}(0, \sigma_t^2) \tag*{[1]}
+$$
+
+$$
+\sigma_t^2 = \omega + \sum_{i=1}^p \alpha_i \varepsilon_{t-i}^2 + \sum_{j=1}^q \beta_j \sigma_{t-j}^2, \quad \omega > 0, \; \alpha_i, \beta_j \ge 0 \tag*{[2]}
+$$
+
+### 1.2. Core Identification Assumptions and Applicability Conditions
+
+1. Time series processes must satisfy covariance stationarity or be differenced to their appropriate order of integration $I(d)$ prior to estimation.
+2. Roots of the autoregressive $\Phi(L)$ and moving-average $\Theta(L)$ lag polynomials must lie strictly outside the complex unit circle.
+3. In conditional volatility GARCH specifications, the persistence condition $\sum \alpha_i + \sum \beta_j < 1$ ensures finite unconditional variance.
 
 <FeatureCards
   features={[
     {
-      title: "Original Chapter on SachKTL",
-      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for Chapter 14 on SachKTL.",
+      title: "Authoritative Chapter on SachKTL",
+      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for this chapter on SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/psesk15u1/c14/"
     },
     {
       title: "Practice Datasets on EcoData & Finco",
-      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and survey data for hands-on replication.",
+      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and household survey data for hands-on replication.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
       title: "Automated Estimation on EcoLab",
-      description: "Execute econometric specifications, run diagnostic battery tests, and export publication-grade tables automatically.",
+      description: "Execute econometric specifications, run diagnostic battery tests, and export APA 7th / AER publication-grade tables automatically.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Step-by-Step Practical Implementation Across Chapter Lessons
+<FeatureNotAvailable
+  feature="Unconditional Baseline Estimation Under Violated Identification Assumptions"
+  reason="Regressing nonstationary levels without unit-root and Johansen cointegration testing induces spurious regression with inflated $t$-statistics and $R^2$."
+  alternative="Run the complete diagnostic battery in Step 4 and transition to the appropriate corrective estimator on VietLOD or EcoLab."
+/>
+
+## 2. Lesson-by-Lesson Academic Breakdown
+
+### 2.1. Ước lượng Trung bình và Tự hiệp phương sai
+
+Ước lượng trung bình và tự hiệp phương sai Estimation of mean and autocovariances Giới thiệu Chào các bạn, chúng ta hãy cùng bắt đầu bài học đầu tiên với một câu hỏi rất cơ bản nhưng vô cùng quan trọng: Khi có trong tay một chuỗi dữ liệu thời gian, ví dụ như GDP hàng quý của Việt Nam trong 20 năm qua, làm thế nào chúng ta biết được giá trị trung bình "thực sự" của nó là bao nhiêu? Rõ ràng, chúng ta không thể quan sát toàn bộ quá trình sinh dữ liệu từ quá khứ đến tương lai. Chúng ta chỉ có một mẫu hữu hạn.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Giới thiệu**
+- **Các ước lượng và tính chất**
+- **1. Ước lượng giá trị trung bình**
+- **2. Ước lượng tự hiệp phương sai và tự tương quan**
+- **Phương pháp ước lượng trên Stata**
+- **Ví dụ minh họa trên Stata**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c14/uoc-luong-trung-binh-va-tu-hiep-phuong-sai/)
+
+### 2.2. Ước lượng Quy trình MA - Từ MOM đến MLE
+
+Ước lượng quy trình MA: MOM và MLE MA estimation: MOM and MLE Giới thiệu Chào mừng các bạn quay trở lại! Ở bài học trước, chúng ta đã nắm vững cách ước lượng trung bình và tự hiệp phương sai từ dữ liệu mẫu. Giờ đây, chúng ta sẽ áp dụng những kiến thức đó để giải quyết một bài toán thú vị hơn: làm thế nào để ước lượng tham số của một mô hình chuỗi thời gian cụ thể? Chúng ta sẽ bắt đầu với mô hình Trung bình Trượt bậc 1, hay MA, được định nghĩa bởi phương trình: $y_t = \mu + \varepsilon_t + \theta\varepsilon_{t-1}$.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Giới thiệu**
+- **Hai phương pháp ước lượng $\theta$**
+- **1. Phương pháp Mô-men**
+- **2. Ước lượng Hợp lý Tối đa**
+- **Phương pháp ước lượng trên Stata**
+- **Ví dụ minh họa trên Stata**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c14/uoc-luong-quy-trinh-ma1-tu-mom-den-mle/)
+
+### 2.3. Ước lượng Quy trình AR – Yule-Walker và MLE
+
+Ước lượng quy trình AR: Yule-Walker và MLE AR estimation: Yule-Walker and MLE Giới thiệu Chào mừng các bạn quay trở lại với chuỗi bài học của chúng ta! Sau khi đã tìm hiểu cách ước lượng mô hình MA trong bài trước, hôm nay chúng ta sẽ chuyển sang một "người anh em" thân thuộc hơn: mô hình Tự Hồi quy AR. Mô hình AR được định nghĩa bởi phương trình: $y_t = c + \phi_1 y_{t-1} + \phi_2 y_{t-2} + ... + \phi_p y_{t-p} + \varepsilon_t$.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Giới thiệu**
+- **Hai phương pháp ước lượng $\phi$**
+- **1. Phương pháp Yule-Walker**
+- **2. Ước lượng Hợp lý Tối đa và liên hệ với OLS**
+- **Phương pháp ước lượng trên Stata**
+- **Ví dụ minh họa trên Stata**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c14/uoc-luong-quy-trinh-arp-yule-walker-va-mle/)
+
+### 2.4. Vấn đề của OLS – Độ chệch mẫu nhỏ và Tính không nhất quán
+
+Vấn đề của OLS: Độ chệch mẫu nhỏ và Tính không nhất quán OLS issues: Small sample bias and inconsistency Giới thiệu Chào mừng các bạn quay trở lại! Trong bài học trước, chúng ta đã kết luận rằng ước lượng OLS hoạt động rất hiệu quả cho các mô hình Tự Hồi quy, vì nó tiệm cận tương đương với Ước lượng Hợp lý Tối đa. Tuy nhiên, kết luận này đi kèm với một số điều kiện "in chữ nhỏ" mà chúng ta cần phải xem xét kỹ lưỡng.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Giới thiệu**
+- **Nền tảng lý thuyết: Khi OLS không còn hoàn hảo**
+- **1. Độ chệch trong mẫu nhỏ của mô hình AR**
+- **2. Tính không nhất quán của OLS trong mô hình động**
+- **Bias vs. Inconsistency: Sự khác biệt cốt lõi**
+- **Phương pháp nhận biết và khắc phục trên Stata**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c14/van-de-cua-ols-do-chech-mau-nho-va-tinh-khong-nhat-quan/)
+
+### 2.5. Các chủ đề nâng cao – ARMA và Mật độ phổ
+
+Các chủ đề nâng cao: ARMA và Mật độ phổ Advanced topics: ARMA and spectral density Giới thiệu Chào mừng các bạn đến với bài học cuối cùng về lý thuyết trong chuỗi bài của chúng ta! Ở các bài trước, chúng ta đã học cách xác định và ước lượng các mô hình AR và MA một cách riêng biệt. Tuy nhiên, trong thực tế, nhiều chuỗi thời gian kinh tế lại thể hiện các đặc điểm của cả hai loại mô hình này. Để mô tả những chuỗi như vậy một cách hiệu quả và "tiết kiệm" tham số nhất, chúng ta cần đến một công cụ mạnh mẽ hơn: mô hình ARMA.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Giới thiệu**
+- **Nền tảng lý thuyết: Từ ARMA đến Phân tích Phổ**
+- **1. Ước lượng mô hình ARMA**
+- **Lưu ý về tính tinh gọn**
+- **2. Giới thiệu về Ước lượng Mật độ phổ**
+- **Phương pháp ước lượng trên Stata**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c14/cac-chu-de-nang-cao-arma-va-mat-do-pho/)
+
+### 2.6. Thực hành Stata ước lượng AR, MA, và ARDL
+
+Hướng dẫn thực hành Stata: AR, MA, và ARDL Stata practice guide: AR, MA, and ARDL Giới thiệu tổng quan Chào mừng các bạn đến với bài thực hành tổng hợp! Sau năm bài học lý thuyết chuyên sâu, giờ là lúc chúng ta "xắn tay áo lên" và làm việc trực tiếp với dữ liệu. Bài học này là cầu nối quan trọng nhất, giúp bạn chuyển hóa những khái niệm trừu tượng như ACF, PACF, MLE, hay tính không nhất quán thành các dòng lệnh Stata cụ thể và các kết quả có thể diễn giải được.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Giới thiệu tổng quan**
+- **Chuẩn bị dữ liệu và môi trường làm việc**
+- **Quy trình phân tích chuỗi thời gian 4 bước**
+- **Thực hành chi tiết từng trường hợp**
+- **Trường hợp 1: Phân tích quy trình AR - Biến y_ar1**
+- **Trường hợp 2: Phân tích quy trình MA - Biến y_ma1**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c14/thuc-hanh-stata-uoc-luong-ar-ma-va-ardl/)
+
+### 2.7. Tổng kết các phương pháp ước lượng
+
+Khung lý thuyết và thực hành ước lượng chuỗi thời gian Synthesis: A framework for theory and practice of estimation 1. Từ lý thuyết đến thực hành Chào mừng các bạn đến với bài học tổng kết của chúng ta! Trong suốt chuỗi bài vừa qua, chúng ta đã thực hiện một hành trình quan trọng: đi từ thế giới lý thuyết của các quy trình chuỗi thời gian dừng đến thế giới thực hành của việc ước lượng các mô hình từ dữ liệu thực tế.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **1. Từ lý thuyết đến thực hành**
+- **2. Các nguyên tắc cốt lõi**
+- **2.1. Tính nhất quán và Tính Ergodic: Nền tảng của Ước lượng**
+- **2.2. Các phương pháp ước lượng chính**
+- **3. Quy trình làm việc của nhà phân tích**
+- **Các nguyên tắc vàng và cạm bẫy cần tránh**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c14/tong-ket-cac-phuong-phap-uoc-luong/)
+
+## 3. Step-by-Step Empirical Implementation Workflow
 
 <Steps>
   <div className="step-item">
-    <h3>Step 1: Ước lượng Trung bình và Tự hiệp phương sai</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Ước lượng Trung bình và Tự hiệp phương sai. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c14/uoc-luong-trung-binh-va-tu-hiep-phuong-sai/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/psesk15u1/c14/uoc-luong-trung-binh-va-tu-hiep-phuong-sai/</a>.</p>
+    <h3>1. Formulate the Research Question and Prepare Data on EcoData & Finco</h3>
+    <p>Define the dependent variable, core explanatory variables, and control covariates aligned with <strong>14. Ước lượng quá trình chuỗi thời gian dừng</strong>. Extract standardized Vietnamese empirical series from <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> or <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, and screen for missing observations and extreme outliers.</p>
   </div>
   <div className="step-item">
-    <h3>Step 2: Ước lượng Quy trình MA - Từ MOM đến MLE</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Ước lượng Quy trình MA - Từ MOM đến MLE. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c14/uoc-luong-quy-trinh-ma1-tu-mom-den-mle/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/psesk15u1/c14/uoc-luong-quy-trinh-ma1-tu-mom-den-mle/</a>.</p>
+    <h3>2. Conduct Descriptive Profiling, Correlation Analysis, and Pre-Estimation Checks</h3>
+    <p>Examine empirical distributions, construct summary statistics tables, and evaluate collinearity using pairwise correlation matrices and Variance Inflation Factors (VIF).</p>
   </div>
   <div className="step-item">
-    <h3>Step 3: Ước lượng Quy trình AR – Yule-Walker và MLE</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Ước lượng Quy trình AR – Yule-Walker và MLE. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c14/uoc-luong-quy-trinh-arp-yule-walker-va-mle/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/psesk15u1/c14/uoc-luong-quy-trinh-arp-yule-walker-va-mle/</a>.</p>
+    <h3>3. Estimate the Model Across Stata 18 MP, R 4.x, and Python 3.11+</h3>
+    <p>Execute the parameter estimation scripts matching the structural equations in Section 1.1 while cross-checking theoretical derivations at <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c14/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Step 4: Vấn đề của OLS – Độ chệch mẫu nhỏ và Tính không nhất quán</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Vấn đề của OLS – Độ chệch mẫu nhỏ và Tính không nhất quán. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c14/van-de-cua-ols-do-chech-mau-nho-va-tinh-khong-nhat-quan/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/psesk15u1/c14/van-de-cua-ols-do-chech-mau-nho-va-tinh-khong-nhat-quan/</a>.</p>
+    <h3>4. Perform Post-Estimation Diagnostics and Robust Variance Correction</h3>
+    <p>Test for heteroskedasticity, serial correlation, Ramsey RESET functional form misspecification, and regressor endogeneity. Apply White HC1 or cluster-robust standard errors for valid inference.</p>
   </div>
   <div className="step-item">
-    <h3>Step 5: Các chủ đề nâng cao – ARMA và Mật độ phổ</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Các chủ đề nâng cao – ARMA và Mật độ phổ. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c14/cac-chu-de-nang-cao-arma-va-mat-do-pho/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/psesk15u1/c14/cac-chu-de-nang-cao-arma-va-mat-do-pho/</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Step 6: Thực hành Stata ước lượng AR, MA, và ARDL</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Thực hành Stata ước lượng AR, MA, và ARDL. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c14/thuc-hanh-stata-uoc-luong-ar-ma-va-ardl/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/psesk15u1/c14/thuc-hanh-stata-uoc-luong-ar-ma-va-ardl/</a>.</p>
+    <h3>5. Format Journal-Grade Tables and Cross-Verify on EcoLab</h3>
+    <p>Report point estimates, standard errors in parentheses, and statistical significance stars following APA 7th / AER Booktabs standards, or automate the entire reporting pipeline on <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> and <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Multi-Platform Implementation Examples in Stata, R, and Python
+## 4. Multi-Platform Implementation Scripts in Stata, R, and Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Initialize environment and load practice dataset from EcoData / SachKTL
+* Thiết lập chuỗi thời gian, kiểm định nghiệm đơn vị và ước lượng ARIMA / GARCH
 version 18.0
 clear all
 set more off
+import delimited "sachktl_timeseries_finco.csv", clear encoding("utf-8")
 
-* Import standardized empirical dataset
-import delimited "sachktl_psesk15u1_c14_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+tsset time_id
+dfuller y, lags(4) trend regress
+pperron y, lags(4) trend
 
-* Estimate baseline specification and run diagnostic checks with robust standard errors
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 1. Ước lượng mô hình ARIMA và kiểm định nhiễu trắng phần dư
+arima y, arima(1,1,1) vce(robust)
+predict resid_arima, resid
+wntestq resid_arima, lags(12)
+
+* 2. Ước lượng mô hình phương sai có điều kiện thay đổi ARCH/GARCH(1,1)
+arch d.y x1 x2, arch(1) garch(1) vce(robust)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Load econometric packages and practice dataset from EcoData / SachKTL
-library(tidyverse)
-library(lmtest)
-library(sandwich)
+# Nạp thư viện chuỗi thời gian và ước lượng ARIMA / GARCH(1,1)
+library(tseries)
+library(forecast)
+library(rugarch)
 
-df <- read.csv("sachktl_psesk15u1_c14_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_timeseries_finco.csv")
+y_ts <- ts(df$y, frequency = 12)
 
-# Estimate model and compute heteroskedasticity-robust HC1 standard errors
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA tối ưu theo AICc
+adf.test(y_ts)
+fit_arima <- auto.arima(y_ts, seasonal = FALSE, ic = "aicc")
+summary(fit_arima)
+checkresiduals(fit_arima)
+
+# 2. Ước lượng mô hình GARCH(1,1) cho chuỗi lợi suất
+spec <- ugarchspec(variance.model = list(model = "sGARCH", garchOrder = c(1, 1)),
+                   mean.model = list(armaOrder = c(1, 0), include.mean = TRUE))
+fit_garch <- ugarchfit(spec = spec, data = diff(y_ts))
+show(fit_garch)
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Load econometric libraries and practice dataset from EcoData / SachKTL
+# Nạp thư viện statsmodels và arch để phân tích chuỗi thời gian & biến động
 import pandas as pd
-import statsmodels.formula.api as smf
+from statsmodels.tsa.stattools import adfuller
+from statsmodels.tsa.arima.model import ARIMA
+from arch import arch_model
 
-df = pd.read_csv("sachktl_psesk15u1_c14_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_timeseries_finco.csv")
+y = df["y"].dropna()
 
-# Fit specification with HC1 robust standard errors
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA(1,1,1)
+adf_stat, p_val, *_ = adfuller(y, autolag="AIC")
+print(f"ADF Statistic: {adf_stat:.4f}, p-value: {p_val:.4f}")
+arima_res = ARIMA(y, order=(1, 1, 1)).fit()
+print(arima_res.summary())
+
+# 2. Ước lượng mô hình GARCH(1,1) với phân phối Student-t
+ret = y.diff().dropna() * 100
+garch_res = arch_model(ret, vol="Garch", p=1, q=1, dist="t").fit(disp="off")
+print(garch_res.summary())
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video Tutorial Walkthrough
+## 5. Post-Estimation Diagnostic and Interpretation Guide
+
+| Diagnostic Criterion | Null Hypothesis $H_0$ | Benchmark Threshold | Corrective Action When $H_0$ Is Rejected |
+| :--- | :--- | :--- | :--- |
+| **Heteroskedasticity** | Constant error variance $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ rejects $H_0$ | Apply `vce(robust)`, `vcovHC(HC1)`, or FGLS/WLS weighted estimation |
+| **Multicollinearity** | No severe linear dependence among regressors | $\text{VIF} < 10$ acceptable | Drop redundant covariates, center interactions, or apply LASSO/Ridge regularization |
+| **Ramsey RESET Functional Form** | No omitted nonlinear or higher-order terms | $p\text{-value} > 0.05$ retains $H_0$ | Add interaction terms, quadratic polynomials, or log-transform skewed positive variables |
+| **Regressor Exogeneity** | Orthogonality $\text{Cov}(X, \varepsilon)=0$ | Durbin-Wu-Hausman $p > 0.05$ | Transition to IV/2SLS, LIML, or GMM estimation with validated instruments |
+
+## 6. Video Tutorial Walkthrough
 
 <VideoTutorial
-  title="Practical Walkthrough for Chapter 14: 14. Ước lượng quá trình chuỗi thời gian dừng on SachKTL"
+  title="Practical Walkthrough for 14. Ước lượng quá trình chuỗi thời gian dừng on SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Complete Lesson Directory and Backlinks to Original SachKTL Articles
+## 7. Complete Lesson Directory and Backlinks to Original SachKTL Articles
 
-| No. | Lesson Title in Chapter 14 | Supported Software | Original Source Link on SachKTL |
+| Lesson Code | Lesson Title | Supported Software | Original Source Link on SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Lesson 01** | Ước lượng Trung bình và Tự hiệp phương sai | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c14/uoc-luong-trung-binh-va-tu-hiep-phuong-sai/) |
-| **Lesson 02** | Ước lượng Quy trình MA - Từ MOM đến MLE | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c14/uoc-luong-quy-trinh-ma1-tu-mom-den-mle/) |
-| **Lesson 03** | Ước lượng Quy trình AR – Yule-Walker và MLE | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c14/uoc-luong-quy-trinh-arp-yule-walker-va-mle/) |
-| **Lesson 04** | Vấn đề của OLS – Độ chệch mẫu nhỏ và Tính không nhất quán | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c14/van-de-cua-ols-do-chech-mau-nho-va-tinh-khong-nhat-quan/) |
-| **Lesson 05** | Các chủ đề nâng cao – ARMA và Mật độ phổ | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c14/cac-chu-de-nang-cao-arma-va-mat-do-pho/) |
-| **Lesson 06** | Thực hành Stata ước lượng AR, MA, và ARDL | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c14/thuc-hanh-stata-uoc-luong-ar-ma-va-ardl/) |
-| **Lesson 07** | Tổng kết các phương pháp ước lượng | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c14/tong-ket-cac-phuong-phap-uoc-luong/) |
+| **14.1** | Ước lượng Trung bình và Tự hiệp phương sai | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c14/uoc-luong-trung-binh-va-tu-hiep-phuong-sai/) |
+| **14.2** | Ước lượng Quy trình MA - Từ MOM đến MLE | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c14/uoc-luong-quy-trinh-ma1-tu-mom-den-mle/) |
+| **14.3** | Ước lượng Quy trình AR – Yule-Walker và MLE | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c14/uoc-luong-quy-trinh-arp-yule-walker-va-mle/) |
+| **14.4** | Vấn đề của OLS – Độ chệch mẫu nhỏ và Tính không nhất quán | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c14/van-de-cua-ols-do-chech-mau-nho-va-tinh-khong-nhat-quan/) |
+| **14.5** | Các chủ đề nâng cao – ARMA và Mật độ phổ | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c14/cac-chu-de-nang-cao-arma-va-mat-do-pho/) |
+| **14.6** | Thực hành Stata ước lượng AR, MA, và ARDL | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c14/thuc-hanh-stata-uoc-luong-ar-ma-va-ardl/) |
+| **14.7** | Tổng kết các phương pháp ước lượng | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c14/tong-ket-cac-phuong-phap-uoc-luong/) |

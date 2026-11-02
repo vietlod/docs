@@ -1,19 +1,19 @@
 ---
 id: chapter-18-c18
-title: "Chương 18: 18. mô hình phi tuyến"
-sidebar_label: "Chương 18: 18. Mô hình phi tuyến"
+title: "18. Mô hình phi tuyến"
+sidebar_label: "18. Mô hình phi tuyến"
 sidebar_position: 19
-description: "Hướng dẫn thực hành How-To Chương 18: 18. mô hình phi tuyến thuộc bộ sách Diễn giải và trực quan hóa mô hình hồi quy bằng Stata trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 18. Mô hình phi tuyến thuộc giáo trình Diễn giải và trực quan hóa mô hình hồi quy bằng Stata trên SachKTL kèm công thức toán học, phân tích 5 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 18: 18. mô hình phi tuyến
+# 18. Mô hình phi tuyến
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 18: 18. mô hình phi tuyến** thuộc [**Bộ sách 07: diễn giải và trực quan hóa mô hình hồi quy bằng Stata**](/sachktl/book-07-msitk21u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/msitk21u1/c18/](https://sachktl.tnsai.vn/vi/msitk21u1/c18/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **5 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **18. Mô hình phi tuyến** thuộc bộ giáo trình [**Diễn giải và trực quan hóa mô hình hồi quy bằng Stata**](/sachktl/book-07-msitk21u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/msitk21u1/c18/](https://sachktl.tnsai.vn/vi/msitk21u1/c18/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 18: 18. mô hình phi tuyến">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="18. Mô hình phi tuyến">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 07 · CHƯƠNG 18</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 18: 18. mô hình phi tuyến</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Diễn giải và trực quan hóa mô hình hồi quy bằng Stata · 5 bài họ</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Diễn giải và trực quan hóa mô hình h</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">18. Mô hình phi tuyến</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng ứng dụng, mô hình hóa thống kê và kiểm định giả thuyết · 5 bài học chuy</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,98 +41,204 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Giới thiệu về các mô hình phi tuyến trong kinh tế lượng An Introduction to Nonlinear models in Econometrics Tổng quan về chuỗi bài học Chào mừng các bạn đã đến với chuỗi bài học về các mô hình phi tuyến, một trong những công cụ mạnh mẽ và phổ biến nhất trong kho tàng kinh tế lượng ứng dụng. Trong thực tế, rất nhiều biến số kinh tế mà chúng ta quan tâm không phải là biến liên tục. Ví dụ, một người quyết định có mua nhà hay không, một hộ gia đình có bao nhiêu chiếc xe, hay mức độ hài lòng của khách hàng được xếp loại như thế nào . Các mô hình tuyến tính cổ điển như OLS
+Giới thiệu về các mô hình phi tuyến trong kinh tế lượng An Introduction to Nonlinear models in Econometrics Tổng quan về chuỗi bài học Chào mừng các bạn đã đến với chuỗi bài học về các mô hình phi tuyến, một trong những công cụ mạnh mẽ và phổ biến nhất trong kho tàng kinh tế lượng ứng dụng. Trong thực tế, rất nhiều biến số kinh tế mà chúng ta quan tâm không phải là biến liên tục. Ví dụ, một người quyết định có mua nhà hay không, một hộ gia đình có bao nhiêu chiếc xe, hay mức độ hài lòng của khách hàng được xếp loại như thế nào .
 
-- **Chủ đề học thuật trọng tâm**: Tổng quan về chuỗi bài học, Cấu trúc chuỗi bài học về mô hình phi tuyến, Kiến thức tiên quyết cần chuẩn bị, Những gì bạn cần biết trước khi bắt đầu, Mục tiêu học tập của chuỗi bài viết.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+Y_i = \beta_0 + \sum_{k=1}^K \beta_k X_{ik} + \varepsilon_i, \quad \mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0 \tag*{[1]}
+$$
+
+$$
+\widehat{\text{Var}}_{\text{HC1}}(\hat{\boldsymbol{\beta}}) = \frac{N}{N - K - 1}\left(\mathbf{X}'\mathbf{X}\right)^{-1}\left(\sum_{i=1}^N \hat{\varepsilon}_i^2 \mathbf{x}_i \mathbf{x}_i'\right)\left(\mathbf{X}'\mathbf{X}\right)^{-1} \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Dạng hàm tuyến tính theo tham số được xác định đúng, không bỏ sót biến giải thích quan trọng có tương quan với các biến trong mô hình.
+2. Kỳ vọng có điều kiện của sai số bằng không $\mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0$, đảm bảo tính không chệch và vững tiệm cận của ước lượng.
+3. Ma trận thiết kế $\mathbf{X}$ có hạng cột đầy đủ, không xảy ra đa cộng tuyến hoàn hảo và sử dụng sai số chuẩn vững HC1/Cluster khi có phương sai thay đổi.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 18 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/msitk21u1/c18/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Khi tồn tại biến giải thích nội sinh do đồng thời hai chiều, sai số đo lường hoặc bỏ sót biến không quan sát được, ước lượng OLS bị chệch và không vững; cần chuyển sang ước lượng biến công cụ IV/2SLS hoặc GMM."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Hồi quy logistic nhị phân - Nền tảng và diễn giải
+
+Hồi quy logistic nhị phân - Nền tảng và diễn giải Binary logistic regression - Foundations and interpretation Tổng quan kiến thức Trong bài giới thiệu, chúng ta đã cùng nhau tìm hiểu về tầm quan trọng của các mô hình phi tuyến khi biến kết quả không phải là một biến liên tục. Giờ đây, chúng ta sẽ bắt đầu với mô hình nền tảng và được sử dụng rộng rãi nhất trong nhóm này: Hồi quy Logistic Nhị phân.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Tổng quan kiến thức**
+- **Nền tảng lý thuyết của hồi quy logistic**
+- **Từ xác suất đến log-odds**
+- **Mô hình hồi quy logistic**
+- **Quy trình phân tích hồi quy logistic trong Stata**
+- **Ví dụ minh họa chi tiết với Stata**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c18/hoi-quy-logistic-nhi-phan-nen-tang-va-dien-giai/)
+
+### 2.2. Mô hình đa thức, thứ tự và Poisson
+
+Mở rộng hồi quy logistic - Mô hình đa thức, thứ tự và poisson Expanding logistic regression - Multinomial, ordinal, and poisson models Tổng quan kiến thức Ở bài học trước, chúng ta đã xây dựng một nền tảng vững chắc về hồi quy logistic nhị phân, công cụ lý tưởng cho các biến kết quả chỉ có hai khả năng. Tuy nhiên, thế giới thực tế lại vô cùng đa dạng và phức tạp hơn thế.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Tổng quan kiến thức**
+- **Nền tảng lý thuyết của các mô hình mở rộng**
+- **1. Hồi quy logistic đa thức**
+- **2. Hồi quy logistic thứ tự**
+- **3. Hồi quy Poisson**
+- **Quy trình phân tích thống nhất trong Stata**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c18/mo-hinh-da-thuc-thu-tu-va-poisson/)
+
+### 2.3. Tương tác và mô hình gãy khúc trong hồi quy logistic
+
+Ứng dụng nâng cao - Tương tác và mô hình gãy khúc trong hồi quy logistic Advanced applications - Interactions and piecewise models in logistic regression Tổng quan kiến thức Trong các bài học trước, chúng ta đã làm quen với các mô hình phi tuyến cơ bản, từ hồi quy logistic nhị phân đến các biến thể đa thức, thứ tự và Poisson. Những công cụ này rất mạnh mẽ để xử lý các loại biến kết quả khác nhau. Tuy nhiên, các mối quan hệ trong kinh tế - xã hội hiếm khi đơn giản.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Tổng quan kiến thức**
+- **Nền tảng lý thuyết cho các mô hình phức tạp**
+- **1. Hiệu ứng tương tác**
+- **2. Mô hình hồi quy gãy khúc**
+- **Quy trình phân tích các mô hình nâng cao**
+- **Ví dụ minh họa chi tiết với Stata**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c18/tuong-tac-va-mo-hinh-gay-khuc-trong-hoi-quy-logistic/)
+
+### 2.4. Bài tập thực hành tổng hợp về mô hình phi tuyến
+
+Bài tập thực hành tổng hợp về mô hình phi tuyến Comprehensive practice exercises on nonlinear models Tổng kết kiến thức đã học Chào mừng các bạn đến với bài học thực hành tổng hợp, nơi chúng ta sẽ kết nối tất cả các mảnh ghép kiến thức đã học để tạo nên một bức tranh phân tích hoàn chỉnh. Trong suốt chuỗi bài viết, chúng ta đã thực hiện một hành trình khám phá đầy thú vị.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Tổng kết kiến thức đã học**
+- **Chuẩn bị dữ liệu: Nghiên cứu tình huống về sức khỏe tài chính**
+- **Mô tả bộ dữ liệu**
+- **Mã Stata để tạo dữ liệu**
+- **Quy trình phân tích một dự án nghiên cứu**
+- **Thực hành phân tích từ cơ bản đến nâng cao**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c18/bai-tap-thuc-hanh-tong-hop-ve-mo-hinh-phi-tuyen/)
+
+### 2.5. Tổng quan và lựa chọn mô hình phi tuyến phù hợp
+
+Tổng hợp chuỗi bài học về mô hình phi tuyến Synthesis of the nonlinear models series Tổng quan và vị thế trong kinh tế lượng Chúc mừng các bạn đã hoàn thành một hành trình quan trọng trong việc chinh phục kinh tế lượng ứng dụng! Chúng ta đã cùng nhau đi từ những khái niệm cơ bản nhất của hồi quy logistic nhị phân đến việc làm chủ các kỹ thuật mô hình hóa phức tạp như hiệu ứng tương tác và hồi quy gãy khúc.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Tổng quan và vị thế trong kinh tế lượng**
+- **Từ Logit đến các mô hình mở rộng**
+- **Nền tảng thống nhất: Phép biến đổi Logit**
+- **So sánh các mô hình phi tuyến chính**
+- **Khung lý thuyết biến ẩn**
+- **Một quy trình làm việc toàn diện**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c18/tong-quan-va-lua-chon-mo-hinh-phi-tuyen-phu-hop/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Hồi quy logistic nhị phân - nền tảng và diễn giải</h3>
-    <p>Hồi quy logistic nhị phân - Nền tảng và diễn giải Binary logistic regression - Foundations and interpretation Tổng quan kiến thức Trong bài giới thiệu, chúng ta đã cùng nhau tìm hiểu về tầm quan trọng của các mô hình phi tuyến khi biến kết quả không phải là mộ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c18/hoi-quy-logistic-nhi-phan-nen-tang-va-dien-giai/" target="_blank" rel="noopener">Hồi quy Logistic nhị phân - Nền tảng và diễn giải</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>18. Mô hình phi tuyến</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Mô hình đa thức, thứ tự và Poisson</h3>
-    <p>Mở rộng hồi quy logistic - Mô hình đa thức, thứ tự và poisson Expanding logistic regression - Multinomial, ordinal, and poisson models Tổng quan kiến thức Ở bài học trước, chúng ta đã xây dựng một nền tảng vững chắc về hồi quy logistic nhị phân, công cụ lý tưở Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c18/mo-hinh-da-thuc-thu-tu-va-poisson/" target="_blank" rel="noopener">Mô hình đa thức, thứ tự và poisson</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Tương tác và mô hình gãy khúc trong hồi quy logistic</h3>
-    <p>Ứng dụng nâng cao - Tương tác và mô hình gãy khúc trong hồi quy logistic Advanced applications - Interactions and piecewise models in logistic regression Tổng quan kiến thức Trong các bài học trước, chúng ta đã làm quen với các mô hình phi tuyến cơ bản, từ hồi Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c18/tuong-tac-va-mo-hinh-gay-khuc-trong-hoi-quy-logistic/" target="_blank" rel="noopener">Tương tác và mô hình gãy khúc trong hồi quy logistic</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c18/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Bài tập thực hành tổng hợp về mô hình phi tuyến</h3>
-    <p>Bài tập thực hành tổng hợp về mô hình phi tuyến Comprehensive practice exercises on nonlinear models Tổng kết kiến thức đã học Chào mừng các bạn đến với bài học thực hành tổng hợp, nơi chúng ta sẽ kết nối tất cả các mảnh ghép kiến thức đã học để tạo nên một bứ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c18/bai-tap-thuc-hanh-tong-hop-ve-mo-hinh-phi-tuyen/" target="_blank" rel="noopener">Bài tập thực hành tổng hợp về mô hình phi tuyến</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 5: Tổng quan và lựa chọn mô hình phi tuyến phù hợp</h3>
-    <p>Tổng hợp chuỗi bài học về mô hình phi tuyến Synthesis of the nonlinear models series Tổng quan và vị thế trong kinh tế lượng Chúc mừng các bạn đã hoàn thành một hành trình quan trọng trong việc chinh phục kinh tế lượng ứng dụng! Chúng ta đã cùng nhau đi từ nhữ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c18/tong-quan-va-lua-chon-mo-hinh-phi-tuyen-phu-hop/" target="_blank" rel="noopener">Tổng quan và lựa chọn mô hình phi tuyến phù hợp</a>.</p>
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập môi trường, ước lượng mô hình và kiểm định chẩn đoán toàn diện
 version 18.0
 clear all
 set more off
+import delimited "sachktl_empirical_ecodata.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_msitk21u1_c18_ecodata.csv", clear encoding("utf-8")
 describe
-summarize
+summarize y x1 x2 x3, detail
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
+* 1. Ước lượng mô hình cơ sở và kiểm định phương sai thay đổi / đa cộng tuyến / dạng hàm
+regress y x1 x2 x3
 estat hettest
+estat imtest, white
 estat vif
+estat ovtest
+
+* 2. Ước lượng với sai số chuẩn vững White HC1 và xuất tác động biên
+regress y c.x1##c.x2 x3, vce(robust)
+margins, dydx(x1 x2 x3)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện phân tích kinh tế lượng và thực thi kiểm định chẩn đoán
 library(tidyverse)
 library(lmtest)
 library(sandwich)
+library(car)
 
-df <- read.csv("sachktl_msitk21u1_c18_ecodata.csv")
+df <- read.csv("sachktl_empirical_ecodata.csv")
 summary(df)
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+# 1. Ước lượng mô hình tuyến tính và kiểm định Breusch-Pagan, RESET, VIF
 fit <- lm(y ~ x1 + x2 + x3, data = df)
+bptest(fit)
+resettest(fit, power = 2:3, type = "fitted")
+vif(fit)
+
+# 2. Xuất bảng hệ số ước lượng với sai số chuẩn vững HC1
 coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
 ```
 
@@ -140,34 +246,52 @@ coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và thực thi ước lượng kèm chẩn đoán phần dư
 import pandas as pd
+import statsmodels.api as sm
 import statsmodels.formula.api as smf
+from statsmodels.stats.diagnostic import het_breuschpagan, linear_reset
+from statsmodels.stats.outliers_influence import variance_inflation_factor
 
-df = pd.read_csv("sachktl_msitk21u1_c18_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_empirical_ecodata.csv")
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
+# 1. Ước lượng mô hình với sai số chuẩn vững HC1
 model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
 print(model.summary())
+
+# 2. Kiểm định phương sai thay đổi Breusch-Pagan, Ramsey RESET và hệ số VIF
+bp_lm, bp_pval, _, _ = het_breuschpagan(model.resid, model.model.exog)
+reset_res = linear_reset(model, power=2, use_f=True)
+X = sm.add_constant(df[["x1", "x2", "x3"]].dropna())
+vifs = {col: variance_inflation_factor(X.values, i) for i, col in enumerate(X.columns)}
+print(f"Breusch-Pagan p={bp_pval:.4f} | RESET p={reset_res.pvalue:.4f} | VIF={vifs}")
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 18: 18. mô hình phi tuyến trên SachKTL"
+  title="Hướng dẫn thực hành 18. Mô hình phi tuyến trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 18 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Hồi quy Logistic nhị phân - Nền tảng và diễn giải | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c18/hoi-quy-logistic-nhi-phan-nen-tang-va-dien-giai/) |
-| **Bài 02** | Mô hình đa thức, thứ tự và poisson | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c18/mo-hinh-da-thuc-thu-tu-va-poisson/) |
-| **Bài 03** | Tương tác và mô hình gãy khúc trong hồi quy logistic | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c18/tuong-tac-va-mo-hinh-gay-khuc-trong-hoi-quy-logistic/) |
-| **Bài 04** | Bài tập thực hành tổng hợp về mô hình phi tuyến | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c18/bai-tap-thuc-hanh-tong-hop-ve-mo-hinh-phi-tuyen/) |
-| **Bài 05** | Tổng quan và lựa chọn mô hình phi tuyến phù hợp | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c18/tong-quan-va-lua-chon-mo-hinh-phi-tuyen-phu-hop/) |
+| **18.1** | Hồi quy logistic nhị phân - Nền tảng và diễn giải | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c18/hoi-quy-logistic-nhi-phan-nen-tang-va-dien-giai/) |
+| **18.2** | Mô hình đa thức, thứ tự và Poisson | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c18/mo-hinh-da-thuc-thu-tu-va-poisson/) |
+| **18.3** | Tương tác và mô hình gãy khúc trong hồi quy logistic | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c18/tuong-tac-va-mo-hinh-gay-khuc-trong-hoi-quy-logistic/) |
+| **18.4** | Bài tập thực hành tổng hợp về mô hình phi tuyến | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c18/bai-tap-thuc-hanh-tong-hop-ve-mo-hinh-phi-tuyen/) |
+| **18.5** | Tổng quan và lựa chọn mô hình phi tuyến phù hợp | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c18/tong-quan-va-lua-chon-mo-hinh-phi-tuyen-phu-hop/) |

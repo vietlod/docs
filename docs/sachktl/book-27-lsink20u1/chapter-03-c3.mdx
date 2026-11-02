@@ -1,19 +1,19 @@
 ---
 id: chapter-03-c3
-title: "Chương 03: 3. khả năng dự báo và giả thuyết thị trường hiệu quả"
-sidebar_label: "Chương 03: 3. Khả năng dự báo và giả thuyết thị trườn"
+title: "3. Khả năng dự báo và giả thuyết thị trường hiệu quả"
+sidebar_label: "3. Khả năng dự báo và giả thuyết thị trường hiệu quả"
 sidebar_position: 4
-description: "Hướng dẫn thực hành How-To Chương 03: 3. khả năng dự báo và giả thuyết thị trường hiệu quả thuộc bộ sách Kinh tế lượng tài chính: Mô hình và Phương pháp trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 3. Khả năng dự báo và giả thuyết thị trường hiệu quả thuộc giáo trình Kinh tế lượng tài chính: Mô hình và phương pháp trên SachKTL kèm công thức toán học, phân tích 6 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 03: 3. khả năng dự báo và giả thuyết thị trường hiệu quả
+# 3. Khả năng dự báo và giả thuyết thị trường hiệu quả
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 03: 3. khả năng dự báo và giả thuyết thị trường hiệu quả** thuộc [**Bộ sách 27: kinh tế lượng tài chính: mô hình và phương pháp**](/sachktl/book-27-lsink20u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/lsink20u1/c3/](https://sachktl.tnsai.vn/vi/lsink20u1/c3/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **6 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **3. Khả năng dự báo và giả thuyết thị trường hiệu quả** thuộc bộ giáo trình [**Kinh tế lượng tài chính: Mô hình và phương pháp**](/sachktl/book-27-lsink20u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/lsink20u1/c3/](https://sachktl.tnsai.vn/vi/lsink20u1/c3/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 03: 3. khả năng dự báo và giả thuyết thị trường hiệu quả">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="3. Khả năng dự báo và giả thuyết thị trường hiệu quả">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 27 · CHƯƠNG 03</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 03: 3. khả năng dự báo và giả thuyết thị trường hiệu quả</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Kinh tế lượng tài chính: Mô hình và Phương pháp · 6 bài học chuy</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng tài chính: Mô hình và </text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">3. Khả năng dự báo và giả thuyết thị trường hiệu quả</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng chuỗi thời gian, đồng liên kết và biến động tài chính · 6 bài học chuyê</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,138 +41,272 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Giới thiệu về giả thuyết thị trường hiệu quả An introduction to the efficient markets hypothesis Chào mừng các bạn sinh viên đến với chuỗi bài học về một trong những chủ đề hấp dẫn và nền tảng nhất của kinh tế lượng tài chính: Giả thuyết Thị trường Hiệu quả, hay còn gọi là EMH . Có bao giờ bạn tự hỏi liệu chúng ta có thể "đánh bại" thị trường chứng khoán không? Liệu có một công thức bí mật nào để dự đoán giá cổ phiếu và kiếm được lợi nhuận khổng lồ? Giả thuyết này cung cấp một câu trả lời khá thẳng thắn và có phần gây tranh cãi: về cơ bản là không thể. EMH cho rằng giá tài sản đã phản ánh đầy
+Giới thiệu về giả thuyết thị trường hiệu quả An introduction to the efficient markets hypothesis Chào mừng các bạn sinh viên đến với chuỗi bài học về một trong những chủ đề hấp dẫn và nền tảng nhất của kinh tế lượng tài chính: Giả thuyết Thị trường Hiệu quả, hay còn gọi là EMH . Có bao giờ bạn tự hỏi liệu chúng ta có thể "đánh bại" thị trường chứng khoán không? Liệu có một công thức bí mật nào để dự đoán giá cổ phiếu và kiếm được lợi nhuận khổng lồ? Giả thuyết này cung cấp một câu trả lời khá thẳng thắn và có phần gây tranh cãi: về cơ bản là không thể.
 
-- **Chủ đề học thuật trọng tâm**: CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO, PHỤ LỤC: Dữ liệu mô phỏng cho series.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+\Phi(L)(1 - L)^d Y_t = \mu + \Theta(L)\varepsilon_t, \quad \varepsilon_t \mid \mathcal{F}_{t-1} \sim \mathcal{N}(0, \sigma_t^2) \tag*{[1]}
+$$
+
+$$
+\sigma_t^2 = \omega + \sum_{i=1}^p \alpha_i \varepsilon_{t-i}^2 + \sum_{j=1}^q \beta_j \sigma_{t-j}^2, \quad \omega > 0, \; \alpha_i, \beta_j \ge 0 \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Chuỗi thời gian phải thỏa mãn điều kiện dừng hiệp phương sai hoặc được sai phân hóa đến bậc tích hợp $I(d)$ phù hợp trước khi ước lượng.
+2. Điều kiện khả nghịch và nghiệm ngoài vòng tròn đơn vị của đa thức trễ $\Phi(L)$ và $\Theta(L)$ đảm bảo tính ổn định động học.
+3. Trong mô hình phương sai có điều kiện thay đổi GARCH, tổng hệ số $\sum \alpha_i + \sum \beta_j < 1$ bảo đảm phương sai không điều kiện hữu hạn.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 03 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/lsink20u1/c3/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Hồi quy chuỗi thời gian không dừng chưa qua kiểm định nghiệm đơn vị ADF/PP và đồng liên kết Johansen dễ dẫn đến hồi quy giả mạo với thống kê $t$ và $R^2$ bị thổi phồng."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Nền tảng giả thuyết thị trường hiệu quả
+
+Nền tảng giả thuyết thị trường hiệu quả và bước ngẫu nhiên Foundations of the efficient markets hypothesis and random walk Giới thiệu Chào mừng các bạn đã quay trở lại với chuỗi bài học về Giả thuyết Thị trường Hiệu quả. Trong bài giới thiệu, chúng ta đã đặt ra một câu hỏi lớn: liệu có thể dự báo giá cổ phiếu một cách có hệ thống để kiếm lợi nhuận vượt trội không? Bài học đầu tiên này sẽ đi sâu vào việc xây dựng nền tảng lý thuyết để trả lời câu hỏi đó.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Nền tảng lý thuyết của giả thuyết thị trường hiệu quả**
+- **Giả thuyết thị trường hiệu quả là gì?**
+- **Ví dụ vui: Câu chuyện về hai nhà kinh tế học chicago**
+- **Ba dạng của giả thuyết thị trường hiệu quả**
+- **CÁC dạng của EMH**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c3/nen-tang-gia-thuyet-thi-truong-hieu-qua/)
+
+### 2.2. Kiểm định EMH bằng tự tương quan
+
+Kiểm định giả thuyết thị trường hiệu quả bằng tự tương quan Testing the efficient markets hypothesis with autocorrelation Giới thiệu Ở bài học trước, chúng ta đã xây dựng nền tảng lý thuyết vững chắc cho Giả thuyết Thị trường Hiệu quả và làm quen với Mô hình Bước ngẫu nhiên. Lý thuyết cho rằng, trong một thị trường hiệu quả, lợi nhuận tài sản là không thể dự báo được từ các giá trị lợi nhuận trong quá khứ. Đây là một phát biểu rất mạnh mẽ, nhưng làm thế nào chúng ta có thể kiểm chứng nó bằng dữ liệu thực tế?
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Nền tảng lý thuyết của phân tích tự tương quan**
+- **Tự tương quan là gì?**
+- **Ước lượng tự tương quan từ dữ liệu mẫu**
+- **Phương pháp kiểm định tự tương quan**
+- **Ví dụ minh họa: Phân tích tự tương quan với Stata**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c3/kiem-dinh-emh-bang-tu-tuong-quan/)
+
+### 2.3. Kiểm định EMH bằng tỷ lệ phương sai
+
+Kiểm định giả thuyết thị trường hiệu quả bằng tỷ lệ phương sai Testing the efficient markets hypothesis with the variance ratio Giới thiệu Trong bài học trước, chúng ta đã học cách sử dụng phân tích tự tương quan để kiểm định Giả thuyết Thị trường Hiệu quả. Chúng ta đã thấy rằng nếu thị trường hiệu quả dạng yếu, lợi nhuận không nên có tương quan tuyến tính với quá khứ. Tuy nhiên, phân tích tự tương quan có một số hạn chế.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Nền tảng lý thuyết của kiểm định tỷ lệ phương sai**
+- **Trực giác cốt lõi: Phương sai nên tăng tuyến tính theo thời gian**
+- **Mối liên hệ với tự tương quan**
+- **Phương pháp kiểm định tỷ lệ phương sai**
+- **Lưu ý quan trọng**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c3/kiem-dinh-emh-bang-ty-le-phuong-sai/)
+
+### 2.4. Các điều kiện kiểm định và giả thuyết thay thế
+
+Các điều kiện kiểm định tổng quát và các giả thuyết thay thế General test conditions and alternative hypotheses Giới thiệu Trong hai bài học vừa qua, chúng ta đã trang bị hai công cụ mạnh mẽ là phân tích tự tương quan và kiểm định tỷ lệ phương sai để kiểm tra Giả thuyết Thị trường Hiệu quả. Chúng ta đã thấy rằng, trên dữ liệu mô phỏng "hoàn hảo", các kiểm định này hoạt động đúng như lý thuyết. Tuy nhiên, thế giới thực hiếm khi nào hoàn hảo.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Nền tảng lý thuyết: Khi các giả định bị nới lỏng**
+- **Từ i.i.d. đến các điều kiện thực tế hơn**
+- **Hàm ý quan trọng nhất**
+- **Phương pháp nghiên cứu: Các phê bình và giả thuyết thay thế**
+- **Phê bình kinh tế về EMH**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c3/cac-dieu-kien-kiem-dinh-va-gia-thuyet-thay-the/)
+
+### 2.5. Thực hành kiểm định EMH với Stata
+
+Thực hành kiểm định giả thuyết thị trường hiệu quả với stata A practical guide to testing the emh in stata Giới thiệu: Từ lý thuyết đến thực hành Chào mừng các bạn đến với bài học được mong chờ nhất trong chuỗi bài của chúng ta! Sau khi đã đi qua một hành trình dài từ việc tìm hiểu các khái niệm nền tảng của Giả thuyết Thị trường Hiệu quả, phân tích tự tương quan, khám phá kiểm định tỷ lệ phương sai, cho đến việc thảo luận về các giả định phức tạp, đã đến lúc chúng ta "xắn tay áo lên" và áp dụng tất cả những kiến thức đó vào thực tế.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu: Từ lý thuyết đến thực hành**
+- **Chuẩn bị dữ liệu: Lợi nhuận chỉ số S&P 500**
+- **Quy trình phân tích từng bước**
+- **Hướng dẫn thực hành chi tiết trên Stata**
+- **Bước 1: Trực quan hóa chuỗi lợi nhuận**
+- **Bước 2: Kiểm định tự tương quan**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c3/thuc-hanh-kiem-dinh-emh-voi-stata/)
+
+### 2.6. Tổng hợp về giả thuyết thị trường hiệu quả
+
+Tổng hợp về giả thuyết thị trường hiệu quả A synthesis of the efficient markets hypothesis Tổng quan chủ đề: Bức tranh lớn về EMH Chúng ta đã cùng nhau đi qua một hành trình khám phá chi tiết về Giả thuyết Thị trường Hiệu quả, từ những viên gạch lý thuyết đầu tiên cho đến các công cụ kiểm định thực nghiệm. Bây giờ là lúc chúng ta lùi lại một bước để nhìn vào bức tranh toàn cảnh.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Tổng quan chủ đề: Bức tranh lớn về EMH**
+- **Hệ thống lý thuyết: Từ bước ngẫu nhiên đến các mô hình thay thế**
+- **Hệ thống phương pháp: Quy trình kiểm định toàn diện**
+- **Ví dụ thực hành tổng hợp: Phân tích vn-index**
+- **Tổng kết và hướng phát triển**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c3/tong-hop-ve-gia-thuyet-thi-truong-hieu-qua/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Nền tảng giả thuyết thị trường hiệu quả</h3>
-    <p>Nền tảng giả thuyết thị trường hiệu quả và bước ngẫu nhiên Foundations of the efficient markets hypothesis and random walk Giới thiệu Chào mừng các bạn đã quay trở lại với chuỗi bài học về Giả thuyết Thị trường Hiệu quả. Trong bài giới thiệu, chúng ta đã đặt r Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/lsink20u1/c3/nen-tang-gia-thuyet-thi-truong-hieu-qua/" target="_blank" rel="noopener">Nền tảng giả thuyết thị trường hiệu quả</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>3. Khả năng dự báo và giả thuyết thị trường hiệu quả</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Kiểm định EMH bằng tự tương quan</h3>
-    <p>Kiểm định giả thuyết thị trường hiệu quả bằng tự tương quan Testing the efficient markets hypothesis with autocorrelation Giới thiệu Ở bài học trước, chúng ta đã xây dựng nền tảng lý thuyết vững chắc cho Giả thuyết Thị trường Hiệu quả và làm quen với Mô hình B Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/lsink20u1/c3/kiem-dinh-emh-bang-tu-tuong-quan/" target="_blank" rel="noopener">Kiểm định EMH bằng tự tương quan</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Kiểm định EMH bằng tỷ lệ phương sai</h3>
-    <p>Kiểm định giả thuyết thị trường hiệu quả bằng tỷ lệ phương sai Testing the efficient markets hypothesis with the variance ratio Giới thiệu Trong bài học trước, chúng ta đã học cách sử dụng phân tích tự tương quan để kiểm định Giả thuyết Thị trường Hiệu quả. Ch Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/lsink20u1/c3/kiem-dinh-emh-bang-ty-le-phuong-sai/" target="_blank" rel="noopener">Kiểm định EMH bằng tỷ lệ phương sai</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/lsink20u1/c3/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Các điều kiện kiểm định và giả thuyết thay thế</h3>
-    <p>Các điều kiện kiểm định tổng quát và các giả thuyết thay thế General test conditions and alternative hypotheses Giới thiệu Trong hai bài học vừa qua, chúng ta đã trang bị hai công cụ mạnh mẽ là phân tích tự tương quan và kiểm định tỷ lệ phương sai để kiểm tra  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/lsink20u1/c3/cac-dieu-kien-kiem-dinh-va-gia-thuyet-thay-the/" target="_blank" rel="noopener">Các điều kiện kiểm định và giả thuyết thay thế</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 5: Thực hành kiểm định EMH với Stata</h3>
-    <p>Thực hành kiểm định giả thuyết thị trường hiệu quả với stata A practical guide to testing the emh in stata Giới thiệu: Từ lý thuyết đến thực hành Chào mừng các bạn đến với bài học được mong chờ nhất trong chuỗi bài của chúng ta! Sau khi đã đi qua một hành trìn Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/lsink20u1/c3/thuc-hanh-kiem-dinh-emh-voi-stata/" target="_blank" rel="noopener">Thực hành kiểm định EMH với Stata</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Bước 6: Tổng hợp về giả thuyết thị trường hiệu quả</h3>
-    <p>Tổng hợp về giả thuyết thị trường hiệu quả A synthesis of the efficient markets hypothesis Tổng quan chủ đề: Bức tranh lớn về EMH Chúng ta đã cùng nhau đi qua một hành trình khám phá chi tiết về Giả thuyết Thị trường Hiệu quả, từ những viên gạch lý thuyết đầu  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/lsink20u1/c3/tong-hop-ve-gia-thuyet-thi-truong-hieu-qua/" target="_blank" rel="noopener">Tổng hợp về giả thuyết thị trường hiệu quả</a>.</p>
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập chuỗi thời gian, kiểm định nghiệm đơn vị và ước lượng ARIMA / GARCH
 version 18.0
 clear all
 set more off
+import delimited "sachktl_timeseries_finco.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_lsink20u1_c03_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+tsset time_id
+dfuller y, lags(4) trend regress
+pperron y, lags(4) trend
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 1. Ước lượng mô hình ARIMA và kiểm định nhiễu trắng phần dư
+arima y, arima(1,1,1) vce(robust)
+predict resid_arima, resid
+wntestq resid_arima, lags(12)
+
+* 2. Ước lượng mô hình phương sai có điều kiện thay đổi ARCH/GARCH(1,1)
+arch d.y x1 x2, arch(1) garch(1) vce(robust)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
-library(tidyverse)
-library(lmtest)
-library(sandwich)
+# Nạp thư viện chuỗi thời gian và ước lượng ARIMA / GARCH(1,1)
+library(tseries)
+library(forecast)
+library(rugarch)
 
-df <- read.csv("sachktl_lsink20u1_c03_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_timeseries_finco.csv")
+y_ts <- ts(df$y, frequency = 12)
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA tối ưu theo AICc
+adf.test(y_ts)
+fit_arima <- auto.arima(y_ts, seasonal = FALSE, ic = "aicc")
+summary(fit_arima)
+checkresiduals(fit_arima)
+
+# 2. Ước lượng mô hình GARCH(1,1) cho chuỗi lợi suất
+spec <- ugarchspec(variance.model = list(model = "sGARCH", garchOrder = c(1, 1)),
+                   mean.model = list(armaOrder = c(1, 0), include.mean = TRUE))
+fit_garch <- ugarchfit(spec = spec, data = diff(y_ts))
+show(fit_garch)
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và arch để phân tích chuỗi thời gian & biến động
 import pandas as pd
-import statsmodels.formula.api as smf
+from statsmodels.tsa.stattools import adfuller
+from statsmodels.tsa.arima.model import ARIMA
+from arch import arch_model
 
-df = pd.read_csv("sachktl_lsink20u1_c03_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_timeseries_finco.csv")
+y = df["y"].dropna()
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA(1,1,1)
+adf_stat, p_val, *_ = adfuller(y, autolag="AIC")
+print(f"ADF Statistic: {adf_stat:.4f}, p-value: {p_val:.4f}")
+arima_res = ARIMA(y, order=(1, 1, 1)).fit()
+print(arima_res.summary())
+
+# 2. Ước lượng mô hình GARCH(1,1) với phân phối Student-t
+ret = y.diff().dropna() * 100
+garch_res = arch_model(ret, vol="Garch", p=1, q=1, dist="t").fit(disp="off")
+print(garch_res.summary())
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 03: 3. khả năng dự báo và giả thuyết thị trường hiệu quả trên SachKTL"
+  title="Hướng dẫn thực hành 3. Khả năng dự báo và giả thuyết thị trường hiệu quả trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 03 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Nền tảng giả thuyết thị trường hiệu quả | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c3/nen-tang-gia-thuyet-thi-truong-hieu-qua/) |
-| **Bài 02** | Kiểm định EMH bằng tự tương quan | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c3/kiem-dinh-emh-bang-tu-tuong-quan/) |
-| **Bài 03** | Kiểm định EMH bằng tỷ lệ phương sai | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c3/kiem-dinh-emh-bang-ty-le-phuong-sai/) |
-| **Bài 04** | Các điều kiện kiểm định và giả thuyết thay thế | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c3/cac-dieu-kien-kiem-dinh-va-gia-thuyet-thay-the/) |
-| **Bài 05** | Thực hành kiểm định EMH với Stata | Stata 18 MP, R 4.x | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c3/thuc-hanh-kiem-dinh-emh-voi-stata/) |
-| **Bài 06** | Tổng hợp về giả thuyết thị trường hiệu quả | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c3/tong-hop-ve-gia-thuyet-thi-truong-hieu-qua/) |
+| **3.1** | Nền tảng giả thuyết thị trường hiệu quả | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c3/nen-tang-gia-thuyet-thi-truong-hieu-qua/) |
+| **3.2** | Kiểm định EMH bằng tự tương quan | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c3/kiem-dinh-emh-bang-tu-tuong-quan/) |
+| **3.3** | Kiểm định EMH bằng tỷ lệ phương sai | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c3/kiem-dinh-emh-bang-ty-le-phuong-sai/) |
+| **3.4** | Các điều kiện kiểm định và giả thuyết thay thế | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c3/cac-dieu-kien-kiem-dinh-va-gia-thuyet-thay-the/) |
+| **3.5** | Thực hành kiểm định EMH với Stata | `Stata 18 MP, R 4.x` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c3/thuc-hanh-kiem-dinh-emh-voi-stata/) |
+| **3.6** | Tổng hợp về giả thuyết thị trường hiệu quả | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c3/tong-hop-ve-gia-thuyet-thi-truong-hieu-qua/) |

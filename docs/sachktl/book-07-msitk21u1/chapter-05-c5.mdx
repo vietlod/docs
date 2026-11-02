@@ -1,19 +1,19 @@
 ---
 id: chapter-05-c5
-title: "Chương 05: 5. tương tác giữa các biến liên tục"
-sidebar_label: "Chương 05: 5. Tương tác giữa các biến liên tục"
+title: "5. Tương tác giữa các biến liên tục"
+sidebar_label: "5. Tương tác giữa các biến liên tục"
 sidebar_position: 6
-description: "Hướng dẫn thực hành How-To Chương 05: 5. tương tác giữa các biến liên tục thuộc bộ sách Diễn giải và trực quan hóa mô hình hồi quy bằng Stata trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 5. Tương tác giữa các biến liên tục thuộc giáo trình Diễn giải và trực quan hóa mô hình hồi quy bằng Stata trên SachKTL kèm công thức toán học, phân tích 5 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 05: 5. tương tác giữa các biến liên tục
+# 5. Tương tác giữa các biến liên tục
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 05: 5. tương tác giữa các biến liên tục** thuộc [**Bộ sách 07: diễn giải và trực quan hóa mô hình hồi quy bằng Stata**](/sachktl/book-07-msitk21u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/msitk21u1/c5/](https://sachktl.tnsai.vn/vi/msitk21u1/c5/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **5 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **5. Tương tác giữa các biến liên tục** thuộc bộ giáo trình [**Diễn giải và trực quan hóa mô hình hồi quy bằng Stata**](/sachktl/book-07-msitk21u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/msitk21u1/c5/](https://sachktl.tnsai.vn/vi/msitk21u1/c5/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 05: 5. tương tác giữa các biến liên tục">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="5. Tương tác giữa các biến liên tục">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 07 · CHƯƠNG 05</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 05: 5. tương tác giữa các biến liên tục</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Diễn giải và trực quan hóa mô hình hồi quy bằng Stata · 5 bài họ</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Diễn giải và trực quan hóa mô hình h</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">5. Tương tác giữa các biến liên tục</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng ứng dụng, mô hình hóa thống kê và kiểm định giả thuyết · 5 bài học chuy</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,98 +41,204 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Hiểu và Trực quan hóa Tương tác giữa các Biến liên tục trong Hồi quy Interpreting and Visualizing Continuous by Continuous Interactions Tại sao các mối quan hệ trong kinh tế không phải lúc nào cũng đơn giản? Chào các bạn sinh viên, trong hành trình khám phá kinh tế lượng, chúng ta thường bắt đầu với các mô hình hồi quy tuyến tính đơn giản, nơi tác động của một biến lên một biến khác là không đổi. Ví dụ, chúng ta giả định rằng mỗi năm kinh nghiệm làm việc sẽ làm tăng lương một lượng cố định. Tuy nhiên, thực tế kinh tế và xã hội lại phức tạp hơn nhiều. Liệu lợi ích của một năm kinh nghiệm có
+Hiểu và Trực quan hóa Tương tác giữa các Biến liên tục trong Hồi quy Interpreting and Visualizing Continuous by Continuous Interactions Tại sao các mối quan hệ trong kinh tế không phải lúc nào cũng đơn giản? Chào các bạn sinh viên, trong hành trình khám phá kinh tế lượng, chúng ta thường bắt đầu với các mô hình hồi quy tuyến tính đơn giản, nơi tác động của một biến lên một biến khác là không đổi. Ví dụ, chúng ta giả định rằng mỗi năm kinh nghiệm làm việc sẽ làm tăng lương một lượng cố định. Tuy nhiên, thực tế kinh tế và xã hội lại phức tạp hơn nhiều.
 
-- **Chủ đề học thuật trọng tâm**: Tại sao các mối quan hệ trong kinh tế không phải lúc nào cũng đơn giản?, Cấu trúc chuỗi bài học, Kiến thức tiên quyết cần chuẩn bị, Bạn cần gì để bắt đầu?, Mục tiêu học tập của chuỗi bài.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+Y_i = \beta_0 + \sum_{k=1}^K \beta_k X_{ik} + \varepsilon_i, \quad \mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0 \tag*{[1]}
+$$
+
+$$
+\widehat{\text{Var}}_{\text{HC1}}(\hat{\boldsymbol{\beta}}) = \frac{N}{N - K - 1}\left(\mathbf{X}'\mathbf{X}\right)^{-1}\left(\sum_{i=1}^N \hat{\varepsilon}_i^2 \mathbf{x}_i \mathbf{x}_i'\right)\left(\mathbf{X}'\mathbf{X}\right)^{-1} \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Dạng hàm tuyến tính theo tham số được xác định đúng, không bỏ sót biến giải thích quan trọng có tương quan với các biến trong mô hình.
+2. Kỳ vọng có điều kiện của sai số bằng không $\mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0$, đảm bảo tính không chệch và vững tiệm cận của ước lượng.
+3. Ma trận thiết kế $\mathbf{X}$ có hạng cột đầy đủ, không xảy ra đa cộng tuyến hoàn hảo và sử dụng sai số chuẩn vững HC1/Cluster khi có phương sai thay đổi.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 05 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/msitk21u1/c5/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Khi tồn tại biến giải thích nội sinh do đồng thời hai chiều, sai số đo lường hoặc bỏ sót biến không quan sát được, ước lượng OLS bị chệch và không vững; cần chuyển sang ước lượng biến công cụ IV/2SLS hoặc GMM."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Diễn giải tương tác tuyến tính - Lý thuyết và trực quan hóa
+
+Diễn giải tương tác tuyến tính: Lý thuyết và trực quan hóa Interpreting linear interactions: Theory and visualization Tổng quan kiến thức: Từ hiệu ứng không đổi đến hiệu ứng động Chào các bạn, chào mừng trở lại với bài học đầu tiên trong chuỗi bài về diễn giải tương tác. Ở bài giới thiệu, chúng ta đã cùng nhau thảo luận về một ý tưởng quan trọng: trong thế giới thực, tác động của một biến số kinh tế thường không phải là một hằng số. Thay vào đó, nó có thể thay đổi tùy thuộc vào các điều kiện hoặc các yếu-tố-khác.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Tổng quan kiến thức: Từ hiệu ứng không đổi đến hiệu ứng động**
+- **Nền tảng lý thuyết của tương tác tuyến tính**
+- **Kịch bản 1: Một thế giới không có tương tác**
+- **Kịch bản 2: Giới thiệu tương tác - Một thế giới thực tế hơn**
+- **Phương pháp trực quan hóa để diễn giải tương tác**
+- **Ví dụ minh họa: "Bóc tách" ý nghĩa của hệ số tương tác**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c5/dien-giai-tuong-tac-tuyen-tinh-ly-thuyet-va-truc-quan-hoa/)
+
+### 2.2. Diễn giải tương tác tuyến tính - Thực hành Stata với lệnh margins
+
+Diễn giải tương tác tuyến tính: Thực hành Stata với lệnh margins Interpreting linear interactions: Stata practice with the margins command Từ lý thuyết đến lệnh Stata Chào mừng các bạn đã quay trở lại! Trong bài học trước, chúng ta đã xây dựng một nền tảng lý thuyết vững chắc về tương tác tuyến tính-tuyến tính. Chúng ta đã hiểu rằng khi có tương tác, hiệu ứng của một biến lên kết quả không còn là một hằng số, mà nó phụ thuộc vào giá trị của một biến khác.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Từ lý thuyết đến lệnh Stata**
+- **Chuẩn bị dữ liệu từ khảo sát xã hội tổng quát**
+- **Bước 1: Tải và mô tả dữ liệu**
+- **Bước 2: Lọc mẫu nghiên cứu**
+- **Quy trình phân tích tương tác trong Stata**
+- **Hướng dẫn từng bước với Stata**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c5/dien-giai-tuong-tac-tuyen-tinh-thuc-hanh-stata-voi-lenh-margins/)
+
+### 2.3. Diễn giải tương tác tuyến tính và bậc hai
+
+Diễn giải tương tác tuyến tính và bậc hai Interpreting linear by quadratic interactions Khi độ cong của mối quan hệ thay đổi Chào mừng các bạn đến với bài học thứ ba! Trong các bài học trước, chúng ta đã làm chủ kỹ năng diễn giải tương tác tuyến tính-tuyến tính. Chúng ta đã học được rằng hiệu ứng của một biến có thể thay đổi một cách tuyến tính theo một biến khác. Điều này đã giúp các mô hình của chúng ta trở nên thực tế hơn rất nhiều. Tuy nhiên, thế giới kinh tế đôi khi còn phức tạp hơn thế.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Khi độ cong của mối quan hệ thay đổi**
+- **Từ độ cong không đổi đến độ cong linh hoạt**
+- **Kịch bản 1: Độ cong không đổi**
+- **Kịch bản 2: Độ cong thay đổi**
+- **Phương pháp phân tích và trực quan hóa trong Stata**
+- **Hướng dẫn từng bước với dữ liệu GSS**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c5/dien-giai-tuong-tac-tuyen-tinh-va-bac-hai/)
+
+### 2.4. Vận dụng tổng hợp các kỹ năng
+
+Vận dụng tổng hợp các kỹ năng Final practice: Applying combined skills Kết nối các mảnh ghép Chào mừng các bạn đã đến với bài học thực hành tổng hợp! Trong suốt ba bài học vừa qua, chúng ta đã cùng nhau đi một chặng đường dài và thú vị. Chúng ta bắt đầu từ việc tìm hiểu khái niệm cốt lõi của một tương tác tuyến tính, hiểu rằng hiệu ứng của một biến có thể không phải là hằng số. Sau đó, chúng ta đã học cách sử dụng bộ đôi lệnh Stata quyền năng margins và marginsplot để định lượng và trực quan hóa các hiệu ứng động này một cách chuyên nghiệp.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Kết nối các mảnh ghép**
+- **Dữ liệu thực hành: Năng suất nông nghiệp**
+- **Mô tả và tạo dữ liệu**
+- **Các biến trong nongnghiep.dta**
+- **Câu hỏi nghiên cứu**
+- **Bài tập thực hành**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c5/van-dung-tong-hop-cac-ky-nang/)
+
+### 2.5. Tổng kết và định hướng nghiên cứu nâng cao
+
+Làm chủ nghệ thuật diễn giải tương tác trong kinh tế lượng Synthesis of the series: Mastering the art of interpreting interactions in econometrics Từ mô hình tĩnh đến bức tranh động của các mối quan hệ kinh tế Chào các bạn sinh viên, chúng ta đã cùng nhau đi hết một hành trình học thuật đầy ý nghĩa và thách thức. Khởi đầu từ những mô hình hồi quy tuyến tính cơ bản, nơi các mối quan hệ được giả định là bất biến và đơn giản, chúng ta đã tiến một bước dài để có thể nắm bắt được sự phức tạp và đa dạng của thế giới kinh tế thực.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Từ mô hình tĩnh đến bức tranh động của các mối quan hệ kinh tế**
+- **Giải phẫu toán học của các hiệu ứng có điều kiện**
+- **1. Nền tảng của tương tác tuyến tính-tuyến tính**
+- **2. Mở rộng sang tương tác tuyến tính-bậc hai**
+- **Quy trình chuẩn cho phân tích tương tác**
+- **Tối ưu hóa hiệu quả đào tạo nhân viên**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c5/tong-ket-va-dinh-huong-nghien-cuu-nang-cao/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Diễn giải tương tác tuyến tính - lý thuyết và trực quan hóa</h3>
-    <p>Diễn giải tương tác tuyến tính: Lý thuyết và trực quan hóa Interpreting linear interactions: Theory and visualization Tổng quan kiến thức: Từ hiệu ứng không đổi đến hiệu ứng động Chào các bạn, chào mừng trở lại với bài học đầu tiên trong chuỗi bài về diễn giải Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c5/dien-giai-tuong-tac-tuyen-tinh-ly-thuyet-va-truc-quan-hoa/" target="_blank" rel="noopener">Diễn giải tương tác tuyến tính - Lý thuyết và trực quan hóa</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>5. Tương tác giữa các biến liên tục</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Diễn giải tương tác tuyến tính - thực hành Stata với lệnh margins</h3>
-    <p>Diễn giải tương tác tuyến tính: Thực hành Stata với lệnh margins Interpreting linear interactions: Stata practice with the margins command Từ lý thuyết đến lệnh Stata Chào mừng các bạn đã quay trở lại! Trong bài học trước, chúng ta đã xây dựng một nền tảng lý  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c5/dien-giai-tuong-tac-tuyen-tinh-thuc-hanh-stata-voi-lenh-margins/" target="_blank" rel="noopener">Diễn giải tương tác tuyến tính - Thực hành Stata với lệnh margins</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Diễn giải tương tác tuyến tính và bậc hai</h3>
-    <p>Diễn giải tương tác tuyến tính và bậc hai Interpreting linear by quadratic interactions Khi độ cong của mối quan hệ thay đổi Chào mừng các bạn đến với bài học thứ ba! Trong các bài học trước, chúng ta đã làm chủ kỹ năng diễn giải tương tác tuyến tính-tuyến tín Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c5/dien-giai-tuong-tac-tuyen-tinh-va-bac-hai/" target="_blank" rel="noopener">Diễn giải tương tác tuyến tính và bậc hai</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c5/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Vận dụng tổng hợp các kỹ năng</h3>
-    <p>Vận dụng tổng hợp các kỹ năng Final practice: Applying combined skills Kết nối các mảnh ghép Chào mừng các bạn đã đến với bài học thực hành tổng hợp! Trong suốt ba bài học vừa qua, chúng ta đã cùng nhau đi một chặng đường dài và thú vị. Chúng ta bắt đầu từ việ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c5/van-dung-tong-hop-cac-ky-nang/" target="_blank" rel="noopener">Vận dụng tổng hợp các kỹ năng</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 5: Tổng kết và định hướng nghiên cứu nâng cao</h3>
-    <p>Làm chủ nghệ thuật diễn giải tương tác trong kinh tế lượng Synthesis of the series: Mastering the art of interpreting interactions in econometrics Từ mô hình tĩnh đến bức tranh động của các mối quan hệ kinh tế Chào các bạn sinh viên, chúng ta đã cùng nhau đi h Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c5/tong-ket-va-dinh-huong-nghien-cuu-nang-cao/" target="_blank" rel="noopener">Tổng kết và định hướng nghiên cứu nâng cao</a>.</p>
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập môi trường, ước lượng mô hình và kiểm định chẩn đoán toàn diện
 version 18.0
 clear all
 set more off
+import delimited "sachktl_empirical_ecodata.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_msitk21u1_c05_ecodata.csv", clear encoding("utf-8")
 describe
-summarize
+summarize y x1 x2 x3, detail
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
+* 1. Ước lượng mô hình cơ sở và kiểm định phương sai thay đổi / đa cộng tuyến / dạng hàm
+regress y x1 x2 x3
 estat hettest
+estat imtest, white
 estat vif
+estat ovtest
+
+* 2. Ước lượng với sai số chuẩn vững White HC1 và xuất tác động biên
+regress y c.x1##c.x2 x3, vce(robust)
+margins, dydx(x1 x2 x3)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện phân tích kinh tế lượng và thực thi kiểm định chẩn đoán
 library(tidyverse)
 library(lmtest)
 library(sandwich)
+library(car)
 
-df <- read.csv("sachktl_msitk21u1_c05_ecodata.csv")
+df <- read.csv("sachktl_empirical_ecodata.csv")
 summary(df)
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+# 1. Ước lượng mô hình tuyến tính và kiểm định Breusch-Pagan, RESET, VIF
 fit <- lm(y ~ x1 + x2 + x3, data = df)
+bptest(fit)
+resettest(fit, power = 2:3, type = "fitted")
+vif(fit)
+
+# 2. Xuất bảng hệ số ước lượng với sai số chuẩn vững HC1
 coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
 ```
 
@@ -140,34 +246,52 @@ coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và thực thi ước lượng kèm chẩn đoán phần dư
 import pandas as pd
+import statsmodels.api as sm
 import statsmodels.formula.api as smf
+from statsmodels.stats.diagnostic import het_breuschpagan, linear_reset
+from statsmodels.stats.outliers_influence import variance_inflation_factor
 
-df = pd.read_csv("sachktl_msitk21u1_c05_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_empirical_ecodata.csv")
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
+# 1. Ước lượng mô hình với sai số chuẩn vững HC1
 model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
 print(model.summary())
+
+# 2. Kiểm định phương sai thay đổi Breusch-Pagan, Ramsey RESET và hệ số VIF
+bp_lm, bp_pval, _, _ = het_breuschpagan(model.resid, model.model.exog)
+reset_res = linear_reset(model, power=2, use_f=True)
+X = sm.add_constant(df[["x1", "x2", "x3"]].dropna())
+vifs = {col: variance_inflation_factor(X.values, i) for i, col in enumerate(X.columns)}
+print(f"Breusch-Pagan p={bp_pval:.4f} | RESET p={reset_res.pvalue:.4f} | VIF={vifs}")
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 05: 5. tương tác giữa các biến liên tục trên SachKTL"
+  title="Hướng dẫn thực hành 5. Tương tác giữa các biến liên tục trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 05 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Diễn giải tương tác tuyến tính - Lý thuyết và trực quan hóa | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c5/dien-giai-tuong-tac-tuyen-tinh-ly-thuyet-va-truc-quan-hoa/) |
-| **Bài 02** | Diễn giải tương tác tuyến tính - Thực hành Stata với lệnh margins | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c5/dien-giai-tuong-tac-tuyen-tinh-thuc-hanh-stata-voi-lenh-margins/) |
-| **Bài 03** | Diễn giải tương tác tuyến tính và bậc hai | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c5/dien-giai-tuong-tac-tuyen-tinh-va-bac-hai/) |
-| **Bài 04** | Vận dụng tổng hợp các kỹ năng | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c5/van-dung-tong-hop-cac-ky-nang/) |
-| **Bài 05** | Tổng kết và định hướng nghiên cứu nâng cao | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c5/tong-ket-va-dinh-huong-nghien-cuu-nang-cao/) |
+| **5.1** | Diễn giải tương tác tuyến tính - Lý thuyết và trực quan hóa | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c5/dien-giai-tuong-tac-tuyen-tinh-ly-thuyet-va-truc-quan-hoa/) |
+| **5.2** | Diễn giải tương tác tuyến tính - Thực hành Stata với lệnh margins | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c5/dien-giai-tuong-tac-tuyen-tinh-thuc-hanh-stata-voi-lenh-margins/) |
+| **5.3** | Diễn giải tương tác tuyến tính và bậc hai | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c5/dien-giai-tuong-tac-tuyen-tinh-va-bac-hai/) |
+| **5.4** | Vận dụng tổng hợp các kỹ năng | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c5/van-dung-tong-hop-cac-ky-nang/) |
+| **5.5** | Tổng kết và định hướng nghiên cứu nâng cao | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c5/tong-ket-va-dinh-huong-nghien-cuu-nang-cao/) |

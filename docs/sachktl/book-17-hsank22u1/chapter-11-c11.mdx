@@ -1,19 +1,19 @@
 ---
 id: chapter-11-c11
-title: "Chương 11: 11. hồi quy đa biến"
-sidebar_label: "Chương 11: 11. Hồi quy đa biến"
+title: "11. Hồi quy đa biến"
+sidebar_label: "11. Hồi quy đa biến"
 sidebar_position: 12
-description: "Hướng dẫn thực hành How-To Chương 11: 11. hồi quy đa biến thuộc bộ sách Lý thuyết Kinh tế lượng trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 11. Hồi quy đa biến thuộc giáo trình Lý thuyết kinh tế lượng trên SachKTL kèm công thức toán học, phân tích 8 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 11: 11. hồi quy đa biến
+# 11. Hồi quy đa biến
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 11: 11. hồi quy đa biến** thuộc [**Bộ sách 17: lý thuyết kinh tế lượng**](/sachktl/book-17-hsank22u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/hsank22u1/c11/](https://sachktl.tnsai.vn/vi/hsank22u1/c11/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **8 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **11. Hồi quy đa biến** thuộc bộ giáo trình [**Lý thuyết kinh tế lượng**](/sachktl/book-17-hsank22u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/hsank22u1/c11/](https://sachktl.tnsai.vn/vi/hsank22u1/c11/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 11: 11. hồi quy đa biến">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="11. Hồi quy đa biến">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 17 · CHƯƠNG 11</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 11: 11. hồi quy đa biến</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Lý thuyết Kinh tế lượng · 8 bài học chuyên sâu</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Lý thuyết kinh tế lượng</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">11. Hồi quy đa biến</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng ứng dụng, mô hình hóa thống kê và kiểm định giả thuyết · 8 bài học chuy</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,102 +41,247 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Hồi quy đa biến Chào mừng các bạn sinh viên đến với chuỗi bài học chuyên sâu về Mô hình nhiều phương trình trong kinh tế lượng! Trong thực tế, các vấn đề kinh tế thường không tồn tại một cách độc lập. Ví dụ, quyết định chi tiêu của một hộ gia đình cho thực phẩm, nhà ở và giải trí đều liên quan đến nhau và cùng bị ảnh hưởng bởi thu nhập. Tương tự, các chỉ số kinh tế vĩ mô như lạm phát, thất nghiệp và tăng trưởng GDP cũng tác động qua lại lẫn nhau. Để phân tích những mối quan hệ phức tạp này, chúng ta không thể chỉ dựa vào một phương trình hồi quy đơn lẻ. Đây chính là lúc các mô hình nhiều
+Hồi quy đa biến Chào mừng các bạn sinh viên đến với chuỗi bài học chuyên sâu về Mô hình nhiều phương trình trong kinh tế lượng! Trong thực tế, các vấn đề kinh tế thường không tồn tại một cách độc lập. Ví dụ, quyết định chi tiêu của một hộ gia đình cho thực phẩm, nhà ở và giải trí đều liên quan đến nhau và cùng bị ảnh hưởng bởi thu nhập. Tương tự, các chỉ số kinh tế vĩ mô như lạm phát, thất nghiệp và tăng trưởng GDP cũng tác động qua lại lẫn nhau. Để phân tích những mối quan hệ phức tạp này, chúng ta không thể chỉ dựa vào một phương trình hồi quy đơn lẻ.
 
-- **Chủ đề học thuật trọng tâm**: Cấu trúc chuỗi bài học, PHỤ LỤC: Dữ liệu mô phỏng cho chuỗi bài viết.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+Y_i = \beta_0 + \sum_{k=1}^K \beta_k X_{ik} + \varepsilon_i, \quad \mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0 \tag*{[1]}
+$$
+
+$$
+\widehat{\text{Var}}_{\text{HC1}}(\hat{\boldsymbol{\beta}}) = \frac{N}{N - K - 1}\left(\mathbf{X}'\mathbf{X}\right)^{-1}\left(\sum_{i=1}^N \hat{\varepsilon}_i^2 \mathbf{x}_i \mathbf{x}_i'\right)\left(\mathbf{X}'\mathbf{X}\right)^{-1} \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Dạng hàm tuyến tính theo tham số được xác định đúng, không bỏ sót biến giải thích quan trọng có tương quan với các biến trong mô hình.
+2. Kỳ vọng có điều kiện của sai số bằng không $\mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0$, đảm bảo tính không chệch và vững tiệm cận của ước lượng.
+3. Ma trận thiết kế $\mathbf{X}$ có hạng cột đầy đủ, không xảy ra đa cộng tuyến hoàn hảo và sử dụng sai số chuẩn vững HC1/Cluster khi có phương sai thay đổi.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 11 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/hsank22u1/c11/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Khi tồn tại biến giải thích nội sinh do đồng thời hai chiều, sai số đo lường hoặc bỏ sót biến không quan sát được, ước lượng OLS bị chệch và không vững; cần chuyển sang ước lượng biến công cụ IV/2SLS hoặc GMM."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Giới thiệu hệ thống hồi quy đa biến
+
+Chào mừng các bạn đã quay trở lại với bài học đầu tiên trong chuỗi bài về Mô hình nhiều phương trình. Trong phần giới thiệu, chúng ta đã cùng nhau tạo ra một bộ dữ liệu mô phỏng về chi tiêu của sinh viên. Một câu hỏi tự nhiên nảy sinh là: làm thế nào để phân tích mối quan hệ giữa thu nhập, GPA và cả ba loại chi tiêu cùng một lúc? Có thể bạn sẽ nghĩ: "Tại sao không chạy ba mô hình hồi quy OLS riêng biệt cho mỗi loại chi tiêu?".
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Nền tảng lý thuyết: Từ một phương trình đến hệ thống**
+- **1.1. Ôn lại mô hình hồi quy đơn biến**
+- **1.2. Xây dựng hệ thống hồi quy đa biến**
+- **1.3. Biểu diễn hệ thống bằng MA trận**
+- **1.4. Trường hợp đặc biệt: Các biến độc lập chung**
+- **2. Ví dụ minh họa: Ước lượng hệ thống chi tiêu sinh viên với Stata**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c11/gioi-thieu-he-thong-hoi-quy-da-bien/)
+
+### 2.2. Ước lượng OLS và các tính chất thống kê
+
+Ở bài học trước, chúng ta đã cùng nhau xây dựng và biểu diễn một hệ thống hồi quy đa biến bằng ngôn ngữ ma trận. Chúng ta cũng đã thực hành ước lượng hệ thống chi tiêu của sinh viên bằng lệnh mvreg trong Stata và nhận thấy rằng nó cho kết quả giống hệt như việc chạy từng hồi quy OLS riêng lẻ. Điều này đặt ra một câu hỏi quan trọng: Nếu kết quả giống nhau, vậy tại sao chúng ta cần phải xem xét chúng như một "hệ thống"? Câu trả lời nằm ở việc suy luận thống kê.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Bộ ước lượng bình phương nhỏ nhất**
+- **2. Kỳ vọng và phương sai của bộ ước lượng OLS**
+- **2.1. Giả định và tính không chệch**
+- **2.2. Ma trận phương sai-hiệp phương sai**
+- **3. Phân phối tiệm cận**
+- **Định lý 11.1: Phân phối tiệm cận của \**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c11/uoc-luong-ols-va-cac-tinh-chat-thong-ke/)
+
+### 2.3. Hồi quy có vẻ không liên quan
+
+Chào mừng các bạn quay trở lại! Ở bài học trước, chúng ta đã phân tích các tính chất của bộ ước lượng OLS trong mô hình hệ thống. Chúng ta đã thấy rằng OLS cung cấp các ước lượng không chệch, nhưng chúng ta cũng đã gợi ý rằng nó có thể không phải là phương pháp "tốt nhất". Cụ thể, OLS xử lý mỗi phương trình một cách độc lập, hoàn toàn bỏ qua thông tin quý giá chứa trong ma trận hiệp phương sai sai số \, đặc biệt là các phần tử nằm ngoài đường chéo chính. Một câu hỏi lớn được đặt ra là: "Liệu chúng ta có thể làm tốt hơn không?
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Nền tảng lý thuyết: Tại sao SUR hiệu quả hơn OLS?**
+- **1.1. Ý tưởng cốt lõi: Bình phương nhỏ nhất tổng quát**
+- **1.2. Ước lượng SUR: GLS khả thi**
+- **1.3. Tính hiệu quả của SUR**
+- **2. Phương pháp nghiên cứu: Ước lượng SUR với Stata**
+- **3. Khi nào SUR và OLS là một?**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c11/hoi-quy-co-ve-khong-lien-quan-sur/)
+
+### 2.4. Ước lượng hợp lý tối đa
+
+Trong bài học trước, chúng ta đã tìm hiểu về Hồi quy có vẻ không liên quan như một phương pháp thông minh để cải thiện hiệu quả của ước lượng OLS. Chúng ta đã học rằng SUR hoạt động bằng cách tận dụng thông tin từ sự tương quan của các sai số giữa các phương trình. Tuy nhiên, SUR có vẻ như một "mẹo" kỹ thuật. Liệu có một nguyên lý thống kê sâu sắc nào đằng sau nó không? Câu trả lời nằm ở một trong những ý tưởng mạnh mẽ và bao quát nhất trong thống kê: Nguyên lý Hợp lý Tối đa, hay còn gọi là MLE .
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Nền tảng lý thuyết**
+- **1.1. Ước lượng hợp lý tối đa**
+- **1.2. Ước lượng có ràng buộc**
+- **2. Ví dụ minh họa: Kiểm định ràng buộc chéo phương trình với Stata**
+- **3. Tổng kết bài học**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c11/uoc-luong-hop-ly-toi-da-mle/)
+
+### 2.5. Hồi quy giảm hạng
+
+Ở bài học trước, chúng ta đã học cách áp đặt các ràng buộc tuyến tính đơn giản lên hệ số của mô hình, ví dụ như buộc hai hệ số phải bằng nhau. Đó là một công cụ rất hữu ích để kiểm định các giả thuyết kinh tế cụ thể. Tuy nhiên, trong kinh tế lượng, đặc biệt là khi làm việc với dữ liệu chuỗi thời gian trong kinh tế vĩ mô và tài chính, đôi khi chúng ta cần áp đặt một loại ràng buộc phức tạp hơn, một ràng buộc lên toàn bộ cấu trúc của một ma trận hệ số. Chào mừng các bạn đến với Hồi quy giảm hạng .
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Nền tảng lý thuyết: Ý nghĩa của việc giảm hạng**
+- **1.1. Trực giác về "hạng của MA trận"**
+- **1.2. Phân tích MA trận và mối quan hệ cân bằng dài hạn**
+- **1.3. Phương pháp ước lượng**
+- **2. Ứng dụng trong Stata: Mô hình véc-tơ tự hiệu chỉnh sai số**
+- **3. Tổng kết bài học**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c11/hoi-quy-giam-hang/)
+
+### 2.6. Phân tích thành phần chính
+
+Chào mừng các bạn đã quay trở lại! Trong các bài học trước, chúng ta đã tập trung vào việc ước lượng và suy luận trên các hệ số của một hệ thống phương trình. Tuy nhiên, trong kinh tế lượng hiện đại, một thách thức lớn mà chúng ta thường gặp phải là có "quá nhiều biến". Hãy tưởng tượng bạn muốn dự báo lạm phát và có trong tay hàng trăm chuỗi dữ liệu kinh tế khác nhau. Việc đưa tất cả các biến này vào một mô hình hồi quy là không khả thi và thường dẫn đến kết quả kém.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Phân tích thành phần chính**
+- **1.1. Ý tưởng cốt lõi**
+- **1.2. Ví dụ minh họa với Stata**
+- **2. Mô hình nhân tố**
+- **2.1. Ý tưởng cốt lõi**
+- **2.2. PCA và mô hình nhân tố gần đúng**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c11/phan-tich-thanh-phan-chinh-pca/)
+
+### 2.7. Hồi quy tăng cường nhân tố
+
+Chào mừng các bạn đến với bài học thứ bảy! Ở bài trước, chúng ta đã học cách sử dụng PCA và Mô hình nhân tố để "chắt lọc" thông tin từ một tập hợp lớn các biến thành một vài "nhân tố" hoặc "thành phần chính" cốt lõi. Chúng ta đã thấy cách các kỹ thuật này giúp giảm chiều dữ liệu và tìm ra các cấu trúc tiềm ẩn. Một câu hỏi rất tự nhiên nảy sinh là: "Vậy chúng ta có thể làm gì với các nhân tố đã được ước lượng này?". Câu trả lời nằm ở một kỹ thuật rất mạnh mẽ và ngày càng phổ biến trong kinh tế lượng ứng dụng: Hồi quy tăng cường nhân tố .
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Nền tảng lý thuyết: Mô hình và quy trình ước lượng**
+- **1.1. Mô hình hồi quy tăng cường nhân tố**
+- **1.2. Quy trình ước lượng hai bước**
+- **2. Ví dụ minh họa: Tác động của GPA lên chi tiêu**
+- **3. Tổng kết bài học**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c11/hoi-quy-tang-cuong-nhan-to/)
+
+### 2.8. Hướng dẫn thực hành phân tích hệ phương trình với Stata
+
+Chào mừng các bạn đến với bài học cuối cùng và cũng là bài thực hành quan trọng nhất trong chuỗi bài về Mô hình nhiều phương trình! Trong suốt bảy bài học vừa qua, chúng ta đã cùng nhau xây dựng một nền tảng lý thuyết vững chắc, từ việc thiết lập một hệ thống hồi quy đơn giản đến các kỹ thuật nâng cao như Hồi quy giảm hạng và Hồi quy tăng cường nhân tố. Giờ là lúc chúng ta biến những lý thuyết đó thành kỹ năng thực hành cụ thể, một kỹ năng không thể thiếu của bất kỳ nhà kinh tế lượng nào.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Tóm tắt tổng hợp và quy trình phân tích**
+- **2. Hướng dẫn thực hành từng bước với Stata**
+- **Bước 1: Chuẩn bị và khám phá dữ liệu**
+- **Bước 2: Mô hình cơ sở - OLS theo từng phương trình**
+- **Bước 3: Mô hình hiệu quả - SUR**
+- **Bước 4: So sánh các mô hình và diễn giải**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c11/huong-dan-thuc-hanh-phan-tich-he-phuong-trinh-voi-stata/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Giới thiệu hệ thống hồi quy đa biến</h3>
-    <p>Chào mừng các bạn đã quay trở lại với bài học đầu tiên trong chuỗi bài về Mô hình nhiều phương trình. Trong phần giới thiệu, chúng ta đã cùng nhau tạo ra một bộ dữ liệu mô phỏng về chi tiêu của sinh viên. Một câu hỏi tự nhiên nảy sinh là: làm thế nào để phân t Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c11/gioi-thieu-he-thong-hoi-quy-da-bien/" target="_blank" rel="noopener">Giới thiệu hệ thống hồi quy đa biến</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>11. Hồi quy đa biến</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Ước lượng OLS và các tính chất thống kê</h3>
-    <p>Ở bài học trước, chúng ta đã cùng nhau xây dựng và biểu diễn một hệ thống hồi quy đa biến bằng ngôn ngữ ma trận. Chúng ta cũng đã thực hành ước lượng hệ thống chi tiêu của sinh viên bằng lệnh mvreg trong Stata và nhận thấy rằng nó cho kết quả giống hệt như việ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c11/uoc-luong-ols-va-cac-tinh-chat-thong-ke/" target="_blank" rel="noopener">Ước lượng OLS và các tính chất thống kê</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Hồi quy có vẻ không liên quan</h3>
-    <p>Chào mừng các bạn quay trở lại! Ở bài học trước, chúng ta đã phân tích các tính chất của bộ ước lượng OLS trong mô hình hệ thống. Chúng ta đã thấy rằng OLS cung cấp các ước lượng không chệch, nhưng chúng ta cũng đã gợi ý rằng nó có thể không phải là phương phá Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c11/hoi-quy-co-ve-khong-lien-quan-sur/" target="_blank" rel="noopener">Hồi quy có vẻ không liên quan</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c11/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Ước lượng hợp lý tối đa</h3>
-    <p>Trong bài học trước, chúng ta đã tìm hiểu về Hồi quy có vẻ không liên quan như một phương pháp thông minh để cải thiện hiệu quả của ước lượng OLS. Chúng ta đã học rằng SUR hoạt động bằng cách tận dụng thông tin từ sự tương quan của các sai số giữa các phương t Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c11/uoc-luong-hop-ly-toi-da-mle/" target="_blank" rel="noopener">Ước lượng hợp lý tối đa</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 5: Hồi quy giảm hạng</h3>
-    <p>Ở bài học trước, chúng ta đã học cách áp đặt các ràng buộc tuyến tính đơn giản lên hệ số của mô hình, ví dụ như buộc hai hệ số phải bằng nhau. Đó là một công cụ rất hữu ích để kiểm định các giả thuyết kinh tế cụ thể. Tuy nhiên, trong kinh tế lượng, đặc biệt là Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c11/hoi-quy-giam-hang/" target="_blank" rel="noopener">Hồi quy giảm hạng</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Bước 6: Phân tích thành phần chính</h3>
-    <p>Chào mừng các bạn đã quay trở lại! Trong các bài học trước, chúng ta đã tập trung vào việc ước lượng và suy luận trên các hệ số của một hệ thống phương trình. Tuy nhiên, trong kinh tế lượng hiện đại, một thách thức lớn mà chúng ta thường gặp phải là có "quá nh Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c11/phan-tich-thanh-phan-chinh-pca/" target="_blank" rel="noopener">Phân tích thành phần chính</a>.</p>
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập môi trường, ước lượng mô hình và kiểm định chẩn đoán toàn diện
 version 18.0
 clear all
 set more off
+import delimited "sachktl_empirical_ecodata.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_hsank22u1_c11_ecodata.csv", clear encoding("utf-8")
 describe
-summarize
+summarize y x1 x2 x3, detail
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
+* 1. Ước lượng mô hình cơ sở và kiểm định phương sai thay đổi / đa cộng tuyến / dạng hàm
+regress y x1 x2 x3
 estat hettest
+estat imtest, white
 estat vif
+estat ovtest
+
+* 2. Ước lượng với sai số chuẩn vững White HC1 và xuất tác động biên
+regress y c.x1##c.x2 x3, vce(robust)
+margins, dydx(x1 x2 x3)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện phân tích kinh tế lượng và thực thi kiểm định chẩn đoán
 library(tidyverse)
 library(lmtest)
 library(sandwich)
+library(car)
 
-df <- read.csv("sachktl_hsank22u1_c11_ecodata.csv")
+df <- read.csv("sachktl_empirical_ecodata.csv")
 summary(df)
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+# 1. Ước lượng mô hình tuyến tính và kiểm định Breusch-Pagan, RESET, VIF
 fit <- lm(y ~ x1 + x2 + x3, data = df)
+bptest(fit)
+resettest(fit, power = 2:3, type = "fitted")
+vif(fit)
+
+# 2. Xuất bảng hệ số ước lượng với sai số chuẩn vững HC1
 coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
 ```
 
@@ -144,37 +289,55 @@ coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và thực thi ước lượng kèm chẩn đoán phần dư
 import pandas as pd
+import statsmodels.api as sm
 import statsmodels.formula.api as smf
+from statsmodels.stats.diagnostic import het_breuschpagan, linear_reset
+from statsmodels.stats.outliers_influence import variance_inflation_factor
 
-df = pd.read_csv("sachktl_hsank22u1_c11_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_empirical_ecodata.csv")
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
+# 1. Ước lượng mô hình với sai số chuẩn vững HC1
 model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
 print(model.summary())
+
+# 2. Kiểm định phương sai thay đổi Breusch-Pagan, Ramsey RESET và hệ số VIF
+bp_lm, bp_pval, _, _ = het_breuschpagan(model.resid, model.model.exog)
+reset_res = linear_reset(model, power=2, use_f=True)
+X = sm.add_constant(df[["x1", "x2", "x3"]].dropna())
+vifs = {col: variance_inflation_factor(X.values, i) for i, col in enumerate(X.columns)}
+print(f"Breusch-Pagan p={bp_pval:.4f} | RESET p={reset_res.pvalue:.4f} | VIF={vifs}")
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 11: 11. hồi quy đa biến trên SachKTL"
+  title="Hướng dẫn thực hành 11. Hồi quy đa biến trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 11 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Giới thiệu hệ thống hồi quy đa biến | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c11/gioi-thieu-he-thong-hoi-quy-da-bien/) |
-| **Bài 02** | Ước lượng OLS và các tính chất thống kê | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c11/uoc-luong-ols-va-cac-tinh-chat-thong-ke/) |
-| **Bài 03** | Hồi quy có vẻ không liên quan | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c11/hoi-quy-co-ve-khong-lien-quan-sur/) |
-| **Bài 04** | Ước lượng hợp lý tối đa | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c11/uoc-luong-hop-ly-toi-da-mle/) |
-| **Bài 05** | Hồi quy giảm hạng | Stata 18 MP, R 4.x | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c11/hoi-quy-giam-hang/) |
-| **Bài 06** | Phân tích thành phần chính | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c11/phan-tich-thanh-phan-chinh-pca/) |
-| **Bài 07** | Hồi quy tăng cường nhân tố | Stata 18 MP, R 4.x | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c11/hoi-quy-tang-cuong-nhan-to/) |
-| **Bài 08** | Hướng dẫn thực hành phân tích hệ phương trình với Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c11/huong-dan-thuc-hanh-phan-tich-he-phuong-trinh-voi-stata/) |
+| **11.1** | Giới thiệu hệ thống hồi quy đa biến | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c11/gioi-thieu-he-thong-hoi-quy-da-bien/) |
+| **11.2** | Ước lượng OLS và các tính chất thống kê | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c11/uoc-luong-ols-va-cac-tinh-chat-thong-ke/) |
+| **11.3** | Hồi quy có vẻ không liên quan | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c11/hoi-quy-co-ve-khong-lien-quan-sur/) |
+| **11.4** | Ước lượng hợp lý tối đa | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c11/uoc-luong-hop-ly-toi-da-mle/) |
+| **11.5** | Hồi quy giảm hạng | `Stata 18 MP, R 4.x` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c11/hoi-quy-giam-hang/) |
+| **11.6** | Phân tích thành phần chính | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c11/phan-tich-thanh-phan-chinh-pca/) |
+| **11.7** | Hồi quy tăng cường nhân tố | `Stata 18 MP, R 4.x` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c11/hoi-quy-tang-cuong-nhan-to/) |
+| **11.8** | Hướng dẫn thực hành phân tích hệ phương trình với Stata | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c11/huong-dan-thuc-hanh-phan-tich-he-phuong-trinh-voi-stata/) |

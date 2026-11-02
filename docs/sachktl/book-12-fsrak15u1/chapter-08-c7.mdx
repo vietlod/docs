@@ -1,19 +1,19 @@
 ---
 id: chapter-08-c7
-title: "Chương 08: 7. hàm ý của các biến có nghiệm đơn vị"
-sidebar_label: "Chương 08: 7. Hàm ý của các biến có nghiệm đơn vị"
+title: "7. Hàm ý của các biến có nghiệm đơn vị"
+sidebar_label: "7. Hàm ý của các biến có nghiệm đơn vị"
 sidebar_position: 9
-description: "Hướng dẫn thực hành How-To Chương 08: 7. hàm ý của các biến có nghiệm đơn vị thuộc bộ sách Kinh tế phát triển thực nghiệm trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 7. Hàm ý của các biến có nghiệm đơn vị thuộc giáo trình Kinh tế phát triển thực nghiệm trên SachKTL kèm công thức toán học, phân tích 4 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 08: 7. hàm ý của các biến có nghiệm đơn vị
+# 7. Hàm ý của các biến có nghiệm đơn vị
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 08: 7. hàm ý của các biến có nghiệm đơn vị** thuộc [**Bộ sách 12: kinh tế phát triển thực nghiệm**](/sachktl/book-12-fsrak15u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/fsrak15u1/c7/](https://sachktl.tnsai.vn/vi/fsrak15u1/c7/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **4 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **7. Hàm ý của các biến có nghiệm đơn vị** thuộc bộ giáo trình [**Kinh tế phát triển thực nghiệm**](/sachktl/book-12-fsrak15u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/fsrak15u1/c7/](https://sachktl.tnsai.vn/vi/fsrak15u1/c7/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 08: 7. hàm ý của các biến có nghiệm đơn vị">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="7. Hàm ý của các biến có nghiệm đơn vị">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 12 · CHƯƠNG 08</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 08: 7. hàm ý của các biến có nghiệm đơn vị</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Kinh tế phát triển thực nghiệm · 4 bài học chuyên sâu</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Kinh tế phát triển thực nghiệm</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">7. Hàm ý của các biến có nghiệm đơn vị</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Suy diễn nhân quả và lượng giá tác động chính sách thực nghiệm · 4 bài học chuyên sâu</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,128 +41,232 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Hàm ý của các biến có nghiệm đơn vị Chào mừng các bạn sinh viên đến với chuỗi bài học về một trong những chủ đề quan trọng và thú vị nhất trong kinh tế lượng: phân tích dữ liệu chuỗi thời gian. Khi làm việc với dữ liệu thay đổi theo thời gian như GDP, lạm phát, hay giá cổ phiếu, chúng ta không thể áp dụng hồi quy OLS một cách máy móc như với dữ liệu chéo. Nếu không cẩn thận, chúng ta có thể rơi vào một cái bẫy gọi là "hồi quy giả mạo", nơi chúng ta tìm thấy những mối quan hệ có vẻ rất ý nghĩa về mặt thống kê nhưng lại hoàn toàn vô nghĩa trong thực tế. Nguyên nhân sâu xa của vấn đề này đến từ
+Hàm ý của các biến có nghiệm đơn vị Chào mừng các bạn sinh viên đến với chuỗi bài học về một trong những chủ đề quan trọng và thú vị nhất trong kinh tế lượng: phân tích dữ liệu chuỗi thời gian. Khi làm việc với dữ liệu thay đổi theo thời gian như GDP, lạm phát, hay giá cổ phiếu, chúng ta không thể áp dụng hồi quy OLS một cách máy móc như với dữ liệu chéo. Nếu không cẩn thận, chúng ta có thể rơi vào một cái bẫy gọi là "hồi quy giả mạo", nơi chúng ta tìm thấy những mối quan hệ có vẻ rất ý nghĩa về mặt thống kê nhưng lại hoàn toàn vô nghĩa trong thực tế.
 
-- **Chủ đề học thuật trọng tâm**: Cấu trúc chuỗi bài học, PHỤ LỤC: Chuẩn bị dữ liệu cho chuỗi bài viết.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+\tau_{\text{ATT}} = \mathbb{E}\left[Y_i(1) - Y_i(0) \mid D_i = 1\right] = \mathbb{E}\left[\mathbb{E}[Y_{it} - Y_{i,t-1} \mid D_i=1] - \mathbb{E}[Y_{it} - Y_{i,t-1} \mid D_i=0]\right] \tag*{[1]}
+$$
+
+$$
+Y_{it} = \alpha_i + \lambda_t + \sum_{k \neq -1} \delta_k \cdot \mathbb{I}(t - G_i = k) + \mathbf{X}_{it}'\boldsymbol{\beta} + \varepsilon_{it} \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Giả thiết xu hướng song song có điều kiện bảo đảm nhóm đối chứng phản ánh đúng quỹ đạo phản thực tế của nhóm chịu tác động khi không có chính sách.
+2. Giả thiết không có hành vi đón đầu chính sách và điều kiện chồng lấp điểm xu hướng $0 < P(D_i=1 \mid \mathbf{X}_i) < 1$ giúp nhận dạng chính xác $\tau_{\text{ATT}}$.
+3. Điều kiện đơn vị chịu tác động ổn định SUTVA loại trừ hiện tượng lan tỏa chéo làm nhiễu nhóm đối chứng.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 08 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/fsrak15u1/c7/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Ước lượng TWFE truyền thống bị chệch trọng số âm khi thời điểm áp dụng chính sách khác nhau giữa các nhóm và hiệu ứng điều trị biến thiên theo thời gian; cần dùng ước lượng Callaway-Sant'Anna hoặc Sun-Abraham."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Hiểu về nghiệm đơn vị và cách kiểm định trong Stata
+
+Chào mừng các bạn đã quay trở lại! Trong bài học giới thiệu, chúng ta đã nói về một "cái bẫy" nguy hiểm trong phân tích chuỗi thời gian gọi là hồi quy giả mạo. Đây là hiện tượng khi hai biến số không hề liên quan đến nhau trong thực tế nhưng kết quả hồi quy lại cho thấy một mối quan hệ rất mạnh. Gốc rễ của vấn đề này chính là khái niệm mà chúng ta sẽ tìm hiểu trong bài học hôm nay: nghiệm đơn vị.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Nền tảng lý thuyết về nghiệm đơn vị**
+- **1.1. Tính dừng và bậc tích hợp i**
+- **1.2. Kiểm định dickey-fuller và dickey-fuller mở rộng**
+- **2. Phương pháp nghiên cứu: Quy trình kiểm định nghiệm đơn vị**
+- **3. Ví dụ minh họa: Kiểm định nghiệm đơn vị cho GDP của argentina**
+- **3.1. Kiểm định cho mức GDP**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/fsrak15u1/c7/hieu-ve-nghiem-don-vi-va-cach-kiem-dinh-trong-stata/)
+
+### 2.2. Đồng tích hợp – Khi nào hai chuỗi không dừng có thể “đi cùng nhau”?
+
+Chào mừng các bạn đến với bài học thứ hai trong chuỗi bài về phân tích chuỗi thời gian! Ở bài trước, chúng ta đã tìm hiểu về nghiệm đơn vị và cách kiểm định nó. Chúng ta đã biết rằng nhiều biến kinh tế vĩ mô, như GDP và mức giá, là các chuỗi không dừng, tức là chúng có nghiệm đơn vị. Vậy, nếu chúng ta muốn nghiên cứu mối quan hệ giữa hai biến không dừng, liệu chúng ta có thể sử dụng phương pháp hồi quy thông thường hay không? Câu trả lời là: có, với điều kiện các biến đó là đồng tích hợp.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Đồng tích hợp là gì?**
+- **1.1. Tổ hợp tuyến tính và phần dư**
+- **1.2. Bậc tích hợp của tổ hợp tuyến tính**
+- **2. Phương pháp nghiên cứu: Kiểm định đồng tích hợp Engle-Granger**
+- **3. Ví dụ minh họa: Kiểm định đồng tích hợp cho GDP và lạm phát của argentina**
+- **3.1. Bước 1: Hồi quy OLS**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/fsrak15u1/c7/dong-tich-hop-khi-nao-hai-chuoi-khong-dung-co-the-di-cung-nhau/)
+
+### 2.3. Mô hình hiệu chỉnh sai số và nhân quả Granger
+
+Chào mừng các bạn đã quay trở lại! Trong hai bài học trước, chúng ta đã đi qua một hành trình quan trọng: từ việc phát hiện các chuỗi không dừng) bằng kiểm định ADF, đến việc kiểm tra xem chúng có một mối quan hệ cân bằng dài hạn hay không bằng kiểm định đồng tích hợp. Ở bài 2, chúng ta đã đi đến một kết luận có vẻ hơi đáng thất vọng: mức GDP và tỷ lệ lạm phát ở Argentina dường như không đồng tích hợp, và hồi quy giữa chúng có thể là giả mạo. Vậy đây có phải là ngõ cụt không? Không hẳn. Có thể mô hình ban đầu của chúng ta quá đơn giản.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Lý thuyết về mô hình hiệu chỉnh sai số**
+- **1.1. Cấu trúc của một mô hình ECM**
+- **2. Lý thuyết về nhân quả Granger**
+- **3. Ví dụ minh họa: Kiểm định nhân quả Granger cho argentina**
+- **3.1. Kiểm định: Lạm phát có Granger-gây ra tăng trưởng không?**
+- **3.2. Kiểm định: Tăng trưởng có Granger-gây ra lạm phát không?**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/fsrak15u1/c7/mo-hinh-hieu-chinh-sai-so-va-nhan-qua-granger/)
+
+### 2.4. Hướng dẫn thực hành phân tích tăng trưởng và lạm phát
+
+Chào mừng các bạn đến với bài học cuối cùng trong chuỗi bài về phân tích chuỗi thời gian! Xin chúc mừng các bạn đã đi đến chặng đường này. Trong ba bài học vừa qua, chúng ta đã cùng nhau xây dựng một nền tảng lý thuyết vững chắc, từ việc nhận diện "căn bệnh" nghiệm đơn vị, tìm hiểu điều kiện "khỏe mạnh" của đồng tích hợp, cho đến việc sử dụng các "phương thuốc" hiệu quả như Mô hình Hiệu chỉnh Sai số và kiểm định Nhân quả Granger. Giờ là lúc chúng ta tổng hợp tất cả lại và đóng vai một nhà kinh tế lượng thực thụ.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Tóm tắt tổng hợp và quy trình phân tích**
+- **2. Hướng dẫn thực hành từng bước với Stata**
+- **Bước 1: Kiểm tra đặc tính của dữ liệu**
+- **Bước 2: Mô hình "ngây thơ" và hồi quy giả mạo**
+- **Bước 3: Mô hình "an toàn" bằng sai phân**
+- **Bước 4: Xây dựng mô hình hiệu chỉnh sai số hoàn chỉnh**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/fsrak15u1/c7/huong-dan-thuc-hanh-phan-tich-tang-truong-va-lam-phat/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Hiểu về nghiệm đơn vị và cách kiểm định trong Stata</h3>
-    <p>Chào mừng các bạn đã quay trở lại! Trong bài học giới thiệu, chúng ta đã nói về một "cái bẫy" nguy hiểm trong phân tích chuỗi thời gian gọi là hồi quy giả mạo. Đây là hiện tượng khi hai biến số không hề liên quan đến nhau trong thực tế nhưng kết quả hồi quy lạ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/fsrak15u1/c7/hieu-ve-nghiem-don-vi-va-cach-kiem-dinh-trong-stata/" target="_blank" rel="noopener">Hiểu về nghiệm đơn vị và cách kiểm định trong Stata</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>7. Hàm ý của các biến có nghiệm đơn vị</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Đồng tích hợp – khi nào hai chuỗi không dừng có thể “đi cùng nhau”?</h3>
-    <p>Chào mừng các bạn đến với bài học thứ hai trong chuỗi bài về phân tích chuỗi thời gian! Ở bài trước, chúng ta đã tìm hiểu về nghiệm đơn vị và cách kiểm định nó. Chúng ta đã biết rằng nhiều biến kinh tế vĩ mô, như GDP và mức giá, là các chuỗi không dừng, tức là Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/fsrak15u1/c7/dong-tich-hop-khi-nao-hai-chuoi-khong-dung-co-the-di-cung-nhau/" target="_blank" rel="noopener">Đồng tích hợp – Khi nào hai chuỗi không dừng có thể “đi cùng nhau”?</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Mô hình hiệu chỉnh sai số và nhân quả Granger</h3>
-    <p>Chào mừng các bạn đã quay trở lại! Trong hai bài học trước, chúng ta đã đi qua một hành trình quan trọng: từ việc phát hiện các chuỗi không dừng) bằng kiểm định ADF, đến việc kiểm tra xem chúng có một mối quan hệ cân bằng dài hạn hay không bằng kiểm định đồng  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/fsrak15u1/c7/mo-hinh-hieu-chinh-sai-so-va-nhan-qua-granger/" target="_blank" rel="noopener">Mô hình hiệu chỉnh sai số và nhân quả Granger</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/fsrak15u1/c7/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Hướng dẫn thực hành phân tích tăng trưởng và lạm phát</h3>
-    <p>Chào mừng các bạn đến với bài học cuối cùng trong chuỗi bài về phân tích chuỗi thời gian! Xin chúc mừng các bạn đã đi đến chặng đường này. Trong ba bài học vừa qua, chúng ta đã cùng nhau xây dựng một nền tảng lý thuyết vững chắc, từ việc nhận diện "căn bệnh" n Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/fsrak15u1/c7/huong-dan-thuc-hanh-phan-tich-tang-truong-va-lam-phat/" target="_blank" rel="noopener">Hướng dẫn thực hành phân tích tăng trưởng và lạm phát</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
+  </div>
+  <div className="step-item">
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Ước lượng tác động nhân quả với DiD, Event Study và Propensity Score Matching
 version 18.0
 clear all
 set more off
+import delimited "sachktl_causal_ecodata.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_fsrak15u1_c08_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+* 1. Ước lượng Difference-in-Differences hai chiều và kiểm định xu hướng song song
+xtset id year
+xtdidregress (y x1 x2) (treated_post), group(id) time(year) vce(cluster id)
+estat trendplots
+estat ptrends
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 2. Ước lượng ghép cặp điểm xu hướng (PSM) và nghịch đảo xác suất trọng số (IPWRA)
+teffects psmatch (y) (treat x1 x2 x3, probit), atet vce(iid)
+teffects ipwra (y x1 x2) (treat x1 x2 x3, logit), atet
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
-library(tidyverse)
-library(lmtest)
-library(sandwich)
+# Nạp thư viện suy diễn nhân quả fixest, did và MatchIt
+library(fixest)
+library(did)
+library(MatchIt)
 
-df <- read.csv("sachktl_fsrak15u1_c08_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_causal_ecodata.csv")
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Ước lượng mô hình DiD và Event Study với sai số chuẩn cụm
+mod_did <- feols(y ~ treated_post + x1 + x2 | id + year, data = df, cluster = ~id)
+summary(mod_did)
+
+# 2. Ước lượng Callaway & Sant'Anna (2021) cho DiD đa thời điểm
+cs_out <- att_gt(yname = "y", tname = "year", idname = "id", gname = "first_treat",
+                 xformla = ~ x1 + x2, data = df, control_group = "nevertreated")
+summary(aggte(cs_out, type = "dynamic"))
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và linearmodels để ước lượng DiD & IPW
 import pandas as pd
 import statsmodels.formula.api as smf
+from linearmodels.panel import PanelOLS
 
-df = pd.read_csv("sachktl_fsrak15u1_c08_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_causal_ecodata.csv")
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Ước lượng điểm xu hướng Propensity Score bằng Logit
+ps_mod = smf.logit("treat ~ x1 + x2 + x3", data=df).fit(disp=False)
+df["pscore"] = ps_mod.predict(df)
+
+# 2. Ước lượng Difference-in-Differences hai chiều với sai số chuẩn cụm
+df_panel = df.set_index(["id", "year"])
+did_mod = PanelOLS.from_formula("y ~ 1 + treated_post + x1 + x2 + EntityEffects + TimeEffects", data=df_panel)
+did_res = did_mod.fit(cov_type="clustered", cluster_entity=True)
+print(did_res.summary)
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 08: 7. hàm ý của các biến có nghiệm đơn vị trên SachKTL"
+  title="Hướng dẫn thực hành 7. Hàm ý của các biến có nghiệm đơn vị trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 08 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Hiểu về nghiệm đơn vị và cách kiểm định trong Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/fsrak15u1/c7/hieu-ve-nghiem-don-vi-va-cach-kiem-dinh-trong-stata/) |
-| **Bài 02** | Đồng tích hợp – Khi nào hai chuỗi không dừng có thể “đi cùng nhau”? | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/fsrak15u1/c7/dong-tich-hop-khi-nao-hai-chuoi-khong-dung-co-the-di-cung-nhau/) |
-| **Bài 03** | Mô hình hiệu chỉnh sai số và nhân quả Granger | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/fsrak15u1/c7/mo-hinh-hieu-chinh-sai-so-va-nhan-qua-granger/) |
-| **Bài 04** | Hướng dẫn thực hành phân tích tăng trưởng và lạm phát | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/fsrak15u1/c7/huong-dan-thuc-hanh-phan-tich-tang-truong-va-lam-phat/) |
+| **8.1** | Hiểu về nghiệm đơn vị và cách kiểm định trong Stata | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/fsrak15u1/c7/hieu-ve-nghiem-don-vi-va-cach-kiem-dinh-trong-stata/) |
+| **8.2** | Đồng tích hợp – Khi nào hai chuỗi không dừng có thể “đi cùng nhau”? | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/fsrak15u1/c7/dong-tich-hop-khi-nao-hai-chuoi-khong-dung-co-the-di-cung-nhau/) |
+| **8.3** | Mô hình hiệu chỉnh sai số và nhân quả Granger | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/fsrak15u1/c7/mo-hinh-hieu-chinh-sai-so-va-nhan-qua-granger/) |
+| **8.4** | Hướng dẫn thực hành phân tích tăng trưởng và lạm phát | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/fsrak15u1/c7/huong-dan-thuc-hanh-phan-tich-tang-truong-va-lam-phat/) |

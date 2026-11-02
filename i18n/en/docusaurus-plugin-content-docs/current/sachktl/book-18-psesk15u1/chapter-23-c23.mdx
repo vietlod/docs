@@ -1,19 +1,19 @@
 ---
 id: chapter-23-c23
-title: "Chapter 23: 23. Mô hình VARX — Time Series and Panel Data Econometrics"
-sidebar_label: "Chapter 23: 23. Mô hình VARX"
+title: "23. Mô hình VARX"
+sidebar_label: "23. Mô hình VARX"
 sidebar_position: 24
-description: "Step-by-step practical how-to guide for Chapter 23: 23. Mô hình VARX from Time Series and Panel Data Econometrics on SachKTL with Stata, R, and Python workflows integrated with EcoData, Finco, and EcoLab."
+description: "Comprehensive practical how-to guide for 23. Mô hình VARX from Time Series and Panel Data Econometrics on SachKTL featuring structural equations, 6 lesson breakdowns, and Stata, R, and Python scripts."
 ---
 
-# Chapter 23: 23. Mô hình VARX — Time Series and Panel Data Econometrics
+# 23. Mô hình VARX
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-This practical how-to guide synthesizes the methodology and empirical implementation workflow of **Chapter 23: 23. Mô hình VARX** from [**Book 18: Time Series and Panel Data Econometrics**](/en/sachktl/book-18-psesk15u1/), with direct backlinks to the authoritative source material at [https://sachktl.tnsai.vn/vi/psesk15u1/c23/](https://sachktl.tnsai.vn/vi/psesk15u1/c23/).
+This practical how-to guide presents the theoretical foundations, structural mathematical equations, detailed breakdown of **6 specialized lessons**, and multi-platform replication workflows for **23. Mô hình VARX** from the textbook [**Time Series and Panel Data Econometrics**](/en/sachktl/book-18-psesk15u1/), with direct cross-references to the authoritative source material at [https://sachktl.tnsai.vn/vi/psesk15u1/c23/](https://sachktl.tnsai.vn/vi/psesk15u1/c23/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chapter 23: 23. Mô hình VARX">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="23. Mô hình VARX">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ This practical how-to guide synthesizes the methodology and empirical implementa
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BOOK 18 · CHAPTER 23</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chapter 23: 23. Mô hình VARX</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Part of Textbook: Time Series and Panel Data Econometrics · 6 Detailed Lessons</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Time Series and Panel Data Econometr</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">23. Mô hình VARX</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Time Series Econometrics, Cointegration, and Financial Volatility · 6 Detailed Lesson</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,138 +41,272 @@ This practical how-to guide synthesizes the methodology and empirical implementa
   </svg>
 </div>
 
-## 1. Methodological Meaning and Scope of Application
+## 1. Methodological Foundations, Mathematical Specification, and Identification
 
-Giới thiệu mô hình VARX cho người bắt đầu An Introduction to VARX Modelling for Beginners Chào các bạn sinh viên, chào mừng đến với chuỗi bài học chuyên sâu về Mô hình VARX . Trong kinh tế lượng, chúng ta thường bắt đầu với mô hình VAR để phân tích mối quan hệ tương tác giữa nhiều biến. Tuy nhiên, thực tế thường phức tạp hơn: có những biến số bên ngoài tác động mạnh mẽ đến kinh tế trong nước, nhưng bản thân chúng lại ít bị ảnh hưởng ngược lại trong dài hạn. Mô hình VARX ra đời chính để giải quyết bài toán này, cho phép chúng ta đưa các biến "ngoại sinh yếu" vào mô hình một cách hợp lý. Đây là
+Giới thiệu mô hình VARX cho người bắt đầu An Introduction to VARX Modelling for Beginners Chào các bạn sinh viên, chào mừng đến với chuỗi bài học chuyên sâu về Mô hình VARX . Trong kinh tế lượng, chúng ta thường bắt đầu với mô hình VAR để phân tích mối quan hệ tương tác giữa nhiều biến. Tuy nhiên, thực tế thường phức tạp hơn: có những biến số bên ngoài tác động mạnh mẽ đến kinh tế trong nước, nhưng bản thân chúng lại ít bị ảnh hưởng ngược lại trong dài hạn. Mô hình VARX ra đời chính để giải quyết bài toán này, cho phép chúng ta đưa các biến "ngoại sinh yếu" vào mô hình một cách hợp lý.
 
-- **Core Academic Topics**: CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO, PHỤ LỤC: DỮ LIỆU MÔ PHỎNG CHO SERIES.
-- **Supported Analytical Environments**: `Stata 18 MP`.
-- **Recommended Empirical Data Sources**: Vietnamese macroeconomic, corporate, and household survey datasets on [EcoData](https://ecodata.io.vn), capital and commodity market series on [Finco](https://www.finco.vn), model cross-references on [VietLOD](https://vietlod.tnsai.vn), and automated estimation on [EcoLab](https://ecolab.io.vn).
+### 1.1. Structural Equations and Representative Estimator
+
+$$
+\Phi(L)(1 - L)^d Y_t = \mu + \Theta(L)\varepsilon_t, \quad \varepsilon_t \mid \mathcal{F}_{t-1} \sim \mathcal{N}(0, \sigma_t^2) \tag*{[1]}
+$$
+
+$$
+\sigma_t^2 = \omega + \sum_{i=1}^p \alpha_i \varepsilon_{t-i}^2 + \sum_{j=1}^q \beta_j \sigma_{t-j}^2, \quad \omega > 0, \; \alpha_i, \beta_j \ge 0 \tag*{[2]}
+$$
+
+### 1.2. Core Identification Assumptions and Applicability Conditions
+
+1. Time series processes must satisfy covariance stationarity or be differenced to their appropriate order of integration $I(d)$ prior to estimation.
+2. Roots of the autoregressive $\Phi(L)$ and moving-average $\Theta(L)$ lag polynomials must lie strictly outside the complex unit circle.
+3. In conditional volatility GARCH specifications, the persistence condition $\sum \alpha_i + \sum \beta_j < 1$ ensures finite unconditional variance.
 
 <FeatureCards
   features={[
     {
-      title: "Original Chapter on SachKTL",
-      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for Chapter 23 on SachKTL.",
+      title: "Authoritative Chapter on SachKTL",
+      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for this chapter on SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/psesk15u1/c23/"
     },
     {
       title: "Practice Datasets on EcoData & Finco",
-      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and survey data for hands-on replication.",
+      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and household survey data for hands-on replication.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
       title: "Automated Estimation on EcoLab",
-      description: "Execute econometric specifications, run diagnostic battery tests, and export publication-grade tables automatically.",
+      description: "Execute econometric specifications, run diagnostic battery tests, and export APA 7th / AER publication-grade tables automatically.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Step-by-Step Practical Implementation Across Chapter Lessons
+<FeatureNotAvailable
+  feature="Unconditional Baseline Estimation Under Violated Identification Assumptions"
+  reason="Regressing nonstationary levels without unit-root and Johansen cointegration testing induces spurious regression with inflated $t$-statistics and $R^2$."
+  alternative="Run the complete diagnostic battery in Step 4 and transition to the appropriate corrective estimator on VietLOD or EcoLab."
+/>
+
+## 2. Lesson-by-Lesson Academic Breakdown
+
+### 2.1. Nền tảng mô hình VARX và tính ngoại sinh yếu
+
+Nền tảng mô hình VARX và tính ngoại sinh yếu VARX model foundations and weak exogeneity 1. Tại sao cần mô hình VARX? Trong hành trình khám phá kinh tế lượng chuỗi thời gian, chắc hẳn các bạn đã quen thuộc với mô hình VAR . Đây là một công cụ tuyệt vời để phân tích mối quan hệ động, tương tác qua lại giữa một nhóm các biến số, nơi mỗi biến đều được coi là "nội sinh" và có thể ảnh hưởng lẫn nhau. Tuy nhiên, trong nhiều bài toán kinh tế thực tế, cách tiếp cận đối xứng này không phải lúc nào cũng phù hợp.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **1. Tại sao cần mô hình VARX?**
+- **2. Nền tảng lý thuyết của mô hình VARX**
+- **2.1. Thiết lập mô hình VECM tổng quát**
+- **2.2. Phân rã và Mô hình có điều kiện**
+- **2.3. Giả định then chốt: Tính Ngoại sinh yếu**
+- **3. Phương pháp luận: Xây dựng mô hình VARX từng bước**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c23/nen-tang-mo-hinh-varx-va-tinh-ngoai-sinh-yeu/)
+
+### 2.2. Ước lượng hiệu quả và các trường hợp đặc biệt
+
+Ước lượng hiệu quả và các trường hợp đặc biệt Efficient estimation and the special cases 1. Tìm kiếm những ước lượng "tốt nhất" Ở bài học trước, chúng ta đã xây dựng được mô hình VECM có điều kiện cho các biến nội sinh. Mô hình đó trông như sau: $\Delta y_t = -\Pi_y z_{t-1} + \Lambda \Delta x_t + v_t$. Đây là một công thức đẹp về mặt lý thuyết, nhưng trong thực tế, các ma trận $\Pi_y$ và $\Lambda$ là những ẩn số.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **1. Tìm kiếm những ước lượng "tốt nhất"**
+- **2. Nguyên lý Ước lượng Hợp lý Tối đa**
+- **2.1. Hàm Log-Likelihood và bài toán tối ưu hóa**
+- **2.2. Tập trung vào tham số dài hạn: Kỹ thuật "Concentrating Out"**
+- **2.3. Lời giải của Johansen: Bài toán giá trị riêng**
+- **3. Quy trình ước lượng VECM-VARX**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c23/uoc-luong-hieu-qua-va-cac-truong-hop-dac-biet/)
+
+### 2.3. Kiểm định đồng kết hợp trong mô hình VARX
+
+Kiểm định Đồng kết hợp trong Mô hình VARX Testing for cointegration in VARX models 1. Câu hỏi về "Hạng" Ở bài học trước, chúng ta đã biết rằng các mối quan hệ đồng kết hợp được chứa trong ma trận dài hạn $\Pi_y = \alpha_y \beta'$. Số lượng các mối quan hệ đồng kết hợp độc lập tuyến tính được gọi là hạng đồng kết hợp , ký hiệu là $r$. Hạng $r$ này chính là số cột của ma trận $\beta$. Việc xác định chính xác giá trị của $r$ là cực kỳ quan trọng.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **1. Câu hỏi về "Hạng"**
+- **2. Logic của các kiểm định Johansen**
+- **2.1. Cấu trúc giả thuyết tuần tự**
+- **2.2. Thống kê kiểm định Dấu**
+- **2.3. Thống kê kiểm định Giá trị riêng Tối đa**
+- **3. Quy trình kiểm định hạng đồng kết hợp**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c23/kiem-dinh-dong-ket-hop-trong-mo-hinh-varx/)
+
+### 2.4. Định danh, dự báo và ứng dụng thực tiễn
+
+Định danh, Dự báo và Ứng dụng Thực tiễn Identification, forecasting, and practical application 1. Từ Thống kê đến Kinh tế học Ở các bài học trước, chúng ta đã đi sâu vào "cơ khí" của mô hình VARX. Chúng ta đã học cách xây dựng mô hình, ước lượng các tham số, và thậm chí xác định được số lượng các mối quan hệ đồng kết hợp. Tuy nhiên, tại thời điểm này, các kết quả của chúng ta vẫn chỉ là những con số và ma trận trừu tượng.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **1. Từ Thống kê đến Kinh tế học**
+- **2. Ba trụ cột của phân tích ứng dụng**
+- **2.1. Định danh các mối quan hệ dài hạn**
+- **2.2. Dự báo với mô hình VARX**
+- **2.3. Ứng dụng thực tiễn: Mô hình kinh tế vĩ mô cho Vương quốc Anh**
+- **3. Quy trình nghiên cứu ứng dụng hoàn chỉnh**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c23/dinh-danh-du-bao-va-ung-dung-thuc-tien/)
+
+### 2.5. Hướng dẫn thực hành Stata toàn diện
+
+Hướng dẫn thực hành Stata toàn diện cho mô hình VARX A comprehensive Stata tutorial for VARX modelling 1. Tóm tắt tổng hợp và mục tiêu thực hành Chào mừng các bạn đến với bài học thực hành quan trọng nhất của chuỗi bài viết! Trong bốn bài học trước, chúng ta đã cùng nhau xây dựng một nền tảng lý thuyết vững chắc: từ việc hiểu cấu trúc mô hình VARX và vai trò của tính ngoại sinh yếu, đến việc nắm vững nguyên lý ước lượng hợp lý tối đa, cách kiểm định hạng đồng kết hợp, và cuối cùng là nghệ thuật định danh các mối quan hệ kinh tế.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **1. Tóm tắt tổng hợp và mục tiêu thực hành**
+- **2. Chuẩn bị dữ liệu và khám phá ban đầu**
+- **2.1. Tải và khai báo dữ liệu chuỗi thời gian**
+- **2.2. Vẽ đồ thị để quan sát trực quan**
+- **2.3. Kiểm định nghiệm đơn vị**
+- **3. Quy trình phân tích VECM-VARX trên Stata**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c23/huong-dan-thuc-hanh-stata-toan-dien/)
+
+### 2.6. Bài tổng hợp và định hướng nâng cao
+
+Tổng hợp mô hình VARX: Hệ thống kiến thức và hướng phát triển VARX modelling synthesis: Knowledge framework and future directions 1. Vị trí của VARX trong bản đồ Kinh tế lượng Chào mừng các bạn đến với bài viết cuối cùng trong chuỗi bài học về mô hình VARX. Chúng ta đã cùng nhau đi qua một hành trình đầy thử thách nhưng cũng vô cùng bổ ích, từ những viên gạch lý thuyết đầu tiên đến việc xây dựng một mô hình hoàn chỉnh trên Stata.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **1. Vị trí của VARX trong bản đồ Kinh tế lượng**
+- **2. Bốn trụ cột cốt lõi**
+- **3. Quy trình làm việc từ A đến Z**
+- **4. VÍ DỤ TỔNG HỢP: Phân tích chính sách tiền tệ**
+- **5. TỔNG KẾT VÀ HƯỚNG PHÁT TRIỂN**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c23/bai-tong-hop-va-dinh-huong-nang-cao/)
+
+## 3. Step-by-Step Empirical Implementation Workflow
 
 <Steps>
   <div className="step-item">
-    <h3>Step 1: Nền tảng mô hình VARX và tính ngoại sinh yếu</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Nền tảng mô hình VARX và tính ngoại sinh yếu. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c23/nen-tang-mo-hinh-varx-va-tinh-ngoai-sinh-yeu/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/psesk15u1/c23/nen-tang-mo-hinh-varx-va-tinh-ngoai-sinh-yeu/</a>.</p>
+    <h3>1. Formulate the Research Question and Prepare Data on EcoData & Finco</h3>
+    <p>Define the dependent variable, core explanatory variables, and control covariates aligned with <strong>23. Mô hình VARX</strong>. Extract standardized Vietnamese empirical series from <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> or <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, and screen for missing observations and extreme outliers.</p>
   </div>
   <div className="step-item">
-    <h3>Step 2: Ước lượng hiệu quả và các trường hợp đặc biệt</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Ước lượng hiệu quả và các trường hợp đặc biệt. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c23/uoc-luong-hieu-qua-va-cac-truong-hop-dac-biet/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/psesk15u1/c23/uoc-luong-hieu-qua-va-cac-truong-hop-dac-biet/</a>.</p>
+    <h3>2. Conduct Descriptive Profiling, Correlation Analysis, and Pre-Estimation Checks</h3>
+    <p>Examine empirical distributions, construct summary statistics tables, and evaluate collinearity using pairwise correlation matrices and Variance Inflation Factors (VIF).</p>
   </div>
   <div className="step-item">
-    <h3>Step 3: Kiểm định đồng kết hợp trong mô hình VARX</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Kiểm định đồng kết hợp trong mô hình VARX. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c23/kiem-dinh-dong-ket-hop-trong-mo-hinh-varx/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/psesk15u1/c23/kiem-dinh-dong-ket-hop-trong-mo-hinh-varx/</a>.</p>
+    <h3>3. Estimate the Model Across Stata 18 MP, R 4.x, and Python 3.11+</h3>
+    <p>Execute the parameter estimation scripts matching the structural equations in Section 1.1 while cross-checking theoretical derivations at <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c23/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Step 4: Định danh, dự báo và ứng dụng thực tiễn</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Định danh, dự báo và ứng dụng thực tiễn. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c23/dinh-danh-du-bao-va-ung-dung-thuc-tien/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/psesk15u1/c23/dinh-danh-du-bao-va-ung-dung-thuc-tien/</a>.</p>
+    <h3>4. Perform Post-Estimation Diagnostics and Robust Variance Correction</h3>
+    <p>Test for heteroskedasticity, serial correlation, Ramsey RESET functional form misspecification, and regressor endogeneity. Apply White HC1 or cluster-robust standard errors for valid inference.</p>
   </div>
   <div className="step-item">
-    <h3>Step 5: Hướng dẫn thực hành Stata toàn diện</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Hướng dẫn thực hành Stata toàn diện. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c23/huong-dan-thuc-hanh-stata-toan-dien/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/psesk15u1/c23/huong-dan-thuc-hanh-stata-toan-dien/</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Step 6: Bài tổng hợp và định hướng nâng cao</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Bài tổng hợp và định hướng nâng cao. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c23/bai-tong-hop-va-dinh-huong-nang-cao/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/psesk15u1/c23/bai-tong-hop-va-dinh-huong-nang-cao/</a>.</p>
+    <h3>5. Format Journal-Grade Tables and Cross-Verify on EcoLab</h3>
+    <p>Report point estimates, standard errors in parentheses, and statistical significance stars following APA 7th / AER Booktabs standards, or automate the entire reporting pipeline on <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> and <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Multi-Platform Implementation Examples in Stata, R, and Python
+## 4. Multi-Platform Implementation Scripts in Stata, R, and Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Initialize environment and load practice dataset from EcoData / SachKTL
+* Thiết lập chuỗi thời gian, kiểm định nghiệm đơn vị và ước lượng ARIMA / GARCH
 version 18.0
 clear all
 set more off
+import delimited "sachktl_timeseries_finco.csv", clear encoding("utf-8")
 
-* Import standardized empirical dataset
-import delimited "sachktl_psesk15u1_c23_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+tsset time_id
+dfuller y, lags(4) trend regress
+pperron y, lags(4) trend
 
-* Estimate baseline specification and run diagnostic checks with robust standard errors
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 1. Ước lượng mô hình ARIMA và kiểm định nhiễu trắng phần dư
+arima y, arima(1,1,1) vce(robust)
+predict resid_arima, resid
+wntestq resid_arima, lags(12)
+
+* 2. Ước lượng mô hình phương sai có điều kiện thay đổi ARCH/GARCH(1,1)
+arch d.y x1 x2, arch(1) garch(1) vce(robust)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Load econometric packages and practice dataset from EcoData / SachKTL
-library(tidyverse)
-library(lmtest)
-library(sandwich)
+# Nạp thư viện chuỗi thời gian và ước lượng ARIMA / GARCH(1,1)
+library(tseries)
+library(forecast)
+library(rugarch)
 
-df <- read.csv("sachktl_psesk15u1_c23_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_timeseries_finco.csv")
+y_ts <- ts(df$y, frequency = 12)
 
-# Estimate model and compute heteroskedasticity-robust HC1 standard errors
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA tối ưu theo AICc
+adf.test(y_ts)
+fit_arima <- auto.arima(y_ts, seasonal = FALSE, ic = "aicc")
+summary(fit_arima)
+checkresiduals(fit_arima)
+
+# 2. Ước lượng mô hình GARCH(1,1) cho chuỗi lợi suất
+spec <- ugarchspec(variance.model = list(model = "sGARCH", garchOrder = c(1, 1)),
+                   mean.model = list(armaOrder = c(1, 0), include.mean = TRUE))
+fit_garch <- ugarchfit(spec = spec, data = diff(y_ts))
+show(fit_garch)
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Load econometric libraries and practice dataset from EcoData / SachKTL
+# Nạp thư viện statsmodels và arch để phân tích chuỗi thời gian & biến động
 import pandas as pd
-import statsmodels.formula.api as smf
+from statsmodels.tsa.stattools import adfuller
+from statsmodels.tsa.arima.model import ARIMA
+from arch import arch_model
 
-df = pd.read_csv("sachktl_psesk15u1_c23_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_timeseries_finco.csv")
+y = df["y"].dropna()
 
-# Fit specification with HC1 robust standard errors
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA(1,1,1)
+adf_stat, p_val, *_ = adfuller(y, autolag="AIC")
+print(f"ADF Statistic: {adf_stat:.4f}, p-value: {p_val:.4f}")
+arima_res = ARIMA(y, order=(1, 1, 1)).fit()
+print(arima_res.summary())
+
+# 2. Ước lượng mô hình GARCH(1,1) với phân phối Student-t
+ret = y.diff().dropna() * 100
+garch_res = arch_model(ret, vol="Garch", p=1, q=1, dist="t").fit(disp="off")
+print(garch_res.summary())
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video Tutorial Walkthrough
+## 5. Post-Estimation Diagnostic and Interpretation Guide
+
+| Diagnostic Criterion | Null Hypothesis $H_0$ | Benchmark Threshold | Corrective Action When $H_0$ Is Rejected |
+| :--- | :--- | :--- | :--- |
+| **Heteroskedasticity** | Constant error variance $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ rejects $H_0$ | Apply `vce(robust)`, `vcovHC(HC1)`, or FGLS/WLS weighted estimation |
+| **Multicollinearity** | No severe linear dependence among regressors | $\text{VIF} < 10$ acceptable | Drop redundant covariates, center interactions, or apply LASSO/Ridge regularization |
+| **Ramsey RESET Functional Form** | No omitted nonlinear or higher-order terms | $p\text{-value} > 0.05$ retains $H_0$ | Add interaction terms, quadratic polynomials, or log-transform skewed positive variables |
+| **Regressor Exogeneity** | Orthogonality $\text{Cov}(X, \varepsilon)=0$ | Durbin-Wu-Hausman $p > 0.05$ | Transition to IV/2SLS, LIML, or GMM estimation with validated instruments |
+
+## 6. Video Tutorial Walkthrough
 
 <VideoTutorial
-  title="Practical Walkthrough for Chapter 23: 23. Mô hình VARX on SachKTL"
+  title="Practical Walkthrough for 23. Mô hình VARX on SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Complete Lesson Directory and Backlinks to Original SachKTL Articles
+## 7. Complete Lesson Directory and Backlinks to Original SachKTL Articles
 
-| No. | Lesson Title in Chapter 23 | Supported Software | Original Source Link on SachKTL |
+| Lesson Code | Lesson Title | Supported Software | Original Source Link on SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Lesson 01** | Nền tảng mô hình VARX và tính ngoại sinh yếu | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c23/nen-tang-mo-hinh-varx-va-tinh-ngoai-sinh-yeu/) |
-| **Lesson 02** | Ước lượng hiệu quả và các trường hợp đặc biệt | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c23/uoc-luong-hieu-qua-va-cac-truong-hop-dac-biet/) |
-| **Lesson 03** | Kiểm định đồng kết hợp trong mô hình VARX | Stata 18 MP, R 4.x | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c23/kiem-dinh-dong-ket-hop-trong-mo-hinh-varx/) |
-| **Lesson 04** | Định danh, dự báo và ứng dụng thực tiễn | Stata 18 MP, R 4.x | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c23/dinh-danh-du-bao-va-ung-dung-thuc-tien/) |
-| **Lesson 05** | Hướng dẫn thực hành Stata toàn diện | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c23/huong-dan-thuc-hanh-stata-toan-dien/) |
-| **Lesson 06** | Bài tổng hợp và định hướng nâng cao | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c23/bai-tong-hop-va-dinh-huong-nang-cao/) |
+| **23.1** | Nền tảng mô hình VARX và tính ngoại sinh yếu | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c23/nen-tang-mo-hinh-varx-va-tinh-ngoai-sinh-yeu/) |
+| **23.2** | Ước lượng hiệu quả và các trường hợp đặc biệt | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c23/uoc-luong-hieu-qua-va-cac-truong-hop-dac-biet/) |
+| **23.3** | Kiểm định đồng kết hợp trong mô hình VARX | `Stata 18 MP, R 4.x` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c23/kiem-dinh-dong-ket-hop-trong-mo-hinh-varx/) |
+| **23.4** | Định danh, dự báo và ứng dụng thực tiễn | `Stata 18 MP, R 4.x` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c23/dinh-danh-du-bao-va-ung-dung-thuc-tien/) |
+| **23.5** | Hướng dẫn thực hành Stata toàn diện | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c23/huong-dan-thuc-hanh-stata-toan-dien/) |
+| **23.6** | Bài tổng hợp và định hướng nâng cao | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c23/bai-tong-hop-va-dinh-huong-nang-cao/) |

@@ -1,19 +1,19 @@
 ---
 id: chapter-08-c8
-title: "Chapter 08: 8. Các mô hình dữ liệu bảng tuyến tính: Cơ bản — Microeconometrics Using Stata"
-sidebar_label: "Chapter 08: 8. Các mô hình dữ liệu bảng tuyến tính: Cơ"
+title: "8. Các mô hình dữ liệu bảng tuyến tính: Cơ bản"
+sidebar_label: "8. Các mô hình dữ liệu bảng tuyến tính: Cơ bản"
 sidebar_position: 9
-description: "Step-by-step practical how-to guide for Chapter 08: 8. Các mô hình dữ liệu bảng tuyến tính: Cơ bản from Microeconometrics Using Stata on SachKTL with Stata, R, and Python workflows integrated with EcoData, Finco, and EcoLab."
+description: "Comprehensive practical how-to guide for 8. Các mô hình dữ liệu bảng tuyến tính: Cơ bản from Microeconometrics Using Stata on SachKTL featuring structural equations, 8 lesson breakdowns, and Stata, R, and Python scripts."
 ---
 
-# Chapter 08: 8. Các mô hình dữ liệu bảng tuyến tính: Cơ bản — Microeconometrics Using Stata
+# 8. Các mô hình dữ liệu bảng tuyến tính: Cơ bản
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-This practical how-to guide synthesizes the methodology and empirical implementation workflow of **Chapter 08: 8. Các mô hình dữ liệu bảng tuyến tính: Cơ bản** from [**Book 15: Microeconometrics Using Stata**](/en/sachktl/book-15-csamk22u1/), with direct backlinks to the authoritative source material at [https://sachktl.tnsai.vn/vi/csamk22u1/c8/](https://sachktl.tnsai.vn/vi/csamk22u1/c8/).
+This practical how-to guide presents the theoretical foundations, structural mathematical equations, detailed breakdown of **8 specialized lessons**, and multi-platform replication workflows for **8. Các mô hình dữ liệu bảng tuyến tính: Cơ bản** from the textbook [**Microeconometrics Using Stata**](/en/sachktl/book-15-csamk22u1/), with direct cross-references to the authoritative source material at [https://sachktl.tnsai.vn/vi/csamk22u1/c8/](https://sachktl.tnsai.vn/vi/csamk22u1/c8/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chapter 08: 8. Các mô hình dữ liệu bảng tuyến tính: Cơ bản">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="8. Các mô hình dữ liệu bảng tuyến tính: Cơ bản">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ This practical how-to guide synthesizes the methodology and empirical implementa
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BOOK 15 · CHAPTER 08</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chapter 08: 8. Các mô hình dữ liệu bảng tuyến tính: Cơ bản</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Part of Textbook: Microeconometrics Using Stata · 8 Detailed Lessons</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Microeconometrics Using Stata</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">8. Các mô hình dữ liệu bảng tuyến tính: Cơ bản</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Panel Data Econometrics and Unobserved Heterogeneity Control · 8 Detailed Lessons</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,140 +41,297 @@ This practical how-to guide synthesizes the methodology and empirical implementa
   </svg>
 </div>
 
-## 1. Methodological Meaning and Scope of Application
+## 1. Methodological Foundations, Mathematical Specification, and Identification
 
-Giới thiệu về các mô hình dữ liệu bảng tuyến tính Introduction to Linear Panel Data models Chào mừng các bạn sinh viên đã đến với chuỗi bài học về một trong những chủ đề hấp dẫn và mạnh mẽ nhất trong kinh tế lượng hiện đại: phân tích dữ liệu bảng. Trong thực tế, các nhà kinh tế học hiếm khi chỉ có dữ liệu tại một thời điểm hay chỉ theo dõi một chỉ số qua thời gian . Thay vào đó, chúng ta thường theo dõi nhiều đối tượng qua nhiều giai đoạn thời gian. Đây chính là lúc dữ liệu bảng phát huy sức mạnh vượt trội của nó. Dữ liệu bảng cho phép chúng ta kiểm soát những yếu tố không quan
+Giới thiệu về các mô hình dữ liệu bảng tuyến tính Introduction to Linear Panel Data models Chào mừng các bạn sinh viên đã đến với chuỗi bài học về một trong những chủ đề hấp dẫn và mạnh mẽ nhất trong kinh tế lượng hiện đại: phân tích dữ liệu bảng. Trong thực tế, các nhà kinh tế học hiếm khi chỉ có dữ liệu tại một thời điểm hay chỉ theo dõi một chỉ số qua thời gian . Thay vào đó, chúng ta thường theo dõi nhiều đối tượng qua nhiều giai đoạn thời gian. Đây chính là lúc dữ liệu bảng phát huy sức mạnh vượt trội của nó.
 
-- **Core Academic Topics**: BA TỪ KHÓA QUAN TRỌNG, CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO.
-- **Supported Analytical Environments**: `Stata 18 MP`.
-- **Recommended Empirical Data Sources**: Vietnamese macroeconomic, corporate, and household survey datasets on [EcoData](https://ecodata.io.vn), capital and commodity market series on [Finco](https://www.finco.vn), model cross-references on [VietLOD](https://vietlod.tnsai.vn), and automated estimation on [EcoLab](https://ecolab.io.vn).
+### 1.1. Structural Equations and Representative Estimator
+
+$$
+Y_{it} = \alpha + \mathbf{X}_{it}'\boldsymbol{\beta} + \mu_i + \lambda_t + \varepsilon_{it}, \quad i = 1,\dots,N; \; t = 1,\dots,T \tag*{[1]}
+$$
+
+$$
+\hat{\boldsymbol{\beta}}_{\text{FE}} = \left(\sum_{i=1}^N \sum_{t=1}^T \tilde{\mathbf{X}}_{it}\tilde{\mathbf{X}}_{it}'\right)^{-1} \left(\sum_{i=1}^N \sum_{t=1}^T \tilde{\mathbf{X}}_{it}\tilde{Y}_{it}\right), \quad \tilde{Z}_{it} = Z_{it} - \bar{Z}_i \tag*{[2]}
+$$
+
+### 1.2. Core Identification Assumptions and Applicability Conditions
+
+1. Strict exogeneity of explanatory covariates with respect to idiosyncratic disturbances across cross-sectional units and time periods.
+2. Unobserved individual effects $\mu_i$ may correlate arbitrarily with $\mathbf{X}_{it}$ under Fixed Effects or remain orthogonal under Random Effects.
+3. Cluster-robust variance-covariance estimation at the entity level is required to accommodate arbitrary within-panel serial correlation and heteroskedasticity.
 
 <FeatureCards
   features={[
     {
-      title: "Original Chapter on SachKTL",
-      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for Chapter 08 on SachKTL.",
+      title: "Authoritative Chapter on SachKTL",
+      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for this chapter on SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/csamk22u1/c8/"
     },
     {
       title: "Practice Datasets on EcoData & Finco",
-      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and survey data for hands-on replication.",
+      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and household survey data for hands-on replication.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
       title: "Automated Estimation on EcoLab",
-      description: "Execute econometric specifications, run diagnostic battery tests, and export publication-grade tables automatically.",
+      description: "Execute econometric specifications, run diagnostic battery tests, and export APA 7th / AER publication-grade tables automatically.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Step-by-Step Practical Implementation Across Chapter Lessons
+<FeatureNotAvailable
+  feature="Unconditional Baseline Estimation Under Violated Identification Assumptions"
+  reason="Standard Fixed Effects and Random Effects estimators suffer from Nickell bias when lagged dependent variables $Y_{i,t-1}$ are included in short-$T$ panels; use Difference GMM or System GMM instead."
+  alternative="Run the complete diagnostic battery in Step 4 and transition to the appropriate corrective estimator on VietLOD or EcoLab."
+/>
+
+## 2. Lesson-by-Lesson Academic Breakdown
+
+### 2.1. Nền tảng và khám phá dữ liệu bảng trong Stata
+
+Nền tảng dữ liệu bảng và khám phá trong Stata Panel data fundamentals and exploration in Stata Giới thiệu Chào mừng các bạn đến với bài học đầu tiên trong chuỗi bài về mô hình dữ liệu bảng. Trước khi chúng ta có thể xây dựng những mô hình kinh tế lượng phức tạp, một bước cực kỳ quan trọng không thể bỏ qua là tìm hiểu và "làm quen" với chính dữ liệu của mình. Dữ liệu bảng, với cấu trúc độc đáo kết hợp cả chiều không gian và chiều thời gian, đòi hỏi một cách tiếp cận đặc biệt.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Giới thiệu**
+- **Nền tảng lý thuyết về dữ liệu bảng**
+- **Các đặc điểm cơ bản của dữ liệu bảng**
+- **Quy trình khám phá dữ liệu bảng trong Stata**
+- **Ví dụ minh họa: Khám phá dữ liệu lương**
+- **Bước 1 & 2: Khai báo và mô tả cấu trúc bảng**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c8/nen-tang-va-kham-pha-du-lieu-bang-trong-stata/)
+
+### 2.2. Mô hình OLS gộp và ước lượng FGLS
+
+Mô hình OLS gộp và ước lượng FGLS Pooled OLS model and FGLS estimation Giới thiệu Sau khi đã làm quen với cấu trúc và các đặc điểm của dữ liệu bảng trong bài học trước, câu hỏi tự nhiên tiếp theo là: "Làm thế nào để chúng ta bắt đầu mô hình hóa mối quan hệ giữa các biến số?". Cách tiếp cận đơn giản nhất và trực quan nhất là bỏ qua cấu trúc bảng của dữ liệu, xem 4,165 quan sát như một bộ dữ liệu chéo lớn và chạy một hồi quy OLS thông thường. Phương pháp này được gọi là OLS gộp.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Giới thiệu**
+- **Nền tảng lý thuyết**
+- **Mô hình OLS Gộp**
+- **Hai vấn đề chính của OLS Gộp**
+- **Ước lượng FGLS**
+- **Phương pháp thực hiện trong Stata**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c8/mo-hinh-ols-gop-va-uoc-luong-fgls/)
+
+### 2.3. Mô hình ảnh hưởng cố định
+
+Mô hình ảnh hưởng cố định The fixed-effects model Giới thiệu Chào mừng các bạn đến với bài học then chốt về mô hình Ảnh hưởng Cố định. Nếu bài học trước đã chỉ ra "căn bệnh" của mô hình OLS gộp – sự chệch do biến bị bỏ sót – thì bài học này sẽ cung cấp "phương thuốc" đặc trị. Mô hình FE là một trong những lý do chính khiến dữ liệu bảng trở nên vô giá trong kinh tế lượng ứng dụng. Nó cho phép chúng ta kiểm soát tất cả các yếu-tố-không-quan-sát-được miễn là chúng không thay đổi theo thời gian đối với mỗi cá nhân.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Giới thiệu**
+- **Nền tảng lý thuyết của mô hình ảnh hưởng cố định**
+- **Mô hình và vấn đề nội sinh**
+- **Phép biến đổi Within**
+- **Sự đánh đổi quan trọng**
+- **Phương pháp thực hiện trong Stata**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c8/mo-hinh-anh-huong-co-dinh-fixed-effects/)
+
+### 2.4. Mô hình ảnh hưởng ngẫu nhiên
+
+Mô hình ảnh hưởng ngẫu nhiên The random-effects model Giới thiệu Trong bài học trước, chúng ta đã thấy mô hình Ảnh hưởng Cố định là một công cụ cực kỳ mạnh mẽ để loại bỏ sự chệch gây ra bởi các đặc điểm không quan sát được và không đổi theo thời gian. Tuy nhiên, sức mạnh đó đi kèm với một cái giá: chúng ta không thể ước lượng được tác động của các biến quan trọng không đổi theo thời gian như học vấn, giới tính, hay vị trí địa lý.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Giới thiệu**
+- **Nền tảng lý thuyết của mô hình ảnh hưởng ngẫu nhiên**
+- **Giả định then chốt: Không có tương quan**
+- **Đây là một giả định rất mạnh!**
+- **Cơ chế ước lượng: Quasi-Demeaning**
+- **Ý nghĩa của $\theta$**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c8/mo-hinh-anh-huong-ngau-nhien-random-effects/)
+
+### 2.5. Lựa chọn mô hình: FE và RE
+
+Lựa chọn mô hình: FE và RE Model selection: FE vs. RE Giới thiệu Trong hai bài học vừa qua, chúng ta đã khám phá hai phương pháp tiếp cận chính cho dữ liệu bảng: mô hình Ảnh hưởng Cố định và Ảnh hưởng Ngẫu nhiên. Chúng ta đã thấy rằng mỗi mô hình đều có ưu và nhược điểm riêng. Mô hình FE mạnh mẽ trong việc kiểm soát sự chệch do biến bị bỏ sót nhưng lại không thể ước lượng tác động của các biến bất biến theo thời gian.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Giới thiệu**
+- **Nền tảng lý thuyết của kiểm định Hausman**
+- **Logic và các giả thuyết**
+- **Lưu ý quan trọng về kiểm định Hausman truyền thống**
+- **Kiểm định Hausman phiên bản Robust**
+- **Phương pháp thực hiện trong Stata**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c8/lua-chon-mo-hinh-fe-va-re-kiem-dinh-hausman/)
+
+### 2.6. Quản lý dữ liệu bảng: Chuyển đổi dạng Dài-Rộng
+
+Quản lý dữ liệu bảng: Chuyển đổi giữa dạng Dài và Rộng Panel data management: Reshaping from long to wide and vice versa Giới thiệu Trong suốt các bài học vừa qua, chúng ta đã làm việc với dữ liệu ở một định dạng cụ thể: mỗi hàng là một quan sát của một cá nhân tại một thời điểm . Đây được gọi là định dạng dài, và nó là định dạng bắt buộc cho hầu hết các lệnh phân tích dữ liệu bảng trong Stata. Tuy nhiên, trong thực tế, dữ liệu không phải lúc nào cũng có sẵn ở dạng này.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Giới thiệu**
+- **Nền tảng lý thuyết của lệnh reshape**
+- **Ba thành phần cốt lõi**
+- **Ghi nhớ logic**
+- **Phương pháp thực hiện trong Stata**
+- **Ví dụ minh họa: Chuyển đổi dữ liệu thuốc lá**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c8/quan-ly-du-lieu-bang-chuyen-doi-dang-dai-rong/)
+
+### 2.7. Bài thực hành tổng hợp: Phân tích từ A đến Z
+
+Bài thực hành tổng hợp: Phân tích từ A đến Z Comprehensive practice: An A-to-Z analysis Giới thiệu và Tóm tắt kiến thức Chào mừng các bạn đến với bài thực hành tổng hợp! Đây là cơ hội để chúng ta kết nối tất cả các mảnh ghép lý thuyết và kỹ năng Stata đã học thành một quy trình phân tích liền mạch. Trong các bài học trước, chúng ta đã tìm hiểu về: OLS Gộp: Một điểm khởi đầu đơn giản nhưng tiềm ẩn nhiều rủi ro về chệch và sai số chuẩn không chính xác.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Giới thiệu và Tóm tắt kiến thức**
+- **MỤC TIÊU BÀI THỰC HÀNH**
+- **Chuẩn bị dữ liệu**
+- **Quy trình phân tích**
+- **Hướng dẫn thực hành từng bước với Stata**
+- **Bước 1: Mô hình OLS gộp**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c8/bai-thuc-hanh-tong-hop-phan-tich-tu-a-den-z/)
+
+### 2.8. Bài tổng hợp chuỗi: Hệ thống hóa kiến thức
+
+Tổng hợp chuỗi: Hệ thống hóa các mô hình dữ liệu bảng Series wrap-up: Systematizing panel data models Tổng quan chủ đề và vị trí trong kinh tế lượng Chúng ta đã hoàn thành một hành trình khám phá các phương pháp phân tích dữ liệu bảng tuyến tính, một trong những lĩnh vực cốt lõi của kinh tế lượng vi mô hiện đại. Dữ liệu bảng, với khả năng theo dõi nhiều đối tượng qua thời gian, cung cấp một lăng kính mạnh mẽ hơn nhiều so với dữ liệu chéo hay dữ liệu chuỗi thời gian đơn thuần.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Tổng quan chủ đề và vị trí trong kinh tế lượng**
+- **Cuộc đối đầu giữa Chệch và Hiệu quả**
+- **Hệ thống hóa phương pháp: Lộ trình tư duy phân tích**
+- **Tóm tắt và bài học kinh nghiệm**
+- **Tổng kết và hướng phát triển**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c8/bai-tong-hop-chuoi-he-thong-hoa-kien-thuc/)
+
+## 3. Step-by-Step Empirical Implementation Workflow
 
 <Steps>
   <div className="step-item">
-    <h3>Step 1: Nền tảng và khám phá dữ liệu bảng trong Stata</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Nền tảng và khám phá dữ liệu bảng trong Stata. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c8/nen-tang-va-kham-pha-du-lieu-bang-trong-stata/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csamk22u1/c8/nen-tang-va-kham-pha-du-lieu-bang-trong-stata/</a>.</p>
+    <h3>1. Formulate the Research Question and Prepare Data on EcoData & Finco</h3>
+    <p>Define the dependent variable, core explanatory variables, and control covariates aligned with <strong>8. Các mô hình dữ liệu bảng tuyến tính: Cơ bản</strong>. Extract standardized Vietnamese empirical series from <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> or <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, and screen for missing observations and extreme outliers.</p>
   </div>
   <div className="step-item">
-    <h3>Step 2: Mô hình OLS gộp và ước lượng FGLS</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Mô hình OLS gộp và ước lượng FGLS. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c8/mo-hinh-ols-gop-va-uoc-luong-fgls/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csamk22u1/c8/mo-hinh-ols-gop-va-uoc-luong-fgls/</a>.</p>
+    <h3>2. Conduct Descriptive Profiling, Correlation Analysis, and Pre-Estimation Checks</h3>
+    <p>Examine empirical distributions, construct summary statistics tables, and evaluate collinearity using pairwise correlation matrices and Variance Inflation Factors (VIF).</p>
   </div>
   <div className="step-item">
-    <h3>Step 3: Mô hình ảnh hưởng cố định</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Mô hình ảnh hưởng cố định. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c8/mo-hinh-anh-huong-co-dinh-fixed-effects/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csamk22u1/c8/mo-hinh-anh-huong-co-dinh-fixed-effects/</a>.</p>
+    <h3>3. Estimate the Model Across Stata 18 MP, R 4.x, and Python 3.11+</h3>
+    <p>Execute the parameter estimation scripts matching the structural equations in Section 1.1 while cross-checking theoretical derivations at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c8/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Step 4: Mô hình ảnh hưởng ngẫu nhiên</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Mô hình ảnh hưởng ngẫu nhiên. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c8/mo-hinh-anh-huong-ngau-nhien-random-effects/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csamk22u1/c8/mo-hinh-anh-huong-ngau-nhien-random-effects/</a>.</p>
+    <h3>4. Perform Post-Estimation Diagnostics and Robust Variance Correction</h3>
+    <p>Test for heteroskedasticity, serial correlation, Ramsey RESET functional form misspecification, and regressor endogeneity. Apply White HC1 or cluster-robust standard errors for valid inference.</p>
   </div>
   <div className="step-item">
-    <h3>Step 5: Lựa chọn mô hình: FE và RE</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Lựa chọn mô hình: FE và RE. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c8/lua-chon-mo-hinh-fe-va-re-kiem-dinh-hausman/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csamk22u1/c8/lua-chon-mo-hinh-fe-va-re-kiem-dinh-hausman/</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Step 6: Quản lý dữ liệu bảng: Chuyển đổi dạng Dài-Rộng</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Quản lý dữ liệu bảng: Chuyển đổi dạng Dài-Rộng. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c8/quan-ly-du-lieu-bang-chuyen-doi-dang-dai-rong/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csamk22u1/c8/quan-ly-du-lieu-bang-chuyen-doi-dang-dai-rong/</a>.</p>
+    <h3>5. Format Journal-Grade Tables and Cross-Verify on EcoLab</h3>
+    <p>Report point estimates, standard errors in parentheses, and statistical significance stars following APA 7th / AER Booktabs standards, or automate the entire reporting pipeline on <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> and <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Multi-Platform Implementation Examples in Stata, R, and Python
+## 4. Multi-Platform Implementation Scripts in Stata, R, and Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Initialize environment and load practice dataset from EcoData / SachKTL
+* Thiết lập cấu trúc dữ liệu bảng và ước lượng FE / RE / Hausman
 version 18.0
 clear all
 set more off
+import delimited "sachktl_panel_ecodata.csv", clear encoding("utf-8")
 
-* Import standardized empirical dataset
-import delimited "sachktl_csamk22u1_c08_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+xtset id year
+xtdescribe
+xtsum y x1 x2 x3
 
-* Estimate baseline specification and run diagnostic checks with robust standard errors
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 1. Ước lượng tác động cố định (Fixed Effects) và tác động ngẫu nhiên (Random Effects)
+xtreg y x1 x2 x3, fe
+estimates store FE_model
+xtreg y x1 x2 x3, re
+estimates store RE_model
+
+* 2. Kiểm định Hausman lựa chọn mô hình và ước lượng sai số chuẩn vững theo cụm
+hausman FE_model RE_model, sigmamore
+xtreg y x1 x2 x3 i.year, fe vce(cluster id)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Load econometric packages and practice dataset from EcoData / SachKTL
-library(tidyverse)
+# Nạp thư viện dữ liệu bảng và ước lượng FE / RE / Cluster-Robust SE
+library(plm)
 library(lmtest)
 library(sandwich)
 
-df <- read.csv("sachktl_csamk22u1_c08_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_panel_ecodata.csv")
+pdata <- pdata.frame(df, index = c("id", "year"))
 
-# Estimate model and compute heteroskedasticity-robust HC1 standard errors
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Ước lượng mô hình Within FE và Swamy-Arora RE
+fe_mod <- plm(y ~ x1 + x2 + x3, data = pdata, model = "within", effect = "twoways")
+re_mod <- plm(y ~ x1 + x2 + x3, data = pdata, model = "random")
+
+# 2. Kiểm định Hausman và xuất sai số chuẩn vững Arellano theo cụm
+phtest(fe_mod, re_mod)
+coeftest(fe_mod, vcov = vcovHC(fe_mod, method = "arellano", type = "HC1", cluster = "group"))
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Load econometric libraries and practice dataset from EcoData / SachKTL
+# Nạp thư viện linearmodels và ước lượng PanelOLS / RandomEffects
 import pandas as pd
-import statsmodels.formula.api as smf
+from linearmodels.panel import PanelOLS, RandomEffects, compare
 
-df = pd.read_csv("sachktl_csamk22u1_c08_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_panel_ecodata.csv").set_index(["id", "year"])
 
-# Fit specification with HC1 robust standard errors
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Ước lượng mô hình Fixed Effects hai chiều với sai số chuẩn cụm
+fe_mod = PanelOLS.from_formula("y ~ 1 + x1 + x2 + x3 + EntityEffects + TimeEffects", data=df)
+fe_res = fe_mod.fit(cov_type="clustered", cluster_entity=True)
+
+# 2. Ước lượng mô hình Random Effects và đối chiếu kết quả
+re_mod = RandomEffects.from_formula("y ~ 1 + x1 + x2 + x3", data=df)
+re_res = re_mod.fit(cov_type="clustered", cluster_entity=True)
+print(compare({"Fixed Effects": fe_res, "Random Effects": re_res}))
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video Tutorial Walkthrough
+## 5. Post-Estimation Diagnostic and Interpretation Guide
+
+| Diagnostic Criterion | Null Hypothesis $H_0$ | Benchmark Threshold | Corrective Action When $H_0$ Is Rejected |
+| :--- | :--- | :--- | :--- |
+| **Heteroskedasticity** | Constant error variance $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ rejects $H_0$ | Apply `vce(robust)`, `vcovHC(HC1)`, or FGLS/WLS weighted estimation |
+| **Multicollinearity** | No severe linear dependence among regressors | $\text{VIF} < 10$ acceptable | Drop redundant covariates, center interactions, or apply LASSO/Ridge regularization |
+| **Ramsey RESET Functional Form** | No omitted nonlinear or higher-order terms | $p\text{-value} > 0.05$ retains $H_0$ | Add interaction terms, quadratic polynomials, or log-transform skewed positive variables |
+| **Regressor Exogeneity** | Orthogonality $\text{Cov}(X, \varepsilon)=0$ | Durbin-Wu-Hausman $p > 0.05$ | Transition to IV/2SLS, LIML, or GMM estimation with validated instruments |
+
+## 6. Video Tutorial Walkthrough
 
 <VideoTutorial
-  title="Practical Walkthrough for Chapter 08: 8. Các mô hình dữ liệu bảng tuyến tính: Cơ bản on SachKTL"
+  title="Practical Walkthrough for 8. Các mô hình dữ liệu bảng tuyến tính: Cơ bản on SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Complete Lesson Directory and Backlinks to Original SachKTL Articles
+## 7. Complete Lesson Directory and Backlinks to Original SachKTL Articles
 
-| No. | Lesson Title in Chapter 08 | Supported Software | Original Source Link on SachKTL |
+| Lesson Code | Lesson Title | Supported Software | Original Source Link on SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Lesson 01** | Nền tảng và khám phá dữ liệu bảng trong Stata | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c8/nen-tang-va-kham-pha-du-lieu-bang-trong-stata/) |
-| **Lesson 02** | Mô hình OLS gộp và ước lượng FGLS | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c8/mo-hinh-ols-gop-va-uoc-luong-fgls/) |
-| **Lesson 03** | Mô hình ảnh hưởng cố định | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c8/mo-hinh-anh-huong-co-dinh-fixed-effects/) |
-| **Lesson 04** | Mô hình ảnh hưởng ngẫu nhiên | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c8/mo-hinh-anh-huong-ngau-nhien-random-effects/) |
-| **Lesson 05** | Lựa chọn mô hình: FE và RE | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c8/lua-chon-mo-hinh-fe-va-re-kiem-dinh-hausman/) |
-| **Lesson 06** | Quản lý dữ liệu bảng: Chuyển đổi dạng Dài-Rộng | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c8/quan-ly-du-lieu-bang-chuyen-doi-dang-dai-rong/) |
-| **Lesson 07** | Bài thực hành tổng hợp: Phân tích từ A đến Z | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c8/bai-thuc-hanh-tong-hop-phan-tich-tu-a-den-z/) |
-| **Lesson 08** | Bài tổng hợp chuỗi: Hệ thống hóa kiến thức | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c8/bai-tong-hop-chuoi-he-thong-hoa-kien-thuc/) |
+| **8.1** | Nền tảng và khám phá dữ liệu bảng trong Stata | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c8/nen-tang-va-kham-pha-du-lieu-bang-trong-stata/) |
+| **8.2** | Mô hình OLS gộp và ước lượng FGLS | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c8/mo-hinh-ols-gop-va-uoc-luong-fgls/) |
+| **8.3** | Mô hình ảnh hưởng cố định | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c8/mo-hinh-anh-huong-co-dinh-fixed-effects/) |
+| **8.4** | Mô hình ảnh hưởng ngẫu nhiên | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c8/mo-hinh-anh-huong-ngau-nhien-random-effects/) |
+| **8.5** | Lựa chọn mô hình: FE và RE | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c8/lua-chon-mo-hinh-fe-va-re-kiem-dinh-hausman/) |
+| **8.6** | Quản lý dữ liệu bảng: Chuyển đổi dạng Dài-Rộng | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c8/quan-ly-du-lieu-bang-chuyen-doi-dang-dai-rong/) |
+| **8.7** | Bài thực hành tổng hợp: Phân tích từ A đến Z | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c8/bai-thuc-hanh-tong-hop-phan-tich-tu-a-den-z/) |
+| **8.8** | Bài tổng hợp chuỗi: Hệ thống hóa kiến thức | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c8/bai-tong-hop-chuoi-he-thong-hoa-kien-thuc/) |

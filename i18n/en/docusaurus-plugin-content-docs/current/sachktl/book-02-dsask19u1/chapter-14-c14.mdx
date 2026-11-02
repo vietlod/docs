@@ -1,19 +1,19 @@
 ---
 id: chapter-14-c14
-title: "Chapter 14: 14. Giới thiệu tổng quan về dự báo chuỗi thời gian — Econometrics Theory and Practice"
-sidebar_label: "Chapter 14: 14. Giới thiệu tổng quan về dự báo chuỗi t"
+title: "14. Overview of Time Series Forecasting"
+sidebar_label: "14. Overview of Time Series Forecasting"
 sidebar_position: 15
-description: "Step-by-step practical how-to guide for Chapter 14: 14. Giới thiệu tổng quan về dự báo chuỗi thời gian from Econometrics Theory and Practice on SachKTL with Stata, R, and Python workflows integrated with EcoData, Finco, and EcoLab."
+description: "Comprehensive practical how-to guide for 14. Overview of Time Series Forecasting from Econometrics: Theory and Practice on SachKTL featuring structural equations, 3 lesson breakdowns, and Stata, R, and Python scripts."
 ---
 
-# Chapter 14: 14. Giới thiệu tổng quan về dự báo chuỗi thời gian — Econometrics Theory and Practice
+# 14. Overview of Time Series Forecasting
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-This practical how-to guide synthesizes the methodology and empirical implementation workflow of **Chapter 14: 14. Giới thiệu tổng quan về dự báo chuỗi thời gian** from [**Book 02: Econometrics Theory and Practice**](/en/sachktl/book-02-dsask19u1/), with direct backlinks to the authoritative source material at [https://sachktl.tnsai.vn/vi/dsask19u1/c14/](https://sachktl.tnsai.vn/vi/dsask19u1/c14/).
+This practical how-to guide presents the theoretical foundations, structural mathematical equations, detailed breakdown of **3 specialized lessons**, and multi-platform replication workflows for **14. Overview of Time Series Forecasting** from the textbook [**Econometrics: Theory and Practice**](/en/sachktl/book-02-dsask19u1/), with direct cross-references to the authoritative source material at [https://sachktl.tnsai.vn/vi/dsask19u1/c14/](https://sachktl.tnsai.vn/vi/dsask19u1/c14/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chapter 14: 14. Giới thiệu tổng quan về dự báo chuỗi thời gian">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="14. Overview of Time Series Forecasting">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ This practical how-to guide synthesizes the methodology and empirical implementa
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BOOK 02 · CHAPTER 14</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chapter 14: 14. Giới thiệu tổng quan về dự báo chuỗi thời gian</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Part of Textbook: Econometrics Theory and Practice · 3 Detailed Lessons</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Econometrics: Theory and Practice</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">14. Overview of Time Series Forecasting</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Time Series Econometrics, Cointegration, and Financial Volatility · 3 Detailed Lesson</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,123 +41,225 @@ This practical how-to guide synthesizes the methodology and empirical implementa
   </svg>
 </div>
 
-## 1. Methodological Meaning and Scope of Application
+## 1. Methodological Foundations, Mathematical Specification, and Identification
 
-Giới thiệu tổng quan về dự báo chuỗi thời gian Dự báo là một trong những ứng dụng quan trọng và hấp dẫn nhất của kinh tế lượng, đóng vai trò cốt lõi trong việc ra quyết định của các doanh nghiệp, nhà hoạch định chính sách và các nhà nghiên cứu. Từ việc dự đoán tăng trưởng GDP, lạm phát, giá cổ phiếu cho đến ước tính nhu cầu sản phẩm trong tương lai, khả năng tiên lượng các giá trị tương lai dựa trên dữ liệu quá khứ là một kỹ năng vô giá. Phân tích chuỗi thời gian cung cấp một bộ công cụ toán học và thống kê mạnh mẽ để mô hình hóa cấu trúc nội tại của dữ liệu theo thời gian, từ đó xây dựng các
+Giới thiệu tổng quan về dự báo chuỗi thời gian Dự báo là một trong những ứng dụng quan trọng và hấp dẫn nhất của kinh tế lượng, đóng vai trò cốt lõi trong việc ra quyết định của các doanh nghiệp, nhà hoạch định chính sách và các nhà nghiên cứu. Từ việc dự đoán tăng trưởng GDP, lạm phát, giá cổ phiếu cho đến ước tính nhu cầu sản phẩm trong tương lai, khả năng tiên lượng các giá trị tương lai dựa trên dữ liệu quá khứ là một kỹ năng vô giá.
 
-- **Core Academic Topics**: Cấu trúc chuỗi bài học, Kiến thức tiên quyết, Mục tiêu học tập, Tài liệu tham khảo chính, PHỤ LỤC: Dữ liệu mô phỏng cho chuỗi bài viết.
-- **Supported Analytical Environments**: `Stata 18 MP`.
-- **Recommended Empirical Data Sources**: Vietnamese macroeconomic, corporate, and household survey datasets on [EcoData](https://ecodata.io.vn), capital and commodity market series on [Finco](https://www.finco.vn), model cross-references on [VietLOD](https://vietlod.tnsai.vn), and automated estimation on [EcoLab](https://ecolab.io.vn).
+### 1.1. Structural Equations and Representative Estimator
+
+$$
+\Phi(L)(1 - L)^d Y_t = \mu + \Theta(L)\varepsilon_t, \quad \varepsilon_t \mid \mathcal{F}_{t-1} \sim \mathcal{N}(0, \sigma_t^2) \tag*{[1]}
+$$
+
+$$
+\sigma_t^2 = \omega + \sum_{i=1}^p \alpha_i \varepsilon_{t-i}^2 + \sum_{j=1}^q \beta_j \sigma_{t-j}^2, \quad \omega > 0, \; \alpha_i, \beta_j \ge 0 \tag*{[2]}
+$$
+
+### 1.2. Core Identification Assumptions and Applicability Conditions
+
+1. Time series processes must satisfy covariance stationarity or be differenced to their appropriate order of integration $I(d)$ prior to estimation.
+2. Roots of the autoregressive $\Phi(L)$ and moving-average $\Theta(L)$ lag polynomials must lie strictly outside the complex unit circle.
+3. In conditional volatility GARCH specifications, the persistence condition $\sum \alpha_i + \sum \beta_j < 1$ ensures finite unconditional variance.
 
 <FeatureCards
   features={[
     {
-      title: "Original Chapter on SachKTL",
-      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for Chapter 14 on SachKTL.",
+      title: "Authoritative Chapter on SachKTL",
+      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for this chapter on SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/dsask19u1/c14/"
     },
     {
       title: "Practice Datasets on EcoData & Finco",
-      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and survey data for hands-on replication.",
+      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and household survey data for hands-on replication.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
       title: "Automated Estimation on EcoLab",
-      description: "Execute econometric specifications, run diagnostic battery tests, and export publication-grade tables automatically.",
+      description: "Execute econometric specifications, run diagnostic battery tests, and export APA 7th / AER publication-grade tables automatically.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Step-by-Step Practical Implementation Across Chapter Lessons
+<FeatureNotAvailable
+  feature="Unconditional Baseline Estimation Under Violated Identification Assumptions"
+  reason="Regressing nonstationary levels without unit-root and Johansen cointegration testing induces spurious regression with inflated $t$-statistics and $R^2$."
+  alternative="Run the complete diagnostic battery in Step 4 and transition to the appropriate corrective estimator on VietLOD or EcoLab."
+/>
+
+## 2. Lesson-by-Lesson Academic Breakdown
+
+### 2.1. Nền tảng dự báo chuỗi thời gian và mô hình đơn biến
+
+Trong bài học giới thiệu, chúng ta đã có cái nhìn tổng quan về tầm quan trọng của dự báo và lộ trình học tập của toàn bộ chuỗi bài viết. Bài học đầu tiên này sẽ đặt những viên gạch nền móng vững chắc nhất, giúp bạn hiểu rõ các khái niệm cốt lõi và làm quen với phương pháp dự báo đơn giản nhưng hiệu quả nhất: mô hình tự hồi quy. Chúng ta sẽ bắt đầu bằng việc phân biệt các loại dự báo, tìm hiểu về sai số dự báo, và sau đó đi sâu vào kỹ thuật làm mịn số mũ đơn giản.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Nền tảng lý thuyết**
+- **1. Các khái niệm cơ bản trong dự báo**
+- **2. Làm mịn số mũ đơn giản: Một phương pháp khởi đầu**
+- **Phương pháp nghiên cứu: Dự báo với mô hình đơn biến AR**
+- **1. Xây dựng dự báo từ hàm trung bình có điều kiện**
+- **2. Đánh giá độ không chắc chắn: Phương sai sai số dự báo**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c14/nen-tang-du-bao-chuoi-thoi-gian-va-mo-hinh-don-bien/)
+
+### 2.2. Các mô hình dự báo nâng cao: ARMA, VAR và GARCH
+
+Ở bài học trước, chúng ta đã xây dựng một nền tảng vững chắc về dự báo chuỗi thời gian thông qua mô hình tự hồi quy. Mô hình AR rất hữu ích, nhưng nó giả định rằng cấu trúc động của một chuỗi chỉ phụ thuộc vào các giá trị quá khứ của chính nó. Tuy nhiên, trong thực tế, nhiều chuỗi thời gian kinh tế lại có cấu trúc phức tạp hơn, bị ảnh hưởng bởi cả các cú sốc ngẫu nhiên trong quá khứ hoặc bởi sự biến động của các chuỗi thời gian khác . Bài học này sẽ mở rộng bộ công cụ phân tích của chúng ta bằng cách giới thiệu ba lớp mô hình nâng cao.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Nền tảng lý thuyết**
+- **1. Dự báo với các quá trình tuyến tính tổng quát**
+- **1.1. Trường hợp đặc biệt: Quá trình Trung bình trượt MA**
+- **1.2. Kết hợp AR và MA: Mô hình ARMA**
+- **2. Dự báo đa biến với mô hình véc-tơ tự hồi quy**
+- **3. Dự báo sự biến động với mô hình GARCH**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c14/cac-mo-hinh-du-bao-nang-cao-arma-var-va-garch/)
+
+### 2.3. Hướng dẫn thực hành dự báo chuỗi thời gian với Stata
+
+Sau khi trang bị những kiến thức lý thuyết nền tảng về các mô hình dự báo đơn biến ở Bài 1 và khám phá các phương pháp nâng cao như ARMA, VAR, GARCH ở Bài 2, giờ là lúc chúng ta tổng hợp tất cả lại trong một bài thực hành toàn diện. Lý thuyết sẽ trở nên vô nghĩa nếu không thể áp dụng vào việc giải quyết các vấn đề thực tế. Bài học cuối cùng này sẽ đóng vai trò như một cây cầu nối liền giữa lý thuyết và thực hành, hướng dẫn bạn từng bước thực hiện một dự án dự báo chuỗi thời gian hoàn chỉnh bằng Stata.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Dữ liệu và bối cảnh nghiên cứu**
+- **Hướng dẫn từng bước từ A-Z**
+- **Quy trình thực hiện dự báo**
+- **Phân tích chuyên sâu và so sánh kết quả**
+- **Diễn giải kết quả**
+- **Mẹo và lưu ý khi thực hành**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c14/huong-dan-thuc-hanh-du-bao-chuoi-thoi-gian-voi-stata/)
+
+## 3. Step-by-Step Empirical Implementation Workflow
 
 <Steps>
   <div className="step-item">
-    <h3>Step 1: Nền tảng dự báo chuỗi thời gian và mô hình đơn biến</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Nền tảng dự báo chuỗi thời gian và mô hình đơn biến. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/dsask19u1/c14/nen-tang-du-bao-chuoi-thoi-gian-va-mo-hinh-don-bien/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/dsask19u1/c14/nen-tang-du-bao-chuoi-thoi-gian-va-mo-hinh-don-bien/</a>.</p>
+    <h3>1. Formulate the Research Question and Prepare Data on EcoData & Finco</h3>
+    <p>Define the dependent variable, core explanatory variables, and control covariates aligned with <strong>14. Overview of Time Series Forecasting</strong>. Extract standardized Vietnamese empirical series from <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> or <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, and screen for missing observations and extreme outliers.</p>
   </div>
   <div className="step-item">
-    <h3>Step 2: Các mô hình dự báo nâng cao: ARMA, VAR và GARCH</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Các mô hình dự báo nâng cao: ARMA, VAR và GARCH. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/dsask19u1/c14/cac-mo-hinh-du-bao-nang-cao-arma-var-va-garch/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/dsask19u1/c14/cac-mo-hinh-du-bao-nang-cao-arma-var-va-garch/</a>.</p>
+    <h3>2. Conduct Descriptive Profiling, Correlation Analysis, and Pre-Estimation Checks</h3>
+    <p>Examine empirical distributions, construct summary statistics tables, and evaluate collinearity using pairwise correlation matrices and Variance Inflation Factors (VIF).</p>
   </div>
   <div className="step-item">
-    <h3>Step 3: Hướng dẫn thực hành dự báo chuỗi thời gian với Stata</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Hướng dẫn thực hành dự báo chuỗi thời gian với Stata. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/dsask19u1/c14/huong-dan-thuc-hanh-du-bao-chuoi-thoi-gian-voi-stata/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/dsask19u1/c14/huong-dan-thuc-hanh-du-bao-chuoi-thoi-gian-voi-stata/</a>.</p>
+    <h3>3. Estimate the Model Across Stata 18 MP, R 4.x, and Python 3.11+</h3>
+    <p>Execute the parameter estimation scripts matching the structural equations in Section 1.1 while cross-checking theoretical derivations at <a href="https://sachktl.tnsai.vn/vi/dsask19u1/c14/" target="_blank" rel="noopener">SachKTL</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>4. Perform Post-Estimation Diagnostics and Robust Variance Correction</h3>
+    <p>Test for heteroskedasticity, serial correlation, Ramsey RESET functional form misspecification, and regressor endogeneity. Apply White HC1 or cluster-robust standard errors for valid inference.</p>
+  </div>
+  <div className="step-item">
+    <h3>5. Format Journal-Grade Tables and Cross-Verify on EcoLab</h3>
+    <p>Report point estimates, standard errors in parentheses, and statistical significance stars following APA 7th / AER Booktabs standards, or automate the entire reporting pipeline on <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> and <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Multi-Platform Implementation Examples in Stata, R, and Python
+## 4. Multi-Platform Implementation Scripts in Stata, R, and Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Initialize environment and load practice dataset from EcoData / SachKTL
+* Thiết lập chuỗi thời gian, kiểm định nghiệm đơn vị và ước lượng ARIMA / GARCH
 version 18.0
 clear all
 set more off
+import delimited "sachktl_timeseries_finco.csv", clear encoding("utf-8")
 
-* Import standardized empirical dataset
-import delimited "sachktl_dsask19u1_c14_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+tsset time_id
+dfuller y, lags(4) trend regress
+pperron y, lags(4) trend
 
-* Estimate baseline specification and run diagnostic checks with robust standard errors
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 1. Ước lượng mô hình ARIMA và kiểm định nhiễu trắng phần dư
+arima y, arima(1,1,1) vce(robust)
+predict resid_arima, resid
+wntestq resid_arima, lags(12)
+
+* 2. Ước lượng mô hình phương sai có điều kiện thay đổi ARCH/GARCH(1,1)
+arch d.y x1 x2, arch(1) garch(1) vce(robust)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Load econometric packages and practice dataset from EcoData / SachKTL
-library(tidyverse)
-library(lmtest)
-library(sandwich)
+# Nạp thư viện chuỗi thời gian và ước lượng ARIMA / GARCH(1,1)
+library(tseries)
+library(forecast)
+library(rugarch)
 
-df <- read.csv("sachktl_dsask19u1_c14_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_timeseries_finco.csv")
+y_ts <- ts(df$y, frequency = 12)
 
-# Estimate model and compute heteroskedasticity-robust HC1 standard errors
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA tối ưu theo AICc
+adf.test(y_ts)
+fit_arima <- auto.arima(y_ts, seasonal = FALSE, ic = "aicc")
+summary(fit_arima)
+checkresiduals(fit_arima)
+
+# 2. Ước lượng mô hình GARCH(1,1) cho chuỗi lợi suất
+spec <- ugarchspec(variance.model = list(model = "sGARCH", garchOrder = c(1, 1)),
+                   mean.model = list(armaOrder = c(1, 0), include.mean = TRUE))
+fit_garch <- ugarchfit(spec = spec, data = diff(y_ts))
+show(fit_garch)
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Load econometric libraries and practice dataset from EcoData / SachKTL
+# Nạp thư viện statsmodels và arch để phân tích chuỗi thời gian & biến động
 import pandas as pd
-import statsmodels.formula.api as smf
+from statsmodels.tsa.stattools import adfuller
+from statsmodels.tsa.arima.model import ARIMA
+from arch import arch_model
 
-df = pd.read_csv("sachktl_dsask19u1_c14_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_timeseries_finco.csv")
+y = df["y"].dropna()
 
-# Fit specification with HC1 robust standard errors
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA(1,1,1)
+adf_stat, p_val, *_ = adfuller(y, autolag="AIC")
+print(f"ADF Statistic: {adf_stat:.4f}, p-value: {p_val:.4f}")
+arima_res = ARIMA(y, order=(1, 1, 1)).fit()
+print(arima_res.summary())
+
+# 2. Ước lượng mô hình GARCH(1,1) với phân phối Student-t
+ret = y.diff().dropna() * 100
+garch_res = arch_model(ret, vol="Garch", p=1, q=1, dist="t").fit(disp="off")
+print(garch_res.summary())
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video Tutorial Walkthrough
+## 5. Post-Estimation Diagnostic and Interpretation Guide
+
+| Diagnostic Criterion | Null Hypothesis $H_0$ | Benchmark Threshold | Corrective Action When $H_0$ Is Rejected |
+| :--- | :--- | :--- | :--- |
+| **Heteroskedasticity** | Constant error variance $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ rejects $H_0$ | Apply `vce(robust)`, `vcovHC(HC1)`, or FGLS/WLS weighted estimation |
+| **Multicollinearity** | No severe linear dependence among regressors | $\text{VIF} < 10$ acceptable | Drop redundant covariates, center interactions, or apply LASSO/Ridge regularization |
+| **Ramsey RESET Functional Form** | No omitted nonlinear or higher-order terms | $p\text{-value} > 0.05$ retains $H_0$ | Add interaction terms, quadratic polynomials, or log-transform skewed positive variables |
+| **Regressor Exogeneity** | Orthogonality $\text{Cov}(X, \varepsilon)=0$ | Durbin-Wu-Hausman $p > 0.05$ | Transition to IV/2SLS, LIML, or GMM estimation with validated instruments |
+
+## 6. Video Tutorial Walkthrough
 
 <VideoTutorial
-  title="Practical Walkthrough for Chapter 14: 14. Giới thiệu tổng quan về dự báo chuỗi thời gian on SachKTL"
+  title="Practical Walkthrough for 14. Overview of Time Series Forecasting on SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Complete Lesson Directory and Backlinks to Original SachKTL Articles
+## 7. Complete Lesson Directory and Backlinks to Original SachKTL Articles
 
-| No. | Lesson Title in Chapter 14 | Supported Software | Original Source Link on SachKTL |
+| Lesson Code | Lesson Title | Supported Software | Original Source Link on SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Lesson 01** | Nền tảng dự báo chuỗi thời gian và mô hình đơn biến | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c14/nen-tang-du-bao-chuoi-thoi-gian-va-mo-hinh-don-bien/) |
-| **Lesson 02** | Các mô hình dự báo nâng cao: ARMA, VAR và GARCH | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c14/cac-mo-hinh-du-bao-nang-cao-arma-var-va-garch/) |
-| **Lesson 03** | Hướng dẫn thực hành dự báo chuỗi thời gian với Stata | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c14/huong-dan-thuc-hanh-du-bao-chuoi-thoi-gian-voi-stata/) |
+| **14.1** | Nền tảng dự báo chuỗi thời gian và mô hình đơn biến | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c14/nen-tang-du-bao-chuoi-thoi-gian-va-mo-hinh-don-bien/) |
+| **14.2** | Các mô hình dự báo nâng cao: ARMA, VAR và GARCH | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c14/cac-mo-hinh-du-bao-nang-cao-arma-var-va-garch/) |
+| **14.3** | Hướng dẫn thực hành dự báo chuỗi thời gian với Stata | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c14/huong-dan-thuc-hanh-du-bao-chuoi-thoi-gian-voi-stata/) |

@@ -1,19 +1,19 @@
 ---
 id: chapter-10-c10
-title: "Chương 10: 10. định giá cân bằng liên thời gian"
-sidebar_label: "Chương 10: 10. Định giá cân bằng liên thời gian"
+title: "10. Định giá cân bằng liên thời gian"
+sidebar_label: "10. Định giá cân bằng liên thời gian"
 sidebar_position: 11
-description: "Hướng dẫn thực hành How-To Chương 10: 10. định giá cân bằng liên thời gian thuộc bộ sách Kinh tế lượng tài chính: Mô hình và Phương pháp trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 10. Định giá cân bằng liên thời gian thuộc giáo trình Kinh tế lượng tài chính: Mô hình và phương pháp trên SachKTL kèm công thức toán học, phân tích 6 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 10: 10. định giá cân bằng liên thời gian
+# 10. Định giá cân bằng liên thời gian
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 10: 10. định giá cân bằng liên thời gian** thuộc [**Bộ sách 27: kinh tế lượng tài chính: mô hình và phương pháp**](/sachktl/book-27-lsink20u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/lsink20u1/c10/](https://sachktl.tnsai.vn/vi/lsink20u1/c10/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **6 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **10. Định giá cân bằng liên thời gian** thuộc bộ giáo trình [**Kinh tế lượng tài chính: Mô hình và phương pháp**](/sachktl/book-27-lsink20u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/lsink20u1/c10/](https://sachktl.tnsai.vn/vi/lsink20u1/c10/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 10: 10. định giá cân bằng liên thời gian">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="10. Định giá cân bằng liên thời gian">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 27 · CHƯƠNG 10</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 10: 10. định giá cân bằng liên thời gian</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Kinh tế lượng tài chính: Mô hình và Phương pháp · 6 bài học chuy</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng tài chính: Mô hình và </text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">10. Định giá cân bằng liên thời gian</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng chuỗi thời gian, đồng liên kết và biến động tài chính · 6 bài học chuyê</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,138 +41,272 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Giới thiệu định giá cân bằng liên thời gian An introduction to intertemporal equilibrium pricing Chào mừng các bạn sinh viên đến với chuỗi bài học về một trong những chủ đề hấp dẫn và nền tảng nhất của tài chính hiện đại: Định giá Cân bằng Liên thời gian. Đây là một lĩnh vực nghiên cứu tìm cách trả lời một câu hỏi tưởng chừng đơn giản nhưng lại vô cùng sâu sắc: "Giá trị của một tài sản được xác định như thế nào?". Không chỉ dừng lại ở việc xem xét cung và cầu tại một thời điểm, các mô hình trong chuỗi bài này sẽ đưa chúng ta vào một hành trình xuyên thời gian, khám phá cách các quyết định về
+Giới thiệu định giá cân bằng liên thời gian An introduction to intertemporal equilibrium pricing Chào mừng các bạn sinh viên đến với chuỗi bài học về một trong những chủ đề hấp dẫn và nền tảng nhất của tài chính hiện đại: Định giá Cân bằng Liên thời gian. Đây là một lĩnh vực nghiên cứu tìm cách trả lời một câu hỏi tưởng chừng đơn giản nhưng lại vô cùng sâu sắc: "Giá trị của một tài sản được xác định như thế nào?".
 
-- **Chủ đề học thuật trọng tâm**: CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO, PHỤ LỤC: Dữ liệu mô phỏng cho series.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+\Phi(L)(1 - L)^d Y_t = \mu + \Theta(L)\varepsilon_t, \quad \varepsilon_t \mid \mathcal{F}_{t-1} \sim \mathcal{N}(0, \sigma_t^2) \tag*{[1]}
+$$
+
+$$
+\sigma_t^2 = \omega + \sum_{i=1}^p \alpha_i \varepsilon_{t-i}^2 + \sum_{j=1}^q \beta_j \sigma_{t-j}^2, \quad \omega > 0, \; \alpha_i, \beta_j \ge 0 \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Chuỗi thời gian phải thỏa mãn điều kiện dừng hiệp phương sai hoặc được sai phân hóa đến bậc tích hợp $I(d)$ phù hợp trước khi ước lượng.
+2. Điều kiện khả nghịch và nghiệm ngoài vòng tròn đơn vị của đa thức trễ $\Phi(L)$ và $\Theta(L)$ đảm bảo tính ổn định động học.
+3. Trong mô hình phương sai có điều kiện thay đổi GARCH, tổng hệ số $\sum \alpha_i + \sum \beta_j < 1$ bảo đảm phương sai không điều kiện hữu hạn.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 10 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/lsink20u1/c10/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Hồi quy chuỗi thời gian không dừng chưa qua kiểm định nghiệm đơn vị ADF/PP và đồng liên kết Johansen dễ dẫn đến hồi quy giả mạo với thống kê $t$ và $R^2$ bị thổi phồng."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Nền tảng định giá cân bằng liên thời gian
+
+Nền tảng định giá cân bằng liên thời gian Foundations of intertemporal equilibrium pricing Giới thiệu Chào mừng các bạn quay trở lại với chuỗi bài học của chúng ta. Trong bài học đầu tiên này, chúng ta sẽ cùng nhau xây dựng những viên gạch nền tảng cho toàn bộ lâu đài kiến thức về định giá tài sản. Hãy thử tưởng tượng về một quyết định rất đỗi quen thuộc: bạn nên dùng 1 triệu đồng hôm nay để chi tiêu hay gửi tiết kiệm để có một khoản lớn hơn trong tương lai?
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Mô hình tác nhân đại diện và bài toán tối ưu hóa**
+- **Điều kiện bậc nhất và phương trình euler**
+- **Yếu tố chiết khấu ngẫu nhiên**
+- **Tại sao SDF lại "ngẫu nhiên"?**
+- **Diễn giải ý nghĩa kinh tế của SDF**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c10/nen-tang-dinh-gia-can-bang-lien-thoi-gian/)
+
+### 2.2. Mô hình CCAPM và kiểm định GMM
+
+Mô hình CCAPM và kiểm định GMM The CCAPM and GMM testing Giới thiệu Trong bài học trước, chúng ta đã khám phá ra Yếu tố Chiết khấu Ngẫu nhiên - một khái niệm tổng quát và mạnh mẽ cho phép định giá mọi tài sản. Tuy nhiên, công thức $P_t = E_t$ vẫn còn khá trừu tượng. Để biến nó thành một mô hình có thể kiểm định được bằng dữ liệu thực tế, chúng ta cần phải "đặc định hóa" nó, tức là đưa ra một giả định cụ thể về dạng của SDF. Đây chính là lúc Mô hình Định giá Tài sản Vốn dựa trên Tiêu dùng, hay CCAPM , ra đời.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Nền tảng lý thuyết của CCAPM**
+- **Từ SDF đến dạng beta của CCAPM**
+- **Phương pháp kiểm định: GMM**
+- **Ví dụ minh họa: Ước lượng CCAPM bằng Stata**
+- **Tổng kết**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c10/mo-hinh-ccapm-va-kiem-dinh-gmm/)
+
+### 2.3. Câu đố phí bù rủi ro vốn chủ sở hữu
+
+Câu đố phí bù rủi ro vốn chủ sở hữu The equity premium puzzle Giới thiệu Chào mừng các bạn đến với bài học thứ ba. Ở bài trước, chúng ta đã học được một lý thuyết rất thanh lịch: Mô hình CCAPM. Lý thuyết này cho rằng phần bù rủi ro của một tài sản - tức là phần lợi suất vượt trội so với tài sản an toàn - là phần thưởng cho việc nhà đầu tư phải gánh chịu rủi ro biến động tiêu dùng. Những tài sản có lợi suất thấp khi kinh tế khó khăn sẽ phải trả một phần bù rủi ro cao, và ngược lại. Về mặt lý thuyết, điều này hoàn toàn hợp lý.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Mối liên kết lý thuyết: Phần bù rủi ro và rủi ro tiêu dùng**
+- **Định lượng câu đố: Một bài toán số học đơn giản**
+- **Câu đố lãi suất phi rủi ro**
+- **Tổng kết**
+- **Những điểm chính cần nắm vững**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c10/cau-do-phi-bu-rui-ro-von-chu-so-huu/)
+
+### 2.4. Các lý thuyết mở rộng giải thích câu đố
+
+Các lý thuyết mở rộng giải thích câu đố Advanced theories explaining the puzzle Giới thiệu Ở bài học trước, chúng ta đã kết thúc với một tình thế khó xử: mô hình CCAPM tiêu chuẩn, dù rất logic và thanh lịch, lại thất bại một cách đáng kể khi đối mặt với dữ liệu thực tế. Nó không thể giải thích tại sao phần bù rủi ro của cổ phiếu lại quá cao và tại sao lãi suất phi rủi ro lại quá thấp . Sự thất bại này không phải là một ngõ cụt, mà ngược lại, nó đã mở ra một kỷ nguyên nghiên cứu mới đầy sáng tạo.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Liệu câu đố có phải là một ảo ảnh thống kê?**
+- **Sửa đổi sở thích của nhà đầu tư: Ngoài CCAPM tiêu chuẩn**
+- **Tách biệt e ngại rủi ro và thay thế liên thời gian: Sở thích epstein-zin**
+- **Sự thỏa mãn tương đối: Mô hình thói quen tiêu dùng**
+- **Mô hình rủi ro dài hạn**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c10/cac-ly-thuyet-mo-rong-giai-thich-cau-do/)
+
+### 2.5. Thực hành phân tích CCAPM với Stata
+
+Thực hành phân tích CCAPM với Stata A practical guide to CCAPM analysis in Stata Giới thiệu Chào mừng các bạn đến với bài học thực hành của chúng ta! Trong các bài trước, chúng ta đã đi sâu vào thế giới lý thuyết của định giá tài sản, từ phương trình Euler, mô hình CCAPM cho đến những câu đố hóc búa và các lý thuyết mở rộng. Chúng ta đã hiểu được "tại sao" và "cái gì". Bây giờ là lúc trả lời câu hỏi "làm thế nào?". Làm thế nào để chúng ta lấy một lý thuyết kinh tế và đối chiếu nó với dữ liệu?
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Bước 1: Chuẩn bị và khám phá dữ liệu**
+- **Bước 2: Ước lượng CCAPM bằng GMM**
+- **Quy trình phân tích**
+- **Thực hiện trên Stata**
+- **Bước 3: Phân tích và diễn giải kết quả**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c10/thuc-hanh-phan-tich-ccapm-voi-stata/)
+
+### 2.6. Tổng kết và ứng dụng nâng cao
+
+Tổng hợp định giá cân bằng liên thời gian A synthesis of intertemporal equilibrium pricing 1. BỨC TRANH LỚN CỦA ĐỊNH GIÁ TÀI SẢN Chúng ta đã cùng nhau trải qua một hành trình khám phá đầy thú vị, bắt đầu từ một câu hỏi nền tảng: "Điều gì quyết định giá trị của một tài sản?". Chuỗi bài học này đã dẫn dắt chúng ta đi từ những nguyên lý đầu tiên về sự lựa chọn của con người đến các mô hình kinh tế lượng phức tạp được sử dụng bởi các nhà nghiên cứu hàng đầu.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. BỨC TRANH lớn của định giá tài sản**
+- **2. MỘT câu chuyện tiến hóa**
+- **3. QUY trình nghiên cứu thực nghiệm**
+- **4. VÍ dụ tổng hợp: KIỂM định CCAPM và "câu đố" TRONG dữ liệu**
+- **5. TỔNG kết và hướng phát triển**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c10/tong-ket-va-ung-dung-nang-cao/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Nền tảng định giá cân bằng liên thời gian</h3>
-    <p>Nền tảng định giá cân bằng liên thời gian Foundations of intertemporal equilibrium pricing Giới thiệu Chào mừng các bạn quay trở lại với chuỗi bài học của chúng ta. Trong bài học đầu tiên này, chúng ta sẽ cùng nhau xây dựng những viên gạch nền tảng cho toàn bộ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/lsink20u1/c10/nen-tang-dinh-gia-can-bang-lien-thoi-gian/" target="_blank" rel="noopener">Nền tảng định giá cân bằng liên thời gian</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>10. Định giá cân bằng liên thời gian</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Mô hình CCAPM và kiểm định GMM</h3>
-    <p>Mô hình CCAPM và kiểm định GMM The CCAPM and GMM testing Giới thiệu Trong bài học trước, chúng ta đã khám phá ra Yếu tố Chiết khấu Ngẫu nhiên - một khái niệm tổng quát và mạnh mẽ cho phép định giá mọi tài sản. Tuy nhiên, công thức $P_t = E_t$ vẫn còn khá trừu  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/lsink20u1/c10/mo-hinh-ccapm-va-kiem-dinh-gmm/" target="_blank" rel="noopener">Mô hình CCAPM và kiểm định GMM</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Câu đố phí bù rủi ro vốn chủ sở hữu</h3>
-    <p>Câu đố phí bù rủi ro vốn chủ sở hữu The equity premium puzzle Giới thiệu Chào mừng các bạn đến với bài học thứ ba. Ở bài trước, chúng ta đã học được một lý thuyết rất thanh lịch: Mô hình CCAPM. Lý thuyết này cho rằng phần bù rủi ro của một tài sản - tức là phầ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/lsink20u1/c10/cau-do-phi-bu-rui-ro-von-chu-so-huu/" target="_blank" rel="noopener">Câu đố phí bù rủi ro vốn chủ sở hữu</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/lsink20u1/c10/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Các lý thuyết mở rộng giải thích câu đố</h3>
-    <p>Các lý thuyết mở rộng giải thích câu đố Advanced theories explaining the puzzle Giới thiệu Ở bài học trước, chúng ta đã kết thúc với một tình thế khó xử: mô hình CCAPM tiêu chuẩn, dù rất logic và thanh lịch, lại thất bại một cách đáng kể khi đối mặt với dữ liệ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/lsink20u1/c10/cac-ly-thuyet-mo-rong-giai-thich-cau-do/" target="_blank" rel="noopener">Các lý thuyết mở rộng giải thích câu đố</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 5: Thực hành phân tích CCAPM với Stata</h3>
-    <p>Thực hành phân tích CCAPM với Stata A practical guide to CCAPM analysis in Stata Giới thiệu Chào mừng các bạn đến với bài học thực hành của chúng ta! Trong các bài trước, chúng ta đã đi sâu vào thế giới lý thuyết của định giá tài sản, từ phương trình Euler, mô Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/lsink20u1/c10/thuc-hanh-phan-tich-ccapm-voi-stata/" target="_blank" rel="noopener">Thực hành phân tích CCAPM với Stata</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Bước 6: Tổng kết và ứng dụng nâng cao</h3>
-    <p>Tổng hợp định giá cân bằng liên thời gian A synthesis of intertemporal equilibrium pricing 1. BỨC TRANH LỚN CỦA ĐỊNH GIÁ TÀI SẢN Chúng ta đã cùng nhau trải qua một hành trình khám phá đầy thú vị, bắt đầu từ một câu hỏi nền tảng: "Điều gì quyết định giá trị của Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/lsink20u1/c10/tong-ket-va-ung-dung-nang-cao/" target="_blank" rel="noopener">Tổng kết và ứng dụng nâng cao</a>.</p>
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập chuỗi thời gian, kiểm định nghiệm đơn vị và ước lượng ARIMA / GARCH
 version 18.0
 clear all
 set more off
+import delimited "sachktl_timeseries_finco.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_lsink20u1_c10_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+tsset time_id
+dfuller y, lags(4) trend regress
+pperron y, lags(4) trend
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 1. Ước lượng mô hình ARIMA và kiểm định nhiễu trắng phần dư
+arima y, arima(1,1,1) vce(robust)
+predict resid_arima, resid
+wntestq resid_arima, lags(12)
+
+* 2. Ước lượng mô hình phương sai có điều kiện thay đổi ARCH/GARCH(1,1)
+arch d.y x1 x2, arch(1) garch(1) vce(robust)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
-library(tidyverse)
-library(lmtest)
-library(sandwich)
+# Nạp thư viện chuỗi thời gian và ước lượng ARIMA / GARCH(1,1)
+library(tseries)
+library(forecast)
+library(rugarch)
 
-df <- read.csv("sachktl_lsink20u1_c10_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_timeseries_finco.csv")
+y_ts <- ts(df$y, frequency = 12)
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA tối ưu theo AICc
+adf.test(y_ts)
+fit_arima <- auto.arima(y_ts, seasonal = FALSE, ic = "aicc")
+summary(fit_arima)
+checkresiduals(fit_arima)
+
+# 2. Ước lượng mô hình GARCH(1,1) cho chuỗi lợi suất
+spec <- ugarchspec(variance.model = list(model = "sGARCH", garchOrder = c(1, 1)),
+                   mean.model = list(armaOrder = c(1, 0), include.mean = TRUE))
+fit_garch <- ugarchfit(spec = spec, data = diff(y_ts))
+show(fit_garch)
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và arch để phân tích chuỗi thời gian & biến động
 import pandas as pd
-import statsmodels.formula.api as smf
+from statsmodels.tsa.stattools import adfuller
+from statsmodels.tsa.arima.model import ARIMA
+from arch import arch_model
 
-df = pd.read_csv("sachktl_lsink20u1_c10_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_timeseries_finco.csv")
+y = df["y"].dropna()
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA(1,1,1)
+adf_stat, p_val, *_ = adfuller(y, autolag="AIC")
+print(f"ADF Statistic: {adf_stat:.4f}, p-value: {p_val:.4f}")
+arima_res = ARIMA(y, order=(1, 1, 1)).fit()
+print(arima_res.summary())
+
+# 2. Ước lượng mô hình GARCH(1,1) với phân phối Student-t
+ret = y.diff().dropna() * 100
+garch_res = arch_model(ret, vol="Garch", p=1, q=1, dist="t").fit(disp="off")
+print(garch_res.summary())
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 10: 10. định giá cân bằng liên thời gian trên SachKTL"
+  title="Hướng dẫn thực hành 10. Định giá cân bằng liên thời gian trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 10 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Nền tảng định giá cân bằng liên thời gian | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c10/nen-tang-dinh-gia-can-bang-lien-thoi-gian/) |
-| **Bài 02** | Mô hình CCAPM và kiểm định GMM | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c10/mo-hinh-ccapm-va-kiem-dinh-gmm/) |
-| **Bài 03** | Câu đố phí bù rủi ro vốn chủ sở hữu | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c10/cau-do-phi-bu-rui-ro-von-chu-so-huu/) |
-| **Bài 04** | Các lý thuyết mở rộng giải thích câu đố | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c10/cac-ly-thuyet-mo-rong-giai-thich-cau-do/) |
-| **Bài 05** | Thực hành phân tích CCAPM với Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c10/thuc-hanh-phan-tich-ccapm-voi-stata/) |
-| **Bài 06** | Tổng kết và ứng dụng nâng cao | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c10/tong-ket-va-ung-dung-nang-cao/) |
+| **10.1** | Nền tảng định giá cân bằng liên thời gian | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c10/nen-tang-dinh-gia-can-bang-lien-thoi-gian/) |
+| **10.2** | Mô hình CCAPM và kiểm định GMM | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c10/mo-hinh-ccapm-va-kiem-dinh-gmm/) |
+| **10.3** | Câu đố phí bù rủi ro vốn chủ sở hữu | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c10/cau-do-phi-bu-rui-ro-von-chu-so-huu/) |
+| **10.4** | Các lý thuyết mở rộng giải thích câu đố | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c10/cac-ly-thuyet-mo-rong-giai-thich-cau-do/) |
+| **10.5** | Thực hành phân tích CCAPM với Stata | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c10/thuc-hanh-phan-tich-ccapm-voi-stata/) |
+| **10.6** | Tổng kết và ứng dụng nâng cao | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c10/tong-ket-va-ung-dung-nang-cao/) |

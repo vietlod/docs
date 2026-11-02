@@ -1,20 +1,20 @@
 ---
 id: index
 slug: /sachktl/book-11-cserk22u1
-title: "Book 11: Causal Inference and Policy Impact Evaluation Econometrics"
-sidebar_label: "Book 11 Overview"
+title: "Causal Inference and Policy Impact Evaluation Econometrics"
+sidebar_label: "Textbook Overview"
 sidebar_position: 1
-description: "Comprehensive how-to guide for Book 11: Causal Inference and Policy Impact Evaluation Econometrics spanning 6 chapters and 30 lessons on SachKTL."
+description: "Comprehensive how-to guide for Causal Inference and Policy Impact Evaluation Econometrics spanning 6 chapters and 30 lessons on SachKTL."
 ---
 
-# Book 11: Causal Inference and Policy Impact Evaluation Econometrics
+# Causal Inference and Policy Impact Evaluation Econometrics
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-**Book 11: Causal Inference and Policy Impact Evaluation Econometrics** is published online at [https://sachktl.tnsai.vn/vi/cserk22u1/](https://sachktl.tnsai.vn/vi/cserk22u1/) and comprises **6 methodological chapters** and **30 detailed lessons** implemented across `Stata 18 MP`.
+**Causal Inference and Policy Impact Evaluation Econometrics** is published online at [https://sachktl.tnsai.vn/vi/cserk22u1/](https://sachktl.tnsai.vn/vi/cserk22u1/) and comprises **6 methodological chapters** and **30 detailed lessons** implemented across `Stata 18 MP`.
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Book 11: Causal Inference and Policy Impact Evaluation Econometrics">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Causal Inference and Policy Impact Evaluation Econometrics">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -26,8 +26,8 @@ description: "Comprehensive how-to guide for Book 11: Causal Inference and Polic
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BOOK 11 · SACHKTL</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Book 11: Causal Inference and Policy Impact Evaluation Econometrics</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">SACHKTL TEXTBOOK</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Causal Inference and Policy Impact Evaluation Econometrics</text>
     <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng đánh giá tác động chính sách · 6 Chapters · 30 Lessons</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
@@ -42,9 +42,19 @@ description: "Comprehensive how-to guide for Book 11: Causal Inference and Polic
   </svg>
 </div>
 
-## 1. Textbook Overview and Academic Scope
+## 1. Textbook Overview, Academic Scope, and Mathematical Formulation
 
-Kinh tế lượng đánh giá tác động chính sách toàn diện A Comprehensive Guide to Econometric Policy Impact Evaluation LỜI GIỚI THIỆU Chào các bạn sinh viên và nhà nghiên cứu trẻ, Làm thế nào để chúng ta biết chắc rằng một chính sách công – như trợ cấp học phí, xây dựng một cây cầu mới, hay một chương trình đào tạo nghề – thực sự mang lại hiệu quả như kỳ vọng? Liệu sự cải thiện mà chúng ta quan sát được là do chính sách, hay chỉ đơn thuần là sự trùng hợp ngẫu nhiên hoặc do các yếu tố khác mà chúng ta chưa tính đến? Đây là câu hỏi cốt lõi của lĩnh vực đánh giá tác động, một trong những nhánh quan trọng và thực tiễn nhất của kinh tế lượng ứng
+Kinh tế lượng đánh giá tác động chính sách toàn diện A Comprehensive Guide to Econometric Policy Impact Evaluation LỜI GIỚI THIỆU Chào các bạn sinh viên và nhà nghiên cứu trẻ, Làm thế nào để chúng ta biết chắc rằng một chính sách công – như trợ cấp học phí, xây dựng một cây cầu mới, hay một chương trình đào tạo nghề – thực sự mang lại hiệu quả như kỳ vọng? Liệu sự cải thiện mà chúng ta quan sát được là do chính sách, hay chỉ đơn thuần là sự trùng hợp ngẫu nhiên hoặc do các yếu tố khác mà chúng ta chưa tính đến?
+
+### 1.1. Core Mathematical Representation
+
+$$
+\tau_{\text{ATT}} = \mathbb{E}\left[Y_i(1) - Y_i(0) \mid D_i = 1\right] = \mathbb{E}\left[\mathbb{E}[Y_{it} - Y_{i,t-1} \mid D_i=1] - \mathbb{E}[Y_{it} - Y_{i,t-1} \mid D_i=0]\right] \tag*{[1]}
+$$
+
+$$
+Y_{it} = \alpha_i + \lambda_t + \sum_{k \neq -1} \delta_k \cdot \mathbb{I}(t - G_i = k) + \mathbf{X}_{it}'\boldsymbol{\beta} + \varepsilon_{it} \tag*{[2]}
+$$
 
 <FeatureCards
   features={[
@@ -69,27 +79,31 @@ Kinh tế lượng đánh giá tác động chính sách toàn diện A Comprehe
   ]}
 />
 
-## 2. Step-by-Step Study and Replication Workflow
+## 2. Step-by-Step Study and Empirical Replication Workflow
 
 <Steps>
   <div className="step-item">
-    <h3>Step 1: Review the Chapter Architecture and Model Assumptions</h3>
-    <p>Browse the 6-chapter directory below to locate the methodology matching your research question and open the source textbook at <a href="https://sachktl.tnsai.vn/vi/cserk22u1/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/cserk22u1/</a>.</p>
+    <h3>1. Review the 6-Chapter Architecture and Identification Assumptions</h3>
+    <p>Browse the chapter directory below to locate the methodology matching your research question and open the authoritative textbook at <a href="https://sachktl.tnsai.vn/vi/cserk22u1/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/cserk22u1/</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Step 2: Follow Chapter-Level How-To Guides in Stata 18 MP</h3>
-    <p>Each chapter guide provides reproducible code templates in Stata 18 MP alongside data preparation workflows using <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> and <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>.</p>
+    <h3>2. Assemble Standardized Practice Datasets From EcoData and Finco</h3>
+    <p>Extract macroeconomic, corporate financial, customs trade, or household survey variables from <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> and <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a> aligned with each chapter's data structure.</p>
   </div>
   <div className="step-item">
-    <h3>Step 3: Perform Diagnostic Verification and Export Tables on EcoLab</h3>
-    <p>Use <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> to verify estimator robustness and generate publication-ready regression tables.</p>
+    <h3>3. Execute Chapter-Level How-To Guides in Stata 18 MP</h3>
+    <p>Every chapter in the left sidebar provides lesson-by-lesson breakdowns, a 5-step practical workflow, and reproducible scripts in Stata 18 MP.</p>
+  </div>
+  <div className="step-item">
+    <h3>4. Verify Robustness and Automate Journal Reporting on EcoLab</h3>
+    <p>Cross-check parameter convergence on <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a> and generate publication-ready APA 7th / AER tables on <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a>.</p>
   </div>
 </Steps>
 
 ## 3. Video Walkthrough of the Textbook
 
 <VideoTutorial
-  title="Study and Replication Guide for Book 11: Causal Inference and Policy Impact Evaluation Econometrics"
+  title="Study and Replication Guide for Causal Inference and Policy Impact Evaluation Econometrics"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
@@ -97,9 +111,9 @@ Kinh tế lượng đánh giá tác động chính sách toàn diện A Comprehe
 
 | Chapter | Chapter Title and Step-by-Step How-To Guide | Lessons | Original Source on SachKTL |
 | :---: | :--- | :---: | :--- |
-| **Chapter 01** | [Chapter 01: 1. Giới thiệu về kinh tế lượng trong đánh giá chương trình](/en/sachktl/book-11-cserk22u1/chapter-01-c1) | 5 Lessons | [Original Chapter on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c1/) |
-| **Chapter 02** | [Chapter 02: 2. Các phương pháp dựa trên lựa chọn các biến quan sát được](/en/sachktl/book-11-cserk22u1/chapter-02-c2) | 6 Lessons | [Original Chapter on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c2/) |
-| **Chapter 03** | [Chapter 03: 3. Các phương pháp dựa trên lựa chọn các biến không quan sát được](/en/sachktl/book-11-cserk22u1/chapter-03-c3) | 7 Lessons | [Original Chapter on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/) |
-| **Chapter 04** | [Chapter 04: 4. Hiệu ứng điều trị trung bình cục bộ và thiết kế gián đoạn hồi quy](/en/sachktl/book-11-cserk22u1/chapter-04-c4) | 6 Lessons | [Original Chapter on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c4/) |
-| **Chapter 05** | [Chapter 05: 5. Phương pháp sai biệt kép với nhiều thời điểm trước và sau can thiệp](/en/sachktl/book-11-cserk22u1/chapter-05-c5) | 4 Lessons | [Original Chapter on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c5/) |
-| **Chapter 06** | [Chapter 06: 6. Phương pháp kiểm soát tổng hợp](/en/sachktl/book-11-cserk22u1/chapter-06-c6) | 2 Lessons | [Original Chapter on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c6/) |
+| **1** | [1. Introduction and Methodological Foundations](/en/sachktl/book-11-cserk22u1/chapter-01-c1) | 5 Lessons | [Original Chapter on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c1/) |
+| **2** | [2. Các phương pháp dựa trên lựa chọn các biến quan sát được](/en/sachktl/book-11-cserk22u1/chapter-02-c2) | 6 Lessons | [Original Chapter on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c2/) |
+| **3** | [3. Các phương pháp dựa trên lựa chọn các biến không quan sát được](/en/sachktl/book-11-cserk22u1/chapter-03-c3) | 7 Lessons | [Original Chapter on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/) |
+| **4** | [4. Hiệu ứng điều trị trung bình cục bộ và thiết kế gián đoạn hồi quy](/en/sachktl/book-11-cserk22u1/chapter-04-c4) | 6 Lessons | [Original Chapter on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c4/) |
+| **5** | [5. Phương pháp sai biệt kép với nhiều thời điểm trước và sau can thiệp](/en/sachktl/book-11-cserk22u1/chapter-05-c5) | 4 Lessons | [Original Chapter on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c5/) |
+| **6** | [6. Phương pháp kiểm soát tổng hợp](/en/sachktl/book-11-cserk22u1/chapter-06-c6) | 2 Lessons | [Original Chapter on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c6/) |

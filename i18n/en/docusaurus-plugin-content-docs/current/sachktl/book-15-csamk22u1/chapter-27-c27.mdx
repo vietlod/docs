@@ -1,19 +1,19 @@
 ---
 id: chapter-27-c27
-title: "Chapter 27: 27. Thử nghiệm đối chứng ngẫu nhiên và tác động điều trị ngoại sinh — Microeconometrics Using Stata"
-sidebar_label: "Chapter 27: 27. Thử nghiệm đối chứng ngẫu nhiên và tác"
+title: "27. Thử nghiệm đối chứng ngẫu nhiên và tác động điều trị ngoại sinh"
+sidebar_label: "27. Thử nghiệm đối chứng ngẫu nhiên và tác động điều trị ngoại sinh"
 sidebar_position: 28
-description: "Step-by-step practical how-to guide for Chapter 27: 27. Thử nghiệm đối chứng ngẫu nhiên và tác động điều trị ngoại sinh from Microeconometrics Using Stata on SachKTL with Stata, R, and Python workflows integrated with EcoData, Finco, and EcoLab."
+description: "Comprehensive practical how-to guide for 27. Thử nghiệm đối chứng ngẫu nhiên và tác động điều trị ngoại sinh from Microeconometrics Using Stata on SachKTL featuring structural equations, 7 lesson breakdowns, and Stata, R, and Python scripts."
 ---
 
-# Chapter 27: 27. Thử nghiệm đối chứng ngẫu nhiên và tác động điều trị ngoại sinh — Microeconometrics Using Stata
+# 27. Thử nghiệm đối chứng ngẫu nhiên và tác động điều trị ngoại sinh
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-This practical how-to guide synthesizes the methodology and empirical implementation workflow of **Chapter 27: 27. Thử nghiệm đối chứng ngẫu nhiên và tác động điều trị ngoại sinh** from [**Book 15: Microeconometrics Using Stata**](/en/sachktl/book-15-csamk22u1/), with direct backlinks to the authoritative source material at [https://sachktl.tnsai.vn/vi/csamk22u1/c27/](https://sachktl.tnsai.vn/vi/csamk22u1/c27/).
+This practical how-to guide presents the theoretical foundations, structural mathematical equations, detailed breakdown of **7 specialized lessons**, and multi-platform replication workflows for **27. Thử nghiệm đối chứng ngẫu nhiên và tác động điều trị ngoại sinh** from the textbook [**Microeconometrics Using Stata**](/en/sachktl/book-15-csamk22u1/), with direct cross-references to the authoritative source material at [https://sachktl.tnsai.vn/vi/csamk22u1/c27/](https://sachktl.tnsai.vn/vi/csamk22u1/c27/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chapter 27: 27. Thử nghiệm đối chứng ngẫu nhiên và tác động điều trị">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="27. Thử nghiệm đối chứng ngẫu nhiên và tác động điều trị ngoại sinh">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ This practical how-to guide synthesizes the methodology and empirical implementa
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BOOK 15 · CHAPTER 27</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chapter 27: 27. Thử nghiệm đối chứng ngẫu nhiên và tác động điều trị</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Part of Textbook: Microeconometrics Using Stata · 7 Detailed Lessons</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Microeconometrics Using Stata</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">27. Thử nghiệm đối chứng ngẫu nhiên và tác động điều trị ngoại sinh</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Causal Inference and Empirical Policy Impact Evaluation · 7 Detailed Lessons</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,139 +41,279 @@ This practical how-to guide synthesizes the methodology and empirical implementa
   </svg>
 </div>
 
-## 1. Methodological Meaning and Scope of Application
+## 1. Methodological Foundations, Mathematical Specification, and Identification
 
-Giới thiệu về Thử nghiệm Ngẫu nhiên có Đối chứng và Tác động Can thiệp Introduction to Randomized Control Trials and Treatment Effects Giới thiệu về Chuỗi bài học Chào mừng các bạn sinh viên đến với chuỗi bài học về một trong những chủ đề hấp dẫn và quan trọng nhất trong kinh tế lượng hiện đại: đánh giá tác động can thiệp. Trong thực tế, các nhà hoạch định chính sách, các doanh nghiệp, và các nhà nghiên cứu luôn muốn biết: Liệu một chương trình đào tạo nghề có thực sự làm tăng thu nhập không? Một chiến dịch marketing mới có giúp tăng doanh số bán hàng không? Hay một chương trình bảo hiểm y tế
+Giới thiệu về Thử nghiệm Ngẫu nhiên có Đối chứng và Tác động Can thiệp Introduction to Randomized Control Trials and Treatment Effects Giới thiệu về Chuỗi bài học Chào mừng các bạn sinh viên đến với chuỗi bài học về một trong những chủ đề hấp dẫn và quan trọng nhất trong kinh tế lượng hiện đại: đánh giá tác động can thiệp. Trong thực tế, các nhà hoạch định chính sách, các doanh nghiệp, và các nhà nghiên cứu luôn muốn biết: Liệu một chương trình đào tạo nghề có thực sự làm tăng thu nhập không? Một chiến dịch marketing mới có giúp tăng doanh số bán hàng không?
 
-- **Core Academic Topics**: Giới thiệu về Chuỗi bài học, Cấu trúc Chuỗi bài học, Kiến thức Tiên quyết, Những gì bạn cần biết trước khi bắt đầu:, Mục tiêu Học tập.
-- **Supported Analytical Environments**: `Stata 18 MP`.
-- **Recommended Empirical Data Sources**: Vietnamese macroeconomic, corporate, and household survey datasets on [EcoData](https://ecodata.io.vn), capital and commodity market series on [Finco](https://www.finco.vn), model cross-references on [VietLOD](https://vietlod.tnsai.vn), and automated estimation on [EcoLab](https://ecolab.io.vn).
+### 1.1. Structural Equations and Representative Estimator
+
+$$
+\tau_{\text{ATT}} = \mathbb{E}\left[Y_i(1) - Y_i(0) \mid D_i = 1\right] = \mathbb{E}\left[\mathbb{E}[Y_{it} - Y_{i,t-1} \mid D_i=1] - \mathbb{E}[Y_{it} - Y_{i,t-1} \mid D_i=0]\right] \tag*{[1]}
+$$
+
+$$
+Y_{it} = \alpha_i + \lambda_t + \sum_{k \neq -1} \delta_k \cdot \mathbb{I}(t - G_i = k) + \mathbf{X}_{it}'\boldsymbol{\beta} + \varepsilon_{it} \tag*{[2]}
+$$
+
+### 1.2. Core Identification Assumptions and Applicability Conditions
+
+1. Conditional parallel trends ensure the comparison group validly represents the counterfactual trajectory of treated units in the absence of intervention.
+2. No anticipation prior to treatment onset and common support overlap $0 < P(D_i=1 \mid \mathbf{X}_i) < 1$ are required for point identification of $\tau_{\text{ATT}}$.
+3. The Stable Unit Treatment Value Assumption (SUTVA) rules out unmodeled spillover interference across treated and control units.
 
 <FeatureCards
   features={[
     {
-      title: "Original Chapter on SachKTL",
-      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for Chapter 27 on SachKTL.",
+      title: "Authoritative Chapter on SachKTL",
+      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for this chapter on SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/csamk22u1/c27/"
     },
     {
       title: "Practice Datasets on EcoData & Finco",
-      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and survey data for hands-on replication.",
+      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and household survey data for hands-on replication.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
       title: "Automated Estimation on EcoLab",
-      description: "Execute econometric specifications, run diagnostic battery tests, and export publication-grade tables automatically.",
+      description: "Execute econometric specifications, run diagnostic battery tests, and export APA 7th / AER publication-grade tables automatically.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Step-by-Step Practical Implementation Across Chapter Lessons
+<FeatureNotAvailable
+  feature="Unconditional Baseline Estimation Under Violated Identification Assumptions"
+  reason="Conventional Two-Way Fixed Effects (TWFE) regressions suffer from negative weighting bias under staggered adoption and heterogeneous treatment effects; use Callaway-Sant'Anna or Sun-Abraham estimators instead."
+  alternative="Run the complete diagnostic battery in Step 4 and transition to the appropriate corrective estimator on VietLOD or EcoLab."
+/>
+
+## 2. Lesson-by-Lesson Academic Breakdown
+
+### 2.1. Nền tảng của RCTs và Khung kết quả Tiềm năng
+
+Nền tảng của Thử nghiệm Ngẫu nhiên có Đối chứng và Khung kết quả Tiềm năng The Foundation of Randomized Control Trials and the Potential Outcomes Framework Vấn đề Cốt lõi của Suy luận Nhân quả Chào mừng các bạn đến với bài học đầu tiên trong chuỗi bài về đánh giá tác động can thiệp. Trước khi đi sâu vào các kỹ thuật phức tạp, chúng ta cần bắt đầu với một câu hỏi nền tảng: Làm thế nào để chúng ta biết chắc chắn rằng một hành động A thực sự gây ra kết quả B?
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Vấn đề Cốt lõi của Suy luận Nhân quả**
+- **Khung kết quả Tiềm năng**
+- **Thử nghiệm Ngẫu nhiên có Đối chứng**
+- **Đánh giá Chương trình Đào tạo Việc làm**
+- **Tổng kết**
+- **Những điểm chính cần nắm vững**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c27/nen-tang-cua-rcts-va-khung-ket-qua-tiem-nang/)
+
+### 2.2. Thiết kế Thí nghiệm và Phân tích Năng lực trong RCTs bằng Stata
+
+Thiết kế Thí nghiệm và Phân tích Năng lực trong RCTs bằng Stata Experimental Design and Power Analysis in RCTs using Stata Từ "Tại sao" đến "Làm thế nào" để Thiết kế một RCT Tốt Trong bài học trước, chúng ta đã cùng nhau tìm hiểu "tại sao" Thử nghiệm Ngẫu nhiên có Đối chứng được xem là tiêu chuẩn vàng trong suy luận nhân quả. Chúng ta đã biết rằng bằng cách phân bổ ngẫu nhiên, RCTs giúp giải quyết vấn đề chệch do tự chọn, cho phép chúng ta ước lượng tác động thực sự của một can thiệp.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Từ "Tại sao" đến "Làm thế nào" để Thiết kế một RCT Tốt**
+- **Các Thành phần của Phân tích Năng lực**
+- **Kiểm định Giả thuyết và Hai loại Sai lầm**
+- **Năng lực Thống kê và Các Yếu tố Ảnh hưởng**
+- **Phân tích Năng lực và Cỡ mẫu bằng Stata**
+- **Thiết kế Thí nghiệm cho Chương trình Gia sư**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c27/thiet-ke-thi-nghiem-va-phan-tich-nang-luc-trong-rcts-bang-stata/)
+
+### 2.3. Nâng cao Độ chính xác trong RCTs bằng Mô hình Hồi quy
+
+Nâng cao Độ chính xác trong RCTs bằng Mô hình Hồi quy Increasing Precision in RCTs using Regression Models Vượt qua Phép so sánh Trung bình Đơn giản Ở các bài học trước, chúng ta đã thiết lập rằng Thử nghiệm Ngẫu nhiên có Đối chứng là một phương pháp cực kỳ mạnh mẽ. Bằng cách phân bổ ngẫu nhiên, chúng ta có thể ước lượng tác động can thiệp trung bình một cách không chệch chỉ bằng cách so sánh giá trị trung bình của nhóm can thiệp và nhóm đối chứng. Đây là một phương pháp đơn giản và trực quan.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Vượt qua Phép so sánh Trung bình Đơn giản**
+- **Tại sao Hồi quy giúp Tăng độ chính xác?**
+- **Phép so sánh Trung bình như một Mô hình Hồi quy**
+- **Thêm các Biến kiểm soát để Giảm Phương sai Sai số**
+- **Thực hiện Hồi quy trong RCTs bằng Stata**
+- **Phân tích lại Dữ liệu Chương trình Đào tạo**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c27/nang-cao-do-chinh-xac-trong-rcts-bang-mo-hinh-hoi-quy/)
+
+### 2.4. Từ RCT đến Dữ liệu Quan sát – Các Giả định và Phương pháp Ước lượng Nâng cao
+
+Từ RCT đến Dữ liệu Quan sát: Các Giả định và Phương pháp Ước lượng Nâng cao From RCTs to Observational Data: Assumptions and Advanced Estimation Methods Thách thức của Dữ liệu trong Thế giới Thực Trong các bài học trước, chúng ta đã khám phá "tiêu chuẩn vàng" của suy luận nhân quả - Thử nghiệm Ngẫu nhiên có Đối chứng. Chúng ta đã thấy rằng việc phân bổ ngẫu nhiên là một công cụ kỳ diệu giúp loại bỏ sai lệch và cho phép chúng ta ước lượng tác động của can thiệp một cách trực tiếp.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Thách thức của Dữ liệu trong Thế giới Thực**
+- **Các Giả định cho Suy luận Nhân quả với Dữ liệu Quan sát**
+- **1. Giả định Độc lập có Điều kiện**
+- **2. Giả định Chồng chéo hay Miền Hỗ trợ chung**
+- **Tổng quan về các Phương pháp Ước lượng Nâng cao**
+- **Phân tích Dữ liệu Quan sát**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c27/tu-rct-den-du-lieu-quan-sat-cac-gia-dinh-va-phuong-phap-uoc-luong-nang-cao/)
+
+### 2.5. Các Phương pháp Ghép cặp trong Đánh giá Tác động
+
+Các Phương pháp Ghép cặp trong Đánh giá Tác động Matching Methods in Impact Evaluation Tìm kiếm "Người anh em song sinh" trong Thống kê Trong bài học trước, chúng ta đã tìm hiểu các phương pháp dựa trên hồi quy và trọng số để xử lý sai lệch lựa chọn trong dữ liệu quan sát. Hôm nay, chúng ta sẽ khám phá một cách tiếp cận khác, có lẽ là trực quan và dễ hiểu nhất: phương pháp ghép cặp.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Tìm kiếm "Người anh em song sinh" trong Thống kê**
+- **Từ Ghép cặp Chính xác đến Điểm xu hướng**
+- **Thách thức: Lời nguyền Đa chiều**
+- **Giải pháp: Ghép cặp Điểm xu hướng**
+- **Các Kỹ thuật Ghép cặp Phổ biến**
+- **Quy trình Thực hiện PSM trong Stata**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c27/cac-phuong-phap-ghep-cap-trong-danh-gia-tac-dong/)
+
+### 2.6. Phân tích Dữ liệu Thí nghiệm Bảo hiểm Y tế Oregon
+
+Phân tích Toàn diện Dữ liệu Thí nghiệm Bảo hiểm Y tế Oregon Comprehensive Analysis of the Oregon Health Insurance Experiment Data Hội tụ các Phương pháp Chào mừng các bạn đến với bài học thực hành tổng hợp của chúng ta! Trong suốt hành trình vừa qua, chúng ta đã xây dựng một bộ công cụ mạnh mẽ để tiếp cận bài toán suy luận nhân quả. Chúng ta bắt đầu với nền tảng lý thuyết của Khung kết quả Tiềm năng, hiểu rõ các khái niệm cốt lõi như ATE và ATET.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Hội tụ các Phương pháp**
+- **Thí nghiệm Bảo hiểm Y tế Oregon**
+- **Bối cảnh Nghiên cứu**
+- **Các Biến chính trong Phân tích**
+- **Quy trình Phân tích**
+- **Hướng dẫn Phân tích Từng bước bằng Stata**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c27/phan-tich-du-lieu-thi-nghiem-bao-hiem-y-te-oregon/)
+
+### 2.7. So sánh các Phương pháp và Hướng nghiên cứu Mở rộng
+
+Thử nghiệm Ngẫu nhiên có Đối chứng và Tác động Can thiệp Synthesis Article: Randomized Control Trials and Treatment Effects Từ Nền tảng đến Ứng dụng trong Suy luận Nhân quả Chào mừng các bạn đến với bài viết tổng hợp cuối cùng của chuỗi bài học về đánh giá tác động can thiệp. Trong suốt hành trình vừa qua, chúng ta đã cùng nhau đi từ những câu hỏi cơ bản nhất của suy luận nhân quả đến việc áp dụng các kỹ thuật kinh tế lượng tinh vi trên dữ liệu thực tế.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Từ Nền tảng đến Ứng dụng trong Suy luận Nhân quả**
+- **Bức tranh Toàn cảnh của Suy luận Nhân quả**
+- **Khung sườn Lựa chọn Công cụ Phân tích**
+- **Tổng hợp Phân tích Dữ liệu OHIE**
+- **Tổng kết và Hướng phát triển**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c27/so-sanh-cac-phuong-phap-va-huong-nghien-cuu-mo-rong/)
+
+## 3. Step-by-Step Empirical Implementation Workflow
 
 <Steps>
   <div className="step-item">
-    <h3>Step 1: Nền tảng của RCTs và Khung kết quả Tiềm năng</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Nền tảng của RCTs và Khung kết quả Tiềm năng. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c27/nen-tang-cua-rcts-va-khung-ket-qua-tiem-nang/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csamk22u1/c27/nen-tang-cua-rcts-va-khung-ket-qua-tiem-nang/</a>.</p>
+    <h3>1. Formulate the Research Question and Prepare Data on EcoData & Finco</h3>
+    <p>Define the dependent variable, core explanatory variables, and control covariates aligned with <strong>27. Thử nghiệm đối chứng ngẫu nhiên và tác động điều trị ngoại sinh</strong>. Extract standardized Vietnamese empirical series from <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> or <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, and screen for missing observations and extreme outliers.</p>
   </div>
   <div className="step-item">
-    <h3>Step 2: Thiết kế Thí nghiệm và Phân tích Năng lực trong RCTs bằng Stata</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Thiết kế Thí nghiệm và Phân tích Năng lực trong RCTs bằng Stata. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c27/thiet-ke-thi-nghiem-va-phan-tich-nang-luc-trong-rcts-bang-stata/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csamk22u1/c27/thiet-ke-thi-nghiem-va-phan-tich-nang-luc-trong-rcts-bang-stata/</a>.</p>
+    <h3>2. Conduct Descriptive Profiling, Correlation Analysis, and Pre-Estimation Checks</h3>
+    <p>Examine empirical distributions, construct summary statistics tables, and evaluate collinearity using pairwise correlation matrices and Variance Inflation Factors (VIF).</p>
   </div>
   <div className="step-item">
-    <h3>Step 3: Nâng cao Độ chính xác trong RCTs bằng Mô hình Hồi quy</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Nâng cao Độ chính xác trong RCTs bằng Mô hình Hồi quy. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c27/nang-cao-do-chinh-xac-trong-rcts-bang-mo-hinh-hoi-quy/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csamk22u1/c27/nang-cao-do-chinh-xac-trong-rcts-bang-mo-hinh-hoi-quy/</a>.</p>
+    <h3>3. Estimate the Model Across Stata 18 MP, R 4.x, and Python 3.11+</h3>
+    <p>Execute the parameter estimation scripts matching the structural equations in Section 1.1 while cross-checking theoretical derivations at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c27/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Step 4: Từ RCT đến Dữ liệu Quan sát – Các Giả định và Phương pháp Ước lượng Nâng cao</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Từ RCT đến Dữ liệu Quan sát – Các Giả định và Phương pháp Ước lượng Nâng cao. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c27/tu-rct-den-du-lieu-quan-sat-cac-gia-dinh-va-phuong-phap-uoc-luong-nang-cao/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csamk22u1/c27/tu-rct-den-du-lieu-quan-sat-cac-gia-dinh-va-phuong-phap-uoc-luong-nang-cao/</a>.</p>
+    <h3>4. Perform Post-Estimation Diagnostics and Robust Variance Correction</h3>
+    <p>Test for heteroskedasticity, serial correlation, Ramsey RESET functional form misspecification, and regressor endogeneity. Apply White HC1 or cluster-robust standard errors for valid inference.</p>
   </div>
   <div className="step-item">
-    <h3>Step 5: Các Phương pháp Ghép cặp trong Đánh giá Tác động</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Các Phương pháp Ghép cặp trong Đánh giá Tác động. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c27/cac-phuong-phap-ghep-cap-trong-danh-gia-tac-dong/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csamk22u1/c27/cac-phuong-phap-ghep-cap-trong-danh-gia-tac-dong/</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Step 6: Phân tích Dữ liệu Thí nghiệm Bảo hiểm Y tế Oregon</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Phân tích Dữ liệu Thí nghiệm Bảo hiểm Y tế Oregon. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c27/phan-tich-du-lieu-thi-nghiem-bao-hiem-y-te-oregon/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csamk22u1/c27/phan-tich-du-lieu-thi-nghiem-bao-hiem-y-te-oregon/</a>.</p>
+    <h3>5. Format Journal-Grade Tables and Cross-Verify on EcoLab</h3>
+    <p>Report point estimates, standard errors in parentheses, and statistical significance stars following APA 7th / AER Booktabs standards, or automate the entire reporting pipeline on <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> and <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Multi-Platform Implementation Examples in Stata, R, and Python
+## 4. Multi-Platform Implementation Scripts in Stata, R, and Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Initialize environment and load practice dataset from EcoData / SachKTL
+* Ước lượng tác động nhân quả với DiD, Event Study và Propensity Score Matching
 version 18.0
 clear all
 set more off
+import delimited "sachktl_causal_ecodata.csv", clear encoding("utf-8")
 
-* Import standardized empirical dataset
-import delimited "sachktl_csamk22u1_c27_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+* 1. Ước lượng Difference-in-Differences hai chiều và kiểm định xu hướng song song
+xtset id year
+xtdidregress (y x1 x2) (treated_post), group(id) time(year) vce(cluster id)
+estat trendplots
+estat ptrends
 
-* Estimate baseline specification and run diagnostic checks with robust standard errors
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 2. Ước lượng ghép cặp điểm xu hướng (PSM) và nghịch đảo xác suất trọng số (IPWRA)
+teffects psmatch (y) (treat x1 x2 x3, probit), atet vce(iid)
+teffects ipwra (y x1 x2) (treat x1 x2 x3, logit), atet
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Load econometric packages and practice dataset from EcoData / SachKTL
-library(tidyverse)
-library(lmtest)
-library(sandwich)
+# Nạp thư viện suy diễn nhân quả fixest, did và MatchIt
+library(fixest)
+library(did)
+library(MatchIt)
 
-df <- read.csv("sachktl_csamk22u1_c27_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_causal_ecodata.csv")
 
-# Estimate model and compute heteroskedasticity-robust HC1 standard errors
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Ước lượng mô hình DiD và Event Study với sai số chuẩn cụm
+mod_did <- feols(y ~ treated_post + x1 + x2 | id + year, data = df, cluster = ~id)
+summary(mod_did)
+
+# 2. Ước lượng Callaway & Sant'Anna (2021) cho DiD đa thời điểm
+cs_out <- att_gt(yname = "y", tname = "year", idname = "id", gname = "first_treat",
+                 xformla = ~ x1 + x2, data = df, control_group = "nevertreated")
+summary(aggte(cs_out, type = "dynamic"))
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Load econometric libraries and practice dataset from EcoData / SachKTL
+# Nạp thư viện statsmodels và linearmodels để ước lượng DiD & IPW
 import pandas as pd
 import statsmodels.formula.api as smf
+from linearmodels.panel import PanelOLS
 
-df = pd.read_csv("sachktl_csamk22u1_c27_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_causal_ecodata.csv")
 
-# Fit specification with HC1 robust standard errors
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Ước lượng điểm xu hướng Propensity Score bằng Logit
+ps_mod = smf.logit("treat ~ x1 + x2 + x3", data=df).fit(disp=False)
+df["pscore"] = ps_mod.predict(df)
+
+# 2. Ước lượng Difference-in-Differences hai chiều với sai số chuẩn cụm
+df_panel = df.set_index(["id", "year"])
+did_mod = PanelOLS.from_formula("y ~ 1 + treated_post + x1 + x2 + EntityEffects + TimeEffects", data=df_panel)
+did_res = did_mod.fit(cov_type="clustered", cluster_entity=True)
+print(did_res.summary)
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video Tutorial Walkthrough
+## 5. Post-Estimation Diagnostic and Interpretation Guide
+
+| Diagnostic Criterion | Null Hypothesis $H_0$ | Benchmark Threshold | Corrective Action When $H_0$ Is Rejected |
+| :--- | :--- | :--- | :--- |
+| **Heteroskedasticity** | Constant error variance $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ rejects $H_0$ | Apply `vce(robust)`, `vcovHC(HC1)`, or FGLS/WLS weighted estimation |
+| **Multicollinearity** | No severe linear dependence among regressors | $\text{VIF} < 10$ acceptable | Drop redundant covariates, center interactions, or apply LASSO/Ridge regularization |
+| **Ramsey RESET Functional Form** | No omitted nonlinear or higher-order terms | $p\text{-value} > 0.05$ retains $H_0$ | Add interaction terms, quadratic polynomials, or log-transform skewed positive variables |
+| **Regressor Exogeneity** | Orthogonality $\text{Cov}(X, \varepsilon)=0$ | Durbin-Wu-Hausman $p > 0.05$ | Transition to IV/2SLS, LIML, or GMM estimation with validated instruments |
+
+## 6. Video Tutorial Walkthrough
 
 <VideoTutorial
-  title="Practical Walkthrough for Chapter 27: 27. Thử nghiệm đối chứng ngẫu nhiên và tác động điều trị ngoại sinh on SachKTL"
+  title="Practical Walkthrough for 27. Thử nghiệm đối chứng ngẫu nhiên và tác động điều trị ngoại sinh on SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Complete Lesson Directory and Backlinks to Original SachKTL Articles
+## 7. Complete Lesson Directory and Backlinks to Original SachKTL Articles
 
-| No. | Lesson Title in Chapter 27 | Supported Software | Original Source Link on SachKTL |
+| Lesson Code | Lesson Title | Supported Software | Original Source Link on SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Lesson 01** | Nền tảng của RCTs và Khung kết quả Tiềm năng | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c27/nen-tang-cua-rcts-va-khung-ket-qua-tiem-nang/) |
-| **Lesson 02** | Thiết kế Thí nghiệm và Phân tích Năng lực trong RCTs bằng Stata | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c27/thiet-ke-thi-nghiem-va-phan-tich-nang-luc-trong-rcts-bang-stata/) |
-| **Lesson 03** | Nâng cao Độ chính xác trong RCTs bằng Mô hình Hồi quy | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c27/nang-cao-do-chinh-xac-trong-rcts-bang-mo-hinh-hoi-quy/) |
-| **Lesson 04** | Từ RCT đến Dữ liệu Quan sát – Các Giả định và Phương pháp Ước lượng Nâng cao | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c27/tu-rct-den-du-lieu-quan-sat-cac-gia-dinh-va-phuong-phap-uoc-luong-nang-cao/) |
-| **Lesson 05** | Các Phương pháp Ghép cặp trong Đánh giá Tác động | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c27/cac-phuong-phap-ghep-cap-trong-danh-gia-tac-dong/) |
-| **Lesson 06** | Phân tích Dữ liệu Thí nghiệm Bảo hiểm Y tế Oregon | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c27/phan-tich-du-lieu-thi-nghiem-bao-hiem-y-te-oregon/) |
-| **Lesson 07** | So sánh các Phương pháp và Hướng nghiên cứu Mở rộng | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c27/so-sanh-cac-phuong-phap-va-huong-nghien-cuu-mo-rong/) |
+| **27.1** | Nền tảng của RCTs và Khung kết quả Tiềm năng | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c27/nen-tang-cua-rcts-va-khung-ket-qua-tiem-nang/) |
+| **27.2** | Thiết kế Thí nghiệm và Phân tích Năng lực trong RCTs bằng Stata | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c27/thiet-ke-thi-nghiem-va-phan-tich-nang-luc-trong-rcts-bang-stata/) |
+| **27.3** | Nâng cao Độ chính xác trong RCTs bằng Mô hình Hồi quy | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c27/nang-cao-do-chinh-xac-trong-rcts-bang-mo-hinh-hoi-quy/) |
+| **27.4** | Từ RCT đến Dữ liệu Quan sát – Các Giả định và Phương pháp Ước lượng Nâng cao | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c27/tu-rct-den-du-lieu-quan-sat-cac-gia-dinh-va-phuong-phap-uoc-luong-nang-cao/) |
+| **27.5** | Các Phương pháp Ghép cặp trong Đánh giá Tác động | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c27/cac-phuong-phap-ghep-cap-trong-danh-gia-tac-dong/) |
+| **27.6** | Phân tích Dữ liệu Thí nghiệm Bảo hiểm Y tế Oregon | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c27/phan-tich-du-lieu-thi-nghiem-bao-hiem-y-te-oregon/) |
+| **27.7** | So sánh các Phương pháp và Hướng nghiên cứu Mở rộng | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c27/so-sanh-cac-phuong-phap-va-huong-nghien-cuu-mo-rong/) |

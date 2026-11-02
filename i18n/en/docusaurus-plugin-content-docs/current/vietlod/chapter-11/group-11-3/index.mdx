@@ -1,35 +1,35 @@
 ---
 id: index
-title: "Group 11.3: Parametric Accelerated Failure Time Models"
-sidebar_label: "Group 11.3. Parametric Accelerated Failure Time Models"
+title: "11.3. Parametric Accelerated Failure Time Models"
+sidebar_label: "11.3. Parametric Accelerated Failure Time Models"
 sidebar_position: 3
 slug: /vietlod/chapter-11/group-11-3
-description: "How-To User Guide for Methodological Group 11.3 — Parametric Accelerated Failure Time Models in Chapter 11: comparing and executing 2 econometric models across Stata 18 MP, R 4.x, and Python 3.11+."
+description: "How-To User Guide for Methodological Part 11.3 — Parametric Accelerated Failure Time Models in Chapter 11: comparing and executing 2 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
 keywords:
-  - VietLOD Group 11.3
+  - VietLOD Part 11.3
   - Parametric Accelerated Failure Time Models
   - Stata 18
   - R 4.x
   - Python 3.11
 ---
 
-# Group 11.3: Parametric Accelerated Failure Time Models
+# 11.3. Parametric Accelerated Failure Time Models
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Methodological Group 11.3 — Parametric Accelerated Failure Time Models** in [Chapter 11: Survival, Event History and Competing-Risks Analysis](/en/vietlod/chapter-11) provides step-by-step How-To implementation guides for **2 econometric models** spanning from Section `11.3.1` to `11.3.2`. Full theoretical derivations are available at [VietLOD Group 11.3](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-11-phan-tich-song-sot-thoi-gian-su-kien-va-rui-ro-canh-tranh/nhom-11-3-parametric) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+**Methodological Part 11.3. Parametric Accelerated Failure Time Models** in [11. Survival, Event History and Competing-Risks Analysis](/en/vietlod/chapter-11) provides step-by-step How-To implementation guides for **2 econometric model lessons** spanning from Section `11.3.1` to `11.3.2`. Full theoretical derivations are available at [VietLOD Part 11.3](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-11-phan-tich-song-sot-thoi-gian-su-kien-va-rui-ro-canh-tranh/nhom-11-3-parametric) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
-  title="How-To Guide for Group 11.3: Parametric Accelerated Failure Time Models in Stata 18, R 4.x, and Python 3.11+"
+  title="How-To Guide for Part 11.3: Parametric Accelerated Failure Time Models in Stata 18, R 4.x, and Python 3.11+"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 1. Methodological Overview and Structural Equations
+## 11.3.1. Methodological Overview and Structural Equations
 
 - **Methodological Focus**: Provides consistent estimation and robust inference for **Parametric Accelerated Failure Time Models** specifications within **Survival, Event History and Competing-Risks Analysis**.
 - **Mandatory Post-Estimation Diagnostics**: Kiểm định Wald cho tham số hình dạng $H_0: p = 1$ hay $\ln(p) = 0$ khi rút gọn về phân phối Mũ, đồ thị phần dư Cox–Snell và so sánh tiêu chuẩn (AIC) và (BIC) với các phân phối tham số khác.
 
-Core structural specification for Group 11.3:
+Core structural specification for Part 11.3:
 
 $$
 \ln(T_i) = X_i^\top \beta + \sigma \varepsilon_i, \quad f(\varepsilon) = \exp(\varepsilon - e^\varepsilon)
@@ -42,10 +42,10 @@ $$
 $$
 
 <FeatureNotAvailable
-  note="When empirical data violate the identification conditions of Group 11.3, researchers should transition to the extended methodological groups in Chapter 11 or apply appropriate instrumental-variable and cluster-robust corrections."
+  note="When empirical data violate the identification conditions of Part 11.3, researchers should transition to the extended methodological parts in Chapter 11 or apply appropriate instrumental-variable and cluster-robust corrections."
 />
 
-## 2. Econometric Models in Group 11.3
+## 11.3.2. Econometric Model Lessons in Part 11.3
 
 <FeatureCards
   features={[
@@ -53,38 +53,37 @@ $$
       title: '11.3.1. Weibull Accelerated Failure Time — AFT',
       description: 'Estimates the Weibull Accelerated Failure Time — AFT specification within the Parametric Accelerated Failure Time Models framework by optimi...',
       link: '/en/vietlod/chapter-11/group-11-3/b175-weibull-aft',
-      badge: 'B175 · weibull_aft'
+      badge: '11.3.1 · weibull_aft'
     },
     {
       title: '11.3.2. Log-Normal Accelerated Failure Time — AFT',
       description: 'Estimates the Log-Normal Accelerated Failure Time — AFT specification within the Parametric Accelerated Failure Time Models framework by opt...',
       link: '/en/vietlod/chapter-11/group-11-3/b176-lognormal-aft',
-      badge: 'B176 · lognormal_aft'
+      badge: '11.3.2 · lognormal_aft'
     }
   ]}
 />
 
-## 3. Comparative Execution Syntax Across Stata 18, R 4.x, and Python 3.11+
+## 11.3.3. Comparative Execution Syntax Across Stata 18, R 4.x, and Python 3.11+
 
 | Section & Model Title | Estimator Key | Stata 18 MP Syntax | R 4.x Syntax | Python 3.11+ Syntax | Support |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `11.3.1` · [Weibull Accelerated Failure Time — AFT](/en/vietlod/chapter-11/group-11-3/b175-weibull-aft) | `weibull_aft` | `stset duration, failure(event) -> streg x1 x2, dist(weibull) time` | `survival::survreg(Surv(duration, event) ~ x1 + x2, data = df, dist = 'weibull')` | `WeibullAFTFitter().fit(df[['duration', 'event', 'x1', 'x2']], 'duration', 'event')` | <Available /> |
-| `11.3.2` · [Log-Normal Accelerated Failure Time — AFT](/en/vietlod/chapter-11/group-11-3/b176-lognormal-aft) | `lognormal_aft` | `stset duration, failure(event) -> streg x1 x2, dist(lnormal) time` | `survival::survreg(Surv(duration, event) ~ x1 + x2, data = df, dist = 'lognormal')` | `LogNormalAFTFitter().fit(df[['duration', 'event', 'x1', 'x2']], 'duration', 'event')` | <Available /> |
+| **11.3.1** · [Weibull Accelerated Failure Time — AFT](/en/vietlod/chapter-11/group-11-3/b175-weibull-aft) | `weibull_aft` | `stset duration, failure(event) -> streg x1 x2, dist(weibull) time` | `survival::survreg(Surv(duration, event) ~ x1 + x2, data = df, dist = 'weibull')` | `WeibullAFTFitter().fit(df[['duration', 'event', 'x1', 'x2']], 'duration', 'event')` | <Available /> |
+| **11.3.2** · [Log-Normal Accelerated Failure Time — AFT](/en/vietlod/chapter-11/group-11-3/b176-lognormal-aft) | `lognormal_aft` | `stset duration, failure(event) -> streg x1 x2, dist(lnormal) time` | `survival::survreg(Surv(duration, event) ~ x1 + x2, data = df, dist = 'lognormal')` | `LogNormalAFTFitter().fit(df[['duration', 'event', 'x1', 'x2']], 'duration', 'event')` | <Available /> |
 
-## 4. Standard Implementation Workflow for Group 11.3
+## 11.3.4. Standard Implementation Workflow for Part 11.3
 
 <Steps>
-
-### Step 1. Load Standardized Practice Datasets From VietLOD, EcoData, or Finco
-
-Download the model-specific `.csv` practice dataset in Group `11.3` or extract custom empirical panels from [EcoData](https://ecodata.io.vn) and [Finco](https://www.finco.vn).
-
-### Step 2. Select the Optimal Estimator for Your Error and Sample Structure
-
-Compare the estimators from `11.3.1` to `11.3.2` in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.
-
-### Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab
-
-Verify all required diagnostics including **Kiểm định Wald cho tham số hình dạng $H_0: p = 1$ hay $\ln(p) = 0$ khi rút gọn về phân phối Mũ, đồ thị phần dư Cox–Snell và so sánh tiêu chuẩn (AIC) và (BIC) với các phân phối tham số khác** and dispatch the specification to [EcoLab](https://ecolab.io.vn) for automated journal-grade reporting.
-
+  <div className="step-item">
+    <h3>Step 1. Load Standardized Practice Datasets From VietLOD, EcoData, or Finco</h3>
+    <p>Download the model-specific <code>.csv</code> practice dataset in Part <code>11.3</code> or extract custom empirical panels from <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> and <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Step 2. Select the Optimal Estimator for Your Error and Sample Structure</h3>
+    <p>Compare the estimators from <code>11.3.1</code> to <code>11.3.2</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
+  </div>
+  <div className="step-item">
+    <h3>Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab</h3>
+    <p>Verify all required diagnostics including <strong>Kiểm định Wald cho tham số hình dạng $H_0: p = 1$ hay $\ln(p) = 0$ khi rút gọn về phân phối Mũ, đồ thị phần dư Cox–Snell và so sánh tiêu chuẩn (AIC) và (BIC) với các phân phối tham số khác</strong> and dispatch the specification to <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> for automated journal-grade reporting.</p>
+  </div>
 </Steps>

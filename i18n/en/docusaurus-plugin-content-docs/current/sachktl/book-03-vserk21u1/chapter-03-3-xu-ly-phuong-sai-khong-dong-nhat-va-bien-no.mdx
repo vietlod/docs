@@ -1,19 +1,19 @@
 ---
 id: chapter-03-3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-no
-title: "Chapter 03: 3. Xử lý phương sai không đồng nhất và biến nội sinh — Panel Data Econometrics in Empirical Finance"
-sidebar_label: "Chapter 03: 3. Xử lý phương sai không đồng nhất và biế"
+title: "3. Addressing Heteroskedasticity and Endogeneity"
+sidebar_label: "3. Addressing Heteroskedasticity and Endogeneity"
 sidebar_position: 4
-description: "Step-by-step practical how-to guide for Chapter 03: 3. Xử lý phương sai không đồng nhất và biến nội sinh from Panel Data Econometrics in Empirical Finance on SachKTL with Stata, R, and Python workflows integrated with EcoData, Finco, and EcoLab."
+description: "Comprehensive practical how-to guide for 3. Addressing Heteroskedasticity and Endogeneity from Panel Data Econometrics in Empirical Finance on SachKTL featuring structural equations, 6 lesson breakdowns, and Stata, R, and Python scripts."
 ---
 
-# Chapter 03: 3. Xử lý phương sai không đồng nhất và biến nội sinh — Panel Data Econometrics in Empirical Finance
+# 3. Addressing Heteroskedasticity and Endogeneity
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-This practical how-to guide synthesizes the methodology and empirical implementation workflow of **Chapter 03: 3. Xử lý phương sai không đồng nhất và biến nội sinh** from [**Book 03: Panel Data Econometrics in Empirical Finance**](/en/sachktl/book-03-vserk21u1/), with direct backlinks to the authoritative source material at [https://sachktl.tnsai.vn/vi/vserk21u1/3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-noi-sinh/](https://sachktl.tnsai.vn/vi/vserk21u1/3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-noi-sinh/).
+This practical how-to guide presents the theoretical foundations, structural mathematical equations, detailed breakdown of **6 specialized lessons**, and multi-platform replication workflows for **3. Addressing Heteroskedasticity and Endogeneity** from the textbook [**Panel Data Econometrics in Empirical Finance**](/en/sachktl/book-03-vserk21u1/), with direct cross-references to the authoritative source material at [https://sachktl.tnsai.vn/vi/vserk21u1/3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-noi-sinh/](https://sachktl.tnsai.vn/vi/vserk21u1/3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-noi-sinh/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chapter 03: 3. Xử lý phương sai không đồng nhất và biến nội sinh">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="3. Addressing Heteroskedasticity and Endogeneity">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ This practical how-to guide synthesizes the methodology and empirical implementa
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BOOK 03 · CHAPTER 03</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chapter 03: 3. Xử lý phương sai không đồng nhất và biến nội sinh</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Part of Textbook: Panel Data Econometrics in Empirical Finance · 6 Detailed Lessons</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Panel Data Econometrics in Empirical</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">3. Addressing Heteroskedasticity and Endogeneity</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Panel Data Econometrics and Unobserved Heterogeneity Control · 6 Detailed Lessons</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,138 +41,266 @@ This practical how-to guide synthesizes the methodology and empirical implementa
   </svg>
 </div>
 
-## 1. Methodological Meaning and Scope of Application
+## 1. Methodological Foundations, Mathematical Specification, and Identification
 
-Xử lý phương sai không đồng nhất và biến nội sinh Trong kinh tế lượng tài chính, việc đối mặt với các vấn đề như phương sai sai số thay đổi và biến nội sinh là không thể tránh khỏi. Những thách thức này nếu không được xử lý đúng cách có thể dẫn đến các kết quả ước lượng bị chệch, không nhất quán, và làm suy yếu nghiêm trọng các kết luận nghiên cứu. Sự tồn tại của tính không đồng nhất không quan sát được là một trong những nguồn gốc chính gây ra biến nội sinh, đòi hỏi các nhà nghiên cứu phải trang bị những công cụ phân tích mạnh mẽ và tinh vi hơn so với hồi quy OLS thông thường. Chúng ta sẽ
+Xử lý phương sai không đồng nhất và biến nội sinh Trong kinh tế lượng tài chính, việc đối mặt với các vấn đề như phương sai sai số thay đổi và biến nội sinh là không thể tránh khỏi. Những thách thức này nếu không được xử lý đúng cách có thể dẫn đến các kết quả ước lượng bị chệch, không nhất quán, và làm suy yếu nghiêm trọng các kết luận nghiên cứu. Sự tồn tại của tính không đồng nhất không quan sát được là một trong những nguồn gốc chính gây ra biến nội sinh, đòi hỏi các nhà nghiên cứu phải trang bị những công cụ phân tích mạnh mẽ và tinh vi hơn so với hồi quy OLS thông thường.
 
-- **Core Academic Topics**: Cấu trúc chuỗi bài học, Kiến thức tiên quyết, Mục tiêu học tập, Tài liệu tham khảo chính, Phụ lục: Dữ liệu mô phỏng cho chuỗi bài viết.
-- **Supported Analytical Environments**: `Stata 18 MP`.
-- **Recommended Empirical Data Sources**: Vietnamese macroeconomic, corporate, and household survey datasets on [EcoData](https://ecodata.io.vn), capital and commodity market series on [Finco](https://www.finco.vn), model cross-references on [VietLOD](https://vietlod.tnsai.vn), and automated estimation on [EcoLab](https://ecolab.io.vn).
+### 1.1. Structural Equations and Representative Estimator
+
+$$
+Y_{it} = \alpha + \mathbf{X}_{it}'\boldsymbol{\beta} + \mu_i + \lambda_t + \varepsilon_{it}, \quad i = 1,\dots,N; \; t = 1,\dots,T \tag*{[1]}
+$$
+
+$$
+\hat{\boldsymbol{\beta}}_{\text{FE}} = \left(\sum_{i=1}^N \sum_{t=1}^T \tilde{\mathbf{X}}_{it}\tilde{\mathbf{X}}_{it}'\right)^{-1} \left(\sum_{i=1}^N \sum_{t=1}^T \tilde{\mathbf{X}}_{it}\tilde{Y}_{it}\right), \quad \tilde{Z}_{it} = Z_{it} - \bar{Z}_i \tag*{[2]}
+$$
+
+### 1.2. Core Identification Assumptions and Applicability Conditions
+
+1. Strict exogeneity of explanatory covariates with respect to idiosyncratic disturbances across cross-sectional units and time periods.
+2. Unobserved individual effects $\mu_i$ may correlate arbitrarily with $\mathbf{X}_{it}$ under Fixed Effects or remain orthogonal under Random Effects.
+3. Cluster-robust variance-covariance estimation at the entity level is required to accommodate arbitrary within-panel serial correlation and heteroskedasticity.
 
 <FeatureCards
   features={[
     {
-      title: "Original Chapter on SachKTL",
-      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for Chapter 03 on SachKTL.",
+      title: "Authoritative Chapter on SachKTL",
+      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for this chapter on SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/vserk21u1/3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-noi-sinh/"
     },
     {
       title: "Practice Datasets on EcoData & Finco",
-      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and survey data for hands-on replication.",
+      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and household survey data for hands-on replication.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
       title: "Automated Estimation on EcoLab",
-      description: "Execute econometric specifications, run diagnostic battery tests, and export publication-grade tables automatically.",
+      description: "Execute econometric specifications, run diagnostic battery tests, and export APA 7th / AER publication-grade tables automatically.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Step-by-Step Practical Implementation Across Chapter Lessons
+<FeatureNotAvailable
+  feature="Unconditional Baseline Estimation Under Violated Identification Assumptions"
+  reason="Standard Fixed Effects and Random Effects estimators suffer from Nickell bias when lagged dependent variables $Y_{i,t-1}$ are included in short-$T$ panels; use Difference GMM or System GMM instead."
+  alternative="Run the complete diagnostic battery in Step 4 and transition to the appropriate corrective estimator on VietLOD or EcoLab."
+/>
+
+## 2. Lesson-by-Lesson Academic Breakdown
+
+### 2.1. Nền tảng về bộ ước lượng hiệu ứng cố định và biến công cụ
+
+Trong các ứng dụng kinh tế lượng tài chính, giả định rằng tất cả các biến giải thích đều có tính ngoại sinh là một yêu cầu rất khó đáp ứng. Thực tế luôn tồn tại tính không đồng nhất không quan sát được , chẳng hạn như năng lực quản lý hay văn hóa doanh nghiệp, vốn có thể tương quan với cả biến giải thích và biến phụ thuộc. Khi đó, các bộ ước lượng tiêu chuẩn như OLS gộp hay Hiệu ứng ngẫu nhiên sẽ trở nên chệch và không nhất quán.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Nền tảng lý thuyết**
+- **Bộ ước lượng biến công cụ**
+- **Diễn giải bộ ước lượng hiệu ứng cố định như một bộ ước lượng IV**
+- **Bộ ước lượng Hausman-Taylor**
+- **Phương pháp nghiên cứu**
+- **Quy trình thực hiện ước lượng Hausman-Taylor**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-noi-sinh/nen-tang-ve-bo-uoc-luong-hieu-ung-co-dinh-va-bien-cong-cu/)
+
+### 2.2. Mô hình hiệu ứng cố định hai chiều và hiệu ứng tương tác
+
+Ở bài học trước, chúng ta đã tìm hiểu cách bộ ước lượng hiệu ứng cố định giải quyết vấn đề nội sinh gây ra bởi các yếu tố không đổi theo thời gian và không quan sát được. Tuy nhiên, trong thực tế, các cú sốc kinh tế thường không chỉ giới hạn ở cấp độ cá nhân. Những sự kiện vĩ mô như khủng hoảng tài chính, thay đổi chính sách tiền tệ, hay đại dịch toàn cầu có thể tạo ra những tác động chung lên tất cả các doanh nghiệp trong một khoảng thời gian nhất định.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Nền tảng lý thuyết**
+- **Mô hình hiệu ứng cố định hai chiều**
+- **Hiệu ứng cố định nhóm và hiệu ứng tương tác**
+- **Một số quan ngại và hạn chế**
+- **Phương pháp nghiên cứu**
+- **Quy trình thực hiện ước lượng mô hình đa chiều**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-noi-sinh/mo-hinh-hieu-ung-co-dinh-hai-chieu-va-hieu-ung-tuong-tac/)
+
+### 2.3. Hồi quy hai giai đoạn và các vấn đề thực tiễn
+
+Trong các bài học trước, chúng ta đã khám phá cách mô hình hiệu ứng cố định có thể được xem như một dạng biến công cụ nội tại, giúp kiểm soát các yếu tố nội sinh không đổi theo thời gian. Tuy nhiên, thực tế phức tạp hơn nhiều. Vấn đề nội sinh không chỉ đến từ các đặc tính cố hữu của doanh nghiệp mà còn có thể phát sinh từ các biến bị bỏ sót, sai số đo lường, hay tính đồng thời . Trong những trường hợp này, các "công cụ nội tại" từ phép biến đổi FE là không đủ, và chúng ta cần đến một phương pháp tổng quát hơn: Hồi quy hai giai đoạn .
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Nền tảng lý thuyết**
+- **Cơ chế hoạt động của 2SLS**
+- **Các vấn đề thực tiễn quan trọng**
+- **Phương pháp nghiên cứu**
+- **Quy trình chuẩn cho phân tích 2SLS**
+- **Công cụ và kỹ thuật trong Stata**
+
+- **Analytical Environments:** `R 4.x` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-noi-sinh/hoi-quy-hai-giai-doan-2sls-va-cac-van-de-thuc-tien/)
+
+### 2.4. Giới thiệu phương pháp GMM và các điều kiện mô-men
+
+Ở bài học trước, chúng ta đã làm chủ phương pháp Hồi quy hai giai đoạn, một công cụ mạnh mẽ để xử lý biến nội sinh. Tuy nhiên, 2SLS có một giả định ngầm khá chặt chẽ: nó hoạt động hiệu quả nhất khi các sai số của mô hình có phương sai không đổi và không tự tương quan. Trong thế giới dữ liệu tài chính thực tế, nơi phương sai thay đổi và tự tương quan là quy luật chứ không phải ngoại lệ, giả định này hiếm khi được thỏa mãn.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Nền tảng lý thuyết**
+- **Điều kiện mô-men**
+- **Bộ ước lượng GMM**
+- **Mối liên hệ với IV và 2SLS**
+- **Ma trận trọng số tối ưu**
+- **Phương pháp nghiên cứu**
+
+- **Analytical Environments:** `R 4.x` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-noi-sinh/gioi-thieu-phuong-phap-gmm-va-cac-dieu-kien-mo-men/)
+
+### 2.5. Tính ngoại sinh ngặt và các phương pháp ước lượng nâng cao
+
+Trong suốt các bài học vừa qua, từ mô hình hiệu ứng cố định đến GMM, chúng ta đã ngầm dựa trên một giả định nền tảng: tính ngoại sinh ngặt . Giả định này yêu cầu rằng, có điều kiện trên hiệu ứng cá nhân $\alpha_i$, sai số ở thời điểm $t$ không chỉ không tương quan với biến giải thích ở thời điểm $t$, mà còn không tương quan với các giá trị quá khứ và tương lai của biến giải thích đó. Đây là một yêu cầu rất khắt khe và thường bị vi phạm trong nhiều bối cảnh tài chính thực tế.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Nền tảng lý thuyết**
+- **Ngoại sinh ngặt và Ngoại sinh đồng thời**
+- **Kiểm định tính ngoại sinh ngặt**
+- **Các phương pháp ước lượng nâng cao khi ngoại sinh ngặt bị vi phạm**
+- **Phương pháp nghiên cứu**
+- **Quy trình chẩn đoán và xử lý vi phạm ngoại sinh ngặt**
+
+- **Analytical Environments:** `R 4.x` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-noi-sinh/tinh-ngoai-sinh-ngat-va-cac-phuong-phap-uoc-luong-nang-cao/)
+
+### 2.6. Hướng dẫn thực hành xử lý biến nội sinh với Stata
+
+Chúng ta đã đi qua một hành trình xuyên suốt năm bài học lý thuyết, từ những khái niệm nền tảng về hiệu ứng cố định và biến công cụ, khám phá các mô hình đa chiều, làm chủ kỹ thuật 2SLS, và tìm hiểu khuôn khổ GMM mạnh mẽ. Chúng ta cũng đã đối mặt với những giả định tinh vi như tính ngoại sinh ngặt. Giờ là lúc lý thuyết gặp gỡ thực tiễn.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Dữ liệu và bối cảnh nghiên cứu**
+- **Hướng dẫn thực hành từ A-Z**
+- **Bước 1: Phân tích sơ bộ và mô hình cơ sở**
+- **Bước 2: Ước lượng 2SLS và các kiểm định chẩn đoán**
+- **Bước 3: Nâng cao hiệu quả với GMM**
+- **Phân tích chuyên sâu và kiểm tra độ vững**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-noi-sinh/huong-dan-thuc-hanh-xu-ly-bien-noi-sinh-voi-stata/)
+
+## 3. Step-by-Step Empirical Implementation Workflow
 
 <Steps>
   <div className="step-item">
-    <h3>Step 1: Nền tảng về bộ ước lượng hiệu ứng cố định và biến công cụ</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Nền tảng về bộ ước lượng hiệu ứng cố định và biến công cụ. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/vserk21u1/3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-noi-sinh/nen-tang-ve-bo-uoc-luong-hieu-ung-co-dinh-va-bien-cong-cu/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/vserk21u1/3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-noi-sinh/nen-tang-ve-bo-uoc-luong-hieu-ung-co-dinh-va-bien-cong-cu/</a>.</p>
+    <h3>1. Formulate the Research Question and Prepare Data on EcoData & Finco</h3>
+    <p>Define the dependent variable, core explanatory variables, and control covariates aligned with <strong>3. Addressing Heteroskedasticity and Endogeneity</strong>. Extract standardized Vietnamese empirical series from <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> or <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, and screen for missing observations and extreme outliers.</p>
   </div>
   <div className="step-item">
-    <h3>Step 2: Mô hình hiệu ứng cố định hai chiều và hiệu ứng tương tác</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Mô hình hiệu ứng cố định hai chiều và hiệu ứng tương tác. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/vserk21u1/3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-noi-sinh/mo-hinh-hieu-ung-co-dinh-hai-chieu-va-hieu-ung-tuong-tac/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/vserk21u1/3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-noi-sinh/mo-hinh-hieu-ung-co-dinh-hai-chieu-va-hieu-ung-tuong-tac/</a>.</p>
+    <h3>2. Conduct Descriptive Profiling, Correlation Analysis, and Pre-Estimation Checks</h3>
+    <p>Examine empirical distributions, construct summary statistics tables, and evaluate collinearity using pairwise correlation matrices and Variance Inflation Factors (VIF).</p>
   </div>
   <div className="step-item">
-    <h3>Step 3: Hồi quy hai giai đoạn và các vấn đề thực tiễn</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Hồi quy hai giai đoạn và các vấn đề thực tiễn. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/vserk21u1/3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-noi-sinh/hoi-quy-hai-giai-doan-2sls-va-cac-van-de-thuc-tien/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/vserk21u1/3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-noi-sinh/hoi-quy-hai-giai-doan-2sls-va-cac-van-de-thuc-tien/</a>.</p>
+    <h3>3. Estimate the Model Across Stata 18 MP, R 4.x, and Python 3.11+</h3>
+    <p>Execute the parameter estimation scripts matching the structural equations in Section 1.1 while cross-checking theoretical derivations at <a href="https://sachktl.tnsai.vn/vi/vserk21u1/3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-noi-sinh/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Step 4: Giới thiệu phương pháp GMM và các điều kiện mô-men</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Giới thiệu phương pháp GMM và các điều kiện mô-men. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/vserk21u1/3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-noi-sinh/gioi-thieu-phuong-phap-gmm-va-cac-dieu-kien-mo-men/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/vserk21u1/3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-noi-sinh/gioi-thieu-phuong-phap-gmm-va-cac-dieu-kien-mo-men/</a>.</p>
+    <h3>4. Perform Post-Estimation Diagnostics and Robust Variance Correction</h3>
+    <p>Test for heteroskedasticity, serial correlation, Ramsey RESET functional form misspecification, and regressor endogeneity. Apply White HC1 or cluster-robust standard errors for valid inference.</p>
   </div>
   <div className="step-item">
-    <h3>Step 5: Tính ngoại sinh ngặt và các phương pháp ước lượng nâng cao</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Tính ngoại sinh ngặt và các phương pháp ước lượng nâng cao. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/vserk21u1/3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-noi-sinh/tinh-ngoai-sinh-ngat-va-cac-phuong-phap-uoc-luong-nang-cao/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/vserk21u1/3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-noi-sinh/tinh-ngoai-sinh-ngat-va-cac-phuong-phap-uoc-luong-nang-cao/</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Step 6: Hướng dẫn thực hành xử lý biến nội sinh với Stata</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Hướng dẫn thực hành xử lý biến nội sinh với Stata. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/vserk21u1/3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-noi-sinh/huong-dan-thuc-hanh-xu-ly-bien-noi-sinh-voi-stata/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/vserk21u1/3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-noi-sinh/huong-dan-thuc-hanh-xu-ly-bien-noi-sinh-voi-stata/</a>.</p>
+    <h3>5. Format Journal-Grade Tables and Cross-Verify on EcoLab</h3>
+    <p>Report point estimates, standard errors in parentheses, and statistical significance stars following APA 7th / AER Booktabs standards, or automate the entire reporting pipeline on <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> and <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Multi-Platform Implementation Examples in Stata, R, and Python
+## 4. Multi-Platform Implementation Scripts in Stata, R, and Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Initialize environment and load practice dataset from EcoData / SachKTL
+* Thiết lập cấu trúc dữ liệu bảng và ước lượng FE / RE / Hausman
 version 18.0
 clear all
 set more off
+import delimited "sachktl_panel_ecodata.csv", clear encoding("utf-8")
 
-* Import standardized empirical dataset
-import delimited "sachktl_vserk21u1_c03_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+xtset id year
+xtdescribe
+xtsum y x1 x2 x3
 
-* Estimate baseline specification and run diagnostic checks with robust standard errors
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 1. Ước lượng tác động cố định (Fixed Effects) và tác động ngẫu nhiên (Random Effects)
+xtreg y x1 x2 x3, fe
+estimates store FE_model
+xtreg y x1 x2 x3, re
+estimates store RE_model
+
+* 2. Kiểm định Hausman lựa chọn mô hình và ước lượng sai số chuẩn vững theo cụm
+hausman FE_model RE_model, sigmamore
+xtreg y x1 x2 x3 i.year, fe vce(cluster id)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Load econometric packages and practice dataset from EcoData / SachKTL
-library(tidyverse)
+# Nạp thư viện dữ liệu bảng và ước lượng FE / RE / Cluster-Robust SE
+library(plm)
 library(lmtest)
 library(sandwich)
 
-df <- read.csv("sachktl_vserk21u1_c03_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_panel_ecodata.csv")
+pdata <- pdata.frame(df, index = c("id", "year"))
 
-# Estimate model and compute heteroskedasticity-robust HC1 standard errors
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Ước lượng mô hình Within FE và Swamy-Arora RE
+fe_mod <- plm(y ~ x1 + x2 + x3, data = pdata, model = "within", effect = "twoways")
+re_mod <- plm(y ~ x1 + x2 + x3, data = pdata, model = "random")
+
+# 2. Kiểm định Hausman và xuất sai số chuẩn vững Arellano theo cụm
+phtest(fe_mod, re_mod)
+coeftest(fe_mod, vcov = vcovHC(fe_mod, method = "arellano", type = "HC1", cluster = "group"))
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Load econometric libraries and practice dataset from EcoData / SachKTL
+# Nạp thư viện linearmodels và ước lượng PanelOLS / RandomEffects
 import pandas as pd
-import statsmodels.formula.api as smf
+from linearmodels.panel import PanelOLS, RandomEffects, compare
 
-df = pd.read_csv("sachktl_vserk21u1_c03_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_panel_ecodata.csv").set_index(["id", "year"])
 
-# Fit specification with HC1 robust standard errors
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Ước lượng mô hình Fixed Effects hai chiều với sai số chuẩn cụm
+fe_mod = PanelOLS.from_formula("y ~ 1 + x1 + x2 + x3 + EntityEffects + TimeEffects", data=df)
+fe_res = fe_mod.fit(cov_type="clustered", cluster_entity=True)
+
+# 2. Ước lượng mô hình Random Effects và đối chiếu kết quả
+re_mod = RandomEffects.from_formula("y ~ 1 + x1 + x2 + x3", data=df)
+re_res = re_mod.fit(cov_type="clustered", cluster_entity=True)
+print(compare({"Fixed Effects": fe_res, "Random Effects": re_res}))
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video Tutorial Walkthrough
+## 5. Post-Estimation Diagnostic and Interpretation Guide
+
+| Diagnostic Criterion | Null Hypothesis $H_0$ | Benchmark Threshold | Corrective Action When $H_0$ Is Rejected |
+| :--- | :--- | :--- | :--- |
+| **Heteroskedasticity** | Constant error variance $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ rejects $H_0$ | Apply `vce(robust)`, `vcovHC(HC1)`, or FGLS/WLS weighted estimation |
+| **Multicollinearity** | No severe linear dependence among regressors | $\text{VIF} < 10$ acceptable | Drop redundant covariates, center interactions, or apply LASSO/Ridge regularization |
+| **Ramsey RESET Functional Form** | No omitted nonlinear or higher-order terms | $p\text{-value} > 0.05$ retains $H_0$ | Add interaction terms, quadratic polynomials, or log-transform skewed positive variables |
+| **Regressor Exogeneity** | Orthogonality $\text{Cov}(X, \varepsilon)=0$ | Durbin-Wu-Hausman $p > 0.05$ | Transition to IV/2SLS, LIML, or GMM estimation with validated instruments |
+
+## 6. Video Tutorial Walkthrough
 
 <VideoTutorial
-  title="Practical Walkthrough for Chapter 03: 3. Xử lý phương sai không đồng nhất và biến nội sinh on SachKTL"
+  title="Practical Walkthrough for 3. Addressing Heteroskedasticity and Endogeneity on SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Complete Lesson Directory and Backlinks to Original SachKTL Articles
+## 7. Complete Lesson Directory and Backlinks to Original SachKTL Articles
 
-| No. | Lesson Title in Chapter 03 | Supported Software | Original Source Link on SachKTL |
+| Lesson Code | Lesson Title | Supported Software | Original Source Link on SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Lesson 01** | Nền tảng về bộ ước lượng hiệu ứng cố định và biến công cụ | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-noi-sinh/nen-tang-ve-bo-uoc-luong-hieu-ung-co-dinh-va-bien-cong-cu/) |
-| **Lesson 02** | Mô hình hiệu ứng cố định hai chiều và hiệu ứng tương tác | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-noi-sinh/mo-hinh-hieu-ung-co-dinh-hai-chieu-va-hieu-ung-tuong-tac/) |
-| **Lesson 03** | Hồi quy hai giai đoạn và các vấn đề thực tiễn | R 4.x | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-noi-sinh/hoi-quy-hai-giai-doan-2sls-va-cac-van-de-thuc-tien/) |
-| **Lesson 04** | Giới thiệu phương pháp GMM và các điều kiện mô-men | R 4.x | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-noi-sinh/gioi-thieu-phuong-phap-gmm-va-cac-dieu-kien-mo-men/) |
-| **Lesson 05** | Tính ngoại sinh ngặt và các phương pháp ước lượng nâng cao | R 4.x | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-noi-sinh/tinh-ngoai-sinh-ngat-va-cac-phuong-phap-uoc-luong-nang-cao/) |
-| **Lesson 06** | Hướng dẫn thực hành xử lý biến nội sinh với Stata | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-noi-sinh/huong-dan-thuc-hanh-xu-ly-bien-noi-sinh-voi-stata/) |
+| **3.1** | Nền tảng về bộ ước lượng hiệu ứng cố định và biến công cụ | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-noi-sinh/nen-tang-ve-bo-uoc-luong-hieu-ung-co-dinh-va-bien-cong-cu/) |
+| **3.2** | Mô hình hiệu ứng cố định hai chiều và hiệu ứng tương tác | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-noi-sinh/mo-hinh-hieu-ung-co-dinh-hai-chieu-va-hieu-ung-tuong-tac/) |
+| **3.3** | Hồi quy hai giai đoạn và các vấn đề thực tiễn | `R 4.x` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-noi-sinh/hoi-quy-hai-giai-doan-2sls-va-cac-van-de-thuc-tien/) |
+| **3.4** | Giới thiệu phương pháp GMM và các điều kiện mô-men | `R 4.x` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-noi-sinh/gioi-thieu-phuong-phap-gmm-va-cac-dieu-kien-mo-men/) |
+| **3.5** | Tính ngoại sinh ngặt và các phương pháp ước lượng nâng cao | `R 4.x` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-noi-sinh/tinh-ngoai-sinh-ngat-va-cac-phuong-phap-uoc-luong-nang-cao/) |
+| **3.6** | Hướng dẫn thực hành xử lý biến nội sinh với Stata | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/3-xu-ly-phuong-sai-khong-dong-nhat-va-bien-noi-sinh/huong-dan-thuc-hanh-xu-ly-bien-noi-sinh-voi-stata/) |

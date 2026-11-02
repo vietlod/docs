@@ -1,10 +1,10 @@
 ---
 id: b023-pls-regression
-title: "2.3.2. Hướng dẫn thực hành Hồi quy bình phương tối thiểu riêng phần (PLSR)"
+title: "2.3.2. Hồi quy bình phương tối thiểu riêng phần (PLSR)"
 sidebar_label: "2.3.2. Hồi quy bình phương tối thiểu riêng phần (PLSR)"
 sidebar_position: 2
 slug: /vietlod/chapter-02/group-2-3/b023-pls-regression
-description: "Tài liệu How-To hướng dẫn thực hành mô hình Hồi quy bình phương tối thiểu riêng phần (PLSR) với mã pls_regression trên Stata 18 MP, R 4.x và Python 3.11+ kèm dữ liệu thực hành và diễn giải kết quả chuẩn tạp chí."
+description: "Tài liệu How-To hướng dẫn thực hành bài 2.3.2 — Hồi quy bình phương tối thiểu riêng phần (PLSR) với mã pls_regression trên Stata 18 MP, R 4.x và Python 3.11+ kèm dữ liệu thực hành và diễn giải kết quả chuẩn tạp chí."
 keywords:
   - Hồi quy bình phương tối thiểu riêng phần (PLSR)
   - pls_regression
@@ -17,28 +17,28 @@ keywords:
   - EcoLab
 ---
 
-# 2.3.2. Hướng dẫn thực hành Hồi quy bình phương tối thiểu riêng phần (PLSR)
+# 2.3.2. Hồi quy bình phương tối thiểu riêng phần (PLSR)
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Bài học `2.3.2` — Mã mô hình `B023` (`pls_regression`)** thuộc [Chương 02: Mô hình chính quy hóa, suy luận chiều cao và giảm chiều](/vietlod/chapter-02) $\to$ [Nhóm 2.3: Giảm chiều và nhân tố ẩn](/vietlod/chapter-02/group-2-3), phân loại **Cấp độ L4 — Chuyên sâu biên giới**. Tài liệu How-To này hướng dẫn chi tiết từ bản chất phương pháp, điều kiện áp dụng, kịch bản mã lệnh trên **Stata 18 MP**, **R 4.x** và **Python 3.11+**, tệp dữ liệu thực hành `vietlod_pls_regression_ecodata.csv` cho đến cách đọc hiểu đồ thị hội tụ 3 phần mềm và viết phần diễn giải kết quả theo chuẩn tạp chí quốc tế.
+**Bài học `2.3.2` — Mã mô hình `B023` — Khóa định danh `pls_regression`** thuộc [2. Mô hình chính quy hóa, suy luận chiều cao và giảm chiều](/vietlod/chapter-02) $\to$ [2.3. Giảm chiều và nhân tố ẩn](/vietlod/chapter-02/group-2-3), phân loại **Cấp độ L4 — Chuyên sâu biên giới**. Tài liệu How-To này hướng dẫn chi tiết từ bản chất phương pháp, điều kiện áp dụng, kịch bản mã lệnh trên **Stata 18 MP**, **R 4.x** và **Python 3.11+**, tệp dữ liệu thực hành `vietlod_pls_regression_ecodata.csv` cho đến cách đọc hiểu đồ thị hội tụ 3 phần mềm và viết phần diễn giải kết quả theo chuẩn tạp chí quốc tế.
 
 <VideoTutorial
   title="Video hướng dẫn thực hành bài 2.3.2: Hồi quy bình phương tối thiểu riêng phần (PLSR) trên Stata 18, R 4.x và Python 3.11+"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 1. Ý nghĩa phương pháp và phạm vi áp dụng
+## 2.3.2.1. Ý nghĩa phương pháp và phạm vi áp dụng
 
-### 1.1. Bản chất kinh tế lượng
+### 2.3.2.1.1. Bản chất kinh tế lượng
 
 Trích xuất các nhân tố ẩn tối đa hóa hiệp phương sai giữa ma trận dự báo $X$ và kết quả $Y$, hiệu quả cao trong dự báo vĩ mô đa cộng tuyến cực mạnh.
 
-### 1.2. Phạm vi áp dụng và yêu cầu cấu trúc dữ liệu
+### 2.3.2.1.2. Phạm vi áp dụng và yêu cầu cấu trúc dữ liệu
 
 Ma trận chỉ số vĩ mô/tài chính có đa cộng tuyến gần hoàn hảo hoặc $k \ge N$ nơi OLS suy biến và PCR bỏ sót chiều có tương quan với $Y$.
 
-### 1.3. Hệ phương trình toán học và điều kiện định danh
+### 2.3.2.1.3. Hệ phương trình toán học và điều kiện định danh
 
 Phương trình đặc tả cấu trúc của mô hình `pls_regression`:
 
@@ -59,10 +59,10 @@ $$
 $$
 
 <FeatureNotAvailable
-  note="Giới hạn áp dụng: Không sử dụng trực tiếp ước lượng Hồi quy bình phương tối thiểu riêng phần (PLSR) khi mẫu vi phạm nghiêm trọng điều kiện định danh hoặc chưa vượt qua bộ kiểm định bắt buộc gồm Tỷ lệ phương sai giải thích của $X$ và $Y$ theo từng nhân tố, PRESS / $Q^2$ cross-validation, chỉ số VIP.. Trong trường hợp vi phạm, hãy tham chiếu các mô hình mở rộng cùng Nhóm 2.3 hoặc Chương 02."
+  note="Giới hạn áp dụng: Không sử dụng trực tiếp ước lượng Hồi quy bình phương tối thiểu riêng phần (PLSR) khi mẫu vi phạm nghiêm trọng điều kiện định danh hoặc chưa vượt qua bộ kiểm định bắt buộc gồm Tỷ lệ phương sai giải thích của $X$ và $Y$ theo từng nhân tố, PRESS / $Q^2$ cross-validation, chỉ số VIP.. Trong trường hợp vi phạm, hãy tham chiếu các mô hình mở rộng cùng Phần 2.3 hoặc Chương 2."
 />
 
-## 2. Ví dụ thực tế và bộ dữ liệu thực hành chuẩn hóa
+## 2.3.2.2. Ví dụ thực tế và bộ dữ liệu thực hành chuẩn hóa
 
 - **Bài toán thực nghiệm tại Việt Nam**: Ứng dụng mô hình `pls_regression` trên bộ dữ liệu **Dự báo thanh khoản thị trường từ chỉ số tài chính** với cỡ mẫu chuẩn hóa $N = 320$ quan sát được trích xuất từ hệ sinh thái [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
 - **Bộ dữ liệu chuẩn quốc tế đối sánh**: **Kelly–Pruitt Return Predictability**, giúp người học đối chiếu trực tiếp kết quả thực hành với các giáo trình kinh tế lượng hàng đầu thế giới.
@@ -80,7 +80,7 @@ $$
       title: 'Bài giảng toàn văn trên VietLOD',
       description: 'Xem bài giảng lý thuyết chuyên sâu, chứng minh toán học và thảo luận học thuật đầy đủ của Bài 2.3.2 trên cổng VietLOD.',
       link: 'https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-02-mo-hinh-chinh-quy-hoa-suy-luan-chieu-cao-va-giam-chieu/nhom-2-3-dimension-reduction/b023-pls-regression',
-      badge: 'VietLOD B023'
+      badge: 'VietLOD 2.3.2'
     },
     {
       title: 'Thực thi đám mây trên EcoLab',
@@ -97,9 +97,9 @@ $$
   ]}
 />
 
-## 3. Gói lệnh phân tích và quy trình thực hành trên Stata, R và Python
+## 2.3.2.3. Gói lệnh phân tích và quy trình thực hành trên Stata, R và Python
 
-### 3.1. Bảng đối chiếu gói phần mềm và cú pháp lệnh chuẩn
+### 2.3.2.3.1. Bảng đối chiếu gói phần mềm và cú pháp lệnh chuẩn
 
 | Nền tảng phần mềm | Gói thư viện chuẩn | Cú pháp ước lượng trọng tâm | Lệnh kiểm định chẩn đoán hậu ước lượng | Hỗ trợ |
 | :--- | :--- | :--- | :--- | :--- |
@@ -107,29 +107,28 @@ $$
 | **R 4.x** | `pls` | `pls::plsr(y ~ x1 + x2, ncomp = 2, validation = 'CV', data = df)` | `plot[cv_fit]; coef[cv_fit, s = 'lambda.1se']; psych::KMO[X]` — Chọn tham số phạt tối ưu và kiểm định cấu trúc nhân tố. | <Available /> |
 | **Python 3.11+** | `scikit-learn` | `PLSRegression(n_components=2).fit(X, y)` | `cross_val_score[model, X, y, cv=10]; silhouette_score[X, labels]` — Đánh giá sai số dự báo ngoài mẫu (RMSE) và độ tách biệt phân cụm. | <Available /> |
 
-### 3.2. Quy trình 4 bước thực thi mô hình `pls_regression`
+### 2.3.2.3.2. Quy trình 4 bước thực thi mô hình `pls_regression`
 
 <Steps>
-
-### Bước 1. Nạp tệp dữ liệu thực hành và kiểm tra thống kê mô tả
-
-Tải tệp [`vietlod_pls_regression_ecodata.csv`](https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_pls_regression_ecodata.csv) vào thư mục làm việc, kiểm tra cỡ mẫu $N = 320$ quan sát, khai báo cấu trúc dữ liệu và rà soát phân phối của biến phụ thuộc `y` cùng các biến giải thích `x1`, `x2`.
-
-### Bước 2. Thực thi hàm ước lượng `pls_regression` với sai số chuẩn vững
-
-Chạy lệnh ước lượng chính thức trên **Stata 18 MP** qua gói `plssem`, **R 4.x** qua gói `pls` hoặc **Python 3.11+** qua gói `scikit-learn` kèm ma trận hiệp phương sai vững để bảo toàn hiệu lực suy luận thống kê.
-
-### Bước 3. Thực hiện bộ kiểm định chẩn đoán hậu ước lượng bắt buộc
-
-Thực thi đầy đủ các kiểm định đặc thù của mô hình gồm: **Tỷ lệ phương sai giải thích của $X$ và $Y$ theo từng nhân tố, PRESS / $Q^2$ cross-validation, chỉ số VIP.**. Ghi nhận giá trị thống kê chẩn đoán $\text{Stat} = 0.7055$ và giá trị $p = 0.7027$.
-
-### Bước 4. Xuất bảng kết quả chuẩn tạp chí và kiểm chứng hội tụ 3 phần mềm
-
-Sử dụng `etable` trên Stata, `coeftest` trên R hoặc `summary()` trên Python để xuất bảng hệ số ước lượng, sau đó đối chiếu với bảng kết quả chuẩn và đồ thị thực nghiệm tại Mục 4.
-
+  <div className="step-item">
+    <h3>Bước 1. Nạp tệp dữ liệu thực hành và kiểm tra thống kê mô tả</h3>
+    <p>Tải tệp <a href="https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_pls_regression_ecodata.csv"><code>vietlod_pls_regression_ecodata.csv</code></a> vào thư mục làm việc, kiểm tra cỡ mẫu $N = 320$ quan sát, khai báo cấu trúc dữ liệu và rà soát phân phối của biến phụ thuộc <code>y</code> cùng các biến giải thích <code>x1</code>, <code>x2</code>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2. Thực thi hàm ước lượng pls_regression với sai số chuẩn vững</h3>
+    <p>Chạy lệnh ước lượng chính thức trên <strong>Stata 18 MP</strong> qua gói <code>plssem</code>, <strong>R 4.x</strong> qua gói <code>pls</code> hoặc <strong>Python 3.11+</strong> qua gói <code>scikit-learn</code> kèm ma trận hiệp phương sai vững để bảo toàn hiệu lực suy luận thống kê.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3. Thực hiện bộ kiểm định chẩn đoán hậu ước lượng bắt buộc</h3>
+    <p>Thực thi đầy đủ các kiểm định đặc thù của mô hình gồm: <strong>Tỷ lệ phương sai giải thích của $X$ và $Y$ theo từng nhân tố, PRESS / $Q^2$ cross-validation, chỉ số VIP.</strong>. Ghi nhận giá trị thống kê chẩn đoán $\text{Stat} = 0.7055$ và giá trị $p = 0.7027$.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4. Xuất bảng kết quả chuẩn tạp chí và kiểm chứng hội tụ 3 phần mềm</h3>
+    <p>Sử dụng <code>etable</code> trên Stata, <code>coeftest</code> trên R hoặc <code>summary()</code> trên Python để xuất bảng hệ số ước lượng, sau đó đối chiếu với bảng kết quả chuẩn và đồ thị thực nghiệm tại Mục 2.3.2.4.</p>
+  </div>
 </Steps>
 
-### 3.3. Mã lệnh thực hành tái lập hoàn chỉnh trên Stata 18, R 4.x và Python 3.11+
+### 2.3.2.3.3. Mã lệnh thực hành tái lập hoàn chỉnh trên Stata 18, R 4.x và Python 3.11+
 
 <Tabs groupId="econometric-software">
   <TabItem value="stata" label="Stata 18 MP">
@@ -230,9 +229,9 @@ print("KẾT QUẢ ƯỚC LƯỢNG [pls_regression]: beta_x1 = 1.1166 | SE = 0.0
   </TabItem>
 </Tabs>
 
-## 4. Kết quả ước lượng thực nghiệm, đồ thị hội tụ và hướng dẫn diễn giải
+## 2.3.2.4. Kết quả ước lượng thực nghiệm, đồ thị hội tụ và hướng dẫn diễn giải
 
-### 4.1. Bảng tổng hợp kết quả ước lượng chuẩn công bố tạp chí
+### 2.3.2.4.1. Bảng tổng hợp kết quả ước lượng chuẩn công bố tạp chí
 
 Bảng dưới đây trình bày kết quả ước lượng thực nghiệm của mô hình **Hồi quy bình phương tối thiểu riêng phần (PLSR)** trên tệp dữ liệu `vietlod_pls_regression_ecodata.csv` với $N = 320$ quan sát, đối chứng đồng thời trên cả 3 nền tảng **Stata 18 MP**, **R 4.x** và **Python 3.11+**:
 
@@ -245,32 +244,31 @@ Bảng dưới đây trình bày kết quả ước lượng thực nghiệm c�
 | **Chỉ số độ khớp `R-squared`** | `0.4326` | — | `F/Wald = 109.000` | — | Chuẩn công bố Q1 |
 | **Kiểm định chẩn đoán** | `Stat = 0.7055` | — | — | `p = 0.7027` | Đạt điều kiện đặc tả |
 
-### 4.2. Đồ thị thực nghiệm đối chiếu đồng thời Stata 18, R 4.x và Python 3.11+
+### 2.3.2.4.2. Đồ thị thực nghiệm đối chiếu đồng thời Stata 18, R 4.x và Python 3.11+
 
 ![Đồ thị thực nghiệm đối chiếu 3 phần mềm cho mô hình Hồi quy bình phương tối thiểu riêng phần (PLSR)](https://vietlod.tnsai.vn/src/ecoaz/img/vietlod-b023-pls-regression.png)
 
-### 4.3. Cách diễn giải kết quả chuẩn học thuật
+### 2.3.2.4.3. Cách diễn giải kết quả chuẩn học thuật
 
 - **Diễn giải hệ số ước lượng trọng tâm**: Hệ số của biến `x1` đạt $\hat{\beta}_1 = 1.1166$ với sai số chuẩn vững $\text{SE} = 0.0761$ và thống kê kiểm định bằng $14.672$, cho thấy `x1` có **tác động thuận chiều** lên biến mục tiêu `y` và **có ý nghĩa thống kê cao ở mức 1%** trong bối cảnh dữ liệu *Dự báo thanh khoản thị trường từ chỉ số tài chính*.
 - **Diễn giải khoảng tin cậy và độ lớn tác động**: Khoảng tin cậy $95\%$ của $\hat{\beta}_1$ nằm trong dải $[0.9674, 1.2657]$, khẳng định độ ổn định của ước lượng điểm và sự hội tụ số học giữa Stata 18 MP, R 4.x và Python 3.11+.
 - **Diễn giải độ khớp mô hình và kiểm định hậu ước lượng**: Đại lượng `R-squared` đạt `$0.4326$` cùng thống kê kiểm định toàn cục đạt `$109.000$`. Thống kê chẩn đoán đạt `$0.7055$` với $p = 0.7027$, xác nhận mô hình `pls_regression` thỏa mãn các điều kiện hậu ước lượng để suy luận chính sách.
 
-## 5. Cách tổng hợp dữ liệu từ EcoData, Finco và truy vết dữ liệu quốc tế
+## 2.3.2.5. Cách tổng hợp dữ liệu từ EcoData, Finco và truy vết dữ liệu quốc tế
 
 <Steps>
-
-### Bước 1. Khởi tạo dự án dữ liệu trên EcoData và Finco
-
-Truy cập cổng dữ liệu [EcoData](https://ecodata.io.vn) hoặc nền tảng tài chính [Finco](https://www.finco.vn), chọn phân hệ dữ liệu tương ứng với chủ đề **Dự báo thanh khoản thị trường từ chỉ số tài chính** và thiết lập bộ lọc đơn vị chéo `id` cùng kỳ thời gian `t` để thu được mẫu $N = 320$ quan sát.
-
-### Bước 2. Chuẩn hóa biến số và xử lý giá trị ngoại lai
-
-Ánh xạ biến phụ thuộc mục tiêu vào cột `y`, biến giải thích chính vào `x1`, biến kiểm soát vào `x2`, cùng các biến định danh và biến chuyên biệt như `z1`, `treat`, `w`, `y_bin`, `y_count`, `duration`, `event`. Thực hiện kiểm soát ngoại lai Winsorize ở ngưỡng $1\%$ và $99\%$ trước khi xuất tệp `vietlod_pls_regression_ecodata.csv`.
-
-### Bước 3. Đối sánh với bộ dữ liệu chuẩn quốc tế Kelly–Pruitt Return Predictability
-
-Để đối chiếu phương pháp trên bộ dữ liệu quốc tế **Kelly–Pruitt Return Predictability**, sử dụng trực tiếp các lệnh nạp dữ liệu trong bảng truy vết bên dưới.
-
+  <div className="step-item">
+    <h3>Bước 1. Khởi tạo dự án dữ liệu trên EcoData và Finco</h3>
+    <p>Truy cập cổng dữ liệu <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc nền tảng tài chính <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, chọn phân hệ dữ liệu tương ứng với chủ đề <strong>Dự báo thanh khoản thị trường từ chỉ số tài chính</strong> và thiết lập bộ lọc đơn vị chéo <code>id</code> cùng kỳ thời gian <code>t</code> để thu được mẫu $N = 320$ quan sát.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2. Chuẩn hóa biến số và xử lý giá trị ngoại lai</h3>
+    <p>Ánh xạ biến phụ thuộc mục tiêu vào cột <code>y</code>, biến giải thích chính vào <code>x1</code>, biến kiểm soát vào <code>x2</code>, cùng các biến định danh và biến chuyên biệt như <code>z1</code>, <code>treat</code>, <code>w</code>, <code>y_bin</code>, <code>y_count</code>, <code>duration</code>, <code>event</code>. Thực hiện kiểm soát ngoại lai Winsorize ở ngưỡng $1\%$ và $99\%$ trước khi xuất tệp <code>vietlod_pls_regression_ecodata.csv</code>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3. Đối sánh với bộ dữ liệu chuẩn quốc tế Kelly–Pruitt Return Predictability</h3>
+    <p>Để đối chiếu phương pháp trên bộ dữ liệu quốc tế <strong>Kelly–Pruitt Return Predictability</strong>, sử dụng trực tiếp các lệnh nạp dữ liệu trong bảng truy vết bên dưới.</p>
+  </div>
 </Steps>
 
 | Nguồn lưu trữ dữ liệu | Tên bộ dữ liệu / Tệp | Lệnh nạp trực tiếp và đường dẫn truy cập |
@@ -281,7 +279,7 @@ Truy cập cổng dữ liệu [EcoData](https://ecodata.io.vn) hoặc nền tả
 | **R CRAN Package** | *Kelly–Pruitt Return Predictability* | Lệnh R: `data("kellypruitt", package = "wooldridge")` |
 | **Python Statsmodels** | *Kelly–Pruitt Return Predictability* | Lệnh Python: `sm.datasets.get_rdataset("kellypruitt", "wooldridge").data` |
 
-## 6. Tài liệu tham khảo học thuật
+## 2.3.2.6. Tài liệu tham khảo học thuật
 
 - Kelly, & Pruitt(2015). Three-Pass Regression Filter. *Journal of Finance*.
 - Groen, & Kapetanios(2016). Foundational econometric methodology and empirical inference in *Journal of Business & Economic Statistics*.

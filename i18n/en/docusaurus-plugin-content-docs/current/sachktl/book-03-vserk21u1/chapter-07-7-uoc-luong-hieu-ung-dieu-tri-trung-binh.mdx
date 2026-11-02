@@ -1,19 +1,19 @@
 ---
 id: chapter-07-7-uoc-luong-hieu-ung-dieu-tri-trung-binh
-title: "Chapter 07: 7. Ước lượng hiệu ứng điều trị trung bình — Panel Data Econometrics in Empirical Finance"
-sidebar_label: "Chapter 07: 7. Ước lượng hiệu ứng điều trị trung bình"
+title: "7. Estimating Average Treatment Effects"
+sidebar_label: "7. Estimating Average Treatment Effects"
 sidebar_position: 8
-description: "Step-by-step practical how-to guide for Chapter 07: 7. Ước lượng hiệu ứng điều trị trung bình from Panel Data Econometrics in Empirical Finance on SachKTL with Stata, R, and Python workflows integrated with EcoData, Finco, and EcoLab."
+description: "Comprehensive practical how-to guide for 7. Estimating Average Treatment Effects from Panel Data Econometrics in Empirical Finance on SachKTL featuring structural equations, 6 lesson breakdowns, and Stata, R, and Python scripts."
 ---
 
-# Chapter 07: 7. Ước lượng hiệu ứng điều trị trung bình — Panel Data Econometrics in Empirical Finance
+# 7. Estimating Average Treatment Effects
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-This practical how-to guide synthesizes the methodology and empirical implementation workflow of **Chapter 07: 7. Ước lượng hiệu ứng điều trị trung bình** from [**Book 03: Panel Data Econometrics in Empirical Finance**](/en/sachktl/book-03-vserk21u1/), with direct backlinks to the authoritative source material at [https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/](https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/).
+This practical how-to guide presents the theoretical foundations, structural mathematical equations, detailed breakdown of **6 specialized lessons**, and multi-platform replication workflows for **7. Estimating Average Treatment Effects** from the textbook [**Panel Data Econometrics in Empirical Finance**](/en/sachktl/book-03-vserk21u1/), with direct cross-references to the authoritative source material at [https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/](https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chapter 07: 7. Ước lượng hiệu ứng điều trị trung bình">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="7. Estimating Average Treatment Effects">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ This practical how-to guide synthesizes the methodology and empirical implementa
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BOOK 03 · CHAPTER 07</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chapter 07: 7. Ước lượng hiệu ứng điều trị trung bình</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Part of Textbook: Panel Data Econometrics in Empirical Finance · 6 Detailed Lessons</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Panel Data Econometrics in Empirical</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">7. Estimating Average Treatment Effects</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Panel Data Econometrics and Unobserved Heterogeneity Control · 6 Detailed Lessons</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,138 +41,266 @@ This practical how-to guide synthesizes the methodology and empirical implementa
   </svg>
 </div>
 
-## 1. Methodological Meaning and Scope of Application
+## 1. Methodological Foundations, Mathematical Specification, and Identification
 
-Ước lượng hiệu ứng điều trị trung bình Trong kinh tế lượng tài chính ứng dụng, một trong những thách thức lớn nhất là xác định các mối quan hệ nhân quả. Liệu một chính sách mới có thực sự cải thiện hiệu suất công ty? Một quyết định quản trị có tác động như thế nào đến giá trị cổ đông? Hay một sự kiện thị trường ảnh hưởng ra sao đến hành vi đầu tư? Để trả lời những câu hỏi này một cách khoa học, các nhà nghiên cứu thường dựa vào các phương pháp ước lượng hiệu ứng điều trị . Đây là thuật ngữ dùng để chỉ tác động nhân quả của một can thiệp lên một kết quả cụ thể. Tuy nhiên, việc ước lượng này
+Ước lượng hiệu ứng điều trị trung bình Trong kinh tế lượng tài chính ứng dụng, một trong những thách thức lớn nhất là xác định các mối quan hệ nhân quả. Liệu một chính sách mới có thực sự cải thiện hiệu suất công ty? Một quyết định quản trị có tác động như thế nào đến giá trị cổ đông? Hay một sự kiện thị trường ảnh hưởng ra sao đến hành vi đầu tư? Để trả lời những câu hỏi này một cách khoa học, các nhà nghiên cứu thường dựa vào các phương pháp ước lượng hiệu ứng điều trị . Đây là thuật ngữ dùng để chỉ tác động nhân quả của một can thiệp lên một kết quả cụ thể.
 
-- **Core Academic Topics**: Cấu trúc chuỗi bài học, Kiến thức tiên quyết, Mục tiêu học tập, Tài liệu tham khảo chính, Phụ lục: Dữ liệu mô phỏng cho chuỗi bài viết.
-- **Supported Analytical Environments**: `Stata 18 MP`.
-- **Recommended Empirical Data Sources**: Vietnamese macroeconomic, corporate, and household survey datasets on [EcoData](https://ecodata.io.vn), capital and commodity market series on [Finco](https://www.finco.vn), model cross-references on [VietLOD](https://vietlod.tnsai.vn), and automated estimation on [EcoLab](https://ecolab.io.vn).
+### 1.1. Structural Equations and Representative Estimator
+
+$$
+Y_{it} = \alpha + \mathbf{X}_{it}'\boldsymbol{\beta} + \mu_i + \lambda_t + \varepsilon_{it}, \quad i = 1,\dots,N; \; t = 1,\dots,T \tag*{[1]}
+$$
+
+$$
+\hat{\boldsymbol{\beta}}_{\text{FE}} = \left(\sum_{i=1}^N \sum_{t=1}^T \tilde{\mathbf{X}}_{it}\tilde{\mathbf{X}}_{it}'\right)^{-1} \left(\sum_{i=1}^N \sum_{t=1}^T \tilde{\mathbf{X}}_{it}\tilde{Y}_{it}\right), \quad \tilde{Z}_{it} = Z_{it} - \bar{Z}_i \tag*{[2]}
+$$
+
+### 1.2. Core Identification Assumptions and Applicability Conditions
+
+1. Strict exogeneity of explanatory covariates with respect to idiosyncratic disturbances across cross-sectional units and time periods.
+2. Unobserved individual effects $\mu_i$ may correlate arbitrarily with $\mathbf{X}_{it}$ under Fixed Effects or remain orthogonal under Random Effects.
+3. Cluster-robust variance-covariance estimation at the entity level is required to accommodate arbitrary within-panel serial correlation and heteroskedasticity.
 
 <FeatureCards
   features={[
     {
-      title: "Original Chapter on SachKTL",
-      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for Chapter 07 on SachKTL.",
+      title: "Authoritative Chapter on SachKTL",
+      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for this chapter on SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/"
     },
     {
       title: "Practice Datasets on EcoData & Finco",
-      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and survey data for hands-on replication.",
+      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and household survey data for hands-on replication.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
       title: "Automated Estimation on EcoLab",
-      description: "Execute econometric specifications, run diagnostic battery tests, and export publication-grade tables automatically.",
+      description: "Execute econometric specifications, run diagnostic battery tests, and export APA 7th / AER publication-grade tables automatically.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Step-by-Step Practical Implementation Across Chapter Lessons
+<FeatureNotAvailable
+  feature="Unconditional Baseline Estimation Under Violated Identification Assumptions"
+  reason="Standard Fixed Effects and Random Effects estimators suffer from Nickell bias when lagged dependent variables $Y_{i,t-1}$ are included in short-$T$ panels; use Difference GMM or System GMM instead."
+  alternative="Run the complete diagnostic battery in Step 4 and transition to the appropriate corrective estimator on VietLOD or EcoLab."
+/>
+
+## 2. Lesson-by-Lesson Academic Breakdown
+
+### 2.1. Khung kết quả tiềm năng và các khái niệm nền tảng
+
+Chào mừng bạn đến với bài học đầu tiên trong chuỗi bài về ước lượng hiệu ứng điều trị. Trong bài giới thiệu tổng quan, chúng ta đã phác thảo bức tranh toàn cảnh về tầm quan trọng của việc xác định quan hệ nhân quả trong tài chính. Để xây dựng một nền móng vững chắc cho các kỹ thuật phức tạp hơn, bài học này sẽ tập trung vào ngôn ngữ và khung lý thuyết cốt lõi đã định hình nên các nghiên cứu hiện đại về chủ đề này: khung kết quả tiềm năng.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Nền tảng lý thuyết: Khung kết quả tiềm năng**
+- **7.1 Kết quả tiềm năng**
+- **7.1.1 Các tham số hiệu ứng điều trị trung bình**
+- **7.1.2 Thử nghiệm ngẫu nhiên và thử nghiệm tự nhiên**
+- **7.1.3 Các nguồn gây thiên chệch**
+- **Giả định SUTVA và vấn đề nhận dạng**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/khung-ket-qua-tiem-nang-va-cac-khai-niem-nen-tang/)
+
+### 2.2. Ước lượng với giả định độc lập có điều kiện
+
+Trong bài học trước, chúng ta đã thiết lập khung lý thuyết về kết quả tiềm năng và xác định "thiên chệch lựa chọn" là trở ngại chính trong việc ước lượng hiệu ứng điều trị nhân quả. Về cơ bản, vấn đề nảy sinh vì nhóm được điều trị và nhóm kiểm soát không giống nhau ngay từ đầu. Vậy làm thế nào chúng ta có thể so sánh một cách hợp lý giữa hai nhóm này? Bài học này sẽ đi sâu vào một giả định nhận dạng mạnh mẽ nhưng cực kỳ hữu ích: Giả định Độc lập có Điều kiện, hay còn gọi là "lựa chọn dựa trên các yếu tố quan sát được".
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Nền tảng lý thuyết: Giả định độc lập có điều kiện**
+- **Định nghĩa và ý nghĩa**
+- **Giả định vùng chung và điểm xu hướng**
+- **Các phương pháp nghiên cứu dựa trên CIA**
+- **7.2.1 Phương pháp trọng số nghịch đảo xác suất**
+- **7.2.2 Phương pháp điều chỉnh hồi quy**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/uoc-luong-voi-gia-dinh-doc-lap-co-dieu-kien/)
+
+### 2.3. Thiết kế hồi quy gián đoạn
+
+Trong bài học trước, chúng ta đã tìm hiểu các phương pháp dựa trên Giả định Độc lập có Điều kiện, vốn yêu cầu chúng ta phải quan sát và kiểm soát tất cả các yếu tố ảnh hưởng đến việc lựa chọn điều trị. Đây là một giả định rất mạnh và không phải lúc nào cũng thỏa mãn. Vậy, điều gì sẽ xảy ra nếu chúng ta không thể đo lường hết các yếu tố đó, nhưng lại biết chính xác quy tắc phân bổ điều trị? Đây chính là lúc Thiết kế Hồi quy Gián đoạn tỏa sáng.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Nền tảng lý thuyết của thiết kế hồi quy gián đoạn**
+- **7.3.1 Thiết kế RDD sắc nét**
+- **7.3.3 Thiết kế RDD mờ**
+- **Phương pháp thực hành và các kiểm định tính hợp lệ**
+- **7.3.2 Thách thức nhận dạng: Vấn đề thao túng**
+- **Các kiểm định giả dược**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/thiet-ke-hoi-quy-gian-doan-rdd/)
+
+### 2.4. Mô hình hồi quy chuyển mạch và biến công cụ
+
+Trong các bài học trước, chúng ta đã khám phá hai cách tiếp cận chính để ước lượng hiệu ứng điều trị. Bài 2 tập trung vào Giả định Độc lập có Điều kiện, vốn cho rằng chúng ta có thể quan sát và kiểm soát tất cả các yếu tố gây ra sự lựa chọn. Bài 3 giới thiệu Thiết kế Hồi quy Gián đoạn, một phương pháp mạnh mẽ nhưng chỉ áp dụng được trong các trường hợp đặc biệt có ngưỡng phân bổ rõ ràng.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **7.4 Mô hình hồi quy chuyển mạch**
+- **Phương pháp hàm kiểm soát**
+- **Quy trình ước lượng hai bước**
+- **7.5 Biến công cụ và hiệu ứng điều trị trung bình cục bộ**
+- **Diễn giải LATE**
+- **Ước lượng LATE**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/mo-hinh-hoi-quy-chuyen-mach-va-bien-cong-cu-late/)
+
+### 2.5. Phương pháp khác biệt trong khác biệt
+
+Trong các bài học trước, chúng ta đã khám phá các phương pháp ước lượng hiệu ứng điều trị trong những bối cảnh khác nhau: từ việc kiểm soát các biến quan sát được, khai thác các ngưỡng phân bổ, cho đến việc mô hình hóa các yếu tố không quan sát được . Mỗi phương pháp đều có những giả định nhận dạng riêng. Bài học này sẽ giới thiệu một công cụ cực kỳ phổ biến và mạnh mẽ, đặc biệt phù hợp khi chúng ta có dữ liệu bảng : Phương pháp Khác biệt trong Khác biệt .
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Nền tảng lý thuyết của phương pháp DiD**
+- **7.6.1 Mô hình DiD cơ bản**
+- **Khung hồi quy với dữ liệu bảng và giả định xu hướng song song**
+- **Phương pháp thực hành và các kiểm định tính hợp lệ**
+- **Thách thức và kiểm định giả định xu hướng song song**
+- **Kiểm tra xu hướng trước điều trị**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/phuong-phap-khac-biet-trong-khac-biet-did/)
+
+### 2.6. Hướng dẫn thực hành ước lượng hiệu ứng điều trị với Stata
+
+Chúng ta đã cùng nhau đi qua một hành trình xuyên suốt các phương pháp luận cốt lõi trong việc ước lượng hiệu ứng điều trị. Từ việc xây dựng nền tảng với khung kết quả tiềm năng, đối mặt với thiên chệch lựa chọn bằng các phương pháp dựa trên Giả định Độc lập có Điều kiện, khai thác các quy tắc phân bổ với Thiết kế Hồi quy Gián đoạn, cho đến việc xử lý các yếu tố không quan sát được bằng Biến công cụ và mô hình DiD.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Dữ liệu nghiên cứu và câu hỏi chính**
+- **Hướng dẫn từng bước với Stata**
+- **Bước 1: Chuẩn bị và khám phá dữ liệu**
+- **Bước 2: Ước lượng mô hình DiD hai chiều hiệu ứng cố định**
+- **Bước 3: Phân tích động**
+- **Phân tích chuyên sâu và kiểm tra độ vững**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/huong-dan-thuc-hanh-uoc-luong-hieu-ung-dieu-tri-voi-stata/)
+
+## 3. Step-by-Step Empirical Implementation Workflow
 
 <Steps>
   <div className="step-item">
-    <h3>Step 1: Khung kết quả tiềm năng và các khái niệm nền tảng</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Khung kết quả tiềm năng và các khái niệm nền tảng. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/khung-ket-qua-tiem-nang-va-cac-khai-niem-nen-tang/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/khung-ket-qua-tiem-nang-va-cac-khai-niem-nen-tang/</a>.</p>
+    <h3>1. Formulate the Research Question and Prepare Data on EcoData & Finco</h3>
+    <p>Define the dependent variable, core explanatory variables, and control covariates aligned with <strong>7. Estimating Average Treatment Effects</strong>. Extract standardized Vietnamese empirical series from <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> or <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, and screen for missing observations and extreme outliers.</p>
   </div>
   <div className="step-item">
-    <h3>Step 2: Ước lượng với giả định độc lập có điều kiện</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Ước lượng với giả định độc lập có điều kiện. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/uoc-luong-voi-gia-dinh-doc-lap-co-dieu-kien/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/uoc-luong-voi-gia-dinh-doc-lap-co-dieu-kien/</a>.</p>
+    <h3>2. Conduct Descriptive Profiling, Correlation Analysis, and Pre-Estimation Checks</h3>
+    <p>Examine empirical distributions, construct summary statistics tables, and evaluate collinearity using pairwise correlation matrices and Variance Inflation Factors (VIF).</p>
   </div>
   <div className="step-item">
-    <h3>Step 3: Thiết kế hồi quy gián đoạn</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Thiết kế hồi quy gián đoạn. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/thiet-ke-hoi-quy-gian-doan-rdd/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/thiet-ke-hoi-quy-gian-doan-rdd/</a>.</p>
+    <h3>3. Estimate the Model Across Stata 18 MP, R 4.x, and Python 3.11+</h3>
+    <p>Execute the parameter estimation scripts matching the structural equations in Section 1.1 while cross-checking theoretical derivations at <a href="https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Step 4: Mô hình hồi quy chuyển mạch và biến công cụ</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Mô hình hồi quy chuyển mạch và biến công cụ. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/mo-hinh-hoi-quy-chuyen-mach-va-bien-cong-cu-late/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/mo-hinh-hoi-quy-chuyen-mach-va-bien-cong-cu-late/</a>.</p>
+    <h3>4. Perform Post-Estimation Diagnostics and Robust Variance Correction</h3>
+    <p>Test for heteroskedasticity, serial correlation, Ramsey RESET functional form misspecification, and regressor endogeneity. Apply White HC1 or cluster-robust standard errors for valid inference.</p>
   </div>
   <div className="step-item">
-    <h3>Step 5: Phương pháp khác biệt trong khác biệt</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Phương pháp khác biệt trong khác biệt. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/phuong-phap-khac-biet-trong-khac-biet-did/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/phuong-phap-khac-biet-trong-khac-biet-did/</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Step 6: Hướng dẫn thực hành ước lượng hiệu ứng điều trị với Stata</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Hướng dẫn thực hành ước lượng hiệu ứng điều trị với Stata. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/huong-dan-thuc-hanh-uoc-luong-hieu-ung-dieu-tri-voi-stata/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/huong-dan-thuc-hanh-uoc-luong-hieu-ung-dieu-tri-voi-stata/</a>.</p>
+    <h3>5. Format Journal-Grade Tables and Cross-Verify on EcoLab</h3>
+    <p>Report point estimates, standard errors in parentheses, and statistical significance stars following APA 7th / AER Booktabs standards, or automate the entire reporting pipeline on <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> and <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Multi-Platform Implementation Examples in Stata, R, and Python
+## 4. Multi-Platform Implementation Scripts in Stata, R, and Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Initialize environment and load practice dataset from EcoData / SachKTL
+* Thiết lập cấu trúc dữ liệu bảng và ước lượng FE / RE / Hausman
 version 18.0
 clear all
 set more off
+import delimited "sachktl_panel_ecodata.csv", clear encoding("utf-8")
 
-* Import standardized empirical dataset
-import delimited "sachktl_vserk21u1_c07_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+xtset id year
+xtdescribe
+xtsum y x1 x2 x3
 
-* Estimate baseline specification and run diagnostic checks with robust standard errors
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 1. Ước lượng tác động cố định (Fixed Effects) và tác động ngẫu nhiên (Random Effects)
+xtreg y x1 x2 x3, fe
+estimates store FE_model
+xtreg y x1 x2 x3, re
+estimates store RE_model
+
+* 2. Kiểm định Hausman lựa chọn mô hình và ước lượng sai số chuẩn vững theo cụm
+hausman FE_model RE_model, sigmamore
+xtreg y x1 x2 x3 i.year, fe vce(cluster id)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Load econometric packages and practice dataset from EcoData / SachKTL
-library(tidyverse)
+# Nạp thư viện dữ liệu bảng và ước lượng FE / RE / Cluster-Robust SE
+library(plm)
 library(lmtest)
 library(sandwich)
 
-df <- read.csv("sachktl_vserk21u1_c07_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_panel_ecodata.csv")
+pdata <- pdata.frame(df, index = c("id", "year"))
 
-# Estimate model and compute heteroskedasticity-robust HC1 standard errors
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Ước lượng mô hình Within FE và Swamy-Arora RE
+fe_mod <- plm(y ~ x1 + x2 + x3, data = pdata, model = "within", effect = "twoways")
+re_mod <- plm(y ~ x1 + x2 + x3, data = pdata, model = "random")
+
+# 2. Kiểm định Hausman và xuất sai số chuẩn vững Arellano theo cụm
+phtest(fe_mod, re_mod)
+coeftest(fe_mod, vcov = vcovHC(fe_mod, method = "arellano", type = "HC1", cluster = "group"))
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Load econometric libraries and practice dataset from EcoData / SachKTL
+# Nạp thư viện linearmodels và ước lượng PanelOLS / RandomEffects
 import pandas as pd
-import statsmodels.formula.api as smf
+from linearmodels.panel import PanelOLS, RandomEffects, compare
 
-df = pd.read_csv("sachktl_vserk21u1_c07_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_panel_ecodata.csv").set_index(["id", "year"])
 
-# Fit specification with HC1 robust standard errors
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Ước lượng mô hình Fixed Effects hai chiều với sai số chuẩn cụm
+fe_mod = PanelOLS.from_formula("y ~ 1 + x1 + x2 + x3 + EntityEffects + TimeEffects", data=df)
+fe_res = fe_mod.fit(cov_type="clustered", cluster_entity=True)
+
+# 2. Ước lượng mô hình Random Effects và đối chiếu kết quả
+re_mod = RandomEffects.from_formula("y ~ 1 + x1 + x2 + x3", data=df)
+re_res = re_mod.fit(cov_type="clustered", cluster_entity=True)
+print(compare({"Fixed Effects": fe_res, "Random Effects": re_res}))
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video Tutorial Walkthrough
+## 5. Post-Estimation Diagnostic and Interpretation Guide
+
+| Diagnostic Criterion | Null Hypothesis $H_0$ | Benchmark Threshold | Corrective Action When $H_0$ Is Rejected |
+| :--- | :--- | :--- | :--- |
+| **Heteroskedasticity** | Constant error variance $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ rejects $H_0$ | Apply `vce(robust)`, `vcovHC(HC1)`, or FGLS/WLS weighted estimation |
+| **Multicollinearity** | No severe linear dependence among regressors | $\text{VIF} < 10$ acceptable | Drop redundant covariates, center interactions, or apply LASSO/Ridge regularization |
+| **Ramsey RESET Functional Form** | No omitted nonlinear or higher-order terms | $p\text{-value} > 0.05$ retains $H_0$ | Add interaction terms, quadratic polynomials, or log-transform skewed positive variables |
+| **Regressor Exogeneity** | Orthogonality $\text{Cov}(X, \varepsilon)=0$ | Durbin-Wu-Hausman $p > 0.05$ | Transition to IV/2SLS, LIML, or GMM estimation with validated instruments |
+
+## 6. Video Tutorial Walkthrough
 
 <VideoTutorial
-  title="Practical Walkthrough for Chapter 07: 7. Ước lượng hiệu ứng điều trị trung bình on SachKTL"
+  title="Practical Walkthrough for 7. Estimating Average Treatment Effects on SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Complete Lesson Directory and Backlinks to Original SachKTL Articles
+## 7. Complete Lesson Directory and Backlinks to Original SachKTL Articles
 
-| No. | Lesson Title in Chapter 07 | Supported Software | Original Source Link on SachKTL |
+| Lesson Code | Lesson Title | Supported Software | Original Source Link on SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Lesson 01** | Khung kết quả tiềm năng và các khái niệm nền tảng | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/khung-ket-qua-tiem-nang-va-cac-khai-niem-nen-tang/) |
-| **Lesson 02** | Ước lượng với giả định độc lập có điều kiện | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/uoc-luong-voi-gia-dinh-doc-lap-co-dieu-kien/) |
-| **Lesson 03** | Thiết kế hồi quy gián đoạn | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/thiet-ke-hoi-quy-gian-doan-rdd/) |
-| **Lesson 04** | Mô hình hồi quy chuyển mạch và biến công cụ | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/mo-hinh-hoi-quy-chuyen-mach-va-bien-cong-cu-late/) |
-| **Lesson 05** | Phương pháp khác biệt trong khác biệt | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/phuong-phap-khac-biet-trong-khac-biet-did/) |
-| **Lesson 06** | Hướng dẫn thực hành ước lượng hiệu ứng điều trị với Stata | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/huong-dan-thuc-hanh-uoc-luong-hieu-ung-dieu-tri-voi-stata/) |
+| **7.1** | Khung kết quả tiềm năng và các khái niệm nền tảng | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/khung-ket-qua-tiem-nang-va-cac-khai-niem-nen-tang/) |
+| **7.2** | Ước lượng với giả định độc lập có điều kiện | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/uoc-luong-voi-gia-dinh-doc-lap-co-dieu-kien/) |
+| **7.3** | Thiết kế hồi quy gián đoạn | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/thiet-ke-hoi-quy-gian-doan-rdd/) |
+| **7.4** | Mô hình hồi quy chuyển mạch và biến công cụ | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/mo-hinh-hoi-quy-chuyen-mach-va-bien-cong-cu-late/) |
+| **7.5** | Phương pháp khác biệt trong khác biệt | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/phuong-phap-khac-biet-trong-khac-biet-did/) |
+| **7.6** | Hướng dẫn thực hành ước lượng hiệu ứng điều trị với Stata | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/7-uoc-luong-hieu-ung-dieu-tri-trung-binh/huong-dan-thuc-hanh-uoc-luong-hieu-ung-dieu-tri-voi-stata/) |

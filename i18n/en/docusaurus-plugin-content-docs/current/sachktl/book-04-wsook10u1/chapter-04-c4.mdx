@@ -1,19 +1,19 @@
 ---
 id: chapter-04-c4
-title: "Chapter 04: 4. Mô hình hồi quy tuyến tính đơn phương trình và ước lượng OLS — Econometric Analysis of Cross Section and Panel Data"
-sidebar_label: "Chapter 04: 4. Mô hình hồi quy tuyến tính đơn phương t"
+title: "4. Mô hình hồi quy tuyến tính đơn phương trình và ước lượng OLS"
+sidebar_label: "4. Mô hình hồi quy tuyến tính đơn phương trình và ước lượng OLS"
 sidebar_position: 5
-description: "Step-by-step practical how-to guide for Chapter 04: 4. Mô hình hồi quy tuyến tính đơn phương trình và ước lượng OLS from Econometric Analysis of Cross Section and Panel Data on SachKTL with Stata, R, and Python workflows integrated with EcoData, Finco, and EcoLab."
+description: "Comprehensive practical how-to guide for 4. Mô hình hồi quy tuyến tính đơn phương trình và ước lượng OLS from Econometric Analysis of Cross Section and Panel Data on SachKTL featuring structural equations, 5 lesson breakdowns, and Stata, R, and Python scripts."
 ---
 
-# Chapter 04: 4. Mô hình hồi quy tuyến tính đơn phương trình và ước lượng OLS — Econometric Analysis of Cross Section and Panel Data
+# 4. Mô hình hồi quy tuyến tính đơn phương trình và ước lượng OLS
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-This practical how-to guide synthesizes the methodology and empirical implementation workflow of **Chapter 04: 4. Mô hình hồi quy tuyến tính đơn phương trình và ước lượng OLS** from [**Book 04: Econometric Analysis of Cross Section and Panel Data**](/en/sachktl/book-04-wsook10u1/), with direct backlinks to the authoritative source material at [https://sachktl.tnsai.vn/vi/wsook10u1/c4/](https://sachktl.tnsai.vn/vi/wsook10u1/c4/).
+This practical how-to guide presents the theoretical foundations, structural mathematical equations, detailed breakdown of **5 specialized lessons**, and multi-platform replication workflows for **4. Mô hình hồi quy tuyến tính đơn phương trình và ước lượng OLS** from the textbook [**Econometric Analysis of Cross Section and Panel Data**](/en/sachktl/book-04-wsook10u1/), with direct cross-references to the authoritative source material at [https://sachktl.tnsai.vn/vi/wsook10u1/c4/](https://sachktl.tnsai.vn/vi/wsook10u1/c4/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chapter 04: 4. Mô hình hồi quy tuyến tính đơn phương trình và ước lư">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="4. Mô hình hồi quy tuyến tính đơn phương trình và ước lượng OLS">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ This practical how-to guide synthesizes the methodology and empirical implementa
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BOOK 04 · CHAPTER 04</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chapter 04: 4. Mô hình hồi quy tuyến tính đơn phương trình và ước lư</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Part of Textbook: Econometric Analysis of Cross Section and Panel Data · 5 Detailed L</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Econometric Analysis of Cross Sectio</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">4. Mô hình hồi quy tuyến tính đơn phương trình và ước lượng OLS</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Panel Data Econometrics and Unobserved Heterogeneity Control · 5 Detailed Lessons</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,133 +41,250 @@ This practical how-to guide synthesizes the methodology and empirical implementa
   </svg>
 </div>
 
-## 1. Methodological Meaning and Scope of Application
+## 1. Methodological Foundations, Mathematical Specification, and Identification
 
-Giới thiệu chuỗi bài học về Mô hình tuyến tính và OLS Chào mừng các bạn sinh viên đã đến với chuỗi bài học nền tảng và quan trọng nhất trong hành trình chinh phục kinh tế lượng! Trong loạt bài viết này, chúng ta sẽ cùng nhau khám phá "con ngựa thồ" của mọi phân tích kinh tế thực nghiệm: Mô hình Tuyến tính Một Phương trình và phương pháp ước lượng kinh điển - Bình phương nhỏ nhất thông thường. Đây không chỉ là việc ôn lại kiến thức nhập môn, mà là một bước tiến sâu hơn vào cách các nhà nghiên cứu chuyên nghiệp tư duy và xử lý các vấn đề phức tạp trong thực tế. Mục tiêu của chúng ta là
+Giới thiệu chuỗi bài học về Mô hình tuyến tính và OLS Chào mừng các bạn sinh viên đã đến với chuỗi bài học nền tảng và quan trọng nhất trong hành trình chinh phục kinh tế lượng! Trong loạt bài viết này, chúng ta sẽ cùng nhau khám phá "con ngựa thồ" của mọi phân tích kinh tế thực nghiệm: Mô hình Tuyến tính Một Phương trình và phương pháp ước lượng kinh điển - Bình phương nhỏ nhất thông thường. Đây không chỉ là việc ôn lại kiến thức nhập môn, mà là một bước tiến sâu hơn vào cách các nhà nghiên cứu chuyên nghiệp tư duy và xử lý các vấn đề phức tạp trong thực tế.
 
-- **Core Academic Topics**: CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO, PHỤ LỤC: Dữ liệu mô phỏng cho chuỗi bài học.
-- **Supported Analytical Environments**: `Stata 18 MP`.
-- **Recommended Empirical Data Sources**: Vietnamese macroeconomic, corporate, and household survey datasets on [EcoData](https://ecodata.io.vn), capital and commodity market series on [Finco](https://www.finco.vn), model cross-references on [VietLOD](https://vietlod.tnsai.vn), and automated estimation on [EcoLab](https://ecolab.io.vn).
+### 1.1. Structural Equations and Representative Estimator
+
+$$
+Y_{it} = \alpha + \mathbf{X}_{it}'\boldsymbol{\beta} + \mu_i + \lambda_t + \varepsilon_{it}, \quad i = 1,\dots,N; \; t = 1,\dots,T \tag*{[1]}
+$$
+
+$$
+\hat{\boldsymbol{\beta}}_{\text{FE}} = \left(\sum_{i=1}^N \sum_{t=1}^T \tilde{\mathbf{X}}_{it}\tilde{\mathbf{X}}_{it}'\right)^{-1} \left(\sum_{i=1}^N \sum_{t=1}^T \tilde{\mathbf{X}}_{it}\tilde{Y}_{it}\right), \quad \tilde{Z}_{it} = Z_{it} - \bar{Z}_i \tag*{[2]}
+$$
+
+### 1.2. Core Identification Assumptions and Applicability Conditions
+
+1. Strict exogeneity of explanatory covariates with respect to idiosyncratic disturbances across cross-sectional units and time periods.
+2. Unobserved individual effects $\mu_i$ may correlate arbitrarily with $\mathbf{X}_{it}$ under Fixed Effects or remain orthogonal under Random Effects.
+3. Cluster-robust variance-covariance estimation at the entity level is required to accommodate arbitrary within-panel serial correlation and heteroskedasticity.
 
 <FeatureCards
   features={[
     {
-      title: "Original Chapter on SachKTL",
-      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for Chapter 04 on SachKTL.",
+      title: "Authoritative Chapter on SachKTL",
+      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for this chapter on SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/wsook10u1/c4/"
     },
     {
       title: "Practice Datasets on EcoData & Finco",
-      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and survey data for hands-on replication.",
+      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and household survey data for hands-on replication.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
       title: "Automated Estimation on EcoLab",
-      description: "Execute econometric specifications, run diagnostic battery tests, and export publication-grade tables automatically.",
+      description: "Execute econometric specifications, run diagnostic battery tests, and export APA 7th / AER publication-grade tables automatically.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Step-by-Step Practical Implementation Across Chapter Lessons
+<FeatureNotAvailable
+  feature="Unconditional Baseline Estimation Under Violated Identification Assumptions"
+  reason="Standard Fixed Effects and Random Effects estimators suffer from Nickell bias when lagged dependent variables $Y_{i,t-1}$ are included in short-$T$ panels; use Difference GMM or System GMM instead."
+  alternative="Run the complete diagnostic battery in Step 4 and transition to the appropriate corrective estimator on VietLOD or EcoLab."
+/>
+
+## 2. Lesson-by-Lesson Academic Breakdown
+
+### 2.1. Nền tảng OLS và các tính chất tiệm cận
+
+Nền tảng OLS và các tính chất tiệm cận OLS foundations and asymptotics Giới thiệu Chào mừng các bạn quay trở lại với bài học đầu tiên và cũng là quan trọng nhất trong chuỗi bài về mô hình tuyến tính. Trong bài học này, chúng ta sẽ cùng nhau xây dựng nền móng vững chắc cho mọi phân tích hồi quy sau này. Hãy tưởng tượng OLS như một công cụ quyền năng; để sử dụng nó một cách hiệu quả và an toàn, trước hết chúng ta phải hiểu rõ "hướng dẫn sử dụng" của nó. Đó chính là các giả định nền tảng và các tính chất thống kê đi kèm.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Giới thiệu**
+- **Nền tảng lý thuyết**
+- **Mô hình tuyến tính một phương trình trong tổng thể**
+- **Điều kiện cốt lõi cho OLS: Giả định trực giao**
+- **Các tính chất tiệm cận của OLS**
+- **Giả định OLS.1: Trực giao trong tổng thể**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c4/nen-tang-ols-va-cac-tinh-chat-tiem-can/)
+
+### 2.2. Vấn đề biến bị bỏ sót và biến thay thế
+
+Vấn đề biến bị bỏ sót và giải pháp biến thay thế Omitted variables and proxies Giới thiệu Chào mừng các bạn đến với bài học thứ hai, nơi chúng ta sẽ đối mặt trực diện với "kẻ thù số một" của các nhà kinh tế lượng: vấn đề biến bị bỏ sót . Đây có lẽ là lý do phổ biến nhất khiến Giả định OLS.1 bị vi phạm và dẫn đến các kết luận sai lầm trong nghiên cứu. Hãy tưởng tượng bạn đang cố gắng chứng minh rằng việc đi học nhiều hơn giúp tăng lương, nhưng lại quên mất rằng "năng lực" bẩm sinh cũng ảnh hưởng đến cả hai.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Giới thiệu**
+- **Nền tảng lý thuyết**
+- **Mô hình cấu trúc và sai lệch do biến bị bỏ sót**
+- **Đặc điểm của sai lệch**
+- **Công thức sai lệch do biến bị bỏ sót**
+- **Giải pháp biến thay thế**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c4/van-de-bien-bi-bo-sot-va-bien-thay-the/)
+
+### 2.3. Sai số đo lường và tác động lên OLS
+
+Sai số đo lường và tác động lên OLS Measurement error and Its impact Giới thiệu Chào mừng các bạn đến với bài học thứ ba trong chuỗi bài về mô hình tuyến tính. Sau khi đã tìm hiểu về vấn đề biến bị bỏ sót, hôm nay chúng ta sẽ khám phá một nguồn gốc khác của tính nội sinh, một vấn đề cũng rất phổ biến trong thực tế: sai số đo lường . Trong một thế giới lý tưởng, chúng ta luôn có dữ liệu hoàn hảo, phản ánh chính xác các khái niệm kinh tế mà chúng ta muốn nghiên cứu.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Giới thiệu**
+- **Nền tảng lý thuyết**
+- **Trường hợp 1: Sai số đo lường trong biến phụ thuộc**
+- **Kết luận về sai số đo lường trong biến phụ thuộc**
+- **Trường hợp 2: Sai số đo lường trong biến giải thích**
+- **Giả định Lỗi kinh điển trong biến**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c4/sai-so-do-luong-va-tac-dong-len-ols/)
+
+### 2.4. Hướng dẫn thực hành OLS với Stata
+
+Hướng dẫn thực hành OLS với Stata A practical guide to OLS Tóm tắt tổng hợp kiến thức Trong các bài học trước, chúng ta đã cùng nhau xây dựng một nền tảng lý thuyết vững chắc. Chúng ta đã hiểu rằng OLS là một công cụ mạnh mẽ, nhưng sức mạnh đó chỉ được phát huy khi các giả định cốt lõi được thỏa mãn. Chúng ta đã mổ xẻ hai "kẻ thù" lớn nhất gây ra sai lệch trong nghiên cứu: vấn đề biến bị bỏ sót và sai số đo lường. Chúng ta đã học cách chẩn đoán chúng về mặt lý thuyết và dự đoán hướng sai lệch mà chúng gây ra.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Tóm tắt tổng hợp kiến thức**
+- **Chuẩn bị dữ liệu**
+- **Ghi nhớ "Sự thật"**
+- **Quy trình phân tích**
+- **Hướng dẫn thực hành từng bước với Stata**
+- **Phần 1: Vấn đề Biến Bị Bỏ Sót trong thực tế**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c4/huong-dan-thuc-hanh-ols-voi-stata/)
+
+### 2.5. Tổng hợp và ứng dụng nâng cao
+
+Tổng hợp chuỗi bài học: Tư duy như một nhà kinh tế lượng với OLS Synthesizing the econometric mindset TỔNG QUAN CHỦ ĐỀ Chúng ta đã cùng nhau đi qua một hành trình khám phá nền tảng của kinh tế lượng thực nghiệm: Mô hình Tuyến tính Một Phương trình và phương pháp ước lượng OLS. Sẽ không quá lời khi nói rằng OLS chính là "hòn đá tảng", là ngôn ngữ chung của hầu hết các phân tích định lượng trong kinh tế và các ngành khoa học xã hội khác.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **TỔNG QUAN CHỦ ĐỀ**
+- **TỔNG HỢP LÝ THUYẾT**
+- **TÍCH HỢP PHƯƠNG PHÁP**
+- **VÍ DỤ TỔNG HỢP**
+- **TỔNG KẾT VÀ HƯỚNG PHÁT TRIỂN**
+- **Những bài học cốt lõi**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c4/tong-hop-va-ung-dung-nang-cao/)
+
+## 3. Step-by-Step Empirical Implementation Workflow
 
 <Steps>
   <div className="step-item">
-    <h3>Step 1: Nền tảng OLS và các tính chất tiệm cận</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Nền tảng OLS và các tính chất tiệm cận. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/wsook10u1/c4/nen-tang-ols-va-cac-tinh-chat-tiem-can/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/wsook10u1/c4/nen-tang-ols-va-cac-tinh-chat-tiem-can/</a>.</p>
+    <h3>1. Formulate the Research Question and Prepare Data on EcoData & Finco</h3>
+    <p>Define the dependent variable, core explanatory variables, and control covariates aligned with <strong>4. Mô hình hồi quy tuyến tính đơn phương trình và ước lượng OLS</strong>. Extract standardized Vietnamese empirical series from <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> or <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, and screen for missing observations and extreme outliers.</p>
   </div>
   <div className="step-item">
-    <h3>Step 2: Vấn đề biến bị bỏ sót và biến thay thế</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Vấn đề biến bị bỏ sót và biến thay thế. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/wsook10u1/c4/van-de-bien-bi-bo-sot-va-bien-thay-the/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/wsook10u1/c4/van-de-bien-bi-bo-sot-va-bien-thay-the/</a>.</p>
+    <h3>2. Conduct Descriptive Profiling, Correlation Analysis, and Pre-Estimation Checks</h3>
+    <p>Examine empirical distributions, construct summary statistics tables, and evaluate collinearity using pairwise correlation matrices and Variance Inflation Factors (VIF).</p>
   </div>
   <div className="step-item">
-    <h3>Step 3: Sai số đo lường và tác động lên OLS</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Sai số đo lường và tác động lên OLS. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/wsook10u1/c4/sai-so-do-luong-va-tac-dong-len-ols/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/wsook10u1/c4/sai-so-do-luong-va-tac-dong-len-ols/</a>.</p>
+    <h3>3. Estimate the Model Across Stata 18 MP, R 4.x, and Python 3.11+</h3>
+    <p>Execute the parameter estimation scripts matching the structural equations in Section 1.1 while cross-checking theoretical derivations at <a href="https://sachktl.tnsai.vn/vi/wsook10u1/c4/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Step 4: Hướng dẫn thực hành OLS với Stata</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Hướng dẫn thực hành OLS với Stata. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/wsook10u1/c4/huong-dan-thuc-hanh-ols-voi-stata/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/wsook10u1/c4/huong-dan-thuc-hanh-ols-voi-stata/</a>.</p>
+    <h3>4. Perform Post-Estimation Diagnostics and Robust Variance Correction</h3>
+    <p>Test for heteroskedasticity, serial correlation, Ramsey RESET functional form misspecification, and regressor endogeneity. Apply White HC1 or cluster-robust standard errors for valid inference.</p>
   </div>
   <div className="step-item">
-    <h3>Step 5: Tổng hợp và ứng dụng nâng cao</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Tổng hợp và ứng dụng nâng cao. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/wsook10u1/c4/tong-hop-va-ung-dung-nang-cao/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/wsook10u1/c4/tong-hop-va-ung-dung-nang-cao/</a>.</p>
+    <h3>5. Format Journal-Grade Tables and Cross-Verify on EcoLab</h3>
+    <p>Report point estimates, standard errors in parentheses, and statistical significance stars following APA 7th / AER Booktabs standards, or automate the entire reporting pipeline on <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> and <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Multi-Platform Implementation Examples in Stata, R, and Python
+## 4. Multi-Platform Implementation Scripts in Stata, R, and Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Initialize environment and load practice dataset from EcoData / SachKTL
+* Thiết lập cấu trúc dữ liệu bảng và ước lượng FE / RE / Hausman
 version 18.0
 clear all
 set more off
+import delimited "sachktl_panel_ecodata.csv", clear encoding("utf-8")
 
-* Import standardized empirical dataset
-import delimited "sachktl_wsook10u1_c04_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+xtset id year
+xtdescribe
+xtsum y x1 x2 x3
 
-* Estimate baseline specification and run diagnostic checks with robust standard errors
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 1. Ước lượng tác động cố định (Fixed Effects) và tác động ngẫu nhiên (Random Effects)
+xtreg y x1 x2 x3, fe
+estimates store FE_model
+xtreg y x1 x2 x3, re
+estimates store RE_model
+
+* 2. Kiểm định Hausman lựa chọn mô hình và ước lượng sai số chuẩn vững theo cụm
+hausman FE_model RE_model, sigmamore
+xtreg y x1 x2 x3 i.year, fe vce(cluster id)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Load econometric packages and practice dataset from EcoData / SachKTL
-library(tidyverse)
+# Nạp thư viện dữ liệu bảng và ước lượng FE / RE / Cluster-Robust SE
+library(plm)
 library(lmtest)
 library(sandwich)
 
-df <- read.csv("sachktl_wsook10u1_c04_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_panel_ecodata.csv")
+pdata <- pdata.frame(df, index = c("id", "year"))
 
-# Estimate model and compute heteroskedasticity-robust HC1 standard errors
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Ước lượng mô hình Within FE và Swamy-Arora RE
+fe_mod <- plm(y ~ x1 + x2 + x3, data = pdata, model = "within", effect = "twoways")
+re_mod <- plm(y ~ x1 + x2 + x3, data = pdata, model = "random")
+
+# 2. Kiểm định Hausman và xuất sai số chuẩn vững Arellano theo cụm
+phtest(fe_mod, re_mod)
+coeftest(fe_mod, vcov = vcovHC(fe_mod, method = "arellano", type = "HC1", cluster = "group"))
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Load econometric libraries and practice dataset from EcoData / SachKTL
+# Nạp thư viện linearmodels và ước lượng PanelOLS / RandomEffects
 import pandas as pd
-import statsmodels.formula.api as smf
+from linearmodels.panel import PanelOLS, RandomEffects, compare
 
-df = pd.read_csv("sachktl_wsook10u1_c04_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_panel_ecodata.csv").set_index(["id", "year"])
 
-# Fit specification with HC1 robust standard errors
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Ước lượng mô hình Fixed Effects hai chiều với sai số chuẩn cụm
+fe_mod = PanelOLS.from_formula("y ~ 1 + x1 + x2 + x3 + EntityEffects + TimeEffects", data=df)
+fe_res = fe_mod.fit(cov_type="clustered", cluster_entity=True)
+
+# 2. Ước lượng mô hình Random Effects và đối chiếu kết quả
+re_mod = RandomEffects.from_formula("y ~ 1 + x1 + x2 + x3", data=df)
+re_res = re_mod.fit(cov_type="clustered", cluster_entity=True)
+print(compare({"Fixed Effects": fe_res, "Random Effects": re_res}))
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video Tutorial Walkthrough
+## 5. Post-Estimation Diagnostic and Interpretation Guide
+
+| Diagnostic Criterion | Null Hypothesis $H_0$ | Benchmark Threshold | Corrective Action When $H_0$ Is Rejected |
+| :--- | :--- | :--- | :--- |
+| **Heteroskedasticity** | Constant error variance $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ rejects $H_0$ | Apply `vce(robust)`, `vcovHC(HC1)`, or FGLS/WLS weighted estimation |
+| **Multicollinearity** | No severe linear dependence among regressors | $\text{VIF} < 10$ acceptable | Drop redundant covariates, center interactions, or apply LASSO/Ridge regularization |
+| **Ramsey RESET Functional Form** | No omitted nonlinear or higher-order terms | $p\text{-value} > 0.05$ retains $H_0$ | Add interaction terms, quadratic polynomials, or log-transform skewed positive variables |
+| **Regressor Exogeneity** | Orthogonality $\text{Cov}(X, \varepsilon)=0$ | Durbin-Wu-Hausman $p > 0.05$ | Transition to IV/2SLS, LIML, or GMM estimation with validated instruments |
+
+## 6. Video Tutorial Walkthrough
 
 <VideoTutorial
-  title="Practical Walkthrough for Chapter 04: 4. Mô hình hồi quy tuyến tính đơn phương trình và ước lượng OLS on SachKTL"
+  title="Practical Walkthrough for 4. Mô hình hồi quy tuyến tính đơn phương trình và ước lượng OLS on SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Complete Lesson Directory and Backlinks to Original SachKTL Articles
+## 7. Complete Lesson Directory and Backlinks to Original SachKTL Articles
 
-| No. | Lesson Title in Chapter 04 | Supported Software | Original Source Link on SachKTL |
+| Lesson Code | Lesson Title | Supported Software | Original Source Link on SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Lesson 01** | Nền tảng OLS và các tính chất tiệm cận | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c4/nen-tang-ols-va-cac-tinh-chat-tiem-can/) |
-| **Lesson 02** | Vấn đề biến bị bỏ sót và biến thay thế | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c4/van-de-bien-bi-bo-sot-va-bien-thay-the/) |
-| **Lesson 03** | Sai số đo lường và tác động lên OLS | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c4/sai-so-do-luong-va-tac-dong-len-ols/) |
-| **Lesson 04** | Hướng dẫn thực hành OLS với Stata | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c4/huong-dan-thuc-hanh-ols-voi-stata/) |
-| **Lesson 05** | Tổng hợp và ứng dụng nâng cao | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c4/tong-hop-va-ung-dung-nang-cao/) |
+| **4.1** | Nền tảng OLS và các tính chất tiệm cận | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c4/nen-tang-ols-va-cac-tinh-chat-tiem-can/) |
+| **4.2** | Vấn đề biến bị bỏ sót và biến thay thế | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c4/van-de-bien-bi-bo-sot-va-bien-thay-the/) |
+| **4.3** | Sai số đo lường và tác động lên OLS | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c4/sai-so-do-luong-va-tac-dong-len-ols/) |
+| **4.4** | Hướng dẫn thực hành OLS với Stata | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c4/huong-dan-thuc-hanh-ols-voi-stata/) |
+| **4.5** | Tổng hợp và ứng dụng nâng cao | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c4/tong-hop-va-ung-dung-nang-cao/) |

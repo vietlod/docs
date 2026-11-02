@@ -1,19 +1,19 @@
 ---
 id: chapter-11-c11
-title: "Chương 11: 11. mô hình cho dữ liệu bảng"
-sidebar_label: "Chương 11: 11. Mô hình cho dữ liệu bảng"
+title: "11. Mô hình cho dữ liệu bảng"
+sidebar_label: "11. Mô hình cho dữ liệu bảng"
 sidebar_position: 12
-description: "Hướng dẫn thực hành How-To Chương 11: 11. mô hình cho dữ liệu bảng thuộc bộ sách Phân tích kinh tế lượng trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 11. Mô hình cho dữ liệu bảng thuộc giáo trình Phân tích kinh tế lượng trên SachKTL kèm công thức toán học, phân tích 8 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 11: 11. mô hình cho dữ liệu bảng
+# 11. Mô hình cho dữ liệu bảng
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 11: 11. mô hình cho dữ liệu bảng** thuộc [**Bộ sách 16: phân tích kinh tế lượng**](/sachktl/book-16-gsrek19u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/gsrek19u1/c11/](https://sachktl.tnsai.vn/vi/gsrek19u1/c11/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **8 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **11. Mô hình cho dữ liệu bảng** thuộc bộ giáo trình [**Phân tích kinh tế lượng**](/sachktl/book-16-gsrek19u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/gsrek19u1/c11/](https://sachktl.tnsai.vn/vi/gsrek19u1/c11/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 11: 11. mô hình cho dữ liệu bảng">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="11. Mô hình cho dữ liệu bảng">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 16 · CHƯƠNG 11</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 11: 11. mô hình cho dữ liệu bảng</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Phân tích kinh tế lượng · 8 bài học chuyên sâu</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Phân tích kinh tế lượng</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">11. Mô hình cho dữ liệu bảng</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng dữ liệu bảng và kiểm soát dị biệt không quan sát được · 8 bài học chuyê</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,140 +41,298 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Mô hình cho dữ liệu bảng Chào các bạn sinh viên, chào mừng đến với chuỗi bài học chuyên sâu về Mô hình Dữ liệu Bảng . Trong kinh tế học và nhiều lĩnh vực khác, chúng ta thường gặp các bộ dữ liệu kết hợp cả thông tin theo không gian và theo thời gian. Ví dụ như theo dõi thu nhập của hàng ngàn hộ gia đình qua nhiều năm, hay phân tích các chỉ số kinh tế vĩ mô của nhiều quốc gia trong một thập kỷ. Những bộ dữ liệu phong phú này được gọi là dữ liệu bảng, và chúng chứa đựng những thông tin vô giá mà dữ liệu chéo hoặc dữ liệu chuỗi thời gian đơn thuần không thể cung cấp. Mục tiêu của chuỗi bài học
+Mô hình cho dữ liệu bảng Chào các bạn sinh viên, chào mừng đến với chuỗi bài học chuyên sâu về Mô hình Dữ liệu Bảng . Trong kinh tế học và nhiều lĩnh vực khác, chúng ta thường gặp các bộ dữ liệu kết hợp cả thông tin theo không gian và theo thời gian. Ví dụ như theo dõi thu nhập của hàng ngàn hộ gia đình qua nhiều năm, hay phân tích các chỉ số kinh tế vĩ mô của nhiều quốc gia trong một thập kỷ. Những bộ dữ liệu phong phú này được gọi là dữ liệu bảng, và chúng chứa đựng những thông tin vô giá mà dữ liệu chéo hoặc dữ liệu chuỗi thời gian đơn thuần không thể cung cấp.
 
-- **Chủ đề học thuật trọng tâm**: Cấu trúc chuỗi bài học, Kiến thức tiên quyết, Mục tiêu học tập, Tài liệu tham khảo, PHỤ LỤC: Dữ liệu mô phỏng cho chuỗi bài viết.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+Y_{it} = \alpha + \mathbf{X}_{it}'\boldsymbol{\beta} + \mu_i + \lambda_t + \varepsilon_{it}, \quad i = 1,\dots,N; \; t = 1,\dots,T \tag*{[1]}
+$$
+
+$$
+\hat{\boldsymbol{\beta}}_{\text{FE}} = \left(\sum_{i=1}^N \sum_{t=1}^T \tilde{\mathbf{X}}_{it}\tilde{\mathbf{X}}_{it}'\right)^{-1} \left(\sum_{i=1}^N \sum_{t=1}^T \tilde{\mathbf{X}}_{it}\tilde{Y}_{it}\right), \quad \tilde{Z}_{it} = Z_{it} - \bar{Z}_i \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Tính ngoại sinh nghiêm ngặt của các biến giải thích đối với thành phần nhiễu đặc thù theo cả chiều chéo và chiều thời gian.
+2. Thành phần hiệu ứng cá thể $\mu_i$ có thể tương quan tùy ý với $\mathbf{X}_{it}$ trong mô hình tác động cố định FE hoặc độc lập tuyến tính trong mô hình tác động ngẫu nhiên RE.
+3. Ma trận hiệp phương sai của sai số cần được hiệu chỉnh vững theo cụm cá thể để kiểm soát tự tương quan chuỗi và phương sai thay đổi.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 11 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/gsrek19u1/c11/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Ước lượng tác động cố định FE và tác động ngẫu nhiên RE bị chệch Nickell khi có biến trễ của biến phụ thuộc $Y_{i,t-1}$ với chiều thời gian $T$ ngắn; khi đó cần chuyển sang ước lượng Difference GMM hoặc System GMM."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Giới thiệu và mô hình hồi quy gộp
+
+Giới thiệu bài học Chào mừng các bạn đã quay trở lại chuỗi bài học về Kinh tế lượng Dữ liệu Bảng! Trong bài giới thiệu tổng quan, chúng ta đã cùng nhau tìm hiểu về tầm quan trọng và cấu trúc của loại dữ liệu đặc biệt này. Trong bài học đầu tiên này, chúng ta sẽ cùng nhau xây dựng nền móng vững chắc bằng cách khám phá các đặc điểm cơ bản của dữ liệu bảng và áp dụng mô hình đơn giản nhất: mô hình hồi quy gộp . Mô hình này là điểm xuất phát tự nhiên, coi tất cả các quan sát từ mọi đối tượng và mọi thời điểm như một bộ dữ liệu chéo lớn.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu bài học**
+- **Nền tảng lý thuyết: Mô hình hồi quy gộp**
+- **1. Khung mô hình chung cho dữ liệu bảng**
+- **2. Mô hình hồi quy gộp**
+- **Các giả định của mô hình hồi quy gộp cổ điển**
+- **3. Vấn đề tiềm ẩn: Khi tính không đồng nhất bị bỏ qua**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c11/gioi-thieu-va-mo-hinh-hoi-quy-gop/)
+
+### 2.2. Mô hình hiệu ứng cố định
+
+Giới thiệu bài học Chào mừng các bạn đến với bài học thứ hai trong chuỗi bài về dữ liệu bảng. Ở bài trước, chúng ta đã tìm hiểu về mô hình hồi quy gộp và nhận ra rằng việc bỏ qua sự khác biệt cố hữu giữa các cá nhân có thể dẫn đến các kết luận thống kê không đáng tin cậy. Vậy làm thế nào để giải quyết triệt để vấn đề này? Câu trả lời nằm ở mô hình hiệu ứng cố định , chủ đề chính của bài học hôm nay.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu bài học**
+- **Nền tảng lý thuyết: Bản chất của mô hình hiệu ứng cố định**
+- **1. Đặc tả mô hình**
+- **2. Phương pháp ước lượng: Biến đổi within**
+- **Quy trình biến đổi within**
+- **3. Ưu điểm và nhược điểm**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c11/mo-hinh-hieu-ung-co-dinh/)
+
+### 2.3. Mô hình hiệu ứng ngẫu nhiên và kiểm định Hausman
+
+Giới thiệu bài học Chào mừng các bạn đến với bài học thứ ba! Trong bài học trước, chúng ta đã khám phá mô hình hiệu ứng cố định và thấy rằng nó là một công cụ tuyệt vời để loại bỏ sai lệch do các biến không quan sát được không đổi theo thời gian. Tuy nhiên, chúng ta cũng đối mặt với một hạn chế lớn: mô hình FE không thể cho chúng ta biết tác động của các biến không đổi theo thời gian như trình độ học vấn , giới tính, hay chủng tộc. Vậy có cách nào vừa kiểm soát được tính không đồng nhất, vừa ước lượng được tác động của các biến này không?
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu bài học**
+- **Nền tảng lý thuyết: Hiệu ứng ngẫu nhiên và logic lựa chọn mô hình**
+- **1. Mô hình hiệu ứng ngẫu nhiên**
+- **Cấu trúc sai số đặc biệt**
+- **2. So sánh hiệu ứng cố định và hiệu ứng ngẫu nhiên**
+- **3. Kiểm định Hausman: Lựa chọn dựa trên dữ liệu**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c11/mo-hinh-hieu-ung-ngau-nhien-va-kiem-dinh-hausman/)
+
+### 2.4. Xử lý các vấn đề ước lượng nâng cao
+
+Giới thiệu bài học Chào mừng các bạn đã quay trở lại! Trong các bài học trước, chúng ta đã tập trung vào việc xử lý tính không đồng nhất thông qua mô hình hiệu ứng cố định và hiệu ứng ngẫu nhiên. Cả hai mô hình này đều giả định rằng sau khi đã kiểm soát được hiệu ứng cá nhân $c_i$, phần sai số còn lại là "đẹp" - tức là không có tương quan và có phương sai không đổi. Tuy nhiên, trong thế giới thực, dữ liệu hiếm khi hoàn hảo như vậy.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu bài học**
+- **Nền tảng lý thuyết: Sai số vững và sự phụ thuộc không gian**
+- **1. Ước lượng MA trận hiệp phương sai vững**
+- **2. Tự tương quan không gian**
+- **Phương pháp ước lượng trên Stata**
+- **1. Tính sai số chuẩn vững cho mô hình FE và RE**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c11/xu-ly-cac-van-de-uoc-luong-nang-cao/)
+
+### 2.5. Vấn đề nội sinh và ước lượng biến công cụ
+
+Giới thiệu bài học Chào mừng các bạn đến với bài học thứ năm! Cho đến nay, chúng ta đã học cách xử lý các đặc điểm không quan sát được không đổi theo thời gian bằng mô hình hiệu ứng cố định và ngẫu nhiên. Tuy nhiên, tất cả các mô hình này đều dựa trên một giả định cốt lõi: các biến giải thích $\mathbf{x'_{it}}$ không tương quan với sai số ngẫu nhiên $\epsilon_{it}$. Giả định này được gọi là tính ngoại sinh. Nhưng điều gì sẽ xảy ra nếu giả định này bị vi phạm?
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu bài học**
+- **Nền tảng lý thuyết: Nội sinh và giải pháp biến công cụ**
+- **1. Vấn đề nội sinh đến từ đâu?**
+- **2. Logic của phương pháp biến công cụ**
+- **Hai điều kiện của biến công cụ**
+- **3. IV trong mô hình hiệu ứng cố định và ngẫu nhiên**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c11/van-de-noi-sinh-va-uoc-luong-bien-cong-cu/)
+
+### 2.6. Các mô hình dữ liệu bảng động
+
+Giới thiệu bài học Chào mừng các bạn đến với bài học thứ sáu! Trong tất cả các mô hình chúng ta đã xem xét cho đến nay, chúng ta đều giả định rằng giá trị của biến phụ thuộc $y_{it}$ chỉ được quyết định bởi các biến giải thích $\mathbf{x'_{it}}$ trong cùng thời kỳ. Đây được gọi là các mô hình tĩnh. Tuy nhiên, trong rất nhiều bối cảnh kinh tế, hành vi hiện tại lại phụ thuộc rất nhiều vào hành vi trong quá khứ.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu bài học**
+- **Nền tảng lý thuyết: Thách thức của các mô hình động**
+- **1. Đặc tả mô hình động**
+- **2. Tại sao các ước lượng thông thường thất bại?**
+- **3. Giải pháp biến công cụ: Sai phân bậc nhất**
+- **A. ước lượng của anderson-Hsiao**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c11/cac-mo-hinh-du-lieu-bang-dong/)
+
+### 2.7. Hồi quy phi tuyến và mô hình tham số ngẫu nhiên
+
+Giới thiệu bài học Chào mừng các bạn đến với bài học lý thuyết cuối cùng trong chuỗi bài về dữ liệu bảng! Cho đến nay, tất cả các mô hình chúng ta đã nghiên cứu đều thuộc nhóm mô hình tuyến tính. Chúng ta đã giả định rằng mối quan hệ giữa các biến giải thích và biến phụ thuộc là tuyến tính. Tuy nhiên, trong kinh tế học, nhiều mối quan hệ lại có bản chất phi tuyến. Ví dụ, hiệu suất cận biên giảm dần của vốn, hay tác động của thu nhập lên sự hài lòng có thể không phải là một đường thẳng.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu bài học**
+- **Nền tảng lý thuyết: Vượt ra ngoài giới hạn tuyến tính**
+- **1. Hồi quy phi tuyến với dữ liệu bảng**
+- **A. mô hình hiệu ứng cố định phi tuyến**
+- **B. mô hình hiệu ứng ngẫu nhiên phi tuyến**
+- **2. Mô hình tham số ngẫu nhiên**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c11/hoi-quy-phi-tuyen-va-mo-hinh-tham-so-ngau-nhien/)
+
+### 2.8. Hướng dẫn thực hành với Stata
+
+Tóm tắt tổng hợp và mục tiêu Xin chúc mừng các bạn đã đi đến bài học cuối cùng của chuỗi bài về dữ liệu bảng! Chúng ta đã cùng nhau trải qua một hành trình dài, từ những khái niệm cơ bản của mô hình hồi quy gộp, đi sâu vào sự khác biệt tinh tế giữa hiệu ứng cố định và hiệu ứng ngẫu nhiên, học cách lựa chọn mô hình bằng kiểm định Hausman, và thậm chí khám phá các chủ đề nâng cao như nội sinh và mô hình động. Bài học hôm nay là nơi tất cả các mảnh ghép kiến thức sẽ được kết hợp lại.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Tóm tắt tổng hợp và mục tiêu**
+- **Câu hỏi nghiên cứu và dữ liệu**
+- **Workflow phân tích dữ liệu bảng: Từ cơ bản đến nâng cao**
+- **Tổng hợp và diễn giải kết quả cuối cùng**
+- **Mẹo và các lỗi thường gặp**
+- **Bài tập tự luyện**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c11/huong-dan-thuc-hanh-voi-stata/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Giới thiệu và mô hình hồi quy gộp</h3>
-    <p>Giới thiệu bài học Chào mừng các bạn đã quay trở lại chuỗi bài học về Kinh tế lượng Dữ liệu Bảng! Trong bài giới thiệu tổng quan, chúng ta đã cùng nhau tìm hiểu về tầm quan trọng và cấu trúc của loại dữ liệu đặc biệt này. Trong bài học đầu tiên này, chúng ta s Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/gsrek19u1/c11/gioi-thieu-va-mo-hinh-hoi-quy-gop/" target="_blank" rel="noopener">Giới thiệu và mô hình hồi quy gộp</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>11. Mô hình cho dữ liệu bảng</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Mô hình hiệu ứng cố định</h3>
-    <p>Giới thiệu bài học Chào mừng các bạn đến với bài học thứ hai trong chuỗi bài về dữ liệu bảng. Ở bài trước, chúng ta đã tìm hiểu về mô hình hồi quy gộp và nhận ra rằng việc bỏ qua sự khác biệt cố hữu giữa các cá nhân có thể dẫn đến các kết luận thống kê không đ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/gsrek19u1/c11/mo-hinh-hieu-ung-co-dinh/" target="_blank" rel="noopener">Mô hình hiệu ứng cố định</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Mô hình hiệu ứng ngẫu nhiên và kiểm định Hausman</h3>
-    <p>Giới thiệu bài học Chào mừng các bạn đến với bài học thứ ba! Trong bài học trước, chúng ta đã khám phá mô hình hiệu ứng cố định và thấy rằng nó là một công cụ tuyệt vời để loại bỏ sai lệch do các biến không quan sát được không đổi theo thời gian. Tuy nhiên, ch Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/gsrek19u1/c11/mo-hinh-hieu-ung-ngau-nhien-va-kiem-dinh-hausman/" target="_blank" rel="noopener">Mô hình hiệu ứng ngẫu nhiên và kiểm định Hausman</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/gsrek19u1/c11/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Xử lý các vấn đề ước lượng nâng cao</h3>
-    <p>Giới thiệu bài học Chào mừng các bạn đã quay trở lại! Trong các bài học trước, chúng ta đã tập trung vào việc xử lý tính không đồng nhất thông qua mô hình hiệu ứng cố định và hiệu ứng ngẫu nhiên. Cả hai mô hình này đều giả định rằng sau khi đã kiểm soát được h Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/gsrek19u1/c11/xu-ly-cac-van-de-uoc-luong-nang-cao/" target="_blank" rel="noopener">Xử lý các vấn đề ước lượng nâng cao</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 5: Vấn đề nội sinh và ước lượng biến công cụ</h3>
-    <p>Giới thiệu bài học Chào mừng các bạn đến với bài học thứ năm! Cho đến nay, chúng ta đã học cách xử lý các đặc điểm không quan sát được không đổi theo thời gian bằng mô hình hiệu ứng cố định và ngẫu nhiên. Tuy nhiên, tất cả các mô hình này đều dựa trên một giả  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/gsrek19u1/c11/van-de-noi-sinh-va-uoc-luong-bien-cong-cu/" target="_blank" rel="noopener">Vấn đề nội sinh và ước lượng biến công cụ</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Bước 6: Các mô hình dữ liệu bảng động</h3>
-    <p>Giới thiệu bài học Chào mừng các bạn đến với bài học thứ sáu! Trong tất cả các mô hình chúng ta đã xem xét cho đến nay, chúng ta đều giả định rằng giá trị của biến phụ thuộc $y_&#123;it&#125;$ chỉ được quyết định bởi các biến giải thích $\mathbf&#123;x'_&#123; Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/gsrek19u1/c11/cac-mo-hinh-du-lieu-bang-dong/" target="_blank" rel="noopener">Các mô hình dữ liệu bảng động</a>.</p>
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập cấu trúc dữ liệu bảng và ước lượng FE / RE / Hausman
 version 18.0
 clear all
 set more off
+import delimited "sachktl_panel_ecodata.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_gsrek19u1_c11_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+xtset id year
+xtdescribe
+xtsum y x1 x2 x3
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 1. Ước lượng tác động cố định (Fixed Effects) và tác động ngẫu nhiên (Random Effects)
+xtreg y x1 x2 x3, fe
+estimates store FE_model
+xtreg y x1 x2 x3, re
+estimates store RE_model
+
+* 2. Kiểm định Hausman lựa chọn mô hình và ước lượng sai số chuẩn vững theo cụm
+hausman FE_model RE_model, sigmamore
+xtreg y x1 x2 x3 i.year, fe vce(cluster id)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
-library(tidyverse)
+# Nạp thư viện dữ liệu bảng và ước lượng FE / RE / Cluster-Robust SE
+library(plm)
 library(lmtest)
 library(sandwich)
 
-df <- read.csv("sachktl_gsrek19u1_c11_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_panel_ecodata.csv")
+pdata <- pdata.frame(df, index = c("id", "year"))
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Ước lượng mô hình Within FE và Swamy-Arora RE
+fe_mod <- plm(y ~ x1 + x2 + x3, data = pdata, model = "within", effect = "twoways")
+re_mod <- plm(y ~ x1 + x2 + x3, data = pdata, model = "random")
+
+# 2. Kiểm định Hausman và xuất sai số chuẩn vững Arellano theo cụm
+phtest(fe_mod, re_mod)
+coeftest(fe_mod, vcov = vcovHC(fe_mod, method = "arellano", type = "HC1", cluster = "group"))
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện linearmodels và ước lượng PanelOLS / RandomEffects
 import pandas as pd
-import statsmodels.formula.api as smf
+from linearmodels.panel import PanelOLS, RandomEffects, compare
 
-df = pd.read_csv("sachktl_gsrek19u1_c11_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_panel_ecodata.csv").set_index(["id", "year"])
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Ước lượng mô hình Fixed Effects hai chiều với sai số chuẩn cụm
+fe_mod = PanelOLS.from_formula("y ~ 1 + x1 + x2 + x3 + EntityEffects + TimeEffects", data=df)
+fe_res = fe_mod.fit(cov_type="clustered", cluster_entity=True)
+
+# 2. Ước lượng mô hình Random Effects và đối chiếu kết quả
+re_mod = RandomEffects.from_formula("y ~ 1 + x1 + x2 + x3", data=df)
+re_res = re_mod.fit(cov_type="clustered", cluster_entity=True)
+print(compare({"Fixed Effects": fe_res, "Random Effects": re_res}))
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 11: 11. mô hình cho dữ liệu bảng trên SachKTL"
+  title="Hướng dẫn thực hành 11. Mô hình cho dữ liệu bảng trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 11 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Giới thiệu và mô hình hồi quy gộp | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c11/gioi-thieu-va-mo-hinh-hoi-quy-gop/) |
-| **Bài 02** | Mô hình hiệu ứng cố định | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c11/mo-hinh-hieu-ung-co-dinh/) |
-| **Bài 03** | Mô hình hiệu ứng ngẫu nhiên và kiểm định Hausman | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c11/mo-hinh-hieu-ung-ngau-nhien-va-kiem-dinh-hausman/) |
-| **Bài 04** | Xử lý các vấn đề ước lượng nâng cao | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c11/xu-ly-cac-van-de-uoc-luong-nang-cao/) |
-| **Bài 05** | Vấn đề nội sinh và ước lượng biến công cụ | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c11/van-de-noi-sinh-va-uoc-luong-bien-cong-cu/) |
-| **Bài 06** | Các mô hình dữ liệu bảng động | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c11/cac-mo-hinh-du-lieu-bang-dong/) |
-| **Bài 07** | Hồi quy phi tuyến và mô hình tham số ngẫu nhiên | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c11/hoi-quy-phi-tuyen-va-mo-hinh-tham-so-ngau-nhien/) |
-| **Bài 08** | Hướng dẫn thực hành với Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c11/huong-dan-thuc-hanh-voi-stata/) |
+| **11.1** | Giới thiệu và mô hình hồi quy gộp | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c11/gioi-thieu-va-mo-hinh-hoi-quy-gop/) |
+| **11.2** | Mô hình hiệu ứng cố định | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c11/mo-hinh-hieu-ung-co-dinh/) |
+| **11.3** | Mô hình hiệu ứng ngẫu nhiên và kiểm định Hausman | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c11/mo-hinh-hieu-ung-ngau-nhien-va-kiem-dinh-hausman/) |
+| **11.4** | Xử lý các vấn đề ước lượng nâng cao | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c11/xu-ly-cac-van-de-uoc-luong-nang-cao/) |
+| **11.5** | Vấn đề nội sinh và ước lượng biến công cụ | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c11/van-de-noi-sinh-va-uoc-luong-bien-cong-cu/) |
+| **11.6** | Các mô hình dữ liệu bảng động | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c11/cac-mo-hinh-du-lieu-bang-dong/) |
+| **11.7** | Hồi quy phi tuyến và mô hình tham số ngẫu nhiên | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c11/hoi-quy-phi-tuyen-va-mo-hinh-tham-so-ngau-nhien/) |
+| **11.8** | Hướng dẫn thực hành với Stata | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c11/huong-dan-thuc-hanh-voi-stata/) |

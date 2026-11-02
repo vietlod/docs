@@ -1,10 +1,10 @@
 ---
 id: b028-probit
-title: "3.1.2. Hướng dẫn thực hành Hồi quy Probit chuẩn nhị phân"
+title: "3.1.2. Hồi quy Probit chuẩn nhị phân"
 sidebar_label: "3.1.2. Hồi quy Probit chuẩn nhị phân"
 sidebar_position: 2
 slug: /vietlod/chapter-03/group-3-1/b028-probit
-description: "Tài liệu How-To hướng dẫn thực hành mô hình Hồi quy Probit chuẩn nhị phân với mã probit trên Stata 18 MP, R 4.x và Python 3.11+ kèm dữ liệu thực hành và diễn giải kết quả chuẩn tạp chí."
+description: "Tài liệu How-To hướng dẫn thực hành bài 3.1.2 — Hồi quy Probit chuẩn nhị phân với mã probit trên Stata 18 MP, R 4.x và Python 3.11+ kèm dữ liệu thực hành và diễn giải kết quả chuẩn tạp chí."
 keywords:
   - Hồi quy Probit chuẩn nhị phân
   - probit
@@ -17,28 +17,28 @@ keywords:
   - EcoLab
 ---
 
-# 3.1.2. Hướng dẫn thực hành Hồi quy Probit chuẩn nhị phân
+# 3.1.2. Hồi quy Probit chuẩn nhị phân
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Bài học `3.1.2` — Mã mô hình `B028` (`probit`)** thuộc [Chương 03: Mô hình lựa chọn rời rạc và cầu cấu trúc](/vietlod/chapter-03) $\to$ [Nhóm 3.1: Lựa chọn nhị phân](/vietlod/chapter-03/group-3-1), phân loại **Cấp độ L1 — Nền tảng**. Tài liệu How-To này hướng dẫn chi tiết từ bản chất phương pháp, điều kiện áp dụng, kịch bản mã lệnh trên **Stata 18 MP**, **R 4.x** và **Python 3.11+**, tệp dữ liệu thực hành `vietlod_probit_ecodata.csv` cho đến cách đọc hiểu đồ thị hội tụ 3 phần mềm và viết phần diễn giải kết quả theo chuẩn tạp chí quốc tế.
+**Bài học `3.1.2` — Mã mô hình `B028` — Khóa định danh `probit`** thuộc [3. Mô hình lựa chọn rời rạc và cầu cấu trúc](/vietlod/chapter-03) $\to$ [3.1. Lựa chọn nhị phân](/vietlod/chapter-03/group-3-1), phân loại **Cấp độ L1 — Nền tảng**. Tài liệu How-To này hướng dẫn chi tiết từ bản chất phương pháp, điều kiện áp dụng, kịch bản mã lệnh trên **Stata 18 MP**, **R 4.x** và **Python 3.11+**, tệp dữ liệu thực hành `vietlod_probit_ecodata.csv` cho đến cách đọc hiểu đồ thị hội tụ 3 phần mềm và viết phần diễn giải kết quả theo chuẩn tạp chí quốc tế.
 
 <VideoTutorial
   title="Video hướng dẫn thực hành bài 3.1.2: Hồi quy Probit chuẩn nhị phân trên Stata 18, R 4.x và Python 3.11+"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 1. Ý nghĩa phương pháp và phạm vi áp dụng
+## 3.1.2.1. Ý nghĩa phương pháp và phạm vi áp dụng
 
-### 1.1. Bản chất kinh tế lượng
+### 3.1.2.1.1. Bản chất kinh tế lượng
 
 Sử dụng hàm phân phối tích lũy chuẩn tắc $\Phi(X_i^\top \beta)$ từ mô hình biến ẩn ngưỡng $Y_i^\ast = X_i^\top \beta + \varepsilon_i$ với $\varepsilon_i \sim \mathcal{N}(0, 1)$ để ước lượng xác suất xảy ra sự kiện nhị phân.
 
-### 1.2. Phạm vi áp dụng và yêu cầu cấu trúc dữ liệu
+### 3.1.2.1.2. Phạm vi áp dụng và yêu cầu cấu trúc dữ liệu
 
 Các bài toán lựa chọn nhị phân dựa trên lý thuyết hữu dụng ngưỡng vi mô khi sai số ngẫu nhiên tuân theo phân phối chuẩn.
 
-### 1.3. Hệ phương trình toán học và điều kiện định danh
+### 3.1.2.1.3. Hệ phương trình toán học và điều kiện định danh
 
 Phương trình đặc tả cấu trúc của mô hình `probit`:
 
@@ -59,10 +59,10 @@ $$
 $$
 
 <FeatureNotAvailable
-  note="Giới hạn áp dụng: Không sử dụng trực tiếp ước lượng Hồi quy Probit chuẩn nhị phân khi mẫu vi phạm nghiêm trọng điều kiện định danh hoặc chưa vượt qua bộ kiểm định bắt buộc gồm Kiểm định (LR) / Wald $\chi^2$, kiểm định dạng hàm và phương sai thay đổi phần dư suy rộng, chỉ số ROC-AUC và tác động biên trung bình (AME). Trong trường hợp vi phạm, hãy tham chiếu các mô hình mở rộng cùng Nhóm 3.1 hoặc Chương 03."
+  note="Giới hạn áp dụng: Không sử dụng trực tiếp ước lượng Hồi quy Probit chuẩn nhị phân khi mẫu vi phạm nghiêm trọng điều kiện định danh hoặc chưa vượt qua bộ kiểm định bắt buộc gồm Kiểm định (LR) / Wald $\chi^2$, kiểm định dạng hàm và phương sai thay đổi phần dư suy rộng, chỉ số ROC-AUC và tác động biên trung bình (AME). Trong trường hợp vi phạm, hãy tham chiếu các mô hình mở rộng cùng Phần 3.1 hoặc Chương 3."
 />
 
-## 2. Ví dụ thực tế và bộ dữ liệu thực hành chuẩn hóa
+## 3.1.2.2. Ví dụ thực tế và bộ dữ liệu thực hành chuẩn hóa
 
 - **Bài toán thực nghiệm tại Việt Nam**: Ứng dụng mô hình `probit` trên bộ dữ liệu **Xác suất tiếp cận tín dụng chính thức của hộ VHLSS** với cỡ mẫu chuẩn hóa $N = 320$ quan sát được trích xuất từ hệ sinh thái [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
 - **Bộ dữ liệu chuẩn quốc tế đối sánh**: **Boston HMDA Mortgage Denial**, giúp người học đối chiếu trực tiếp kết quả thực hành với các giáo trình kinh tế lượng hàng đầu thế giới.
@@ -80,7 +80,7 @@ $$
       title: 'Bài giảng toàn văn trên VietLOD',
       description: 'Xem bài giảng lý thuyết chuyên sâu, chứng minh toán học và thảo luận học thuật đầy đủ của Bài 3.1.2 trên cổng VietLOD.',
       link: 'https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-03-mo-hinh-lua-chon-roi-rac-va-cau-cau-truc/nhom-3-1-binary/b028-probit',
-      badge: 'VietLOD B028'
+      badge: 'VietLOD 3.1.2'
     },
     {
       title: 'Thực thi đám mây trên EcoLab',
@@ -97,9 +97,9 @@ $$
   ]}
 />
 
-## 3. Gói lệnh phân tích và quy trình thực hành trên Stata, R và Python
+## 3.1.2.3. Gói lệnh phân tích và quy trình thực hành trên Stata, R và Python
 
-### 3.1. Bảng đối chiếu gói phần mềm và cú pháp lệnh chuẩn
+### 3.1.2.3.1. Bảng đối chiếu gói phần mềm và cú pháp lệnh chuẩn
 
 | Nền tảng phần mềm | Gói thư viện chuẩn | Cú pháp ước lượng trọng tâm | Lệnh kiểm định chẩn đoán hậu ước lượng | Hỗ trợ |
 | :--- | :--- | :--- | :--- | :--- |
@@ -107,29 +107,28 @@ $$
 | **R 4.x** | `stats + margins` | `glm(y_bin ~ x1 + x2, family = binomial(link = 'probit'), data = df)` | `lmtest::lrtest[fit]; marginaleffects::avg_slopes[fit]` — Kiểm định tỷ số hợp lý (LR), giả định độc lập phương án (IIA) và tác động biên trung bình (AME). | <Available /> |
 | **Python 3.11+** | `statsmodels` | `smf.probit('y_bin ~ x1 + x2', data=df).fit()` | `res.get_margeff[at='overall'].summary(); res.llr_pvalue` — Ước lượng tác động biên trung bình (AME), hệ số McFadden Pseudo-R2 và kiểm định tỷ số hợp lý (LR). | <Available /> |
 
-### 3.2. Quy trình 4 bước thực thi mô hình `probit`
+### 3.1.2.3.2. Quy trình 4 bước thực thi mô hình `probit`
 
 <Steps>
-
-### Bước 1. Nạp tệp dữ liệu thực hành và kiểm tra thống kê mô tả
-
-Tải tệp [`vietlod_probit_ecodata.csv`](https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_probit_ecodata.csv) vào thư mục làm việc, kiểm tra cỡ mẫu $N = 320$ quan sát, khai báo cấu trúc dữ liệu và rà soát phân phối của biến phụ thuộc `y` cùng các biến giải thích `x1`, `x2`.
-
-### Bước 2. Thực thi hàm ước lượng `probit` với sai số chuẩn vững
-
-Chạy lệnh ước lượng chính thức trên **Stata 18 MP** qua gói `base Stata`, **R 4.x** qua gói `stats + margins` hoặc **Python 3.11+** qua gói `statsmodels` kèm ma trận hiệp phương sai vững để bảo toàn hiệu lực suy luận thống kê.
-
-### Bước 3. Thực hiện bộ kiểm định chẩn đoán hậu ước lượng bắt buộc
-
-Thực thi đầy đủ các kiểm định đặc thù của mô hình gồm: **Kiểm định (LR) / Wald $\chi^2$, kiểm định dạng hàm và phương sai thay đổi phần dư suy rộng, chỉ số ROC-AUC và tác động biên trung bình (AME)**. Ghi nhận giá trị thống kê chẩn đoán $\text{Stat} = 0.0150$ và giá trị $p = 0.9925$.
-
-### Bước 4. Xuất bảng kết quả chuẩn tạp chí và kiểm chứng hội tụ 3 phần mềm
-
-Sử dụng `etable` trên Stata, `coeftest` trên R hoặc `summary()` trên Python để xuất bảng hệ số ước lượng, sau đó đối chiếu với bảng kết quả chuẩn và đồ thị thực nghiệm tại Mục 4.
-
+  <div className="step-item">
+    <h3>Bước 1. Nạp tệp dữ liệu thực hành và kiểm tra thống kê mô tả</h3>
+    <p>Tải tệp <a href="https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_probit_ecodata.csv"><code>vietlod_probit_ecodata.csv</code></a> vào thư mục làm việc, kiểm tra cỡ mẫu $N = 320$ quan sát, khai báo cấu trúc dữ liệu và rà soát phân phối của biến phụ thuộc <code>y</code> cùng các biến giải thích <code>x1</code>, <code>x2</code>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2. Thực thi hàm ước lượng probit với sai số chuẩn vững</h3>
+    <p>Chạy lệnh ước lượng chính thức trên <strong>Stata 18 MP</strong> qua gói <code>base Stata</code>, <strong>R 4.x</strong> qua gói <code>stats + margins</code> hoặc <strong>Python 3.11+</strong> qua gói <code>statsmodels</code> kèm ma trận hiệp phương sai vững để bảo toàn hiệu lực suy luận thống kê.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3. Thực hiện bộ kiểm định chẩn đoán hậu ước lượng bắt buộc</h3>
+    <p>Thực thi đầy đủ các kiểm định đặc thù của mô hình gồm: <strong>Kiểm định (LR) / Wald $\chi^2$, kiểm định dạng hàm và phương sai thay đổi phần dư suy rộng, chỉ số ROC-AUC và tác động biên trung bình (AME)</strong>. Ghi nhận giá trị thống kê chẩn đoán $\text{Stat} = 0.0150$ và giá trị $p = 0.9925$.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4. Xuất bảng kết quả chuẩn tạp chí và kiểm chứng hội tụ 3 phần mềm</h3>
+    <p>Sử dụng <code>etable</code> trên Stata, <code>coeftest</code> trên R hoặc <code>summary()</code> trên Python để xuất bảng hệ số ước lượng, sau đó đối chiếu với bảng kết quả chuẩn và đồ thị thực nghiệm tại Mục 3.1.2.4.</p>
+  </div>
 </Steps>
 
-### 3.3. Mã lệnh thực hành tái lập hoàn chỉnh trên Stata 18, R 4.x và Python 3.11+
+### 3.1.2.3.3. Mã lệnh thực hành tái lập hoàn chỉnh trên Stata 18, R 4.x và Python 3.11+
 
 <Tabs groupId="econometric-software">
   <TabItem value="stata" label="Stata 18 MP">
@@ -230,9 +229,9 @@ print("KẾT QUẢ ƯỚC LƯỢNG [probit]: beta_x1 = 1.8014 | SE = 0.2250 | p 
   </TabItem>
 </Tabs>
 
-## 4. Kết quả ước lượng thực nghiệm, đồ thị hội tụ và hướng dẫn diễn giải
+## 3.1.2.4. Kết quả ước lượng thực nghiệm, đồ thị hội tụ và hướng dẫn diễn giải
 
-### 4.1. Bảng tổng hợp kết quả ước lượng chuẩn công bố tạp chí
+### 3.1.2.4.1. Bảng tổng hợp kết quả ước lượng chuẩn công bố tạp chí
 
 Bảng dưới đây trình bày kết quả ước lượng thực nghiệm của mô hình **Hồi quy Probit chuẩn nhị phân** trên tệp dữ liệu `vietlod_probit_ecodata.csv` với $N = 320$ quan sát, đối chứng đồng thời trên cả 3 nền tảng **Stata 18 MP**, **R 4.x** và **Python 3.11+**:
 
@@ -245,32 +244,31 @@ Bảng dưới đây trình bày kết quả ước lượng thực nghiệm c�
 | **Chỉ số độ khớp `McFadden Pseudo-R2`** | `0.2230` | — | `F/Wald = 98.889` | — | Chuẩn công bố Q1 |
 | **Kiểm định chẩn đoán** | `Stat = 0.0150` | — | — | `p = 0.9925` | Đạt điều kiện đặc tả |
 
-### 4.2. Đồ thị thực nghiệm đối chiếu đồng thời Stata 18, R 4.x và Python 3.11+
+### 3.1.2.4.2. Đồ thị thực nghiệm đối chiếu đồng thời Stata 18, R 4.x và Python 3.11+
 
 ![Đồ thị thực nghiệm đối chiếu 3 phần mềm cho mô hình Hồi quy Probit chuẩn nhị phân](https://vietlod.tnsai.vn/src/ecoaz/img/vietlod-b028-probit.png)
 
-### 4.3. Cách diễn giải kết quả chuẩn học thuật
+### 3.1.2.4.3. Cách diễn giải kết quả chuẩn học thuật
 
 - **Diễn giải hệ số ước lượng trọng tâm**: Hệ số của biến `x1` đạt $\hat{\beta}_1 = 1.8014$ với sai số chuẩn vững $\text{SE} = 0.2250$ và thống kê kiểm định bằng $8.007$, cho thấy `x1` có **tác động thuận chiều** lên biến mục tiêu `y` và **có ý nghĩa thống kê cao ở mức 1%** trong bối cảnh dữ liệu *Xác suất tiếp cận tín dụng chính thức của hộ VHLSS*.
 - **Diễn giải khoảng tin cậy và độ lớn tác động**: Khoảng tin cậy $95\%$ của $\hat{\beta}_1$ nằm trong dải $[1.3605, 2.2424]$, khẳng định độ ổn định của ước lượng điểm và sự hội tụ số học giữa Stata 18 MP, R 4.x và Python 3.11+.
 - **Diễn giải độ khớp mô hình và kiểm định hậu ước lượng**: Đại lượng `McFadden Pseudo-R2` đạt `$0.2230$` cùng thống kê kiểm định toàn cục đạt `$98.889$`. Thống kê chẩn đoán đạt `$0.0150$` với $p = 0.9925$, xác nhận mô hình `probit` thỏa mãn các điều kiện hậu ước lượng để suy luận chính sách.
 
-## 5. Cách tổng hợp dữ liệu từ EcoData, Finco và truy vết dữ liệu quốc tế
+## 3.1.2.5. Cách tổng hợp dữ liệu từ EcoData, Finco và truy vết dữ liệu quốc tế
 
 <Steps>
-
-### Bước 1. Khởi tạo dự án dữ liệu trên EcoData và Finco
-
-Truy cập cổng dữ liệu [EcoData](https://ecodata.io.vn) hoặc nền tảng tài chính [Finco](https://www.finco.vn), chọn phân hệ dữ liệu tương ứng với chủ đề **Xác suất tiếp cận tín dụng chính thức của hộ VHLSS** và thiết lập bộ lọc đơn vị chéo `id` cùng kỳ thời gian `t` để thu được mẫu $N = 320$ quan sát.
-
-### Bước 2. Chuẩn hóa biến số và xử lý giá trị ngoại lai
-
-Ánh xạ biến phụ thuộc mục tiêu vào cột `y`, biến giải thích chính vào `x1`, biến kiểm soát vào `x2`, cùng các biến định danh và biến chuyên biệt như `z1`, `treat`, `w`, `y_bin`, `y_count`, `duration`, `event`. Thực hiện kiểm soát ngoại lai Winsorize ở ngưỡng $1\%$ và $99\%$ trước khi xuất tệp `vietlod_probit_ecodata.csv`.
-
-### Bước 3. Đối sánh với bộ dữ liệu chuẩn quốc tế Boston HMDA Mortgage Denial
-
-Để đối chiếu phương pháp trên bộ dữ liệu quốc tế **Boston HMDA Mortgage Denial**, sử dụng trực tiếp các lệnh nạp dữ liệu trong bảng truy vết bên dưới.
-
+  <div className="step-item">
+    <h3>Bước 1. Khởi tạo dự án dữ liệu trên EcoData và Finco</h3>
+    <p>Truy cập cổng dữ liệu <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc nền tảng tài chính <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, chọn phân hệ dữ liệu tương ứng với chủ đề <strong>Xác suất tiếp cận tín dụng chính thức của hộ VHLSS</strong> và thiết lập bộ lọc đơn vị chéo <code>id</code> cùng kỳ thời gian <code>t</code> để thu được mẫu $N = 320$ quan sát.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2. Chuẩn hóa biến số và xử lý giá trị ngoại lai</h3>
+    <p>Ánh xạ biến phụ thuộc mục tiêu vào cột <code>y</code>, biến giải thích chính vào <code>x1</code>, biến kiểm soát vào <code>x2</code>, cùng các biến định danh và biến chuyên biệt như <code>z1</code>, <code>treat</code>, <code>w</code>, <code>y_bin</code>, <code>y_count</code>, <code>duration</code>, <code>event</code>. Thực hiện kiểm soát ngoại lai Winsorize ở ngưỡng $1\%$ và $99\%$ trước khi xuất tệp <code>vietlod_probit_ecodata.csv</code>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3. Đối sánh với bộ dữ liệu chuẩn quốc tế Boston HMDA Mortgage Denial</h3>
+    <p>Để đối chiếu phương pháp trên bộ dữ liệu quốc tế <strong>Boston HMDA Mortgage Denial</strong>, sử dụng trực tiếp các lệnh nạp dữ liệu trong bảng truy vết bên dưới.</p>
+  </div>
 </Steps>
 
 | Nguồn lưu trữ dữ liệu | Tên bộ dữ liệu / Tệp | Lệnh nạp trực tiếp và đường dẫn truy cập |
@@ -281,7 +279,7 @@ Truy cập cổng dữ liệu [EcoData](https://ecodata.io.vn) hoặc nền tả
 | **R CRAN Package** | *Boston HMDA Mortgage Denial* | Lệnh R: `data("boston", package = "wooldridge")` |
 | **Python Statsmodels** | *Boston HMDA Mortgage Denial* | Lệnh Python: `sm.datasets.get_rdataset("boston", "wooldridge").data` |
 
-## 6. Tài liệu tham khảo học thuật
+## 3.1.2.6. Tài liệu tham khảo học thuật
 
 - Bliss, C. I.(1934). The method of probits. *Science*, 79, số 2037, 38–39.
 - Wooldridge, J. M.(2010). *Econometric Analysis of Cross Section and Panel Data*, 2nd ed.. MIT Press.

@@ -1,19 +1,19 @@
 ---
 id: chapter-14-c14
-title: "Chương 14: 14. mô hình biến động ngẫu nhiên với trí nhớ dài"
-sidebar_label: "Chương 14: 14. Mô hình biến động ngẫu nhiên với trí n"
+title: "14. Mô hình biến động ngẫu nhiên với trí nhớ dài"
+sidebar_label: "14. Mô hình biến động ngẫu nhiên với trí nhớ dài"
 sidebar_position: 15
-description: "Hướng dẫn thực hành How-To Chương 14: 14. mô hình biến động ngẫu nhiên với trí nhớ dài thuộc bộ sách Cẩm nang kinh tế lượng chuỗi thời gian tài chính trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 14. Mô hình biến động ngẫu nhiên với trí nhớ dài thuộc giáo trình Cẩm nang kinh tế lượng chuỗi thời gian tài chính trên SachKTL kèm công thức toán học, phân tích 5 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 14: 14. mô hình biến động ngẫu nhiên với trí nhớ dài
+# 14. Mô hình biến động ngẫu nhiên với trí nhớ dài
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 14: 14. mô hình biến động ngẫu nhiên với trí nhớ dài** thuộc [**Bộ sách 28: cẩm nang kinh tế lượng chuỗi thời gian tài chính**](/sachktl/book-28-asndk09u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/asndk09u1/c14/](https://sachktl.tnsai.vn/vi/asndk09u1/c14/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **5 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **14. Mô hình biến động ngẫu nhiên với trí nhớ dài** thuộc bộ giáo trình [**Cẩm nang kinh tế lượng chuỗi thời gian tài chính**](/sachktl/book-28-asndk09u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/asndk09u1/c14/](https://sachktl.tnsai.vn/vi/asndk09u1/c14/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 14: 14. mô hình biến động ngẫu nhiên với trí nhớ dài">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="14. Mô hình biến động ngẫu nhiên với trí nhớ dài">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 28 · CHƯƠNG 14</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 14: 14. mô hình biến động ngẫu nhiên với trí nhớ dài</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Cẩm nang kinh tế lượng chuỗi thời gian tài chính · 5 bài học chu</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Cẩm nang kinh tế lượng chuỗi thời gi</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">14. Mô hình biến động ngẫu nhiên với trí nhớ dài</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng chuỗi thời gian, đồng liên kết và biến động tài chính · 5 bài học chuyê</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,133 +41,257 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Giới thiệu mô hình biến động ngẫu nhiên có trí nhớ dài An Introduction to Long-Memory Stochastic Volatility Models Tổng quan về chuỗi bài học Chào các bạn sinh viên, chào mừng đến với chuỗi bài học chuyên sâu về một trong những chủ đề hấp dẫn nhất của kinh tế lượng tài chính hiện đại: Mô hình Biến động Ngẫu nhiên có Trí nhớ dài. Trong thực tế, chúng ta thường quan sát thấy rằng những cú sốc trên thị trường tài chính dường như có tác động kéo dài. Một giai đoạn bất ổn thường kéo theo nhiều ngày bất ổn khác, và ngược lại. Hiện tượng này, được gọi là "cụm biến động" , cho thấy rằng biến
+Giới thiệu mô hình biến động ngẫu nhiên có trí nhớ dài An Introduction to Long-Memory Stochastic Volatility Models Tổng quan về chuỗi bài học Chào các bạn sinh viên, chào mừng đến với chuỗi bài học chuyên sâu về một trong những chủ đề hấp dẫn nhất của kinh tế lượng tài chính hiện đại: Mô hình Biến động Ngẫu nhiên có Trí nhớ dài. Trong thực tế, chúng ta thường quan sát thấy rằng những cú sốc trên thị trường tài chính dường như có tác động kéo dài. Một giai đoạn bất ổn thường kéo theo nhiều ngày bất ổn khác, và ngược lại.
 
-- **Chủ đề học thuật trọng tâm**: Tổng quan về chuỗi bài học, BA TỪ KHÓA CỐT LÕI, CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+\Phi(L)(1 - L)^d Y_t = \mu + \Theta(L)\varepsilon_t, \quad \varepsilon_t \mid \mathcal{F}_{t-1} \sim \mathcal{N}(0, \sigma_t^2) \tag*{[1]}
+$$
+
+$$
+\sigma_t^2 = \omega + \sum_{i=1}^p \alpha_i \varepsilon_{t-i}^2 + \sum_{j=1}^q \beta_j \sigma_{t-j}^2, \quad \omega > 0, \; \alpha_i, \beta_j \ge 0 \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Chuỗi thời gian phải thỏa mãn điều kiện dừng hiệp phương sai hoặc được sai phân hóa đến bậc tích hợp $I(d)$ phù hợp trước khi ước lượng.
+2. Điều kiện khả nghịch và nghiệm ngoài vòng tròn đơn vị của đa thức trễ $\Phi(L)$ và $\Theta(L)$ đảm bảo tính ổn định động học.
+3. Trong mô hình phương sai có điều kiện thay đổi GARCH, tổng hệ số $\sum \alpha_i + \sum \beta_j < 1$ bảo đảm phương sai không điều kiện hữu hạn.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 14 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/asndk09u1/c14/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Hồi quy chuỗi thời gian không dừng chưa qua kiểm định nghiệm đơn vị ADF/PP và đồng liên kết Johansen dễ dẫn đến hồi quy giả mạo với thống kê $t$ và $R^2$ bị thổi phồng."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Nền tảng mô hình LMSV
+
+Nền tảng mô hình biến động ngẫu nhiên trí nhớ dài Foundations of the long-memory stochastic volatility model 1. Giới thiệu: Tại sao cần mô hình LMSV? Chào các bạn, trong bài học đầu tiên này, chúng ta sẽ cùng nhau khám phá những viên gạch nền tảng xây dựng nên mô hình Biến động Ngẫu nhiên có Trí nhớ dài, hay còn gọi là LMSV. Trên các thị trường tài chính, một trong những đặc điểm được quan sát rộng rãi nhất là hiện tượng "cụm biến động" – những giai đoạn biến động cao thường đi liền với nhau, và những giai đoạn bình ổn cũng vậy.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Giới thiệu: Tại sao cần mô hình LMSV?**
+- **2. Nền tảng lý thuyết của mô hình LMSV**
+- **2.1. Định nghĩa trí nhớ dài**
+- **Giải thích các ký hiệu**
+- **2.2. Cấu trúc mô hình LMSV**
+- **2.3. Chuyển đổi dữ liệu: Chìa khóa để ước lượng**
+
+- **Môi trường thực hành:** `R 4.x` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c14/nen-tang-mo-hinh-lmsv/)
+
+### 2.2. Ước lượng tham số
+
+Ước lượng tham số cho mô hình LMSV Parametric estimation for the LMSV model 1. Giới thiệu: Thách thức trong việc đo lường trí nhớ dài Chào mừng các bạn quay trở lại bài học thứ hai. Ở bài trước, chúng ta đã học cách nhận diện sự tồn tại của trí nhớ dài trong biến động thông qua phân tích trực quan. Tuy nhiên, trong nghiên cứu định lượng, "thấy" thôi là chưa đủ, chúng ta cần phải "đo lường" nó một cách chính xác. Câu hỏi đặt ra là: Làm thế nào để ước lượng được tham số trí nhớ dài $d$ và các tham số khác của mô hình LMSV?
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Giới thiệu: Thách thức trong việc đo lường trí nhớ dài**
+- **2. Nền tảng lý thuyết của ước lượng tham số**
+- **3. Các phương pháp ước lượng tham số**
+- **3.1. Phương pháp 1: QML trong miền thời gian**
+- **Giải thích các thành phần trong công thức**
+- **3.2. Phương pháp 2: Ước lượng whittle trong miền tần số**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c14/uoc-luong-tham-so/)
+
+### 2.3. Ước lượng bán tham số
+
+Ước lượng bán tham số và kiểm định trí nhớ dài Semiparametric estimation and testing for long memory 1. Giới thiệu: Khi chúng ta không muốn giả định quá nhiều Chào mừng các bạn đến với bài học thứ ba. Trong bài học trước, chúng ta đã khám phá các phương pháp ước lượng tham số như Whittle, vốn yêu cầu chúng ta phải xác định một mô hình đầy đủ, chẳng hạn như ARFIMA, cho quá trình log-biến động. Tuy nhiên, trong thực tế nghiên cứu, việc lựa chọn đúng các bậc $p$ và $q$ có thể rất khó khăn.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Giới thiệu: Khi chúng ta không muốn giả định quá nhiều**
+- **2. Nền tảng lý thuyết của ước lượng bán tham số**
+- **2.1. Ước lượng hồi quy log-biểu đồ chu kỳ**
+- **2.2. Vai trò của băng thông $m$**
+- **3. Phương pháp kiểm định sự tồn tại của trí nhớ dài**
+- **4. Ví dụ minh họa: Ước lượng GPH và kiểm định với Stata**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c14/uoc-luong-ban-tham-so/)
+
+### 2.4. Thực hành với Stata
+
+Hướng dẫn thực hành phân tích mô hình LMSV với Stata A practical guide to analyzing LMSV models with Stata 1. Tổng hợp kiến thức và mục tiêu thực hành Chào mừng các bạn đến với bài học thực hành tổng hợp! Trong ba bài học vừa qua, chúng ta đã cùng nhau xây dựng một hành trình kiến thức vững chắc: bắt đầu từ việc tìm hiểu "LMSV là gì và tại sao nó quan trọng", sau đó đi sâu vào các phương pháp ước lượng tham số chính xác như Whittle, và khám phá các công cụ chẩn đoán linh hoạt như GPH.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Tổng hợp kiến thức và mục tiêu thực hành**
+- **2. Quy trình phân tích trí nhớ dài trong 5 Bước**
+- **3. Hướng dẫn chi tiết từng bước với Stata**
+- **Bước 1: Chuẩn bị và trực quan hóa dữ liệu**
+- **Bước 2: Chẩn đoán sơ bộ bằng GPH**
+- **Bước 3: Ước lượng tham số bằng whittle**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c14/thuc-hanh-voi-stata/)
+
+### 2.5. Tổng hợp và ứng dụng
+
+Tổng hợp mô hình LMSV: Lý thuyết, ứng dụng và mở rộng Synthesizing LMSV models: Theory, applications, and extensions 1. Vị trí của LMSV trong kinh tế lượng Chào mừng các bạn đến với bài học cuối cùng của chuỗi bài về Mô hình Biến động Ngẫu nhiên có Trí nhớ dài. Sau một hành trình đi từ những khái niệm nền tảng, qua các kỹ thuật ước lượng phức tạp, đến quy trình phân tích thực hành, giờ là lúc chúng ta lùi lại một bước để nhìn vào bức tranh toàn cảnh.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Vị trí của LMSV trong kinh tế lượng**
+- **2. Hệ thống hóa lý thuyết cốt lõi**
+- **2.1. Từ cụm biến động đến trí nhớ dài**
+- **2.2. Cấu trúc "tín hiệu cộng nhiễu"**
+- **3. Tích hợp các phương pháp luận**
+- **4. Ví dụ tổng hợp và các ứng dụng nâng cao**
+
+- **Môi trường thực hành:** `R 4.x` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c14/tong-hop-va-ung-dung/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Nền tảng mô hình LMSV</h3>
-    <p>Nền tảng mô hình biến động ngẫu nhiên trí nhớ dài Foundations of the long-memory stochastic volatility model 1. Giới thiệu: Tại sao cần mô hình LMSV? Chào các bạn, trong bài học đầu tiên này, chúng ta sẽ cùng nhau khám phá những viên gạch nền tảng xây dựng nên Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c14/nen-tang-mo-hinh-lmsv/" target="_blank" rel="noopener">Nền tảng mô hình LMSV</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>14. Mô hình biến động ngẫu nhiên với trí nhớ dài</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Ước lượng tham số</h3>
-    <p>Ước lượng tham số cho mô hình LMSV Parametric estimation for the LMSV model 1. Giới thiệu: Thách thức trong việc đo lường trí nhớ dài Chào mừng các bạn quay trở lại bài học thứ hai. Ở bài trước, chúng ta đã học cách nhận diện sự tồn tại của trí nhớ dài trong b Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c14/uoc-luong-tham-so/" target="_blank" rel="noopener">Ước lượng tham số</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Ước lượng bán tham số</h3>
-    <p>Ước lượng bán tham số và kiểm định trí nhớ dài Semiparametric estimation and testing for long memory 1. Giới thiệu: Khi chúng ta không muốn giả định quá nhiều Chào mừng các bạn đến với bài học thứ ba. Trong bài học trước, chúng ta đã khám phá các phương pháp ư Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c14/uoc-luong-ban-tham-so/" target="_blank" rel="noopener">Ước lượng bán tham số</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c14/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Thực hành với Stata</h3>
-    <p>Hướng dẫn thực hành phân tích mô hình LMSV với Stata A practical guide to analyzing LMSV models with Stata 1. Tổng hợp kiến thức và mục tiêu thực hành Chào mừng các bạn đến với bài học thực hành tổng hợp! Trong ba bài học vừa qua, chúng ta đã cùng nhau xây dựn Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c14/thuc-hanh-voi-stata/" target="_blank" rel="noopener">Thực hành với Stata</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 5: Tổng hợp và ứng dụng</h3>
-    <p>Tổng hợp mô hình LMSV: Lý thuyết, ứng dụng và mở rộng Synthesizing LMSV models: Theory, applications, and extensions 1. Vị trí của LMSV trong kinh tế lượng Chào mừng các bạn đến với bài học cuối cùng của chuỗi bài về Mô hình Biến động Ngẫu nhiên có Trí nhớ dài Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c14/tong-hop-va-ung-dung/" target="_blank" rel="noopener">Tổng hợp và ứng dụng</a>.</p>
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập chuỗi thời gian, kiểm định nghiệm đơn vị và ước lượng ARIMA / GARCH
 version 18.0
 clear all
 set more off
+import delimited "sachktl_timeseries_finco.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_asndk09u1_c14_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+tsset time_id
+dfuller y, lags(4) trend regress
+pperron y, lags(4) trend
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 1. Ước lượng mô hình ARIMA và kiểm định nhiễu trắng phần dư
+arima y, arima(1,1,1) vce(robust)
+predict resid_arima, resid
+wntestq resid_arima, lags(12)
+
+* 2. Ước lượng mô hình phương sai có điều kiện thay đổi ARCH/GARCH(1,1)
+arch d.y x1 x2, arch(1) garch(1) vce(robust)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
-library(tidyverse)
-library(lmtest)
-library(sandwich)
+# Nạp thư viện chuỗi thời gian và ước lượng ARIMA / GARCH(1,1)
+library(tseries)
+library(forecast)
+library(rugarch)
 
-df <- read.csv("sachktl_asndk09u1_c14_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_timeseries_finco.csv")
+y_ts <- ts(df$y, frequency = 12)
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA tối ưu theo AICc
+adf.test(y_ts)
+fit_arima <- auto.arima(y_ts, seasonal = FALSE, ic = "aicc")
+summary(fit_arima)
+checkresiduals(fit_arima)
+
+# 2. Ước lượng mô hình GARCH(1,1) cho chuỗi lợi suất
+spec <- ugarchspec(variance.model = list(model = "sGARCH", garchOrder = c(1, 1)),
+                   mean.model = list(armaOrder = c(1, 0), include.mean = TRUE))
+fit_garch <- ugarchfit(spec = spec, data = diff(y_ts))
+show(fit_garch)
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và arch để phân tích chuỗi thời gian & biến động
 import pandas as pd
-import statsmodels.formula.api as smf
+from statsmodels.tsa.stattools import adfuller
+from statsmodels.tsa.arima.model import ARIMA
+from arch import arch_model
 
-df = pd.read_csv("sachktl_asndk09u1_c14_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_timeseries_finco.csv")
+y = df["y"].dropna()
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA(1,1,1)
+adf_stat, p_val, *_ = adfuller(y, autolag="AIC")
+print(f"ADF Statistic: {adf_stat:.4f}, p-value: {p_val:.4f}")
+arima_res = ARIMA(y, order=(1, 1, 1)).fit()
+print(arima_res.summary())
+
+# 2. Ước lượng mô hình GARCH(1,1) với phân phối Student-t
+ret = y.diff().dropna() * 100
+garch_res = arch_model(ret, vol="Garch", p=1, q=1, dist="t").fit(disp="off")
+print(garch_res.summary())
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 14: 14. mô hình biến động ngẫu nhiên với trí nhớ dài trên SachKTL"
+  title="Hướng dẫn thực hành 14. Mô hình biến động ngẫu nhiên với trí nhớ dài trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 14 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Nền tảng mô hình LMSV | R 4.x | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c14/nen-tang-mo-hinh-lmsv/) |
-| **Bài 02** | Ước lượng tham số | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c14/uoc-luong-tham-so/) |
-| **Bài 03** | Ước lượng bán tham số | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c14/uoc-luong-ban-tham-so/) |
-| **Bài 04** | Thực hành với Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c14/thuc-hanh-voi-stata/) |
-| **Bài 05** | Tổng hợp và ứng dụng | R 4.x | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c14/tong-hop-va-ung-dung/) |
+| **14.1** | Nền tảng mô hình LMSV | `R 4.x` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c14/nen-tang-mo-hinh-lmsv/) |
+| **14.2** | Ước lượng tham số | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c14/uoc-luong-tham-so/) |
+| **14.3** | Ước lượng bán tham số | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c14/uoc-luong-ban-tham-so/) |
+| **14.4** | Thực hành với Stata | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c14/thuc-hanh-voi-stata/) |
+| **14.5** | Tổng hợp và ứng dụng | `R 4.x` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c14/tong-hop-va-ung-dung/) |

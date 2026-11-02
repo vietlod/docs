@@ -1,19 +1,19 @@
 ---
 id: chapter-16-c16
-title: "Chapter 16: 16. Mô hình phản hồi đa danh mục và phản hồi có thứ tự — Econometric Analysis of Cross Section and Panel Data"
-sidebar_label: "Chapter 16: 16. Mô hình phản hồi đa danh mục và phản h"
+title: "16. Mô hình phản hồi đa danh mục và phản hồi có thứ tự"
+sidebar_label: "16. Mô hình phản hồi đa danh mục và phản hồi có thứ tự"
 sidebar_position: 17
-description: "Step-by-step practical how-to guide for Chapter 16: 16. Mô hình phản hồi đa danh mục và phản hồi có thứ tự from Econometric Analysis of Cross Section and Panel Data on SachKTL with Stata, R, and Python workflows integrated with EcoData, Finco, and EcoLab."
+description: "Comprehensive practical how-to guide for 16. Mô hình phản hồi đa danh mục và phản hồi có thứ tự from Econometric Analysis of Cross Section and Panel Data on SachKTL featuring structural equations, 6 lesson breakdowns, and Stata, R, and Python scripts."
 ---
 
-# Chapter 16: 16. Mô hình phản hồi đa danh mục và phản hồi có thứ tự — Econometric Analysis of Cross Section and Panel Data
+# 16. Mô hình phản hồi đa danh mục và phản hồi có thứ tự
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-This practical how-to guide synthesizes the methodology and empirical implementation workflow of **Chapter 16: 16. Mô hình phản hồi đa danh mục và phản hồi có thứ tự** from [**Book 04: Econometric Analysis of Cross Section and Panel Data**](/en/sachktl/book-04-wsook10u1/), with direct backlinks to the authoritative source material at [https://sachktl.tnsai.vn/vi/wsook10u1/c16/](https://sachktl.tnsai.vn/vi/wsook10u1/c16/).
+This practical how-to guide presents the theoretical foundations, structural mathematical equations, detailed breakdown of **6 specialized lessons**, and multi-platform replication workflows for **16. Mô hình phản hồi đa danh mục và phản hồi có thứ tự** from the textbook [**Econometric Analysis of Cross Section and Panel Data**](/en/sachktl/book-04-wsook10u1/), with direct cross-references to the authoritative source material at [https://sachktl.tnsai.vn/vi/wsook10u1/c16/](https://sachktl.tnsai.vn/vi/wsook10u1/c16/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chapter 16: 16. Mô hình phản hồi đa danh mục và phản hồi có thứ tự">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="16. Mô hình phản hồi đa danh mục và phản hồi có thứ tự">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ This practical how-to guide synthesizes the methodology and empirical implementa
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BOOK 04 · CHAPTER 16</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chapter 16: 16. Mô hình phản hồi đa danh mục và phản hồi có thứ tự</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Part of Textbook: Econometric Analysis of Cross Section and Panel Data · 6 Detailed L</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Econometric Analysis of Cross Sectio</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">16. Mô hình phản hồi đa danh mục và phản hồi có thứ tự</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Panel Data Econometrics and Unobserved Heterogeneity Control · 6 Detailed Lessons</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,138 +41,266 @@ This practical how-to guide synthesizes the methodology and empirical implementa
   </svg>
 </div>
 
-## 1. Methodological Meaning and Scope of Application
+## 1. Methodological Foundations, Mathematical Specification, and Identification
 
-Giới thiệu chuỗi bài học về mô hình lựa chọn đa danh mục và có thứ tự Chào mừng các bạn sinh viên đã quay trở lại với chuỗi bài học kinh tế lượng ứng dụng! Trong cuộc sống hàng ngày cũng như trong kinh tế, chúng ta thường xuyên phải đối mặt với những quyết định không chỉ có hai lựa chọn "có" hoặc "không". Chẳng hạn, một sinh viên tốt nghiệp phải chọn một trong nhiều con đường sự nghiệp: đi làm, học cao học, hay khởi nghiệp. Một người tiêu dùng lựa chọn giữa nhiều phương tiện di chuyển: xe máy, ô tô, xe buýt, hay tàu điện. Những lựa chọn này có đặc điểm chung là biến kết quả mà chúng ta quan
+Giới thiệu chuỗi bài học về mô hình lựa chọn đa danh mục và có thứ tự Chào mừng các bạn sinh viên đã quay trở lại với chuỗi bài học kinh tế lượng ứng dụng! Trong cuộc sống hàng ngày cũng như trong kinh tế, chúng ta thường xuyên phải đối mặt với những quyết định không chỉ có hai lựa chọn "có" hoặc "không". Chẳng hạn, một sinh viên tốt nghiệp phải chọn một trong nhiều con đường sự nghiệp: đi làm, học cao học, hay khởi nghiệp. Một người tiêu dùng lựa chọn giữa nhiều phương tiện di chuyển: xe máy, ô tô, xe buýt, hay tàu điện.
 
-- **Core Academic Topics**: CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO, PHỤ LỤC: Dữ liệu mô phỏng cho series.
-- **Supported Analytical Environments**: `Stata 18 MP`.
-- **Recommended Empirical Data Sources**: Vietnamese macroeconomic, corporate, and household survey datasets on [EcoData](https://ecodata.io.vn), capital and commodity market series on [Finco](https://www.finco.vn), model cross-references on [VietLOD](https://vietlod.tnsai.vn), and automated estimation on [EcoLab](https://ecolab.io.vn).
+### 1.1. Structural Equations and Representative Estimator
+
+$$
+Y_{it} = \alpha + \mathbf{X}_{it}'\boldsymbol{\beta} + \mu_i + \lambda_t + \varepsilon_{it}, \quad i = 1,\dots,N; \; t = 1,\dots,T \tag*{[1]}
+$$
+
+$$
+\hat{\boldsymbol{\beta}}_{\text{FE}} = \left(\sum_{i=1}^N \sum_{t=1}^T \tilde{\mathbf{X}}_{it}\tilde{\mathbf{X}}_{it}'\right)^{-1} \left(\sum_{i=1}^N \sum_{t=1}^T \tilde{\mathbf{X}}_{it}\tilde{Y}_{it}\right), \quad \tilde{Z}_{it} = Z_{it} - \bar{Z}_i \tag*{[2]}
+$$
+
+### 1.2. Core Identification Assumptions and Applicability Conditions
+
+1. Strict exogeneity of explanatory covariates with respect to idiosyncratic disturbances across cross-sectional units and time periods.
+2. Unobserved individual effects $\mu_i$ may correlate arbitrarily with $\mathbf{X}_{it}$ under Fixed Effects or remain orthogonal under Random Effects.
+3. Cluster-robust variance-covariance estimation at the entity level is required to accommodate arbitrary within-panel serial correlation and heteroskedasticity.
 
 <FeatureCards
   features={[
     {
-      title: "Original Chapter on SachKTL",
-      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for Chapter 16 on SachKTL.",
+      title: "Authoritative Chapter on SachKTL",
+      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for this chapter on SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/wsook10u1/c16/"
     },
     {
       title: "Practice Datasets on EcoData & Finco",
-      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and survey data for hands-on replication.",
+      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and household survey data for hands-on replication.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
       title: "Automated Estimation on EcoLab",
-      description: "Execute econometric specifications, run diagnostic battery tests, and export publication-grade tables automatically.",
+      description: "Execute econometric specifications, run diagnostic battery tests, and export APA 7th / AER publication-grade tables automatically.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Step-by-Step Practical Implementation Across Chapter Lessons
+<FeatureNotAvailable
+  feature="Unconditional Baseline Estimation Under Violated Identification Assumptions"
+  reason="Standard Fixed Effects and Random Effects estimators suffer from Nickell bias when lagged dependent variables $Y_{i,t-1}$ are included in short-$T$ panels; use Difference GMM or System GMM instead."
+  alternative="Run the complete diagnostic battery in Step 4 and transition to the appropriate corrective estimator on VietLOD or EcoLab."
+/>
+
+## 2. Lesson-by-Lesson Academic Breakdown
+
+### 2.1. Nền tảng mô hình multinomial logit
+
+Nền tảng mô hình Multinomial Logit Understanding unordered choices 1. Giới thiệu Trong các bài học trước, chúng ta đã làm quen với các mô hình lựa chọn nhị phân như Logit và Probit, nơi biến kết quả chỉ có hai giá trị . Tuy nhiên, thực tế kinh tế thường phức tạp hơn nhiều. Hãy tưởng tượng bạn là một nhà tư vấn hướng nghiệp, phân tích các yếu tố ảnh hưởng đến quyết định của sinh viên sau khi tốt nghiệp.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **1. Giới thiệu**
+- **2. Nền tảng lý thuyết**
+- **2.1. Nhóm cơ sở**
+- **2.2. Công thức xác suất của mô hình MNL**
+- **2.3. Diễn giải hệ số: Tỷ lệ Log-Odds**
+- **3. Phương pháp nghiên cứu**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c16/nen-tang-mo-hinh-multinomial-logit-mnl/)
+
+### 2.2. Conditional logit và giả định IIA
+
+Conditional Logit và giả định IIA Modeling choices with alternative-specific attributes 1. Giới thiệu Hãy xem xét một quyết định thường ngày: lựa chọn phương tiện di chuyển đến trường. Các lựa chọn có thể là xe máy, xe buýt, hoặc xe đạp. Mô hình MNL mà chúng ta đã học sẽ phân tích lựa chọn này dựa trên các đặc điểm của bạn, như thu nhập, độ tuổi, hoặc khoảng cách từ nhà đến trường.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **1. Giới thiệu**
+- **2. Nền tảng lý thuyết: Lựa chọn dựa trên tối đa hóa hữu dụng**
+- **2.1. Phương trình hữu dụng tiềm ẩn**
+- **2.2. Công thức xác suất của mô hình CL**
+- **3. Giả định IIA: "Gót chân Achilles" của mô hình Logit**
+- **Ví dụ "Xe buýt đỏ / Xe buýt xanh"**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c16/conditional-logit-va-gia-dinh-iia/)
+
+### 2.3. Mô hình ordered probit và ordered logit
+
+Mô hình Ordered Probit và Ordered Logit Analyzing responses with natural ordering 1. Giới thiệu Trong hai bài học trước, chúng ta đã tập trung vào các lựa chọn "danh nghĩa", nơi các kết quả chỉ đơn giản là khác nhau mà không có sự hơn kém . Tuy nhiên, trong rất nhiều lĩnh vực của kinh tế và xã hội học, chúng ta thường gặp phải các biến kết quả mà các giá trị của nó, dù là rời rạc, lại mang một thứ tự tự nhiên.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **1. Giới thiệu**
+- **2. Nền tảng lý thuyết: Từ biến tiềm ẩn đến kết quả quan sát được**
+- **2.1. Các điểm ngắt**
+- **2.2. Công thức xác suất**
+- **3. Diễn giải kết quả: Một thách thức phức tạp**
+- **Tác động biên**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c16/mo-hinh-ordered-probit-va-ordered-logit/)
+
+### 2.4. Xử lý nội sinh và dữ liệu bảng
+
+Xử lý Nội sinh và Dữ liệu Bảng Advanced techniques for robust inference 1. Giới thiệu Trong các bài học trước, chúng ta đã hoạt động dưới một giả định ngầm khá mạnh mẽ: tất cả các biến giải thích đều là ngoại sinh. Tuy nhiên, trong thế giới thực, giả định này thường bị vi phạm. Ví dụ, khi phân tích ảnh hưởng của số năm đào tạo đến lựa chọn nghề nghiệp, liệu có phải những người có động lực và năng lực cao hơn thường có xu hướng tham gia các khóa đào tạo nhiều hơn và đồng thời cũng có khả năng chọn những công việc tốt hơn không?
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **1. Giới thiệu**
+- **2. Nền tảng lý thuyết**
+- **2.1. Vấn đề Nội sinh và Phương pháp Hàm điều khiển**
+- **2.2. Dữ liệu Bảng và Hiệu ứng ngẫu nhiên tương quan**
+- **3. Phương pháp nghiên cứu và thực hành Stata**
+- **3.1. Quy trình xử lý Nội sinh bằng Hàm điều khiển**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c16/xu-ly-noi-sinh-va-du-lieu-bang/)
+
+### 2.5. Thực hành Stata toàn diện
+
+Thực hành Stata toàn diện From theory to practice with MNL and Ordered Probit 1. Tóm tắt tổng hợp kiến thức Chào mừng các bạn đến với bài học thực hành quan trọng nhất trong chuỗi bài viết của chúng ta! Trong bốn bài học vừa qua, chúng ta đã cùng nhau xây dựng một nền tảng kiến thức toàn diện về các mô hình lựa chọn rời rạc. Chúng ta đã bắt đầu với Mô hình Multinomial Logit để phân tích các lựa chọn không có thứ tự, sau đó đi sâu vào Mô hình Conditional Logit và "gót chân Achilles" của nó - giả định IIA.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **1. Tóm tắt tổng hợp kiến thức**
+- **2. Chuẩn bị dữ liệu và xác định câu hỏi nghiên cứu**
+- **Ôn lại dữ liệu**
+- **Câu hỏi nghiên cứu**
+- **3. Quy trình phân tích**
+- **4. Hướng dẫn từng bước với Stata**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c16/thuc-hanh-stata-toan-dien/)
+
+### 2.6. Tổng hợp và ứng dụng nâng cao
+
+Tổng hợp: Mô hình lựa chọn đa danh mục và có thứ tự A strategic framework for discrete choice modeling 1. TỔNG QUAN CHỦ ĐỀ Chào mừng các bạn đến với bài viết cuối cùng trong chuỗi bài học chuyên sâu của chúng ta. Trong suốt hành trình vừa qua, chúng ta đã đi từ những khái niệm cơ bản đến các kỹ thuật nâng cao trong lĩnh vực mô hình hóa các lựa chọn rời rạc.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **1. TỔNG QUAN CHỦ ĐỀ**
+- **2. TỔNG HỢP LÝ THUYẾT**
+- **Hai nhánh chính của mô hình lựa chọn**
+- **3. TÍCH HỢP PHƯƠNG PHÁP: Khung lựa chọn mô hình**
+- **4. VÍ DỤ TỔNG HỢP: Phân tích lựa chọn khóa học tự chọn**
+- **5. TỔNG KẾT VÀ HƯỚNG PHÁT TRIỂN**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c16/tong-hop-va-ung-dung-nang-cao/)
+
+## 3. Step-by-Step Empirical Implementation Workflow
 
 <Steps>
   <div className="step-item">
-    <h3>Step 1: Nền tảng mô hình multinomial logit</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Nền tảng mô hình multinomial logit. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/wsook10u1/c16/nen-tang-mo-hinh-multinomial-logit-mnl/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/wsook10u1/c16/nen-tang-mo-hinh-multinomial-logit-mnl/</a>.</p>
+    <h3>1. Formulate the Research Question and Prepare Data on EcoData & Finco</h3>
+    <p>Define the dependent variable, core explanatory variables, and control covariates aligned with <strong>16. Mô hình phản hồi đa danh mục và phản hồi có thứ tự</strong>. Extract standardized Vietnamese empirical series from <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> or <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, and screen for missing observations and extreme outliers.</p>
   </div>
   <div className="step-item">
-    <h3>Step 2: Conditional logit và giả định IIA</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Conditional logit và giả định IIA. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/wsook10u1/c16/conditional-logit-va-gia-dinh-iia/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/wsook10u1/c16/conditional-logit-va-gia-dinh-iia/</a>.</p>
+    <h3>2. Conduct Descriptive Profiling, Correlation Analysis, and Pre-Estimation Checks</h3>
+    <p>Examine empirical distributions, construct summary statistics tables, and evaluate collinearity using pairwise correlation matrices and Variance Inflation Factors (VIF).</p>
   </div>
   <div className="step-item">
-    <h3>Step 3: Mô hình ordered probit và ordered logit</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Mô hình ordered probit và ordered logit. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/wsook10u1/c16/mo-hinh-ordered-probit-va-ordered-logit/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/wsook10u1/c16/mo-hinh-ordered-probit-va-ordered-logit/</a>.</p>
+    <h3>3. Estimate the Model Across Stata 18 MP, R 4.x, and Python 3.11+</h3>
+    <p>Execute the parameter estimation scripts matching the structural equations in Section 1.1 while cross-checking theoretical derivations at <a href="https://sachktl.tnsai.vn/vi/wsook10u1/c16/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Step 4: Xử lý nội sinh và dữ liệu bảng</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Xử lý nội sinh và dữ liệu bảng. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/wsook10u1/c16/xu-ly-noi-sinh-va-du-lieu-bang/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/wsook10u1/c16/xu-ly-noi-sinh-va-du-lieu-bang/</a>.</p>
+    <h3>4. Perform Post-Estimation Diagnostics and Robust Variance Correction</h3>
+    <p>Test for heteroskedasticity, serial correlation, Ramsey RESET functional form misspecification, and regressor endogeneity. Apply White HC1 or cluster-robust standard errors for valid inference.</p>
   </div>
   <div className="step-item">
-    <h3>Step 5: Thực hành Stata toàn diện</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Thực hành Stata toàn diện. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/wsook10u1/c16/thuc-hanh-stata-toan-dien/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/wsook10u1/c16/thuc-hanh-stata-toan-dien/</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Step 6: Tổng hợp và ứng dụng nâng cao</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Tổng hợp và ứng dụng nâng cao. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/wsook10u1/c16/tong-hop-va-ung-dung-nang-cao/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/wsook10u1/c16/tong-hop-va-ung-dung-nang-cao/</a>.</p>
+    <h3>5. Format Journal-Grade Tables and Cross-Verify on EcoLab</h3>
+    <p>Report point estimates, standard errors in parentheses, and statistical significance stars following APA 7th / AER Booktabs standards, or automate the entire reporting pipeline on <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> and <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Multi-Platform Implementation Examples in Stata, R, and Python
+## 4. Multi-Platform Implementation Scripts in Stata, R, and Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Initialize environment and load practice dataset from EcoData / SachKTL
+* Thiết lập cấu trúc dữ liệu bảng và ước lượng FE / RE / Hausman
 version 18.0
 clear all
 set more off
+import delimited "sachktl_panel_ecodata.csv", clear encoding("utf-8")
 
-* Import standardized empirical dataset
-import delimited "sachktl_wsook10u1_c16_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+xtset id year
+xtdescribe
+xtsum y x1 x2 x3
 
-* Estimate baseline specification and run diagnostic checks with robust standard errors
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 1. Ước lượng tác động cố định (Fixed Effects) và tác động ngẫu nhiên (Random Effects)
+xtreg y x1 x2 x3, fe
+estimates store FE_model
+xtreg y x1 x2 x3, re
+estimates store RE_model
+
+* 2. Kiểm định Hausman lựa chọn mô hình và ước lượng sai số chuẩn vững theo cụm
+hausman FE_model RE_model, sigmamore
+xtreg y x1 x2 x3 i.year, fe vce(cluster id)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Load econometric packages and practice dataset from EcoData / SachKTL
-library(tidyverse)
+# Nạp thư viện dữ liệu bảng và ước lượng FE / RE / Cluster-Robust SE
+library(plm)
 library(lmtest)
 library(sandwich)
 
-df <- read.csv("sachktl_wsook10u1_c16_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_panel_ecodata.csv")
+pdata <- pdata.frame(df, index = c("id", "year"))
 
-# Estimate model and compute heteroskedasticity-robust HC1 standard errors
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Ước lượng mô hình Within FE và Swamy-Arora RE
+fe_mod <- plm(y ~ x1 + x2 + x3, data = pdata, model = "within", effect = "twoways")
+re_mod <- plm(y ~ x1 + x2 + x3, data = pdata, model = "random")
+
+# 2. Kiểm định Hausman và xuất sai số chuẩn vững Arellano theo cụm
+phtest(fe_mod, re_mod)
+coeftest(fe_mod, vcov = vcovHC(fe_mod, method = "arellano", type = "HC1", cluster = "group"))
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Load econometric libraries and practice dataset from EcoData / SachKTL
+# Nạp thư viện linearmodels và ước lượng PanelOLS / RandomEffects
 import pandas as pd
-import statsmodels.formula.api as smf
+from linearmodels.panel import PanelOLS, RandomEffects, compare
 
-df = pd.read_csv("sachktl_wsook10u1_c16_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_panel_ecodata.csv").set_index(["id", "year"])
 
-# Fit specification with HC1 robust standard errors
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Ước lượng mô hình Fixed Effects hai chiều với sai số chuẩn cụm
+fe_mod = PanelOLS.from_formula("y ~ 1 + x1 + x2 + x3 + EntityEffects + TimeEffects", data=df)
+fe_res = fe_mod.fit(cov_type="clustered", cluster_entity=True)
+
+# 2. Ước lượng mô hình Random Effects và đối chiếu kết quả
+re_mod = RandomEffects.from_formula("y ~ 1 + x1 + x2 + x3", data=df)
+re_res = re_mod.fit(cov_type="clustered", cluster_entity=True)
+print(compare({"Fixed Effects": fe_res, "Random Effects": re_res}))
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video Tutorial Walkthrough
+## 5. Post-Estimation Diagnostic and Interpretation Guide
+
+| Diagnostic Criterion | Null Hypothesis $H_0$ | Benchmark Threshold | Corrective Action When $H_0$ Is Rejected |
+| :--- | :--- | :--- | :--- |
+| **Heteroskedasticity** | Constant error variance $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ rejects $H_0$ | Apply `vce(robust)`, `vcovHC(HC1)`, or FGLS/WLS weighted estimation |
+| **Multicollinearity** | No severe linear dependence among regressors | $\text{VIF} < 10$ acceptable | Drop redundant covariates, center interactions, or apply LASSO/Ridge regularization |
+| **Ramsey RESET Functional Form** | No omitted nonlinear or higher-order terms | $p\text{-value} > 0.05$ retains $H_0$ | Add interaction terms, quadratic polynomials, or log-transform skewed positive variables |
+| **Regressor Exogeneity** | Orthogonality $\text{Cov}(X, \varepsilon)=0$ | Durbin-Wu-Hausman $p > 0.05$ | Transition to IV/2SLS, LIML, or GMM estimation with validated instruments |
+
+## 6. Video Tutorial Walkthrough
 
 <VideoTutorial
-  title="Practical Walkthrough for Chapter 16: 16. Mô hình phản hồi đa danh mục và phản hồi có thứ tự on SachKTL"
+  title="Practical Walkthrough for 16. Mô hình phản hồi đa danh mục và phản hồi có thứ tự on SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Complete Lesson Directory and Backlinks to Original SachKTL Articles
+## 7. Complete Lesson Directory and Backlinks to Original SachKTL Articles
 
-| No. | Lesson Title in Chapter 16 | Supported Software | Original Source Link on SachKTL |
+| Lesson Code | Lesson Title | Supported Software | Original Source Link on SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Lesson 01** | Nền tảng mô hình multinomial logit | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c16/nen-tang-mo-hinh-multinomial-logit-mnl/) |
-| **Lesson 02** | Conditional logit và giả định IIA | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c16/conditional-logit-va-gia-dinh-iia/) |
-| **Lesson 03** | Mô hình ordered probit và ordered logit | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c16/mo-hinh-ordered-probit-va-ordered-logit/) |
-| **Lesson 04** | Xử lý nội sinh và dữ liệu bảng | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c16/xu-ly-noi-sinh-va-du-lieu-bang/) |
-| **Lesson 05** | Thực hành Stata toàn diện | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c16/thuc-hanh-stata-toan-dien/) |
-| **Lesson 06** | Tổng hợp và ứng dụng nâng cao | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c16/tong-hop-va-ung-dung-nang-cao/) |
+| **16.1** | Nền tảng mô hình multinomial logit | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c16/nen-tang-mo-hinh-multinomial-logit-mnl/) |
+| **16.2** | Conditional logit và giả định IIA | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c16/conditional-logit-va-gia-dinh-iia/) |
+| **16.3** | Mô hình ordered probit và ordered logit | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c16/mo-hinh-ordered-probit-va-ordered-logit/) |
+| **16.4** | Xử lý nội sinh và dữ liệu bảng | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c16/xu-ly-noi-sinh-va-du-lieu-bang/) |
+| **16.5** | Thực hành Stata toàn diện | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c16/thuc-hanh-stata-toan-dien/) |
+| **16.6** | Tổng hợp và ứng dụng nâng cao | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/wsook10u1/c16/tong-hop-va-ung-dung-nang-cao/) |

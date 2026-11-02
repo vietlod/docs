@@ -1,10 +1,10 @@
 ---
 id: b038-mixed-logit
-title: "3.4.1. Hướng dẫn thực hành Mô hình Logit hỗn hợp hệ số ngẫu nhiên"
+title: "3.4.1. Mô hình Logit hỗn hợp hệ số ngẫu nhiên"
 sidebar_label: "3.4.1. Mô hình Logit hỗn hợp hệ số ngẫu nhiên"
 sidebar_position: 1
 slug: /vietlod/chapter-03/group-3-4/b038-mixed-logit
-description: "Tài liệu How-To hướng dẫn thực hành mô hình Mô hình Logit hỗn hợp hệ số ngẫu nhiên với mã mixed_logit trên Stata 18 MP, R 4.x và Python 3.11+ kèm dữ liệu thực hành và diễn giải kết quả chuẩn tạp chí."
+description: "Tài liệu How-To hướng dẫn thực hành bài 3.4.1 — Mô hình Logit hỗn hợp hệ số ngẫu nhiên với mã mixed_logit trên Stata 18 MP, R 4.x và Python 3.11+ kèm dữ liệu thực hành và diễn giải kết quả chuẩn tạp chí."
 keywords:
   - Mô hình Logit hỗn hợp hệ số ngẫu nhiên
   - mixed_logit
@@ -17,28 +17,28 @@ keywords:
   - EcoLab
 ---
 
-# 3.4.1. Hướng dẫn thực hành Mô hình Logit hỗn hợp hệ số ngẫu nhiên
+# 3.4.1. Mô hình Logit hỗn hợp hệ số ngẫu nhiên
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Bài học `3.4.1` — Mã mô hình `B038` (`mixed_logit`)** thuộc [Chương 03: Mô hình lựa chọn rời rạc và cầu cấu trúc](/vietlod/chapter-03) $\to$ [Nhóm 3.4: Mô hình Logit hỗn hợp](/vietlod/chapter-03/group-3-4), phân loại **Cấp độ L4 — Chuyên sâu biên giới**. Tài liệu How-To này hướng dẫn chi tiết từ bản chất phương pháp, điều kiện áp dụng, kịch bản mã lệnh trên **Stata 18 MP**, **R 4.x** và **Python 3.11+**, tệp dữ liệu thực hành `vietlod_mixed_logit_ecodata.csv` cho đến cách đọc hiểu đồ thị hội tụ 3 phần mềm và viết phần diễn giải kết quả theo chuẩn tạp chí quốc tế.
+**Bài học `3.4.1` — Mã mô hình `B038` — Khóa định danh `mixed_logit`** thuộc [3. Mô hình lựa chọn rời rạc và cầu cấu trúc](/vietlod/chapter-03) $\to$ [3.4. Mô hình Logit hỗn hợp](/vietlod/chapter-03/group-3-4), phân loại **Cấp độ L4 — Chuyên sâu biên giới**. Tài liệu How-To này hướng dẫn chi tiết từ bản chất phương pháp, điều kiện áp dụng, kịch bản mã lệnh trên **Stata 18 MP**, **R 4.x** và **Python 3.11+**, tệp dữ liệu thực hành `vietlod_mixed_logit_ecodata.csv` cho đến cách đọc hiểu đồ thị hội tụ 3 phần mềm và viết phần diễn giải kết quả theo chuẩn tạp chí quốc tế.
 
 <VideoTutorial
   title="Video hướng dẫn thực hành bài 3.4.1: Mô hình Logit hỗn hợp hệ số ngẫu nhiên trên Stata 18, R 4.x và Python 3.11+"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 1. Ý nghĩa phương pháp và phạm vi áp dụng
+## 3.4.1.1. Ý nghĩa phương pháp và phạm vi áp dụng
 
-### 1.1. Bản chất kinh tế lượng
+### 3.4.1.1.1. Bản chất kinh tế lượng
 
 Cho phép hệ số độ nhạy sở thích $\beta_i$ biến thiên ngẫu nhiên giữa các cá thể theo phân phối $f(\beta_i \mid \theta)$ và ước lượng bằng hợp lý cực đại mô phỏng, giải phóng hoàn toàn mô hình khỏi giả định (IIA).
 
-### 1.2. Phạm vi áp dụng và yêu cầu cấu trúc dữ liệu
+### 3.4.1.1.2. Phạm vi áp dụng và yêu cầu cấu trúc dữ liệu
 
 Phân tích hành vi tiêu dùng không đồng nhất, định giá mức sẵn lòng chi trả và lựa chọn danh mục sản phẩm có tương quan giữa các phương án.
 
-### 1.3. Hệ phương trình toán học và điều kiện định danh
+### 3.4.1.1.3. Hệ phương trình toán học và điều kiện định danh
 
 Phương trình đặc tả cấu trúc của mô hình `mixed_logit`:
 
@@ -59,10 +59,10 @@ $$
 $$
 
 <FeatureNotAvailable
-  note="Giới hạn áp dụng: Không sử dụng trực tiếp ước lượng Mô hình Logit hỗn hợp hệ số ngẫu nhiên khi mẫu vi phạm nghiêm trọng điều kiện định danh hoặc chưa vượt qua bộ kiểm định bắt buộc gồm Kiểm định ý nghĩa thống kê của độ lệch chuẩn các hệ số ngẫu nhiên $\sigma_\beta$, độ hội tụ theo số lượng điểm rút mẫu Halton $R \ge 500$ và phân phối mức sẵn lòng chi trả. Trong trường hợp vi phạm, hãy tham chiếu các mô hình mở rộng cùng Nhóm 3.4 hoặc Chương 03."
+  note="Giới hạn áp dụng: Không sử dụng trực tiếp ước lượng Mô hình Logit hỗn hợp hệ số ngẫu nhiên khi mẫu vi phạm nghiêm trọng điều kiện định danh hoặc chưa vượt qua bộ kiểm định bắt buộc gồm Kiểm định ý nghĩa thống kê của độ lệch chuẩn các hệ số ngẫu nhiên $\sigma_\beta$, độ hội tụ theo số lượng điểm rút mẫu Halton $R \ge 500$ và phân phối mức sẵn lòng chi trả. Trong trường hợp vi phạm, hãy tham chiếu các mô hình mở rộng cùng Phần 3.4 hoặc Chương 3."
 />
 
-## 2. Ví dụ thực tế và bộ dữ liệu thực hành chuẩn hóa
+## 3.4.1.2. Ví dụ thực tế và bộ dữ liệu thực hành chuẩn hóa
 
 - **Bài toán thực nghiệm tại Việt Nam**: Ứng dụng mô hình `mixed_logit` trên bộ dữ liệu **Sở thích không đồng nhất của người tiêu dùng** với cỡ mẫu chuẩn hóa $N = 320$ quan sát được trích xuất từ hệ sinh thái [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
 - **Bộ dữ liệu chuẩn quốc tế đối sánh**: **Train (2009) Electricity Supplier Choice**, giúp người học đối chiếu trực tiếp kết quả thực hành với các giáo trình kinh tế lượng hàng đầu thế giới.
@@ -80,7 +80,7 @@ $$
       title: 'Bài giảng toàn văn trên VietLOD',
       description: 'Xem bài giảng lý thuyết chuyên sâu, chứng minh toán học và thảo luận học thuật đầy đủ của Bài 3.4.1 trên cổng VietLOD.',
       link: 'https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-03-mo-hinh-lua-chon-roi-rac-va-cau-cau-truc/nhom-3-4-mixed/b038-mixed-logit',
-      badge: 'VietLOD B038'
+      badge: 'VietLOD 3.4.1'
     },
     {
       title: 'Thực thi đám mây trên EcoLab',
@@ -97,9 +97,9 @@ $$
   ]}
 />
 
-## 3. Gói lệnh phân tích và quy trình thực hành trên Stata, R và Python
+## 3.4.1.3. Gói lệnh phân tích và quy trình thực hành trên Stata, R và Python
 
-### 3.1. Bảng đối chiếu gói phần mềm và cú pháp lệnh chuẩn
+### 3.4.1.3.1. Bảng đối chiếu gói phần mềm và cú pháp lệnh chuẩn
 
 | Nền tảng phần mềm | Gói thư viện chuẩn | Cú pháp ước lượng trọng tâm | Lệnh kiểm định chẩn đoán hậu ước lượng | Hỗ trợ |
 | :--- | :--- | :--- | :--- | :--- |
@@ -107,29 +107,28 @@ $$
 | **R 4.x** | `mlogit` | `mlogit::mlogit(choice ~ x_alt, rpar = c(x_alt = 'n'), R = 100, data = df)` | `lmtest::lrtest[fit]; marginaleffects::avg_slopes[fit]` — Kiểm định tỷ số hợp lý (LR), giả định độc lập phương án (IIA) và tác động biên trung bình (AME). | <Available /> |
 | **Python 3.11+** | `statsmodels / scipy` | `smf.mixedlm('y ~ x1 + x2', data=df, groups=df['id']).fit()` | `res.get_margeff[at='overall'].summary(); res.llr_pvalue` — Ước lượng tác động biên trung bình (AME), hệ số McFadden Pseudo-R2 và kiểm định tỷ số hợp lý (LR). | <Available /> |
 
-### 3.2. Quy trình 4 bước thực thi mô hình `mixed_logit`
+### 3.4.1.3.2. Quy trình 4 bước thực thi mô hình `mixed_logit`
 
 <Steps>
-
-### Bước 1. Nạp tệp dữ liệu thực hành và kiểm tra thống kê mô tả
-
-Tải tệp [`vietlod_mixed_logit_ecodata.csv`](https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_mixed_logit_ecodata.csv) vào thư mục làm việc, kiểm tra cỡ mẫu $N = 320$ quan sát, khai báo cấu trúc dữ liệu và rà soát phân phối của biến phụ thuộc `y` cùng các biến giải thích `x1`, `x2`.
-
-### Bước 2. Thực thi hàm ước lượng `mixed_logit` với sai số chuẩn vững
-
-Chạy lệnh ước lượng chính thức trên **Stata 18 MP** qua gói `Stata 18 cm`, **R 4.x** qua gói `mlogit` hoặc **Python 3.11+** qua gói `statsmodels / scipy` kèm ma trận hiệp phương sai vững để bảo toàn hiệu lực suy luận thống kê.
-
-### Bước 3. Thực hiện bộ kiểm định chẩn đoán hậu ước lượng bắt buộc
-
-Thực thi đầy đủ các kiểm định đặc thù của mô hình gồm: **Kiểm định ý nghĩa thống kê của độ lệch chuẩn các hệ số ngẫu nhiên $\sigma_\beta$, độ hội tụ theo số lượng điểm rút mẫu Halton $R \ge 500$ và phân phối mức sẵn lòng chi trả**. Ghi nhận giá trị thống kê chẩn đoán $\text{Stat} = 0.2411$ và giá trị $p = 0.8864$.
-
-### Bước 4. Xuất bảng kết quả chuẩn tạp chí và kiểm chứng hội tụ 3 phần mềm
-
-Sử dụng `etable` trên Stata, `coeftest` trên R hoặc `summary()` trên Python để xuất bảng hệ số ước lượng, sau đó đối chiếu với bảng kết quả chuẩn và đồ thị thực nghiệm tại Mục 4.
-
+  <div className="step-item">
+    <h3>Bước 1. Nạp tệp dữ liệu thực hành và kiểm tra thống kê mô tả</h3>
+    <p>Tải tệp <a href="https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_mixed_logit_ecodata.csv"><code>vietlod_mixed_logit_ecodata.csv</code></a> vào thư mục làm việc, kiểm tra cỡ mẫu $N = 320$ quan sát, khai báo cấu trúc dữ liệu và rà soát phân phối của biến phụ thuộc <code>y</code> cùng các biến giải thích <code>x1</code>, <code>x2</code>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2. Thực thi hàm ước lượng mixed_logit với sai số chuẩn vững</h3>
+    <p>Chạy lệnh ước lượng chính thức trên <strong>Stata 18 MP</strong> qua gói <code>Stata 18 cm</code>, <strong>R 4.x</strong> qua gói <code>mlogit</code> hoặc <strong>Python 3.11+</strong> qua gói <code>statsmodels / scipy</code> kèm ma trận hiệp phương sai vững để bảo toàn hiệu lực suy luận thống kê.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3. Thực hiện bộ kiểm định chẩn đoán hậu ước lượng bắt buộc</h3>
+    <p>Thực thi đầy đủ các kiểm định đặc thù của mô hình gồm: <strong>Kiểm định ý nghĩa thống kê của độ lệch chuẩn các hệ số ngẫu nhiên $\sigma_\beta$, độ hội tụ theo số lượng điểm rút mẫu Halton $R \ge 500$ và phân phối mức sẵn lòng chi trả</strong>. Ghi nhận giá trị thống kê chẩn đoán $\text{Stat} = 0.2411$ và giá trị $p = 0.8864$.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4. Xuất bảng kết quả chuẩn tạp chí và kiểm chứng hội tụ 3 phần mềm</h3>
+    <p>Sử dụng <code>etable</code> trên Stata, <code>coeftest</code> trên R hoặc <code>summary()</code> trên Python để xuất bảng hệ số ước lượng, sau đó đối chiếu với bảng kết quả chuẩn và đồ thị thực nghiệm tại Mục 3.4.1.4.</p>
+  </div>
 </Steps>
 
-### 3.3. Mã lệnh thực hành tái lập hoàn chỉnh trên Stata 18, R 4.x và Python 3.11+
+### 3.4.1.3.3. Mã lệnh thực hành tái lập hoàn chỉnh trên Stata 18, R 4.x và Python 3.11+
 
 <Tabs groupId="econometric-software">
   <TabItem value="stata" label="Stata 18 MP">
@@ -230,9 +229,9 @@ print("KẾT QUẢ ƯỚC LƯỢNG [mixed_logit]: beta_x1 = 1.8365 | SE = 0.2145
   </TabItem>
 </Tabs>
 
-## 4. Kết quả ước lượng thực nghiệm, đồ thị hội tụ và hướng dẫn diễn giải
+## 3.4.1.4. Kết quả ước lượng thực nghiệm, đồ thị hội tụ và hướng dẫn diễn giải
 
-### 4.1. Bảng tổng hợp kết quả ước lượng chuẩn công bố tạp chí
+### 3.4.1.4.1. Bảng tổng hợp kết quả ước lượng chuẩn công bố tạp chí
 
 Bảng dưới đây trình bày kết quả ước lượng thực nghiệm của mô hình **Mô hình Logit hỗn hợp hệ số ngẫu nhiên** trên tệp dữ liệu `vietlod_mixed_logit_ecodata.csv` với $N = 320$ quan sát, đối chứng đồng thời trên cả 3 nền tảng **Stata 18 MP**, **R 4.x** và **Python 3.11+**:
 
@@ -245,32 +244,31 @@ Bảng dưới đây trình bày kết quả ước lượng thực nghiệm c�
 | **Chỉ số độ khớp `McFadden Pseudo-R2`** | `0.2192` | — | `F/Wald = 97.232` | — | Chuẩn công bố Q1 |
 | **Kiểm định chẩn đoán** | `Stat = 0.2411` | — | — | `p = 0.8864` | Đạt điều kiện đặc tả |
 
-### 4.2. Đồ thị thực nghiệm đối chiếu đồng thời Stata 18, R 4.x và Python 3.11+
+### 3.4.1.4.2. Đồ thị thực nghiệm đối chiếu đồng thời Stata 18, R 4.x và Python 3.11+
 
 ![Đồ thị thực nghiệm đối chiếu 3 phần mềm cho mô hình Mô hình Logit hỗn hợp hệ số ngẫu nhiên](https://vietlod.tnsai.vn/src/ecoaz/img/vietlod-b038-mixed-logit.png)
 
-### 4.3. Cách diễn giải kết quả chuẩn học thuật
+### 3.4.1.4.3. Cách diễn giải kết quả chuẩn học thuật
 
 - **Diễn giải hệ số ước lượng trọng tâm**: Hệ số của biến `x1` đạt $\hat{\beta}_1 = 1.8365$ với sai số chuẩn vững $\text{SE} = 0.2145$ và thống kê kiểm định bằng $8.560$, cho thấy `x1` có **tác động thuận chiều** lên biến mục tiêu `y` và **có ý nghĩa thống kê cao ở mức 1%** trong bối cảnh dữ liệu *Sở thích không đồng nhất của người tiêu dùng*.
 - **Diễn giải khoảng tin cậy và độ lớn tác động**: Khoảng tin cậy $95\%$ của $\hat{\beta}_1$ nằm trong dải $[1.4160, 2.2570]$, khẳng định độ ổn định của ước lượng điểm và sự hội tụ số học giữa Stata 18 MP, R 4.x và Python 3.11+.
 - **Diễn giải độ khớp mô hình và kiểm định hậu ước lượng**: Đại lượng `McFadden Pseudo-R2` đạt `$0.2192$` cùng thống kê kiểm định toàn cục đạt `$97.232$`. Thống kê chẩn đoán đạt `$0.2411$` với $p = 0.8864$, xác nhận mô hình `mixed_logit` thỏa mãn các điều kiện hậu ước lượng để suy luận chính sách.
 
-## 5. Cách tổng hợp dữ liệu từ EcoData, Finco và truy vết dữ liệu quốc tế
+## 3.4.1.5. Cách tổng hợp dữ liệu từ EcoData, Finco và truy vết dữ liệu quốc tế
 
 <Steps>
-
-### Bước 1. Khởi tạo dự án dữ liệu trên EcoData và Finco
-
-Truy cập cổng dữ liệu [EcoData](https://ecodata.io.vn) hoặc nền tảng tài chính [Finco](https://www.finco.vn), chọn phân hệ dữ liệu tương ứng với chủ đề **Sở thích không đồng nhất của người tiêu dùng** và thiết lập bộ lọc đơn vị chéo `id` cùng kỳ thời gian `t` để thu được mẫu $N = 320$ quan sát.
-
-### Bước 2. Chuẩn hóa biến số và xử lý giá trị ngoại lai
-
-Ánh xạ biến phụ thuộc mục tiêu vào cột `y`, biến giải thích chính vào `x1`, biến kiểm soát vào `x2`, cùng các biến định danh và biến chuyên biệt như `z1`, `treat`, `w`, `y_bin`, `y_count`, `duration`, `event`. Thực hiện kiểm soát ngoại lai Winsorize ở ngưỡng $1\%$ và $99\%$ trước khi xuất tệp `vietlod_mixed_logit_ecodata.csv`.
-
-### Bước 3. Đối sánh với bộ dữ liệu chuẩn quốc tế Train (2009) Electricity Supplier Choice
-
-Để đối chiếu phương pháp trên bộ dữ liệu quốc tế **Train (2009) Electricity Supplier Choice**, sử dụng trực tiếp các lệnh nạp dữ liệu trong bảng truy vết bên dưới.
-
+  <div className="step-item">
+    <h3>Bước 1. Khởi tạo dự án dữ liệu trên EcoData và Finco</h3>
+    <p>Truy cập cổng dữ liệu <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc nền tảng tài chính <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, chọn phân hệ dữ liệu tương ứng với chủ đề <strong>Sở thích không đồng nhất của người tiêu dùng</strong> và thiết lập bộ lọc đơn vị chéo <code>id</code> cùng kỳ thời gian <code>t</code> để thu được mẫu $N = 320$ quan sát.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2. Chuẩn hóa biến số và xử lý giá trị ngoại lai</h3>
+    <p>Ánh xạ biến phụ thuộc mục tiêu vào cột <code>y</code>, biến giải thích chính vào <code>x1</code>, biến kiểm soát vào <code>x2</code>, cùng các biến định danh và biến chuyên biệt như <code>z1</code>, <code>treat</code>, <code>w</code>, <code>y_bin</code>, <code>y_count</code>, <code>duration</code>, <code>event</code>. Thực hiện kiểm soát ngoại lai Winsorize ở ngưỡng $1\%$ và $99\%$ trước khi xuất tệp <code>vietlod_mixed_logit_ecodata.csv</code>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3. Đối sánh với bộ dữ liệu chuẩn quốc tế Train (2009) Electricity Supplier Choice</h3>
+    <p>Để đối chiếu phương pháp trên bộ dữ liệu quốc tế <strong>Train (2009) Electricity Supplier Choice</strong>, sử dụng trực tiếp các lệnh nạp dữ liệu trong bảng truy vết bên dưới.</p>
+  </div>
 </Steps>
 
 | Nguồn lưu trữ dữ liệu | Tên bộ dữ liệu / Tệp | Lệnh nạp trực tiếp và đường dẫn truy cập |
@@ -281,7 +279,7 @@ Truy cập cổng dữ liệu [EcoData](https://ecodata.io.vn) hoặc nền tả
 | **R CRAN Package** | *Train (2009) Electricity Supplier Choice* | Lệnh R: `data("train", package = "wooldridge")` |
 | **Python Statsmodels** | *Train (2009) Electricity Supplier Choice* | Lệnh Python: `sm.datasets.get_rdataset("train", "wooldridge").data` |
 
-## 6. Tài liệu tham khảo học thuật
+## 3.4.1.6. Tài liệu tham khảo học thuật
 
 - McFadden, D, & Train, K.(2000). Mixed MNL models for discrete response. *Journal of Applied Econometrics*, 15, số 5, 447–470.
 - Train, K. E.(2009). *Discrete Choice Methods with Simulation*, 2nd ed.. Cambridge University Press.

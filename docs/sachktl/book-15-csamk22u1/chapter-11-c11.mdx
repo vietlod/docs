@@ -1,19 +1,19 @@
 ---
 id: chapter-11-c11
-title: "Chương 11: 11. kiểm định giả thuyết và chỉ định mô hình"
-sidebar_label: "Chương 11: 11. Kiểm định giả thuyết và chỉ định mô hì"
+title: "11. Kiểm định giả thuyết và chỉ định mô hình"
+sidebar_label: "11. Kiểm định giả thuyết và chỉ định mô hình"
 sidebar_position: 12
-description: "Hướng dẫn thực hành How-To Chương 11: 11. kiểm định giả thuyết và chỉ định mô hình thuộc bộ sách Kinh tế lượng vi mô sử dụng Stata trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 11. Kiểm định giả thuyết và chỉ định mô hình thuộc giáo trình Kinh tế lượng vi mô sử dụng Stata trên SachKTL kèm công thức toán học, phân tích 8 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 11: 11. kiểm định giả thuyết và chỉ định mô hình
+# 11. Kiểm định giả thuyết và chỉ định mô hình
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 11: 11. kiểm định giả thuyết và chỉ định mô hình** thuộc [**Bộ sách 15: kinh tế lượng vi mô sử dụng Stata**](/sachktl/book-15-csamk22u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/csamk22u1/c11/](https://sachktl.tnsai.vn/vi/csamk22u1/c11/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **8 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **11. Kiểm định giả thuyết và chỉ định mô hình** thuộc bộ giáo trình [**Kinh tế lượng vi mô sử dụng Stata**](/sachktl/book-15-csamk22u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/csamk22u1/c11/](https://sachktl.tnsai.vn/vi/csamk22u1/c11/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 11: 11. kiểm định giả thuyết và chỉ định mô hình">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="11. Kiểm định giả thuyết và chỉ định mô hình">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 15 · CHƯƠNG 11</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 11: 11. kiểm định giả thuyết và chỉ định mô hình</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Kinh tế lượng vi mô sử dụng Stata · 8 bài học chuyên sâu</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng vi mô sử dụng Stata</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">11. Kiểm định giả thuyết và chỉ định mô hình</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng ứng dụng, mô hình hóa thống kê và kiểm định giả thuyết · 8 bài học chuy</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,102 +41,249 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Giới thiệu về kiểm định giả thuyết và đặc tả mô hình Introduction to Hypothesis tests and Model Specification Tổng quan về vai trò của kiểm định trong kinh tế lượng Trong hành trình nghiên cứu kinh tế lượng, việc xây dựng một mô hình chỉ là bước khởi đầu. Làm thế nào để chúng ta biết được mô hình đó có thực sự tốt không? Các biến số chúng ta đưa vào có ý nghĩa thống kê không? Các giả định của mô hình có được thỏa mãn? Chào mừng các bạn đến với thế giới của kiểm định giả thuyết và đặc tả mô hình – bộ công cụ thiết yếu giúp chúng ta kiểm chứng các lý thuyết kinh tế bằng dữ liệu thực nghiệm một
+Giới thiệu về kiểm định giả thuyết và đặc tả mô hình Introduction to Hypothesis tests and Model Specification Tổng quan về vai trò của kiểm định trong kinh tế lượng Trong hành trình nghiên cứu kinh tế lượng, việc xây dựng một mô hình chỉ là bước khởi đầu. Làm thế nào để chúng ta biết được mô hình đó có thực sự tốt không? Các biến số chúng ta đưa vào có ý nghĩa thống kê không? Các giả định của mô hình có được thỏa mãn?
 
-- **Chủ đề học thuật trọng tâm**: Tổng quan về vai trò của kiểm định trong kinh tế lượng, CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+Y_i = \beta_0 + \sum_{k=1}^K \beta_k X_{ik} + \varepsilon_i, \quad \mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0 \tag*{[1]}
+$$
+
+$$
+\widehat{\text{Var}}_{\text{HC1}}(\hat{\boldsymbol{\beta}}) = \frac{N}{N - K - 1}\left(\mathbf{X}'\mathbf{X}\right)^{-1}\left(\sum_{i=1}^N \hat{\varepsilon}_i^2 \mathbf{x}_i \mathbf{x}_i'\right)\left(\mathbf{X}'\mathbf{X}\right)^{-1} \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Dạng hàm tuyến tính theo tham số được xác định đúng, không bỏ sót biến giải thích quan trọng có tương quan với các biến trong mô hình.
+2. Kỳ vọng có điều kiện của sai số bằng không $\mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0$, đảm bảo tính không chệch và vững tiệm cận của ước lượng.
+3. Ma trận thiết kế $\mathbf{X}$ có hạng cột đầy đủ, không xảy ra đa cộng tuyến hoàn hảo và sử dụng sai số chuẩn vững HC1/Cluster khi có phương sai thay đổi.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 11 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/csamk22u1/c11/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Khi tồn tại biến giải thích nội sinh do đồng thời hai chiều, sai số đo lường hoặc bỏ sót biến không quan sát được, ước lượng OLS bị chệch và không vững; cần chuyển sang ước lượng biến công cụ IV/2SLS hoặc GMM."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Nền tảng các phân phối trong kiểm định
+
+Nền tảng các phân phối trong kiểm định The foundation of distributions in hypothesis testing Ngôn ngữ của các kiểm định thống kê Chào mừng các bạn đến với bài học đầu tiên trong chuỗi bài về kiểm định giả thuyết. Trước khi chúng ta có thể thực hiện các kiểm định phức tạp như Wald hay LR, điều cốt lõi là phải hiểu được "ngôn ngữ" mà các kiểm định này sử dụng để đưa ra kết luận. Ngôn ngữ đó chính là các phân phối xác suất. Có thể trong các môn học nhập môn, các bạn đã quen thuộc với việc sử dụng phân phối t và F.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Ngôn ngữ của các kiểm định thống kê**
+- **Tại sao chúng ta cần quan tâm đến các phân phối này?**
+- **Phân phối z và t: Kiểm định cho một ràng buộc**
+- **Phân phối chi-squared và f: Kiểm định cho nhiều ràng buộc**
+- **Trực quan hóa sự khác biệt bằng Stata**
+- **Ví dụ minh họa: Tính toán giá trị tới hạn và p-value**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c11/nen-tang-cac-phan-phoi-trong-kiem-dinh/)
+
+### 2.2. Kiểm định Wald từ lý thuyết đến thực hành
+
+Kiểm định Wald từ lý thuyết đến thực hành The Wald test from theory to practice Giải mã các con số trong kết quả hồi quy Khi bạn chạy một lệnh hồi quy trong Stata, bạn nhận được một bảng kết quả với các cột như "z", "P&gt;|z|", và một thống kê "Wald chi2" ở góc trên bên phải. Bạn đã bao giờ tự hỏi tất cả những con số này đến từ đâu và chúng có mối liên hệ gì với nhau không? Câu trả lời chính là Kiểm định Wald.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giải mã các con số trong kết quả hồi quy**
+- **Nền tảng lý thuyết của kiểm định Wald**
+- **Trường hợp 1: Giả thuyết tuyến tính đơn lẻ**
+- **Trường hợp 2: Giả thuyết tuyến tính kết hợp**
+- **Trường hợp 3: Giả thuyết phi tuyến**
+- **Phương pháp thực hiện kiểm định Wald trong Stata**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c11/kiem-dinh-wald-tu-ly-thuyet-den-thuc-hanh/)
+
+### 2.3. Kiểm định tỷ số hợp lý và nhân tử lagrange
+
+Kiểm định tỷ số hợp lý và nhân tử Lagrange Likelihood-ratio and Lagrange multiplier tests Ba góc nhìn cho cùng một câu hỏi Trong bài học trước, chúng ta đã làm chủ kiểm định Wald, một phương pháp rất trực quan dựa trên việc ước lượng mô hình đầy đủ và xem các hệ số ước lượng có "cách xa" giả thuyết không hay không. Bây giờ, chúng ta sẽ tìm hiểu hai cách tiếp cận khác để trả lời cùng một câu hỏi.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Ba góc nhìn cho cùng một câu hỏi**
+- **Trực giác và công thức**
+- **Kiểm định tỷ số hợp lý**
+- **Kiểm định nhân tử lagrange**
+- **Phương pháp thực hiện trong Stata**
+- **Ví dụ minh họa: So sánh Wald, LR và LM**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c11/kiem-dinh-ty-so-hop-ly-va-nhan-tu-lagrange/)
+
+### 2.4. Vấn đề kiểm định bội và cách xử lý
+
+Vấn đề kiểm định bội và cách xử lý The problem of multiple testing and how to address it Cạm bẫy của những khám phá "tình cờ" Hãy tưởng tượng bạn đang thực hiện một nghiên cứu và kiểm định 20 giả thuyết khác nhau, mỗi giả thuyết ở mức ý nghĩa 5%. Mức ý nghĩa 5% có nghĩa là ngay cả khi giả thuyết không hoàn toàn đúng, vẫn có 5% khả năng chúng ta sẽ bác bỏ nó một cách sai lầm . Vậy, khi bạn thực hiện 20 kiểm định độc lập, xác suất để bạn không mắc phải sai lầm loại I nào cả là bao nhiêu?
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Cạm bẫy của những khám phá "tình cờ"**
+- **Nền tảng lý thuyết: Từ FWER đến FDR**
+- **Kiểm soát tỷ lệ sai số toàn bộ gia đình**
+- **Kiểm soát tỷ lệ khám phá giả**
+- **Phương pháp thực hiện trong Stata**
+- **Tác động của bảo hiểm lên các nhóm tuổi**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c11/van-de-kiem-dinh-boi-va-cach-xu-ly/)
+
+### 2.5. Phân tích lực của kiểm định và kích thước mẫu
+
+Phân tích lực của kiểm định và kích thước mẫu Power analysis and sample size determination Ngoài sai lầm loại I, còn có sai lầm loại II Trong các bài học trước, chúng ta đã tập trung rất nhiều vào việc kiểm soát sai lầm loại I - tức là bác bỏ giả thuyết không một cách sai lầm khi nó thực sự đúng. Mức ý nghĩa $\alpha$ chính là xác suất tối đa mà chúng ta chấp nhận cho loại sai lầm này. Tuy nhiên, còn một loại sai lầm khác cũng quan trọng không kém: sai lầm loại II, tức là không thể bác bỏ $H_0$ trong khi nó thực sự sai.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Ngoài sai lầm loại i, còn có sai lầm loại II**
+- **Bốn yếu tố quyết định lực của kiểm định**
+- **Phương pháp thực hiện trong Stata**
+- **Thiết kế một nghiên cứu**
+- **Bài toán 1: Tính lực của kiểm định với cỡ mẫu hiện tại**
+- **Bài toán 2: Tính cỡ mẫu cần thiết**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c11/phan-tich-luc-cua-kiem-dinh-va-kich-thuoc-mau/)
+
+### 2.6. Các kiểm định đặc tả mô hình chuyên sâu
+
+Các kiểm định đặc tả mô hình chuyên sâu Advanced model specification tests "Khám bệnh" cho mô hình kinh tế lượng của bạn Cho đến nay, chúng ta đã tập trung vào việc kiểm định các giả thuyết về các tham số của mô hình, ví dụ như $\beta_j = 0$. Đây được gọi là kiểm định suy luận. Tuy nhiên, tính hợp lệ của các kiểm định này phụ thuộc vào việc mô hình của chúng ta có được "đặc tả đúng" hay không. Một mô hình được đặc tả đúng không chỉ bao gồm các biến phù hợp mà còn phải thỏa mãn các giả định thống kê nền tảng.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **"Khám bệnh" cho mô hình kinh tế lượng của bạn**
+- **Các loại "bệnh" của mô hình**
+- **1. Kiểm định nội sinh - Kiểm định Hausman**
+- **2. Kiểm định các giả định phân phối - Kiểm định MA trận thông tin**
+- **3. Kiểm định phi tham số - Kiểm định hoán vị**
+- **Phương pháp thực hiện trong Stata**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c11/cac-kiem-dinh-dac-ta-mo-hinh-chuyen-sau/)
+
+### 2.7. Bài thực hành tổng hợp trên Stata
+
+Bài thực hành tổng hợp trên Stata Comprehensive practical exercise in Stata Từ lý thuyết đến thực hành nghiên cứu Chào mừng các bạn đến với bài thực hành tổng hợp! Đây là bài học quan trọng nhất trong chuỗi bài của chúng ta, nơi lý thuyết gặp gỡ thực tế. Trong các bài trước, chúng ta đã học riêng lẻ từng kỹ thuật: kiểm định Wald, LR, LM, xử lý kiểm định bội, phân tích lực, và các kiểm định đặc tả. Tuy nhiên, trong một dự án nghiên cứu thực tế, các công cụ này không tồn tại một cách cô lập.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Từ lý thuyết đến thực hành nghiên cứu**
+- **Bối cảnh nghiên cứu và dữ liệu**
+- **Bước 1: Ước lượng mô hình và kiểm định ý nghĩa tổng thể**
+- **Bước 2: Kiểm định các giả thuyết kinh tế cụ thể**
+- **Bước 3: So sánh mô hình lồng nhau**
+- **Bước 4: Kiểm định đặc tả**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c11/bai-thuc-hanh-tong-hop-tren-stata/)
+
+### 2.8. Bài tổng hợp và định hướng nghiên cứu
+
+Tổng hợp về kiểm định giả thuyết và đặc tả mô hình Synthesis of hypothesis testing and model specification 1. Bức tranh lớn về suy luận thống kê Chúng ta đã hoàn thành một hành trình khám phá bộ công cụ thiết yếu nhất của nhà nghiên cứu kinh tế lượng: suy luận và chẩn đoán. Nếu ước lượng mô hình là việc xây dựng một "cỗ máy" để giải thích dữ liệu, thì kiểm định giả thuyết và đặc tả mô hình chính là quy trình kiểm soát chất lượng nghiêm ngặt cho cỗ máy đó.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Bức tranh lớn về suy luận thống kê**
+- **2. Bộ ba kiểm định và các nguyên tắc cốt lõi**
+- **So sánh bộ ba kiểm định kinh điển**
+- **3. Một quy trình làm việc gợi ý**
+- **4. Phân tích toàn diện từ a đến z**
+- **5. Tổng kết và hướng phát triển**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c11/bai-tong-hop-va-dinh-huong-nghien-cuu/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Nền tảng các phân phối trong kiểm định</h3>
-    <p>Nền tảng các phân phối trong kiểm định The foundation of distributions in hypothesis testing Ngôn ngữ của các kiểm định thống kê Chào mừng các bạn đến với bài học đầu tiên trong chuỗi bài về kiểm định giả thuyết. Trước khi chúng ta có thể thực hiện các kiểm đị Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c11/nen-tang-cac-phan-phoi-trong-kiem-dinh/" target="_blank" rel="noopener">Nền tảng các phân phối trong kiểm định</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>11. Kiểm định giả thuyết và chỉ định mô hình</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Kiểm định Wald từ lý thuyết đến thực hành</h3>
-    <p>Kiểm định Wald từ lý thuyết đến thực hành The Wald test from theory to practice Giải mã các con số trong kết quả hồi quy Khi bạn chạy một lệnh hồi quy trong Stata, bạn nhận được một bảng kết quả với các cột như "z", "P&gt;|z|", và một thống kê "Wald chi2" ở gó Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c11/kiem-dinh-wald-tu-ly-thuyet-den-thuc-hanh/" target="_blank" rel="noopener">Kiểm định Wald từ lý thuyết đến thực hành</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Kiểm định tỷ số hợp lý và nhân tử lagrange</h3>
-    <p>Kiểm định tỷ số hợp lý và nhân tử Lagrange Likelihood-ratio and Lagrange multiplier tests Ba góc nhìn cho cùng một câu hỏi Trong bài học trước, chúng ta đã làm chủ kiểm định Wald, một phương pháp rất trực quan dựa trên việc ước lượng mô hình đầy đủ và xem các  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c11/kiem-dinh-ty-so-hop-ly-va-nhan-tu-lagrange/" target="_blank" rel="noopener">Kiểm định tỷ số hợp lý và nhân tử Lagrange</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c11/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Vấn đề kiểm định bội và cách xử lý</h3>
-    <p>Vấn đề kiểm định bội và cách xử lý The problem of multiple testing and how to address it Cạm bẫy của những khám phá "tình cờ" Hãy tưởng tượng bạn đang thực hiện một nghiên cứu và kiểm định 20 giả thuyết khác nhau, mỗi giả thuyết ở mức ý nghĩa 5%. Mức ý nghĩa 5 Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c11/van-de-kiem-dinh-boi-va-cach-xu-ly/" target="_blank" rel="noopener">Vấn đề kiểm định bội và cách xử lý</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 5: Phân tích lực của kiểm định và kích thước mẫu</h3>
-    <p>Phân tích lực của kiểm định và kích thước mẫu Power analysis and sample size determination Ngoài sai lầm loại I, còn có sai lầm loại II Trong các bài học trước, chúng ta đã tập trung rất nhiều vào việc kiểm soát sai lầm loại I - tức là bác bỏ giả thuyết không  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c11/phan-tich-luc-cua-kiem-dinh-va-kich-thuoc-mau/" target="_blank" rel="noopener">Phân tích lực của kiểm định và kích thước mẫu</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Bước 6: Các kiểm định đặc tả mô hình chuyên sâu</h3>
-    <p>Các kiểm định đặc tả mô hình chuyên sâu Advanced model specification tests "Khám bệnh" cho mô hình kinh tế lượng của bạn Cho đến nay, chúng ta đã tập trung vào việc kiểm định các giả thuyết về các tham số của mô hình, ví dụ như $\beta_j = 0$. Đây được gọi là k Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c11/cac-kiem-dinh-dac-ta-mo-hinh-chuyen-sau/" target="_blank" rel="noopener">Các kiểm định đặc tả mô hình chuyên sâu</a>.</p>
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập môi trường, ước lượng mô hình và kiểm định chẩn đoán toàn diện
 version 18.0
 clear all
 set more off
+import delimited "sachktl_empirical_ecodata.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_csamk22u1_c11_ecodata.csv", clear encoding("utf-8")
 describe
-summarize
+summarize y x1 x2 x3, detail
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
+* 1. Ước lượng mô hình cơ sở và kiểm định phương sai thay đổi / đa cộng tuyến / dạng hàm
+regress y x1 x2 x3
 estat hettest
+estat imtest, white
 estat vif
+estat ovtest
+
+* 2. Ước lượng với sai số chuẩn vững White HC1 và xuất tác động biên
+regress y c.x1##c.x2 x3, vce(robust)
+margins, dydx(x1 x2 x3)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện phân tích kinh tế lượng và thực thi kiểm định chẩn đoán
 library(tidyverse)
 library(lmtest)
 library(sandwich)
+library(car)
 
-df <- read.csv("sachktl_csamk22u1_c11_ecodata.csv")
+df <- read.csv("sachktl_empirical_ecodata.csv")
 summary(df)
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+# 1. Ước lượng mô hình tuyến tính và kiểm định Breusch-Pagan, RESET, VIF
 fit <- lm(y ~ x1 + x2 + x3, data = df)
+bptest(fit)
+resettest(fit, power = 2:3, type = "fitted")
+vif(fit)
+
+# 2. Xuất bảng hệ số ước lượng với sai số chuẩn vững HC1
 coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
 ```
 
@@ -144,37 +291,55 @@ coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và thực thi ước lượng kèm chẩn đoán phần dư
 import pandas as pd
+import statsmodels.api as sm
 import statsmodels.formula.api as smf
+from statsmodels.stats.diagnostic import het_breuschpagan, linear_reset
+from statsmodels.stats.outliers_influence import variance_inflation_factor
 
-df = pd.read_csv("sachktl_csamk22u1_c11_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_empirical_ecodata.csv")
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
+# 1. Ước lượng mô hình với sai số chuẩn vững HC1
 model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
 print(model.summary())
+
+# 2. Kiểm định phương sai thay đổi Breusch-Pagan, Ramsey RESET và hệ số VIF
+bp_lm, bp_pval, _, _ = het_breuschpagan(model.resid, model.model.exog)
+reset_res = linear_reset(model, power=2, use_f=True)
+X = sm.add_constant(df[["x1", "x2", "x3"]].dropna())
+vifs = {col: variance_inflation_factor(X.values, i) for i, col in enumerate(X.columns)}
+print(f"Breusch-Pagan p={bp_pval:.4f} | RESET p={reset_res.pvalue:.4f} | VIF={vifs}")
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 11: 11. kiểm định giả thuyết và chỉ định mô hình trên SachKTL"
+  title="Hướng dẫn thực hành 11. Kiểm định giả thuyết và chỉ định mô hình trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 11 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Nền tảng các phân phối trong kiểm định | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c11/nen-tang-cac-phan-phoi-trong-kiem-dinh/) |
-| **Bài 02** | Kiểm định Wald từ lý thuyết đến thực hành | Stata 18 MP, R 4.x | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c11/kiem-dinh-wald-tu-ly-thuyet-den-thuc-hanh/) |
-| **Bài 03** | Kiểm định tỷ số hợp lý và nhân tử Lagrange | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c11/kiem-dinh-ty-so-hop-ly-va-nhan-tu-lagrange/) |
-| **Bài 04** | Vấn đề kiểm định bội và cách xử lý | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c11/van-de-kiem-dinh-boi-va-cach-xu-ly/) |
-| **Bài 05** | Phân tích lực của kiểm định và kích thước mẫu | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c11/phan-tich-luc-cua-kiem-dinh-va-kich-thuoc-mau/) |
-| **Bài 06** | Các kiểm định đặc tả mô hình chuyên sâu | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c11/cac-kiem-dinh-dac-ta-mo-hinh-chuyen-sau/) |
-| **Bài 07** | Bài thực hành tổng hợp trên Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c11/bai-thuc-hanh-tong-hop-tren-stata/) |
-| **Bài 08** | Bài tổng hợp và định hướng nghiên cứu | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c11/bai-tong-hop-va-dinh-huong-nghien-cuu/) |
+| **11.1** | Nền tảng các phân phối trong kiểm định | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c11/nen-tang-cac-phan-phoi-trong-kiem-dinh/) |
+| **11.2** | Kiểm định Wald từ lý thuyết đến thực hành | `Stata 18 MP, R 4.x` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c11/kiem-dinh-wald-tu-ly-thuyet-den-thuc-hanh/) |
+| **11.3** | Kiểm định tỷ số hợp lý và nhân tử lagrange | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c11/kiem-dinh-ty-so-hop-ly-va-nhan-tu-lagrange/) |
+| **11.4** | Vấn đề kiểm định bội và cách xử lý | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c11/van-de-kiem-dinh-boi-va-cach-xu-ly/) |
+| **11.5** | Phân tích lực của kiểm định và kích thước mẫu | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c11/phan-tich-luc-cua-kiem-dinh-va-kich-thuoc-mau/) |
+| **11.6** | Các kiểm định đặc tả mô hình chuyên sâu | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c11/cac-kiem-dinh-dac-ta-mo-hinh-chuyen-sau/) |
+| **11.7** | Bài thực hành tổng hợp trên Stata | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c11/bai-thuc-hanh-tong-hop-tren-stata/) |
+| **11.8** | Bài tổng hợp và định hướng nghiên cứu | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c11/bai-tong-hop-va-dinh-huong-nghien-cuu/) |

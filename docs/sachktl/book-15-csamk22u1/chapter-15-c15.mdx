@@ -1,19 +1,19 @@
 ---
 id: chapter-15-c15
-title: "Chương 15: 15. hồi quy bách phân vị"
-sidebar_label: "Chương 15: 15. Hồi quy bách phân vị"
+title: "15. Hồi quy bách phân vị"
+sidebar_label: "15. Hồi quy bách phân vị"
 sidebar_position: 16
-description: "Hướng dẫn thực hành How-To Chương 15: 15. hồi quy bách phân vị thuộc bộ sách Kinh tế lượng vi mô sử dụng Stata trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 15. Hồi quy bách phân vị thuộc giáo trình Kinh tế lượng vi mô sử dụng Stata trên SachKTL kèm công thức toán học, phân tích 6 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 15: 15. hồi quy bách phân vị
+# 15. Hồi quy bách phân vị
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 15: 15. hồi quy bách phân vị** thuộc [**Bộ sách 15: kinh tế lượng vi mô sử dụng Stata**](/sachktl/book-15-csamk22u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/csamk22u1/c15/](https://sachktl.tnsai.vn/vi/csamk22u1/c15/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **6 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **15. Hồi quy bách phân vị** thuộc bộ giáo trình [**Kinh tế lượng vi mô sử dụng Stata**](/sachktl/book-15-csamk22u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/csamk22u1/c15/](https://sachktl.tnsai.vn/vi/csamk22u1/c15/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 15: 15. hồi quy bách phân vị">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="15. Hồi quy bách phân vị">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 15 · CHƯƠNG 15</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 15: 15. hồi quy bách phân vị</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Kinh tế lượng vi mô sử dụng Stata · 6 bài học chuyên sâu</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng vi mô sử dụng Stata</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">15. Hồi quy bách phân vị</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng ứng dụng, mô hình hóa thống kê và kiểm định giả thuyết · 6 bài học chuy</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,102 +41,219 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Giới thiệu hồi quy phân vị cho người mới bắt đầu An Introduction to Quantile Regression for Beginners Tổng quan về hồi quy phân vị Chào các bạn sinh viên, trong hành trình khám phá kinh tế lượng, chúng ta thường bắt đầu với mô hình hồi quy tuyến tính cổ điển. OLS là một công cụ cực kỳ mạnh mẽ, giúp chúng ta hiểu được mối quan hệ trung bình giữa các biến. Ví dụ, OLS có thể cho biết trung bình một năm kinh nghiệm làm việc sẽ làm tăng mức lương lên bao nhiêu. Tuy nhiên, thế giới thực lại phức tạp hơn rất nhiều. Liệu tác động của kinh nghiệm lên lương có giống nhau ở nhóm người có thu nhập
+Giới thiệu hồi quy phân vị cho người mới bắt đầu An Introduction to Quantile Regression for Beginners Tổng quan về hồi quy phân vị Chào các bạn sinh viên, trong hành trình khám phá kinh tế lượng, chúng ta thường bắt đầu với mô hình hồi quy tuyến tính cổ điển. OLS là một công cụ cực kỳ mạnh mẽ, giúp chúng ta hiểu được mối quan hệ trung bình giữa các biến. Ví dụ, OLS có thể cho biết trung bình một năm kinh nghiệm làm việc sẽ làm tăng mức lương lên bao nhiêu. Tuy nhiên, thế giới thực lại phức tạp hơn rất nhiều.
 
-- **Chủ đề học thuật trọng tâm**: Tổng quan về hồi quy phân vị, CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+Y_i = \beta_0 + \sum_{k=1}^K \beta_k X_{ik} + \varepsilon_i, \quad \mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0 \tag*{[1]}
+$$
+
+$$
+\widehat{\text{Var}}_{\text{HC1}}(\hat{\boldsymbol{\beta}}) = \frac{N}{N - K - 1}\left(\mathbf{X}'\mathbf{X}\right)^{-1}\left(\sum_{i=1}^N \hat{\varepsilon}_i^2 \mathbf{x}_i \mathbf{x}_i'\right)\left(\mathbf{X}'\mathbf{X}\right)^{-1} \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Dạng hàm tuyến tính theo tham số được xác định đúng, không bỏ sót biến giải thích quan trọng có tương quan với các biến trong mô hình.
+2. Kỳ vọng có điều kiện của sai số bằng không $\mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0$, đảm bảo tính không chệch và vững tiệm cận của ước lượng.
+3. Ma trận thiết kế $\mathbf{X}$ có hạng cột đầy đủ, không xảy ra đa cộng tuyến hoàn hảo và sử dụng sai số chuẩn vững HC1/Cluster khi có phương sai thay đổi.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 15 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/csamk22u1/c15/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Khi tồn tại biến giải thích nội sinh do đồng thời hai chiều, sai số đo lường hoặc bỏ sót biến không quan sát được, ước lượng OLS bị chệch và không vững; cần chuyển sang ước lượng biến công cụ IV/2SLS hoặc GMM."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Nền tảng lý thuyết CQR
+
+Nền tảng lý thuyết của hồi quy phân vị có điều kiện Theoretical foundations of conditional quantile regression Vượt ra ngoài giới hạn của giá trị trung bình Trong các khóa học kinh tế lượng nhập môn, chúng ta dành phần lớn thời gian để làm việc với mô hình hồi quy OLS. Đây là một phương pháp tuyệt vời để hiểu được tác động trung bình của một biến giải thích lên biến kết quả. Tuy nhiên, việc chỉ tập trung vào giá trị trung bình đôi khi giống như chỉ nhìn vào tâm của một cơn bão mà bỏ qua toàn bộ sức mạnh và quy mô của nó.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Vượt ra ngoài giới hạn của giá trị trung bình**
+- **Nền tảng lý thuyết của CQR**
+- **Từ phân vị đến phân vị có điều kiện**
+- **Hàm mất mát: Trái tim của sự khác biệt**
+- **Giải thích hàm kiểm tra $\rho_q$**
+- **Ước lượng và suy diễn thống kê**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c15/nen-tang-ly-thuyet-cqr/)
+
+### 2.2. Thực hành CQR với dữ liệu y tế
+
+Thực hành hồi quy phân vị có điều kiện với Stata Conditional quantile regression in practice with Stata Từ lý thuyết đến phân tích dữ liệu thực tế Ở bài học trước, chúng ta đã cùng nhau khám phá nền tảng lý thuyết của Hồi quy phân vị có điều kiện, hiểu được sự khác biệt cốt lõi của nó so với OLS qua hàm mất mát bất đối xứng. Lý thuyết là nền tảng, nhưng sức mạnh thực sự của một phương pháp kinh tế lượng chỉ được thể hiện khi chúng ta áp dụng nó để giải quyết các câu hỏi nghiên cứu cụ thể từ dữ liệu thực.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Từ lý thuyết đến phân tích dữ liệu thực tế**
+- **Khám phá dữ liệu chi phí y tế**
+- **Tóm tắt thống kê mô tả**
+- **Ước lượng phân vị ban đầu**
+- **Ước lượng mô hình hồi quy trung vị**
+- **Diễn giải hệ số và phép biến đổi ngược**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c15/thuc-hanh-cqr-voi-du-lieu-y-te/)
+
+### 2.3. So sánh và kiểm định trong CQR
+
+So sánh các ước lượng và kiểm định giả thuyết trong CQR Comparing estimates and hypothesis testing in CQR Bức tranh đa chiều từ các phân vị Trong bài học trước, chúng ta đã thực hiện thành công mô hình hồi quy trung vị, một bước tiến quan trọng so với mô hình OLS truyền thống. Tuy nhiên, việc chỉ dừng lại ở trung vị cũng giống như chỉ đọc chương giữa của một cuốn sách hấp dẫn – chúng ta đã bỏ lỡ phần mở đầu và kết thúc đầy kịch tính.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Bức tranh đa chiều từ các phân vị**
+- **So sánh các ước lượng tại các phân vị khác nhau**
+- **Kiểm định phương sai thay đổi**
+- **Kiểm định sự bằng nhau của các hệ số giữa các phân vị**
+- **Tổng kết**
+- **Những điểm chính cần nắm vững**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c15/so-sanh-va-kiem-dinh-trong-cqr/)
+
+### 2.4. Minh họa CQR qua dữ liệu mô phỏng
+
+Hiểu sâu hồi quy phân vị qua dữ liệu mô phỏng Understanding CQR via simulated data Thí nghiệm trong phòng lab của nhà kinh tế lượng Khi làm việc với dữ liệu trong thế giới thực, chúng ta giống như những nhà thám hiểm khám phá một vùng đất bí ẩn. Chúng ta không bao giờ biết chắc chắn "quy luật tự nhiên" thực sự hay mô hình chính xác đã tạo ra dữ liệu đó. Chúng ta sử dụng các công cụ kinh tế lượng như OLS hay CQR để cố gắng tìm ra quy luật đó, nhưng luôn có một mức độ không chắc chắn.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Thí nghiệm trong phòng lab của nhà kinh tế lượng**
+- **Quy trình tạo dữ liệu**
+- **Thiết kế mô hình**
+- **Giải thích từng thành phần của DGP**
+- **Dự đoán kết quả**
+- **Tạo và khám phá dữ liệu trong Stata**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c15/minh-hoa-cqr-qua-du-lieu-mo-phong/)
+
+### 2.5. Phân tích tác động xử lý
+
+Phân tích tác động xử lý theo phân vị Quantile treatment effects analysis Tác động của chính sách có dành cho tất cả mọi người? Trong kinh tế học, một trong những câu hỏi cốt lõi là: "Một chính sách, một chương trình, hay một sự kiện có thực sự tạo ra tác động không?". Phương pháp truyền thống thường tập trung vào việc tính toán Tác động xử lý trung bình . Ví dụ, chúng ta có thể hỏi: "Trung bình, việc tham gia một khóa đào tạo nghề làm tăng thu nhập lên bao nhiêu?".
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Tác động của chính sách có dành cho tất cả mọi người?**
+- **Định nghĩa và ước lượng QTE**
+- **Ước lượng QTE tại q=0.25**
+- **Trực quan hóa QTE trên toàn bộ dải phân vị**
+- **Thảo luận về diễn giải nhân quả**
+- **Tổng kết**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c15/phan-tich-tac-dong-xu-ly-qte/)
+
+### 2.6. Tổng kết và ứng dụng
+
+Tổng kết hồi quy phân vị: Từ lý thuyết đến quy trình nghiên cứu Quantile regression synthesis: From theory to research workflow Hồi quy phân vị trong bức tranh lớn của kinh tế lượng Chúng ta đã cùng nhau trải qua một hành trình khám phá chi tiết về Hồi quy phân vị, một công cụ cho phép chúng ta nhìn xa hơn giới hạn của giá trị trung bình. Trong chương trình đào tạo kinh tế lượng, chúng ta thường bắt đầu với OLS như một nền tảng vững chắc.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Hồi quy phân vị trong bức tranh lớn của kinh tế lượng**
+- **Hệ thống lý thuyết và phương pháp cốt lõi**
+- **Trụ cột lý thuyết**
+- **Hệ thống phương pháp luận**
+- **Quy trình nghiên cứu CQR hoàn chỉnh**
+- **Tổng kết và hướng phát triển**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c15/tong-ket-va-ung-dung/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Nền tảng lý thuyết CQR</h3>
-    <p>Nền tảng lý thuyết của hồi quy phân vị có điều kiện Theoretical foundations of conditional quantile regression Vượt ra ngoài giới hạn của giá trị trung bình Trong các khóa học kinh tế lượng nhập môn, chúng ta dành phần lớn thời gian để làm việc với mô hình hồi Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c15/nen-tang-ly-thuyet-cqr/" target="_blank" rel="noopener">Nền tảng lý thuyết CQR</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>15. Hồi quy bách phân vị</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Thực hành CQR với dữ liệu y tế</h3>
-    <p>Thực hành hồi quy phân vị có điều kiện với Stata Conditional quantile regression in practice with Stata Từ lý thuyết đến phân tích dữ liệu thực tế Ở bài học trước, chúng ta đã cùng nhau khám phá nền tảng lý thuyết của Hồi quy phân vị có điều kiện, hiểu được sự Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c15/thuc-hanh-cqr-voi-du-lieu-y-te/" target="_blank" rel="noopener">Thực hành CQR với dữ liệu y tế</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: So sánh và kiểm định trong CQR</h3>
-    <p>So sánh các ước lượng và kiểm định giả thuyết trong CQR Comparing estimates and hypothesis testing in CQR Bức tranh đa chiều từ các phân vị Trong bài học trước, chúng ta đã thực hiện thành công mô hình hồi quy trung vị, một bước tiến quan trọng so với mô hình  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c15/so-sanh-va-kiem-dinh-trong-cqr/" target="_blank" rel="noopener">So sánh và kiểm định trong CQR</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c15/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Minh họa CQR qua dữ liệu mô phỏng</h3>
-    <p>Hiểu sâu hồi quy phân vị qua dữ liệu mô phỏng Understanding CQR via simulated data Thí nghiệm trong phòng lab của nhà kinh tế lượng Khi làm việc với dữ liệu trong thế giới thực, chúng ta giống như những nhà thám hiểm khám phá một vùng đất bí ẩn. Chúng ta không Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c15/minh-hoa-cqr-qua-du-lieu-mo-phong/" target="_blank" rel="noopener">Minh họa CQR qua dữ liệu mô phỏng</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 5: Phân tích tác động xử lý</h3>
-    <p>Phân tích tác động xử lý theo phân vị Quantile treatment effects analysis Tác động của chính sách có dành cho tất cả mọi người? Trong kinh tế học, một trong những câu hỏi cốt lõi là: "Một chính sách, một chương trình, hay một sự kiện có thực sự tạo ra tác động Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c15/phan-tich-tac-dong-xu-ly-qte/" target="_blank" rel="noopener">Phân tích tác động xử lý</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Bước 6: Tổng kết và ứng dụng</h3>
-    <p>Tổng kết hồi quy phân vị: Từ lý thuyết đến quy trình nghiên cứu Quantile regression synthesis: From theory to research workflow Hồi quy phân vị trong bức tranh lớn của kinh tế lượng Chúng ta đã cùng nhau trải qua một hành trình khám phá chi tiết về Hồi quy phâ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c15/tong-ket-va-ung-dung/" target="_blank" rel="noopener">Tổng kết và ứng dụng</a>.</p>
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập môi trường, ước lượng mô hình và kiểm định chẩn đoán toàn diện
 version 18.0
 clear all
 set more off
+import delimited "sachktl_empirical_ecodata.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_csamk22u1_c15_ecodata.csv", clear encoding("utf-8")
 describe
-summarize
+summarize y x1 x2 x3, detail
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
+* 1. Ước lượng mô hình cơ sở và kiểm định phương sai thay đổi / đa cộng tuyến / dạng hàm
+regress y x1 x2 x3
 estat hettest
+estat imtest, white
 estat vif
+estat ovtest
+
+* 2. Ước lượng với sai số chuẩn vững White HC1 và xuất tác động biên
+regress y c.x1##c.x2 x3, vce(robust)
+margins, dydx(x1 x2 x3)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện phân tích kinh tế lượng và thực thi kiểm định chẩn đoán
 library(tidyverse)
 library(lmtest)
 library(sandwich)
+library(car)
 
-df <- read.csv("sachktl_csamk22u1_c15_ecodata.csv")
+df <- read.csv("sachktl_empirical_ecodata.csv")
 summary(df)
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+# 1. Ước lượng mô hình tuyến tính và kiểm định Breusch-Pagan, RESET, VIF
 fit <- lm(y ~ x1 + x2 + x3, data = df)
+bptest(fit)
+resettest(fit, power = 2:3, type = "fitted")
+vif(fit)
+
+# 2. Xuất bảng hệ số ước lượng với sai số chuẩn vững HC1
 coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
 ```
 
@@ -144,35 +261,53 @@ coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và thực thi ước lượng kèm chẩn đoán phần dư
 import pandas as pd
+import statsmodels.api as sm
 import statsmodels.formula.api as smf
+from statsmodels.stats.diagnostic import het_breuschpagan, linear_reset
+from statsmodels.stats.outliers_influence import variance_inflation_factor
 
-df = pd.read_csv("sachktl_csamk22u1_c15_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_empirical_ecodata.csv")
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
+# 1. Ước lượng mô hình với sai số chuẩn vững HC1
 model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
 print(model.summary())
+
+# 2. Kiểm định phương sai thay đổi Breusch-Pagan, Ramsey RESET và hệ số VIF
+bp_lm, bp_pval, _, _ = het_breuschpagan(model.resid, model.model.exog)
+reset_res = linear_reset(model, power=2, use_f=True)
+X = sm.add_constant(df[["x1", "x2", "x3"]].dropna())
+vifs = {col: variance_inflation_factor(X.values, i) for i, col in enumerate(X.columns)}
+print(f"Breusch-Pagan p={bp_pval:.4f} | RESET p={reset_res.pvalue:.4f} | VIF={vifs}")
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 15: 15. hồi quy bách phân vị trên SachKTL"
+  title="Hướng dẫn thực hành 15. Hồi quy bách phân vị trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 15 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Nền tảng lý thuyết CQR | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c15/nen-tang-ly-thuyet-cqr/) |
-| **Bài 02** | Thực hành CQR với dữ liệu y tế | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c15/thuc-hanh-cqr-voi-du-lieu-y-te/) |
-| **Bài 03** | So sánh và kiểm định trong CQR | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c15/so-sanh-va-kiem-dinh-trong-cqr/) |
-| **Bài 04** | Minh họa CQR qua dữ liệu mô phỏng | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c15/minh-hoa-cqr-qua-du-lieu-mo-phong/) |
-| **Bài 05** | Phân tích tác động xử lý | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c15/phan-tich-tac-dong-xu-ly-qte/) |
-| **Bài 06** | Tổng kết và ứng dụng | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c15/tong-ket-va-ung-dung/) |
+| **15.1** | Nền tảng lý thuyết CQR | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c15/nen-tang-ly-thuyet-cqr/) |
+| **15.2** | Thực hành CQR với dữ liệu y tế | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c15/thuc-hanh-cqr-voi-du-lieu-y-te/) |
+| **15.3** | So sánh và kiểm định trong CQR | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c15/so-sanh-va-kiem-dinh-trong-cqr/) |
+| **15.4** | Minh họa CQR qua dữ liệu mô phỏng | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c15/minh-hoa-cqr-qua-du-lieu-mo-phong/) |
+| **15.5** | Phân tích tác động xử lý | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c15/phan-tich-tac-dong-xu-ly-qte/) |
+| **15.6** | Tổng kết và ứng dụng | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c15/tong-ket-va-ung-dung/) |

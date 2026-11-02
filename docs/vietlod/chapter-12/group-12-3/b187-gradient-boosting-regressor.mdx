@@ -1,10 +1,10 @@
 ---
 id: b187-gradient-boosting-regressor
-title: "12.3.2. Hướng dẫn thực hành Hồi quy tăng cường độ dốc Friedman và phân rã tác động biên"
+title: "12.3.2. Hồi quy tăng cường độ dốc Friedman và phân rã tác động biên"
 sidebar_label: "12.3.2. Hồi quy tăng cường độ dốc Friedman và phân rã tác động biên"
 sidebar_position: 2
 slug: /vietlod/chapter-12/group-12-3/b187-gradient-boosting-regressor
-description: "Tài liệu How-To hướng dẫn thực hành mô hình Hồi quy tăng cường độ dốc Friedman và phân rã tác động biên với mã gradient_boosting_regressor trên Stata 18 MP, R 4.x và Python 3.11+ kèm dữ liệu thực hành và diễn giải kết quả chuẩn tạp chí."
+description: "Tài liệu How-To hướng dẫn thực hành bài 12.3.2 — Hồi quy tăng cường độ dốc Friedman và phân rã tác động biên với mã gradient_boosting_regressor trên Stata 18 MP, R 4.x và Python 3.11+ kèm dữ liệu thực hành và diễn giải kết quả chuẩn tạp chí."
 keywords:
   - Hồi quy tăng cường độ dốc Friedman và phân rã tác động biên
   - gradient_boosting_regressor
@@ -17,28 +17,28 @@ keywords:
   - EcoLab
 ---
 
-# 12.3.2. Hướng dẫn thực hành Hồi quy tăng cường độ dốc Friedman và phân rã tác động biên
+# 12.3.2. Hồi quy tăng cường độ dốc Friedman và phân rã tác động biên
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Bài học `12.3.2` — Mã mô hình `B187` (`gradient_boosting_regressor`)** thuộc [Chương 12: Hệ phương trình đồng thời, hệ cầu, kinh tế lượng Bayes và học máy](/vietlod/chapter-12) $\to$ [Nhóm 12.3: Học máy kinh tế lượng](/vietlod/chapter-12/group-12-3), phân loại **Cấp độ L4 — Chuyên sâu biên giới**. Tài liệu How-To này hướng dẫn chi tiết từ bản chất phương pháp, điều kiện áp dụng, kịch bản mã lệnh trên **Stata 18 MP**, **R 4.x** và **Python 3.11+**, tệp dữ liệu thực hành `vietlod_gradient_boosting_regressor_ecodata.csv` cho đến cách đọc hiểu đồ thị hội tụ 3 phần mềm và viết phần diễn giải kết quả theo chuẩn tạp chí quốc tế.
+**Bài học `12.3.2` — Mã mô hình `B187` — Khóa định danh `gradient_boosting_regressor`** thuộc [12. Hệ phương trình đồng thời, hệ cầu, kinh tế lượng Bayes và học máy](/vietlod/chapter-12) $\to$ [12.3. Học máy kinh tế lượng](/vietlod/chapter-12/group-12-3), phân loại **Cấp độ L4 — Chuyên sâu biên giới**. Tài liệu How-To này hướng dẫn chi tiết từ bản chất phương pháp, điều kiện áp dụng, kịch bản mã lệnh trên **Stata 18 MP**, **R 4.x** và **Python 3.11+**, tệp dữ liệu thực hành `vietlod_gradient_boosting_regressor_ecodata.csv` cho đến cách đọc hiểu đồ thị hội tụ 3 phần mềm và viết phần diễn giải kết quả theo chuẩn tạp chí quốc tế.
 
 <VideoTutorial
   title="Video hướng dẫn thực hành bài 12.3.2: Hồi quy tăng cường độ dốc Friedman và phân rã tác động biên trên Stata 18, R 4.x và Python 3.11+"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 1. Ý nghĩa phương pháp và phạm vi áp dụng
+## 12.3.2.1. Ý nghĩa phương pháp và phạm vi áp dụng
 
-### 1.1. Bản chất kinh tế lượng
+### 12.3.2.1.1. Bản chất kinh tế lượng
 
 Huấn luyện tuần tự chuỗi các cây quyết định nông trong không gian hàm số, trong đó mỗi cây mới được khớp trực tiếp lên đạo hàm âm của hàm tổn thất từ tổ hợp các cây trước đó kèm hệ số thu nhỏ tốc độ học $\nu$ để tối ưu hóa đồng thời độ chệch và phương sai.
 
-### 1.2. Phạm vi áp dụng và yêu cầu cấu trúc dữ liệu
+### 12.3.2.1.2. Phạm vi áp dụng và yêu cầu cấu trúc dữ liệu
 
 Dự báo rủi ro vỡ nợ, giá bất động sản, thu ngân sách hoặc ước lượng hàm kỳ vọng có điều kiện phức tạp trên dữ liệu bảng và dữ liệu chéo.
 
-### 1.3. Hệ phương trình toán học và điều kiện định danh
+### 12.3.2.1.3. Hệ phương trình toán học và điều kiện định danh
 
 Phương trình đặc tả cấu trúc của mô hình `gradient_boosting_regressor`:
 
@@ -59,10 +59,10 @@ $$
 $$
 
 <FeatureNotAvailable
-  note="Giới hạn áp dụng: Không sử dụng trực tiếp ước lượng Hồi quy tăng cường độ dốc Friedman và phân rã tác động biên khi mẫu vi phạm nghiêm trọng điều kiện định danh hoặc chưa vượt qua bộ kiểm định bắt buộc gồm Kiểm định chéo K-Fold với dừng sớm để chọn số lượng cây $M$ và tốc độ học $\nu$, phân rã giá trị đóng góp biên Shapley (SHAP) và kiểm định Diebold–Mariano ngoài mẫu. Trong trường hợp vi phạm, hãy tham chiếu các mô hình mở rộng cùng Nhóm 12.3 hoặc Chương 12."
+  note="Giới hạn áp dụng: Không sử dụng trực tiếp ước lượng Hồi quy tăng cường độ dốc Friedman và phân rã tác động biên khi mẫu vi phạm nghiêm trọng điều kiện định danh hoặc chưa vượt qua bộ kiểm định bắt buộc gồm Kiểm định chéo K-Fold với dừng sớm để chọn số lượng cây $M$ và tốc độ học $\nu$, phân rã giá trị đóng góp biên Shapley (SHAP) và kiểm định Diebold–Mariano ngoài mẫu. Trong trường hợp vi phạm, hãy tham chiếu các mô hình mở rộng cùng Phần 12.3 hoặc Chương 12."
 />
 
-## 2. Ví dụ thực tế và bộ dữ liệu thực hành chuẩn hóa
+## 12.3.2.2. Ví dụ thực tế và bộ dữ liệu thực hành chuẩn hóa
 
 - **Bài toán thực nghiệm tại Việt Nam**: Ứng dụng mô hình `gradient_boosting_regressor` trên bộ dữ liệu **Dự báo chéo lợi suất và rủi ro tín dụng** với cỡ mẫu chuẩn hóa $N = 320$ quan sát được trích xuất từ hệ sinh thái [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
 - **Bộ dữ liệu chuẩn quốc tế đối sánh**: **Gu–Kelly–Xiu (2020) Empirical Asset Pricing**, giúp người học đối chiếu trực tiếp kết quả thực hành với các giáo trình kinh tế lượng hàng đầu thế giới.
@@ -80,7 +80,7 @@ $$
       title: 'Bài giảng toàn văn trên VietLOD',
       description: 'Xem bài giảng lý thuyết chuyên sâu, chứng minh toán học và thảo luận học thuật đầy đủ của Bài 12.3.2 trên cổng VietLOD.',
       link: 'https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-12-he-phuong-trinh-he-cau-kinh-te-luong-bayes-va-hoc-may/nhom-12-3-ml-econometrics/b187-gradient-boosting-regressor',
-      badge: 'VietLOD B187'
+      badge: 'VietLOD 12.3.2'
     },
     {
       title: 'Thực thi đám mây trên EcoLab',
@@ -97,9 +97,9 @@ $$
   ]}
 />
 
-## 3. Gói lệnh phân tích và quy trình thực hành trên Stata, R và Python
+## 12.3.2.3. Gói lệnh phân tích và quy trình thực hành trên Stata, R và Python
 
-### 3.1. Bảng đối chiếu gói phần mềm và cú pháp lệnh chuẩn
+### 12.3.2.3.1. Bảng đối chiếu gói phần mềm và cú pháp lệnh chuẩn
 
 | Nền tảng phần mềm | Gói thư viện chuẩn | Cú pháp ước lượng trọng tâm | Lệnh kiểm định chẩn đoán hậu ước lượng | Hỗ trợ |
 | :--- | :--- | :--- | :--- | :--- |
@@ -107,29 +107,28 @@ $$
 | **R 4.x** | `gbm` | `gbm::gbm(y ~ x1 + x2 + x3, data = df, distribution = 'gaussian', n.trees = 200)` | `lmtest::lrtest[sur_fit, ols_fit]; coda::gelman.diag[mcmc_chain]; vip::vip[rf_fit]` — Kiểm định ràng buộc đối xứng Slutsky, chẩn đoán hội tụ Gelman–Rubin và độ quan trọng biến hoán vị. | <Available /> |
 | **Python 3.11+** | `scikit-learn` | `GradientBoostingRegressor(n_estimators=200, learning_rate=0.05, random_state=42).fit(X, y)` | `res.breusch_pagan; arviz.summary[idata]; permutation_importance[model, X_val, y_val]` — Kiểm định ma trận hiệp phương sai hệ thống, hội tụ chuỗi (MCMC) và sai số dự báo ngoài mẫu. | <Available /> |
 
-### 3.2. Quy trình 4 bước thực thi mô hình `gradient_boosting_regressor`
+### 12.3.2.3.2. Quy trình 4 bước thực thi mô hình `gradient_boosting_regressor`
 
 <Steps>
-
-### Bước 1. Nạp tệp dữ liệu thực hành và kiểm tra thống kê mô tả
-
-Tải tệp [`vietlod_gradient_boosting_regressor_ecodata.csv`](https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_gradient_boosting_regressor_ecodata.csv) vào thư mục làm việc, kiểm tra cỡ mẫu $N = 320$ quan sát, khai báo cấu trúc dữ liệu và rà soát phân phối của biến phụ thuộc `y` cùng các biến giải thích `x1`, `x2`.
-
-### Bước 2. Thực thi hàm ước lượng `gradient_boosting_regressor` với sai số chuẩn vững
-
-Chạy lệnh ước lượng chính thức trên **Stata 18 MP** qua gói `Stata boost`, **R 4.x** qua gói `gbm` hoặc **Python 3.11+** qua gói `scikit-learn` kèm ma trận hiệp phương sai vững để bảo toàn hiệu lực suy luận thống kê.
-
-### Bước 3. Thực hiện bộ kiểm định chẩn đoán hậu ước lượng bắt buộc
-
-Thực thi đầy đủ các kiểm định đặc thù của mô hình gồm: **Kiểm định chéo K-Fold với dừng sớm để chọn số lượng cây $M$ và tốc độ học $\nu$, phân rã giá trị đóng góp biên Shapley (SHAP) và kiểm định Diebold–Mariano ngoài mẫu**. Ghi nhận giá trị thống kê chẩn đoán $\text{Stat} = 0.4283$ và giá trị $p = 0.8072$.
-
-### Bước 4. Xuất bảng kết quả chuẩn tạp chí và kiểm chứng hội tụ 3 phần mềm
-
-Sử dụng `etable` trên Stata, `coeftest` trên R hoặc `summary()` trên Python để xuất bảng hệ số ước lượng, sau đó đối chiếu với bảng kết quả chuẩn và đồ thị thực nghiệm tại Mục 4.
-
+  <div className="step-item">
+    <h3>Bước 1. Nạp tệp dữ liệu thực hành và kiểm tra thống kê mô tả</h3>
+    <p>Tải tệp <a href="https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_gradient_boosting_regressor_ecodata.csv"><code>vietlod_gradient_boosting_regressor_ecodata.csv</code></a> vào thư mục làm việc, kiểm tra cỡ mẫu $N = 320$ quan sát, khai báo cấu trúc dữ liệu và rà soát phân phối của biến phụ thuộc <code>y</code> cùng các biến giải thích <code>x1</code>, <code>x2</code>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2. Thực thi hàm ước lượng gradient_boosting_regressor với sai số chuẩn vững</h3>
+    <p>Chạy lệnh ước lượng chính thức trên <strong>Stata 18 MP</strong> qua gói <code>Stata boost</code>, <strong>R 4.x</strong> qua gói <code>gbm</code> hoặc <strong>Python 3.11+</strong> qua gói <code>scikit-learn</code> kèm ma trận hiệp phương sai vững để bảo toàn hiệu lực suy luận thống kê.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3. Thực hiện bộ kiểm định chẩn đoán hậu ước lượng bắt buộc</h3>
+    <p>Thực thi đầy đủ các kiểm định đặc thù của mô hình gồm: <strong>Kiểm định chéo K-Fold với dừng sớm để chọn số lượng cây $M$ và tốc độ học $\nu$, phân rã giá trị đóng góp biên Shapley (SHAP) và kiểm định Diebold–Mariano ngoài mẫu</strong>. Ghi nhận giá trị thống kê chẩn đoán $\text{Stat} = 0.4283$ và giá trị $p = 0.8072$.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4. Xuất bảng kết quả chuẩn tạp chí và kiểm chứng hội tụ 3 phần mềm</h3>
+    <p>Sử dụng <code>etable</code> trên Stata, <code>coeftest</code> trên R hoặc <code>summary()</code> trên Python để xuất bảng hệ số ước lượng, sau đó đối chiếu với bảng kết quả chuẩn và đồ thị thực nghiệm tại Mục 12.3.2.4.</p>
+  </div>
 </Steps>
 
-### 3.3. Mã lệnh thực hành tái lập hoàn chỉnh trên Stata 18, R 4.x và Python 3.11+
+### 12.3.2.3.3. Mã lệnh thực hành tái lập hoàn chỉnh trên Stata 18, R 4.x và Python 3.11+
 
 <Tabs groupId="econometric-software">
   <TabItem value="stata" label="Stata 18 MP">
@@ -230,9 +229,9 @@ print("KẾT QUẢ ƯỚC LƯỢNG [gradient_boosting_regressor]: beta_x1 = 1.30
   </TabItem>
 </Tabs>
 
-## 4. Kết quả ước lượng thực nghiệm, đồ thị hội tụ và hướng dẫn diễn giải
+## 12.3.2.4. Kết quả ước lượng thực nghiệm, đồ thị hội tụ và hướng dẫn diễn giải
 
-### 4.1. Bảng tổng hợp kết quả ước lượng chuẩn công bố tạp chí
+### 12.3.2.4.1. Bảng tổng hợp kết quả ước lượng chuẩn công bố tạp chí
 
 Bảng dưới đây trình bày kết quả ước lượng thực nghiệm của mô hình **Hồi quy tăng cường độ dốc Friedman và phân rã tác động biên** trên tệp dữ liệu `vietlod_gradient_boosting_regressor_ecodata.csv` với $N = 320$ quan sát, đối chứng đồng thời trên cả 3 nền tảng **Stata 18 MP**, **R 4.x** và **Python 3.11+**:
 
@@ -245,32 +244,31 @@ Bảng dưới đây trình bày kết quả ước lượng thực nghiệm c�
 | **Chỉ số độ khớp `R-squared`** | `0.4255` | — | `F/Wald = 108.214` | — | Chuẩn công bố Q1 |
 | **Kiểm định chẩn đoán** | `Stat = 0.4283` | — | — | `p = 0.8072` | Đạt điều kiện đặc tả |
 
-### 4.2. Đồ thị thực nghiệm đối chiếu đồng thời Stata 18, R 4.x và Python 3.11+
+### 12.3.2.4.2. Đồ thị thực nghiệm đối chiếu đồng thời Stata 18, R 4.x và Python 3.11+
 
 ![Đồ thị thực nghiệm đối chiếu 3 phần mềm cho mô hình Hồi quy tăng cường độ dốc Friedman và phân rã tác động biên](https://vietlod.tnsai.vn/src/ecoaz/img/vietlod-b187-gradient-boosting-regressor.png)
 
-### 4.3. Cách diễn giải kết quả chuẩn học thuật
+### 12.3.2.4.3. Cách diễn giải kết quả chuẩn học thuật
 
 - **Diễn giải hệ số ước lượng trọng tâm**: Hệ số của biến `x1` đạt $\hat{\beta}_1 = 1.3046$ với sai số chuẩn vững $\text{SE} = 0.0893$ và thống kê kiểm định bằng $14.602$, cho thấy `x1` có **tác động thuận chiều** lên biến mục tiêu `y` và **có ý nghĩa thống kê cao ở mức 1%** trong bối cảnh dữ liệu *Dự báo chéo lợi suất và rủi ro tín dụng*.
 - **Diễn giải khoảng tin cậy và độ lớn tác động**: Khoảng tin cậy $95\%$ của $\hat{\beta}_1$ nằm trong dải $[1.1295, 1.4797]$, khẳng định độ ổn định của ước lượng điểm và sự hội tụ số học giữa Stata 18 MP, R 4.x và Python 3.11+.
 - **Diễn giải độ khớp mô hình và kiểm định hậu ước lượng**: Đại lượng `R-squared` đạt `$0.4255$` cùng thống kê kiểm định toàn cục đạt `$108.214$`. Thống kê chẩn đoán đạt `$0.4283$` với $p = 0.8072$, xác nhận mô hình `gradient_boosting_regressor` thỏa mãn các điều kiện hậu ước lượng để suy luận chính sách.
 
-## 5. Cách tổng hợp dữ liệu từ EcoData, Finco và truy vết dữ liệu quốc tế
+## 12.3.2.5. Cách tổng hợp dữ liệu từ EcoData, Finco và truy vết dữ liệu quốc tế
 
 <Steps>
-
-### Bước 1. Khởi tạo dự án dữ liệu trên EcoData và Finco
-
-Truy cập cổng dữ liệu [EcoData](https://ecodata.io.vn) hoặc nền tảng tài chính [Finco](https://www.finco.vn), chọn phân hệ dữ liệu tương ứng với chủ đề **Dự báo chéo lợi suất và rủi ro tín dụng** và thiết lập bộ lọc đơn vị chéo `id` cùng kỳ thời gian `t` để thu được mẫu $N = 320$ quan sát.
-
-### Bước 2. Chuẩn hóa biến số và xử lý giá trị ngoại lai
-
-Ánh xạ biến phụ thuộc mục tiêu vào cột `y`, biến giải thích chính vào `x1`, biến kiểm soát vào `x2`, cùng các biến định danh và biến chuyên biệt như `z1`, `treat`, `w`, `y_bin`, `y_count`, `duration`, `event`. Thực hiện kiểm soát ngoại lai Winsorize ở ngưỡng $1\%$ và $99\%$ trước khi xuất tệp `vietlod_gradient_boosting_regressor_ecodata.csv`.
-
-### Bước 3. Đối sánh với bộ dữ liệu chuẩn quốc tế Gu–Kelly–Xiu (2020) Empirical Asset Pricing
-
-Để đối chiếu phương pháp trên bộ dữ liệu quốc tế **Gu–Kelly–Xiu (2020) Empirical Asset Pricing**, sử dụng trực tiếp các lệnh nạp dữ liệu trong bảng truy vết bên dưới.
-
+  <div className="step-item">
+    <h3>Bước 1. Khởi tạo dự án dữ liệu trên EcoData và Finco</h3>
+    <p>Truy cập cổng dữ liệu <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc nền tảng tài chính <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, chọn phân hệ dữ liệu tương ứng với chủ đề <strong>Dự báo chéo lợi suất và rủi ro tín dụng</strong> và thiết lập bộ lọc đơn vị chéo <code>id</code> cùng kỳ thời gian <code>t</code> để thu được mẫu $N = 320$ quan sát.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2. Chuẩn hóa biến số và xử lý giá trị ngoại lai</h3>
+    <p>Ánh xạ biến phụ thuộc mục tiêu vào cột <code>y</code>, biến giải thích chính vào <code>x1</code>, biến kiểm soát vào <code>x2</code>, cùng các biến định danh và biến chuyên biệt như <code>z1</code>, <code>treat</code>, <code>w</code>, <code>y_bin</code>, <code>y_count</code>, <code>duration</code>, <code>event</code>. Thực hiện kiểm soát ngoại lai Winsorize ở ngưỡng $1\%$ và $99\%$ trước khi xuất tệp <code>vietlod_gradient_boosting_regressor_ecodata.csv</code>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3. Đối sánh với bộ dữ liệu chuẩn quốc tế Gu–Kelly–Xiu (2020) Empirical Asset Pricing</h3>
+    <p>Để đối chiếu phương pháp trên bộ dữ liệu quốc tế <strong>Gu–Kelly–Xiu (2020) Empirical Asset Pricing</strong>, sử dụng trực tiếp các lệnh nạp dữ liệu trong bảng truy vết bên dưới.</p>
+  </div>
 </Steps>
 
 | Nguồn lưu trữ dữ liệu | Tên bộ dữ liệu / Tệp | Lệnh nạp trực tiếp và đường dẫn truy cập |
@@ -281,7 +279,7 @@ Truy cập cổng dữ liệu [EcoData](https://ecodata.io.vn) hoặc nền tả
 | **R CRAN Package** | *Gu–Kelly–Xiu (2020) Empirical Asset Pricing* | Lệnh R: `data("gukellyxiu", package = "wooldridge")` |
 | **Python Statsmodels** | *Gu–Kelly–Xiu (2020) Empirical Asset Pricing* | Lệnh Python: `sm.datasets.get_rdataset("gukellyxiu", "wooldridge").data` |
 
-## 6. Tài liệu tham khảo học thuật
+## 12.3.2.6. Tài liệu tham khảo học thuật
 
 - Friedman, J. H.(2001). Greedy function approximation: A gradient boosting machine. *The Annals of Statistics*, 29, số 5, 1189–1232.
 - Hastie, T, Tibshirani, R, & Friedman, J.(2009). *The Elements of Statistical Learning: Data Mining, Inference, and Prediction*, 2nd ed.. Springer.

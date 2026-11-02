@@ -1,35 +1,35 @@
 ---
 id: index
-title: "Nhóm 4.2: Mô hình lạm phát số 0 và rào cản"
-sidebar_label: "Nhóm 4.2. Mô hình lạm phát số 0 và rào cản"
+title: "4.2. Mô hình lạm phát số 0 và rào cản"
+sidebar_label: "4.2. Mô hình lạm phát số 0 và rào cản"
 sidebar_position: 2
 slug: /vietlod/chapter-04/group-4-2
-description: "Hướng dẫn thực hành Nhóm 4.2 — Mô hình lạm phát số 0 và rào cản thuộc Chương 04: so sánh và thực thi 3 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Phần 4.2 — Mô hình lạm phát số 0 và rào cản thuộc Chương 4: so sánh và thực thi 3 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
-  - Nhóm 4.2 VietLOD
+  - Phần 4.2 VietLOD
   - Mô hình lạm phát số 0 và rào cản
   - Stata 18
   - R 4.x
   - Python 3.11
 ---
 
-# Nhóm 4.2: Mô hình lạm phát số 0 và rào cản
+# 4.2. Mô hình lạm phát số 0 và rào cản
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Nhóm phương pháp 4.2 — Mô hình lạm phát số 0 và rào cản** thuộc [Chương 04: Mô hình đếm, lực hấp dẫn thương mại và biến phụ thuộc giới hạn](/vietlod/chapter-04) cung cấp quy trình thực hành từng bước cho **3 mô hình kinh tế lượng** từ bài `4.2.1` đến `4.2.3`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Nhóm 4.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-04-mo-hinh-dem-luc-hap-dan-va-bien-phu-thuoc-gioi-han/nhom-4-2-zero-inflated) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+**Phần 4.2. Mô hình lạm phát số 0 và rào cản** thuộc [4. Mô hình đếm, lực hấp dẫn thương mại và biến phụ thuộc giới hạn](/vietlod/chapter-04) cung cấp quy trình thực hành từng bước cho **3 bài học mô hình kinh tế lượng** từ mục `4.2.1` đến `4.2.3`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 4.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-04-mo-hinh-dem-luc-hap-dan-va-bien-phu-thuoc-gioi-han/nhom-4-2-zero-inflated) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Nhóm 4.2: Mô hình lạm phát số 0 và rào cản trên Stata 18, R 4.x và Python 3.11+"
+  title="Hướng dẫn thực hành Phần 4.2: Mô hình lạm phát số 0 và rào cản trên Stata 18, R 4.x và Python 3.11+"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 1. Bản chất phương pháp và hệ phương trình định danh
+## 4.2.1. Bản chất phương pháp và hệ phương trình định danh
 
-- **Câu hỏi nghiên cứu trọng tâm của nhóm**: Khi biến kết quả là số đếm không âm, kim ngạch thương mại nhiều số 0, bị chặn ngưỡng, tự chọn mẫu hoặc là tỷ trọng, phương pháp nào cho ước lượng nhất quán?
+- **Câu hỏi nghiên cứu trọng tâm**: Khi biến kết quả là số đếm không âm, kim ngạch thương mại nhiều số 0, bị chặn ngưỡng, tự chọn mẫu hoặc là tỷ trọng, phương pháp nào cho ước lượng nhất quán?
 - **Kiểm định chẩn đoán bắt buộc**: So sánh tiêu chuẩn (AIC) và (BIC) và kiểm định Vuong hiệu chỉnh Wilson (2015) giữa (ZIP) với Poisson chuẩn, kiểm định quá phân tán so với (ZINB).
 
-Phương trình đặc tả cấu trúc của nhóm phương pháp 4.2:
+Phương trình đặc tả cấu trúc của phần phương pháp 4.2:
 
 $$
 P(Y_i = 0) = \pi_i + (1 - \pi_i)e^{-\mu_i}, \quad P(Y_i = y) = (1 - \pi_i)\frac{e^{-\mu_i}\mu_i^y}{y!}
@@ -42,10 +42,10 @@ $$
 $$
 
 <FeatureNotAvailable
-  note="Khi dữ liệu vi phạm giả định định danh của Nhóm 4.2, nhà nghiên cứu cần chuyển sang các nhóm phương pháp mở rộng trong Chương 04 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
+  note="Khi dữ liệu vi phạm giả định định danh của Phần 4.2, nhà nghiên cứu cần chuyển sang các phần phương pháp mở rộng trong Chương 4 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
 />
 
-## 2. Danh mục các mô hình trong Nhóm 4.2
+## 4.2.2. Danh mục các bài học mô hình trong Phần 4.2
 
 <FeatureCards
   features={[
@@ -53,45 +53,44 @@ $$
       title: '4.2.1. Mô hình Poisson lạm phát số 0 hai cơ chế (ZIP)',
       description: 'Kết hợp quá trình nhị phân Logit/Probit sinh ra các số $0$ cấu trúc và quá trình đếm Poisson sinh ra các số đếm ngẫu nhiên bao gồm cả số $0$...',
       link: '/vietlod/chapter-04/group-4-2/b045-zero-inflated-poisson',
-      badge: 'B045 · zero_inflated_poisson'
+      badge: '4.2.1 · zero_inflated_poisson'
     },
     {
       title: '4.2.2. Mô hình nhị thức âm lạm phát số 0 (ZINB)',
       description: 'Mô hình hai cơ chế xử lý đồng thời cả sự dư thừa số $0$ cấu trúc qua phương trình lạm phát Logit/Probit lẫn sự quá phân tán của các quan sát...',
       link: '/vietlod/chapter-04/group-4-2/b046-zero-inflated-negbin',
-      badge: 'B046 · zero_inflated_negbin'
+      badge: '4.2.2 · zero_inflated_negbin'
     },
     {
       title: '4.2.3. Mô hình đếm hai phần vượt rào cản Cragg–Mullahy',
       description: 'Tách cơ chế sinh dữ liệu đếm thành 2 quyết định độc lập: Vượt rào cản tham gia — $Y \gt  0$ qua Logit/Probit — và Cường độ đếm dương — $Y \m...',
       link: '/vietlod/chapter-04/group-4-2/b047-hurdle-count',
-      badge: 'B047 · hurdle_count'
+      badge: '4.2.3 · hurdle_count'
     }
   ]}
 />
 
-## 3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
+## 4.2.3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
 
 | Bài học & Mô hình | Mã định danh | Cú pháp Stata 18 MP | Cú pháp R 4.x | Cú pháp Python 3.11+ | Hỗ trợ |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `4.2.1` · [Mô hình Poisson lạm phát số 0 hai cơ chế (ZIP)](/vietlod/chapter-04/group-4-2/b045-zero-inflated-poisson) | `zero_inflated_poisson` | `zip y_count x1 x2, inflate(z1) vce(robust)` | `pscl::zeroinfl(y_count ~ x1 + x2 \| z1, dist = 'poisson', data = df)` | `ZeroInflatedPoisson(endog, exog, exog_infl=exog_infl).fit()` | <Available /> |
-| `4.2.2` · [Mô hình nhị thức âm lạm phát số 0 (ZINB)](/vietlod/chapter-04/group-4-2/b046-zero-inflated-negbin) | `zero_inflated_negbin` | `zinb y_count x1 x2, inflate(z1) vce(robust)` | `pscl::zeroinfl(y_count ~ x1 + x2 \| z1, dist = 'negbin', data = df)` | `ZeroInflatedNegativeBinomialP(endog, exog, exog_infl=exog_infl).fit()` | <Available /> |
-| `4.2.3` · [Mô hình đếm hai phần vượt rào cản Cragg–Mullahy](/vietlod/chapter-04/group-4-2/b047-hurdle-count) | `hurdle_count` | `churdle exponential y_count x1 x2, select(z1) vce(robust)` | `pscl::hurdle(y_count ~ x1 + x2 \| z1, dist = 'negbin', data = df)` | `HurdleCountModel(df['y_count'], df[['x1', 'x2']]).fit()` | <Available /> |
+| **4.2.1** · [Mô hình Poisson lạm phát số 0 hai cơ chế (ZIP)](/vietlod/chapter-04/group-4-2/b045-zero-inflated-poisson) | `zero_inflated_poisson` | `zip y_count x1 x2, inflate(z1) vce(robust)` | `pscl::zeroinfl(y_count ~ x1 + x2 \| z1, dist = 'poisson', data = df)` | `ZeroInflatedPoisson(endog, exog, exog_infl=exog_infl).fit()` | <Available /> |
+| **4.2.2** · [Mô hình nhị thức âm lạm phát số 0 (ZINB)](/vietlod/chapter-04/group-4-2/b046-zero-inflated-negbin) | `zero_inflated_negbin` | `zinb y_count x1 x2, inflate(z1) vce(robust)` | `pscl::zeroinfl(y_count ~ x1 + x2 \| z1, dist = 'negbin', data = df)` | `ZeroInflatedNegativeBinomialP(endog, exog, exog_infl=exog_infl).fit()` | <Available /> |
+| **4.2.3** · [Mô hình đếm hai phần vượt rào cản Cragg–Mullahy](/vietlod/chapter-04/group-4-2/b047-hurdle-count) | `hurdle_count` | `churdle exponential y_count x1 x2, select(z1) vce(robust)` | `pscl::hurdle(y_count ~ x1 + x2 \| z1, dist = 'negbin', data = df)` | `HurdleCountModel(df['y_count'], df[['x1', 'x2']]).fit()` | <Available /> |
 
-## 4. Quy trình thực hành chuẩn cho Nhóm 4.2
+## 4.2.4. Quy trình thực hành chuẩn cho Phần 4.2
 
 <Steps>
-
-### Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco
-
-Tải tệp CSV thực hành của từng mô hình trong Nhóm `4.2` hoặc kết nối dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
-
-### Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu
-
-So sánh các mô hình từ `4.2.1` đến `4.2.3` trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.
-
-### Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab
-
-Thực hiện đầy đủ bộ kiểm định **So sánh tiêu chuẩn (AIC) và (BIC) và kiểm định Vuong hiệu chỉnh Wilson (2015) giữa (ZIP) với Poisson chuẩn, kiểm định quá phân tán so với (ZINB)** và đẩy mã mô hình sang [EcoLab](https://ecolab.io.vn) để xuất bảng kết quả chuẩn công bố quốc tế.
-
+  <div className="step-item">
+    <h3>Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco</h3>
+    <p>Tải tệp CSV thực hành của từng bài học trong Phần <code>4.2</code> hoặc kết nối dữ liệu thực tế từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> và <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu</h3>
+    <p>So sánh các bài học mô hình từ <code>4.2.1</code> đến <code>4.2.3</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab</h3>
+    <p>Thực hiện đầy đủ bộ kiểm định <strong>So sánh tiêu chuẩn (AIC) và (BIC) và kiểm định Vuong hiệu chỉnh Wilson (2015) giữa (ZIP) với Poisson chuẩn, kiểm định quá phân tán so với (ZINB)</strong> và đẩy mã mô hình sang <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> để xuất bảng kết quả chuẩn công bố quốc tế.</p>
+  </div>
 </Steps>

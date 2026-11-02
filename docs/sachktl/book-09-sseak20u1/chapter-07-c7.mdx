@@ -1,19 +1,19 @@
 ---
 id: chapter-07-c7
-title: "Chương 07: 7. mô hình hóa chuỗi thời gian thực tế"
-sidebar_label: "Chương 07: 7. Mô hình hóa chuỗi thời gian thực tế"
+title: "7. Mô hình hóa chuỗi thời gian thực tế"
+sidebar_label: "7. Mô hình hóa chuỗi thời gian thực tế"
 sidebar_position: 8
-description: "Hướng dẫn thực hành How-To Chương 07: 7. mô hình hóa chuỗi thời gian thực tế thuộc bộ sách Phân tích chuỗi thời gian với Stata trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 7. Mô hình hóa chuỗi thời gian thực tế thuộc giáo trình Phân tích chuỗi thời gian với Stata trên SachKTL kèm công thức toán học, phân tích 7 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 07: 7. mô hình hóa chuỗi thời gian thực tế
+# 7. Mô hình hóa chuỗi thời gian thực tế
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 07: 7. mô hình hóa chuỗi thời gian thực tế** thuộc [**Bộ sách 09: phân tích chuỗi thời gian với Stata**](/sachktl/book-09-sseak20u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/sseak20u1/c7/](https://sachktl.tnsai.vn/vi/sseak20u1/c7/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **7 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **7. Mô hình hóa chuỗi thời gian thực tế** thuộc bộ giáo trình [**Phân tích chuỗi thời gian với Stata**](/sachktl/book-09-sseak20u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/sseak20u1/c7/](https://sachktl.tnsai.vn/vi/sseak20u1/c7/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 07: 7. mô hình hóa chuỗi thời gian thực tế">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="7. Mô hình hóa chuỗi thời gian thực tế">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 09 · CHƯƠNG 07</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 07: 7. mô hình hóa chuỗi thời gian thực tế</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Phân tích chuỗi thời gian với Stata · 7 bài học chuyên sâu</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Phân tích chuỗi thời gian với Stata</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">7. Mô hình hóa chuỗi thời gian thực tế</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng chuỗi thời gian, đồng liên kết và biến động tài chính · 7 bài học chuyê</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,139 +41,288 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Giới thiệu mô hình hóa chuỗi thời gian thực tế Modeling a Real-world Time Series with Stata Chào mừng các bạn sinh viên đã đến với chuỗi bài học chuyên sâu về mô hình hóa chuỗi thời gian! Trong thế giới kinh tế đầy biến động, khả năng phân tích và dự báo các chỉ số như GDP, lạm phát hay tỷ giá là một kỹ năng vô cùng quý giá. Chuỗi bài học này sẽ trang bị cho các bạn những công cụ lý thuyết và thực hành mạnh mẽ nhất để làm chủ kỹ năng đó, thông qua một ví dụ kinh điển: phân tích Tổng sản phẩm quốc nội của Hoa Kỳ. Chúng ta sẽ cùng nhau đi qua một hành trình học thuật đầy thú vị, bắt đầu
+Giới thiệu mô hình hóa chuỗi thời gian thực tế Modeling a Real-world Time Series with Stata Chào mừng các bạn sinh viên đã đến với chuỗi bài học chuyên sâu về mô hình hóa chuỗi thời gian! Trong thế giới kinh tế đầy biến động, khả năng phân tích và dự báo các chỉ số như GDP, lạm phát hay tỷ giá là một kỹ năng vô cùng quý giá. Chuỗi bài học này sẽ trang bị cho các bạn những công cụ lý thuyết và thực hành mạnh mẽ nhất để làm chủ kỹ năng đó, thông qua một ví dụ kinh điển: phân tích Tổng sản phẩm quốc nội của Hoa Kỳ.
 
-- **Chủ đề học thuật trọng tâm**: CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO CHÍNH, PHỤ LỤC: DỮ LIỆU THỰC HÀNH CHO CHUỖI BÀI HỌC.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP, R 4.x`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+\Phi(L)(1 - L)^d Y_t = \mu + \Theta(L)\varepsilon_t, \quad \varepsilon_t \mid \mathcal{F}_{t-1} \sim \mathcal{N}(0, \sigma_t^2) \tag*{[1]}
+$$
+
+$$
+\sigma_t^2 = \omega + \sum_{i=1}^p \alpha_i \varepsilon_{t-i}^2 + \sum_{j=1}^q \beta_j \sigma_{t-j}^2, \quad \omega > 0, \; \alpha_i, \beta_j \ge 0 \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Chuỗi thời gian phải thỏa mãn điều kiện dừng hiệp phương sai hoặc được sai phân hóa đến bậc tích hợp $I(d)$ phù hợp trước khi ước lượng.
+2. Điều kiện khả nghịch và nghiệm ngoài vòng tròn đơn vị của đa thức trễ $\Phi(L)$ và $\Theta(L)$ đảm bảo tính ổn định động học.
+3. Trong mô hình phương sai có điều kiện thay đổi GARCH, tổng hệ số $\sum \alpha_i + \sum \beta_j < 1$ bảo đảm phương sai không điều kiện hữu hạn.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 07 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/sseak20u1/c7/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Hồi quy chuỗi thời gian không dừng chưa qua kiểm định nghiệm đơn vị ADF/PP và đồng liên kết Johansen dễ dẫn đến hồi quy giả mạo với thống kê $t$ và $R^2$ bị thổi phồng."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Chuẩn bị mô hình hóa chuỗi thời gian
+
+Chuẩn bị mô hình hóa chuỗi thời gian Getting ready to model a time series Giới thiệu Chào mừng các bạn quay trở lại với bài học đầu tiên trong chuỗi bài về mô hình hóa chuỗi thời gian. Trước khi chúng ta đi sâu vào các mô hình phức tạp như ARIMA, một bước cực kỳ quan trọng mà bất kỳ nhà phân tích dữ liệu giỏi nào cũng thực hiện là: khám phá và "làm quen" với dữ liệu. Giống như việc một bác sĩ cần chẩn đoán tổng quan trước khi kê đơn, chúng ta cần hiểu rõ các đặc tính cơ bản của chuỗi thời gian trước khi lựa chọn mô hình phù hợp.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Nền tảng về các phương pháp khám phá**
+- **Mô hình xu hướng tuyến tính: Góc nhìn dài hạn**
+- **Phương pháp làm mượt holt-winters: Góc nhìn linh hoạt**
+- **Ví dụ minh họa với Stata**
+- **Bước 1: Ước lượng xu hướng tuyến tính**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c7/chuan-bi-mo-hinh-hoa-chuoi-thoi-gian/)
+
+### 2.2. Nền tảng phương pháp Box-Jenkins
+
+Nền tảng phương pháp Box-Jenkins The Box-Jenkins approach and stationarity Giới thiệu Ở bài học trước, chúng ta đã thấy rằng các mô hình đơn giản như xu hướng tuyến tính là không đủ để nắm bắt động lực phức tạp của chuỗi GDP. Phần dư của mô hình cho thấy rõ ràng các quy luật bị bỏ sót, một dấu hiệu cho thấy chúng ta cần một công cụ mạnh mẽ hơn. Đây chính là lúc phương pháp Box-Jenkins xuất hiện và tỏa sáng.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Triết lý và các khái niệm cốt lõi**
+- **Quy trình 3 Bước lặp của Box-Jenkins**
+- **Nguyên tắc vàng: Tính tiết kiệm**
+- **Vấn đề cốt lõi: Tính dừng**
+- **Phương pháp xử lý tính không dừng**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c7/nen-tang-phuong-phap-box-jenkins/)
+
+### 2.3. Xác định bậc mô hình ARMA
+
+Xác định bậc mô hình ARMA Identifying the order of an ARMA model Giới thiệu Chào mừng các bạn đến với bài học thứ ba, nơi chúng ta sẽ học một trong những kỹ năng quan trọng và "nghệ thuật" nhất trong quy trình Box-Jenkins: Nhận dạng mô hình. Ở bài trước, chúng ta đã thành công trong việc biến đổi chuỗi GDP không dừng thành chuỗi tốc độ tăng trưởng dừng. Dữ liệu của chúng ta giờ đã "sẵn sàng". Nhưng sẵn sàng cho mô hình nào? Một mô hình ARMA, ARMA, hay một cấu trúc nào khác?
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Nền tảng lý thuyết: ACF và PACF**
+- **Hàm tự tương quan**
+- **Hàm tự tương quan riêng phần**
+- **Mẫu hình nhận dạng đặc trưng**
+- **Ví dụ minh họa: Rèn luyện kỹ năng nhận dạng**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c7/xac-dinh-bac-mo-hinh-arma-pq/)
+
+### 2.4. Ước lượng mô hình ARIMA với Stata
+
+Ước lượng mô hình ARIMA với Stata Estimating ARIMA models in Stata Giới thiệu Chào mừng các bạn quay trở lại! Ở bài học trước, chúng ta đã hoàn thành xuất sắc vai trò của một "thám tử dữ liệu". Bằng cách phân tích các biểu đồ ACF và PACF, chúng ta đã xác định được hai mô hình ứng viên tiềm năng cho chuỗi tốc độ tăng trưởng GDP: ARMA và ARMA. Giai đoạn "Nhận dạng" đã kết thúc. Bây giờ là lúc chúng ta chuyển sang giai đoạn thứ hai trong quy trình Box-Jenkins: Ước lượng.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Nền tảng về ước lượng mô hình ARIMA**
+- **Lệnh ARIMA trong Stata**
+- **Tại sao kết quả ARIMA lại phức tạp?**
+- **Ví dụ minh họa: Ước lượng và diễn giải**
+- **Bước 1: Ước lượng mô hình ARMA**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c7/uoc-luong-mo-hinh-arima-voi-stata/)
+
+### 2.5. Kiểm định chẩn đoán mô hình
+
+Kiểm định chẩn đoán mô hình Model diagnostic checking Giới thiệu Chào mừng các bạn đến với bài học thứ năm! Ở các bài trước, chúng ta đã đi qua hai giai đoạn đầu của quy trình Box-Jenkins: "Nhận dạng" và "Ước lượng". Chúng ta đã bắt đầu với dữ liệu thô, xử lý tính không dừng, sử dụng ACF/PACF để xác định cấu trúc, và cuối cùng đã ước lượng được hai mô hình ứng viên sáng giá cho tốc độ tăng trưởng GDP: AR và MA. Câu hỏi đặt ra bây giờ là: Liệu chúng ta có thể tin tưởng vào những mô hình này không?
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Nền tảng về các phương pháp chẩn đoán**
+- **Overfitting: Kiểm tra sự đơn giản hóa quá mức**
+- **Kiểm định phần dư: Tìm kiếm quy luật còn sót lại**
+- **Ví dụ minh họa: Chẩn đoán mô hình AR và MA**
+- **Bước 1: Overfitting các mô hình ứng viên**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c7/kiem-dinh-chan-doan-mo-hinh/)
+
+### 2.6. Dự báo và so sánh các mô hình
+
+Bài thực hành: Dự báo và so sánh các mô hình Forecasting with ARIMA models and model comparison Giới thiệu Chào mừng các bạn đến với bài học cuối cùng và cũng là bài học thực hành quan trọng nhất trong chuỗi bài của chúng ta! Chúng ta đã cùng nhau đi qua một hành trình dài và đầy thử thách: từ việc khám phá dữ liệu, xử lý tính không dừng, nhận dạng cấu trúc, ước lượng tham số, cho đến kiểm định chẩn đoán mô hình. Giờ đây, chúng ta đã có trong tay hai mô hình AR và MA mạnh mẽ, đã được kiểm tra kỹ lưỡng và sẵn sàng để đưa vào sử dụng.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Tóm tắt quy trình và các loại dự báo**
+- **Bốn bước của quy trình Box-Jenkins đã thực hiện**
+- **Các loại dự báo trong Stata**
+- **Hướng dẫn thực hành từng bước với Stata**
+- **Bước 1: Tạo các loại dự báo từ mô hình AR**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c7/du-bao-va-so-sanh-cac-mo-hinh/)
+
+### 2.7. Hệ thống kiến thức và ứng dụng
+
+Quy trình Box-Jenkins từ lý thuyết đến thực hành The Box-Jenkins workflow: From theory to practice Tổng quan chủ đề Chúng ta đã cùng nhau hoàn thành một hành trình học thuật toàn diện, đi sâu vào một trong những phương pháp luận mạnh mẽ và được sử dụng rộng rãi nhất trong kinh tế lượng hiện đại: quy trình Box-Jenkins để mô hình hóa chuỗi thời gian ARIMA.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Tổng quan chủ đề**
+- **Hệ thống lý thuyết**
+- **Tích hợp phương pháp**
+- **Ví dụ tổng hợp**
+- **Tổng kết và hướng phát triển**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c7/he-thong-kien-thuc-va-ung-dung/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Chuẩn bị mô hình hóa chuỗi thời gian</h3>
-    <p>Chuẩn bị mô hình hóa chuỗi thời gian Getting ready to model a time series Giới thiệu Chào mừng các bạn quay trở lại với bài học đầu tiên trong chuỗi bài về mô hình hóa chuỗi thời gian. Trước khi chúng ta đi sâu vào các mô hình phức tạp như ARIMA, một bước cực  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sseak20u1/c7/chuan-bi-mo-hinh-hoa-chuoi-thoi-gian/" target="_blank" rel="noopener">Chuẩn bị mô hình hóa chuỗi thời gian</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>7. Mô hình hóa chuỗi thời gian thực tế</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Nền tảng phương pháp Box-Jenkins</h3>
-    <p>Nền tảng phương pháp Box-Jenkins The Box-Jenkins approach and stationarity Giới thiệu Ở bài học trước, chúng ta đã thấy rằng các mô hình đơn giản như xu hướng tuyến tính là không đủ để nắm bắt động lực phức tạp của chuỗi GDP. Phần dư của mô hình cho thấy rõ rà Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sseak20u1/c7/nen-tang-phuong-phap-box-jenkins/" target="_blank" rel="noopener">Nền tảng phương pháp Box-Jenkins</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Xác định bậc mô hình ARMA</h3>
-    <p>Xác định bậc mô hình ARMA Identifying the order of an ARMA model Giới thiệu Chào mừng các bạn đến với bài học thứ ba, nơi chúng ta sẽ học một trong những kỹ năng quan trọng và "nghệ thuật" nhất trong quy trình Box-Jenkins: Nhận dạng mô hình. Ở bài trước, chúng Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sseak20u1/c7/xac-dinh-bac-mo-hinh-arma-pq/" target="_blank" rel="noopener">Xác định bậc mô hình ARMA</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sseak20u1/c7/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Ước lượng mô hình ARIMA với Stata</h3>
-    <p>Ước lượng mô hình ARIMA với Stata Estimating ARIMA models in Stata Giới thiệu Chào mừng các bạn quay trở lại! Ở bài học trước, chúng ta đã hoàn thành xuất sắc vai trò của một "thám tử dữ liệu". Bằng cách phân tích các biểu đồ ACF và PACF, chúng ta đã xác định  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sseak20u1/c7/uoc-luong-mo-hinh-arima-voi-stata/" target="_blank" rel="noopener">Ước lượng mô hình ARIMA với Stata</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 5: Kiểm định chẩn đoán mô hình</h3>
-    <p>Kiểm định chẩn đoán mô hình Model diagnostic checking Giới thiệu Chào mừng các bạn đến với bài học thứ năm! Ở các bài trước, chúng ta đã đi qua hai giai đoạn đầu của quy trình Box-Jenkins: "Nhận dạng" và "Ước lượng". Chúng ta đã bắt đầu với dữ liệu thô, xử lý  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sseak20u1/c7/kiem-dinh-chan-doan-mo-hinh/" target="_blank" rel="noopener">Kiểm định chẩn đoán mô hình</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Bước 6: Dự báo và so sánh các mô hình</h3>
-    <p>Bài thực hành: Dự báo và so sánh các mô hình Forecasting with ARIMA models and model comparison Giới thiệu Chào mừng các bạn đến với bài học cuối cùng và cũng là bài học thực hành quan trọng nhất trong chuỗi bài của chúng ta! Chúng ta đã cùng nhau đi qua một h Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sseak20u1/c7/du-bao-va-so-sanh-cac-mo-hinh/" target="_blank" rel="noopener">Dự báo và so sánh các mô hình</a>.</p>
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập chuỗi thời gian, kiểm định nghiệm đơn vị và ước lượng ARIMA / GARCH
 version 18.0
 clear all
 set more off
+import delimited "sachktl_timeseries_finco.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_sseak20u1_c07_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+tsset time_id
+dfuller y, lags(4) trend regress
+pperron y, lags(4) trend
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 1. Ước lượng mô hình ARIMA và kiểm định nhiễu trắng phần dư
+arima y, arima(1,1,1) vce(robust)
+predict resid_arima, resid
+wntestq resid_arima, lags(12)
+
+* 2. Ước lượng mô hình phương sai có điều kiện thay đổi ARCH/GARCH(1,1)
+arch d.y x1 x2, arch(1) garch(1) vce(robust)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
-library(tidyverse)
-library(lmtest)
-library(sandwich)
+# Nạp thư viện chuỗi thời gian và ước lượng ARIMA / GARCH(1,1)
+library(tseries)
+library(forecast)
+library(rugarch)
 
-df <- read.csv("sachktl_sseak20u1_c07_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_timeseries_finco.csv")
+y_ts <- ts(df$y, frequency = 12)
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA tối ưu theo AICc
+adf.test(y_ts)
+fit_arima <- auto.arima(y_ts, seasonal = FALSE, ic = "aicc")
+summary(fit_arima)
+checkresiduals(fit_arima)
+
+# 2. Ước lượng mô hình GARCH(1,1) cho chuỗi lợi suất
+spec <- ugarchspec(variance.model = list(model = "sGARCH", garchOrder = c(1, 1)),
+                   mean.model = list(armaOrder = c(1, 0), include.mean = TRUE))
+fit_garch <- ugarchfit(spec = spec, data = diff(y_ts))
+show(fit_garch)
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và arch để phân tích chuỗi thời gian & biến động
 import pandas as pd
-import statsmodels.formula.api as smf
+from statsmodels.tsa.stattools import adfuller
+from statsmodels.tsa.arima.model import ARIMA
+from arch import arch_model
 
-df = pd.read_csv("sachktl_sseak20u1_c07_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_timeseries_finco.csv")
+y = df["y"].dropna()
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA(1,1,1)
+adf_stat, p_val, *_ = adfuller(y, autolag="AIC")
+print(f"ADF Statistic: {adf_stat:.4f}, p-value: {p_val:.4f}")
+arima_res = ARIMA(y, order=(1, 1, 1)).fit()
+print(arima_res.summary())
+
+# 2. Ước lượng mô hình GARCH(1,1) với phân phối Student-t
+ret = y.diff().dropna() * 100
+garch_res = arch_model(ret, vol="Garch", p=1, q=1, dist="t").fit(disp="off")
+print(garch_res.summary())
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 07: 7. mô hình hóa chuỗi thời gian thực tế trên SachKTL"
+  title="Hướng dẫn thực hành 7. Mô hình hóa chuỗi thời gian thực tế trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 07 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Chuẩn bị mô hình hóa chuỗi thời gian | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c7/chuan-bi-mo-hinh-hoa-chuoi-thoi-gian/) |
-| **Bài 02** | Nền tảng phương pháp Box-Jenkins | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c7/nen-tang-phuong-phap-box-jenkins/) |
-| **Bài 03** | Xác định bậc mô hình ARMA | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c7/xac-dinh-bac-mo-hinh-arma-pq/) |
-| **Bài 04** | Ước lượng mô hình ARIMA với Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c7/uoc-luong-mo-hinh-arima-voi-stata/) |
-| **Bài 05** | Kiểm định chẩn đoán mô hình | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c7/kiem-dinh-chan-doan-mo-hinh/) |
-| **Bài 06** | Dự báo và so sánh các mô hình | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c7/du-bao-va-so-sanh-cac-mo-hinh/) |
-| **Bài 07** | Hệ thống kiến thức và ứng dụng | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c7/he-thong-kien-thuc-va-ung-dung/) |
+| **7.1** | Chuẩn bị mô hình hóa chuỗi thời gian | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c7/chuan-bi-mo-hinh-hoa-chuoi-thoi-gian/) |
+| **7.2** | Nền tảng phương pháp Box-Jenkins | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c7/nen-tang-phuong-phap-box-jenkins/) |
+| **7.3** | Xác định bậc mô hình ARMA | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c7/xac-dinh-bac-mo-hinh-arma-pq/) |
+| **7.4** | Ước lượng mô hình ARIMA với Stata | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c7/uoc-luong-mo-hinh-arima-voi-stata/) |
+| **7.5** | Kiểm định chẩn đoán mô hình | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c7/kiem-dinh-chan-doan-mo-hinh/) |
+| **7.6** | Dự báo và so sánh các mô hình | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c7/du-bao-va-so-sanh-cac-mo-hinh/) |
+| **7.7** | Hệ thống kiến thức và ứng dụng | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c7/he-thong-kien-thuc-va-ung-dung/) |

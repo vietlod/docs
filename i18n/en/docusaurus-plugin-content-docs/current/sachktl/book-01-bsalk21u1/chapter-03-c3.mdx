@@ -1,19 +1,19 @@
 ---
 id: chapter-03-c3
-title: "Chapter 03: 3. Mô hình hồi quy sai số thành phần hai chiều — Econometric Analysis of Panel Data"
-sidebar_label: "Chapter 03: 3. Mô hình hồi quy sai số thành phần hai c"
+title: "3. Two-Way Error Component Regression Model"
+sidebar_label: "3. Two-Way Error Component Regression Model"
 sidebar_position: 4
-description: "Step-by-step practical how-to guide for Chapter 03: 3. Mô hình hồi quy sai số thành phần hai chiều from Econometric Analysis of Panel Data on SachKTL with Stata, R, and Python workflows integrated with EcoData, Finco, and EcoLab."
+description: "Comprehensive practical how-to guide for 3. Two-Way Error Component Regression Model from Econometric Analysis of Panel Data on SachKTL featuring structural equations, 5 lesson breakdowns, and Stata, R, and Python scripts."
 ---
 
-# Chapter 03: 3. Mô hình hồi quy sai số thành phần hai chiều — Econometric Analysis of Panel Data
+# 3. Two-Way Error Component Regression Model
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-This practical how-to guide synthesizes the methodology and empirical implementation workflow of **Chapter 03: 3. Mô hình hồi quy sai số thành phần hai chiều** from [**Book 01: Econometric Analysis of Panel Data**](/en/sachktl/book-01-bsalk21u1/), with direct backlinks to the authoritative source material at [https://sachktl.tnsai.vn/vi/bsalk21u1/c3/](https://sachktl.tnsai.vn/vi/bsalk21u1/c3/).
+This practical how-to guide presents the theoretical foundations, structural mathematical equations, detailed breakdown of **5 specialized lessons**, and multi-platform replication workflows for **3. Two-Way Error Component Regression Model** from the textbook [**Econometric Analysis of Panel Data**](/en/sachktl/book-01-bsalk21u1/), with direct cross-references to the authoritative source material at [https://sachktl.tnsai.vn/vi/bsalk21u1/c3/](https://sachktl.tnsai.vn/vi/bsalk21u1/c3/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chapter 03: 3. Mô hình hồi quy sai số thành phần hai chiều">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="3. Two-Way Error Component Regression Model">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ This practical how-to guide synthesizes the methodology and empirical implementa
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BOOK 01 · CHAPTER 03</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chapter 03: 3. Mô hình hồi quy sai số thành phần hai chiều</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Part of Textbook: Econometric Analysis of Panel Data · 5 Detailed Lessons</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Econometric Analysis of Panel Data</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">3. Two-Way Error Component Regression Model</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Panel Data Econometrics and Unobserved Heterogeneity Control · 5 Detailed Lessons</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,133 +41,250 @@ This practical how-to guide synthesizes the methodology and empirical implementa
   </svg>
 </div>
 
-## 1. Methodological Meaning and Scope of Application
+## 1. Methodological Foundations, Mathematical Specification, and Identification
 
-Mô hình hồi quy sai số thành phần hai chiều Trong phân tích dữ liệu bảng, việc kiểm soát các yếu tố không quan sát được là chìa khóa để có được những ước lượng vững chắc và đáng tin cậy. Ở chương trước, chúng ta đã tìm hiểu về mô hình thành phần sai số một chiều, tập trung vào việc xử lý các đặc tính riêng không đổi theo thời gian của từng đối tượng. Tuy nhiên, trong nhiều bối cảnh kinh tế, các cú sốc hoặc sự kiện chung có thể tác động đồng thời lên tất cả các đối tượng trong một khoảng thời gian nhất định, chẳng hạn như các cuộc khủng hoảng tài chính, thay đổi chính sách vĩ mô, hay các cú
+Mô hình hồi quy sai số thành phần hai chiều Trong phân tích dữ liệu bảng, việc kiểm soát các yếu tố không quan sát được là chìa khóa để có được những ước lượng vững chắc và đáng tin cậy. Ở chương trước, chúng ta đã tìm hiểu về mô hình thành phần sai số một chiều, tập trung vào việc xử lý các đặc tính riêng không đổi theo thời gian của từng đối tượng.
 
-- **Core Academic Topics**: Cấu trúc chuỗi bài học, Kiến thức tiên quyết, Mục tiêu học tập, Tài liệu tham khảo chính, Phụ lục: Dữ liệu mô phỏng cho chuỗi bài học.
-- **Supported Analytical Environments**: `Stata 18 MP`.
-- **Recommended Empirical Data Sources**: Vietnamese macroeconomic, corporate, and household survey datasets on [EcoData](https://ecodata.io.vn), capital and commodity market series on [Finco](https://www.finco.vn), model cross-references on [VietLOD](https://vietlod.tnsai.vn), and automated estimation on [EcoLab](https://ecolab.io.vn).
+### 1.1. Structural Equations and Representative Estimator
+
+$$
+Y_{it} = \alpha + \mathbf{X}_{it}'\boldsymbol{\beta} + \mu_i + \lambda_t + \varepsilon_{it}, \quad i = 1,\dots,N; \; t = 1,\dots,T \tag*{[1]}
+$$
+
+$$
+\hat{\boldsymbol{\beta}}_{\text{FE}} = \left(\sum_{i=1}^N \sum_{t=1}^T \tilde{\mathbf{X}}_{it}\tilde{\mathbf{X}}_{it}'\right)^{-1} \left(\sum_{i=1}^N \sum_{t=1}^T \tilde{\mathbf{X}}_{it}\tilde{Y}_{it}\right), \quad \tilde{Z}_{it} = Z_{it} - \bar{Z}_i \tag*{[2]}
+$$
+
+### 1.2. Core Identification Assumptions and Applicability Conditions
+
+1. Strict exogeneity of explanatory covariates with respect to idiosyncratic disturbances across cross-sectional units and time periods.
+2. Unobserved individual effects $\mu_i$ may correlate arbitrarily with $\mathbf{X}_{it}$ under Fixed Effects or remain orthogonal under Random Effects.
+3. Cluster-robust variance-covariance estimation at the entity level is required to accommodate arbitrary within-panel serial correlation and heteroskedasticity.
 
 <FeatureCards
   features={[
     {
-      title: "Original Chapter on SachKTL",
-      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for Chapter 03 on SachKTL.",
+      title: "Authoritative Chapter on SachKTL",
+      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for this chapter on SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/bsalk21u1/c3/"
     },
     {
       title: "Practice Datasets on EcoData & Finco",
-      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and survey data for hands-on replication.",
+      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and household survey data for hands-on replication.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
       title: "Automated Estimation on EcoLab",
-      description: "Execute econometric specifications, run diagnostic battery tests, and export publication-grade tables automatically.",
+      description: "Execute econometric specifications, run diagnostic battery tests, and export APA 7th / AER publication-grade tables automatically.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Step-by-Step Practical Implementation Across Chapter Lessons
+<FeatureNotAvailable
+  feature="Unconditional Baseline Estimation Under Violated Identification Assumptions"
+  reason="Standard Fixed Effects and Random Effects estimators suffer from Nickell bias when lagged dependent variables $Y_{i,t-1}$ are included in short-$T$ panels; use Difference GMM or System GMM instead."
+  alternative="Run the complete diagnostic battery in Step 4 and transition to the appropriate corrective estimator on VietLOD or EcoLab."
+/>
+
+## 2. Lesson-by-Lesson Academic Breakdown
+
+### 2.1. Mô hình hiệu ứng cố định
+
+Trong chuỗi bài giới thiệu, chúng ta đã nhận thấy tầm quan trọng của việc kiểm soát các yếu tố không quan sát được trong phân tích dữ liệu bảng. Mô hình thành phần sai số một chiều đã giúp chúng ta xử lý các đặc tính cố hữu, không đổi theo thời gian của từng đối tượng. Tuy nhiên, thế giới thực hiếm khi tĩnh tại; các sự kiện kinh tế, chính sách vĩ mô, hay các cú sốc công nghệ thường tạo ra những tác động chung, ảnh hưởng đến tất cả các đối tượng trong cùng một khoảng thời gian.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Nền tảng lý thuyết của mô hình hai chiều**
+- **3.1 Cấu trúc thành phần sai số hai chiều**
+- **3.2 Mô hình hiệu ứng cố định hai chiều**
+- **Phương pháp kiểm định hiệu ứng cố định**
+- **3.2.1 Kiểm định sự tồn tại của hiệu ứng cố định**
+- **Các giả thuyết kiểm định chính**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c3/mo-hinh-hieu-ung-co-dinh/)
+
+### 2.2. Mô hình Hiệu ứng Ngẫu nhiên hai chiều
+
+Ở bài học trước, chúng ta đã tìm hiểu mô hình hiệu ứng cố định, một phương pháp hiệu quả để loại bỏ sai lệch gây ra bởi các yếu tố không quan sát được có tương quan với biến giải thích. Cách tiếp cận này coi các hiệu ứng $\mu_i$ và $\lambda_t$ là các hằng số cần ước lượng. Tuy nhiên, phương pháp FE có một hạn chế lớn: nó không thể ước lượng được hệ số của các biến không thay đổi theo thời gian . Để giải quyết vấn đề này và cho phép suy diễn ra một tổng thể rộng lớn hơn, chúng ta chuyển sang mô hình hiệu ứng ngẫu nhiên hai chiều .
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Nền tảng lý thuyết của mô hình hiệu ứng ngẫu nhiên**
+- **3.3 Giả định và cấu trúc sai số**
+- **Các phương pháp ước lượng thành phần phương sai**
+- **Phương pháp thực hiện trong Stata**
+- **Cú pháp lệnh và các tùy chọn**
+- **Ví dụ minh họa với dữ liệu Grunfeld**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c3/mo-hinh-hieu-ung-ngau-nhien/)
+
+### 2.3. Ước lượng hợp lý tối đa và kỹ thuật dự báo
+
+Trong hai bài học trước, chúng ta đã khám phá các phương pháp Hiệu ứng Cố định và Hiệu ứng Ngẫu nhiên để xử lý các thành phần sai số không quan sát được. Đặc biệt, mô hình Hiệu ứng Ngẫu nhiên đã giới thiệu phương pháp Bình phương Tối thiểu Tổng quát Khả thi, một quy trình hai bước: đầu tiên ước lượng các thành phần phương sai, sau đó sử dụng chúng để thực hiện hồi quy GLS. Mặc dù hiệu quả, quy trình này vẫn mang tính tuần tự. Kinh tế lượng cung cấp một phương pháp thay thế, mạnh mẽ và toàn diện hơn, đó là Ước lượng Hợp lý Tối đa.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Nền tảng lý thuyết của MLE và dự báo**
+- **3.4 Ước lượng hợp lý tối đa**
+- **3.5 Dự báo với mô hình hai chiều**
+- **Phương pháp nghiên cứu và thực hành Stata**
+- **Các lệnh Stata chính**
+- **Ví dụ minh họa với dữ liệu Grunfeld**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c3/uoc-luong-hop-ly-toi-da/)
+
+### 2.4. Phân tích các ví dụ thực nghiệm và bài tập
+
+Sau khi đã trang bị đầy đủ các công cụ lý thuyết từ hiệu ứng cố định, hiệu ứng ngẫu nhiên đến ước lượng hợp lý tối đa, hành trình của chúng ta giờ đây chuyển sang giai đoạn ứng dụng. Lý thuyết sẽ trở nên vô nghĩa nếu không thể soi sáng cho các vấn đề trong thế giới thực. Do đó, bài học này sẽ tập trung vào việc phân tích các ví dụ thực nghiệm kinh điển trong kinh tế lượng dữ liệu bảng.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Phân tích các ví dụ thực nghiệm**
+- **3.6.1 Ví dụ 1: Phương trình đầu tư Grunfeld**
+- **3.6.2 Ví dụ 2: Phương trình cầu xăng dầu**
+- **Hướng dẫn giải bài tập chọn lọc**
+- **Bài tập lý thuyết 3.1: Within hai chiều tương đương hai Within một chiều**
+- **Chứng minh từng bước**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c3/phan-tich-cac-vi-du-thuc-nghiem/)
+
+### 2.5. Hướng dẫn Thực hành Toàn diện
+
+Qua bốn bài học, chúng ta đã xây dựng một nền tảng kiến thức toàn diện về mô hình thành phần sai số hai chiều. Từ việc phân biệt sự khác biệt triết học giữa Hiệu ứng Cố định và Hiệu ứng Ngẫu nhiên, đến việc nắm vững các kỹ thuật ước lượng như FGLS và MLE, bạn đã được trang bị bộ công cụ lý thuyết cần thiết. Bài học cuối cùng này sẽ là đỉnh cao của chuỗi bài, nơi chúng ta chuyển hóa toàn bộ lý thuyết đó thành một quy trình làm việc thực tiễn, mạch lạc và có hệ thống từ A đến Z.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Quy trình phân tích dữ liệu bảng hai chiều từ A-Z**
+- **Các bước trong quy trình làm việc**
+- **Bước 1: Chuẩn bị và khám phá dữ liệu**
+- **Bước 2: Ước lượng các mô hình cơ bản**
+- **Bước 3: Lựa chọn mô hình - Kiểm định Hausman**
+- **Bước 4: Phân tích chuyên sâu và kiểm định độ vững chắc**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c3/huong-dan-thuc-hanh-toan-dien/)
+
+## 3. Step-by-Step Empirical Implementation Workflow
 
 <Steps>
   <div className="step-item">
-    <h3>Step 1: Mô hình hiệu ứng cố định</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Mô hình hiệu ứng cố định. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/bsalk21u1/c3/mo-hinh-hieu-ung-co-dinh/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/bsalk21u1/c3/mo-hinh-hieu-ung-co-dinh/</a>.</p>
+    <h3>1. Formulate the Research Question and Prepare Data on EcoData & Finco</h3>
+    <p>Define the dependent variable, core explanatory variables, and control covariates aligned with <strong>3. Two-Way Error Component Regression Model</strong>. Extract standardized Vietnamese empirical series from <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> or <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, and screen for missing observations and extreme outliers.</p>
   </div>
   <div className="step-item">
-    <h3>Step 2: Mô hình Hiệu ứng Ngẫu nhiên hai chiều</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Mô hình Hiệu ứng Ngẫu nhiên hai chiều. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/bsalk21u1/c3/mo-hinh-hieu-ung-ngau-nhien/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/bsalk21u1/c3/mo-hinh-hieu-ung-ngau-nhien/</a>.</p>
+    <h3>2. Conduct Descriptive Profiling, Correlation Analysis, and Pre-Estimation Checks</h3>
+    <p>Examine empirical distributions, construct summary statistics tables, and evaluate collinearity using pairwise correlation matrices and Variance Inflation Factors (VIF).</p>
   </div>
   <div className="step-item">
-    <h3>Step 3: Ước lượng hợp lý tối đa và kỹ thuật dự báo</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Ước lượng hợp lý tối đa và kỹ thuật dự báo. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/bsalk21u1/c3/uoc-luong-hop-ly-toi-da/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/bsalk21u1/c3/uoc-luong-hop-ly-toi-da/</a>.</p>
+    <h3>3. Estimate the Model Across Stata 18 MP, R 4.x, and Python 3.11+</h3>
+    <p>Execute the parameter estimation scripts matching the structural equations in Section 1.1 while cross-checking theoretical derivations at <a href="https://sachktl.tnsai.vn/vi/bsalk21u1/c3/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Step 4: Phân tích các ví dụ thực nghiệm và bài tập</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Phân tích các ví dụ thực nghiệm và bài tập. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/bsalk21u1/c3/phan-tich-cac-vi-du-thuc-nghiem/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/bsalk21u1/c3/phan-tich-cac-vi-du-thuc-nghiem/</a>.</p>
+    <h3>4. Perform Post-Estimation Diagnostics and Robust Variance Correction</h3>
+    <p>Test for heteroskedasticity, serial correlation, Ramsey RESET functional form misspecification, and regressor endogeneity. Apply White HC1 or cluster-robust standard errors for valid inference.</p>
   </div>
   <div className="step-item">
-    <h3>Step 5: Hướng dẫn Thực hành Toàn diện</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Hướng dẫn Thực hành Toàn diện. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/bsalk21u1/c3/huong-dan-thuc-hanh-toan-dien/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/bsalk21u1/c3/huong-dan-thuc-hanh-toan-dien/</a>.</p>
+    <h3>5. Format Journal-Grade Tables and Cross-Verify on EcoLab</h3>
+    <p>Report point estimates, standard errors in parentheses, and statistical significance stars following APA 7th / AER Booktabs standards, or automate the entire reporting pipeline on <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> and <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Multi-Platform Implementation Examples in Stata, R, and Python
+## 4. Multi-Platform Implementation Scripts in Stata, R, and Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Initialize environment and load practice dataset from EcoData / SachKTL
+* Thiết lập cấu trúc dữ liệu bảng và ước lượng FE / RE / Hausman
 version 18.0
 clear all
 set more off
+import delimited "sachktl_panel_ecodata.csv", clear encoding("utf-8")
 
-* Import standardized empirical dataset
-import delimited "sachktl_bsalk21u1_c03_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+xtset id year
+xtdescribe
+xtsum y x1 x2 x3
 
-* Estimate baseline specification and run diagnostic checks with robust standard errors
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 1. Ước lượng tác động cố định (Fixed Effects) và tác động ngẫu nhiên (Random Effects)
+xtreg y x1 x2 x3, fe
+estimates store FE_model
+xtreg y x1 x2 x3, re
+estimates store RE_model
+
+* 2. Kiểm định Hausman lựa chọn mô hình và ước lượng sai số chuẩn vững theo cụm
+hausman FE_model RE_model, sigmamore
+xtreg y x1 x2 x3 i.year, fe vce(cluster id)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Load econometric packages and practice dataset from EcoData / SachKTL
-library(tidyverse)
+# Nạp thư viện dữ liệu bảng và ước lượng FE / RE / Cluster-Robust SE
+library(plm)
 library(lmtest)
 library(sandwich)
 
-df <- read.csv("sachktl_bsalk21u1_c03_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_panel_ecodata.csv")
+pdata <- pdata.frame(df, index = c("id", "year"))
 
-# Estimate model and compute heteroskedasticity-robust HC1 standard errors
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Ước lượng mô hình Within FE và Swamy-Arora RE
+fe_mod <- plm(y ~ x1 + x2 + x3, data = pdata, model = "within", effect = "twoways")
+re_mod <- plm(y ~ x1 + x2 + x3, data = pdata, model = "random")
+
+# 2. Kiểm định Hausman và xuất sai số chuẩn vững Arellano theo cụm
+phtest(fe_mod, re_mod)
+coeftest(fe_mod, vcov = vcovHC(fe_mod, method = "arellano", type = "HC1", cluster = "group"))
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Load econometric libraries and practice dataset from EcoData / SachKTL
+# Nạp thư viện linearmodels và ước lượng PanelOLS / RandomEffects
 import pandas as pd
-import statsmodels.formula.api as smf
+from linearmodels.panel import PanelOLS, RandomEffects, compare
 
-df = pd.read_csv("sachktl_bsalk21u1_c03_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_panel_ecodata.csv").set_index(["id", "year"])
 
-# Fit specification with HC1 robust standard errors
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Ước lượng mô hình Fixed Effects hai chiều với sai số chuẩn cụm
+fe_mod = PanelOLS.from_formula("y ~ 1 + x1 + x2 + x3 + EntityEffects + TimeEffects", data=df)
+fe_res = fe_mod.fit(cov_type="clustered", cluster_entity=True)
+
+# 2. Ước lượng mô hình Random Effects và đối chiếu kết quả
+re_mod = RandomEffects.from_formula("y ~ 1 + x1 + x2 + x3", data=df)
+re_res = re_mod.fit(cov_type="clustered", cluster_entity=True)
+print(compare({"Fixed Effects": fe_res, "Random Effects": re_res}))
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video Tutorial Walkthrough
+## 5. Post-Estimation Diagnostic and Interpretation Guide
+
+| Diagnostic Criterion | Null Hypothesis $H_0$ | Benchmark Threshold | Corrective Action When $H_0$ Is Rejected |
+| :--- | :--- | :--- | :--- |
+| **Heteroskedasticity** | Constant error variance $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ rejects $H_0$ | Apply `vce(robust)`, `vcovHC(HC1)`, or FGLS/WLS weighted estimation |
+| **Multicollinearity** | No severe linear dependence among regressors | $\text{VIF} < 10$ acceptable | Drop redundant covariates, center interactions, or apply LASSO/Ridge regularization |
+| **Ramsey RESET Functional Form** | No omitted nonlinear or higher-order terms | $p\text{-value} > 0.05$ retains $H_0$ | Add interaction terms, quadratic polynomials, or log-transform skewed positive variables |
+| **Regressor Exogeneity** | Orthogonality $\text{Cov}(X, \varepsilon)=0$ | Durbin-Wu-Hausman $p > 0.05$ | Transition to IV/2SLS, LIML, or GMM estimation with validated instruments |
+
+## 6. Video Tutorial Walkthrough
 
 <VideoTutorial
-  title="Practical Walkthrough for Chapter 03: 3. Mô hình hồi quy sai số thành phần hai chiều on SachKTL"
+  title="Practical Walkthrough for 3. Two-Way Error Component Regression Model on SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Complete Lesson Directory and Backlinks to Original SachKTL Articles
+## 7. Complete Lesson Directory and Backlinks to Original SachKTL Articles
 
-| No. | Lesson Title in Chapter 03 | Supported Software | Original Source Link on SachKTL |
+| Lesson Code | Lesson Title | Supported Software | Original Source Link on SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Lesson 01** | Mô hình hiệu ứng cố định | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c3/mo-hinh-hieu-ung-co-dinh/) |
-| **Lesson 02** | Mô hình Hiệu ứng Ngẫu nhiên hai chiều | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c3/mo-hinh-hieu-ung-ngau-nhien/) |
-| **Lesson 03** | Ước lượng hợp lý tối đa và kỹ thuật dự báo | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c3/uoc-luong-hop-ly-toi-da/) |
-| **Lesson 04** | Phân tích các ví dụ thực nghiệm và bài tập | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c3/phan-tich-cac-vi-du-thuc-nghiem/) |
-| **Lesson 05** | Hướng dẫn Thực hành Toàn diện | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c3/huong-dan-thuc-hanh-toan-dien/) |
+| **3.1** | Mô hình hiệu ứng cố định | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c3/mo-hinh-hieu-ung-co-dinh/) |
+| **3.2** | Mô hình Hiệu ứng Ngẫu nhiên hai chiều | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c3/mo-hinh-hieu-ung-ngau-nhien/) |
+| **3.3** | Ước lượng hợp lý tối đa và kỹ thuật dự báo | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c3/uoc-luong-hop-ly-toi-da/) |
+| **3.4** | Phân tích các ví dụ thực nghiệm và bài tập | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c3/phan-tich-cac-vi-du-thuc-nghiem/) |
+| **3.5** | Hướng dẫn Thực hành Toàn diện | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c3/huong-dan-thuc-hanh-toan-dien/) |

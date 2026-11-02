@@ -1,19 +1,19 @@
 ---
 id: chapter-12-c12
-title: "Chương 12: 12. biến công cụ"
-sidebar_label: "Chương 12: 12. Biến công cụ"
+title: "12. Biến công cụ"
+sidebar_label: "12. Biến công cụ"
 sidebar_position: 13
-description: "Hướng dẫn thực hành How-To Chương 12: 12. biến công cụ thuộc bộ sách Lý thuyết Kinh tế lượng trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 12. Biến công cụ thuộc giáo trình Lý thuyết kinh tế lượng trên SachKTL kèm công thức toán học, phân tích 6 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 12: 12. biến công cụ
+# 12. Biến công cụ
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 12: 12. biến công cụ** thuộc [**Bộ sách 17: lý thuyết kinh tế lượng**](/sachktl/book-17-hsank22u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/hsank22u1/c12/](https://sachktl.tnsai.vn/vi/hsank22u1/c12/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **6 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **12. Biến công cụ** thuộc bộ giáo trình [**Lý thuyết kinh tế lượng**](/sachktl/book-17-hsank22u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/hsank22u1/c12/](https://sachktl.tnsai.vn/vi/hsank22u1/c12/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 12: 12. biến công cụ">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="12. Biến công cụ">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 17 · CHƯƠNG 12</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 12: 12. biến công cụ</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Lý thuyết Kinh tế lượng · 6 bài học chuyên sâu</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Lý thuyết kinh tế lượng</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">12. Biến công cụ</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng ứng dụng, mô hình hóa thống kê và kiểm định giả thuyết · 6 bài học chuy</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,102 +41,218 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Biến công cụ Chào mừng các bạn sinh viên đến với chuỗi bài học về một trong những chủ đề quan trọng và thú vị nhất của kinh tế lượng hiện đại: Biến công cụ . Trong thực tế, các mô hình kinh tế thường phức tạp hơn những gì chúng ta giả định trong hồi quy OLS cơ bản. Rất nhiều khi, biến giải thích mà chúng ta quan tâm lại có mối quan hệ hai chiều hoặc bị ảnh hưởng bởi các yếu tố không quan sát được, dẫn đến một vấn đề nghiêm trọng gọi là "nội sinh". Khi đó, ước lượng OLS sẽ bị chệch và không còn đáng tin cậy để suy luận nhân quả. Vậy làm thế nào để giải quyết vấn đề hóc búa này? Phương pháp
+Biến công cụ Chào mừng các bạn sinh viên đến với chuỗi bài học về một trong những chủ đề quan trọng và thú vị nhất của kinh tế lượng hiện đại: Biến công cụ . Trong thực tế, các mô hình kinh tế thường phức tạp hơn những gì chúng ta giả định trong hồi quy OLS cơ bản. Rất nhiều khi, biến giải thích mà chúng ta quan tâm lại có mối quan hệ hai chiều hoặc bị ảnh hưởng bởi các yếu tố không quan sát được, dẫn đến một vấn đề nghiêm trọng gọi là "nội sinh". Khi đó, ước lượng OLS sẽ bị chệch và không còn đáng tin cậy để suy luận nhân quả. Vậy làm thế nào để giải quyết vấn đề hóc búa này?
 
-- **Chủ đề học thuật trọng tâm**: Cấu trúc chuỗi bài học, PHỤ LỤC: Dữ liệu mô phỏng cho chuỗi bài viết.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+Y_i = \beta_0 + \sum_{k=1}^K \beta_k X_{ik} + \varepsilon_i, \quad \mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0 \tag*{[1]}
+$$
+
+$$
+\widehat{\text{Var}}_{\text{HC1}}(\hat{\boldsymbol{\beta}}) = \frac{N}{N - K - 1}\left(\mathbf{X}'\mathbf{X}\right)^{-1}\left(\sum_{i=1}^N \hat{\varepsilon}_i^2 \mathbf{x}_i \mathbf{x}_i'\right)\left(\mathbf{X}'\mathbf{X}\right)^{-1} \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Dạng hàm tuyến tính theo tham số được xác định đúng, không bỏ sót biến giải thích quan trọng có tương quan với các biến trong mô hình.
+2. Kỳ vọng có điều kiện của sai số bằng không $\mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0$, đảm bảo tính không chệch và vững tiệm cận của ước lượng.
+3. Ma trận thiết kế $\mathbf{X}$ có hạng cột đầy đủ, không xảy ra đa cộng tuyến hoàn hảo và sử dụng sai số chuẩn vững HC1/Cluster khi có phương sai thay đổi.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 12 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/hsank22u1/c12/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Khi tồn tại biến giải thích nội sinh do đồng thời hai chiều, sai số đo lường hoặc bỏ sót biến không quan sát được, ước lượng OLS bị chệch và không vững; cần chuyển sang ước lượng biến công cụ IV/2SLS hoặc GMM."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Hiểu về nội sinh và biến công cụ
+
+Chào mừng các bạn đã quay trở lại với chuỗi bài học về Biến công cụ! Trong bài giới thiệu, chúng ta đã có cái nhìn tổng quan về tầm quan trọng của phương pháp này. Ở bài học đầu tiên hôm nay, chúng ta sẽ cùng nhau giải quyết hai câu hỏi cốt lõi và nền tảng nhất: "Nội sinh là gì?" và "Tại sao nó lại là một vấn đề nghiêm trọng đối với hồi quy OLS mà chúng ta đã quen thuộc?". Đây là một trong những khái niệm phân biệt rõ ràng nhất giữa kinh tế lượng và các ngành thống kê khác.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Vấn đề nội sinh: Khi OLS không còn đáng tin cậy**
+- **Tại sao OLS lại bị chệch?**
+- **Các nguồn gốc phổ biến của nội sinh**
+- **2. Biến công cụ: Giải pháp cho vấn đề nội sinh**
+- **Hai điều kiện vàng của một biến công cụ tốt**
+- **3. Ví dụ minh họa: Lợi tức từ giáo dục**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c12/hieu-ve-noi-sinh-va-bien-cong-cu/)
+
+### 2.2. Nhận dạng và các phương pháp ước lượng cơ bản
+
+Ở bài học trước, chúng ta đã xây dựng được một trực giác vững chắc về vấn đề nội sinh và tại sao biến công cụ lại là một ý tưởng hay. Chúng ta đã hiểu "cái gì" và "tại sao". Trong bài học hôm nay, chúng ta sẽ đi sâu vào phần "như thế nào". Chúng ta sẽ chính thức hóa các ý tưởng đã thảo luận bằng ngôn ngữ của kinh tế lượng, tìm hiểu các điều kiện cần thiết để một mô hình có thể được ước lượng, và quan trọng nhất là học cách thực hiện các phương pháp ước lượng đầu tiên.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Dạng rút gọn và tính nhận dạng**
+- **2. Ước lượng biến công cụ**
+- **3. Bình phương nhỏ nhất hai giai đoạn**
+- **4. Ví dụ minh họa với Stata**
+- **Bước 1: Hồi quy OLS**
+- **Bước 2: Ước lượng bằng 2SLS**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c12/nhan-dang-va-cac-phuong-phap-uoc-luong-co-ban/)
+
+### 2.3. Ước lượng LIML và các phương pháp thay thế
+
+Chào mừng các bạn đã đến với bài học thứ ba trong chuỗi bài về Biến công cụ. Ở bài trước, chúng ta đã làm quen với 2SLS, phương pháp được coi là "con ngựa thồ" trong thế giới ước lượng IV vì tính phổ biến và dễ áp dụng của nó. Tuy nhiên, không có phương pháp nào là hoàn hảo cho mọi tình huống. Trong thực tế, 2SLS có thể bộc lộ một số điểm yếu, đặc biệt là khi mô hình của chúng ta trở nên phức tạp hơn. Trong bài học hôm nay, chúng ta sẽ mở rộng bộ công cụ của mình bằng cách tìm hiểu về các phương pháp ước lượng thay thế.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Ước lượng hợp lý tối đa thông tin hạn chế**
+- **So sánh trực quan giữa LIML và 2SLS**
+- **2. Các phương pháp thay thế: JIVE**
+- **3. Ví dụ minh họa với Stata**
+- **4. Tổng kết bài học**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c12/uoc-luong-liml-va-cac-phuong-phap-thay-the/)
+
+### 2.4. Suy luận thống kê trong mô hình biến công cụ
+
+Chào mừng các bạn đến với bài học thứ tư! Trong các bài học trước, chúng ta đã tập trung vào việc "ước lượng", tức là tìm ra giá trị điểm cho các hệ số cấu trúc \ bằng các phương pháp như 2SLS và LIML. Tuy nhiên, một ước lượng điểm tự nó không cho chúng ta biết nhiều về độ không chắc chắn của kết quả. Liệu lợi tức từ giáo dục là 10% có thực sự khác biệt so với 0% về mặt thống kê không? Hay nó chỉ là một kết quả ngẫu nhiên do biến động của mẫu?
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Phân phối tiệm cận của 2SLS**
+- **2. Ước lượng MA trận hiệp phương sai và sai số chuẩn**
+- **3. Khoảng tin cậy và kiểm định giả thuyết**
+- **Khoảng tin cậy**
+- **Kiểm định t**
+- **Kiểm định Wald**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c12/suy-luan-thong-ke-trong-mo-hinh-bien-cong-cu/)
+
+### 2.5. Các kiểm định đặc tả và vấn đề biến công cụ yếu
+
+Chào mừng các bạn đã quay trở lại! Trong các bài học trước, chúng ta đã học cách xây dựng, ước lượng và suy luận từ một mô hình biến công cụ. Chúng ta đã giả định rằng mô hình của mình được đặc tả đúng: biến giải thích thực sự nội sinh và các biến công cụ chúng ta chọn là hợp lệ. Nhưng trong thực tế, làm thế nào chúng ta có thể chắc chắn về những giả định này? Bài học hôm nay sẽ đóng vai trò như một buổi "kiểm tra sức khỏe tổng quát" cho mô hình IV của bạn.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Kiểm định nội sinh**
+- **Thực hiện kiểm định bằng hồi quy hàm kiểm soát**
+- **2. Kiểm định quá xác định**
+- **3. Vấn đề biến công cụ yếu**
+- **Làm thế nào để phát hiện công cụ yếu?**
+- **4. Ví dụ minh họa với Stata**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c12/cac-kiem-dinh-dac-ta-va-van-de-bien-cong-cu-yeu/)
+
+### 2.6. Hướng dẫn thực hành biến công cụ với Stata
+
+Trong bài học hôm nay, chúng ta sẽ cùng nhau thực hiện một quy trình phân tích kinh tế lượng hoàn chỉnh bằng phần mềm Stata. Chúng ta sẽ sử dụng bộ dữ liệu về lợi tức giáo dục của Card, một trong những nghiên cứu kinh điển và có ảnh hưởng nhất sử dụng phương pháp Biến công cụ. Đây không chỉ là một bài tập về cách gõ lệnh. Quan trọng hơn, đây là một bài thực hành về tư duy kinh tế lượng.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Tóm tắt tổng hợp và quy trình phân tích**
+- **2. Hướng dẫn thực hành từng bước với Stata**
+- **Bước 1: Chuẩn bị và khám phá dữ liệu**
+- **Bước 2: Mô hình cơ sở - Hồi quy OLS**
+- **Bước 3: Mô hình biến công cụ - Hồi quy 2SLS**
+- **Bước 4: Kiểm định đặc tả mô hình**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c12/huong-dan-thuc-hanh-bien-cong-cu-voi-stata/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Hiểu về nội sinh và biến công cụ</h3>
-    <p>Chào mừng các bạn đã quay trở lại với chuỗi bài học về Biến công cụ! Trong bài giới thiệu, chúng ta đã có cái nhìn tổng quan về tầm quan trọng của phương pháp này. Ở bài học đầu tiên hôm nay, chúng ta sẽ cùng nhau giải quyết hai câu hỏi cốt lõi và nền tảng nhấ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c12/hieu-ve-noi-sinh-va-bien-cong-cu/" target="_blank" rel="noopener">Hiểu về nội sinh và biến công cụ</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>12. Biến công cụ</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Nhận dạng và các phương pháp ước lượng cơ bản</h3>
-    <p>Ở bài học trước, chúng ta đã xây dựng được một trực giác vững chắc về vấn đề nội sinh và tại sao biến công cụ lại là một ý tưởng hay. Chúng ta đã hiểu "cái gì" và "tại sao". Trong bài học hôm nay, chúng ta sẽ đi sâu vào phần "như thế nào". Chúng ta sẽ chính th Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c12/nhan-dang-va-cac-phuong-phap-uoc-luong-co-ban/" target="_blank" rel="noopener">Nhận dạng và các phương pháp ước lượng cơ bản</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Ước lượng LIML và các phương pháp thay thế</h3>
-    <p>Chào mừng các bạn đã đến với bài học thứ ba trong chuỗi bài về Biến công cụ. Ở bài trước, chúng ta đã làm quen với 2SLS, phương pháp được coi là "con ngựa thồ" trong thế giới ước lượng IV vì tính phổ biến và dễ áp dụng của nó. Tuy nhiên, không có phương pháp n Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c12/uoc-luong-liml-va-cac-phuong-phap-thay-the/" target="_blank" rel="noopener">Ước lượng LIML và các phương pháp thay thế</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c12/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Suy luận thống kê trong mô hình biến công cụ</h3>
-    <p>Chào mừng các bạn đến với bài học thứ tư! Trong các bài học trước, chúng ta đã tập trung vào việc "ước lượng", tức là tìm ra giá trị điểm cho các hệ số cấu trúc \ bằng các phương pháp như 2SLS và LIML. Tuy nhiên, một ước lượng điểm tự nó không cho chúng ta biế Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c12/suy-luan-thong-ke-trong-mo-hinh-bien-cong-cu/" target="_blank" rel="noopener">Suy luận thống kê trong mô hình biến công cụ</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 5: Các kiểm định đặc tả và vấn đề biến công cụ yếu</h3>
-    <p>Chào mừng các bạn đã quay trở lại! Trong các bài học trước, chúng ta đã học cách xây dựng, ước lượng và suy luận từ một mô hình biến công cụ. Chúng ta đã giả định rằng mô hình của mình được đặc tả đúng: biến giải thích thực sự nội sinh và các biến công cụ chún Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c12/cac-kiem-dinh-dac-ta-va-van-de-bien-cong-cu-yeu/" target="_blank" rel="noopener">Các kiểm định đặc tả và vấn đề biến công cụ yếu</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Bước 6: Hướng dẫn thực hành biến công cụ với Stata</h3>
-    <p>Trong bài học hôm nay, chúng ta sẽ cùng nhau thực hiện một quy trình phân tích kinh tế lượng hoàn chỉnh bằng phần mềm Stata. Chúng ta sẽ sử dụng bộ dữ liệu về lợi tức giáo dục của Card, một trong những nghiên cứu kinh điển và có ảnh hưởng nhất sử dụng phương p Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c12/huong-dan-thuc-hanh-bien-cong-cu-voi-stata/" target="_blank" rel="noopener">Hướng dẫn thực hành biến công cụ với Stata</a>.</p>
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập môi trường, ước lượng mô hình và kiểm định chẩn đoán toàn diện
 version 18.0
 clear all
 set more off
+import delimited "sachktl_empirical_ecodata.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_hsank22u1_c12_ecodata.csv", clear encoding("utf-8")
 describe
-summarize
+summarize y x1 x2 x3, detail
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
+* 1. Ước lượng mô hình cơ sở và kiểm định phương sai thay đổi / đa cộng tuyến / dạng hàm
+regress y x1 x2 x3
 estat hettest
+estat imtest, white
 estat vif
+estat ovtest
+
+* 2. Ước lượng với sai số chuẩn vững White HC1 và xuất tác động biên
+regress y c.x1##c.x2 x3, vce(robust)
+margins, dydx(x1 x2 x3)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện phân tích kinh tế lượng và thực thi kiểm định chẩn đoán
 library(tidyverse)
 library(lmtest)
 library(sandwich)
+library(car)
 
-df <- read.csv("sachktl_hsank22u1_c12_ecodata.csv")
+df <- read.csv("sachktl_empirical_ecodata.csv")
 summary(df)
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+# 1. Ước lượng mô hình tuyến tính và kiểm định Breusch-Pagan, RESET, VIF
 fit <- lm(y ~ x1 + x2 + x3, data = df)
+bptest(fit)
+resettest(fit, power = 2:3, type = "fitted")
+vif(fit)
+
+# 2. Xuất bảng hệ số ước lượng với sai số chuẩn vững HC1
 coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
 ```
 
@@ -144,35 +260,53 @@ coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và thực thi ước lượng kèm chẩn đoán phần dư
 import pandas as pd
+import statsmodels.api as sm
 import statsmodels.formula.api as smf
+from statsmodels.stats.diagnostic import het_breuschpagan, linear_reset
+from statsmodels.stats.outliers_influence import variance_inflation_factor
 
-df = pd.read_csv("sachktl_hsank22u1_c12_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_empirical_ecodata.csv")
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
+# 1. Ước lượng mô hình với sai số chuẩn vững HC1
 model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
 print(model.summary())
+
+# 2. Kiểm định phương sai thay đổi Breusch-Pagan, Ramsey RESET và hệ số VIF
+bp_lm, bp_pval, _, _ = het_breuschpagan(model.resid, model.model.exog)
+reset_res = linear_reset(model, power=2, use_f=True)
+X = sm.add_constant(df[["x1", "x2", "x3"]].dropna())
+vifs = {col: variance_inflation_factor(X.values, i) for i, col in enumerate(X.columns)}
+print(f"Breusch-Pagan p={bp_pval:.4f} | RESET p={reset_res.pvalue:.4f} | VIF={vifs}")
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 12: 12. biến công cụ trên SachKTL"
+  title="Hướng dẫn thực hành 12. Biến công cụ trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 12 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Hiểu về nội sinh và biến công cụ | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c12/hieu-ve-noi-sinh-va-bien-cong-cu/) |
-| **Bài 02** | Nhận dạng và các phương pháp ước lượng cơ bản | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c12/nhan-dang-va-cac-phuong-phap-uoc-luong-co-ban/) |
-| **Bài 03** | Ước lượng LIML và các phương pháp thay thế | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c12/uoc-luong-liml-va-cac-phuong-phap-thay-the/) |
-| **Bài 04** | Suy luận thống kê trong mô hình biến công cụ | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c12/suy-luan-thong-ke-trong-mo-hinh-bien-cong-cu/) |
-| **Bài 05** | Các kiểm định đặc tả và vấn đề biến công cụ yếu | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c12/cac-kiem-dinh-dac-ta-va-van-de-bien-cong-cu-yeu/) |
-| **Bài 06** | Hướng dẫn thực hành biến công cụ với Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c12/huong-dan-thuc-hanh-bien-cong-cu-voi-stata/) |
+| **12.1** | Hiểu về nội sinh và biến công cụ | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c12/hieu-ve-noi-sinh-va-bien-cong-cu/) |
+| **12.2** | Nhận dạng và các phương pháp ước lượng cơ bản | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c12/nhan-dang-va-cac-phuong-phap-uoc-luong-co-ban/) |
+| **12.3** | Ước lượng LIML và các phương pháp thay thế | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c12/uoc-luong-liml-va-cac-phuong-phap-thay-the/) |
+| **12.4** | Suy luận thống kê trong mô hình biến công cụ | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c12/suy-luan-thong-ke-trong-mo-hinh-bien-cong-cu/) |
+| **12.5** | Các kiểm định đặc tả và vấn đề biến công cụ yếu | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c12/cac-kiem-dinh-dac-ta-va-van-de-bien-cong-cu-yeu/) |
+| **12.6** | Hướng dẫn thực hành biến công cụ với Stata | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c12/huong-dan-thuc-hanh-bien-cong-cu-voi-stata/) |

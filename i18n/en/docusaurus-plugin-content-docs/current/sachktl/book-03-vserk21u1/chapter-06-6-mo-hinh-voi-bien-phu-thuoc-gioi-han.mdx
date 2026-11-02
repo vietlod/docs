@@ -1,19 +1,19 @@
 ---
 id: chapter-06-6-mo-hinh-voi-bien-phu-thuoc-gioi-han
-title: "Chapter 06: 6. Mô hình với biến phụ thuộc giới hạn — Panel Data Econometrics in Empirical Finance"
-sidebar_label: "Chapter 06: 6. Mô hình với biến phụ thuộc giới hạn"
+title: "6. Models With Limited Dependent Variables"
+sidebar_label: "6. Models With Limited Dependent Variables"
 sidebar_position: 7
-description: "Step-by-step practical how-to guide for Chapter 06: 6. Mô hình với biến phụ thuộc giới hạn from Panel Data Econometrics in Empirical Finance on SachKTL with Stata, R, and Python workflows integrated with EcoData, Finco, and EcoLab."
+description: "Comprehensive practical how-to guide for 6. Models With Limited Dependent Variables from Panel Data Econometrics in Empirical Finance on SachKTL featuring structural equations, 7 lesson breakdowns, and Stata, R, and Python scripts."
 ---
 
-# Chapter 06: 6. Mô hình với biến phụ thuộc giới hạn — Panel Data Econometrics in Empirical Finance
+# 6. Models With Limited Dependent Variables
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-This practical how-to guide synthesizes the methodology and empirical implementation workflow of **Chapter 06: 6. Mô hình với biến phụ thuộc giới hạn** from [**Book 03: Panel Data Econometrics in Empirical Finance**](/en/sachktl/book-03-vserk21u1/), with direct backlinks to the authoritative source material at [https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/](https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/).
+This practical how-to guide presents the theoretical foundations, structural mathematical equations, detailed breakdown of **7 specialized lessons**, and multi-platform replication workflows for **6. Models With Limited Dependent Variables** from the textbook [**Panel Data Econometrics in Empirical Finance**](/en/sachktl/book-03-vserk21u1/), with direct cross-references to the authoritative source material at [https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/](https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chapter 06: 6. Mô hình với biến phụ thuộc giới hạn">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="6. Models With Limited Dependent Variables">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ This practical how-to guide synthesizes the methodology and empirical implementa
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BOOK 03 · CHAPTER 06</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chapter 06: 6. Mô hình với biến phụ thuộc giới hạn</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Part of Textbook: Panel Data Econometrics in Empirical Finance · 7 Detailed Lessons</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Panel Data Econometrics in Empirical</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">6. Models With Limited Dependent Variables</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Panel Data Econometrics and Unobserved Heterogeneity Control · 7 Detailed Lessons</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,139 +41,282 @@ This practical how-to guide synthesizes the methodology and empirical implementa
   </svg>
 </div>
 
-## 1. Methodological Meaning and Scope of Application
+## 1. Methodological Foundations, Mathematical Specification, and Identification
 
-Mô hình với biến phụ thuộc giới hạn Trong các ứng dụng tài chính và kinh tế lượng, chúng ta thường xuyên đối mặt với những biến số không tuân theo thang đo liên tục truyền thống. Thay vào đó, chúng là những biến rời rạc, bị giới hạn hoặc chỉ có thể nhận một tập hợp giá trị hữu hạn. Ví dụ, quyết định của một công ty về việc trả cổ tức, xếp hạng tín dụng của một trái phiếu, hay tỷ lệ tài sản rủi ro trong danh mục đầu tư của một hộ gia đình . Việc áp dụng mô hình hồi quy tuyến tính cổ điển cho những biến phụ thuộc có hạn chế này thường không phù hợp, dẫn đến các
+Mô hình với biến phụ thuộc giới hạn Trong các ứng dụng tài chính và kinh tế lượng, chúng ta thường xuyên đối mặt với những biến số không tuân theo thang đo liên tục truyền thống. Thay vào đó, chúng là những biến rời rạc, bị giới hạn hoặc chỉ có thể nhận một tập hợp giá trị hữu hạn. Ví dụ, quyết định của một công ty về việc trả cổ tức, xếp hạng tín dụng của một trái phiếu, hay tỷ lệ tài sản rủi ro trong danh mục đầu tư của một hộ gia đình .
 
-- **Core Academic Topics**: Cấu trúc chuỗi bài học, Kiến thức tiên quyết, Mục tiêu học tập, Tài liệu tham khảo chính, PHỤ LỤC: Dữ liệu mô phỏng cho chuỗi bài viết.
-- **Supported Analytical Environments**: `Stata 18 MP`.
-- **Recommended Empirical Data Sources**: Vietnamese macroeconomic, corporate, and household survey datasets on [EcoData](https://ecodata.io.vn), capital and commodity market series on [Finco](https://www.finco.vn), model cross-references on [VietLOD](https://vietlod.tnsai.vn), and automated estimation on [EcoLab](https://ecolab.io.vn).
+### 1.1. Structural Equations and Representative Estimator
+
+$$
+Y_{it} = \alpha + \mathbf{X}_{it}'\boldsymbol{\beta} + \mu_i + \lambda_t + \varepsilon_{it}, \quad i = 1,\dots,N; \; t = 1,\dots,T \tag*{[1]}
+$$
+
+$$
+\hat{\boldsymbol{\beta}}_{\text{FE}} = \left(\sum_{i=1}^N \sum_{t=1}^T \tilde{\mathbf{X}}_{it}\tilde{\mathbf{X}}_{it}'\right)^{-1} \left(\sum_{i=1}^N \sum_{t=1}^T \tilde{\mathbf{X}}_{it}\tilde{Y}_{it}\right), \quad \tilde{Z}_{it} = Z_{it} - \bar{Z}_i \tag*{[2]}
+$$
+
+### 1.2. Core Identification Assumptions and Applicability Conditions
+
+1. Strict exogeneity of explanatory covariates with respect to idiosyncratic disturbances across cross-sectional units and time periods.
+2. Unobserved individual effects $\mu_i$ may correlate arbitrarily with $\mathbf{X}_{it}$ under Fixed Effects or remain orthogonal under Random Effects.
+3. Cluster-robust variance-covariance estimation at the entity level is required to accommodate arbitrary within-panel serial correlation and heteroskedasticity.
 
 <FeatureCards
   features={[
     {
-      title: "Original Chapter on SachKTL",
-      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for Chapter 06 on SachKTL.",
+      title: "Authoritative Chapter on SachKTL",
+      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for this chapter on SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/"
     },
     {
       title: "Practice Datasets on EcoData & Finco",
-      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and survey data for hands-on replication.",
+      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and household survey data for hands-on replication.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
       title: "Automated Estimation on EcoLab",
-      description: "Execute econometric specifications, run diagnostic battery tests, and export publication-grade tables automatically.",
+      description: "Execute econometric specifications, run diagnostic battery tests, and export APA 7th / AER publication-grade tables automatically.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Step-by-Step Practical Implementation Across Chapter Lessons
+<FeatureNotAvailable
+  feature="Unconditional Baseline Estimation Under Violated Identification Assumptions"
+  reason="Standard Fixed Effects and Random Effects estimators suffer from Nickell bias when lagged dependent variables $Y_{i,t-1}$ are included in short-$T$ panels; use Difference GMM or System GMM instead."
+  alternative="Run the complete diagnostic battery in Step 4 and transition to the appropriate corrective estimator on VietLOD or EcoLab."
+/>
+
+## 2. Lesson-by-Lesson Academic Breakdown
+
+### 2.1. Nền tảng mô hình lựa chọn nhị phân
+
+Chào mừng các bạn đã đến với bài học đầu tiên trong chuỗi bài về các mô hình cho biến phụ thuộc có hạn chế. Trong thực tế nghiên cứu tài chính, rất nhiều câu hỏi quan trọng xoay quanh các kết quả chỉ có hai khả năng: một công ty có phá sản hay không, một hộ gia đình có đầu tư vào thị trường chứng khoán hay không, một thỏa thuận sáp nhập có thành công hay không. Đây là những biến nhị phân, và việc phân tích chúng đòi hỏi một bộ công cụ chuyên biệt vượt ra ngoài khuôn khổ của mô hình hồi quy tuyến tính thông thường.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Nền tảng lý thuyết về mô hình lựa chọn nhị phân**
+- **Mô hình xác suất tuyến tính và những hạn chế**
+- **Mô hình Logit và Probit: Giải pháp phi tuyến**
+- **Diễn giải hệ số: Hiệu ứng biên và Tỷ lệ Odds**
+- **Hiệu ứng biên**
+- **Tỷ lệ Odds - Dành riêng cho mô hình Logit**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/nen-tang-mo-hinh-lua-chon-nhi-phan/)
+
+### 2.2. Mô hình lựa chọn nhị phân cho dữ liệu bảng
+
+Trong bài học trước, chúng ta đã xây dựng nền tảng vững chắc về các mô hình lựa chọn nhị phân và tìm hiểu các phương pháp ước lượng gộp như một điểm khởi đầu. Mặc dù hữu ích, cách tiếp cận gộp về cơ bản đã bỏ qua một trong những lợi thế lớn nhất của dữ liệu bảng: khả năng kiểm soát các yếu tố không quan sát được, bất biến theo thời gian, vốn là đặc trưng riêng của mỗi đối tượng nghiên cứu.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Nền tảng lý thuyết: Hiệu ứng ngẫu nhiên và hiệu ứng cố định**
+- **Mô hình hiệu ứng ngẫu nhiên**
+- **Vấn đề về tỷ lệ**
+- **Mô hình hiệu ứng cố định**
+- **Phương pháp nghiên cứu và thực hành trên Stata**
+- **Quy trình thực hiện**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/mo-hinh-lua-chon-nhi-phan-cho-du-lieu-bang/)
+
+### 2.3. Các vấn đề nâng cao trong mô hình lựa chọn nhị phân
+
+Sau khi đã nắm vững các phương pháp ước lượng gộp, hiệu ứng ngẫu nhiên và hiệu ứng cố định trong hai bài học trước, chúng ta đã có trong tay một bộ công cụ mạnh mẽ để phân tích các biến phụ thuộc nhị phân trong dữ liệu bảng. Tuy nhiên, quá trình nghiên cứu thực nghiệm hiếm khi dừng lại ở việc ước lượng mô hình.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Nền tảng lý thuyết: Đánh giá mô hình và xử lý nội sinh**
+- **Đánh giá độ phù hợp**
+- **Vấn đề nội sinh và biến công cụ**
+- **Phương pháp nghiên cứu: Phương pháp hàm kiểm soát**
+- **Quy trình ước lượng hai bước**
+- **Ví dụ minh họa: Xử lý nội sinh trong quyết định trả cổ tức**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/cac-van-de-nang-cao-trong-mo-hinh-lua-chon-nhi-phan/)
+
+### 2.4. Mô hình cho biến phụ thuộc có nhiều kết quả
+
+Trong các bài học trước, chúng ta đã tập trung vào các tình huống mà kết quả quan tâm chỉ có hai khả năng. Tuy nhiên, thực tế tài chính và kinh tế thường phức tạp hơn nhiều. Các quyết định thường liên quan đến việc lựa chọn giữa nhiều hơn hai phương án. Ví dụ, một công ty có thể quyết định tăng, giữ nguyên, hoặc cắt giảm cổ tức; một nhà phân tích có thể xếp hạng tín dụng của một trái phiếu thành nhiều cấp độ ; hay một doanh nghiệp cần huy động vốn có thể chọn giữa phát hành cổ phiếu, vay nợ tư nhân, hoặc phát hành trái phiếu ra công chúng.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Nền tảng lý thuyết: Thứ tự có quan trọng không?**
+- **Mô hình phản ứng có thứ tự**
+- **Mô hình đa thức không có thứ tự**
+- **Giả định IIA**
+- **Phương pháp nghiên cứu và thực hành trên Stata**
+- **Ví dụ 1: Mô hình Ordered Logit - Chính sách cổ tức**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/mo-hinh-cho-bien-phu-thuoc-co-nhieu-ket-qua/)
+
+### 2.5. Mô hình tobit và các vấn đề về lựa chọn mẫu
+
+Trong các bài học trước, chúng ta đã khám phá các mô hình cho biến phụ thuộc rời rạc. Giờ đây, chúng ta sẽ chuyển sự chú ý sang một loại biến phụ thuộc khác, một loại biến lai giữa rời rạc và liên tục. Hãy tưởng tượng bạn đang nghiên cứu số tiền một công ty chi cho việc mua lại cổ phiếu, tỷ lệ tài sản rủi ro trong danh mục của một hộ gia đình, hoặc tỷ lệ doanh thu xuất khẩu được phòng ngừa rủi ro. Điểm chung của các biến này là gì?
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Nền tảng lý thuyết: Từ kiểm duyệt đến lựa chọn mẫu**
+- **Mô hình Tobit: Hồi quy bị kiểm duyệt**
+- **Hạn chế cốt lõi của mô hình Tobit**
+- **Mô hình lựa chọn mẫu Heckman**
+- **Phương pháp nghiên cứu và ước lượng**
+- **Ước lượng mô hình Tobit và Heckman**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/mo-hinh-tobit-va-cac-van-de-ve-lua-chon-mau/)
+
+### 2.6. Mô hình động, dữ liệu đếm và mô hình thời gian tồn tại
+
+Chào mừng các bạn đến với bài học cuối cùng trong chuỗi bài lý thuyết về các mô hình cho biến phụ thuộc có hạn chế. Sau khi đã đi qua các mô hình lựa chọn nhị phân, đa thức, và các mô hình cho dữ liệu bị kiểm duyệt, bài học này sẽ trang bị cho chúng ta ba công cụ chuyên biệt nhưng vô cùng mạnh mẽ, giải quyết những câu hỏi nghiên cứu mà các mô hình trước chưa thể chạm tới.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Mô hình động: Sự phụ thuộc trạng thái và vấn đề điều kiện ban đầu**
+- **Sự phụ thuộc trạng thái thực sự vs. Sự không đồng nhất không quan sát được**
+- **Vấn đề điều kiện ban đầu**
+- **Mô hình dữ liệu đếm**
+- **Mô hình hồi quy Poisson**
+- **Mô hình thời gian tồn tại**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/mo-hinh-dong-du-lieu-dem-va-mo-hinh-thoi-gian-ton-tai/)
+
+### 2.7. Hướng dẫn thực hành với Stata
+
+Trong suốt chuỗi bài học này, chúng ta đã xây dựng một nền tảng lý thuyết vững chắc về các mô hình cho biến phụ thuộc có hạn chế. Giờ là lúc tổng hợp những kiến thức đó vào một quy trình nghiên cứu hoàn chỉnh. Bài thực hành tổng hợp này sẽ hướng dẫn bạn từng bước phân tích một câu hỏi kinh điển trong tài chính: Các yếu tố nào quyết định việc một công ty trả cổ tức? Chúng ta sẽ sử dụng bộ dữ liệu bảng mô phỏng dividend_decision.dta đã được giới thiệu, tập trung vào việc triển khai và diễn giải Mô hình Probit Hiệu ứng Ngẫu nhiên .
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Dữ liệu nghiên cứu và thiết lập**
+- **Hướng dẫn từng bước: Quy trình phân tích từ A-Z**
+- **Bước 1: Khám phá dữ liệu**
+- **Bước 2: Mô hình cơ sở - Probit Gộp**
+- **Bước 3: Mô hình chính - Probit Hiệu ứng Ngẫu nhiên**
+- **Phân tích chuyên sâu và Kiểm định độ vững**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/huong-dan-thuc-hanh-voi-stata/)
+
+## 3. Step-by-Step Empirical Implementation Workflow
 
 <Steps>
   <div className="step-item">
-    <h3>Step 1: Nền tảng mô hình lựa chọn nhị phân</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Nền tảng mô hình lựa chọn nhị phân. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/nen-tang-mo-hinh-lua-chon-nhi-phan/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/nen-tang-mo-hinh-lua-chon-nhi-phan/</a>.</p>
+    <h3>1. Formulate the Research Question and Prepare Data on EcoData & Finco</h3>
+    <p>Define the dependent variable, core explanatory variables, and control covariates aligned with <strong>6. Models With Limited Dependent Variables</strong>. Extract standardized Vietnamese empirical series from <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> or <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, and screen for missing observations and extreme outliers.</p>
   </div>
   <div className="step-item">
-    <h3>Step 2: Mô hình lựa chọn nhị phân cho dữ liệu bảng</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Mô hình lựa chọn nhị phân cho dữ liệu bảng. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/mo-hinh-lua-chon-nhi-phan-cho-du-lieu-bang/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/mo-hinh-lua-chon-nhi-phan-cho-du-lieu-bang/</a>.</p>
+    <h3>2. Conduct Descriptive Profiling, Correlation Analysis, and Pre-Estimation Checks</h3>
+    <p>Examine empirical distributions, construct summary statistics tables, and evaluate collinearity using pairwise correlation matrices and Variance Inflation Factors (VIF).</p>
   </div>
   <div className="step-item">
-    <h3>Step 3: Các vấn đề nâng cao trong mô hình lựa chọn nhị phân</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Các vấn đề nâng cao trong mô hình lựa chọn nhị phân. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/cac-van-de-nang-cao-trong-mo-hinh-lua-chon-nhi-phan/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/cac-van-de-nang-cao-trong-mo-hinh-lua-chon-nhi-phan/</a>.</p>
+    <h3>3. Estimate the Model Across Stata 18 MP, R 4.x, and Python 3.11+</h3>
+    <p>Execute the parameter estimation scripts matching the structural equations in Section 1.1 while cross-checking theoretical derivations at <a href="https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Step 4: Mô hình cho biến phụ thuộc có nhiều kết quả</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Mô hình cho biến phụ thuộc có nhiều kết quả. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/mo-hinh-cho-bien-phu-thuoc-co-nhieu-ket-qua/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/mo-hinh-cho-bien-phu-thuoc-co-nhieu-ket-qua/</a>.</p>
+    <h3>4. Perform Post-Estimation Diagnostics and Robust Variance Correction</h3>
+    <p>Test for heteroskedasticity, serial correlation, Ramsey RESET functional form misspecification, and regressor endogeneity. Apply White HC1 or cluster-robust standard errors for valid inference.</p>
   </div>
   <div className="step-item">
-    <h3>Step 5: Mô hình tobit và các vấn đề về lựa chọn mẫu</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Mô hình tobit và các vấn đề về lựa chọn mẫu. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/mo-hinh-tobit-va-cac-van-de-ve-lua-chon-mau/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/mo-hinh-tobit-va-cac-van-de-ve-lua-chon-mau/</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Step 6: Mô hình động, dữ liệu đếm và mô hình thời gian tồn tại</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Mô hình động, dữ liệu đếm và mô hình thời gian tồn tại. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/mo-hinh-dong-du-lieu-dem-va-mo-hinh-thoi-gian-ton-tai/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/mo-hinh-dong-du-lieu-dem-va-mo-hinh-thoi-gian-ton-tai/</a>.</p>
+    <h3>5. Format Journal-Grade Tables and Cross-Verify on EcoLab</h3>
+    <p>Report point estimates, standard errors in parentheses, and statistical significance stars following APA 7th / AER Booktabs standards, or automate the entire reporting pipeline on <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> and <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Multi-Platform Implementation Examples in Stata, R, and Python
+## 4. Multi-Platform Implementation Scripts in Stata, R, and Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Initialize environment and load practice dataset from EcoData / SachKTL
+* Thiết lập cấu trúc dữ liệu bảng và ước lượng FE / RE / Hausman
 version 18.0
 clear all
 set more off
+import delimited "sachktl_panel_ecodata.csv", clear encoding("utf-8")
 
-* Import standardized empirical dataset
-import delimited "sachktl_vserk21u1_c06_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+xtset id year
+xtdescribe
+xtsum y x1 x2 x3
 
-* Estimate baseline specification and run diagnostic checks with robust standard errors
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 1. Ước lượng tác động cố định (Fixed Effects) và tác động ngẫu nhiên (Random Effects)
+xtreg y x1 x2 x3, fe
+estimates store FE_model
+xtreg y x1 x2 x3, re
+estimates store RE_model
+
+* 2. Kiểm định Hausman lựa chọn mô hình và ước lượng sai số chuẩn vững theo cụm
+hausman FE_model RE_model, sigmamore
+xtreg y x1 x2 x3 i.year, fe vce(cluster id)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Load econometric packages and practice dataset from EcoData / SachKTL
-library(tidyverse)
+# Nạp thư viện dữ liệu bảng và ước lượng FE / RE / Cluster-Robust SE
+library(plm)
 library(lmtest)
 library(sandwich)
 
-df <- read.csv("sachktl_vserk21u1_c06_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_panel_ecodata.csv")
+pdata <- pdata.frame(df, index = c("id", "year"))
 
-# Estimate model and compute heteroskedasticity-robust HC1 standard errors
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Ước lượng mô hình Within FE và Swamy-Arora RE
+fe_mod <- plm(y ~ x1 + x2 + x3, data = pdata, model = "within", effect = "twoways")
+re_mod <- plm(y ~ x1 + x2 + x3, data = pdata, model = "random")
+
+# 2. Kiểm định Hausman và xuất sai số chuẩn vững Arellano theo cụm
+phtest(fe_mod, re_mod)
+coeftest(fe_mod, vcov = vcovHC(fe_mod, method = "arellano", type = "HC1", cluster = "group"))
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Load econometric libraries and practice dataset from EcoData / SachKTL
+# Nạp thư viện linearmodels và ước lượng PanelOLS / RandomEffects
 import pandas as pd
-import statsmodels.formula.api as smf
+from linearmodels.panel import PanelOLS, RandomEffects, compare
 
-df = pd.read_csv("sachktl_vserk21u1_c06_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_panel_ecodata.csv").set_index(["id", "year"])
 
-# Fit specification with HC1 robust standard errors
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Ước lượng mô hình Fixed Effects hai chiều với sai số chuẩn cụm
+fe_mod = PanelOLS.from_formula("y ~ 1 + x1 + x2 + x3 + EntityEffects + TimeEffects", data=df)
+fe_res = fe_mod.fit(cov_type="clustered", cluster_entity=True)
+
+# 2. Ước lượng mô hình Random Effects và đối chiếu kết quả
+re_mod = RandomEffects.from_formula("y ~ 1 + x1 + x2 + x3", data=df)
+re_res = re_mod.fit(cov_type="clustered", cluster_entity=True)
+print(compare({"Fixed Effects": fe_res, "Random Effects": re_res}))
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video Tutorial Walkthrough
+## 5. Post-Estimation Diagnostic and Interpretation Guide
+
+| Diagnostic Criterion | Null Hypothesis $H_0$ | Benchmark Threshold | Corrective Action When $H_0$ Is Rejected |
+| :--- | :--- | :--- | :--- |
+| **Heteroskedasticity** | Constant error variance $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ rejects $H_0$ | Apply `vce(robust)`, `vcovHC(HC1)`, or FGLS/WLS weighted estimation |
+| **Multicollinearity** | No severe linear dependence among regressors | $\text{VIF} < 10$ acceptable | Drop redundant covariates, center interactions, or apply LASSO/Ridge regularization |
+| **Ramsey RESET Functional Form** | No omitted nonlinear or higher-order terms | $p\text{-value} > 0.05$ retains $H_0$ | Add interaction terms, quadratic polynomials, or log-transform skewed positive variables |
+| **Regressor Exogeneity** | Orthogonality $\text{Cov}(X, \varepsilon)=0$ | Durbin-Wu-Hausman $p > 0.05$ | Transition to IV/2SLS, LIML, or GMM estimation with validated instruments |
+
+## 6. Video Tutorial Walkthrough
 
 <VideoTutorial
-  title="Practical Walkthrough for Chapter 06: 6. Mô hình với biến phụ thuộc giới hạn on SachKTL"
+  title="Practical Walkthrough for 6. Models With Limited Dependent Variables on SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Complete Lesson Directory and Backlinks to Original SachKTL Articles
+## 7. Complete Lesson Directory and Backlinks to Original SachKTL Articles
 
-| No. | Lesson Title in Chapter 06 | Supported Software | Original Source Link on SachKTL |
+| Lesson Code | Lesson Title | Supported Software | Original Source Link on SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Lesson 01** | Nền tảng mô hình lựa chọn nhị phân | Stata 18 MP, R 4.x | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/nen-tang-mo-hinh-lua-chon-nhi-phan/) |
-| **Lesson 02** | Mô hình lựa chọn nhị phân cho dữ liệu bảng | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/mo-hinh-lua-chon-nhi-phan-cho-du-lieu-bang/) |
-| **Lesson 03** | Các vấn đề nâng cao trong mô hình lựa chọn nhị phân | Stata 18 MP, R 4.x | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/cac-van-de-nang-cao-trong-mo-hinh-lua-chon-nhi-phan/) |
-| **Lesson 04** | Mô hình cho biến phụ thuộc có nhiều kết quả | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/mo-hinh-cho-bien-phu-thuoc-co-nhieu-ket-qua/) |
-| **Lesson 05** | Mô hình tobit và các vấn đề về lựa chọn mẫu | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/mo-hinh-tobit-va-cac-van-de-ve-lua-chon-mau/) |
-| **Lesson 06** | Mô hình động, dữ liệu đếm và mô hình thời gian tồn tại | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/mo-hinh-dong-du-lieu-dem-va-mo-hinh-thoi-gian-ton-tai/) |
-| **Lesson 07** | Hướng dẫn thực hành với Stata | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/huong-dan-thuc-hanh-voi-stata/) |
+| **6.1** | Nền tảng mô hình lựa chọn nhị phân | `Stata 18 MP, R 4.x` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/nen-tang-mo-hinh-lua-chon-nhi-phan/) |
+| **6.2** | Mô hình lựa chọn nhị phân cho dữ liệu bảng | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/mo-hinh-lua-chon-nhi-phan-cho-du-lieu-bang/) |
+| **6.3** | Các vấn đề nâng cao trong mô hình lựa chọn nhị phân | `Stata 18 MP, R 4.x` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/cac-van-de-nang-cao-trong-mo-hinh-lua-chon-nhi-phan/) |
+| **6.4** | Mô hình cho biến phụ thuộc có nhiều kết quả | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/mo-hinh-cho-bien-phu-thuoc-co-nhieu-ket-qua/) |
+| **6.5** | Mô hình tobit và các vấn đề về lựa chọn mẫu | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/mo-hinh-tobit-va-cac-van-de-ve-lua-chon-mau/) |
+| **6.6** | Mô hình động, dữ liệu đếm và mô hình thời gian tồn tại | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/mo-hinh-dong-du-lieu-dem-va-mo-hinh-thoi-gian-ton-tai/) |
+| **6.7** | Hướng dẫn thực hành với Stata | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/6-mo-hinh-voi-bien-phu-thuoc-gioi-han/huong-dan-thuc-hanh-voi-stata/) |

@@ -1,19 +1,19 @@
 ---
 id: chapter-02-c2
-title: "Chapter 02: 2. Các phương pháp dựa trên lựa chọn các biến quan sát được — Causal Inference and Policy Impact Evaluation Econometrics"
-sidebar_label: "Chapter 02: 2. Các phương pháp dựa trên lựa chọn các b"
+title: "2. Các phương pháp dựa trên lựa chọn các biến quan sát được"
+sidebar_label: "2. Các phương pháp dựa trên lựa chọn các biến quan sát được"
 sidebar_position: 3
-description: "Step-by-step practical how-to guide for Chapter 02: 2. Các phương pháp dựa trên lựa chọn các biến quan sát được from Causal Inference and Policy Impact Evaluation Econometrics on SachKTL with Stata, R, and Python workflows integrated with EcoData, Finco, and EcoLab."
+description: "Comprehensive practical how-to guide for 2. Các phương pháp dựa trên lựa chọn các biến quan sát được from Causal Inference and Policy Impact Evaluation Econometrics on SachKTL featuring structural equations, 6 lesson breakdowns, and Stata, R, and Python scripts."
 ---
 
-# Chapter 02: 2. Các phương pháp dựa trên lựa chọn các biến quan sát được — Causal Inference and Policy Impact Evaluation Econometrics
+# 2. Các phương pháp dựa trên lựa chọn các biến quan sát được
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-This practical how-to guide synthesizes the methodology and empirical implementation workflow of **Chapter 02: 2. Các phương pháp dựa trên lựa chọn các biến quan sát được** from [**Book 11: Causal Inference and Policy Impact Evaluation Econometrics**](/en/sachktl/book-11-cserk22u1/), with direct backlinks to the authoritative source material at [https://sachktl.tnsai.vn/vi/cserk22u1/c2/](https://sachktl.tnsai.vn/vi/cserk22u1/c2/).
+This practical how-to guide presents the theoretical foundations, structural mathematical equations, detailed breakdown of **6 specialized lessons**, and multi-platform replication workflows for **2. Các phương pháp dựa trên lựa chọn các biến quan sát được** from the textbook [**Causal Inference and Policy Impact Evaluation Econometrics**](/en/sachktl/book-11-cserk22u1/), with direct cross-references to the authoritative source material at [https://sachktl.tnsai.vn/vi/cserk22u1/c2/](https://sachktl.tnsai.vn/vi/cserk22u1/c2/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chapter 02: 2. Các phương pháp dựa trên lựa chọn các biến quan sát đ">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="2. Các phương pháp dựa trên lựa chọn các biến quan sát được">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ This practical how-to guide synthesizes the methodology and empirical implementa
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BOOK 11 · CHAPTER 02</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chapter 02: 2. Các phương pháp dựa trên lựa chọn các biến quan sát đ</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Part of Textbook: Causal Inference and Policy Impact Evaluation Econometrics · 6 Deta</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Causal Inference and Policy Impact E</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">2. Các phương pháp dựa trên lựa chọn các biến quan sát được</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Causal Inference and Empirical Policy Impact Evaluation · 6 Detailed Lessons</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,138 +41,258 @@ This practical how-to guide synthesizes the methodology and empirical implementa
   </svg>
 </div>
 
-## 1. Methodological Meaning and Scope of Application
+## 1. Methodological Foundations, Mathematical Specification, and Identification
 
-Các phương pháp dựa trên lựa chọn các biến quan sát được Chào mừng các bạn sinh viên đến với chuỗi bài học về các phương pháp đánh giá tác động trong kinh tế lượng. Trong thế giới thực, chúng ta hiếm khi có được dữ liệu từ các thí nghiệm ngẫu nhiên có kiểm soát hoàn hảo. Thay vào đó, chúng ta thường phải làm việc với dữ liệu quan sát, nơi các cá nhân, doanh nghiệp, hay chính phủ tự lựa chọn tham gia vào một chương trình, chính sách nào đó. Điều này tạo ra một thách thức lớn gọi là "thiên kiến lựa chọn", khiến việc so sánh đơn giản giữa nhóm tham gia và không tham gia trở nên
+Các phương pháp dựa trên lựa chọn các biến quan sát được Chào mừng các bạn sinh viên đến với chuỗi bài học về các phương pháp đánh giá tác động trong kinh tế lượng. Trong thế giới thực, chúng ta hiếm khi có được dữ liệu từ các thí nghiệm ngẫu nhiên có kiểm soát hoàn hảo. Thay vào đó, chúng ta thường phải làm việc với dữ liệu quan sát, nơi các cá nhân, doanh nghiệp, hay chính phủ tự lựa chọn tham gia vào một chương trình, chính sách nào đó.
 
-- **Core Academic Topics**: Cấu trúc chuỗi bài học, PHỤ LỤC: Dữ liệu mô phỏng cho chuỗi bài viết.
-- **Supported Analytical Environments**: `Stata 18 MP`.
-- **Recommended Empirical Data Sources**: Vietnamese macroeconomic, corporate, and household survey datasets on [EcoData](https://ecodata.io.vn), capital and commodity market series on [Finco](https://www.finco.vn), model cross-references on [VietLOD](https://vietlod.tnsai.vn), and automated estimation on [EcoLab](https://ecolab.io.vn).
+### 1.1. Structural Equations and Representative Estimator
+
+$$
+\tau_{\text{ATT}} = \mathbb{E}\left[Y_i(1) - Y_i(0) \mid D_i = 1\right] = \mathbb{E}\left[\mathbb{E}[Y_{it} - Y_{i,t-1} \mid D_i=1] - \mathbb{E}[Y_{it} - Y_{i,t-1} \mid D_i=0]\right] \tag*{[1]}
+$$
+
+$$
+Y_{it} = \alpha_i + \lambda_t + \sum_{k \neq -1} \delta_k \cdot \mathbb{I}(t - G_i = k) + \mathbf{X}_{it}'\boldsymbol{\beta} + \varepsilon_{it} \tag*{[2]}
+$$
+
+### 1.2. Core Identification Assumptions and Applicability Conditions
+
+1. Conditional parallel trends ensure the comparison group validly represents the counterfactual trajectory of treated units in the absence of intervention.
+2. No anticipation prior to treatment onset and common support overlap $0 < P(D_i=1 \mid \mathbf{X}_i) < 1$ are required for point identification of $\tau_{\text{ATT}}$.
+3. The Stable Unit Treatment Value Assumption (SUTVA) rules out unmodeled spillover interference across treated and control units.
 
 <FeatureCards
   features={[
     {
-      title: "Original Chapter on SachKTL",
-      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for Chapter 02 on SachKTL.",
+      title: "Authoritative Chapter on SachKTL",
+      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for this chapter on SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/cserk22u1/c2/"
     },
     {
       title: "Practice Datasets on EcoData & Finco",
-      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and survey data for hands-on replication.",
+      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and household survey data for hands-on replication.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
       title: "Automated Estimation on EcoLab",
-      description: "Execute econometric specifications, run diagnostic battery tests, and export publication-grade tables automatically.",
+      description: "Execute econometric specifications, run diagnostic battery tests, and export APA 7th / AER publication-grade tables automatically.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Step-by-Step Practical Implementation Across Chapter Lessons
+<FeatureNotAvailable
+  feature="Unconditional Baseline Estimation Under Violated Identification Assumptions"
+  reason="Conventional Two-Way Fixed Effects (TWFE) regressions suffer from negative weighting bias under staggered adoption and heterogeneous treatment effects; use Callaway-Sant'Anna or Sun-Abraham estimators instead."
+  alternative="Run the complete diagnostic battery in Step 4 and transition to the appropriate corrective estimator on VietLOD or EcoLab."
+/>
+
+## 2. Lesson-by-Lesson Academic Breakdown
+
+### 2.1. Nền tảng về điều chỉnh hồi quy
+
+Chào mừng các bạn đã quay trở lại! Trong bài học đầu tiên này, chúng ta sẽ khám phá một trong những phương pháp mạnh mẽ và trực quan nhất để ước lượng tác động nhân quả: Điều chỉnh hồi quy . Hãy tưởng tượng rằng chúng ta muốn so sánh hai nhóm, nhưng hai nhóm này lại không hoàn toàn giống nhau ngay từ đầu. Phương pháp Điều chỉnh hồi quy chính là công cụ giúp chúng ta "điều chỉnh" một cách toán học cho những sự khác biệt đó, để phép so sánh của chúng ta trở nên công bằng và chính xác hơn.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **1. Nền tảng lý thuyết: Điều chỉnh hồi quy là gì?**
+- **1.1. Giả định CMI và việc xác định các kết quả phản thực tế**
+- **1.2. Công thức tổng quát của Điều chỉnh hồi quy**
+- **1.3. Logic nội suy và tầm quan trọng của vùng hỗ trợ chung**
+- **2. Phương pháp nghiên cứu: Hồi quy hàm kiểm soát**
+- **2.1. Trường hợp 1: Tác động của x là đồng nhất = g_0\))**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c2/nen-tang-ve-dieu-chinh-hoi-quy/)
+
+### 2.2. Giới thiệu về phương pháp so khớp
+
+Trong bài học trước, chúng ta đã học cách sử dụng mô hình hồi quy để kiểm soát các yếu tố gây nhiễu. Hôm nay, chúng ta sẽ tiếp cận vấn đề từ một góc độ khác, một cách tiếp cận rất trực quan và dễ hình dung. Chào mừng các bạn đến với Phương pháp so khớp. Ý tưởng cốt lõi của so khớp rất đơn giản và gần gũi: để đánh giá tác động của một can thiệp, chúng ta phải so sánh "táo với táo".
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **1. Nền tảng lý thuyết: Triết lý "Táo so với Táo"**
+- **1.1. Các giả định nhận dạng của phương pháp so khớp**
+- **2. Phương pháp nghiên cứu: So khớp theo Hiệp biến và So khớp theo Điểm xu hướng**
+- **2.1. So khớp theo Hiệp biến**
+- **2.2. So khớp theo Điểm xu hướng**
+- **3. Tổng kết**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c2/gioi-thieu-ve-phuong-phap-so-khop/)
+
+### 2.3. Kỹ thuật so khớp điểm xu hướng
+
+Chào mừng các bạn đến với bài học thứ ba trong chuỗi bài của chúng ta! Ở bài trước, chúng ta đã khám phá ra một ý tưởng đột phá: thay vì so khớp trên rất nhiều biến số phức tạp, chúng ta có thể so khớp trên một chỉ số duy nhất là điểm xu hướng . Cách tiếp cận này không chỉ giúp đơn giản hóa bài toán mà còn được chứng minh là rất hiệu quả về mặt lý thuyết. Trong bài học hôm nay, chúng ta sẽ đi sâu vào các kỹ thuật thực tế của phương pháp So khớp điểm xu hướng.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **1. Nền tảng lý thuyết: Các tính chất kỳ diệu của Điểm xu hướng**
+- **1.1. Tính chất Cân bằng**
+- **1.2. Tính chất Không nhiễu**
+- **2. Phương pháp nghiên cứu: Các thuật toán so khớp phổ biến**
+- **2.1. So khớp Lân cận gần nhất**
+- **2.2. So khớp theo Bán kính**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c2/ky-thuat-so-khop-diem-xu-huong/)
+
+### 2.4. Phương pháp tái trọng số và ước lượng bền vững kép
+
+Chào mừng các bạn đến với bài học thứ tư! Ở các bài trước, chúng ta đã học cách "điều chỉnh" bằng hồi quy và "tìm người song sinh" bằng so khớp. Hôm nay, chúng ta sẽ tìm hiểu một triết lý khác: thay vì thay đổi mô hình hay tìm kiếm các cặp đôi, chúng ta sẽ "thay đổi chính bộ dữ liệu" bằng cách Tái trọng số. Ý tưởng là gán cho mỗi quan sát một "trọng số" để làm cho nhóm đối chứng trông giống hệt nhóm can thiệp về mặt phân phối các đặc điểm.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **1. Nền tảng lý thuyết: Tái trọng số bằng Nghịch đảo Xác suất**
+- **2. Phương pháp nghiên cứu: Ước lượng Bền vững kép**
+- **3. Tổng kết**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c2/phuong-phap-tai-trong-so-va-uoc-luong-ben-vung-kep/)
+
+### 2.5. Phân tích thực hành với hồi quy điều chỉnh và so khớp
+
+Chào mừng các bạn đến với bài học thực hành đầu tiên! Trong bốn bài học vừa qua, chúng ta đã cùng nhau xây dựng một nền tảng lý thuyết vững chắc về các phương pháp ước lượng tác động can thiệp. Giờ là lúc chúng ta khởi động phần mềm Stata và áp dụng những gì đã học vào một ví dụ thực tế. Mục tiêu của bài học hôm nay không chỉ là gõ lệnh, mà là thực hành tư duy phân tích: từ việc khám phá dữ liệu, xây dựng mô hình, đến diễn giải kết quả một cách sâu sắc.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **1. Quy trình phân tích dữ liệu**
+- **2. Hướng dẫn thực hành từng bước với Stata**
+- **Bước 1: Chuẩn bị và khám phá dữ liệu**
+- **Bước 2: Ước lượng bằng Điều chỉnh hồi quy**
+- **Bước 3: Ước lượng bằng So khớp theo Hiệp biến**
+- **Bước 4: Ước lượng bằng So khớp theo Điểm xu hướng**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c2/phan-tich-thuc-hanh-voi-hoi-quy-dieu-chinh-va-so-khop/)
+
+### 2.6. Hướng dẫn thực hành với tái trọng số và so khớp CEM
+
+Chào mừng các bạn đến với bài học thực hành cuối cùng trong chuỗi bài của chúng ta! Sau khi đã nắm vững cách "điều chỉnh" bằng hồi quy và "tìm cặp song sinh" bằng so khớp, hôm nay chúng ta sẽ khám phá hai kỹ thuật mạnh mẽ khác để đảm bảo sự cân bằng giữa các nhóm so sánh: Tái trọng số Nghịch đảo Xác suất và So khớp Chính xác Thô hóa. Đây là những công cụ nâng cao giúp chúng ta xử lý các tình huống phức tạp và tăng cường độ tin cậy cho kết quả phân tích.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **1. Hướng dẫn thực hành với Tái trọng số**
+- **2. Hướng dẫn thực hành với So khớp Chính xác Thô hóa**
+- **Tổng kết và Lời khuyên**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c2/huong-dan-thuc-hanh-voi-tai-trong-so-va-so-khop-cem/)
+
+## 3. Step-by-Step Empirical Implementation Workflow
 
 <Steps>
   <div className="step-item">
-    <h3>Step 1: Nền tảng về điều chỉnh hồi quy</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Nền tảng về điều chỉnh hồi quy. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/cserk22u1/c2/nen-tang-ve-dieu-chinh-hoi-quy/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/cserk22u1/c2/nen-tang-ve-dieu-chinh-hoi-quy/</a>.</p>
+    <h3>1. Formulate the Research Question and Prepare Data on EcoData & Finco</h3>
+    <p>Define the dependent variable, core explanatory variables, and control covariates aligned with <strong>2. Các phương pháp dựa trên lựa chọn các biến quan sát được</strong>. Extract standardized Vietnamese empirical series from <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> or <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, and screen for missing observations and extreme outliers.</p>
   </div>
   <div className="step-item">
-    <h3>Step 2: Giới thiệu về phương pháp so khớp</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Giới thiệu về phương pháp so khớp. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/cserk22u1/c2/gioi-thieu-ve-phuong-phap-so-khop/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/cserk22u1/c2/gioi-thieu-ve-phuong-phap-so-khop/</a>.</p>
+    <h3>2. Conduct Descriptive Profiling, Correlation Analysis, and Pre-Estimation Checks</h3>
+    <p>Examine empirical distributions, construct summary statistics tables, and evaluate collinearity using pairwise correlation matrices and Variance Inflation Factors (VIF).</p>
   </div>
   <div className="step-item">
-    <h3>Step 3: Kỹ thuật so khớp điểm xu hướng</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Kỹ thuật so khớp điểm xu hướng. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/cserk22u1/c2/ky-thuat-so-khop-diem-xu-huong/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/cserk22u1/c2/ky-thuat-so-khop-diem-xu-huong/</a>.</p>
+    <h3>3. Estimate the Model Across Stata 18 MP, R 4.x, and Python 3.11+</h3>
+    <p>Execute the parameter estimation scripts matching the structural equations in Section 1.1 while cross-checking theoretical derivations at <a href="https://sachktl.tnsai.vn/vi/cserk22u1/c2/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Step 4: Phương pháp tái trọng số và ước lượng bền vững kép</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Phương pháp tái trọng số và ước lượng bền vững kép. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/cserk22u1/c2/phuong-phap-tai-trong-so-va-uoc-luong-ben-vung-kep/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/cserk22u1/c2/phuong-phap-tai-trong-so-va-uoc-luong-ben-vung-kep/</a>.</p>
+    <h3>4. Perform Post-Estimation Diagnostics and Robust Variance Correction</h3>
+    <p>Test for heteroskedasticity, serial correlation, Ramsey RESET functional form misspecification, and regressor endogeneity. Apply White HC1 or cluster-robust standard errors for valid inference.</p>
   </div>
   <div className="step-item">
-    <h3>Step 5: Phân tích thực hành với hồi quy điều chỉnh và so khớp</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Phân tích thực hành với hồi quy điều chỉnh và so khớp. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/cserk22u1/c2/phan-tich-thuc-hanh-voi-hoi-quy-dieu-chinh-va-so-khop/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/cserk22u1/c2/phan-tich-thuc-hanh-voi-hoi-quy-dieu-chinh-va-so-khop/</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Step 6: Hướng dẫn thực hành với tái trọng số và so khớp CEM</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Hướng dẫn thực hành với tái trọng số và so khớp CEM. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/cserk22u1/c2/huong-dan-thuc-hanh-voi-tai-trong-so-va-so-khop-cem/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/cserk22u1/c2/huong-dan-thuc-hanh-voi-tai-trong-so-va-so-khop-cem/</a>.</p>
+    <h3>5. Format Journal-Grade Tables and Cross-Verify on EcoLab</h3>
+    <p>Report point estimates, standard errors in parentheses, and statistical significance stars following APA 7th / AER Booktabs standards, or automate the entire reporting pipeline on <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> and <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Multi-Platform Implementation Examples in Stata, R, and Python
+## 4. Multi-Platform Implementation Scripts in Stata, R, and Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Initialize environment and load practice dataset from EcoData / SachKTL
+* Ước lượng tác động nhân quả với DiD, Event Study và Propensity Score Matching
 version 18.0
 clear all
 set more off
+import delimited "sachktl_causal_ecodata.csv", clear encoding("utf-8")
 
-* Import standardized empirical dataset
-import delimited "sachktl_cserk22u1_c02_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+* 1. Ước lượng Difference-in-Differences hai chiều và kiểm định xu hướng song song
+xtset id year
+xtdidregress (y x1 x2) (treated_post), group(id) time(year) vce(cluster id)
+estat trendplots
+estat ptrends
 
-* Estimate baseline specification and run diagnostic checks with robust standard errors
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 2. Ước lượng ghép cặp điểm xu hướng (PSM) và nghịch đảo xác suất trọng số (IPWRA)
+teffects psmatch (y) (treat x1 x2 x3, probit), atet vce(iid)
+teffects ipwra (y x1 x2) (treat x1 x2 x3, logit), atet
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Load econometric packages and practice dataset from EcoData / SachKTL
-library(tidyverse)
-library(lmtest)
-library(sandwich)
+# Nạp thư viện suy diễn nhân quả fixest, did và MatchIt
+library(fixest)
+library(did)
+library(MatchIt)
 
-df <- read.csv("sachktl_cserk22u1_c02_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_causal_ecodata.csv")
 
-# Estimate model and compute heteroskedasticity-robust HC1 standard errors
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Ước lượng mô hình DiD và Event Study với sai số chuẩn cụm
+mod_did <- feols(y ~ treated_post + x1 + x2 | id + year, data = df, cluster = ~id)
+summary(mod_did)
+
+# 2. Ước lượng Callaway & Sant'Anna (2021) cho DiD đa thời điểm
+cs_out <- att_gt(yname = "y", tname = "year", idname = "id", gname = "first_treat",
+                 xformla = ~ x1 + x2, data = df, control_group = "nevertreated")
+summary(aggte(cs_out, type = "dynamic"))
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Load econometric libraries and practice dataset from EcoData / SachKTL
+# Nạp thư viện statsmodels và linearmodels để ước lượng DiD & IPW
 import pandas as pd
 import statsmodels.formula.api as smf
+from linearmodels.panel import PanelOLS
 
-df = pd.read_csv("sachktl_cserk22u1_c02_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_causal_ecodata.csv")
 
-# Fit specification with HC1 robust standard errors
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Ước lượng điểm xu hướng Propensity Score bằng Logit
+ps_mod = smf.logit("treat ~ x1 + x2 + x3", data=df).fit(disp=False)
+df["pscore"] = ps_mod.predict(df)
+
+# 2. Ước lượng Difference-in-Differences hai chiều với sai số chuẩn cụm
+df_panel = df.set_index(["id", "year"])
+did_mod = PanelOLS.from_formula("y ~ 1 + treated_post + x1 + x2 + EntityEffects + TimeEffects", data=df_panel)
+did_res = did_mod.fit(cov_type="clustered", cluster_entity=True)
+print(did_res.summary)
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video Tutorial Walkthrough
+## 5. Post-Estimation Diagnostic and Interpretation Guide
+
+| Diagnostic Criterion | Null Hypothesis $H_0$ | Benchmark Threshold | Corrective Action When $H_0$ Is Rejected |
+| :--- | :--- | :--- | :--- |
+| **Heteroskedasticity** | Constant error variance $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ rejects $H_0$ | Apply `vce(robust)`, `vcovHC(HC1)`, or FGLS/WLS weighted estimation |
+| **Multicollinearity** | No severe linear dependence among regressors | $\text{VIF} < 10$ acceptable | Drop redundant covariates, center interactions, or apply LASSO/Ridge regularization |
+| **Ramsey RESET Functional Form** | No omitted nonlinear or higher-order terms | $p\text{-value} > 0.05$ retains $H_0$ | Add interaction terms, quadratic polynomials, or log-transform skewed positive variables |
+| **Regressor Exogeneity** | Orthogonality $\text{Cov}(X, \varepsilon)=0$ | Durbin-Wu-Hausman $p > 0.05$ | Transition to IV/2SLS, LIML, or GMM estimation with validated instruments |
+
+## 6. Video Tutorial Walkthrough
 
 <VideoTutorial
-  title="Practical Walkthrough for Chapter 02: 2. Các phương pháp dựa trên lựa chọn các biến quan sát được on SachKTL"
+  title="Practical Walkthrough for 2. Các phương pháp dựa trên lựa chọn các biến quan sát được on SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Complete Lesson Directory and Backlinks to Original SachKTL Articles
+## 7. Complete Lesson Directory and Backlinks to Original SachKTL Articles
 
-| No. | Lesson Title in Chapter 02 | Supported Software | Original Source Link on SachKTL |
+| Lesson Code | Lesson Title | Supported Software | Original Source Link on SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Lesson 01** | Nền tảng về điều chỉnh hồi quy | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c2/nen-tang-ve-dieu-chinh-hoi-quy/) |
-| **Lesson 02** | Giới thiệu về phương pháp so khớp | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c2/gioi-thieu-ve-phuong-phap-so-khop/) |
-| **Lesson 03** | Kỹ thuật so khớp điểm xu hướng | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c2/ky-thuat-so-khop-diem-xu-huong/) |
-| **Lesson 04** | Phương pháp tái trọng số và ước lượng bền vững kép | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c2/phuong-phap-tai-trong-so-va-uoc-luong-ben-vung-kep/) |
-| **Lesson 05** | Phân tích thực hành với hồi quy điều chỉnh và so khớp | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c2/phan-tich-thuc-hanh-voi-hoi-quy-dieu-chinh-va-so-khop/) |
-| **Lesson 06** | Hướng dẫn thực hành với tái trọng số và so khớp CEM | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c2/huong-dan-thuc-hanh-voi-tai-trong-so-va-so-khop-cem/) |
+| **2.1** | Nền tảng về điều chỉnh hồi quy | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c2/nen-tang-ve-dieu-chinh-hoi-quy/) |
+| **2.2** | Giới thiệu về phương pháp so khớp | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c2/gioi-thieu-ve-phuong-phap-so-khop/) |
+| **2.3** | Kỹ thuật so khớp điểm xu hướng | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c2/ky-thuat-so-khop-diem-xu-huong/) |
+| **2.4** | Phương pháp tái trọng số và ước lượng bền vững kép | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c2/phuong-phap-tai-trong-so-va-uoc-luong-ben-vung-kep/) |
+| **2.5** | Phân tích thực hành với hồi quy điều chỉnh và so khớp | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c2/phan-tich-thuc-hanh-voi-hoi-quy-dieu-chinh-va-so-khop/) |
+| **2.6** | Hướng dẫn thực hành với tái trọng số và so khớp CEM | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c2/huong-dan-thuc-hanh-voi-tai-trong-so-va-so-khop-cem/) |

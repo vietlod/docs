@@ -1,19 +1,19 @@
 ---
 id: chapter-07-c7
-title: "Chương 07: 7. phương trình đồng thời với thành phần sai số"
-sidebar_label: "Chương 07: 7. Phương trình đồng thời với thành phần s"
+title: "7. Phương trình đồng thời với thành phần sai số"
+sidebar_label: "7. Phương trình đồng thời với thành phần sai số"
 sidebar_position: 8
-description: "Hướng dẫn thực hành How-To Chương 07: 7. phương trình đồng thời với thành phần sai số thuộc bộ sách Phương pháp phân tích dữ liệu bảng trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 7. Phương trình đồng thời với thành phần sai số thuộc giáo trình Phương pháp phân tích dữ liệu bảng trên SachKTL kèm công thức toán học, phân tích 4 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 07: 7. phương trình đồng thời với thành phần sai số
+# 7. Phương trình đồng thời với thành phần sai số
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 07: 7. phương trình đồng thời với thành phần sai số** thuộc [**Bộ sách 01: phương pháp phân tích dữ liệu bảng**](/sachktl/book-01-bsalk21u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/bsalk21u1/c7/](https://sachktl.tnsai.vn/vi/bsalk21u1/c7/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **4 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **7. Phương trình đồng thời với thành phần sai số** thuộc bộ giáo trình [**Phương pháp phân tích dữ liệu bảng**](/sachktl/book-01-bsalk21u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/bsalk21u1/c7/](https://sachktl.tnsai.vn/vi/bsalk21u1/c7/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 07: 7. phương trình đồng thời với thành phần sai số">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="7. Phương trình đồng thời với thành phần sai số">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 01 · CHƯƠNG 07</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 07: 7. phương trình đồng thời với thành phần sai số</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Phương pháp phân tích dữ liệu bảng · 4 bài học chuyên sâu</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Phương pháp phân tích dữ liệu bảng</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">7. Phương trình đồng thời với thành phần sai số</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng dữ liệu bảng và kiểm soát dị biệt không quan sát được · 4 bài học chuyê</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,128 +41,234 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Phương trình đồng thời với thành phần sai số Giới thiệu Một trong những thách thức lớn và phổ biến nhất trong kinh tế lượng ứng dụng là vấn đề nội sinh. Nội sinh xảy ra khi các biến giải thích ở vế phải của phương trình hồi quy có tương quan với thành phần sai số, dẫn đến ước lượng OLS bị chệch và không nhất quán. Vấn đề này xuất hiện trong vô số mô hình kinh tế, từ các hệ phương trình cung-cầu, hàm sản xuất, mô hình đầu tư, cho đến các phương trình hành vi như tiêu dùng hay xuất nhập khẩu. Để giải quyết vấn đề này, các nhà kinh tế lượng đã phát triển các phương pháp sử dụng
+Phương trình đồng thời với thành phần sai số Giới thiệu Một trong những thách thức lớn và phổ biến nhất trong kinh tế lượng ứng dụng là vấn đề nội sinh. Nội sinh xảy ra khi các biến giải thích ở vế phải của phương trình hồi quy có tương quan với thành phần sai số, dẫn đến ước lượng OLS bị chệch và không nhất quán. Vấn đề này xuất hiện trong vô số mô hình kinh tế, từ các hệ phương trình cung-cầu, hàm sản xuất, mô hình đầu tư, cho đến các phương trình hành vi như tiêu dùng hay xuất nhập khẩu.
 
-- **Chủ đề học thuật trọng tâm**: Giới thiệu, Cấu trúc chuỗi bài học, Kiến thức tiên quyết, Mục tiêu học tập, Tài liệu tham khảo chính.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+Y_{it} = \alpha + \mathbf{X}_{it}'\boldsymbol{\beta} + \mu_i + \lambda_t + \varepsilon_{it}, \quad i = 1,\dots,N; \; t = 1,\dots,T \tag*{[1]}
+$$
+
+$$
+\hat{\boldsymbol{\beta}}_{\text{FE}} = \left(\sum_{i=1}^N \sum_{t=1}^T \tilde{\mathbf{X}}_{it}\tilde{\mathbf{X}}_{it}'\right)^{-1} \left(\sum_{i=1}^N \sum_{t=1}^T \tilde{\mathbf{X}}_{it}\tilde{Y}_{it}\right), \quad \tilde{Z}_{it} = Z_{it} - \bar{Z}_i \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Tính ngoại sinh nghiêm ngặt của các biến giải thích đối với thành phần nhiễu đặc thù theo cả chiều chéo và chiều thời gian.
+2. Thành phần hiệu ứng cá thể $\mu_i$ có thể tương quan tùy ý với $\mathbf{X}_{it}$ trong mô hình tác động cố định FE hoặc độc lập tuyến tính trong mô hình tác động ngẫu nhiên RE.
+3. Ma trận hiệp phương sai của sai số cần được hiệu chỉnh vững theo cụm cá thể để kiểm soát tự tương quan chuỗi và phương sai thay đổi.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 07 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/bsalk21u1/c7/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Ước lượng tác động cố định FE và tác động ngẫu nhiên RE bị chệch Nickell khi có biến trễ của biến phụ thuộc $Y_{i,t-1}$ với chiều thời gian $T$ ngắn; khi đó cần chuyển sang ước lượng Difference GMM hoặc System GMM."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Xử lý nội sinh trong phương trình đơn với dữ liệu bảng
+
+Trong phần giới thiệu, chúng ta đã xác định nội sinh là một trong những thách thức lớn nhất trong phân tích hồi quy. Khi làm việc với dữ liệu bảng, vấn đề này trở nên phức tạp hơn vì sai số không chỉ là một thành phần ngẫu nhiên đơn thuần mà còn chứa đựng các hiệu ứng riêng không quan sát được. Do đó, một biến giải thích có thể bị nội sinh theo hai cách: tương quan với sai số ngẫu nhiên hoặc tương quan với hiệu ứng riêng không quan sát được.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Nền tảng lý thuyết: Từ 2SLS đến EC2SLS**
+- **1. Ước lượng 2SLS-within và 2SLS-between**
+- **2. Ước lượng EC2SLS: Kết hợp thông tin**
+- **Ví dụ minh họa: Mô hình kinh tế về tội phạm ở north carolina**
+- **Vấn đề nội sinh**
+- **Quy trình ước lượng và kết quả với Stata**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c7/xu-ly-noi-sinh-trong-phuong-trinh-don-voi-du-lieu-bang-ec2sls/)
+
+### 2.2. Ước lượng hệ thống phương trình đồng thời
+
+Trong bài học trước, chúng ta đã tập trung vào việc xử lý nội sinh trong một phương trình đơn lẻ bằng phương pháp Bình phương nhỏ nhất hai giai đoạn thành phần sai số. Phương pháp này rất mạnh mẽ, tuy nhiên, nhiều mô hình kinh tế không chỉ bao gồm một phương trình duy nhất mà là một hệ thống các mối quan hệ tương tác lẫn nhau. Ví dụ, trong một mô hình kinh tế vĩ mô, tiêu dùng, đầu tư và thu nhập đều được xác định đồng thời. Khi đó, các thành phần sai số của các phương trình khác nhau trong hệ thống có thể tương quan với nhau.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Nền tảng lý thuyết: Từ 3SLS đến EC3SLS**
+- **1. Ước lượng 3SLS-within và 3SLS-between**
+- **2. Ước lượng EC3SLS: Ước lượng hệ thống hiệu quả**
+- **Ví dụ minh họa: Tăng trưởng kinh tế và viện trợ nước ngoài**
+- **Phương pháp và dữ liệu**
+- **Thực hiện với Stata**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c7/uoc-luong-he-thong-phuong-trinh-dong-thoi-ec3sls/)
+
+### 2.3. Ước lượng Hausman-Taylor - Giải pháp cho nội sinh từ hiệu ứng riêng
+
+Trong hai bài học trước, chúng ta đã tập trung giải quyết vấn đề nội sinh "truyền thống", tức là sự tương quan giữa các biến giải thích và thành phần sai số ngẫu nhiên). Các phương pháp như EC2SLS và EC3SLS đã cung cấp những công cụ hiệu quả cho bài toán này. Tuy nhiên, trong dữ liệu bảng, có một dạng nội sinh thứ hai, tinh vi hơn nhưng cũng không kém phần quan trọng: sự tương quan giữa các biến giải thích và hiệu ứng riêng không quan sát được).
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Nền tảng lý thuyết: Biến công cụ từ bên trong mô hình**
+- **Phân loại biến trong mô hình Hausman-Taylor**
+- **Tạo ra các biến công cụ**
+- **Điều kiện nhận dạng**
+- **Ví dụ minh họa: Lợi tức của giáo dục và phương trình thu nhập Mincer**
+- **Phân loại biến và thiết lập mô hình**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c7/uoc-luong-hausman-taylor/)
+
+### 2.4. Hướng dẫn thực hành tổng hợp và giải bài tập
+
+Chúng ta đã đi một chặng đường dài và đầy thử thách trong hành trình khám phá các phương pháp xử lý phương trình đồng thời với thành phần sai số. Từ việc ước lượng một phương trình đơn lẻ với EC2SLS, mở rộng sang toàn bộ hệ thống với EC3SLS, và cuối cùng là tìm hiểu giải pháp tinh vi cho vấn đề nội sinh từ hiệu ứng cá thể với ước lượng Hausman-Taylor. Mỗi bài học đã trang bị cho chúng ta một công cụ chuyên biệt và mạnh mẽ.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Thực hành tổng hợp: Phân tích lại mô hình kinh tế về tội phạm**
+- **Quy trình phân tích**
+- **Workflow phân tích**
+- **Thực hành chi tiết với Stata**
+- **Phân tích và kết luận**
+- **Củng cố lý thuyết: Lời giải chi tiết cho các bài tập quan trọng**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c7/huong-dan-thuc-hanh-tong-hop/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Xử lý nội sinh trong phương trình đơn với dữ liệu bảng</h3>
-    <p>Trong phần giới thiệu, chúng ta đã xác định nội sinh là một trong những thách thức lớn nhất trong phân tích hồi quy. Khi làm việc với dữ liệu bảng, vấn đề này trở nên phức tạp hơn vì sai số không chỉ là một thành phần ngẫu nhiên đơn thuần mà còn chứa đựng các  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/bsalk21u1/c7/xu-ly-noi-sinh-trong-phuong-trinh-don-voi-du-lieu-bang-ec2sls/" target="_blank" rel="noopener">Xử lý nội sinh trong phương trình đơn với dữ liệu bảng</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>7. Phương trình đồng thời với thành phần sai số</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Ước lượng hệ thống phương trình đồng thời</h3>
-    <p>Trong bài học trước, chúng ta đã tập trung vào việc xử lý nội sinh trong một phương trình đơn lẻ bằng phương pháp Bình phương nhỏ nhất hai giai đoạn thành phần sai số. Phương pháp này rất mạnh mẽ, tuy nhiên, nhiều mô hình kinh tế không chỉ bao gồm một phương t Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/bsalk21u1/c7/uoc-luong-he-thong-phuong-trinh-dong-thoi-ec3sls/" target="_blank" rel="noopener">Ước lượng hệ thống phương trình đồng thời</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Ước lượng Hausman-Taylor - giải pháp cho nội sinh từ hiệu ứng riêng</h3>
-    <p>Trong hai bài học trước, chúng ta đã tập trung giải quyết vấn đề nội sinh "truyền thống", tức là sự tương quan giữa các biến giải thích và thành phần sai số ngẫu nhiên). Các phương pháp như EC2SLS và EC3SLS đã cung cấp những công cụ hiệu quả cho bài toán này.  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/bsalk21u1/c7/uoc-luong-hausman-taylor/" target="_blank" rel="noopener">Ước lượng Hausman-Taylor - Giải pháp cho nội sinh từ hiệu ứng riêng</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/bsalk21u1/c7/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Hướng dẫn thực hành tổng hợp và giải bài tập</h3>
-    <p>Chúng ta đã đi một chặng đường dài và đầy thử thách trong hành trình khám phá các phương pháp xử lý phương trình đồng thời với thành phần sai số. Từ việc ước lượng một phương trình đơn lẻ với EC2SLS, mở rộng sang toàn bộ hệ thống với EC3SLS, và cuối cùng là tì Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/bsalk21u1/c7/huong-dan-thuc-hanh-tong-hop/" target="_blank" rel="noopener">Hướng dẫn thực hành tổng hợp và giải bài tập</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
+  </div>
+  <div className="step-item">
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập cấu trúc dữ liệu bảng và ước lượng FE / RE / Hausman
 version 18.0
 clear all
 set more off
+import delimited "sachktl_panel_ecodata.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_bsalk21u1_c07_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+xtset id year
+xtdescribe
+xtsum y x1 x2 x3
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 1. Ước lượng tác động cố định (Fixed Effects) và tác động ngẫu nhiên (Random Effects)
+xtreg y x1 x2 x3, fe
+estimates store FE_model
+xtreg y x1 x2 x3, re
+estimates store RE_model
+
+* 2. Kiểm định Hausman lựa chọn mô hình và ước lượng sai số chuẩn vững theo cụm
+hausman FE_model RE_model, sigmamore
+xtreg y x1 x2 x3 i.year, fe vce(cluster id)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
-library(tidyverse)
+# Nạp thư viện dữ liệu bảng và ước lượng FE / RE / Cluster-Robust SE
+library(plm)
 library(lmtest)
 library(sandwich)
 
-df <- read.csv("sachktl_bsalk21u1_c07_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_panel_ecodata.csv")
+pdata <- pdata.frame(df, index = c("id", "year"))
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Ước lượng mô hình Within FE và Swamy-Arora RE
+fe_mod <- plm(y ~ x1 + x2 + x3, data = pdata, model = "within", effect = "twoways")
+re_mod <- plm(y ~ x1 + x2 + x3, data = pdata, model = "random")
+
+# 2. Kiểm định Hausman và xuất sai số chuẩn vững Arellano theo cụm
+phtest(fe_mod, re_mod)
+coeftest(fe_mod, vcov = vcovHC(fe_mod, method = "arellano", type = "HC1", cluster = "group"))
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện linearmodels và ước lượng PanelOLS / RandomEffects
 import pandas as pd
-import statsmodels.formula.api as smf
+from linearmodels.panel import PanelOLS, RandomEffects, compare
 
-df = pd.read_csv("sachktl_bsalk21u1_c07_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_panel_ecodata.csv").set_index(["id", "year"])
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Ước lượng mô hình Fixed Effects hai chiều với sai số chuẩn cụm
+fe_mod = PanelOLS.from_formula("y ~ 1 + x1 + x2 + x3 + EntityEffects + TimeEffects", data=df)
+fe_res = fe_mod.fit(cov_type="clustered", cluster_entity=True)
+
+# 2. Ước lượng mô hình Random Effects và đối chiếu kết quả
+re_mod = RandomEffects.from_formula("y ~ 1 + x1 + x2 + x3", data=df)
+re_res = re_mod.fit(cov_type="clustered", cluster_entity=True)
+print(compare({"Fixed Effects": fe_res, "Random Effects": re_res}))
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 07: 7. phương trình đồng thời với thành phần sai số trên SachKTL"
+  title="Hướng dẫn thực hành 7. Phương trình đồng thời với thành phần sai số trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 07 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Xử lý nội sinh trong phương trình đơn với dữ liệu bảng | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c7/xu-ly-noi-sinh-trong-phuong-trinh-don-voi-du-lieu-bang-ec2sls/) |
-| **Bài 02** | Ước lượng hệ thống phương trình đồng thời | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c7/uoc-luong-he-thong-phuong-trinh-dong-thoi-ec3sls/) |
-| **Bài 03** | Ước lượng Hausman-Taylor - Giải pháp cho nội sinh từ hiệu ứng riêng | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c7/uoc-luong-hausman-taylor/) |
-| **Bài 04** | Hướng dẫn thực hành tổng hợp và giải bài tập | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c7/huong-dan-thuc-hanh-tong-hop/) |
+| **7.1** | Xử lý nội sinh trong phương trình đơn với dữ liệu bảng | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c7/xu-ly-noi-sinh-trong-phuong-trinh-don-voi-du-lieu-bang-ec2sls/) |
+| **7.2** | Ước lượng hệ thống phương trình đồng thời | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c7/uoc-luong-he-thong-phuong-trinh-dong-thoi-ec3sls/) |
+| **7.3** | Ước lượng Hausman-Taylor - Giải pháp cho nội sinh từ hiệu ứng riêng | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c7/uoc-luong-hausman-taylor/) |
+| **7.4** | Hướng dẫn thực hành tổng hợp và giải bài tập | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c7/huong-dan-thuc-hanh-tong-hop/) |

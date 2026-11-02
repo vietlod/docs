@@ -1,19 +1,19 @@
 ---
 id: chapter-15-c15
-title: "Chương 15: 15. chuỗi thời gian đa biến"
-sidebar_label: "Chương 15: 15. Chuỗi thời gian đa biến"
+title: "15. Chuỗi thời gian đa biến"
+sidebar_label: "15. Chuỗi thời gian đa biến"
 sidebar_position: 16
-description: "Hướng dẫn thực hành How-To Chương 15: 15. chuỗi thời gian đa biến thuộc bộ sách Lý thuyết Kinh tế lượng trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 15. Chuỗi thời gian đa biến thuộc giáo trình Lý thuyết kinh tế lượng trên SachKTL kèm công thức toán học, phân tích 8 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 15: 15. chuỗi thời gian đa biến
+# 15. Chuỗi thời gian đa biến
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 15: 15. chuỗi thời gian đa biến** thuộc [**Bộ sách 17: lý thuyết kinh tế lượng**](/sachktl/book-17-hsank22u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/hsank22u1/c15/](https://sachktl.tnsai.vn/vi/hsank22u1/c15/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **8 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **15. Chuỗi thời gian đa biến** thuộc bộ giáo trình [**Lý thuyết kinh tế lượng**](/sachktl/book-17-hsank22u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/hsank22u1/c15/](https://sachktl.tnsai.vn/vi/hsank22u1/c15/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 15: 15. chuỗi thời gian đa biến">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="15. Chuỗi thời gian đa biến">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 17 · CHƯƠNG 15</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 15: 15. chuỗi thời gian đa biến</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Lý thuyết Kinh tế lượng · 8 bài học chuyên sâu</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Lý thuyết kinh tế lượng</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">15. Chuỗi thời gian đa biến</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng chuỗi thời gian, đồng liên kết và biến động tài chính · 8 bài học chuyê</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,140 +41,299 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Chuỗi thời gian đa biến Chào mừng các bạn sinh viên đến với một trong những công cụ mạnh mẽ và được sử dụng rộng rãi nhất trong kinh tế lượng hiện đại: mô hình chuỗi thời gian đa biến. Trong thực tế, các biến kinh tế hiếm khi vận động một cách độc lập. Lãi suất ảnh hưởng đến lạm phát, lạm phát tác động đến tăng trưởng GDP, và tăng trưởng GDP lại ảnh hưởng ngược lại đến các quyết định chính sách. Để nắm bắt được những mối quan hệ tương tác phức tạp này, chúng ta cần một công cụ có thể phân tích đồng thời nhiều chuỗi thời gian, và đó chính là lúc mô hình Tự Hồi quy Vector, hay còn gọi là mô
+Chuỗi thời gian đa biến Chào mừng các bạn sinh viên đến với một trong những công cụ mạnh mẽ và được sử dụng rộng rãi nhất trong kinh tế lượng hiện đại: mô hình chuỗi thời gian đa biến. Trong thực tế, các biến kinh tế hiếm khi vận động một cách độc lập. Lãi suất ảnh hưởng đến lạm phát, lạm phát tác động đến tăng trưởng GDP, và tăng trưởng GDP lại ảnh hưởng ngược lại đến các quyết định chính sách.
 
-- **Chủ đề học thuật trọng tâm**: Cấu trúc chuỗi bài học, PHỤ LỤC: Dữ liệu mô phỏng cho chuỗi bài viết.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+\Phi(L)(1 - L)^d Y_t = \mu + \Theta(L)\varepsilon_t, \quad \varepsilon_t \mid \mathcal{F}_{t-1} \sim \mathcal{N}(0, \sigma_t^2) \tag*{[1]}
+$$
+
+$$
+\sigma_t^2 = \omega + \sum_{i=1}^p \alpha_i \varepsilon_{t-i}^2 + \sum_{j=1}^q \beta_j \sigma_{t-j}^2, \quad \omega > 0, \; \alpha_i, \beta_j \ge 0 \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Chuỗi thời gian phải thỏa mãn điều kiện dừng hiệp phương sai hoặc được sai phân hóa đến bậc tích hợp $I(d)$ phù hợp trước khi ước lượng.
+2. Điều kiện khả nghịch và nghiệm ngoài vòng tròn đơn vị của đa thức trễ $\Phi(L)$ và $\Theta(L)$ đảm bảo tính ổn định động học.
+3. Trong mô hình phương sai có điều kiện thay đổi GARCH, tổng hệ số $\sum \alpha_i + \sum \beta_j < 1$ bảo đảm phương sai không điều kiện hữu hạn.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 15 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/hsank22u1/c15/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Hồi quy chuỗi thời gian không dừng chưa qua kiểm định nghiệm đơn vị ADF/PP và đồng liên kết Johansen dễ dẫn đến hồi quy giả mạo với thống kê $t$ và $R^2$ bị thổi phồng."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Giới thiệu mô hình tự hồi quy vector
+
+Chào mừng các bạn đã quay trở lại! Trong bài học đầu tiên này, chúng ta sẽ cùng nhau xây dựng những viên gạch nền tảng cho một trong những mô hình quan trọng nhất trong kinh tế lượng chuỗi thời gian: Mô hình Tự hồi quy Vector, hay chúng ta sẽ gọi tắt là mô hình VAR. Có thể các bạn đã từng nghe qua về mô hình này, nhưng đừng lo lắng nếu nó có vẻ phức tạp. Mục tiêu của chúng ta hôm nay là tiếp cận nó một cách trực quan và dễ hiểu nhất.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Nền tảng lý thuyết: Từ AR-DL đến VAR**
+- **1.1. Ôn lại mô hình AR-DL cho một biến**
+- **1.2. Xây dựng hệ thống hai phương trình**
+- **1.3. Mô hình tự hồi quy vector**
+- **1.4. Mở rộng ra mô hình VAR**
+- **2. Phương pháp nghiên cứu: Biểu diễn VAR dưới dạng hồi quy**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c15/gioi-thieu-mo-hinh-tu-hoi-quy-vector/)
+
+### 2.2. Nền tảng lý thuyết của chuỗi thời gian đa biến
+
+Chào mừng các bạn đến với bài học thứ hai! Sau khi đã làm quen với cấu trúc của một mô hình VAR ở bài trước, hôm nay chúng ta sẽ cùng nhau tìm hiểu "linh hồn" lý thuyết đằng sau nó. Tại sao chúng ta có thể biểu diễn các chuỗi thời gian kinh tế dưới dạng một mô hình VAR? Câu trả lời nằm trong một số định lý nền tảng vô cùng quan trọng mà bất kỳ nhà kinh tế lượng nào cũng cần nắm vững.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Phép chiếu tuyến tính và các đổi mới**
+- **2. Phân tích Wold đa biến**
+- **2.1. Mối liên hệ ngược: Từ Wold đến VAR**
+- **3. Phương pháp: Tính toán hệ số Wold từ hệ số VAR**
+- **4. Tổng kết**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c15/nen-tang-ly-thuyet-cua-chuoi-thoi-gian-da-bien/)
+
+### 2.3. Ước lượng, suy luận và lựa chọn mô hình VAR
+
+Chào mừng các bạn đã quay trở lại! Trong hai bài học trước, chúng ta đã cùng nhau xây dựng mô hình VAR từ các khái niệm trực quan và tìm hiểu nền tảng lý thuyết của nó. Giờ là lúc chúng ta bắt tay vào công việc thực tế của một nhà kinh tế lượng: lấy dữ liệu và "thổi hồn" vào mô hình. Bài học hôm nay sẽ hướng dẫn các bạn cách ước lượng các hệ số của mô hình VAR, kiểm định các giả thuyết thống kê về chúng, và quan trọng không kém, làm thế nào để chọn ra một mô hình "tốt nhất" cho bộ dữ liệu của mình.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Nền tảng lý thuyết: Tính dừng và các định lý tiệm cận**
+- **1.1. Điều kiện dừng cho mô hình VAR**
+- **1.2. Phân phối tiệm cận của các ước lượng**
+- **2. Phương pháp nghiên cứu: Ước lượng và lựa chọn mô hình**
+- **Bước 1: Ước lượng các hệ số**
+- **Bước 2: Lựa chọn độ dài độ trễ**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c15/uoc-luong-suy-luan-va-lua-chon-mo-hinh-var/)
+
+### 2.4. Hàm phản ứng xung và cách ước lượng
+
+Chào mừng các bạn đã quay trở lại! Trong bài học ngày hôm nay, chúng ta sẽ khám phá một công cụ phân tích cực kỳ mạnh mẽ và trực quan: Hàm Phản ứng Xung, hay còn gọi là Impulse Response Function. Nếu mô hình VAR là một bức tranh tĩnh về các mối quan hệ, thì IRF chính là một đoạn phim sống động, cho chúng ta thấy các biến số phản ứng và tương tác với nhau như thế nào theo thời gian khi có một "cú sốc" bất ngờ xảy ra. Hãy tưởng tượng bạn ném một viên sỏi xuống mặt hồ yên tĩnh. Những gợn sóng sẽ lan tỏa ra sao?
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Nền tảng lý thuyết: Hàm phản ứng xung là gì?**
+- **1.1. Hàm phản ứng xung tích lũy**
+- **2. Phương pháp nghiên cứu: Ước lượng IRF từ mô hình VAR**
+- **3. Ví dụ minh họa với Stata**
+- **4. Tổng kết**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c15/ham-phan-ung-xung-irf-va-cach-uoc-luong/)
+
+### 2.5. Nhận dạng VAR qua phân rã Cholesky
+
+Chào mừng các bạn đã quay trở lại! Trong bài học trước, chúng ta đã khám phá công cụ Hàm Phản ứng Xung nhưng cũng đã đối mặt với một câu hỏi hóc búa: làm thế nào để diễn giải tác động của một cú sốc khi các cú sốc thường xảy ra cùng lúc? Việc các thành phần của véc-tơ sai số \ có tương quan với nhau làm cho việc nói "tác động của cú sốc A, giữ các yếu tố khác không đổi" trở nên thiếu thực tế. Để giải quyết vấn đề này, chúng ta cần biến đổi các sai số có tương quan thành một tập hợp các "cú sốc cấu trúc" không tương quan với nhau.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Nền tảng lý thuyết: Trực giao hóa các cú sốc**
+- **1.1. Phân rã Cholesky**
+- **1.2. Tầm quan trọng của thứ tự biến**
+- **1.3. Hàm phản ứng xung trực giao**
+- **2. Phương pháp nghiên cứu: Quy trình ước lượng và phân tích**
+- **3. Ví dụ minh họa với Stata**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c15/nhan-dang-var-qua-phan-ra-cholesky/)
+
+### 2.6. Nhận dạng VAR cấu trúc
+
+Chào mừng các bạn đã quay trở lại! Trong bài học trước, chúng ta đã làm một bước tiến lớn khi sử dụng Phân rã Cholesky để nhận dạng các cú sốc. Tuy nhiên, phương pháp đó buộc chúng ta phải chấp nhận một giả định đệ quy khá cứng nhắc. Điều gì sẽ xảy ra nếu lý thuyết kinh tế cho chúng ta biết rằng các biến có sự tác động qua lại hai chiều ngay trong cùng một kỳ? Ví dụ, liệu có hợp lý không khi cho rằng chính sách tiền tệ phản ứng với lạm phát, và các kỳ vọng về lạm phát cũng phản ứng lại với chính sách tiền tệ, tất cả diễn ra gần như đồng thời?
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Nền tảng lý thuyết: Vượt ra ngoài cấu trúc đệ quy**
+- **1.1. Vấn đề nhận dạng trong SVAR**
+- **2. Phương pháp nghiên cứu: Xây dựng mô hình SVAR**
+- **3. Ví dụ minh họa: Phân tích tác động của chính sách tài khóa**
+- **4. Tổng kết**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c15/nhan-dang-var-cau-truc-svar/)
+
+### 2.7. Nhận dạng SVAR với ràng buộc dài hạn
+
+Chào mừng các bạn đến với bài học thứ bảy trong chuỗi bài về mô hình VAR! Ở bài trước, chúng ta đã học cách sử dụng các ràng buộc ngắn hạn – dựa trên lý thuyết về các mối quan hệ xảy ra "trong cùng một quý" – để nhận dạng mô hình SVAR. Đây là một công cụ rất mạnh mẽ. Tuy nhiên, đôi khi lý thuyết kinh tế lại không cho chúng ta nhiều thông tin chắc chắn về các tác động đồng thời, mà thay vào đó lại đưa ra những dự báo mạnh mẽ về các mối quan hệ trong dài hạn.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Nhận dạng bằng ràng buộc dài hạn**
+- **1.1. Nền tảng lý thuyết**
+- **1.2. Ví dụ kinh điển: Blanchard và quah**
+- **2. Nhận dạng bằng biến công cụ ngoại sinh**
+- **3. Tổng kết**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c15/nhan-dang-svar-voi-rang-buoc-dai-han/)
+
+### 2.8. Hướng dẫn thực hành với Stata
+
+Chào mừng các bạn đến với bài học thực hành tổng hợp! Đây là nơi lý thuyết gặp gỡ thực tiễn. Chúng ta sẽ đóng vai một nhà kinh tế lượng ứng dụng, sử dụng dữ liệu kinh tế vĩ mô thực tế của Hoa Kỳ và bộ công cụ VAR mà chúng ta đã học để trả lời một câu hỏi kinh điển và luôn mang tính thời sự: Khi ngân hàng trung ương thực hiện một cú sốc chính sách tiền tệ thắt chặt , nền kinh tế sẽ phản ứng như thế nào? Cụ thể, tác động lên tăng trưởng GDP và lạm phát sẽ ra sao theo thời gian? Đây không chỉ là một bài tập về cách gõ lệnh trong Stata.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Tóm tắt tổng hợp và quy trình phân tích**
+- **2. Chuẩn bị dữ liệu nghiên cứu**
+- **3. Hướng dẫn phân tích từng bước với Stata**
+- **4. Tổng kết và các bước tiếp theo**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c15/huong-dan-thuc-hanh/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Giới thiệu mô hình tự hồi quy vector</h3>
-    <p>Chào mừng các bạn đã quay trở lại! Trong bài học đầu tiên này, chúng ta sẽ cùng nhau xây dựng những viên gạch nền tảng cho một trong những mô hình quan trọng nhất trong kinh tế lượng chuỗi thời gian: Mô hình Tự hồi quy Vector, hay chúng ta sẽ gọi tắt là mô hìn Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c15/gioi-thieu-mo-hinh-tu-hoi-quy-vector/" target="_blank" rel="noopener">Giới thiệu mô hình tự hồi quy vector</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>15. Chuỗi thời gian đa biến</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Nền tảng lý thuyết của chuỗi thời gian đa biến</h3>
-    <p>Chào mừng các bạn đến với bài học thứ hai! Sau khi đã làm quen với cấu trúc của một mô hình VAR ở bài trước, hôm nay chúng ta sẽ cùng nhau tìm hiểu "linh hồn" lý thuyết đằng sau nó. Tại sao chúng ta có thể biểu diễn các chuỗi thời gian kinh tế dưới dạng một mô Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c15/nen-tang-ly-thuyet-cua-chuoi-thoi-gian-da-bien/" target="_blank" rel="noopener">Nền tảng lý thuyết của chuỗi thời gian đa biến</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Ước lượng, suy luận và lựa chọn mô hình VAR</h3>
-    <p>Chào mừng các bạn đã quay trở lại! Trong hai bài học trước, chúng ta đã cùng nhau xây dựng mô hình VAR từ các khái niệm trực quan và tìm hiểu nền tảng lý thuyết của nó. Giờ là lúc chúng ta bắt tay vào công việc thực tế của một nhà kinh tế lượng: lấy dữ liệu và Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c15/uoc-luong-suy-luan-va-lua-chon-mo-hinh-var/" target="_blank" rel="noopener">Ước lượng, suy luận và lựa chọn mô hình VAR</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c15/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Hàm phản ứng xung và cách ước lượng</h3>
-    <p>Chào mừng các bạn đã quay trở lại! Trong bài học ngày hôm nay, chúng ta sẽ khám phá một công cụ phân tích cực kỳ mạnh mẽ và trực quan: Hàm Phản ứng Xung, hay còn gọi là Impulse Response Function. Nếu mô hình VAR là một bức tranh tĩnh về các mối quan hệ, thì IR Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c15/ham-phan-ung-xung-irf-va-cach-uoc-luong/" target="_blank" rel="noopener">Hàm phản ứng xung và cách ước lượng</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 5: Nhận dạng VAR qua phân rã Cholesky</h3>
-    <p>Chào mừng các bạn đã quay trở lại! Trong bài học trước, chúng ta đã khám phá công cụ Hàm Phản ứng Xung nhưng cũng đã đối mặt với một câu hỏi hóc búa: làm thế nào để diễn giải tác động của một cú sốc khi các cú sốc thường xảy ra cùng lúc? Việc các thành phần củ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c15/nhan-dang-var-qua-phan-ra-cholesky/" target="_blank" rel="noopener">Nhận dạng VAR qua phân rã Cholesky</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Bước 6: Nhận dạng VAR cấu trúc</h3>
-    <p>Chào mừng các bạn đã quay trở lại! Trong bài học trước, chúng ta đã làm một bước tiến lớn khi sử dụng Phân rã Cholesky để nhận dạng các cú sốc. Tuy nhiên, phương pháp đó buộc chúng ta phải chấp nhận một giả định đệ quy khá cứng nhắc. Điều gì sẽ xảy ra nếu lý t Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsank22u1/c15/nhan-dang-var-cau-truc-svar/" target="_blank" rel="noopener">Nhận dạng VAR cấu trúc</a>.</p>
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập chuỗi thời gian, kiểm định nghiệm đơn vị và ước lượng ARIMA / GARCH
 version 18.0
 clear all
 set more off
+import delimited "sachktl_timeseries_finco.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_hsank22u1_c15_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+tsset time_id
+dfuller y, lags(4) trend regress
+pperron y, lags(4) trend
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 1. Ước lượng mô hình ARIMA và kiểm định nhiễu trắng phần dư
+arima y, arima(1,1,1) vce(robust)
+predict resid_arima, resid
+wntestq resid_arima, lags(12)
+
+* 2. Ước lượng mô hình phương sai có điều kiện thay đổi ARCH/GARCH(1,1)
+arch d.y x1 x2, arch(1) garch(1) vce(robust)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
-library(tidyverse)
-library(lmtest)
-library(sandwich)
+# Nạp thư viện chuỗi thời gian và ước lượng ARIMA / GARCH(1,1)
+library(tseries)
+library(forecast)
+library(rugarch)
 
-df <- read.csv("sachktl_hsank22u1_c15_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_timeseries_finco.csv")
+y_ts <- ts(df$y, frequency = 12)
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA tối ưu theo AICc
+adf.test(y_ts)
+fit_arima <- auto.arima(y_ts, seasonal = FALSE, ic = "aicc")
+summary(fit_arima)
+checkresiduals(fit_arima)
+
+# 2. Ước lượng mô hình GARCH(1,1) cho chuỗi lợi suất
+spec <- ugarchspec(variance.model = list(model = "sGARCH", garchOrder = c(1, 1)),
+                   mean.model = list(armaOrder = c(1, 0), include.mean = TRUE))
+fit_garch <- ugarchfit(spec = spec, data = diff(y_ts))
+show(fit_garch)
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và arch để phân tích chuỗi thời gian & biến động
 import pandas as pd
-import statsmodels.formula.api as smf
+from statsmodels.tsa.stattools import adfuller
+from statsmodels.tsa.arima.model import ARIMA
+from arch import arch_model
 
-df = pd.read_csv("sachktl_hsank22u1_c15_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_timeseries_finco.csv")
+y = df["y"].dropna()
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA(1,1,1)
+adf_stat, p_val, *_ = adfuller(y, autolag="AIC")
+print(f"ADF Statistic: {adf_stat:.4f}, p-value: {p_val:.4f}")
+arima_res = ARIMA(y, order=(1, 1, 1)).fit()
+print(arima_res.summary())
+
+# 2. Ước lượng mô hình GARCH(1,1) với phân phối Student-t
+ret = y.diff().dropna() * 100
+garch_res = arch_model(ret, vol="Garch", p=1, q=1, dist="t").fit(disp="off")
+print(garch_res.summary())
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 15: 15. chuỗi thời gian đa biến trên SachKTL"
+  title="Hướng dẫn thực hành 15. Chuỗi thời gian đa biến trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 15 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Giới thiệu mô hình tự hồi quy vector | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c15/gioi-thieu-mo-hinh-tu-hoi-quy-vector/) |
-| **Bài 02** | Nền tảng lý thuyết của chuỗi thời gian đa biến | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c15/nen-tang-ly-thuyet-cua-chuoi-thoi-gian-da-bien/) |
-| **Bài 03** | Ước lượng, suy luận và lựa chọn mô hình VAR | Stata 18 MP, R 4.x | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c15/uoc-luong-suy-luan-va-lua-chon-mo-hinh-var/) |
-| **Bài 04** | Hàm phản ứng xung và cách ước lượng | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c15/ham-phan-ung-xung-irf-va-cach-uoc-luong/) |
-| **Bài 05** | Nhận dạng VAR qua phân rã Cholesky | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c15/nhan-dang-var-qua-phan-ra-cholesky/) |
-| **Bài 06** | Nhận dạng VAR cấu trúc | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c15/nhan-dang-var-cau-truc-svar/) |
-| **Bài 07** | Nhận dạng SVAR với ràng buộc dài hạn | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c15/nhan-dang-svar-voi-rang-buoc-dai-han/) |
-| **Bài 08** | Hướng dẫn thực hành với Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c15/huong-dan-thuc-hanh/) |
+| **15.1** | Giới thiệu mô hình tự hồi quy vector | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c15/gioi-thieu-mo-hinh-tu-hoi-quy-vector/) |
+| **15.2** | Nền tảng lý thuyết của chuỗi thời gian đa biến | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c15/nen-tang-ly-thuyet-cua-chuoi-thoi-gian-da-bien/) |
+| **15.3** | Ước lượng, suy luận và lựa chọn mô hình VAR | `Stata 18 MP, R 4.x` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c15/uoc-luong-suy-luan-va-lua-chon-mo-hinh-var/) |
+| **15.4** | Hàm phản ứng xung và cách ước lượng | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c15/ham-phan-ung-xung-irf-va-cach-uoc-luong/) |
+| **15.5** | Nhận dạng VAR qua phân rã Cholesky | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c15/nhan-dang-var-qua-phan-ra-cholesky/) |
+| **15.6** | Nhận dạng VAR cấu trúc | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c15/nhan-dang-var-cau-truc-svar/) |
+| **15.7** | Nhận dạng SVAR với ràng buộc dài hạn | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c15/nhan-dang-svar-voi-rang-buoc-dai-han/) |
+| **15.8** | Hướng dẫn thực hành với Stata | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsank22u1/c15/huong-dan-thuc-hanh/) |

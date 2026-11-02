@@ -1,19 +1,19 @@
 ---
 id: chapter-13-c13
-title: "Chương 13: 13. phương pháp hồi quy phi tuyến"
-sidebar_label: "Chương 13: 13. Phương pháp hồi quy phi tuyến"
+title: "13. Phương pháp hồi quy phi tuyến"
+sidebar_label: "13. Phương pháp hồi quy phi tuyến"
 sidebar_position: 14
-description: "Hướng dẫn thực hành How-To Chương 13: 13. phương pháp hồi quy phi tuyến thuộc bộ sách Kinh tế lượng vi mô sử dụng Stata trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 13. Phương pháp hồi quy phi tuyến thuộc giáo trình Kinh tế lượng vi mô sử dụng Stata trên SachKTL kèm công thức toán học, phân tích 7 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 13: 13. phương pháp hồi quy phi tuyến
+# 13. Phương pháp hồi quy phi tuyến
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 13: 13. phương pháp hồi quy phi tuyến** thuộc [**Bộ sách 15: kinh tế lượng vi mô sử dụng Stata**](/sachktl/book-15-csamk22u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/csamk22u1/c13/](https://sachktl.tnsai.vn/vi/csamk22u1/c13/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **7 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **13. Phương pháp hồi quy phi tuyến** thuộc bộ giáo trình [**Kinh tế lượng vi mô sử dụng Stata**](/sachktl/book-15-csamk22u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/csamk22u1/c13/](https://sachktl.tnsai.vn/vi/csamk22u1/c13/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 13: 13. phương pháp hồi quy phi tuyến">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="13. Phương pháp hồi quy phi tuyến">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 15 · CHƯƠNG 13</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 13: 13. phương pháp hồi quy phi tuyến</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Kinh tế lượng vi mô sử dụng Stata · 7 bài học chuyên sâu</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng vi mô sử dụng Stata</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">13. Phương pháp hồi quy phi tuyến</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng ứng dụng, mô hình hóa thống kê và kiểm định giả thuyết · 7 bài học chuy</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,102 +41,233 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Giới thiệu chuỗi bài học về các phương pháp hồi quy phi tuyến An Introduction to Nonlinear Regression Methods Chào mừng các bạn sinh viên đã quay trở lại với chuỗi bài học kinh tế lượng ứng dụng! Trong học phần nhập môn, chúng ta đã dành phần lớn thời gian làm việc với mô hình hồi quy tuyến tính, một công cụ cực kỳ mạnh mẽ. Tuy nhiên, thế giới kinh tế không phải lúc nào cũng vận hành theo một đường thẳng. Rất nhiều mối quan hệ kinh tế trong thực tế lại có dạng phi tuyến, ví dụ như lợi tức giảm dần của giáo dục, tác động của chi tiêu quảng cáo đến doanh thu, hay các biến số chỉ có thể
+Giới thiệu chuỗi bài học về các phương pháp hồi quy phi tuyến An Introduction to Nonlinear Regression Methods Chào mừng các bạn sinh viên đã quay trở lại với chuỗi bài học kinh tế lượng ứng dụng! Trong học phần nhập môn, chúng ta đã dành phần lớn thời gian làm việc với mô hình hồi quy tuyến tính, một công cụ cực kỳ mạnh mẽ. Tuy nhiên, thế giới kinh tế không phải lúc nào cũng vận hành theo một đường thẳng.
 
-- **Chủ đề học thuật trọng tâm**: CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO, PHỤ LỤC: Dữ liệu mô phỏng cho chuỗi bài học.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+Y_i = \beta_0 + \sum_{k=1}^K \beta_k X_{ik} + \varepsilon_i, \quad \mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0 \tag*{[1]}
+$$
+
+$$
+\widehat{\text{Var}}_{\text{HC1}}(\hat{\boldsymbol{\beta}}) = \frac{N}{N - K - 1}\left(\mathbf{X}'\mathbf{X}\right)^{-1}\left(\sum_{i=1}^N \hat{\varepsilon}_i^2 \mathbf{x}_i \mathbf{x}_i'\right)\left(\mathbf{X}'\mathbf{X}\right)^{-1} \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Dạng hàm tuyến tính theo tham số được xác định đúng, không bỏ sót biến giải thích quan trọng có tương quan với các biến trong mô hình.
+2. Kỳ vọng có điều kiện của sai số bằng không $\mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0$, đảm bảo tính không chệch và vững tiệm cận của ước lượng.
+3. Ma trận thiết kế $\mathbf{X}$ có hạng cột đầy đủ, không xảy ra đa cộng tuyến hoàn hảo và sử dụng sai số chuẩn vững HC1/Cluster khi có phương sai thay đổi.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 13 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/csamk22u1/c13/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Khi tồn tại biến giải thích nội sinh do đồng thời hai chiều, sai số đo lường hoặc bỏ sót biến không quan sát được, ước lượng OLS bị chệch và không vững; cần chuyển sang ước lượng biến công cụ IV/2SLS hoặc GMM."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Nền tảng hồi quy phi tuyến và mô hình Poisson
+
+Nền tảng hồi quy phi tuyến và mô hình Poisson Foundations of nonlinear regression and the Poisson model Giới thiệu Trong các học phần kinh tế lượng cơ bản, chúng ta đã làm quen và sử dụng thành thạo mô hình hồi quy tuyến tính. OLS là một công cụ vô cùng mạnh mẽ, nhưng nó giả định rằng mối quan hệ giữa các biến là một đường thẳng. Tuy nhiên, trong thực tế, rất nhiều hiện tượng kinh tế lại không tuân theo quy luật tuyến tính đơn giản này.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Nền tảng lý thuyết của mô hình Poisson**
+- **Phương pháp nghiên cứu**
+- **Ví dụ minh họa: Mô hình hóa số lượt khám bác sĩ**
+- **Bước 1: Khám phá dữ liệu**
+- **Bước 2 & 3: Ước lượng và diễn giải mô hình Poisson**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c13/nen-tang-hoi-quy-phi-tuyen-va-mo-hinh-poisson/)
+
+### 2.2. Các phương pháp ước lượng phi tuyến phổ biến
+
+Các phương pháp ước lượng phi tuyến phổ biến Common nonlinear estimation methods Giới thiệu Ở bài học trước, chúng ta đã thực hiện thành công hồi quy Poisson đầu tiên. Khi bạn gõ lệnh poisson và nhấn Enter, Stata đã thực hiện một loạt các tính toán phức tạp để tìm ra các hệ số phù hợp nhất cho mô hình. Nhưng quy trình đó chính xác là gì? Stata đã dựa trên nguyên tắc nào để đưa ra kết quả? Câu trả lời nằm ở các phương pháp ước lượng.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Nền tảng lý thuyết của các phương pháp ước lượng**
+- **1. Ước lượng hợp lý tối đa**
+- **2. Bình phương tối thiểu phi tuyến**
+- **3. Mô hình tuyến tính tổng quát**
+- **4. Phương pháp mô-men tổng quát**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c13/cac-phuong-phap-uoc-luong-phi-tuyen-pho-bien/)
+
+### 2.3. Tiên đoán và ý nghĩa của tác động biên
+
+Tiên đoán và ý nghĩa của tác động biên Prediction and the meaning of marginal effects Giới thiệu Ở các bài học trước, chúng ta đã học cách ước lượng một mô hình hồi quy phi tuyến bằng các lệnh như poisson. Chúng ta đã có được một bảng kết quả với các hệ số và sai số chuẩn. Nhưng những con số đó thực sự có ý nghĩa gì? Một sai lầm phổ biến của người mới bắt đầu là diễn giải hệ số của mô hình phi tuyến giống hệt như hệ số của mô hình OLS.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Tại sao hệ số không phải là tác động biên?**
+- **Phương pháp nghiên cứu**
+- **Ví dụ minh họa: Diễn giải mô hình số lượt khám bác sĩ**
+- **Bước 1: Chạy lại mô hình**
+- **Bước 2: Tiên đoán biên với margins**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c13/tien-doan-va-y-nghia-cua-tac-dong-bien/)
+
+### 2.4. Sai số chuẩn và các chẩn đoán mô hình
+
+Sai số chuẩn và các chẩn đoán mô hình Standard errors and model diagnostics Giới thiệu Việc ước lượng một mô hình và diễn giải các hệ số chỉ là một nửa của câu chuyện. Nửa còn lại, và có lẽ còn quan trọng hơn, là đánh giá độ tin cậy của các kết quả đó. Trong thế giới của hồi quy tuyến tính OLS, chúng ta đã quen thuộc với các công cụ như R-squared để đo lường mức độ phù hợp của mô hình, và các kiểm định t, F để đánh giá ý nghĩa thống kê. Tuy nhiên, trong bối cảnh phi tuyến, mọi thứ trở nên phức tạp hơn một chút.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Đánh giá độ tin cậy của mô hình**
+- **1. Sai số chuẩn và sự cần thiết của "robust"**
+- **2. Đo lường mức độ phù hợp: Pseudo R-squared**
+- **3. So sánh các mô hình không lồng nhau: AIC và BIC**
+- **Phương pháp nghiên cứu**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c13/sai-so-chuan-va-cac-chan-doan-mo-hinh/)
+
+### 2.5. Phân tích dữ liệu cụm trong mô hình phi tuyến
+
+Phân tích dữ liệu cụm trong mô hình phi tuyến Analysis of clustered data in nonlinear models Giới thiệu Trong nhiều ứng dụng kinh tế lượng, các quan sát của chúng ta không hoàn toàn độc lập với nhau. Thay vào đó, chúng có thể được nhóm lại thành các cụm. Ví dụ, các học sinh có thể được nhóm theo từng lớp học, các bệnh nhân theo từng bệnh viện, hoặc các hộ gia đình theo từng xã, phường. Rất có khả năng các quan sát trong cùng một cụm sẽ có những đặc điểm chung không quan sát được, khiến cho sai số của chúng có tương quan với nhau.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Các cách tiếp cận cho dữ liệu cụm**
+- **1. Mô hình gộp với sai số chuẩn cụm**
+- **2. Mô hình tác động ngẫu nhiên**
+- **3. Mô hình tác động cố định**
+- **Phương pháp nghiên cứu**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c13/phan-tich-du-lieu-cum-trong-mo-hinh-phi-tuyen/)
+
+### 2.6. Phân tích một case study hoàn chỉnh
+
+Bài thực hành: Phân tích một case study hoàn chỉnh Practice exercise: A complete case study analysis 1. Tóm tắt tổng hợp kiến thức Chúc mừng các bạn đã đến với bài học thực hành cuối cùng của chuỗi bài về hồi quy phi tuyến! Trước khi bắt tay vào một case study mới, hãy cùng nhau nhìn lại hành trình đã qua. Chúng ta đã bắt đầu bằng việc nhận ra những hạn chế của mô hình OLS đối với các loại dữ liệu đặc biệt như dữ liệu đếm, từ đó thấy được sự cần thiết của các mô hình phi tuyến.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Tóm tắt tổng hợp kiến thức**
+- **2. Chuẩn bị dữ liệu**
+- **3. Quy trình phân tích chính sách**
+- **4. Hướng dẫn thực hành từng bước với Stata**
+- **Bước 1 & 2: Xây dựng và đảm bảo độ tin cậy của mô hình**
+- **Bước 3: Lượng hóa tác động chính sách**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c13/phan-tich-mot-case-study-hoan-chinh/)
+
+### 2.7. Hệ thống hóa kiến thức và định hướng nâng cao
+
+Tổng hợp chuỗi bài học về các phương pháp hồi quy phi tuyến Synthesis of the series on nonlinear regression methods 1. Tổng quan chủ đề Chúc mừng các bạn đã hoàn thành một hành trình đầy thử thách nhưng cũng vô cùng bổ ích qua thế giới của các phương pháp hồi quy phi tuyến! Chúng ta đã bắt đầu từ một câu hỏi đơn giản: "Điều gì sẽ xảy ra khi mối quan hệ kinh tế không còn là một đường thẳng?".
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Tổng quan chủ đề**
+- **2. Hệ thống lý thuyết**
+- **3. Hệ thống phương pháp**
+- **4. Ví dụ thực hành tổng hợp**
+- **5. Tổng kết và hướng phát triển**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c13/he-thong-hoa-kien-thuc-va-dinh-huong-nang-cao/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Nền tảng hồi quy phi tuyến và mô hình Poisson</h3>
-    <p>Nền tảng hồi quy phi tuyến và mô hình Poisson Foundations of nonlinear regression and the Poisson model Giới thiệu Trong các học phần kinh tế lượng cơ bản, chúng ta đã làm quen và sử dụng thành thạo mô hình hồi quy tuyến tính. OLS là một công cụ vô cùng mạnh m Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c13/nen-tang-hoi-quy-phi-tuyen-va-mo-hinh-poisson/" target="_blank" rel="noopener">Nền tảng hồi quy phi tuyến và mô hình Poisson</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>13. Phương pháp hồi quy phi tuyến</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Các phương pháp ước lượng phi tuyến phổ biến</h3>
-    <p>Các phương pháp ước lượng phi tuyến phổ biến Common nonlinear estimation methods Giới thiệu Ở bài học trước, chúng ta đã thực hiện thành công hồi quy Poisson đầu tiên. Khi bạn gõ lệnh poisson và nhấn Enter, Stata đã thực hiện một loạt các tính toán phức tạp để Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c13/cac-phuong-phap-uoc-luong-phi-tuyen-pho-bien/" target="_blank" rel="noopener">Các phương pháp ước lượng phi tuyến phổ biến</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Tiên đoán và ý nghĩa của tác động biên</h3>
-    <p>Tiên đoán và ý nghĩa của tác động biên Prediction and the meaning of marginal effects Giới thiệu Ở các bài học trước, chúng ta đã học cách ước lượng một mô hình hồi quy phi tuyến bằng các lệnh như poisson. Chúng ta đã có được một bảng kết quả với các hệ số và  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c13/tien-doan-va-y-nghia-cua-tac-dong-bien/" target="_blank" rel="noopener">Tiên đoán và ý nghĩa của tác động biên</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c13/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Sai số chuẩn và các chẩn đoán mô hình</h3>
-    <p>Sai số chuẩn và các chẩn đoán mô hình Standard errors and model diagnostics Giới thiệu Việc ước lượng một mô hình và diễn giải các hệ số chỉ là một nửa của câu chuyện. Nửa còn lại, và có lẽ còn quan trọng hơn, là đánh giá độ tin cậy của các kết quả đó. Trong t Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c13/sai-so-chuan-va-cac-chan-doan-mo-hinh/" target="_blank" rel="noopener">Sai số chuẩn và các chẩn đoán mô hình</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 5: Phân tích dữ liệu cụm trong mô hình phi tuyến</h3>
-    <p>Phân tích dữ liệu cụm trong mô hình phi tuyến Analysis of clustered data in nonlinear models Giới thiệu Trong nhiều ứng dụng kinh tế lượng, các quan sát của chúng ta không hoàn toàn độc lập với nhau. Thay vào đó, chúng có thể được nhóm lại thành các cụm. Ví dụ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c13/phan-tich-du-lieu-cum-trong-mo-hinh-phi-tuyen/" target="_blank" rel="noopener">Phân tích dữ liệu cụm trong mô hình phi tuyến</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Bước 6: Phân tích một case study hoàn chỉnh</h3>
-    <p>Bài thực hành: Phân tích một case study hoàn chỉnh Practice exercise: A complete case study analysis 1. Tóm tắt tổng hợp kiến thức Chúc mừng các bạn đã đến với bài học thực hành cuối cùng của chuỗi bài về hồi quy phi tuyến! Trước khi bắt tay vào một case study Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c13/phan-tich-mot-case-study-hoan-chinh/" target="_blank" rel="noopener">Phân tích một case study hoàn chỉnh</a>.</p>
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập môi trường, ước lượng mô hình và kiểm định chẩn đoán toàn diện
 version 18.0
 clear all
 set more off
+import delimited "sachktl_empirical_ecodata.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_csamk22u1_c13_ecodata.csv", clear encoding("utf-8")
 describe
-summarize
+summarize y x1 x2 x3, detail
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
+* 1. Ước lượng mô hình cơ sở và kiểm định phương sai thay đổi / đa cộng tuyến / dạng hàm
+regress y x1 x2 x3
 estat hettest
+estat imtest, white
 estat vif
+estat ovtest
+
+* 2. Ước lượng với sai số chuẩn vững White HC1 và xuất tác động biên
+regress y c.x1##c.x2 x3, vce(robust)
+margins, dydx(x1 x2 x3)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện phân tích kinh tế lượng và thực thi kiểm định chẩn đoán
 library(tidyverse)
 library(lmtest)
 library(sandwich)
+library(car)
 
-df <- read.csv("sachktl_csamk22u1_c13_ecodata.csv")
+df <- read.csv("sachktl_empirical_ecodata.csv")
 summary(df)
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+# 1. Ước lượng mô hình tuyến tính và kiểm định Breusch-Pagan, RESET, VIF
 fit <- lm(y ~ x1 + x2 + x3, data = df)
+bptest(fit)
+resettest(fit, power = 2:3, type = "fitted")
+vif(fit)
+
+# 2. Xuất bảng hệ số ước lượng với sai số chuẩn vững HC1
 coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
 ```
 
@@ -144,36 +275,54 @@ coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và thực thi ước lượng kèm chẩn đoán phần dư
 import pandas as pd
+import statsmodels.api as sm
 import statsmodels.formula.api as smf
+from statsmodels.stats.diagnostic import het_breuschpagan, linear_reset
+from statsmodels.stats.outliers_influence import variance_inflation_factor
 
-df = pd.read_csv("sachktl_csamk22u1_c13_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_empirical_ecodata.csv")
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
+# 1. Ước lượng mô hình với sai số chuẩn vững HC1
 model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
 print(model.summary())
+
+# 2. Kiểm định phương sai thay đổi Breusch-Pagan, Ramsey RESET và hệ số VIF
+bp_lm, bp_pval, _, _ = het_breuschpagan(model.resid, model.model.exog)
+reset_res = linear_reset(model, power=2, use_f=True)
+X = sm.add_constant(df[["x1", "x2", "x3"]].dropna())
+vifs = {col: variance_inflation_factor(X.values, i) for i, col in enumerate(X.columns)}
+print(f"Breusch-Pagan p={bp_pval:.4f} | RESET p={reset_res.pvalue:.4f} | VIF={vifs}")
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 13: 13. phương pháp hồi quy phi tuyến trên SachKTL"
+  title="Hướng dẫn thực hành 13. Phương pháp hồi quy phi tuyến trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 13 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Nền tảng hồi quy phi tuyến và mô hình Poisson | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c13/nen-tang-hoi-quy-phi-tuyen-va-mo-hinh-poisson/) |
-| **Bài 02** | Các phương pháp ước lượng phi tuyến phổ biến | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c13/cac-phuong-phap-uoc-luong-phi-tuyen-pho-bien/) |
-| **Bài 03** | Tiên đoán và ý nghĩa của tác động biên | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c13/tien-doan-va-y-nghia-cua-tac-dong-bien/) |
-| **Bài 04** | Sai số chuẩn và các chẩn đoán mô hình | Stata 18 MP, R 4.x | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c13/sai-so-chuan-va-cac-chan-doan-mo-hinh/) |
-| **Bài 05** | Phân tích dữ liệu cụm trong mô hình phi tuyến | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c13/phan-tich-du-lieu-cum-trong-mo-hinh-phi-tuyen/) |
-| **Bài 06** | Phân tích một case study hoàn chỉnh | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c13/phan-tich-mot-case-study-hoan-chinh/) |
-| **Bài 07** | Hệ thống hóa kiến thức và định hướng nâng cao | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c13/he-thong-hoa-kien-thuc-va-dinh-huong-nang-cao/) |
+| **13.1** | Nền tảng hồi quy phi tuyến và mô hình Poisson | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c13/nen-tang-hoi-quy-phi-tuyen-va-mo-hinh-poisson/) |
+| **13.2** | Các phương pháp ước lượng phi tuyến phổ biến | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c13/cac-phuong-phap-uoc-luong-phi-tuyen-pho-bien/) |
+| **13.3** | Tiên đoán và ý nghĩa của tác động biên | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c13/tien-doan-va-y-nghia-cua-tac-dong-bien/) |
+| **13.4** | Sai số chuẩn và các chẩn đoán mô hình | `Stata 18 MP, R 4.x` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c13/sai-so-chuan-va-cac-chan-doan-mo-hinh/) |
+| **13.5** | Phân tích dữ liệu cụm trong mô hình phi tuyến | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c13/phan-tich-du-lieu-cum-trong-mo-hinh-phi-tuyen/) |
+| **13.6** | Phân tích một case study hoàn chỉnh | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c13/phan-tich-mot-case-study-hoan-chinh/) |
+| **13.7** | Hệ thống hóa kiến thức và định hướng nâng cao | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c13/he-thong-hoa-kien-thuc-va-dinh-huong-nang-cao/) |

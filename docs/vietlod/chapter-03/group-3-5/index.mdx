@@ -1,35 +1,35 @@
 ---
 id: index
-title: "Nhóm 3.5: Lựa chọn dữ liệu bảng và cầu cấu trúc"
-sidebar_label: "Nhóm 3.5. Lựa chọn dữ liệu bảng và cầu cấu trúc"
+title: "3.5. Lựa chọn dữ liệu bảng và cầu cấu trúc"
+sidebar_label: "3.5. Lựa chọn dữ liệu bảng và cầu cấu trúc"
 sidebar_position: 5
 slug: /vietlod/chapter-03/group-3-5
-description: "Hướng dẫn thực hành Nhóm 3.5 — Lựa chọn dữ liệu bảng và cầu cấu trúc thuộc Chương 03: so sánh và thực thi 2 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Phần 3.5 — Lựa chọn dữ liệu bảng và cầu cấu trúc thuộc Chương 3: so sánh và thực thi 2 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
-  - Nhóm 3.5 VietLOD
+  - Phần 3.5 VietLOD
   - Lựa chọn dữ liệu bảng và cầu cấu trúc
   - Stata 18
   - R 4.x
   - Python 3.11
 ---
 
-# Nhóm 3.5: Lựa chọn dữ liệu bảng và cầu cấu trúc
+# 3.5. Lựa chọn dữ liệu bảng và cầu cấu trúc
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Nhóm phương pháp 3.5 — Lựa chọn dữ liệu bảng và cầu cấu trúc** thuộc [Chương 03: Mô hình lựa chọn rời rạc và cầu cấu trúc](/vietlod/chapter-03) cung cấp quy trình thực hành từng bước cho **2 mô hình kinh tế lượng** từ bài `3.5.1` đến `3.5.2`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Nhóm 3.5](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-03-mo-hinh-lua-chon-roi-rac-va-cau-cau-truc/nhom-3-5-structural-panel-choice) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+**Phần 3.5. Lựa chọn dữ liệu bảng và cầu cấu trúc** thuộc [3. Mô hình lựa chọn rời rạc và cầu cấu trúc](/vietlod/chapter-03) cung cấp quy trình thực hành từng bước cho **2 bài học mô hình kinh tế lượng** từ mục `3.5.1` đến `3.5.2`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 3.5](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-03-mo-hinh-lua-chon-roi-rac-va-cau-cau-truc/nhom-3-5-structural-panel-choice) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Nhóm 3.5: Lựa chọn dữ liệu bảng và cầu cấu trúc trên Stata 18, R 4.x và Python 3.11+"
+  title="Hướng dẫn thực hành Phần 3.5: Lựa chọn dữ liệu bảng và cầu cấu trúc trên Stata 18, R 4.x và Python 3.11+"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 1. Bản chất phương pháp và hệ phương trình định danh
+## 3.5.1. Bản chất phương pháp và hệ phương trình định danh
 
-- **Câu hỏi nghiên cứu trọng tâm của nhóm**: Làm thế nào để mô hình hóa quyết định định tính — nhị phân, đa phương án, có thứ tự — và ước lượng cầu sản phẩm phân hóa có nội sinh giá bán?
+- **Câu hỏi nghiên cứu trọng tâm**: Làm thế nào để mô hình hóa quyết định định tính — nhị phân, đa phương án, có thứ tự — và ước lượng cầu sản phẩm phân hóa có nội sinh giá bán?
 - **Kiểm định chẩn đoán bắt buộc**: Kiểm định Hausman Panel FE Logit vs RE Logit, số đơn vị chuyển trạng thái thực chất — switchers count — cảnh báo loại các đơn vị không đổi $Y_{it} \equiv 0/1$, Average Partial Effects đã hiệu chỉnh chệch..
 
-Phương trình đặc tả cấu trúc của nhóm phương pháp 3.5:
+Phương trình đặc tả cấu trúc của phần phương pháp 3.5:
 
 $$
 \ell_{\text{cond}}(\beta) = \sum_{i=1}^N \ln \frac{\exp\left(\sum_{t=1}^T Y_{it} X_{it}^\top \beta\right)}{\sum_{d_i \in \mathcal{B}_i} \exp\left(\sum_{t=1}^T d_{it} X_{it}^\top \beta\right)}, \quad \mathcal{B}_i = \left\{d_i \in \{0,1\}^T : \sum_{t=1}^T d_{it} = \sum_{t=1}^T Y_{it}\right\}
@@ -42,10 +42,10 @@ $$
 $$
 
 <FeatureNotAvailable
-  note="Khi dữ liệu vi phạm giả định định danh của Nhóm 3.5, nhà nghiên cứu cần chuyển sang các nhóm phương pháp mở rộng trong Chương 03 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
+  note="Khi dữ liệu vi phạm giả định định danh của Phần 3.5, nhà nghiên cứu cần chuyển sang các phần phương pháp mở rộng trong Chương 3 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
 />
 
-## 2. Danh mục các mô hình trong Nhóm 3.5
+## 3.5.2. Danh mục các bài học mô hình trong Phần 3.5
 
 <FeatureCards
   features={[
@@ -53,38 +53,37 @@ $$
       title: '3.5.1. Mô hình Logit dữ liệu bảng hiệu ứng cố định Chamberlain',
       description: 'Khắc phục bài toán tham số ngẫu nhiên Neyman–Scott — incidental parameters bias $\hat{\beta} \to 2\beta$ khi gán dummy đơn vị trực tiếp vào ...',
       link: '/vietlod/chapter-03/group-3-5/b039-panel-logit-fe-cre',
-      badge: 'B039 · panel_logit_fe_cre'
+      badge: '3.5.1 · panel_logit_fe_cre'
     },
     {
       title: '3.5.2. Mô hình cầu sản phẩm phân hóa với biến công cụ (BLP)',
       description: 'Mô hình trụ cột số 1 của Kinh tế học Tổ chức Ngành: biến đổi ngược thị phần tổng hợp $\ln(s_{jt}) - \ln(s_{0t}) = X_{jt}\beta - \alpha p_{jt...',
       link: '/vietlod/chapter-03/group-3-5/b040-berry-blp-logit-iv',
-      badge: 'B040 · berry_blp_logit_iv'
+      badge: '3.5.2 · berry_blp_logit_iv'
     }
   ]}
 />
 
-## 3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
+## 3.5.3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
 
 | Bài học & Mô hình | Mã định danh | Cú pháp Stata 18 MP | Cú pháp R 4.x | Cú pháp Python 3.11+ | Hỗ trợ |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `3.5.1` · [Mô hình Logit dữ liệu bảng hiệu ứng cố định Chamberlain](/vietlod/chapter-03/group-3-5/b039-panel-logit-fe-cre) | `panel_logit_fe_cre` | `xtlogit y_bin x1 x2, fe` | `bife::bife(y_bin ~ x1 + x2 \| id, data = df)` | `ConditionalLogit(df['y_bin'], df[['x1', 'x2']], groups=df['id']).fit()` | <Available /> |
-| `3.5.2` · [Mô hình cầu sản phẩm phân hóa với biến công cụ (BLP)](/vietlod/chapter-03/group-3-5/b040-berry-blp-logit-iv) | `berry_blp_logit_iv` | `ivreghdfe ln_s_s0 x1 (price = z1 z2), absorb(market_id)` | `fixest::feols(ln_s_s0 ~ x1 \| market_id \| price ~ z1 + z2, data = df)` | `IV2SLS.from_formula('ln_s_s0 ~ 1 + x1 + [price ~ z1 + z2]', data=df).fit()` | <Available /> |
+| **3.5.1** · [Mô hình Logit dữ liệu bảng hiệu ứng cố định Chamberlain](/vietlod/chapter-03/group-3-5/b039-panel-logit-fe-cre) | `panel_logit_fe_cre` | `xtlogit y_bin x1 x2, fe` | `bife::bife(y_bin ~ x1 + x2 \| id, data = df)` | `ConditionalLogit(df['y_bin'], df[['x1', 'x2']], groups=df['id']).fit()` | <Available /> |
+| **3.5.2** · [Mô hình cầu sản phẩm phân hóa với biến công cụ (BLP)](/vietlod/chapter-03/group-3-5/b040-berry-blp-logit-iv) | `berry_blp_logit_iv` | `ivreghdfe ln_s_s0 x1 (price = z1 z2), absorb(market_id)` | `fixest::feols(ln_s_s0 ~ x1 \| market_id \| price ~ z1 + z2, data = df)` | `IV2SLS.from_formula('ln_s_s0 ~ 1 + x1 + [price ~ z1 + z2]', data=df).fit()` | <Available /> |
 
-## 4. Quy trình thực hành chuẩn cho Nhóm 3.5
+## 3.5.4. Quy trình thực hành chuẩn cho Phần 3.5
 
 <Steps>
-
-### Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco
-
-Tải tệp CSV thực hành của từng mô hình trong Nhóm `3.5` hoặc kết nối dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
-
-### Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu
-
-So sánh các mô hình từ `3.5.1` đến `3.5.2` trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.
-
-### Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab
-
-Thực hiện đầy đủ bộ kiểm định **Kiểm định Hausman Panel FE Logit vs RE Logit, số đơn vị chuyển trạng thái thực chất — switchers count — cảnh báo loại các đơn vị không đổi $Y_{it} \equiv 0/1$, Average Partial Effects đã hiệu chỉnh chệch.** và đẩy mã mô hình sang [EcoLab](https://ecolab.io.vn) để xuất bảng kết quả chuẩn công bố quốc tế.
-
+  <div className="step-item">
+    <h3>Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco</h3>
+    <p>Tải tệp CSV thực hành của từng bài học trong Phần <code>3.5</code> hoặc kết nối dữ liệu thực tế từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> và <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu</h3>
+    <p>So sánh các bài học mô hình từ <code>3.5.1</code> đến <code>3.5.2</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab</h3>
+    <p>Thực hiện đầy đủ bộ kiểm định <strong>Kiểm định Hausman Panel FE Logit vs RE Logit, số đơn vị chuyển trạng thái thực chất — switchers count — cảnh báo loại các đơn vị không đổi $Y_{it} \equiv 0/1$, Average Partial Effects đã hiệu chỉnh chệch.</strong> và đẩy mã mô hình sang <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> để xuất bảng kết quả chuẩn công bố quốc tế.</p>
+  </div>
 </Steps>

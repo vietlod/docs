@@ -1,35 +1,35 @@
 ---
 id: index
-title: "Nhóm 14.1: Biên hiệu quả và năng suất nhân tố tổng hợp (TFP)"
-sidebar_label: "Nhóm 14.1. Biên hiệu quả và năng suất nhân tố tổng hợp (TFP)"
+title: "14.1. Biên hiệu quả và năng suất nhân tố tổng hợp (TFP)"
+sidebar_label: "14.1. Biên hiệu quả và năng suất nhân tố tổng hợp (TFP)"
 sidebar_position: 1
 slug: /vietlod/chapter-14/group-14-1
-description: "Hướng dẫn thực hành Nhóm 14.1 — Biên hiệu quả và năng suất nhân tố tổng hợp (TFP) thuộc Chương 14: so sánh và thực thi 4 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Phần 14.1 — Biên hiệu quả và năng suất nhân tố tổng hợp (TFP) thuộc Chương 14: so sánh và thực thi 4 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
-  - Nhóm 14.1 VietLOD
+  - Phần 14.1 VietLOD
   - Biên hiệu quả và năng suất nhân tố tổng hợp (TFP)
   - Stata 18
   - R 4.x
   - Python 3.11
 ---
 
-# Nhóm 14.1: Biên hiệu quả và năng suất nhân tố tổng hợp (TFP)
+# 14.1. Biên hiệu quả và năng suất nhân tố tổng hợp (TFP)
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Nhóm phương pháp 14.1 — Biên hiệu quả và năng suất nhân tố tổng hợp (TFP)** thuộc [Chương 14: Năng suất, biên hiệu quả và hàm sản xuất cấu trúc](/vietlod/chapter-14) cung cấp quy trình thực hành từng bước cho **4 mô hình kinh tế lượng** từ bài `14.1.1` đến `14.1.4`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Nhóm 14.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-14-nang-suat-bien-hieu-qua-va-ham-san-xuat-cau-truc/nhom-14-1-frontier-tfp) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+**Phần 14.1. Biên hiệu quả và năng suất nhân tố tổng hợp (TFP)** thuộc [14. Năng suất, biên hiệu quả và hàm sản xuất cấu trúc](/vietlod/chapter-14) cung cấp quy trình thực hành từng bước cho **4 bài học mô hình kinh tế lượng** từ mục `14.1.1` đến `14.1.4`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 14.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-14-nang-suat-bien-hieu-qua-va-ham-san-xuat-cau-truc/nhom-14-1-frontier-tfp) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Nhóm 14.1: Biên hiệu quả và năng suất nhân tố tổng hợp (TFP) trên Stata 18, R 4.x và Python 3.11+"
+  title="Hướng dẫn thực hành Phần 14.1: Biên hiệu quả và năng suất nhân tố tổng hợp (TFP) trên Stata 18, R 4.x và Python 3.11+"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 1. Bản chất phương pháp và hệ phương trình định danh
+## 14.1.1. Bản chất phương pháp và hệ phương trình định danh
 
-- **Câu hỏi nghiên cứu trọng tâm của nhóm**: Làm thế nào để đo lường hiệu quả kỹ thuật, phân rã chỉ số năng suất liên thời gian Malmquist và ước lượng TFP cấu trúc khử nội sinh đầu vào (ACF)?
+- **Câu hỏi nghiên cứu trọng tâm**: Làm thế nào để đo lường hiệu quả kỹ thuật, phân rã chỉ số năng suất liên thời gian Malmquist và ước lượng TFP cấu trúc khử nội sinh đầu vào (ACF)?
 - **Kiểm định chẩn đoán bắt buộc**: Tỷ trọng phương sai phi hiệu quả $\gamma = \sigma_u^2 / (\sigma_v^2 + \sigma_u^2)$ và $\lambda = \sigma_u/\sigma_v$, kiểm định Kodde–Palm mixed-$\chi^2$ LR cho $H_0: \sigma_u^2 = 0$ — có tồn tại phi hiệu quả hay chỉ là OLS, phân phối TE..
 
-Phương trình đặc tả cấu trúc của nhóm phương pháp 14.1:
+Phương trình đặc tả cấu trúc của phần phương pháp 14.1:
 
 $$
 \ln Y_{it} = X_{it}^\top \beta + v_{it} - u_{it}, \quad v_{it} \sim \mathcal{N}(0, \sigma_v^2), \quad u_{it} \sim \mathcal{N}^+(\mu_{it}, \sigma_u^2), \quad \text{TE}_{it} = \text{E}[\exp(-u_{it}) \mid \varepsilon_{it}]
@@ -42,10 +42,10 @@ $$
 $$
 
 <FeatureNotAvailable
-  note="Khi dữ liệu vi phạm giả định định danh của Nhóm 14.1, nhà nghiên cứu cần chuyển sang các nhóm phương pháp mở rộng trong Chương 14 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
+  note="Khi dữ liệu vi phạm giả định định danh của Phần 14.1, nhà nghiên cứu cần chuyển sang các phần phương pháp mở rộng trong Chương 14 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
 />
 
-## 2. Danh mục các mô hình trong Nhóm 14.1
+## 14.1.2. Danh mục các bài học mô hình trong Phần 14.1
 
 <FeatureCards
   features={[
@@ -53,52 +53,51 @@ $$
       title: '14.1.1. Phân tích biên ngẫu nhiên hàm sản xuất và chi phí (SFA)',
       description: 'Tách sai số hàm sản xuất / hàm chi phí thành hai thành phần độc lập: nhiễu ngẫu nhiên đối xứng $v_i \sim \mathcal{N}(0, \sigma_v^2)$ và phi ...',
       link: '/vietlod/chapter-14/group-14-1/b194-sfa-frontier',
-      badge: 'B194 · sfa_frontier'
+      badge: '14.1.1 · sfa_frontier'
     },
     {
       title: '14.1.2. Phân tích bao dữ liệu và suy luận Bootstrap Simar–Wilson (DEA)',
       description: 'Đo lường hiệu quả kỹ thuật tổng hợp (CRS), hiệu quả kỹ thuật thuần (VRS) và hiệu quả quy mô — SE = CRS/VRS — cho hệ thống đa đầu vào – đa đầ...',
       link: '/vietlod/chapter-14/group-14-1/b195-dea-efficiency',
-      badge: 'B195 · dea_efficiency'
+      badge: '14.1.2 · dea_efficiency'
     },
     {
       title: '14.1.3. Chỉ số năng suất nhân tố tổng hợp liên thời gian Malmquist',
       description: 'Đo lường tốc độ tăng trưởng năng suất nhân tố tổng hợp liên thời gian của từng đơn vị (DMU) trên dữ liệu bảng đa đầu vào – đa đầu ra qua tru...',
       link: '/vietlod/chapter-14/group-14-1/b196-malmquist-productivity',
-      badge: 'B196 · malmquist_productivity'
+      badge: '14.1.3 · malmquist_productivity'
     },
     {
       title: '14.1.4. Ước lượng hàm sản xuất cấu trúc và TFP Ackerberg–Caves–Frazer (ACF)',
       description: 'Ước lượng nhất quán độ co giãn lao động, vốn và Năng suất nhân tố tổng hợp — TFP $\omega_{it}$ — trên dữ liệu bảng doanh nghiệp bằng phương ...',
       link: '/vietlod/chapter-14/group-14-1/b197-acf-production-tfp',
-      badge: 'B197 · acf_production_tfp'
+      badge: '14.1.4 · acf_production_tfp'
     }
   ]}
 />
 
-## 3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
+## 14.1.3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
 
 | Bài học & Mô hình | Mã định danh | Cú pháp Stata 18 MP | Cú pháp R 4.x | Cú pháp Python 3.11+ | Hỗ trợ |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `14.1.1` · [Phân tích biên ngẫu nhiên hàm sản xuất và chi phí (SFA)](/vietlod/chapter-14/group-14-1/b194-sfa-frontier) | `sfa_frontier` | `frontier ln_y ln_k ln_l, dist(tnormal) vce(robust)` | `frontier::sfa(ln_y ~ ln_k + ln_l, data = df, ineffDecrease = TRUE)` | `scipy.optimize.minimize(sfa_halfnormal_negloglik, theta0, method='BFGS')` | <Available /> |
-| `14.1.2` · [Phân tích bao dữ liệu và suy luận Bootstrap Simar–Wilson (DEA)](/vietlod/chapter-14/group-14-1/b195-dea-efficiency) | `dea_efficiency` | `teradial y = x1 x2, rts(vrs) base(input)` | `Benchmarking::dea(X, Y, RTS = 'vrs', ORIENTATION = 'in')` | `scipy.optimize.linprog(c_dea, A_ub=A_dea, b_ub=b_dea, method='highs')` | <Available /> |
-| `14.1.3` · [Chỉ số năng suất nhân tố tổng hợp liên thời gian Malmquist](/vietlod/chapter-14/group-14-1/b196-malmquist-productivity) | `malmquist_productivity` | `malmq2 x1 x2 = y, ort(o) fgnz` | `Benchmarking::malmquist.components(X, Y, ID = df$id, TIME = df$year)` | `scipy.optimize.linprog(c_malm, A_ub=A_malm, b_ub=b_malm, method='highs')` | <Available /> |
-| `14.1.4` · [Ước lượng hàm sản xuất cấu trúc và TFP Ackerberg–Caves–Frazer (ACF)](/vietlod/chapter-14/group-14-1/b197-acf-production-tfp) | `acf_production_tfp` | `prodest ln_va, free(ln_l) state(ln_k) proxy(ln_m) met(acf) id(id) t(year)` | `prodest::prodestACF(Y = df$ln_va, fX = df$ln_l, sX = df$ln_k, pX = df$ln_m, idvar = df$id, timevar = df$year)` | `smf.ols('ln_va ~ ln_l + poly_k_m', data=df).fit(cov_type='cluster', cov_kwds={'groups': df['id']})` | <Available /> |
+| **14.1.1** · [Phân tích biên ngẫu nhiên hàm sản xuất và chi phí (SFA)](/vietlod/chapter-14/group-14-1/b194-sfa-frontier) | `sfa_frontier` | `frontier ln_y ln_k ln_l, dist(tnormal) vce(robust)` | `frontier::sfa(ln_y ~ ln_k + ln_l, data = df, ineffDecrease = TRUE)` | `scipy.optimize.minimize(sfa_halfnormal_negloglik, theta0, method='BFGS')` | <Available /> |
+| **14.1.2** · [Phân tích bao dữ liệu và suy luận Bootstrap Simar–Wilson (DEA)](/vietlod/chapter-14/group-14-1/b195-dea-efficiency) | `dea_efficiency` | `teradial y = x1 x2, rts(vrs) base(input)` | `Benchmarking::dea(X, Y, RTS = 'vrs', ORIENTATION = 'in')` | `scipy.optimize.linprog(c_dea, A_ub=A_dea, b_ub=b_dea, method='highs')` | <Available /> |
+| **14.1.3** · [Chỉ số năng suất nhân tố tổng hợp liên thời gian Malmquist](/vietlod/chapter-14/group-14-1/b196-malmquist-productivity) | `malmquist_productivity` | `malmq2 x1 x2 = y, ort(o) fgnz` | `Benchmarking::malmquist.components(X, Y, ID = df$id, TIME = df$year)` | `scipy.optimize.linprog(c_malm, A_ub=A_malm, b_ub=b_malm, method='highs')` | <Available /> |
+| **14.1.4** · [Ước lượng hàm sản xuất cấu trúc và TFP Ackerberg–Caves–Frazer (ACF)](/vietlod/chapter-14/group-14-1/b197-acf-production-tfp) | `acf_production_tfp` | `prodest ln_va, free(ln_l) state(ln_k) proxy(ln_m) met(acf) id(id) t(year)` | `prodest::prodestACF(Y = df$ln_va, fX = df$ln_l, sX = df$ln_k, pX = df$ln_m, idvar = df$id, timevar = df$year)` | `smf.ols('ln_va ~ ln_l + poly_k_m', data=df).fit(cov_type='cluster', cov_kwds={'groups': df['id']})` | <Available /> |
 
-## 4. Quy trình thực hành chuẩn cho Nhóm 14.1
+## 14.1.4. Quy trình thực hành chuẩn cho Phần 14.1
 
 <Steps>
-
-### Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco
-
-Tải tệp CSV thực hành của từng mô hình trong Nhóm `14.1` hoặc kết nối dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
-
-### Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu
-
-So sánh các mô hình từ `14.1.1` đến `14.1.4` trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.
-
-### Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab
-
-Thực hiện đầy đủ bộ kiểm định **Tỷ trọng phương sai phi hiệu quả $\gamma = \sigma_u^2 / (\sigma_v^2 + \sigma_u^2)$ và $\lambda = \sigma_u/\sigma_v$, kiểm định Kodde–Palm mixed-$\chi^2$ LR cho $H_0: \sigma_u^2 = 0$ — có tồn tại phi hiệu quả hay chỉ là OLS, phân phối TE.** và đẩy mã mô hình sang [EcoLab](https://ecolab.io.vn) để xuất bảng kết quả chuẩn công bố quốc tế.
-
+  <div className="step-item">
+    <h3>Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco</h3>
+    <p>Tải tệp CSV thực hành của từng bài học trong Phần <code>14.1</code> hoặc kết nối dữ liệu thực tế từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> và <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu</h3>
+    <p>So sánh các bài học mô hình từ <code>14.1.1</code> đến <code>14.1.4</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab</h3>
+    <p>Thực hiện đầy đủ bộ kiểm định <strong>Tỷ trọng phương sai phi hiệu quả $\gamma = \sigma_u^2 / (\sigma_v^2 + \sigma_u^2)$ và $\lambda = \sigma_u/\sigma_v$, kiểm định Kodde–Palm mixed-$\chi^2$ LR cho $H_0: \sigma_u^2 = 0$ — có tồn tại phi hiệu quả hay chỉ là OLS, phân phối TE.</strong> và đẩy mã mô hình sang <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> để xuất bảng kết quả chuẩn công bố quốc tế.</p>
+  </div>
 </Steps>

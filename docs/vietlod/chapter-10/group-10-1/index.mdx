@@ -1,35 +1,35 @@
 ---
 id: index
-title: "Nhóm 10.1: Hồi quy không gian cắt ngang"
-sidebar_label: "Nhóm 10.1. Hồi quy không gian cắt ngang"
+title: "10.1. Hồi quy không gian cắt ngang"
+sidebar_label: "10.1. Hồi quy không gian cắt ngang"
 sidebar_position: 1
 slug: /vietlod/chapter-10/group-10-1
-description: "Hướng dẫn thực hành Nhóm 10.1 — Hồi quy không gian cắt ngang thuộc Chương 10: so sánh và thực thi 5 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Phần 10.1 — Hồi quy không gian cắt ngang thuộc Chương 10: so sánh và thực thi 5 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
-  - Nhóm 10.1 VietLOD
+  - Phần 10.1 VietLOD
   - Hồi quy không gian cắt ngang
   - Stata 18
   - R 4.x
   - Python 3.11
 ---
 
-# Nhóm 10.1: Hồi quy không gian cắt ngang
+# 10.1. Hồi quy không gian cắt ngang
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Nhóm phương pháp 10.1 — Hồi quy không gian cắt ngang** thuộc [Chương 10: Kinh tế lượng không gian, sai số chuẩn Conley và mạng cặp đôi](/vietlod/chapter-10) cung cấp quy trình thực hành từng bước cho **5 mô hình kinh tế lượng** từ bài `10.1.1` đến `10.1.5`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Nhóm 10.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-10-kinh-te-luong-khong-gian-conley-hac-va-mang-cap-doi/nhom-10-1-spatial-regression) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+**Phần 10.1. Hồi quy không gian cắt ngang** thuộc [10. Kinh tế lượng không gian, sai số chuẩn Conley và mạng cặp đôi](/vietlod/chapter-10) cung cấp quy trình thực hành từng bước cho **5 bài học mô hình kinh tế lượng** từ mục `10.1.1` đến `10.1.5`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 10.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-10-kinh-te-luong-khong-gian-conley-hac-va-mang-cap-doi/nhom-10-1-spatial-regression) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Nhóm 10.1: Hồi quy không gian cắt ngang trên Stata 18, R 4.x và Python 3.11+"
+  title="Hướng dẫn thực hành Phần 10.1: Hồi quy không gian cắt ngang trên Stata 18, R 4.x và Python 3.11+"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 1. Bản chất phương pháp và hệ phương trình định danh
+## 10.1.1. Bản chất phương pháp và hệ phương trình định danh
 
-- **Câu hỏi nghiên cứu trọng tâm của nhóm**: Làm thế nào để lượng hóa hiệu ứng lan tỏa địa lý, biến thiên hệ số đa thang đo (MGWR) và sai số chuẩn không gian Conley HAC / mạng cặp đôi?
+- **Câu hỏi nghiên cứu trọng tâm**: Làm thế nào để lượng hóa hiệu ứng lan tỏa địa lý, biến thiên hệ số đa thang đo (MGWR) và sai số chuẩn không gian Conley HAC / mạng cặp đôi?
 - **Kiểm định chẩn đoán bắt buộc**: Bảng phân rã Direct, Indirect — Spillover $\theta$ — và Total Effects kèm $p$-value, kiểm định Wald đồng thời $H_0: \theta = 0$, kiểm định Moran's $I$ & LM-Error trên phần dư..
 
-Phương trình đặc tả cấu trúc của nhóm phương pháp 10.1:
+Phương trình đặc tả cấu trúc của phần phương pháp 10.1:
 
 $$
 Y = X\beta + W X \theta + \varepsilon, \quad \frac{\partial \text{E}[Y]}{\partial X_k^\top} = I_N \beta_k + W \theta_k
@@ -42,10 +42,10 @@ $$
 $$
 
 <FeatureNotAvailable
-  note="Khi dữ liệu vi phạm giả định định danh của Nhóm 10.1, nhà nghiên cứu cần chuyển sang các nhóm phương pháp mở rộng trong Chương 10 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
+  note="Khi dữ liệu vi phạm giả định định danh của Phần 10.1, nhà nghiên cứu cần chuyển sang các phần phương pháp mở rộng trong Chương 10 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
 />
 
-## 2. Danh mục các mô hình trong Nhóm 10.1
+## 10.1.2. Danh mục các bài học mô hình trong Phần 10.1
 
 <FeatureCards
   features={[
@@ -53,59 +53,58 @@ $$
       title: '10.1.1. Mô hình trễ không gian của biến giải thích (SLX)',
       description: 'Mô hình hóa lan tỏa không gian cục bộ trực tiếp qua biến giải thích trễ không gian $Y = X\beta + WX\theta + \varepsilon$, cho phép tách bạch...',
       link: '/vietlod/chapter-10/group-10-1/b161-slx-spatial-x',
-      badge: 'B161 · slx_spatial_x'
+      badge: '10.1.1 · slx_spatial_x'
     },
     {
       title: '10.1.2. Mô hình tự hồi quy trễ không gian của biến phụ thuộc (SAR)',
       description: 'Đưa biến trễ không gian của biến phụ thuộc $W Y$ vào vế phải phương trình $Y = \rho W Y + X \beta + \varepsilon$ và ước lượng bằng hợp lý cự...',
       link: '/vietlod/chapter-10/group-10-1/b162-sar-spatial-lag',
-      badge: 'B162 · sar_spatial_lag'
+      badge: '10.1.2 · sar_spatial_lag'
     },
     {
       title: '10.1.3. Mô hình tự tương quan không gian trong sai số (SEM)',
       description: 'Mô hình hóa cấu trúc tự tương quan không gian nằm trong thành phần sai số $u = \lambda W u + \varepsilon$ để kiểm soát các cú sốc địa lý, kh...',
       link: '/vietlod/chapter-10/group-10-1/b163-sem-spatial-error',
-      badge: 'B163 · sem_spatial_error'
+      badge: '10.1.3 · sem_spatial_error'
     },
     {
       title: '10.1.4. Mô hình không gian Durbin và phân rã tác động LeSage–Pace (SDM)',
       description: 'Bao hàm đồng thời cả biến trễ không gian của biến phụ thuộc $\rho W Y$ và biến trễ không gian của các biến giải thích $W X \theta$, tạo ra m...',
       link: '/vietlod/chapter-10/group-10-1/b164-sdm-spatial-durbin',
-      badge: 'B164 · sdm_spatial_durbin'
+      badge: '10.1.4 · sdm_spatial_durbin'
     },
     {
       title: '10.1.5. Mô hình kết hợp tự hồi quy trễ và sai số không gian (SARAR)',
       description: 'Kết hợp đồng thời cả tương tác nội sinh của biến kết quả giữa các vùng lân cận — $\rho WY$ — và tự tương quan không gian trong cú sốc nhiễu ...',
       link: '/vietlod/chapter-10/group-10-1/b165-sarar-sac-spatial',
-      badge: 'B165 · sarar_sac_spatial'
+      badge: '10.1.5 · sarar_sac_spatial'
     }
   ]}
 />
 
-## 3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
+## 10.1.3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
 
 | Bài học & Mô hình | Mã định danh | Cú pháp Stata 18 MP | Cú pháp R 4.x | Cú pháp Python 3.11+ | Hỗ trợ |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `10.1.1` · [Mô hình trễ không gian của biến giải thích (SLX)](/vietlod/chapter-10/group-10-1/b161-slx-spatial-x) | `slx_spatial_x` | `spregress y x1 x2, gs2sls ivarlag(W: x1 x2)` | `spatialreg::lmSLX(y ~ x1 + x2, data = df, listw = lw)` | `spreg.OLS(y, X, w=w, slx_lags=1)` | <Available /> |
-| `10.1.2` · [Mô hình tự hồi quy trễ không gian của biến phụ thuộc (SAR)](/vietlod/chapter-10/group-10-1/b162-sar-spatial-lag) | `sar_spatial_lag` | `spregress y x1 x2, ml dvarlag(W)` | `spatialreg::lagsarlm(y ~ x1 + x2, data = df, listw = lw)` | `spreg.ML_Lag(y, X, w=w)` | <Available /> |
-| `10.1.3` · [Mô hình tự tương quan không gian trong sai số (SEM)](/vietlod/chapter-10/group-10-1/b163-sem-spatial-error) | `sem_spatial_error` | `spregress y x1 x2, ml errorlag(W)` | `spatialreg::errorsarlm(y ~ x1 + x2, data = df, listw = lw)` | `spreg.ML_Error(y, X, w=w)` | <Available /> |
-| `10.1.4` · [Mô hình không gian Durbin và phân rã tác động LeSage–Pace (SDM)](/vietlod/chapter-10/group-10-1/b164-sdm-spatial-durbin) | `sdm_spatial_durbin` | `spregress y x1 x2, ml dvarlag(W) ivarlag(W: x1 x2) -> estat impact` | `spatialreg::lagsarlm(y ~ x1 + x2, data = df, listw = lw, Durbin = TRUE)` | `spreg.ML_Lag(y, X, w=w, slx_lags=1)` | <Available /> |
-| `10.1.5` · [Mô hình kết hợp tự hồi quy trễ và sai số không gian (SARAR)](/vietlod/chapter-10/group-10-1/b165-sarar-sac-spatial) | `sarar_sac_spatial` | `spregress y x1 x2, gs2sls dvarlag(W) errorlag(W) het` | `spatialreg::sacsarlm(y ~ x1 + x2, data = df, listw = lw)` | `spreg.GM_Combo_Het(y, X, w=w)` | <Available /> |
+| **10.1.1** · [Mô hình trễ không gian của biến giải thích (SLX)](/vietlod/chapter-10/group-10-1/b161-slx-spatial-x) | `slx_spatial_x` | `spregress y x1 x2, gs2sls ivarlag(W: x1 x2)` | `spatialreg::lmSLX(y ~ x1 + x2, data = df, listw = lw)` | `spreg.OLS(y, X, w=w, slx_lags=1)` | <Available /> |
+| **10.1.2** · [Mô hình tự hồi quy trễ không gian của biến phụ thuộc (SAR)](/vietlod/chapter-10/group-10-1/b162-sar-spatial-lag) | `sar_spatial_lag` | `spregress y x1 x2, ml dvarlag(W)` | `spatialreg::lagsarlm(y ~ x1 + x2, data = df, listw = lw)` | `spreg.ML_Lag(y, X, w=w)` | <Available /> |
+| **10.1.3** · [Mô hình tự tương quan không gian trong sai số (SEM)](/vietlod/chapter-10/group-10-1/b163-sem-spatial-error) | `sem_spatial_error` | `spregress y x1 x2, ml errorlag(W)` | `spatialreg::errorsarlm(y ~ x1 + x2, data = df, listw = lw)` | `spreg.ML_Error(y, X, w=w)` | <Available /> |
+| **10.1.4** · [Mô hình không gian Durbin và phân rã tác động LeSage–Pace (SDM)](/vietlod/chapter-10/group-10-1/b164-sdm-spatial-durbin) | `sdm_spatial_durbin` | `spregress y x1 x2, ml dvarlag(W) ivarlag(W: x1 x2) -> estat impact` | `spatialreg::lagsarlm(y ~ x1 + x2, data = df, listw = lw, Durbin = TRUE)` | `spreg.ML_Lag(y, X, w=w, slx_lags=1)` | <Available /> |
+| **10.1.5** · [Mô hình kết hợp tự hồi quy trễ và sai số không gian (SARAR)](/vietlod/chapter-10/group-10-1/b165-sarar-sac-spatial) | `sarar_sac_spatial` | `spregress y x1 x2, gs2sls dvarlag(W) errorlag(W) het` | `spatialreg::sacsarlm(y ~ x1 + x2, data = df, listw = lw)` | `spreg.GM_Combo_Het(y, X, w=w)` | <Available /> |
 
-## 4. Quy trình thực hành chuẩn cho Nhóm 10.1
+## 10.1.4. Quy trình thực hành chuẩn cho Phần 10.1
 
 <Steps>
-
-### Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco
-
-Tải tệp CSV thực hành của từng mô hình trong Nhóm `10.1` hoặc kết nối dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
-
-### Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu
-
-So sánh các mô hình từ `10.1.1` đến `10.1.5` trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.
-
-### Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab
-
-Thực hiện đầy đủ bộ kiểm định **Bảng phân rã Direct, Indirect — Spillover $\theta$ — và Total Effects kèm $p$-value, kiểm định Wald đồng thời $H_0: \theta = 0$, kiểm định Moran's $I$ & LM-Error trên phần dư.** và đẩy mã mô hình sang [EcoLab](https://ecolab.io.vn) để xuất bảng kết quả chuẩn công bố quốc tế.
-
+  <div className="step-item">
+    <h3>Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco</h3>
+    <p>Tải tệp CSV thực hành của từng bài học trong Phần <code>10.1</code> hoặc kết nối dữ liệu thực tế từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> và <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu</h3>
+    <p>So sánh các bài học mô hình từ <code>10.1.1</code> đến <code>10.1.5</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab</h3>
+    <p>Thực hiện đầy đủ bộ kiểm định <strong>Bảng phân rã Direct, Indirect — Spillover $\theta$ — và Total Effects kèm $p$-value, kiểm định Wald đồng thời $H_0: \theta = 0$, kiểm định Moran's $I$ & LM-Error trên phần dư.</strong> và đẩy mã mô hình sang <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> để xuất bảng kết quả chuẩn công bố quốc tế.</p>
+  </div>
 </Steps>

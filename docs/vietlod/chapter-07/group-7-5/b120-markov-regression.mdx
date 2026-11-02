@@ -1,10 +1,10 @@
 ---
 id: b120-markov-regression
-title: "7.5.2. Hướng dẫn thực hành Mô hình hồi quy chuyển đổi chế độ ẩn Markov Hamilton"
+title: "7.5.2. Mô hình hồi quy chuyển đổi chế độ ẩn Markov Hamilton"
 sidebar_label: "7.5.2. Mô hình hồi quy chuyển đổi chế độ ẩn Markov Hamilton"
 sidebar_position: 2
 slug: /vietlod/chapter-07/group-7-5/b120-markov-regression
-description: "Tài liệu How-To hướng dẫn thực hành mô hình Mô hình hồi quy chuyển đổi chế độ ẩn Markov Hamilton với mã markov_regression trên Stata 18 MP, R 4.x và Python 3.11+ kèm dữ liệu thực hành và diễn giải kết quả chuẩn tạp chí."
+description: "Tài liệu How-To hướng dẫn thực hành bài 7.5.2 — Mô hình hồi quy chuyển đổi chế độ ẩn Markov Hamilton với mã markov_regression trên Stata 18 MP, R 4.x và Python 3.11+ kèm dữ liệu thực hành và diễn giải kết quả chuẩn tạp chí."
 keywords:
   - Mô hình hồi quy chuyển đổi chế độ ẩn Markov Hamilton
   - markov_regression
@@ -17,28 +17,28 @@ keywords:
   - EcoLab
 ---
 
-# 7.5.2. Hướng dẫn thực hành Mô hình hồi quy chuyển đổi chế độ ẩn Markov Hamilton
+# 7.5.2. Mô hình hồi quy chuyển đổi chế độ ẩn Markov Hamilton
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Bài học `7.5.2` — Mã mô hình `B120` (`markov_regression`)** thuộc [Chương 07: Chuỗi thời gian đa biến, chiếu cục bộ và mạng lan tỏa](/vietlod/chapter-07) $\to$ [Nhóm 7.5: Mô hình tự hồi quy ngưỡng và chuyển chế độ Markov](/vietlod/chapter-07/group-7-5), phân loại **Cấp độ L4 — Chuyên sâu biên giới**. Tài liệu How-To này hướng dẫn chi tiết từ bản chất phương pháp, điều kiện áp dụng, kịch bản mã lệnh trên **Stata 18 MP**, **R 4.x** và **Python 3.11+**, tệp dữ liệu thực hành `vietlod_markov_regression_ecodata.csv` cho đến cách đọc hiểu đồ thị hội tụ 3 phần mềm và viết phần diễn giải kết quả theo chuẩn tạp chí quốc tế.
+**Bài học `7.5.2` — Mã mô hình `B120` — Khóa định danh `markov_regression`** thuộc [7. Chuỗi thời gian đa biến, chiếu cục bộ và mạng lan tỏa](/vietlod/chapter-07) $\to$ [7.5. Mô hình tự hồi quy ngưỡng và chuyển chế độ Markov](/vietlod/chapter-07/group-7-5), phân loại **Cấp độ L4 — Chuyên sâu biên giới**. Tài liệu How-To này hướng dẫn chi tiết từ bản chất phương pháp, điều kiện áp dụng, kịch bản mã lệnh trên **Stata 18 MP**, **R 4.x** và **Python 3.11+**, tệp dữ liệu thực hành `vietlod_markov_regression_ecodata.csv` cho đến cách đọc hiểu đồ thị hội tụ 3 phần mềm và viết phần diễn giải kết quả theo chuẩn tạp chí quốc tế.
 
 <VideoTutorial
   title="Video hướng dẫn thực hành bài 7.5.2: Mô hình hồi quy chuyển đổi chế độ ẩn Markov Hamilton trên Stata 18, R 4.x và Python 3.11+"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 1. Ý nghĩa phương pháp và phạm vi áp dụng
+## 7.5.2.1. Ý nghĩa phương pháp và phạm vi áp dụng
 
-### 1.1. Bản chất kinh tế lượng
+### 7.5.2.1.1. Bản chất kinh tế lượng
 
 Cho phép các tham số trung bình, hệ số hồi quy và phương sai nhiễu chuyển đổi giữa $M$ trạng thái ẩn không quan sát được $S_t \in \{1, \dots, M\}$ vận động theo chuỗi Markov bậc nhất với ma trận xác suất chuyển tiếp $P$.
 
-### 1.2. Phạm vi áp dụng và yêu cầu cấu trúc dữ liệu
+### 7.5.2.1.2. Phạm vi áp dụng và yêu cầu cấu trúc dữ liệu
 
 Nhận diện tự động các giai đoạn mở rộng và suy thoái của chu kỳ kinh tế hoặc trạng thái thị trường chứng khoán tăng giá và giảm giá qua bộ lọc Hamilton.
 
-### 1.3. Hệ phương trình toán học và điều kiện định danh
+### 7.5.2.1.3. Hệ phương trình toán học và điều kiện định danh
 
 Phương trình đặc tả cấu trúc của mô hình `markov_regression`:
 
@@ -59,10 +59,10 @@ $$
 $$
 
 <FeatureNotAvailable
-  note="Giới hạn áp dụng: Không sử dụng trực tiếp ước lượng Mô hình hồi quy chuyển đổi chế độ ẩn Markov Hamilton khi mẫu vi phạm nghiêm trọng điều kiện định danh hoặc chưa vượt qua bộ kiểm định bắt buộc gồm Xác suất trạng thái làm trơn, thời gian duy trì kỳ vọng của từng chế độ $1 / (1 - p_{ii})$, kiểm định tỷ số hợp lý Davies/Garcia cho số chế độ và kiểm định phần dư. Trong trường hợp vi phạm, hãy tham chiếu các mô hình mở rộng cùng Nhóm 7.5 hoặc Chương 07."
+  note="Giới hạn áp dụng: Không sử dụng trực tiếp ước lượng Mô hình hồi quy chuyển đổi chế độ ẩn Markov Hamilton khi mẫu vi phạm nghiêm trọng điều kiện định danh hoặc chưa vượt qua bộ kiểm định bắt buộc gồm Xác suất trạng thái làm trơn, thời gian duy trì kỳ vọng của từng chế độ $1 / (1 - p_{ii})$, kiểm định tỷ số hợp lý Davies/Garcia cho số chế độ và kiểm định phần dư. Trong trường hợp vi phạm, hãy tham chiếu các mô hình mở rộng cùng Phần 7.5 hoặc Chương 7."
 />
 
-## 2. Ví dụ thực tế và bộ dữ liệu thực hành chuẩn hóa
+## 7.5.2.2. Ví dụ thực tế và bộ dữ liệu thực hành chuẩn hóa
 
 - **Bài toán thực nghiệm tại Việt Nam**: Ứng dụng mô hình `markov_regression` trên bộ dữ liệu **Nhận diện chế độ Mở rộng vs Suy giảm của thị trường** với cỡ mẫu chuẩn hóa $N = 320$ quan sát được trích xuất từ hệ sinh thái [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
 - **Bộ dữ liệu chuẩn quốc tế đối sánh**: **Hamilton (1989) US Business Cycle**, giúp người học đối chiếu trực tiếp kết quả thực hành với các giáo trình kinh tế lượng hàng đầu thế giới.
@@ -80,7 +80,7 @@ $$
       title: 'Bài giảng toàn văn trên VietLOD',
       description: 'Xem bài giảng lý thuyết chuyên sâu, chứng minh toán học và thảo luận học thuật đầy đủ của Bài 7.5.2 trên cổng VietLOD.',
       link: 'https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-07-chuoi-thoi-gian-da-bien-chieu-cuc-bo-va-mang-lan-toa/nhom-7-5-regime-threshold/b120-markov-regression',
-      badge: 'VietLOD B120'
+      badge: 'VietLOD 7.5.2'
     },
     {
       title: 'Thực thi đám mây trên EcoLab',
@@ -97,9 +97,9 @@ $$
   ]}
 />
 
-## 3. Gói lệnh phân tích và quy trình thực hành trên Stata, R và Python
+## 7.5.2.3. Gói lệnh phân tích và quy trình thực hành trên Stata, R và Python
 
-### 3.1. Bảng đối chiếu gói phần mềm và cú pháp lệnh chuẩn
+### 7.5.2.3.1. Bảng đối chiếu gói phần mềm và cú pháp lệnh chuẩn
 
 | Nền tảng phần mềm | Gói thư viện chuẩn | Cú pháp ước lượng trọng tâm | Lệnh kiểm định chẩn đoán hậu ước lượng | Hỗ trợ |
 | :--- | :--- | :--- | :--- | :--- |
@@ -107,29 +107,28 @@ $$
 | **R 4.x** | `stats / MSwM` | `MSwM::msmFit(lm(y ~ x1, data = df), k = 2, sw = c(TRUE, TRUE, TRUE))` | `vars::roots[fit]; vars::serial.test[fit]; vars::causality[fit, cause = 'x1']` — Kiểm tra mô-đun nghiệm đặc trưng, kiểm định Portmanteau và phân rã phương sai (FEVD). | <Available /> |
 | **Python 3.11+** | `statsmodels` | `MarkovRegression(df['y'], k_regimes=2, exog=df[['x1']], switching_variance=True).fit()` | `res.is_stable(); res.test_whiteness[nlags=8]; res.test_causality['y', ['x1']]` — Kiểm định tính ổn định hệ thống đa biến, tính nhiễu trắng phần dư và hàm phản ứng xung (IRF). | <Available /> |
 
-### 3.2. Quy trình 4 bước thực thi mô hình `markov_regression`
+### 7.5.2.3.2. Quy trình 4 bước thực thi mô hình `markov_regression`
 
 <Steps>
-
-### Bước 1. Nạp tệp dữ liệu thực hành và kiểm tra thống kê mô tả
-
-Tải tệp [`vietlod_markov_regression_ecodata.csv`](https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_markov_regression_ecodata.csv) vào thư mục làm việc, kiểm tra cỡ mẫu $N = 320$ quan sát, khai báo cấu trúc dữ liệu và rà soát phân phối của biến phụ thuộc `y` cùng các biến giải thích `x1`, `x2`.
-
-### Bước 2. Thực thi hàm ước lượng `markov_regression` với sai số chuẩn vững
-
-Chạy lệnh ước lượng chính thức trên **Stata 18 MP** qua gói `base Stata`, **R 4.x** qua gói `stats / MSwM` hoặc **Python 3.11+** qua gói `statsmodels` kèm ma trận hiệp phương sai vững để bảo toàn hiệu lực suy luận thống kê.
-
-### Bước 3. Thực hiện bộ kiểm định chẩn đoán hậu ước lượng bắt buộc
-
-Thực thi đầy đủ các kiểm định đặc thù của mô hình gồm: **Xác suất trạng thái làm trơn, thời gian duy trì kỳ vọng của từng chế độ $1 / (1 - p_{ii})$, kiểm định tỷ số hợp lý Davies/Garcia cho số chế độ và kiểm định phần dư**. Ghi nhận giá trị thống kê chẩn đoán $\text{Stat} = 0.1538$ và giá trị $p = 0.9260$.
-
-### Bước 4. Xuất bảng kết quả chuẩn tạp chí và kiểm chứng hội tụ 3 phần mềm
-
-Sử dụng `etable` trên Stata, `coeftest` trên R hoặc `summary()` trên Python để xuất bảng hệ số ước lượng, sau đó đối chiếu với bảng kết quả chuẩn và đồ thị thực nghiệm tại Mục 4.
-
+  <div className="step-item">
+    <h3>Bước 1. Nạp tệp dữ liệu thực hành và kiểm tra thống kê mô tả</h3>
+    <p>Tải tệp <a href="https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_markov_regression_ecodata.csv"><code>vietlod_markov_regression_ecodata.csv</code></a> vào thư mục làm việc, kiểm tra cỡ mẫu $N = 320$ quan sát, khai báo cấu trúc dữ liệu và rà soát phân phối của biến phụ thuộc <code>y</code> cùng các biến giải thích <code>x1</code>, <code>x2</code>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2. Thực thi hàm ước lượng markov_regression với sai số chuẩn vững</h3>
+    <p>Chạy lệnh ước lượng chính thức trên <strong>Stata 18 MP</strong> qua gói <code>base Stata</code>, <strong>R 4.x</strong> qua gói <code>stats / MSwM</code> hoặc <strong>Python 3.11+</strong> qua gói <code>statsmodels</code> kèm ma trận hiệp phương sai vững để bảo toàn hiệu lực suy luận thống kê.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3. Thực hiện bộ kiểm định chẩn đoán hậu ước lượng bắt buộc</h3>
+    <p>Thực thi đầy đủ các kiểm định đặc thù của mô hình gồm: <strong>Xác suất trạng thái làm trơn, thời gian duy trì kỳ vọng của từng chế độ $1 / (1 - p_{ii})$, kiểm định tỷ số hợp lý Davies/Garcia cho số chế độ và kiểm định phần dư</strong>. Ghi nhận giá trị thống kê chẩn đoán $\text{Stat} = 0.1538$ và giá trị $p = 0.9260$.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4. Xuất bảng kết quả chuẩn tạp chí và kiểm chứng hội tụ 3 phần mềm</h3>
+    <p>Sử dụng <code>etable</code> trên Stata, <code>coeftest</code> trên R hoặc <code>summary()</code> trên Python để xuất bảng hệ số ước lượng, sau đó đối chiếu với bảng kết quả chuẩn và đồ thị thực nghiệm tại Mục 7.5.2.4.</p>
+  </div>
 </Steps>
 
-### 3.3. Mã lệnh thực hành tái lập hoàn chỉnh trên Stata 18, R 4.x và Python 3.11+
+### 7.5.2.3.3. Mã lệnh thực hành tái lập hoàn chỉnh trên Stata 18, R 4.x và Python 3.11+
 
 <Tabs groupId="econometric-software">
   <TabItem value="stata" label="Stata 18 MP">
@@ -230,9 +229,9 @@ print("KẾT QUẢ ƯỚC LƯỢNG [markov_regression]: beta_x1 = 1.0110 | SE = 
   </TabItem>
 </Tabs>
 
-## 4. Kết quả ước lượng thực nghiệm, đồ thị hội tụ và hướng dẫn diễn giải
+## 7.5.2.4. Kết quả ước lượng thực nghiệm, đồ thị hội tụ và hướng dẫn diễn giải
 
-### 4.1. Bảng tổng hợp kết quả ước lượng chuẩn công bố tạp chí
+### 7.5.2.4.1. Bảng tổng hợp kết quả ước lượng chuẩn công bố tạp chí
 
 Bảng dưới đây trình bày kết quả ước lượng thực nghiệm của mô hình **Mô hình hồi quy chuyển đổi chế độ ẩn Markov Hamilton** trên tệp dữ liệu `vietlod_markov_regression_ecodata.csv` với $N = 320$ quan sát, đối chứng đồng thời trên cả 3 nền tảng **Stata 18 MP**, **R 4.x** và **Python 3.11+**:
 
@@ -245,32 +244,31 @@ Bảng dưới đây trình bày kết quả ước lượng thực nghiệm c�
 | **Chỉ số độ khớp `R-squared`** | `0.4066` | — | `F/Wald = 103.384` | — | Chuẩn công bố Q1 |
 | **Kiểm định chẩn đoán** | `Stat = 0.1538` | — | — | `p = 0.9260` | Đạt điều kiện đặc tả |
 
-### 4.2. Đồ thị thực nghiệm đối chiếu đồng thời Stata 18, R 4.x và Python 3.11+
+### 7.5.2.4.2. Đồ thị thực nghiệm đối chiếu đồng thời Stata 18, R 4.x và Python 3.11+
 
 ![Đồ thị thực nghiệm đối chiếu 3 phần mềm cho mô hình Mô hình hồi quy chuyển đổi chế độ ẩn Markov Hamilton](https://vietlod.tnsai.vn/src/ecoaz/img/vietlod-b120-markov-regression.png)
 
-### 4.3. Cách diễn giải kết quả chuẩn học thuật
+### 7.5.2.4.3. Cách diễn giải kết quả chuẩn học thuật
 
 - **Diễn giải hệ số ước lượng trọng tâm**: Hệ số của biến `x1` đạt $\hat{\beta}_1 = 1.0110$ với sai số chuẩn vững $\text{SE} = 0.0703$ và thống kê kiểm định bằng $14.375$, cho thấy `x1` có **tác động thuận chiều** lên biến mục tiêu `y` và **có ý nghĩa thống kê cao ở mức 1%** trong bối cảnh dữ liệu *Nhận diện chế độ Mở rộng vs Suy giảm của thị trường*.
 - **Diễn giải khoảng tin cậy và độ lớn tác động**: Khoảng tin cậy $95\%$ của $\hat{\beta}_1$ nằm trong dải $[0.8732, 1.1489]$, khẳng định độ ổn định của ước lượng điểm và sự hội tụ số học giữa Stata 18 MP, R 4.x và Python 3.11+.
 - **Diễn giải độ khớp mô hình và kiểm định hậu ước lượng**: Đại lượng `R-squared` đạt `$0.4066$` cùng thống kê kiểm định toàn cục đạt `$103.384$`. Thống kê chẩn đoán đạt `$0.1538$` với $p = 0.9260$, xác nhận mô hình `markov_regression` thỏa mãn các điều kiện hậu ước lượng để suy luận chính sách.
 
-## 5. Cách tổng hợp dữ liệu từ EcoData, Finco và truy vết dữ liệu quốc tế
+## 7.5.2.5. Cách tổng hợp dữ liệu từ EcoData, Finco và truy vết dữ liệu quốc tế
 
 <Steps>
-
-### Bước 1. Khởi tạo dự án dữ liệu trên EcoData và Finco
-
-Truy cập cổng dữ liệu [EcoData](https://ecodata.io.vn) hoặc nền tảng tài chính [Finco](https://www.finco.vn), chọn phân hệ dữ liệu tương ứng với chủ đề **Nhận diện chế độ Mở rộng vs Suy giảm của thị trường** và thiết lập bộ lọc đơn vị chéo `id` cùng kỳ thời gian `t` để thu được mẫu $N = 320$ quan sát.
-
-### Bước 2. Chuẩn hóa biến số và xử lý giá trị ngoại lai
-
-Ánh xạ biến phụ thuộc mục tiêu vào cột `y`, biến giải thích chính vào `x1`, biến kiểm soát vào `x2`, cùng các biến định danh và biến chuyên biệt như `z1`, `treat`, `w`, `y_bin`, `y_count`, `duration`, `event`. Thực hiện kiểm soát ngoại lai Winsorize ở ngưỡng $1\%$ và $99\%$ trước khi xuất tệp `vietlod_markov_regression_ecodata.csv`.
-
-### Bước 3. Đối sánh với bộ dữ liệu chuẩn quốc tế Hamilton (1989) US Business Cycle
-
-Để đối chiếu phương pháp trên bộ dữ liệu quốc tế **Hamilton (1989) US Business Cycle**, sử dụng trực tiếp các lệnh nạp dữ liệu trong bảng truy vết bên dưới.
-
+  <div className="step-item">
+    <h3>Bước 1. Khởi tạo dự án dữ liệu trên EcoData và Finco</h3>
+    <p>Truy cập cổng dữ liệu <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc nền tảng tài chính <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, chọn phân hệ dữ liệu tương ứng với chủ đề <strong>Nhận diện chế độ Mở rộng vs Suy giảm của thị trường</strong> và thiết lập bộ lọc đơn vị chéo <code>id</code> cùng kỳ thời gian <code>t</code> để thu được mẫu $N = 320$ quan sát.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2. Chuẩn hóa biến số và xử lý giá trị ngoại lai</h3>
+    <p>Ánh xạ biến phụ thuộc mục tiêu vào cột <code>y</code>, biến giải thích chính vào <code>x1</code>, biến kiểm soát vào <code>x2</code>, cùng các biến định danh và biến chuyên biệt như <code>z1</code>, <code>treat</code>, <code>w</code>, <code>y_bin</code>, <code>y_count</code>, <code>duration</code>, <code>event</code>. Thực hiện kiểm soát ngoại lai Winsorize ở ngưỡng $1\%$ và $99\%$ trước khi xuất tệp <code>vietlod_markov_regression_ecodata.csv</code>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3. Đối sánh với bộ dữ liệu chuẩn quốc tế Hamilton (1989) US Business Cycle</h3>
+    <p>Để đối chiếu phương pháp trên bộ dữ liệu quốc tế <strong>Hamilton (1989) US Business Cycle</strong>, sử dụng trực tiếp các lệnh nạp dữ liệu trong bảng truy vết bên dưới.</p>
+  </div>
 </Steps>
 
 | Nguồn lưu trữ dữ liệu | Tên bộ dữ liệu / Tệp | Lệnh nạp trực tiếp và đường dẫn truy cập |
@@ -281,7 +279,7 @@ Truy cập cổng dữ liệu [EcoData](https://ecodata.io.vn) hoặc nền tả
 | **R CRAN Package** | *Hamilton (1989) US Business Cycle* | Lệnh R: `data("hamilton", package = "wooldridge")` |
 | **Python Statsmodels** | *Hamilton (1989) US Business Cycle* | Lệnh Python: `sm.datasets.get_rdataset("hamilton", "wooldridge").data` |
 
-## 6. Tài liệu tham khảo học thuật
+## 7.5.2.6. Tài liệu tham khảo học thuật
 
 - Hamilton, J. D.(1989, 1994). A new approach to the economic analysis of nonstationary time series and the business cycle, *Econometrica*, 57, số 2, 357–384 & *Time Series Analysis*, Princeton University Press.
 - Kim, C.-J, & Nelson, C. R.(1999). *State-Space Models with Regime Switching*. MIT Press.

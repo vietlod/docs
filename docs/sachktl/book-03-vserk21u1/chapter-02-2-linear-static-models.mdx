@@ -1,19 +1,19 @@
 ---
 id: chapter-02-2-linear-static-models
-title: "Chương 02: 2. mô hình tĩnh tuyến tính trong tài chínhs"
-sidebar_label: "Chương 02: 2. Mô hình tĩnh tuyến tính trong tài chính"
+title: "2. Mô hình tĩnh tuyến tính trong tài chính"
+sidebar_label: "2. Mô hình tĩnh tuyến tính trong tài chính"
 sidebar_position: 3
-description: "Hướng dẫn thực hành How-To Chương 02: 2. mô hình tĩnh tuyến tính trong tài chínhs thuộc bộ sách Phương pháp dữ liệu bảng trong tài chính trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 2. Mô hình tĩnh tuyến tính trong tài chính thuộc giáo trình Phương pháp dữ liệu bảng trong tài chính trên SachKTL kèm công thức toán học, phân tích 7 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 02: 2. mô hình tĩnh tuyến tính trong tài chínhs
+# 2. Mô hình tĩnh tuyến tính trong tài chính
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 02: 2. mô hình tĩnh tuyến tính trong tài chínhs** thuộc [**Bộ sách 03: phương pháp dữ liệu bảng trong tài chính**](/sachktl/book-03-vserk21u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/vserk21u1/2-linear-static-models/](https://sachktl.tnsai.vn/vi/vserk21u1/2-linear-static-models/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **7 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **2. Mô hình tĩnh tuyến tính trong tài chính** thuộc bộ giáo trình [**Phương pháp dữ liệu bảng trong tài chính**](/sachktl/book-03-vserk21u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/vserk21u1/2-linear-static-models/](https://sachktl.tnsai.vn/vi/vserk21u1/2-linear-static-models/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 02: 2. mô hình tĩnh tuyến tính trong tài chínhs">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="2. Mô hình tĩnh tuyến tính trong tài chính">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 03 · CHƯƠNG 02</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 02: 2. mô hình tĩnh tuyến tính trong tài chínhs</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Phương pháp dữ liệu bảng trong tài chính · 7 bài học chuyên sâu</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Phương pháp dữ liệu bảng trong tài c</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">2. Mô hình tĩnh tuyến tính trong tài chính</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng dữ liệu bảng và kiểm soát dị biệt không quan sát được · 7 bài học chuyê</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,139 +41,281 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Giới thiệu mô hình tĩnh tuyến tính trong tài chính Mô hình hồi quy tuyến tính là công cụ nền tảng và không thể thiếu trong lĩnh vực tài chính thực nghiệm. Từ việc định giá tài sản, phân tích cấu trúc vốn đến đánh giá hiệu quả hoạt động của doanh nghiệp, việc hiểu và áp dụng đúng các mô hình này là chìa khóa để đưa ra những kết luận nghiên cứu đáng tin cậy. Tuy nhiên, sự đa dạng của các loại dữ liệu trong tài chính—từ dữ liệu chéo, chuỗi thời gian đến dữ liệu bảng—đòi hỏi một sự am hiểu sâu sắc về các giả định, phương pháp ước lượng và các vấn đề tiềm ẩn có thể phát sinh. Việc lựa chọn sai
+Giới thiệu mô hình tĩnh tuyến tính trong tài chính Mô hình hồi quy tuyến tính là công cụ nền tảng và không thể thiếu trong lĩnh vực tài chính thực nghiệm. Từ việc định giá tài sản, phân tích cấu trúc vốn đến đánh giá hiệu quả hoạt động của doanh nghiệp, việc hiểu và áp dụng đúng các mô hình này là chìa khóa để đưa ra những kết luận nghiên cứu đáng tin cậy. Tuy nhiên, sự đa dạng của các loại dữ liệu trong tài chính—từ dữ liệu chéo, chuỗi thời gian đến dữ liệu bảng—đòi hỏi một sự am hiểu sâu sắc về các giả định, phương pháp ước lượng và các vấn đề tiềm ẩn có thể phát sinh.
 
-- **Chủ đề học thuật trọng tâm**: Cấu trúc chuỗi bài học, Kiến thức tiên quyết, Mục tiêu học tập, Tài liệu tham khảo chính, PHỤ LỤC: Dữ liệu mô phỏng cho chuỗi bài viết.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+Y_{it} = \alpha + \mathbf{X}_{it}'\boldsymbol{\beta} + \mu_i + \lambda_t + \varepsilon_{it}, \quad i = 1,\dots,N; \; t = 1,\dots,T \tag*{[1]}
+$$
+
+$$
+\hat{\boldsymbol{\beta}}_{\text{FE}} = \left(\sum_{i=1}^N \sum_{t=1}^T \tilde{\mathbf{X}}_{it}\tilde{\mathbf{X}}_{it}'\right)^{-1} \left(\sum_{i=1}^N \sum_{t=1}^T \tilde{\mathbf{X}}_{it}\tilde{Y}_{it}\right), \quad \tilde{Z}_{it} = Z_{it} - \bar{Z}_i \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Tính ngoại sinh nghiêm ngặt của các biến giải thích đối với thành phần nhiễu đặc thù theo cả chiều chéo và chiều thời gian.
+2. Thành phần hiệu ứng cá thể $\mu_i$ có thể tương quan tùy ý với $\mathbf{X}_{it}$ trong mô hình tác động cố định FE hoặc độc lập tuyến tính trong mô hình tác động ngẫu nhiên RE.
+3. Ma trận hiệp phương sai của sai số cần được hiệu chỉnh vững theo cụm cá thể để kiểm soát tự tương quan chuỗi và phương sai thay đổi.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 02 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/vserk21u1/2-linear-static-models/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Ước lượng tác động cố định FE và tác động ngẫu nhiên RE bị chệch Nickell khi có biến trễ của biến phụ thuộc $Y_{i,t-1}$ với chiều thời gian $T$ ngắn; khi đó cần chuyển sang ước lượng Difference GMM hoặc System GMM."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Nền tảng mô hình tuyến tính: Dữ liệu chéo và chuỗi thời gian
+
+Mô hình hồi quy tuyến tính là viên gạch nền tảng xây dựng nên toàn bộ lâu đài kinh tế lượng tài chính. Trước khi chúng ta có thể khám phá sự phức tạp và sức mạnh của dữ liệu bảng, việc nắm vững các nguyên tắc cơ bản áp dụng cho hai loại dữ liệu sơ khởi—dữ liệu chéo và dữ liệu chuỗi thời gian—là một yêu cầu bắt buộc. Mỗi loại dữ liệu mang trong mình những đặc điểm và thách thức riêng, từ đó định hình nên các giả định và phương pháp luận phù hợp.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Mô hình hồi quy tuyến tính với dữ liệu chéo**
+- **Mô hình tuyến tính và phương pháp bình phương tối thiểu thông thường**
+- **Các giả định chính cho ước lượng OLS trên dữ liệu chéo**
+- **Phương sai thay đổi**
+- **Kiểm định giả thuyết**
+- **Thảo luận thêm: Vấn đề p-hacking và thiên vị xuất bản**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/2-linear-static-models/nen-tang-mo-hinh-tuyen-tinh/)
+
+### 2.2. Giới thiệu dữ liệu bảng và hồi quy OLS gộp
+
+Trong bài học trước, chúng ta đã củng cố lại nền tảng của mô hình hồi quy tuyến tính trên hai loại dữ liệu cơ bản: dữ liệu chéo và dữ liệu chuỗi thời gian. Tuy nhiên, trong tài chính thực nghiệm, chúng ta hiếm khi chỉ có một lát cắt thông tin tại một thời điểm hay một chuỗi quan sát duy nhất. Thay vào đó, chúng ta thường sở hữu những bộ dữ liệu phong phú theo dõi nhiều đối tượng qua nhiều giai đoạn thời gian.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu dữ liệu bảng**
+- **Vấn đề không đồng nhất của tham số**
+- **Ví dụ: Kiểm định mô hình định giá tài sản**
+- **Mô hình hồi quy OLS gộp**
+- **Vấn đề sai số chuẩn trong mô hình POLS**
+- **Tổng kết**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/2-linear-static-models/gioi-thieu-du-lieu-bang-va-hoi-quy-ols-gop/)
+
+### 2.3. Sai số chuẩn phân cụm và mô hình hiệu ứng ngẫu nhiên
+
+Ở bài học trước, chúng ta đã làm quen với phương pháp Hồi quy OLS gộp và nhận ra một sự thật quan trọng: khi làm việc với dữ liệu bảng, việc sử dụng sai số chuẩn thông thường gần như chắc chắn sẽ dẫn đến suy luận sai lầm. Chúng ta đã kết luận rằng việc điều chỉnh sai số chuẩn, đặc biệt là thông qua phân cụm, là một bước đi bắt buộc. Tuy nhiên, việc chỉ biết "cần phải làm" là chưa đủ. Một nhà nghiên cứu giỏi cần hiểu "tại sao" và "cơ chế hoạt động" đằng sau công cụ mà họ sử dụng. Tại sao phân cụm lại hiệu quả?
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Sai số chuẩn phân cụm**
+- **Các lựa chọn phân cụm**
+- **Mô hình hiệu ứng ngẫu nhiên**
+- **Giả định cốt lõi và phương pháp ước lượng**
+- **Tổng kết**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/2-linear-static-models/sai-so-chuan-phan-cum-va-mo-hinh-hieu-ung-ngau-nhien/)
+
+### 2.4. Mô hình hiệu ứng cố định và so sánh với hiệu ứng ngẫu nhiên
+
+Trong bài học trước, chúng ta đã khám phá mô hình hiệu ứng ngẫu nhiên, một phương pháp hiệu quả hơn OLS gộp bằng cách mô hình hóa tường minh các yếu tố không đồng nhất đặc thù của công ty. Tuy nhiên, sức mạnh về hiệu quả của mô hình RE phải đánh đổi bằng một giả định rất nghiêm ngặt và thường không thực tế: các yếu tố không quan sát được, không đổi theo thời gian phải hoàn toàn không tương quan với bất kỳ biến giải thích nào trong mô hình. Trong hầu hết các bối cảnh tài chính doanh nghiệp, giả định này khó có thể đứng vững.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Mô hình hiệu ứng cố định**
+- **Phép biến đổi within**
+- **Ưu và nhược điểm của mô hình FE**
+- **Lựa chọn giữa hiệu ứng ngẫu nhiên và hiệu ứng cố định: Kiểm định Hausman**
+- **Lưu ý về kiểm định Hausman**
+- **Tổng kết**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/2-linear-static-models/mo-hinh-hieu-ung-co-dinh-va-so-sanh-voi-hieu-ung-ngau-nhien/)
+
+### 2.5. Các phương pháp ước lượng thay thế: Sai phân bậc nhất và fama-macbeth
+
+Trong các bài học trước, chúng ta đã tập trung vào bộ ba phương pháp cốt lõi của dữ liệu bảng: OLS gộp, Hiệu ứng ngẫu nhiên và Hiệu ứng cố định. Đặc biệt, mô hình FE nổi lên như một công cụ mạnh mẽ để kiểm soát các yếu tố không đồng nhất, không đổi theo thời gian. Tuy nhiên, thế giới kinh tế lượng không chỉ dừng lại ở đó. Đôi khi, các giả định của mô hình FE, chẳng hạn như yêu cầu về tính ngoại sinh nghiêm ngặt, có thể không được đáp ứng.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Bộ ước lượng sai phân bậc nhất**
+- **So sánh giữa FE và FD**
+- **Phương pháp fama-macbeth**
+- **Quy trình fama-macbeth**
+- **Ưu điểm và hạn chế**
+- **Tổng kết**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/2-linear-static-models/cac-phuong-phap-uoc-luong-thay-the-sai-phan-bac-nhat-va-fama-macbeth/)
+
+### 2.6. Kiểm định chẩn đoán và đánh giá độ phù hợp của mô hình
+
+Qua các bài học trước, chúng ta đã xây dựng một bộ công cụ ước lượng đa dạng, từ OLS gộp đơn giản đến các mô hình hiệu ứng cố định và Fama-MacBeth phức tạp hơn. Chúng ta đã học cách lựa chọn giữa các mô hình dựa trên các giả định lý thuyết và các kiểm định như Hausman. Tuy nhiên, việc ước lượng một mô hình chỉ là một nửa của cuộc hành trình. Nửa còn lại, và cũng không kém phần quan trọng, là quá trình kiểm định và chẩn đoán: Liệu các giả định mà chúng ta đặt ra cho mô hình có thực sự được dữ liệu ủng hộ không?
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Kiểm định chẩn đoán cho mô hình hiệu ứng cố định**
+- **Kiểm định phương sai thay đổi**
+- **Kiểm định tự tương quan chuỗi**
+- **Đánh giá độ phù hợp của mô hình**
+- **Ba loại $R^2$ trong dữ liệu bảng**
+- **Tổng kết**
+
+- **Môi trường thực hành:** `R 4.x` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/2-linear-static-models/kiem-dinh-chan-doan-va-danh-gia-do-phu-hop-cua-mo-hinh/)
+
+### 2.7. Hướng dẫn thực hành tổng hợp các mô hình tĩnh tuyến tính với Stata
+
+Sau một hành trình xuyên suốt sáu bài học lý thuyết, từ những nguyên tắc cơ bản của OLS đến sự phức tạp của các mô hình dữ liệu bảng, giờ là lúc chúng ta kết nối lý thuyết với thực hành. Kiến thức kinh tế lượng sẽ chỉ thực sự trở nên hữu ích khi chúng ta có thể vận dụng nó để phân tích dữ liệu thực tế, diễn giải kết quả và đưa ra những kết luận có ý nghĩa.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Dữ liệu nghiên cứu và chuẩn bị**
+- **Hướng dẫn phân tích từng bước**
+- **Bước 1: Thống kê mô tả**
+- **Bước 2: Hồi quy OLS gộp - Mô hình cơ sở**
+- **Bước 3: Mô hình hiệu ứng ngẫu nhiên**
+- **Bước 4: Mô hình hiệu ứng cố định**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/2-linear-static-models/huong-dan-thuc-hanh-tong-hop-cac-mo-hinh-tinh-tuyen-tinh-voi-stata/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Nền tảng mô hình tuyến tính: dữ liệu chéo và chuỗi thời gian</h3>
-    <p>Mô hình hồi quy tuyến tính là viên gạch nền tảng xây dựng nên toàn bộ lâu đài kinh tế lượng tài chính. Trước khi chúng ta có thể khám phá sự phức tạp và sức mạnh của dữ liệu bảng, việc nắm vững các nguyên tắc cơ bản áp dụng cho hai loại dữ liệu sơ khởi—dữ liệu Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/vserk21u1/2-linear-static-models/nen-tang-mo-hinh-tuyen-tinh/" target="_blank" rel="noopener">Nền tảng mô hình tuyến tính: dữ liệu chéo và chuỗi thời gian</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>2. Mô hình tĩnh tuyến tính trong tài chính</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Giới thiệu dữ liệu bảng và hồi quy OLS gộp</h3>
-    <p>Trong bài học trước, chúng ta đã củng cố lại nền tảng của mô hình hồi quy tuyến tính trên hai loại dữ liệu cơ bản: dữ liệu chéo và dữ liệu chuỗi thời gian. Tuy nhiên, trong tài chính thực nghiệm, chúng ta hiếm khi chỉ có một lát cắt thông tin tại một thời điểm Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/vserk21u1/2-linear-static-models/gioi-thieu-du-lieu-bang-va-hoi-quy-ols-gop/" target="_blank" rel="noopener">Giới thiệu dữ liệu bảng và hồi quy OLS gộp</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Sai số chuẩn phân cụm và mô hình hiệu ứng ngẫu nhiên</h3>
-    <p>Ở bài học trước, chúng ta đã làm quen với phương pháp Hồi quy OLS gộp và nhận ra một sự thật quan trọng: khi làm việc với dữ liệu bảng, việc sử dụng sai số chuẩn thông thường gần như chắc chắn sẽ dẫn đến suy luận sai lầm. Chúng ta đã kết luận rằng việc điều ch Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/vserk21u1/2-linear-static-models/sai-so-chuan-phan-cum-va-mo-hinh-hieu-ung-ngau-nhien/" target="_blank" rel="noopener">Sai số chuẩn phân cụm và mô hình hiệu ứng ngẫu nhiên</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/vserk21u1/2-linear-static-models/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Mô hình hiệu ứng cố định và so sánh với hiệu ứng ngẫu nhiên</h3>
-    <p>Trong bài học trước, chúng ta đã khám phá mô hình hiệu ứng ngẫu nhiên, một phương pháp hiệu quả hơn OLS gộp bằng cách mô hình hóa tường minh các yếu tố không đồng nhất đặc thù của công ty. Tuy nhiên, sức mạnh về hiệu quả của mô hình RE phải đánh đổi bằng một g Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/vserk21u1/2-linear-static-models/mo-hinh-hieu-ung-co-dinh-va-so-sanh-voi-hieu-ung-ngau-nhien/" target="_blank" rel="noopener">Mô hình hiệu ứng cố định và so sánh với hiệu ứng ngẫu nhiên</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 5: Các phương pháp ước lượng thay thế: sai phân bậc nhất và fama-macbeth</h3>
-    <p>Trong các bài học trước, chúng ta đã tập trung vào bộ ba phương pháp cốt lõi của dữ liệu bảng: OLS gộp, Hiệu ứng ngẫu nhiên và Hiệu ứng cố định. Đặc biệt, mô hình FE nổi lên như một công cụ mạnh mẽ để kiểm soát các yếu tố không đồng nhất, không đổi theo thời g Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/vserk21u1/2-linear-static-models/cac-phuong-phap-uoc-luong-thay-the-sai-phan-bac-nhat-va-fama-macbeth/" target="_blank" rel="noopener">Các phương pháp ước lượng thay thế: sai phân bậc nhất và Fama-MacBeth</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Bước 6: Kiểm định chẩn đoán và đánh giá độ phù hợp của mô hình</h3>
-    <p>Qua các bài học trước, chúng ta đã xây dựng một bộ công cụ ước lượng đa dạng, từ OLS gộp đơn giản đến các mô hình hiệu ứng cố định và Fama-MacBeth phức tạp hơn. Chúng ta đã học cách lựa chọn giữa các mô hình dựa trên các giả định lý thuyết và các kiểm định như Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/vserk21u1/2-linear-static-models/kiem-dinh-chan-doan-va-danh-gia-do-phu-hop-cua-mo-hinh/" target="_blank" rel="noopener">Kiểm định chẩn đoán và đánh giá độ phù hợp của mô hình</a>.</p>
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập cấu trúc dữ liệu bảng và ước lượng FE / RE / Hausman
 version 18.0
 clear all
 set more off
+import delimited "sachktl_panel_ecodata.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_vserk21u1_c02_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+xtset id year
+xtdescribe
+xtsum y x1 x2 x3
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 1. Ước lượng tác động cố định (Fixed Effects) và tác động ngẫu nhiên (Random Effects)
+xtreg y x1 x2 x3, fe
+estimates store FE_model
+xtreg y x1 x2 x3, re
+estimates store RE_model
+
+* 2. Kiểm định Hausman lựa chọn mô hình và ước lượng sai số chuẩn vững theo cụm
+hausman FE_model RE_model, sigmamore
+xtreg y x1 x2 x3 i.year, fe vce(cluster id)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
-library(tidyverse)
+# Nạp thư viện dữ liệu bảng và ước lượng FE / RE / Cluster-Robust SE
+library(plm)
 library(lmtest)
 library(sandwich)
 
-df <- read.csv("sachktl_vserk21u1_c02_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_panel_ecodata.csv")
+pdata <- pdata.frame(df, index = c("id", "year"))
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Ước lượng mô hình Within FE và Swamy-Arora RE
+fe_mod <- plm(y ~ x1 + x2 + x3, data = pdata, model = "within", effect = "twoways")
+re_mod <- plm(y ~ x1 + x2 + x3, data = pdata, model = "random")
+
+# 2. Kiểm định Hausman và xuất sai số chuẩn vững Arellano theo cụm
+phtest(fe_mod, re_mod)
+coeftest(fe_mod, vcov = vcovHC(fe_mod, method = "arellano", type = "HC1", cluster = "group"))
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện linearmodels và ước lượng PanelOLS / RandomEffects
 import pandas as pd
-import statsmodels.formula.api as smf
+from linearmodels.panel import PanelOLS, RandomEffects, compare
 
-df = pd.read_csv("sachktl_vserk21u1_c02_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_panel_ecodata.csv").set_index(["id", "year"])
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Ước lượng mô hình Fixed Effects hai chiều với sai số chuẩn cụm
+fe_mod = PanelOLS.from_formula("y ~ 1 + x1 + x2 + x3 + EntityEffects + TimeEffects", data=df)
+fe_res = fe_mod.fit(cov_type="clustered", cluster_entity=True)
+
+# 2. Ước lượng mô hình Random Effects và đối chiếu kết quả
+re_mod = RandomEffects.from_formula("y ~ 1 + x1 + x2 + x3", data=df)
+re_res = re_mod.fit(cov_type="clustered", cluster_entity=True)
+print(compare({"Fixed Effects": fe_res, "Random Effects": re_res}))
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 02: 2. mô hình tĩnh tuyến tính trong tài chínhs trên SachKTL"
+  title="Hướng dẫn thực hành 2. Mô hình tĩnh tuyến tính trong tài chính trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 02 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Nền tảng mô hình tuyến tính: dữ liệu chéo và chuỗi thời gian | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/2-linear-static-models/nen-tang-mo-hinh-tuyen-tinh/) |
-| **Bài 02** | Giới thiệu dữ liệu bảng và hồi quy OLS gộp | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/2-linear-static-models/gioi-thieu-du-lieu-bang-va-hoi-quy-ols-gop/) |
-| **Bài 03** | Sai số chuẩn phân cụm và mô hình hiệu ứng ngẫu nhiên | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/2-linear-static-models/sai-so-chuan-phan-cum-va-mo-hinh-hieu-ung-ngau-nhien/) |
-| **Bài 04** | Mô hình hiệu ứng cố định và so sánh với hiệu ứng ngẫu nhiên | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/2-linear-static-models/mo-hinh-hieu-ung-co-dinh-va-so-sanh-voi-hieu-ung-ngau-nhien/) |
-| **Bài 05** | Các phương pháp ước lượng thay thế: sai phân bậc nhất và Fama-MacBeth | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/2-linear-static-models/cac-phuong-phap-uoc-luong-thay-the-sai-phan-bac-nhat-va-fama-macbeth/) |
-| **Bài 06** | Kiểm định chẩn đoán và đánh giá độ phù hợp của mô hình | R 4.x | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/2-linear-static-models/kiem-dinh-chan-doan-va-danh-gia-do-phu-hop-cua-mo-hinh/) |
-| **Bài 07** | Hướng dẫn thực hành tổng hợp các mô hình tĩnh tuyến tính với Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/2-linear-static-models/huong-dan-thuc-hanh-tong-hop-cac-mo-hinh-tinh-tuyen-tinh-voi-stata/) |
+| **2.1** | Nền tảng mô hình tuyến tính: Dữ liệu chéo và chuỗi thời gian | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/2-linear-static-models/nen-tang-mo-hinh-tuyen-tinh/) |
+| **2.2** | Giới thiệu dữ liệu bảng và hồi quy OLS gộp | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/2-linear-static-models/gioi-thieu-du-lieu-bang-va-hoi-quy-ols-gop/) |
+| **2.3** | Sai số chuẩn phân cụm và mô hình hiệu ứng ngẫu nhiên | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/2-linear-static-models/sai-so-chuan-phan-cum-va-mo-hinh-hieu-ung-ngau-nhien/) |
+| **2.4** | Mô hình hiệu ứng cố định và so sánh với hiệu ứng ngẫu nhiên | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/2-linear-static-models/mo-hinh-hieu-ung-co-dinh-va-so-sanh-voi-hieu-ung-ngau-nhien/) |
+| **2.5** | Các phương pháp ước lượng thay thế: Sai phân bậc nhất và fama-macbeth | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/2-linear-static-models/cac-phuong-phap-uoc-luong-thay-the-sai-phan-bac-nhat-va-fama-macbeth/) |
+| **2.6** | Kiểm định chẩn đoán và đánh giá độ phù hợp của mô hình | `R 4.x` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/2-linear-static-models/kiem-dinh-chan-doan-va-danh-gia-do-phu-hop-cua-mo-hinh/) |
+| **2.7** | Hướng dẫn thực hành tổng hợp các mô hình tĩnh tuyến tính với Stata | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/2-linear-static-models/huong-dan-thuc-hanh-tong-hop-cac-mo-hinh-tinh-tuyen-tinh-voi-stata/) |

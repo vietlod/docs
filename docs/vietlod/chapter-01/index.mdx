@@ -1,12 +1,12 @@
 ---
 id: index
-title: "Chương 01: Hồi quy tuyến tính cổ điển và biến công cụ"
-sidebar_label: "Chương 01. Hồi quy tuyến tính cổ điển và biến công cụ"
+title: "1. Hồi quy tuyến tính cổ điển và biến công cụ"
+sidebar_label: "1. Hồi quy tuyến tính cổ điển và biến công cụ"
 sidebar_position: 2
 slug: /vietlod/chapter-01
-description: "Hướng dẫn thực hành Chương 01 — Hồi quy tuyến tính cổ điển và biến công cụ: bao gồm 4 nhóm phương pháp và 14 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Chương 1 — Hồi quy tuyến tính cổ điển và biến công cụ: bao gồm 4 phần phương pháp và 14 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
-  - Chương 01 VietLOD
+  - Chương 1 VietLOD
   - Hồi quy tuyến tính cổ điển và biến công cụ
   - Stata 18
   - R 4.x
@@ -15,105 +15,104 @@ keywords:
   - EcoLab
 ---
 
-# Chương 01: Hồi quy tuyến tính cổ điển và biến công cụ
+# 1. Hồi quy tuyến tính cổ điển và biến công cụ
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Chương 01 — Hồi quy tuyến tính cổ điển và biến công cụ** hướng dẫn thực hành chi tiết **14 mô hình kinh tế lượng** thuộc **4 nhóm phương pháp** từ mã `B001` đến `B014`. Toàn bộ bài viết trong chương được đồng bộ hóa với giáo trình gốc tại [VietLOD Chương 01](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-01-hoi-quy-tuyen-tinh-co-dien-va-bien-cong-cu) và hỗ trợ thực thi tự động trên [EcoLab](https://ecolab.io.vn).
+**Chương 1. Hồi quy tuyến tính cổ điển và biến công cụ** hướng dẫn thực hành chi tiết **14 bài học mô hình kinh tế lượng** thuộc **4 phần phương pháp** từ mục `1.1.1` đến `1.4.6`. Toàn bộ bài viết trong chương được đồng bộ hóa với giáo trình gốc tại [VietLOD Chương 1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-01-hoi-quy-tuyen-tinh-co-dien-va-bien-cong-cu) và hỗ trợ thực thi tự động trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 01: Hồi quy tuyến tính cổ điển và biến công cụ trên Stata 18, R 4.x và Python 3.11+"
+  title="Hướng dẫn thực hành Chương 1: Hồi quy tuyến tính cổ điển và biến công cụ trên Stata 18, R 4.x và Python 3.11+"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 1. Câu hỏi nghiên cứu trọng tâm và phương trình nền tảng
+## 1.1. Câu hỏi nghiên cứu trọng tâm và phương trình nền tảng
 
 - **Câu hỏi nghiên cứu trọng tâm**: Làm thế nào để ước lượng tác động tuyến tính vững chắc khi tồn tại phương sai thay đổi, điểm ngoại lai, hiệu ứng cố định đa chiều và biến giải thích nội sinh?
-- **Phạm vi cấu trúc chương**: Gồm `4` nhóm phương pháp chuyên sâu và `14` mô hình thực nghiệm đối chứng trên dữ liệu Việt Nam từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
+- **Phạm vi cấu trúc chương**: Gồm `4` phần phương pháp chuyên sâu từ `1.1` đến `1.4` và `14` bài học thực nghiệm đối chứng trên dữ liệu Việt Nam từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
 
-Phương trình đặc tả tổng quát của Chương 01:
+Phương trình đặc tả tổng quát của Chương 1:
 
 $$
 Y_i = X_i^\top \beta + \varepsilon_i, \quad \text{E}[Z_i \varepsilon_i] = 0
 $$
 
 <FeatureNotAvailable
-  note="Không áp dụng các ước lượng trong Chương 01 khi chưa kiểm tra điều kiện định danh và bộ kiểm định chẩn đoán bắt buộc gồm: Breusch–Pagan, White, VIF, Ramsey RESET, Kleibergen–Paap rk Wald F, Montiel Olea–Pflueger Effective F, Hansen J."
+  note="Không áp dụng các ước lượng trong Chương 1 khi chưa kiểm tra điều kiện định danh và bộ kiểm định chẩn đoán bắt buộc gồm: Breusch–Pagan, White, VIF, Ramsey RESET, Kleibergen–Paap rk Wald F, Montiel Olea–Pflueger Effective F, Hansen J."
 />
 
-## 2. Khám phá 4 nhóm phương pháp trong Chương 01
+## 1.2. Hệ thống 4 phần phương pháp trong Chương 1
 
 <FeatureCards
   features={[
     {
-      title: 'Nhóm 1.1. Bình phương nhỏ nhất',
+      title: '1.1. Bình phương nhỏ nhất',
       description: 'Làm thế nào để ước lượng tác động tuyến tính vững chắc khi tồn tại phương sai thay đổi, điểm ngoại lai, hiệu ứng cố định đa chiều và biến giải thích nội sinh?',
       link: '/vietlod/chapter-01/group-1-1',
-      badge: '4 mô hình'
+      badge: '4 bài học'
     },
     {
-      title: 'Nhóm 1.2. Hồi quy kháng nhiễu và phân vị',
+      title: '1.2. Hồi quy kháng nhiễu và phân vị',
       description: 'Làm thế nào để ước lượng tác động tuyến tính vững chắc khi tồn tại phương sai thay đổi, điểm ngoại lai, hiệu ứng cố định đa chiều và biến giải thích nội sinh?',
       link: '/vietlod/chapter-01/group-1-2',
-      badge: '2 mô hình'
+      badge: '2 bài học'
     },
     {
-      title: 'Nhóm 1.3. Biến công cụ cổ điển',
+      title: '1.3. Biến công cụ cổ điển',
       description: 'Làm thế nào để ước lượng tác động tuyến tính vững chắc khi tồn tại phương sai thay đổi, điểm ngoại lai, hiệu ứng cố định đa chiều và biến giải thích nội sinh?',
       link: '/vietlod/chapter-01/group-1-3',
-      badge: '2 mô hình'
+      badge: '2 bài học'
     },
     {
-      title: 'Nhóm 1.4. Hiệu ứng cố định đa chiều và biến công cụ hiện đại',
+      title: '1.4. Hiệu ứng cố định đa chiều và biến công cụ hiện đại',
       description: 'Làm thế nào để ước lượng tác động tuyến tính vững chắc khi tồn tại phương sai thay đổi, điểm ngoại lai, hiệu ứng cố định đa chiều và biến giải thích nội sinh?',
       link: '/vietlod/chapter-01/group-1-4',
-      badge: '6 mô hình'
+      badge: '6 bài học'
     }
   ]}
 />
 
-## 3. Quy trình 4 bước lựa chọn và thực thi mô hình trong Chương 01
+## 1.3. Quy trình 4 bước lựa chọn và thực thi mô hình trong Chương 1
 
 <Steps>
-
-### Bước 1. Xác định nhóm phương pháp phù hợp trong 4 nhóm của chương
-
-Đối chiếu giả thuyết kinh tế và cấu trúc mẫu thực nghiệm với câu hỏi định danh của từng nhóm phương pháp từ Nhóm `1.1` đến Nhóm `1.4`.
-
-### Bước 2. Chuẩn bị tệp dữ liệu chuẩn hóa từ EcoData hoặc Finco
-
-Tải tệp dữ liệu thực hành `.csv` tương ứng với từng mô hình tại `/src/ecoaz/data/` hoặc trích xuất bảng dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
-
-### Bước 3. Ước lượng tham số và chạy kiểm định chẩn đoán trên Stata 18, R 4.x và Python 3.11+
-
-Thực thi mã lệnh mẫu trong từng bài học và kiểm tra nghiêm ngặt các tiêu chuẩn chẩn đoán bắt buộc của chương: **Breusch–Pagan, White, VIF, Ramsey RESET, Kleibergen–Paap rk Wald F, Montiel Olea–Pflueger Effective F, Hansen J**.
-
-### Bước 4. Đối chiếu đồ thị hội tụ 3 phần mềm và xuất bảng công bố trên EcoLab
-
-Kiểm tra sự hội tụ của hệ số ước lượng giữa Stata, R và Python trên đồ thị thực nghiệm 3 khung và xuất bảng kết quả chuẩn tạp chí qua [EcoLab](https://ecolab.io.vn).
-
+  <div className="step-item">
+    <h3>Bước 1. Xác định phần phương pháp phù hợp từ 1.1 đến 1.4</h3>
+    <p>Đối chiếu giả thuyết kinh tế và cấu trúc mẫu thực nghiệm với câu hỏi định danh của từng phần phương pháp trong Chương 1 để lựa chọn đúng bài học mô hình <code>A.B.C</code>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2. Chuẩn bị tệp dữ liệu chuẩn hóa từ EcoData hoặc Finco</h3>
+    <p>Tải tệp dữ liệu thực hành <code>.csv</code> tương ứng với từng bài học tại <code>/src/ecoaz/data/</code> hoặc trích xuất bảng dữ liệu thực tế từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> và <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3. Ước lượng tham số và chạy kiểm định chẩn đoán trên Stata 18, R 4.x và Python 3.11+</h3>
+    <p>Thực thi mã lệnh mẫu trong từng bài học và kiểm tra nghiêm ngặt các tiêu chuẩn chẩn đoán bắt buộc của chương: <strong>Breusch–Pagan, White, VIF, Ramsey RESET, Kleibergen–Paap rk Wald F, Montiel Olea–Pflueger Effective F, Hansen J</strong>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4. Đối chiếu đồ thị hội tụ 3 phần mềm và xuất bảng công bố trên EcoLab</h3>
+    <p>Kiểm tra sự hội tụ của hệ số ước lượng giữa Stata, R và Python trên đồ thị thực nghiệm 3 khung và xuất bảng kết quả chuẩn tạp chí qua <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a>.</p>
+  </div>
 </Steps>
 
-## 4. Danh mục đầy đủ 14 mô hình kinh tế lượng trong Chương 01
+## 1.4. Danh mục đầy đủ 14 bài học mô hình kinh tế lượng trong Chương 1
 
-| Mã bài | Tên mô hình kinh tế lượng | Khóa định danh | Cấp độ | Gói phần mềm Stata · R · Python | Hỗ trợ |
+| Đề mục | Tên bài học và mô hình kinh tế lượng | Khóa định danh | Cấp độ | Gói phần mềm Stata · R · Python | Hỗ trợ |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `1.1.1` · `B001` | [Hồi quy bình phương nhỏ nhất thông thường (OLS)](/vietlod/chapter-01/group-1-1/b001-ols) | `ols` | `L1` | `base Stata` · `stats + sandwich` · `statsmodels` | <Available /> |
-| `1.2.1` · `B005` | [Hồi quy tuyến tính kháng nhiễu ngoại lai (RLM)](/vietlod/chapter-01/group-1-2/b005-robust-rlm) | `robust_rlm` | `L2` | `base Stata` · `MASS` · `statsmodels` | <Available /> |
-| `1.3.1` · `B007` | [Hồi quy biến công cụ hai giai đoạn (2SLS)](/vietlod/chapter-01/group-1-3/b007-iv-2sls) | `iv_2sls` | `L1` | `base Stata` · `AER` · `linearmodels` | <Available /> |
-| `1.4.1` · `B009` | [Hồi quy tuyến tính hiệu ứng cố định đa chiều (HDFE)](/vietlod/chapter-01/group-1-4/b009-hdfe-ols) | `hdfe_ols` | `L3` | `reghdfe` · `fixest` · `pyfixest` | <Available /> |
-| `1.1.2` · `B002` | [Hồi quy bình phương nhỏ nhất có trọng số (WLS)](/vietlod/chapter-01/group-1-1/b002-wls) | `wls` | `L1` | `base Stata` · `stats` · `statsmodels` | <Available /> |
-| `1.2.2` · `B006` | [Hồi quy phân vị có điều kiện](/vietlod/chapter-01/group-1-2/b006-quantile-regression) | `quantile_regression` | `L2` | `base Stata` · `quantreg` · `statsmodels` | <Available /> |
-| `1.3.2` · `B008` | [Ước lượng hợp lý cực đại thông tin giới hạn (LIML)](/vietlod/chapter-01/group-1-3/b008-iv-liml) | `iv_liml` | `L2` | `base Stata` · `AER / ivmodel` · `linearmodels` | <Available /> |
-| `1.4.2` · `B010` | [Hồi quy biến công cụ hiệu ứng cố định đa chiều (HDFE)](/vietlod/chapter-01/group-1-4/b010-hdfe-iv) | `hdfe_iv` | `L3` | `ivreghdfe` · `fixest` · `pyfixest` | <Available /> |
-| `1.1.3` · `B003` | [Hồi quy bình phương nhỏ nhất tổng quát (GLS)](/vietlod/chapter-01/group-1-1/b003-gls) | `gls` | `L1` | `base Stata` · `nlme` · `statsmodels` | <Available /> |
-| `1.4.3` · `B011` | [Biến công cụ cấu trúc ngành–vùng Bartik](/vietlod/chapter-01/group-1-4/b011-bartik-shift-share-iv) | `bartik_shift_share_iv` | `L3` | `ssaggregate / ivreg2` · `ShiftShareSE` · `linearmodels` | <Available /> |
-| `1.1.4` · `B004` | [Hồi quy bình phương nhỏ nhất tổng quát khả thi (FGLS)](/vietlod/chapter-01/group-1-1/b004-fgls) | `fgls` | `L2` | `base Stata` · `nlme` · `statsmodels` | <Available /> |
-| `1.4.4` · `B012` | [Biến công cụ kiến tạo từ phương sai thay đổi Lewbel](/vietlod/chapter-01/group-1-4/b012-lewbel-het-iv) | `lewbel_het_iv` | `L4` | `ivreg2h` · `REndo` · `linearmodels` | <Available /> |
-| `1.4.5` · `B013` | [Phương pháp hàm kiểm soát xử lý nội sinh (CF)](/vietlod/chapter-01/group-1-4/b013-control-function-iv) | `control_function_iv` | `L4` | `etregress` · `fixest + boot` · `statsmodels` | <Available /> |
-| `1.4.6` · `B014` | [Hồi quy phân vị biến công cụ (IVQR)](/vietlod/chapter-01/group-1-4/b014-iv-quantile) | `iv_quantile` | `L4` | `Stata 18 ivqregress` · `quantreg` · `statsmodels` | <Available /> |
+| **1.1.1** | [1.1.1. Hồi quy bình phương nhỏ nhất thông thường (OLS)](/vietlod/chapter-01/group-1-1/b001-ols) | `ols` | `L1` | `base Stata` · `stats + sandwich` · `statsmodels` | <Available /> |
+| **1.1.2** | [1.1.2. Hồi quy bình phương nhỏ nhất có trọng số (WLS)](/vietlod/chapter-01/group-1-1/b002-wls) | `wls` | `L1` | `base Stata` · `stats` · `statsmodels` | <Available /> |
+| **1.1.3** | [1.1.3. Hồi quy bình phương nhỏ nhất tổng quát (GLS)](/vietlod/chapter-01/group-1-1/b003-gls) | `gls` | `L1` | `base Stata` · `nlme` · `statsmodels` | <Available /> |
+| **1.1.4** | [1.1.4. Hồi quy bình phương nhỏ nhất tổng quát khả thi (FGLS)](/vietlod/chapter-01/group-1-1/b004-fgls) | `fgls` | `L2` | `base Stata` · `nlme` · `statsmodels` | <Available /> |
+| **1.2.1** | [1.2.1. Hồi quy tuyến tính kháng nhiễu ngoại lai (RLM)](/vietlod/chapter-01/group-1-2/b005-robust-rlm) | `robust_rlm` | `L2` | `base Stata` · `MASS` · `statsmodels` | <Available /> |
+| **1.2.2** | [1.2.2. Hồi quy phân vị có điều kiện](/vietlod/chapter-01/group-1-2/b006-quantile-regression) | `quantile_regression` | `L2` | `base Stata` · `quantreg` · `statsmodels` | <Available /> |
+| **1.3.1** | [1.3.1. Hồi quy biến công cụ hai giai đoạn (2SLS)](/vietlod/chapter-01/group-1-3/b007-iv-2sls) | `iv_2sls` | `L1` | `base Stata` · `AER` · `linearmodels` | <Available /> |
+| **1.3.2** | [1.3.2. Ước lượng hợp lý cực đại thông tin giới hạn (LIML)](/vietlod/chapter-01/group-1-3/b008-iv-liml) | `iv_liml` | `L2` | `base Stata` · `AER / ivmodel` · `linearmodels` | <Available /> |
+| **1.4.1** | [1.4.1. Hồi quy tuyến tính hiệu ứng cố định đa chiều (HDFE)](/vietlod/chapter-01/group-1-4/b009-hdfe-ols) | `hdfe_ols` | `L3` | `reghdfe` · `fixest` · `pyfixest` | <Available /> |
+| **1.4.2** | [1.4.2. Hồi quy biến công cụ hiệu ứng cố định đa chiều (HDFE)](/vietlod/chapter-01/group-1-4/b010-hdfe-iv) | `hdfe_iv` | `L3` | `ivreghdfe` · `fixest` · `pyfixest` | <Available /> |
+| **1.4.3** | [1.4.3. Biến công cụ cấu trúc ngành–vùng Bartik](/vietlod/chapter-01/group-1-4/b011-bartik-shift-share-iv) | `bartik_shift_share_iv` | `L3` | `ssaggregate / ivreg2` · `ShiftShareSE` · `linearmodels` | <Available /> |
+| **1.4.4** | [1.4.4. Biến công cụ kiến tạo từ phương sai thay đổi Lewbel](/vietlod/chapter-01/group-1-4/b012-lewbel-het-iv) | `lewbel_het_iv` | `L4` | `ivreg2h` · `REndo` · `linearmodels` | <Available /> |
+| **1.4.5** | [1.4.5. Phương pháp hàm kiểm soát xử lý nội sinh (CF)](/vietlod/chapter-01/group-1-4/b013-control-function-iv) | `control_function_iv` | `L4` | `etregress` · `fixest + boot` · `statsmodels` | <Available /> |
+| **1.4.6** | [1.4.6. Hồi quy phân vị biến công cụ (IVQR)](/vietlod/chapter-01/group-1-4/b014-iv-quantile) | `iv_quantile` | `L4` | `Stata 18 ivqregress` · `quantreg` · `statsmodels` | <Available /> |
 
-## 5. Tài liệu tham khảo học thuật trọng tâm
+## 1.5. Tài liệu tham khảo học thuật trọng tâm
 
 - Wooldridge(2020). Econometric specification, identification, and asymptotic inference.
 - Angrist, J. D, & Pischke, J.-S.(2009). *Mostly Harmless Econometrics: An Empiricist's Companion*. Princeton University Press.

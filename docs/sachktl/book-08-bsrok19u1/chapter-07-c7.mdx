@@ -1,19 +1,19 @@
 ---
 id: chapter-07-c7
-title: "Chương 07: 7. mô hình đa biến"
-sidebar_label: "Chương 07: 7. Mô hình đa biến"
+title: "7. Mô hình đa biến"
+sidebar_label: "7. Mô hình đa biến"
 sidebar_position: 8
-description: "Hướng dẫn thực hành How-To Chương 07: 7. mô hình đa biến thuộc bộ sách Kinh tế lượng trong tài chính trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 7. Mô hình đa biến thuộc giáo trình Kinh tế lượng trong tài chính trên SachKTL kèm công thức toán học, phân tích 6 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 07: 7. mô hình đa biến
+# 7. Mô hình đa biến
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 07: 7. mô hình đa biến** thuộc [**Bộ sách 08: kinh tế lượng trong tài chính**](/sachktl/book-08-bsrok19u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/bsrok19u1/c7/](https://sachktl.tnsai.vn/vi/bsrok19u1/c7/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **6 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **7. Mô hình đa biến** thuộc bộ giáo trình [**Kinh tế lượng trong tài chính**](/sachktl/book-08-bsrok19u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/bsrok19u1/c7/](https://sachktl.tnsai.vn/vi/bsrok19u1/c7/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 07: 7. mô hình đa biến">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="7. Mô hình đa biến">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 08 · CHƯƠNG 07</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 07: 7. mô hình đa biến</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Kinh tế lượng trong tài chính · 6 bài học chuyên sâu</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng trong tài chính</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">7. Mô hình đa biến</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng chuỗi thời gian, đồng liên kết và biến động tài chính · 6 bài học chuyê</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,138 +41,267 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
 Mô hình đa biến Giới thiệu chuỗi bài học Chào mừng các bạn sinh viên đã quay trở lại với hành trình khám phá kinh tế lượng! Trong các chương trước, chúng ta đã cùng nhau làm chủ các mô hình hồi quy đơn phương trình, nơi một biến phụ thuộc được giải thích bởi một hoặc nhiều biến độc lập. Cách tiếp cận này rất mạnh mẽ, nhưng nó dựa trên một giả định quan trọng: mối quan hệ nhân quả chỉ đi theo một chiều. Tuy nhiên, trong thế giới kinh tế và tài chính thực tế, các mối quan hệ thường phức tạp hơn nhiều. Giá cả ảnh hưởng đến lượng cầu, nhưng đồng thời lượng cầu cũng tác động ngược trở lại giá cả.
 
-- **Chủ đề học thuật trọng tâm**: Giới thiệu chuỗi bài học, PHỤ LỤC: Dữ liệu mô phỏng cho chuỗi bài viết.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+\Phi(L)(1 - L)^d Y_t = \mu + \Theta(L)\varepsilon_t, \quad \varepsilon_t \mid \mathcal{F}_{t-1} \sim \mathcal{N}(0, \sigma_t^2) \tag*{[1]}
+$$
+
+$$
+\sigma_t^2 = \omega + \sum_{i=1}^p \alpha_i \varepsilon_{t-i}^2 + \sum_{j=1}^q \beta_j \sigma_{t-j}^2, \quad \omega > 0, \; \alpha_i, \beta_j \ge 0 \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Chuỗi thời gian phải thỏa mãn điều kiện dừng hiệp phương sai hoặc được sai phân hóa đến bậc tích hợp $I(d)$ phù hợp trước khi ước lượng.
+2. Điều kiện khả nghịch và nghiệm ngoài vòng tròn đơn vị của đa thức trễ $\Phi(L)$ và $\Theta(L)$ đảm bảo tính ổn định động học.
+3. Trong mô hình phương sai có điều kiện thay đổi GARCH, tổng hệ số $\sum \alpha_i + \sum \beta_j < 1$ bảo đảm phương sai không điều kiện hữu hạn.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 07 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/bsrok19u1/c7/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Hồi quy chuỗi thời gian không dừng chưa qua kiểm định nghiệm đơn vị ADF/PP và đồng liên kết Johansen dễ dẫn đến hồi quy giả mạo với thống kê $t$ và $R^2$ bị thổi phồng."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Tại sao mô hình đơn phương trình là chưa đủ?
+
+Chào mừng các bạn đã đến với bài học đầu tiên trong chuỗi bài về mô hình kinh tế lượng đa biến! Ở các học phần trước, chúng ta đã dành nhiều thời gian để làm việc với các mô hình đơn phương trình, nơi chúng ta giả định rằng các biến giải thích tác động lên biến phụ thuộc theo một chiều. Đây là một công cụ vô cùng mạnh mẽ và là nền tảng của kinh tế lượng. Tuy nhiên, thế giới thực tế lại hiếm khi đơn giản như vậy.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Hạn chế của mô hình đơn phương trình**
+- **2. Ví dụ kinh điển: Mô hình cung cầu nhà ở**
+- **3. Dạng cấu trúc và dạng rút gọn của mô hình**
+- **4. Chệch do phương trình đồng thời**
+- **5. Tổng kết bài học**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/bsrok19u1/c7/tai-sao-mo-hinh-don-phuong-trinh-la-chua-du/)
+
+### 2.2. Vấn đề nhận dạng trong hệ phương trình
+
+Chào mừng các bạn quay trở lại! Trong bài học trước, chúng ta đã khám phá ra một sự thật quan trọng: việc áp dụng OLS trực tiếp lên các phương trình cấu trúc của một hệ thống đồng thời sẽ dẫn đến kết quả bị chệch. Chúng ta cũng đã học được rằng có một lối thoát, đó là biến đổi hệ thống về "dạng rút gọn", nơi mỗi biến nội sinh chỉ phụ thuộc vào các biến ngoại sinh, và dạng này có thể được ước lượng bằng OLS.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Trực giác về vấn đề nhận dạng: Khi cung và cầu không thể phân biệt**
+- **2. Ba trạng thái nhận dạng của một phương trình**
+- **3. Điều kiện bậc: Một quy tắc thực hành để kiểm tra nhận dạng**
+- **4. Ví dụ: Áp dụng điều kiện bậc**
+- **5. Tổng kết bài học**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/bsrok19u1/c7/van-de-nhan-dang-trong-he-phuong-trinh/)
+
+### 2.3. Các phương pháp ước lượng cho hệ phương trình đồng thời
+
+Chào mừng các bạn đã quay trở lại! Trong hai bài học trước, chúng ta đã cùng nhau xây dựng một nền tảng vững chắc. Chúng ta đã hiểu tại sao tính đồng thời lại gây ra chệch cho ước lượng OLS và đã học cách sử dụng Điều kiện Bậc để kiểm tra xem một phương trình có đủ thông tin để có thể ước lượng được hay không. Bây giờ, khi đã biết khi nào có thể ước lượng, câu hỏi tiếp theo và cũng là câu hỏi quan trọng nhất là: chúng ta sẽ ước lượng chúng như thế nào? Bài học hôm nay sẽ trả lời câu hỏi đó.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Bình phương tối thiểu gián tiếp**
+- **2. Bình phương tối thiểu hai giai đoạn**
+- **Thực hành 2SLS với Stata**
+- **3. Biến công cụ**
+- **4. Tổng kết bài học**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/bsrok19u1/c7/cac-phuong-phap-uoc-luong-cho-he-phuong-trinh-dong-thoi/)
+
+### 2.4. Giới thiệu mô hình tự hồi quy vector
+
+Chào mừng các bạn đã đến với một trong những công cụ mạnh mẽ và phổ biến nhất trong kinh tế lượng chuỗi thời gian hiện đại! Trong ba bài học vừa qua, chúng ta đã tập trung vào Hệ phương trình đồng thời. Chúng ta đã thấy rằng cách tiếp cận này, mặc dù rất sâu sắc về mặt lý thuyết, lại đòi hỏi chúng ta phải có những giả định mạnh mẽ về cấu trúc của mô hình: biến nào là nội sinh, biến nào là ngoại sinh, và làm thế nào để đảm bảo mỗi phương trình đều được nhận dạng.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Mô hình tự hồi quy vector là gì?**
+- **2. Ưu điểm của mô hình VAR**
+- **3. Hạn chế của mô hình VAR**
+- **4. Tổng kết bài học**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/bsrok19u1/c7/gioi-thieu-mo-hinh-tu-hoi-quy-vector-var/)
+
+### 2.5. Phân tích động lực học trong mô hình VAR
+
+Chào mừng các bạn đã quay trở lại! Trong bài học trước, chúng ta đã tìm hiểu về cấu trúc của mô hình VAR và nhận thấy một trong những hạn chế lớn nhất của nó là sự khó khăn trong việc diễn giải ý nghĩa kinh tế của từng hệ số riêng lẻ. Khi có hàng chục, thậm chí hàng trăm hệ số trong một mô hình, việc nhìn vào chúng để hiểu được mối quan-hệ-tổng-thể giữa các biến là gần như không thể. Vậy, làm thế nào để chúng ta khai thác được những thông tin quý giá ẩn chứa bên trong một mô hình VAR đã được ước lượng?
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Kiểm định nhân quả Granger**
+- **Thực hành với Stata**
+- **2. Hàm phản ứng xung lực**
+- **3. Phân rã phương sai**
+- **4. Tổng kết bài học**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/bsrok19u1/c7/phan-tich-dong-luc-hoc-trong-mo-hinh-var/)
+
+### 2.6. Hướng dẫn thực hành mô hình VAR với Stata
+
+Chào mừng các bạn đến với bài học cuối cùng và cũng là bài thực hành tổng hợp trong chuỗi bài về mô hình đa biến! Trong suốt năm bài học vừa qua, chúng ta đã cùng nhau xây dựng một nền tảng lý thuyết vững chắc, từ việc hiểu rõ những hạn chế của mô hình đơn phương trình, các thách thức của hệ phương trình đồng thời, cho đến việc làm chủ các khái niệm và công cụ phân tích của mô hình VAR. Giờ là lúc chúng ta biến những lý thuyết đó thành kỹ năng thực hành cụ thể, áp dụng vào một bài toán phân tích kinh tế lượng hoàn chỉnh.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Quy trình phân tích mô hình VAR**
+- **2. Hướng dẫn thực hành từng bước với Stata**
+- **Bước 1: Chuẩn bị và khám phá dữ liệu**
+- **Bước 2: Kiểm tra tính dừng**
+- **Bước 3: Lựa chọn độ trễ tối ưu**
+- **Bước 4: Ước lượng và kiểm tra mô hình VAR**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/bsrok19u1/c7/huong-dan-thuc-hanh-mo-hinh-var-voi-stata/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Tại sao mô hình đơn phương trình là chưa đủ?</h3>
-    <p>Chào mừng các bạn đã đến với bài học đầu tiên trong chuỗi bài về mô hình kinh tế lượng đa biến! Ở các học phần trước, chúng ta đã dành nhiều thời gian để làm việc với các mô hình đơn phương trình, nơi chúng ta giả định rằng các biến giải thích tác động lên biế Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/bsrok19u1/c7/tai-sao-mo-hinh-don-phuong-trinh-la-chua-du/" target="_blank" rel="noopener">Tại sao mô hình đơn phương trình là chưa đủ?</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>7. Mô hình đa biến</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Vấn đề nhận dạng trong hệ phương trình</h3>
-    <p>Chào mừng các bạn quay trở lại! Trong bài học trước, chúng ta đã khám phá ra một sự thật quan trọng: việc áp dụng OLS trực tiếp lên các phương trình cấu trúc của một hệ thống đồng thời sẽ dẫn đến kết quả bị chệch. Chúng ta cũng đã học được rằng có một lối thoá Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/bsrok19u1/c7/van-de-nhan-dang-trong-he-phuong-trinh/" target="_blank" rel="noopener">Vấn đề nhận dạng trong hệ phương trình</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Các phương pháp ước lượng cho hệ phương trình đồng thời</h3>
-    <p>Chào mừng các bạn đã quay trở lại! Trong hai bài học trước, chúng ta đã cùng nhau xây dựng một nền tảng vững chắc. Chúng ta đã hiểu tại sao tính đồng thời lại gây ra chệch cho ước lượng OLS và đã học cách sử dụng Điều kiện Bậc để kiểm tra xem một phương trình  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/bsrok19u1/c7/cac-phuong-phap-uoc-luong-cho-he-phuong-trinh-dong-thoi/" target="_blank" rel="noopener">Các phương pháp ước lượng cho hệ phương trình đồng thời</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/bsrok19u1/c7/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Giới thiệu mô hình tự hồi quy vector</h3>
-    <p>Chào mừng các bạn đã đến với một trong những công cụ mạnh mẽ và phổ biến nhất trong kinh tế lượng chuỗi thời gian hiện đại! Trong ba bài học vừa qua, chúng ta đã tập trung vào Hệ phương trình đồng thời. Chúng ta đã thấy rằng cách tiếp cận này, mặc dù rất sâu s Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/bsrok19u1/c7/gioi-thieu-mo-hinh-tu-hoi-quy-vector-var/" target="_blank" rel="noopener">Giới thiệu mô hình tự hồi quy vector</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 5: Phân tích động lực học trong mô hình VAR</h3>
-    <p>Chào mừng các bạn đã quay trở lại! Trong bài học trước, chúng ta đã tìm hiểu về cấu trúc của mô hình VAR và nhận thấy một trong những hạn chế lớn nhất của nó là sự khó khăn trong việc diễn giải ý nghĩa kinh tế của từng hệ số riêng lẻ. Khi có hàng chục, thậm ch Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/bsrok19u1/c7/phan-tich-dong-luc-hoc-trong-mo-hinh-var/" target="_blank" rel="noopener">Phân tích động lực học trong mô hình VAR</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Bước 6: Hướng dẫn thực hành mô hình VAR với Stata</h3>
-    <p>Chào mừng các bạn đến với bài học cuối cùng và cũng là bài thực hành tổng hợp trong chuỗi bài về mô hình đa biến! Trong suốt năm bài học vừa qua, chúng ta đã cùng nhau xây dựng một nền tảng lý thuyết vững chắc, từ việc hiểu rõ những hạn chế của mô hình đơn phư Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/bsrok19u1/c7/huong-dan-thuc-hanh-mo-hinh-var-voi-stata/" target="_blank" rel="noopener">Hướng dẫn thực hành mô hình VAR với Stata</a>.</p>
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập chuỗi thời gian, kiểm định nghiệm đơn vị và ước lượng ARIMA / GARCH
 version 18.0
 clear all
 set more off
+import delimited "sachktl_timeseries_finco.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_bsrok19u1_c07_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+tsset time_id
+dfuller y, lags(4) trend regress
+pperron y, lags(4) trend
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 1. Ước lượng mô hình ARIMA và kiểm định nhiễu trắng phần dư
+arima y, arima(1,1,1) vce(robust)
+predict resid_arima, resid
+wntestq resid_arima, lags(12)
+
+* 2. Ước lượng mô hình phương sai có điều kiện thay đổi ARCH/GARCH(1,1)
+arch d.y x1 x2, arch(1) garch(1) vce(robust)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
-library(tidyverse)
-library(lmtest)
-library(sandwich)
+# Nạp thư viện chuỗi thời gian và ước lượng ARIMA / GARCH(1,1)
+library(tseries)
+library(forecast)
+library(rugarch)
 
-df <- read.csv("sachktl_bsrok19u1_c07_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_timeseries_finco.csv")
+y_ts <- ts(df$y, frequency = 12)
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA tối ưu theo AICc
+adf.test(y_ts)
+fit_arima <- auto.arima(y_ts, seasonal = FALSE, ic = "aicc")
+summary(fit_arima)
+checkresiduals(fit_arima)
+
+# 2. Ước lượng mô hình GARCH(1,1) cho chuỗi lợi suất
+spec <- ugarchspec(variance.model = list(model = "sGARCH", garchOrder = c(1, 1)),
+                   mean.model = list(armaOrder = c(1, 0), include.mean = TRUE))
+fit_garch <- ugarchfit(spec = spec, data = diff(y_ts))
+show(fit_garch)
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và arch để phân tích chuỗi thời gian & biến động
 import pandas as pd
-import statsmodels.formula.api as smf
+from statsmodels.tsa.stattools import adfuller
+from statsmodels.tsa.arima.model import ARIMA
+from arch import arch_model
 
-df = pd.read_csv("sachktl_bsrok19u1_c07_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_timeseries_finco.csv")
+y = df["y"].dropna()
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA(1,1,1)
+adf_stat, p_val, *_ = adfuller(y, autolag="AIC")
+print(f"ADF Statistic: {adf_stat:.4f}, p-value: {p_val:.4f}")
+arima_res = ARIMA(y, order=(1, 1, 1)).fit()
+print(arima_res.summary())
+
+# 2. Ước lượng mô hình GARCH(1,1) với phân phối Student-t
+ret = y.diff().dropna() * 100
+garch_res = arch_model(ret, vol="Garch", p=1, q=1, dist="t").fit(disp="off")
+print(garch_res.summary())
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 07: 7. mô hình đa biến trên SachKTL"
+  title="Hướng dẫn thực hành 7. Mô hình đa biến trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 07 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Tại sao mô hình đơn phương trình là chưa đủ? | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/bsrok19u1/c7/tai-sao-mo-hinh-don-phuong-trinh-la-chua-du/) |
-| **Bài 02** | Vấn đề nhận dạng trong hệ phương trình | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/bsrok19u1/c7/van-de-nhan-dang-trong-he-phuong-trinh/) |
-| **Bài 03** | Các phương pháp ước lượng cho hệ phương trình đồng thời | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/bsrok19u1/c7/cac-phuong-phap-uoc-luong-cho-he-phuong-trinh-dong-thoi/) |
-| **Bài 04** | Giới thiệu mô hình tự hồi quy vector | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/bsrok19u1/c7/gioi-thieu-mo-hinh-tu-hoi-quy-vector-var/) |
-| **Bài 05** | Phân tích động lực học trong mô hình VAR | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/bsrok19u1/c7/phan-tich-dong-luc-hoc-trong-mo-hinh-var/) |
-| **Bài 06** | Hướng dẫn thực hành mô hình VAR với Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/bsrok19u1/c7/huong-dan-thuc-hanh-mo-hinh-var-voi-stata/) |
+| **7.1** | Tại sao mô hình đơn phương trình là chưa đủ? | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/bsrok19u1/c7/tai-sao-mo-hinh-don-phuong-trinh-la-chua-du/) |
+| **7.2** | Vấn đề nhận dạng trong hệ phương trình | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/bsrok19u1/c7/van-de-nhan-dang-trong-he-phuong-trinh/) |
+| **7.3** | Các phương pháp ước lượng cho hệ phương trình đồng thời | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/bsrok19u1/c7/cac-phuong-phap-uoc-luong-cho-he-phuong-trinh-dong-thoi/) |
+| **7.4** | Giới thiệu mô hình tự hồi quy vector | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/bsrok19u1/c7/gioi-thieu-mo-hinh-tu-hoi-quy-vector-var/) |
+| **7.5** | Phân tích động lực học trong mô hình VAR | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/bsrok19u1/c7/phan-tich-dong-luc-hoc-trong-mo-hinh-var/) |
+| **7.6** | Hướng dẫn thực hành mô hình VAR với Stata | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/bsrok19u1/c7/huong-dan-thuc-hanh-mo-hinh-var-voi-stata/) |

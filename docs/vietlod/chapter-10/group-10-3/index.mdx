@@ -1,35 +1,35 @@
 ---
 id: index
-title: "Nhóm 10.3: Hồi quy địa lý đa thang đo và sai số chuẩn Conley"
-sidebar_label: "Nhóm 10.3. Hồi quy địa lý đa thang đo và sai số chuẩn Conley"
+title: "10.3. Hồi quy địa lý đa thang đo và sai số chuẩn Conley"
+sidebar_label: "10.3. Hồi quy địa lý đa thang đo và sai số chuẩn Conley"
 sidebar_position: 3
 slug: /vietlod/chapter-10/group-10-3
-description: "Hướng dẫn thực hành Nhóm 10.3 — Hồi quy địa lý đa thang đo và sai số chuẩn Conley thuộc Chương 10: so sánh và thực thi 2 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Phần 10.3 — Hồi quy địa lý đa thang đo và sai số chuẩn Conley thuộc Chương 10: so sánh và thực thi 2 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
-  - Nhóm 10.3 VietLOD
+  - Phần 10.3 VietLOD
   - Hồi quy địa lý đa thang đo và sai số chuẩn Conley
   - Stata 18
   - R 4.x
   - Python 3.11
 ---
 
-# Nhóm 10.3: Hồi quy địa lý đa thang đo và sai số chuẩn Conley
+# 10.3. Hồi quy địa lý đa thang đo và sai số chuẩn Conley
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Nhóm phương pháp 10.3 — Hồi quy địa lý đa thang đo và sai số chuẩn Conley** thuộc [Chương 10: Kinh tế lượng không gian, sai số chuẩn Conley và mạng cặp đôi](/vietlod/chapter-10) cung cấp quy trình thực hành từng bước cho **2 mô hình kinh tế lượng** từ bài `10.3.1` đến `10.3.2`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Nhóm 10.3](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-10-kinh-te-luong-khong-gian-conley-hac-va-mang-cap-doi/nhom-10-3-multiscale-conley) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+**Phần 10.3. Hồi quy địa lý đa thang đo và sai số chuẩn Conley** thuộc [10. Kinh tế lượng không gian, sai số chuẩn Conley và mạng cặp đôi](/vietlod/chapter-10) cung cấp quy trình thực hành từng bước cho **2 bài học mô hình kinh tế lượng** từ mục `10.3.1` đến `10.3.2`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 10.3](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-10-kinh-te-luong-khong-gian-conley-hac-va-mang-cap-doi/nhom-10-3-multiscale-conley) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Nhóm 10.3: Hồi quy địa lý đa thang đo và sai số chuẩn Conley trên Stata 18, R 4.x và Python 3.11+"
+  title="Hướng dẫn thực hành Phần 10.3: Hồi quy địa lý đa thang đo và sai số chuẩn Conley trên Stata 18, R 4.x và Python 3.11+"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 1. Bản chất phương pháp và hệ phương trình định danh
+## 10.3.1. Bản chất phương pháp và hệ phương trình định danh
 
-- **Câu hỏi nghiên cứu trọng tâm của nhóm**: Làm thế nào để lượng hóa hiệu ứng lan tỏa địa lý, biến thiên hệ số đa thang đo (MGWR) và sai số chuẩn không gian Conley HAC / mạng cặp đôi?
+- **Câu hỏi nghiên cứu trọng tâm**: Làm thế nào để lượng hóa hiệu ứng lan tỏa địa lý, biến thiên hệ số đa thang đo (MGWR) và sai số chuẩn không gian Conley HAC / mạng cặp đôi?
 - **Kiểm định chẩn đoán bắt buộc**: Băng thông tối ưu riêng $bw_k$ cho từng biến, $\text{AIC}_c$ so sánh MGWR vs GWR vs Global OLS, kiểm định Monte-Carlo / Leung $F_3$ về sự biến thiên không gian thực sự của từng $\beta_k(u_i, v_i)$..
 
-Phương trình đặc tả cấu trúc của nhóm phương pháp 10.3:
+Phương trình đặc tả cấu trúc của phần phương pháp 10.3:
 
 $$
 Y_i = \beta_{b_0}(u_i, v_i) + \sum_{k=1}^K \beta_{b_k}(u_i, v_i) X_{ik} + \varepsilon_i, \quad \hat{\beta}(u_i, v_i) = \left(X^\top W(u_i, v_i) X\right)^{-1}X^\top W(u_i, v_i)Y
@@ -42,10 +42,10 @@ $$
 $$
 
 <FeatureNotAvailable
-  note="Khi dữ liệu vi phạm giả định định danh của Nhóm 10.3, nhà nghiên cứu cần chuyển sang các nhóm phương pháp mở rộng trong Chương 10 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
+  note="Khi dữ liệu vi phạm giả định định danh của Phần 10.3, nhà nghiên cứu cần chuyển sang các phần phương pháp mở rộng trong Chương 10 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
 />
 
-## 2. Danh mục các mô hình trong Nhóm 10.3
+## 10.3.2. Danh mục các bài học mô hình trong Phần 10.3
 
 <FeatureCards
   features={[
@@ -53,38 +53,37 @@ $$
       title: '10.3.1. Hồi quy trọng số địa lý và đa thang đo (GWR, MGWR)',
       description: 'Cho phép hệ số hồi quy $\beta_k(u_i, v_i)$ biến thiên liên tục theo tọa độ không gian của từng địa phương với băng thông không gian tối ưu $...',
       link: '/vietlod/chapter-10/group-10-3/b168-mgwr-spatial',
-      badge: 'B168 · mgwr_spatial'
+      badge: '10.3.1 · mgwr_spatial'
     },
     {
       title: '10.3.2. Sai số chuẩn bền vững không gian–thời gian Conley và mạng cặp đôi',
       description: 'Suy luận hiệp phương sai phi tham số cho phép nhiễu tương quan tự do theo khoảng cách địa lý Haversine $d_{ij} \le d_{\text{cutoff}}$ — hạt ...',
       link: '/vietlod/chapter-10/group-10-3/b169-conley-spatial-hac',
-      badge: 'B169 · conley_spatial_hac'
+      badge: '10.3.2 · conley_spatial_hac'
     }
   ]}
 />
 
-## 3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
+## 10.3.3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
 
 | Bài học & Mô hình | Mã định danh | Cú pháp Stata 18 MP | Cú pháp R 4.x | Cú pháp Python 3.11+ | Hỗ trợ |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `10.3.1` · [Hồi quy trọng số địa lý và đa thang đo (GWR, MGWR)](/vietlod/chapter-10/group-10-3/b168-mgwr-spatial) | `mgwr_spatial` | `gwr y x1 x2, east(coord_x) north(coord_y) bandwidth(aic)` | `GWmodel::gwr.multiscale(y ~ x1 + x2, data = spdf, adaptive = TRUE)` | `MGWR(coords, y, X, selector=Sel_BW(coords, y, X, multi=True)).fit()` | <Available /> |
-| `10.3.2` · [Sai số chuẩn bền vững không gian–thời gian Conley và mạng cặp đôi](/vietlod/chapter-10/group-10-3/b169-conley-spatial-hac) | `conley_spatial_hac` | `acreg y x1 x2, spatial latitude(lat) longitude(lon) dist(100)` | `fixest::feols(y ~ x1 + x2, vcov = fixest::vcov_conley(lat = 'lat', lon = 'lon', cutoff = 100), data = df)` | `smf.ols('y ~ x1 + x2', data=df).fit(cov_type='HAC', cov_kwds={'maxlags': 4})` | <Available /> |
+| **10.3.1** · [Hồi quy trọng số địa lý và đa thang đo (GWR, MGWR)](/vietlod/chapter-10/group-10-3/b168-mgwr-spatial) | `mgwr_spatial` | `gwr y x1 x2, east(coord_x) north(coord_y) bandwidth(aic)` | `GWmodel::gwr.multiscale(y ~ x1 + x2, data = spdf, adaptive = TRUE)` | `MGWR(coords, y, X, selector=Sel_BW(coords, y, X, multi=True)).fit()` | <Available /> |
+| **10.3.2** · [Sai số chuẩn bền vững không gian–thời gian Conley và mạng cặp đôi](/vietlod/chapter-10/group-10-3/b169-conley-spatial-hac) | `conley_spatial_hac` | `acreg y x1 x2, spatial latitude(lat) longitude(lon) dist(100)` | `fixest::feols(y ~ x1 + x2, vcov = fixest::vcov_conley(lat = 'lat', lon = 'lon', cutoff = 100), data = df)` | `smf.ols('y ~ x1 + x2', data=df).fit(cov_type='HAC', cov_kwds={'maxlags': 4})` | <Available /> |
 
-## 4. Quy trình thực hành chuẩn cho Nhóm 10.3
+## 10.3.4. Quy trình thực hành chuẩn cho Phần 10.3
 
 <Steps>
-
-### Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco
-
-Tải tệp CSV thực hành của từng mô hình trong Nhóm `10.3` hoặc kết nối dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
-
-### Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu
-
-So sánh các mô hình từ `10.3.1` đến `10.3.2` trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.
-
-### Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab
-
-Thực hiện đầy đủ bộ kiểm định **Băng thông tối ưu riêng $bw_k$ cho từng biến, $\text{AIC}_c$ so sánh MGWR vs GWR vs Global OLS, kiểm định Monte-Carlo / Leung $F_3$ về sự biến thiên không gian thực sự của từng $\beta_k(u_i, v_i)$.** và đẩy mã mô hình sang [EcoLab](https://ecolab.io.vn) để xuất bảng kết quả chuẩn công bố quốc tế.
-
+  <div className="step-item">
+    <h3>Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco</h3>
+    <p>Tải tệp CSV thực hành của từng bài học trong Phần <code>10.3</code> hoặc kết nối dữ liệu thực tế từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> và <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu</h3>
+    <p>So sánh các bài học mô hình từ <code>10.3.1</code> đến <code>10.3.2</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab</h3>
+    <p>Thực hiện đầy đủ bộ kiểm định <strong>Băng thông tối ưu riêng $bw_k$ cho từng biến, $\text{AIC}_c$ so sánh MGWR vs GWR vs Global OLS, kiểm định Monte-Carlo / Leung $F_3$ về sự biến thiên không gian thực sự của từng $\beta_k(u_i, v_i)$.</strong> và đẩy mã mô hình sang <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> để xuất bảng kết quả chuẩn công bố quốc tế.</p>
+  </div>
 </Steps>

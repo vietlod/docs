@@ -1,12 +1,12 @@
 ---
 id: index
-title: "Chương 07: Chuỗi thời gian đa biến, chiếu cục bộ và mạng lan tỏa"
-sidebar_label: "Chương 07. Chuỗi thời gian đa biến, chiếu cục bộ và mạng lan tỏa"
+title: "7. Chuỗi thời gian đa biến, chiếu cục bộ và mạng lan tỏa"
+sidebar_label: "7. Chuỗi thời gian đa biến, chiếu cục bộ và mạng lan tỏa"
 sidebar_position: 8
 slug: /vietlod/chapter-07
-description: "Hướng dẫn thực hành Chương 07 — Chuỗi thời gian đa biến, chiếu cục bộ và mạng lan tỏa: bao gồm 5 nhóm phương pháp và 15 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Chương 7 — Chuỗi thời gian đa biến, chiếu cục bộ và mạng lan tỏa: bao gồm 5 phần phương pháp và 15 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
-  - Chương 07 VietLOD
+  - Chương 7 VietLOD
   - Chuỗi thời gian đa biến, chiếu cục bộ và mạng lan tỏa
   - Stata 18
   - R 4.x
@@ -15,112 +15,111 @@ keywords:
   - EcoLab
 ---
 
-# Chương 07: Chuỗi thời gian đa biến, chiếu cục bộ và mạng lan tỏa
+# 7. Chuỗi thời gian đa biến, chiếu cục bộ và mạng lan tỏa
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Chương 07 — Chuỗi thời gian đa biến, chiếu cục bộ và mạng lan tỏa** hướng dẫn thực hành chi tiết **15 mô hình kinh tế lượng** thuộc **5 nhóm phương pháp** từ mã `B107` đến `B121`. Toàn bộ bài viết trong chương được đồng bộ hóa với giáo trình gốc tại [VietLOD Chương 07](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-07-chuoi-thoi-gian-da-bien-chieu-cuc-bo-va-mang-lan-toa) và hỗ trợ thực thi tự động trên [EcoLab](https://ecolab.io.vn).
+**Chương 7. Chuỗi thời gian đa biến, chiếu cục bộ và mạng lan tỏa** hướng dẫn thực hành chi tiết **15 bài học mô hình kinh tế lượng** thuộc **5 phần phương pháp** từ mục `7.1.1` đến `7.5.3`. Toàn bộ bài viết trong chương được đồng bộ hóa với giáo trình gốc tại [VietLOD Chương 7](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-07-chuoi-thoi-gian-da-bien-chieu-cuc-bo-va-mang-lan-toa) và hỗ trợ thực thi tự động trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 07: Chuỗi thời gian đa biến, chiếu cục bộ và mạng lan tỏa trên Stata 18, R 4.x và Python 3.11+"
+  title="Hướng dẫn thực hành Chương 7: Chuỗi thời gian đa biến, chiếu cục bộ và mạng lan tỏa trên Stata 18, R 4.x và Python 3.11+"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 1. Câu hỏi nghiên cứu trọng tâm và phương trình nền tảng
+## 7.1. Câu hỏi nghiên cứu trọng tâm và phương trình nền tảng
 
 - **Câu hỏi nghiên cứu trọng tâm**: Làm sao để phân tích tương tác động học đa chiều, nhận dạng cú sốc cấu trúc — SVAR vs Jordà Local Projections, hệ số biến thiên theo thời gian (VAR) và chỉ số lan tỏa mạng lưới?
-- **Phạm vi cấu trúc chương**: Gồm `5` nhóm phương pháp chuyên sâu và `15` mô hình thực nghiệm đối chứng trên dữ liệu Việt Nam từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
+- **Phạm vi cấu trúc chương**: Gồm `5` phần phương pháp chuyên sâu từ `7.1` đến `7.5` và `15` bài học thực nghiệm đối chứng trên dữ liệu Việt Nam từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
 
-Phương trình đặc tả tổng quát của Chương 07:
+Phương trình đặc tả tổng quát của Chương 7:
 
 $$
 Y_{t+h} = \alpha_h + \beta_h \text{Shock}_t + \sum_{\ell=1}^p \Gamma_{h,\ell} Y_{t-\ell} + u_{t+h}, \quad h = 0, 1, \dots, H
 $$
 
 <FeatureNotAvailable
-  note="Không áp dụng các ước lượng trong Chương 07 khi chưa kiểm tra điều kiện định danh và bộ kiểm định chẩn đoán bắt buộc gồm: Eigenvalue Stability Condition, Granger/Toda–Yamamoto Wald Test, Newey–West HAC IRF Bands, Montiel Olea–Pflueger LP-IV F-stat, Diebold–Yilmaz TCI/NET."
+  note="Không áp dụng các ước lượng trong Chương 7 khi chưa kiểm tra điều kiện định danh và bộ kiểm định chẩn đoán bắt buộc gồm: Eigenvalue Stability Condition, Granger/Toda–Yamamoto Wald Test, Newey–West HAC IRF Bands, Montiel Olea–Pflueger LP-IV F-stat, Diebold–Yilmaz TCI/NET."
 />
 
-## 2. Khám phá 5 nhóm phương pháp trong Chương 07
+## 7.2. Hệ thống 5 phần phương pháp trong Chương 7
 
 <FeatureCards
   features={[
     {
-      title: 'Nhóm 7.1. Hệ mô hình tự hồi quy vectơ (VAR, VECM, SVAR)',
+      title: '7.1. Hệ mô hình tự hồi quy vectơ (VAR, VECM, SVAR)',
       description: 'Làm sao để phân tích tương tác động học đa chiều, nhận dạng cú sốc cấu trúc — SVAR vs Jordà Local Projections, hệ số biến thiên theo thời gian (VAR) và chỉ số lan tỏa mạng lưới?',
       link: '/vietlod/chapter-07/group-7-1',
-      badge: '4 mô hình'
+      badge: '4 bài học'
     },
     {
-      title: 'Nhóm 7.2. Nhân quả Granger và hàm phản ứng xung',
+      title: '7.2. Nhân quả Granger và hàm phản ứng xung',
       description: 'Làm sao để phân tích tương tác động học đa chiều, nhận dạng cú sốc cấu trúc — SVAR vs Jordà Local Projections, hệ số biến thiên theo thời gian (VAR) và chỉ số lan tỏa mạng lưới?',
       link: '/vietlod/chapter-07/group-7-2',
-      badge: '2 mô hình'
+      badge: '2 bài học'
     },
     {
-      title: 'Nhóm 7.3. Phương pháp chiếu cục bộ (LP)',
+      title: '7.3. Phương pháp chiếu cục bộ (LP)',
       description: 'Làm sao để phân tích tương tác động học đa chiều, nhận dạng cú sốc cấu trúc — SVAR vs Jordà Local Projections, hệ số biến thiên theo thời gian (VAR) và chỉ số lan tỏa mạng lưới?',
       link: '/vietlod/chapter-07/group-7-3',
-      badge: '3 mô hình'
+      badge: '3 bài học'
     },
     {
-      title: 'Nhóm 7.4. Mô hình VAR tham số biến thiên và mạng lan tỏa',
+      title: '7.4. Mô hình VAR tham số biến thiên và mạng lan tỏa',
       description: 'Làm sao để phân tích tương tác động học đa chiều, nhận dạng cú sốc cấu trúc — SVAR vs Jordà Local Projections, hệ số biến thiên theo thời gian (VAR) và chỉ số lan tỏa mạng lưới?',
       link: '/vietlod/chapter-07/group-7-4',
-      badge: '3 mô hình'
+      badge: '3 bài học'
     },
     {
-      title: 'Nhóm 7.5. Mô hình tự hồi quy ngưỡng và chuyển chế độ Markov',
+      title: '7.5. Mô hình tự hồi quy ngưỡng và chuyển chế độ Markov',
       description: 'Làm sao để phân tích tương tác động học đa chiều, nhận dạng cú sốc cấu trúc — SVAR vs Jordà Local Projections, hệ số biến thiên theo thời gian (VAR) và chỉ số lan tỏa mạng lưới?',
       link: '/vietlod/chapter-07/group-7-5',
-      badge: '3 mô hình'
+      badge: '3 bài học'
     }
   ]}
 />
 
-## 3. Quy trình 4 bước lựa chọn và thực thi mô hình trong Chương 07
+## 7.3. Quy trình 4 bước lựa chọn và thực thi mô hình trong Chương 7
 
 <Steps>
-
-### Bước 1. Xác định nhóm phương pháp phù hợp trong 5 nhóm của chương
-
-Đối chiếu giả thuyết kinh tế và cấu trúc mẫu thực nghiệm với câu hỏi định danh của từng nhóm phương pháp từ Nhóm `7.1` đến Nhóm `7.5`.
-
-### Bước 2. Chuẩn bị tệp dữ liệu chuẩn hóa từ EcoData hoặc Finco
-
-Tải tệp dữ liệu thực hành `.csv` tương ứng với từng mô hình tại `/src/ecoaz/data/` hoặc trích xuất bảng dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
-
-### Bước 3. Ước lượng tham số và chạy kiểm định chẩn đoán trên Stata 18, R 4.x và Python 3.11+
-
-Thực thi mã lệnh mẫu trong từng bài học và kiểm tra nghiêm ngặt các tiêu chuẩn chẩn đoán bắt buộc của chương: **Eigenvalue Stability Condition, Granger/Toda–Yamamoto Wald Test, Newey–West HAC IRF Bands, Montiel Olea–Pflueger LP-IV F-stat, Diebold–Yilmaz TCI/NET**.
-
-### Bước 4. Đối chiếu đồ thị hội tụ 3 phần mềm và xuất bảng công bố trên EcoLab
-
-Kiểm tra sự hội tụ của hệ số ước lượng giữa Stata, R và Python trên đồ thị thực nghiệm 3 khung và xuất bảng kết quả chuẩn tạp chí qua [EcoLab](https://ecolab.io.vn).
-
+  <div className="step-item">
+    <h3>Bước 1. Xác định phần phương pháp phù hợp từ 7.1 đến 7.5</h3>
+    <p>Đối chiếu giả thuyết kinh tế và cấu trúc mẫu thực nghiệm với câu hỏi định danh của từng phần phương pháp trong Chương 7 để lựa chọn đúng bài học mô hình <code>A.B.C</code>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2. Chuẩn bị tệp dữ liệu chuẩn hóa từ EcoData hoặc Finco</h3>
+    <p>Tải tệp dữ liệu thực hành <code>.csv</code> tương ứng với từng bài học tại <code>/src/ecoaz/data/</code> hoặc trích xuất bảng dữ liệu thực tế từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> và <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3. Ước lượng tham số và chạy kiểm định chẩn đoán trên Stata 18, R 4.x và Python 3.11+</h3>
+    <p>Thực thi mã lệnh mẫu trong từng bài học và kiểm tra nghiêm ngặt các tiêu chuẩn chẩn đoán bắt buộc của chương: <strong>Eigenvalue Stability Condition, Granger/Toda–Yamamoto Wald Test, Newey–West HAC IRF Bands, Montiel Olea–Pflueger LP-IV F-stat, Diebold–Yilmaz TCI/NET</strong>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4. Đối chiếu đồ thị hội tụ 3 phần mềm và xuất bảng công bố trên EcoLab</h3>
+    <p>Kiểm tra sự hội tụ của hệ số ước lượng giữa Stata, R và Python trên đồ thị thực nghiệm 3 khung và xuất bảng kết quả chuẩn tạp chí qua <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a>.</p>
+  </div>
 </Steps>
 
-## 4. Danh mục đầy đủ 15 mô hình kinh tế lượng trong Chương 07
+## 7.4. Danh mục đầy đủ 15 bài học mô hình kinh tế lượng trong Chương 7
 
-| Mã bài | Tên mô hình kinh tế lượng | Khóa định danh | Cấp độ | Gói phần mềm Stata · R · Python | Hỗ trợ |
+| Đề mục | Tên bài học và mô hình kinh tế lượng | Khóa định danh | Cấp độ | Gói phần mềm Stata · R · Python | Hỗ trợ |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `7.1.1` · `B107` | [Mô hình tự hồi quy vectơ (VAR)](/vietlod/chapter-07/group-7-1/b107-var) | `var` | `L1` | `base Stata` · `vars` · `statsmodels` | <Available /> |
-| `7.2.1` · `B108` | [Kiểm định nhân quả Granger và nhân quả Toda–Yamamoto](/vietlod/chapter-07/group-7-2/b108-granger-causality) | `granger_causality` | `L1` | `base Stata` · `lmtest / vars` · `statsmodels` | <Available /> |
-| `7.3.1` · `B113` | [Phương pháp chiếu cục bộ Jordà ước lượng phản ứng xung (LP)](/vietlod/chapter-07/group-7-3/b113-local-projections) | `local_projections` | `L2` | `Stata 18 lpirf` · `lpirfs` · `statsmodels` | <Available /> |
-| `7.4.1` · `B116` | [Mô hình VAR bổ sung nhân tố ẩn Bernanke–Boivin–Eliasz (FAVAR)](/vietlod/chapter-07/group-7-4/b116-favar) | `favar` | `L3` | `pca / svar` · `FAVAR / vars` · `statsmodels` | <Available /> |
-| `7.5.1` · `B119` | [Mô hình tự hồi quy ngưỡng tự kích hoạt (SETAR)](/vietlod/chapter-07/group-7-5/b119-setar) | `setar` | `L2` | `Stata 18 threshold` · `stats / strucchange` · `statsmodels` | <Available /> |
-| `7.1.2` · `B110` | [Mô hình hiệu chỉnh sai số vectơ (VECM)](/vietlod/chapter-07/group-7-1/b110-vecm) | `vecm` | `L2` | `base Stata` · `urca / vars` · `statsmodels` | <Available /> |
-| `7.2.2` · `B109` | [Hàm phản ứng xung và phân rã phương sai (IRF, FEVD)](/vietlod/chapter-07/group-7-2/b109-impulse-response) | `impulse_response` | `L1` | `base Stata` · `vars` · `statsmodels` | <Available /> |
-| `7.3.2` · `B114` | [Chiếu cục bộ kết hợp biến công cụ nhận dạng cú sốc (LP)](/vietlod/chapter-07/group-7-3/b114-local-projections-iv) | `local_projections_iv` | `L3` | `Stata 18 lpirf / ivregress` · `lpirfs` · `linearmodels` | <Available /> |
-| `7.4.2` · `B117` | [Mô hình VAR tham số và phương sai biến thiên theo thời gian (VAR)](/vietlod/chapter-07/group-7-4/b117-tvp-var) | `tvp_var` | `L4` | `Stata sspace` · `bvarsv / tvReg` · `statsmodels / scipy` | <Available /> |
-| `7.5.2` · `B120` | [Mô hình hồi quy chuyển đổi chế độ ẩn Markov Hamilton](/vietlod/chapter-07/group-7-5/b120-markov-regression) | `markov_regression` | `L4` | `base Stata` · `stats / MSwM` · `statsmodels` | <Available /> |
-| `7.1.3` · `B111` | [Mô hình tự hồi quy vectơ cấu trúc (SVAR)](/vietlod/chapter-07/group-7-1/b111-svar) | `svar` | `L2` | `base Stata` · `vars` · `statsmodels` | <Available /> |
-| `7.3.3` · `B115` | [Chiếu cục bộ trên dữ liệu bảng đa đơn vị](/vietlod/chapter-07/group-7-3/b115-panel-local-projections) | `panel_local_projections` | `L3` | `reghdfe / xtscc` · `lpirfs / fixest` · `pyfixest` | <Available /> |
-| `7.4.3` · `B118` | [Mô hình đo lường lan tỏa và kết nối mạng lưới Diebold–Yilmaz](/vietlod/chapter-07/group-7-4/b118-spillover-connectedness) | `spillover_connectedness` | `L3` | `dyconnectedness / var` · `ConnectednessApproach` · `statsmodels` | <Available /> |
-| `7.5.3` · `B121` | [Mô hình tự hồi quy vectơ chuyển đổi chế độ Markov (VAR)](/vietlod/chapter-07/group-7-5/b121-ms-var) | `ms_var` | `L4` | `Stata mswitch` · `MSwM / vars` · `statsmodels` | <Available /> |
-| `7.1.4` · `B112` | [Mô hình tự hồi quy vectơ Bayes với tiên nghiệm Minnesota (BVAR)](/vietlod/chapter-07/group-7-1/b112-bvar) | `bvar` | `L3` | `Stata 18 bayes: var` · `vars / BVAR` · `statsmodels / numpy` | <Available /> |
+| **7.1.1** | [7.1.1. Mô hình tự hồi quy vectơ (VAR)](/vietlod/chapter-07/group-7-1/b107-var) | `var` | `L1` | `base Stata` · `vars` · `statsmodels` | <Available /> |
+| **7.1.2** | [7.1.2. Mô hình hiệu chỉnh sai số vectơ (VECM)](/vietlod/chapter-07/group-7-1/b110-vecm) | `vecm` | `L2` | `base Stata` · `urca / vars` · `statsmodels` | <Available /> |
+| **7.1.3** | [7.1.3. Mô hình tự hồi quy vectơ cấu trúc (SVAR)](/vietlod/chapter-07/group-7-1/b111-svar) | `svar` | `L2` | `base Stata` · `vars` · `statsmodels` | <Available /> |
+| **7.1.4** | [7.1.4. Mô hình tự hồi quy vectơ Bayes với tiên nghiệm Minnesota (BVAR)](/vietlod/chapter-07/group-7-1/b112-bvar) | `bvar` | `L3` | `Stata 18 bayes: var` · `vars / BVAR` · `statsmodels / numpy` | <Available /> |
+| **7.2.1** | [7.2.1. Kiểm định nhân quả Granger và nhân quả Toda–Yamamoto](/vietlod/chapter-07/group-7-2/b108-granger-causality) | `granger_causality` | `L1` | `base Stata` · `lmtest / vars` · `statsmodels` | <Available /> |
+| **7.2.2** | [7.2.2. Hàm phản ứng xung và phân rã phương sai (IRF, FEVD)](/vietlod/chapter-07/group-7-2/b109-impulse-response) | `impulse_response` | `L1` | `base Stata` · `vars` · `statsmodels` | <Available /> |
+| **7.3.1** | [7.3.1. Phương pháp chiếu cục bộ Jordà ước lượng phản ứng xung (LP)](/vietlod/chapter-07/group-7-3/b113-local-projections) | `local_projections` | `L2` | `Stata 18 lpirf` · `lpirfs` · `statsmodels` | <Available /> |
+| **7.3.2** | [7.3.2. Chiếu cục bộ kết hợp biến công cụ nhận dạng cú sốc (LP)](/vietlod/chapter-07/group-7-3/b114-local-projections-iv) | `local_projections_iv` | `L3` | `Stata 18 lpirf / ivregress` · `lpirfs` · `linearmodels` | <Available /> |
+| **7.3.3** | [7.3.3. Chiếu cục bộ trên dữ liệu bảng đa đơn vị](/vietlod/chapter-07/group-7-3/b115-panel-local-projections) | `panel_local_projections` | `L3` | `reghdfe / xtscc` · `lpirfs / fixest` · `pyfixest` | <Available /> |
+| **7.4.1** | [7.4.1. Mô hình VAR bổ sung nhân tố ẩn Bernanke–Boivin–Eliasz (FAVAR)](/vietlod/chapter-07/group-7-4/b116-favar) | `favar` | `L3` | `pca / svar` · `FAVAR / vars` · `statsmodels` | <Available /> |
+| **7.4.2** | [7.4.2. Mô hình VAR tham số và phương sai biến thiên theo thời gian (VAR)](/vietlod/chapter-07/group-7-4/b117-tvp-var) | `tvp_var` | `L4` | `Stata sspace` · `bvarsv / tvReg` · `statsmodels / scipy` | <Available /> |
+| **7.4.3** | [7.4.3. Mô hình đo lường lan tỏa và kết nối mạng lưới Diebold–Yilmaz](/vietlod/chapter-07/group-7-4/b118-spillover-connectedness) | `spillover_connectedness` | `L3` | `dyconnectedness / var` · `ConnectednessApproach` · `statsmodels` | <Available /> |
+| **7.5.1** | [7.5.1. Mô hình tự hồi quy ngưỡng tự kích hoạt (SETAR)](/vietlod/chapter-07/group-7-5/b119-setar) | `setar` | `L2` | `Stata 18 threshold` · `stats / strucchange` · `statsmodels` | <Available /> |
+| **7.5.2** | [7.5.2. Mô hình hồi quy chuyển đổi chế độ ẩn Markov Hamilton](/vietlod/chapter-07/group-7-5/b120-markov-regression) | `markov_regression` | `L4` | `base Stata` · `stats / MSwM` · `statsmodels` | <Available /> |
+| **7.5.3** | [7.5.3. Mô hình tự hồi quy vectơ chuyển đổi chế độ Markov (VAR)](/vietlod/chapter-07/group-7-5/b121-ms-var) | `ms_var` | `L4` | `Stata mswitch` · `MSwM / vars` · `statsmodels` | <Available /> |
 
-## 5. Tài liệu tham khảo học thuật trọng tâm
+## 7.5. Tài liệu tham khảo học thuật trọng tâm
 
 - Sims, C. A.(1980). Macroeconomics and reality. *Econometrica*, 48, số 1, 1–48.
 - Johansen, S.(1995). *Likelihood-Based Inference in Cointegrated Vector Autoregressive Models*. Oxford University Press.

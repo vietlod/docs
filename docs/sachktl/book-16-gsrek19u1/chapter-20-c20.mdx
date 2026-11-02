@@ -1,19 +1,19 @@
 ---
 id: chapter-20-c20
-title: "Chương 20: 20. tự tương quan"
-sidebar_label: "Chương 20: 20. Tự tương quan"
+title: "20. Tự tương quan"
+sidebar_label: "20. Tự tương quan"
 sidebar_position: 21
-description: "Hướng dẫn thực hành How-To Chương 20: 20. tự tương quan thuộc bộ sách Phân tích kinh tế lượng trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 20. Tự tương quan thuộc giáo trình Phân tích kinh tế lượng trên SachKTL kèm công thức toán học, phân tích 9 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 20: 20. tự tương quan
+# 20. Tự tương quan
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 20: 20. tự tương quan** thuộc [**Bộ sách 16: phân tích kinh tế lượng**](/sachktl/book-16-gsrek19u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/gsrek19u1/c20/](https://sachktl.tnsai.vn/vi/gsrek19u1/c20/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **9 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **20. Tự tương quan** thuộc bộ giáo trình [**Phân tích kinh tế lượng**](/sachktl/book-16-gsrek19u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/gsrek19u1/c20/](https://sachktl.tnsai.vn/vi/gsrek19u1/c20/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 20: 20. tự tương quan">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="20. Tự tương quan">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 16 · CHƯƠNG 20</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 20: 20. tự tương quan</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Phân tích kinh tế lượng · 9 bài học chuyên sâu</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Phân tích kinh tế lượng</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">20. Tự tương quan</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng ứng dụng, mô hình hóa thống kê và kiểm định giả thuyết · 9 bài học chuy</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,102 +41,264 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
 Tự tương quan Chào mừng các bạn sinh viên đến với chuỗi bài học chuyên sâu về một trong những hiện tượng phổ biến và quan trọng nhất trong kinh tế lượng chuỗi thời gian: tự tương quan. Khi phân tích dữ liệu theo thời gian, chẳng hạn như GDP hàng quý, lạm phát hàng tháng, hay giá cổ phiếu hàng ngày, chúng ta thường thấy rằng các sai số của mô hình không hoàn toàn độc lập với nhau. Giống như tâm trạng của một người có thể kéo dài từ hôm nay sang ngày mai, các "cú sốc" kinh tế trong một kỳ có thể ảnh hưởng đến các kỳ tiếp theo. Hiện tượng "trí nhớ" này của các sai số được gọi là tự tương quan .
 
-- **Chủ đề học thuật trọng tâm**: Cấu trúc chuỗi bài học, PHỤ LỤC: Dữ liệu mô phỏng cho chuỗi bài viết.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+Y_i = \beta_0 + \sum_{k=1}^K \beta_k X_{ik} + \varepsilon_i, \quad \mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0 \tag*{[1]}
+$$
+
+$$
+\widehat{\text{Var}}_{\text{HC1}}(\hat{\boldsymbol{\beta}}) = \frac{N}{N - K - 1}\left(\mathbf{X}'\mathbf{X}\right)^{-1}\left(\sum_{i=1}^N \hat{\varepsilon}_i^2 \mathbf{x}_i \mathbf{x}_i'\right)\left(\mathbf{X}'\mathbf{X}\right)^{-1} \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Dạng hàm tuyến tính theo tham số được xác định đúng, không bỏ sót biến giải thích quan trọng có tương quan với các biến trong mô hình.
+2. Kỳ vọng có điều kiện của sai số bằng không $\mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0$, đảm bảo tính không chệch và vững tiệm cận của ước lượng.
+3. Ma trận thiết kế $\mathbf{X}$ có hạng cột đầy đủ, không xảy ra đa cộng tuyến hoàn hảo và sử dụng sai số chuẩn vững HC1/Cluster khi có phương sai thay đổi.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 20 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/gsrek19u1/c20/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Khi tồn tại biến giải thích nội sinh do đồng thời hai chiều, sai số đo lường hoặc bỏ sót biến không quan sát được, ước lượng OLS bị chệch và không vững; cần chuyển sang ước lượng biến công cụ IV/2SLS hoặc GMM."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Giới thiệu về tự tương quan trong mô hình hồi quy
+
+Chào mừng các bạn đã quay trở lại! Trong bài học đầu tiên này, chúng ta sẽ cùng nhau xây dựng một trực giác vững chắc về tự tương quan. Đây là một khái niệm nền tảng, và việc hiểu rõ nó ngay từ đầu sẽ giúp cho việc học các kỹ thuật phức tạp hơn ở các bài sau trở nên dễ dàng hơn rất nhiều. Chúng ta sẽ bắt đầu bằng việc trả lời hai câu hỏi cơ bản: Tự tương quan là gì, và làm thế nào để "nhìn thấy" nó trong dữ liệu của chúng ta? Hãy coi bài học này như một chuyến đi khám phá.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Tự tương quan là gì và trông như thế nào?**
+- **2. Các ví dụ minh họa về tự tương quan**
+- **Ví dụ 20.1: Nhận diện tự tương quan trong phương trình cầu tiền**
+- **Ví dụ 20.2: Tự tương quan gây ra bởi đặc tả sai mô hình**
+- **Ví dụ 20.3: Tự tương quan âm trong đường cong phillips**
+- **3. Thực hành nhận diện tự tương quan với Stata**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c20/gioi-thieu-ve-tu-tuong-quan-trong-mo-hinh-hoi-quy/)
+
+### 2.2. Các khái niệm nền tảng cho phân tích dữ liệu chuỗi thời gian
+
+Trong bài học trước, chúng ta đã làm quen với hiện tượng tự tương quan qua các ví dụ trực quan. Chúng ta đã thấy rằng dữ liệu chuỗi thời gian có những đặc điểm rất riêng, khiến cho các giả định của mô hình hồi quy cổ điển có thể không còn đúng nữa. Để có thể phân tích loại dữ liệu này một cách chính xác, trước tiên chúng ta cần thay đổi cách tư duy về việc lấy mẫu và xây dựng một bộ khái niệm nền tảng dành riêng cho chuỗi thời gian. Bài học hôm nay sẽ tập trung vào những ý tưởng cốt lõi đó.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Nền tảng lý thuyết: Một cách nhìn mới về dữ liệu**
+- **Dữ liệu chuỗi thời gian: Một lần diễn ra duy nhất**
+- **Quá trình tĩnh : "Quy luật của trò chơi" không đổi**
+- **2. Áp dụng các khái niệm: Phân tích mô hình AR đơn giản**
+- **Tìm trung bình của quá trình \**
+- **Tìm phương sai của quá trình \**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c20/cac-khai-niem-nen-tang-cho-phan-tich-du-lieu-chuoi-thoi-gian/)
+
+### 2.3. Đặc điểm của quá trình nhiễu và mô hình AR kinh điển
+
+Ở bài học trước, chúng ta đã thiết lập các khái niệm nền tảng như tính dừng, giúp chúng ta có một cơ sở lý thuyết vững chắc để làm việc với dữ liệu chuỗi thời gian. Trong bài học này, chúng ta sẽ quay trở lại vấn đề cốt lõi: làm thế nào để mô tả một cách định lượng và mô hình hóa cấu trúc tương quan của các sai số mà chúng ta đã quan sát được một cách trực quan ở Bài 1. Chúng ta sẽ học một "ngôn ngữ" mới để mô tả mối quan hệ của một biến với quá khứ của chính nó.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Nền tảng lý thuyết: Đặc điểm của quá trình nhiễu**
+- **Tự hiệp phương sai**
+- **Tự tương quan**
+- **Hàm tự tương quan**
+- **2. Mô hình AR kinh điển**
+- **"Dấu vân tay" ACF của quá trình AR**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c20/dac-diem-cua-qua-trinh-nhieu-va-mo-hinh-ar1-kinh-dien/)
+
+### 2.4. Các định lý quan trọng và tính chất tiệm cận trong chuỗi thời gian
+
+Trong các bài học trước, chúng ta đã xác định được rằng dữ liệu chuỗi thời gian có các quan sát phụ thuộc lẫn nhau, điều này vi phạm giả định cốt lõi của mô hình hồi quy cổ điển. Sự phụ thuộc này đặt ra một câu hỏi lớn: Liệu các công cụ thống kê mà chúng ta đã học, như Luật số lớn và Định lý giới hạn trung tâm, có còn áp dụng được không? Nếu không, làm thế nào chúng ta có thể tin tưởng vào kết quả ước lượng và các kiểm định giả thuyết của mình? Bài học này sẽ giải quyết chính xác câu hỏi đó.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Nền tảng lý thuyết: Mở rộng các định lý thống kê cho chuỗi thời gian**
+- **1.1. Tính bất biến : Điều kiện để học hỏi từ quá khứ**
+- **1.2. Định lý giới hạn trung tâm cho chuỗi thời gian**
+- **2. Tính chất tiệm cận của ước lượng OLS trong chuỗi thời gian**
+- **Tính nhất quán**
+- **Tính phân phối chuẩn tiệm cận**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c20/cac-dinh-ly-quan-trong-va-tinh-chat-tiem-can-trong-chuoi-thoi-gian/)
+
+### 2.5. Ước lượng OLS và các vấn đề khi có tự tương quan
+
+Chào mừng các bạn quay trở lại! Trong bài học trước, chúng ta đã thiết lập một nền tảng lý thuyết vững chắc cho việc phân tích chuỗi thời gian. Một trong những kết luận quan trọng nhất là, mặc dù ước lượng OLS vẫn nhất quán khi có tự tương quan , nhưng các sai số chuẩn thông thường của nó lại trở nên không đáng tin cậy. Điều này giống như việc bạn có một chiếc cân chính xác về trọng lượng trung bình, nhưng lại không biết mức độ sai số của nó là bao nhiêu, khiến cho mọi kết luận trở nên thiếu cơ sở.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Nền tảng lý thuyết: Hậu quả của tự tương quan đối với OLS**
+- **1.1. Ước lượng phương sai của OLS**
+- **1.2. Trường hợp đặc biệt nguy hiểm: Biến phụ thuộc trễ và tự tương quan**
+- **2. Phương pháp nghiên cứu: Ước lượng Newey-West**
+- **3. Ví dụ minh họa: Sửa sai số chuẩn với Stata**
+- **4. Tổng kết bài học**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c20/uoc-luong-ols-va-cac-van-de-khi-co-tu-tuong-quan/)
+
+### 2.6. Các phương pháp kiểm định tự tương quan trong thực hành
+
+Trong các bài học trước, chúng ta đã tìm hiểu về bản chất của tự tương quan, cách nhận diện nó một cách trực quan qua biểu đồ phần dư, và cách tính toán sai số chuẩn đáng tin cậy bằng phương pháp Newey-West. Tuy nhiên, việc chỉ nhìn vào biểu đồ có thể mang tính chủ quan. Để có thể đưa ra kết luận một cách khoa học, chúng ta cần các công cụ kiểm định thống kê chính thức. Bài học hôm nay sẽ giới thiệu các phương pháp kiểm định tự tương quan phổ biến nhất trong kinh tế lượng.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Nền tảng lý thuyết: Logic chung của các kiểm định**
+- **2.1. Kiểm định Durbin-Watson**
+- **2.2. Kiểm định box-pierce và ljung-box**
+- **2.3. Kiểm định breusch-godfrey**
+- **2. Ví dụ minh họa: Thực hành kiểm định tự tương quan trong Stata**
+- **3. Tổng kết bài học**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c20/cac-phuong-phap-kiem-dinh-tu-tuong-quan-trong-thuc-hanh/)
+
+### 2.7. Ước lượng hiệu quả và mô hình có biến trễ phụ thuộc
+
+Trong các bài học trước, chúng ta đã xác định rằng khi có tự tương quan, ước lượng OLS không còn hiệu quả . Điều này có nghĩa là có những phương pháp ước lượng khác tốt hơn, cho chúng ta các kết quả chính xác hơn với cùng một lượng dữ liệu. Bài học hôm nay sẽ tập trung vào chính những phương pháp "tốt hơn" đó. Chúng ta sẽ bắt đầu với ý tưởng về Bình phương nhỏ nhất tổng quát, một phương pháp ước lượng hiệu quả lý tưởng.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Nền tảng lý thuyết: Từ GLS đến FGLS**
+- **1.1. Bình phương nhỏ nhất tổng quát - Trường hợp lý tưởng**
+- **1.2. Bình phương nhỏ nhất tổng quát khả thi - Giải pháp thực tế**
+- **1.3. Ước lượng với biến phụ thuộc trễ**
+- **2. Ví dụ minh họa: Ước lượng hiệu quả với Stata**
+- **3. Tổng kết bài học**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c20/uoc-luong-hieu-qua-gls-fgls-va-mo-hinh-co-bien-tre-phu-thuoc/)
+
+### 2.8. Giới thiệu về mô hình ARCH và GARCH cho phương sai có điều kiện
+
+Trong suốt bảy bài học vừa qua, chúng ta đã tập trung vào việc xử lý tự tương quan trong sai số của mô hình hồi quy. Về cơ bản, chúng ta đã tìm cách mô hình hóa trung bình có điều kiện của biến phụ thuộc, \. Tuy nhiên, trong nhiều lĩnh vực, đặc biệt là tài chính, người ta không chỉ quan tâm đến mức sinh lời trung bình mà còn quan tâm rất nhiều đến rủi ro, hay còn gọi là sự biến động của mức sinh lời đó. Sự biến động này chính là phương sai của sai số.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Nền tảng lý thuyết: Tại sao cần mô hình hóa phương sai?**
+- **1.1. Mô hình ARCH**
+- **1.2. Mô hình GARCH**
+- **1.3. Ước lượng và kiểm định**
+- **2. Ví dụ minh họa: Mô hình hóa sự biến động với Stata**
+- **3. Tổng kết bài học**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c20/gioi-thieu-ve-mo-hinh-arch-va-garch-cho-phuong-sai-co-dieu-kien/)
+
+### 2.9. Hướng dẫn thực hành phân tích tự tương quan và GARCH với Stata
+
+Chào mừng các bạn đến với bài học cuối cùng và cũng là bài thực hành quan trọng nhất trong chuỗi bài học của chúng ta! Trong suốt tám bài vừa qua, chúng ta đã cùng nhau xây dựng một nền tảng lý thuyết vững chắc, từ việc hiểu bản chất của tự tương quan, các khái niệm nền tảng như tính dừng, cho đến các mô hình ước lượng hiệu quả và các mô hình GARCH để phân tích sự biến động. Trong bài học hôm nay, chúng ta sẽ biến tất cả những lý thuyết đó thành kỹ năng thực hành cụ thể.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Tóm tắt tổng hợp và quy trình phân tích**
+- **2. Hướng dẫn thực hành từng bước với Stata**
+- **Bước 1: Khám phá dữ liệu và nhận diện vấn đề trực quan**
+- **Bước 2: Mô hình OLS cơ sở và chẩn đoán tự tương quan**
+- **Bước 3: Khắc phục tự tương quan bằng FGLS**
+- **Bước 4: Chẩn đoán hiệu ứng ARCH/GARCH**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c20/huong-dan-thuc-hanh-phan-tich-tu-tuong-quan-va-garch-voi-stata/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Giới thiệu về tự tương quan trong mô hình hồi quy</h3>
-    <p>Chào mừng các bạn đã quay trở lại! Trong bài học đầu tiên này, chúng ta sẽ cùng nhau xây dựng một trực giác vững chắc về tự tương quan. Đây là một khái niệm nền tảng, và việc hiểu rõ nó ngay từ đầu sẽ giúp cho việc học các kỹ thuật phức tạp hơn ở các bài sau t Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/gsrek19u1/c20/gioi-thieu-ve-tu-tuong-quan-trong-mo-hinh-hoi-quy/" target="_blank" rel="noopener">Giới thiệu về tự tương quan trong mô hình hồi quy</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>20. Tự tương quan</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Các khái niệm nền tảng cho phân tích dữ liệu chuỗi thời gian</h3>
-    <p>Trong bài học trước, chúng ta đã làm quen với hiện tượng tự tương quan qua các ví dụ trực quan. Chúng ta đã thấy rằng dữ liệu chuỗi thời gian có những đặc điểm rất riêng, khiến cho các giả định của mô hình hồi quy cổ điển có thể không còn đúng nữa. Để có thể p Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/gsrek19u1/c20/cac-khai-niem-nen-tang-cho-phan-tich-du-lieu-chuoi-thoi-gian/" target="_blank" rel="noopener">Các khái niệm nền tảng cho phân tích dữ liệu chuỗi thời gian</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Đặc điểm của quá trình nhiễu và mô hình AR kinh điển</h3>
-    <p>Ở bài học trước, chúng ta đã thiết lập các khái niệm nền tảng như tính dừng, giúp chúng ta có một cơ sở lý thuyết vững chắc để làm việc với dữ liệu chuỗi thời gian. Trong bài học này, chúng ta sẽ quay trở lại vấn đề cốt lõi: làm thế nào để mô tả một cách định  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/gsrek19u1/c20/dac-diem-cua-qua-trinh-nhieu-va-mo-hinh-ar1-kinh-dien/" target="_blank" rel="noopener">Đặc điểm của quá trình nhiễu và mô hình AR kinh điển</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/gsrek19u1/c20/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Các định lý quan trọng và tính chất tiệm cận trong chuỗi thời gian</h3>
-    <p>Trong các bài học trước, chúng ta đã xác định được rằng dữ liệu chuỗi thời gian có các quan sát phụ thuộc lẫn nhau, điều này vi phạm giả định cốt lõi của mô hình hồi quy cổ điển. Sự phụ thuộc này đặt ra một câu hỏi lớn: Liệu các công cụ thống kê mà chúng ta đã Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/gsrek19u1/c20/cac-dinh-ly-quan-trong-va-tinh-chat-tiem-can-trong-chuoi-thoi-gian/" target="_blank" rel="noopener">Các định lý quan trọng và tính chất tiệm cận trong chuỗi thời gian</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 5: Ước lượng OLS và các vấn đề khi có tự tương quan</h3>
-    <p>Chào mừng các bạn quay trở lại! Trong bài học trước, chúng ta đã thiết lập một nền tảng lý thuyết vững chắc cho việc phân tích chuỗi thời gian. Một trong những kết luận quan trọng nhất là, mặc dù ước lượng OLS vẫn nhất quán khi có tự tương quan , nhưng các sai Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/gsrek19u1/c20/uoc-luong-ols-va-cac-van-de-khi-co-tu-tuong-quan/" target="_blank" rel="noopener">Ước lượng OLS và các vấn đề khi có tự tương quan</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Bước 6: Các phương pháp kiểm định tự tương quan trong thực hành</h3>
-    <p>Trong các bài học trước, chúng ta đã tìm hiểu về bản chất của tự tương quan, cách nhận diện nó một cách trực quan qua biểu đồ phần dư, và cách tính toán sai số chuẩn đáng tin cậy bằng phương pháp Newey-West. Tuy nhiên, việc chỉ nhìn vào biểu đồ có thể mang tín Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/gsrek19u1/c20/cac-phuong-phap-kiem-dinh-tu-tuong-quan-trong-thuc-hanh/" target="_blank" rel="noopener">Các phương pháp kiểm định tự tương quan trong thực hành</a>.</p>
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập môi trường, ước lượng mô hình và kiểm định chẩn đoán toàn diện
 version 18.0
 clear all
 set more off
+import delimited "sachktl_empirical_ecodata.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_gsrek19u1_c20_ecodata.csv", clear encoding("utf-8")
 describe
-summarize
+summarize y x1 x2 x3, detail
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
+* 1. Ước lượng mô hình cơ sở và kiểm định phương sai thay đổi / đa cộng tuyến / dạng hàm
+regress y x1 x2 x3
 estat hettest
+estat imtest, white
 estat vif
+estat ovtest
+
+* 2. Ước lượng với sai số chuẩn vững White HC1 và xuất tác động biên
+regress y c.x1##c.x2 x3, vce(robust)
+margins, dydx(x1 x2 x3)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện phân tích kinh tế lượng và thực thi kiểm định chẩn đoán
 library(tidyverse)
 library(lmtest)
 library(sandwich)
+library(car)
 
-df <- read.csv("sachktl_gsrek19u1_c20_ecodata.csv")
+df <- read.csv("sachktl_empirical_ecodata.csv")
 summary(df)
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+# 1. Ước lượng mô hình tuyến tính và kiểm định Breusch-Pagan, RESET, VIF
 fit <- lm(y ~ x1 + x2 + x3, data = df)
+bptest(fit)
+resettest(fit, power = 2:3, type = "fitted")
+vif(fit)
+
+# 2. Xuất bảng hệ số ước lượng với sai số chuẩn vững HC1
 coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
 ```
 
@@ -144,38 +306,56 @@ coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và thực thi ước lượng kèm chẩn đoán phần dư
 import pandas as pd
+import statsmodels.api as sm
 import statsmodels.formula.api as smf
+from statsmodels.stats.diagnostic import het_breuschpagan, linear_reset
+from statsmodels.stats.outliers_influence import variance_inflation_factor
 
-df = pd.read_csv("sachktl_gsrek19u1_c20_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_empirical_ecodata.csv")
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
+# 1. Ước lượng mô hình với sai số chuẩn vững HC1
 model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
 print(model.summary())
+
+# 2. Kiểm định phương sai thay đổi Breusch-Pagan, Ramsey RESET và hệ số VIF
+bp_lm, bp_pval, _, _ = het_breuschpagan(model.resid, model.model.exog)
+reset_res = linear_reset(model, power=2, use_f=True)
+X = sm.add_constant(df[["x1", "x2", "x3"]].dropna())
+vifs = {col: variance_inflation_factor(X.values, i) for i, col in enumerate(X.columns)}
+print(f"Breusch-Pagan p={bp_pval:.4f} | RESET p={reset_res.pvalue:.4f} | VIF={vifs}")
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 20: 20. tự tương quan trên SachKTL"
+  title="Hướng dẫn thực hành 20. Tự tương quan trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 20 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Giới thiệu về tự tương quan trong mô hình hồi quy | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c20/gioi-thieu-ve-tu-tuong-quan-trong-mo-hinh-hoi-quy/) |
-| **Bài 02** | Các khái niệm nền tảng cho phân tích dữ liệu chuỗi thời gian | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c20/cac-khai-niem-nen-tang-cho-phan-tich-du-lieu-chuoi-thoi-gian/) |
-| **Bài 03** | Đặc điểm của quá trình nhiễu và mô hình AR kinh điển | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c20/dac-diem-cua-qua-trinh-nhieu-va-mo-hinh-ar1-kinh-dien/) |
-| **Bài 04** | Các định lý quan trọng và tính chất tiệm cận trong chuỗi thời gian | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c20/cac-dinh-ly-quan-trong-va-tinh-chat-tiem-can-trong-chuoi-thoi-gian/) |
-| **Bài 05** | Ước lượng OLS và các vấn đề khi có tự tương quan | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c20/uoc-luong-ols-va-cac-van-de-khi-co-tu-tuong-quan/) |
-| **Bài 06** | Các phương pháp kiểm định tự tương quan trong thực hành | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c20/cac-phuong-phap-kiem-dinh-tu-tuong-quan-trong-thuc-hanh/) |
-| **Bài 07** | Ước lượng hiệu quả và mô hình có biến trễ phụ thuộc | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c20/uoc-luong-hieu-qua-gls-fgls-va-mo-hinh-co-bien-tre-phu-thuoc/) |
-| **Bài 08** | Giới thiệu về mô hình ARCH và GARCH cho phương sai có điều kiện | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c20/gioi-thieu-ve-mo-hinh-arch-va-garch-cho-phuong-sai-co-dieu-kien/) |
-| **Bài 09** | Hướng dẫn thực hành phân tích tự tương quan và GARCH với Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c20/huong-dan-thuc-hanh-phan-tich-tu-tuong-quan-va-garch-voi-stata/) |
+| **20.1** | Giới thiệu về tự tương quan trong mô hình hồi quy | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c20/gioi-thieu-ve-tu-tuong-quan-trong-mo-hinh-hoi-quy/) |
+| **20.2** | Các khái niệm nền tảng cho phân tích dữ liệu chuỗi thời gian | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c20/cac-khai-niem-nen-tang-cho-phan-tich-du-lieu-chuoi-thoi-gian/) |
+| **20.3** | Đặc điểm của quá trình nhiễu và mô hình AR kinh điển | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c20/dac-diem-cua-qua-trinh-nhieu-va-mo-hinh-ar1-kinh-dien/) |
+| **20.4** | Các định lý quan trọng và tính chất tiệm cận trong chuỗi thời gian | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c20/cac-dinh-ly-quan-trong-va-tinh-chat-tiem-can-trong-chuoi-thoi-gian/) |
+| **20.5** | Ước lượng OLS và các vấn đề khi có tự tương quan | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c20/uoc-luong-ols-va-cac-van-de-khi-co-tu-tuong-quan/) |
+| **20.6** | Các phương pháp kiểm định tự tương quan trong thực hành | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c20/cac-phuong-phap-kiem-dinh-tu-tuong-quan-trong-thuc-hanh/) |
+| **20.7** | Ước lượng hiệu quả và mô hình có biến trễ phụ thuộc | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c20/uoc-luong-hieu-qua-gls-fgls-va-mo-hinh-co-bien-tre-phu-thuoc/) |
+| **20.8** | Giới thiệu về mô hình ARCH và GARCH cho phương sai có điều kiện | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c20/gioi-thieu-ve-mo-hinh-arch-va-garch-cho-phuong-sai-co-dieu-kien/) |
+| **20.9** | Hướng dẫn thực hành phân tích tự tương quan và GARCH với Stata | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c20/huong-dan-thuc-hanh-phan-tich-tu-tuong-quan-va-garch-voi-stata/) |

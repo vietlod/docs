@@ -1,35 +1,35 @@
 ---
 id: index
-title: "Nhóm 6.3: Mô hình trễ phân phối tự hồi quy (ARDL)"
-sidebar_label: "Nhóm 6.3. Mô hình trễ phân phối tự hồi quy (ARDL)"
+title: "6.3. Mô hình trễ phân phối tự hồi quy (ARDL)"
+sidebar_label: "6.3. Mô hình trễ phân phối tự hồi quy (ARDL)"
 sidebar_position: 3
 slug: /vietlod/chapter-06/group-6-3
-description: "Hướng dẫn thực hành Nhóm 6.3 — Mô hình trễ phân phối tự hồi quy (ARDL) thuộc Chương 06: so sánh và thực thi 4 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Phần 6.3 — Mô hình trễ phân phối tự hồi quy (ARDL) thuộc Chương 6: so sánh và thực thi 4 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
-  - Nhóm 6.3 VietLOD
+  - Phần 6.3 VietLOD
   - Mô hình trễ phân phối tự hồi quy (ARDL)
   - Stata 18
   - R 4.x
   - Python 3.11
 ---
 
-# Nhóm 6.3: Mô hình trễ phân phối tự hồi quy (ARDL)
+# 6.3. Mô hình trễ phân phối tự hồi quy (ARDL)
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Nhóm phương pháp 6.3 — Mô hình trễ phân phối tự hồi quy (ARDL)** thuộc [Chương 06: Chuỗi thời gian đơn biến, phi tuyến, điểm gãy và bong bóng](/vietlod/chapter-06) cung cấp quy trình thực hành từng bước cho **4 mô hình kinh tế lượng** từ bài `6.3.1` đến `6.3.4`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Nhóm 6.3](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-06-chuoi-thoi-gian-don-bien-phi-tuyen-diem-gay-va-bong-bong/nhom-6-3-distributed-lag) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+**Phần 6.3. Mô hình trễ phân phối tự hồi quy (ARDL)** thuộc [6. Chuỗi thời gian đơn biến, phi tuyến, điểm gãy và bong bóng](/vietlod/chapter-06) cung cấp quy trình thực hành từng bước cho **4 bài học mô hình kinh tế lượng** từ mục `6.3.1` đến `6.3.4`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 6.3](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-06-chuoi-thoi-gian-don-bien-phi-tuyen-diem-gay-va-bong-bong/nhom-6-3-distributed-lag) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Nhóm 6.3: Mô hình trễ phân phối tự hồi quy (ARDL) trên Stata 18, R 4.x và Python 3.11+"
+  title="Hướng dẫn thực hành Phần 6.3: Mô hình trễ phân phối tự hồi quy (ARDL) trên Stata 18, R 4.x và Python 3.11+"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 1. Bản chất phương pháp và hệ phương trình định danh
+## 6.3.1. Bản chất phương pháp và hệ phương trình định danh
 
-- **Câu hỏi nghiên cứu trọng tâm của nhóm**: Làm thế nào để kiểm định tính dừng, dự báo chuỗi thời gian, ước lượng đồng tích hợp bất đối xứng (ARDL) và (NARDL), lấy mẫu tần suất hỗn hợp (MIDAS) và phát hiện điểm gãy/bong bóng?
+- **Câu hỏi nghiên cứu trọng tâm**: Làm thế nào để kiểm định tính dừng, dự báo chuỗi thời gian, ước lượng đồng tích hợp bất đối xứng (ARDL) và (NARDL), lấy mẫu tần suất hỗn hợp (MIDAS) và phát hiện điểm gãy/bong bóng?
 - **Kiểm định chẩn đoán bắt buộc**: Kiểm định đường bao $F$-Bounds và $t$-Bounds với giá trị tới hạn hữu hạn mẫu Kripfganz–Schneider (2020), kiểm định tự tương quan Breusch–Godfrey, ARCH-(LM) và ổn định tham số CUSUM / CUSUMSQ.
 
-Phương trình đặc tả cấu trúc của nhóm phương pháp 6.3:
+Phương trình đặc tả cấu trúc của phần phương pháp 6.3:
 
 $$
 Y_t = c + \sum_{i=1}^p \phi_i Y_{t-i} + \sum_{k=1}^K \sum_{j=0}^{q_k} \beta_{k,j} X_{k,t-j} + \varepsilon_t
@@ -42,10 +42,10 @@ $$
 $$
 
 <FeatureNotAvailable
-  note="Khi dữ liệu vi phạm giả định định danh của Nhóm 6.3, nhà nghiên cứu cần chuyển sang các nhóm phương pháp mở rộng trong Chương 06 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
+  note="Khi dữ liệu vi phạm giả định định danh của Phần 6.3, nhà nghiên cứu cần chuyển sang các phần phương pháp mở rộng trong Chương 6 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
 />
 
-## 2. Danh mục các mô hình trong Nhóm 6.3
+## 6.3.2. Danh mục các bài học mô hình trong Phần 6.3
 
 <FeatureCards
   features={[
@@ -53,52 +53,51 @@ $$
       title: '6.3.1. Mô hình tự hồi quy trễ phân phối và kiểm định đường bao (ARDL)',
       description: 'Ước lượng đồng thời mối quan hệ động ngắn hạn và cân bằng dài hạn thông qua kiểm định đường bao của Pesaran–Shin–Smith, áp dụng hợp lệ bất k...',
       link: '/vietlod/chapter-06/group-6-3/b095-ardl',
-      badge: 'B095 · ardl'
+      badge: '6.3.1 · ardl'
     },
     {
       title: '6.3.2. Mô hình hiệu chỉnh sai số không ràng buộc (UECM)',
       description: 'Biểu diễn tái tham số hóa tương đương 1-1 của mô hình (ARDL) dưới dạng phương trình hiệu chỉnh sai số không ràng buộc, tách bạch trực tiếp t...',
       link: '/vietlod/chapter-06/group-6-3/b096-uecm',
-      badge: 'B096 · uecm'
+      badge: '6.3.2 · uecm'
     },
     {
       title: '6.3.3. Mô hình ARDL phi tuyến bất đối xứng (NARDL)',
       description: 'Phân tách biến giải thích thành tổng bộ phận dương và âm — $X_t^+ = \sum \max(\Delta X_j, 0), X_t^- = \sum \min(\Delta X_j, 0)$ — để đo lườn...',
       link: '/vietlod/chapter-06/group-6-3/b097-nardl',
-      badge: 'B097 · nardl'
+      badge: '6.3.3 · nardl'
     },
     {
       title: '6.3.4. Mô hình tự hồi quy trễ phân phối trên các phân vị (QARDL)',
       description: 'Ước lượng đồng tích hợp và cơ chế hiệu chỉnh sai số phụ thuộc vào từng trạng thái phân vị $\tau \in (0,1)$ của cú sốc kinh tế vĩ mô/tài chín...',
       link: '/vietlod/chapter-06/group-6-3/b098-qardl',
-      badge: 'B098 · qardl'
+      badge: '6.3.4 · qardl'
     }
   ]}
 />
 
-## 3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
+## 6.3.3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
 
 | Bài học & Mô hình | Mã định danh | Cú pháp Stata 18 MP | Cú pháp R 4.x | Cú pháp Python 3.11+ | Hỗ trợ |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `6.3.1` · [Mô hình tự hồi quy trễ phân phối và kiểm định đường bao (ARDL)](/vietlod/chapter-06/group-6-3/b095-ardl) | `ardl` | `ardl y x1 x2, lags(2 1 1) ec` | `ARDL::ardl(y ~ x1 + x2, data = df, order = c(2, 1, 1))` | `ARDL(df['y'], 2, df[['x1', 'x2']], 1).fit()` | <Available /> |
-| `6.3.2` · [Mô hình hiệu chỉnh sai số không ràng buộc (UECM)](/vietlod/chapter-06/group-6-3/b096-uecm) | `uecm` | `ardl y x1 x2, lags(2 1 1) ec btest` | `ARDL::uecm(y ~ x1 + x2, data = df, order = c(2, 1, 1))` | `UECM(df['y'], 2, df[['x1', 'x2']], 1).fit()` | <Available /> |
-| `6.3.3` · [Mô hình ARDL phi tuyến bất đối xứng (NARDL)](/vietlod/chapter-06/group-6-3/b097-nardl) | `nardl` | `nardl y x1 x2, p(2) q(2) deterministic(c) horizon(20)` | `ARDL::ardl(y ~ x1_pos + x1_neg + x2, data = df, order = c(2, 1, 1, 1))` | `ARDL(df['y'], 2, df[['x1_pos', 'x1_neg', 'x2']], 1).fit()` | <Available /> |
-| `6.3.4` · [Mô hình tự hồi quy trễ phân phối trên các phân vị (QARDL)](/vietlod/chapter-06/group-6-3/b098-qardl) | `qardl` | `sqreg dy l1_y l1_x1 dx1 dx2, quantile(0.25 0.50 0.75) reps(200)` | `quantreg::rq(dy ~ l1_y + l1_x1 + dx1 + dx2, tau = c(0.25, 0.5, 0.75), data = df)` | `smf.quantreg('dy ~ l1_y + l1_x1 + dx1 + dx2', data=df).fit(q=0.5)` | <Available /> |
+| **6.3.1** · [Mô hình tự hồi quy trễ phân phối và kiểm định đường bao (ARDL)](/vietlod/chapter-06/group-6-3/b095-ardl) | `ardl` | `ardl y x1 x2, lags(2 1 1) ec` | `ARDL::ardl(y ~ x1 + x2, data = df, order = c(2, 1, 1))` | `ARDL(df['y'], 2, df[['x1', 'x2']], 1).fit()` | <Available /> |
+| **6.3.2** · [Mô hình hiệu chỉnh sai số không ràng buộc (UECM)](/vietlod/chapter-06/group-6-3/b096-uecm) | `uecm` | `ardl y x1 x2, lags(2 1 1) ec btest` | `ARDL::uecm(y ~ x1 + x2, data = df, order = c(2, 1, 1))` | `UECM(df['y'], 2, df[['x1', 'x2']], 1).fit()` | <Available /> |
+| **6.3.3** · [Mô hình ARDL phi tuyến bất đối xứng (NARDL)](/vietlod/chapter-06/group-6-3/b097-nardl) | `nardl` | `nardl y x1 x2, p(2) q(2) deterministic(c) horizon(20)` | `ARDL::ardl(y ~ x1_pos + x1_neg + x2, data = df, order = c(2, 1, 1, 1))` | `ARDL(df['y'], 2, df[['x1_pos', 'x1_neg', 'x2']], 1).fit()` | <Available /> |
+| **6.3.4** · [Mô hình tự hồi quy trễ phân phối trên các phân vị (QARDL)](/vietlod/chapter-06/group-6-3/b098-qardl) | `qardl` | `sqreg dy l1_y l1_x1 dx1 dx2, quantile(0.25 0.50 0.75) reps(200)` | `quantreg::rq(dy ~ l1_y + l1_x1 + dx1 + dx2, tau = c(0.25, 0.5, 0.75), data = df)` | `smf.quantreg('dy ~ l1_y + l1_x1 + dx1 + dx2', data=df).fit(q=0.5)` | <Available /> |
 
-## 4. Quy trình thực hành chuẩn cho Nhóm 6.3
+## 6.3.4. Quy trình thực hành chuẩn cho Phần 6.3
 
 <Steps>
-
-### Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco
-
-Tải tệp CSV thực hành của từng mô hình trong Nhóm `6.3` hoặc kết nối dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
-
-### Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu
-
-So sánh các mô hình từ `6.3.1` đến `6.3.4` trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.
-
-### Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab
-
-Thực hiện đầy đủ bộ kiểm định **Kiểm định đường bao $F$-Bounds và $t$-Bounds với giá trị tới hạn hữu hạn mẫu Kripfganz–Schneider (2020), kiểm định tự tương quan Breusch–Godfrey, ARCH-(LM) và ổn định tham số CUSUM / CUSUMSQ** và đẩy mã mô hình sang [EcoLab](https://ecolab.io.vn) để xuất bảng kết quả chuẩn công bố quốc tế.
-
+  <div className="step-item">
+    <h3>Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco</h3>
+    <p>Tải tệp CSV thực hành của từng bài học trong Phần <code>6.3</code> hoặc kết nối dữ liệu thực tế từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> và <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu</h3>
+    <p>So sánh các bài học mô hình từ <code>6.3.1</code> đến <code>6.3.4</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab</h3>
+    <p>Thực hiện đầy đủ bộ kiểm định <strong>Kiểm định đường bao $F$-Bounds và $t$-Bounds với giá trị tới hạn hữu hạn mẫu Kripfganz–Schneider (2020), kiểm định tự tương quan Breusch–Godfrey, ARCH-(LM) và ổn định tham số CUSUM / CUSUMSQ</strong> và đẩy mã mô hình sang <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> để xuất bảng kết quả chuẩn công bố quốc tế.</p>
+  </div>
 </Steps>

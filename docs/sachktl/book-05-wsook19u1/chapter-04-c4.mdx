@@ -1,19 +1,19 @@
 ---
 id: chapter-04-c4
-title: "Chương 04: 4. phân tích hồi quy bội: suy luận"
-sidebar_label: "Chương 04: 4. Phân tích hồi quy bội: Suy luận"
+title: "4. Phân tích hồi quy bội: Suy luận"
+sidebar_label: "4. Phân tích hồi quy bội: Suy luận"
 sidebar_position: 5
-description: "Hướng dẫn thực hành How-To Chương 04: 4. phân tích hồi quy bội: suy luận thuộc bộ sách Nhập môn Kinh tế lượng - Cách tiếp cận hiện đại trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 4. Phân tích hồi quy bội: Suy luận thuộc giáo trình Nhập môn kinh tế lượng - Cách tiếp cận hiện đại trên SachKTL kèm công thức toán học, phân tích 7 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 04: 4. phân tích hồi quy bội: suy luận
+# 4. Phân tích hồi quy bội: Suy luận
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 04: 4. phân tích hồi quy bội: suy luận** thuộc [**Bộ sách 05: nhập môn kinh tế lượng - cách tiếp cận hiện đại**](/sachktl/book-05-wsook19u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/wsook19u1/c4/](https://sachktl.tnsai.vn/vi/wsook19u1/c4/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **7 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **4. Phân tích hồi quy bội: Suy luận** thuộc bộ giáo trình [**Nhập môn kinh tế lượng - Cách tiếp cận hiện đại**](/sachktl/book-05-wsook19u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/wsook19u1/c4/](https://sachktl.tnsai.vn/vi/wsook19u1/c4/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 04: 4. phân tích hồi quy bội: suy luận">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="4. Phân tích hồi quy bội: Suy luận">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 05 · CHƯƠNG 04</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 04: 4. phân tích hồi quy bội: suy luận</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Nhập môn Kinh tế lượng - Cách tiếp cận hiện đại · 7 bài học chuy</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Nhập môn kinh tế lượng - Cách tiếp c</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">4. Phân tích hồi quy bội: Suy luận</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng ứng dụng, mô hình hóa thống kê và kiểm định giả thuyết · 7 bài học chuy</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,102 +41,234 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Giới thiệu Suy luận Thống kê trong Hồi quy Bội Chào mừng các bạn đã quay trở lại với chuỗi bài học về kinh tế lượng! Trong các chương trước, chúng ta đã học cách ước lượng các hệ số của mô hình hồi quy bội bằng phương pháp OLS và hiểu được các giả định cần thiết để ước lượng của chúng ta không bị chệch. Tuy nhiên, việc có được các con số ước lượng chỉ là bước khởi đầu. Một câu hỏi quan trọng hơn mà bất kỳ nhà nghiên cứu nào cũng phải đối mặt là: "Liệu những kết quả chúng ta tìm thấy trong một mẫu cụ thể có đủ tin cậy để khái quát hóa cho toàn bộ tổng thể hay không?" Đây chính là lúc "suy luận
+Giới thiệu Suy luận Thống kê trong Hồi quy Bội Chào mừng các bạn đã quay trở lại với chuỗi bài học về kinh tế lượng! Trong các chương trước, chúng ta đã học cách ước lượng các hệ số của mô hình hồi quy bội bằng phương pháp OLS và hiểu được các giả định cần thiết để ước lượng của chúng ta không bị chệch. Tuy nhiên, việc có được các con số ước lượng chỉ là bước khởi đầu.
 
-- **Chủ đề học thuật trọng tâm**: CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHÁO, PHỤ LỤC: Dữ liệu mô phỏng cho series.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+Y_i = \beta_0 + \sum_{k=1}^K \beta_k X_{ik} + \varepsilon_i, \quad \mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0 \tag*{[1]}
+$$
+
+$$
+\widehat{\text{Var}}_{\text{HC1}}(\hat{\boldsymbol{\beta}}) = \frac{N}{N - K - 1}\left(\mathbf{X}'\mathbf{X}\right)^{-1}\left(\sum_{i=1}^N \hat{\varepsilon}_i^2 \mathbf{x}_i \mathbf{x}_i'\right)\left(\mathbf{X}'\mathbf{X}\right)^{-1} \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Dạng hàm tuyến tính theo tham số được xác định đúng, không bỏ sót biến giải thích quan trọng có tương quan với các biến trong mô hình.
+2. Kỳ vọng có điều kiện của sai số bằng không $\mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0$, đảm bảo tính không chệch và vững tiệm cận của ước lượng.
+3. Ma trận thiết kế $\mathbf{X}$ có hạng cột đầy đủ, không xảy ra đa cộng tuyến hoàn hảo và sử dụng sai số chuẩn vững HC1/Cluster khi có phương sai thay đổi.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 04 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/wsook19u1/c4/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Khi tồn tại biến giải thích nội sinh do đồng thời hai chiều, sai số đo lường hoặc bỏ sót biến không quan sát được, ước lượng OLS bị chệch và không vững; cần chuyển sang ước lượng biến công cụ IV/2SLS hoặc GMM."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Nền tảng suy luận và kiểm định t cho một tham số
+
+Bài 1: Nền tảng Suy luận và Kiểm định t cho một Tham số Foundations of inference and the t-test GIỚI THIỆU Chào mừng các bạn đến với bài học đầu tiên trong chuỗi bài về suy luận thống kê! Ở các chương trước, chúng ta đã cùng nhau xây dựng nền tảng vững chắc cho phân tích hồi quy, tìm hiểu cách phương pháp OLS cung cấp các ước lượng không chệch cho các tham số tổng thể dưới các giả định Gauss-Markov. Tuy nhiên, một ước lượng điểm, dù tốt đến đâu, cũng chỉ là một con số duy nhất từ một mẫu dữ liệu cụ thể.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **GIỚI thiệu**
+- **NỀN tảng lý thuyết**
+- **Giả định MLR.6: Tính chuẩn hóa**
+- **Phân phối mẫu chuẩn của các ước lượng OLS**
+- **ĐIỂM cốt lõi cần nhớ**
+- **PHƯƠNG pháp nghiên cứu: KIỂM định t**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/wsook19u1/c4/nen-tang-suy-luan-va-kiem-dinh-t-cho-mot-tham-so/)
+
+### 2.2. Khoảng tin cậy và các ứng dụng của kiểm định t
+
+Bài 2: Khoảng Tin cậy và các Ứng dụng của Kiểm định t Confidence intervals and applications of the t-test GIỚI THIỆU Trong bài học trước, chúng ta đã xây dựng nền tảng cho suy luận thống kê và học cách sử dụng kiểm định t để trả lời một câu hỏi rất cụ thể: "Liệu một biến có tác động khác không lên biến phụ thuộc hay không?". Đây là một bước tiến lớn, nhưng trong nghiên cứu kinh tế, các câu hỏi thường phức tạp và đa dạng hơn. Ví dụ, một lý thuyết kinh tế có thể dự đoán rằng độ co giãn của cầu đối với giá không chỉ khác không, mà phải bằng -1.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **GIỚI thiệu**
+- **NỀN tảng lý thuyết**
+- **4-2c. kiểm định các giả thuyết khác về \**
+- **4-2d. tính toán và diễn giải giá trị p**
+- **4-3. khoảng tin cậy**
+- **Mối liên hệ giữa khoảng tin cậy và kiểm định giả thuyết**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/wsook19u1/c4/khoang-tin-cay-va-cac-ung-dung-cua-kiem-dinh-t/)
+
+### 2.3. Kiểm định giả thuyết về tổ hợp tuyến tính của các tham số
+
+Bài 3: Kiểm định Giả thuyết về Tổ hợp Tuyến tính của các Tham số Testing hypotheses about a single linear combination of parameters GIỚI THIỆU Ở những bài học trước, chúng ta đã thành thạo việc sử dụng kiểm định t để đánh giá ý nghĩa của từng hệ số hồi quy một cách riêng lẻ. Chúng ta có thể tự tin trả lời các câu hỏi như "Liệu giáo dục có tác động đến tiền lương không?" hay "Tác động của ô nhiễm đến giá nhà có bằng -1 không?". Tuy nhiên, thế giới kinh tế lượng không chỉ dừng lại ở đó.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **GIỚI thiệu**
+- **NỀN tảng lý thuyết**
+- **Xây dựng thống kê t cho một tổ hợp tuyến tính**
+- **Giải pháp: Tham số hóa lại mô hình**
+- **PHƯƠG pháp nghiên cứu: QUY trình kiểm định tổng quát**
+- **VÍ dụ MINH họa: LỢI ích của CAO đẳng SO với đại học**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/wsook19u1/c4/kiem-dinh-gia-thuyet-ve-to-hop-tuyen-tinh-cua-cac-tham-so/)
+
+### 2.4. Giới thiệu kiểm định f và kiểm định ràng buộc loại trừ
+
+Bài 4: Giới thiệu Kiểm định F và Kiểm định Ràng buộc Loại trừ Introduction to the F-test and testing exclusion restrictions GIỚI THIỆU Trong các bài học trước, chúng ta đã làm chủ kiểm định t, một công cụ sắc bén để kiểm tra ý nghĩa của từng biến độc lập một cách riêng lẻ. Tuy nhiên, trong nghiên cứu thực tế, chúng ta thường phải đối mặt với những câu hỏi lớn hơn. Ví dụ, sau khi kiểm soát kinh nghiệm và vị trí thi đấu, liệu một nhóm các chỉ số hiệu suất có đồng thời ảnh hưởng đến lương của một cầu thủ bóng chày không?
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **GIỚI thiệu**
+- **NỀN tảng lý thuyết**
+- **Mô hình không bị ràng buộc và mô hình bị ràng buộc**
+- **Thống kê f**
+- **Dạng R-squared của thống kê f**
+- **PHƯƠNG pháp nghiên cứu: QUY trình kiểm định f**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/wsook19u1/c4/gioi-thieu-kiem-dinh-f-va-kiem-dinh-rang-buoc-loai-tru/)
+
+### 2.5. Ứng dụng nâng cao của kiểm định f và báo cáo kết quả
+
+Bài 5: Ứng dụng Nâng cao của Kiểm định F và Báo cáo Kết quả Advanced F-test applications and reporting results GIỚI THIỆU Ở bài học trước, chúng ta đã được trang bị một công cụ suy luận vô cùng mạnh mẽ là kiểm định F, cho phép chúng ta đánh giá ý nghĩa đồng thời của một nhóm biến. Chúng ta đã hiểu được logic cơ bản đằng sau việc so sánh mô hình bị ràng buộc và không bị ràng buộc. Giờ đây, đã đến lúc chúng ta nâng kỹ năng của mình lên một tầm cao mới. Trong thực tế nghiên cứu, các giả thuyết không chỉ dừng lại ở việc loại bỏ một vài biến.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **GIỚI thiệu**
+- **NỀN tảng lý thuyết**
+- **4-5d. tính toán và diễn giải giá trị p cho kiểm định f**
+- **4-5e. kiểm định ý nghĩa tổng thể của một hồi quy**
+- **LƯU ý QUAN trọng**
+- **4-5f. kiểm định các ràng buộc tuyến tính tổng quát**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/wsook19u1/c4/ung-dung-nang-cao-cua-kiem-dinh-f-va-bao-cao-ket-qua/)
+
+### 2.6. Phân tích chính sách và thực hành suy luận hồi quy với Stata
+
+Bài 6: Phân tích Chính sách và Thực hành Suy luận Hồi quy với Stata Policy analysis and practical regression inference with Stata TÓM TẮT TỔNG HỢP KIẾN THỨC Thật tuyệt vời! Chúng ta đã cùng nhau đi qua một hành trình đầy ý nghĩa, từ những viên gạch nền tảng của suy luận thống kê đến các kỹ thuật kiểm định phức tạp. Trước khi bước vào bài thực hành tổng hợp cuối cùng, hãy cùng nhau nhìn lại bức tranh toàn cảnh về những gì chúng ta đã học.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **TÓM tắt tổng hợp kiến thức**
+- **CHUẨN bị dữ liệu và bài toán phân tích**
+- **QUY trình phân tích**
+- **HƯỚNG dẫn thực hành từng bước với STATA**
+- **Bước 1: Phân tích sơ bộ**
+- **Bước 2 & 3: Hồi quy bội và suy luận về hiệu ứng**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/wsook19u1/c4/phan-tich-chinh-sach-va-thuc-hanh-suy-luan-hoi-quy-voi-stata/)
+
+### 2.7. Hệ thống hóa các phương pháp suy luận trong hồi quy
+
+Bài Tổng hợp: Hệ thống hóa các Phương pháp Suy luận trong Hồi quy Bội Synthesizing inference methods in multiple regression 1. SUY LUẬN LÀ TRÁI TIM CỦA KINH TẾ LƯỢNG Chúng ta đã cùng nhau khám phá một hành trình tri thức, từ việc ước lượng các hệ số hồi quy đến việc đánh giá ý nghĩa của chúng. Nếu hồi quy OLS là công cụ để "phác họa" một bức tranh từ dữ liệu mẫu, thì suy luận thống kê chính là nghệ thuật để khẳng định rằng bức tranh đó phản ánh một sự thật trong thế giới thực, chứ không phải là một ảo ảnh do may rủi tạo ra.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. SUY luận là trái TIM của KINH tế lượng**
+- **2. CON đường LOGIC từ giả định đến SUY luận**
+- **3. HỆ thống phương pháp: MỘT QUY trình RA quyết định**
+- **CÁC cạm bẫy phổ biến cần tránh**
+- **4. VÍ dụ thực hành tổng hợp**
+- **5. TỔNG kết và hướng phát triển**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/wsook19u1/c4/he-thong-hoa-cac-phuong-phap-suy-luan-trong-hoi-quy/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Nền tảng suy luận và kiểm định t cho một tham số</h3>
-    <p>Bài 1: Nền tảng Suy luận và Kiểm định t cho một Tham số Foundations of inference and the t-test GIỚI THIỆU Chào mừng các bạn đến với bài học đầu tiên trong chuỗi bài về suy luận thống kê! Ở các chương trước, chúng ta đã cùng nhau xây dựng nền tảng vững chắc ch Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/wsook19u1/c4/nen-tang-suy-luan-va-kiem-dinh-t-cho-mot-tham-so/" target="_blank" rel="noopener">Nền tảng Suy luận và Kiểm định t cho một Tham số</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>4. Phân tích hồi quy bội: Suy luận</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Khoảng tin cậy và các ứng dụng của kiểm định t</h3>
-    <p>Bài 2: Khoảng Tin cậy và các Ứng dụng của Kiểm định t Confidence intervals and applications of the t-test GIỚI THIỆU Trong bài học trước, chúng ta đã xây dựng nền tảng cho suy luận thống kê và học cách sử dụng kiểm định t để trả lời một câu hỏi rất cụ thể: "Li Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/wsook19u1/c4/khoang-tin-cay-va-cac-ung-dung-cua-kiem-dinh-t/" target="_blank" rel="noopener">Khoảng Tin cậy và các Ứng dụng của Kiểm định t</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Kiểm định giả thuyết về tổ hợp tuyến tính của các tham số</h3>
-    <p>Bài 3: Kiểm định Giả thuyết về Tổ hợp Tuyến tính của các Tham số Testing hypotheses about a single linear combination of parameters GIỚI THIỆU Ở những bài học trước, chúng ta đã thành thạo việc sử dụng kiểm định t để đánh giá ý nghĩa của từng hệ số hồi quy một Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/wsook19u1/c4/kiem-dinh-gia-thuyet-ve-to-hop-tuyen-tinh-cua-cac-tham-so/" target="_blank" rel="noopener">Kiểm định Giả thuyết về Tổ hợp Tuyến tính của các Tham số</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/wsook19u1/c4/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Giới thiệu kiểm định f và kiểm định ràng buộc loại trừ</h3>
-    <p>Bài 4: Giới thiệu Kiểm định F và Kiểm định Ràng buộc Loại trừ Introduction to the F-test and testing exclusion restrictions GIỚI THIỆU Trong các bài học trước, chúng ta đã làm chủ kiểm định t, một công cụ sắc bén để kiểm tra ý nghĩa của từng biến độc lập một c Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/wsook19u1/c4/gioi-thieu-kiem-dinh-f-va-kiem-dinh-rang-buoc-loai-tru/" target="_blank" rel="noopener">Giới thiệu Kiểm định F và Kiểm định Ràng buộc Loại trừ</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 5: Ứng dụng nâng cao của kiểm định f và báo cáo kết quả</h3>
-    <p>Bài 5: Ứng dụng Nâng cao của Kiểm định F và Báo cáo Kết quả Advanced F-test applications and reporting results GIỚI THIỆU Ở bài học trước, chúng ta đã được trang bị một công cụ suy luận vô cùng mạnh mẽ là kiểm định F, cho phép chúng ta đánh giá ý nghĩa đồng th Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/wsook19u1/c4/ung-dung-nang-cao-cua-kiem-dinh-f-va-bao-cao-ket-qua/" target="_blank" rel="noopener">Ứng dụng Nâng cao của Kiểm định F và Báo cáo Kết quả</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Bước 6: Phân tích chính sách và thực hành suy luận hồi quy với Stata</h3>
-    <p>Bài 6: Phân tích Chính sách và Thực hành Suy luận Hồi quy với Stata Policy analysis and practical regression inference with Stata TÓM TẮT TỔNG HỢP KIẾN THỨC Thật tuyệt vời! Chúng ta đã cùng nhau đi qua một hành trình đầy ý nghĩa, từ những viên gạch nền tảng củ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/wsook19u1/c4/phan-tich-chinh-sach-va-thuc-hanh-suy-luan-hoi-quy-voi-stata/" target="_blank" rel="noopener">Phân tích Chính sách và Thực hành Suy luận Hồi quy với Stata</a>.</p>
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập môi trường, ước lượng mô hình và kiểm định chẩn đoán toàn diện
 version 18.0
 clear all
 set more off
+import delimited "sachktl_empirical_ecodata.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_wsook19u1_c04_ecodata.csv", clear encoding("utf-8")
 describe
-summarize
+summarize y x1 x2 x3, detail
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
+* 1. Ước lượng mô hình cơ sở và kiểm định phương sai thay đổi / đa cộng tuyến / dạng hàm
+regress y x1 x2 x3
 estat hettest
+estat imtest, white
 estat vif
+estat ovtest
+
+* 2. Ước lượng với sai số chuẩn vững White HC1 và xuất tác động biên
+regress y c.x1##c.x2 x3, vce(robust)
+margins, dydx(x1 x2 x3)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện phân tích kinh tế lượng và thực thi kiểm định chẩn đoán
 library(tidyverse)
 library(lmtest)
 library(sandwich)
+library(car)
 
-df <- read.csv("sachktl_wsook19u1_c04_ecodata.csv")
+df <- read.csv("sachktl_empirical_ecodata.csv")
 summary(df)
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+# 1. Ước lượng mô hình tuyến tính và kiểm định Breusch-Pagan, RESET, VIF
 fit <- lm(y ~ x1 + x2 + x3, data = df)
+bptest(fit)
+resettest(fit, power = 2:3, type = "fitted")
+vif(fit)
+
+# 2. Xuất bảng hệ số ước lượng với sai số chuẩn vững HC1
 coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
 ```
 
@@ -144,36 +276,54 @@ coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và thực thi ước lượng kèm chẩn đoán phần dư
 import pandas as pd
+import statsmodels.api as sm
 import statsmodels.formula.api as smf
+from statsmodels.stats.diagnostic import het_breuschpagan, linear_reset
+from statsmodels.stats.outliers_influence import variance_inflation_factor
 
-df = pd.read_csv("sachktl_wsook19u1_c04_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_empirical_ecodata.csv")
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
+# 1. Ước lượng mô hình với sai số chuẩn vững HC1
 model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
 print(model.summary())
+
+# 2. Kiểm định phương sai thay đổi Breusch-Pagan, Ramsey RESET và hệ số VIF
+bp_lm, bp_pval, _, _ = het_breuschpagan(model.resid, model.model.exog)
+reset_res = linear_reset(model, power=2, use_f=True)
+X = sm.add_constant(df[["x1", "x2", "x3"]].dropna())
+vifs = {col: variance_inflation_factor(X.values, i) for i, col in enumerate(X.columns)}
+print(f"Breusch-Pagan p={bp_pval:.4f} | RESET p={reset_res.pvalue:.4f} | VIF={vifs}")
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 04: 4. phân tích hồi quy bội: suy luận trên SachKTL"
+  title="Hướng dẫn thực hành 4. Phân tích hồi quy bội: Suy luận trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 04 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Nền tảng Suy luận và Kiểm định t cho một Tham số | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/wsook19u1/c4/nen-tang-suy-luan-va-kiem-dinh-t-cho-mot-tham-so/) |
-| **Bài 02** | Khoảng Tin cậy và các Ứng dụng của Kiểm định t | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/wsook19u1/c4/khoang-tin-cay-va-cac-ung-dung-cua-kiem-dinh-t/) |
-| **Bài 03** | Kiểm định Giả thuyết về Tổ hợp Tuyến tính của các Tham số | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/wsook19u1/c4/kiem-dinh-gia-thuyet-ve-to-hop-tuyen-tinh-cua-cac-tham-so/) |
-| **Bài 04** | Giới thiệu Kiểm định F và Kiểm định Ràng buộc Loại trừ | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/wsook19u1/c4/gioi-thieu-kiem-dinh-f-va-kiem-dinh-rang-buoc-loai-tru/) |
-| **Bài 05** | Ứng dụng Nâng cao của Kiểm định F và Báo cáo Kết quả | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/wsook19u1/c4/ung-dung-nang-cao-cua-kiem-dinh-f-va-bao-cao-ket-qua/) |
-| **Bài 06** | Phân tích Chính sách và Thực hành Suy luận Hồi quy với Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/wsook19u1/c4/phan-tich-chinh-sach-va-thuc-hanh-suy-luan-hoi-quy-voi-stata/) |
-| **Bài 07** | Hệ thống hóa các Phương pháp Suy luận trong Hồi quy | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/wsook19u1/c4/he-thong-hoa-cac-phuong-phap-suy-luan-trong-hoi-quy/) |
+| **4.1** | Nền tảng suy luận và kiểm định t cho một tham số | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/wsook19u1/c4/nen-tang-suy-luan-va-kiem-dinh-t-cho-mot-tham-so/) |
+| **4.2** | Khoảng tin cậy và các ứng dụng của kiểm định t | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/wsook19u1/c4/khoang-tin-cay-va-cac-ung-dung-cua-kiem-dinh-t/) |
+| **4.3** | Kiểm định giả thuyết về tổ hợp tuyến tính của các tham số | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/wsook19u1/c4/kiem-dinh-gia-thuyet-ve-to-hop-tuyen-tinh-cua-cac-tham-so/) |
+| **4.4** | Giới thiệu kiểm định f và kiểm định ràng buộc loại trừ | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/wsook19u1/c4/gioi-thieu-kiem-dinh-f-va-kiem-dinh-rang-buoc-loai-tru/) |
+| **4.5** | Ứng dụng nâng cao của kiểm định f và báo cáo kết quả | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/wsook19u1/c4/ung-dung-nang-cao-cua-kiem-dinh-f-va-bao-cao-ket-qua/) |
+| **4.6** | Phân tích chính sách và thực hành suy luận hồi quy với Stata | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/wsook19u1/c4/phan-tich-chinh-sach-va-thuc-hanh-suy-luan-hoi-quy-voi-stata/) |
+| **4.7** | Hệ thống hóa các phương pháp suy luận trong hồi quy | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/wsook19u1/c4/he-thong-hoa-cac-phuong-phap-suy-luan-trong-hoi-quy/) |

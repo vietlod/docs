@@ -1,19 +1,19 @@
 ---
 id: chapter-01-c1
-title: "Chương 01: 1. giới thiệu Stata"
-sidebar_label: "Chương 01: 1. Giới thiệu Stata"
+title: "1. Giới thiệu Stata"
+sidebar_label: "1. Giới thiệu Stata"
 sidebar_position: 2
-description: "Hướng dẫn thực hành How-To Chương 01: 1. giới thiệu Stata thuộc bộ sách Phân tích chuỗi thời gian với Stata trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 1. Giới thiệu Stata thuộc giáo trình Phân tích chuỗi thời gian với Stata trên SachKTL kèm công thức toán học, phân tích 6 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 01: 1. giới thiệu Stata
+# 1. Giới thiệu Stata
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 01: 1. giới thiệu Stata** thuộc [**Bộ sách 09: phân tích chuỗi thời gian với Stata**](/sachktl/book-09-sseak20u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/sseak20u1/c1/](https://sachktl.tnsai.vn/vi/sseak20u1/c1/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **6 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **1. Giới thiệu Stata** thuộc bộ giáo trình [**Phân tích chuỗi thời gian với Stata**](/sachktl/book-09-sseak20u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/sseak20u1/c1/](https://sachktl.tnsai.vn/vi/sseak20u1/c1/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 01: 1. giới thiệu Stata">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="1. Giới thiệu Stata">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 09 · CHƯƠNG 01</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 01: 1. giới thiệu Stata</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Phân tích chuỗi thời gian với Stata · 6 bài học chuyên sâu</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Phân tích chuỗi thời gian với Stata</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">1. Giới thiệu Stata</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng chuỗi thời gian, đồng liên kết và biến động tài chính · 6 bài học chuyê</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,138 +41,273 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Giới thiệu về Stata cho người mới bắt đầu A Beginner's guide to Stata Fundamentals Giới thiệu tổng quan Chào mừng các bạn sinh viên đến với chuỗi bài học đầu tiên trên hành trình chinh phục kinh tế lượng ứng dụng! Trước khi chúng ta có thể phân tích các mô hình phức tạp hay khám phá những mối quan hệ kinh tế thú vị, có một công cụ mà bất kỳ nhà nghiên cứu nào cũng cần phải thành thạo: đó chính là phần mềm Stata. Hãy xem Stata không phải là một rào cản kỹ thuật, mà là một người trợ lý đắc lực, một phòng thí nghiệm ảo nơi bạn có thể kiểm chứng các giả thuyết kinh tế và biến những con số khô
+Giới thiệu về Stata cho người mới bắt đầu A Beginner's guide to Stata Fundamentals Giới thiệu tổng quan Chào mừng các bạn sinh viên đến với chuỗi bài học đầu tiên trên hành trình chinh phục kinh tế lượng ứng dụng! Trước khi chúng ta có thể phân tích các mô hình phức tạp hay khám phá những mối quan hệ kinh tế thú vị, có một công cụ mà bất kỳ nhà nghiên cứu nào cũng cần phải thành thạo: đó chính là phần mềm Stata.
 
-- **Chủ đề học thuật trọng tâm**: Giới thiệu tổng quan, Cấu trúc chuỗi bài học, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP, R 4.x`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+\Phi(L)(1 - L)^d Y_t = \mu + \Theta(L)\varepsilon_t, \quad \varepsilon_t \mid \mathcal{F}_{t-1} \sim \mathcal{N}(0, \sigma_t^2) \tag*{[1]}
+$$
+
+$$
+\sigma_t^2 = \omega + \sum_{i=1}^p \alpha_i \varepsilon_{t-i}^2 + \sum_{j=1}^q \beta_j \sigma_{t-j}^2, \quad \omega > 0, \; \alpha_i, \beta_j \ge 0 \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Chuỗi thời gian phải thỏa mãn điều kiện dừng hiệp phương sai hoặc được sai phân hóa đến bậc tích hợp $I(d)$ phù hợp trước khi ước lượng.
+2. Điều kiện khả nghịch và nghiệm ngoài vòng tròn đơn vị của đa thức trễ $\Phi(L)$ và $\Theta(L)$ đảm bảo tính ổn định động học.
+3. Trong mô hình phương sai có điều kiện thay đổi GARCH, tổng hệ số $\sum \alpha_i + \sum \beta_j < 1$ bảo đảm phương sai không điều kiện hữu hạn.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 01 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/sseak20u1/c1/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Hồi quy chuỗi thời gian không dừng chưa qua kiểm định nghiệm đơn vị ADF/PP và đồng liên kết Johansen dễ dẫn đến hồi quy giả mạo với thống kê $t$ và $R^2$ bị thổi phồng."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Làm quen với giao diện và cú pháp Stata
+
+Làm quen với giao diện và cú pháp Stata Navigating the interface and syntax Giới thiệu Chào mừng các bạn đến với bài học chính thức đầu tiên trong hành trình làm chủ Stata! Hãy tưởng tượng việc học Stata cũng giống như học bảng chữ cái và ngữ pháp trước khi viết một bài luận xuất sắc. Đây chính là bước nền tảng, tuy đơn giản nhưng lại cực kỳ quan trọng, quyết định sự tự tin và hiệu quả của bạn trong suốt quá trình học tập và nghiên cứu kinh tế lượng sau này.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Thực hành một phiên Stata cơ bản**
+- **Khám phá giao diện làm việc của Stata**
+- **1.1.1 Các cửa sổ chính**
+- **1.1.2 Thanh công cụ và hệ thống trợ giúp**
+- **Các công cụ quan trọng trên thanh công cụ**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c1/bat-dau-voi-stata/)
+
+### 2.2. Quản lý và thao tác dữ liệu hiệu quả
+
+Quản lý và thao tác dữ liệu trong Stata Data management and manipulation Giới thiệu Chào mừng các bạn quay trở lại với bài học thứ hai! Ở bài trước, chúng ta đã có một chuyến tham quan tổng quan về "ngôi nhà" Stata. Bây giờ là lúc chúng ta bắt đầu học cách sắp xếp đồ đạc và chuẩn bị "nguyên liệu" bên trong ngôi nhà đó. Quản lý và thao tác dữ liệu có thể không phải là phần hào nhoáng nhất của kinh tế lượng, nhưng nó lại là công đoạn nền tảng quyết định đến 80% sự thành công của một dự án nghiên cứu.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Các lệnh quản lý dữ liệu cơ bản**
+- **1. Đưa dữ liệu vào và lưu dữ liệu ra**
+- **Tải và lưu dữ liệu định dạng Stata**
+- **Nhập và xuất dữ liệu từ các định dạng khác**
+- **2. Thao tác với biến và quan sát**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c1/quan-ly-du-lieu-trong-stata/)
+
+### 2.3. Khám phá dữ liệu bằng thống kê và đồ thị
+
+Khám phá dữ liệu qua thống kê và đồ thị Statistics and visualization in Stata Giới thiệu Chào mừng các bạn đến với bài học thứ ba! Nếu như ở bài trước, chúng ta đã học cách trở thành một "nghệ nhân" dữ liệu, người có thể sắp xếp và chuẩn bị nguyên liệu một cách ngăn nắp, thì hôm nay, chúng ta sẽ khoác lên mình chiếc áo của một nhà thám tử. Công việc của chúng ta là khám phá, điều tra và tìm ra những "manh mối" ẩn giấu bên trong bộ dữ liệu trước khi đưa ra bất kỳ kết luận chính thức nào.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Nền tảng của phân tích khám phá dữ liệu**
+- **1. Thống kê mô tả: Kể chuyện bằng con số**
+- **2. Trực quan hóa dữ liệu: Một bức tranh hơn ngàn lời nói**
+- **Các công cụ khám phá dữ liệu trong Stata**
+- **Ví dụ minh họa: Khám phá dữ liệu khí hậu thế giới**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c1/kham-pha-du-lieu-bang-thong-ke-va-do-thi/)
+
+### 2.4. Công cụ nâng cao và xử lý dữ liệu thời gian
+
+Công cụ nâng cao và xử lý dữ liệu thời gian Advanced tools and time-series data Giới thiệu Chào mừng các bạn đến với bài học thứ tư và cũng là bài học cuối cùng về các công cụ Stata trong chương nhập môn này! Trong các bài học trước, chúng ta đã xây dựng một nền tảng vững chắc, từ việc làm quen với giao diện, quản lý dữ liệu, cho đến khám phá dữ liệu bằng thống kê và đồ thị. Các bạn đã được trang bị những kỹ năng cần thiết để xử lý phần lớn các tác vụ phân tích cơ bản.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Nền tảng lý thuyết và các khái niệm chính**
+- **1. Tự động hóa với vòng lặp**
+- **2. Tầm quan trọng của MA trận**
+- **3. Đặc thù của dữ liệu chuỗi thời gian**
+- **Các công cụ nâng cao và phương pháp xử lý thời gian**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c1/cac-cong-cu-nang-cao-trong-stata/)
+
+### 2.5. Bài thực hành tích hợp trên Stata
+
+Bài thực hành tích hợp trên Stata A comprehensive Stata practice case study Tổng kết và tích hợp kiến thức Chào mừng các bạn đến với bài học thực hành cuối cùng và cũng là bài học quan trọng nhất trong chương nhập môn này! Hãy coi đây là một "dự án tốt nghiệp" nhỏ, nơi chúng ta sẽ tổng hợp và vận dụng toàn bộ kiến thức và kỹ năng đã tích lũy qua bốn bài học vừa rồi.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Tổng kết và tích hợp kiến thức**
+- **Chuẩn bị dữ liệu và xác định câu hỏi nghiên cứu**
+- **1. Bối cảnh và dữ liệu**
+- **2. Câu hỏi nghiên cứu**
+- **Quy trình phân tích dữ liệu**
+- **Hướng dẫn thực hành từng bước với Stata**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c1/xu-ly-du-lieu-chuoi-thoi-gian/)
+
+### 2.6. Tổng kết và định hướng học tập
+
+Tổng hợp kiến thức Stata cho phân tích dữ liệu Synthesizing Stata skills for data analysis 1. Từ người học đến người thực hành Xin chúc mừng tất cả các bạn sinh viên đã hoàn thành xuất sắc chuỗi bài học "Vừa đủ Stata để bắt đầu"! Đây là một cột mốc quan trọng. Các bạn đã đi một chặng đường dài từ việc bỡ ngỡ mở một phần mềm dựa trên dòng lệnh cho đến việc tự tin thực hiện một quy trình phân tích dữ liệu hoàn chỉnh.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Từ người học đến người thực hành**
+- **2. Triết lý làm việc của Stata**
+- **Nguyên tắc 1: Stata là một cuộc đối thoại tương tác**
+- **Nguyên tắc 2: Mọi thứ đều xoay quanh "hình chữ nhật dữ liệu"**
+- **Nguyên tắc 3: Yếu tố thời gian là một lớp cấu trúc đặc biệt**
+- **3. Quy trình làm việc của một nhà phân tích**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c1/he-thong-hoa-toan-bo-kien-thuc/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Làm quen với giao diện và cú pháp Stata</h3>
-    <p>Làm quen với giao diện và cú pháp Stata Navigating the interface and syntax Giới thiệu Chào mừng các bạn đến với bài học chính thức đầu tiên trong hành trình làm chủ Stata! Hãy tưởng tượng việc học Stata cũng giống như học bảng chữ cái và ngữ pháp trước khi vi Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sseak20u1/c1/bat-dau-voi-stata/" target="_blank" rel="noopener">Làm quen với giao diện và cú pháp Stata</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>1. Giới thiệu Stata</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Quản lý và thao tác dữ liệu hiệu quả</h3>
-    <p>Quản lý và thao tác dữ liệu trong Stata Data management and manipulation Giới thiệu Chào mừng các bạn quay trở lại với bài học thứ hai! Ở bài trước, chúng ta đã có một chuyến tham quan tổng quan về "ngôi nhà" Stata. Bây giờ là lúc chúng ta bắt đầu học cách sắp Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sseak20u1/c1/quan-ly-du-lieu-trong-stata/" target="_blank" rel="noopener">Quản lý và thao tác dữ liệu hiệu quả</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Khám phá dữ liệu bằng thống kê và đồ thị</h3>
-    <p>Khám phá dữ liệu qua thống kê và đồ thị Statistics and visualization in Stata Giới thiệu Chào mừng các bạn đến với bài học thứ ba! Nếu như ở bài trước, chúng ta đã học cách trở thành một "nghệ nhân" dữ liệu, người có thể sắp xếp và chuẩn bị nguyên liệu một các Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sseak20u1/c1/kham-pha-du-lieu-bang-thong-ke-va-do-thi/" target="_blank" rel="noopener">Khám phá dữ liệu bằng thống kê và đồ thị</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sseak20u1/c1/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Công cụ nâng cao và xử lý dữ liệu thời gian</h3>
-    <p>Công cụ nâng cao và xử lý dữ liệu thời gian Advanced tools and time-series data Giới thiệu Chào mừng các bạn đến với bài học thứ tư và cũng là bài học cuối cùng về các công cụ Stata trong chương nhập môn này! Trong các bài học trước, chúng ta đã xây dựng một n Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sseak20u1/c1/cac-cong-cu-nang-cao-trong-stata/" target="_blank" rel="noopener">Công cụ nâng cao và xử lý dữ liệu thời gian</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 5: Bài thực hành tích hợp trên Stata</h3>
-    <p>Bài thực hành tích hợp trên Stata A comprehensive Stata practice case study Tổng kết và tích hợp kiến thức Chào mừng các bạn đến với bài học thực hành cuối cùng và cũng là bài học quan trọng nhất trong chương nhập môn này! Hãy coi đây là một "dự án tốt nghiệp" Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sseak20u1/c1/xu-ly-du-lieu-chuoi-thoi-gian/" target="_blank" rel="noopener">Bài thực hành tích hợp trên Stata</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Bước 6: Tổng kết và định hướng học tập</h3>
-    <p>Tổng hợp kiến thức Stata cho phân tích dữ liệu Synthesizing Stata skills for data analysis 1. Từ người học đến người thực hành Xin chúc mừng tất cả các bạn sinh viên đã hoàn thành xuất sắc chuỗi bài học "Vừa đủ Stata để bắt đầu"! Đây là một cột mốc quan trọng. Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/sseak20u1/c1/he-thong-hoa-toan-bo-kien-thuc/" target="_blank" rel="noopener">Tổng kết và định hướng học tập</a>.</p>
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập chuỗi thời gian, kiểm định nghiệm đơn vị và ước lượng ARIMA / GARCH
 version 18.0
 clear all
 set more off
+import delimited "sachktl_timeseries_finco.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_sseak20u1_c01_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+tsset time_id
+dfuller y, lags(4) trend regress
+pperron y, lags(4) trend
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 1. Ước lượng mô hình ARIMA và kiểm định nhiễu trắng phần dư
+arima y, arima(1,1,1) vce(robust)
+predict resid_arima, resid
+wntestq resid_arima, lags(12)
+
+* 2. Ước lượng mô hình phương sai có điều kiện thay đổi ARCH/GARCH(1,1)
+arch d.y x1 x2, arch(1) garch(1) vce(robust)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
-library(tidyverse)
-library(lmtest)
-library(sandwich)
+# Nạp thư viện chuỗi thời gian và ước lượng ARIMA / GARCH(1,1)
+library(tseries)
+library(forecast)
+library(rugarch)
 
-df <- read.csv("sachktl_sseak20u1_c01_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_timeseries_finco.csv")
+y_ts <- ts(df$y, frequency = 12)
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA tối ưu theo AICc
+adf.test(y_ts)
+fit_arima <- auto.arima(y_ts, seasonal = FALSE, ic = "aicc")
+summary(fit_arima)
+checkresiduals(fit_arima)
+
+# 2. Ước lượng mô hình GARCH(1,1) cho chuỗi lợi suất
+spec <- ugarchspec(variance.model = list(model = "sGARCH", garchOrder = c(1, 1)),
+                   mean.model = list(armaOrder = c(1, 0), include.mean = TRUE))
+fit_garch <- ugarchfit(spec = spec, data = diff(y_ts))
+show(fit_garch)
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và arch để phân tích chuỗi thời gian & biến động
 import pandas as pd
-import statsmodels.formula.api as smf
+from statsmodels.tsa.stattools import adfuller
+from statsmodels.tsa.arima.model import ARIMA
+from arch import arch_model
 
-df = pd.read_csv("sachktl_sseak20u1_c01_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_timeseries_finco.csv")
+y = df["y"].dropna()
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA(1,1,1)
+adf_stat, p_val, *_ = adfuller(y, autolag="AIC")
+print(f"ADF Statistic: {adf_stat:.4f}, p-value: {p_val:.4f}")
+arima_res = ARIMA(y, order=(1, 1, 1)).fit()
+print(arima_res.summary())
+
+# 2. Ước lượng mô hình GARCH(1,1) với phân phối Student-t
+ret = y.diff().dropna() * 100
+garch_res = arch_model(ret, vol="Garch", p=1, q=1, dist="t").fit(disp="off")
+print(garch_res.summary())
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 01: 1. giới thiệu Stata trên SachKTL"
+  title="Hướng dẫn thực hành 1. Giới thiệu Stata trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 01 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Làm quen với giao diện và cú pháp Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c1/bat-dau-voi-stata/) |
-| **Bài 02** | Quản lý và thao tác dữ liệu hiệu quả | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c1/quan-ly-du-lieu-trong-stata/) |
-| **Bài 03** | Khám phá dữ liệu bằng thống kê và đồ thị | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c1/kham-pha-du-lieu-bang-thong-ke-va-do-thi/) |
-| **Bài 04** | Công cụ nâng cao và xử lý dữ liệu thời gian | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c1/cac-cong-cu-nang-cao-trong-stata/) |
-| **Bài 05** | Bài thực hành tích hợp trên Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c1/xu-ly-du-lieu-chuoi-thoi-gian/) |
-| **Bài 06** | Tổng kết và định hướng học tập | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c1/he-thong-hoa-toan-bo-kien-thuc/) |
+| **1.1** | Làm quen với giao diện và cú pháp Stata | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c1/bat-dau-voi-stata/) |
+| **1.2** | Quản lý và thao tác dữ liệu hiệu quả | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c1/quan-ly-du-lieu-trong-stata/) |
+| **1.3** | Khám phá dữ liệu bằng thống kê và đồ thị | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c1/kham-pha-du-lieu-bang-thong-ke-va-do-thi/) |
+| **1.4** | Công cụ nâng cao và xử lý dữ liệu thời gian | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c1/cac-cong-cu-nang-cao-trong-stata/) |
+| **1.5** | Bài thực hành tích hợp trên Stata | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c1/xu-ly-du-lieu-chuoi-thoi-gian/) |
+| **1.6** | Tổng kết và định hướng học tập | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/sseak20u1/c1/he-thong-hoa-toan-bo-kien-thuc/) |

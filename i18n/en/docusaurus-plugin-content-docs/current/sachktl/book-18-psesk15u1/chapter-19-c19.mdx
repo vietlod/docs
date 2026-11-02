@@ -1,19 +1,19 @@
 ---
 id: chapter-19-c19
-title: "Chapter 19: 19. Phân tích đa biến — Time Series and Panel Data Econometrics"
-sidebar_label: "Chapter 19: 19. Phân tích đa biến"
+title: "19. Multivariate Statistical Analysis"
+sidebar_label: "19. Multivariate Statistical Analysis"
 sidebar_position: 20
-description: "Step-by-step practical how-to guide for Chapter 19: 19. Phân tích đa biến from Time Series and Panel Data Econometrics on SachKTL with Stata, R, and Python workflows integrated with EcoData, Finco, and EcoLab."
+description: "Comprehensive practical how-to guide for 19. Multivariate Statistical Analysis from Time Series and Panel Data Econometrics on SachKTL featuring structural equations, 7 lesson breakdowns, and Stata, R, and Python scripts."
 ---
 
-# Chapter 19: 19. Phân tích đa biến — Time Series and Panel Data Econometrics
+# 19. Multivariate Statistical Analysis
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-This practical how-to guide synthesizes the methodology and empirical implementation workflow of **Chapter 19: 19. Phân tích đa biến** from [**Book 18: Time Series and Panel Data Econometrics**](/en/sachktl/book-18-psesk15u1/), with direct backlinks to the authoritative source material at [https://sachktl.tnsai.vn/vi/psesk15u1/c19/](https://sachktl.tnsai.vn/vi/psesk15u1/c19/).
+This practical how-to guide presents the theoretical foundations, structural mathematical equations, detailed breakdown of **7 specialized lessons**, and multi-platform replication workflows for **19. Multivariate Statistical Analysis** from the textbook [**Time Series and Panel Data Econometrics**](/en/sachktl/book-18-psesk15u1/), with direct cross-references to the authoritative source material at [https://sachktl.tnsai.vn/vi/psesk15u1/c19/](https://sachktl.tnsai.vn/vi/psesk15u1/c19/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chapter 19: 19. Phân tích đa biến">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="19. Multivariate Statistical Analysis">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ This practical how-to guide synthesizes the methodology and empirical implementa
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BOOK 18 · CHAPTER 19</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chapter 19: 19. Phân tích đa biến</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Part of Textbook: Time Series and Panel Data Econometrics · 7 Detailed Lessons</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Time Series and Panel Data Econometr</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">19. Multivariate Statistical Analysis</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Time Series Econometrics, Cointegration, and Financial Volatility · 7 Detailed Lesson</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,139 +41,289 @@ This practical how-to guide synthesizes the methodology and empirical implementa
   </svg>
 </div>
 
-## 1. Methodological Meaning and Scope of Application
+## 1. Methodological Foundations, Mathematical Specification, and Identification
 
-Giới thiệu phân tích đa biến trong kinh tế lượng An Introduction to Multivariate Analysis in Econometrics Tổng quan về phân tích hệ thống đa biến Chào các bạn sinh viên, chào mừng đến với một trong những lĩnh vực hấp dẫn và mạnh mẽ nhất của kinh tế lượng hiện đại: Phân tích đa biến. Trong thực tế, các mối quan hệ kinh tế hiếm khi tồn tại một cách độc lập. Quyết định đầu tư của một công ty có thể bị ảnh hưởng bởi các đối thủ cạnh tranh, giá cả của một mặt hàng phụ thuộc vào nhiều mặt hàng khác, và các chỉ số kinh tế vĩ mô luôn vận động cùng nhau. Các mô hình hồi quy đơn phương trình mà chúng
+Giới thiệu phân tích đa biến trong kinh tế lượng An Introduction to Multivariate Analysis in Econometrics Tổng quan về phân tích hệ thống đa biến Chào các bạn sinh viên, chào mừng đến với một trong những lĩnh vực hấp dẫn và mạnh mẽ nhất của kinh tế lượng hiện đại: Phân tích đa biến. Trong thực tế, các mối quan hệ kinh tế hiếm khi tồn tại một cách độc lập. Quyết định đầu tư của một công ty có thể bị ảnh hưởng bởi các đối thủ cạnh tranh, giá cả của một mặt hàng phụ thuộc vào nhiều mặt hàng khác, và các chỉ số kinh tế vĩ mô luôn vận động cùng nhau.
 
-- **Core Academic Topics**: Tổng quan về phân tích hệ thống đa biến, CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO.
-- **Supported Analytical Environments**: `Stata 18 MP`.
-- **Recommended Empirical Data Sources**: Vietnamese macroeconomic, corporate, and household survey datasets on [EcoData](https://ecodata.io.vn), capital and commodity market series on [Finco](https://www.finco.vn), model cross-references on [VietLOD](https://vietlod.tnsai.vn), and automated estimation on [EcoLab](https://ecolab.io.vn).
+### 1.1. Structural Equations and Representative Estimator
+
+$$
+\Phi(L)(1 - L)^d Y_t = \mu + \Theta(L)\varepsilon_t, \quad \varepsilon_t \mid \mathcal{F}_{t-1} \sim \mathcal{N}(0, \sigma_t^2) \tag*{[1]}
+$$
+
+$$
+\sigma_t^2 = \omega + \sum_{i=1}^p \alpha_i \varepsilon_{t-i}^2 + \sum_{j=1}^q \beta_j \sigma_{t-j}^2, \quad \omega > 0, \; \alpha_i, \beta_j \ge 0 \tag*{[2]}
+$$
+
+### 1.2. Core Identification Assumptions and Applicability Conditions
+
+1. Time series processes must satisfy covariance stationarity or be differenced to their appropriate order of integration $I(d)$ prior to estimation.
+2. Roots of the autoregressive $\Phi(L)$ and moving-average $\Theta(L)$ lag polynomials must lie strictly outside the complex unit circle.
+3. In conditional volatility GARCH specifications, the persistence condition $\sum \alpha_i + \sum \beta_j < 1$ ensures finite unconditional variance.
 
 <FeatureCards
   features={[
     {
-      title: "Original Chapter on SachKTL",
-      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for Chapter 19 on SachKTL.",
+      title: "Authoritative Chapter on SachKTL",
+      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for this chapter on SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/psesk15u1/c19/"
     },
     {
       title: "Practice Datasets on EcoData & Finco",
-      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and survey data for hands-on replication.",
+      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and household survey data for hands-on replication.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
       title: "Automated Estimation on EcoLab",
-      description: "Execute econometric specifications, run diagnostic battery tests, and export publication-grade tables automatically.",
+      description: "Execute econometric specifications, run diagnostic battery tests, and export APA 7th / AER publication-grade tables automatically.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Step-by-Step Practical Implementation Across Chapter Lessons
+<FeatureNotAvailable
+  feature="Unconditional Baseline Estimation Under Violated Identification Assumptions"
+  reason="Regressing nonstationary levels without unit-root and Johansen cointegration testing induces spurious regression with inflated $t$-statistics and $R^2$."
+  alternative="Run the complete diagnostic battery in Step 4 and transition to the appropriate corrective estimator on VietLOD or EcoLab."
+/>
+
+## 2. Lesson-by-Lesson Academic Breakdown
+
+### 2.1. Nền tảng mô hình SURE
+
+Nền tảng mô hình hồi quy tưởng chừng như không liên quan Foundations of the seemingly unrelated regressions model Khi những phương trình riêng lẻ lại có mối liên hệ ngầm Chào các bạn sinh viên, trong bài học đầu tiên của chuỗi bài về phân tích đa biến, chúng ta sẽ cùng nhau khám phá một trong những mô hình nền tảng và hữu ích nhất: Mô hình Hồi quy Tưởng chừng như Không liên quan, hay còn gọi là mô hình SURE . Cái tên của nó có vẻ hơi lạ, nhưng lại mô tả chính xác bản chất của vấn đề mà nó giải quyết.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Khi những phương trình riêng lẻ lại có mối liên hệ ngầm**
+- **Xây dựng mô hình SURE từ các phương trình đơn lẻ**
+- **Giả định cốt lõi về sai số của hệ thống**
+- **Các trường hợp phân tích của hệ thống phương trình**
+- **Tại sao SURE hiệu quả hơn OLS? Một góc nhìn trực quan**
+- **Tổng kết những điểm chính**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c19/nen-tang-mo-hinh-sure/)
+
+### 2.2. Ước lượng mô hình SURE
+
+Ước lượng mô hình SURE với GLS và FGLS Estimating the SURE model with GLS and FGLS Từ lý thuyết đến giải pháp thực tiễn Trong bài học trước, chúng ta đã hiểu "tại sao" mô hình SURE lại cần thiết: khi các sai số giữa các phương trình có tương quan với nhau, việc ước lượng chúng như một hệ thống sẽ mang lại hiệu quả cao hơn. Chúng ta đã thấy rằng việc chạy các hồi quy OLS riêng lẻ sẽ bỏ qua thông tin quan trọng chứa đựng trong mối tương quan này. Vậy câu hỏi tự nhiên tiếp theo là: "làm thế nào" để chúng ta tận dụng thông tin đó?
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Từ lý thuyết đến giải pháp thực tiễn**
+- **Ước lượng Bình phương Tối thiểu Tổng quát**
+- **Quy trình ước lượng GLS Khả thi**
+- **Ví dụ minh họa: Ước lượng SURE bằng Stata**
+- **Tổng kết những điểm chính**
+- **Những điểm chính cần nắm vững**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c19/uoc-luong-mo-hinh-sure/)
+
+### 2.3. MLE và kiểm định giả thuyết
+
+Ước lượng hợp lý tối đa và kiểm định giả thuyết trong SURE Maximum likelihood estimation and hypothesis testing in SURE Một cách tiếp cận toàn diện hơn Trong bài học trước, chúng ta đã tìm hiểu về FGLS như một giải pháp thực tiễn để ước lượng mô hình SURE. FGLS là một công cụ tuyệt vời, đặc biệt là vì tính trực quan của quy trình hai bước. Tuy nhiên, trong kinh tế lượng, có một nguyên tắc ước lượng nền tảng và mạnh mẽ hơn, được xây dựng dựa trên lý thuyết xác suất sâu sắc: đó là Ước lượng Hợp lý Tối đa, hay MLE .
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Một cách tiếp cận toàn diện hơn**
+- **Ước lượng Hợp lý Tối đa**
+- **Kiểm định ràng buộc chéo phương trình**
+- **Ví dụ minh họa: MLE và kiểm định Wald trong Stata**
+- **Tổng kết những điểm chính**
+- **Những điểm chính cần nắm vững**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c19/mle-va-kiem-dinh-gia-thuyet/)
+
+### 2.4. Hệ thống với biến nội sinh
+
+Hệ thống phương trình với biến nội sinh System of equations with endogenous variables Khi các biến tác động lẫn nhau Chào các bạn sinh viên, trong các bài học trước, chúng ta đã làm việc với mô hình SURE dưới một giả định ngầm rất quan trọng: tất cả các biến giải thích đều là biến ngoại sinh, tức là chúng không tương quan với sai số. Nhưng trong thế giới kinh tế, các mối quan-hệ-hai-chiều lại vô cùng phổ biến.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Khi các biến tác động lẫn nhau**
+- **Nội sinh, Biến công cụ và Điều kiện xác định**
+- **1. Vấn đề Nội sinh**
+- **2. Giải pháp: Biến Công cụ**
+- **3. Điều kiện xác định**
+- **Từ 2SLS đến 3SLS**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c19/he-thong-voi-bien-noi-sinh/)
+
+### 2.5. Giảm chiều dữ liệu
+
+Giảm chiều dữ liệu: Phân tích thành phần chính và mô hình nhân tố Dimensionality reduction: Principal component analysis and factor models Tìm kiếm cấu trúc trong "biển" dữ liệu Chào các bạn sinh viên, trong các bài học trước, chúng ta đã tập trung vào việc mô hình hóa các mối quan hệ cấu trúc rõ ràng giữa các biến, ví dụ như cách các công ty ảnh hưởng lẫn nhau hay cách cung và cầu tương tác . Tuy nhiên, trong kinh tế và tài chính hiện đại, chúng ta thường xuyên phải đối mặt với một thách thức khác: có quá nhiều biến số!
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Tìm kiếm cấu trúc trong "biển" dữ liệu**
+- **Từ PCA đến Mô hình Nhân tố**
+- **1. Phân tích Thành phần chính**
+- **2. Mô hình Nhân tố**
+- **Thực hiện PCA và ước lượng nhân tố**
+- **Ví dụ minh họa: Tìm nhân tố chung trong dữ liệu đầu tư**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c19/giam-chieu-du-lieu/)
+
+### 2.6. Thực hành SURE và 2SLS
+
+Thực hành phân tích SURE và 2SLS từ A-Z với Stata A practical guide to SURE and 2SLS analysis in Stata Tóm tắt tổng hợp kiến thức Chào các bạn sinh viên, chào mừng đến với bài học thực hành quan trọng nhất trong chuỗi bài của chúng ta. Đến thời điểm này, chúng ta đã cùng nhau xây dựng một nền tảng lý thuyết vững chắc về phân tích đa biến.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Tóm tắt tổng hợp kiến thức**
+- **Chuẩn bị dữ liệu và kịch bản phân tích**
+- **Kịch bản 1: Phân tích SURE**
+- **Kịch bản 2: Phân tích 2SLS**
+- **Mã Stata chuẩn bị dữ liệu**
+- **Quy trình phân tích Kịch bản 1: Mô hình SURE**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c19/thuc-hanh-sure-va-2sls/)
+
+### 2.7. Tổng hợp và nâng cao
+
+Tổng hợp phân tích đa biến: Từ lý thuyết đến chiến lược nghiên cứu Multivariate analysis synthesis: From theory to research strategy 1. Nhìn lại khu rừng từ những cái cây Chào các bạn sinh viên, xin chúc mừng các bạn đã hoàn thành một hành trình đầy thử thách nhưng vô cùng bổ ích qua thế giới của phân tích đa biến.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **1. Nhìn lại khu rừng từ những cái cây**
+- **2. Ba trụ cột của phân tích đa biến**
+- **3. Một quy trình ra quyết định cho nhà nghiên cứu**
+- **Những cạm bẫy thường gặp**
+- **4. Phân tích quyết định đầu tư của doanh nghiệp**
+- **5. Tổng kết và hướng phát triển: Hành trình tiếp theo của bạn**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c19/tong-hop-va-nang-cao/)
+
+## 3. Step-by-Step Empirical Implementation Workflow
 
 <Steps>
   <div className="step-item">
-    <h3>Step 1: Nền tảng mô hình SURE</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Nền tảng mô hình SURE. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c19/nen-tang-mo-hinh-sure/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/psesk15u1/c19/nen-tang-mo-hinh-sure/</a>.</p>
+    <h3>1. Formulate the Research Question and Prepare Data on EcoData & Finco</h3>
+    <p>Define the dependent variable, core explanatory variables, and control covariates aligned with <strong>19. Multivariate Statistical Analysis</strong>. Extract standardized Vietnamese empirical series from <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> or <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, and screen for missing observations and extreme outliers.</p>
   </div>
   <div className="step-item">
-    <h3>Step 2: Ước lượng mô hình SURE</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Ước lượng mô hình SURE. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c19/uoc-luong-mo-hinh-sure/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/psesk15u1/c19/uoc-luong-mo-hinh-sure/</a>.</p>
+    <h3>2. Conduct Descriptive Profiling, Correlation Analysis, and Pre-Estimation Checks</h3>
+    <p>Examine empirical distributions, construct summary statistics tables, and evaluate collinearity using pairwise correlation matrices and Variance Inflation Factors (VIF).</p>
   </div>
   <div className="step-item">
-    <h3>Step 3: MLE và kiểm định giả thuyết</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for MLE và kiểm định giả thuyết. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c19/mle-va-kiem-dinh-gia-thuyet/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/psesk15u1/c19/mle-va-kiem-dinh-gia-thuyet/</a>.</p>
+    <h3>3. Estimate the Model Across Stata 18 MP, R 4.x, and Python 3.11+</h3>
+    <p>Execute the parameter estimation scripts matching the structural equations in Section 1.1 while cross-checking theoretical derivations at <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c19/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Step 4: Hệ thống với biến nội sinh</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Hệ thống với biến nội sinh. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c19/he-thong-voi-bien-noi-sinh/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/psesk15u1/c19/he-thong-voi-bien-noi-sinh/</a>.</p>
+    <h3>4. Perform Post-Estimation Diagnostics and Robust Variance Correction</h3>
+    <p>Test for heteroskedasticity, serial correlation, Ramsey RESET functional form misspecification, and regressor endogeneity. Apply White HC1 or cluster-robust standard errors for valid inference.</p>
   </div>
   <div className="step-item">
-    <h3>Step 5: Giảm chiều dữ liệu</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Giảm chiều dữ liệu. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c19/giam-chieu-du-lieu/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/psesk15u1/c19/giam-chieu-du-lieu/</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Step 6: Thực hành SURE và 2SLS</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Thực hành SURE và 2SLS. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/psesk15u1/c19/thuc-hanh-sure-va-2sls/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/psesk15u1/c19/thuc-hanh-sure-va-2sls/</a>.</p>
+    <h3>5. Format Journal-Grade Tables and Cross-Verify on EcoLab</h3>
+    <p>Report point estimates, standard errors in parentheses, and statistical significance stars following APA 7th / AER Booktabs standards, or automate the entire reporting pipeline on <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> and <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Multi-Platform Implementation Examples in Stata, R, and Python
+## 4. Multi-Platform Implementation Scripts in Stata, R, and Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Initialize environment and load practice dataset from EcoData / SachKTL
+* Thiết lập chuỗi thời gian, kiểm định nghiệm đơn vị và ước lượng ARIMA / GARCH
 version 18.0
 clear all
 set more off
+import delimited "sachktl_timeseries_finco.csv", clear encoding("utf-8")
 
-* Import standardized empirical dataset
-import delimited "sachktl_psesk15u1_c19_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+tsset time_id
+dfuller y, lags(4) trend regress
+pperron y, lags(4) trend
 
-* Estimate baseline specification and run diagnostic checks with robust standard errors
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 1. Ước lượng mô hình ARIMA và kiểm định nhiễu trắng phần dư
+arima y, arima(1,1,1) vce(robust)
+predict resid_arima, resid
+wntestq resid_arima, lags(12)
+
+* 2. Ước lượng mô hình phương sai có điều kiện thay đổi ARCH/GARCH(1,1)
+arch d.y x1 x2, arch(1) garch(1) vce(robust)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Load econometric packages and practice dataset from EcoData / SachKTL
-library(tidyverse)
-library(lmtest)
-library(sandwich)
+# Nạp thư viện chuỗi thời gian và ước lượng ARIMA / GARCH(1,1)
+library(tseries)
+library(forecast)
+library(rugarch)
 
-df <- read.csv("sachktl_psesk15u1_c19_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_timeseries_finco.csv")
+y_ts <- ts(df$y, frequency = 12)
 
-# Estimate model and compute heteroskedasticity-robust HC1 standard errors
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA tối ưu theo AICc
+adf.test(y_ts)
+fit_arima <- auto.arima(y_ts, seasonal = FALSE, ic = "aicc")
+summary(fit_arima)
+checkresiduals(fit_arima)
+
+# 2. Ước lượng mô hình GARCH(1,1) cho chuỗi lợi suất
+spec <- ugarchspec(variance.model = list(model = "sGARCH", garchOrder = c(1, 1)),
+                   mean.model = list(armaOrder = c(1, 0), include.mean = TRUE))
+fit_garch <- ugarchfit(spec = spec, data = diff(y_ts))
+show(fit_garch)
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Load econometric libraries and practice dataset from EcoData / SachKTL
+# Nạp thư viện statsmodels và arch để phân tích chuỗi thời gian & biến động
 import pandas as pd
-import statsmodels.formula.api as smf
+from statsmodels.tsa.stattools import adfuller
+from statsmodels.tsa.arima.model import ARIMA
+from arch import arch_model
 
-df = pd.read_csv("sachktl_psesk15u1_c19_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_timeseries_finco.csv")
+y = df["y"].dropna()
 
-# Fit specification with HC1 robust standard errors
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA(1,1,1)
+adf_stat, p_val, *_ = adfuller(y, autolag="AIC")
+print(f"ADF Statistic: {adf_stat:.4f}, p-value: {p_val:.4f}")
+arima_res = ARIMA(y, order=(1, 1, 1)).fit()
+print(arima_res.summary())
+
+# 2. Ước lượng mô hình GARCH(1,1) với phân phối Student-t
+ret = y.diff().dropna() * 100
+garch_res = arch_model(ret, vol="Garch", p=1, q=1, dist="t").fit(disp="off")
+print(garch_res.summary())
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video Tutorial Walkthrough
+## 5. Post-Estimation Diagnostic and Interpretation Guide
+
+| Diagnostic Criterion | Null Hypothesis $H_0$ | Benchmark Threshold | Corrective Action When $H_0$ Is Rejected |
+| :--- | :--- | :--- | :--- |
+| **Heteroskedasticity** | Constant error variance $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ rejects $H_0$ | Apply `vce(robust)`, `vcovHC(HC1)`, or FGLS/WLS weighted estimation |
+| **Multicollinearity** | No severe linear dependence among regressors | $\text{VIF} < 10$ acceptable | Drop redundant covariates, center interactions, or apply LASSO/Ridge regularization |
+| **Ramsey RESET Functional Form** | No omitted nonlinear or higher-order terms | $p\text{-value} > 0.05$ retains $H_0$ | Add interaction terms, quadratic polynomials, or log-transform skewed positive variables |
+| **Regressor Exogeneity** | Orthogonality $\text{Cov}(X, \varepsilon)=0$ | Durbin-Wu-Hausman $p > 0.05$ | Transition to IV/2SLS, LIML, or GMM estimation with validated instruments |
+
+## 6. Video Tutorial Walkthrough
 
 <VideoTutorial
-  title="Practical Walkthrough for Chapter 19: 19. Phân tích đa biến on SachKTL"
+  title="Practical Walkthrough for 19. Multivariate Statistical Analysis on SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Complete Lesson Directory and Backlinks to Original SachKTL Articles
+## 7. Complete Lesson Directory and Backlinks to Original SachKTL Articles
 
-| No. | Lesson Title in Chapter 19 | Supported Software | Original Source Link on SachKTL |
+| Lesson Code | Lesson Title | Supported Software | Original Source Link on SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Lesson 01** | Nền tảng mô hình SURE | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c19/nen-tang-mo-hinh-sure/) |
-| **Lesson 02** | Ước lượng mô hình SURE | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c19/uoc-luong-mo-hinh-sure/) |
-| **Lesson 03** | MLE và kiểm định giả thuyết | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c19/mle-va-kiem-dinh-gia-thuyet/) |
-| **Lesson 04** | Hệ thống với biến nội sinh | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c19/he-thong-voi-bien-noi-sinh/) |
-| **Lesson 05** | Giảm chiều dữ liệu | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c19/giam-chieu-du-lieu/) |
-| **Lesson 06** | Thực hành SURE và 2SLS | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c19/thuc-hanh-sure-va-2sls/) |
-| **Lesson 07** | Tổng hợp và nâng cao | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c19/tong-hop-va-nang-cao/) |
+| **19.1** | Nền tảng mô hình SURE | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c19/nen-tang-mo-hinh-sure/) |
+| **19.2** | Ước lượng mô hình SURE | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c19/uoc-luong-mo-hinh-sure/) |
+| **19.3** | MLE và kiểm định giả thuyết | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c19/mle-va-kiem-dinh-gia-thuyet/) |
+| **19.4** | Hệ thống với biến nội sinh | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c19/he-thong-voi-bien-noi-sinh/) |
+| **19.5** | Giảm chiều dữ liệu | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c19/giam-chieu-du-lieu/) |
+| **19.6** | Thực hành SURE và 2SLS | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c19/thuc-hanh-sure-va-2sls/) |
+| **19.7** | Tổng hợp và nâng cao | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/psesk15u1/c19/tong-hop-va-nang-cao/) |

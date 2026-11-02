@@ -1,19 +1,19 @@
 ---
 id: chapter-03-c3
-title: "Chương 03: 3. đồ thị MA trận phân tán"
-sidebar_label: "Chương 03: 3. Đồ thị ma trận phân tán"
+title: "3. Đồ thị MA trận phân tán"
+sidebar_label: "3. Đồ thị MA trận phân tán"
 sidebar_position: 4
-description: "Hướng dẫn thực hành How-To Chương 03: 3. đồ thị MA trận phân tán thuộc bộ sách Hướng dẫn trực quan về đồ họa với Stata trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 3. Đồ thị MA trận phân tán thuộc giáo trình Hướng dẫn trực quan về đồ họa với Stata trên SachKTL kèm công thức toán học, phân tích 5 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 03: 3. đồ thị MA trận phân tán
+# 3. Đồ thị MA trận phân tán
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 03: 3. đồ thị MA trận phân tán** thuộc [**Bộ sách 06: hướng dẫn trực quan về đồ họa với Stata**](/sachktl/book-06-msitk22u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/msitk22u1/c3/](https://sachktl.tnsai.vn/vi/msitk22u1/c3/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **5 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **3. Đồ thị MA trận phân tán** thuộc bộ giáo trình [**Hướng dẫn trực quan về đồ họa với Stata**](/sachktl/book-06-msitk22u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/msitk22u1/c3/](https://sachktl.tnsai.vn/vi/msitk22u1/c3/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 03: 3. đồ thị MA trận phân tán">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="3. Đồ thị MA trận phân tán">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 06 · CHƯƠNG 03</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 03: 3. đồ thị MA trận phân tán</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Hướng dẫn trực quan về đồ họa với Stata · 5 bài học chuyên sâu</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Hướng dẫn trực quan về đồ họa với St</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">3. Đồ thị MA trận phân tán</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng ứng dụng, mô hình hóa thống kê và kiểm định giả thuyết · 5 bài học chuy</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,98 +41,204 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Giới thiệu biểu đồ ma trận phân tán trong Stata An Introduction to Scatterplot Matrix graphs in Stata Chào mừng các bạn đến với chuỗi bài học chuyên sâu về biểu đồ ma trận phân tán trong Stata. Đây là một công cụ trực quan hóa dữ liệu cực kỳ mạnh mẽ, đặc biệt hữu ích trong giai đoạn phân tích dữ liệu khám phá . Thay vì phải vẽ từng biểu đồ phân tán riêng lẻ cho mỗi cặp biến, biểu đồ ma trận cho phép chúng ta quan sát mối quan hệ hai chiều giữa nhiều biến cùng một lúc trên một ma trận duy nhất. Điều này không chỉ tiết kiệm thời gian mà còn giúp chúng ta nhanh chóng phát hiện các xu hướng, các
+Giới thiệu biểu đồ ma trận phân tán trong Stata An Introduction to Scatterplot Matrix graphs in Stata Chào mừng các bạn đến với chuỗi bài học chuyên sâu về biểu đồ ma trận phân tán trong Stata. Đây là một công cụ trực quan hóa dữ liệu cực kỳ mạnh mẽ, đặc biệt hữu ích trong giai đoạn phân tích dữ liệu khám phá . Thay vì phải vẽ từng biểu đồ phân tán riêng lẻ cho mỗi cặp biến, biểu đồ ma trận cho phép chúng ta quan sát mối quan hệ hai chiều giữa nhiều biến cùng một lúc trên một ma trận duy nhất.
 
-- **Chủ đề học thuật trọng tâm**: CẤU TRÚC CHUỖI BÀI HỌC, Kiến thức tiên quyết, Mục tiêu học tập, Tài liệu tham khảo, Phụ lục: Dữ liệu mô phỏng.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+Y_i = \beta_0 + \sum_{k=1}^K \beta_k X_{ik} + \varepsilon_i, \quad \mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0 \tag*{[1]}
+$$
+
+$$
+\widehat{\text{Var}}_{\text{HC1}}(\hat{\boldsymbol{\beta}}) = \frac{N}{N - K - 1}\left(\mathbf{X}'\mathbf{X}\right)^{-1}\left(\sum_{i=1}^N \hat{\varepsilon}_i^2 \mathbf{x}_i \mathbf{x}_i'\right)\left(\mathbf{X}'\mathbf{X}\right)^{-1} \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Dạng hàm tuyến tính theo tham số được xác định đúng, không bỏ sót biến giải thích quan trọng có tương quan với các biến trong mô hình.
+2. Kỳ vọng có điều kiện của sai số bằng không $\mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0$, đảm bảo tính không chệch và vững tiệm cận của ước lượng.
+3. Ma trận thiết kế $\mathbf{X}$ có hạng cột đầy đủ, không xảy ra đa cộng tuyến hoàn hảo và sử dụng sai số chuẩn vững HC1/Cluster khi có phương sai thay đổi.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 03 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/msitk22u1/c3/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Khi tồn tại biến giải thích nội sinh do đồng thời hai chiều, sai số đo lường hoặc bỏ sót biến không quan sát được, ước lượng OLS bị chệch và không vững; cần chuyển sang ước lượng biến công cụ IV/2SLS hoặc GMM."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Làm chủ các tùy chọn marker
+
+Làm chủ các tùy chọn marker trong biểu đồ ma trận phân tán Mastering marker options in scatterplot matrix graphs Giới thiệu Trong bài học giới thiệu, chúng ta đã hiểu được tầm quan trọng của biểu đồ ma trận phân tán như một công cụ khám phá dữ liệu mạnh mẽ. Một biểu đồ mặc định do Stata tạo ra đã rất hữu ích, nhưng để thực sự biến dữ liệu thành một câu chuyện trực quan, chúng ta cần khả năng tùy chỉnh các chi tiết nhỏ nhất.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Tại sao cần tùy chỉnh marker?**
+- **Các tùy chọn marker chính**
+- **Ví dụ minh họa: Tùy chỉnh biểu đồ MA trận**
+- **1. Biểu đồ MA trận mặc định**
+- **2. Thay đổi ký hiệu và kích thước marker**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c3/lam-chu-cac-tuy-chon-marker/)
+
+### 2.2. Tinh chỉnh trục và tiêu đề
+
+Tinh chỉnh trục và tiêu đề trong biểu đồ ma trận Controlling axes and titles in scatterplot matrix graphs Giới thiệu Trong bài học trước, chúng ta đã thành công trong việc làm chủ các marker, biến những điểm dữ liệu đơn giản thành các ký hiệu giàu thông tin. Giờ đây, khi các điểm dữ liệu đã được trình bày một cách rõ ràng, bước tiếp theo là xây dựng một "khung" vững chắc cho chúng. Khung này chính là hệ thống các trục tọa độ và các tiêu đề.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Logic của hệ thống trục trong graph matrix**
+- **Các tùy chọn kiểm soát trục và tiêu đề**
+- **Ví dụ minh họa: Tinh chỉnh trục và tiêu đề**
+- **1. Tùy chỉnh trục cho biến đầu tiên**
+- **2. Đồng bộ hóa tất cả các trục bằng maxes**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c3/tinh-chinh-truc-va-tieu-de/)
+
+### 2.3. Kỹ thuật nâng cao cho MA trận và nhóm
+
+Kỹ thuật nâng cao cho ma trận và phân tích theo nhóm Advanced techniques for matrix layout and grouped analysis Giới thiệu Trong hai bài học đầu tiên, chúng ta đã xây dựng một nền tảng vững chắc bằng cách học cách kiểm soát từng chi tiết nhỏ nhất của biểu đồ ma trận: từ các điểm dữ liệu cho đến hệ thống trục và tiêu đề. Giờ đây, bạn đã có khả năng tạo ra những biểu đồ rõ ràng và được định dạng chuyên nghiệp.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Giải quyết các thách thức trực quan hóa**
+- **Các tùy chọn MA trận và nhóm**
+- **Ví dụ minh họa: Kỹ thuật nâng cao**
+- **Phần 1: Các tùy chọn MA trận**
+- **Phần 2: Phân tích theo nhóm**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c3/ky-thuat-nang-cao-cho-ma-tran-va-nhom/)
+
+### 2.4. Bài tập thực hành tổng hợp
+
+Bài tập thực hành tổng hợp biểu đồ ma trận phân tán Comprehensive practice exercise for scatterplot matrix graphs Tổng quan Chào mừng bạn đến với bài học cuối cùng trong chuỗi bài học về biểu đồ ma trận phân tán! Sau khi đã đi qua ba bài học chi tiết, từ việc làm chủ các marker, tinh chỉnh trục và tiêu đề, cho đến việc áp dụng các kỹ thuật nâng cao và phân tích theo nhóm, giờ là lúc chúng ta kết hợp tất cả những kỹ năng đó lại với nhau.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Tổng quan**
+- **Hệ thống hóa lý thuyết**
+- **Quy trình phân tích phương pháp luận**
+- **Ví dụ thực hành: Khám phá các yếu tố kinh tế - Xã hội**
+- **Bước 1: Câu hỏi nghiên cứu và lựa chọn biến**
+- **Bước 2 & 3: Xây dựng và tinh chỉnh biểu đồ MA trận ban đầu**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c3/bai-tap-thuc-hanh-tong-hop/)
+
+### 2.5. Tổng hợp chuỗi biểu đồ MA trận phân tán
+
+Tổng hợp biểu đồ ma trận phân tán: từ khám phá đến trình bày Synthesizing scatterplot matrices: from exploration to presentation Giới thiệu Chúng ta đã cùng nhau đi qua một hành trình chi tiết để làm chủ biểu đồ ma trận phân tán, một trong những công cụ nền tảng và mạnh mẽ nhất trong bộ công cụ của nhà phân tích dữ liệu.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Nền tảng lý thuyết cốt lõi**
+- **Quy trình phương pháp luận tổng quát**
+- **Ví dụ minh họa tổng hợp**
+- **Tổng kết**
+- **Những điểm chính cần nắm vững**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c3/tong-hop-chuoi-bieu-do-ma-tran-phan-tan/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Làm chủ các tùy chọn marker</h3>
-    <p>Làm chủ các tùy chọn marker trong biểu đồ ma trận phân tán Mastering marker options in scatterplot matrix graphs Giới thiệu Trong bài học giới thiệu, chúng ta đã hiểu được tầm quan trọng của biểu đồ ma trận phân tán như một công cụ khám phá dữ liệu mạnh mẽ. Mộ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk22u1/c3/lam-chu-cac-tuy-chon-marker/" target="_blank" rel="noopener">Làm chủ các Tùy chọn Marker</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>3. Đồ thị MA trận phân tán</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Tinh chỉnh trục và tiêu đề</h3>
-    <p>Tinh chỉnh trục và tiêu đề trong biểu đồ ma trận Controlling axes and titles in scatterplot matrix graphs Giới thiệu Trong bài học trước, chúng ta đã thành công trong việc làm chủ các marker, biến những điểm dữ liệu đơn giản thành các ký hiệu giàu thông tin. G Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk22u1/c3/tinh-chinh-truc-va-tieu-de/" target="_blank" rel="noopener">Tinh chỉnh Trục và Tiêu đề</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Kỹ thuật nâng cao cho MA trận và nhóm</h3>
-    <p>Kỹ thuật nâng cao cho ma trận và phân tích theo nhóm Advanced techniques for matrix layout and grouped analysis Giới thiệu Trong hai bài học đầu tiên, chúng ta đã xây dựng một nền tảng vững chắc bằng cách học cách kiểm soát từng chi tiết nhỏ nhất của biểu đồ m Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk22u1/c3/ky-thuat-nang-cao-cho-ma-tran-va-nhom/" target="_blank" rel="noopener">Kỹ thuật Nâng cao cho Ma trận và Nhóm</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk22u1/c3/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Bài tập thực hành tổng hợp</h3>
-    <p>Bài tập thực hành tổng hợp biểu đồ ma trận phân tán Comprehensive practice exercise for scatterplot matrix graphs Tổng quan Chào mừng bạn đến với bài học cuối cùng trong chuỗi bài học về biểu đồ ma trận phân tán! Sau khi đã đi qua ba bài học chi tiết, từ việc  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk22u1/c3/bai-tap-thuc-hanh-tong-hop/" target="_blank" rel="noopener">Bài tập Thực hành Tổng hợp</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 5: Tổng hợp chuỗi biểu đồ MA trận phân tán</h3>
-    <p>Tổng hợp biểu đồ ma trận phân tán: từ khám phá đến trình bày Synthesizing scatterplot matrices: from exploration to presentation Giới thiệu Chúng ta đã cùng nhau đi qua một hành trình chi tiết để làm chủ biểu đồ ma trận phân tán, một trong những công cụ nền tả Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk22u1/c3/tong-hop-chuoi-bieu-do-ma-tran-phan-tan/" target="_blank" rel="noopener">Tổng hợp chuỗi Biểu đồ ma trận phân tán</a>.</p>
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập môi trường, ước lượng mô hình và kiểm định chẩn đoán toàn diện
 version 18.0
 clear all
 set more off
+import delimited "sachktl_empirical_ecodata.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_msitk22u1_c03_ecodata.csv", clear encoding("utf-8")
 describe
-summarize
+summarize y x1 x2 x3, detail
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
+* 1. Ước lượng mô hình cơ sở và kiểm định phương sai thay đổi / đa cộng tuyến / dạng hàm
+regress y x1 x2 x3
 estat hettest
+estat imtest, white
 estat vif
+estat ovtest
+
+* 2. Ước lượng với sai số chuẩn vững White HC1 và xuất tác động biên
+regress y c.x1##c.x2 x3, vce(robust)
+margins, dydx(x1 x2 x3)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện phân tích kinh tế lượng và thực thi kiểm định chẩn đoán
 library(tidyverse)
 library(lmtest)
 library(sandwich)
+library(car)
 
-df <- read.csv("sachktl_msitk22u1_c03_ecodata.csv")
+df <- read.csv("sachktl_empirical_ecodata.csv")
 summary(df)
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+# 1. Ước lượng mô hình tuyến tính và kiểm định Breusch-Pagan, RESET, VIF
 fit <- lm(y ~ x1 + x2 + x3, data = df)
+bptest(fit)
+resettest(fit, power = 2:3, type = "fitted")
+vif(fit)
+
+# 2. Xuất bảng hệ số ước lượng với sai số chuẩn vững HC1
 coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
 ```
 
@@ -140,34 +246,52 @@ coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và thực thi ước lượng kèm chẩn đoán phần dư
 import pandas as pd
+import statsmodels.api as sm
 import statsmodels.formula.api as smf
+from statsmodels.stats.diagnostic import het_breuschpagan, linear_reset
+from statsmodels.stats.outliers_influence import variance_inflation_factor
 
-df = pd.read_csv("sachktl_msitk22u1_c03_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_empirical_ecodata.csv")
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
+# 1. Ước lượng mô hình với sai số chuẩn vững HC1
 model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
 print(model.summary())
+
+# 2. Kiểm định phương sai thay đổi Breusch-Pagan, Ramsey RESET và hệ số VIF
+bp_lm, bp_pval, _, _ = het_breuschpagan(model.resid, model.model.exog)
+reset_res = linear_reset(model, power=2, use_f=True)
+X = sm.add_constant(df[["x1", "x2", "x3"]].dropna())
+vifs = {col: variance_inflation_factor(X.values, i) for i, col in enumerate(X.columns)}
+print(f"Breusch-Pagan p={bp_pval:.4f} | RESET p={reset_res.pvalue:.4f} | VIF={vifs}")
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 03: 3. đồ thị MA trận phân tán trên SachKTL"
+  title="Hướng dẫn thực hành 3. Đồ thị MA trận phân tán trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 03 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Làm chủ các Tùy chọn Marker | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c3/lam-chu-cac-tuy-chon-marker/) |
-| **Bài 02** | Tinh chỉnh Trục và Tiêu đề | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c3/tinh-chinh-truc-va-tieu-de/) |
-| **Bài 03** | Kỹ thuật Nâng cao cho Ma trận và Nhóm | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c3/ky-thuat-nang-cao-cho-ma-tran-va-nhom/) |
-| **Bài 04** | Bài tập Thực hành Tổng hợp | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c3/bai-tap-thuc-hanh-tong-hop/) |
-| **Bài 05** | Tổng hợp chuỗi Biểu đồ ma trận phân tán | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c3/tong-hop-chuoi-bieu-do-ma-tran-phan-tan/) |
+| **3.1** | Làm chủ các tùy chọn marker | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c3/lam-chu-cac-tuy-chon-marker/) |
+| **3.2** | Tinh chỉnh trục và tiêu đề | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c3/tinh-chinh-truc-va-tieu-de/) |
+| **3.3** | Kỹ thuật nâng cao cho MA trận và nhóm | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c3/ky-thuat-nang-cao-cho-ma-tran-va-nhom/) |
+| **3.4** | Bài tập thực hành tổng hợp | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c3/bai-tap-thuc-hanh-tong-hop/) |
+| **3.5** | Tổng hợp chuỗi biểu đồ MA trận phân tán | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk22u1/c3/tong-hop-chuoi-bieu-do-ma-tran-phan-tan/) |

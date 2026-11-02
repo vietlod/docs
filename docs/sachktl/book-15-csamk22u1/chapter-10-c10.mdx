@@ -1,19 +1,19 @@
 ---
 id: chapter-10-c10
-title: "Chương 10: 10. giới thiệu về hồi quy phi tuyến"
-sidebar_label: "Chương 10: 10. Giới thiệu về hồi quy phi tuyến"
+title: "10. Giới thiệu về hồi quy phi tuyến"
+sidebar_label: "10. Giới thiệu về hồi quy phi tuyến"
 sidebar_position: 11
-description: "Hướng dẫn thực hành How-To Chương 10: 10. giới thiệu về hồi quy phi tuyến thuộc bộ sách Kinh tế lượng vi mô sử dụng Stata trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 10. Giới thiệu về hồi quy phi tuyến thuộc giáo trình Kinh tế lượng vi mô sử dụng Stata trên SachKTL kèm công thức toán học, phân tích 5 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 10: 10. giới thiệu về hồi quy phi tuyến
+# 10. Giới thiệu về hồi quy phi tuyến
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 10: 10. giới thiệu về hồi quy phi tuyến** thuộc [**Bộ sách 15: kinh tế lượng vi mô sử dụng Stata**](/sachktl/book-15-csamk22u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/csamk22u1/c10/](https://sachktl.tnsai.vn/vi/csamk22u1/c10/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **5 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **10. Giới thiệu về hồi quy phi tuyến** thuộc bộ giáo trình [**Kinh tế lượng vi mô sử dụng Stata**](/sachktl/book-15-csamk22u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/csamk22u1/c10/](https://sachktl.tnsai.vn/vi/csamk22u1/c10/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 10: 10. giới thiệu về hồi quy phi tuyến">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="10. Giới thiệu về hồi quy phi tuyến">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 15 · CHƯƠNG 10</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 10: 10. giới thiệu về hồi quy phi tuyến</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Kinh tế lượng vi mô sử dụng Stata · 5 bài học chuyên sâu</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng vi mô sử dụng Stata</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">10. Giới thiệu về hồi quy phi tuyến</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng ứng dụng, mô hình hóa thống kê và kiểm định giả thuyết · 5 bài học chuy</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,98 +41,203 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Giới thiệu hồi quy phi tuyến cho biến kết quả nhị phân Introduction to Nonlinear Regression for Binary outcomes Tổng quan về chuỗi bài học hồi quy phi tuyến Chào mừng các bạn sinh viên đến với chuỗi bài học về một trong những công cụ mạnh mẽ và phổ biến nhất trong kinh tế lượng ứng dụng: hồi quy phi tuyến. Trong thực tế, rất nhiều câu hỏi kinh tế không thể được trả lời bằng các mối quan hệ tuyến tính đơn giản. Ví dụ, quyết định đi làm hay ở nhà, lựa chọn mua một sản phẩm hay không, một doanh nghiệp quyết định phá sản hay tiếp tục hoạt động – tất cả đều là những biến kết quả chỉ nhận hai giá
+Giới thiệu hồi quy phi tuyến cho biến kết quả nhị phân Introduction to Nonlinear Regression for Binary outcomes Tổng quan về chuỗi bài học hồi quy phi tuyến Chào mừng các bạn sinh viên đến với chuỗi bài học về một trong những công cụ mạnh mẽ và phổ biến nhất trong kinh tế lượng ứng dụng: hồi quy phi tuyến. Trong thực tế, rất nhiều câu hỏi kinh tế không thể được trả lời bằng các mối quan hệ tuyến tính đơn giản.
 
-- **Chủ đề học thuật trọng tâm**: Tổng quan về chuỗi bài học hồi quy phi tuyến, Cấu trúc chuỗi bài học, Kiến thức tiên quyết cần có, Bạn cần chuẩn bị gì?, Mục tiêu học tập.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+Y_i = \beta_0 + \sum_{k=1}^K \beta_k X_{ik} + \varepsilon_i, \quad \mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0 \tag*{[1]}
+$$
+
+$$
+\widehat{\text{Var}}_{\text{HC1}}(\hat{\boldsymbol{\beta}}) = \frac{N}{N - K - 1}\left(\mathbf{X}'\mathbf{X}\right)^{-1}\left(\sum_{i=1}^N \hat{\varepsilon}_i^2 \mathbf{x}_i \mathbf{x}_i'\right)\left(\mathbf{X}'\mathbf{X}\right)^{-1} \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Dạng hàm tuyến tính theo tham số được xác định đúng, không bỏ sót biến giải thích quan trọng có tương quan với các biến trong mô hình.
+2. Kỳ vọng có điều kiện của sai số bằng không $\mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0$, đảm bảo tính không chệch và vững tiệm cận của ước lượng.
+3. Ma trận thiết kế $\mathbf{X}$ có hạng cột đầy đủ, không xảy ra đa cộng tuyến hoàn hảo và sử dụng sai số chuẩn vững HC1/Cluster khi có phương sai thay đổi.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 10 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/csamk22u1/c10/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Khi tồn tại biến giải thích nội sinh do đồng thời hai chiều, sai số đo lường hoặc bỏ sót biến không quan sát được, ước lượng OLS bị chệch và không vững; cần chuyển sang ước lượng biến công cụ IV/2SLS hoặc GMM."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Mô hình Probit - Lý thuyết và thực hành ước lượng trong Stata
+
+Mô hình Probit: Lý thuyết và thực hành ước lượng trong Stata Probit model: Theory and estimation practice in Stata Giới thiệu về mô hình lựa chọn nhị phân Chào mừng các bạn quay trở lại với chuỗi bài học về hồi quy phi tuyến! Ở bài giới thiệu, chúng ta đã biết rằng có rất nhiều biến số kinh tế quan trọng mà chúng ta muốn giải thích lại chỉ nhận hai giá trị, ví dụ như một người quyết định đi làm hay không, một công ty có trả cổ tức hay không. Đây là các biến kết quả nhị phân .
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu về mô hình lựa chọn nhị phân**
+- **Nền tảng lý thuyết của mô hình Probit**
+- **Ý tưởng cốt lõi: Từ chỉ số tiềm ẩn đến xác suất**
+- **Thực hành ước lượng mô hình Probit trong Stata**
+- **Bước 1: Tải và khám phá dữ liệu**
+- **Bước 2: Ước lượng mô hình Probit**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c10/nhap-mon-du-lieu-bang-va-kham-pha-trong-stata/)
+
+### 2.2. Diễn giải kết quả Probit - Sức mạnh của tác động biên
+
+Diễn giải kết quả Probit: Sức mạnh của tác động biên Interpreting probit results: The power of marginal effects Tại sao hệ số Probit chưa đủ? Trong bài học trước, chúng ta đã cùng nhau ước lượng thành công mô hình Probit đầu tiên và học cách diễn giải dấu cũng như ý nghĩa thống kê của các hệ số. Chúng ta biết rằng điểm trung bình cao hơn làm tăng khả năng đi làm thêm, trong khi thu nhập gia đình cao hơn làm giảm khả năng này. Tuy nhiên, một câu hỏi quan trọng vẫn còn bỏ ngỏ: "Tăng bao nhiêu?" và "Giảm bao nhiêu?".
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Tại sao hệ số Probit chưa đủ?**
+- **Lý thuyết về tác động biên trong mô hình Probit**
+- **Bản chất phi tuyến và tác động biên thay đổi**
+- **Các phương pháp tính toán tác động biên**
+- **Quy trình tính toán tác động biên trong Stata**
+- **Ví dụ thực hành: Diễn giải quyết định đi làm thêm**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c10/mo-hinh-ols-gop-va-tac-dong-ngau-nhien-re/)
+
+### 2.3. Mô hình Logit và so sánh với Probit, mô hình xác suất tuyến tính
+
+Mô hình Logit và so sánh với Probit, mô hình xác suất tuyến tính Logit model and comparison with Probit and the linear probability model Mở rộng bộ công cụ phân tích Ở hai bài học trước, chúng ta đã đi sâu vào mô hình Probit, từ lý thuyết nền tảng đến cách ước lượng và diễn giải kết quả thông qua tác động biên. Các bạn đã nắm được rằng Probit là một công cụ mạnh mẽ để mô hình hóa các biến kết quả nhị phân, khắc phục được những hạn chế cơ bản của hồi quy OLS thông thường.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Mở rộng bộ công cụ phân tích**
+- **Nền tảng lý thuyết: Logit và LPM**
+- **Mô hình Logit**
+- **Mô hình xác suất tuyến tính**
+- **Thực hành so sánh các mô hình trong Stata**
+- **Bước 1: Ước lượng mô hình Logit và tính AME**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c10/mo-hinh-tac-dong-co-dinh-fe-chuyen-sau/)
+
+### 2.4. Các chủ đề nâng cao và bài tập thực hành tổng hợp
+
+Các chủ đề nâng cao và bài tập thực hành tổng hợp Advanced topics and comprehensive practice exercises Nâng tầm phân tích của bạn Chào mừng các bạn đến với bài học cuối cùng trong chuỗi thực hành về mô hình lựa chọn nhị phân! Sau khi đã thành thạo việc ước lượng và diễn giải các mô hình Probit và Logit cơ bản, chúng ta đã có một nền tảng rất vững chắc. Tuy nhiên, các mối quan hệ kinh tế trong thế giới thực thường phức tạp hơn nhiều. Tác động của một yếu tố này có thể phụ thuộc vào một yếu tố khác.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Nâng tầm phân tích của bạn**
+- **Lý thuyết về các chủ đề nâng cao**
+- **Biến tương tác trong mô hình Probit/Logit**
+- **Ước lượng bình phương nhỏ nhất phi tuyến**
+- **Thực hành các kỹ thuật nâng cao trong Stata**
+- **Ước lượng và diễn giải mô hình có biến tương tác**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c10/cac-chu-de-nang-cao-va-bai-tap-thuc-hanh-tong-hop/)
+
+### 2.5. Tổng kết kiến thức về các mô hình lựa chọn nhị phân
+
+Tổng hợp kiến thức về các mô hình lựa chọn nhị phân Synthesis of knowledge on binary choice models Từ lý thuyết đến nghệ thuật phân tích dữ liệu Chào mừng các bạn đến với bài viết cuối cùng trong chuỗi bài học về hồi quy phi tuyến. Chúng ta đã cùng nhau trải qua một hành trình đầy thú vị, từ việc nhận ra những hạn chế của mô hình tuyến tính cổ điển khi đối mặt với các biến kết quả nhị phân, cho đến việc làm chủ hai công cụ mạnh mẽ là mô hình Probit và Logit.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Từ lý thuyết đến nghệ thuật phân tích dữ liệu**
+- **Hệ thống hóa nền tảng lý thuyết**
+- **Quy trình phân tích chuẩn cho mô hình lựa chọn nhị phân**
+- **Tổng hợp lại bài toán sinh viên làm thêm**
+- **Hướng phát triển và các chủ đề nâng cao**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c10/tong-ket-kien-thuc-ve-cac-mo-hinh-lua-chon-nhi-phan/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Mô hình Probit - lý thuyết và thực hành ước lượng trong Stata</h3>
-    <p>Mô hình Probit: Lý thuyết và thực hành ước lượng trong Stata Probit model: Theory and estimation practice in Stata Giới thiệu về mô hình lựa chọn nhị phân Chào mừng các bạn quay trở lại với chuỗi bài học về hồi quy phi tuyến! Ở bài giới thiệu, chúng ta đã biết Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c10/nhap-mon-du-lieu-bang-va-kham-pha-trong-stata/" target="_blank" rel="noopener">Mô hình Probit - Lý thuyết và thực hành ước lượng trong Stata</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>10. Giới thiệu về hồi quy phi tuyến</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Diễn giải kết quả Probit - sức mạnh của tác động biên</h3>
-    <p>Diễn giải kết quả Probit: Sức mạnh của tác động biên Interpreting probit results: The power of marginal effects Tại sao hệ số Probit chưa đủ? Trong bài học trước, chúng ta đã cùng nhau ước lượng thành công mô hình Probit đầu tiên và học cách diễn giải dấu cũng Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c10/mo-hinh-ols-gop-va-tac-dong-ngau-nhien-re/" target="_blank" rel="noopener">Diễn giải kết quả Probit - Sức mạnh của tác động biên</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Mô hình Logit và so sánh với Probit, mô hình xác suất tuyến tính</h3>
-    <p>Mô hình Logit và so sánh với Probit, mô hình xác suất tuyến tính Logit model and comparison with Probit and the linear probability model Mở rộng bộ công cụ phân tích Ở hai bài học trước, chúng ta đã đi sâu vào mô hình Probit, từ lý thuyết nền tảng đến cách ước Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c10/mo-hinh-tac-dong-co-dinh-fe-chuyen-sau/" target="_blank" rel="noopener">Mô hình Logit và so sánh với Probit, mô hình xác suất tuyến tính</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c10/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Các chủ đề nâng cao và bài tập thực hành tổng hợp</h3>
-    <p>Các chủ đề nâng cao và bài tập thực hành tổng hợp Advanced topics and comprehensive practice exercises Nâng tầm phân tích của bạn Chào mừng các bạn đến với bài học cuối cùng trong chuỗi thực hành về mô hình lựa chọn nhị phân! Sau khi đã thành thạo việc ước lượ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c10/cac-chu-de-nang-cao-va-bai-tap-thuc-hanh-tong-hop/" target="_blank" rel="noopener">Các chủ đề nâng cao và bài tập thực hành tổng hợp</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 5: Tổng kết kiến thức về các mô hình lựa chọn nhị phân</h3>
-    <p>Tổng hợp kiến thức về các mô hình lựa chọn nhị phân Synthesis of knowledge on binary choice models Từ lý thuyết đến nghệ thuật phân tích dữ liệu Chào mừng các bạn đến với bài viết cuối cùng trong chuỗi bài học về hồi quy phi tuyến. Chúng ta đã cùng nhau trải q Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c10/tong-ket-kien-thuc-ve-cac-mo-hinh-lua-chon-nhi-phan/" target="_blank" rel="noopener">Tổng kết kiến thức về các mô hình lựa chọn nhị phân</a>.</p>
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập môi trường, ước lượng mô hình và kiểm định chẩn đoán toàn diện
 version 18.0
 clear all
 set more off
+import delimited "sachktl_empirical_ecodata.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_csamk22u1_c10_ecodata.csv", clear encoding("utf-8")
 describe
-summarize
+summarize y x1 x2 x3, detail
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
+* 1. Ước lượng mô hình cơ sở và kiểm định phương sai thay đổi / đa cộng tuyến / dạng hàm
+regress y x1 x2 x3
 estat hettest
+estat imtest, white
 estat vif
+estat ovtest
+
+* 2. Ước lượng với sai số chuẩn vững White HC1 và xuất tác động biên
+regress y c.x1##c.x2 x3, vce(robust)
+margins, dydx(x1 x2 x3)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện phân tích kinh tế lượng và thực thi kiểm định chẩn đoán
 library(tidyverse)
 library(lmtest)
 library(sandwich)
+library(car)
 
-df <- read.csv("sachktl_csamk22u1_c10_ecodata.csv")
+df <- read.csv("sachktl_empirical_ecodata.csv")
 summary(df)
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+# 1. Ước lượng mô hình tuyến tính và kiểm định Breusch-Pagan, RESET, VIF
 fit <- lm(y ~ x1 + x2 + x3, data = df)
+bptest(fit)
+resettest(fit, power = 2:3, type = "fitted")
+vif(fit)
+
+# 2. Xuất bảng hệ số ước lượng với sai số chuẩn vững HC1
 coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
 ```
 
@@ -140,34 +245,52 @@ coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và thực thi ước lượng kèm chẩn đoán phần dư
 import pandas as pd
+import statsmodels.api as sm
 import statsmodels.formula.api as smf
+from statsmodels.stats.diagnostic import het_breuschpagan, linear_reset
+from statsmodels.stats.outliers_influence import variance_inflation_factor
 
-df = pd.read_csv("sachktl_csamk22u1_c10_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_empirical_ecodata.csv")
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
+# 1. Ước lượng mô hình với sai số chuẩn vững HC1
 model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
 print(model.summary())
+
+# 2. Kiểm định phương sai thay đổi Breusch-Pagan, Ramsey RESET và hệ số VIF
+bp_lm, bp_pval, _, _ = het_breuschpagan(model.resid, model.model.exog)
+reset_res = linear_reset(model, power=2, use_f=True)
+X = sm.add_constant(df[["x1", "x2", "x3"]].dropna())
+vifs = {col: variance_inflation_factor(X.values, i) for i, col in enumerate(X.columns)}
+print(f"Breusch-Pagan p={bp_pval:.4f} | RESET p={reset_res.pvalue:.4f} | VIF={vifs}")
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 10: 10. giới thiệu về hồi quy phi tuyến trên SachKTL"
+  title="Hướng dẫn thực hành 10. Giới thiệu về hồi quy phi tuyến trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 10 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Mô hình Probit - Lý thuyết và thực hành ước lượng trong Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c10/nhap-mon-du-lieu-bang-va-kham-pha-trong-stata/) |
-| **Bài 02** | Diễn giải kết quả Probit - Sức mạnh của tác động biên | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c10/mo-hinh-ols-gop-va-tac-dong-ngau-nhien-re/) |
-| **Bài 03** | Mô hình Logit và so sánh với Probit, mô hình xác suất tuyến tính | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c10/mo-hinh-tac-dong-co-dinh-fe-chuyen-sau/) |
-| **Bài 04** | Các chủ đề nâng cao và bài tập thực hành tổng hợp | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c10/cac-chu-de-nang-cao-va-bai-tap-thuc-hanh-tong-hop/) |
-| **Bài 05** | Tổng kết kiến thức về các mô hình lựa chọn nhị phân | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c10/tong-ket-kien-thuc-ve-cac-mo-hinh-lua-chon-nhi-phan/) |
+| **10.1** | Mô hình Probit - Lý thuyết và thực hành ước lượng trong Stata | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c10/nhap-mon-du-lieu-bang-va-kham-pha-trong-stata/) |
+| **10.2** | Diễn giải kết quả Probit - Sức mạnh của tác động biên | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c10/mo-hinh-ols-gop-va-tac-dong-ngau-nhien-re/) |
+| **10.3** | Mô hình Logit và so sánh với Probit, mô hình xác suất tuyến tính | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c10/mo-hinh-tac-dong-co-dinh-fe-chuyen-sau/) |
+| **10.4** | Các chủ đề nâng cao và bài tập thực hành tổng hợp | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c10/cac-chu-de-nang-cao-va-bai-tap-thuc-hanh-tong-hop/) |
+| **10.5** | Tổng kết kiến thức về các mô hình lựa chọn nhị phân | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c10/tong-ket-kien-thuc-ve-cac-mo-hinh-lua-chon-nhi-phan/) |

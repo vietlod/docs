@@ -1,6 +1,7 @@
 .stepsContainer {
   position: relative;
-  padding-left: 45px;
+  padding-left: 52px;
+  margin: 1.5rem 0 2rem 0;
   counter-reset: step-counter;
 }
 
@@ -10,43 +11,98 @@
   padding: 0;
 }
 
-.stepsContainer > ol > li {
+/* Support all 3 child structures: <ol><li>, <div className="step-item">, and .stepCard */
+.stepsContainer > ol > li,
+.stepsContainer > :global(.step-item),
+.stepCard {
   position: relative;
-  margin-bottom: 20px;
-  padding-bottom: 10px;
+  margin-bottom: 1.15rem;
+  padding: 1.1rem 1.35rem;
+  background: var(--ifm-card-background-color, var(--ifm-background-surface-color, #ffffff));
+  border: 1px solid var(--ifm-color-emphasis-200, #e2e8f0);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
-.stepsContainer > ol > li::before {
+.stepsContainer > ol > li:hover,
+.stepsContainer > :global(.step-item):hover,
+.stepCard:hover {
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 6px 16px rgba(2, 132, 199, 0.1);
+}
+
+/* Numbered Step Circle (1, 2, 3...) */
+.stepsContainer > ol > li::before,
+.stepsContainer > :global(.step-item)::before,
+.stepCard::before {
   content: counter(step-counter);
   counter-increment: step-counter;
   position: absolute;
-  top: -5px;
-  left: -48px;
-  width: 30px;
-  height: 30px;
-  background-color: var(--step-bg, #fff);
-  border: 2px solid var(--ifm-color-primary);
+  top: 1rem;
+  left: -52px;
+  width: 34px;
+  height: 34px;
+  background: linear-gradient(135deg, var(--ifm-color-primary) 0%, var(--ifm-color-primary-dark, #0369a1) 100%);
+  border: 2px solid var(--ifm-background-color, #ffffff);
+  box-shadow: 0 0 0 2px var(--ifm-color-primary), 0 3px 8px rgba(2, 132, 199, 0.25);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
-  color: var(--step-color, initial);
+  font-weight: 800;
+  font-size: 0.92rem;
+  color: #ffffff;
+  z-index: 2;
+}
+
+/* Vertical Connector Line */
+.stepsContainer > ol > li::after,
+.stepsContainer > :global(.step-item)::after,
+.stepCard::after {
+  content: '';
+  position: absolute;
+  top: calc(1rem + 34px);
+  bottom: calc(-1.15rem - 1rem);
+  left: -36px;
+  width: 2px;
+  background: linear-gradient(
+    180deg,
+    var(--ifm-color-primary) 0%,
+    var(--ifm-color-emphasis-300, #cbd5e1) 100%
+  );
   z-index: 1;
 }
 
-.stepsContainer > ol > li::after {
-  content: '';
-  position: absolute;
-  top: 15px;
-  bottom: -15px;
-  left: -32px;
-  width: 2px;
-  background-color: var(--line-color, #e0e0e0);
+.stepsContainer > ol > li:last-child,
+.stepsContainer > :global(.step-item):last-child,
+.stepCard:last-child {
+  margin-bottom: 0;
 }
 
-.stepsContainer > ol > li:last-child::after {
+.stepsContainer > ol > li:last-child::after,
+.stepsContainer > :global(.step-item):last-child::after,
+.stepCard:last-child::after {
   display: none;
+}
+
+/* Step Headings & Paragraphs inside Step Cards */
+.stepsContainer > :global(.step-item) > h3,
+.stepsContainer > :global(.step-item) > h4,
+.stepCard > h3,
+.stepCard > h4 {
+  margin-top: 0 !important;
+  margin-bottom: 0.45rem !important;
+  font-size: 1.06rem;
+  font-weight: 700;
+  color: var(--ifm-heading-color, var(--ifm-font-color-base));
+  line-height: 1.4;
+}
+
+.stepsContainer > :global(.step-item) > p:last-child,
+.stepBody > p:last-child,
+.stepsContainer > ol > li > p:last-child {
+  margin-bottom: 0;
 }
 
 /* Reset styles for nested lists */
@@ -58,14 +114,32 @@
 
 .stepsContainer ul {
   list-style: disc;
+  padding-left: 1.25rem;
+  margin-bottom: 0.5rem;
 }
 
 /* Dark mode adjustments */
-[data-theme='dark'] .stepsContainer > ol > li::before {
-  --step-bg: var(--ifm-background-color);
-  --step-color: var(--ifm-color-primary);
+[data-theme='dark'] .stepsContainer > ol > li,
+[data-theme='dark'] .stepsContainer > :global(.step-item),
+[data-theme='dark'] .stepCard {
+  background: rgba(30, 41, 59, 0.65);
+  border-color: var(--ifm-color-emphasis-300, #334155);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
-[data-theme='dark'] .stepsContainer > ol > li::after {
-  --line-color: var(--ifm-color-emphasis-300);
+[data-theme='dark'] .stepsContainer > ol > li::before,
+[data-theme='dark'] .stepsContainer > :global(.step-item)::before,
+[data-theme='dark'] .stepCard::before {
+  border-color: #0f172a;
+  color: #ffffff;
+}
+
+[data-theme='dark'] .stepsContainer > ol > li::after,
+[data-theme='dark'] .stepsContainer > :global(.step-item)::after,
+[data-theme='dark'] .stepCard::after {
+  background: linear-gradient(
+    180deg,
+    var(--ifm-color-primary) 0%,
+    var(--ifm-color-emphasis-300, #334155) 100%
+  );
 }

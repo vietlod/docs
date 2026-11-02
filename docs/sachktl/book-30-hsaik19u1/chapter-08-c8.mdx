@@ -1,19 +1,19 @@
 ---
 id: chapter-08-c8
-title: "Chương 08: 8. hồi quy logistic"
-sidebar_label: "Chương 08: 8. Hồi quy logistic"
+title: "8. Hồi quy logistic"
+sidebar_label: "8. Hồi quy logistic"
 sidebar_position: 9
-description: "Hướng dẫn thực hành How-To Chương 08: 8. hồi quy logistic thuộc bộ sách Phân tích dữ liệu đa biến ứng dụng trong nghiên cứu trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 8. Hồi quy logistic thuộc giáo trình Phân tích dữ liệu đa biến ứng dụng trong nghiên cứu trên SachKTL kèm công thức toán học, phân tích 6 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 08: 8. hồi quy logistic
+# 8. Hồi quy logistic
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 08: 8. hồi quy logistic** thuộc [**Bộ sách 30: phân tích dữ liệu đa biến ứng dụng trong nghiên cứu**](/sachktl/book-30-hsaik19u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/hsaik19u1/c8/](https://sachktl.tnsai.vn/vi/hsaik19u1/c8/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **6 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **8. Hồi quy logistic** thuộc bộ giáo trình [**Phân tích dữ liệu đa biến ứng dụng trong nghiên cứu**](/sachktl/book-30-hsaik19u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/hsaik19u1/c8/](https://sachktl.tnsai.vn/vi/hsaik19u1/c8/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 08: 8. hồi quy logistic">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="8. Hồi quy logistic">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 30 · CHƯƠNG 08</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 08: 8. hồi quy logistic</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Phân tích dữ liệu đa biến ứng dụng trong nghiên cứu · 6 bài học </text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Phân tích dữ liệu đa biến ứng dụng t</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">8. Hồi quy logistic</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng ứng dụng, mô hình hóa thống kê và kiểm định giả thuyết · 6 bài học chuy</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,102 +41,218 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Giới thiệu chuỗi bài học hồi quy logistic với biến phụ thuộc nhị phân An Introduction to Logistic Regression with a Binary Dependent Variable Series Tổng quan về hồi quy logistic và chuỗi bài học Chào các bạn sinh viên, chào mừng đến với chuỗi bài học về một trong những kỹ thuật quan trọng và được ứng dụng rộng rãi nhất trong kinh tế lượng hiện đại: Hồi quy Logistic. Trong nghiên cứu kinh tế và kinh doanh, chúng ta thường xuyên gặp phải những câu hỏi không chỉ về "bao nhiêu" mà còn về "có hoặc không". Ví dụ, một khách hàng có quyết định mua sản phẩm hay không? Một doanh nghiệp có nguy cơ phá
+Giới thiệu chuỗi bài học hồi quy logistic với biến phụ thuộc nhị phân An Introduction to Logistic Regression with a Binary Dependent Variable Series Tổng quan về hồi quy logistic và chuỗi bài học Chào các bạn sinh viên, chào mừng đến với chuỗi bài học về một trong những kỹ thuật quan trọng và được ứng dụng rộng rãi nhất trong kinh tế lượng hiện đại: Hồi quy Logistic. Trong nghiên cứu kinh tế và kinh doanh, chúng ta thường xuyên gặp phải những câu hỏi không chỉ về "bao nhiêu" mà còn về "có hoặc không". Ví dụ, một khách hàng có quyết định mua sản phẩm hay không?
 
-- **Chủ đề học thuật trọng tâm**: Tổng quan về hồi quy logistic và chuỗi bài học, Cấu trúc chuỗi bài học về hồi quy logistic, Kiến thức tiên quyết cần chuẩn bị, Những gì bạn cần biết trước khi bắt đầu:, Mục tiêu học tập của chuỗi bài.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+Y_i = \beta_0 + \sum_{k=1}^K \beta_k X_{ik} + \varepsilon_i, \quad \mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0 \tag*{[1]}
+$$
+
+$$
+\widehat{\text{Var}}_{\text{HC1}}(\hat{\boldsymbol{\beta}}) = \frac{N}{N - K - 1}\left(\mathbf{X}'\mathbf{X}\right)^{-1}\left(\sum_{i=1}^N \hat{\varepsilon}_i^2 \mathbf{x}_i \mathbf{x}_i'\right)\left(\mathbf{X}'\mathbf{X}\right)^{-1} \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Dạng hàm tuyến tính theo tham số được xác định đúng, không bỏ sót biến giải thích quan trọng có tương quan với các biến trong mô hình.
+2. Kỳ vọng có điều kiện của sai số bằng không $\mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0$, đảm bảo tính không chệch và vững tiệm cận của ước lượng.
+3. Ma trận thiết kế $\mathbf{X}$ có hạng cột đầy đủ, không xảy ra đa cộng tuyến hoàn hảo và sử dụng sai số chuẩn vững HC1/Cluster khi có phương sai thay đổi.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 08 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/hsaik19u1/c8/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Khi tồn tại biến giải thích nội sinh do đồng thời hai chiều, sai số đo lường hoặc bỏ sót biến không quan sát được, ước lượng OLS bị chệch và không vững; cần chuyển sang ước lượng biến công cụ IV/2SLS hoặc GMM."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Nền tảng của hồi quy logistic
+
+Nền tảng của hồi quy logistic và phép biến đổi logit Fundamentals of logistic regression and the logit transformation Tại sao hồi quy tuyến tính là chưa đủ? Chào mừng các bạn đã quay trở lại với chuỗi bài học về Hồi quy Logistic. Ở bài giới thiệu, chúng ta đã biết rằng mô hình này là công cụ lý tưởng cho các biến phụ thuộc nhị phân, tức là những biến chỉ nhận hai giá trị, chẳng hạn như có/không, thành công/thất bại, hoặc mua/không mua.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Tại sao hồi quy tuyến tính là chưa đủ?**
+- **Nền tảng lý thuyết của hồi quy logistic**
+- **Bước 1: Bắt đầu với xác suất**
+- **Bước 2: Chuyển đổi thành tỷ lệ chênh lệch**
+- **Bước 3: Hoàn tất với Logit**
+- **Quy trình phương pháp luận**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/hsaik19u1/c8/nen-tang-cua-hoi-quy-logistic/)
+
+### 2.2. Ước lượng và đánh giá độ phù hợp tổng thể
+
+Ước lượng mô hình và đánh giá độ phù hợp tổng thể Model estimation and assessing overall goodness-of-fit Xây dựng và kiểm tra "sức khỏe" của mô hình Ở bài học trước, chúng ta đã cùng nhau khám phá "linh hồn" của hồi quy logistic: phép biến đổi logit. Chúng ta đã hiểu tại sao cần phải biến đổi từ xác suất sang odds rồi sang logit để có một biến phụ thuộc phù hợp cho mô hình.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Xây dựng và kiểm tra "sức khỏe" của mô hình**
+- **Từ ước lượng đến đánh giá mô hình**
+- **Phương pháp ước lượng hợp lý tối đa**
+- **Đánh giá độ phù hợp tổng thể của mô hình**
+- **1. Thước đo dựa trên hàm hợp lý: -2 log likelihood**
+- **2. Các thước đo pseudo R-bình phương**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/hsaik19u1/c8/uoc-luong-va-danh-gia-do-phu-hop-tong-the/)
+
+### 2.3. Đánh giá độ chính xác dự báo của mô hình
+
+Đánh giá độ chính xác dự báo của mô hình Evaluating the predictive accuracy of the model Từ "phù hợp" đến "chính xác" Trong bài học số 2, chúng ta đã cùng nhau tìm hiểu các thước đo để đánh giá độ phù hợp tổng thể của mô hình. Các chỉ số như LR chi2 hay Pseudo R² cho chúng ta biết rằng mô hình có ý nghĩa thống kê và giải thích được một phần sự biến thiên của dữ liệu. Tuy nhiên, một mô hình "phù hợp" về mặt thống kê chưa chắc đã là một mô hình "chính xác" trong thực tế.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Từ "phù hợp" đến "chính xác"**
+- **Các thước đo độ chính xác dự báo**
+- **Ngưỡng quyết định**
+- **Ma trận phân loại**
+- **Các chỉ số hiệu suất chính**
+- **Đường cong ROC và chỉ số AUC**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/hsaik19u1/c8/danh-gia-do-chinh-xac-du-bao-cua-mo-hinh/)
+
+### 2.4. Diễn giải hệ số và các kiểm định chẩn đoán
+
+Diễn giải hệ số hồi quy và các kiểm định chẩn đoán Interpreting coefficients and performing diagnostic checks "Đọc vị" những con số và tìm kiếm những điểm bất thường Chào mừng các bạn đến với bài học thứ tư trong chuỗi bài về Hồi quy Logistic. Ở các bài trước, chúng ta đã cùng nhau xây dựng một mô hình và thực hiện các bài kiểm tra quan trọng để khẳng định rằng nó "phù hợp" với dữ liệu và có "độ chính xác dự báo" cao. Mô hình của chúng ta đã vượt qua các bài kiểm tra sức khỏe tổng quát.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **"Đọc vị" những con số và tìm kiếm những điểm bất thường**
+- **Diễn giải và chẩn đoán**
+- **Diễn giải các hệ số hồi quy**
+- **1. Hệ số Logit**
+- **2. Tỷ lệ chênh lệch )**
+- **Các kiểm định chẩn đoán**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/hsaik19u1/c8/dien-giai-he-so-va-cac-kiem-dinh-chan-doan/)
+
+### 2.5. Hướng dẫn thực hành phân tích từ A-Z trên Stata
+
+Hướng dẫn thực hành từ A-Z - Phân tích hồi quy logistic trên Stata A-Z practical guide: Conducting a logistic regression analysis in Stata Tổng hợp kiến thức và quy trình phân tích hoàn chỉnh Chào mừng các bạn đến với bài học thực hành tổng hợp của chuỗi bài Hồi quy Logistic. Trong bốn bài học vừa qua, chúng ta đã cùng nhau xây dựng một nền tảng kiến thức vững chắc. Chúng ta đã bắt đầu từ việc tìm hiểu "tại sao" cần hồi quy logistic và phép biến đổi logit kỳ diệu.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Tổng hợp kiến thức và quy trình phân tích hoàn chỉnh**
+- **Chuẩn bị và khám phá dữ liệu**
+- **Quy trình phân tích hồi quy logistic từ A-Z**
+- **Thực hành chi tiết trên Stata**
+- **Bước 1: Ước lượng mô hình và diễn giải hệ số**
+- **Bước 2: Đánh giá độ phù hợp tổng thể**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/hsaik19u1/c8/huong-dan-thuc-hanh-phan-tich-tu-a-z-tren-stata/)
+
+### 2.6. Tổng kết và định hướng nghiên cứu nâng cao
+
+Bài tổng hợp: Làm chủ hồi quy logistic từ lý thuyết đến thực hành Mastering logistic regression from theory to practice: a synthesis Tổng quan và vị thế của hồi quy logistic trong kinh tế lượng Khi nhìn lại hành trình chúng ta đã đi qua, từ những khái niệm bỡ ngỡ ban đầu đến việc thực hành một quy trình phân tích hoàn chỉnh, có thể thấy Hồi quy Logistic không chỉ là một kỹ thuật thống kê đơn thuần.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Tổng quan và vị thế của hồi quy logistic trong kinh tế lượng**
+- **Hệ thống hóa nền tảng lý thuyết**
+- **Hệ thống hóa quy trình phương pháp luận**
+- **Ví dụ thực tiễn toàn diện**
+- **Tổng kết và hướng phát triển nâng cao**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/hsaik19u1/c8/tong-ket-va-dinh-huong-nghien-cuu-nang-cao/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Nền tảng của hồi quy logistic</h3>
-    <p>Nền tảng của hồi quy logistic và phép biến đổi logit Fundamentals of logistic regression and the logit transformation Tại sao hồi quy tuyến tính là chưa đủ? Chào mừng các bạn đã quay trở lại với chuỗi bài học về Hồi quy Logistic. Ở bài giới thiệu, chúng ta đã  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsaik19u1/c8/nen-tang-cua-hoi-quy-logistic/" target="_blank" rel="noopener">Nền tảng của hồi quy logistic</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>8. Hồi quy logistic</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Ước lượng và đánh giá độ phù hợp tổng thể</h3>
-    <p>Ước lượng mô hình và đánh giá độ phù hợp tổng thể Model estimation and assessing overall goodness-of-fit Xây dựng và kiểm tra "sức khỏe" của mô hình Ở bài học trước, chúng ta đã cùng nhau khám phá "linh hồn" của hồi quy logistic: phép biến đổi logit. Chúng ta  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsaik19u1/c8/uoc-luong-va-danh-gia-do-phu-hop-tong-the/" target="_blank" rel="noopener">Ước lượng và đánh giá độ phù hợp tổng thể</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Đánh giá độ chính xác dự báo của mô hình</h3>
-    <p>Đánh giá độ chính xác dự báo của mô hình Evaluating the predictive accuracy of the model Từ "phù hợp" đến "chính xác" Trong bài học số 2, chúng ta đã cùng nhau tìm hiểu các thước đo để đánh giá độ phù hợp tổng thể của mô hình. Các chỉ số như LR chi2 hay Pseudo Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsaik19u1/c8/danh-gia-do-chinh-xac-du-bao-cua-mo-hinh/" target="_blank" rel="noopener">Đánh giá độ chính xác dự báo của mô hình</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsaik19u1/c8/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Diễn giải hệ số và các kiểm định chẩn đoán</h3>
-    <p>Diễn giải hệ số hồi quy và các kiểm định chẩn đoán Interpreting coefficients and performing diagnostic checks "Đọc vị" những con số và tìm kiếm những điểm bất thường Chào mừng các bạn đến với bài học thứ tư trong chuỗi bài về Hồi quy Logistic. Ở các bài trước, Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsaik19u1/c8/dien-giai-he-so-va-cac-kiem-dinh-chan-doan/" target="_blank" rel="noopener">Diễn giải hệ số và các kiểm định chẩn đoán</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 5: Hướng dẫn thực hành phân tích từ A-Z trên Stata</h3>
-    <p>Hướng dẫn thực hành từ A-Z - Phân tích hồi quy logistic trên Stata A-Z practical guide: Conducting a logistic regression analysis in Stata Tổng hợp kiến thức và quy trình phân tích hoàn chỉnh Chào mừng các bạn đến với bài học thực hành tổng hợp của chuỗi bài H Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsaik19u1/c8/huong-dan-thuc-hanh-phan-tich-tu-a-z-tren-stata/" target="_blank" rel="noopener">Hướng dẫn thực hành phân tích từ A-Z trên Stata</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Bước 6: Tổng kết và định hướng nghiên cứu nâng cao</h3>
-    <p>Bài tổng hợp: Làm chủ hồi quy logistic từ lý thuyết đến thực hành Mastering logistic regression from theory to practice: a synthesis Tổng quan và vị thế của hồi quy logistic trong kinh tế lượng Khi nhìn lại hành trình chúng ta đã đi qua, từ những khái niệm bỡ  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsaik19u1/c8/tong-ket-va-dinh-huong-nghien-cuu-nang-cao/" target="_blank" rel="noopener">Tổng kết và định hướng nghiên cứu nâng cao</a>.</p>
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập môi trường, ước lượng mô hình và kiểm định chẩn đoán toàn diện
 version 18.0
 clear all
 set more off
+import delimited "sachktl_empirical_ecodata.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_hsaik19u1_c08_ecodata.csv", clear encoding("utf-8")
 describe
-summarize
+summarize y x1 x2 x3, detail
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
+* 1. Ước lượng mô hình cơ sở và kiểm định phương sai thay đổi / đa cộng tuyến / dạng hàm
+regress y x1 x2 x3
 estat hettest
+estat imtest, white
 estat vif
+estat ovtest
+
+* 2. Ước lượng với sai số chuẩn vững White HC1 và xuất tác động biên
+regress y c.x1##c.x2 x3, vce(robust)
+margins, dydx(x1 x2 x3)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện phân tích kinh tế lượng và thực thi kiểm định chẩn đoán
 library(tidyverse)
 library(lmtest)
 library(sandwich)
+library(car)
 
-df <- read.csv("sachktl_hsaik19u1_c08_ecodata.csv")
+df <- read.csv("sachktl_empirical_ecodata.csv")
 summary(df)
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+# 1. Ước lượng mô hình tuyến tính và kiểm định Breusch-Pagan, RESET, VIF
 fit <- lm(y ~ x1 + x2 + x3, data = df)
+bptest(fit)
+resettest(fit, power = 2:3, type = "fitted")
+vif(fit)
+
+# 2. Xuất bảng hệ số ước lượng với sai số chuẩn vững HC1
 coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
 ```
 
@@ -144,35 +260,53 @@ coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và thực thi ước lượng kèm chẩn đoán phần dư
 import pandas as pd
+import statsmodels.api as sm
 import statsmodels.formula.api as smf
+from statsmodels.stats.diagnostic import het_breuschpagan, linear_reset
+from statsmodels.stats.outliers_influence import variance_inflation_factor
 
-df = pd.read_csv("sachktl_hsaik19u1_c08_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_empirical_ecodata.csv")
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
+# 1. Ước lượng mô hình với sai số chuẩn vững HC1
 model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
 print(model.summary())
+
+# 2. Kiểm định phương sai thay đổi Breusch-Pagan, Ramsey RESET và hệ số VIF
+bp_lm, bp_pval, _, _ = het_breuschpagan(model.resid, model.model.exog)
+reset_res = linear_reset(model, power=2, use_f=True)
+X = sm.add_constant(df[["x1", "x2", "x3"]].dropna())
+vifs = {col: variance_inflation_factor(X.values, i) for i, col in enumerate(X.columns)}
+print(f"Breusch-Pagan p={bp_pval:.4f} | RESET p={reset_res.pvalue:.4f} | VIF={vifs}")
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 08: 8. hồi quy logistic trên SachKTL"
+  title="Hướng dẫn thực hành 8. Hồi quy logistic trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 08 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Nền tảng của hồi quy logistic | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsaik19u1/c8/nen-tang-cua-hoi-quy-logistic/) |
-| **Bài 02** | Ước lượng và đánh giá độ phù hợp tổng thể | Stata 18 MP, R 4.x | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsaik19u1/c8/uoc-luong-va-danh-gia-do-phu-hop-tong-the/) |
-| **Bài 03** | Đánh giá độ chính xác dự báo của mô hình | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsaik19u1/c8/danh-gia-do-chinh-xac-du-bao-cua-mo-hinh/) |
-| **Bài 04** | Diễn giải hệ số và các kiểm định chẩn đoán | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsaik19u1/c8/dien-giai-he-so-va-cac-kiem-dinh-chan-doan/) |
-| **Bài 05** | Hướng dẫn thực hành phân tích từ A-Z trên Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsaik19u1/c8/huong-dan-thuc-hanh-phan-tich-tu-a-z-tren-stata/) |
-| **Bài 06** | Tổng kết và định hướng nghiên cứu nâng cao | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsaik19u1/c8/tong-ket-va-dinh-huong-nghien-cuu-nang-cao/) |
+| **8.1** | Nền tảng của hồi quy logistic | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsaik19u1/c8/nen-tang-cua-hoi-quy-logistic/) |
+| **8.2** | Ước lượng và đánh giá độ phù hợp tổng thể | `Stata 18 MP, R 4.x` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsaik19u1/c8/uoc-luong-va-danh-gia-do-phu-hop-tong-the/) |
+| **8.3** | Đánh giá độ chính xác dự báo của mô hình | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsaik19u1/c8/danh-gia-do-chinh-xac-du-bao-cua-mo-hinh/) |
+| **8.4** | Diễn giải hệ số và các kiểm định chẩn đoán | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsaik19u1/c8/dien-giai-he-so-va-cac-kiem-dinh-chan-doan/) |
+| **8.5** | Hướng dẫn thực hành phân tích từ A-Z trên Stata | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsaik19u1/c8/huong-dan-thuc-hanh-phan-tich-tu-a-z-tren-stata/) |
+| **8.6** | Tổng kết và định hướng nghiên cứu nâng cao | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsaik19u1/c8/tong-ket-va-dinh-huong-nghien-cuu-nang-cao/) |

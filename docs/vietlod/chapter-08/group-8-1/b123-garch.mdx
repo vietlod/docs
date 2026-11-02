@@ -1,10 +1,10 @@
 ---
 id: b123-garch
-title: "8.1.2. Hướng dẫn thực hành Mô hình ARCH tổng quát hóa của Bollerslev (GARCH)"
+title: "8.1.2. Mô hình ARCH tổng quát hóa của Bollerslev (GARCH)"
 sidebar_label: "8.1.2. Mô hình ARCH tổng quát hóa của Bollerslev (GARCH)"
 sidebar_position: 2
 slug: /vietlod/chapter-08/group-8-1/b123-garch
-description: "Tài liệu How-To hướng dẫn thực hành mô hình Mô hình ARCH tổng quát hóa của Bollerslev (GARCH) với mã garch trên Stata 18 MP, R 4.x và Python 3.11+ kèm dữ liệu thực hành và diễn giải kết quả chuẩn tạp chí."
+description: "Tài liệu How-To hướng dẫn thực hành bài 8.1.2 — Mô hình ARCH tổng quát hóa của Bollerslev (GARCH) với mã garch trên Stata 18 MP, R 4.x và Python 3.11+ kèm dữ liệu thực hành và diễn giải kết quả chuẩn tạp chí."
 keywords:
   - Mô hình ARCH tổng quát hóa của Bollerslev (GARCH)
   - garch
@@ -17,28 +17,28 @@ keywords:
   - EcoLab
 ---
 
-# 8.1.2. Hướng dẫn thực hành Mô hình ARCH tổng quát hóa của Bollerslev (GARCH)
+# 8.1.2. Mô hình ARCH tổng quát hóa của Bollerslev (GARCH)
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Bài học `8.1.2` — Mã mô hình `B123` (`garch`)** thuộc [Chương 08: Độ biến động tài chính, định giá tài sản và rủi ro hệ thống](/vietlod/chapter-08) $\to$ [Nhóm 8.1: Họ mô hình phương sai thay đổi có điều kiện (ARCH, GARCH)](/vietlod/chapter-08/group-8-1), phân loại **Cấp độ L1 — Nền tảng**. Tài liệu How-To này hướng dẫn chi tiết từ bản chất phương pháp, điều kiện áp dụng, kịch bản mã lệnh trên **Stata 18 MP**, **R 4.x** và **Python 3.11+**, tệp dữ liệu thực hành `vietlod_garch_ecodata.csv` cho đến cách đọc hiểu đồ thị hội tụ 3 phần mềm và viết phần diễn giải kết quả theo chuẩn tạp chí quốc tế.
+**Bài học `8.1.2` — Mã mô hình `B123` — Khóa định danh `garch`** thuộc [8. Độ biến động tài chính, định giá tài sản và rủi ro hệ thống](/vietlod/chapter-08) $\to$ [8.1. Họ mô hình phương sai thay đổi có điều kiện (ARCH, GARCH)](/vietlod/chapter-08/group-8-1), phân loại **Cấp độ L1 — Nền tảng**. Tài liệu How-To này hướng dẫn chi tiết từ bản chất phương pháp, điều kiện áp dụng, kịch bản mã lệnh trên **Stata 18 MP**, **R 4.x** và **Python 3.11+**, tệp dữ liệu thực hành `vietlod_garch_ecodata.csv` cho đến cách đọc hiểu đồ thị hội tụ 3 phần mềm và viết phần diễn giải kết quả theo chuẩn tạp chí quốc tế.
 
 <VideoTutorial
   title="Video hướng dẫn thực hành bài 8.1.2: Mô hình ARCH tổng quát hóa của Bollerslev (GARCH) trên Stata 18, R 4.x và Python 3.11+"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 1. Ý nghĩa phương pháp và phạm vi áp dụng
+## 8.1.2.1. Ý nghĩa phương pháp và phạm vi áp dụng
 
-### 1.1. Bản chất kinh tế lượng
+### 8.1.2.1.1. Bản chất kinh tế lượng
 
 Bổ sung các độ trễ của chính phương sai có điều kiện $\sigma_{t-j}^2$ vào phương trình (ARCH) của Engle, tạo ra cấu trúc (ARMA) tiết kiệm tham số cho phương sai giúp nắm bắt bộ nhớ biến động dài chỉ với GARCH bậc 1, 1.
 
-### 1.2. Phạm vi áp dụng và yêu cầu cấu trúc dữ liệu
+### 8.1.2.1.2. Phạm vi áp dụng và yêu cầu cấu trúc dữ liệu
 
 Chuẩn mực cơ sở để ước lượng và dự báo độ biến động tỷ suất sinh lời tài sản tài chính, tính toán giá trị có rủi ro (VaR) và định giá quyền chọn.
 
-### 1.3. Hệ phương trình toán học và điều kiện định danh
+### 8.1.2.1.3. Hệ phương trình toán học và điều kiện định danh
 
 Phương trình đặc tả cấu trúc của mô hình `garch`:
 
@@ -59,10 +59,10 @@ $$
 $$
 
 <FeatureNotAvailable
-  note="Giới hạn áp dụng: Không sử dụng trực tiếp ước lượng Mô hình ARCH tổng quát hóa của Bollerslev (GARCH) khi mẫu vi phạm nghiêm trọng điều kiện định danh hoặc chưa vượt qua bộ kiểm định bắt buộc gồm Kiểm định điều kiện dừng phương sai $\alpha_1 + \beta_1 \lt 1$, tính chu kỳ bán rã cú sốc biến động $\ln(0.5)/\ln(\alpha_1 + \beta_1)$, kiểm định ARCH-(LM) và lựa chọn phân phối nhiễu Normal, Student-$t$ hoặc GED. Trong trường hợp vi phạm, hãy tham chiếu các mô hình mở rộng cùng Nhóm 8.1 hoặc Chương 08."
+  note="Giới hạn áp dụng: Không sử dụng trực tiếp ước lượng Mô hình ARCH tổng quát hóa của Bollerslev (GARCH) khi mẫu vi phạm nghiêm trọng điều kiện định danh hoặc chưa vượt qua bộ kiểm định bắt buộc gồm Kiểm định điều kiện dừng phương sai $\alpha_1 + \beta_1 \lt 1$, tính chu kỳ bán rã cú sốc biến động $\ln(0.5)/\ln(\alpha_1 + \beta_1)$, kiểm định ARCH-(LM) và lựa chọn phân phối nhiễu Normal, Student-$t$ hoặc GED. Trong trường hợp vi phạm, hãy tham chiếu các mô hình mở rộng cùng Phần 8.1 hoặc Chương 8."
 />
 
-## 2. Ví dụ thực tế và bộ dữ liệu thực hành chuẩn hóa
+## 8.1.2.2. Ví dụ thực tế và bộ dữ liệu thực hành chuẩn hóa
 
 - **Bài toán thực nghiệm tại Việt Nam**: Ứng dụng mô hình `garch` trên bộ dữ liệu **Dự báo độ biến động cổ phiếu trụ cột HOSE** với cỡ mẫu chuẩn hóa $N = 320$ quan sát được trích xuất từ hệ sinh thái [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
 - **Bộ dữ liệu chuẩn quốc tế đối sánh**: **Bollerslev (1986) Daily Exchange Rate & Equity**, giúp người học đối chiếu trực tiếp kết quả thực hành với các giáo trình kinh tế lượng hàng đầu thế giới.
@@ -80,7 +80,7 @@ $$
       title: 'Bài giảng toàn văn trên VietLOD',
       description: 'Xem bài giảng lý thuyết chuyên sâu, chứng minh toán học và thảo luận học thuật đầy đủ của Bài 8.1.2 trên cổng VietLOD.',
       link: 'https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-08-do-bien-dong-tai-chinh-dinh-gia-tai-san-va-rui-ro-he-thong/nhom-8-1-arch-family/b123-garch',
-      badge: 'VietLOD B123'
+      badge: 'VietLOD 8.1.2'
     },
     {
       title: 'Thực thi đám mây trên EcoLab',
@@ -97,9 +97,9 @@ $$
   ]}
 />
 
-## 3. Gói lệnh phân tích và quy trình thực hành trên Stata, R và Python
+## 8.1.2.3. Gói lệnh phân tích và quy trình thực hành trên Stata, R và Python
 
-### 3.1. Bảng đối chiếu gói phần mềm và cú pháp lệnh chuẩn
+### 8.1.2.3.1. Bảng đối chiếu gói phần mềm và cú pháp lệnh chuẩn
 
 | Nền tảng phần mềm | Gói thư viện chuẩn | Cú pháp ước lượng trọng tâm | Lệnh kiểm định chẩn đoán hậu ước lượng | Hỗ trợ |
 | :--- | :--- | :--- | :--- | :--- |
@@ -107,29 +107,28 @@ $$
 | **R 4.x** | `rugarch` | `rugarch::ugarchfit(ugarchspec(variance.model = list(model = 'sGARCH', garchOrder = c(1, 1))), ret)` | `rugarch::signbias[fit]; rugarch::VaRTest[alpha = 0.05, actual, VaR]` — Kiểm định chệch dấu Engle–Ng, kiểm định Ljung–Box bình phương phần dư và hậu kiểm Kupiec POF. | <Available /> |
 | **Python 3.11+** | `arch` | `arch_model(ret, vol='GARCH', p=1, q=1).fit(disp='off')` | `het_arch[res.std_resid]; acorr_ljungbox[res.std_resid2, lags=[5, 10]]` — Kiểm định phần dư chuẩn hóa bình phương, phân phối đuôi dày và hậu kiểm rủi ro đuôi. | <Available /> |
 
-### 3.2. Quy trình 4 bước thực thi mô hình `garch`
+### 8.1.2.3.2. Quy trình 4 bước thực thi mô hình `garch`
 
 <Steps>
-
-### Bước 1. Nạp tệp dữ liệu thực hành và kiểm tra thống kê mô tả
-
-Tải tệp [`vietlod_garch_ecodata.csv`](https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_garch_ecodata.csv) vào thư mục làm việc, kiểm tra cỡ mẫu $N = 320$ quan sát, khai báo cấu trúc dữ liệu và rà soát phân phối của biến phụ thuộc `y` cùng các biến giải thích `x1`, `x2`.
-
-### Bước 2. Thực thi hàm ước lượng `garch` với sai số chuẩn vững
-
-Chạy lệnh ước lượng chính thức trên **Stata 18 MP** qua gói `base Stata`, **R 4.x** qua gói `rugarch` hoặc **Python 3.11+** qua gói `arch` kèm ma trận hiệp phương sai vững để bảo toàn hiệu lực suy luận thống kê.
-
-### Bước 3. Thực hiện bộ kiểm định chẩn đoán hậu ước lượng bắt buộc
-
-Thực thi đầy đủ các kiểm định đặc thù của mô hình gồm: **Kiểm định điều kiện dừng phương sai $\alpha_1 + \beta_1 \lt 1$, tính chu kỳ bán rã cú sốc biến động $\ln(0.5)/\ln(\alpha_1 + \beta_1)$, kiểm định ARCH-(LM) và lựa chọn phân phối nhiễu Normal, Student-$t$ hoặc GED**. Ghi nhận giá trị thống kê chẩn đoán $\text{Stat} = 0.1362$ và giá trị $p = 0.9342$.
-
-### Bước 4. Xuất bảng kết quả chuẩn tạp chí và kiểm chứng hội tụ 3 phần mềm
-
-Sử dụng `etable` trên Stata, `coeftest` trên R hoặc `summary()` trên Python để xuất bảng hệ số ước lượng, sau đó đối chiếu với bảng kết quả chuẩn và đồ thị thực nghiệm tại Mục 4.
-
+  <div className="step-item">
+    <h3>Bước 1. Nạp tệp dữ liệu thực hành và kiểm tra thống kê mô tả</h3>
+    <p>Tải tệp <a href="https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_garch_ecodata.csv"><code>vietlod_garch_ecodata.csv</code></a> vào thư mục làm việc, kiểm tra cỡ mẫu $N = 320$ quan sát, khai báo cấu trúc dữ liệu và rà soát phân phối của biến phụ thuộc <code>y</code> cùng các biến giải thích <code>x1</code>, <code>x2</code>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2. Thực thi hàm ước lượng garch với sai số chuẩn vững</h3>
+    <p>Chạy lệnh ước lượng chính thức trên <strong>Stata 18 MP</strong> qua gói <code>base Stata</code>, <strong>R 4.x</strong> qua gói <code>rugarch</code> hoặc <strong>Python 3.11+</strong> qua gói <code>arch</code> kèm ma trận hiệp phương sai vững để bảo toàn hiệu lực suy luận thống kê.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3. Thực hiện bộ kiểm định chẩn đoán hậu ước lượng bắt buộc</h3>
+    <p>Thực thi đầy đủ các kiểm định đặc thù của mô hình gồm: <strong>Kiểm định điều kiện dừng phương sai $\alpha_1 + \beta_1 \lt 1$, tính chu kỳ bán rã cú sốc biến động $\ln(0.5)/\ln(\alpha_1 + \beta_1)$, kiểm định ARCH-(LM) và lựa chọn phân phối nhiễu Normal, Student-$t$ hoặc GED</strong>. Ghi nhận giá trị thống kê chẩn đoán $\text{Stat} = 0.1362$ và giá trị $p = 0.9342$.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4. Xuất bảng kết quả chuẩn tạp chí và kiểm chứng hội tụ 3 phần mềm</h3>
+    <p>Sử dụng <code>etable</code> trên Stata, <code>coeftest</code> trên R hoặc <code>summary()</code> trên Python để xuất bảng hệ số ước lượng, sau đó đối chiếu với bảng kết quả chuẩn và đồ thị thực nghiệm tại Mục 8.1.2.4.</p>
+  </div>
 </Steps>
 
-### 3.3. Mã lệnh thực hành tái lập hoàn chỉnh trên Stata 18, R 4.x và Python 3.11+
+### 8.1.2.3.3. Mã lệnh thực hành tái lập hoàn chỉnh trên Stata 18, R 4.x và Python 3.11+
 
 <Tabs groupId="econometric-software">
   <TabItem value="stata" label="Stata 18 MP">
@@ -230,9 +229,9 @@ print("KẾT QUẢ ƯỚC LƯỢNG [garch]: beta_x1 = 1.0512 | SE = 0.0739 | p =
   </TabItem>
 </Tabs>
 
-## 4. Kết quả ước lượng thực nghiệm, đồ thị hội tụ và hướng dẫn diễn giải
+## 8.1.2.4. Kết quả ước lượng thực nghiệm, đồ thị hội tụ và hướng dẫn diễn giải
 
-### 4.1. Bảng tổng hợp kết quả ước lượng chuẩn công bố tạp chí
+### 8.1.2.4.1. Bảng tổng hợp kết quả ước lượng chuẩn công bố tạp chí
 
 Bảng dưới đây trình bày kết quả ước lượng thực nghiệm của mô hình **Mô hình ARCH tổng quát hóa của Bollerslev (GARCH)** trên tệp dữ liệu `vietlod_garch_ecodata.csv` với $N = 320$ quan sát, đối chứng đồng thời trên cả 3 nền tảng **Stata 18 MP**, **R 4.x** và **Python 3.11+**:
 
@@ -245,32 +244,31 @@ Bảng dưới đây trình bày kết quả ước lượng thực nghiệm c�
 | **Chỉ số độ khớp `R-squared`** | `0.3913` | — | `F/Wald = 104.100` | — | Chuẩn công bố Q1 |
 | **Kiểm định chẩn đoán** | `Stat = 0.1362` | — | — | `p = 0.9342` | Đạt điều kiện đặc tả |
 
-### 4.2. Đồ thị thực nghiệm đối chiếu đồng thời Stata 18, R 4.x và Python 3.11+
+### 8.1.2.4.2. Đồ thị thực nghiệm đối chiếu đồng thời Stata 18, R 4.x và Python 3.11+
 
 ![Đồ thị thực nghiệm đối chiếu 3 phần mềm cho mô hình Mô hình ARCH tổng quát hóa của Bollerslev (GARCH)](https://vietlod.tnsai.vn/src/ecoaz/img/vietlod-b123-garch.png)
 
-### 4.3. Cách diễn giải kết quả chuẩn học thuật
+### 8.1.2.4.3. Cách diễn giải kết quả chuẩn học thuật
 
 - **Diễn giải hệ số ước lượng trọng tâm**: Hệ số của biến `x1` đạt $\hat{\beta}_1 = 1.0512$ với sai số chuẩn vững $\text{SE} = 0.0739$ và thống kê kiểm định bằng $14.232$, cho thấy `x1` có **tác động thuận chiều** lên biến mục tiêu `y` và **có ý nghĩa thống kê cao ở mức 1%** trong bối cảnh dữ liệu *Dự báo độ biến động cổ phiếu trụ cột HOSE*.
 - **Diễn giải khoảng tin cậy và độ lớn tác động**: Khoảng tin cậy $95\%$ của $\hat{\beta}_1$ nằm trong dải $[0.9064, 1.1959]$, khẳng định độ ổn định của ước lượng điểm và sự hội tụ số học giữa Stata 18 MP, R 4.x và Python 3.11+.
 - **Diễn giải độ khớp mô hình và kiểm định hậu ước lượng**: Đại lượng `R-squared` đạt `$0.3913$` cùng thống kê kiểm định toàn cục đạt `$104.100$`. Thống kê chẩn đoán đạt `$0.1362$` với $p = 0.9342$, xác nhận mô hình `garch` thỏa mãn các điều kiện hậu ước lượng để suy luận chính sách.
 
-## 5. Cách tổng hợp dữ liệu từ EcoData, Finco và truy vết dữ liệu quốc tế
+## 8.1.2.5. Cách tổng hợp dữ liệu từ EcoData, Finco và truy vết dữ liệu quốc tế
 
 <Steps>
-
-### Bước 1. Khởi tạo dự án dữ liệu trên EcoData và Finco
-
-Truy cập cổng dữ liệu [EcoData](https://ecodata.io.vn) hoặc nền tảng tài chính [Finco](https://www.finco.vn), chọn phân hệ dữ liệu tương ứng với chủ đề **Dự báo độ biến động cổ phiếu trụ cột HOSE** và thiết lập bộ lọc đơn vị chéo `id` cùng kỳ thời gian `t` để thu được mẫu $N = 320$ quan sát.
-
-### Bước 2. Chuẩn hóa biến số và xử lý giá trị ngoại lai
-
-Ánh xạ biến phụ thuộc mục tiêu vào cột `y`, biến giải thích chính vào `x1`, biến kiểm soát vào `x2`, cùng các biến định danh và biến chuyên biệt như `z1`, `treat`, `w`, `y_bin`, `y_count`, `duration`, `event`. Thực hiện kiểm soát ngoại lai Winsorize ở ngưỡng $1\%$ và $99\%$ trước khi xuất tệp `vietlod_garch_ecodata.csv`.
-
-### Bước 3. Đối sánh với bộ dữ liệu chuẩn quốc tế Bollerslev (1986) Daily Exchange Rate & Equity
-
-Để đối chiếu phương pháp trên bộ dữ liệu quốc tế **Bollerslev (1986) Daily Exchange Rate & Equity**, sử dụng trực tiếp các lệnh nạp dữ liệu trong bảng truy vết bên dưới.
-
+  <div className="step-item">
+    <h3>Bước 1. Khởi tạo dự án dữ liệu trên EcoData và Finco</h3>
+    <p>Truy cập cổng dữ liệu <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc nền tảng tài chính <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, chọn phân hệ dữ liệu tương ứng với chủ đề <strong>Dự báo độ biến động cổ phiếu trụ cột HOSE</strong> và thiết lập bộ lọc đơn vị chéo <code>id</code> cùng kỳ thời gian <code>t</code> để thu được mẫu $N = 320$ quan sát.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2. Chuẩn hóa biến số và xử lý giá trị ngoại lai</h3>
+    <p>Ánh xạ biến phụ thuộc mục tiêu vào cột <code>y</code>, biến giải thích chính vào <code>x1</code>, biến kiểm soát vào <code>x2</code>, cùng các biến định danh và biến chuyên biệt như <code>z1</code>, <code>treat</code>, <code>w</code>, <code>y_bin</code>, <code>y_count</code>, <code>duration</code>, <code>event</code>. Thực hiện kiểm soát ngoại lai Winsorize ở ngưỡng $1\%$ và $99\%$ trước khi xuất tệp <code>vietlod_garch_ecodata.csv</code>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3. Đối sánh với bộ dữ liệu chuẩn quốc tế Bollerslev (1986) Daily Exchange Rate & Equity</h3>
+    <p>Để đối chiếu phương pháp trên bộ dữ liệu quốc tế <strong>Bollerslev (1986) Daily Exchange Rate & Equity</strong>, sử dụng trực tiếp các lệnh nạp dữ liệu trong bảng truy vết bên dưới.</p>
+  </div>
 </Steps>
 
 | Nguồn lưu trữ dữ liệu | Tên bộ dữ liệu / Tệp | Lệnh nạp trực tiếp và đường dẫn truy cập |
@@ -281,7 +279,7 @@ Truy cập cổng dữ liệu [EcoData](https://ecodata.io.vn) hoặc nền tả
 | **R CRAN Package** | *Bollerslev (1986) Daily Exchange Rate & Equity* | Lệnh R: `data("bollerslev", package = "wooldridge")` |
 | **Python Statsmodels** | *Bollerslev (1986) Daily Exchange Rate & Equity* | Lệnh Python: `sm.datasets.get_rdataset("bollerslev", "wooldridge").data` |
 
-## 6. Tài liệu tham khảo học thuật
+## 8.1.2.6. Tài liệu tham khảo học thuật
 
 - Bollerslev, T.(1986). Generalized autoregressive conditional heteroskedasticity. *Journal of Econometrics*, 31, số 3, 307–327.
 - Engle, R.(2001). GARCH 101: The use of ARCH/GARCH models in applied econometrics. *Journal of Economic Perspectives*, 15, số 4, 157–168.

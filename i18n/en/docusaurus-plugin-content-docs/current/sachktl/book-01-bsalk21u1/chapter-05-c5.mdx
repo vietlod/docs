@@ -1,19 +1,19 @@
 ---
 id: chapter-05-c5
-title: "Chapter 05: 5. Phương sai sai số thay đổi và tự tương quan — Econometric Analysis of Panel Data"
-sidebar_label: "Chapter 05: 5. Phương sai sai số thay đổi và tự tương "
+title: "5. Heteroskedasticity and Serial Correlation"
+sidebar_label: "5. Heteroskedasticity and Serial Correlation"
 sidebar_position: 6
-description: "Step-by-step practical how-to guide for Chapter 05: 5. Phương sai sai số thay đổi và tự tương quan from Econometric Analysis of Panel Data on SachKTL with Stata, R, and Python workflows integrated with EcoData, Finco, and EcoLab."
+description: "Comprehensive practical how-to guide for 5. Heteroskedasticity and Serial Correlation from Econometric Analysis of Panel Data on SachKTL featuring structural equations, 5 lesson breakdowns, and Stata, R, and Python scripts."
 ---
 
-# Chapter 05: 5. Phương sai sai số thay đổi và tự tương quan — Econometric Analysis of Panel Data
+# 5. Heteroskedasticity and Serial Correlation
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-This practical how-to guide synthesizes the methodology and empirical implementation workflow of **Chapter 05: 5. Phương sai sai số thay đổi và tự tương quan** from [**Book 01: Econometric Analysis of Panel Data**](/en/sachktl/book-01-bsalk21u1/), with direct backlinks to the authoritative source material at [https://sachktl.tnsai.vn/vi/bsalk21u1/c5/](https://sachktl.tnsai.vn/vi/bsalk21u1/c5/).
+This practical how-to guide presents the theoretical foundations, structural mathematical equations, detailed breakdown of **5 specialized lessons**, and multi-platform replication workflows for **5. Heteroskedasticity and Serial Correlation** from the textbook [**Econometric Analysis of Panel Data**](/en/sachktl/book-01-bsalk21u1/), with direct cross-references to the authoritative source material at [https://sachktl.tnsai.vn/vi/bsalk21u1/c5/](https://sachktl.tnsai.vn/vi/bsalk21u1/c5/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chapter 05: 5. Phương sai sai số thay đổi và tự tương quan">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="5. Heteroskedasticity and Serial Correlation">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ This practical how-to guide synthesizes the methodology and empirical implementa
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BOOK 01 · CHAPTER 05</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chapter 05: 5. Phương sai sai số thay đổi và tự tương quan</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Part of Textbook: Econometric Analysis of Panel Data · 5 Detailed Lessons</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Econometric Analysis of Panel Data</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">5. Heteroskedasticity and Serial Correlation</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Panel Data Econometrics and Unobserved Heterogeneity Control · 5 Detailed Lessons</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,133 +41,250 @@ This practical how-to guide synthesizes the methodology and empirical implementa
   </svg>
 </div>
 
-## 1. Methodological Meaning and Scope of Application
+## 1. Methodological Foundations, Mathematical Specification, and Identification
 
-Phương sai sai số thay đổi và tự tương quan Trong phân tích kinh tế lượng với dữ liệu bảng, các mô hình thành phần sai số tiêu chuẩn thường được xây dựng dựa trên hai giả định quan trọng: phương sai của sai số là đồng nhất và không có sự tương quan chuỗi trong thành phần sai số còn lại. Tuy nhiên, trong các ứng dụng thực tế, từ việc phân tích nhu cầu năng lượng của các quốc gia OECD đến ước lượng hàm chi phí cho các hãng hàng không, những giả định này thường xuyên bị vi phạm. Việc bỏ qua sự tồn tại của phương sai không đồng nhất và tự tương quan chuỗi sẽ dẫn đến các ước lượng không còn hiệu
+Phương sai sai số thay đổi và tự tương quan Trong phân tích kinh tế lượng với dữ liệu bảng, các mô hình thành phần sai số tiêu chuẩn thường được xây dựng dựa trên hai giả định quan trọng: phương sai của sai số là đồng nhất và không có sự tương quan chuỗi trong thành phần sai số còn lại. Tuy nhiên, trong các ứng dụng thực tế, từ việc phân tích nhu cầu năng lượng của các quốc gia OECD đến ước lượng hàm chi phí cho các hãng hàng không, những giả định này thường xuyên bị vi phạm.
 
-- **Core Academic Topics**: Cấu trúc chuỗi bài học, Kiến thức tiên quyết, Mục tiêu học tập, Tài liệu tham khảo chính, PHỤ LỤC: Dữ liệu thực hành cho series.
-- **Supported Analytical Environments**: `Stata 18 MP`.
-- **Recommended Empirical Data Sources**: Vietnamese macroeconomic, corporate, and household survey datasets on [EcoData](https://ecodata.io.vn), capital and commodity market series on [Finco](https://www.finco.vn), model cross-references on [VietLOD](https://vietlod.tnsai.vn), and automated estimation on [EcoLab](https://ecolab.io.vn).
+### 1.1. Structural Equations and Representative Estimator
+
+$$
+Y_{it} = \alpha + \mathbf{X}_{it}'\boldsymbol{\beta} + \mu_i + \lambda_t + \varepsilon_{it}, \quad i = 1,\dots,N; \; t = 1,\dots,T \tag*{[1]}
+$$
+
+$$
+\hat{\boldsymbol{\beta}}_{\text{FE}} = \left(\sum_{i=1}^N \sum_{t=1}^T \tilde{\mathbf{X}}_{it}\tilde{\mathbf{X}}_{it}'\right)^{-1} \left(\sum_{i=1}^N \sum_{t=1}^T \tilde{\mathbf{X}}_{it}\tilde{Y}_{it}\right), \quad \tilde{Z}_{it} = Z_{it} - \bar{Z}_i \tag*{[2]}
+$$
+
+### 1.2. Core Identification Assumptions and Applicability Conditions
+
+1. Strict exogeneity of explanatory covariates with respect to idiosyncratic disturbances across cross-sectional units and time periods.
+2. Unobserved individual effects $\mu_i$ may correlate arbitrarily with $\mathbf{X}_{it}$ under Fixed Effects or remain orthogonal under Random Effects.
+3. Cluster-robust variance-covariance estimation at the entity level is required to accommodate arbitrary within-panel serial correlation and heteroskedasticity.
 
 <FeatureCards
   features={[
     {
-      title: "Original Chapter on SachKTL",
-      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for Chapter 05 on SachKTL.",
+      title: "Authoritative Chapter on SachKTL",
+      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for this chapter on SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/bsalk21u1/c5/"
     },
     {
       title: "Practice Datasets on EcoData & Finco",
-      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and survey data for hands-on replication.",
+      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and household survey data for hands-on replication.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
       title: "Automated Estimation on EcoLab",
-      description: "Execute econometric specifications, run diagnostic battery tests, and export publication-grade tables automatically.",
+      description: "Execute econometric specifications, run diagnostic battery tests, and export APA 7th / AER publication-grade tables automatically.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Step-by-Step Practical Implementation Across Chapter Lessons
+<FeatureNotAvailable
+  feature="Unconditional Baseline Estimation Under Violated Identification Assumptions"
+  reason="Standard Fixed Effects and Random Effects estimators suffer from Nickell bias when lagged dependent variables $Y_{i,t-1}$ are included in short-$T$ panels; use Difference GMM or System GMM instead."
+  alternative="Run the complete diagnostic battery in Step 4 and transition to the appropriate corrective estimator on VietLOD or EcoLab."
+/>
+
+## 2. Lesson-by-Lesson Academic Breakdown
+
+### 2.1. Xử lý Phương sai không đồng nhất
+
+Trong bài học giới thiệu, chúng ta đã nhấn mạnh rằng giả định về phương sai đồng nhất là một trong những nền tảng của mô hình thành phần sai số cổ điển. Tuy nhiên, giả định này thường tỏ ra quá chặt chẽ và không thực tế khi làm việc với dữ liệu bảng, nơi các đối tượng nghiên cứu có thể rất khác biệt về quy mô và đặc điểm, dẫn đến sự biến động khác nhau trong sai số. Việc bỏ qua sự tồn tại của phương sai không đồng nhất không làm chệch ước lượng của các hệ số hồi quy, nhưng lại làm chúng mất đi tính hiệu quả.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Nền tảng lý thuyết về phương sai không đồng nhất**
+- **Trường hợp 1: Phương sai không đồng nhất ở thành phần hiệu ứng riêng )**
+- **Trường hợp 2: Phương sai không đồng nhất ở thành phần sai số còn lại )**
+- **Phương pháp nghiên cứu và thực hành với Stata**
+- **Quy trình xử lý phương sai không đồng nhất**
+- **Các lệnh Stata chính**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c5/xu-ly-phuong-sai-khong-dong-nhat/)
+
+### 2.2. Mô hình hóa tự tương quan chuỗi với quy trình AR và MA
+
+Trong bài học trước, chúng ta đã giải quyết vấn đề phương sai không đồng nhất, vốn xuất phát từ sự khác biệt giữa các đối tượng trong dữ liệu bảng. Giờ đây, chúng ta sẽ chuyển sự chú ý sang một khía cạnh khác liên quan đến chiều thời gian: tự tương quan chuỗi . Mô hình thành phần sai số cổ điển giả định rằng sai số chỉ tương quan trong cùng một đối tượng qua các thời điểm khác nhau do sự tồn tại của hiệu ứng riêng \. Tuy nhiên, giả định này ngụ ý rằng mức độ tương quan là không đổi, bất kể khoảng cách thời gian là bao xa.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Nền tảng lý thuyết về tự tương quan chuỗi**
+- **Trường hợp 1: Quy trình Tự hồi quy bậc một - AR**
+- **Quy trình biến đổi cho mô hình AR**
+- **Các trường hợp phức tạp hơn: AR và MA**
+- **Phương pháp và thực hành với Stata**
+- **Cú pháp lệnh xtregar**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c5/mo-hinh-hoa-tu-tuong-quan-chuoi/)
+
+### 2.3. Ứng dụng và dự báo với tự tương quan chuỗi trong dữ liệu bảng không cân bằng
+
+Ở bài học trước, chúng ta đã nắm vững cách mô hình hóa và ước lượng mô hình thành phần sai số với sai số tuân theo quy trình AR. Đó là một nền tảng lý thuyết và thực hành quan trọng. Tuy nhiên, giá trị thực sự của một mô hình kinh tế lượng nằm ở khả năng ứng dụng linh hoạt trong các điều kiện dữ liệu không hoàn hảo và khả năng cung cấp những dự báo hữu ích cho tương lai—hai yêu cầu cốt lõi trong hầu hết các nghiên cứu thực nghiệm. Bài học này sẽ mở rộng kiến thức của chúng ta bằng cách giải quyết hai ứng dụng nâng cao.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Nền tảng lý thuyết cho các ứng dụng nâng cao**
+- **Xử lý dữ liệu bảng không cân bằng với sai số AR**
+- **Dự báo trong mô hình thành phần sai số có tự tương quan**
+- **Phương pháp và thực hành với Stata**
+- **Thực hành với dữ liệu bảng không cân bằng**
+- **Diễn giải kết quả**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c5/ung-dung-va-du-bao-voi-tu-tuong-quan-chuoi/)
+
+### 2.4. Các kiểm định về Tự tương quan và Hiệu ứng riêng
+
+Trong các bài học trước, chúng ta đã học cách ước lượng các mô hình phức tạp có tính đến phương sai không đồng nhất và tự tương quan chuỗi. Tuy nhiên, một câu hỏi quan trọng luôn nảy sinh trong thực hành là: "Khi nào thì chúng ta thực sự cần đến những mô hình phức tạp này?". Việc sử dụng một mô hình phức tạp hơn mức cần thiết có thể làm giảm độ chính xác của ước lượng, trong khi việc sử dụng một mô hình quá đơn giản lại dẫn đến các suy luận thống kê sai lệch.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Nền tảng lý thuyết về các kiểm định giả thuyết**
+- **Kiểm định đồng thời cho hiệu ứng riêng và tự tương quan**
+- **Kiểm định có điều kiện cho tự tương quan**
+- **Kiểm định phân biệt AR và MA**
+- **Phương pháp và thực hành với Stata**
+- **Các lệnh Stata chính cho việc kiểm định**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c5/cac-kiem-dinh-ve-tu-tuong-quan-va-hieu-ung-rieng/)
+
+### 2.5. Hồi quy HAC và hướng dẫn thực hành toàn diện với Stata
+
+Chúng ta đã đi một chặng đường dài trong chuỗi bài học này. Bắt đầu từ việc nhận diện những hạn chế của mô hình thành phần sai số cổ điển, chúng ta đã học cách xử lý phương sai không đồng nhất, mô hình hóa tự tương quan chuỗi, áp dụng các mô hình này cho dữ liệu không cân bằng và dự báo, và cuối cùng là trang bị bộ công cụ kiểm định giả thuyết để lựa chọn mô hình một cách khoa học. Mỗi bài học là một mảnh ghép quan trọng, giúp chúng ta xây dựng nên một bức tranh toàn cảnh về phân tích dữ liệu bảng trong thực tế.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Dữ liệu nghiên cứu và câu hỏi**
+- **Hướng dẫn thực hành từ A-Z**
+- **Bước 1: Ước lượng các mô hình cơ sở**
+- **Bước 2: Thực hiện các kiểm định chẩn đoán**
+- **Bước 3: Ước lượng mô hình điều chỉnh tự tương quan**
+- **Bước 4: Giới thiệu mô hình HAC tổng quát**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c5/huong-dan-thuc-hanh-toan-die/)
+
+## 3. Step-by-Step Empirical Implementation Workflow
 
 <Steps>
   <div className="step-item">
-    <h3>Step 1: Xử lý Phương sai không đồng nhất</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Xử lý Phương sai không đồng nhất. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/bsalk21u1/c5/xu-ly-phuong-sai-khong-dong-nhat/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/bsalk21u1/c5/xu-ly-phuong-sai-khong-dong-nhat/</a>.</p>
+    <h3>1. Formulate the Research Question and Prepare Data on EcoData & Finco</h3>
+    <p>Define the dependent variable, core explanatory variables, and control covariates aligned with <strong>5. Heteroskedasticity and Serial Correlation</strong>. Extract standardized Vietnamese empirical series from <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> or <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, and screen for missing observations and extreme outliers.</p>
   </div>
   <div className="step-item">
-    <h3>Step 2: Mô hình hóa tự tương quan chuỗi với quy trình AR và MA</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Mô hình hóa tự tương quan chuỗi với quy trình AR và MA. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/bsalk21u1/c5/mo-hinh-hoa-tu-tuong-quan-chuoi/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/bsalk21u1/c5/mo-hinh-hoa-tu-tuong-quan-chuoi/</a>.</p>
+    <h3>2. Conduct Descriptive Profiling, Correlation Analysis, and Pre-Estimation Checks</h3>
+    <p>Examine empirical distributions, construct summary statistics tables, and evaluate collinearity using pairwise correlation matrices and Variance Inflation Factors (VIF).</p>
   </div>
   <div className="step-item">
-    <h3>Step 3: Ứng dụng và dự báo với tự tương quan chuỗi trong dữ liệu bảng không cân bằng</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Ứng dụng và dự báo với tự tương quan chuỗi trong dữ liệu bảng không cân bằng. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/bsalk21u1/c5/ung-dung-va-du-bao-voi-tu-tuong-quan-chuoi/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/bsalk21u1/c5/ung-dung-va-du-bao-voi-tu-tuong-quan-chuoi/</a>.</p>
+    <h3>3. Estimate the Model Across Stata 18 MP, R 4.x, and Python 3.11+</h3>
+    <p>Execute the parameter estimation scripts matching the structural equations in Section 1.1 while cross-checking theoretical derivations at <a href="https://sachktl.tnsai.vn/vi/bsalk21u1/c5/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Step 4: Các kiểm định về Tự tương quan và Hiệu ứng riêng</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Các kiểm định về Tự tương quan và Hiệu ứng riêng. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/bsalk21u1/c5/cac-kiem-dinh-ve-tu-tuong-quan-va-hieu-ung-rieng/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/bsalk21u1/c5/cac-kiem-dinh-ve-tu-tuong-quan-va-hieu-ung-rieng/</a>.</p>
+    <h3>4. Perform Post-Estimation Diagnostics and Robust Variance Correction</h3>
+    <p>Test for heteroskedasticity, serial correlation, Ramsey RESET functional form misspecification, and regressor endogeneity. Apply White HC1 or cluster-robust standard errors for valid inference.</p>
   </div>
   <div className="step-item">
-    <h3>Step 5: Hồi quy HAC và hướng dẫn thực hành toàn diện với Stata</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Hồi quy HAC và hướng dẫn thực hành toàn diện với Stata. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/bsalk21u1/c5/huong-dan-thuc-hanh-toan-die/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/bsalk21u1/c5/huong-dan-thuc-hanh-toan-die/</a>.</p>
+    <h3>5. Format Journal-Grade Tables and Cross-Verify on EcoLab</h3>
+    <p>Report point estimates, standard errors in parentheses, and statistical significance stars following APA 7th / AER Booktabs standards, or automate the entire reporting pipeline on <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> and <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Multi-Platform Implementation Examples in Stata, R, and Python
+## 4. Multi-Platform Implementation Scripts in Stata, R, and Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Initialize environment and load practice dataset from EcoData / SachKTL
+* Thiết lập cấu trúc dữ liệu bảng và ước lượng FE / RE / Hausman
 version 18.0
 clear all
 set more off
+import delimited "sachktl_panel_ecodata.csv", clear encoding("utf-8")
 
-* Import standardized empirical dataset
-import delimited "sachktl_bsalk21u1_c05_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+xtset id year
+xtdescribe
+xtsum y x1 x2 x3
 
-* Estimate baseline specification and run diagnostic checks with robust standard errors
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 1. Ước lượng tác động cố định (Fixed Effects) và tác động ngẫu nhiên (Random Effects)
+xtreg y x1 x2 x3, fe
+estimates store FE_model
+xtreg y x1 x2 x3, re
+estimates store RE_model
+
+* 2. Kiểm định Hausman lựa chọn mô hình và ước lượng sai số chuẩn vững theo cụm
+hausman FE_model RE_model, sigmamore
+xtreg y x1 x2 x3 i.year, fe vce(cluster id)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Load econometric packages and practice dataset from EcoData / SachKTL
-library(tidyverse)
+# Nạp thư viện dữ liệu bảng và ước lượng FE / RE / Cluster-Robust SE
+library(plm)
 library(lmtest)
 library(sandwich)
 
-df <- read.csv("sachktl_bsalk21u1_c05_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_panel_ecodata.csv")
+pdata <- pdata.frame(df, index = c("id", "year"))
 
-# Estimate model and compute heteroskedasticity-robust HC1 standard errors
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Ước lượng mô hình Within FE và Swamy-Arora RE
+fe_mod <- plm(y ~ x1 + x2 + x3, data = pdata, model = "within", effect = "twoways")
+re_mod <- plm(y ~ x1 + x2 + x3, data = pdata, model = "random")
+
+# 2. Kiểm định Hausman và xuất sai số chuẩn vững Arellano theo cụm
+phtest(fe_mod, re_mod)
+coeftest(fe_mod, vcov = vcovHC(fe_mod, method = "arellano", type = "HC1", cluster = "group"))
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Load econometric libraries and practice dataset from EcoData / SachKTL
+# Nạp thư viện linearmodels và ước lượng PanelOLS / RandomEffects
 import pandas as pd
-import statsmodels.formula.api as smf
+from linearmodels.panel import PanelOLS, RandomEffects, compare
 
-df = pd.read_csv("sachktl_bsalk21u1_c05_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_panel_ecodata.csv").set_index(["id", "year"])
 
-# Fit specification with HC1 robust standard errors
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Ước lượng mô hình Fixed Effects hai chiều với sai số chuẩn cụm
+fe_mod = PanelOLS.from_formula("y ~ 1 + x1 + x2 + x3 + EntityEffects + TimeEffects", data=df)
+fe_res = fe_mod.fit(cov_type="clustered", cluster_entity=True)
+
+# 2. Ước lượng mô hình Random Effects và đối chiếu kết quả
+re_mod = RandomEffects.from_formula("y ~ 1 + x1 + x2 + x3", data=df)
+re_res = re_mod.fit(cov_type="clustered", cluster_entity=True)
+print(compare({"Fixed Effects": fe_res, "Random Effects": re_res}))
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video Tutorial Walkthrough
+## 5. Post-Estimation Diagnostic and Interpretation Guide
+
+| Diagnostic Criterion | Null Hypothesis $H_0$ | Benchmark Threshold | Corrective Action When $H_0$ Is Rejected |
+| :--- | :--- | :--- | :--- |
+| **Heteroskedasticity** | Constant error variance $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ rejects $H_0$ | Apply `vce(robust)`, `vcovHC(HC1)`, or FGLS/WLS weighted estimation |
+| **Multicollinearity** | No severe linear dependence among regressors | $\text{VIF} < 10$ acceptable | Drop redundant covariates, center interactions, or apply LASSO/Ridge regularization |
+| **Ramsey RESET Functional Form** | No omitted nonlinear or higher-order terms | $p\text{-value} > 0.05$ retains $H_0$ | Add interaction terms, quadratic polynomials, or log-transform skewed positive variables |
+| **Regressor Exogeneity** | Orthogonality $\text{Cov}(X, \varepsilon)=0$ | Durbin-Wu-Hausman $p > 0.05$ | Transition to IV/2SLS, LIML, or GMM estimation with validated instruments |
+
+## 6. Video Tutorial Walkthrough
 
 <VideoTutorial
-  title="Practical Walkthrough for Chapter 05: 5. Phương sai sai số thay đổi và tự tương quan on SachKTL"
+  title="Practical Walkthrough for 5. Heteroskedasticity and Serial Correlation on SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Complete Lesson Directory and Backlinks to Original SachKTL Articles
+## 7. Complete Lesson Directory and Backlinks to Original SachKTL Articles
 
-| No. | Lesson Title in Chapter 05 | Supported Software | Original Source Link on SachKTL |
+| Lesson Code | Lesson Title | Supported Software | Original Source Link on SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Lesson 01** | Xử lý Phương sai không đồng nhất | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c5/xu-ly-phuong-sai-khong-dong-nhat/) |
-| **Lesson 02** | Mô hình hóa tự tương quan chuỗi với quy trình AR và MA | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c5/mo-hinh-hoa-tu-tuong-quan-chuoi/) |
-| **Lesson 03** | Ứng dụng và dự báo với tự tương quan chuỗi trong dữ liệu bảng không cân bằng | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c5/ung-dung-va-du-bao-voi-tu-tuong-quan-chuoi/) |
-| **Lesson 04** | Các kiểm định về Tự tương quan và Hiệu ứng riêng | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c5/cac-kiem-dinh-ve-tu-tuong-quan-va-hieu-ung-rieng/) |
-| **Lesson 05** | Hồi quy HAC và hướng dẫn thực hành toàn diện với Stata | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c5/huong-dan-thuc-hanh-toan-die/) |
+| **5.1** | Xử lý Phương sai không đồng nhất | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c5/xu-ly-phuong-sai-khong-dong-nhat/) |
+| **5.2** | Mô hình hóa tự tương quan chuỗi với quy trình AR và MA | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c5/mo-hinh-hoa-tu-tuong-quan-chuoi/) |
+| **5.3** | Ứng dụng và dự báo với tự tương quan chuỗi trong dữ liệu bảng không cân bằng | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c5/ung-dung-va-du-bao-voi-tu-tuong-quan-chuoi/) |
+| **5.4** | Các kiểm định về Tự tương quan và Hiệu ứng riêng | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c5/cac-kiem-dinh-ve-tu-tuong-quan-va-hieu-ung-rieng/) |
+| **5.5** | Hồi quy HAC và hướng dẫn thực hành toàn diện với Stata | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/bsalk21u1/c5/huong-dan-thuc-hanh-toan-die/) |

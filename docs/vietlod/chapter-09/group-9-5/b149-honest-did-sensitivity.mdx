@@ -1,10 +1,10 @@
 ---
 id: b149-honest-did-sensitivity
-title: "9.5.7. Hướng dẫn thực hành Phân tích độ nhạy vi phạm xu hướng song song Rambachan–Roth"
+title: "9.5.7. Phân tích độ nhạy vi phạm xu hướng song song Rambachan–Roth"
 sidebar_label: "9.5.7. Phân tích độ nhạy vi phạm xu hướng song song Rambachan–Roth"
 sidebar_position: 7
 slug: /vietlod/chapter-09/group-9-5/b149-honest-did-sensitivity
-description: "Tài liệu How-To hướng dẫn thực hành mô hình Phân tích độ nhạy vi phạm xu hướng song song Rambachan–Roth với mã honest_did_sensitivity trên Stata 18 MP, R 4.x và Python 3.11+ kèm dữ liệu thực hành và diễn giải kết quả chuẩn tạp chí."
+description: "Tài liệu How-To hướng dẫn thực hành bài 9.5.7 — Phân tích độ nhạy vi phạm xu hướng song song Rambachan–Roth với mã honest_did_sensitivity trên Stata 18 MP, R 4.x và Python 3.11+ kèm dữ liệu thực hành và diễn giải kết quả chuẩn tạp chí."
 keywords:
   - Phân tích độ nhạy vi phạm xu hướng song song Rambachan–Roth
   - honest_did_sensitivity
@@ -17,28 +17,28 @@ keywords:
   - EcoLab
 ---
 
-# 9.5.7. Hướng dẫn thực hành Phân tích độ nhạy vi phạm xu hướng song song Rambachan–Roth
+# 9.5.7. Phân tích độ nhạy vi phạm xu hướng song song Rambachan–Roth
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Bài học `9.5.7` — Mã mô hình `B149` (`honest_did_sensitivity`)** thuộc [Chương 09: Suy luận nhân quả và đánh giá tác động chính sách](/vietlod/chapter-09) $\to$ [Nhóm 9.5: Sai biệt trong sai biệt lệch pha hiện đại](/vietlod/chapter-09/group-9-5), phân loại **Cấp độ L3 — Nâng cao**. Tài liệu How-To này hướng dẫn chi tiết từ bản chất phương pháp, điều kiện áp dụng, kịch bản mã lệnh trên **Stata 18 MP**, **R 4.x** và **Python 3.11+**, tệp dữ liệu thực hành `vietlod_honest_did_sensitivity_ecodata.csv` cho đến cách đọc hiểu đồ thị hội tụ 3 phần mềm và viết phần diễn giải kết quả theo chuẩn tạp chí quốc tế.
+**Bài học `9.5.7` — Mã mô hình `B149` — Khóa định danh `honest_did_sensitivity`** thuộc [9. Suy luận nhân quả và đánh giá tác động chính sách](/vietlod/chapter-09) $\to$ [9.5. Sai biệt trong sai biệt lệch pha hiện đại](/vietlod/chapter-09/group-9-5), phân loại **Cấp độ L3 — Nâng cao**. Tài liệu How-To này hướng dẫn chi tiết từ bản chất phương pháp, điều kiện áp dụng, kịch bản mã lệnh trên **Stata 18 MP**, **R 4.x** và **Python 3.11+**, tệp dữ liệu thực hành `vietlod_honest_did_sensitivity_ecodata.csv` cho đến cách đọc hiểu đồ thị hội tụ 3 phần mềm và viết phần diễn giải kết quả theo chuẩn tạp chí quốc tế.
 
 <VideoTutorial
   title="Video hướng dẫn thực hành bài 9.5.7: Phân tích độ nhạy vi phạm xu hướng song song Rambachan–Roth trên Stata 18, R 4.x và Python 3.11+"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 1. Ý nghĩa phương pháp và phạm vi áp dụng
+## 9.5.7.1. Ý nghĩa phương pháp và phạm vi áp dụng
 
-### 1.1. Bản chất kinh tế lượng
+### 9.5.7.1.1. Bản chất kinh tế lượng
 
 Thay vì giả định xu hướng song song sau can thiệp đúng tuyệt đối 100%, thiết lập khoảng nhận dạng từng phần cho hiệu ứng chính sách khi vi phạm xu hướng sau xử lý tối đa bằng $\bar{M}$ lần độ lệch tiền xu hướng lớn nhất — $\Delta^{RM}(\bar{M})$ — hoặc bị chặn đạo hàm bậc hai — $\Delta^{SD}(M)$.
 
-### 1.2. Phạm vi áp dụng và yêu cầu cấu trúc dữ liệu
+### 9.5.7.1.2. Phạm vi áp dụng và yêu cầu cấu trúc dữ liệu
 
 Hậu kiểm bắt buộc trong các bài báo DID/Event-Study chuẩn xuất bản 2023–2026 để xác định ngưỡng gãy Breakdown Value $\bar{M}^*$ mà tại đó kết luận có ý nghĩa thống kê bị đảo ngược.
 
-### 1.3. Hệ phương trình toán học và điều kiện định danh
+### 9.5.7.1.3. Hệ phương trình toán học và điều kiện định danh
 
 Phương trình đặc tả cấu trúc của mô hình `honest_did_sensitivity`:
 
@@ -59,10 +59,10 @@ $$
 $$
 
 <FeatureNotAvailable
-  note="Giới hạn áp dụng: Không sử dụng trực tiếp ước lượng Phân tích độ nhạy vi phạm xu hướng song song Rambachan–Roth khi mẫu vi phạm nghiêm trọng điều kiện định danh hoặc chưa vượt qua bộ kiểm định bắt buộc gồm Giá trị ngưỡng gãy Breakdown Value $\bar{M}^*$, bảng khoảng tin cậy bền vững theo lưới $\bar{M} \in \{0, 0.5, 1.0, 1.5, 2.0\}$, so sánh Original CI vs Honest CI.. Trong trường hợp vi phạm, hãy tham chiếu các mô hình mở rộng cùng Nhóm 9.5 hoặc Chương 09."
+  note="Giới hạn áp dụng: Không sử dụng trực tiếp ước lượng Phân tích độ nhạy vi phạm xu hướng song song Rambachan–Roth khi mẫu vi phạm nghiêm trọng điều kiện định danh hoặc chưa vượt qua bộ kiểm định bắt buộc gồm Giá trị ngưỡng gãy Breakdown Value $\bar{M}^*$, bảng khoảng tin cậy bền vững theo lưới $\bar{M} \in \{0, 0.5, 1.0, 1.5, 2.0\}$, so sánh Original CI vs Honest CI.. Trong trường hợp vi phạm, hãy tham chiếu các mô hình mở rộng cùng Phần 9.5 hoặc Chương 9."
 />
 
-## 2. Ví dụ thực tế và bộ dữ liệu thực hành chuẩn hóa
+## 9.5.7.2. Ví dụ thực tế và bộ dữ liệu thực hành chuẩn hóa
 
 - **Bài toán thực nghiệm tại Việt Nam**: Ứng dụng mô hình `honest_did_sensitivity` trên bộ dữ liệu **Kiểm định độ bền kết luận chính sách** với cỡ mẫu chuẩn hóa $N = 320$ quan sát được trích xuất từ hệ sinh thái [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
 - **Bộ dữ liệu chuẩn quốc tế đối sánh**: **Rambachan–Roth (2023) Breakdown $\bar{M}^*$**, giúp người học đối chiếu trực tiếp kết quả thực hành với các giáo trình kinh tế lượng hàng đầu thế giới.
@@ -80,7 +80,7 @@ $$
       title: 'Bài giảng toàn văn trên VietLOD',
       description: 'Xem bài giảng lý thuyết chuyên sâu, chứng minh toán học và thảo luận học thuật đầy đủ của Bài 9.5.7 trên cổng VietLOD.',
       link: 'https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-09-suy-luan-nhan-qua-va-danh-gia-tac-dong-chinh-sach/nhom-9-5-staggered-did-modern/b149-honest-did-sensitivity',
-      badge: 'VietLOD B149'
+      badge: 'VietLOD 9.5.7'
     },
     {
       title: 'Thực thi đám mây trên EcoLab',
@@ -97,9 +97,9 @@ $$
   ]}
 />
 
-## 3. Gói lệnh phân tích và quy trình thực hành trên Stata, R và Python
+## 9.5.7.3. Gói lệnh phân tích và quy trình thực hành trên Stata, R và Python
 
-### 3.1. Bảng đối chiếu gói phần mềm và cú pháp lệnh chuẩn
+### 9.5.7.3.1. Bảng đối chiếu gói phần mềm và cú pháp lệnh chuẩn
 
 | Nền tảng phần mềm | Gói thư viện chuẩn | Cú pháp ước lượng trọng tâm | Lệnh kiểm định chẩn đoán hậu ước lượng | Hỗ trợ |
 | :--- | :--- | :--- | :--- | :--- |
@@ -107,29 +107,28 @@ $$
 | **R 4.x** | `HonestDiD` | `HonestDiD::createSensitivityResults_relativeMagnitudes(betahat, sigma, numPrePeriods = 4, numPostPeriods = 4)` | `did::ggdid[fit]; cobalt::bal.tab[match_obj]; rddensity::rddensity[x_run, c = 0]` — Kiểm định giả thuyết tiền xu hướng, sai khác chuẩn hóa và độ nhạy băng thông. | <Available /> |
 | **Python 3.11+** | `scipy / statsmodels` | `scipy.optimize.linprog(c_obj, A_ub=A_rm, b_ub=b_rm)` | `res.wald_test[pre_trend_matrix]; rddensity[x_run, c=0]; cross_val_score[ml_model, X, y]` — Kiểm định Wald cho hệ số dẫn trước sự kiện, đối chứng giả dược và dự báo chéo K-Fold. | <Available /> |
 
-### 3.2. Quy trình 4 bước thực thi mô hình `honest_did_sensitivity`
+### 9.5.7.3.2. Quy trình 4 bước thực thi mô hình `honest_did_sensitivity`
 
 <Steps>
-
-### Bước 1. Nạp tệp dữ liệu thực hành và kiểm tra thống kê mô tả
-
-Tải tệp [`vietlod_honest_did_sensitivity_ecodata.csv`](https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_honest_did_sensitivity_ecodata.csv) vào thư mục làm việc, kiểm tra cỡ mẫu $N = 320$ quan sát, khai báo cấu trúc dữ liệu và rà soát phân phối của biến phụ thuộc `y` cùng các biến giải thích `x1`, `x2`.
-
-### Bước 2. Thực thi hàm ước lượng `honest_did_sensitivity` với sai số chuẩn vững
-
-Chạy lệnh ước lượng chính thức trên **Stata 18 MP** qua gói `honestdid`, **R 4.x** qua gói `HonestDiD` hoặc **Python 3.11+** qua gói `scipy / statsmodels` kèm ma trận hiệp phương sai vững để bảo toàn hiệu lực suy luận thống kê.
-
-### Bước 3. Thực hiện bộ kiểm định chẩn đoán hậu ước lượng bắt buộc
-
-Thực thi đầy đủ các kiểm định đặc thù của mô hình gồm: **Giá trị ngưỡng gãy Breakdown Value $\bar{M}^*$, bảng khoảng tin cậy bền vững theo lưới $\bar{M} \in \{0, 0.5, 1.0, 1.5, 2.0\}$, so sánh Original CI vs Honest CI.**. Ghi nhận giá trị thống kê chẩn đoán $\text{Stat} = 0.8187$ và giá trị $p = 0.6641$.
-
-### Bước 4. Xuất bảng kết quả chuẩn tạp chí và kiểm chứng hội tụ 3 phần mềm
-
-Sử dụng `etable` trên Stata, `coeftest` trên R hoặc `summary()` trên Python để xuất bảng hệ số ước lượng, sau đó đối chiếu với bảng kết quả chuẩn và đồ thị thực nghiệm tại Mục 4.
-
+  <div className="step-item">
+    <h3>Bước 1. Nạp tệp dữ liệu thực hành và kiểm tra thống kê mô tả</h3>
+    <p>Tải tệp <a href="https://vietlod.tnsai.vn/src/ecoaz/data/vietlod_honest_did_sensitivity_ecodata.csv"><code>vietlod_honest_did_sensitivity_ecodata.csv</code></a> vào thư mục làm việc, kiểm tra cỡ mẫu $N = 320$ quan sát, khai báo cấu trúc dữ liệu và rà soát phân phối của biến phụ thuộc <code>y</code> cùng các biến giải thích <code>x1</code>, <code>x2</code>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2. Thực thi hàm ước lượng honest_did_sensitivity với sai số chuẩn vững</h3>
+    <p>Chạy lệnh ước lượng chính thức trên <strong>Stata 18 MP</strong> qua gói <code>honestdid</code>, <strong>R 4.x</strong> qua gói <code>HonestDiD</code> hoặc <strong>Python 3.11+</strong> qua gói <code>scipy / statsmodels</code> kèm ma trận hiệp phương sai vững để bảo toàn hiệu lực suy luận thống kê.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3. Thực hiện bộ kiểm định chẩn đoán hậu ước lượng bắt buộc</h3>
+    <p>Thực thi đầy đủ các kiểm định đặc thù của mô hình gồm: <strong>Giá trị ngưỡng gãy Breakdown Value $\bar{M}^*$, bảng khoảng tin cậy bền vững theo lưới $\bar{M} \in \{0, 0.5, 1.0, 1.5, 2.0\}$, so sánh Original CI vs Honest CI.</strong>. Ghi nhận giá trị thống kê chẩn đoán $\text{Stat} = 0.8187$ và giá trị $p = 0.6641$.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4. Xuất bảng kết quả chuẩn tạp chí và kiểm chứng hội tụ 3 phần mềm</h3>
+    <p>Sử dụng <code>etable</code> trên Stata, <code>coeftest</code> trên R hoặc <code>summary()</code> trên Python để xuất bảng hệ số ước lượng, sau đó đối chiếu với bảng kết quả chuẩn và đồ thị thực nghiệm tại Mục 9.5.7.4.</p>
+  </div>
 </Steps>
 
-### 3.3. Mã lệnh thực hành tái lập hoàn chỉnh trên Stata 18, R 4.x và Python 3.11+
+### 9.5.7.3.3. Mã lệnh thực hành tái lập hoàn chỉnh trên Stata 18, R 4.x và Python 3.11+
 
 <Tabs groupId="econometric-software">
   <TabItem value="stata" label="Stata 18 MP">
@@ -230,9 +229,9 @@ print("KẾT QUẢ ƯỚC LƯỢNG [honest_did_sensitivity]: beta_x1 = 1.1585 | 
   </TabItem>
 </Tabs>
 
-## 4. Kết quả ước lượng thực nghiệm, đồ thị hội tụ và hướng dẫn diễn giải
+## 9.5.7.4. Kết quả ước lượng thực nghiệm, đồ thị hội tụ và hướng dẫn diễn giải
 
-### 4.1. Bảng tổng hợp kết quả ước lượng chuẩn công bố tạp chí
+### 9.5.7.4.1. Bảng tổng hợp kết quả ước lượng chuẩn công bố tạp chí
 
 Bảng dưới đây trình bày kết quả ước lượng thực nghiệm của mô hình **Phân tích độ nhạy vi phạm xu hướng song song Rambachan–Roth** trên tệp dữ liệu `vietlod_honest_did_sensitivity_ecodata.csv` với $N = 320$ quan sát, đối chứng đồng thời trên cả 3 nền tảng **Stata 18 MP**, **R 4.x** và **Python 3.11+**:
 
@@ -245,32 +244,31 @@ Bảng dưới đây trình bày kết quả ước lượng thực nghiệm c�
 | **Chỉ số độ khớp `R-squared`** | `0.4387` | — | `F/Wald = 113.235` | — | Chuẩn công bố Q1 |
 | **Kiểm định chẩn đoán** | `Stat = 0.8187` | — | — | `p = 0.6641` | Đạt điều kiện đặc tả |
 
-### 4.2. Đồ thị thực nghiệm đối chiếu đồng thời Stata 18, R 4.x và Python 3.11+
+### 9.5.7.4.2. Đồ thị thực nghiệm đối chiếu đồng thời Stata 18, R 4.x và Python 3.11+
 
 ![Đồ thị thực nghiệm đối chiếu 3 phần mềm cho mô hình Phân tích độ nhạy vi phạm xu hướng song song Rambachan–Roth](https://vietlod.tnsai.vn/src/ecoaz/img/vietlod-b149-honest-did-sensitivity.png)
 
-### 4.3. Cách diễn giải kết quả chuẩn học thuật
+### 9.5.7.4.3. Cách diễn giải kết quả chuẩn học thuật
 
 - **Diễn giải hệ số ước lượng trọng tâm**: Hệ số của biến `x1` đạt $\hat{\beta}_1 = 1.1585$ với sai số chuẩn vững $\text{SE} = 0.0774$ và thống kê kiểm định bằng $14.963$, cho thấy `x1` có **tác động thuận chiều** lên biến mục tiêu `y` và **có ý nghĩa thống kê cao ở mức 1%** trong bối cảnh dữ liệu *Kiểm định độ bền kết luận chính sách*.
 - **Diễn giải khoảng tin cậy và độ lớn tác động**: Khoảng tin cậy $95\%$ của $\hat{\beta}_1$ nằm trong dải $[1.0068, 1.3103]$, khẳng định độ ổn định của ước lượng điểm và sự hội tụ số học giữa Stata 18 MP, R 4.x và Python 3.11+.
 - **Diễn giải độ khớp mô hình và kiểm định hậu ước lượng**: Đại lượng `R-squared` đạt `$0.4387$` cùng thống kê kiểm định toàn cục đạt `$113.235$`. Thống kê chẩn đoán đạt `$0.8187$` với $p = 0.6641$, xác nhận mô hình `honest_did_sensitivity` thỏa mãn các điều kiện hậu ước lượng để suy luận chính sách.
 
-## 5. Cách tổng hợp dữ liệu từ EcoData, Finco và truy vết dữ liệu quốc tế
+## 9.5.7.5. Cách tổng hợp dữ liệu từ EcoData, Finco và truy vết dữ liệu quốc tế
 
 <Steps>
-
-### Bước 1. Khởi tạo dự án dữ liệu trên EcoData và Finco
-
-Truy cập cổng dữ liệu [EcoData](https://ecodata.io.vn) hoặc nền tảng tài chính [Finco](https://www.finco.vn), chọn phân hệ dữ liệu tương ứng với chủ đề **Kiểm định độ bền kết luận chính sách** và thiết lập bộ lọc đơn vị chéo `id` cùng kỳ thời gian `t` để thu được mẫu $N = 320$ quan sát.
-
-### Bước 2. Chuẩn hóa biến số và xử lý giá trị ngoại lai
-
-Ánh xạ biến phụ thuộc mục tiêu vào cột `y`, biến giải thích chính vào `x1`, biến kiểm soát vào `x2`, cùng các biến định danh và biến chuyên biệt như `z1`, `treat`, `w`, `y_bin`, `y_count`, `duration`, `event`. Thực hiện kiểm soát ngoại lai Winsorize ở ngưỡng $1\%$ và $99\%$ trước khi xuất tệp `vietlod_honest_did_sensitivity_ecodata.csv`.
-
-### Bước 3. Đối sánh với bộ dữ liệu chuẩn quốc tế Rambachan–Roth (2023) Breakdown $\bar{M}^*$
-
-Để đối chiếu phương pháp trên bộ dữ liệu quốc tế **Rambachan–Roth (2023) Breakdown $\bar{M}^*$**, sử dụng trực tiếp các lệnh nạp dữ liệu trong bảng truy vết bên dưới.
-
+  <div className="step-item">
+    <h3>Bước 1. Khởi tạo dự án dữ liệu trên EcoData và Finco</h3>
+    <p>Truy cập cổng dữ liệu <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc nền tảng tài chính <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, chọn phân hệ dữ liệu tương ứng với chủ đề <strong>Kiểm định độ bền kết luận chính sách</strong> và thiết lập bộ lọc đơn vị chéo <code>id</code> cùng kỳ thời gian <code>t</code> để thu được mẫu $N = 320$ quan sát.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2. Chuẩn hóa biến số và xử lý giá trị ngoại lai</h3>
+    <p>Ánh xạ biến phụ thuộc mục tiêu vào cột <code>y</code>, biến giải thích chính vào <code>x1</code>, biến kiểm soát vào <code>x2</code>, cùng các biến định danh và biến chuyên biệt như <code>z1</code>, <code>treat</code>, <code>w</code>, <code>y_bin</code>, <code>y_count</code>, <code>duration</code>, <code>event</code>. Thực hiện kiểm soát ngoại lai Winsorize ở ngưỡng $1\%$ và $99\%$ trước khi xuất tệp <code>vietlod_honest_did_sensitivity_ecodata.csv</code>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3. Đối sánh với bộ dữ liệu chuẩn quốc tế Rambachan–Roth (2023) Breakdown $\bar{M}^*$</h3>
+    <p>Để đối chiếu phương pháp trên bộ dữ liệu quốc tế <strong>Rambachan–Roth (2023) Breakdown $\bar{M}^*$</strong>, sử dụng trực tiếp các lệnh nạp dữ liệu trong bảng truy vết bên dưới.</p>
+  </div>
 </Steps>
 
 | Nguồn lưu trữ dữ liệu | Tên bộ dữ liệu / Tệp | Lệnh nạp trực tiếp và đường dẫn truy cập |
@@ -281,7 +279,7 @@ Truy cập cổng dữ liệu [EcoData](https://ecodata.io.vn) hoặc nền tả
 | **R CRAN Package** | *Rambachan–Roth (2023) Breakdown $\bar{M}^*$* | Lệnh R: `data("rambachanroth", package = "wooldridge")` |
 | **Python Statsmodels** | *Rambachan–Roth (2023) Breakdown $\bar{M}^*$* | Lệnh Python: `sm.datasets.get_rdataset("rambachanroth", "wooldridge").data` |
 
-## 6. Tài liệu tham khảo học thuật
+## 9.5.7.6. Tài liệu tham khảo học thuật
 
 - Rambachan, & Roth(2023). A More Credible Approach to Parallel Trends. *Review of Economic Studies*.
 - Roth(2022). Foundational econometric methodology and empirical inference in *American Economic Review: Insights*.

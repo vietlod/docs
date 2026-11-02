@@ -1,19 +1,19 @@
 ---
 id: chapter-06-c5
-title: "Chương 06: 5. các yếu tố quyết định thu nhập và năng suất lao động"
-sidebar_label: "Chương 06: 5. Các yếu tố quyết định thu nhập và năng "
+title: "5. Các yếu tố quyết định thu nhập và năng suất lao động"
+sidebar_label: "5. Các yếu tố quyết định thu nhập và năng suất lao động"
 sidebar_position: 7
-description: "Hướng dẫn thực hành How-To Chương 06: 5. các yếu tố quyết định thu nhập và năng suất lao động thuộc bộ sách Kinh tế phát triển thực nghiệm trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 5. Các yếu tố quyết định thu nhập và năng suất lao động thuộc giáo trình Kinh tế phát triển thực nghiệm trên SachKTL kèm công thức toán học, phân tích 4 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 06: 5. các yếu tố quyết định thu nhập và năng suất lao động
+# 5. Các yếu tố quyết định thu nhập và năng suất lao động
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 06: 5. các yếu tố quyết định thu nhập và năng suất lao động** thuộc [**Bộ sách 12: kinh tế phát triển thực nghiệm**](/sachktl/book-12-fsrak15u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/fsrak15u1/c5/](https://sachktl.tnsai.vn/vi/fsrak15u1/c5/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **4 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **5. Các yếu tố quyết định thu nhập và năng suất lao động** thuộc bộ giáo trình [**Kinh tế phát triển thực nghiệm**](/sachktl/book-12-fsrak15u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/fsrak15u1/c5/](https://sachktl.tnsai.vn/vi/fsrak15u1/c5/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 06: 5. các yếu tố quyết định thu nhập và năng suất lao động">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="5. Các yếu tố quyết định thu nhập và năng suất lao động">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 12 · CHƯƠNG 06</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 06: 5. các yếu tố quyết định thu nhập và năng suất lao động</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Kinh tế phát triển thực nghiệm · 4 bài học chuyên sâu</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Kinh tế phát triển thực nghiệm</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">5. Các yếu tố quyết định thu nhập và năng suất lao động</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Suy diễn nhân quả và lượng giá tác động chính sách thực nghiệm · 4 bài học chuyên sâu</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,128 +41,230 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Các yếu tố quyết định thu nhập và năng suất lao động Chào mừng các bạn sinh viên đã quay trở lại với môn Kinh tế lượng ứng dụng! Trong các bài học trước, chúng ta đã cùng nhau tìm hiểu cách xây dựng và ước lượng các mô hình hồi quy cơ bản. Giờ là lúc chúng ta tiến thêm một bước cực kỳ quan trọng và thú vị: học cách "bắt bệnh" cho mô hình của mình. Liệu những kết quả chúng ta thu được có thực sự đáng tin cậy? Những giả định nền tảng của phương pháp OLS có được thỏa mãn trong thực tế hay không? Chuỗi bài học này sẽ đưa các bạn vào vai một nhà nghiên cứu thực thụ, sử dụng bộ công cụ chẩn đoán để
+Các yếu tố quyết định thu nhập và năng suất lao động Chào mừng các bạn sinh viên đã quay trở lại với môn Kinh tế lượng ứng dụng! Trong các bài học trước, chúng ta đã cùng nhau tìm hiểu cách xây dựng và ước lượng các mô hình hồi quy cơ bản. Giờ là lúc chúng ta tiến thêm một bước cực kỳ quan trọng và thú vị: học cách "bắt bệnh" cho mô hình của mình. Liệu những kết quả chúng ta thu được có thực sự đáng tin cậy? Những giả định nền tảng của phương pháp OLS có được thỏa mãn trong thực tế hay không?
 
-- **Chủ đề học thuật trọng tâm**: Cấu trúc chuỗi bài học, PHỤ LỤC: Dữ liệu sử dụng trong chuỗi bài viết.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+\tau_{\text{ATT}} = \mathbb{E}\left[Y_i(1) - Y_i(0) \mid D_i = 1\right] = \mathbb{E}\left[\mathbb{E}[Y_{it} - Y_{i,t-1} \mid D_i=1] - \mathbb{E}[Y_{it} - Y_{i,t-1} \mid D_i=0]\right] \tag*{[1]}
+$$
+
+$$
+Y_{it} = \alpha_i + \lambda_t + \sum_{k \neq -1} \delta_k \cdot \mathbb{I}(t - G_i = k) + \mathbf{X}_{it}'\boldsymbol{\beta} + \varepsilon_{it} \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Giả thiết xu hướng song song có điều kiện bảo đảm nhóm đối chứng phản ánh đúng quỹ đạo phản thực tế của nhóm chịu tác động khi không có chính sách.
+2. Giả thiết không có hành vi đón đầu chính sách và điều kiện chồng lấp điểm xu hướng $0 < P(D_i=1 \mid \mathbf{X}_i) < 1$ giúp nhận dạng chính xác $\tau_{\text{ATT}}$.
+3. Điều kiện đơn vị chịu tác động ổn định SUTVA loại trừ hiện tượng lan tỏa chéo làm nhiễu nhóm đối chứng.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 06 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/fsrak15u1/c5/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Ước lượng TWFE truyền thống bị chệch trọng số âm khi thời điểm áp dụng chính sách khác nhau giữa các nhóm và hiệu ứng điều trị biến thiên theo thời gian; cần dùng ước lượng Callaway-Sant'Anna hoặc Sun-Abraham."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Tại sao phải kiểm định giả định?
+
+Chào mừng các bạn đến với bài học đầu tiên trong chuỗi bài về kiểm định và diễn giải mô hình. Trong phần giới thiệu, chúng ta đã nói về tầm quan trọng của việc kiểm tra "sức khỏe" của mô hình hồi quy. Bài học hôm nay sẽ là bước đi đầu tiên trên hành trình đó, tập trung vào một trong những giả định quan trọng nhất: giả định về phân phối chuẩn của sai số. Có thể các bạn sẽ thắc mắc: "Tại sao chúng ta phải quan tâm đến giả định này?".
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Nền tảng lý thuyết: Tại sao cần kiểm tra tính chuẩn?**
+- **1.1. Độ lệch**
+- **1.2. Độ nhọn**
+- **1.3. Kiểm định Jarque-Bera**
+- **2. Phương pháp thực hiện kiểm định trong Stata**
+- **3. Ví dụ minh họa với dữ liệu thu nhập**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/fsrak15u1/c5/tai-sao-phai-kiem-dinh-gia-dinh/)
+
+### 2.2. Hàm thu nhập và cách xử lý phương sai sai số thay đổi
+
+Chào mừng các bạn quay trở lại! Trong bài học số 1, chúng ta đã phát hiện ra rằng phần dư của mô hình hàm thu nhập không tuân theo phân phối chuẩn. Đó là một "tín hiệu cảnh báo" quan trọng, và hôm nay, chúng ta sẽ tiếp tục công việc "chẩn đoán" bằng cách kiểm tra một giả định quan trọng khác: giả định về tính đồng nhất phương sai . Nói một cách đơn giản, giả định này yêu cầu "mức độ sai số" của mô hình phải ổn định, không thay đổi khi các biến độc lập thay đổi.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Nền tảng lý thuyết: Hiểu về phương sai sai số thay đổi**
+- **1.1. Phương sai sai số thay đổi là gì và tại sao nó là một vấn đề?**
+- **1.2. Kiểm định Breusch-Pagan**
+- **1.3. Các giải pháp khắc phục**
+- **2. Phương pháp thực hiện trong Stata**
+- **3. Ví dụ minh họa: Hàm thu nhập Mincer**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/fsrak15u1/c5/ham-thu-nhap-va-cach-xu-ly-phuong-sai-sai-so-thay-doi/)
+
+### 2.3. Phân tích hàm sản xuất và thảo luận về diễn giải nhân quả
+
+Chào mừng các bạn đến với bài học thứ ba! Sau khi đã thành thạo các kỹ thuật chẩn đoán và xử lý vấn đề trên hàm thu nhập, hôm nay chúng ta sẽ chuyển sang một lĩnh vực khác nhưng không kém phần quan trọng: phân tích năng suất ở cấp độ vĩ mô thông qua hàm sản xuất. Chúng ta sẽ xem liệu các vấn đề như phương sai sai số thay đổi có tồn tại trong dữ liệu cấp quốc gia hay không và áp dụng các công cụ tương tự để giải quyết. Tuy nhiên, bài học hôm nay sẽ không chỉ dừng lại ở kỹ thuật.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Kiểm định hàm sản xuất cobb-douglas**
+- **2. Mở rộng mô hình: Từ dữ liệu gộp đến mô hình sai phân**
+- **2.1. Hồi quy gộp**
+- **2.2. Phép biến đổi sai phân**
+- **3. Thảo luận quan trọng: Tương quan và diễn giải nhân quả**
+- **4. Tổng kết**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/fsrak15u1/c5/phan-tich-ham-san-xuat-va-thao-luan-ve-dien-giai-nhan-qua/)
+
+### 2.4. Hướng dẫn thực hành phân tích hàm thu nhập và sản xuất với Stata
+
+Chào mừng các bạn đến với bài học thực hành tổng hợp! Đây là nơi chúng ta sẽ kết nối tất cả các dấu chấm, áp dụng toàn bộ lý thuyết và kỹ thuật đã học vào việc phân tích dữ liệu thực tế. Mục tiêu của bài học hôm nay không chỉ là chạy các câu lệnh, mà là thực hành tư duy của một nhà kinh tế lượng: bắt đầu từ một câu hỏi, xây dựng mô hình, kiểm tra các giả định, lựa chọn phương pháp ước lượng phù hợp và cuối cùng là diễn giải kết quả một cách cẩn trọng.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Quy trình phân tích tổng quan**
+- **2. Hướng dẫn thực hành phần i: Phân tích hàm thu nhập**
+- **3. Hướng dẫn thực hành phần II: Phân tích hàm sản xuất**
+- **4. Tổng kết và các bước tiếp theo**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/fsrak15u1/c5/huong-dan-thuc-hanh-phan-tich-ham-thu-nhap-va-san-xuat-voi-stata/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Tại sao phải kiểm định giả định?</h3>
-    <p>Chào mừng các bạn đến với bài học đầu tiên trong chuỗi bài về kiểm định và diễn giải mô hình. Trong phần giới thiệu, chúng ta đã nói về tầm quan trọng của việc kiểm tra "sức khỏe" của mô hình hồi quy. Bài học hôm nay sẽ là bước đi đầu tiên trên hành trình đó,  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/fsrak15u1/c5/tai-sao-phai-kiem-dinh-gia-dinh/" target="_blank" rel="noopener">Tại sao phải kiểm định giả định?</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>5. Các yếu tố quyết định thu nhập và năng suất lao động</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Hàm thu nhập và cách xử lý phương sai sai số thay đổi</h3>
-    <p>Chào mừng các bạn quay trở lại! Trong bài học số 1, chúng ta đã phát hiện ra rằng phần dư của mô hình hàm thu nhập không tuân theo phân phối chuẩn. Đó là một "tín hiệu cảnh báo" quan trọng, và hôm nay, chúng ta sẽ tiếp tục công việc "chẩn đoán" bằng cách kiểm  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/fsrak15u1/c5/ham-thu-nhap-va-cach-xu-ly-phuong-sai-sai-so-thay-doi/" target="_blank" rel="noopener">Hàm thu nhập và cách xử lý phương sai sai số thay đổi</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Phân tích hàm sản xuất và thảo luận về diễn giải nhân quả</h3>
-    <p>Chào mừng các bạn đến với bài học thứ ba! Sau khi đã thành thạo các kỹ thuật chẩn đoán và xử lý vấn đề trên hàm thu nhập, hôm nay chúng ta sẽ chuyển sang một lĩnh vực khác nhưng không kém phần quan trọng: phân tích năng suất ở cấp độ vĩ mô thông qua hàm sản xu Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/fsrak15u1/c5/phan-tich-ham-san-xuat-va-thao-luan-ve-dien-giai-nhan-qua/" target="_blank" rel="noopener">Phân tích hàm sản xuất và thảo luận về diễn giải nhân quả</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/fsrak15u1/c5/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Hướng dẫn thực hành phân tích hàm thu nhập và sản xuất với Stata</h3>
-    <p>Chào mừng các bạn đến với bài học thực hành tổng hợp! Đây là nơi chúng ta sẽ kết nối tất cả các dấu chấm, áp dụng toàn bộ lý thuyết và kỹ thuật đã học vào việc phân tích dữ liệu thực tế. Mục tiêu của bài học hôm nay không chỉ là chạy các câu lệnh, mà là thực h Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/fsrak15u1/c5/huong-dan-thuc-hanh-phan-tich-ham-thu-nhap-va-san-xuat-voi-stata/" target="_blank" rel="noopener">Hướng dẫn thực hành phân tích hàm thu nhập và sản xuất với Stata</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
+  </div>
+  <div className="step-item">
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Ước lượng tác động nhân quả với DiD, Event Study và Propensity Score Matching
 version 18.0
 clear all
 set more off
+import delimited "sachktl_causal_ecodata.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_fsrak15u1_c06_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+* 1. Ước lượng Difference-in-Differences hai chiều và kiểm định xu hướng song song
+xtset id year
+xtdidregress (y x1 x2) (treated_post), group(id) time(year) vce(cluster id)
+estat trendplots
+estat ptrends
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 2. Ước lượng ghép cặp điểm xu hướng (PSM) và nghịch đảo xác suất trọng số (IPWRA)
+teffects psmatch (y) (treat x1 x2 x3, probit), atet vce(iid)
+teffects ipwra (y x1 x2) (treat x1 x2 x3, logit), atet
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
-library(tidyverse)
-library(lmtest)
-library(sandwich)
+# Nạp thư viện suy diễn nhân quả fixest, did và MatchIt
+library(fixest)
+library(did)
+library(MatchIt)
 
-df <- read.csv("sachktl_fsrak15u1_c06_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_causal_ecodata.csv")
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Ước lượng mô hình DiD và Event Study với sai số chuẩn cụm
+mod_did <- feols(y ~ treated_post + x1 + x2 | id + year, data = df, cluster = ~id)
+summary(mod_did)
+
+# 2. Ước lượng Callaway & Sant'Anna (2021) cho DiD đa thời điểm
+cs_out <- att_gt(yname = "y", tname = "year", idname = "id", gname = "first_treat",
+                 xformla = ~ x1 + x2, data = df, control_group = "nevertreated")
+summary(aggte(cs_out, type = "dynamic"))
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và linearmodels để ước lượng DiD & IPW
 import pandas as pd
 import statsmodels.formula.api as smf
+from linearmodels.panel import PanelOLS
 
-df = pd.read_csv("sachktl_fsrak15u1_c06_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_causal_ecodata.csv")
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Ước lượng điểm xu hướng Propensity Score bằng Logit
+ps_mod = smf.logit("treat ~ x1 + x2 + x3", data=df).fit(disp=False)
+df["pscore"] = ps_mod.predict(df)
+
+# 2. Ước lượng Difference-in-Differences hai chiều với sai số chuẩn cụm
+df_panel = df.set_index(["id", "year"])
+did_mod = PanelOLS.from_formula("y ~ 1 + treated_post + x1 + x2 + EntityEffects + TimeEffects", data=df_panel)
+did_res = did_mod.fit(cov_type="clustered", cluster_entity=True)
+print(did_res.summary)
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 06: 5. các yếu tố quyết định thu nhập và năng suất lao động trên SachKTL"
+  title="Hướng dẫn thực hành 5. Các yếu tố quyết định thu nhập và năng suất lao động trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 06 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Tại sao phải kiểm định giả định? | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/fsrak15u1/c5/tai-sao-phai-kiem-dinh-gia-dinh/) |
-| **Bài 02** | Hàm thu nhập và cách xử lý phương sai sai số thay đổi | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/fsrak15u1/c5/ham-thu-nhap-va-cach-xu-ly-phuong-sai-sai-so-thay-doi/) |
-| **Bài 03** | Phân tích hàm sản xuất và thảo luận về diễn giải nhân quả | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/fsrak15u1/c5/phan-tich-ham-san-xuat-va-thao-luan-ve-dien-giai-nhan-qua/) |
-| **Bài 04** | Hướng dẫn thực hành phân tích hàm thu nhập và sản xuất với Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/fsrak15u1/c5/huong-dan-thuc-hanh-phan-tich-ham-thu-nhap-va-san-xuat-voi-stata/) |
+| **6.1** | Tại sao phải kiểm định giả định? | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/fsrak15u1/c5/tai-sao-phai-kiem-dinh-gia-dinh/) |
+| **6.2** | Hàm thu nhập và cách xử lý phương sai sai số thay đổi | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/fsrak15u1/c5/ham-thu-nhap-va-cach-xu-ly-phuong-sai-sai-so-thay-doi/) |
+| **6.3** | Phân tích hàm sản xuất và thảo luận về diễn giải nhân quả | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/fsrak15u1/c5/phan-tich-ham-san-xuat-va-thao-luan-ve-dien-giai-nhan-qua/) |
+| **6.4** | Hướng dẫn thực hành phân tích hàm thu nhập và sản xuất với Stata | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/fsrak15u1/c5/huong-dan-thuc-hanh-phan-tich-ham-thu-nhap-va-san-xuat-voi-stata/) |

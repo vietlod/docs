@@ -1,19 +1,19 @@
 ---
 id: chapter-05-c5
-title: "Chương 05: 5. hồi quy đa biến"
-sidebar_label: "Chương 05: 5. Hồi quy đa biến"
+title: "5. Hồi quy đa biến"
+sidebar_label: "5. Hồi quy đa biến"
 sidebar_position: 6
-description: "Hướng dẫn thực hành How-To Chương 05: 5. hồi quy đa biến thuộc bộ sách Phân tích dữ liệu đa biến ứng dụng trong nghiên cứu trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 5. Hồi quy đa biến thuộc giáo trình Phân tích dữ liệu đa biến ứng dụng trong nghiên cứu trên SachKTL kèm công thức toán học, phân tích 6 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 05: 5. hồi quy đa biến
+# 5. Hồi quy đa biến
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 05: 5. hồi quy đa biến** thuộc [**Bộ sách 30: phân tích dữ liệu đa biến ứng dụng trong nghiên cứu**](/sachktl/book-30-hsaik19u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/hsaik19u1/c5/](https://sachktl.tnsai.vn/vi/hsaik19u1/c5/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **6 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **5. Hồi quy đa biến** thuộc bộ giáo trình [**Phân tích dữ liệu đa biến ứng dụng trong nghiên cứu**](/sachktl/book-30-hsaik19u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/hsaik19u1/c5/](https://sachktl.tnsai.vn/vi/hsaik19u1/c5/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 05: 5. hồi quy đa biến">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="5. Hồi quy đa biến">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 30 · CHƯƠNG 05</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 05: 5. hồi quy đa biến</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Phân tích dữ liệu đa biến ứng dụng trong nghiên cứu · 6 bài học </text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Phân tích dữ liệu đa biến ứng dụng t</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">5. Hồi quy đa biến</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng ứng dụng, mô hình hóa thống kê và kiểm định giả thuyết · 6 bài học chuy</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,102 +41,219 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Giới thiệu chuỗi bài học về các kỹ thuật phụ thuộc với kết quả định lượng An Introduction to Dependence Techniques with Metric Outcomes Tổng quan về chuỗi bài học Chào các bạn sinh viên, chào mừng các bạn đến với hành trình khám phá một trong những công cụ mạnh mẽ và nền tảng nhất của kinh tế lượng: Phân tích Hồi quy Đa biến. Đây không chỉ là một kỹ thuật thống kê, mà còn là một lăng kính giúp chúng ta nhìn thấu các mối quan hệ phức tạp trong dữ liệu kinh tế và xã hội. Dù bạn muốn dự báo doanh số bán hàng, giải thích các yếu tố ảnh hưởng đến sự hài lòng của khách hàng, hay đánh giá tác động
+Giới thiệu chuỗi bài học về các kỹ thuật phụ thuộc với kết quả định lượng An Introduction to Dependence Techniques with Metric Outcomes Tổng quan về chuỗi bài học Chào các bạn sinh viên, chào mừng các bạn đến với hành trình khám phá một trong những công cụ mạnh mẽ và nền tảng nhất của kinh tế lượng: Phân tích Hồi quy Đa biến. Đây không chỉ là một kỹ thuật thống kê, mà còn là một lăng kính giúp chúng ta nhìn thấu các mối quan hệ phức tạp trong dữ liệu kinh tế và xã hội.
 
-- **Chủ đề học thuật trọng tâm**: Tổng quan về chuỗi bài học, Cấu trúc chuỗi bài học, Kiến thức tiên quyết, Mục tiêu học tập, Tài liệu tham khảo.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+Y_i = \beta_0 + \sum_{k=1}^K \beta_k X_{ik} + \varepsilon_i, \quad \mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0 \tag*{[1]}
+$$
+
+$$
+\widehat{\text{Var}}_{\text{HC1}}(\hat{\boldsymbol{\beta}}) = \frac{N}{N - K - 1}\left(\mathbf{X}'\mathbf{X}\right)^{-1}\left(\sum_{i=1}^N \hat{\varepsilon}_i^2 \mathbf{x}_i \mathbf{x}_i'\right)\left(\mathbf{X}'\mathbf{X}\right)^{-1} \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Dạng hàm tuyến tính theo tham số được xác định đúng, không bỏ sót biến giải thích quan trọng có tương quan với các biến trong mô hình.
+2. Kỳ vọng có điều kiện của sai số bằng không $\mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0$, đảm bảo tính không chệch và vững tiệm cận của ước lượng.
+3. Ma trận thiết kế $\mathbf{X}$ có hạng cột đầy đủ, không xảy ra đa cộng tuyến hoàn hảo và sử dụng sai số chuẩn vững HC1/Cluster khi có phương sai thay đổi.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 05 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/hsaik19u1/c5/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Khi tồn tại biến giải thích nội sinh do đồng thời hai chiều, sai số đo lường hoặc bỏ sót biến không quan sát được, ước lượng OLS bị chệch và không vững; cần chuyển sang ước lượng biến công cụ IV/2SLS hoặc GMM."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Nền tảng hồi quy đa biến từ khái niệm đến phương trình
+
+Nền tảng hồi quy đa biến từ khái niệm đến phương trình Multiple regression fundamentals from concept to equation Công cụ dự báo và giải thích mạnh mẽ Chào mừng các bạn quay trở lại chuỗi bài học về các kỹ thuật phụ thuộc. Trong bài viết giới thiệu, chúng ta đã có cái nhìn tổng quan về tầm quan trọng của phân tích hồi quy. Giờ đây, chúng ta sẽ cùng nhau đi sâu vào những viên gạch nền móng đầu tiên.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Công cụ dự báo và giải thích mạnh mẽ**
+- **Nền tảng lý thuyết của phân tích hồi quy**
+- **Hồi quy tuyến tính đơn**
+- **Hồi quy tuyến tính đa biến**
+- **Đánh giá độ chính xác của mô hình: Hệ số xác định r²**
+- **Quy trình xây dựng mô hình hồi quy**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/hsaik19u1/c5/nen-tang-hoi-quy-da-bien-tu-khai-niem-den-phuong-trinh/)
+
+### 2.2. Thiết kế nghiên cứu và các giả định quan trọng trong hồi quy
+
+Thiết kế nghiên cứu và các giả định quan trọng trong hồi quy Research design and critical assumptions in regression analysis Nền tảng cho một mô hình đáng tin cậy Ở bài học trước, chúng ta đã làm quen với các khái niệm cơ bản và cách xây dựng phương trình hồi quy. Tuy nhiên, để một mô hình hồi quy thực sự hữu ích, việc ước lượng các hệ số chỉ là một phần của câu chuyện. Một mô hình mạnh mẽ và đáng tin cậy đòi hỏi một thiết kế nghiên cứu chu đáo và phải tuân thủ các giả định thống kê nền tảng.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Nền tảng cho một mô hình đáng tin cậy**
+- **Thiết kế và các giả định**
+- **Giai đoạn 2: Thiết kế một phân tích hồi quy đa biến**
+- **Giai đoạn 3: Các giả định trong hồi quy đa biến**
+- **Phương pháp thiết kế và kiểm tra**
+- **Ví dụ minh họa về tạo biến trong Stata**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/hsaik19u1/c5/thiet-ke-nghien-cuu-va-cac-gia-dinh-quan-trong-trong-hoi-quy/)
+
+### 2.3. Ước lượng, diễn giải mô hình và xử lý vấn đề đa cộng tuyến
+
+Ước lượng, diễn giải mô hình và vấn đề đa cộng tuyến Model estimation, interpretation, and the problem of multicollinearity Từ dữ liệu thô đến thông tin chi tiết có ý nghĩa Trong các bài học trước, chúng ta đã cẩn thận đặt nền móng cho phân tích của mình bằng cách xây dựng một thiết kế nghiên cứu và tìm hiểu các giả định quan trọng. Giờ đây, chúng ta sẽ bước vào giai đoạn trung tâm của quy trình phân tích hồi quy: Giai đoạn 4 và Giai đoạn 5 .
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Từ dữ liệu thô đến thông tin chi tiết có ý nghĩa**
+- **Ước lượng, đánh giá và đa cộng tuyến**
+- **Chiến lược lựa chọn biến và ước lượng mô hình**
+- **Đánh giá độ phù hợp tổng thể của mô hình**
+- **Vấn đề đa cộng tuyến**
+- **Phương pháp chẩn đoán và xử lý**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/hsaik19u1/c5/uoc-luong-dien-giai-mo-hinh-va-xu-ly-van-de-da-cong-tuyen/)
+
+### 2.4. Thực hành chẩn đoán và xác thực mô hình hồi quy với Stata
+
+Thực hành chẩn đoán và xác thực mô hình hồi quy với Stata Hands-on diagnostics and validation of regression models with Stata Xây dựng một mô hình hồi quy vững chắc Chào mừng các bạn đến với bài thực hành tổng hợp của chuỗi bài học về hồi quy đa biến. Trong các bài trước, chúng ta đã học về lý thuyết, các giả định và cách diễn giải kết quả. Giờ đây, chúng ta sẽ áp dụng toàn bộ quy trình 6 bước xây dựng mô hình vào một tình huống nghiên cứu thực tế.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Xây dựng một mô hình hồi quy vững chắc**
+- **Quy trình 6 Bước xây dựng mô hình**
+- **Quy trình chẩn đoán và xác thực**
+- **Phân tích sự hài lòng của khách hàng tại HBAT**
+- **Giai đoạn 4 & 5: Ước lượng, chẩn đoán và diễn giải**
+- **Giai đoạn 6: Xác thực mô hình**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/hsaik19u1/c5/thuc-hanh-chan-doan-va-xac-thuc-mo-hinh-hoi-quy-voi-stata/)
+
+### 2.5. Các mô hình hồi quy mở rộng cho dữ liệu phức tạp
+
+Các mô hình hồi quy mở rộng cho dữ liệu phức tạp Advanced regression models for complex data structures Khi hồi quy cổ điển không còn đủ Trong suốt chuỗi bài học, chúng ta đã tập trung vào mô hình hồi quy tuyến tính cổ điển, một công cụ cực kỳ mạnh mẽ. Tuy nhiên, sức mạnh của OLS được xây dựng trên một giả định nền tảng quan trọng: các quan sát phải độc lập với nhau. Nhưng trong thế giới thực, dữ liệu thường không "cư xử" một cách lý tưởng như vậy.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Khi hồi quy cổ điển không còn đủ**
+- **Vượt qua giới hạn của OLS**
+- **Mô hình đa cấp cho dữ liệu phân cấp**
+- **Mô hình dữ liệu bảng cho dữ liệu dọc**
+- **Lựa chọn mô hình phù hợp**
+- **Ví dụ minh họa trong Stata**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/hsaik19u1/c5/cac-mo-hinh-hoi-quy-mo-rong-cho-du-lieu-phuc-tap/)
+
+### 2.6. Tổng hợp và ứng dụng hồi quy đa biến trong nghiên cứu
+
+Tổng hợp hồi quy đa biến: Từ lý thuyết đến các mô hình nâng cao Synthesizing multiple regression: From theory to advanced models Tổng quan và vị thế của hồi quy trong kinh tế lượng Chào các bạn, chúng ta đã cùng nhau đi qua một hành trình chi tiết để khám phá Phân tích Hồi quy Đa biến. Từ những phương trình tuyến tính đơn giản đến các quy trình chẩn đoán phức tạp, chúng ta đã xây dựng một bộ công cụ mạnh mẽ để phân tích dữ liệu.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Tổng quan và vị thế của hồi quy trong kinh tế lượng**
+- **Các nguyên tắc cốt lõi**
+- **Nguyên tắc bình phương tối thiểu**
+- **Mục tiêu kép: Dự báo và giải thích**
+- **Các giả định như là "điều kiện để có kết quả tốt nhất"**
+- **Quy trình làm việc của nhà nghiên cứu**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/hsaik19u1/c5/tong-hop-va-ung-dung-hoi-quy-da-bien-trong-nghien-cuu/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Nền tảng hồi quy đa biến từ khái niệm đến phương trình</h3>
-    <p>Nền tảng hồi quy đa biến từ khái niệm đến phương trình Multiple regression fundamentals from concept to equation Công cụ dự báo và giải thích mạnh mẽ Chào mừng các bạn quay trở lại chuỗi bài học về các kỹ thuật phụ thuộc. Trong bài viết giới thiệu, chúng ta đã Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsaik19u1/c5/nen-tang-hoi-quy-da-bien-tu-khai-niem-den-phuong-trinh/" target="_blank" rel="noopener">Nền tảng hồi quy đa biến từ khái niệm đến phương trình</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>5. Hồi quy đa biến</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Thiết kế nghiên cứu và các giả định quan trọng trong hồi quy</h3>
-    <p>Thiết kế nghiên cứu và các giả định quan trọng trong hồi quy Research design and critical assumptions in regression analysis Nền tảng cho một mô hình đáng tin cậy Ở bài học trước, chúng ta đã làm quen với các khái niệm cơ bản và cách xây dựng phương trình hồi  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsaik19u1/c5/thiet-ke-nghien-cuu-va-cac-gia-dinh-quan-trong-trong-hoi-quy/" target="_blank" rel="noopener">Thiết kế nghiên cứu và các giả định quan trọng trong hồi quy</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Ước lượng, diễn giải mô hình và xử lý vấn đề đa cộng tuyến</h3>
-    <p>Ước lượng, diễn giải mô hình và vấn đề đa cộng tuyến Model estimation, interpretation, and the problem of multicollinearity Từ dữ liệu thô đến thông tin chi tiết có ý nghĩa Trong các bài học trước, chúng ta đã cẩn thận đặt nền móng cho phân tích của mình bằng  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsaik19u1/c5/uoc-luong-dien-giai-mo-hinh-va-xu-ly-van-de-da-cong-tuyen/" target="_blank" rel="noopener">Ước lượng, diễn giải mô hình và xử lý vấn đề đa cộng tuyến</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsaik19u1/c5/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Thực hành chẩn đoán và xác thực mô hình hồi quy với Stata</h3>
-    <p>Thực hành chẩn đoán và xác thực mô hình hồi quy với Stata Hands-on diagnostics and validation of regression models with Stata Xây dựng một mô hình hồi quy vững chắc Chào mừng các bạn đến với bài thực hành tổng hợp của chuỗi bài học về hồi quy đa biến. Trong cá Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsaik19u1/c5/thuc-hanh-chan-doan-va-xac-thuc-mo-hinh-hoi-quy-voi-stata/" target="_blank" rel="noopener">Thực hành chẩn đoán và xác thực mô hình hồi quy với Stata</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 5: Các mô hình hồi quy mở rộng cho dữ liệu phức tạp</h3>
-    <p>Các mô hình hồi quy mở rộng cho dữ liệu phức tạp Advanced regression models for complex data structures Khi hồi quy cổ điển không còn đủ Trong suốt chuỗi bài học, chúng ta đã tập trung vào mô hình hồi quy tuyến tính cổ điển, một công cụ cực kỳ mạnh mẽ. Tuy nhi Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsaik19u1/c5/cac-mo-hinh-hoi-quy-mo-rong-cho-du-lieu-phuc-tap/" target="_blank" rel="noopener">Các mô hình hồi quy mở rộng cho dữ liệu phức tạp</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Bước 6: Tổng hợp và ứng dụng hồi quy đa biến trong nghiên cứu</h3>
-    <p>Tổng hợp hồi quy đa biến: Từ lý thuyết đến các mô hình nâng cao Synthesizing multiple regression: From theory to advanced models Tổng quan và vị thế của hồi quy trong kinh tế lượng Chào các bạn, chúng ta đã cùng nhau đi qua một hành trình chi tiết để khám phá  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/hsaik19u1/c5/tong-hop-va-ung-dung-hoi-quy-da-bien-trong-nghien-cuu/" target="_blank" rel="noopener">Tổng hợp và ứng dụng hồi quy đa biến trong nghiên cứu</a>.</p>
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập môi trường, ước lượng mô hình và kiểm định chẩn đoán toàn diện
 version 18.0
 clear all
 set more off
+import delimited "sachktl_empirical_ecodata.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_hsaik19u1_c05_ecodata.csv", clear encoding("utf-8")
 describe
-summarize
+summarize y x1 x2 x3, detail
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
+* 1. Ước lượng mô hình cơ sở và kiểm định phương sai thay đổi / đa cộng tuyến / dạng hàm
+regress y x1 x2 x3
 estat hettest
+estat imtest, white
 estat vif
+estat ovtest
+
+* 2. Ước lượng với sai số chuẩn vững White HC1 và xuất tác động biên
+regress y c.x1##c.x2 x3, vce(robust)
+margins, dydx(x1 x2 x3)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện phân tích kinh tế lượng và thực thi kiểm định chẩn đoán
 library(tidyverse)
 library(lmtest)
 library(sandwich)
+library(car)
 
-df <- read.csv("sachktl_hsaik19u1_c05_ecodata.csv")
+df <- read.csv("sachktl_empirical_ecodata.csv")
 summary(df)
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+# 1. Ước lượng mô hình tuyến tính và kiểm định Breusch-Pagan, RESET, VIF
 fit <- lm(y ~ x1 + x2 + x3, data = df)
+bptest(fit)
+resettest(fit, power = 2:3, type = "fitted")
+vif(fit)
+
+# 2. Xuất bảng hệ số ước lượng với sai số chuẩn vững HC1
 coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
 ```
 
@@ -144,35 +261,53 @@ coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và thực thi ước lượng kèm chẩn đoán phần dư
 import pandas as pd
+import statsmodels.api as sm
 import statsmodels.formula.api as smf
+from statsmodels.stats.diagnostic import het_breuschpagan, linear_reset
+from statsmodels.stats.outliers_influence import variance_inflation_factor
 
-df = pd.read_csv("sachktl_hsaik19u1_c05_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_empirical_ecodata.csv")
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
+# 1. Ước lượng mô hình với sai số chuẩn vững HC1
 model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
 print(model.summary())
+
+# 2. Kiểm định phương sai thay đổi Breusch-Pagan, Ramsey RESET và hệ số VIF
+bp_lm, bp_pval, _, _ = het_breuschpagan(model.resid, model.model.exog)
+reset_res = linear_reset(model, power=2, use_f=True)
+X = sm.add_constant(df[["x1", "x2", "x3"]].dropna())
+vifs = {col: variance_inflation_factor(X.values, i) for i, col in enumerate(X.columns)}
+print(f"Breusch-Pagan p={bp_pval:.4f} | RESET p={reset_res.pvalue:.4f} | VIF={vifs}")
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 05: 5. hồi quy đa biến trên SachKTL"
+  title="Hướng dẫn thực hành 5. Hồi quy đa biến trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 05 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Nền tảng hồi quy đa biến từ khái niệm đến phương trình | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsaik19u1/c5/nen-tang-hoi-quy-da-bien-tu-khai-niem-den-phuong-trinh/) |
-| **Bài 02** | Thiết kế nghiên cứu và các giả định quan trọng trong hồi quy | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsaik19u1/c5/thiet-ke-nghien-cuu-va-cac-gia-dinh-quan-trong-trong-hoi-quy/) |
-| **Bài 03** | Ước lượng, diễn giải mô hình và xử lý vấn đề đa cộng tuyến | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsaik19u1/c5/uoc-luong-dien-giai-mo-hinh-va-xu-ly-van-de-da-cong-tuyen/) |
-| **Bài 04** | Thực hành chẩn đoán và xác thực mô hình hồi quy với Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsaik19u1/c5/thuc-hanh-chan-doan-va-xac-thuc-mo-hinh-hoi-quy-voi-stata/) |
-| **Bài 05** | Các mô hình hồi quy mở rộng cho dữ liệu phức tạp | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsaik19u1/c5/cac-mo-hinh-hoi-quy-mo-rong-cho-du-lieu-phuc-tap/) |
-| **Bài 06** | Tổng hợp và ứng dụng hồi quy đa biến trong nghiên cứu | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsaik19u1/c5/tong-hop-va-ung-dung-hoi-quy-da-bien-trong-nghien-cuu/) |
+| **5.1** | Nền tảng hồi quy đa biến từ khái niệm đến phương trình | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsaik19u1/c5/nen-tang-hoi-quy-da-bien-tu-khai-niem-den-phuong-trinh/) |
+| **5.2** | Thiết kế nghiên cứu và các giả định quan trọng trong hồi quy | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsaik19u1/c5/thiet-ke-nghien-cuu-va-cac-gia-dinh-quan-trong-trong-hoi-quy/) |
+| **5.3** | Ước lượng, diễn giải mô hình và xử lý vấn đề đa cộng tuyến | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsaik19u1/c5/uoc-luong-dien-giai-mo-hinh-va-xu-ly-van-de-da-cong-tuyen/) |
+| **5.4** | Thực hành chẩn đoán và xác thực mô hình hồi quy với Stata | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsaik19u1/c5/thuc-hanh-chan-doan-va-xac-thuc-mo-hinh-hoi-quy-voi-stata/) |
+| **5.5** | Các mô hình hồi quy mở rộng cho dữ liệu phức tạp | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsaik19u1/c5/cac-mo-hinh-hoi-quy-mo-rong-cho-du-lieu-phuc-tap/) |
+| **5.6** | Tổng hợp và ứng dụng hồi quy đa biến trong nghiên cứu | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/hsaik19u1/c5/tong-hop-va-ung-dung-hoi-quy-da-bien-trong-nghien-cuu/) |

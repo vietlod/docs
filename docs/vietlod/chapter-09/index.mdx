@@ -1,12 +1,12 @@
 ---
 id: index
-title: "Chương 09: Suy luận nhân quả và đánh giá tác động chính sách"
-sidebar_label: "Chương 09. Suy luận nhân quả và đánh giá tác động chính sách"
+title: "9. Suy luận nhân quả và đánh giá tác động chính sách"
+sidebar_label: "9. Suy luận nhân quả và đánh giá tác động chính sách"
 sidebar_position: 10
 slug: /vietlod/chapter-09
-description: "Hướng dẫn thực hành Chương 09 — Suy luận nhân quả và đánh giá tác động chính sách: bao gồm 5 nhóm phương pháp và 25 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Chương 9 — Suy luận nhân quả và đánh giá tác động chính sách: bao gồm 5 phần phương pháp và 25 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
-  - Chương 09 VietLOD
+  - Chương 9 VietLOD
   - Suy luận nhân quả và đánh giá tác động chính sách
   - Stata 18
   - R 4.x
@@ -15,122 +15,121 @@ keywords:
   - EcoLab
 ---
 
-# Chương 09: Suy luận nhân quả và đánh giá tác động chính sách
+# 9. Suy luận nhân quả và đánh giá tác động chính sách
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Chương 09 — Suy luận nhân quả và đánh giá tác động chính sách** hướng dẫn thực hành chi tiết **25 mô hình kinh tế lượng** thuộc **5 nhóm phương pháp** từ mã `B136` đến `B152`. Toàn bộ bài viết trong chương được đồng bộ hóa với giáo trình gốc tại [VietLOD Chương 09](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-09-suy-luan-nhan-qua-va-danh-gia-tac-dong-chinh-sach) và hỗ trợ thực thi tự động trên [EcoLab](https://ecolab.io.vn).
+**Chương 9. Suy luận nhân quả và đánh giá tác động chính sách** hướng dẫn thực hành chi tiết **25 bài học mô hình kinh tế lượng** thuộc **5 phần phương pháp** từ mục `9.1.1` đến `9.5.8`. Toàn bộ bài viết trong chương được đồng bộ hóa với giáo trình gốc tại [VietLOD Chương 9](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-09-suy-luan-nhan-qua-va-danh-gia-tac-dong-chinh-sach) và hỗ trợ thực thi tự động trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 09: Suy luận nhân quả và đánh giá tác động chính sách trên Stata 18, R 4.x và Python 3.11+"
+  title="Hướng dẫn thực hành Chương 9: Suy luận nhân quả và đánh giá tác động chính sách trên Stata 18, R 4.x và Python 3.11+"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 1. Câu hỏi nghiên cứu trọng tâm và phương trình nền tảng
+## 9.1. Câu hỏi nghiên cứu trọng tâm và phương trình nền tảng
 
 - **Câu hỏi nghiên cứu trọng tâm**: Làm sao để nhận dạng tác động nhân quả tin cậy bằng Staggered DID thế hệ mới, Đối chứng tổng hợp (SCM) và (SDID), Hồi quy gián đoạn, MTE, Bunching và Học máy nhân quả?
-- **Phạm vi cấu trúc chương**: Gồm `5` nhóm phương pháp chuyên sâu và `25` mô hình thực nghiệm đối chứng trên dữ liệu Việt Nam từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
+- **Phạm vi cấu trúc chương**: Gồm `5` phần phương pháp chuyên sâu từ `9.1` đến `9.5` và `25` bài học thực nghiệm đối chứng trên dữ liệu Việt Nam từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
 
-Phương trình đặc tả tổng quát của Chương 09:
+Phương trình đặc tả tổng quát của Chương 9:
 
 $$
 \text{ATT}(g, t) = \text{E}[Y_{it}(g) - Y_{it}(\infty) \mid G_{ig} = 1]
 $$
 
 <FeatureNotAvailable
-  note="Không áp dụng các ước lượng trong Chương 09 khi chưa kiểm tra điều kiện định danh và bộ kiểm định chẩn đoán bắt buộc gồm: Joint Pre-Trend Wald Test, Goodman-Bacon Negative Weight Diagnostic, Rambachan–Roth HonestDiD Breakdown M, Cattaneo rddensity Manipulation Test, SMD Balance Check."
+  note="Không áp dụng các ước lượng trong Chương 9 khi chưa kiểm tra điều kiện định danh và bộ kiểm định chẩn đoán bắt buộc gồm: Joint Pre-Trend Wald Test, Goodman-Bacon Negative Weight Diagnostic, Rambachan–Roth HonestDiD Breakdown M, Cattaneo rddensity Manipulation Test, SMD Balance Check."
 />
 
-## 2. Khám phá 5 nhóm phương pháp trong Chương 09
+## 9.2. Hệ thống 5 phần phương pháp trong Chương 9
 
 <FeatureCards
   features={[
     {
-      title: 'Nhóm 9.1. Ghép cặp và cân bằng mẫu',
+      title: '9.1. Ghép cặp và cân bằng mẫu',
       description: 'Làm sao để nhận dạng tác động nhân quả tin cậy bằng Staggered DID thế hệ mới, Đối chứng tổng hợp (SCM) và (SDID), Hồi quy gián đoạn, MTE, Bunching và Học máy nhân quả?',
       link: '/vietlod/chapter-09/group-9-1',
-      badge: '2 mô hình'
+      badge: '2 bài học'
     },
     {
-      title: 'Nhóm 9.2. Sai biệt trong sai biệt cổ điển và nghiên cứu sự kiện',
+      title: '9.2. Sai biệt trong sai biệt cổ điển và nghiên cứu sự kiện',
       description: 'Làm sao để nhận dạng tác động nhân quả tin cậy bằng Staggered DID thế hệ mới, Đối chứng tổng hợp (SCM) và (SDID), Hồi quy gián đoạn, MTE, Bunching và Học máy nhân quả?',
       link: '/vietlod/chapter-09/group-9-2',
-      badge: '3 mô hình'
+      badge: '3 bài học'
     },
     {
-      title: 'Nhóm 9.3. Hồi quy gián đoạn, gãy khúc, tích tụ và hiệu ứng biên',
+      title: '9.3. Hồi quy gián đoạn, gãy khúc, tích tụ và hiệu ứng biên',
       description: 'Làm sao để nhận dạng tác động nhân quả tin cậy bằng Staggered DID thế hệ mới, Đối chứng tổng hợp (SCM) và (SDID), Hồi quy gián đoạn, MTE, Bunching và Học máy nhân quả?',
       link: '/vietlod/chapter-09/group-9-3',
-      badge: '6 mô hình'
+      badge: '6 bài học'
     },
     {
-      title: 'Nhóm 9.4. Trọng số xác suất nghịch đảo, đối chứng tổng hợp và học máy nhân quả',
+      title: '9.4. Trọng số xác suất nghịch đảo, đối chứng tổng hợp và học máy nhân quả',
       description: 'Làm sao để nhận dạng tác động nhân quả tin cậy bằng Staggered DID thế hệ mới, Đối chứng tổng hợp (SCM) và (SDID), Hồi quy gián đoạn, MTE, Bunching và Học máy nhân quả?',
       link: '/vietlod/chapter-09/group-9-4',
-      badge: '6 mô hình'
+      badge: '6 bài học'
     },
     {
-      title: 'Nhóm 9.5. Sai biệt trong sai biệt lệch pha hiện đại',
+      title: '9.5. Sai biệt trong sai biệt lệch pha hiện đại',
       description: 'Làm sao để nhận dạng tác động nhân quả tin cậy bằng Staggered DID thế hệ mới, Đối chứng tổng hợp (SCM) và (SDID), Hồi quy gián đoạn, MTE, Bunching và Học máy nhân quả?',
       link: '/vietlod/chapter-09/group-9-5',
-      badge: '8 mô hình'
+      badge: '8 bài học'
     }
   ]}
 />
 
-## 3. Quy trình 4 bước lựa chọn và thực thi mô hình trong Chương 09
+## 9.3. Quy trình 4 bước lựa chọn và thực thi mô hình trong Chương 9
 
 <Steps>
-
-### Bước 1. Xác định nhóm phương pháp phù hợp trong 5 nhóm của chương
-
-Đối chiếu giả thuyết kinh tế và cấu trúc mẫu thực nghiệm với câu hỏi định danh của từng nhóm phương pháp từ Nhóm `9.1` đến Nhóm `9.5`.
-
-### Bước 2. Chuẩn bị tệp dữ liệu chuẩn hóa từ EcoData hoặc Finco
-
-Tải tệp dữ liệu thực hành `.csv` tương ứng với từng mô hình tại `/src/ecoaz/data/` hoặc trích xuất bảng dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
-
-### Bước 3. Ước lượng tham số và chạy kiểm định chẩn đoán trên Stata 18, R 4.x và Python 3.11+
-
-Thực thi mã lệnh mẫu trong từng bài học và kiểm tra nghiêm ngặt các tiêu chuẩn chẩn đoán bắt buộc của chương: **Joint Pre-Trend Wald Test, Goodman-Bacon Negative Weight Diagnostic, Rambachan–Roth HonestDiD Breakdown M, Cattaneo rddensity Manipulation Test, SMD Balance Check**.
-
-### Bước 4. Đối chiếu đồ thị hội tụ 3 phần mềm và xuất bảng công bố trên EcoLab
-
-Kiểm tra sự hội tụ của hệ số ước lượng giữa Stata, R và Python trên đồ thị thực nghiệm 3 khung và xuất bảng kết quả chuẩn tạp chí qua [EcoLab](https://ecolab.io.vn).
-
+  <div className="step-item">
+    <h3>Bước 1. Xác định phần phương pháp phù hợp từ 9.1 đến 9.5</h3>
+    <p>Đối chiếu giả thuyết kinh tế và cấu trúc mẫu thực nghiệm với câu hỏi định danh của từng phần phương pháp trong Chương 9 để lựa chọn đúng bài học mô hình <code>A.B.C</code>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2. Chuẩn bị tệp dữ liệu chuẩn hóa từ EcoData hoặc Finco</h3>
+    <p>Tải tệp dữ liệu thực hành <code>.csv</code> tương ứng với từng bài học tại <code>/src/ecoaz/data/</code> hoặc trích xuất bảng dữ liệu thực tế từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> và <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3. Ước lượng tham số và chạy kiểm định chẩn đoán trên Stata 18, R 4.x và Python 3.11+</h3>
+    <p>Thực thi mã lệnh mẫu trong từng bài học và kiểm tra nghiêm ngặt các tiêu chuẩn chẩn đoán bắt buộc của chương: <strong>Joint Pre-Trend Wald Test, Goodman-Bacon Negative Weight Diagnostic, Rambachan–Roth HonestDiD Breakdown M, Cattaneo rddensity Manipulation Test, SMD Balance Check</strong>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 4. Đối chiếu đồ thị hội tụ 3 phần mềm và xuất bảng công bố trên EcoLab</h3>
+    <p>Kiểm tra sự hội tụ của hệ số ước lượng giữa Stata, R và Python trên đồ thị thực nghiệm 3 khung và xuất bảng kết quả chuẩn tạp chí qua <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a>.</p>
+  </div>
 </Steps>
 
-## 4. Danh mục đầy đủ 25 mô hình kinh tế lượng trong Chương 09
+## 9.4. Danh mục đầy đủ 25 bài học mô hình kinh tế lượng trong Chương 9
 
-| Mã bài | Tên mô hình kinh tế lượng | Khóa định danh | Cấp độ | Gói phần mềm Stata · R · Python | Hỗ trợ |
+| Đề mục | Tên bài học và mô hình kinh tế lượng | Khóa định danh | Cấp độ | Gói phần mềm Stata · R · Python | Hỗ trợ |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `9.1.1` · `B136` | [Ghép cặp điểm xu hướng Rosenbaum–Rubin (PSM)](/vietlod/chapter-09/group-9-1/b136-propensity-score-matching) | `propensity_score_matching` | `L1` | `base Stata` · `MatchIt / stats` · `statsmodels / scikit-learn` | <Available /> |
-| `9.2.1` · `B140` | [Sai biệt trong sai biệt hai chiều hiệu ứng cố định (TWFE)](/vietlod/chapter-09/group-9-2/b140-twfe-did) | `twfe_did` | `L1` | `base Stata` · `fixest / plm` · `linearmodels` | <Available /> |
-| `9.3.1` · `B153` | [Thiết kế hồi quy gián đoạn sắc nhọn tại ngưỡng cắt (RDD)](/vietlod/chapter-09/group-9-3/b153-sharp-rdd) | `sharp_rdd` | `L1` | `Stata rdrobust` · `rdrobust / stats` · `rdrobust / statsmodels` | <Available /> |
-| `9.4.1` · `B138` | [Trọng số nghịch đảo xác suất điều trị Horvitz–Thompson (IPW)](/vietlod/chapter-09/group-9-4/b138-ipw) | `ipw` | `L1` | `base Stata` · `WeightIt / stats` · `statsmodels` | <Available /> |
-| `9.5.1` · `B142` | [Phân rã trọng số hai nhân hai của Goodman-Bacon](/vietlod/chapter-09/group-9-5/b142-bacon-decomposition) | `bacon_decomposition` | `L3` | `bacondecomp` · `bacondecomp` · `linearmodels` | <Available /> |
-| `9.1.2` · `B137` | [Cân bằng trọng số Entropy chính xác moment Hainmueller](/vietlod/chapter-09/group-9-1/b137-entropy-balancing) | `entropy_balancing` | `L2` | `Stata ebalance` · `ebal / stats` · `scipy / statsmodels` | <Available /> |
-| `9.2.2` · `B141` | [Thiết kế nghiên cứu sự kiện động và kiểm định tiền xu hướng](/vietlod/chapter-09/group-9-2/b141-event-study-did) | `event_study_did` | `L2` | `Stata reghdfe / xtreg` · `fixest` · `linearmodels / statsmodels` | <Available /> |
-| `9.3.2` · `B154` | [Thiết kế hồi quy gián đoạn mờ với biến công cụ cục bộ](/vietlod/chapter-09/group-9-3/b154-fuzzy-rdd) | `fuzzy_rdd` | `L2` | `Stata rdrobust` · `rdrobust / AER` · `rdrobust / linearmodels` | <Available /> |
-| `9.4.2` · `B139` | [Ước lượng bền vững kép tăng cường trọng số xác suất (AIPW)](/vietlod/chapter-09/group-9-4/b139-aipw) | `aipw` | `L2` | `base Stata` · `AIPW / stats` · `doubleml / statsmodels` | <Available /> |
-| `9.5.2` · `B144` | [Nghiên cứu sự kiện trọng số tương tác đoàn hệ Sun–Abraham](/vietlod/chapter-09/group-9-5/b144-sun-abraham-did) | `sun_abraham_did` | `L3` | `eventstudyinteract` · `fixest` · `pyfixest` | <Available /> |
-| `9.2.3` · `B143` | [Ước lượng DID theo nhóm–thời gian không đồng nhất Callaway–Sant'Anna](/vietlod/chapter-09/group-9-2/b143-callaway-santanna-did) | `callaway_santanna_did` | `L3` | `Stata csdid` · `did` · `csdid / statsmodels` | <Available /> |
-| `9.3.3` · `B155` | [Hồi quy gián đoạn đa thức cục bộ hiệu chỉnh chệch bền vững](/vietlod/chapter-09/group-9-3/b155-rdrobust-sharp-fuzzy) | `rdrobust_sharp_fuzzy` | `L3` | `rdrobust` · `rdrobust` · `rdrobust` | <Available /> |
-| `9.4.3` · `B150` | [Phương pháp đối chứng tổng hợp Abadie–Diamond–Hainmueller (SCM)](/vietlod/chapter-09/group-9-4/b150-synthetic-control) | `synthetic_control` | `L2` | `Stata synth` · `Synth` · `pysyncon / scipy` | <Available /> |
-| `9.5.3` · `B145` | [Ước lượng DID suy diễn khử chệch Borusyak–Jaravel–Spiess](/vietlod/chapter-09/group-9-5/b145-borusyak-imputation-did) | `borusyak_imputation_did` | `L3` | `did_imputation` · `did2s` · `pyfixest` | <Available /> |
-| `9.3.4` · `B156` | [Thiết kế gãy khúc hồi quy tại điểm đổi độ dốc chính sách (RKD)](/vietlod/chapter-09/group-9-3/b156-regression-kink-rkd) | `regression_kink_rkd` | `L4` | `rdrobust` · `rdrobust` · `rdrobust` | <Available /> |
-| `9.4.4` · `B151` | [Đối chứng tổng hợp tăng cường hiệu chỉnh chệch Ridge (ASCM)](/vietlod/chapter-09/group-9-4/b151-augmented-synthetic-control) | `augmented_synthetic_control` | `L3` | `synth / fect` · `Synth / fect` · `pysyncon` | <Available /> |
-| `9.5.4` · `B146` | [Ước lượng DID động cho xử lý đảo chiều de Chaisemartin–D'Haultfœuille](/vietlod/chapter-09/group-9-5/b146-dechaisemartin-did) | `dechaisemartin_did` | `L4` | `did_multiplegt_dyn` · `DIDmultiplegtDYN` · `linearmodels` | <Available /> |
-| `9.3.5` · `B157` | [Ước lượng tích tụ hành vi tại ngưỡng chính sách Saez–Kleven](/vietlod/chapter-09/group-9-3/b157-bunching-estimator) | `bunching_estimator` | `L4` | `bunchit` · `bunching` · `statsmodels` | <Available /> |
-| `9.4.5` · `B159` | [Học máy nhân quả khử chệch trực giao Neyman (DML)](/vietlod/chapter-09/group-9-4/b159-double-ml) | `double_ml` | `L3` | `Stata 18 lasso` · `DoubleML / glmnet` · `doubleml / scikit-learn` | <Available /> |
-| `9.5.5` · `B147` | [Mô hình hiệu ứng cố định hai chiều mở rộng Mundlak (ETWFE)](/vietlod/chapter-09/group-9-5/b147-wooldridge-etwfe) | `wooldridge_etwfe` | `L3` | `Stata 18 xthdidregress / jwdid` · `etwfe` · `pyfixest` | <Available /> |
-| `9.3.6` · `B158` | [Hiệu ứng điều trị biên và biến công cụ cục bộ (MTE)](/vietlod/chapter-09/group-9-3/b158-marginal-treatment-effects) | `marginal_treatment_effects` | `L4` | `mtefe` · `ivmte` · `statsmodels` | <Available /> |
-| `9.4.6` · `B160` | [Rừng ngẫu nhiên nhân quả ước lượng hiệu ứng không đồng nhất](/vietlod/chapter-09/group-9-4/b160-causal-forest) | `causal_forest` | `L4` | `Stata Python/R bridge` · `grf / randomForest` · `econml / scikit-learn` | <Available /> |
-| `9.5.6` · `B148` | [Phương pháp chiếu cục bộ kết hợp mẫu đối chứng sạch (DID)](/vietlod/chapter-09/group-9-5/b148-lp-did) | `lp_did` | `L4` | `lpdid` · `fixest` · `pyfixest` | <Available /> |
-| `9.5.7` · `B149` | [Phân tích độ nhạy vi phạm xu hướng song song Rambachan–Roth](/vietlod/chapter-09/group-9-5/b149-honest-did-sensitivity) | `honest_did_sensitivity` | `L3` | `honestdid` · `HonestDiD` · `scipy / statsmodels` | <Available /> |
-| `9.5.8` · `B152` | [Sai biệt trong sai biệt tổng hợp (SDID)](/vietlod/chapter-09/group-9-5/b152-synthetic-did) | `synthetic_did` | `L3` | `sdid` · `synthdid / fect` · `pysyncon` | <Available /> |
+| **9.1.1** | [9.1.1. Ghép cặp điểm xu hướng Rosenbaum–Rubin (PSM)](/vietlod/chapter-09/group-9-1/b136-propensity-score-matching) | `propensity_score_matching` | `L1` | `base Stata` · `MatchIt / stats` · `statsmodels / scikit-learn` | <Available /> |
+| **9.1.2** | [9.1.2. Cân bằng trọng số Entropy chính xác moment Hainmueller](/vietlod/chapter-09/group-9-1/b137-entropy-balancing) | `entropy_balancing` | `L2` | `Stata ebalance` · `ebal / stats` · `scipy / statsmodels` | <Available /> |
+| **9.2.1** | [9.2.1. Sai biệt trong sai biệt hai chiều hiệu ứng cố định (TWFE)](/vietlod/chapter-09/group-9-2/b140-twfe-did) | `twfe_did` | `L1` | `base Stata` · `fixest / plm` · `linearmodels` | <Available /> |
+| **9.2.2** | [9.2.2. Thiết kế nghiên cứu sự kiện động và kiểm định tiền xu hướng](/vietlod/chapter-09/group-9-2/b141-event-study-did) | `event_study_did` | `L2` | `Stata reghdfe / xtreg` · `fixest` · `linearmodels / statsmodels` | <Available /> |
+| **9.2.3** | [9.2.3. Ước lượng DID theo nhóm–thời gian không đồng nhất Callaway–Sant'Anna](/vietlod/chapter-09/group-9-2/b143-callaway-santanna-did) | `callaway_santanna_did` | `L3` | `Stata csdid` · `did` · `csdid / statsmodels` | <Available /> |
+| **9.3.1** | [9.3.1. Thiết kế hồi quy gián đoạn sắc nhọn tại ngưỡng cắt (RDD)](/vietlod/chapter-09/group-9-3/b153-sharp-rdd) | `sharp_rdd` | `L1` | `Stata rdrobust` · `rdrobust / stats` · `rdrobust / statsmodels` | <Available /> |
+| **9.3.2** | [9.3.2. Thiết kế hồi quy gián đoạn mờ với biến công cụ cục bộ](/vietlod/chapter-09/group-9-3/b154-fuzzy-rdd) | `fuzzy_rdd` | `L2` | `Stata rdrobust` · `rdrobust / AER` · `rdrobust / linearmodels` | <Available /> |
+| **9.3.3** | [9.3.3. Hồi quy gián đoạn đa thức cục bộ hiệu chỉnh chệch bền vững](/vietlod/chapter-09/group-9-3/b155-rdrobust-sharp-fuzzy) | `rdrobust_sharp_fuzzy` | `L3` | `rdrobust` · `rdrobust` · `rdrobust` | <Available /> |
+| **9.3.4** | [9.3.4. Thiết kế gãy khúc hồi quy tại điểm đổi độ dốc chính sách (RKD)](/vietlod/chapter-09/group-9-3/b156-regression-kink-rkd) | `regression_kink_rkd` | `L4` | `rdrobust` · `rdrobust` · `rdrobust` | <Available /> |
+| **9.3.5** | [9.3.5. Ước lượng tích tụ hành vi tại ngưỡng chính sách Saez–Kleven](/vietlod/chapter-09/group-9-3/b157-bunching-estimator) | `bunching_estimator` | `L4` | `bunchit` · `bunching` · `statsmodels` | <Available /> |
+| **9.3.6** | [9.3.6. Hiệu ứng điều trị biên và biến công cụ cục bộ (MTE)](/vietlod/chapter-09/group-9-3/b158-marginal-treatment-effects) | `marginal_treatment_effects` | `L4` | `mtefe` · `ivmte` · `statsmodels` | <Available /> |
+| **9.4.1** | [9.4.1. Trọng số nghịch đảo xác suất điều trị Horvitz–Thompson (IPW)](/vietlod/chapter-09/group-9-4/b138-ipw) | `ipw` | `L1` | `base Stata` · `WeightIt / stats` · `statsmodels` | <Available /> |
+| **9.4.2** | [9.4.2. Ước lượng bền vững kép tăng cường trọng số xác suất (AIPW)](/vietlod/chapter-09/group-9-4/b139-aipw) | `aipw` | `L2` | `base Stata` · `AIPW / stats` · `doubleml / statsmodels` | <Available /> |
+| **9.4.3** | [9.4.3. Phương pháp đối chứng tổng hợp Abadie–Diamond–Hainmueller (SCM)](/vietlod/chapter-09/group-9-4/b150-synthetic-control) | `synthetic_control` | `L2` | `Stata synth` · `Synth` · `pysyncon / scipy` | <Available /> |
+| **9.4.4** | [9.4.4. Đối chứng tổng hợp tăng cường hiệu chỉnh chệch Ridge (ASCM)](/vietlod/chapter-09/group-9-4/b151-augmented-synthetic-control) | `augmented_synthetic_control` | `L3` | `synth / fect` · `Synth / fect` · `pysyncon` | <Available /> |
+| **9.4.5** | [9.4.5. Học máy nhân quả khử chệch trực giao Neyman (DML)](/vietlod/chapter-09/group-9-4/b159-double-ml) | `double_ml` | `L3` | `Stata 18 lasso` · `DoubleML / glmnet` · `doubleml / scikit-learn` | <Available /> |
+| **9.4.6** | [9.4.6. Rừng ngẫu nhiên nhân quả ước lượng hiệu ứng không đồng nhất](/vietlod/chapter-09/group-9-4/b160-causal-forest) | `causal_forest` | `L4` | `Stata Python/R bridge` · `grf / randomForest` · `econml / scikit-learn` | <Available /> |
+| **9.5.1** | [9.5.1. Phân rã trọng số hai nhân hai của Goodman-Bacon](/vietlod/chapter-09/group-9-5/b142-bacon-decomposition) | `bacon_decomposition` | `L3` | `bacondecomp` · `bacondecomp` · `linearmodels` | <Available /> |
+| **9.5.2** | [9.5.2. Nghiên cứu sự kiện trọng số tương tác đoàn hệ Sun–Abraham](/vietlod/chapter-09/group-9-5/b144-sun-abraham-did) | `sun_abraham_did` | `L3` | `eventstudyinteract` · `fixest` · `pyfixest` | <Available /> |
+| **9.5.3** | [9.5.3. Ước lượng DID suy diễn khử chệch Borusyak–Jaravel–Spiess](/vietlod/chapter-09/group-9-5/b145-borusyak-imputation-did) | `borusyak_imputation_did` | `L3` | `did_imputation` · `did2s` · `pyfixest` | <Available /> |
+| **9.5.4** | [9.5.4. Ước lượng DID động cho xử lý đảo chiều de Chaisemartin–D'Haultfœuille](/vietlod/chapter-09/group-9-5/b146-dechaisemartin-did) | `dechaisemartin_did` | `L4` | `did_multiplegt_dyn` · `DIDmultiplegtDYN` · `linearmodels` | <Available /> |
+| **9.5.5** | [9.5.5. Mô hình hiệu ứng cố định hai chiều mở rộng Mundlak (ETWFE)](/vietlod/chapter-09/group-9-5/b147-wooldridge-etwfe) | `wooldridge_etwfe` | `L3` | `Stata 18 xthdidregress / jwdid` · `etwfe` · `pyfixest` | <Available /> |
+| **9.5.6** | [9.5.6. Phương pháp chiếu cục bộ kết hợp mẫu đối chứng sạch (DID)](/vietlod/chapter-09/group-9-5/b148-lp-did) | `lp_did` | `L4` | `lpdid` · `fixest` · `pyfixest` | <Available /> |
+| **9.5.7** | [9.5.7. Phân tích độ nhạy vi phạm xu hướng song song Rambachan–Roth](/vietlod/chapter-09/group-9-5/b149-honest-did-sensitivity) | `honest_did_sensitivity` | `L3` | `honestdid` · `HonestDiD` · `scipy / statsmodels` | <Available /> |
+| **9.5.8** | [9.5.8. Sai biệt trong sai biệt tổng hợp (SDID)](/vietlod/chapter-09/group-9-5/b152-synthetic-did) | `synthetic_did` | `L3` | `sdid` · `synthdid / fect` · `pysyncon` | <Available /> |
 
-## 5. Tài liệu tham khảo học thuật trọng tâm
+## 9.5. Tài liệu tham khảo học thuật trọng tâm
 
 - Callaway, B, & Sant'Anna, P. H. C.(2021). Difference-in-differences with multiple time periods. *Journal of Econometrics*, 225, số 2, 200–230.
 - Sun, & Abraham(2021). Econometric specification, identification, and asymptotic inference.

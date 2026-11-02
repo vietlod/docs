@@ -1,35 +1,35 @@
 ---
 id: index
-title: "Nhóm 3.4: Mô hình Logit hỗn hợp"
-sidebar_label: "Nhóm 3.4. Mô hình Logit hỗn hợp"
+title: "3.4. Mô hình Logit hỗn hợp"
+sidebar_label: "3.4. Mô hình Logit hỗn hợp"
 sidebar_position: 4
 slug: /vietlod/chapter-03/group-3-4
-description: "Hướng dẫn thực hành Nhóm 3.4 — Mô hình Logit hỗn hợp thuộc Chương 03: so sánh và thực thi 1 mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Phần 3.4 — Mô hình Logit hỗn hợp thuộc Chương 3: so sánh và thực thi 1 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
-  - Nhóm 3.4 VietLOD
+  - Phần 3.4 VietLOD
   - Mô hình Logit hỗn hợp
   - Stata 18
   - R 4.x
   - Python 3.11
 ---
 
-# Nhóm 3.4: Mô hình Logit hỗn hợp
+# 3.4. Mô hình Logit hỗn hợp
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Nhóm phương pháp 3.4 — Mô hình Logit hỗn hợp** thuộc [Chương 03: Mô hình lựa chọn rời rạc và cầu cấu trúc](/vietlod/chapter-03) cung cấp quy trình thực hành từng bước cho **1 mô hình kinh tế lượng** từ bài `3.4.1` đến `3.4.1`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Nhóm 3.4](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-03-mo-hinh-lua-chon-roi-rac-va-cau-cau-truc/nhom-3-4-mixed) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+**Phần 3.4. Mô hình Logit hỗn hợp** thuộc [3. Mô hình lựa chọn rời rạc và cầu cấu trúc](/vietlod/chapter-03) cung cấp quy trình thực hành từng bước cho **1 bài học mô hình kinh tế lượng** từ mục `3.4.1` đến `3.4.1`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 3.4](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-03-mo-hinh-lua-chon-roi-rac-va-cau-cau-truc/nhom-3-4-mixed) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Nhóm 3.4: Mô hình Logit hỗn hợp trên Stata 18, R 4.x và Python 3.11+"
+  title="Hướng dẫn thực hành Phần 3.4: Mô hình Logit hỗn hợp trên Stata 18, R 4.x và Python 3.11+"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 1. Bản chất phương pháp và hệ phương trình định danh
+## 3.4.1. Bản chất phương pháp và hệ phương trình định danh
 
-- **Câu hỏi nghiên cứu trọng tâm của nhóm**: Làm thế nào để mô hình hóa quyết định định tính — nhị phân, đa phương án, có thứ tự — và ước lượng cầu sản phẩm phân hóa có nội sinh giá bán?
+- **Câu hỏi nghiên cứu trọng tâm**: Làm thế nào để mô hình hóa quyết định định tính — nhị phân, đa phương án, có thứ tự — và ước lượng cầu sản phẩm phân hóa có nội sinh giá bán?
 - **Kiểm định chẩn đoán bắt buộc**: Kiểm định ý nghĩa thống kê của độ lệch chuẩn các hệ số ngẫu nhiên $\sigma_\beta$, độ hội tụ theo số lượng điểm rút mẫu Halton $R \ge 500$ và phân phối mức sẵn lòng chi trả.
 
-Phương trình đặc tả cấu trúc của nhóm phương pháp 3.4:
+Phương trình đặc tả cấu trúc của phần phương pháp 3.4:
 
 $$
 P_{ij} = \int \frac{\exp(X_{ij}^\top \beta_i)}{\sum_{m=1}^J \exp(X_{im}^\top \beta_i)} f(\beta_i \mid \theta)\,d\beta_i
@@ -42,10 +42,10 @@ $$
 $$
 
 <FeatureNotAvailable
-  note="Khi dữ liệu vi phạm giả định định danh của Nhóm 3.4, nhà nghiên cứu cần chuyển sang các nhóm phương pháp mở rộng trong Chương 03 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
+  note="Khi dữ liệu vi phạm giả định định danh của Phần 3.4, nhà nghiên cứu cần chuyển sang các phần phương pháp mở rộng trong Chương 3 hoặc sử dụng sai số chuẩn vững và biến công cụ phù hợp."
 />
 
-## 2. Danh mục các mô hình trong Nhóm 3.4
+## 3.4.2. Danh mục các bài học mô hình trong Phần 3.4
 
 <FeatureCards
   features={[
@@ -53,31 +53,30 @@ $$
       title: '3.4.1. Mô hình Logit hỗn hợp hệ số ngẫu nhiên',
       description: 'Cho phép hệ số độ nhạy sở thích $\beta_i$ biến thiên ngẫu nhiên giữa các cá thể theo phân phối $f(\beta_i \mid \theta)$ và ước lượng bằng hợ...',
       link: '/vietlod/chapter-03/group-3-4/b038-mixed-logit',
-      badge: 'B038 · mixed_logit'
+      badge: '3.4.1 · mixed_logit'
     }
   ]}
 />
 
-## 3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
+## 3.4.3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
 
 | Bài học & Mô hình | Mã định danh | Cú pháp Stata 18 MP | Cú pháp R 4.x | Cú pháp Python 3.11+ | Hỗ trợ |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `3.4.1` · [Mô hình Logit hỗn hợp hệ số ngẫu nhiên](/vietlod/chapter-03/group-3-4/b038-mixed-logit) | `mixed_logit` | `cmxtmixlogit choice x_alt, random(x_alt)` | `mlogit::mlogit(choice ~ x_alt, rpar = c(x_alt = 'n'), R = 100, data = df)` | `smf.mixedlm('y ~ x1 + x2', data=df, groups=df['id']).fit()` | <Available /> |
+| **3.4.1** · [Mô hình Logit hỗn hợp hệ số ngẫu nhiên](/vietlod/chapter-03/group-3-4/b038-mixed-logit) | `mixed_logit` | `cmxtmixlogit choice x_alt, random(x_alt)` | `mlogit::mlogit(choice ~ x_alt, rpar = c(x_alt = 'n'), R = 100, data = df)` | `smf.mixedlm('y ~ x1 + x2', data=df, groups=df['id']).fit()` | <Available /> |
 
-## 4. Quy trình thực hành chuẩn cho Nhóm 3.4
+## 3.4.4. Quy trình thực hành chuẩn cho Phần 3.4
 
 <Steps>
-
-### Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco
-
-Tải tệp CSV thực hành của từng mô hình trong Nhóm `3.4` hoặc kết nối dữ liệu thực tế từ [EcoData](https://ecodata.io.vn) và [Finco](https://www.finco.vn).
-
-### Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu
-
-So sánh các mô hình từ `3.4.1` đến `3.4.1` trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.
-
-### Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab
-
-Thực hiện đầy đủ bộ kiểm định **Kiểm định ý nghĩa thống kê của độ lệch chuẩn các hệ số ngẫu nhiên $\sigma_\beta$, độ hội tụ theo số lượng điểm rút mẫu Halton $R \ge 500$ và phân phối mức sẵn lòng chi trả** và đẩy mã mô hình sang [EcoLab](https://ecolab.io.vn) để xuất bảng kết quả chuẩn công bố quốc tế.
-
+  <div className="step-item">
+    <h3>Bước 1. Nạp dữ liệu thực hành chuẩn hóa từ VietLOD, EcoData hoặc Finco</h3>
+    <p>Tải tệp CSV thực hành của từng bài học trong Phần <code>3.4</code> hoặc kết nối dữ liệu thực tế từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> và <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu</h3>
+    <p>So sánh các bài học mô hình từ <code>3.4.1</code> đến <code>3.4.1</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
+  </div>
+  <div className="step-item">
+    <h3>Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab</h3>
+    <p>Thực hiện đầy đủ bộ kiểm định <strong>Kiểm định ý nghĩa thống kê của độ lệch chuẩn các hệ số ngẫu nhiên $\sigma_\beta$, độ hội tụ theo số lượng điểm rút mẫu Halton $R \ge 500$ và phân phối mức sẵn lòng chi trả</strong> và đẩy mã mô hình sang <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> để xuất bảng kết quả chuẩn công bố quốc tế.</p>
+  </div>
 </Steps>

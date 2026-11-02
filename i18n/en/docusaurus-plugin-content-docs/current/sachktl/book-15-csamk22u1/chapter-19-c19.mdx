@@ -1,19 +1,19 @@
 ---
 id: chapter-19-c19
-title: "Chapter 19: 19. Phương pháp tối ưu hóa phi tuyến — Microeconometrics Using Stata"
-sidebar_label: "Chapter 19: 19. Phương pháp tối ưu hóa phi tuyến"
+title: "19. Phương pháp tối ưu hóa phi tuyến"
+sidebar_label: "19. Phương pháp tối ưu hóa phi tuyến"
 sidebar_position: 20
-description: "Step-by-step practical how-to guide for Chapter 19: 19. Phương pháp tối ưu hóa phi tuyến from Microeconometrics Using Stata on SachKTL with Stata, R, and Python workflows integrated with EcoData, Finco, and EcoLab."
+description: "Comprehensive practical how-to guide for 19. Phương pháp tối ưu hóa phi tuyến from Microeconometrics Using Stata on SachKTL featuring structural equations, 6 lesson breakdowns, and Stata, R, and Python scripts."
 ---
 
-# Chapter 19: 19. Phương pháp tối ưu hóa phi tuyến — Microeconometrics Using Stata
+# 19. Phương pháp tối ưu hóa phi tuyến
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-This practical how-to guide synthesizes the methodology and empirical implementation workflow of **Chapter 19: 19. Phương pháp tối ưu hóa phi tuyến** from [**Book 15: Microeconometrics Using Stata**](/en/sachktl/book-15-csamk22u1/), with direct backlinks to the authoritative source material at [https://sachktl.tnsai.vn/vi/csamk22u1/c19/](https://sachktl.tnsai.vn/vi/csamk22u1/c19/).
+This practical how-to guide presents the theoretical foundations, structural mathematical equations, detailed breakdown of **6 specialized lessons**, and multi-platform replication workflows for **19. Phương pháp tối ưu hóa phi tuyến** from the textbook [**Microeconometrics Using Stata**](/en/sachktl/book-15-csamk22u1/), with direct cross-references to the authoritative source material at [https://sachktl.tnsai.vn/vi/csamk22u1/c19/](https://sachktl.tnsai.vn/vi/csamk22u1/c19/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chapter 19: 19. Phương pháp tối ưu hóa phi tuyến">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="19. Phương pháp tối ưu hóa phi tuyến">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ This practical how-to guide synthesizes the methodology and empirical implementa
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BOOK 15 · CHAPTER 19</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chapter 19: 19. Phương pháp tối ưu hóa phi tuyến</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Part of Textbook: Microeconometrics Using Stata · 6 Detailed Lessons</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Microeconometrics Using Stata</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">19. Phương pháp tối ưu hóa phi tuyến</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Applied Econometrics, Statistical Modeling, and Hypothesis Testing · 6 Detailed Lesso</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,102 +41,218 @@ This practical how-to guide synthesizes the methodology and empirical implementa
   </svg>
 </div>
 
-## 1. Methodological Meaning and Scope of Application
+## 1. Methodological Foundations, Mathematical Specification, and Identification
 
-Phương pháp tối ưu hóa phi tuyến TÓM TẮT CHỦ ĐỀ Chào các bạn sinh viên, chào mừng đến với chuỗi bài học chuyên sâu về các phương pháp tối ưu hóa phi tuyến trong kinh tế lượng. Khi sử dụng các lệnh ước lượng quen thuộc như logit hay poisson trong Stata, chúng ta thường chỉ quan tâm đến kết quả cuối cùng mà không hiểu rõ quá trình tính toán phức tạp "ẩn" đằng sau. Stata đã làm thế nào để tìm ra các hệ số hồi quy đó? Tại sao đôi khi quá trình ước lượng lại xuất hiện các thông báo như hay? Chuỗi bài học này sẽ mở "chiếc hộp đen" đó ra, giúp các bạn không chỉ hiểu sâu về
+Phương pháp tối ưu hóa phi tuyến TÓM TẮT CHỦ ĐỀ Chào các bạn sinh viên, chào mừng đến với chuỗi bài học chuyên sâu về các phương pháp tối ưu hóa phi tuyến trong kinh tế lượng. Khi sử dụng các lệnh ước lượng quen thuộc như logit hay poisson trong Stata, chúng ta thường chỉ quan tâm đến kết quả cuối cùng mà không hiểu rõ quá trình tính toán phức tạp "ẩn" đằng sau. Stata đã làm thế nào để tìm ra các hệ số hồi quy đó? Tại sao đôi khi quá trình ước lượng lại xuất hiện các thông báo như hay?
 
-- **Core Academic Topics**: TÓM TẮT CHỦ ĐỀ, CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO.
-- **Supported Analytical Environments**: `Stata 18 MP`.
-- **Recommended Empirical Data Sources**: Vietnamese macroeconomic, corporate, and household survey datasets on [EcoData](https://ecodata.io.vn), capital and commodity market series on [Finco](https://www.finco.vn), model cross-references on [VietLOD](https://vietlod.tnsai.vn), and automated estimation on [EcoLab](https://ecolab.io.vn).
+### 1.1. Structural Equations and Representative Estimator
+
+$$
+Y_i = \beta_0 + \sum_{k=1}^K \beta_k X_{ik} + \varepsilon_i, \quad \mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0 \tag*{[1]}
+$$
+
+$$
+\widehat{\text{Var}}_{\text{HC1}}(\hat{\boldsymbol{\beta}}) = \frac{N}{N - K - 1}\left(\mathbf{X}'\mathbf{X}\right)^{-1}\left(\sum_{i=1}^N \hat{\varepsilon}_i^2 \mathbf{x}_i \mathbf{x}_i'\right)\left(\mathbf{X}'\mathbf{X}\right)^{-1} \tag*{[2]}
+$$
+
+### 1.2. Core Identification Assumptions and Applicability Conditions
+
+1. Correct functional form specification in parameters without omitting relevant covariates correlated with included regressors.
+2. Zero conditional mean of disturbances $\mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0$, ensuring unbiasedness and asymptotic consistency.
+3. Full column rank of the design matrix $\mathbf{X}$ without exact multicollinearity, paired with HC1 or cluster-robust standard errors under heteroskedasticity.
 
 <FeatureCards
   features={[
     {
-      title: "Original Chapter on SachKTL",
-      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for Chapter 19 on SachKTL.",
+      title: "Authoritative Chapter on SachKTL",
+      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for this chapter on SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/csamk22u1/c19/"
     },
     {
       title: "Practice Datasets on EcoData & Finco",
-      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and survey data for hands-on replication.",
+      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and household survey data for hands-on replication.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
       title: "Automated Estimation on EcoLab",
-      description: "Execute econometric specifications, run diagnostic battery tests, and export publication-grade tables automatically.",
+      description: "Execute econometric specifications, run diagnostic battery tests, and export APA 7th / AER publication-grade tables automatically.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Step-by-Step Practical Implementation Across Chapter Lessons
+<FeatureNotAvailable
+  feature="Unconditional Baseline Estimation Under Violated Identification Assumptions"
+  reason="When explanatory variables are endogenous due to simultaneity, measurement error, or omitted confounders, OLS estimates are biased and inconsistent; transition to IV/2SLS or GMM estimation."
+  alternative="Run the complete diagnostic battery in Step 4 and transition to the appropriate corrective estimator on VietLOD or EcoLab."
+/>
+
+## 2. Lesson-by-Lesson Academic Breakdown
+
+### 2.1. Nền tảng lý thuyết - Phương pháp Newton-Raphson
+
+Hiểu sâu về phương pháp Newton-Raphson The workhorse of nonlinear optimization Bên trong "hộp đen" của các lệnh ước lượng Khi thực hiện các phân tích kinh tế lượng, chắc hẳn các bạn đã rất quen thuộc với việc sử dụng các lệnh ước lượng có sẵn trong Stata như regress, logit, hay poisson. Chúng ta cung cấp dữ liệu, chỉ định mô hình, và Stata trả về các hệ số ước lượng cùng sai số chuẩn một cách nhanh chóng. Nhưng bạn đã bao giờ tự hỏi: Stata đã làm thế nào để tìm ra những con số đó, đặc biệt là với các mô hình phi tuyến phức tạp?
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Bên trong "hộp đen" của các lệnh ước lượng**
+- **Nền tảng lý thuyết của phương pháp Newton-Raphson**
+- **Khai triển Taylor và công thức cập nhật**
+- **Phương pháp nghiên cứu: Áp dụng NR cho mô hình Poisson**
+- **Gradient và Hessian của mô hình Poisson**
+- **Từng bước "leo đồi" tìm ước lượng Poisson**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c19/nen-tang-ly-thuyet-phuong-phap-newton-raphson/)
+
+### 2.2. Tối ưu hóa trong Stata - Lệnh ml và Phương pháp lf
+
+Tối ưu hóa trong Stata với lệnh ml A practical guide to the lf method Từ lý thuyết đến thực hành với Stata Chào mừng các bạn quay trở lại với chuỗi bài học về tối ưu hóa phi tuyến! Trong bài học trước, chúng ta đã cùng nhau "mổ xẻ" thuật toán Newton-Raphson và hiểu được cách nó tìm ra điểm tối ưu bằng cách lặp đi lặp lại việc cập nhật tham số dựa trên gradient và Hessian. Đó là một nền tảng lý thuyết vô cùng quan trọng.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Từ lý thuyết đến thực hành với Stata**
+- **Nền tảng về lệnh ml và phương pháp lf**
+- **Phương pháp lf: Dạng tuyến tính đơn giản**
+- **Phương pháp nghiên cứu: Xây dựng mô hình Poisson với ml lf**
+- **Ví dụ minh họa: Từ Poisson đến Negative Binomial và NLS**
+- **1. Hồi quy Poisson**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c19/toi-uu-hoa-trong-stata-lenh-ml-va-phuong-phap-lf/)
+
+### 2.3. Các phương pháp Gradient và Gỡ lỗi Chương trình
+
+Các phương pháp Gradient và Gỡ lỗi chương trình Navigating the optimization process Khi quá trình "leo đồi" không hề bằng phẳng Trong bài học trước, chúng ta đã thành công trong việc tự xây dựng và ước lượng các mô hình Poisson, Negative Binomial và NLS. Quá trình diễn ra thật suôn sẻ: chúng ta định nghĩa mô hình, ra lệnh tối ưu hóa, và Stata trả về kết quả đẹp đẽ. Đó là kịch bản lý tưởng. Tuy nhiên, trong nghiên cứu thực tế, con đường đến đỉnh đồi của hàm mục tiêu thường không bằng phẳng.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Khi quá trình "leo đồi" không hề bằng phẳng**
+- **Đọc hiểu quá trình tối ưu hóa**
+- **Các kỹ thuật tối ưu hóa thay thế**
+- **Giải mã nhật ký lặp**
+- **Kỹ năng gỡ lỗi chương trình ml**
+- **Ví dụ minh họa: Các kịch bản lỗi thường gặp**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c19/cac-phuong-phap-gradient-va-go-loi-chuong-trinh/)
+
+### 2.4. Lập trình Nâng cao với Mata và GMM
+
+Lập trình nâng cao với Mata và GMM From high-level commands to matrix programming Giới thiệu: Vượt qua giới hạn của ml Trong các bài học trước, chúng ta đã khám phá sức mạnh của bộ lệnh ml. Nó giống như một ngôn ngữ lập trình "cấp cao", cho phép chúng ta mô tả hàm mục tiêu một cách tương đối đơn giản, và Stata sẽ lo phần còn lại của quá trình tối ưu hóa. Tuy nhiên, sự đơn giản này cũng đi kèm với những giới hạn.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Giới thiệu: Vượt qua giới hạn của ml**
+- **GMM và bộ công cụ optimize của Mata**
+- **Ôn lại về GMM cho biến công cụ phi tuyến**
+- **Giới thiệu bộ công cụ optimize của Mata**
+- **Quy trình triển khai GMM trong Mata**
+- **Xây dựng ước lượng GMM cho mô hình Poisson-IV**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c19/lap-trinh-nang-cao-voi-mata-va-gmm/)
+
+### 2.5. Hướng dẫn thực hành tổng hợp
+
+Hướng dẫn thực hành tổng hợp từ A đến Z Building and estimating a custom model Vận dụng kiến thức vào thực tế Chào mừng các bạn đến với bài học quan trọng nhất trong chuỗi bài học của chúng ta! Sau khi đã trang bị một kho tàng kiến thức vững chắc – từ lý thuyết về thuật toán Newton-Raphson, kỹ năng thực hành với lệnh ml, phương pháp gỡ lỗi chương trình, cho đến lập trình nâng cao với Mata – giờ là lúc chúng ta vận dụng chúng vào một kịch bản nghiên cứu thực tế.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Vận dụng kiến thức vào thực tế**
+- **Chuẩn bị dữ liệu và biến tương tác**
+- **Quy trình phân tích mô hình tương tác**
+- **Hướng dẫn thực hành từng bước với Stata**
+- **Tổng kết**
+- **Những điểm chính cần nắm vững**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c19/huong-dan-thuc-hanh-tong-hop/)
+
+### 2.6. Tổng kết và lựa chọn phương pháp
+
+Tổng hợp các phương pháp tối ưu hóa phi tuyến A unified framework for econometric estimation Từ người dùng đến người sáng tạo Chúng ta đã cùng nhau trải qua một hành trình đầy thử thách nhưng cũng vô cùng bổ ích, đi sâu vào "phòng động cơ" của các phương pháp ước lượng kinh tế lượng.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Từ người dùng đến người sáng tạo**
+- **Ngọn đồi, bản đồ và những người leo núi**
+- **Cây quyết định lựa chọn công cụ**
+- **Tổng hợp các kỹ năng**
+- **Tổng kết và hướng phát triển**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c19/tong-ket-va-lua-chon-phuong-phap/)
+
+## 3. Step-by-Step Empirical Implementation Workflow
 
 <Steps>
   <div className="step-item">
-    <h3>Step 1: Nền tảng lý thuyết - Phương pháp Newton-Raphson</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Nền tảng lý thuyết - Phương pháp Newton-Raphson. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c19/nen-tang-ly-thuyet-phuong-phap-newton-raphson/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csamk22u1/c19/nen-tang-ly-thuyet-phuong-phap-newton-raphson/</a>.</p>
+    <h3>1. Formulate the Research Question and Prepare Data on EcoData & Finco</h3>
+    <p>Define the dependent variable, core explanatory variables, and control covariates aligned with <strong>19. Phương pháp tối ưu hóa phi tuyến</strong>. Extract standardized Vietnamese empirical series from <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> or <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, and screen for missing observations and extreme outliers.</p>
   </div>
   <div className="step-item">
-    <h3>Step 2: Tối ưu hóa trong Stata - Lệnh ml và Phương pháp lf</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Tối ưu hóa trong Stata - Lệnh ml và Phương pháp lf. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c19/toi-uu-hoa-trong-stata-lenh-ml-va-phuong-phap-lf/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csamk22u1/c19/toi-uu-hoa-trong-stata-lenh-ml-va-phuong-phap-lf/</a>.</p>
+    <h3>2. Conduct Descriptive Profiling, Correlation Analysis, and Pre-Estimation Checks</h3>
+    <p>Examine empirical distributions, construct summary statistics tables, and evaluate collinearity using pairwise correlation matrices and Variance Inflation Factors (VIF).</p>
   </div>
   <div className="step-item">
-    <h3>Step 3: Các phương pháp Gradient và Gỡ lỗi Chương trình</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Các phương pháp Gradient và Gỡ lỗi Chương trình. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c19/cac-phuong-phap-gradient-va-go-loi-chuong-trinh/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csamk22u1/c19/cac-phuong-phap-gradient-va-go-loi-chuong-trinh/</a>.</p>
+    <h3>3. Estimate the Model Across Stata 18 MP, R 4.x, and Python 3.11+</h3>
+    <p>Execute the parameter estimation scripts matching the structural equations in Section 1.1 while cross-checking theoretical derivations at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c19/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Step 4: Lập trình Nâng cao với Mata và GMM</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Lập trình Nâng cao với Mata và GMM. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c19/lap-trinh-nang-cao-voi-mata-va-gmm/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csamk22u1/c19/lap-trinh-nang-cao-voi-mata-va-gmm/</a>.</p>
+    <h3>4. Perform Post-Estimation Diagnostics and Robust Variance Correction</h3>
+    <p>Test for heteroskedasticity, serial correlation, Ramsey RESET functional form misspecification, and regressor endogeneity. Apply White HC1 or cluster-robust standard errors for valid inference.</p>
   </div>
   <div className="step-item">
-    <h3>Step 5: Hướng dẫn thực hành tổng hợp</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Hướng dẫn thực hành tổng hợp. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c19/huong-dan-thuc-hanh-tong-hop/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csamk22u1/c19/huong-dan-thuc-hanh-tong-hop/</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Step 6: Tổng kết và lựa chọn phương pháp</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Tổng kết và lựa chọn phương pháp. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c19/tong-ket-va-lua-chon-phuong-phap/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csamk22u1/c19/tong-ket-va-lua-chon-phuong-phap/</a>.</p>
+    <h3>5. Format Journal-Grade Tables and Cross-Verify on EcoLab</h3>
+    <p>Report point estimates, standard errors in parentheses, and statistical significance stars following APA 7th / AER Booktabs standards, or automate the entire reporting pipeline on <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> and <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Multi-Platform Implementation Examples in Stata, R, and Python
+## 4. Multi-Platform Implementation Scripts in Stata, R, and Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Initialize environment and load practice dataset from EcoData / SachKTL
+* Thiết lập môi trường, ước lượng mô hình và kiểm định chẩn đoán toàn diện
 version 18.0
 clear all
 set more off
+import delimited "sachktl_empirical_ecodata.csv", clear encoding("utf-8")
 
-* Import standardized empirical dataset
-import delimited "sachktl_csamk22u1_c19_ecodata.csv", clear encoding("utf-8")
 describe
-summarize
+summarize y x1 x2 x3, detail
 
-* Estimate baseline specification and run diagnostic checks with robust standard errors
-regress y x1 x2 x3, vce(robust)
+* 1. Ước lượng mô hình cơ sở và kiểm định phương sai thay đổi / đa cộng tuyến / dạng hàm
+regress y x1 x2 x3
 estat hettest
+estat imtest, white
 estat vif
+estat ovtest
+
+* 2. Ước lượng với sai số chuẩn vững White HC1 và xuất tác động biên
+regress y c.x1##c.x2 x3, vce(robust)
+margins, dydx(x1 x2 x3)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Load econometric packages and practice dataset from EcoData / SachKTL
+# Nạp thư viện phân tích kinh tế lượng và thực thi kiểm định chẩn đoán
 library(tidyverse)
 library(lmtest)
 library(sandwich)
+library(car)
 
-df <- read.csv("sachktl_csamk22u1_c19_ecodata.csv")
+df <- read.csv("sachktl_empirical_ecodata.csv")
 summary(df)
 
-# Estimate model and compute heteroskedasticity-robust HC1 standard errors
+# 1. Ước lượng mô hình tuyến tính và kiểm định Breusch-Pagan, RESET, VIF
 fit <- lm(y ~ x1 + x2 + x3, data = df)
+bptest(fit)
+resettest(fit, power = 2:3, type = "fitted")
+vif(fit)
+
+# 2. Xuất bảng hệ số ước lượng với sai số chuẩn vững HC1
 coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
 ```
 
@@ -144,35 +260,53 @@ coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Load econometric libraries and practice dataset from EcoData / SachKTL
+# Nạp thư viện statsmodels và thực thi ước lượng kèm chẩn đoán phần dư
 import pandas as pd
+import statsmodels.api as sm
 import statsmodels.formula.api as smf
+from statsmodels.stats.diagnostic import het_breuschpagan, linear_reset
+from statsmodels.stats.outliers_influence import variance_inflation_factor
 
-df = pd.read_csv("sachktl_csamk22u1_c19_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_empirical_ecodata.csv")
 
-# Fit specification with HC1 robust standard errors
+# 1. Ước lượng mô hình với sai số chuẩn vững HC1
 model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
 print(model.summary())
+
+# 2. Kiểm định phương sai thay đổi Breusch-Pagan, Ramsey RESET và hệ số VIF
+bp_lm, bp_pval, _, _ = het_breuschpagan(model.resid, model.model.exog)
+reset_res = linear_reset(model, power=2, use_f=True)
+X = sm.add_constant(df[["x1", "x2", "x3"]].dropna())
+vifs = {col: variance_inflation_factor(X.values, i) for i, col in enumerate(X.columns)}
+print(f"Breusch-Pagan p={bp_pval:.4f} | RESET p={reset_res.pvalue:.4f} | VIF={vifs}")
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video Tutorial Walkthrough
+## 5. Post-Estimation Diagnostic and Interpretation Guide
+
+| Diagnostic Criterion | Null Hypothesis $H_0$ | Benchmark Threshold | Corrective Action When $H_0$ Is Rejected |
+| :--- | :--- | :--- | :--- |
+| **Heteroskedasticity** | Constant error variance $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ rejects $H_0$ | Apply `vce(robust)`, `vcovHC(HC1)`, or FGLS/WLS weighted estimation |
+| **Multicollinearity** | No severe linear dependence among regressors | $\text{VIF} < 10$ acceptable | Drop redundant covariates, center interactions, or apply LASSO/Ridge regularization |
+| **Ramsey RESET Functional Form** | No omitted nonlinear or higher-order terms | $p\text{-value} > 0.05$ retains $H_0$ | Add interaction terms, quadratic polynomials, or log-transform skewed positive variables |
+| **Regressor Exogeneity** | Orthogonality $\text{Cov}(X, \varepsilon)=0$ | Durbin-Wu-Hausman $p > 0.05$ | Transition to IV/2SLS, LIML, or GMM estimation with validated instruments |
+
+## 6. Video Tutorial Walkthrough
 
 <VideoTutorial
-  title="Practical Walkthrough for Chapter 19: 19. Phương pháp tối ưu hóa phi tuyến on SachKTL"
+  title="Practical Walkthrough for 19. Phương pháp tối ưu hóa phi tuyến on SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Complete Lesson Directory and Backlinks to Original SachKTL Articles
+## 7. Complete Lesson Directory and Backlinks to Original SachKTL Articles
 
-| No. | Lesson Title in Chapter 19 | Supported Software | Original Source Link on SachKTL |
+| Lesson Code | Lesson Title | Supported Software | Original Source Link on SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Lesson 01** | Nền tảng lý thuyết - Phương pháp Newton-Raphson | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c19/nen-tang-ly-thuyet-phuong-phap-newton-raphson/) |
-| **Lesson 02** | Tối ưu hóa trong Stata - Lệnh ml và Phương pháp lf | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c19/toi-uu-hoa-trong-stata-lenh-ml-va-phuong-phap-lf/) |
-| **Lesson 03** | Các phương pháp Gradient và Gỡ lỗi Chương trình | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c19/cac-phuong-phap-gradient-va-go-loi-chuong-trinh/) |
-| **Lesson 04** | Lập trình Nâng cao với Mata và GMM | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c19/lap-trinh-nang-cao-voi-mata-va-gmm/) |
-| **Lesson 05** | Hướng dẫn thực hành tổng hợp | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c19/huong-dan-thuc-hanh-tong-hop/) |
-| **Lesson 06** | Tổng kết và lựa chọn phương pháp | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c19/tong-ket-va-lua-chon-phuong-phap/) |
+| **19.1** | Nền tảng lý thuyết - Phương pháp Newton-Raphson | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c19/nen-tang-ly-thuyet-phuong-phap-newton-raphson/) |
+| **19.2** | Tối ưu hóa trong Stata - Lệnh ml và Phương pháp lf | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c19/toi-uu-hoa-trong-stata-lenh-ml-va-phuong-phap-lf/) |
+| **19.3** | Các phương pháp Gradient và Gỡ lỗi Chương trình | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c19/cac-phuong-phap-gradient-va-go-loi-chuong-trinh/) |
+| **19.4** | Lập trình Nâng cao với Mata và GMM | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c19/lap-trinh-nang-cao-voi-mata-va-gmm/) |
+| **19.5** | Hướng dẫn thực hành tổng hợp | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c19/huong-dan-thuc-hanh-tong-hop/) |
+| **19.6** | Tổng kết và lựa chọn phương pháp | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c19/tong-ket-va-lua-chon-phuong-phap/) |

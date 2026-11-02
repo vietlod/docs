@@ -1,19 +1,19 @@
 ---
 id: chapter-11-c11
-title: "Chương 11: 11. các thuộc tính xác suất của mô hình SV"
-sidebar_label: "Chương 11: 11. Các thuộc tính xác suất của mô hình SV"
+title: "11. Các thuộc tính xác suất của mô hình SV"
+sidebar_label: "11. Các thuộc tính xác suất của mô hình SV"
 sidebar_position: 12
-description: "Hướng dẫn thực hành How-To Chương 11: 11. các thuộc tính xác suất của mô hình SV thuộc bộ sách Cẩm nang kinh tế lượng chuỗi thời gian tài chính trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 11. Các thuộc tính xác suất của mô hình SV thuộc giáo trình Cẩm nang kinh tế lượng chuỗi thời gian tài chính trên SachKTL kèm công thức toán học, phân tích 5 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 11: 11. các thuộc tính xác suất của mô hình SV
+# 11. Các thuộc tính xác suất của mô hình SV
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 11: 11. các thuộc tính xác suất của mô hình SV** thuộc [**Bộ sách 28: cẩm nang kinh tế lượng chuỗi thời gian tài chính**](/sachktl/book-28-asndk09u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/asndk09u1/c11/](https://sachktl.tnsai.vn/vi/asndk09u1/c11/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **5 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **11. Các thuộc tính xác suất của mô hình SV** thuộc bộ giáo trình [**Cẩm nang kinh tế lượng chuỗi thời gian tài chính**](/sachktl/book-28-asndk09u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/asndk09u1/c11/](https://sachktl.tnsai.vn/vi/asndk09u1/c11/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 11: 11. các thuộc tính xác suất của mô hình SV">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="11. Các thuộc tính xác suất của mô hình SV">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 28 · CHƯƠNG 11</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 11: 11. các thuộc tính xác suất của mô hình SV</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Cẩm nang kinh tế lượng chuỗi thời gian tài chính · 5 bài học chu</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Cẩm nang kinh tế lượng chuỗi thời gi</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">11. Các thuộc tính xác suất của mô hình SV</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng chuỗi thời gian, đồng liên kết và biến động tài chính · 5 bài học chuyê</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,133 +41,256 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-GIỚI THIỆU CHUỖI BÀI HỌC Chào mừng các bạn sinh viên đến với chuỗi bài học chuyên sâu về Mô hình Biến động Ngẫu nhiên . Trong tài chính, chúng ta thường quan sát thấy rằng có những giai đoạn thị trường biến động rất mạnh, theo sau là những giai đoạn tương đối "yên tĩnh". Tại sao lại như vậy? Làm thế nào để mô hình hóa được cụm biến động này một cách hiệu quả? Mô hình SV chính là một trong những công cụ mạnh mẽ nhất để trả lời câu hỏi đó. Khác với các mô hình như GARCH, nơi biến động được xác định bởi các giá trị trong quá khứ, mô hình SV giả định rằng biến động tuân theo một quy luật ngẫu
+GIỚI THIỆU CHUỖI BÀI HỌC Chào mừng các bạn sinh viên đến với chuỗi bài học chuyên sâu về Mô hình Biến động Ngẫu nhiên . Trong tài chính, chúng ta thường quan sát thấy rằng có những giai đoạn thị trường biến động rất mạnh, theo sau là những giai đoạn tương đối "yên tĩnh". Tại sao lại như vậy? Làm thế nào để mô hình hóa được cụm biến động này một cách hiệu quả? Mô hình SV chính là một trong những công cụ mạnh mẽ nhất để trả lời câu hỏi đó.
 
-- **Chủ đề học thuật trọng tâm**: GIỚI THIỆU CHUỖI BÀI HỌC, CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+\Phi(L)(1 - L)^d Y_t = \mu + \Theta(L)\varepsilon_t, \quad \varepsilon_t \mid \mathcal{F}_{t-1} \sim \mathcal{N}(0, \sigma_t^2) \tag*{[1]}
+$$
+
+$$
+\sigma_t^2 = \omega + \sum_{i=1}^p \alpha_i \varepsilon_{t-i}^2 + \sum_{j=1}^q \beta_j \sigma_{t-j}^2, \quad \omega > 0, \; \alpha_i, \beta_j \ge 0 \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Chuỗi thời gian phải thỏa mãn điều kiện dừng hiệp phương sai hoặc được sai phân hóa đến bậc tích hợp $I(d)$ phù hợp trước khi ước lượng.
+2. Điều kiện khả nghịch và nghiệm ngoài vòng tròn đơn vị của đa thức trễ $\Phi(L)$ và $\Theta(L)$ đảm bảo tính ổn định động học.
+3. Trong mô hình phương sai có điều kiện thay đổi GARCH, tổng hệ số $\sum \alpha_i + \sum \beta_j < 1$ bảo đảm phương sai không điều kiện hữu hạn.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 11 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/asndk09u1/c11/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Hồi quy chuỗi thời gian không dừng chưa qua kiểm định nghiệm đơn vị ADF/PP và đồng liên kết Johansen dễ dẫn đến hồi quy giả mạo với thống kê $t$ và $R^2$ bị thổi phồng."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Nền tảng mô hình SV
+
+Nền tảng mô hình biến động ngẫu nhiên Foundations of stochastic volatility models Giới thiệu: Một cách nhìn mới về biến động Chào mừng các bạn quay trở lại với chuỗi bài học về Mô hình Biến động Ngẫu nhiên. Trong bài giới thiệu, chúng ta đã nói về hiện tượng "cụm biến động" - một đặc điểm quen thuộc của hầu hết các chuỗi thời gian tài chính. Để mô hình hóa hiện tượng này, các mô hình như GARCH đã ra đời và rất thành công. Tuy nhiên, GARCH giả định rằng biến động ở thời điểm hiện tại là một hàm số xác định của các thông tin trong quá khứ.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu: Một cách nhìn mới về biến động**
+- **Nền tảng lý thuyết của mô hình SV**
+- **Mô hình biến động ngẫu nhiên là gì?**
+- **Tính dừng nghiêm ngặt**
+- **Xây dựng chuỗi biến động dừng: Quá trình log-tuyến tính**
+- **Các đặc tính sâu hơn: Tính ergodic và tính trộn mạnh**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c11/nen-tang-mo-hinh-sv/)
+
+### 2.2. Cấu trúc phụ thuộc
+
+Cấu trúc phụ thuộc trong mô hình SV The covariance structure of SV models Giới thiệu: Tìm kiếm sự phụ thuộc ẩn giấu Chào mừng các bạn đến với bài học thứ hai. Một trong những nghịch lý thú vị nhất khi phân tích dữ liệu tài chính là: nếu bạn vẽ hàm tự tương quan của chuỗi lợi suất hàng ngày, bạn sẽ thường thấy rằng các hệ số tương quan gần như bằng không ở mọi độ trễ. Điều này gợi ý rằng chuỗi lợi suất là một quá trình nhiễu trắng, không có sự phụ thuộc tuyến tính.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu: Tìm kiếm sự phụ thuộc ẩn giấu**
+- **Nền tảng lý thuyết: Từ nhiễu trắng đến bộ nhớ dài**
+- **Tại sao chuỗi lợi suất là một quá trình nhiễu trắng?**
+- **Khám phá sự phụ thuộc trong các lũy thừa**
+- **Cấu trúc phụ thuộc của và sự kế thừa**
+- **Phương pháp nghiên cứu: Trí nhớ ngắn và trí nhớ dài**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c11/cau-truc-phu-thuoc/)
+
+### 2.3. Mô-men và hành vi đuôi
+
+Mô-men và hành vi đuôi trong mô hình SV Moments and tail behavior in SV models Giới thiệu: Giải mã những sự kiện cực đoan Chào mừng các bạn đã quay trở lại. Trong các bài học trước, chúng ta đã tập trung vào cấu trúc phụ thuộc theo thời gian của mô hình SV, tức là cách các quan sát liên kết với nhau qua các độ trễ. Bây giờ, chúng ta sẽ chuyển sang một khía cạnh khác nhưng không kém phần quan trọng: đặc tính phân phối của chính chuỗi lợi suất, đặc biệt là ở những vùng "cực đoan" của nó.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu: Giải mã những sự kiện cực đoan**
+- **Nền tảng lý thuyết: Mô-men, đuôi dày và định lý breiman**
+- **Mô-men của quá trình SV**
+- **Đuôi dày và phân phối biến đổi đều**
+- **Định lý breiman: Sản phẩm kế thừa chiếc đuôi nặng hơn**
+- **Phương pháp nghiên cứu: Nguồn gốc của đuôi dày trong mô hình SV**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c11/mo-men-va-hanh-vi-duoi/)
+
+### 2.4. Thực hành phân tích với Stata
+
+Thực hành phân tích mô hình SV với Stata Applied analysis of SV models with Stata Giới thiệu: Từ lý thuyết đến thực tiễn Chào mừng các bạn đến với bài học thực hành tổng hợp của chuỗi bài về Mô hình Biến động Ngẫu nhiên. Trong ba bài học vừa qua, chúng ta đã cùng nhau khám phá một hành trình lý thuyết đầy thú vị: từ việc định nghĩa mô hình SV, tìm hiểu tính dừng và tính trộn, phân tích cấu trúc phụ thuộc ẩn giấu, cho đến việc giải mã hiện tượng đuôi dày. Đây là những kiến thức nền tảng vô cùng quý giá.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu: Từ lý thuyết đến thực tiễn**
+- **Quy trình phân tích chẩn đoán đặc tính SV**
+- **Hướng dẫn thực hành từng bước với Stata**
+- **Bước 1: Trực quan hóa và thống kê mô tả**
+- **Bước 2: Kiểm tra tương quan chuỗi**
+- **Bước 3: Phát hiện phụ thuộc trong biến động**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c11/thuc-hanh-phan-tich-voi-stata/)
+
+### 2.5. Tổng quan và so sánh
+
+Mô hình biến động ngẫu nhiên: Tổng quan và ứng dụng Stochastic volatility models: Synthesis and applications Bức tranh lớn về biến động Chào mừng các bạn đến với bài học cuối cùng trong chuỗi bài về Mô hình Biến động Ngẫu nhiên. Trong suốt hành trình vừa qua, chúng ta đã cùng nhau "giải phẫu" một trong những họ mô hình thanh lịch và mạnh mẽ nhất trong kinh tế lượng tài chính.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Bức tranh lớn về biến động**
+- **Ba trụ cột của mô hình SV**
+- **SV và GARCH - Một so sánh chuyên sâu**
+- **Ví dụ tổng hợp: Quy trình làm việc từ a đến z**
+- **Tổng kết và hướng phát triển**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c11/tong-quan-va-so-sanh/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Nền tảng mô hình SV</h3>
-    <p>Nền tảng mô hình biến động ngẫu nhiên Foundations of stochastic volatility models Giới thiệu: Một cách nhìn mới về biến động Chào mừng các bạn quay trở lại với chuỗi bài học về Mô hình Biến động Ngẫu nhiên. Trong bài giới thiệu, chúng ta đã nói về hiện tượng " Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c11/nen-tang-mo-hinh-sv/" target="_blank" rel="noopener">Nền tảng mô hình SV</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>11. Các thuộc tính xác suất của mô hình SV</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Cấu trúc phụ thuộc</h3>
-    <p>Cấu trúc phụ thuộc trong mô hình SV The covariance structure of SV models Giới thiệu: Tìm kiếm sự phụ thuộc ẩn giấu Chào mừng các bạn đến với bài học thứ hai. Một trong những nghịch lý thú vị nhất khi phân tích dữ liệu tài chính là: nếu bạn vẽ hàm tự tương qua Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c11/cau-truc-phu-thuoc/" target="_blank" rel="noopener">Cấu trúc phụ thuộc</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Mô-men và hành vi đuôi</h3>
-    <p>Mô-men và hành vi đuôi trong mô hình SV Moments and tail behavior in SV models Giới thiệu: Giải mã những sự kiện cực đoan Chào mừng các bạn đã quay trở lại. Trong các bài học trước, chúng ta đã tập trung vào cấu trúc phụ thuộc theo thời gian của mô hình SV, tứ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c11/mo-men-va-hanh-vi-duoi/" target="_blank" rel="noopener">Mô-men và hành vi đuôi</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c11/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Thực hành phân tích với Stata</h3>
-    <p>Thực hành phân tích mô hình SV với Stata Applied analysis of SV models with Stata Giới thiệu: Từ lý thuyết đến thực tiễn Chào mừng các bạn đến với bài học thực hành tổng hợp của chuỗi bài về Mô hình Biến động Ngẫu nhiên. Trong ba bài học vừa qua, chúng ta đã c Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c11/thuc-hanh-phan-tich-voi-stata/" target="_blank" rel="noopener">Thực hành phân tích với Stata</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 5: Tổng quan và so sánh</h3>
-    <p>Mô hình biến động ngẫu nhiên: Tổng quan và ứng dụng Stochastic volatility models: Synthesis and applications Bức tranh lớn về biến động Chào mừng các bạn đến với bài học cuối cùng trong chuỗi bài về Mô hình Biến động Ngẫu nhiên. Trong suốt hành trình vừa qua,  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c11/tong-quan-va-so-sanh/" target="_blank" rel="noopener">Tổng quan và so sánh</a>.</p>
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập chuỗi thời gian, kiểm định nghiệm đơn vị và ước lượng ARIMA / GARCH
 version 18.0
 clear all
 set more off
+import delimited "sachktl_timeseries_finco.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_asndk09u1_c11_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+tsset time_id
+dfuller y, lags(4) trend regress
+pperron y, lags(4) trend
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 1. Ước lượng mô hình ARIMA và kiểm định nhiễu trắng phần dư
+arima y, arima(1,1,1) vce(robust)
+predict resid_arima, resid
+wntestq resid_arima, lags(12)
+
+* 2. Ước lượng mô hình phương sai có điều kiện thay đổi ARCH/GARCH(1,1)
+arch d.y x1 x2, arch(1) garch(1) vce(robust)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
-library(tidyverse)
-library(lmtest)
-library(sandwich)
+# Nạp thư viện chuỗi thời gian và ước lượng ARIMA / GARCH(1,1)
+library(tseries)
+library(forecast)
+library(rugarch)
 
-df <- read.csv("sachktl_asndk09u1_c11_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_timeseries_finco.csv")
+y_ts <- ts(df$y, frequency = 12)
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA tối ưu theo AICc
+adf.test(y_ts)
+fit_arima <- auto.arima(y_ts, seasonal = FALSE, ic = "aicc")
+summary(fit_arima)
+checkresiduals(fit_arima)
+
+# 2. Ước lượng mô hình GARCH(1,1) cho chuỗi lợi suất
+spec <- ugarchspec(variance.model = list(model = "sGARCH", garchOrder = c(1, 1)),
+                   mean.model = list(armaOrder = c(1, 0), include.mean = TRUE))
+fit_garch <- ugarchfit(spec = spec, data = diff(y_ts))
+show(fit_garch)
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và arch để phân tích chuỗi thời gian & biến động
 import pandas as pd
-import statsmodels.formula.api as smf
+from statsmodels.tsa.stattools import adfuller
+from statsmodels.tsa.arima.model import ARIMA
+from arch import arch_model
 
-df = pd.read_csv("sachktl_asndk09u1_c11_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_timeseries_finco.csv")
+y = df["y"].dropna()
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA(1,1,1)
+adf_stat, p_val, *_ = adfuller(y, autolag="AIC")
+print(f"ADF Statistic: {adf_stat:.4f}, p-value: {p_val:.4f}")
+arima_res = ARIMA(y, order=(1, 1, 1)).fit()
+print(arima_res.summary())
+
+# 2. Ước lượng mô hình GARCH(1,1) với phân phối Student-t
+ret = y.diff().dropna() * 100
+garch_res = arch_model(ret, vol="Garch", p=1, q=1, dist="t").fit(disp="off")
+print(garch_res.summary())
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 11: 11. các thuộc tính xác suất của mô hình SV trên SachKTL"
+  title="Hướng dẫn thực hành 11. Các thuộc tính xác suất của mô hình SV trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 11 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Nền tảng mô hình SV | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c11/nen-tang-mo-hinh-sv/) |
-| **Bài 02** | Cấu trúc phụ thuộc | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c11/cau-truc-phu-thuoc/) |
-| **Bài 03** | Mô-men và hành vi đuôi | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c11/mo-men-va-hanh-vi-duoi/) |
-| **Bài 04** | Thực hành phân tích với Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c11/thuc-hanh-phan-tich-voi-stata/) |
-| **Bài 05** | Tổng quan và so sánh | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c11/tong-quan-va-so-sanh/) |
+| **11.1** | Nền tảng mô hình SV | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c11/nen-tang-mo-hinh-sv/) |
+| **11.2** | Cấu trúc phụ thuộc | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c11/cau-truc-phu-thuoc/) |
+| **11.3** | Mô-men và hành vi đuôi | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c11/mo-men-va-hanh-vi-duoi/) |
+| **11.4** | Thực hành phân tích với Stata | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c11/thuc-hanh-phan-tich-voi-stata/) |
+| **11.5** | Tổng quan và so sánh | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c11/tong-quan-va-so-sanh/) |

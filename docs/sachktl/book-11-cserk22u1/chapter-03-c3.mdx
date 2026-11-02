@@ -1,19 +1,19 @@
 ---
 id: chapter-03-c3
-title: "Chương 03: 3. các phương pháp dựa trên lựa chọn các biến không quan sát được"
-sidebar_label: "Chương 03: 3. Các phương pháp dựa trên lựa chọn các b"
+title: "3. Các phương pháp dựa trên lựa chọn các biến không quan sát được"
+sidebar_label: "3. Các phương pháp dựa trên lựa chọn các biến không quan sát được"
 sidebar_position: 4
-description: "Hướng dẫn thực hành How-To Chương 03: 3. các phương pháp dựa trên lựa chọn các biến không quan sát được thuộc bộ sách Kinh tế lượng đánh giá tác động chính sách trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 3. Các phương pháp dựa trên lựa chọn các biến không quan sát được thuộc giáo trình Kinh tế lượng đánh giá tác động chính sách trên SachKTL kèm công thức toán học, phân tích 7 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 03: 3. các phương pháp dựa trên lựa chọn các biến không quan sát được
+# 3. Các phương pháp dựa trên lựa chọn các biến không quan sát được
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 03: 3. các phương pháp dựa trên lựa chọn các biến không quan sát được** thuộc [**Bộ sách 11: kinh tế lượng đánh giá tác động chính sách**](/sachktl/book-11-cserk22u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/cserk22u1/c3/](https://sachktl.tnsai.vn/vi/cserk22u1/c3/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **7 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **3. Các phương pháp dựa trên lựa chọn các biến không quan sát được** thuộc bộ giáo trình [**Kinh tế lượng đánh giá tác động chính sách**](/sachktl/book-11-cserk22u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/cserk22u1/c3/](https://sachktl.tnsai.vn/vi/cserk22u1/c3/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 03: 3. các phương pháp dựa trên lựa chọn các biến không quan ">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="3. Các phương pháp dựa trên lựa chọn các biến không quan sát được">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 11 · CHƯƠNG 03</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 03: 3. các phương pháp dựa trên lựa chọn các biến không quan </text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Kinh tế lượng đánh giá tác động chính sách · 7 bài học chuyên sâ</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng đánh giá tác động chín</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">3. Các phương pháp dựa trên lựa chọn các biến không quan sát được</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Suy diễn nhân quả và lượng giá tác động chính sách thực nghiệm · 7 bài học chuyên sâu</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,139 +41,270 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Các phương pháp dựa trên lựa chọn các biến không quan sát được Chào mừng các bạn sinh viên đã quay trở lại với chuỗi bài học về kinh tế lượng đánh giá chương trình! Ở chương trước, chúng ta đã cùng nhau tìm hiểu các phương pháp xử lý "thiên lệch công khai", tức là những sai lệch gây ra bởi các yếu tố mà chúng ta có thể quan sát và đo lường được trong bộ dữ liệu. Tuy nhiên, trong thực tế, bài toán khó khăn và phổ biến hơn rất nhiều là khi quyết định tham gia một chương trình lại phụ thuộc vào những yếu tố mà chúng ta không thể thấy được, chẳng hạn như năng lực bẩm sinh, động lực
+Các phương pháp dựa trên lựa chọn các biến không quan sát được Chào mừng các bạn sinh viên đã quay trở lại với chuỗi bài học về kinh tế lượng đánh giá chương trình! Ở chương trước, chúng ta đã cùng nhau tìm hiểu các phương pháp xử lý "thiên lệch công khai", tức là những sai lệch gây ra bởi các yếu tố mà chúng ta có thể quan sát và đo lường được trong bộ dữ liệu.
 
-- **Chủ đề học thuật trọng tâm**: Cấu trúc chuỗi bài học.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+\tau_{\text{ATT}} = \mathbb{E}\left[Y_i(1) - Y_i(0) \mid D_i = 1\right] = \mathbb{E}\left[\mathbb{E}[Y_{it} - Y_{i,t-1} \mid D_i=1] - \mathbb{E}[Y_{it} - Y_{i,t-1} \mid D_i=0]\right] \tag*{[1]}
+$$
+
+$$
+Y_{it} = \alpha_i + \lambda_t + \sum_{k \neq -1} \delta_k \cdot \mathbb{I}(t - G_i = k) + \mathbf{X}_{it}'\boldsymbol{\beta} + \varepsilon_{it} \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Giả thiết xu hướng song song có điều kiện bảo đảm nhóm đối chứng phản ánh đúng quỹ đạo phản thực tế của nhóm chịu tác động khi không có chính sách.
+2. Giả thiết không có hành vi đón đầu chính sách và điều kiện chồng lấp điểm xu hướng $0 < P(D_i=1 \mid \mathbf{X}_i) < 1$ giúp nhận dạng chính xác $\tau_{\text{ATT}}$.
+3. Điều kiện đơn vị chịu tác động ổn định SUTVA loại trừ hiện tượng lan tỏa chéo làm nhiễu nhóm đối chứng.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 03 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/cserk22u1/c3/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Ước lượng TWFE truyền thống bị chệch trọng số âm khi thời điểm áp dụng chính sách khác nhau giữa các nhóm và hiệu ứng điều trị biến thiên theo thời gian; cần dùng ước lượng Callaway-Sant'Anna hoặc Sun-Abraham."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Giới thiệu về thiên lệch ẩn và biến công cụ
+
+Chào mừng các bạn đến với bài học đầu tiên trong chuỗi bài về các phương pháp xử lý "lựa chọn dựa trên các yếu tố không quan sát được". Ở các bài học trước, chúng ta đã làm quen với việc điều chỉnh sai lệch khi có đủ thông tin về các biến gây nhiễu. Nhưng trong thực tế, chúng ta thường phải đối mặt với một vấn đề nan giải hơn nhiều: điều gì sẽ xảy ra nếu những yếu tố quan trọng nhất ảnh hưởng đến cả quyết định tham gia chương trình và kết quả lại là những thứ chúng ta không thể đo lường được?
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Nền tảng lý thuyết: Tại sao OLS thất bại khi có thiên lệch ẩn?**
+- **2. Giải pháp biến công cụ : Ý tưởng và cơ chế hoạt động**
+- **3. Tổng kết bài học**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/gioi-thieu-ve-thien-lech-an-va-bien-cong-cu/)
+
+### 2.2. Các kỹ thuật ước lượng IV và xử lý tính dị biệt
+
+Ở bài học trước, chúng ta đã hiểu được tại sao OLS thất bại khi có thiên lệch ẩn và làm quen với ý tưởng cơ bản của phương pháp Biến công cụ. Chúng ta đã biết rằng, về mặt lý thuyết, IV có thể khôi phục lại ước lượng nhất quán cho tác động của chương trình. Trong bài học hôm nay, chúng ta sẽ trả lời câu hỏi: "Vậy, làm thế nào để thực hiện ước lượng IV trong thực tế?" và "Điều gì xảy ra nếu tác động của chương trình không giống nhau cho tất cả mọi người?".
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Nền tảng lý thuyết: Mô hình hệ số ngẫu nhiên và các trường hợp**
+- **2. Các phương pháp ước lượng IV trong trường hợp hiệu ứng đồng nhất**
+- **2.1. Phương pháp hai giai đoạn OLS trực tiếp**
+- **2.2. Phương pháp Probit-OLS**
+- **2.3. Phương pháp Probit-2SLS**
+- **3. Mở rộng: IV với hiệu ứng dị biệt quan sát được**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/cac-ky-thuat-uoc-luong-iv-va-xu-ly-tinh-di-biet/)
+
+### 2.3. Các vấn đề thực tế khi sử dụng biến công cụ
+
+Chào mừng các bạn quay trở lại! Trong các bài học trước, chúng ta đã khám phá sức mạnh của phương pháp Biến công cụ như một giải pháp thanh lịch cho vấn đề nội sinh. Về mặt lý thuyết, chỉ cần tìm được một biến công cụ thỏa mãn hai điều kiện "tương quan" và "ràng buộc loại trừ", chúng ta có thể tự tin thu được một ước lượng nhất quán. Tuy nhiên, con đường từ lý thuyết đến thực hành luôn đầy rẫy những thách thức. Việc tìm kiếm một "biến công cụ hoàn hảo" trong thực tế giống như đi tìm Chén Thánh vậy - cực kỳ khó khăn và hiếm có.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Vấn đề 1: Tính không nhất quán khi công cụ không ngoại sinh**
+- **2. Vấn đề 2: Hiệu quả thấp khi công cụ yếu**
+- **3. Vấn đề 3: Sai lệch trong mẫu nhỏ của 2SLS**
+- **4. Tổng kết và khuyến nghị cho sinh viên**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/cac-van-de-thuc-te-khi-su-dung-bien-cong-cu/)
+
+### 2.4. Mô hình lựa chọn Heckman
+
+Chào mừng các bạn đến với bài học thứ tư! Trong các bài học trước, chúng ta đã dành nhiều thời gian với phương pháp Biến công cụ, một kỹ thuật dựa vào việc tìm kiếm một biến ngoại sinh \ để giải quyết vấn đề nội sinh. Tuy nhiên, như chúng ta đã thảo luận, việc tìm được một biến công cụ hoàn hảo trong thực tế là một thách thức lớn. Điều này đặt ra một câu hỏi quan trọng: Liệu có cách nào ước lượng tác động nhân quả khi có thiên lệch ẩn mà không cần đến biến công cụ không?
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Nền tảng lý thuyết: Đặc trưng hóa sai lệch OLS trong mô hình lựa chọn**
+- **2. Phương pháp ước lượng: Quy trình hai bước của Heckman**
+- **3. Mở rộng: Mô hình heckit với hiệu ứng dị biệt**
+- **4. Tổng kết bài học**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/mo-hinh-lua-chon-heckman-heckit/)
+
+### 2.5. Phương pháp sai biệt kép
+
+Chào mừng các bạn đến với bài học thứ năm! Cho đến nay, chúng ta đã tìm hiểu hai cách tiếp cận để giải quyết vấn đề thiên lệch ẩn: sử dụng một biến công cụ hoặc mô hình hóa trực tiếp quá trình lựa chọn. Cả hai phương pháp này đều là những công cụ mạnh mẽ, nhưng chúng cũng đòi hỏi những điều kiện không dễ dàng có được trong thực tế. Hôm nay, chúng ta sẽ học một phương pháp thứ ba, một cách tiếp cận hoàn toàn khác, không cần đến biến công cụ hay các giả định phân phối phức tạp.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Nền tảng lý thuyết: Giả định xu hướng song song**
+- **2. Phương pháp ước lượng DID bằng hồi quy OLS**
+- **3. Các loại dữ liệu và biến thể của DID**
+- **3.1. DID với dữ liệu cắt ngang lặp lại**
+- **3.2. DID với dữ liệu bảng**
+- **3.3. DID với ghép cặp**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/phuong-phap-sai-biet-kep/)
+
+### 2.6. Hướng dẫn thực hành IV và mô hình lựa chọn với Stata
+
+Chào mừng các bạn đến với bài học thực hành đầu tiên trong chuỗi bài! Trong suốt các bài học vừa qua, chúng ta đã cùng nhau xây dựng một nền tảng lý thuyết vững chắc về các phương pháp xử lý thiên lệch ẩn. Giờ là lúc chúng ta biến những lý thuyết đó thành kỹ năng thực hành cụ thể. Trong bài học hôm nay, chúng ta sẽ cùng nhau thực hiện một phân tích kinh tế lượng hoàn chỉnh từ A đến Z bằng phần mềm Stata, tập trung vào hai phương pháp đã học: Biến công cụ và Mô hình lựa chọn Heckman.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Chuẩn bị dữ liệu và công cụ**
+- **2. Phân tích từng bước với Stata**
+- **Bước 1: Phân tích ban đầu - So sánh trung bình và hồi quy OLS**
+- **Bước 2: Ước lượng bằng biến công cụ**
+- **Bước 3: Ước lượng bằng mô hình lựa chọn Heckman**
+- **Bước 4: So sánh các mô hình**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/huong-dan-thuc-hanh-iv-va-mo-hinh-lua-chon-voi-stata/)
+
+### 2.7. Hướng dẫn thực hành phương pháp DID với Stata
+
+Chào mừng các bạn đến với bài học thực hành cuối cùng và cũng là bài học quan trọng nhất trong chuỗi bài về các phương pháp xử lý thiên lệch ẩn! Trong các bài học trước, chúng ta đã tập trung vào các kỹ thuật áp dụng cho dữ liệu cắt ngang. Hôm nay, chúng ta sẽ chuyển sang một lĩnh vực khác, khai thác sức mạnh của dữ liệu được thu thập theo thời gian thông qua Phương pháp Sai biệt kép.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Thực hành DID với dữ liệu cắt ngang lặp lại**
+- **2. Thực hành DID với dữ liệu bảng**
+- **3. Tổng kết và các bước tiếp theo**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/huong-dan-thuc-hanh-phuong-phap-did-voi-stata/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Giới thiệu về thiên lệch ẩn và biến công cụ</h3>
-    <p>Chào mừng các bạn đến với bài học đầu tiên trong chuỗi bài về các phương pháp xử lý "lựa chọn dựa trên các yếu tố không quan sát được". Ở các bài học trước, chúng ta đã làm quen với việc điều chỉnh sai lệch khi có đủ thông tin về các biến gây nhiễu. Nhưng tron Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/cserk22u1/c3/gioi-thieu-ve-thien-lech-an-va-bien-cong-cu/" target="_blank" rel="noopener">Giới thiệu về thiên lệch ẩn và biến công cụ</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>3. Các phương pháp dựa trên lựa chọn các biến không quan sát được</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Các kỹ thuật ước lượng IV và xử lý tính dị biệt</h3>
-    <p>Ở bài học trước, chúng ta đã hiểu được tại sao OLS thất bại khi có thiên lệch ẩn và làm quen với ý tưởng cơ bản của phương pháp Biến công cụ. Chúng ta đã biết rằng, về mặt lý thuyết, IV có thể khôi phục lại ước lượng nhất quán cho tác động của chương trình. Tr Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/cserk22u1/c3/cac-ky-thuat-uoc-luong-iv-va-xu-ly-tinh-di-biet/" target="_blank" rel="noopener">Các kỹ thuật ước lượng IV và xử lý tính dị biệt</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Các vấn đề thực tế khi sử dụng biến công cụ</h3>
-    <p>Chào mừng các bạn quay trở lại! Trong các bài học trước, chúng ta đã khám phá sức mạnh của phương pháp Biến công cụ như một giải pháp thanh lịch cho vấn đề nội sinh. Về mặt lý thuyết, chỉ cần tìm được một biến công cụ thỏa mãn hai điều kiện "tương quan" và "rà Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/cserk22u1/c3/cac-van-de-thuc-te-khi-su-dung-bien-cong-cu/" target="_blank" rel="noopener">Các vấn đề thực tế khi sử dụng biến công cụ</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/cserk22u1/c3/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Mô hình lựa chọn Heckman</h3>
-    <p>Chào mừng các bạn đến với bài học thứ tư! Trong các bài học trước, chúng ta đã dành nhiều thời gian với phương pháp Biến công cụ, một kỹ thuật dựa vào việc tìm kiếm một biến ngoại sinh \ để giải quyết vấn đề nội sinh. Tuy nhiên, như chúng ta đã thảo luận, việc Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/cserk22u1/c3/mo-hinh-lua-chon-heckman-heckit/" target="_blank" rel="noopener">Mô hình lựa chọn Heckman</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 5: Phương pháp sai biệt kép</h3>
-    <p>Chào mừng các bạn đến với bài học thứ năm! Cho đến nay, chúng ta đã tìm hiểu hai cách tiếp cận để giải quyết vấn đề thiên lệch ẩn: sử dụng một biến công cụ hoặc mô hình hóa trực tiếp quá trình lựa chọn. Cả hai phương pháp này đều là những công cụ mạnh mẽ, nhưn Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/cserk22u1/c3/phuong-phap-sai-biet-kep/" target="_blank" rel="noopener">Phương pháp sai biệt kép</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Bước 6: Hướng dẫn thực hành IV và mô hình lựa chọn với Stata</h3>
-    <p>Chào mừng các bạn đến với bài học thực hành đầu tiên trong chuỗi bài! Trong suốt các bài học vừa qua, chúng ta đã cùng nhau xây dựng một nền tảng lý thuyết vững chắc về các phương pháp xử lý thiên lệch ẩn. Giờ là lúc chúng ta biến những lý thuyết đó thành kỹ n Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/cserk22u1/c3/huong-dan-thuc-hanh-iv-va-mo-hinh-lua-chon-voi-stata/" target="_blank" rel="noopener">Hướng dẫn thực hành IV và mô hình lựa chọn với Stata</a>.</p>
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Ước lượng tác động nhân quả với DiD, Event Study và Propensity Score Matching
 version 18.0
 clear all
 set more off
+import delimited "sachktl_causal_ecodata.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_cserk22u1_c03_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+* 1. Ước lượng Difference-in-Differences hai chiều và kiểm định xu hướng song song
+xtset id year
+xtdidregress (y x1 x2) (treated_post), group(id) time(year) vce(cluster id)
+estat trendplots
+estat ptrends
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 2. Ước lượng ghép cặp điểm xu hướng (PSM) và nghịch đảo xác suất trọng số (IPWRA)
+teffects psmatch (y) (treat x1 x2 x3, probit), atet vce(iid)
+teffects ipwra (y x1 x2) (treat x1 x2 x3, logit), atet
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
-library(tidyverse)
-library(lmtest)
-library(sandwich)
+# Nạp thư viện suy diễn nhân quả fixest, did và MatchIt
+library(fixest)
+library(did)
+library(MatchIt)
 
-df <- read.csv("sachktl_cserk22u1_c03_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_causal_ecodata.csv")
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Ước lượng mô hình DiD và Event Study với sai số chuẩn cụm
+mod_did <- feols(y ~ treated_post + x1 + x2 | id + year, data = df, cluster = ~id)
+summary(mod_did)
+
+# 2. Ước lượng Callaway & Sant'Anna (2021) cho DiD đa thời điểm
+cs_out <- att_gt(yname = "y", tname = "year", idname = "id", gname = "first_treat",
+                 xformla = ~ x1 + x2, data = df, control_group = "nevertreated")
+summary(aggte(cs_out, type = "dynamic"))
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và linearmodels để ước lượng DiD & IPW
 import pandas as pd
 import statsmodels.formula.api as smf
+from linearmodels.panel import PanelOLS
 
-df = pd.read_csv("sachktl_cserk22u1_c03_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_causal_ecodata.csv")
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Ước lượng điểm xu hướng Propensity Score bằng Logit
+ps_mod = smf.logit("treat ~ x1 + x2 + x3", data=df).fit(disp=False)
+df["pscore"] = ps_mod.predict(df)
+
+# 2. Ước lượng Difference-in-Differences hai chiều với sai số chuẩn cụm
+df_panel = df.set_index(["id", "year"])
+did_mod = PanelOLS.from_formula("y ~ 1 + treated_post + x1 + x2 + EntityEffects + TimeEffects", data=df_panel)
+did_res = did_mod.fit(cov_type="clustered", cluster_entity=True)
+print(did_res.summary)
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 03: 3. các phương pháp dựa trên lựa chọn các biến không quan sát được trên SachKTL"
+  title="Hướng dẫn thực hành 3. Các phương pháp dựa trên lựa chọn các biến không quan sát được trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 03 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Giới thiệu về thiên lệch ẩn và biến công cụ | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/gioi-thieu-ve-thien-lech-an-va-bien-cong-cu/) |
-| **Bài 02** | Các kỹ thuật ước lượng IV và xử lý tính dị biệt | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/cac-ky-thuat-uoc-luong-iv-va-xu-ly-tinh-di-biet/) |
-| **Bài 03** | Các vấn đề thực tế khi sử dụng biến công cụ | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/cac-van-de-thuc-te-khi-su-dung-bien-cong-cu/) |
-| **Bài 04** | Mô hình lựa chọn Heckman | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/mo-hinh-lua-chon-heckman-heckit/) |
-| **Bài 05** | Phương pháp sai biệt kép | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/phuong-phap-sai-biet-kep/) |
-| **Bài 06** | Hướng dẫn thực hành IV và mô hình lựa chọn với Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/huong-dan-thuc-hanh-iv-va-mo-hinh-lua-chon-voi-stata/) |
-| **Bài 07** | Hướng dẫn thực hành phương pháp DID với Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/huong-dan-thuc-hanh-phuong-phap-did-voi-stata/) |
+| **3.1** | Giới thiệu về thiên lệch ẩn và biến công cụ | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/gioi-thieu-ve-thien-lech-an-va-bien-cong-cu/) |
+| **3.2** | Các kỹ thuật ước lượng IV và xử lý tính dị biệt | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/cac-ky-thuat-uoc-luong-iv-va-xu-ly-tinh-di-biet/) |
+| **3.3** | Các vấn đề thực tế khi sử dụng biến công cụ | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/cac-van-de-thuc-te-khi-su-dung-bien-cong-cu/) |
+| **3.4** | Mô hình lựa chọn Heckman | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/mo-hinh-lua-chon-heckman-heckit/) |
+| **3.5** | Phương pháp sai biệt kép | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/phuong-phap-sai-biet-kep/) |
+| **3.6** | Hướng dẫn thực hành IV và mô hình lựa chọn với Stata | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/huong-dan-thuc-hanh-iv-va-mo-hinh-lua-chon-voi-stata/) |
+| **3.7** | Hướng dẫn thực hành phương pháp DID với Stata | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/cserk22u1/c3/huong-dan-thuc-hanh-phuong-phap-did-voi-stata/) |

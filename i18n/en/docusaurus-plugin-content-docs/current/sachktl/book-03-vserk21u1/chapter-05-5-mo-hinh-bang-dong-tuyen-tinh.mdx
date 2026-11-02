@@ -1,19 +1,19 @@
 ---
 id: chapter-05-5-mo-hinh-bang-dong-tuyen-tinh
-title: "Chapter 05: 5. Mô hình bảng động tuyến tính — Panel Data Econometrics in Empirical Finance"
-sidebar_label: "Chapter 05: 5. Mô hình bảng động tuyến tính"
+title: "5. Linear Dynamic Panel Models"
+sidebar_label: "5. Linear Dynamic Panel Models"
 sidebar_position: 6
-description: "Step-by-step practical how-to guide for Chapter 05: 5. Mô hình bảng động tuyến tính from Panel Data Econometrics in Empirical Finance on SachKTL with Stata, R, and Python workflows integrated with EcoData, Finco, and EcoLab."
+description: "Comprehensive practical how-to guide for 5. Linear Dynamic Panel Models from Panel Data Econometrics in Empirical Finance on SachKTL featuring structural equations, 4 lesson breakdowns, and Stata, R, and Python scripts."
 ---
 
-# Chapter 05: 5. Mô hình bảng động tuyến tính — Panel Data Econometrics in Empirical Finance
+# 5. Linear Dynamic Panel Models
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-This practical how-to guide synthesizes the methodology and empirical implementation workflow of **Chapter 05: 5. Mô hình bảng động tuyến tính** from [**Book 03: Panel Data Econometrics in Empirical Finance**](/en/sachktl/book-03-vserk21u1/), with direct backlinks to the authoritative source material at [https://sachktl.tnsai.vn/vi/vserk21u1/5-mo-hinh-bang-dong-tuyen-tinh/](https://sachktl.tnsai.vn/vi/vserk21u1/5-mo-hinh-bang-dong-tuyen-tinh/).
+This practical how-to guide presents the theoretical foundations, structural mathematical equations, detailed breakdown of **4 specialized lessons**, and multi-platform replication workflows for **5. Linear Dynamic Panel Models** from the textbook [**Panel Data Econometrics in Empirical Finance**](/en/sachktl/book-03-vserk21u1/), with direct cross-references to the authoritative source material at [https://sachktl.tnsai.vn/vi/vserk21u1/5-mo-hinh-bang-dong-tuyen-tinh/](https://sachktl.tnsai.vn/vi/vserk21u1/5-mo-hinh-bang-dong-tuyen-tinh/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chapter 05: 5. Mô hình bảng động tuyến tính">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="5. Linear Dynamic Panel Models">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ This practical how-to guide synthesizes the methodology and empirical implementa
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BOOK 03 · CHAPTER 05</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chapter 05: 5. Mô hình bảng động tuyến tính</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Part of Textbook: Panel Data Econometrics in Empirical Finance · 4 Detailed Lessons</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Panel Data Econometrics in Empirical</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">5. Linear Dynamic Panel Models</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Panel Data Econometrics and Unobserved Heterogeneity Control · 4 Detailed Lessons</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,128 +41,234 @@ This practical how-to guide synthesizes the methodology and empirical implementa
   </svg>
 </div>
 
-## 1. Methodological Meaning and Scope of Application
+## 1. Methodological Foundations, Mathematical Specification, and Identification
 
-Mô hình bảng động tuyến tính Dữ liệu bảng mở ra một cánh cửa quan trọng cho các nhà nghiên cứu tài chính: khả năng mô hình hóa sự vận động và thay đổi theo thời gian ở cấp độ cá nhân . Tuy nhiên, việc đưa một biến phụ thuộc có độ trễ vào mô hình, kết hợp với sự tồn tại của các yếu tố không đồng nhất không quan sát được , đã tạo ra những thách thức kinh tế lượng đáng kể. Các phương pháp ước lượng tiêu chuẩn như OLS gộp, Fama-MacBeth, hay thậm chí là mô hình hiệu ứng cố định đều trở nên chệch và không nhất quán, đặc biệt khi chuỗi thời gian ngắn. Chuỗi bài viết
+Mô hình bảng động tuyến tính Dữ liệu bảng mở ra một cánh cửa quan trọng cho các nhà nghiên cứu tài chính: khả năng mô hình hóa sự vận động và thay đổi theo thời gian ở cấp độ cá nhân . Tuy nhiên, việc đưa một biến phụ thuộc có độ trễ vào mô hình, kết hợp với sự tồn tại của các yếu tố không đồng nhất không quan sát được , đã tạo ra những thách thức kinh tế lượng đáng kể. Các phương pháp ước lượng tiêu chuẩn như OLS gộp, Fama-MacBeth, hay thậm chí là mô hình hiệu ứng cố định đều trở nên chệch và không nhất quán, đặc biệt khi chuỗi thời gian ngắn.
 
-- **Core Academic Topics**: Cấu trúc chuỗi bài học, Kiến thức tiên quyết, Mục tiêu học tập, Tài liệu tham khảo chính, PHỤ LỤC: Dữ liệu mô phỏng cho chuỗi bài viết.
-- **Supported Analytical Environments**: `Stata 18 MP`.
-- **Recommended Empirical Data Sources**: Vietnamese macroeconomic, corporate, and household survey datasets on [EcoData](https://ecodata.io.vn), capital and commodity market series on [Finco](https://www.finco.vn), model cross-references on [VietLOD](https://vietlod.tnsai.vn), and automated estimation on [EcoLab](https://ecolab.io.vn).
+### 1.1. Structural Equations and Representative Estimator
+
+$$
+Y_{it} = \alpha + \mathbf{X}_{it}'\boldsymbol{\beta} + \mu_i + \lambda_t + \varepsilon_{it}, \quad i = 1,\dots,N; \; t = 1,\dots,T \tag*{[1]}
+$$
+
+$$
+\hat{\boldsymbol{\beta}}_{\text{FE}} = \left(\sum_{i=1}^N \sum_{t=1}^T \tilde{\mathbf{X}}_{it}\tilde{\mathbf{X}}_{it}'\right)^{-1} \left(\sum_{i=1}^N \sum_{t=1}^T \tilde{\mathbf{X}}_{it}\tilde{Y}_{it}\right), \quad \tilde{Z}_{it} = Z_{it} - \bar{Z}_i \tag*{[2]}
+$$
+
+### 1.2. Core Identification Assumptions and Applicability Conditions
+
+1. Strict exogeneity of explanatory covariates with respect to idiosyncratic disturbances across cross-sectional units and time periods.
+2. Unobserved individual effects $\mu_i$ may correlate arbitrarily with $\mathbf{X}_{it}$ under Fixed Effects or remain orthogonal under Random Effects.
+3. Cluster-robust variance-covariance estimation at the entity level is required to accommodate arbitrary within-panel serial correlation and heteroskedasticity.
 
 <FeatureCards
   features={[
     {
-      title: "Original Chapter on SachKTL",
-      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for Chapter 05 on SachKTL.",
+      title: "Authoritative Chapter on SachKTL",
+      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for this chapter on SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/vserk21u1/5-mo-hinh-bang-dong-tuyen-tinh/"
     },
     {
       title: "Practice Datasets on EcoData & Finco",
-      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and survey data for hands-on replication.",
+      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and household survey data for hands-on replication.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
       title: "Automated Estimation on EcoLab",
-      description: "Execute econometric specifications, run diagnostic battery tests, and export publication-grade tables automatically.",
+      description: "Execute econometric specifications, run diagnostic battery tests, and export APA 7th / AER publication-grade tables automatically.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Step-by-Step Practical Implementation Across Chapter Lessons
+<FeatureNotAvailable
+  feature="Unconditional Baseline Estimation Under Violated Identification Assumptions"
+  reason="Standard Fixed Effects and Random Effects estimators suffer from Nickell bias when lagged dependent variables $Y_{i,t-1}$ are included in short-$T$ panels; use Difference GMM or System GMM instead."
+  alternative="Run the complete diagnostic battery in Step 4 and transition to the appropriate corrective estimator on VietLOD or EcoLab."
+/>
+
+## 2. Lesson-by-Lesson Academic Breakdown
+
+### 2.1. Nền tảng và các thiên chệch trong mô hình động
+
+Trong bài giới thiệu, chúng ta đã đề cập đến tầm quan trọng của việc mô hình hóa sự vận động trong tài chính và những thách thức mà biến phụ thuộc có độ trễ gây ra. Bài học đầu tiên này sẽ là nền tảng cho toàn bộ chuỗi bài viết. Chúng ta sẽ mổ xẻ vấn đề từ gốc rễ: tại sao sự hiện diện của tính không đồng nhất không quan sát được lại làm cho các phương pháp ước lượng tiêu chuẩn như OLS gộp hay Fama-MacBeth trở nên chệch?
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Vấn đề cốt lõi: sự không đồng nhất không quan sát được**
+- **Phân tích thiên chệch trong các bộ ước lượng tiêu chuẩn**
+- **Thiên chệch của OLS gộp và Hiệu ứng ngẫu nhiên**
+- **Thiên chệch của Hiệu ứng cố định**
+- **Ví dụ minh họa: Chứng minh sự tồn tại của thiên chệch bằng Stata**
+- **1. Ước lượng bằng OLS gộp**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/5-mo-hinh-bang-dong-tuyen-tinh/nen-tang-va-cac-thien-chech-trong-mo-hinh-dong/)
+
+### 2.2. Giải pháp biến công cụ và bộ ước lượng GMM Arellano-Bond
+
+Trong bài học trước, chúng ta đã đi đến một kết luận quan trọng: cả hai phương pháp ước lượng OLS gộp và hiệu ứng cố định đều thất bại trong việc cung cấp một ước lượng nhất quán cho hệ số động trong mô hình dữ liệu bảng có chuỗi thời gian ngắn. OLS bị chệch lên trên, trong khi FE lại bị chệch xuống dưới do thiên chệch Nickell. Tình thế này đòi hỏi một cách tiếp cận hoàn toàn khác, một phương pháp có thể "phá vỡ" mối tương quan tai hại giữa biến giải thích và sai số.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Nền tảng lý thuyết: Từ sai phân bậc nhất đến biến công cụ**
+- **Bộ ước lượng Anderson-Hsiao**
+- **Phương pháp nghiên cứu: Bộ ước lượng GMM Arellano-Bond**
+- **Nguyên tắc xây dựng biến công cụ của GMM**
+- **Ví dụ minh họa: Ước lượng mô hình động bằng IV và GMM trong Stata**
+- **1. Ước lượng bằng Anderson-Hsiao**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/5-mo-hinh-bang-dong-tuyen-tinh/giai-phap-bien-cong-cu-va-bo-uoc-luong-gmm-arellano-bond/)
+
+### 2.3. Các vấn đề nâng cao và ứng dụng của GMM động
+
+Trong bài học trước, chúng ta đã làm quen với bộ ước lượng GMM sai phân của Arellano-Bond như một giải pháp mạnh mẽ cho vấn đề nội sinh trong mô hình bảng động. Bằng cách sử dụng các giá trị trễ của biến phụ thuộc làm công cụ cho phương trình đã lấy sai phân, DGMM có thể cung cấp một ước lượng nhất quán khi các phương pháp truyền thống thất bại. Tuy nhiên, phương pháp này không phải là một viên đạn bạc.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Nền tảng lý thuyết: Từ GMM sai phân đến GMM hệ thống**
+- **1. GMM Hệ thống**
+- **2. Các kiểm định đặc tả mô hình**
+- **3. Các vấn đề thực hành quan trọng**
+- **Ví dụ ứng dụng trong tài chính**
+- **1. Mô hình động cho cấu trúc vốn**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/5-mo-hinh-bang-dong-tuyen-tinh/cac-van-de-nang-cao-va-ung-dung-cua-gmm-dong/)
+
+### 2.4. Hướng dẫn thực hành mô hình động tuyến tính với Stata
+
+Hành trình của chúng ta qua ba bài học đầu tiên đã xây dựng một nền tảng lý thuyết vững chắc. Chúng ta đã bắt đầu bằng việc nhận diện các loại thiên chệch cố hữu trong mô hình OLS và Hiệu ứng cố định, sau đó khám phá giải pháp thông qua biến công cụ và cuối cùng là làm chủ khuôn khổ GMM động của Arellano-Bond và Blundell-Bond. Giờ là lúc biến lý thuyết thành kỹ năng thực hành.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Bối cảnh nghiên cứu và dữ liệu**
+- **Quy trình phân tích từng bước trên Stata**
+- **Bước 1: Chuẩn bị và khám phá dữ liệu**
+- **Bước 2: Ước lượng các mô hình cơ sở**
+- **Bước 3: Ước lượng GMM sai phân**
+- **Bước 4: Ước lượng GMM Hệ thống**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/5-mo-hinh-bang-dong-tuyen-tinh/huong-dan-thuc-hanh-mo-hinh-dong-tuyen-tinh-voi-stata/)
+
+## 3. Step-by-Step Empirical Implementation Workflow
 
 <Steps>
   <div className="step-item">
-    <h3>Step 1: Nền tảng và các thiên chệch trong mô hình động</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Nền tảng và các thiên chệch trong mô hình động. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/vserk21u1/5-mo-hinh-bang-dong-tuyen-tinh/nen-tang-va-cac-thien-chech-trong-mo-hinh-dong/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/vserk21u1/5-mo-hinh-bang-dong-tuyen-tinh/nen-tang-va-cac-thien-chech-trong-mo-hinh-dong/</a>.</p>
+    <h3>1. Formulate the Research Question and Prepare Data on EcoData & Finco</h3>
+    <p>Define the dependent variable, core explanatory variables, and control covariates aligned with <strong>5. Linear Dynamic Panel Models</strong>. Extract standardized Vietnamese empirical series from <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> or <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, and screen for missing observations and extreme outliers.</p>
   </div>
   <div className="step-item">
-    <h3>Step 2: Giải pháp biến công cụ và bộ ước lượng GMM Arellano-Bond</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Giải pháp biến công cụ và bộ ước lượng GMM Arellano-Bond. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/vserk21u1/5-mo-hinh-bang-dong-tuyen-tinh/giai-phap-bien-cong-cu-va-bo-uoc-luong-gmm-arellano-bond/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/vserk21u1/5-mo-hinh-bang-dong-tuyen-tinh/giai-phap-bien-cong-cu-va-bo-uoc-luong-gmm-arellano-bond/</a>.</p>
+    <h3>2. Conduct Descriptive Profiling, Correlation Analysis, and Pre-Estimation Checks</h3>
+    <p>Examine empirical distributions, construct summary statistics tables, and evaluate collinearity using pairwise correlation matrices and Variance Inflation Factors (VIF).</p>
   </div>
   <div className="step-item">
-    <h3>Step 3: Các vấn đề nâng cao và ứng dụng của GMM động</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Các vấn đề nâng cao và ứng dụng của GMM động. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/vserk21u1/5-mo-hinh-bang-dong-tuyen-tinh/cac-van-de-nang-cao-va-ung-dung-cua-gmm-dong/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/vserk21u1/5-mo-hinh-bang-dong-tuyen-tinh/cac-van-de-nang-cao-va-ung-dung-cua-gmm-dong/</a>.</p>
+    <h3>3. Estimate the Model Across Stata 18 MP, R 4.x, and Python 3.11+</h3>
+    <p>Execute the parameter estimation scripts matching the structural equations in Section 1.1 while cross-checking theoretical derivations at <a href="https://sachktl.tnsai.vn/vi/vserk21u1/5-mo-hinh-bang-dong-tuyen-tinh/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Step 4: Hướng dẫn thực hành mô hình động tuyến tính với Stata</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Hướng dẫn thực hành mô hình động tuyến tính với Stata. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/vserk21u1/5-mo-hinh-bang-dong-tuyen-tinh/huong-dan-thuc-hanh-mo-hinh-dong-tuyen-tinh-voi-stata/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/vserk21u1/5-mo-hinh-bang-dong-tuyen-tinh/huong-dan-thuc-hanh-mo-hinh-dong-tuyen-tinh-voi-stata/</a>.</p>
+    <h3>4. Perform Post-Estimation Diagnostics and Robust Variance Correction</h3>
+    <p>Test for heteroskedasticity, serial correlation, Ramsey RESET functional form misspecification, and regressor endogeneity. Apply White HC1 or cluster-robust standard errors for valid inference.</p>
+  </div>
+  <div className="step-item">
+    <h3>5. Format Journal-Grade Tables and Cross-Verify on EcoLab</h3>
+    <p>Report point estimates, standard errors in parentheses, and statistical significance stars following APA 7th / AER Booktabs standards, or automate the entire reporting pipeline on <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> and <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Multi-Platform Implementation Examples in Stata, R, and Python
+## 4. Multi-Platform Implementation Scripts in Stata, R, and Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Initialize environment and load practice dataset from EcoData / SachKTL
+* Thiết lập cấu trúc dữ liệu bảng và ước lượng FE / RE / Hausman
 version 18.0
 clear all
 set more off
+import delimited "sachktl_panel_ecodata.csv", clear encoding("utf-8")
 
-* Import standardized empirical dataset
-import delimited "sachktl_vserk21u1_c05_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+xtset id year
+xtdescribe
+xtsum y x1 x2 x3
 
-* Estimate baseline specification and run diagnostic checks with robust standard errors
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 1. Ước lượng tác động cố định (Fixed Effects) và tác động ngẫu nhiên (Random Effects)
+xtreg y x1 x2 x3, fe
+estimates store FE_model
+xtreg y x1 x2 x3, re
+estimates store RE_model
+
+* 2. Kiểm định Hausman lựa chọn mô hình và ước lượng sai số chuẩn vững theo cụm
+hausman FE_model RE_model, sigmamore
+xtreg y x1 x2 x3 i.year, fe vce(cluster id)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Load econometric packages and practice dataset from EcoData / SachKTL
-library(tidyverse)
+# Nạp thư viện dữ liệu bảng và ước lượng FE / RE / Cluster-Robust SE
+library(plm)
 library(lmtest)
 library(sandwich)
 
-df <- read.csv("sachktl_vserk21u1_c05_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_panel_ecodata.csv")
+pdata <- pdata.frame(df, index = c("id", "year"))
 
-# Estimate model and compute heteroskedasticity-robust HC1 standard errors
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Ước lượng mô hình Within FE và Swamy-Arora RE
+fe_mod <- plm(y ~ x1 + x2 + x3, data = pdata, model = "within", effect = "twoways")
+re_mod <- plm(y ~ x1 + x2 + x3, data = pdata, model = "random")
+
+# 2. Kiểm định Hausman và xuất sai số chuẩn vững Arellano theo cụm
+phtest(fe_mod, re_mod)
+coeftest(fe_mod, vcov = vcovHC(fe_mod, method = "arellano", type = "HC1", cluster = "group"))
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Load econometric libraries and practice dataset from EcoData / SachKTL
+# Nạp thư viện linearmodels và ước lượng PanelOLS / RandomEffects
 import pandas as pd
-import statsmodels.formula.api as smf
+from linearmodels.panel import PanelOLS, RandomEffects, compare
 
-df = pd.read_csv("sachktl_vserk21u1_c05_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_panel_ecodata.csv").set_index(["id", "year"])
 
-# Fit specification with HC1 robust standard errors
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Ước lượng mô hình Fixed Effects hai chiều với sai số chuẩn cụm
+fe_mod = PanelOLS.from_formula("y ~ 1 + x1 + x2 + x3 + EntityEffects + TimeEffects", data=df)
+fe_res = fe_mod.fit(cov_type="clustered", cluster_entity=True)
+
+# 2. Ước lượng mô hình Random Effects và đối chiếu kết quả
+re_mod = RandomEffects.from_formula("y ~ 1 + x1 + x2 + x3", data=df)
+re_res = re_mod.fit(cov_type="clustered", cluster_entity=True)
+print(compare({"Fixed Effects": fe_res, "Random Effects": re_res}))
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video Tutorial Walkthrough
+## 5. Post-Estimation Diagnostic and Interpretation Guide
+
+| Diagnostic Criterion | Null Hypothesis $H_0$ | Benchmark Threshold | Corrective Action When $H_0$ Is Rejected |
+| :--- | :--- | :--- | :--- |
+| **Heteroskedasticity** | Constant error variance $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ rejects $H_0$ | Apply `vce(robust)`, `vcovHC(HC1)`, or FGLS/WLS weighted estimation |
+| **Multicollinearity** | No severe linear dependence among regressors | $\text{VIF} < 10$ acceptable | Drop redundant covariates, center interactions, or apply LASSO/Ridge regularization |
+| **Ramsey RESET Functional Form** | No omitted nonlinear or higher-order terms | $p\text{-value} > 0.05$ retains $H_0$ | Add interaction terms, quadratic polynomials, or log-transform skewed positive variables |
+| **Regressor Exogeneity** | Orthogonality $\text{Cov}(X, \varepsilon)=0$ | Durbin-Wu-Hausman $p > 0.05$ | Transition to IV/2SLS, LIML, or GMM estimation with validated instruments |
+
+## 6. Video Tutorial Walkthrough
 
 <VideoTutorial
-  title="Practical Walkthrough for Chapter 05: 5. Mô hình bảng động tuyến tính on SachKTL"
+  title="Practical Walkthrough for 5. Linear Dynamic Panel Models on SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Complete Lesson Directory and Backlinks to Original SachKTL Articles
+## 7. Complete Lesson Directory and Backlinks to Original SachKTL Articles
 
-| No. | Lesson Title in Chapter 05 | Supported Software | Original Source Link on SachKTL |
+| Lesson Code | Lesson Title | Supported Software | Original Source Link on SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Lesson 01** | Nền tảng và các thiên chệch trong mô hình động | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/5-mo-hinh-bang-dong-tuyen-tinh/nen-tang-va-cac-thien-chech-trong-mo-hinh-dong/) |
-| **Lesson 02** | Giải pháp biến công cụ và bộ ước lượng GMM Arellano-Bond | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/5-mo-hinh-bang-dong-tuyen-tinh/giai-phap-bien-cong-cu-va-bo-uoc-luong-gmm-arellano-bond/) |
-| **Lesson 03** | Các vấn đề nâng cao và ứng dụng của GMM động | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/5-mo-hinh-bang-dong-tuyen-tinh/cac-van-de-nang-cao-va-ung-dung-cua-gmm-dong/) |
-| **Lesson 04** | Hướng dẫn thực hành mô hình động tuyến tính với Stata | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/5-mo-hinh-bang-dong-tuyen-tinh/huong-dan-thuc-hanh-mo-hinh-dong-tuyen-tinh-voi-stata/) |
+| **5.1** | Nền tảng và các thiên chệch trong mô hình động | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/5-mo-hinh-bang-dong-tuyen-tinh/nen-tang-va-cac-thien-chech-trong-mo-hinh-dong/) |
+| **5.2** | Giải pháp biến công cụ và bộ ước lượng GMM Arellano-Bond | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/5-mo-hinh-bang-dong-tuyen-tinh/giai-phap-bien-cong-cu-va-bo-uoc-luong-gmm-arellano-bond/) |
+| **5.3** | Các vấn đề nâng cao và ứng dụng của GMM động | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/5-mo-hinh-bang-dong-tuyen-tinh/cac-van-de-nang-cao-va-ung-dung-cua-gmm-dong/) |
+| **5.4** | Hướng dẫn thực hành mô hình động tuyến tính với Stata | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/vserk21u1/5-mo-hinh-bang-dong-tuyen-tinh/huong-dan-thuc-hanh-mo-hinh-dong-tuyen-tinh-voi-stata/) |

@@ -1,19 +1,19 @@
 ---
 id: chapter-06-c6
-title: "Chương 06: 6. hồi quy tuyến tính với sai số tương quan"
-sidebar_label: "Chương 06: 6. Hồi quy tuyến tính với sai số tương qua"
+title: "6. Hồi quy tuyến tính với sai số tương quan"
+sidebar_label: "6. Hồi quy tuyến tính với sai số tương quan"
 sidebar_position: 7
-description: "Hướng dẫn thực hành How-To Chương 06: 6. hồi quy tuyến tính với sai số tương quan thuộc bộ sách Kinh tế lượng vi mô sử dụng Stata trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 6. Hồi quy tuyến tính với sai số tương quan thuộc giáo trình Kinh tế lượng vi mô sử dụng Stata trên SachKTL kèm công thức toán học, phân tích 6 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 06: 6. hồi quy tuyến tính với sai số tương quan
+# 6. Hồi quy tuyến tính với sai số tương quan
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 06: 6. hồi quy tuyến tính với sai số tương quan** thuộc [**Bộ sách 15: kinh tế lượng vi mô sử dụng Stata**](/sachktl/book-15-csamk22u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/csamk22u1/c6/](https://sachktl.tnsai.vn/vi/csamk22u1/c6/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **6 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **6. Hồi quy tuyến tính với sai số tương quan** thuộc bộ giáo trình [**Kinh tế lượng vi mô sử dụng Stata**](/sachktl/book-15-csamk22u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/csamk22u1/c6/](https://sachktl.tnsai.vn/vi/csamk22u1/c6/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 06: 6. hồi quy tuyến tính với sai số tương quan">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="6. Hồi quy tuyến tính với sai số tương quan">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 15 · CHƯƠNG 06</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 06: 6. hồi quy tuyến tính với sai số tương quan</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Kinh tế lượng vi mô sử dụng Stata · 6 bài học chuyên sâu</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng vi mô sử dụng Stata</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">6. Hồi quy tuyến tính với sai số tương quan</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng ứng dụng, mô hình hóa thống kê và kiểm định giả thuyết · 6 bài học chuy</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,102 +41,219 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Giới thiệu hồi quy tuyến tính với sai số tương quan An Introduction to Linear Regression with Correlated Errors Tổng quan về chuỗi bài học Chào các bạn sinh viên, chào mừng đến với chuỗi bài học chuyên sâu về một trong những vấn đề phổ biến và quan trọng nhất trong kinh tế lượng ứng dụng: hồi quy tuyến tính với sai số tương quan. Trong các khóa học nhập môn, chúng ta thường bắt đầu với giả định rằng các sai số của mô hình hồi quy là độc lập và có phương sai không đổi. Tuy nhiên, trong thế giới thực, đặc biệt là với dữ liệu kinh tế - xã hội, giả định này hiếm khi được thỏa mãn. Việc bỏ qua sự
+Giới thiệu hồi quy tuyến tính với sai số tương quan An Introduction to Linear Regression with Correlated Errors Tổng quan về chuỗi bài học Chào các bạn sinh viên, chào mừng đến với chuỗi bài học chuyên sâu về một trong những vấn đề phổ biến và quan trọng nhất trong kinh tế lượng ứng dụng: hồi quy tuyến tính với sai số tương quan. Trong các khóa học nhập môn, chúng ta thường bắt đầu với giả định rằng các sai số của mô hình hồi quy là độc lập và có phương sai không đổi. Tuy nhiên, trong thế giới thực, đặc biệt là với dữ liệu kinh tế - xã hội, giả định này hiếm khi được thỏa mãn.
 
-- **Chủ đề học thuật trọng tâm**: Tổng quan về chuỗi bài học, CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+Y_i = \beta_0 + \sum_{k=1}^K \beta_k X_{ik} + \varepsilon_i, \quad \mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0 \tag*{[1]}
+$$
+
+$$
+\widehat{\text{Var}}_{\text{HC1}}(\hat{\boldsymbol{\beta}}) = \frac{N}{N - K - 1}\left(\mathbf{X}'\mathbf{X}\right)^{-1}\left(\sum_{i=1}^N \hat{\varepsilon}_i^2 \mathbf{x}_i \mathbf{x}_i'\right)\left(\mathbf{X}'\mathbf{X}\right)^{-1} \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Dạng hàm tuyến tính theo tham số được xác định đúng, không bỏ sót biến giải thích quan trọng có tương quan với các biến trong mô hình.
+2. Kỳ vọng có điều kiện của sai số bằng không $\mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0$, đảm bảo tính không chệch và vững tiệm cận của ước lượng.
+3. Ma trận thiết kế $\mathbf{X}$ có hạng cột đầy đủ, không xảy ra đa cộng tuyến hoàn hảo và sử dụng sai số chuẩn vững HC1/Cluster khi có phương sai thay đổi.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 06 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/csamk22u1/c6/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Khi tồn tại biến giải thích nội sinh do đồng thời hai chiều, sai số đo lường hoặc bỏ sót biến không quan sát được, ước lượng OLS bị chệch và không vững; cần chuyển sang ước lượng biến công cụ IV/2SLS hoặc GMM."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Nền tảng FGLS và ứng dụng cho phương sai thay đổi
+
+Nền tảng FGLS và ứng dụng cho phương sai thay đổi FGLS foundation and application to heteroskedasticity Giới thiệu Chào mừng các bạn quay trở lại với chuỗi bài học về hồi quy với sai số tương quan. Ở bài giới thiệu, chúng ta đã biết rằng một trong những giả định cốt lõi của mô hình hồi quy tuyến tính cổ điển là các sai số độc lập và có phương sai không đổi . Tuy nhiên, trong thực tế, giả định này thường bị vi phạm. Khi phương sai của sai số thay đổi theo các quan sát, chúng ta gọi đó là hiện tượng phương sai của sai số thay đổi .
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Nền tảng lý thuyết về GLS và FGLS**
+- **Bình phương nhỏ nhất tổng quát cho phương sai thay đổi**
+- **Từ GLS đến FGLS: Hướng tiếp cận thực tế**
+- **Ví dụ thực hành: Xử lý phương sai thay đổi bằng Stata**
+- **Bước 1: Ước lượng OLS và kiểm tra sai số chuẩn**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c6/nen-tang-fgls-va-ung-dung-cho-phuong-sai-thay-doi/)
+
+### 2.2. Sai số phân cụm và ước lượng OLS với sai số chuẩn vững
+
+Sai số phân cụm và ước lượng OLS với sai số chuẩn vững Clustered errors and OLS with cluster-robust standard errors Giới thiệu Trong bài học trước, chúng ta đã xử lý trường hợp phương sai của sai số thay đổi giữa các quan sát. Hôm nay, chúng ta sẽ khám phá một vấn đề khác: điều gì xảy ra khi các sai số có tương quan với nhau bên trong các nhóm nhưng lại độc lập giữa các nhóm? Đây chính là hiện tượng **sai số phân cụm** . Hãy tưởng tượng bạn đang nghiên cứu kết quả học tập của sinh viên.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Nền tảng lý thuyết về sai số phân cụm**
+- **Bản chất của sai số phân cụm**
+- **Hậu quả và giải pháp: Sai số chuẩn vững theo cụm**
+- **Ví dụ thực hành: Phân tích dữ liệu y tế Việt Nam**
+- **Bước 1: Tìm hiểu và chuẩn bị dữ liệu**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c6/sai-so-phan-cum-va-uoc-luong-ols-voi-sai-so-chuan-vung/)
+
+### 2.3. Mô hình tác động ngẫu nhiên và tác động cố định
+
+Mô hình Tác động ngẫu nhiên và Tác động cố định Random-effects and fixed-effects models Giới thiệu Chào mừng các bạn đến với bài học thứ ba trong chuỗi bài của chúng ta. Ở bài trước, chúng ta đã học một phương pháp rất hiệu quả để xử lý sai số phân cụm: tiếp tục sử dụng OLS nhưng điều chỉnh sai số chuẩn . Cách tiếp cận đó rất mạnh mẽ vì nó không đòi hỏi chúng ta phải biết chính xác tại sao các sai số lại có tương quan. Tuy nhiên, đôi khi chúng ta muốn đi sâu hơn và mô hình hóa trực tiếp cấu trúc sai số này.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Nền tảng lý thuyết: RE và FE**
+- **Mô hình tác động ngẫu nhiên**
+- **Mô hình tác động cố định**
+- **Lựa chọn giữa RE và FE: Kiểm định Hausman**
+- **Ví dụ thực hành trên Stata**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c6/mo-hinh-tac-dong-ngau-nhien-va-tac-dong-co-dinh-re-ezd_ampersand-fe/)
+
+### 2.4. Các chủ đề nâng cao – Mô hình hỗn hợp và hồi quy SUR
+
+Các chủ đề nâng cao - Mô hình Hỗn hợp và Hồi quy SUR Advanced topics - mixed models and seemingly unrelated regressions Giới thiệu Chào mừng các bạn đến với bài học thứ tư. Trong các bài trước, chúng ta đã học cách xử lý sai số tương quan trong một phương trình hồi quy duy nhất. Mô hình Tác động ngẫu nhiên mà chúng ta đã tìm hiểu cho phép hệ số chặn thay đổi ngẫu nhiên giữa các cụm, nhưng vẫn giả định rằng tác động của các biến giải thích là như nhau cho tất cả các cụm.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Mô hình hỗn hợp tuyến tính**
+- **Từ RE đến mô hình hỗn hợp: Cho phép hệ số góc thay đổi**
+- **Thực hành với Stata: Lệnh mixed**
+- **Hồi quy tưởng chừng như không liên quan**
+- **Lý thuyết và trực giác**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c6/cac-chu-de-nang-cao-mo-hinh-hon-hop-va-hoi-quy-sur/)
+
+### 2.5. Phân tích dữ liệu khảo sát phức tạp
+
+Phân tích Dữ liệu khảo sát phức tạp Analysis of complex survey data Giới thiệu Chào mừng các bạn đến với bài học thứ năm. Cho đến nay, chúng ta đã ngầm giả định rằng mỗi quan sát trong mẫu của chúng ta có cùng một cơ hội được chọn từ tổng thể. Đây là bản chất của việc lấy mẫu ngẫu nhiên đơn giản. Tuy nhiên, các cuộc điều tra quy mô lớn trên thực tế, chẳng hạn như Điều tra Mức sống Dân cư Việt Nam hay Khảo sát Sức khỏe và Dinh dưỡng Quốc gia Hoa Kỳ, hiếm khi sử dụng phương pháp này.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Nền tảng lý thuyết về dữ liệu khảo sát phức tạp**
+- **1. Trọng số**
+- **2. Phân cụm**
+- **3. Phân tầng**
+- **Ví dụ thực hành: Phân tích dữ liệu NHANES**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c6/phan-tich-du-lieu-khao-sat-phuc-tap/)
+
+### 2.6. Bài thực hành và tổng kết chuỗi bài học
+
+Bài thực hành và tổng kết chuỗi bài học Practice and series wrap-up Giới thiệu Chào mừng các bạn đến với bài học tổng kết. Trong suốt chuỗi bài vừa qua, chúng ta đã thực hiện một hành trình khám phá sâu sắc về thế giới phức tạp nhưng đầy thú vị của sai số tương quan. Chúng ta bắt đầu từ nền tảng của FGLS để xử lý phương sai thay đổi, sau đó chuyển sang vấn đề phân cụm và học cách sử dụng sai số chuẩn vững. Tiếp theo, chúng ta đã mô hình hóa cấu trúc cụm một cách tường minh hơn với mô hình Tác động ngẫu nhiên và Tác động cố định.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Tóm tắt tổng hợp kiến thức đã học**
+- **Nghiên cứu tình huống: Các yếu tố ảnh hưởng đến chi tiêu y tế**
+- **Bước 1: Chuẩn bị dữ liệu ở cấp độ hộ gia đình**
+- **Bước 2: Phân tích từ cơ bản đến nâng cao**
+- **Tổng kết chuỗi bài học**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c6/bai-thuc-hanh-va-tong-ket-chuoi-bai-hoc/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Nền tảng FGLS và ứng dụng cho phương sai thay đổi</h3>
-    <p>Nền tảng FGLS và ứng dụng cho phương sai thay đổi FGLS foundation and application to heteroskedasticity Giới thiệu Chào mừng các bạn quay trở lại với chuỗi bài học về hồi quy với sai số tương quan. Ở bài giới thiệu, chúng ta đã biết rằng một trong những giả đị Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c6/nen-tang-fgls-va-ung-dung-cho-phuong-sai-thay-doi/" target="_blank" rel="noopener">Nền tảng FGLS và ứng dụng cho phương sai thay đổi</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>6. Hồi quy tuyến tính với sai số tương quan</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Sai số phân cụm và ước lượng OLS với sai số chuẩn vững</h3>
-    <p>Sai số phân cụm và ước lượng OLS với sai số chuẩn vững Clustered errors and OLS with cluster-robust standard errors Giới thiệu Trong bài học trước, chúng ta đã xử lý trường hợp phương sai của sai số thay đổi giữa các quan sát. Hôm nay, chúng ta sẽ khám phá một Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c6/sai-so-phan-cum-va-uoc-luong-ols-voi-sai-so-chuan-vung/" target="_blank" rel="noopener">Sai số phân cụm và ước lượng OLS với sai số chuẩn vững</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Mô hình tác động ngẫu nhiên và tác động cố định</h3>
-    <p>Mô hình Tác động ngẫu nhiên và Tác động cố định Random-effects and fixed-effects models Giới thiệu Chào mừng các bạn đến với bài học thứ ba trong chuỗi bài của chúng ta. Ở bài trước, chúng ta đã học một phương pháp rất hiệu quả để xử lý sai số phân cụm: tiếp t Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c6/mo-hinh-tac-dong-ngau-nhien-va-tac-dong-co-dinh-re-ezd_ampersand-fe/" target="_blank" rel="noopener">Mô hình tác động ngẫu nhiên và tác động cố định</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c6/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Các chủ đề nâng cao – mô hình hỗn hợp và hồi quy SUR</h3>
-    <p>Các chủ đề nâng cao - Mô hình Hỗn hợp và Hồi quy SUR Advanced topics - mixed models and seemingly unrelated regressions Giới thiệu Chào mừng các bạn đến với bài học thứ tư. Trong các bài trước, chúng ta đã học cách xử lý sai số tương quan trong một phương trìn Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c6/cac-chu-de-nang-cao-mo-hinh-hon-hop-va-hoi-quy-sur/" target="_blank" rel="noopener">Các chủ đề nâng cao – mô hình hỗn hợp và hồi quy SUR</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 5: Phân tích dữ liệu khảo sát phức tạp</h3>
-    <p>Phân tích Dữ liệu khảo sát phức tạp Analysis of complex survey data Giới thiệu Chào mừng các bạn đến với bài học thứ năm. Cho đến nay, chúng ta đã ngầm giả định rằng mỗi quan sát trong mẫu của chúng ta có cùng một cơ hội được chọn từ tổng thể. Đây là bản chất  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c6/phan-tich-du-lieu-khao-sat-phuc-tap/" target="_blank" rel="noopener">Phân tích dữ liệu khảo sát phức tạp</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Bước 6: Bài thực hành và tổng kết chuỗi bài học</h3>
-    <p>Bài thực hành và tổng kết chuỗi bài học Practice and series wrap-up Giới thiệu Chào mừng các bạn đến với bài học tổng kết. Trong suốt chuỗi bài vừa qua, chúng ta đã thực hiện một hành trình khám phá sâu sắc về thế giới phức tạp nhưng đầy thú vị của sai số tươn Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c6/bai-thuc-hanh-va-tong-ket-chuoi-bai-hoc/" target="_blank" rel="noopener">Bài thực hành và tổng kết chuỗi bài học</a>.</p>
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập môi trường, ước lượng mô hình và kiểm định chẩn đoán toàn diện
 version 18.0
 clear all
 set more off
+import delimited "sachktl_empirical_ecodata.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_csamk22u1_c06_ecodata.csv", clear encoding("utf-8")
 describe
-summarize
+summarize y x1 x2 x3, detail
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
+* 1. Ước lượng mô hình cơ sở và kiểm định phương sai thay đổi / đa cộng tuyến / dạng hàm
+regress y x1 x2 x3
 estat hettest
+estat imtest, white
 estat vif
+estat ovtest
+
+* 2. Ước lượng với sai số chuẩn vững White HC1 và xuất tác động biên
+regress y c.x1##c.x2 x3, vce(robust)
+margins, dydx(x1 x2 x3)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện phân tích kinh tế lượng và thực thi kiểm định chẩn đoán
 library(tidyverse)
 library(lmtest)
 library(sandwich)
+library(car)
 
-df <- read.csv("sachktl_csamk22u1_c06_ecodata.csv")
+df <- read.csv("sachktl_empirical_ecodata.csv")
 summary(df)
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+# 1. Ước lượng mô hình tuyến tính và kiểm định Breusch-Pagan, RESET, VIF
 fit <- lm(y ~ x1 + x2 + x3, data = df)
+bptest(fit)
+resettest(fit, power = 2:3, type = "fitted")
+vif(fit)
+
+# 2. Xuất bảng hệ số ước lượng với sai số chuẩn vững HC1
 coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
 ```
 
@@ -144,35 +261,53 @@ coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và thực thi ước lượng kèm chẩn đoán phần dư
 import pandas as pd
+import statsmodels.api as sm
 import statsmodels.formula.api as smf
+from statsmodels.stats.diagnostic import het_breuschpagan, linear_reset
+from statsmodels.stats.outliers_influence import variance_inflation_factor
 
-df = pd.read_csv("sachktl_csamk22u1_c06_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_empirical_ecodata.csv")
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
+# 1. Ước lượng mô hình với sai số chuẩn vững HC1
 model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
 print(model.summary())
+
+# 2. Kiểm định phương sai thay đổi Breusch-Pagan, Ramsey RESET và hệ số VIF
+bp_lm, bp_pval, _, _ = het_breuschpagan(model.resid, model.model.exog)
+reset_res = linear_reset(model, power=2, use_f=True)
+X = sm.add_constant(df[["x1", "x2", "x3"]].dropna())
+vifs = {col: variance_inflation_factor(X.values, i) for i, col in enumerate(X.columns)}
+print(f"Breusch-Pagan p={bp_pval:.4f} | RESET p={reset_res.pvalue:.4f} | VIF={vifs}")
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 06: 6. hồi quy tuyến tính với sai số tương quan trên SachKTL"
+  title="Hướng dẫn thực hành 6. Hồi quy tuyến tính với sai số tương quan trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 06 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Nền tảng FGLS và ứng dụng cho phương sai thay đổi | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c6/nen-tang-fgls-va-ung-dung-cho-phuong-sai-thay-doi/) |
-| **Bài 02** | Sai số phân cụm và ước lượng OLS với sai số chuẩn vững | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c6/sai-so-phan-cum-va-uoc-luong-ols-voi-sai-so-chuan-vung/) |
-| **Bài 03** | Mô hình tác động ngẫu nhiên và tác động cố định | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c6/mo-hinh-tac-dong-ngau-nhien-va-tac-dong-co-dinh-re-ezd_ampersand-fe/) |
-| **Bài 04** | Các chủ đề nâng cao – mô hình hỗn hợp và hồi quy SUR | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c6/cac-chu-de-nang-cao-mo-hinh-hon-hop-va-hoi-quy-sur/) |
-| **Bài 05** | Phân tích dữ liệu khảo sát phức tạp | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c6/phan-tich-du-lieu-khao-sat-phuc-tap/) |
-| **Bài 06** | Bài thực hành và tổng kết chuỗi bài học | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c6/bai-thuc-hanh-va-tong-ket-chuoi-bai-hoc/) |
+| **6.1** | Nền tảng FGLS và ứng dụng cho phương sai thay đổi | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c6/nen-tang-fgls-va-ung-dung-cho-phuong-sai-thay-doi/) |
+| **6.2** | Sai số phân cụm và ước lượng OLS với sai số chuẩn vững | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c6/sai-so-phan-cum-va-uoc-luong-ols-voi-sai-so-chuan-vung/) |
+| **6.3** | Mô hình tác động ngẫu nhiên và tác động cố định | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c6/mo-hinh-tac-dong-ngau-nhien-va-tac-dong-co-dinh-re-ezd_ampersand-fe/) |
+| **6.4** | Các chủ đề nâng cao – Mô hình hỗn hợp và hồi quy SUR | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c6/cac-chu-de-nang-cao-mo-hinh-hon-hop-va-hoi-quy-sur/) |
+| **6.5** | Phân tích dữ liệu khảo sát phức tạp | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c6/phan-tich-du-lieu-khao-sat-phuc-tap/) |
+| **6.6** | Bài thực hành và tổng kết chuỗi bài học | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c6/bai-thuc-hanh-va-tong-ket-chuoi-bai-hoc/) |

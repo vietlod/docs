@@ -1,19 +1,19 @@
 ---
 id: chapter-03-c3
-title: "Chương 03: 3. đặc tả và ước lượng mô hình PLS-SEM"
-sidebar_label: "Chương 03: 3. Đặc tả và ước lượng mô hình PLS-SEM"
+title: "3. Đặc tả và ước lượng mô hình PLS-SEM"
+sidebar_label: "3. Đặc tả và ước lượng mô hình PLS-SEM"
 sidebar_position: 4
-description: "Hướng dẫn thực hành How-To Chương 03: 3. đặc tả và ước lượng mô hình PLS-SEM thuộc bộ sách Phân tích SEM với PLS sử dụng Stata trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 3. Đặc tả và ước lượng mô hình PLS-SEM thuộc giáo trình Phân tích SEM với PLS sử dụng Stata trên SachKTL kèm công thức toán học, phân tích 6 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 03: 3. đặc tả và ước lượng mô hình PLS-SEM
+# 3. Đặc tả và ước lượng mô hình PLS-SEM
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 03: 3. đặc tả và ước lượng mô hình PLS-SEM** thuộc [**Bộ sách 29: phân tích SEM với PLS sử dụng Stata**](/sachktl/book-29-msehk21u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/msehk21u1/c3/](https://sachktl.tnsai.vn/vi/msehk21u1/c3/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **6 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **3. Đặc tả và ước lượng mô hình PLS-SEM** thuộc bộ giáo trình [**Phân tích SEM với PLS sử dụng Stata**](/sachktl/book-29-msehk21u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/msehk21u1/c3/](https://sachktl.tnsai.vn/vi/msehk21u1/c3/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 03: 3. đặc tả và ước lượng mô hình PLS-SEM">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="3. Đặc tả và ước lượng mô hình PLS-SEM">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 29 · CHƯƠNG 03</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 03: 3. đặc tả và ước lượng mô hình PLS-SEM</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Phân tích SEM với PLS sử dụng Stata · 6 bài học chuyên sâu</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Phân tích SEM với PLS sử dụng Stata</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">3. Đặc tả và ước lượng mô hình PLS-SEM</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng ứng dụng, mô hình hóa thống kê và kiểm định giả thuyết · 6 bài học chuy</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,102 +41,218 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Giới thiệu Mô hình hóa Phương trình Cấu trúc PLS-SEM An Introduction to PLS Structural Equation Modelling Tổng quan về Chuỗi bài học Mô hình PLS-SEM Chào mừng các bạn sinh viên đến với chuỗi bài học chuyên sâu về Mô hình hóa Phương trình Cấu trúc bằng Bình phương Tối thiểu Riêng phần, hay còn gọi là PLS-SEM . Trong thế giới nghiên cứu kinh tế và kinh doanh hiện đại, chúng ta thường xuyên phải đối mặt với những câu hỏi phức tạp không thể trả lời bằng các mô hình hồi quy truyền thống. Ví dụ, làm thế nào để đo lường "Sự hài lòng của khách hàng" hay "Hình ảnh thương hiệu" và xác định các yếu tố
+Giới thiệu Mô hình hóa Phương trình Cấu trúc PLS-SEM An Introduction to PLS Structural Equation Modelling Tổng quan về Chuỗi bài học Mô hình PLS-SEM Chào mừng các bạn sinh viên đến với chuỗi bài học chuyên sâu về Mô hình hóa Phương trình Cấu trúc bằng Bình phương Tối thiểu Riêng phần, hay còn gọi là PLS-SEM . Trong thế giới nghiên cứu kinh tế và kinh doanh hiện đại, chúng ta thường xuyên phải đối mặt với những câu hỏi phức tạp không thể trả lời bằng các mô hình hồi quy truyền thống.
 
-- **Chủ đề học thuật trọng tâm**: Tổng quan về Chuỗi bài học Mô hình PLS-SEM, Cấu trúc Chuỗi bài học, Kiến thức tiên quyết cần có, Những gì bạn cần chuẩn bị, Mục tiêu học tập của chuỗi bài.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+Y_i = \beta_0 + \sum_{k=1}^K \beta_k X_{ik} + \varepsilon_i, \quad \mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0 \tag*{[1]}
+$$
+
+$$
+\widehat{\text{Var}}_{\text{HC1}}(\hat{\boldsymbol{\beta}}) = \frac{N}{N - K - 1}\left(\mathbf{X}'\mathbf{X}\right)^{-1}\left(\sum_{i=1}^N \hat{\varepsilon}_i^2 \mathbf{x}_i \mathbf{x}_i'\right)\left(\mathbf{X}'\mathbf{X}\right)^{-1} \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Dạng hàm tuyến tính theo tham số được xác định đúng, không bỏ sót biến giải thích quan trọng có tương quan với các biến trong mô hình.
+2. Kỳ vọng có điều kiện của sai số bằng không $\mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0$, đảm bảo tính không chệch và vững tiệm cận của ước lượng.
+3. Ma trận thiết kế $\mathbf{X}$ có hạng cột đầy đủ, không xảy ra đa cộng tuyến hoàn hảo và sử dụng sai số chuẩn vững HC1/Cluster khi có phương sai thay đổi.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 03 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/msehk21u1/c3/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Khi tồn tại biến giải thích nội sinh do đồng thời hai chiều, sai số đo lường hoặc bỏ sót biến không quan sát được, ước lượng OLS bị chệch và không vững; cần chuyển sang ước lượng biến công cụ IV/2SLS hoặc GMM."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Nền tảng mô hình hóa phương trình cấu trúc PLS
+
+Nền tảng Mô hình hóa Phương trình Cấu trúc PLS Model Specification and Core Concepts Tại sao chúng ta cần một phương pháp mới? Chào mừng các bạn quay trở lại với bài học đầu tiên trong chuỗi bài về PLS-SEM. Trong các môn kinh tế lượng cơ bản, chúng ta đã quen thuộc với mô hình hồi quy tuyến tính, một công cụ vô cùng hữu ích để phân tích mối quan hệ giữa các biến số. Tuy nhiên, một giả định ngầm quan trọng của hồi quy truyền thống là các biến của chúng ta được đo lường một cách hoàn hảo và không có sai số.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Tại sao chúng ta cần một phương pháp mới?**
+- **Nền tảng lý thuyết của PLS-SEM**
+- **Hai trụ cột của mô hình SEM: Biến ẩn và biến biểu hiện**
+- **Cấu trúc kép của mô hình PLS-SEM**
+- **Mô hình đo lường : Cầu nối giữa lý thuyết và dữ liệu**
+- **Mô hình cấu trúc : Kể câu chuyện giữa các khái niệm**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msehk21u1/c3/nen-tang-mo-hinh-hoa-phuong-trinh-cau-truc-pls/)
+
+### 2.2. Quy trình ước lượng và suy luận bootstrap trong PLS-SEM
+
+Quy trình Ước lượng và Suy luận Bootstrap trong PLS-SEM The Estimation Algorithm and Bootstrap-based Inference Bên trong "Hộp đen" của PLS-SEM Chào mừng các bạn đến với bài học thứ hai trong chuỗi bài về PLS-SEM. Trong bài trước, chúng ta đã cùng nhau xây dựng nền tảng về "cái gì" và "tại sao" của PLS-SEM. Chúng ta đã hiểu rõ về các thành phần cốt lõi như biến ẩn, biến biểu hiện, cũng như sự khác biệt quan trọng giữa mô hình đo lường phản ánh và cấu thành.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Bên trong "hộp đen" của PLS-SEM**
+- **Thuật toán ước lượng PLS-SEM**
+- **Giai đoạn i: Ước lượng lặp điểm số biến ẩn**
+- **Giai đoạn II: Ước lượng các tham số mô hình đo lường**
+- **Giai đoạn III: Ước lượng các tham số mô hình cấu trúc**
+- **Suy luận dựa trên bootstrap**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msehk21u1/c3/quy-trinh-uoc-luong-va-suy-luan-bootstrap-trong-pls-sem/)
+
+### 2.3. Thực hành PLS-SEM với Stata và xử lý dữ liệu khuyết
+
+Thực hành PLS-SEM với Stata và Xử lý Dữ liệu Khuyết Hands-on PLS-SEM with Stata and Missing Data Handling Từ Lý thuyết đến Phân tích Dữ liệu Thực tế Chào mừng các bạn đến với bài học thứ ba, nơi chúng ta sẽ chuyển từ những khái niệm lý thuyết sang kỹ năng thực hành phân tích. Ở hai bài trước, chúng ta đã cùng nhau xây dựng một nền tảng vững chắc về cấu trúc của một mô hình PLS-SEM và khám phá thuật toán ước lượng tinh vi bên trong nó. Giờ đây, đã đến lúc chúng ta xắn tay áo lên và thực sự "nói chuyện" với dữ liệu bằng công cụ mạnh mẽ là Stata.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Từ lý thuyết đến phân tích dữ liệu thực tế**
+- **Gói lệnh plssem và vấn đề dữ liệu khuyết**
+- **Làm chủ gói lệnh plssem trong Stata**
+- **Đối mặt với thực tế: Vấn đề dữ liệu khuyết**
+- **Quy trình phân tích và xử lý dữ liệu khuyết**
+- **Phân tích sự hài lòng của du khách với dữ liệu khuyết**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msehk21u1/c3/thuc-hanh-pls-sem-voi-stata-va-xu-ly-du-lieu-khuyet/)
+
+### 2.4. Các chủ đề nâng cao trong mô hình PLS-SEM
+
+Các Chủ đề Nâng cao trong Mô hình PLS-SEM Advanced Topics in PLS-SEM Mở rộng Năng lực Phân tích của bạn Chào mừng các bạn quay trở lại với bài học thứ tư và cũng là bài học lý thuyết cuối cùng trong chuỗi bài về PLS-SEM. Trong các bài học trước, chúng ta đã cùng nhau đi qua một hành trình từ việc xây dựng mô hình, tìm hiểu thuật toán ước lượng, đến thực hành phân tích trên Stata và xử lý các vấn đề dữ liệu thực tế. Các bạn đã nắm được những kỹ năng cốt lõi để thực hiện một phân tích PLS-SEM hoàn chỉnh.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Mở rộng năng lực phân tích của bạn**
+- **Các khái niệm nâng cao**
+- **Phân rã hiệu ứng: Hiểu rõ cơ chế "như thế nào?"**
+- **Yêu cầu về cỡ mẫu: "Bao nhiêu là đủ?"**
+- **PLS nhất quán : Khắc phục sai lệch cố hữu**
+- **Cấu trúc bậc cao**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msehk21u1/c3/cac-chu-de-nang-cao-trong-mo-hinh-pls-sem/)
+
+### 2.5. Xây dựng một dự án PLS-SEM hoàn chỉnh với Stata
+
+Xây dựng một dự án PLS-SEM hoàn chỉnh Final Practice: Building a Complete PLS-SEM Project Tổng kết toàn diện kiến thức đã học Chào mừng các bạn đến với bài học thực hành cuối cùng, nơi chúng ta sẽ tổng hợp tất cả kiến thức và kỹ năng đã học để hoàn thành một dự án phân tích PLS-SEM từ đầu đến cuối. Đây là thời điểm để tất cả các mảnh ghép rơi vào đúng vị trí, biến những khái niệm lý thuyết trở thành năng lực phân tích thực thụ.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Tổng kết toàn diện kiến thức đã học**
+- **Nghiên cứu tình huống về sự hài lòng của khách hàng**
+- **Quy trình phân tích: Từ giả thuyết đến kết luận**
+- **Hướng dẫn từng bước với Stata**
+- **Bước 1: Chỉ định mô hình và giả thuyết**
+- **Bước 2 & 3: Ước lượng và diễn giải mô hình chính**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msehk21u1/c3/xay-dung-mot-du-an-pls-sem-hoan-chinh-voi-stata/)
+
+### 2.6. Tổng kết và định vị PLS-SEM trong kinh tế lượng
+
+Tổng hợp chuỗi bài học Mô hình hóa Phương trình Cấu trúc PLS A Comprehensive Synthesis of the PLS-SEM Learning Series Tổng quan và Định vị PLS-SEM trong Khoa học Dữ liệu Chúng ta đã cùng nhau đi qua một hành trình khám phá chi tiết về Mô hình hóa Phương trình Cấu trúc bằng Bình phương Tối thiểu Riêng phần.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Tổng quan và định vị PLS-SEM trong khoa học dữ liệu**
+- **Hệ thống hóa nền tảng lý thuyết**
+- **Hệ thống hóa quy trình phương pháp luận**
+- **Nghiên cứu tình huống toàn diện: Sự hài lòng của khách hàng**
+- **Tổng kết và hướng phát triển**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msehk21u1/c3/tong-ket-va-dinh-vi-pls-sem-trong-kinh-te-luong/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Nền tảng mô hình hóa phương trình cấu trúc PLS</h3>
-    <p>Nền tảng Mô hình hóa Phương trình Cấu trúc PLS Model Specification and Core Concepts Tại sao chúng ta cần một phương pháp mới? Chào mừng các bạn quay trở lại với bài học đầu tiên trong chuỗi bài về PLS-SEM. Trong các môn kinh tế lượng cơ bản, chúng ta đã quen  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msehk21u1/c3/nen-tang-mo-hinh-hoa-phuong-trinh-cau-truc-pls/" target="_blank" rel="noopener">Nền tảng Mô hình hóa Phương trình Cấu trúc PLS</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>3. Đặc tả và ước lượng mô hình PLS-SEM</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Quy trình ước lượng và suy luận bootstrap trong PLS-SEM</h3>
-    <p>Quy trình Ước lượng và Suy luận Bootstrap trong PLS-SEM The Estimation Algorithm and Bootstrap-based Inference Bên trong "Hộp đen" của PLS-SEM Chào mừng các bạn đến với bài học thứ hai trong chuỗi bài về PLS-SEM. Trong bài trước, chúng ta đã cùng nhau xây dựng Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msehk21u1/c3/quy-trinh-uoc-luong-va-suy-luan-bootstrap-trong-pls-sem/" target="_blank" rel="noopener">Quy trình Ước lượng và Suy luận Bootstrap trong PLS-SEM</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Thực hành PLS-SEM với Stata và xử lý dữ liệu khuyết</h3>
-    <p>Thực hành PLS-SEM với Stata và Xử lý Dữ liệu Khuyết Hands-on PLS-SEM with Stata and Missing Data Handling Từ Lý thuyết đến Phân tích Dữ liệu Thực tế Chào mừng các bạn đến với bài học thứ ba, nơi chúng ta sẽ chuyển từ những khái niệm lý thuyết sang kỹ năng thực Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msehk21u1/c3/thuc-hanh-pls-sem-voi-stata-va-xu-ly-du-lieu-khuyet/" target="_blank" rel="noopener">Thực hành PLS-SEM với Stata và Xử lý Dữ liệu Khuyết</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msehk21u1/c3/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Các chủ đề nâng cao trong mô hình PLS-SEM</h3>
-    <p>Các Chủ đề Nâng cao trong Mô hình PLS-SEM Advanced Topics in PLS-SEM Mở rộng Năng lực Phân tích của bạn Chào mừng các bạn quay trở lại với bài học thứ tư và cũng là bài học lý thuyết cuối cùng trong chuỗi bài về PLS-SEM. Trong các bài học trước, chúng ta đã cù Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msehk21u1/c3/cac-chu-de-nang-cao-trong-mo-hinh-pls-sem/" target="_blank" rel="noopener">Các Chủ đề Nâng cao trong Mô hình PLS-SEM</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 5: Xây dựng một dự án PLS-SEM hoàn chỉnh với Stata</h3>
-    <p>Xây dựng một dự án PLS-SEM hoàn chỉnh Final Practice: Building a Complete PLS-SEM Project Tổng kết toàn diện kiến thức đã học Chào mừng các bạn đến với bài học thực hành cuối cùng, nơi chúng ta sẽ tổng hợp tất cả kiến thức và kỹ năng đã học để hoàn thành một d Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msehk21u1/c3/xay-dung-mot-du-an-pls-sem-hoan-chinh-voi-stata/" target="_blank" rel="noopener">Xây dựng một dự án PLS-SEM hoàn chỉnh với Stata</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Bước 6: Tổng kết và định vị PLS-SEM trong kinh tế lượng</h3>
-    <p>Tổng hợp chuỗi bài học Mô hình hóa Phương trình Cấu trúc PLS A Comprehensive Synthesis of the PLS-SEM Learning Series Tổng quan và Định vị PLS-SEM trong Khoa học Dữ liệu Chúng ta đã cùng nhau đi qua một hành trình khám phá chi tiết về Mô hình hóa Phương trình  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msehk21u1/c3/tong-ket-va-dinh-vi-pls-sem-trong-kinh-te-luong/" target="_blank" rel="noopener">Tổng kết và Định vị PLS-SEM trong Kinh tế lượng</a>.</p>
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập môi trường, ước lượng mô hình và kiểm định chẩn đoán toàn diện
 version 18.0
 clear all
 set more off
+import delimited "sachktl_empirical_ecodata.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_msehk21u1_c03_ecodata.csv", clear encoding("utf-8")
 describe
-summarize
+summarize y x1 x2 x3, detail
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
+* 1. Ước lượng mô hình cơ sở và kiểm định phương sai thay đổi / đa cộng tuyến / dạng hàm
+regress y x1 x2 x3
 estat hettest
+estat imtest, white
 estat vif
+estat ovtest
+
+* 2. Ước lượng với sai số chuẩn vững White HC1 và xuất tác động biên
+regress y c.x1##c.x2 x3, vce(robust)
+margins, dydx(x1 x2 x3)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện phân tích kinh tế lượng và thực thi kiểm định chẩn đoán
 library(tidyverse)
 library(lmtest)
 library(sandwich)
+library(car)
 
-df <- read.csv("sachktl_msehk21u1_c03_ecodata.csv")
+df <- read.csv("sachktl_empirical_ecodata.csv")
 summary(df)
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+# 1. Ước lượng mô hình tuyến tính và kiểm định Breusch-Pagan, RESET, VIF
 fit <- lm(y ~ x1 + x2 + x3, data = df)
+bptest(fit)
+resettest(fit, power = 2:3, type = "fitted")
+vif(fit)
+
+# 2. Xuất bảng hệ số ước lượng với sai số chuẩn vững HC1
 coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
 ```
 
@@ -144,35 +260,53 @@ coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và thực thi ước lượng kèm chẩn đoán phần dư
 import pandas as pd
+import statsmodels.api as sm
 import statsmodels.formula.api as smf
+from statsmodels.stats.diagnostic import het_breuschpagan, linear_reset
+from statsmodels.stats.outliers_influence import variance_inflation_factor
 
-df = pd.read_csv("sachktl_msehk21u1_c03_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_empirical_ecodata.csv")
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
+# 1. Ước lượng mô hình với sai số chuẩn vững HC1
 model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
 print(model.summary())
+
+# 2. Kiểm định phương sai thay đổi Breusch-Pagan, Ramsey RESET và hệ số VIF
+bp_lm, bp_pval, _, _ = het_breuschpagan(model.resid, model.model.exog)
+reset_res = linear_reset(model, power=2, use_f=True)
+X = sm.add_constant(df[["x1", "x2", "x3"]].dropna())
+vifs = {col: variance_inflation_factor(X.values, i) for i, col in enumerate(X.columns)}
+print(f"Breusch-Pagan p={bp_pval:.4f} | RESET p={reset_res.pvalue:.4f} | VIF={vifs}")
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 03: 3. đặc tả và ước lượng mô hình PLS-SEM trên SachKTL"
+  title="Hướng dẫn thực hành 3. Đặc tả và ước lượng mô hình PLS-SEM trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 03 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Nền tảng Mô hình hóa Phương trình Cấu trúc PLS | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msehk21u1/c3/nen-tang-mo-hinh-hoa-phuong-trinh-cau-truc-pls/) |
-| **Bài 02** | Quy trình Ước lượng và Suy luận Bootstrap trong PLS-SEM | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msehk21u1/c3/quy-trinh-uoc-luong-va-suy-luan-bootstrap-trong-pls-sem/) |
-| **Bài 03** | Thực hành PLS-SEM với Stata và Xử lý Dữ liệu Khuyết | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msehk21u1/c3/thuc-hanh-pls-sem-voi-stata-va-xu-ly-du-lieu-khuyet/) |
-| **Bài 04** | Các Chủ đề Nâng cao trong Mô hình PLS-SEM | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msehk21u1/c3/cac-chu-de-nang-cao-trong-mo-hinh-pls-sem/) |
-| **Bài 05** | Xây dựng một dự án PLS-SEM hoàn chỉnh với Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msehk21u1/c3/xay-dung-mot-du-an-pls-sem-hoan-chinh-voi-stata/) |
-| **Bài 06** | Tổng kết và Định vị PLS-SEM trong Kinh tế lượng | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msehk21u1/c3/tong-ket-va-dinh-vi-pls-sem-trong-kinh-te-luong/) |
+| **3.1** | Nền tảng mô hình hóa phương trình cấu trúc PLS | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msehk21u1/c3/nen-tang-mo-hinh-hoa-phuong-trinh-cau-truc-pls/) |
+| **3.2** | Quy trình ước lượng và suy luận bootstrap trong PLS-SEM | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msehk21u1/c3/quy-trinh-uoc-luong-va-suy-luan-bootstrap-trong-pls-sem/) |
+| **3.3** | Thực hành PLS-SEM với Stata và xử lý dữ liệu khuyết | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msehk21u1/c3/thuc-hanh-pls-sem-voi-stata-va-xu-ly-du-lieu-khuyet/) |
+| **3.4** | Các chủ đề nâng cao trong mô hình PLS-SEM | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msehk21u1/c3/cac-chu-de-nang-cao-trong-mo-hinh-pls-sem/) |
+| **3.5** | Xây dựng một dự án PLS-SEM hoàn chỉnh với Stata | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msehk21u1/c3/xay-dung-mot-du-an-pls-sem-hoan-chinh-voi-stata/) |
+| **3.6** | Tổng kết và định vị PLS-SEM trong kinh tế lượng | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msehk21u1/c3/tong-ket-va-dinh-vi-pls-sem-trong-kinh-te-luong/) |

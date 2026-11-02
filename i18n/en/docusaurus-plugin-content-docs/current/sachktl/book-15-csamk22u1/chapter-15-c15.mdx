@@ -1,19 +1,19 @@
 ---
 id: chapter-15-c15
-title: "Chapter 15: 15. Hồi quy bách phân vị — Microeconometrics Using Stata"
-sidebar_label: "Chapter 15: 15. Hồi quy bách phân vị"
+title: "15. Hồi quy bách phân vị"
+sidebar_label: "15. Hồi quy bách phân vị"
 sidebar_position: 16
-description: "Step-by-step practical how-to guide for Chapter 15: 15. Hồi quy bách phân vị from Microeconometrics Using Stata on SachKTL with Stata, R, and Python workflows integrated with EcoData, Finco, and EcoLab."
+description: "Comprehensive practical how-to guide for 15. Hồi quy bách phân vị from Microeconometrics Using Stata on SachKTL featuring structural equations, 6 lesson breakdowns, and Stata, R, and Python scripts."
 ---
 
-# Chapter 15: 15. Hồi quy bách phân vị — Microeconometrics Using Stata
+# 15. Hồi quy bách phân vị
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-This practical how-to guide synthesizes the methodology and empirical implementation workflow of **Chapter 15: 15. Hồi quy bách phân vị** from [**Book 15: Microeconometrics Using Stata**](/en/sachktl/book-15-csamk22u1/), with direct backlinks to the authoritative source material at [https://sachktl.tnsai.vn/vi/csamk22u1/c15/](https://sachktl.tnsai.vn/vi/csamk22u1/c15/).
+This practical how-to guide presents the theoretical foundations, structural mathematical equations, detailed breakdown of **6 specialized lessons**, and multi-platform replication workflows for **15. Hồi quy bách phân vị** from the textbook [**Microeconometrics Using Stata**](/en/sachktl/book-15-csamk22u1/), with direct cross-references to the authoritative source material at [https://sachktl.tnsai.vn/vi/csamk22u1/c15/](https://sachktl.tnsai.vn/vi/csamk22u1/c15/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chapter 15: 15. Hồi quy bách phân vị">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="15. Hồi quy bách phân vị">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ This practical how-to guide synthesizes the methodology and empirical implementa
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BOOK 15 · CHAPTER 15</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chapter 15: 15. Hồi quy bách phân vị</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Part of Textbook: Microeconometrics Using Stata · 6 Detailed Lessons</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Microeconometrics Using Stata</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">15. Hồi quy bách phân vị</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Applied Econometrics, Statistical Modeling, and Hypothesis Testing · 6 Detailed Lesso</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,102 +41,219 @@ This practical how-to guide synthesizes the methodology and empirical implementa
   </svg>
 </div>
 
-## 1. Methodological Meaning and Scope of Application
+## 1. Methodological Foundations, Mathematical Specification, and Identification
 
-Giới thiệu hồi quy phân vị cho người mới bắt đầu An Introduction to Quantile Regression for Beginners Tổng quan về hồi quy phân vị Chào các bạn sinh viên, trong hành trình khám phá kinh tế lượng, chúng ta thường bắt đầu với mô hình hồi quy tuyến tính cổ điển. OLS là một công cụ cực kỳ mạnh mẽ, giúp chúng ta hiểu được mối quan hệ trung bình giữa các biến. Ví dụ, OLS có thể cho biết trung bình một năm kinh nghiệm làm việc sẽ làm tăng mức lương lên bao nhiêu. Tuy nhiên, thế giới thực lại phức tạp hơn rất nhiều. Liệu tác động của kinh nghiệm lên lương có giống nhau ở nhóm người có thu nhập
+Giới thiệu hồi quy phân vị cho người mới bắt đầu An Introduction to Quantile Regression for Beginners Tổng quan về hồi quy phân vị Chào các bạn sinh viên, trong hành trình khám phá kinh tế lượng, chúng ta thường bắt đầu với mô hình hồi quy tuyến tính cổ điển. OLS là một công cụ cực kỳ mạnh mẽ, giúp chúng ta hiểu được mối quan hệ trung bình giữa các biến. Ví dụ, OLS có thể cho biết trung bình một năm kinh nghiệm làm việc sẽ làm tăng mức lương lên bao nhiêu. Tuy nhiên, thế giới thực lại phức tạp hơn rất nhiều.
 
-- **Core Academic Topics**: Tổng quan về hồi quy phân vị, CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO.
-- **Supported Analytical Environments**: `Stata 18 MP`.
-- **Recommended Empirical Data Sources**: Vietnamese macroeconomic, corporate, and household survey datasets on [EcoData](https://ecodata.io.vn), capital and commodity market series on [Finco](https://www.finco.vn), model cross-references on [VietLOD](https://vietlod.tnsai.vn), and automated estimation on [EcoLab](https://ecolab.io.vn).
+### 1.1. Structural Equations and Representative Estimator
+
+$$
+Y_i = \beta_0 + \sum_{k=1}^K \beta_k X_{ik} + \varepsilon_i, \quad \mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0 \tag*{[1]}
+$$
+
+$$
+\widehat{\text{Var}}_{\text{HC1}}(\hat{\boldsymbol{\beta}}) = \frac{N}{N - K - 1}\left(\mathbf{X}'\mathbf{X}\right)^{-1}\left(\sum_{i=1}^N \hat{\varepsilon}_i^2 \mathbf{x}_i \mathbf{x}_i'\right)\left(\mathbf{X}'\mathbf{X}\right)^{-1} \tag*{[2]}
+$$
+
+### 1.2. Core Identification Assumptions and Applicability Conditions
+
+1. Correct functional form specification in parameters without omitting relevant covariates correlated with included regressors.
+2. Zero conditional mean of disturbances $\mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0$, ensuring unbiasedness and asymptotic consistency.
+3. Full column rank of the design matrix $\mathbf{X}$ without exact multicollinearity, paired with HC1 or cluster-robust standard errors under heteroskedasticity.
 
 <FeatureCards
   features={[
     {
-      title: "Original Chapter on SachKTL",
-      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for Chapter 15 on SachKTL.",
+      title: "Authoritative Chapter on SachKTL",
+      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for this chapter on SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/csamk22u1/c15/"
     },
     {
       title: "Practice Datasets on EcoData & Finco",
-      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and survey data for hands-on replication.",
+      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and household survey data for hands-on replication.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
       title: "Automated Estimation on EcoLab",
-      description: "Execute econometric specifications, run diagnostic battery tests, and export publication-grade tables automatically.",
+      description: "Execute econometric specifications, run diagnostic battery tests, and export APA 7th / AER publication-grade tables automatically.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Step-by-Step Practical Implementation Across Chapter Lessons
+<FeatureNotAvailable
+  feature="Unconditional Baseline Estimation Under Violated Identification Assumptions"
+  reason="When explanatory variables are endogenous due to simultaneity, measurement error, or omitted confounders, OLS estimates are biased and inconsistent; transition to IV/2SLS or GMM estimation."
+  alternative="Run the complete diagnostic battery in Step 4 and transition to the appropriate corrective estimator on VietLOD or EcoLab."
+/>
+
+## 2. Lesson-by-Lesson Academic Breakdown
+
+### 2.1. Nền tảng lý thuyết CQR
+
+Nền tảng lý thuyết của hồi quy phân vị có điều kiện Theoretical foundations of conditional quantile regression Vượt ra ngoài giới hạn của giá trị trung bình Trong các khóa học kinh tế lượng nhập môn, chúng ta dành phần lớn thời gian để làm việc với mô hình hồi quy OLS. Đây là một phương pháp tuyệt vời để hiểu được tác động trung bình của một biến giải thích lên biến kết quả. Tuy nhiên, việc chỉ tập trung vào giá trị trung bình đôi khi giống như chỉ nhìn vào tâm của một cơn bão mà bỏ qua toàn bộ sức mạnh và quy mô của nó.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Vượt ra ngoài giới hạn của giá trị trung bình**
+- **Nền tảng lý thuyết của CQR**
+- **Từ phân vị đến phân vị có điều kiện**
+- **Hàm mất mát: Trái tim của sự khác biệt**
+- **Giải thích hàm kiểm tra $\rho_q$**
+- **Ước lượng và suy diễn thống kê**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c15/nen-tang-ly-thuyet-cqr/)
+
+### 2.2. Thực hành CQR với dữ liệu y tế
+
+Thực hành hồi quy phân vị có điều kiện với Stata Conditional quantile regression in practice with Stata Từ lý thuyết đến phân tích dữ liệu thực tế Ở bài học trước, chúng ta đã cùng nhau khám phá nền tảng lý thuyết của Hồi quy phân vị có điều kiện, hiểu được sự khác biệt cốt lõi của nó so với OLS qua hàm mất mát bất đối xứng. Lý thuyết là nền tảng, nhưng sức mạnh thực sự của một phương pháp kinh tế lượng chỉ được thể hiện khi chúng ta áp dụng nó để giải quyết các câu hỏi nghiên cứu cụ thể từ dữ liệu thực.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Từ lý thuyết đến phân tích dữ liệu thực tế**
+- **Khám phá dữ liệu chi phí y tế**
+- **Tóm tắt thống kê mô tả**
+- **Ước lượng phân vị ban đầu**
+- **Ước lượng mô hình hồi quy trung vị**
+- **Diễn giải hệ số và phép biến đổi ngược**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c15/thuc-hanh-cqr-voi-du-lieu-y-te/)
+
+### 2.3. So sánh và kiểm định trong CQR
+
+So sánh các ước lượng và kiểm định giả thuyết trong CQR Comparing estimates and hypothesis testing in CQR Bức tranh đa chiều từ các phân vị Trong bài học trước, chúng ta đã thực hiện thành công mô hình hồi quy trung vị, một bước tiến quan trọng so với mô hình OLS truyền thống. Tuy nhiên, việc chỉ dừng lại ở trung vị cũng giống như chỉ đọc chương giữa của một cuốn sách hấp dẫn – chúng ta đã bỏ lỡ phần mở đầu và kết thúc đầy kịch tính.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Bức tranh đa chiều từ các phân vị**
+- **So sánh các ước lượng tại các phân vị khác nhau**
+- **Kiểm định phương sai thay đổi**
+- **Kiểm định sự bằng nhau của các hệ số giữa các phân vị**
+- **Tổng kết**
+- **Những điểm chính cần nắm vững**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c15/so-sanh-va-kiem-dinh-trong-cqr/)
+
+### 2.4. Minh họa CQR qua dữ liệu mô phỏng
+
+Hiểu sâu hồi quy phân vị qua dữ liệu mô phỏng Understanding CQR via simulated data Thí nghiệm trong phòng lab của nhà kinh tế lượng Khi làm việc với dữ liệu trong thế giới thực, chúng ta giống như những nhà thám hiểm khám phá một vùng đất bí ẩn. Chúng ta không bao giờ biết chắc chắn "quy luật tự nhiên" thực sự hay mô hình chính xác đã tạo ra dữ liệu đó. Chúng ta sử dụng các công cụ kinh tế lượng như OLS hay CQR để cố gắng tìm ra quy luật đó, nhưng luôn có một mức độ không chắc chắn.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Thí nghiệm trong phòng lab của nhà kinh tế lượng**
+- **Quy trình tạo dữ liệu**
+- **Thiết kế mô hình**
+- **Giải thích từng thành phần của DGP**
+- **Dự đoán kết quả**
+- **Tạo và khám phá dữ liệu trong Stata**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c15/minh-hoa-cqr-qua-du-lieu-mo-phong/)
+
+### 2.5. Phân tích tác động xử lý
+
+Phân tích tác động xử lý theo phân vị Quantile treatment effects analysis Tác động của chính sách có dành cho tất cả mọi người? Trong kinh tế học, một trong những câu hỏi cốt lõi là: "Một chính sách, một chương trình, hay một sự kiện có thực sự tạo ra tác động không?". Phương pháp truyền thống thường tập trung vào việc tính toán Tác động xử lý trung bình . Ví dụ, chúng ta có thể hỏi: "Trung bình, việc tham gia một khóa đào tạo nghề làm tăng thu nhập lên bao nhiêu?".
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Tác động của chính sách có dành cho tất cả mọi người?**
+- **Định nghĩa và ước lượng QTE**
+- **Ước lượng QTE tại q=0.25**
+- **Trực quan hóa QTE trên toàn bộ dải phân vị**
+- **Thảo luận về diễn giải nhân quả**
+- **Tổng kết**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c15/phan-tich-tac-dong-xu-ly-qte/)
+
+### 2.6. Tổng kết và ứng dụng
+
+Tổng kết hồi quy phân vị: Từ lý thuyết đến quy trình nghiên cứu Quantile regression synthesis: From theory to research workflow Hồi quy phân vị trong bức tranh lớn của kinh tế lượng Chúng ta đã cùng nhau trải qua một hành trình khám phá chi tiết về Hồi quy phân vị, một công cụ cho phép chúng ta nhìn xa hơn giới hạn của giá trị trung bình. Trong chương trình đào tạo kinh tế lượng, chúng ta thường bắt đầu với OLS như một nền tảng vững chắc.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Hồi quy phân vị trong bức tranh lớn của kinh tế lượng**
+- **Hệ thống lý thuyết và phương pháp cốt lõi**
+- **Trụ cột lý thuyết**
+- **Hệ thống phương pháp luận**
+- **Quy trình nghiên cứu CQR hoàn chỉnh**
+- **Tổng kết và hướng phát triển**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c15/tong-ket-va-ung-dung/)
+
+## 3. Step-by-Step Empirical Implementation Workflow
 
 <Steps>
   <div className="step-item">
-    <h3>Step 1: Nền tảng lý thuyết CQR</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Nền tảng lý thuyết CQR. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c15/nen-tang-ly-thuyet-cqr/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csamk22u1/c15/nen-tang-ly-thuyet-cqr/</a>.</p>
+    <h3>1. Formulate the Research Question and Prepare Data on EcoData & Finco</h3>
+    <p>Define the dependent variable, core explanatory variables, and control covariates aligned with <strong>15. Hồi quy bách phân vị</strong>. Extract standardized Vietnamese empirical series from <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> or <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, and screen for missing observations and extreme outliers.</p>
   </div>
   <div className="step-item">
-    <h3>Step 2: Thực hành CQR với dữ liệu y tế</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Thực hành CQR với dữ liệu y tế. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c15/thuc-hanh-cqr-voi-du-lieu-y-te/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csamk22u1/c15/thuc-hanh-cqr-voi-du-lieu-y-te/</a>.</p>
+    <h3>2. Conduct Descriptive Profiling, Correlation Analysis, and Pre-Estimation Checks</h3>
+    <p>Examine empirical distributions, construct summary statistics tables, and evaluate collinearity using pairwise correlation matrices and Variance Inflation Factors (VIF).</p>
   </div>
   <div className="step-item">
-    <h3>Step 3: So sánh và kiểm định trong CQR</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for So sánh và kiểm định trong CQR. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c15/so-sanh-va-kiem-dinh-trong-cqr/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csamk22u1/c15/so-sanh-va-kiem-dinh-trong-cqr/</a>.</p>
+    <h3>3. Estimate the Model Across Stata 18 MP, R 4.x, and Python 3.11+</h3>
+    <p>Execute the parameter estimation scripts matching the structural equations in Section 1.1 while cross-checking theoretical derivations at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c15/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Step 4: Minh họa CQR qua dữ liệu mô phỏng</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Minh họa CQR qua dữ liệu mô phỏng. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c15/minh-hoa-cqr-qua-du-lieu-mo-phong/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csamk22u1/c15/minh-hoa-cqr-qua-du-lieu-mo-phong/</a>.</p>
+    <h3>4. Perform Post-Estimation Diagnostics and Robust Variance Correction</h3>
+    <p>Test for heteroskedasticity, serial correlation, Ramsey RESET functional form misspecification, and regressor endogeneity. Apply White HC1 or cluster-robust standard errors for valid inference.</p>
   </div>
   <div className="step-item">
-    <h3>Step 5: Phân tích tác động xử lý</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Phân tích tác động xử lý. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c15/phan-tich-tac-dong-xu-ly-qte/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csamk22u1/c15/phan-tich-tac-dong-xu-ly-qte/</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Step 6: Tổng kết và ứng dụng</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Tổng kết và ứng dụng. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csamk22u1/c15/tong-ket-va-ung-dung/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csamk22u1/c15/tong-ket-va-ung-dung/</a>.</p>
+    <h3>5. Format Journal-Grade Tables and Cross-Verify on EcoLab</h3>
+    <p>Report point estimates, standard errors in parentheses, and statistical significance stars following APA 7th / AER Booktabs standards, or automate the entire reporting pipeline on <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> and <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Multi-Platform Implementation Examples in Stata, R, and Python
+## 4. Multi-Platform Implementation Scripts in Stata, R, and Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Initialize environment and load practice dataset from EcoData / SachKTL
+* Thiết lập môi trường, ước lượng mô hình và kiểm định chẩn đoán toàn diện
 version 18.0
 clear all
 set more off
+import delimited "sachktl_empirical_ecodata.csv", clear encoding("utf-8")
 
-* Import standardized empirical dataset
-import delimited "sachktl_csamk22u1_c15_ecodata.csv", clear encoding("utf-8")
 describe
-summarize
+summarize y x1 x2 x3, detail
 
-* Estimate baseline specification and run diagnostic checks with robust standard errors
-regress y x1 x2 x3, vce(robust)
+* 1. Ước lượng mô hình cơ sở và kiểm định phương sai thay đổi / đa cộng tuyến / dạng hàm
+regress y x1 x2 x3
 estat hettest
+estat imtest, white
 estat vif
+estat ovtest
+
+* 2. Ước lượng với sai số chuẩn vững White HC1 và xuất tác động biên
+regress y c.x1##c.x2 x3, vce(robust)
+margins, dydx(x1 x2 x3)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Load econometric packages and practice dataset from EcoData / SachKTL
+# Nạp thư viện phân tích kinh tế lượng và thực thi kiểm định chẩn đoán
 library(tidyverse)
 library(lmtest)
 library(sandwich)
+library(car)
 
-df <- read.csv("sachktl_csamk22u1_c15_ecodata.csv")
+df <- read.csv("sachktl_empirical_ecodata.csv")
 summary(df)
 
-# Estimate model and compute heteroskedasticity-robust HC1 standard errors
+# 1. Ước lượng mô hình tuyến tính và kiểm định Breusch-Pagan, RESET, VIF
 fit <- lm(y ~ x1 + x2 + x3, data = df)
+bptest(fit)
+resettest(fit, power = 2:3, type = "fitted")
+vif(fit)
+
+# 2. Xuất bảng hệ số ước lượng với sai số chuẩn vững HC1
 coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
 ```
 
@@ -144,35 +261,53 @@ coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Load econometric libraries and practice dataset from EcoData / SachKTL
+# Nạp thư viện statsmodels và thực thi ước lượng kèm chẩn đoán phần dư
 import pandas as pd
+import statsmodels.api as sm
 import statsmodels.formula.api as smf
+from statsmodels.stats.diagnostic import het_breuschpagan, linear_reset
+from statsmodels.stats.outliers_influence import variance_inflation_factor
 
-df = pd.read_csv("sachktl_csamk22u1_c15_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_empirical_ecodata.csv")
 
-# Fit specification with HC1 robust standard errors
+# 1. Ước lượng mô hình với sai số chuẩn vững HC1
 model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
 print(model.summary())
+
+# 2. Kiểm định phương sai thay đổi Breusch-Pagan, Ramsey RESET và hệ số VIF
+bp_lm, bp_pval, _, _ = het_breuschpagan(model.resid, model.model.exog)
+reset_res = linear_reset(model, power=2, use_f=True)
+X = sm.add_constant(df[["x1", "x2", "x3"]].dropna())
+vifs = {col: variance_inflation_factor(X.values, i) for i, col in enumerate(X.columns)}
+print(f"Breusch-Pagan p={bp_pval:.4f} | RESET p={reset_res.pvalue:.4f} | VIF={vifs}")
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video Tutorial Walkthrough
+## 5. Post-Estimation Diagnostic and Interpretation Guide
+
+| Diagnostic Criterion | Null Hypothesis $H_0$ | Benchmark Threshold | Corrective Action When $H_0$ Is Rejected |
+| :--- | :--- | :--- | :--- |
+| **Heteroskedasticity** | Constant error variance $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ rejects $H_0$ | Apply `vce(robust)`, `vcovHC(HC1)`, or FGLS/WLS weighted estimation |
+| **Multicollinearity** | No severe linear dependence among regressors | $\text{VIF} < 10$ acceptable | Drop redundant covariates, center interactions, or apply LASSO/Ridge regularization |
+| **Ramsey RESET Functional Form** | No omitted nonlinear or higher-order terms | $p\text{-value} > 0.05$ retains $H_0$ | Add interaction terms, quadratic polynomials, or log-transform skewed positive variables |
+| **Regressor Exogeneity** | Orthogonality $\text{Cov}(X, \varepsilon)=0$ | Durbin-Wu-Hausman $p > 0.05$ | Transition to IV/2SLS, LIML, or GMM estimation with validated instruments |
+
+## 6. Video Tutorial Walkthrough
 
 <VideoTutorial
-  title="Practical Walkthrough for Chapter 15: 15. Hồi quy bách phân vị on SachKTL"
+  title="Practical Walkthrough for 15. Hồi quy bách phân vị on SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Complete Lesson Directory and Backlinks to Original SachKTL Articles
+## 7. Complete Lesson Directory and Backlinks to Original SachKTL Articles
 
-| No. | Lesson Title in Chapter 15 | Supported Software | Original Source Link on SachKTL |
+| Lesson Code | Lesson Title | Supported Software | Original Source Link on SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Lesson 01** | Nền tảng lý thuyết CQR | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c15/nen-tang-ly-thuyet-cqr/) |
-| **Lesson 02** | Thực hành CQR với dữ liệu y tế | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c15/thuc-hanh-cqr-voi-du-lieu-y-te/) |
-| **Lesson 03** | So sánh và kiểm định trong CQR | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c15/so-sanh-va-kiem-dinh-trong-cqr/) |
-| **Lesson 04** | Minh họa CQR qua dữ liệu mô phỏng | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c15/minh-hoa-cqr-qua-du-lieu-mo-phong/) |
-| **Lesson 05** | Phân tích tác động xử lý | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c15/phan-tich-tac-dong-xu-ly-qte/) |
-| **Lesson 06** | Tổng kết và ứng dụng | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c15/tong-ket-va-ung-dung/) |
+| **15.1** | Nền tảng lý thuyết CQR | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c15/nen-tang-ly-thuyet-cqr/) |
+| **15.2** | Thực hành CQR với dữ liệu y tế | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c15/thuc-hanh-cqr-voi-du-lieu-y-te/) |
+| **15.3** | So sánh và kiểm định trong CQR | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c15/so-sanh-va-kiem-dinh-trong-cqr/) |
+| **15.4** | Minh họa CQR qua dữ liệu mô phỏng | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c15/minh-hoa-cqr-qua-du-lieu-mo-phong/) |
+| **15.5** | Phân tích tác động xử lý | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c15/phan-tich-tac-dong-xu-ly-qte/) |
+| **15.6** | Tổng kết và ứng dụng | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csamk22u1/c15/tong-ket-va-ung-dung/) |

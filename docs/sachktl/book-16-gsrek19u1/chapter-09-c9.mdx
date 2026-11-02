@@ -1,19 +1,19 @@
 ---
 id: chapter-09-c9
-title: "Chương 09: 9. mô hình hồi quy tổng quát và phương sai thay đổi"
-sidebar_label: "Chương 09: 9. Mô hình hồi quy tổng quát và phương sai"
+title: "9. Mô hình hồi quy tổng quát và phương sai thay đổi"
+sidebar_label: "9. Mô hình hồi quy tổng quát và phương sai thay đổi"
 sidebar_position: 10
-description: "Hướng dẫn thực hành How-To Chương 09: 9. mô hình hồi quy tổng quát và phương sai thay đổi thuộc bộ sách Phân tích kinh tế lượng trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 9. Mô hình hồi quy tổng quát và phương sai thay đổi thuộc giáo trình Phân tích kinh tế lượng trên SachKTL kèm công thức toán học, phân tích 6 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 09: 9. mô hình hồi quy tổng quát và phương sai thay đổi
+# 9. Mô hình hồi quy tổng quát và phương sai thay đổi
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 09: 9. mô hình hồi quy tổng quát và phương sai thay đổi** thuộc [**Bộ sách 16: phân tích kinh tế lượng**](/sachktl/book-16-gsrek19u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/gsrek19u1/c9/](https://sachktl.tnsai.vn/vi/gsrek19u1/c9/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **6 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **9. Mô hình hồi quy tổng quát và phương sai thay đổi** thuộc bộ giáo trình [**Phân tích kinh tế lượng**](/sachktl/book-16-gsrek19u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/gsrek19u1/c9/](https://sachktl.tnsai.vn/vi/gsrek19u1/c9/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 09: 9. mô hình hồi quy tổng quát và phương sai thay đổi">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="9. Mô hình hồi quy tổng quát và phương sai thay đổi">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 16 · CHƯƠNG 09</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 09: 9. mô hình hồi quy tổng quát và phương sai thay đổi</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Phân tích kinh tế lượng · 6 bài học chuyên sâu</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Phân tích kinh tế lượng</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">9. Mô hình hồi quy tổng quát và phương sai thay đổi</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng ứng dụng, mô hình hóa thống kê và kiểm định giả thuyết · 6 bài học chuy</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,102 +41,213 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Mô hình hồi quy tổng quát và phương sai thay đổi Chào mừng các bạn sinh viên đến với chuỗi bài học về một trong những mở rộng quan trọng nhất của kinh tế lượng: Mô hình Hồi quy Tuyến tính Tổng quát. Trong các học phần nhập môn, chúng ta đã làm quen với mô hình hồi quy cổ điển và các giả định nền tảng của nó, đặc biệt là giả định về phương sai của sai số không đổi . Tuy nhiên, trong thế giới thực, dữ liệu kinh tế hiếm khi hoàn hảo như vậy. Rất nhiều bộ dữ liệu, từ chi tiêu của các hộ gia đình đến lợi nhuận của các công ty, đều vi phạm giả định này, dẫn đến một vấn đề phổ biến gọi là phương sai
+Mô hình hồi quy tổng quát và phương sai thay đổi Chào mừng các bạn sinh viên đến với chuỗi bài học về một trong những mở rộng quan trọng nhất của kinh tế lượng: Mô hình Hồi quy Tuyến tính Tổng quát. Trong các học phần nhập môn, chúng ta đã làm quen với mô hình hồi quy cổ điển và các giả định nền tảng của nó, đặc biệt là giả định về phương sai của sai số không đổi . Tuy nhiên, trong thế giới thực, dữ liệu kinh tế hiếm khi hoàn hảo như vậy.
 
-- **Chủ đề học thuật trọng tâm**: Cấu trúc chuỗi bài học, Kiến thức tiên quyết, Mục tiêu học tập, Tài liệu tham khảo, PHỤ LỤC: Dữ liệu mô phỏng cho chuỗi bài viết.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+Y_i = \beta_0 + \sum_{k=1}^K \beta_k X_{ik} + \varepsilon_i, \quad \mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0 \tag*{[1]}
+$$
+
+$$
+\widehat{\text{Var}}_{\text{HC1}}(\hat{\boldsymbol{\beta}}) = \frac{N}{N - K - 1}\left(\mathbf{X}'\mathbf{X}\right)^{-1}\left(\sum_{i=1}^N \hat{\varepsilon}_i^2 \mathbf{x}_i \mathbf{x}_i'\right)\left(\mathbf{X}'\mathbf{X}\right)^{-1} \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Dạng hàm tuyến tính theo tham số được xác định đúng, không bỏ sót biến giải thích quan trọng có tương quan với các biến trong mô hình.
+2. Kỳ vọng có điều kiện của sai số bằng không $\mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0$, đảm bảo tính không chệch và vững tiệm cận của ước lượng.
+3. Ma trận thiết kế $\mathbf{X}$ có hạng cột đầy đủ, không xảy ra đa cộng tuyến hoàn hảo và sử dụng sai số chuẩn vững HC1/Cluster khi có phương sai thay đổi.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 09 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/gsrek19u1/c9/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Khi tồn tại biến giải thích nội sinh do đồng thời hai chiều, sai số đo lường hoặc bỏ sót biến không quan sát được, ước lượng OLS bị chệch và không vững; cần chuyển sang ước lượng biến công cụ IV/2SLS hoặc GMM."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Giới thiệu mô hình hồi quy tổng quát và hậu quả cho OLS
+
+Chào mừng các bạn quay trở lại với chuỗi bài học của chúng ta! Ở học phần kinh tế lượng cơ bản, chúng ta đã dành nhiều thời gian làm việc với Mô hình Hồi quy Tuyến tính Cổ điển và các giả định của nó. Một trong những giả định quan trọng nhất là phương sai của sai số không đổi qua các quan sát, hay còn gọi là homoscedasticity. Nhưng trong thực tế, giả định này thường bị vi phạm. Vậy điều gì sẽ xảy ra khi phương sai không còn là hằng số nữa?
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Nền tảng lý thuyết**
+- **Mô hình hồi quy tuyến tính tổng quát**
+- **Hai trường hợp phổ biến**
+- **Hậu quả đối với ước lượng bình phương nhỏ nhất**
+- **OLS vẫn còn tốt không?**
+- **Vấn đề lớn nhất: Phương sai và suy luận thống kê**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c9/gioi-thieu-mo-hinh-hoi-quy-tong-quat-va-hau-qua-cho-ols/)
+
+### 2.2. Ước lượng hiệu quả với GLS và FGLS
+
+Trong bài học trước, chúng ta đã xác định được vấn đề cốt lõi khi có phương sai thay đổi: ước lượng OLS không còn hiệu quả. Mặc dù sai số chuẩn vững giúp chúng ta có được các suy luận thống kê đáng tin cậy, nhưng bản thân các hệ số hồi quy vẫn chưa phải là "tốt nhất". Câu hỏi đặt ra là: Liệu có cách nào để thu được một ước lượng vừa không chệch, vừa nhất quán, lại vừa có phương sai nhỏ nhất có thể trong bối cảnh mô hình tổng quát không? Câu trả lời là có, và đó chính là nội dung chính của bài học hôm nay.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Nền tảng lý thuyết: Bình phương nhỏ nhất tổng quát**
+- **Ý tưởng biến đổi mô hình**
+- **Ước lượng GLS**
+- **Các thuộc tính của GLS**
+- **Phương pháp thực tế: Bình phương nhỏ nhất tổng quát khả thi**
+- **Quy trình ước lượng hai bước**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c9/uoc-luong-hieu-qua-voi-gls-va-fgls/)
+
+### 2.3. Phương sai thay đổi và ước lượng WLS
+
+Ở bài học trước, chúng ta đã tìm hiểu về phương pháp FGLS như một quy trình hai bước mạnh mẽ để đạt được ước lượng hiệu quả. Các bạn có nhớ ở bước cuối cùng, chúng ta đã chạy một lệnh hồi quy với tùy chọn trong Stata không? Lệnh đó chính là trái tim của bài học hôm nay: Bình phương nhỏ nhất có Trọng số . WLS không phải là một khái niệm hoàn toàn mới, mà thực chất là một trường hợp đặc biệt của GLS, được áp dụng riêng cho vấn đề phương sai thay đổi.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Nền tảng lý thuyết: Logic của việc gán trọng số**
+- **Nguyên tắc cốt lõi của WLS**
+- **WLS chính là OLS trên dữ liệu đã biến đổi**
+- **Phương pháp áp dụng WLS**
+- **Trường hợp 1: Dạng của phương sai đã biết**
+- **Trường hợp 2: Dạng của phương sai chưa biết**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c9/phuong-sai-thay-doi-va-uoc-luong-gls/)
+
+### 2.4. Các kiểm định về phương sai thay đổi trong Stata
+
+Chào mừng các bạn đã quay trở lại! Trong các bài học trước, chúng ta đã tập trung vào các phương pháp để "sửa lỗi" khi mô hình hồi quy gặp phải vấn đề phương sai thay đổi. Chúng ta đã học về WLS và FGLS như những công cụ hiệu quả để có được ước lượng tốt hơn. Tuy nhiên, một bước cực kỳ quan trọng trước khi tiến hành "điều trị" là phải "chẩn đoán" chính xác. Làm thế nào để chúng ta biết chắc chắn rằng phương sai của sai số thực sự thay đổi? Bài học này sẽ trả lời câu hỏi đó.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Chiến lược chung của các kiểm định**
+- **Kiểm định Breusch-Pagan**
+- **Kiểm định White**
+- **Hướng dẫn thực hành toàn diện trong Stata**
+- **Tổng kết**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c9/cac-kiem-dinh-ve-phuong-sai-thay-doi-trong-stata/)
+
+### 2.5. Các mô hình phương sai thay đổi phổ biến
+
+Chào mừng các bạn đến với bài học thứ năm! Ở bài trước, chúng ta đã trang bị cho mình những công cụ "chẩn đoán" mạnh mẽ như kiểm định Breusch-Pagan và kiểm định White. Một khi đã xác định chắc chắn rằng mô hình của chúng ta có vấn đề về phương sai thay đổi, bước tiếp theo là lựa chọn một phương pháp "điều trị" cụ thể. Đây là một bước quan trọng, bởi vì hiệu quả của ước lượng FGLS phụ thuộc rất nhiều vào việc chúng ta mô hình hóa cấu trúc của phương sai một cách hợp lý.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Mô hình 1: Phương sai thay đổi dạng nhân**
+- **Cấu trúc của mô hình**
+- **Quy trình ước lượng FGLS**
+- **Mô hình 2: Phương sai thay đổi theo nhóm**
+- **Tổng kết**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c9/cac-mo-hinh-phuong-sai-thay-doi-pho-bien/)
+
+### 2.6. Hướng dẫn thực hành phân tích phương sai thay đổi với Stata
+
+Chào mừng các bạn đến với bài học cuối cùng trong chuỗi bài về phương sai thay đổi! Chúng ta đã cùng nhau xây dựng một nền tảng kiến thức vững chắc, từ việc hiểu rõ "tại sao", "làm thế nào để biết", cho đến "phải làm gì" . Bây giờ là lúc thú vị nhất: áp dụng tất cả những gì đã học vào một quy trình phân tích dữ liệu hoàn chỉnh, giống như cách một nhà nghiên cứu thực thụ sẽ làm. Bài học này sẽ không giới thiệu khái niệm mới, thay vào đó, nó sẽ là một bản tổng kết thực hành.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Quy trình phân tích dữ liệu từ a đến z**
+- **Tổng kết chuỗi bài học**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c9/huong-dan-thuc-hanh-phan-tich-phuong-sai-thay-doi-voi-stata/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Giới thiệu mô hình hồi quy tổng quát và hậu quả cho OLS</h3>
-    <p>Chào mừng các bạn quay trở lại với chuỗi bài học của chúng ta! Ở học phần kinh tế lượng cơ bản, chúng ta đã dành nhiều thời gian làm việc với Mô hình Hồi quy Tuyến tính Cổ điển và các giả định của nó. Một trong những giả định quan trọng nhất là phương sai của  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/gsrek19u1/c9/gioi-thieu-mo-hinh-hoi-quy-tong-quat-va-hau-qua-cho-ols/" target="_blank" rel="noopener">Giới thiệu mô hình hồi quy tổng quát và hậu quả cho OLS</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>9. Mô hình hồi quy tổng quát và phương sai thay đổi</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Ước lượng hiệu quả với GLS và FGLS</h3>
-    <p>Trong bài học trước, chúng ta đã xác định được vấn đề cốt lõi khi có phương sai thay đổi: ước lượng OLS không còn hiệu quả. Mặc dù sai số chuẩn vững giúp chúng ta có được các suy luận thống kê đáng tin cậy, nhưng bản thân các hệ số hồi quy vẫn chưa phải là "tố Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/gsrek19u1/c9/uoc-luong-hieu-qua-voi-gls-va-fgls/" target="_blank" rel="noopener">Ước lượng hiệu quả với GLS và FGLS</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Phương sai thay đổi và ước lượng WLS</h3>
-    <p>Ở bài học trước, chúng ta đã tìm hiểu về phương pháp FGLS như một quy trình hai bước mạnh mẽ để đạt được ước lượng hiệu quả. Các bạn có nhớ ở bước cuối cùng, chúng ta đã chạy một lệnh hồi quy với tùy chọn trong Stata không? Lệnh đó chính là trái tim của bài họ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/gsrek19u1/c9/phuong-sai-thay-doi-va-uoc-luong-gls/" target="_blank" rel="noopener">Phương sai thay đổi và ước lượng WLS</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/gsrek19u1/c9/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Các kiểm định về phương sai thay đổi trong Stata</h3>
-    <p>Chào mừng các bạn đã quay trở lại! Trong các bài học trước, chúng ta đã tập trung vào các phương pháp để "sửa lỗi" khi mô hình hồi quy gặp phải vấn đề phương sai thay đổi. Chúng ta đã học về WLS và FGLS như những công cụ hiệu quả để có được ước lượng tốt hơn.  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/gsrek19u1/c9/cac-kiem-dinh-ve-phuong-sai-thay-doi-trong-stata/" target="_blank" rel="noopener">Các kiểm định về phương sai thay đổi trong Stata</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 5: Các mô hình phương sai thay đổi phổ biến</h3>
-    <p>Chào mừng các bạn đến với bài học thứ năm! Ở bài trước, chúng ta đã trang bị cho mình những công cụ "chẩn đoán" mạnh mẽ như kiểm định Breusch-Pagan và kiểm định White. Một khi đã xác định chắc chắn rằng mô hình của chúng ta có vấn đề về phương sai thay đổi, bư Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/gsrek19u1/c9/cac-mo-hinh-phuong-sai-thay-doi-pho-bien/" target="_blank" rel="noopener">Các mô hình phương sai thay đổi phổ biến</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Bước 6: Hướng dẫn thực hành phân tích phương sai thay đổi với Stata</h3>
-    <p>Chào mừng các bạn đến với bài học cuối cùng trong chuỗi bài về phương sai thay đổi! Chúng ta đã cùng nhau xây dựng một nền tảng kiến thức vững chắc, từ việc hiểu rõ "tại sao", "làm thế nào để biết", cho đến "phải làm gì" . Bây giờ là lúc thú vị nhất: áp dụng t Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/gsrek19u1/c9/huong-dan-thuc-hanh-phan-tich-phuong-sai-thay-doi-voi-stata/" target="_blank" rel="noopener">Hướng dẫn thực hành phân tích phương sai thay đổi với Stata</a>.</p>
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập môi trường, ước lượng mô hình và kiểm định chẩn đoán toàn diện
 version 18.0
 clear all
 set more off
+import delimited "sachktl_empirical_ecodata.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_gsrek19u1_c09_ecodata.csv", clear encoding("utf-8")
 describe
-summarize
+summarize y x1 x2 x3, detail
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
+* 1. Ước lượng mô hình cơ sở và kiểm định phương sai thay đổi / đa cộng tuyến / dạng hàm
+regress y x1 x2 x3
 estat hettest
+estat imtest, white
 estat vif
+estat ovtest
+
+* 2. Ước lượng với sai số chuẩn vững White HC1 và xuất tác động biên
+regress y c.x1##c.x2 x3, vce(robust)
+margins, dydx(x1 x2 x3)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện phân tích kinh tế lượng và thực thi kiểm định chẩn đoán
 library(tidyverse)
 library(lmtest)
 library(sandwich)
+library(car)
 
-df <- read.csv("sachktl_gsrek19u1_c09_ecodata.csv")
+df <- read.csv("sachktl_empirical_ecodata.csv")
 summary(df)
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+# 1. Ước lượng mô hình tuyến tính và kiểm định Breusch-Pagan, RESET, VIF
 fit <- lm(y ~ x1 + x2 + x3, data = df)
+bptest(fit)
+resettest(fit, power = 2:3, type = "fitted")
+vif(fit)
+
+# 2. Xuất bảng hệ số ước lượng với sai số chuẩn vững HC1
 coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
 ```
 
@@ -144,35 +255,53 @@ coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và thực thi ước lượng kèm chẩn đoán phần dư
 import pandas as pd
+import statsmodels.api as sm
 import statsmodels.formula.api as smf
+from statsmodels.stats.diagnostic import het_breuschpagan, linear_reset
+from statsmodels.stats.outliers_influence import variance_inflation_factor
 
-df = pd.read_csv("sachktl_gsrek19u1_c09_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_empirical_ecodata.csv")
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
+# 1. Ước lượng mô hình với sai số chuẩn vững HC1
 model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
 print(model.summary())
+
+# 2. Kiểm định phương sai thay đổi Breusch-Pagan, Ramsey RESET và hệ số VIF
+bp_lm, bp_pval, _, _ = het_breuschpagan(model.resid, model.model.exog)
+reset_res = linear_reset(model, power=2, use_f=True)
+X = sm.add_constant(df[["x1", "x2", "x3"]].dropna())
+vifs = {col: variance_inflation_factor(X.values, i) for i, col in enumerate(X.columns)}
+print(f"Breusch-Pagan p={bp_pval:.4f} | RESET p={reset_res.pvalue:.4f} | VIF={vifs}")
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 09: 9. mô hình hồi quy tổng quát và phương sai thay đổi trên SachKTL"
+  title="Hướng dẫn thực hành 9. Mô hình hồi quy tổng quát và phương sai thay đổi trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 09 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Giới thiệu mô hình hồi quy tổng quát và hậu quả cho OLS | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c9/gioi-thieu-mo-hinh-hoi-quy-tong-quat-va-hau-qua-cho-ols/) |
-| **Bài 02** | Ước lượng hiệu quả với GLS và FGLS | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c9/uoc-luong-hieu-qua-voi-gls-va-fgls/) |
-| **Bài 03** | Phương sai thay đổi và ước lượng WLS | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c9/phuong-sai-thay-doi-va-uoc-luong-gls/) |
-| **Bài 04** | Các kiểm định về phương sai thay đổi trong Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c9/cac-kiem-dinh-ve-phuong-sai-thay-doi-trong-stata/) |
-| **Bài 05** | Các mô hình phương sai thay đổi phổ biến | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c9/cac-mo-hinh-phuong-sai-thay-doi-pho-bien/) |
-| **Bài 06** | Hướng dẫn thực hành phân tích phương sai thay đổi với Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c9/huong-dan-thuc-hanh-phan-tich-phuong-sai-thay-doi-voi-stata/) |
+| **9.1** | Giới thiệu mô hình hồi quy tổng quát và hậu quả cho OLS | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c9/gioi-thieu-mo-hinh-hoi-quy-tong-quat-va-hau-qua-cho-ols/) |
+| **9.2** | Ước lượng hiệu quả với GLS và FGLS | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c9/uoc-luong-hieu-qua-voi-gls-va-fgls/) |
+| **9.3** | Phương sai thay đổi và ước lượng WLS | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c9/phuong-sai-thay-doi-va-uoc-luong-gls/) |
+| **9.4** | Các kiểm định về phương sai thay đổi trong Stata | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c9/cac-kiem-dinh-ve-phuong-sai-thay-doi-trong-stata/) |
+| **9.5** | Các mô hình phương sai thay đổi phổ biến | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c9/cac-mo-hinh-phuong-sai-thay-doi-pho-bien/) |
+| **9.6** | Hướng dẫn thực hành phân tích phương sai thay đổi với Stata | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/gsrek19u1/c9/huong-dan-thuc-hanh-phan-tich-phuong-sai-thay-doi-voi-stata/) |

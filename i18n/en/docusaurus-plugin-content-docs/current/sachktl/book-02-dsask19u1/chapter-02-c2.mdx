@@ -1,19 +1,19 @@
 ---
 id: chapter-02-c2
-title: "Chapter 02: 2. Mô hình hồi quy tuyến tính: Tính chất và phương pháp ước lượng — Econometrics Theory and Practice"
-sidebar_label: "Chapter 02: 2. Mô hình hồi quy tuyến tính: Tính chất v"
+title: "2. Linear Regression Model: Properties and Estimation Methods"
+sidebar_label: "2. Linear Regression Model: Properties and Estimation Methods"
 sidebar_position: 3
-description: "Step-by-step practical how-to guide for Chapter 02: 2. Mô hình hồi quy tuyến tính: Tính chất và phương pháp ước lượng from Econometrics Theory and Practice on SachKTL with Stata, R, and Python workflows integrated with EcoData, Finco, and EcoLab."
+description: "Comprehensive practical how-to guide for 2. Linear Regression Model: Properties and Estimation Methods from Econometrics: Theory and Practice on SachKTL featuring structural equations, 5 lesson breakdowns, and Stata, R, and Python scripts."
 ---
 
-# Chapter 02: 2. Mô hình hồi quy tuyến tính: Tính chất và phương pháp ước lượng — Econometrics Theory and Practice
+# 2. Linear Regression Model: Properties and Estimation Methods
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-This practical how-to guide synthesizes the methodology and empirical implementation workflow of **Chapter 02: 2. Mô hình hồi quy tuyến tính: Tính chất và phương pháp ước lượng** from [**Book 02: Econometrics Theory and Practice**](/en/sachktl/book-02-dsask19u1/), with direct backlinks to the authoritative source material at [https://sachktl.tnsai.vn/vi/dsask19u1/c2/](https://sachktl.tnsai.vn/vi/dsask19u1/c2/).
+This practical how-to guide presents the theoretical foundations, structural mathematical equations, detailed breakdown of **5 specialized lessons**, and multi-platform replication workflows for **2. Linear Regression Model: Properties and Estimation Methods** from the textbook [**Econometrics: Theory and Practice**](/en/sachktl/book-02-dsask19u1/), with direct cross-references to the authoritative source material at [https://sachktl.tnsai.vn/vi/dsask19u1/c2/](https://sachktl.tnsai.vn/vi/dsask19u1/c2/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chapter 02: 2. Mô hình hồi quy tuyến tính: Tính chất và phương pháp ">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="2. Linear Regression Model: Properties and Estimation Methods">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ This practical how-to guide synthesizes the methodology and empirical implementa
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BOOK 02 · CHAPTER 02</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chapter 02: 2. Mô hình hồi quy tuyến tính: Tính chất và phương pháp </text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Part of Textbook: Econometrics Theory and Practice · 5 Detailed Lessons</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Econometrics: Theory and Practice</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">2. Linear Regression Model: Properties and Estimation Methods</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Applied Econometrics, Statistical Modeling, and Hypothesis Testing · 5 Detailed Lesso</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,98 +41,203 @@ This practical how-to guide synthesizes the methodology and empirical implementa
   </svg>
 </div>
 
-## 1. Methodological Meaning and Scope of Application
+## 1. Methodological Foundations, Mathematical Specification, and Identification
 
-Mô hình hồi quy tuyến tính: Tính chất và phương pháp ước lượng Sau khi nắm vững những khái niệm nền tảng về kinh tế lượng trong chuỗi bài học trước, giờ là lúc chúng ta bước vào trung tâm của phân tích kinh tế lượng ứng dụng: Mô hình Hồi quy Tuyến tính. Đây không chỉ là một kỹ thuật, mà là công cụ lao động chính của hầu hết các nhà kinh tế lượng, cho phép chúng ta lượng hóa và kiểm định các mối quan hệ giữa các biến kinh tế. Mục tiêu cốt lõi của phân tích hồi quy là ước lượng các tham số chưa biết của mô hình, kiểm tra xem lý thuyết kinh tế có phù hợp với dữ liệu thực tế hay không, và cuối
+Mô hình hồi quy tuyến tính: Tính chất và phương pháp ước lượng Sau khi nắm vững những khái niệm nền tảng về kinh tế lượng trong chuỗi bài học trước, giờ là lúc chúng ta bước vào trung tâm của phân tích kinh tế lượng ứng dụng: Mô hình Hồi quy Tuyến tính. Đây không chỉ là một kỹ thuật, mà là công cụ lao động chính của hầu hết các nhà kinh tế lượng, cho phép chúng ta lượng hóa và kiểm định các mối quan hệ giữa các biến kinh tế.
 
-- **Core Academic Topics**: Cấu trúc chuỗi bài học, Kiến thức tiên quyết, Mục tiêu học tập, PHỤ LỤC: Dữ liệu thực hành cho chuỗi bài học, Mô tả dữ liệu.
-- **Supported Analytical Environments**: `Stata 18 MP`.
-- **Recommended Empirical Data Sources**: Vietnamese macroeconomic, corporate, and household survey datasets on [EcoData](https://ecodata.io.vn), capital and commodity market series on [Finco](https://www.finco.vn), model cross-references on [VietLOD](https://vietlod.tnsai.vn), and automated estimation on [EcoLab](https://ecolab.io.vn).
+### 1.1. Structural Equations and Representative Estimator
+
+$$
+Y_i = \beta_0 + \sum_{k=1}^K \beta_k X_{ik} + \varepsilon_i, \quad \mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0 \tag*{[1]}
+$$
+
+$$
+\widehat{\text{Var}}_{\text{HC1}}(\hat{\boldsymbol{\beta}}) = \frac{N}{N - K - 1}\left(\mathbf{X}'\mathbf{X}\right)^{-1}\left(\sum_{i=1}^N \hat{\varepsilon}_i^2 \mathbf{x}_i \mathbf{x}_i'\right)\left(\mathbf{X}'\mathbf{X}\right)^{-1} \tag*{[2]}
+$$
+
+### 1.2. Core Identification Assumptions and Applicability Conditions
+
+1. Correct functional form specification in parameters without omitting relevant covariates correlated with included regressors.
+2. Zero conditional mean of disturbances $\mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0$, ensuring unbiasedness and asymptotic consistency.
+3. Full column rank of the design matrix $\mathbf{X}$ without exact multicollinearity, paired with HC1 or cluster-robust standard errors under heteroskedasticity.
 
 <FeatureCards
   features={[
     {
-      title: "Original Chapter on SachKTL",
-      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for Chapter 02 on SachKTL.",
+      title: "Authoritative Chapter on SachKTL",
+      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for this chapter on SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/dsask19u1/c2/"
     },
     {
       title: "Practice Datasets on EcoData & Finco",
-      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and survey data for hands-on replication.",
+      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and household survey data for hands-on replication.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
       title: "Automated Estimation on EcoLab",
-      description: "Execute econometric specifications, run diagnostic battery tests, and export publication-grade tables automatically.",
+      description: "Execute econometric specifications, run diagnostic battery tests, and export APA 7th / AER publication-grade tables automatically.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Step-by-Step Practical Implementation Across Chapter Lessons
+<FeatureNotAvailable
+  feature="Unconditional Baseline Estimation Under Violated Identification Assumptions"
+  reason="When explanatory variables are endogenous due to simultaneity, measurement error, or omitted confounders, OLS estimates are biased and inconsistent; transition to IV/2SLS or GMM estimation."
+  alternative="Run the complete diagnostic battery in Step 4 and transition to the appropriate corrective estimator on VietLOD or EcoLab."
+/>
+
+## 2. Lesson-by-Lesson Academic Breakdown
+
+### 2.1. Giới thiệu hồi quy tuyến tính và mô hình hồi quy đơn
+
+Chào mừng bạn đến với bài học đầu tiên trong chuỗi bài về Mô hình Hồi quy Tuyến tính. Trong phần giới thiệu tổng quan, chúng ta đã xác định hồi quy là công cụ trung tâm của kinh tế lượng, giúp lượng hóa các mối quan hệ kinh tế. Bài học hôm nay sẽ đặt những viên gạch đầu tiên cho nền móng kiến thức này. Chúng ta sẽ bắt đầu bằng việc tìm hiểu bản chất của phân tích hồi quy: nó là gì, và tại sao nó lại hữu ích không chỉ trong kinh tế học mà còn trong vô số các lĩnh vực khoa học khác?
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Nền tảng lý thuyết**
+- **Hồi quy tuyến tính là gì?**
+- **Cấu trúc mô hình hồi quy tuyến tính đơn**
+- **Hàm hồi quy tổng thể và hàm hồi quy mẫu**
+- **Ví dụ minh họa với Stata**
+- **Tổng kết bài học**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c2/gioi-thieu-hoi-quy-tuyen-tinh/)
+
+### 2.2. Mô hình hồi quy tuyến tính bội và diễn giải ceteris paribus
+
+Ở bài học trước, chúng ta đã tìm hiểu kỹ lưỡng về mô hình hồi quy tuyến tính đơn, một công cụ hữu ích để phân tích mối quan hệ giữa hai biến. Tuy nhiên, chúng ta cũng nhận thấy một hạn chế lớn của nó: trong thực tế, một biến kinh tế hiếm khi chỉ chịu tác động của một yếu tố duy nhất. Ví dụ, chi tiêu của một hộ gia đình không chỉ phụ thuộc vào thu nhập, mà còn bị ảnh hưởng bởi giá cả, tài sản, quy mô gia đình, và nhiều yếu tố khác.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Nền tảng lý thuyết**
+- **Tại sao cần mô hình hồi quy bội?**
+- **Cấu trúc mô hình hồi quy tuyến tính bội**
+- **Diễn giải Ceteris Paribus**
+- **Phương pháp và diễn giải**
+- **Diễn giải các hệ số hồi quy riêng phần**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c2/mo-hinh-hoi-quy-tuyen-tinh-boi/)
+
+### 2.3. Các giả định cổ điển của mô hình hồi quy tuyến tính
+
+Trong các bài học trước, chúng ta đã xây dựng được cấu trúc của mô hình hồi quy tuyến tính, từ dạng đơn giản đến dạng bội, và hiểu được sức mạnh của nó trong việc phân tích các mối quan hệ ceteris paribus. Chúng ta đã biết rằng mục tiêu của mình là sử dụng dữ liệu mẫu để ước lượng các tham số của mô hình. Tuy nhiên, một câu hỏi quan trọng vẫn còn bỏ ngỏ: Điều gì đảm bảo rằng các tham số mà chúng ta ước lượng được là "tốt"? Làm thế nào chúng ta có thể tin tưởng rằng các ước lượng đó phản ánh đúng các tham số tổng thể thực sự?
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Nền tảng lý thuyết: Bảy giả định cốt lõi**
+- **Giả định 1: Tuyến tính theo tham số**
+- **Giả định 2: Các biến giải thích không ngẫu nhiên**
+- **Giả định 3: Kỳ vọng có điều kiện của sai số bằng không**
+- **Giả định 4: Phương sai của sai số không đổi**
+- **Giả định 5: Không có tự tương quan**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c2/cac-gia-dinh-co-dien/)
+
+### 2.4. Các phương pháp ước lượng tham số
+
+Ở bài học trước, chúng ta đã thiết lập một bộ "luật chơi" quan trọng—các giả định của mô hình hồi quy tuyến tính cổ điển. Những giả định này, đặc biệt là giả định về tính ngoại sinh, tạo ra một môi trường lý tưởng để chúng ta có thể tin tưởng vào kết quả ước lượng. Bây giờ, câu hỏi thực hành được đặt ra là: chính xác thì chúng ta "ước lượng" các tham số $\beta$ bằng cách nào?
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Các phương pháp ước lượng**
+- **1. Phương pháp Moment**
+- **2. Phương pháp Bình phương nhỏ nhất**
+- **3. Phương pháp Hợp lý Tối đa**
+- **Tổng kết bài học**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c2/cac-phuong-phap-uoc-luong/)
+
+### 2.5. Tính chất của ước lượng OLS và định lý Gauss-Markov
+
+Trong bài học trước, chúng ta đã khám phá các "cơ chế" kỹ thuật để tìm ra các ước lượng tham số, tập trung vào ba phương pháp chính: MM, OLS và ML. Chúng ta đã thấy một kết quả đáng chú ý rằng, trong bối cảnh của mô hình hồi quy tuyến tính, cả ba phương pháp này đều dẫn đến cùng một bộ ước lượng cho các hệ số $\beta$. Điều này đặt ra một câu hỏi sâu sắc hơn: Tại sao bộ ước lượng này lại đặc biệt đến vậy? Những tính chất nào làm cho nó trở nên "tốt" hoặc thậm chí là "tốt nhất" trong một số điều kiện nhất định?
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Các tính chất của ước lượng OLS**
+- **1. Các tính chất đại số**
+- **2. Các tính chất thống kê**
+- **a. Tính không chệch**
+- **b. Phương sai của các ước lượng OLS**
+- **Định lý Gauss-Markov và tính hiệu quả của OLS**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c2/tinh-chat-cua-uoc-luong-ols/)
+
+## 3. Step-by-Step Empirical Implementation Workflow
 
 <Steps>
   <div className="step-item">
-    <h3>Step 1: Giới thiệu hồi quy tuyến tính và mô hình hồi quy đơn</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Giới thiệu hồi quy tuyến tính và mô hình hồi quy đơn. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/dsask19u1/c2/gioi-thieu-hoi-quy-tuyen-tinh/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/dsask19u1/c2/gioi-thieu-hoi-quy-tuyen-tinh/</a>.</p>
+    <h3>1. Formulate the Research Question and Prepare Data on EcoData & Finco</h3>
+    <p>Define the dependent variable, core explanatory variables, and control covariates aligned with <strong>2. Linear Regression Model: Properties and Estimation Methods</strong>. Extract standardized Vietnamese empirical series from <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> or <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, and screen for missing observations and extreme outliers.</p>
   </div>
   <div className="step-item">
-    <h3>Step 2: Mô hình hồi quy tuyến tính bội và diễn giải ceteris paribus</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Mô hình hồi quy tuyến tính bội và diễn giải ceteris paribus. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/dsask19u1/c2/mo-hinh-hoi-quy-tuyen-tinh-boi/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/dsask19u1/c2/mo-hinh-hoi-quy-tuyen-tinh-boi/</a>.</p>
+    <h3>2. Conduct Descriptive Profiling, Correlation Analysis, and Pre-Estimation Checks</h3>
+    <p>Examine empirical distributions, construct summary statistics tables, and evaluate collinearity using pairwise correlation matrices and Variance Inflation Factors (VIF).</p>
   </div>
   <div className="step-item">
-    <h3>Step 3: Các giả định cổ điển của mô hình hồi quy tuyến tính</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Các giả định cổ điển của mô hình hồi quy tuyến tính. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/dsask19u1/c2/cac-gia-dinh-co-dien/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/dsask19u1/c2/cac-gia-dinh-co-dien/</a>.</p>
+    <h3>3. Estimate the Model Across Stata 18 MP, R 4.x, and Python 3.11+</h3>
+    <p>Execute the parameter estimation scripts matching the structural equations in Section 1.1 while cross-checking theoretical derivations at <a href="https://sachktl.tnsai.vn/vi/dsask19u1/c2/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Step 4: Các phương pháp ước lượng tham số</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Các phương pháp ước lượng tham số. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/dsask19u1/c2/cac-phuong-phap-uoc-luong/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/dsask19u1/c2/cac-phuong-phap-uoc-luong/</a>.</p>
+    <h3>4. Perform Post-Estimation Diagnostics and Robust Variance Correction</h3>
+    <p>Test for heteroskedasticity, serial correlation, Ramsey RESET functional form misspecification, and regressor endogeneity. Apply White HC1 or cluster-robust standard errors for valid inference.</p>
   </div>
   <div className="step-item">
-    <h3>Step 5: Tính chất của ước lượng OLS và định lý Gauss-Markov</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Tính chất của ước lượng OLS và định lý Gauss-Markov. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/dsask19u1/c2/tinh-chat-cua-uoc-luong-ols/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/dsask19u1/c2/tinh-chat-cua-uoc-luong-ols/</a>.</p>
+    <h3>5. Format Journal-Grade Tables and Cross-Verify on EcoLab</h3>
+    <p>Report point estimates, standard errors in parentheses, and statistical significance stars following APA 7th / AER Booktabs standards, or automate the entire reporting pipeline on <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> and <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Multi-Platform Implementation Examples in Stata, R, and Python
+## 4. Multi-Platform Implementation Scripts in Stata, R, and Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Initialize environment and load practice dataset from EcoData / SachKTL
+* Thiết lập môi trường, ước lượng mô hình và kiểm định chẩn đoán toàn diện
 version 18.0
 clear all
 set more off
+import delimited "sachktl_empirical_ecodata.csv", clear encoding("utf-8")
 
-* Import standardized empirical dataset
-import delimited "sachktl_dsask19u1_c02_ecodata.csv", clear encoding("utf-8")
 describe
-summarize
+summarize y x1 x2 x3, detail
 
-* Estimate baseline specification and run diagnostic checks with robust standard errors
-regress y x1 x2 x3, vce(robust)
+* 1. Ước lượng mô hình cơ sở và kiểm định phương sai thay đổi / đa cộng tuyến / dạng hàm
+regress y x1 x2 x3
 estat hettest
+estat imtest, white
 estat vif
+estat ovtest
+
+* 2. Ước lượng với sai số chuẩn vững White HC1 và xuất tác động biên
+regress y c.x1##c.x2 x3, vce(robust)
+margins, dydx(x1 x2 x3)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Load econometric packages and practice dataset from EcoData / SachKTL
+# Nạp thư viện phân tích kinh tế lượng và thực thi kiểm định chẩn đoán
 library(tidyverse)
 library(lmtest)
 library(sandwich)
+library(car)
 
-df <- read.csv("sachktl_dsask19u1_c02_ecodata.csv")
+df <- read.csv("sachktl_empirical_ecodata.csv")
 summary(df)
 
-# Estimate model and compute heteroskedasticity-robust HC1 standard errors
+# 1. Ước lượng mô hình tuyến tính và kiểm định Breusch-Pagan, RESET, VIF
 fit <- lm(y ~ x1 + x2 + x3, data = df)
+bptest(fit)
+resettest(fit, power = 2:3, type = "fitted")
+vif(fit)
+
+# 2. Xuất bảng hệ số ước lượng với sai số chuẩn vững HC1
 coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
 ```
 
@@ -140,34 +245,52 @@ coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Load econometric libraries and practice dataset from EcoData / SachKTL
+# Nạp thư viện statsmodels và thực thi ước lượng kèm chẩn đoán phần dư
 import pandas as pd
+import statsmodels.api as sm
 import statsmodels.formula.api as smf
+from statsmodels.stats.diagnostic import het_breuschpagan, linear_reset
+from statsmodels.stats.outliers_influence import variance_inflation_factor
 
-df = pd.read_csv("sachktl_dsask19u1_c02_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_empirical_ecodata.csv")
 
-# Fit specification with HC1 robust standard errors
+# 1. Ước lượng mô hình với sai số chuẩn vững HC1
 model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
 print(model.summary())
+
+# 2. Kiểm định phương sai thay đổi Breusch-Pagan, Ramsey RESET và hệ số VIF
+bp_lm, bp_pval, _, _ = het_breuschpagan(model.resid, model.model.exog)
+reset_res = linear_reset(model, power=2, use_f=True)
+X = sm.add_constant(df[["x1", "x2", "x3"]].dropna())
+vifs = {col: variance_inflation_factor(X.values, i) for i, col in enumerate(X.columns)}
+print(f"Breusch-Pagan p={bp_pval:.4f} | RESET p={reset_res.pvalue:.4f} | VIF={vifs}")
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video Tutorial Walkthrough
+## 5. Post-Estimation Diagnostic and Interpretation Guide
+
+| Diagnostic Criterion | Null Hypothesis $H_0$ | Benchmark Threshold | Corrective Action When $H_0$ Is Rejected |
+| :--- | :--- | :--- | :--- |
+| **Heteroskedasticity** | Constant error variance $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ rejects $H_0$ | Apply `vce(robust)`, `vcovHC(HC1)`, or FGLS/WLS weighted estimation |
+| **Multicollinearity** | No severe linear dependence among regressors | $\text{VIF} < 10$ acceptable | Drop redundant covariates, center interactions, or apply LASSO/Ridge regularization |
+| **Ramsey RESET Functional Form** | No omitted nonlinear or higher-order terms | $p\text{-value} > 0.05$ retains $H_0$ | Add interaction terms, quadratic polynomials, or log-transform skewed positive variables |
+| **Regressor Exogeneity** | Orthogonality $\text{Cov}(X, \varepsilon)=0$ | Durbin-Wu-Hausman $p > 0.05$ | Transition to IV/2SLS, LIML, or GMM estimation with validated instruments |
+
+## 6. Video Tutorial Walkthrough
 
 <VideoTutorial
-  title="Practical Walkthrough for Chapter 02: 2. Mô hình hồi quy tuyến tính: Tính chất và phương pháp ước lượng on SachKTL"
+  title="Practical Walkthrough for 2. Linear Regression Model: Properties and Estimation Methods on SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Complete Lesson Directory and Backlinks to Original SachKTL Articles
+## 7. Complete Lesson Directory and Backlinks to Original SachKTL Articles
 
-| No. | Lesson Title in Chapter 02 | Supported Software | Original Source Link on SachKTL |
+| Lesson Code | Lesson Title | Supported Software | Original Source Link on SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Lesson 01** | Giới thiệu hồi quy tuyến tính và mô hình hồi quy đơn | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c2/gioi-thieu-hoi-quy-tuyen-tinh/) |
-| **Lesson 02** | Mô hình hồi quy tuyến tính bội và diễn giải ceteris paribus | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c2/mo-hinh-hoi-quy-tuyen-tinh-boi/) |
-| **Lesson 03** | Các giả định cổ điển của mô hình hồi quy tuyến tính | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c2/cac-gia-dinh-co-dien/) |
-| **Lesson 04** | Các phương pháp ước lượng tham số | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c2/cac-phuong-phap-uoc-luong/) |
-| **Lesson 05** | Tính chất của ước lượng OLS và định lý Gauss-Markov | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c2/tinh-chat-cua-uoc-luong-ols/) |
+| **2.1** | Giới thiệu hồi quy tuyến tính và mô hình hồi quy đơn | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c2/gioi-thieu-hoi-quy-tuyen-tinh/) |
+| **2.2** | Mô hình hồi quy tuyến tính bội và diễn giải ceteris paribus | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c2/mo-hinh-hoi-quy-tuyen-tinh-boi/) |
+| **2.3** | Các giả định cổ điển của mô hình hồi quy tuyến tính | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c2/cac-gia-dinh-co-dien/) |
+| **2.4** | Các phương pháp ước lượng tham số | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c2/cac-phuong-phap-uoc-luong/) |
+| **2.5** | Tính chất của ước lượng OLS và định lý Gauss-Markov | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c2/tinh-chat-cua-uoc-luong-ols/) |

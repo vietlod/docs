@@ -294,10 +294,17 @@ const sidebars = {
     }
   ],
   "vietlodSidebar": [
-    "vietlod/overview",
     {
       "type": "category",
-      "label": "Chương 01. Hồi quy tuyến tính cổ điển và biến công cụ",
+      "label": "Bắt đầu",
+      "collapsed": false,
+      "items": [
+        "vietlod/overview"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "1. Hồi quy tuyến tính cổ điển và biến công cụ",
       "link": {
         "type": "doc",
         "id": "vietlod/chapter-01/index"
@@ -305,7 +312,7 @@ const sidebars = {
       "items": [
         {
           "type": "category",
-          "label": "Nhóm 1.1. Bình phương nhỏ nhất",
+          "label": "1.1. Bình phương nhỏ nhất",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-01/group-1-1/index"
@@ -319,7 +326,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 1.2. Hồi quy kháng nhiễu và phân vị",
+          "label": "1.2. Hồi quy kháng nhiễu và phân vị",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-01/group-1-2/index"
@@ -331,7 +338,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 1.3. Biến công cụ cổ điển",
+          "label": "1.3. Biến công cụ cổ điển",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-01/group-1-3/index"
@@ -343,7 +350,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 1.4. Hiệu ứng cố định đa chiều và biến công cụ hiện đại",
+          "label": "1.4. Hiệu ứng cố định đa chiều và biến công cụ hiện đại",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-01/group-1-4/index"
@@ -361,7 +368,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Chương 02. Mô hình chính quy hóa, suy luận chiều cao và giảm chiều",
+      "label": "2. Mô hình chính quy hóa, suy luận chiều cao và giảm chiều",
       "link": {
         "type": "doc",
         "id": "vietlod/chapter-02/index"
@@ -369,7 +376,7 @@ const sidebars = {
       "items": [
         {
           "type": "category",
-          "label": "Nhóm 2.1. Hồi quy chính quy hóa",
+          "label": "2.1. Hồi quy chính quy hóa",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-02/group-2-1/index"
@@ -382,7 +389,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 2.2. Chọn mô hình và suy luận chiều cao",
+          "label": "2.2. Chọn mô hình và suy luận chiều cao",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-02/group-2-2/index"
@@ -396,7 +403,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 2.3. Giảm chiều và nhân tố ẩn",
+          "label": "2.3. Giảm chiều và nhân tố ẩn",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-02/group-2-3/index"
@@ -410,7 +417,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 2.4. Phân cụm chế độ kinh tế",
+          "label": "2.4. Phân cụm chế độ kinh tế",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-02/group-2-4/index"
@@ -423,7 +430,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Chương 03. Mô hình lựa chọn rời rạc và cầu cấu trúc",
+      "label": "3. Mô hình lựa chọn rời rạc và cầu cấu trúc",
       "link": {
         "type": "doc",
         "id": "vietlod/chapter-03/index"
@@ -431,7 +438,7 @@ const sidebars = {
       "items": [
         {
           "type": "category",
-          "label": "Nhóm 3.1. Lựa chọn nhị phân",
+          "label": "3.1. Lựa chọn nhị phân",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-03/group-3-1/index"
@@ -446,7 +453,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 3.2. Lựa chọn đa phân loại",
+          "label": "3.2. Lựa chọn đa phân loại",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-03/group-3-2/index"
@@ -460,7 +467,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 3.3. Lựa chọn có thứ tự",
+          "label": "3.3. Lựa chọn có thứ tự",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-03/group-3-3/index"
@@ -472,7 +479,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 3.4. Mô hình Logit hỗn hợp",
+          "label": "3.4. Mô hình Logit hỗn hợp",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-03/group-3-4/index"
@@ -483,7 +490,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 3.5. Lựa chọn dữ liệu bảng và cầu cấu trúc",
+          "label": "3.5. Lựa chọn dữ liệu bảng và cầu cấu trúc",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-03/group-3-5/index"
@@ -497,7 +504,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Chương 04. Mô hình đếm, lực hấp dẫn thương mại và biến phụ thuộc giới hạn",
+      "label": "4. Mô hình đếm, lực hấp dẫn thương mại và biến phụ thuộc giới hạn",
       "link": {
         "type": "doc",
         "id": "vietlod/chapter-04/index"
@@ -505,7 +512,7 @@ const sidebars = {
       "items": [
         {
           "type": "category",
-          "label": "Nhóm 4.1. Mô hình đếm cơ sở và lực hấp dẫn",
+          "label": "4.1. Mô hình đếm cơ sở và lực hấp dẫn",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-04/group-4-1/index"
@@ -519,7 +526,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 4.2. Mô hình lạm phát số 0 và rào cản",
+          "label": "4.2. Mô hình lạm phát số 0 và rào cản",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-04/group-4-2/index"
@@ -532,7 +539,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 4.3. Mô hình kiểm duyệt và chọn mẫu",
+          "label": "4.3. Mô hình kiểm duyệt và chọn mẫu",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-04/group-4-3/index"
@@ -546,7 +553,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 4.4. Mô hình nghiệm góc và tỷ trọng",
+          "label": "4.4. Mô hình nghiệm góc và tỷ trọng",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-04/group-4-4/index"
@@ -562,7 +569,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Chương 05. Kinh tế lượng dữ liệu bảng tĩnh, động và phụ thuộc chéo",
+      "label": "5. Kinh tế lượng dữ liệu bảng tĩnh, động và phụ thuộc chéo",
       "link": {
         "type": "doc",
         "id": "vietlod/chapter-05/index"
@@ -570,7 +577,7 @@ const sidebars = {
       "items": [
         {
           "type": "category",
-          "label": "Nhóm 5.1. Dữ liệu bảng tĩnh",
+          "label": "5.1. Dữ liệu bảng tĩnh",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-05/group-5-1/index"
@@ -589,7 +596,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 5.2. Dữ liệu bảng động",
+          "label": "5.2. Dữ liệu bảng động",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-05/group-5-2/index"
@@ -602,7 +609,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 5.3. Biến công cụ dữ liệu bảng",
+          "label": "5.3. Biến công cụ dữ liệu bảng",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-05/group-5-3/index"
@@ -615,7 +622,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 5.4. Đồng tích hợp và ARDL dữ liệu bảng",
+          "label": "5.4. Đồng tích hợp và ARDL dữ liệu bảng",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-05/group-5-4/index"
@@ -630,7 +637,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 5.5. Dữ liệu bảng phụ thuộc chéo thế hệ 2",
+          "label": "5.5. Dữ liệu bảng phụ thuộc chéo thế hệ 2",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-05/group-5-5/index"
@@ -645,7 +652,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 5.6. Ngưỡng và phân vị dữ liệu bảng",
+          "label": "5.6. Ngưỡng và phân vị dữ liệu bảng",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-05/group-5-6/index"
@@ -660,7 +667,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Chương 06. Chuỗi thời gian đơn biến, phi tuyến, điểm gãy và bong bóng",
+      "label": "6. Chuỗi thời gian đơn biến, phi tuyến, điểm gãy và bong bóng",
       "link": {
         "type": "doc",
         "id": "vietlod/chapter-06/index"
@@ -668,7 +675,7 @@ const sidebars = {
       "items": [
         {
           "type": "category",
-          "label": "Nhóm 6.1. Kiểm định nghiệm đơn vị và đồng tích hợp",
+          "label": "6.1. Kiểm định nghiệm đơn vị và đồng tích hợp",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-06/group-6-1/index"
@@ -684,7 +691,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 6.2. Dự báo chuỗi thời gian đơn biến",
+          "label": "6.2. Dự báo chuỗi thời gian đơn biến",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-06/group-6-2/index"
@@ -699,7 +706,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 6.3. Mô hình trễ phân phối tự hồi quy (ARDL)",
+          "label": "6.3. Mô hình trễ phân phối tự hồi quy (ARDL)",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-06/group-6-3/index"
@@ -713,7 +720,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 6.4. Mô hình không gian trạng thái",
+          "label": "6.4. Mô hình không gian trạng thái",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-06/group-6-4/index"
@@ -726,7 +733,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 6.5. Chuỗi thời gian phi tuyến, điểm gãy và bong bóng",
+          "label": "6.5. Chuỗi thời gian phi tuyến, điểm gãy và bong bóng",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-06/group-6-5/index"
@@ -743,7 +750,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Chương 07. Chuỗi thời gian đa biến, chiếu cục bộ và mạng lan tỏa",
+      "label": "7. Chuỗi thời gian đa biến, chiếu cục bộ và mạng lan tỏa",
       "link": {
         "type": "doc",
         "id": "vietlod/chapter-07/index"
@@ -751,7 +758,7 @@ const sidebars = {
       "items": [
         {
           "type": "category",
-          "label": "Nhóm 7.1. Hệ mô hình tự hồi quy vectơ (VAR, VECM, SVAR)",
+          "label": "7.1. Hệ mô hình tự hồi quy vectơ (VAR, VECM, SVAR)",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-07/group-7-1/index"
@@ -765,7 +772,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 7.2. Nhân quả Granger và hàm phản ứng xung",
+          "label": "7.2. Nhân quả Granger và hàm phản ứng xung",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-07/group-7-2/index"
@@ -777,7 +784,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 7.3. Phương pháp chiếu cục bộ (LP)",
+          "label": "7.3. Phương pháp chiếu cục bộ (LP)",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-07/group-7-3/index"
@@ -790,7 +797,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 7.4. Mô hình VAR tham số biến thiên và mạng lan tỏa",
+          "label": "7.4. Mô hình VAR tham số biến thiên và mạng lan tỏa",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-07/group-7-4/index"
@@ -803,7 +810,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 7.5. Mô hình tự hồi quy ngưỡng và chuyển chế độ Markov",
+          "label": "7.5. Mô hình tự hồi quy ngưỡng và chuyển chế độ Markov",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-07/group-7-5/index"
@@ -818,7 +825,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Chương 08. Độ biến động tài chính, định giá tài sản và rủi ro hệ thống",
+      "label": "8. Độ biến động tài chính, định giá tài sản và rủi ro hệ thống",
       "link": {
         "type": "doc",
         "id": "vietlod/chapter-08/index"
@@ -826,7 +833,7 @@ const sidebars = {
       "items": [
         {
           "type": "category",
-          "label": "Nhóm 8.1. Họ mô hình phương sai thay đổi có điều kiện (ARCH, GARCH)",
+          "label": "8.1. Họ mô hình phương sai thay đổi có điều kiện (ARCH, GARCH)",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-08/group-8-1/index"
@@ -843,7 +850,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 8.2. Độ biến động thực tế, tần suất hỗn hợp và rủi ro đuôi",
+          "label": "8.2. Độ biến động thực tế, tần suất hỗn hợp và rủi ro đuôi",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-08/group-8-2/index"
@@ -857,7 +864,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 8.3. Độ biến động đa biến",
+          "label": "8.3. Độ biến động đa biến",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-08/group-8-3/index"
@@ -869,7 +876,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 8.4. Định giá tài sản đa nhân tố",
+          "label": "8.4. Định giá tài sản đa nhân tố",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-08/group-8-4/index"
@@ -882,7 +889,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Chương 09. Suy luận nhân quả và đánh giá tác động chính sách",
+      "label": "9. Suy luận nhân quả và đánh giá tác động chính sách",
       "link": {
         "type": "doc",
         "id": "vietlod/chapter-09/index"
@@ -890,7 +897,7 @@ const sidebars = {
       "items": [
         {
           "type": "category",
-          "label": "Nhóm 9.1. Ghép cặp và cân bằng mẫu",
+          "label": "9.1. Ghép cặp và cân bằng mẫu",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-09/group-9-1/index"
@@ -902,7 +909,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 9.2. Sai biệt trong sai biệt cổ điển và nghiên cứu sự kiện",
+          "label": "9.2. Sai biệt trong sai biệt cổ điển và nghiên cứu sự kiện",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-09/group-9-2/index"
@@ -915,7 +922,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 9.3. Hồi quy gián đoạn, gãy khúc, tích tụ và hiệu ứng biên",
+          "label": "9.3. Hồi quy gián đoạn, gãy khúc, tích tụ và hiệu ứng biên",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-09/group-9-3/index"
@@ -931,7 +938,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 9.4. Trọng số xác suất nghịch đảo, đối chứng tổng hợp và học máy nhân quả",
+          "label": "9.4. Trọng số xác suất nghịch đảo, đối chứng tổng hợp và học máy nhân quả",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-09/group-9-4/index"
@@ -947,7 +954,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 9.5. Sai biệt trong sai biệt lệch pha hiện đại",
+          "label": "9.5. Sai biệt trong sai biệt lệch pha hiện đại",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-09/group-9-5/index"
@@ -967,7 +974,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Chương 10. Kinh tế lượng không gian, sai số chuẩn Conley và mạng cặp đôi",
+      "label": "10. Kinh tế lượng không gian, sai số chuẩn Conley và mạng cặp đôi",
       "link": {
         "type": "doc",
         "id": "vietlod/chapter-10/index"
@@ -975,7 +982,7 @@ const sidebars = {
       "items": [
         {
           "type": "category",
-          "label": "Nhóm 10.1. Hồi quy không gian cắt ngang",
+          "label": "10.1. Hồi quy không gian cắt ngang",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-10/group-10-1/index"
@@ -990,7 +997,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 10.2. Dữ liệu bảng không gian",
+          "label": "10.2. Dữ liệu bảng không gian",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-10/group-10-2/index"
@@ -1002,7 +1009,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 10.3. Hồi quy địa lý đa thang đo và sai số chuẩn Conley",
+          "label": "10.3. Hồi quy địa lý đa thang đo và sai số chuẩn Conley",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-10/group-10-3/index"
@@ -1014,7 +1021,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 10.4. Kinh tế lượng mạng lưới",
+          "label": "10.4. Kinh tế lượng mạng lưới",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-10/group-10-4/index"
@@ -1027,7 +1034,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Chương 11. Phân tích sống sót, thời gian sự kiện và rủi ro cạnh tranh",
+      "label": "11. Phân tích sống sót, thời gian sự kiện và rủi ro cạnh tranh",
       "link": {
         "type": "doc",
         "id": "vietlod/chapter-11/index"
@@ -1035,7 +1042,7 @@ const sidebars = {
       "items": [
         {
           "type": "category",
-          "label": "Nhóm 11.1. Phân tích sống sót phi tham số",
+          "label": "11.1. Phân tích sống sót phi tham số",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-11/group-11-1/index"
@@ -1047,7 +1054,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 11.2. Mô hình nguy cơ tỷ lệ bán tham số Cox",
+          "label": "11.2. Mô hình nguy cơ tỷ lệ bán tham số Cox",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-11/group-11-2/index"
@@ -1059,7 +1066,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 11.3. Mô hình thời gian thất bại tăng tốc tham số (AFT)",
+          "label": "11.3. Mô hình thời gian thất bại tăng tốc tham số (AFT)",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-11/group-11-3/index"
@@ -1071,7 +1078,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 11.4. Nguy cơ thời gian rời rạc và rủi ro cạnh tranh",
+          "label": "11.4. Nguy cơ thời gian rời rạc và rủi ro cạnh tranh",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-11/group-11-4/index"
@@ -1085,7 +1092,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Chương 12. Hệ phương trình đồng thời, hệ cầu, kinh tế lượng Bayes và học máy",
+      "label": "12. Hệ phương trình đồng thời, hệ cầu, kinh tế lượng Bayes và học máy",
       "link": {
         "type": "doc",
         "id": "vietlod/chapter-12/index"
@@ -1093,7 +1100,7 @@ const sidebars = {
       "items": [
         {
           "type": "category",
-          "label": "Nhóm 12.1. Hệ phương trình đồng thời và hệ cầu cấu trúc",
+          "label": "12.1. Hệ phương trình đồng thời và hệ cầu cấu trúc",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-12/group-12-1/index"
@@ -1107,7 +1114,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 12.2. Kinh tế lượng Bayes và trung bình hóa mô hình (BMA)",
+          "label": "12.2. Kinh tế lượng Bayes và trung bình hóa mô hình (BMA)",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-12/group-12-2/index"
@@ -1120,7 +1127,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 12.3. Học máy kinh tế lượng",
+          "label": "12.3. Học máy kinh tế lượng",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-12/group-12-3/index"
@@ -1134,7 +1141,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 12.4. Mạng nơ-ron chuỗi thời gian",
+          "label": "12.4. Mạng nơ-ron chuỗi thời gian",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-12/group-12-4/index"
@@ -1147,7 +1154,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Chương 13. Phân phối thu nhập và phân rã bất bình đẳng",
+      "label": "13. Phân phối thu nhập và phân rã bất bình đẳng",
       "link": {
         "type": "doc",
         "id": "vietlod/chapter-13/index"
@@ -1155,7 +1162,7 @@ const sidebars = {
       "items": [
         {
           "type": "category",
-          "label": "Nhóm 13.1. Phân rã khoảng cách và phân phối bất bình đẳng",
+          "label": "13.1. Phân rã khoảng cách và phân phối bất bình đẳng",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-13/group-13-1/index"
@@ -1170,7 +1177,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Chương 14. Năng suất, biên hiệu quả và hàm sản xuất cấu trúc",
+      "label": "14. Năng suất, biên hiệu quả và hàm sản xuất cấu trúc",
       "link": {
         "type": "doc",
         "id": "vietlod/chapter-14/index"
@@ -1178,7 +1185,7 @@ const sidebars = {
       "items": [
         {
           "type": "category",
-          "label": "Nhóm 14.1. Biên hiệu quả và năng suất nhân tố tổng hợp (TFP)",
+          "label": "14.1. Biên hiệu quả và năng suất nhân tố tổng hợp (TFP)",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-14/group-14-1/index"
@@ -1194,7 +1201,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Chương 15. Kinh tế lượng phi tham số và suy luận tái lấy mẫu cụm ít",
+      "label": "15. Kinh tế lượng phi tham số và suy luận tái lấy mẫu cụm ít",
       "link": {
         "type": "doc",
         "id": "vietlod/chapter-15/index"
@@ -1202,7 +1209,7 @@ const sidebars = {
       "items": [
         {
           "type": "category",
-          "label": "Nhóm 15.1. Hồi quy phi tham số và bán tham số",
+          "label": "15.1. Hồi quy phi tham số và bán tham số",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-15/group-15-1/index"
@@ -1214,7 +1221,7 @@ const sidebars = {
         },
         {
           "type": "category",
-          "label": "Nhóm 15.2. Suy luận tái lấy mẫu cụm ít và ngẫu nhiên hóa",
+          "label": "15.2. Suy luận tái lấy mẫu cụm ít và ngẫu nhiên hóa",
           "link": {
             "type": "doc",
             "id": "vietlod/chapter-15/group-15-2/index"
@@ -1253,7 +1260,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Sách 01: Phương pháp phân tích dữ liệu bảng",
+      "label": "Phương pháp phân tích dữ liệu bảng",
       "link": {
         "type": "doc",
         "id": "sachktl/book-01-bsalk21u1/index"
@@ -1276,7 +1283,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Sách 02: Kinh tế lượng: lý thuyết và thực hành",
+      "label": "Kinh tế lượng: Lý thuyết và thực hành",
       "link": {
         "type": "doc",
         "id": "sachktl/book-02-dsask19u1/index"
@@ -1304,7 +1311,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Sách 03: Phương pháp dữ liệu bảng trong tài chính",
+      "label": "Phương pháp dữ liệu bảng trong tài chính",
       "link": {
         "type": "doc",
         "id": "sachktl/book-03-vserk21u1/index"
@@ -1321,7 +1328,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Sách 04: Mô hình dữ liệu chéo và dữ liệu bảng",
+      "label": "Mô hình dữ liệu chéo và dữ liệu bảng",
       "link": {
         "type": "doc",
         "id": "sachktl/book-04-wsook10u1/index"
@@ -1353,7 +1360,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Sách 05: Nhập môn Kinh tế lượng - Cách tiếp cận hiện đại",
+      "label": "Nhập môn kinh tế lượng - Cách tiếp cận hiện đại",
       "link": {
         "type": "doc",
         "id": "sachktl/book-05-wsook19u1/index"
@@ -1382,7 +1389,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Sách 06: Hướng dẫn trực quan về đồ họa với Stata",
+      "label": "Hướng dẫn trực quan về đồ họa với Stata",
       "link": {
         "type": "doc",
         "id": "sachktl/book-06-msitk22u1/index"
@@ -1403,7 +1410,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Sách 07: Diễn giải và trực quan hóa mô hình hồi quy bằng Stata",
+      "label": "Diễn giải và trực quan hóa mô hình hồi quy bằng Stata",
       "link": {
         "type": "doc",
         "id": "sachktl/book-07-msitk21u1/index"
@@ -1432,7 +1439,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Sách 08: Kinh tế lượng trong tài chính",
+      "label": "Kinh tế lượng trong tài chính",
       "link": {
         "type": "doc",
         "id": "sachktl/book-08-bsrok19u1/index"
@@ -1457,7 +1464,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Sách 09: Phân tích chuỗi thời gian với Stata",
+      "label": "Phân tích chuỗi thời gian với Stata",
       "link": {
         "type": "doc",
         "id": "sachktl/book-09-sseak20u1/index"
@@ -1478,7 +1485,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Sách 10: Giới thiệu về kinh tế lượng",
+      "label": "Giới thiệu về kinh tế lượng",
       "link": {
         "type": "doc",
         "id": "sachktl/book-10-sstok20u1/index"
@@ -1507,7 +1514,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Sách 11: Kinh tế lượng đánh giá tác động chính sách",
+      "label": "Kinh tế lượng đánh giá tác động chính sách",
       "link": {
         "type": "doc",
         "id": "sachktl/book-11-cserk22u1/index"
@@ -1523,7 +1530,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Sách 12: Kinh tế phát triển thực nghiệm",
+      "label": "Kinh tế phát triển thực nghiệm",
       "link": {
         "type": "doc",
         "id": "sachktl/book-12-fsrak15u1/index"
@@ -1563,7 +1570,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Sách 13: Thống kê ứng dụng với Stata",
+      "label": "Thống kê ứng dụng với Stata",
       "link": {
         "type": "doc",
         "id": "sachktl/book-13-msehk22u1/index"
@@ -1586,7 +1593,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Sách 14: Lý thuyết và mô hình IRT với Stata",
+      "label": "Lý thuyết và mô hình IRT với Stata",
       "link": {
         "type": "doc",
         "id": "sachktl/book-14-tsenk18u1/index"
@@ -1609,7 +1616,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Sách 15: Kinh tế lượng vi mô sử dụng Stata",
+      "label": "Kinh tế lượng vi mô sử dụng Stata",
       "link": {
         "type": "doc",
         "id": "sachktl/book-15-csamk22u1/index"
@@ -1652,7 +1659,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Sách 16: Phân tích kinh tế lượng",
+      "label": "Phân tích kinh tế lượng",
       "link": {
         "type": "doc",
         "id": "sachktl/book-16-gsrek19u1/index"
@@ -1683,7 +1690,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Sách 17: Lý thuyết Kinh tế lượng",
+      "label": "Lý thuyết kinh tế lượng",
       "link": {
         "type": "doc",
         "id": "sachktl/book-17-hsank22u1/index"
@@ -1722,7 +1729,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Sách 18: Phân tích chuỗi thời gian và dữ liệu bảng",
+      "label": "Phân tích chuỗi thời gian và dữ liệu bảng",
       "link": {
         "type": "doc",
         "id": "sachktl/book-18-psesk15u1/index"
@@ -1765,7 +1772,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Sách 19: Mô hình đa bậc với Stata",
+      "label": "Mô hình đa bậc với Stata",
       "link": {
         "type": "doc",
         "id": "sachktl/book-19-sskrk22u1/index"
@@ -1792,7 +1799,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Sách 20: Phân tích sức mạnh thống kê",
+      "label": "Phân tích sức mạnh thống kê",
       "link": {
         "type": "doc",
         "id": "sachktl/book-20-csohk88u1/index"
@@ -1814,7 +1821,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Sách 21: Giới thiệu về phân tích tổng hợp",
+      "label": "Giới thiệu về phân tích tổng hợp",
       "link": {
         "type": "doc",
         "id": "sachktl/book-21-bsrok21u1/index"
@@ -1835,7 +1842,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Sách 22: Phân tích meta với Stata",
+      "label": "Phân tích meta với Stata",
       "link": {
         "type": "doc",
         "id": "sachktl/book-22-cshek21u1/index"
@@ -1860,7 +1867,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Sách 23: Tổng quan tài liệu: cách tiếp cận mới",
+      "label": "Tổng quan tài liệu: Cách tiếp cận mới",
       "link": {
         "type": "doc",
         "id": "sachktl/book-23-esrmk21u1/index"
@@ -1879,7 +1886,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Sách 24: Phân tích dữ liệu với SPSS",
+      "label": "Phân tích dữ liệu với SPSS",
       "link": {
         "type": "doc",
         "id": "sachktl/book-24-spss/index"
@@ -1894,7 +1901,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Sách 25: Kinh tế lượng tài chính ứng dụng với Stata",
+      "label": "Kinh tế lượng tài chính ứng dụng với Stata",
       "link": {
         "type": "doc",
         "id": "sachktl/book-25-bsofk16u1/index"
@@ -1910,7 +1917,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Sách 26: Phân tích Chuỗi thời gian Kinh tế và Tài chính",
+      "label": "Phân tích chuỗi thời gian kinh tế và tài chính",
       "link": {
         "type": "doc",
         "id": "sachktl/book-26-csipk20u1/index"
@@ -1934,7 +1941,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Sách 27: Kinh tế lượng tài chính: Mô hình và Phương pháp",
+      "label": "Kinh tế lượng tài chính: Mô hình và phương pháp",
       "link": {
         "type": "doc",
         "id": "sachktl/book-27-lsink20u1/index"
@@ -1960,7 +1967,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Sách 28: Cẩm nang kinh tế lượng chuỗi thời gian tài chính",
+      "label": "Cẩm nang kinh tế lượng chuỗi thời gian tài chính",
       "link": {
         "type": "doc",
         "id": "sachktl/book-28-asndk09u1/index"
@@ -2014,7 +2021,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Sách 29: Phân tích SEM với PLS sử dụng Stata",
+      "label": "Phân tích SEM với PLS sử dụng Stata",
       "link": {
         "type": "doc",
         "id": "sachktl/book-29-msehk21u1/index"
@@ -2033,7 +2040,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Sách 30: Phân tích dữ liệu đa biến ứng dụng trong nghiên cứu",
+      "label": "Phân tích dữ liệu đa biến ứng dụng trong nghiên cứu",
       "link": {
         "type": "doc",
         "id": "sachktl/book-30-hsaik19u1/index"

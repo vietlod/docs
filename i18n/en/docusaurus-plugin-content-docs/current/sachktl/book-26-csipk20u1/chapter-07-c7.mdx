@@ -1,19 +1,19 @@
 ---
 id: chapter-07-c7
-title: "Chapter 07: 7. Tự tương quan trong mô hình hồi quy — Time Series Econometrics for Macroeconomics and Finance"
-sidebar_label: "Chapter 07: 7. Tự tương quan trong mô hình hồi quy"
+title: "7. Tự tương quan trong mô hình hồi quy"
+sidebar_label: "7. Tự tương quan trong mô hình hồi quy"
 sidebar_position: 8
-description: "Step-by-step practical how-to guide for Chapter 07: 7. Tự tương quan trong mô hình hồi quy from Time Series Econometrics for Macroeconomics and Finance on SachKTL with Stata, R, and Python workflows integrated with EcoData, Finco, and EcoLab."
+description: "Comprehensive practical how-to guide for 7. Tự tương quan trong mô hình hồi quy from Time Series Econometrics for Macroeconomics and Finance on SachKTL featuring structural equations, 6 lesson breakdowns, and Stata, R, and Python scripts."
 ---
 
-# Chapter 07: 7. Tự tương quan trong mô hình hồi quy — Time Series Econometrics for Macroeconomics and Finance
+# 7. Tự tương quan trong mô hình hồi quy
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-This practical how-to guide synthesizes the methodology and empirical implementation workflow of **Chapter 07: 7. Tự tương quan trong mô hình hồi quy** from [**Book 26: Time Series Econometrics for Macroeconomics and Finance**](/en/sachktl/book-26-csipk20u1/), with direct backlinks to the authoritative source material at [https://sachktl.tnsai.vn/vi/csipk20u1/c7/](https://sachktl.tnsai.vn/vi/csipk20u1/c7/).
+This practical how-to guide presents the theoretical foundations, structural mathematical equations, detailed breakdown of **6 specialized lessons**, and multi-platform replication workflows for **7. Tự tương quan trong mô hình hồi quy** from the textbook [**Time Series Econometrics for Macroeconomics and Finance**](/en/sachktl/book-26-csipk20u1/), with direct cross-references to the authoritative source material at [https://sachktl.tnsai.vn/vi/csipk20u1/c7/](https://sachktl.tnsai.vn/vi/csipk20u1/c7/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chapter 07: 7. Tự tương quan trong mô hình hồi quy">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="7. Tự tương quan trong mô hình hồi quy">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ This practical how-to guide synthesizes the methodology and empirical implementa
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BOOK 26 · CHAPTER 07</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chapter 07: 7. Tự tương quan trong mô hình hồi quy</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Part of Textbook: Time Series Econometrics for Macroeconomics and Finance · 6 Detaile</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Time Series Econometrics for Macroec</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">7. Tự tương quan trong mô hình hồi quy</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Time Series Econometrics, Cointegration, and Financial Volatility · 6 Detailed Lesson</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,138 +41,272 @@ This practical how-to guide synthesizes the methodology and empirical implementa
   </svg>
 </div>
 
-## 1. Methodological Meaning and Scope of Application
+## 1. Methodological Foundations, Mathematical Specification, and Identification
 
-Giới thiệu các phương pháp tự tương quan trong hồi quy Autocorrelation Methods in Regression Models Chào mừng các bạn sinh viên đã đến với chuỗi bài học mới về một chủ đề cực kỳ quan trọng trong kinh tế lượng ứng dụng: các phương pháp xử lý hiện tượng tự tương quan trong mô hình hồi quy. Trong thực tế, khi làm việc với dữ liệu chuỗi thời gian như GDP hàng quý, giá cổ phiếu hàng ngày, hay tỷ lệ lạm phát hàng tháng, chúng ta thường xuyên phải đối mặt với một vấn đề nan giải: các sai số của mô hình không độc lập với nhau. Điều này vi phạm một trong những giả định cốt lõi của phương pháp bình
+Giới thiệu các phương pháp tự tương quan trong hồi quy Autocorrelation Methods in Regression Models Chào mừng các bạn sinh viên đã đến với chuỗi bài học mới về một chủ đề cực kỳ quan trọng trong kinh tế lượng ứng dụng: các phương pháp xử lý hiện tượng tự tương quan trong mô hình hồi quy. Trong thực tế, khi làm việc với dữ liệu chuỗi thời gian như GDP hàng quý, giá cổ phiếu hàng ngày, hay tỷ lệ lạm phát hàng tháng, chúng ta thường xuyên phải đối mặt với một vấn đề nan giải: các sai số của mô hình không độc lập với nhau.
 
-- **Core Academic Topics**: CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO, PHỤ LỤC: DỮ LIỆU MÔ PHỎNG CHO SERIES.
-- **Supported Analytical Environments**: `Stata 18 MP`.
-- **Recommended Empirical Data Sources**: Vietnamese macroeconomic, corporate, and household survey datasets on [EcoData](https://ecodata.io.vn), capital and commodity market series on [Finco](https://www.finco.vn), model cross-references on [VietLOD](https://vietlod.tnsai.vn), and automated estimation on [EcoLab](https://ecolab.io.vn).
+### 1.1. Structural Equations and Representative Estimator
+
+$$
+\Phi(L)(1 - L)^d Y_t = \mu + \Theta(L)\varepsilon_t, \quad \varepsilon_t \mid \mathcal{F}_{t-1} \sim \mathcal{N}(0, \sigma_t^2) \tag*{[1]}
+$$
+
+$$
+\sigma_t^2 = \omega + \sum_{i=1}^p \alpha_i \varepsilon_{t-i}^2 + \sum_{j=1}^q \beta_j \sigma_{t-j}^2, \quad \omega > 0, \; \alpha_i, \beta_j \ge 0 \tag*{[2]}
+$$
+
+### 1.2. Core Identification Assumptions and Applicability Conditions
+
+1. Time series processes must satisfy covariance stationarity or be differenced to their appropriate order of integration $I(d)$ prior to estimation.
+2. Roots of the autoregressive $\Phi(L)$ and moving-average $\Theta(L)$ lag polynomials must lie strictly outside the complex unit circle.
+3. In conditional volatility GARCH specifications, the persistence condition $\sum \alpha_i + \sum \beta_j < 1$ ensures finite unconditional variance.
 
 <FeatureCards
   features={[
     {
-      title: "Original Chapter on SachKTL",
-      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for Chapter 07 on SachKTL.",
+      title: "Authoritative Chapter on SachKTL",
+      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for this chapter on SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/csipk20u1/c7/"
     },
     {
       title: "Practice Datasets on EcoData & Finco",
-      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and survey data for hands-on replication.",
+      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and household survey data for hands-on replication.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
       title: "Automated Estimation on EcoLab",
-      description: "Execute econometric specifications, run diagnostic battery tests, and export publication-grade tables automatically.",
+      description: "Execute econometric specifications, run diagnostic battery tests, and export APA 7th / AER publication-grade tables automatically.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Step-by-Step Practical Implementation Across Chapter Lessons
+<FeatureNotAvailable
+  feature="Unconditional Baseline Estimation Under Violated Identification Assumptions"
+  reason="Regressing nonstationary levels without unit-root and Johansen cointegration testing induces spurious regression with inflated $t$-statistics and $R^2$."
+  alternative="Run the complete diagnostic battery in Step 4 and transition to the appropriate corrective estimator on VietLOD or EcoLab."
+/>
+
+## 2. Lesson-by-Lesson Academic Breakdown
+
+### 2.1. Nền tảng mô hình hồi quy động
+
+Nền tảng mô hình hồi quy động Foundations of dynamic regression models Giới thiệu Chào mừng các bạn quay trở lại với bài học đầu tiên của chúng ta! Trong khóa học kinh tế lượng nhập môn, các bạn đã làm quen với mô hình hồi quy tuyến tính cổ điển, một công cụ vô cùng mạnh mẽ để phân tích mối quan hệ giữa các biến. Tuy nhiên, thế giới kinh tế và tài chính hiếm khi nào "tĩnh". Các quyết định kinh tế hôm nay thường chịu ảnh hưởng bởi những gì đã xảy ra trong quá khứ, và tác động của một chính sách thường cần thời gian để lan tỏa.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Giới thiệu**
+- **Mô hình hồi quy động là gì?**
+- **1. Định nghĩa chính thức**
+- **2. Tại sao phần dư lại có cấu trúc động?**
+- **3. Tại sao chúng ta cần các biến trễ?**
+- **Hồi quy tuyến tính với phần dư tự tương quan**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csipk20u1/c7/nen-tang-mo-hinh-hoi-quy-dong/)
+
+### 2.2. Chẩn đoán tự tương quan trong Stata
+
+Chẩn đoán tự tương quan trong stata Diagnosing autocorrelation in stata Giới thiệu Chào mừng các bạn đã quay trở lại! Trong bài học trước, chúng ta đã xây dựng một nền tảng lý thuyết vững chắc về mô hình hồi quy động và hiểu được bản chất của hiện tượng tự tương quan trong phần dư. Chúng ta đã biết rằng, khi tự tương quan xuất hiện, các kết quả từ mô hình OLS thông thường có thể không còn đáng tin cậy.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Giới thiệu**
+- **Nền tảng lý thuyết của các kiểm định**
+- **1. Kiểm định Durbin-Watson**
+- **2. Kiểm định Breusch-Godfrey**
+- **Phương pháp thực hiện trong Stata**
+- **Ví dụ minh họa: Chẩn đoán mô hình lợi suất trái phiếu**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csipk20u1/c7/chan-doan-tu-tuong-quan-trong-stata/)
+
+### 2.3. Xử lý tự tương quan và mô hình trễ phân bố
+
+Khắc phục tự tương quan và mô hình trễ phân bố Correcting autocorrelation and distributed lag models Giới thiệu Chào mừng các bạn đến với bài học thứ ba! Ở bài học trước, chúng ta đã thành công trong vai trò của một "nhà chẩn đoán" khi sử dụng các kiểm định Durbin-Watson và Breusch-Godfrey để xác nhận rằng mô hình lợi suất trái phiếu của chúng ta đang gặp vấn đề nghiêm trọng về tự tương quan. Việc phát hiện ra vấn đề là một bước quan trọng, nhưng câu hỏi lớn hơn là: "Bây giờ chúng ta phải làm gì?".
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Giới thiệu**
+- **Các phương pháp khắc phục tự tương quan**
+- **1. Phương pháp Cochrane-Orcutt**
+- **2. Ước lượng Newey-West**
+- **Giới thiệu mô hình trễ phân bố**
+- **Thực hành với Stata: Từ khắc phục đến mô hình hóa**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csipk20u1/c7/xu-ly-tu-tuong-quan-va-mo-hinh-tre-phan-bo/)
+
+### 2.4. Mô hình tự hồi quy trễ phân bố
+
+Mô hình tự hồi quy trễ phân bố Autoregressive distributed lag models Giới thiệu Chào mừng các bạn đến với bài học thứ tư và cũng là bài học lý thuyết cuối cùng trong chuỗi bài của chúng ta! Ở bài trước, chúng ta đã làm quen với mô hình trễ phân bố, một công cụ hữu ích để nắm bắt tác động kéo dài của một biến. Tuy nhiên, qua ví dụ về GDP và cung tiền, chúng ta thấy rằng ngay cả một mô hình DL cũng có thể chưa đủ để loại bỏ hoàn toàn hiện tượng tự tương quan.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Giới thiệu**
+- **Nền tảng lý thuyết của mô hình ADL**
+- **1. Định nghĩa chính thức**
+- **ADL: Một khuôn khổ hợp nhất**
+- **Các ứng dụng quan trọng của mô hình ADL**
+- **1. Phân tích can thiệp**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csipk20u1/c7/mo-hinh-tu-hoi-quy-tre-phan-bo-adl/)
+
+### 2.5. Thực hành và tổng kết toàn diện
+
+Thực hành và tổng kết toàn diện Comprehensive practice and summary 1. Tóm tắt tổng hợp kiến thức Thật tuyệt vời khi các bạn đã đi đến chặng đường cuối cùng của chuỗi bài học! Chúng ta đã cùng nhau trải qua một hành trình đầy thử thách nhưng cũng vô cùng bổ ích. Hãy cùng nhìn lại những kiến thức cốt lõi mà chúng ta đã trang bị: Ở Bài 1, chúng ta đã xây dựng nền tảng về sự cần thiết của các mô hình động và hiểu rõ bản chất của tự tương quan.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **1. Tóm tắt tổng hợp kiến thức**
+- **2. Chuẩn bị dữ liệu**
+- **3. Hướng dẫn thực hành từng bước với Stata**
+- **Bài tập 7.1: Phân tích mô hình lợi suất trái phiếu từ năm 1991**
+- **Bài tập 7.2: Phân tích mô hình GDP-M1 từ năm 1980**
+- **4. Tổng kết cuối khóa**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csipk20u1/c7/thuc-hanh-va-tong-ket-toan-dien/)
+
+### 2.6. Tổng hợp các phương pháp tự tương quan trong hồi quy
+
+Tổng hợp các phương pháp tự tương quan trong hồi quy A synthesis of autocorrelation methods in regression 1. Tại sao "động học" là chìa khóa? Chúng ta đã hoàn thành một hành trình khám phá sâu sắc về các phương pháp tự tương quan trong mô hình hồi quy. Nhưng câu hỏi quan trọng nhất cần trả lời là: Tại sao chủ đề này lại chiếm một vị trí trung tâm trong kinh tế lượng hiện đại? Câu trả lời nằm ở một sự thật cơ bản: thế giới kinh tế không tĩnh tại. Các biến số kinh tế và tài chính luôn vận động, tương tác và ảnh hưởng lẫn nhau qua thời gian.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **1. Tại sao "động học" là chìa khóa?**
+- **2. Từ triệu chứng đến cấu trúc**
+- **3. Hệ thống phương pháp: Một quy trình ra quyết định**
+- **4. Phân tích toàn diện mô hình AAA-TBILL**
+- **5. Tổng kết và hướng phát triển**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csipk20u1/c7/tong-hop-cac-phuong-phap-tu-tuong-quan-trong-hoi-quy/)
+
+## 3. Step-by-Step Empirical Implementation Workflow
 
 <Steps>
   <div className="step-item">
-    <h3>Step 1: Nền tảng mô hình hồi quy động</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Nền tảng mô hình hồi quy động. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csipk20u1/c7/nen-tang-mo-hinh-hoi-quy-dong/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csipk20u1/c7/nen-tang-mo-hinh-hoi-quy-dong/</a>.</p>
+    <h3>1. Formulate the Research Question and Prepare Data on EcoData & Finco</h3>
+    <p>Define the dependent variable, core explanatory variables, and control covariates aligned with <strong>7. Tự tương quan trong mô hình hồi quy</strong>. Extract standardized Vietnamese empirical series from <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> or <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, and screen for missing observations and extreme outliers.</p>
   </div>
   <div className="step-item">
-    <h3>Step 2: Chẩn đoán tự tương quan trong Stata</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Chẩn đoán tự tương quan trong Stata. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csipk20u1/c7/chan-doan-tu-tuong-quan-trong-stata/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csipk20u1/c7/chan-doan-tu-tuong-quan-trong-stata/</a>.</p>
+    <h3>2. Conduct Descriptive Profiling, Correlation Analysis, and Pre-Estimation Checks</h3>
+    <p>Examine empirical distributions, construct summary statistics tables, and evaluate collinearity using pairwise correlation matrices and Variance Inflation Factors (VIF).</p>
   </div>
   <div className="step-item">
-    <h3>Step 3: Xử lý tự tương quan và mô hình trễ phân bố</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Xử lý tự tương quan và mô hình trễ phân bố. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csipk20u1/c7/xu-ly-tu-tuong-quan-va-mo-hinh-tre-phan-bo/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csipk20u1/c7/xu-ly-tu-tuong-quan-va-mo-hinh-tre-phan-bo/</a>.</p>
+    <h3>3. Estimate the Model Across Stata 18 MP, R 4.x, and Python 3.11+</h3>
+    <p>Execute the parameter estimation scripts matching the structural equations in Section 1.1 while cross-checking theoretical derivations at <a href="https://sachktl.tnsai.vn/vi/csipk20u1/c7/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Step 4: Mô hình tự hồi quy trễ phân bố</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Mô hình tự hồi quy trễ phân bố. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csipk20u1/c7/mo-hinh-tu-hoi-quy-tre-phan-bo-adl/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csipk20u1/c7/mo-hinh-tu-hoi-quy-tre-phan-bo-adl/</a>.</p>
+    <h3>4. Perform Post-Estimation Diagnostics and Robust Variance Correction</h3>
+    <p>Test for heteroskedasticity, serial correlation, Ramsey RESET functional form misspecification, and regressor endogeneity. Apply White HC1 or cluster-robust standard errors for valid inference.</p>
   </div>
   <div className="step-item">
-    <h3>Step 5: Thực hành và tổng kết toàn diện</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Thực hành và tổng kết toàn diện. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csipk20u1/c7/thuc-hanh-va-tong-ket-toan-dien/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csipk20u1/c7/thuc-hanh-va-tong-ket-toan-dien/</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Step 6: Tổng hợp các phương pháp tự tương quan trong hồi quy</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Tổng hợp các phương pháp tự tương quan trong hồi quy. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/csipk20u1/c7/tong-hop-cac-phuong-phap-tu-tuong-quan-trong-hoi-quy/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/csipk20u1/c7/tong-hop-cac-phuong-phap-tu-tuong-quan-trong-hoi-quy/</a>.</p>
+    <h3>5. Format Journal-Grade Tables and Cross-Verify on EcoLab</h3>
+    <p>Report point estimates, standard errors in parentheses, and statistical significance stars following APA 7th / AER Booktabs standards, or automate the entire reporting pipeline on <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> and <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Multi-Platform Implementation Examples in Stata, R, and Python
+## 4. Multi-Platform Implementation Scripts in Stata, R, and Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Initialize environment and load practice dataset from EcoData / SachKTL
+* Thiết lập chuỗi thời gian, kiểm định nghiệm đơn vị và ước lượng ARIMA / GARCH
 version 18.0
 clear all
 set more off
+import delimited "sachktl_timeseries_finco.csv", clear encoding("utf-8")
 
-* Import standardized empirical dataset
-import delimited "sachktl_csipk20u1_c07_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+tsset time_id
+dfuller y, lags(4) trend regress
+pperron y, lags(4) trend
 
-* Estimate baseline specification and run diagnostic checks with robust standard errors
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 1. Ước lượng mô hình ARIMA và kiểm định nhiễu trắng phần dư
+arima y, arima(1,1,1) vce(robust)
+predict resid_arima, resid
+wntestq resid_arima, lags(12)
+
+* 2. Ước lượng mô hình phương sai có điều kiện thay đổi ARCH/GARCH(1,1)
+arch d.y x1 x2, arch(1) garch(1) vce(robust)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Load econometric packages and practice dataset from EcoData / SachKTL
-library(tidyverse)
-library(lmtest)
-library(sandwich)
+# Nạp thư viện chuỗi thời gian và ước lượng ARIMA / GARCH(1,1)
+library(tseries)
+library(forecast)
+library(rugarch)
 
-df <- read.csv("sachktl_csipk20u1_c07_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_timeseries_finco.csv")
+y_ts <- ts(df$y, frequency = 12)
 
-# Estimate model and compute heteroskedasticity-robust HC1 standard errors
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA tối ưu theo AICc
+adf.test(y_ts)
+fit_arima <- auto.arima(y_ts, seasonal = FALSE, ic = "aicc")
+summary(fit_arima)
+checkresiduals(fit_arima)
+
+# 2. Ước lượng mô hình GARCH(1,1) cho chuỗi lợi suất
+spec <- ugarchspec(variance.model = list(model = "sGARCH", garchOrder = c(1, 1)),
+                   mean.model = list(armaOrder = c(1, 0), include.mean = TRUE))
+fit_garch <- ugarchfit(spec = spec, data = diff(y_ts))
+show(fit_garch)
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Load econometric libraries and practice dataset from EcoData / SachKTL
+# Nạp thư viện statsmodels và arch để phân tích chuỗi thời gian & biến động
 import pandas as pd
-import statsmodels.formula.api as smf
+from statsmodels.tsa.stattools import adfuller
+from statsmodels.tsa.arima.model import ARIMA
+from arch import arch_model
 
-df = pd.read_csv("sachktl_csipk20u1_c07_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_timeseries_finco.csv")
+y = df["y"].dropna()
 
-# Fit specification with HC1 robust standard errors
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA(1,1,1)
+adf_stat, p_val, *_ = adfuller(y, autolag="AIC")
+print(f"ADF Statistic: {adf_stat:.4f}, p-value: {p_val:.4f}")
+arima_res = ARIMA(y, order=(1, 1, 1)).fit()
+print(arima_res.summary())
+
+# 2. Ước lượng mô hình GARCH(1,1) với phân phối Student-t
+ret = y.diff().dropna() * 100
+garch_res = arch_model(ret, vol="Garch", p=1, q=1, dist="t").fit(disp="off")
+print(garch_res.summary())
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video Tutorial Walkthrough
+## 5. Post-Estimation Diagnostic and Interpretation Guide
+
+| Diagnostic Criterion | Null Hypothesis $H_0$ | Benchmark Threshold | Corrective Action When $H_0$ Is Rejected |
+| :--- | :--- | :--- | :--- |
+| **Heteroskedasticity** | Constant error variance $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ rejects $H_0$ | Apply `vce(robust)`, `vcovHC(HC1)`, or FGLS/WLS weighted estimation |
+| **Multicollinearity** | No severe linear dependence among regressors | $\text{VIF} < 10$ acceptable | Drop redundant covariates, center interactions, or apply LASSO/Ridge regularization |
+| **Ramsey RESET Functional Form** | No omitted nonlinear or higher-order terms | $p\text{-value} > 0.05$ retains $H_0$ | Add interaction terms, quadratic polynomials, or log-transform skewed positive variables |
+| **Regressor Exogeneity** | Orthogonality $\text{Cov}(X, \varepsilon)=0$ | Durbin-Wu-Hausman $p > 0.05$ | Transition to IV/2SLS, LIML, or GMM estimation with validated instruments |
+
+## 6. Video Tutorial Walkthrough
 
 <VideoTutorial
-  title="Practical Walkthrough for Chapter 07: 7. Tự tương quan trong mô hình hồi quy on SachKTL"
+  title="Practical Walkthrough for 7. Tự tương quan trong mô hình hồi quy on SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Complete Lesson Directory and Backlinks to Original SachKTL Articles
+## 7. Complete Lesson Directory and Backlinks to Original SachKTL Articles
 
-| No. | Lesson Title in Chapter 07 | Supported Software | Original Source Link on SachKTL |
+| Lesson Code | Lesson Title | Supported Software | Original Source Link on SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Lesson 01** | Nền tảng mô hình hồi quy động | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csipk20u1/c7/nen-tang-mo-hinh-hoi-quy-dong/) |
-| **Lesson 02** | Chẩn đoán tự tương quan trong Stata | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csipk20u1/c7/chan-doan-tu-tuong-quan-trong-stata/) |
-| **Lesson 03** | Xử lý tự tương quan và mô hình trễ phân bố | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csipk20u1/c7/xu-ly-tu-tuong-quan-va-mo-hinh-tre-phan-bo/) |
-| **Lesson 04** | Mô hình tự hồi quy trễ phân bố | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csipk20u1/c7/mo-hinh-tu-hoi-quy-tre-phan-bo-adl/) |
-| **Lesson 05** | Thực hành và tổng kết toàn diện | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csipk20u1/c7/thuc-hanh-va-tong-ket-toan-dien/) |
-| **Lesson 06** | Tổng hợp các phương pháp tự tương quan trong hồi quy | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csipk20u1/c7/tong-hop-cac-phuong-phap-tu-tuong-quan-trong-hoi-quy/) |
+| **7.1** | Nền tảng mô hình hồi quy động | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csipk20u1/c7/nen-tang-mo-hinh-hoi-quy-dong/) |
+| **7.2** | Chẩn đoán tự tương quan trong Stata | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csipk20u1/c7/chan-doan-tu-tuong-quan-trong-stata/) |
+| **7.3** | Xử lý tự tương quan và mô hình trễ phân bố | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csipk20u1/c7/xu-ly-tu-tuong-quan-va-mo-hinh-tre-phan-bo/) |
+| **7.4** | Mô hình tự hồi quy trễ phân bố | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csipk20u1/c7/mo-hinh-tu-hoi-quy-tre-phan-bo-adl/) |
+| **7.5** | Thực hành và tổng kết toàn diện | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csipk20u1/c7/thuc-hanh-va-tong-ket-toan-dien/) |
+| **7.6** | Tổng hợp các phương pháp tự tương quan trong hồi quy | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/csipk20u1/c7/tong-hop-cac-phuong-phap-tu-tuong-quan-trong-hoi-quy/) |

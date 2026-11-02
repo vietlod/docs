@@ -1,19 +1,19 @@
 ---
 id: chapter-06-c6
-title: "Chương 06: 6. phân tích hiệu ứng điều tiết với PLS-SEM"
-sidebar_label: "Chương 06: 6. Phân tích hiệu ứng điều tiết với PLS-SE"
+title: "6. Phân tích hiệu ứng điều tiết với PLS-SEM"
+sidebar_label: "6. Phân tích hiệu ứng điều tiết với PLS-SEM"
 sidebar_position: 7
-description: "Hướng dẫn thực hành How-To Chương 06: 6. phân tích hiệu ứng điều tiết với PLS-SEM thuộc bộ sách Phân tích SEM với PLS sử dụng Stata trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 6. Phân tích hiệu ứng điều tiết với PLS-SEM thuộc giáo trình Phân tích SEM với PLS sử dụng Stata trên SachKTL kèm công thức toán học, phân tích 4 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 06: 6. phân tích hiệu ứng điều tiết với PLS-SEM
+# 6. Phân tích hiệu ứng điều tiết với PLS-SEM
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 06: 6. phân tích hiệu ứng điều tiết với PLS-SEM** thuộc [**Bộ sách 29: phân tích SEM với PLS sử dụng Stata**](/sachktl/book-29-msehk21u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/msehk21u1/c6/](https://sachktl.tnsai.vn/vi/msehk21u1/c6/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **4 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **6. Phân tích hiệu ứng điều tiết với PLS-SEM** thuộc bộ giáo trình [**Phân tích SEM với PLS sử dụng Stata**](/sachktl/book-29-msehk21u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/msehk21u1/c6/](https://sachktl.tnsai.vn/vi/msehk21u1/c6/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 06: 6. phân tích hiệu ứng điều tiết với PLS-SEM">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="6. Phân tích hiệu ứng điều tiết với PLS-SEM">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 29 · CHƯƠNG 06</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 06: 6. phân tích hiệu ứng điều tiết với PLS-SEM</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Phân tích SEM với PLS sử dụng Stata · 4 bài học chuyên sâu</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Phân tích SEM với PLS sử dụng Stata</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">6. Phân tích hiệu ứng điều tiết với PLS-SEM</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng ứng dụng, mô hình hóa thống kê và kiểm định giả thuyết · 4 bài học chuy</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,94 +41,189 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Tổng quan về hiệu ứng điều tiết và tương tác trong mô hình PLS-SEM Moderating and Interaction Effects Using PLS-SEM Giới thiệu về tầm quan trọng của hiệu ứng điều tiết Chào các bạn sinh viên, chào mừng đến với chuỗi bài học chuyên sâu về một trong những kỹ thuật quan trọng và thú vị nhất trong mô hình phương trình cấu trúc PLS-SEM: phân tích hiệu ứng điều tiết và tương tác. Trong nghiên cứu kinh tế và xã hội, chúng ta thường không chỉ muốn biết liệu một biến X có tác động đến Y hay không, mà còn muốn khám phá một câu hỏi sâu sắc hơn: "Mối quan hệ này có thay đổi dưới những điều kiện khác nhau
+Tổng quan về hiệu ứng điều tiết và tương tác trong mô hình PLS-SEM Moderating and Interaction Effects Using PLS-SEM Giới thiệu về tầm quan trọng của hiệu ứng điều tiết Chào các bạn sinh viên, chào mừng đến với chuỗi bài học chuyên sâu về một trong những kỹ thuật quan trọng và thú vị nhất trong mô hình phương trình cấu trúc PLS-SEM: phân tích hiệu ứng điều tiết và tương tác.
 
-- **Chủ đề học thuật trọng tâm**: Giới thiệu về tầm quan trọng của hiệu ứng điều tiết, Cấu trúc chuỗi bài học, Kiến thức tiên quyết cần chuẩn bị, Những gì bạn cần biết trước khi bắt đầu:, Mục tiêu học tập của chuỗi bài viết.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+Y_i = \beta_0 + \sum_{k=1}^K \beta_k X_{ik} + \varepsilon_i, \quad \mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0 \tag*{[1]}
+$$
+
+$$
+\widehat{\text{Var}}_{\text{HC1}}(\hat{\boldsymbol{\beta}}) = \frac{N}{N - K - 1}\left(\mathbf{X}'\mathbf{X}\right)^{-1}\left(\sum_{i=1}^N \hat{\varepsilon}_i^2 \mathbf{x}_i \mathbf{x}_i'\right)\left(\mathbf{X}'\mathbf{X}\right)^{-1} \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Dạng hàm tuyến tính theo tham số được xác định đúng, không bỏ sót biến giải thích quan trọng có tương quan với các biến trong mô hình.
+2. Kỳ vọng có điều kiện của sai số bằng không $\mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0$, đảm bảo tính không chệch và vững tiệm cận của ước lượng.
+3. Ma trận thiết kế $\mathbf{X}$ có hạng cột đầy đủ, không xảy ra đa cộng tuyến hoàn hảo và sử dụng sai số chuẩn vững HC1/Cluster khi có phương sai thay đổi.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 06 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/msehk21u1/c6/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Khi tồn tại biến giải thích nội sinh do đồng thời hai chiều, sai số đo lường hoặc bỏ sót biến không quan sát được, ước lượng OLS bị chệch và không vững; cần chuyển sang ước lượng biến công cụ IV/2SLS hoặc GMM."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Phân tích tương tác với phương pháp product-indicator
+
+Phân tích tương tác với phương pháp Product-Indicator trong PLS-SEM Interaction analysis with the product-indicator approach in PLS-SEM Giới thiệu về phương pháp Product-Indicator Chào các bạn, trong bài học đầu tiên này, chúng ta sẽ cùng nhau khám phá phương pháp Product-Indicator, một cách tiếp cận rất phổ biến và trực quan để kiểm định hiệu ứng điều tiết trong mô hình PLS-SEM.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu về phương pháp product-indicator**
+- **Nền tảng lý thuyết của phương pháp product-indicator**
+- **Từ hồi quy tuyến tính đến tương tác biến ẩn**
+- **Mô hình và diễn giải hệ số**
+- **Quy trình phân tích hiệu ứng điều tiết bằng product-indicator**
+- **Ví dụ minh họa trên Stata**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msehk21u1/c6/phan-tich-tuong-tac-voi-phuong-phap-product-indicator/)
+
+### 2.2. Phân tích tương tác với phương pháp two-stage
+
+Phân tích tương tác với phương pháp Two-Stage trong PLS-SEM Interaction analysis with the two-stage approach in PLS-SEM Giới thiệu về phương pháp Two-Stage Chào mừng các bạn quay trở lại với chuỗi bài học về hiệu ứng điều tiết! Ở bài trước, chúng ta đã làm quen với phương pháp Product-Indicator, một cách tiếp cận trực quan dựa trên việc nhân các chỉ báo. Trong bài học này, chúng ta sẽ tìm hiểu một phương pháp thay thế linh hoạt và mạnh mẽ hơn: phương pháp Two-Stage.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu về phương pháp two-stage**
+- **Nền tảng lý thuyết của phương pháp two-stage**
+- **Giai đoạn 1: Ước tính điểm số biến ẩn**
+- **Giai đoạn 2: Xây dựng mô hình tương tác từ điểm số biến ẩn**
+- **Quy trình phân tích hiệu ứng điều tiết bằng phương pháp two-stage**
+- **Ví dụ minh họa trên Stata**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msehk21u1/c6/phan-tich-tuong-tac-voi-phuong-phap-two-stage/)
+
+### 2.3. Phân tích đa nhóm và bất biến đo lường
+
+Phân tích đa nhóm và tầm quan trọng của bất biến đo lường Multi-sample approach and the importance of measurement invariance Giới thiệu về Phân tích Đa nhóm Chào các bạn đã đến với bài học thứ ba và cũng là bài thực hành chuyên sâu trong chuỗi bài về hiệu ứng điều tiết. Ở các bài trước, chúng ta đã học cách kiểm định tương tác bằng cách tạo ra một "biến tương tác". Hôm nay, chúng ta sẽ tiếp cận vấn đề từ một góc độ hoàn toàn khác nhưng lại vô cùng trực quan và dễ hiểu: **Phân tích Đa nhóm** , hay còn gọi là **Phân tích Đa nhóm** .
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu về phân tích đa nhóm**
+- **Nền tảng lý thuyết của MGA và bất biến đo lường**
+- **Logic của phân tích đa nhóm**
+- **Tại sao bất biến đo lường lại quan trọng?**
+- **Quy trình thực hành phân tích đa nhóm**
+- **Ví dụ minh họa trên Stata**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msehk21u1/c6/phan-tich-da-nhom-multi-sample-approach-va-bat-bien-do-luong/)
+
+### 2.4. Tổng hợp và lựa chọn phương pháp phân tích điều tiết trong PLS-SEM
+
+Tổng hợp và lựa chọn phương pháp phân tích hiệu ứng điều tiết trong PLS-SEM Synthesizing and selecting methods for moderation analysis in PLS-SEM Tổng quan và vị thế của phân tích điều tiết trong nghiên cứu Chào các bạn sinh viên, chúng ta đã cùng nhau đi qua một hành trình chi tiết khám phá ba phương pháp chính để phân tích hiệu ứng điều tiết trong mô hình PLS-SEM.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Tổng quan và vị thế của phân tích điều tiết trong nghiên cứu**
+- **Hệ thống hóa nền tảng lý thuyết về hiệu ứng tương tác**
+- **Bản chất toán học của sự tương tác**
+- **Vai trò của lý thuyết trong việc lựa chọn biến điều tiết**
+- **Hệ thống hóa quy trình và khung lựa chọn phương pháp**
+- **Quy trình phân tích điều tiết tổng quát 5 Bước**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msehk21u1/c6/tong-hop-va-lua-chon-phuong-phap-phan-tich-dieu-tiet-trong-pls-sem/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Phân tích tương tác với phương pháp product-indicator</h3>
-    <p>Phân tích tương tác với phương pháp Product-Indicator trong PLS-SEM Interaction analysis with the product-indicator approach in PLS-SEM Giới thiệu về phương pháp Product-Indicator Chào các bạn, trong bài học đầu tiên này, chúng ta sẽ cùng nhau khám phá phương  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msehk21u1/c6/phan-tich-tuong-tac-voi-phuong-phap-product-indicator/" target="_blank" rel="noopener">Phân tích tương tác với phương pháp Product-Indicator</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>6. Phân tích hiệu ứng điều tiết với PLS-SEM</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Phân tích tương tác với phương pháp two-stage</h3>
-    <p>Phân tích tương tác với phương pháp Two-Stage trong PLS-SEM Interaction analysis with the two-stage approach in PLS-SEM Giới thiệu về phương pháp Two-Stage Chào mừng các bạn quay trở lại với chuỗi bài học về hiệu ứng điều tiết! Ở bài trước, chúng ta đã làm que Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msehk21u1/c6/phan-tich-tuong-tac-voi-phuong-phap-two-stage/" target="_blank" rel="noopener">Phân tích tương tác với phương pháp Two-Stage</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Phân tích đa nhóm và bất biến đo lường</h3>
-    <p>Phân tích đa nhóm và tầm quan trọng của bất biến đo lường Multi-sample approach and the importance of measurement invariance Giới thiệu về Phân tích Đa nhóm Chào các bạn đã đến với bài học thứ ba và cũng là bài thực hành chuyên sâu trong chuỗi bài về hiệu ứng  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msehk21u1/c6/phan-tich-da-nhom-multi-sample-approach-va-bat-bien-do-luong/" target="_blank" rel="noopener">Phân tích đa nhóm và bất biến đo lường</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msehk21u1/c6/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Tổng hợp và lựa chọn phương pháp phân tích điều tiết trong PLS-SEM</h3>
-    <p>Tổng hợp và lựa chọn phương pháp phân tích hiệu ứng điều tiết trong PLS-SEM Synthesizing and selecting methods for moderation analysis in PLS-SEM Tổng quan và vị thế của phân tích điều tiết trong nghiên cứu Chào các bạn sinh viên, chúng ta đã cùng nhau đi qua  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msehk21u1/c6/tong-hop-va-lua-chon-phuong-phap-phan-tich-dieu-tiet-trong-pls-sem/" target="_blank" rel="noopener">Tổng hợp và lựa chọn phương pháp phân tích điều tiết trong PLS-SEM</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
+  </div>
+  <div className="step-item">
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập môi trường, ước lượng mô hình và kiểm định chẩn đoán toàn diện
 version 18.0
 clear all
 set more off
+import delimited "sachktl_empirical_ecodata.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_msehk21u1_c06_ecodata.csv", clear encoding("utf-8")
 describe
-summarize
+summarize y x1 x2 x3, detail
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
+* 1. Ước lượng mô hình cơ sở và kiểm định phương sai thay đổi / đa cộng tuyến / dạng hàm
+regress y x1 x2 x3
 estat hettest
+estat imtest, white
 estat vif
+estat ovtest
+
+* 2. Ước lượng với sai số chuẩn vững White HC1 và xuất tác động biên
+regress y c.x1##c.x2 x3, vce(robust)
+margins, dydx(x1 x2 x3)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện phân tích kinh tế lượng và thực thi kiểm định chẩn đoán
 library(tidyverse)
 library(lmtest)
 library(sandwich)
+library(car)
 
-df <- read.csv("sachktl_msehk21u1_c06_ecodata.csv")
+df <- read.csv("sachktl_empirical_ecodata.csv")
 summary(df)
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+# 1. Ước lượng mô hình tuyến tính và kiểm định Breusch-Pagan, RESET, VIF
 fit <- lm(y ~ x1 + x2 + x3, data = df)
+bptest(fit)
+resettest(fit, power = 2:3, type = "fitted")
+vif(fit)
+
+# 2. Xuất bảng hệ số ước lượng với sai số chuẩn vững HC1
 coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
 ```
 
@@ -136,33 +231,51 @@ coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và thực thi ước lượng kèm chẩn đoán phần dư
 import pandas as pd
+import statsmodels.api as sm
 import statsmodels.formula.api as smf
+from statsmodels.stats.diagnostic import het_breuschpagan, linear_reset
+from statsmodels.stats.outliers_influence import variance_inflation_factor
 
-df = pd.read_csv("sachktl_msehk21u1_c06_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_empirical_ecodata.csv")
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
+# 1. Ước lượng mô hình với sai số chuẩn vững HC1
 model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
 print(model.summary())
+
+# 2. Kiểm định phương sai thay đổi Breusch-Pagan, Ramsey RESET và hệ số VIF
+bp_lm, bp_pval, _, _ = het_breuschpagan(model.resid, model.model.exog)
+reset_res = linear_reset(model, power=2, use_f=True)
+X = sm.add_constant(df[["x1", "x2", "x3"]].dropna())
+vifs = {col: variance_inflation_factor(X.values, i) for i, col in enumerate(X.columns)}
+print(f"Breusch-Pagan p={bp_pval:.4f} | RESET p={reset_res.pvalue:.4f} | VIF={vifs}")
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 06: 6. phân tích hiệu ứng điều tiết với PLS-SEM trên SachKTL"
+  title="Hướng dẫn thực hành 6. Phân tích hiệu ứng điều tiết với PLS-SEM trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 06 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Phân tích tương tác với phương pháp Product-Indicator | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msehk21u1/c6/phan-tich-tuong-tac-voi-phuong-phap-product-indicator/) |
-| **Bài 02** | Phân tích tương tác với phương pháp Two-Stage | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msehk21u1/c6/phan-tich-tuong-tac-voi-phuong-phap-two-stage/) |
-| **Bài 03** | Phân tích đa nhóm và bất biến đo lường | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msehk21u1/c6/phan-tich-da-nhom-multi-sample-approach-va-bat-bien-do-luong/) |
-| **Bài 04** | Tổng hợp và lựa chọn phương pháp phân tích điều tiết trong PLS-SEM | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msehk21u1/c6/tong-hop-va-lua-chon-phuong-phap-phan-tich-dieu-tiet-trong-pls-sem/) |
+| **6.1** | Phân tích tương tác với phương pháp product-indicator | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msehk21u1/c6/phan-tich-tuong-tac-voi-phuong-phap-product-indicator/) |
+| **6.2** | Phân tích tương tác với phương pháp two-stage | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msehk21u1/c6/phan-tich-tuong-tac-voi-phuong-phap-two-stage/) |
+| **6.3** | Phân tích đa nhóm và bất biến đo lường | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msehk21u1/c6/phan-tich-da-nhom-multi-sample-approach-va-bat-bien-do-luong/) |
+| **6.4** | Tổng hợp và lựa chọn phương pháp phân tích điều tiết trong PLS-SEM | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msehk21u1/c6/tong-hop-va-lua-chon-phuong-phap-phan-tich-dieu-tiet-trong-pls-sem/) |

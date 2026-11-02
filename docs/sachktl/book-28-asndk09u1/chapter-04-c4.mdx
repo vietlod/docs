@@ -1,19 +1,19 @@
 ---
 id: chapter-04-c4
-title: "Chương 04: 4. lý thuyết tiệm cận của ước lượng GARCH"
-sidebar_label: "Chương 04: 4. Lý thuyết tiệm cận của ước lượng GARCH"
+title: "4. Lý thuyết tiệm cận của ước lượng GARCH"
+sidebar_label: "4. Lý thuyết tiệm cận của ước lượng GARCH"
 sidebar_position: 5
-description: "Hướng dẫn thực hành How-To Chương 04: 4. lý thuyết tiệm cận của ước lượng GARCH thuộc bộ sách Cẩm nang kinh tế lượng chuỗi thời gian tài chính trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 4. Lý thuyết tiệm cận của ước lượng GARCH thuộc giáo trình Cẩm nang kinh tế lượng chuỗi thời gian tài chính trên SachKTL kèm công thức toán học, phân tích 6 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 04: 4. lý thuyết tiệm cận của ước lượng GARCH
+# 4. Lý thuyết tiệm cận của ước lượng GARCH
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 04: 4. lý thuyết tiệm cận của ước lượng GARCH** thuộc [**Bộ sách 28: cẩm nang kinh tế lượng chuỗi thời gian tài chính**](/sachktl/book-28-asndk09u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/asndk09u1/c4/](https://sachktl.tnsai.vn/vi/asndk09u1/c4/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **6 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **4. Lý thuyết tiệm cận của ước lượng GARCH** thuộc bộ giáo trình [**Cẩm nang kinh tế lượng chuỗi thời gian tài chính**](/sachktl/book-28-asndk09u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/asndk09u1/c4/](https://sachktl.tnsai.vn/vi/asndk09u1/c4/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 04: 4. lý thuyết tiệm cận của ước lượng GARCH">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="4. Lý thuyết tiệm cận của ước lượng GARCH">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 28 · CHƯƠNG 04</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 04: 4. lý thuyết tiệm cận của ước lượng GARCH</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Cẩm nang kinh tế lượng chuỗi thời gian tài chính · 6 bài học chu</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Cẩm nang kinh tế lượng chuỗi thời gi</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">4. Lý thuyết tiệm cận của ước lượng GARCH</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng chuỗi thời gian, đồng liên kết và biến động tài chính · 6 bài học chuyê</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,138 +41,272 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Giới thiệu chuỗi bài học về lý thuyết ước lượng GARCH An Introduction to The Asymptotic Theory of GARCH Estimation TÓM TẮT CHỦ ĐỀ Chào mừng các bạn đến với chuỗi bài học chuyên sâu về lý thuyết ước lượng cho các mô hình GARCH. Trong thế giới tài chính, biến động không phải lúc nào cũng ổn định; có những giai đoạn thị trường cực kỳ sóng gió và cũng có những lúc lại yên bình. Mô hình GARCH ra đời chính là để nắm bắt và dự báo sự thay đổi của biến động này, trở thành một công cụ không thể thiếu trong quản trị rủi ro, định giá tài sản và phân tích chuỗi thời gian tài chính. Tuy nhiên, việc xây
+Giới thiệu chuỗi bài học về lý thuyết ước lượng GARCH An Introduction to The Asymptotic Theory of GARCH Estimation TÓM TẮT CHỦ ĐỀ Chào mừng các bạn đến với chuỗi bài học chuyên sâu về lý thuyết ước lượng cho các mô hình GARCH. Trong thế giới tài chính, biến động không phải lúc nào cũng ổn định; có những giai đoạn thị trường cực kỳ sóng gió và cũng có những lúc lại yên bình. Mô hình GARCH ra đời chính là để nắm bắt và dự báo sự thay đổi của biến động này, trở thành một công cụ không thể thiếu trong quản trị rủi ro, định giá tài sản và phân tích chuỗi thời gian tài chính.
 
-- **Chủ đề học thuật trọng tâm**: TÓM TẮT CHỦ ĐỀ, CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+\Phi(L)(1 - L)^d Y_t = \mu + \Theta(L)\varepsilon_t, \quad \varepsilon_t \mid \mathcal{F}_{t-1} \sim \mathcal{N}(0, \sigma_t^2) \tag*{[1]}
+$$
+
+$$
+\sigma_t^2 = \omega + \sum_{i=1}^p \alpha_i \varepsilon_{t-i}^2 + \sum_{j=1}^q \beta_j \sigma_{t-j}^2, \quad \omega > 0, \; \alpha_i, \beta_j \ge 0 \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Chuỗi thời gian phải thỏa mãn điều kiện dừng hiệp phương sai hoặc được sai phân hóa đến bậc tích hợp $I(d)$ phù hợp trước khi ước lượng.
+2. Điều kiện khả nghịch và nghiệm ngoài vòng tròn đơn vị của đa thức trễ $\Phi(L)$ và $\Theta(L)$ đảm bảo tính ổn định động học.
+3. Trong mô hình phương sai có điều kiện thay đổi GARCH, tổng hệ số $\sum \alpha_i + \sum \beta_j < 1$ bảo đảm phương sai không điều kiện hữu hạn.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 04 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/asndk09u1/c4/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Hồi quy chuỗi thời gian không dừng chưa qua kiểm định nghiệm đơn vị ADF/PP và đồng liên kết Johansen dễ dẫn đến hồi quy giả mạo với thống kê $t$ và $R^2$ bị thổi phồng."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Nền tảng mô hình GARCH và ước lượng LSE
+
+Nền tảng mô hình GARCH và ước lượng LSE GARCH fundamentals and LSE estimation Giới thiệu Chào mừng các bạn quay trở lại với bài học đầu tiên trong chuỗi bài về lý thuyết ước lượng GARCH. Ở bài giới thiệu, chúng ta đã cùng nhau tìm hiểu tầm quan trọng của việc mô hình hóa sự biến động trong tài chính. Giờ đây, chúng ta sẽ đi vào chi tiết kỹ thuật của công cụ mạnh mẽ nhất cho nhiệm vụ này: mô hình GARCH.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Nền tảng lý thuyết của mô hình GARCH**
+- **1. Định nghĩa mô hình GARCH**
+- **2. Điều kiện dừng và tính ổn định**
+- **Ước lượng bình phương tối thiểu cho mô hình ARCH**
+- **1. Biểu diễn mô hình ARCH dưới dạng tự hồi quy**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c4/nen-tang-mo-hinh-garch-va-uoc-luong-lse/)
+
+### 2.2. Ước lượng hợp lý tối đa tựa nhiên
+
+Ước lượng hợp lý tối đa tựa nhiên Quasi-maximum likelihood estimation Giới thiệu Chào mừng các bạn quay trở lại với bài học thứ hai. Ở bài trước, chúng ta đã làm quen với phương pháp LSE và thấy rằng nó khá trực quan nhưng lại có một hạn chế lớn: chỉ áp dụng được cho mô hình ARCH thuần túy. Vậy làm thế nào để ước lượng mô hình GARCH tổng quát, vốn có cả thành phần phương sai trễ $h_{t-j}$? Câu trả lời nằm ở một phương pháp mạnh mẽ và linh hoạt hơn rất nhiều: Ước lượng Hợp lý Tối đa Tựa nhiên, hay còn gọi là QMLE .
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Nền tảng lý thuyết của QMLE**
+- **1. Xây dựng hàm hợp lý tối đa tựa nhiên**
+- **Các giả định chính cho QMLE**
+- **Ví dụ minh họa với Stata**
+- **Tổng kết**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c4/uoc-luong-hop-ly-toi-da-tua-nhien-qmle/)
+
+### 2.3. Tính hiệu quả và các phương pháp thay thế
+
+Tính hiệu quả và các phương pháp ước lượng thay thế Efficiency and alternative estimation methods Giới thiệu Trong bài học trước, chúng ta đã khám phá QMLE, một phương pháp ước lượng mạnh mẽ và là "con ngựa thồ" trong hầu hết các ứng dụng GARCH. Sức mạnh của nó nằm ở chỗ không yêu cầu chúng ta phải biết phân phối thực sự của nhiễu loạn, mà chỉ cần một giả định đơn giản về phân phối chuẩn là đủ để có được các ước lượng nhất quán. Tuy nhiên, trong khoa học, đặc biệt là thống kê, chúng ta luôn muốn tìm kiếm phương pháp tối ưu nhất.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Nền tảng lý thuyết về tính hiệu quả và MLE**
+- **1. Ước lượng hợp lý tối đa**
+- **2. So sánh hiệu quả: QMLE vs. MLE**
+- **3. Trường hợp đặc biệt: Khi nào QMLE hiệu quả?**
+- **Các phương pháp ước lượng thay thế**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c4/tinh-hieu-qua-va-cac-phuong-phap-thay-the/)
+
+### 2.4. Xử lý hệ số bằng không và kiểm định giả thuyết
+
+Xử lý hệ số GARCH bằng không và kiểm định giả thuyết Handling zero GARCH coefficients and hypothesis testing Giới thiệu Trong các bài học trước, chúng ta đã tập trung vào việc tìm ra các giá trị ước lượng "tốt nhất" cho các tham số của mô hình GARCH. Giờ đây, chúng ta sẽ chuyển sang một nhiệm vụ quan trọng không kém: kiểm định các giả thuyết về những tham số đó.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Nền tảng lý thuyết: Vấn đề trên biên**
+- **1. Tại sao hệ số bằng không lại đặc biệt?**
+- **2. Phân phối tiệm cận phi chuẩn**
+- **Hệ quả đối với kiểm định giả thuyết**
+- **Ví dụ minh họa: Kiểm định ARCH effects bằng LM test**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c4/xu-ly-he-so-bang-khong-va-kiem-dinh-gia-thuyet/)
+
+### 2.5. Hướng dẫn thực hành GARCH với Stata
+
+Hướng dẫn thực hành ước lượng GARCH với Stata A practical guide to estimating GARCH in Stata Giới thiệu Chào mừng các bạn đến với bài học thực hành tổng hợp của chúng ta! Trong bốn bài học vừa qua, chúng ta đã xây dựng một nền tảng lý thuyết vững chắc: từ việc hiểu cấu trúc mô hình GARCH, khám phá các phương pháp ước lượng như LSE và QMLE, cho đến việc nhận thức được các thách thức khi kiểm định giả thuyết.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Tóm tắt quy trình phân tích GARCH**
+- **Hướng dẫn từng bước với Stata**
+- **Bước 1: Khám phá dữ liệu và trực quan hóa**
+- **Bước 2: Kiểm định sự tồn tại của hiệu ứng ARCH**
+- **Bước 3: Ước lượng mô hình GARCH**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c4/huong-dan-thuc-hanh-garch11-voi-stata/)
+
+### 2.6. Hệ thống hóa kiến thức
+
+Tổng hợp chuỗi bài học về lý thuyết ước lượng GARCH A synthesis of the GARCH estimation theory series 1. TỔNG QUAN CHỦ ĐỀ Chào mừng các bạn đến với bài viết tổng kết chuỗi bài học về lý thuyết ước lượng GARCH. Trong suốt hành trình vừa qua, chúng ta đã đi từ những khái niệm cơ bản nhất về sự biến động của chuỗi thời gian tài chính đến các kỹ thuật ước lượng và kiểm định tinh vi.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. TỔNG QUAN chủ đề**
+- **2. HỆ thống lý thuyết**
+- **3. HỆ thống phương pháp**
+- **4. VÍ dụ thực hành tổng hợp**
+- **5. TỔNG kết và hướng phát triển**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c4/he-thong-hoa-kien-thuc/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Nền tảng mô hình GARCH và ước lượng LSE</h3>
-    <p>Nền tảng mô hình GARCH và ước lượng LSE GARCH fundamentals and LSE estimation Giới thiệu Chào mừng các bạn quay trở lại với bài học đầu tiên trong chuỗi bài về lý thuyết ước lượng GARCH. Ở bài giới thiệu, chúng ta đã cùng nhau tìm hiểu tầm quan trọng của việc  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c4/nen-tang-mo-hinh-garch-va-uoc-luong-lse/" target="_blank" rel="noopener">Nền tảng mô hình GARCH và ước lượng LSE</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>4. Lý thuyết tiệm cận của ước lượng GARCH</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Ước lượng hợp lý tối đa tựa nhiên</h3>
-    <p>Ước lượng hợp lý tối đa tựa nhiên Quasi-maximum likelihood estimation Giới thiệu Chào mừng các bạn quay trở lại với bài học thứ hai. Ở bài trước, chúng ta đã làm quen với phương pháp LSE và thấy rằng nó khá trực quan nhưng lại có một hạn chế lớn: chỉ áp dụng đ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c4/uoc-luong-hop-ly-toi-da-tua-nhien-qmle/" target="_blank" rel="noopener">Ước lượng hợp lý tối đa tựa nhiên</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Tính hiệu quả và các phương pháp thay thế</h3>
-    <p>Tính hiệu quả và các phương pháp ước lượng thay thế Efficiency and alternative estimation methods Giới thiệu Trong bài học trước, chúng ta đã khám phá QMLE, một phương pháp ước lượng mạnh mẽ và là "con ngựa thồ" trong hầu hết các ứng dụng GARCH. Sức mạnh của n Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c4/tinh-hieu-qua-va-cac-phuong-phap-thay-the/" target="_blank" rel="noopener">Tính hiệu quả và các phương pháp thay thế</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c4/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Xử lý hệ số bằng không và kiểm định giả thuyết</h3>
-    <p>Xử lý hệ số GARCH bằng không và kiểm định giả thuyết Handling zero GARCH coefficients and hypothesis testing Giới thiệu Trong các bài học trước, chúng ta đã tập trung vào việc tìm ra các giá trị ước lượng "tốt nhất" cho các tham số của mô hình GARCH. Giờ đây,  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c4/xu-ly-he-so-bang-khong-va-kiem-dinh-gia-thuyet/" target="_blank" rel="noopener">Xử lý hệ số bằng không và kiểm định giả thuyết</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 5: Hướng dẫn thực hành GARCH với Stata</h3>
-    <p>Hướng dẫn thực hành ước lượng GARCH với Stata A practical guide to estimating GARCH in Stata Giới thiệu Chào mừng các bạn đến với bài học thực hành tổng hợp của chúng ta! Trong bốn bài học vừa qua, chúng ta đã xây dựng một nền tảng lý thuyết vững chắc: từ việc Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c4/huong-dan-thuc-hanh-garch11-voi-stata/" target="_blank" rel="noopener">Hướng dẫn thực hành GARCH với Stata</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Bước 6: Hệ thống hóa kiến thức</h3>
-    <p>Tổng hợp chuỗi bài học về lý thuyết ước lượng GARCH A synthesis of the GARCH estimation theory series 1. TỔNG QUAN CHỦ ĐỀ Chào mừng các bạn đến với bài viết tổng kết chuỗi bài học về lý thuyết ước lượng GARCH. Trong suốt hành trình vừa qua, chúng ta đã đi từ n Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c4/he-thong-hoa-kien-thuc/" target="_blank" rel="noopener">Hệ thống hóa kiến thức</a>.</p>
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập chuỗi thời gian, kiểm định nghiệm đơn vị và ước lượng ARIMA / GARCH
 version 18.0
 clear all
 set more off
+import delimited "sachktl_timeseries_finco.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_asndk09u1_c04_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+tsset time_id
+dfuller y, lags(4) trend regress
+pperron y, lags(4) trend
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 1. Ước lượng mô hình ARIMA và kiểm định nhiễu trắng phần dư
+arima y, arima(1,1,1) vce(robust)
+predict resid_arima, resid
+wntestq resid_arima, lags(12)
+
+* 2. Ước lượng mô hình phương sai có điều kiện thay đổi ARCH/GARCH(1,1)
+arch d.y x1 x2, arch(1) garch(1) vce(robust)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
-library(tidyverse)
-library(lmtest)
-library(sandwich)
+# Nạp thư viện chuỗi thời gian và ước lượng ARIMA / GARCH(1,1)
+library(tseries)
+library(forecast)
+library(rugarch)
 
-df <- read.csv("sachktl_asndk09u1_c04_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_timeseries_finco.csv")
+y_ts <- ts(df$y, frequency = 12)
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA tối ưu theo AICc
+adf.test(y_ts)
+fit_arima <- auto.arima(y_ts, seasonal = FALSE, ic = "aicc")
+summary(fit_arima)
+checkresiduals(fit_arima)
+
+# 2. Ước lượng mô hình GARCH(1,1) cho chuỗi lợi suất
+spec <- ugarchspec(variance.model = list(model = "sGARCH", garchOrder = c(1, 1)),
+                   mean.model = list(armaOrder = c(1, 0), include.mean = TRUE))
+fit_garch <- ugarchfit(spec = spec, data = diff(y_ts))
+show(fit_garch)
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và arch để phân tích chuỗi thời gian & biến động
 import pandas as pd
-import statsmodels.formula.api as smf
+from statsmodels.tsa.stattools import adfuller
+from statsmodels.tsa.arima.model import ARIMA
+from arch import arch_model
 
-df = pd.read_csv("sachktl_asndk09u1_c04_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_timeseries_finco.csv")
+y = df["y"].dropna()
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA(1,1,1)
+adf_stat, p_val, *_ = adfuller(y, autolag="AIC")
+print(f"ADF Statistic: {adf_stat:.4f}, p-value: {p_val:.4f}")
+arima_res = ARIMA(y, order=(1, 1, 1)).fit()
+print(arima_res.summary())
+
+# 2. Ước lượng mô hình GARCH(1,1) với phân phối Student-t
+ret = y.diff().dropna() * 100
+garch_res = arch_model(ret, vol="Garch", p=1, q=1, dist="t").fit(disp="off")
+print(garch_res.summary())
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 04: 4. lý thuyết tiệm cận của ước lượng GARCH trên SachKTL"
+  title="Hướng dẫn thực hành 4. Lý thuyết tiệm cận của ước lượng GARCH trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 04 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Nền tảng mô hình GARCH và ước lượng LSE | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c4/nen-tang-mo-hinh-garch-va-uoc-luong-lse/) |
-| **Bài 02** | Ước lượng hợp lý tối đa tựa nhiên | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c4/uoc-luong-hop-ly-toi-da-tua-nhien-qmle/) |
-| **Bài 03** | Tính hiệu quả và các phương pháp thay thế | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c4/tinh-hieu-qua-va-cac-phuong-phap-thay-the/) |
-| **Bài 04** | Xử lý hệ số bằng không và kiểm định giả thuyết | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c4/xu-ly-he-so-bang-khong-va-kiem-dinh-gia-thuyet/) |
-| **Bài 05** | Hướng dẫn thực hành GARCH với Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c4/huong-dan-thuc-hanh-garch11-voi-stata/) |
-| **Bài 06** | Hệ thống hóa kiến thức | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c4/he-thong-hoa-kien-thuc/) |
+| **4.1** | Nền tảng mô hình GARCH và ước lượng LSE | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c4/nen-tang-mo-hinh-garch-va-uoc-luong-lse/) |
+| **4.2** | Ước lượng hợp lý tối đa tựa nhiên | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c4/uoc-luong-hop-ly-toi-da-tua-nhien-qmle/) |
+| **4.3** | Tính hiệu quả và các phương pháp thay thế | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c4/tinh-hieu-qua-va-cac-phuong-phap-thay-the/) |
+| **4.4** | Xử lý hệ số bằng không và kiểm định giả thuyết | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c4/xu-ly-he-so-bang-khong-va-kiem-dinh-gia-thuyet/) |
+| **4.5** | Hướng dẫn thực hành GARCH với Stata | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c4/huong-dan-thuc-hanh-garch11-voi-stata/) |
+| **4.6** | Hệ thống hóa kiến thức | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c4/he-thong-hoa-kien-thuc/) |

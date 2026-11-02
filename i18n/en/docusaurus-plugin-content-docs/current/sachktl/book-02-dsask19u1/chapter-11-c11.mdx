@@ -1,19 +1,19 @@
 ---
 id: chapter-11-c11
-title: "Chapter 11: 11. Chuỗi thời gian không dừng, nghiệm đơn và sự thay đổi cấu trúc — Econometrics Theory and Practice"
-sidebar_label: "Chapter 11: 11. Chuỗi thời gian không dừng, nghiệm đơn"
+title: "11. Nonstationary Time Series, Unit Roots, and Structural Breaks"
+sidebar_label: "11. Nonstationary Time Series, Unit Roots, and Structural Breaks"
 sidebar_position: 12
-description: "Step-by-step practical how-to guide for Chapter 11: 11. Chuỗi thời gian không dừng, nghiệm đơn và sự thay đổi cấu trúc from Econometrics Theory and Practice on SachKTL with Stata, R, and Python workflows integrated with EcoData, Finco, and EcoLab."
+description: "Comprehensive practical how-to guide for 11. Nonstationary Time Series, Unit Roots, and Structural Breaks from Econometrics: Theory and Practice on SachKTL featuring structural equations, 6 lesson breakdowns, and Stata, R, and Python scripts."
 ---
 
-# Chapter 11: 11. Chuỗi thời gian không dừng, nghiệm đơn và sự thay đổi cấu trúc — Econometrics Theory and Practice
+# 11. Nonstationary Time Series, Unit Roots, and Structural Breaks
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-This practical how-to guide synthesizes the methodology and empirical implementation workflow of **Chapter 11: 11. Chuỗi thời gian không dừng, nghiệm đơn và sự thay đổi cấu trúc** from [**Book 02: Econometrics Theory and Practice**](/en/sachktl/book-02-dsask19u1/), with direct backlinks to the authoritative source material at [https://sachktl.tnsai.vn/vi/dsask19u1/c11/](https://sachktl.tnsai.vn/vi/dsask19u1/c11/).
+This practical how-to guide presents the theoretical foundations, structural mathematical equations, detailed breakdown of **6 specialized lessons**, and multi-platform replication workflows for **11. Nonstationary Time Series, Unit Roots, and Structural Breaks** from the textbook [**Econometrics: Theory and Practice**](/en/sachktl/book-02-dsask19u1/), with direct cross-references to the authoritative source material at [https://sachktl.tnsai.vn/vi/dsask19u1/c11/](https://sachktl.tnsai.vn/vi/dsask19u1/c11/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chapter 11: 11. Chuỗi thời gian không dừng, nghiệm đơn và sự thay đổ">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="11. Nonstationary Time Series, Unit Roots, and Structural Breaks">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ This practical how-to guide synthesizes the methodology and empirical implementa
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BOOK 02 · CHAPTER 11</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chapter 11: 11. Chuỗi thời gian không dừng, nghiệm đơn và sự thay đổ</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Part of Textbook: Econometrics Theory and Practice · 6 Detailed Lessons</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Econometrics: Theory and Practice</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">11. Nonstationary Time Series, Unit Roots, and Structural Breaks</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Time Series Econometrics, Cointegration, and Financial Volatility · 6 Detailed Lesson</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,138 +41,273 @@ This practical how-to guide synthesizes the methodology and empirical implementa
   </svg>
 </div>
 
-## 1. Methodological Meaning and Scope of Application
+## 1. Methodological Foundations, Mathematical Specification, and Identification
 
-Chuỗi thời gian không dừng, nghiệm đơn và sự thay đổi cấu trúc Trong phân tích kinh tế lượng chuỗi thời gian, việc xác định tính dừng của dữ liệu là một bước nền tảng và tối quan trọng. Nhiều chuỗi thời gian kinh tế vĩ mô như GDP, tỷ giá hối đoái, hay giá tài sản thường biểu hiện hành vi xu hướng, hay còn gọi là tính không dừng. Sự hiện diện của tính không dừng này, nếu không được xử lý đúng cách, có thể dẫn đến các kết quả hồi quy giả mạo , làm sai lệch hoàn toàn các suy luận thống kê và các khuyến nghị chính sách. Kể từ công trình tiên phong của Nelson và Plosser, khái
+Chuỗi thời gian không dừng, nghiệm đơn và sự thay đổi cấu trúc Trong phân tích kinh tế lượng chuỗi thời gian, việc xác định tính dừng của dữ liệu là một bước nền tảng và tối quan trọng. Nhiều chuỗi thời gian kinh tế vĩ mô như GDP, tỷ giá hối đoái, hay giá tài sản thường biểu hiện hành vi xu hướng, hay còn gọi là tính không dừng. Sự hiện diện của tính không dừng này, nếu không được xử lý đúng cách, có thể dẫn đến các kết quả hồi quy giả mạo , làm sai lệch hoàn toàn các suy luận thống kê và các khuyến nghị chính sách.
 
-- **Core Academic Topics**: Cấu trúc chuỗi bài học, Kiến thức tiên quyết, Mục tiêu học tập, Tài liệu tham khảo chính, PHỤ LỤC: Dữ liệu mô phỏng cho chuỗi bài viết.
-- **Supported Analytical Environments**: `Stata 18 MP`.
-- **Recommended Empirical Data Sources**: Vietnamese macroeconomic, corporate, and household survey datasets on [EcoData](https://ecodata.io.vn), capital and commodity market series on [Finco](https://www.finco.vn), model cross-references on [VietLOD](https://vietlod.tnsai.vn), and automated estimation on [EcoLab](https://ecolab.io.vn).
+### 1.1. Structural Equations and Representative Estimator
+
+$$
+\Phi(L)(1 - L)^d Y_t = \mu + \Theta(L)\varepsilon_t, \quad \varepsilon_t \mid \mathcal{F}_{t-1} \sim \mathcal{N}(0, \sigma_t^2) \tag*{[1]}
+$$
+
+$$
+\sigma_t^2 = \omega + \sum_{i=1}^p \alpha_i \varepsilon_{t-i}^2 + \sum_{j=1}^q \beta_j \sigma_{t-j}^2, \quad \omega > 0, \; \alpha_i, \beta_j \ge 0 \tag*{[2]}
+$$
+
+### 1.2. Core Identification Assumptions and Applicability Conditions
+
+1. Time series processes must satisfy covariance stationarity or be differenced to their appropriate order of integration $I(d)$ prior to estimation.
+2. Roots of the autoregressive $\Phi(L)$ and moving-average $\Theta(L)$ lag polynomials must lie strictly outside the complex unit circle.
+3. In conditional volatility GARCH specifications, the persistence condition $\sum \alpha_i + \sum \beta_j < 1$ ensures finite unconditional variance.
 
 <FeatureCards
   features={[
     {
-      title: "Original Chapter on SachKTL",
-      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for Chapter 11 on SachKTL.",
+      title: "Authoritative Chapter on SachKTL",
+      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for this chapter on SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/dsask19u1/c11/"
     },
     {
       title: "Practice Datasets on EcoData & Finco",
-      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and survey data for hands-on replication.",
+      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and household survey data for hands-on replication.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
       title: "Automated Estimation on EcoLab",
-      description: "Execute econometric specifications, run diagnostic battery tests, and export publication-grade tables automatically.",
+      description: "Execute econometric specifications, run diagnostic battery tests, and export APA 7th / AER publication-grade tables automatically.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Step-by-Step Practical Implementation Across Chapter Lessons
+<FeatureNotAvailable
+  feature="Unconditional Baseline Estimation Under Violated Identification Assumptions"
+  reason="Regressing nonstationary levels without unit-root and Johansen cointegration testing induces spurious regression with inflated $t$-statistics and $R^2$."
+  alternative="Run the complete diagnostic battery in Step 4 and transition to the appropriate corrective estimator on VietLOD or EcoLab."
+/>
+
+## 2. Lesson-by-Lesson Academic Breakdown
+
+### 2.1. Nền tảng về xu hướng và nghiệm đơn vị
+
+Chào mừng bạn đến với bài học đầu tiên trong chuỗi bài viết về phân tích tính không dừng. Trước khi đi sâu vào các kỹ thuật kiểm định phức tạp, việc xây dựng một nền tảng lý thuyết vững chắc là điều kiện tiên quyết. Trong thực tế, việc xác định sai bản chất của xu hướng trong dữ liệu có thể dẫn đến việc lựa chọn mô hình sai, gây ra những suy luận kinh tế không chính xác.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Phân biệt các loại xu hướng trong chuỗi thời gian**
+- **1. Quá trình dừng theo xu hướng : Xu hướng như một hàm tất định**
+- **2. Quá trình dừng theo sai phân : Xu hướng như một hàm ngẫu nhiên**
+- **3. Trường hợp kết hợp: Mô hình bước ngẫu nhiên có độ trôi**
+- **Bảng so sánh TSP và DSP**
+- **nghiệm đơn vị: Nền tảng toán học của xu hướng ngẫu nhiên**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c11/nen-tang-ve-xu-huong-va-nghiem-don-vi/)
+
+### 2.2. Các kiểm định nghiệm đơn vị cổ điển
+
+Ở bài học trước, chúng ta đã xây dựng nền tảng lý thuyết vững chắc bằng cách phân biệt giữa quá trình dừng theo xu hướng và quá trình dừng theo sai phân, đồng thời hiểu rằng khái niệm nghiệm đơn vị là chìa khóa toán học của DSP. Với kiến thức đó, giờ là lúc chúng ta chuyển từ "cái gì" và "tại sao" sang "làm thế nào". Làm thế nào để chúng ta có thể kiểm tra một cách khách quan sự tồn tại của nghiệm đơn vị trong một chuỗi dữ liệu thực tế? Câu trả lời nằm ở việc sử dụng các kiểm định thống kê chính thức.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Lý thuyết về các kiểm định nghiệm đơn vị**
+- **1. Kiểm định Dickey-Fuller Mở rộng**
+- **2. Kiểm định Phillips-Perron**
+- **3. Kiểm định Dickey-Fuller GLS**
+- **Thực hành kiểm định nghiệm đơn vị với Stata**
+- **Bước 1: Lựa chọn độ trễ tối ưu**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c11/cac-kiem-dinh-nghiem-don-vi-co-dien/)
+
+### 2.3. Kiểm định tính dừng và giới thiệu về đứt gãy cấu trúc
+
+Trong bài học trước, chúng ta đã thực hành với bộ ba kiểm định nghiệm đơn vị cổ điển: ADF, PP, và DF-GLS. Một điểm chung quan trọng của chúng là đều xuất phát từ cùng một giả thuyết không: "chuỗi có một nghiệm đơn vị". Mặc dù đây là cách tiếp cận phổ biến, việc chỉ dựa vào một loại giả thuyết có thể tiềm ẩn rủi ro, đặc biệt khi các kiểm định này có công suất thấp. Để có một kết luận vững chắc hơn, các nhà kinh tế lượng thường tìm kiếm bằng chứng hội tụ từ nhiều phương pháp khác nhau, bao gồm cả việc kiểm tra vấn đề từ một góc độ đối lập.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **1. Kiểm định tính dừng KPSS**
+- **Lý thuyết kiểm định KPSS**
+- **Thực hành kiểm định KPSS với Stata**
+- **2. Giới thiệu về điểm gãy cấu trúc**
+- **Đứt gãy cấu trúc là gì?**
+- **Các loại điểm gãy**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c11/kiem-dinh-tinh-dung-kpss/)
+
+### 2.4. Phân tích nghiệm đơn vị khi có đứt gãy cấu trúc
+
+Bài học trước đã gióng lên một hồi chuông cảnh báo: sự tồn tại của đứt gãy cấu trúc có thể "đánh lừa" các kiểm định nghiệm đơn vị tiêu chuẩn, khiến chúng ta kết luận sai rằng một chuỗi dừng là không dừng. Điều này đặt ra một câu hỏi cấp thiết: làm thế nào để thực hiện một kiểm định nghiệm đơn vị đáng tin cậy khi chúng ta nghi ngờ có sự thay đổi cấu trúc trong dữ liệu? May mắn thay, các nhà kinh tế lượng đã phát triển các phương pháp mạnh mẽ để giải quyết chính xác vấn đề này.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Lý thuyết về kiểm định nghiệm đơn vị có đứt gãy cấu trúc**
+- **1. Kiểm định Perron : Điểm gãy ngoại sinh**
+- **2. Kiểm định Zivot-Andrews : Điểm gãy nội sinh**
+- **Thực hành kiểm định với Stata**
+- **1. Thực hiện kiểm định Perron**
+- **2. Thực hiện kiểm định Zivot-Andrews**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c11/phan-tich-nghiem-don-vi-khi-co-diem-gay-cau-truc/)
+
+### 2.5. Xử lý tính mùa vụ và phân rã chuỗi thời gian với bộ lọc HP
+
+Trong các bài học trước, chúng ta đã tập trung vào việc xác định và xử lý các xu hướng dài hạn và các cú sốc đột ngột thông qua kiểm định nghiệm đơn vị và phân tích đứt gãy cấu trúc. Tuy nhiên, đối với nhiều chuỗi thời gian kinh tế, đặc biệt là dữ liệu có tần suất hàng quý hoặc hàng tháng, còn tồn tại một loại biến động có quy luật khác cần được quan tâm: tính mùa vụ. Những biến động này, nếu không được xử lý, có thể che khuất các động lực kinh tế cơ bản mà chúng ta muốn phân tích.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **1. Xử lý tính mùa vụ trong chuỗi thời gian**
+- **Lý thuyết về tính mùa vụ**
+- **Thực hành điều chỉnh mùa vụ với Stata**
+- **2. Phân rã chuỗi thời gian với bộ lọc Hodrick-Prescott**
+- **Lý thuyết về bộ lọc HP**
+- **Thực hành bộ lọc HP với Stata**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c11/xu-ly-tinh-mua-vu-va-phan-ra-chuoi-thoi-gian/)
+
+### 2.6. Hướng dẫn thực hành tổng hợp: Phân tích tính dừng của chuỗi GDP với Stata
+
+Chúng ta đã đi qua một hành trình xuyên suốt các khái niệm nền tảng và các kỹ thuật nâng cao trong phân tích tính dừng của chuỗi thời gian. Từ việc phân biệt giữa quá trình dừng theo xu hướng và dừng theo sai phân, sử dụng các kiểm định nghiệm đơn vị cổ điển , xác nhận lại bằng kiểm định tính dừng, cho đến việc nhận diện "cạm bẫy" từ các đứt gãy cấu trúc và áp dụng các kiểm định chuyên biệt . Giờ là lúc chúng ta kết hợp tất cả những mảnh ghép kiến thức này lại thành một quy trình phân tích hoàn chỉnh và mạch lạc.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Dữ liệu nghiên cứu**
+- **Hướng dẫn phân tích từng bước từ A-Z**
+- **Bước 1: Khám phá dữ liệu trực quan**
+- **Bước 2: Lựa chọn độ trễ tối ưu**
+- **Bước 3: Thực hiện các kiểm định nghiệm đơn vị tiêu chuẩn**
+- **Bước 4: Thực hiện kiểm định tính dừng bổ sung**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c11/huong-dan-thuc-hanh-tong-hop/)
+
+## 3. Step-by-Step Empirical Implementation Workflow
 
 <Steps>
   <div className="step-item">
-    <h3>Step 1: Nền tảng về xu hướng và nghiệm đơn vị</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Nền tảng về xu hướng và nghiệm đơn vị. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/dsask19u1/c11/nen-tang-ve-xu-huong-va-nghiem-don-vi/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/dsask19u1/c11/nen-tang-ve-xu-huong-va-nghiem-don-vi/</a>.</p>
+    <h3>1. Formulate the Research Question and Prepare Data on EcoData & Finco</h3>
+    <p>Define the dependent variable, core explanatory variables, and control covariates aligned with <strong>11. Nonstationary Time Series, Unit Roots, and Structural Breaks</strong>. Extract standardized Vietnamese empirical series from <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> or <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, and screen for missing observations and extreme outliers.</p>
   </div>
   <div className="step-item">
-    <h3>Step 2: Các kiểm định nghiệm đơn vị cổ điển</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Các kiểm định nghiệm đơn vị cổ điển. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/dsask19u1/c11/cac-kiem-dinh-nghiem-don-vi-co-dien/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/dsask19u1/c11/cac-kiem-dinh-nghiem-don-vi-co-dien/</a>.</p>
+    <h3>2. Conduct Descriptive Profiling, Correlation Analysis, and Pre-Estimation Checks</h3>
+    <p>Examine empirical distributions, construct summary statistics tables, and evaluate collinearity using pairwise correlation matrices and Variance Inflation Factors (VIF).</p>
   </div>
   <div className="step-item">
-    <h3>Step 3: Kiểm định tính dừng và giới thiệu về đứt gãy cấu trúc</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Kiểm định tính dừng và giới thiệu về đứt gãy cấu trúc. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/dsask19u1/c11/kiem-dinh-tinh-dung-kpss/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/dsask19u1/c11/kiem-dinh-tinh-dung-kpss/</a>.</p>
+    <h3>3. Estimate the Model Across Stata 18 MP, R 4.x, and Python 3.11+</h3>
+    <p>Execute the parameter estimation scripts matching the structural equations in Section 1.1 while cross-checking theoretical derivations at <a href="https://sachktl.tnsai.vn/vi/dsask19u1/c11/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Step 4: Phân tích nghiệm đơn vị khi có đứt gãy cấu trúc</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Phân tích nghiệm đơn vị khi có đứt gãy cấu trúc. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/dsask19u1/c11/phan-tich-nghiem-don-vi-khi-co-diem-gay-cau-truc/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/dsask19u1/c11/phan-tich-nghiem-don-vi-khi-co-diem-gay-cau-truc/</a>.</p>
+    <h3>4. Perform Post-Estimation Diagnostics and Robust Variance Correction</h3>
+    <p>Test for heteroskedasticity, serial correlation, Ramsey RESET functional form misspecification, and regressor endogeneity. Apply White HC1 or cluster-robust standard errors for valid inference.</p>
   </div>
   <div className="step-item">
-    <h3>Step 5: Xử lý tính mùa vụ và phân rã chuỗi thời gian với bộ lọc HP</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Xử lý tính mùa vụ và phân rã chuỗi thời gian với bộ lọc HP. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/dsask19u1/c11/xu-ly-tinh-mua-vu-va-phan-ra-chuoi-thoi-gian/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/dsask19u1/c11/xu-ly-tinh-mua-vu-va-phan-ra-chuoi-thoi-gian/</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Step 6: Hướng dẫn thực hành tổng hợp: Phân tích tính dừng của chuỗi GDP với Stata</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Hướng dẫn thực hành tổng hợp: Phân tích tính dừng của chuỗi GDP với Stata. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/dsask19u1/c11/huong-dan-thuc-hanh-tong-hop/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/dsask19u1/c11/huong-dan-thuc-hanh-tong-hop/</a>.</p>
+    <h3>5. Format Journal-Grade Tables and Cross-Verify on EcoLab</h3>
+    <p>Report point estimates, standard errors in parentheses, and statistical significance stars following APA 7th / AER Booktabs standards, or automate the entire reporting pipeline on <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> and <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Multi-Platform Implementation Examples in Stata, R, and Python
+## 4. Multi-Platform Implementation Scripts in Stata, R, and Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Initialize environment and load practice dataset from EcoData / SachKTL
+* Thiết lập chuỗi thời gian, kiểm định nghiệm đơn vị và ước lượng ARIMA / GARCH
 version 18.0
 clear all
 set more off
+import delimited "sachktl_timeseries_finco.csv", clear encoding("utf-8")
 
-* Import standardized empirical dataset
-import delimited "sachktl_dsask19u1_c11_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+tsset time_id
+dfuller y, lags(4) trend regress
+pperron y, lags(4) trend
 
-* Estimate baseline specification and run diagnostic checks with robust standard errors
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 1. Ước lượng mô hình ARIMA và kiểm định nhiễu trắng phần dư
+arima y, arima(1,1,1) vce(robust)
+predict resid_arima, resid
+wntestq resid_arima, lags(12)
+
+* 2. Ước lượng mô hình phương sai có điều kiện thay đổi ARCH/GARCH(1,1)
+arch d.y x1 x2, arch(1) garch(1) vce(robust)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Load econometric packages and practice dataset from EcoData / SachKTL
-library(tidyverse)
-library(lmtest)
-library(sandwich)
+# Nạp thư viện chuỗi thời gian và ước lượng ARIMA / GARCH(1,1)
+library(tseries)
+library(forecast)
+library(rugarch)
 
-df <- read.csv("sachktl_dsask19u1_c11_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_timeseries_finco.csv")
+y_ts <- ts(df$y, frequency = 12)
 
-# Estimate model and compute heteroskedasticity-robust HC1 standard errors
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA tối ưu theo AICc
+adf.test(y_ts)
+fit_arima <- auto.arima(y_ts, seasonal = FALSE, ic = "aicc")
+summary(fit_arima)
+checkresiduals(fit_arima)
+
+# 2. Ước lượng mô hình GARCH(1,1) cho chuỗi lợi suất
+spec <- ugarchspec(variance.model = list(model = "sGARCH", garchOrder = c(1, 1)),
+                   mean.model = list(armaOrder = c(1, 0), include.mean = TRUE))
+fit_garch <- ugarchfit(spec = spec, data = diff(y_ts))
+show(fit_garch)
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Load econometric libraries and practice dataset from EcoData / SachKTL
+# Nạp thư viện statsmodels và arch để phân tích chuỗi thời gian & biến động
 import pandas as pd
-import statsmodels.formula.api as smf
+from statsmodels.tsa.stattools import adfuller
+from statsmodels.tsa.arima.model import ARIMA
+from arch import arch_model
 
-df = pd.read_csv("sachktl_dsask19u1_c11_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_timeseries_finco.csv")
+y = df["y"].dropna()
 
-# Fit specification with HC1 robust standard errors
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA(1,1,1)
+adf_stat, p_val, *_ = adfuller(y, autolag="AIC")
+print(f"ADF Statistic: {adf_stat:.4f}, p-value: {p_val:.4f}")
+arima_res = ARIMA(y, order=(1, 1, 1)).fit()
+print(arima_res.summary())
+
+# 2. Ước lượng mô hình GARCH(1,1) với phân phối Student-t
+ret = y.diff().dropna() * 100
+garch_res = arch_model(ret, vol="Garch", p=1, q=1, dist="t").fit(disp="off")
+print(garch_res.summary())
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video Tutorial Walkthrough
+## 5. Post-Estimation Diagnostic and Interpretation Guide
+
+| Diagnostic Criterion | Null Hypothesis $H_0$ | Benchmark Threshold | Corrective Action When $H_0$ Is Rejected |
+| :--- | :--- | :--- | :--- |
+| **Heteroskedasticity** | Constant error variance $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ rejects $H_0$ | Apply `vce(robust)`, `vcovHC(HC1)`, or FGLS/WLS weighted estimation |
+| **Multicollinearity** | No severe linear dependence among regressors | $\text{VIF} < 10$ acceptable | Drop redundant covariates, center interactions, or apply LASSO/Ridge regularization |
+| **Ramsey RESET Functional Form** | No omitted nonlinear or higher-order terms | $p\text{-value} > 0.05$ retains $H_0$ | Add interaction terms, quadratic polynomials, or log-transform skewed positive variables |
+| **Regressor Exogeneity** | Orthogonality $\text{Cov}(X, \varepsilon)=0$ | Durbin-Wu-Hausman $p > 0.05$ | Transition to IV/2SLS, LIML, or GMM estimation with validated instruments |
+
+## 6. Video Tutorial Walkthrough
 
 <VideoTutorial
-  title="Practical Walkthrough for Chapter 11: 11. Chuỗi thời gian không dừng, nghiệm đơn và sự thay đổi cấu trúc on SachKTL"
+  title="Practical Walkthrough for 11. Nonstationary Time Series, Unit Roots, and Structural Breaks on SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Complete Lesson Directory and Backlinks to Original SachKTL Articles
+## 7. Complete Lesson Directory and Backlinks to Original SachKTL Articles
 
-| No. | Lesson Title in Chapter 11 | Supported Software | Original Source Link on SachKTL |
+| Lesson Code | Lesson Title | Supported Software | Original Source Link on SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Lesson 01** | Nền tảng về xu hướng và nghiệm đơn vị | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c11/nen-tang-ve-xu-huong-va-nghiem-don-vi/) |
-| **Lesson 02** | Các kiểm định nghiệm đơn vị cổ điển | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c11/cac-kiem-dinh-nghiem-don-vi-co-dien/) |
-| **Lesson 03** | Kiểm định tính dừng và giới thiệu về đứt gãy cấu trúc | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c11/kiem-dinh-tinh-dung-kpss/) |
-| **Lesson 04** | Phân tích nghiệm đơn vị khi có đứt gãy cấu trúc | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c11/phan-tich-nghiem-don-vi-khi-co-diem-gay-cau-truc/) |
-| **Lesson 05** | Xử lý tính mùa vụ và phân rã chuỗi thời gian với bộ lọc HP | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c11/xu-ly-tinh-mua-vu-va-phan-ra-chuoi-thoi-gian/) |
-| **Lesson 06** | Hướng dẫn thực hành tổng hợp: Phân tích tính dừng của chuỗi GDP với Stata | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c11/huong-dan-thuc-hanh-tong-hop/) |
+| **11.1** | Nền tảng về xu hướng và nghiệm đơn vị | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c11/nen-tang-ve-xu-huong-va-nghiem-don-vi/) |
+| **11.2** | Các kiểm định nghiệm đơn vị cổ điển | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c11/cac-kiem-dinh-nghiem-don-vi-co-dien/) |
+| **11.3** | Kiểm định tính dừng và giới thiệu về đứt gãy cấu trúc | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c11/kiem-dinh-tinh-dung-kpss/) |
+| **11.4** | Phân tích nghiệm đơn vị khi có đứt gãy cấu trúc | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c11/phan-tich-nghiem-don-vi-khi-co-diem-gay-cau-truc/) |
+| **11.5** | Xử lý tính mùa vụ và phân rã chuỗi thời gian với bộ lọc HP | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c11/xu-ly-tinh-mua-vu-va-phan-ra-chuoi-thoi-gian/) |
+| **11.6** | Hướng dẫn thực hành tổng hợp: Phân tích tính dừng của chuỗi GDP với Stata | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/dsask19u1/c11/huong-dan-thuc-hanh-tong-hop/) |

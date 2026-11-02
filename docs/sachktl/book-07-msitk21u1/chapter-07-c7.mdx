@@ -1,19 +1,19 @@
 ---
 id: chapter-07-c7
-title: "Chương 07: 7. biến dự báo định tính"
-sidebar_label: "Chương 07: 7. Biến dự báo định tính"
+title: "7. Biến dự báo định tính"
+sidebar_label: "7. Biến dự báo định tính"
 sidebar_position: 8
-description: "Hướng dẫn thực hành How-To Chương 07: 7. biến dự báo định tính thuộc bộ sách Diễn giải và trực quan hóa mô hình hồi quy bằng Stata trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 7. Biến dự báo định tính thuộc giáo trình Diễn giải và trực quan hóa mô hình hồi quy bằng Stata trên SachKTL kèm công thức toán học, phân tích 6 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 07: 7. biến dự báo định tính
+# 7. Biến dự báo định tính
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 07: 7. biến dự báo định tính** thuộc [**Bộ sách 07: diễn giải và trực quan hóa mô hình hồi quy bằng Stata**](/sachktl/book-07-msitk21u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/msitk21u1/c7/](https://sachktl.tnsai.vn/vi/msitk21u1/c7/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **6 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **7. Biến dự báo định tính** thuộc bộ giáo trình [**Diễn giải và trực quan hóa mô hình hồi quy bằng Stata**](/sachktl/book-07-msitk21u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/msitk21u1/c7/](https://sachktl.tnsai.vn/vi/msitk21u1/c7/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 07: 7. biến dự báo định tính">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="7. Biến dự báo định tính">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 07 · CHƯƠNG 07</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 07: 7. biến dự báo định tính</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Diễn giải và trực quan hóa mô hình hồi quy bằng Stata · 6 bài họ</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Diễn giải và trực quan hóa mô hình h</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">7. Biến dự báo định tính</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng ứng dụng, mô hình hóa thống kê và kiểm định giả thuyết · 6 bài học chuy</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,102 +41,219 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Diễn giải và trực quan hóa các mô hình với biến dự báo định tính Interpreting and Visualizing models with Categorical Predictors Giới thiệu về chuỗi bài viết Chào mừng các bạn sinh viên đến với chuỗi bài học chuyên sâu về cách xử lý, diễn giải và trực quan hóa các mô hình kinh tế lượng có chứa biến dự báo định tính. Trong nghiên cứu kinh tế và xã hội, chúng ta thường xuyên làm việc với các biến không thể đo lường bằng những con số liên tục, chẳng hạn như giới tính, vùng miền, trình độ học vấn , hay tình trạng hôn nhân. Những biến này, được gọi là biến định tính hay
+Diễn giải và trực quan hóa các mô hình với biến dự báo định tính Interpreting and Visualizing models with Categorical Predictors Giới thiệu về chuỗi bài viết Chào mừng các bạn sinh viên đến với chuỗi bài học chuyên sâu về cách xử lý, diễn giải và trực quan hóa các mô hình kinh tế lượng có chứa biến dự báo định tính. Trong nghiên cứu kinh tế và xã hội, chúng ta thường xuyên làm việc với các biến không thể đo lường bằng những con số liên tục, chẳng hạn như giới tính, vùng miền, trình độ học vấn , hay tình trạng hôn nhân.
 
-- **Chủ đề học thuật trọng tâm**: Giới thiệu về chuỗi bài viết, Cấu trúc loạt bài học, Các kiến thức tiên quyết, Mục tiêu học tập, Tài liệu tham khảo.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+Y_i = \beta_0 + \sum_{k=1}^K \beta_k X_{ik} + \varepsilon_i, \quad \mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0 \tag*{[1]}
+$$
+
+$$
+\widehat{\text{Var}}_{\text{HC1}}(\hat{\boldsymbol{\beta}}) = \frac{N}{N - K - 1}\left(\mathbf{X}'\mathbf{X}\right)^{-1}\left(\sum_{i=1}^N \hat{\varepsilon}_i^2 \mathbf{x}_i \mathbf{x}_i'\right)\left(\mathbf{X}'\mathbf{X}\right)^{-1} \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Dạng hàm tuyến tính theo tham số được xác định đúng, không bỏ sót biến giải thích quan trọng có tương quan với các biến trong mô hình.
+2. Kỳ vọng có điều kiện của sai số bằng không $\mathbb{E}[\varepsilon_i \mid \mathbf{X}_i] = 0$, đảm bảo tính không chệch và vững tiệm cận của ước lượng.
+3. Ma trận thiết kế $\mathbf{X}$ có hạng cột đầy đủ, không xảy ra đa cộng tuyến hoàn hảo và sử dụng sai số chuẩn vững HC1/Cluster khi có phương sai thay đổi.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 07 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/msitk21u1/c7/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Khi tồn tại biến giải thích nội sinh do đồng thời hai chiều, sai số đo lường hoặc bỏ sót biến không quan sát được, ước lượng OLS bị chệch và không vững; cần chuyển sang ước lượng biến công cụ IV/2SLS hoặc GMM."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Phân tích biến định tính cơ bản trong Stata
+
+Phân tích biến định tính cơ bản trong Stata Basic analysis of categorical predictors in Stata Từ so sánh đơn giản đến phân tích đa chiều Chào mừng các bạn đến với bài học đầu tiên trong chuỗi bài về phân tích biến dự báo định tính. Trong nghiên cứu, một trong những câu hỏi cơ bản nhất chúng ta thường đặt ra là: "Liệu có sự khác biệt nào giữa các nhóm không?". Ví dụ, liệu mức thu nhập trung bình của nam và nữ có khác nhau? Liệu hiệu quả của một chính sách có khác biệt giữa khu vực thành thị và nông thôn?
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Từ so sánh đơn giản đến phân tích đa chiều**
+- **So sánh trung bình giữa các nhóm**
+- **So sánh trung bình hai nhóm với kiểm định t**
+- **So sánh trung bình nhiều nhóm với ANOVA**
+- **Giá trị trung bình điều chỉnh và lệnh margins**
+- **Quy trình phân tích biến định tính cơ bản**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c7/phan-tich-bien-dinh-tinh-co-ban-trong-stata/)
+
+### 2.2. So sánh nhóm với toán tử tương phản
+
+So sánh nhóm với toán tử tương phản Comparing groups with contrast operators Vượt xa kiểm định F tổng thể Ở Bài 1, chúng ta đã học cách sử dụng lệnh anova để kiểm tra xem có sự khác biệt tổng thể về giá trị trung bình giữa các nhóm hay không, và dùng margins cùng marginsplot để tính toán và trực quan hóa các giá trị trung bình điều chỉnh. Tuy nhiên, kiểm định F tổng thể của ANOVA chỉ cho chúng ta biết có sự khác biệt, chứ không nói rõ nhóm nào khác nhóm nào, hoặc mối quan hệ cụ thể giữa các nhóm là gì.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Vượt xa kiểm định f tổng thể**
+- **Các toán tử tương phản và ý nghĩa**
+- **Lệnh contrast và các toán tử**
+- **Quy trình phân tích với các toán tử tương phản cơ bản**
+- **Ứng dụng các toán tử tương phản**
+- **1. Toán tử R.: So sánh với nhóm tham chiếu**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c7/so-sanh-nhom-voi-toan-tu-tuong-phan-phan-1/)
+
+### 2.3. So sánh nhóm với toán tử tương phản
+
+So sánh nhóm với toán tử tương phản Comparing groups with contrast operators Khám phá các mối quan hệ phức tạp Trong bài học trước, chúng ta đã làm quen với các toán tử tương phản cơ bản, giúp so sánh các nhóm với một nhóm tham chiếu, với trung bình chung, hoặc với các nhóm kề nhau. Những kỹ thuật này rất mạnh mẽ, nhưng đôi khi câu hỏi nghiên cứu của chúng ta đòi hỏi những phép so sánh phức tạp hơn.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Khám phá các mối quan hệ phức tạp**
+- **Tương phản helmert và tương phản đa thức**
+- **So sánh helmert : Tìm kiếm điểm ngưỡng**
+- **Tương phản đa thức : Phân tích xu hướng**
+- **Quy trình phân tích với các toán tử tương phản nâng cao**
+- **Tìm ngưỡng tác dụng và phân tích xu hướng**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c7/so-sanh-nhom-voi-toan-tu-tuong-phan-phan-2/)
+
+### 2.4. Tương phản tùy chỉnh và tương phản theo trọng số
+
+Tương phản tùy chỉnh và tương phản theo trọng số Custom contrasts and weighted contrasts Khi những công cụ có sẵn là không đủ Trong các bài học trước, chúng ta đã khám phá một loạt các toán tử tương phản mạnh mẽ như r., g., h., giúp tự động hóa nhiều phép so sánh phổ biến. Tuy nhiên, trong nghiên cứu thực tế, các giả thuyết của chúng ta đôi khi rất đặc thù và không thể biểu diễn bằng bất kỳ toán tử có sẵn nào.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Khi những công cụ có sẵn là không đủ**
+- **Xây dựng và điều chỉnh các phép so sánh**
+- **1. Logic của tương phản tùy chỉnh**
+- **⚠️ QUY tắc bắt buộc: Tổng các hệ số phải bằng 0**
+- **2. Ước lượng cân bằng vs. ước lượng theo quan sát**
+- **Quy trình phân tích với tương phản tùy chỉnh và theo trọng số**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c7/tuong-phan-tuy-chinh-va-tuong-phan-theo-trong-so/)
+
+### 2.5. Thực hành tổng hợp và các lưu ý chuyên sâu
+
+Thực hành tổng hợp và các lưu ý chuyên sâu Practice synthesis and in-depth considerations Hoàn thiện bộ công cụ phân tích Chào mừng các bạn đến với bài học thực hành cuối cùng của chuỗi bài viết. Trải qua bốn bài học, chúng ta đã xây dựng một bộ công cụ phân tích biến định tính vô cùng mạnh mẽ.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Hoàn thiện bộ công cụ phân tích**
+- **Các vấn đề thực tiễn trong so sánh nhóm**
+- **1. So sánh cặp và vấn đề so sánh bội**
+- **2. Diễn giải khoảng tin cậy trên biểu đồ**
+- **3. Sự tương đương giữa ANOVA và regress**
+- **Quy trình thực hành tổng hợp**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c7/thuc-hanh-tong-hop-va-cac-luu-y-chuyen-sau/)
+
+### 2.6. Hệ thống hóa kiến thức và định hướng nâng cao
+
+Làm chủ phân tích biến định tính trong Stata Synthesis: Mastering the analysis of categorical predictors in Stata Từ câu hỏi đơn giản đến câu chuyện dữ liệu phức tạp Trong suốt chuỗi bài viết này, chúng ta đã thực hiện một hành trình toàn diện, đi từ những viên gạch nền tảng nhất đến các kỹ thuật phân tích tinh vi dành cho biến dự báo định tính.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Từ câu hỏi đơn giản đến câu chuyện dữ liệu phức tạp**
+- **Các khối kiến thức cốt lõi**
+- **1. Nền tảng của so sánh nhóm**
+- **2. Trung bình điều chỉnh và tương phản**
+- **3. Hệ thống các toán tử tương phản**
+- **4. Các vấn đề nâng cao**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c7/he-thong-hoa-kien-thuc-va-dinh-huong-nang-cao/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Phân tích biến định tính cơ bản trong Stata</h3>
-    <p>Phân tích biến định tính cơ bản trong Stata Basic analysis of categorical predictors in Stata Từ so sánh đơn giản đến phân tích đa chiều Chào mừng các bạn đến với bài học đầu tiên trong chuỗi bài về phân tích biến dự báo định tính. Trong nghiên cứu, một trong  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c7/phan-tich-bien-dinh-tinh-co-ban-trong-stata/" target="_blank" rel="noopener">Phân tích biến định tính cơ bản trong Stata</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>7. Biến dự báo định tính</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: So sánh nhóm với toán tử tương phản</h3>
-    <p>So sánh nhóm với toán tử tương phản Comparing groups with contrast operators Vượt xa kiểm định F tổng thể Ở Bài 1, chúng ta đã học cách sử dụng lệnh anova để kiểm tra xem có sự khác biệt tổng thể về giá trị trung bình giữa các nhóm hay không, và dùng margins c Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c7/so-sanh-nhom-voi-toan-tu-tuong-phan-phan-1/" target="_blank" rel="noopener">So sánh nhóm với toán tử tương phản</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: So sánh nhóm với toán tử tương phản</h3>
-    <p>So sánh nhóm với toán tử tương phản Comparing groups with contrast operators Khám phá các mối quan hệ phức tạp Trong bài học trước, chúng ta đã làm quen với các toán tử tương phản cơ bản, giúp so sánh các nhóm với một nhóm tham chiếu, với trung bình chung, hoặ Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c7/so-sanh-nhom-voi-toan-tu-tuong-phan-phan-2/" target="_blank" rel="noopener">So sánh nhóm với toán tử tương phản</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c7/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Tương phản tùy chỉnh và tương phản theo trọng số</h3>
-    <p>Tương phản tùy chỉnh và tương phản theo trọng số Custom contrasts and weighted contrasts Khi những công cụ có sẵn là không đủ Trong các bài học trước, chúng ta đã khám phá một loạt các toán tử tương phản mạnh mẽ như r., g., h., giúp tự động hóa nhiều phép so s Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c7/tuong-phan-tuy-chinh-va-tuong-phan-theo-trong-so/" target="_blank" rel="noopener">Tương phản tùy chỉnh và tương phản theo trọng số</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 5: Thực hành tổng hợp và các lưu ý chuyên sâu</h3>
-    <p>Thực hành tổng hợp và các lưu ý chuyên sâu Practice synthesis and in-depth considerations Hoàn thiện bộ công cụ phân tích Chào mừng các bạn đến với bài học thực hành cuối cùng của chuỗi bài viết. Trải qua bốn bài học, chúng ta đã xây dựng một bộ công cụ phân t Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c7/thuc-hanh-tong-hop-va-cac-luu-y-chuyen-sau/" target="_blank" rel="noopener">Thực hành tổng hợp và các lưu ý chuyên sâu</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Bước 6: Hệ thống hóa kiến thức và định hướng nâng cao</h3>
-    <p>Làm chủ phân tích biến định tính trong Stata Synthesis: Mastering the analysis of categorical predictors in Stata Từ câu hỏi đơn giản đến câu chuyện dữ liệu phức tạp Trong suốt chuỗi bài viết này, chúng ta đã thực hiện một hành trình toàn diện, đi từ những viê Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/msitk21u1/c7/he-thong-hoa-kien-thuc-va-dinh-huong-nang-cao/" target="_blank" rel="noopener">Hệ thống hóa kiến thức và định hướng nâng cao</a>.</p>
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập môi trường, ước lượng mô hình và kiểm định chẩn đoán toàn diện
 version 18.0
 clear all
 set more off
+import delimited "sachktl_empirical_ecodata.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_msitk21u1_c07_ecodata.csv", clear encoding("utf-8")
 describe
-summarize
+summarize y x1 x2 x3, detail
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
+* 1. Ước lượng mô hình cơ sở và kiểm định phương sai thay đổi / đa cộng tuyến / dạng hàm
+regress y x1 x2 x3
 estat hettest
+estat imtest, white
 estat vif
+estat ovtest
+
+* 2. Ước lượng với sai số chuẩn vững White HC1 và xuất tác động biên
+regress y c.x1##c.x2 x3, vce(robust)
+margins, dydx(x1 x2 x3)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện phân tích kinh tế lượng và thực thi kiểm định chẩn đoán
 library(tidyverse)
 library(lmtest)
 library(sandwich)
+library(car)
 
-df <- read.csv("sachktl_msitk21u1_c07_ecodata.csv")
+df <- read.csv("sachktl_empirical_ecodata.csv")
 summary(df)
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
+# 1. Ước lượng mô hình tuyến tính và kiểm định Breusch-Pagan, RESET, VIF
 fit <- lm(y ~ x1 + x2 + x3, data = df)
+bptest(fit)
+resettest(fit, power = 2:3, type = "fitted")
+vif(fit)
+
+# 2. Xuất bảng hệ số ước lượng với sai số chuẩn vững HC1
 coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
 ```
 
@@ -144,35 +261,53 @@ coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và thực thi ước lượng kèm chẩn đoán phần dư
 import pandas as pd
+import statsmodels.api as sm
 import statsmodels.formula.api as smf
+from statsmodels.stats.diagnostic import het_breuschpagan, linear_reset
+from statsmodels.stats.outliers_influence import variance_inflation_factor
 
-df = pd.read_csv("sachktl_msitk21u1_c07_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_empirical_ecodata.csv")
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
+# 1. Ước lượng mô hình với sai số chuẩn vững HC1
 model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
 print(model.summary())
+
+# 2. Kiểm định phương sai thay đổi Breusch-Pagan, Ramsey RESET và hệ số VIF
+bp_lm, bp_pval, _, _ = het_breuschpagan(model.resid, model.model.exog)
+reset_res = linear_reset(model, power=2, use_f=True)
+X = sm.add_constant(df[["x1", "x2", "x3"]].dropna())
+vifs = {col: variance_inflation_factor(X.values, i) for i, col in enumerate(X.columns)}
+print(f"Breusch-Pagan p={bp_pval:.4f} | RESET p={reset_res.pvalue:.4f} | VIF={vifs}")
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 07: 7. biến dự báo định tính trên SachKTL"
+  title="Hướng dẫn thực hành 7. Biến dự báo định tính trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 07 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Phân tích biến định tính cơ bản trong Stata | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c7/phan-tich-bien-dinh-tinh-co-ban-trong-stata/) |
-| **Bài 02** | So sánh nhóm với toán tử tương phản | Stata 18 MP, R 4.x | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c7/so-sanh-nhom-voi-toan-tu-tuong-phan-phan-1/) |
-| **Bài 03** | So sánh nhóm với toán tử tương phản | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c7/so-sanh-nhom-voi-toan-tu-tuong-phan-phan-2/) |
-| **Bài 04** | Tương phản tùy chỉnh và tương phản theo trọng số | Stata 18 MP, R 4.x | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c7/tuong-phan-tuy-chinh-va-tuong-phan-theo-trong-so/) |
-| **Bài 05** | Thực hành tổng hợp và các lưu ý chuyên sâu | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c7/thuc-hanh-tong-hop-va-cac-luu-y-chuyen-sau/) |
-| **Bài 06** | Hệ thống hóa kiến thức và định hướng nâng cao | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c7/he-thong-hoa-kien-thuc-va-dinh-huong-nang-cao/) |
+| **7.1** | Phân tích biến định tính cơ bản trong Stata | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c7/phan-tich-bien-dinh-tinh-co-ban-trong-stata/) |
+| **7.2** | So sánh nhóm với toán tử tương phản | `Stata 18 MP, R 4.x` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c7/so-sanh-nhom-voi-toan-tu-tuong-phan-phan-1/) |
+| **7.3** | So sánh nhóm với toán tử tương phản | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c7/so-sanh-nhom-voi-toan-tu-tuong-phan-phan-2/) |
+| **7.4** | Tương phản tùy chỉnh và tương phản theo trọng số | `Stata 18 MP, R 4.x` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c7/tuong-phan-tuy-chinh-va-tuong-phan-theo-trong-so/) |
+| **7.5** | Thực hành tổng hợp và các lưu ý chuyên sâu | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c7/thuc-hanh-tong-hop-va-cac-luu-y-chuyen-sau/) |
+| **7.6** | Hệ thống hóa kiến thức và định hướng nâng cao | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/msitk21u1/c7/he-thong-hoa-kien-thuc-va-dinh-huong-nang-cao/) |

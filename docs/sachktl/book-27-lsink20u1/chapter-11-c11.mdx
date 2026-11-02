@@ -1,19 +1,19 @@
 ---
 id: chapter-11-c11
-title: "Chương 11: 11. mô hình hóa biến động"
-sidebar_label: "Chương 11: 11. Mô hình hóa biến động"
+title: "11. Mô hình hóa biến động"
+sidebar_label: "11. Mô hình hóa biến động"
 sidebar_position: 12
-description: "Hướng dẫn thực hành How-To Chương 11: 11. mô hình hóa biến động thuộc bộ sách Kinh tế lượng tài chính: Mô hình và Phương pháp trên SachKTL kèm kịch bản Stata, R, Python và liên kết dữ liệu EcoData, Finco, EcoLab."
+description: "Hướng dẫn thực hành chuyên sâu 11. Mô hình hóa biến động thuộc giáo trình Kinh tế lượng tài chính: Mô hình và phương pháp trên SachKTL kèm công thức toán học, phân tích 8 bài học và kịch bản Stata, R, Python."
 ---
 
-# Chương 11: 11. mô hình hóa biến động
+# 11. Mô hình hóa biến động
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương pháp luận và quy trình triển khai của **Chương 11: 11. mô hình hóa biến động** thuộc [**Bộ sách 27: kinh tế lượng tài chính: mô hình và phương pháp**](/sachktl/book-27-lsink20u1/), kết nối trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/lsink20u1/c11/](https://sachktl.tnsai.vn/vi/lsink20u1/c11/).
+Tài liệu hướng dẫn thực hành này trình bày toàn diện cơ sở lý thuyết, hệ phương trình toán học, nội dung chi tiết của **8 bài học chuyên đề** và quy trình ước lượng đa phần mềm cho **11. Mô hình hóa biến động** thuộc bộ giáo trình [**Kinh tế lượng tài chính: Mô hình và phương pháp**](/sachktl/book-27-lsink20u1/), đối chiếu trực tiếp với nguồn học liệu gốc tại [https://sachktl.tnsai.vn/vi/lsink20u1/c11/](https://sachktl.tnsai.vn/vi/lsink20u1/c11/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chương 11: 11. mô hình hóa biến động">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="11. Mô hình hóa biến động">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BỘ SÁCH 27 · CHƯƠNG 11</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chương 11: 11. mô hình hóa biến động</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Thuộc bộ giáo trình: Kinh tế lượng tài chính: Mô hình và Phương pháp · 8 bài học chuy</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng tài chính: Mô hình và </text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">11. Mô hình hóa biến động</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Kinh tế lượng chuỗi thời gian, đồng liên kết và biến động tài chính · 8 bài học chuyê</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,140 +41,305 @@ Tài liệu hướng dẫn thực hành này tổng hợp trọn vẹn phương 
   </svg>
 </div>
 
-## 1. Ý nghĩa phương pháp luận và phạm vi áp dụng
+## 1. Cơ sở phương pháp luận, biểu diễn toán học và giả thiết nhận dạng
 
-Giới thiệu về biến động trong tài chính An introduction to financial volatility Tổng quan về chủ đề Biến động Chào các bạn sinh viên, chào mừng đến với chuỗi bài học chuyên sâu về một trong những khái niệm hấp dẫn và quan trọng nhất trong tài chính hiện đại: Biến động. Nếu bạn từng tự hỏi tại sao thị trường chứng khoán có những ngày "sóng yên biển lặng" nhưng cũng có những ngày "bão tố" với giá cả thay đổi chóng mặt, thì câu trả lời nằm ở khái niệm biến động. Hiểu một cách đơn giản, biến động là thước đo mức độ và tốc độ thay đổi giá của một tài sản tài chính theo thời gian. Một
+Giới thiệu về biến động trong tài chính An introduction to financial volatility Tổng quan về chủ đề Biến động Chào các bạn sinh viên, chào mừng đến với chuỗi bài học chuyên sâu về một trong những khái niệm hấp dẫn và quan trọng nhất trong tài chính hiện đại: Biến động. Nếu bạn từng tự hỏi tại sao thị trường chứng khoán có những ngày "sóng yên biển lặng" nhưng cũng có những ngày "bão tố" với giá cả thay đổi chóng mặt, thì câu trả lời nằm ở khái niệm biến động. Hiểu một cách đơn giản, biến động là thước đo mức độ và tốc độ thay đổi giá của một tài sản tài chính theo thời gian.
 
-- **Chủ đề học thuật trọng tâm**: Tổng quan về chủ đề Biến động, CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO.
-- **Môi trường phần mềm thực hành**: `Stata 18 MP`.
-- **Nguồn dữ liệu thực nghiệm khuyến nghị**: Kho dữ liệu vĩ mô, doanh nghiệp và khảo sát Việt Nam tại [EcoData](https://ecodata.io.vn), dữ liệu thị trường tài chính và hàng hóa tại [Finco](https://www.finco.vn), đối chiếu mô hình tại [VietLOD](https://vietlod.tnsai.vn) và tự động hóa ước lượng tại [EcoLab](https://ecolab.io.vn).
+### 1.1. Hệ phương trình cấu trúc và công thức ước lượng đại diện
+
+$$
+\Phi(L)(1 - L)^d Y_t = \mu + \Theta(L)\varepsilon_t, \quad \varepsilon_t \mid \mathcal{F}_{t-1} \sim \mathcal{N}(0, \sigma_t^2) \tag*{[1]}
+$$
+
+$$
+\sigma_t^2 = \omega + \sum_{i=1}^p \alpha_i \varepsilon_{t-i}^2 + \sum_{j=1}^q \beta_j \sigma_{t-j}^2, \quad \omega > 0, \; \alpha_i, \beta_j \ge 0 \tag*{[2]}
+$$
+
+### 1.2. Các giả thiết nhận dạng và điều kiện áp dụng
+
+1. Chuỗi thời gian phải thỏa mãn điều kiện dừng hiệp phương sai hoặc được sai phân hóa đến bậc tích hợp $I(d)$ phù hợp trước khi ước lượng.
+2. Điều kiện khả nghịch và nghiệm ngoài vòng tròn đơn vị của đa thức trễ $\Phi(L)$ và $\Theta(L)$ đảm bảo tính ổn định động học.
+3. Trong mô hình phương sai có điều kiện thay đổi GARCH, tổng hệ số $\sum \alpha_i + \sum \beta_j < 1$ bảo đảm phương sai không điều kiện hữu hạn.
 
 <FeatureCards
   features={[
     {
-      title: "Học liệu gốc trên SachKTL",
-      description: "Đọc toàn văn lý thuyết, chứng minh toán thống kê và ví dụ mẫu của Chương 11 trên chuyên trang SachKTL.",
+      title: "Giáo trình gốc trên SachKTL",
+      description: "Đọc toàn văn lý thuyết, chứng minh định lý toán thống kê và bài tập giải mẫu của chương học trên chuyên trang SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/lsink20u1/c11/"
     },
     {
-      title: "Dữ liệu thực hành EcoData & Finco",
-      description: "Trích xuất dữ liệu kinh tế, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
+      title: "Kho dữ liệu chuẩn EcoData & Finco",
+      description: "Trích xuất dữ liệu kinh tế vĩ mô, tài chính doanh nghiệp và khảo sát hộ gia đình Việt Nam để thực hành ngay các bài học trong chương.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
-      title: "Phòng thí nghiệm tự động EcoLab",
-      description: "Thực thi ước lượng mô hình, kiểm định giả thuyết và xuất bảng kết quả chuẩn tạp chí quốc tế tự động.",
+      title: "Ước lượng tự động trên EcoLab",
+      description: "Thực thi ước lượng mô hình, kiểm định chẩn đoán tự động và xuất bảng kết quả chuẩn tạp chí quốc tế APA 7th / AER.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Quy trình thực hành từng bước cho các bài học trong chương
+<FeatureNotAvailable
+  feature="Áp dụng máy móc ước lượng cơ sở khi vi phạm giả thiết nhận dạng"
+  reason="Hồi quy chuỗi thời gian không dừng chưa qua kiểm định nghiệm đơn vị ADF/PP và đồng liên kết Johansen dễ dẫn đến hồi quy giả mạo với thống kê $t$ và $R^2$ bị thổi phồng."
+  alternative="Thực hiện đầy đủ bộ kiểm định chẩn đoán ở Bước 4 và chuyển sang mô hình hiệu chỉnh tương ứng trên VietLOD hoặc EcoLab."
+/>
+
+## 2. Phân tích chuyên sâu từng bài học trong chương
+
+### 2.1. Các khái niệm nền tảng và biến động ngụ ý
+
+Các khái niệm nền tảng và biến động ngụ ý Foundations and implied volatility Giới thiệu Chào mừng các bạn đã quay trở lại với chuỗi bài học về biến động. Trong bài học đầu tiên này, chúng ta sẽ cùng nhau xây dựng những viên gạch nền tảng vững chắc nhất. Trước khi đi sâu vào các mô hình phức tạp, điều quan trọng là phải trả lời được câu hỏi cốt lõi: "Tại sao biến động lại quan trọng đến vậy?".
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Tại sao biến động lại quan trọng?**
+- **1. Định giá tài sản**
+- **2. Quản trị rủi ro**
+- **3. Phân bổ danh mục đầu tư**
+- **4. Chất lượng thị trường**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c11/cac-khai-niem-nen-tang-va-bien-dong-ngu-y/)
+
+### 2.2. Biến động trong kỳ và biến động hiện thực
+
+Biến động trong kỳ và biến động hiện thực Intra-period and realized volatility Giới thiệu Chào mừng các bạn đến với bài học thứ hai trong chuỗi bài về biến động. Ở bài trước, chúng ta đã khám phá cách "nhìn thấu" kỳ vọng của thị trường thông qua biến động ngụ ý và chỉ số VIX. Đó là một cách tiếp cận hướng tới tương lai . Trong bài học hôm nay, chúng ta sẽ chuyển sang một góc nhìn hoàn toàn khác: phân tích những gì đã thực sự diễn ra.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Các phương pháp đo lường biến động hậu kiểm**
+- **1. Biến động trong kỳ**
+- **2. Biến động hiện thực**
+- **3. Biến động dựa trên khoảng giá**
+- **Quy trình tính toán biến động hàng năm từ dữ liệu hàng ngày**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c11/bien-dong-trong-ky-va-bien-dong-hien-thuc/)
+
+### 2.3. Giới thiệu mô hình ARCH
+
+Giới thiệu mô hình ARCH Introduction to the ARCH model Giới thiệu Chào mừng các bạn đến với bài học thứ ba. Trong hai bài học trước, chúng ta đã tiếp cận biến động như một đại lượng có thể đo lường được, hoặc từ kỳ vọng thị trường hoặc từ dữ liệu lịch sử . Tuy nhiên, các phương pháp đó chỉ cho chúng ta biết "biến động là bao nhiêu" tại một thời điểm, chứ chưa giải thích được "tại sao biến động lại thay đổi theo thời gian". Tại sao thị trường lại có những giai đoạn biến động cao kéo dài, theo sau là những giai đoạn tương đối bình lặng?
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Nền tảng lý thuyết: Tại sao cần mô hình phi tuyến?**
+- **Mô hình ARCH**
+- **Các thuộc tính quan trọng của ARCH**
+- **1. Phương sai không điều kiện**
+- **2. Kurtosis và đuôi dày**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c11/gioi-thieu-mo-hinh-arch/)
+
+### 2.4. Mô hình GARCH và các phiên bản bất đối xứng
+
+Mô hình GARCH và các phiên bản bất đối xứng The GARCH model and asymmetric versions Giới thiệu Chào mừng các bạn đã quay trở lại! Trong bài học trước, chúng ta đã có một bước tiến lớn khi tìm hiểu mô hình ARCH, công cụ đầu tiên giúp chúng ta mô hình hóa hiện tượng cụm biến động. Tuy nhiên, mô hình ARCH trong thực tế vẫn còn một số hạn chế. Để nắm bắt được "bộ nhớ" dài của biến động, các nhà nghiên cứu thường phải sử dụng một mô hình ARCH với rất nhiều bậc trễ với p lớn), điều này làm mô hình trở nên cồng kềnh và khó ước lượng.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Nền tảng lý thuyết: Từ ARCH đến GARCH**
+- **Mô hình GARCH**
+- **Tính dừng và phương sai không điều kiện**
+- **Mô hình bất đối xứng: Tác động của tin tốt và tin xấu**
+- **1. Mô hình EGARCH**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c11/mo-hinh-garch-va-cac-phien-ban-bat-doi-xung/)
+
+### 2.5. Ước lượng và kiểm định mô hình GARCH
+
+Ước lượng và kiểm định mô hình GARCH Estimation and testing of GARCH models Giới thiệu Chào mừng các bạn đã quay trở lại! Trong các bài học trước, chúng ta đã xây dựng một bộ công cụ mạnh mẽ với các mô hình GARCH, GJR-GARCH và EGARCH để mô tả động lực học phức tạp của biến động tài chính. Chúng ta đã hiểu được "linh hồn" của các mô hình này, nhưng vẫn còn một bước cực kỳ quan trọng để biến lý thuyết thành ứng dụng thực tế: làm thế nào để "gán" những con số cụ thể cho các tham số như $\omega, \gamma, \beta, \delta$ từ dữ liệu thực tế?
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **Nguyên lý ước lượng hợp lý tối đa**
+- **Hợp lý tối đa giả**
+- **Quy trình 3 Bước ước lượng và kiểm định**
+- **Ví dụ minh họa bằng Stata**
+- **Tổng kết**
+
+- **Môi trường thực hành:** `Stata 18 MP` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c11/uoc-luong-va-kiem-dinh-mo-hinh-garch/)
+
+### 2.6. Các chủ đề nâng cao trong mô hình biến động
+
+Các chủ đề nâng cao trong mô hình biến động Advanced topics in volatility modeling Giới thiệu Chào mừng các bạn đến với bài học thứ sáu! Cho đến nay, chúng ta đã xây dựng một nền tảng rất vững chắc với họ mô hình GARCH. Chúng ta đã học cách nắm bắt hiện tượng cụm biến động, hiệu ứng đòn bẩy, và quy trình ước lượng, kiểm định một cách khoa học. Tuy nhiên, thế giới của các mô hình biến động không chỉ dừng lại ở đó. Các mô hình GARCH, dù rất mạnh mẽ, vẫn dựa trên một giả định cốt lõi: biến động là một hàm xác định của các thông tin trong quá khứ.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **Giới thiệu**
+- **1. Mô hình biến động ngẫu nhiên**
+- **2. Mô hình bộ nhớ dài và FIGARCH**
+- **3. Mô hình GARCH đa biến**
+- **Ví dụ minh họa: Ước lượng mô hình DCC-GARCH trong Stata**
+- **Tổng kết**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c11/cac-chu-de-nang-cao-trong-mo-hinh-bien-dong/)
+
+### 2.7. Thực hành phân tích biến động với Stata
+
+Thực hành phân tích biến động với Stata Volatility analysis in Stata a practical guide 1. Tóm tắt tổng hợp kiến thức Chào mừng các bạn đến với bài học thực hành cuối cùng của chuỗi bài về biến động! Trong sáu bài học vừa qua, chúng ta đã cùng nhau xây dựng một nền tảng kiến thức vững chắc. Chúng ta bắt đầu bằng việc hiểu tại sao biến động lại quan trọng, sau đó học cách đo lường nó qua biến động ngụ ý và biến động hiện thực.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Tóm tắt tổng hợp kiến thức**
+- **2. Chuẩn bị dữ liệu**
+- **3. Quy trình phân tích từng bước với Stata**
+- **4. Hướng dẫn thực hành chi tiết**
+- **Bước 1: Nhận dạng và ước lượng**
+- **Bước 2: Kiểm định chẩn đoán cho mô hình GJR-GARCH**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c11/thuc-hanh-phan-tich-bien-dong-voi-stata/)
+
+### 2.8. Tổng hợp và hệ thống hóa kiến thức
+
+Tổng hợp chuỗi bài học về biến động A synthesis of volatility modeling 1. Tổng quan chủ đề Biến động Chào mừng các bạn đến với bài viết tổng kết chuỗi bài học về biến động. Chúng ta đã cùng nhau trải qua một hành trình khám phá sâu rộng, từ việc trả lời câu hỏi cơ bản "Biến động là gì?" cho đến việc triển khai các mô hình kinh tế lượng phức tạp để nắm bắt và dự báo nó. Giờ là lúc chúng ta lùi lại một bước, nhìn vào bức tranh toàn cảnh để thấy được vị trí và tầm quan trọng của chủ đề này trong lĩnh vực kinh tế lượng tài chính hiện đại.
+
+**Các nội dung học thuật trọng tâm trong bài học:**
+
+- **1. Tổng quan chủ đề biến động**
+- **2. Hệ thống lý thuyết**
+- **Trụ cột 1: Đo lường biến động**
+- **Trụ cột 2: Mô hình GARCH và các mở rộng**
+- **Trụ cột 3: Các chủ đề nâng cao**
+- **3. Hệ thống phương pháp**
+
+- **Môi trường thực hành:** `Stata 18 MP, R 4.x, Python 3.11+` · **Tài liệu gốc:** [Đọc toàn văn bài học tại SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c11/tong-hop-va-he-thong-hoa-kien-thuc/)
+
+## 3. Quy trình thực hành chuẩn từng bước trên dữ liệu thực nghiệm
 
 <Steps>
   <div className="step-item">
-    <h3>Bước 1: Các khái niệm nền tảng và biến động ngụ ý</h3>
-    <p>Các khái niệm nền tảng và biến động ngụ ý Foundations and implied volatility Giới thiệu Chào mừng các bạn đã quay trở lại với chuỗi bài học về biến động. Trong bài học đầu tiên này, chúng ta sẽ cùng nhau xây dựng những viên gạch nền tảng vững chắc nhất. Trước  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/lsink20u1/c11/cac-khai-niem-nen-tang-va-bien-dong-ngu-y/" target="_blank" rel="noopener">Các khái niệm nền tảng và biến động ngụ ý</a>.</p>
+    <h3>1. Xác định câu hỏi nghiên cứu và chuẩn bị dữ liệu trên EcoData & Finco</h3>
+    <p>Xác định biến phụ thuộc, nhóm biến giải thích trọng tâm và biến kiểm soát phù hợp với nội dung <strong>11. Mô hình hóa biến động</strong>. Trích xuất chuỗi dữ liệu thực nghiệm Việt Nam từ <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> hoặc <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, kiểm tra giá trị khuyết thiếu và ngoại lai trước khi đưa vào mô hình.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 2: Biến động trong kỳ và biến động hiện thực</h3>
-    <p>Biến động trong kỳ và biến động hiện thực Intra-period and realized volatility Giới thiệu Chào mừng các bạn đến với bài học thứ hai trong chuỗi bài về biến động. Ở bài trước, chúng ta đã khám phá cách "nhìn thấu" kỳ vọng của thị trường thông qua biến động ngụ  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/lsink20u1/c11/bien-dong-trong-ky-va-bien-dong-hien-thuc/" target="_blank" rel="noopener">Biến động trong kỳ và biến động hiện thực</a>.</p>
+    <h3>2. Thống kê mô tả, ma trận tương quan và kiểm tra tiền ước lượng</h3>
+    <p>Phân tích phân phối thực nghiệm của các biến, lập bảng thống kê mô tả theo nhóm và kiểm tra hiện tượng đa cộng tuyến thông qua ma trận tương quan cặp cũng như nhân tử phóng đại phương sai VIF.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 3: Giới thiệu mô hình ARCH</h3>
-    <p>Giới thiệu mô hình ARCH Introduction to the ARCH model Giới thiệu Chào mừng các bạn đến với bài học thứ ba. Trong hai bài học trước, chúng ta đã tiếp cận biến động như một đại lượng có thể đo lường được, hoặc từ kỳ vọng thị trường hoặc từ dữ liệu lịch sử . Tuy Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/lsink20u1/c11/gioi-thieu-mo-hinh-arch/" target="_blank" rel="noopener">Giới thiệu mô hình ARCH</a>.</p>
+    <h3>3. Ước lượng mô hình chuẩn trên Stata 18 MP, R 4.x và Python 3.11+</h3>
+    <p>Thực thi kịch bản ước lượng tham số theo đúng cấu trúc phương trình toán học đã thiết lập ở Mục 1.1, đồng thời kết hợp đối chiếu với các bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/lsink20u1/c11/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 4: Mô hình GARCH và các phiên bản bất đối xứng</h3>
-    <p>Mô hình GARCH và các phiên bản bất đối xứng The GARCH model and asymmetric versions Giới thiệu Chào mừng các bạn đã quay trở lại! Trong bài học trước, chúng ta đã có một bước tiến lớn khi tìm hiểu mô hình ARCH, công cụ đầu tiên giúp chúng ta mô hình hóa hiện t Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/lsink20u1/c11/mo-hinh-garch-va-cac-phien-ban-bat-doi-xung/" target="_blank" rel="noopener">Mô hình GARCH và các phiên bản bất đối xứng</a>.</p>
+    <h3>4. Kiểm định chẩn đoán sau ước lượng và hiệu chỉnh sai số chuẩn vững</h3>
+    <p>Kiểm tra phương sai sai số thay đổi, tự tương quan chuỗi, dạng hàm Ramsey RESET và tính nội sinh của biến giải thích. Áp dụng sai số chuẩn vững White HC1 hoặc cụm cá thể để bảo đảm suy diễn thống kê chính xác.</p>
   </div>
   <div className="step-item">
-    <h3>Bước 5: Ước lượng và kiểm định mô hình GARCH</h3>
-    <p>Ước lượng và kiểm định mô hình GARCH Estimation and testing of GARCH models Giới thiệu Chào mừng các bạn đã quay trở lại! Trong các bài học trước, chúng ta đã xây dựng một bộ công cụ mạnh mẽ với các mô hình GARCH, GJR-GARCH và EGARCH để mô tả động lực học phức Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/lsink20u1/c11/uoc-luong-va-kiem-dinh-mo-hinh-garch/" target="_blank" rel="noopener">Ước lượng và kiểm định mô hình GARCH</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Bước 6: Các chủ đề nâng cao trong mô hình biến động</h3>
-    <p>Các chủ đề nâng cao trong mô hình biến động Advanced topics in volatility modeling Giới thiệu Chào mừng các bạn đến với bài học thứ sáu! Cho đến nay, chúng ta đã xây dựng một nền tảng rất vững chắc với họ mô hình GARCH. Chúng ta đã học cách nắm bắt hiện tượng  Tham khảo chi tiết bài học gốc tại <a href="https://sachktl.tnsai.vn/vi/lsink20u1/c11/cac-chu-de-nang-cao-trong-mo-hinh-bien-dong/" target="_blank" rel="noopener">Các chủ đề nâng cao trong mô hình biến động</a>.</p>
+    <h3>5. Tổng hợp bảng kết quả chuẩn tạp chí quốc tế và đối chiếu trên EcoLab</h3>
+    <p>Trình bày hệ số ước lượng, sai số chuẩn trong ngoặc đơn và ký hiệu mức ý nghĩa thống kê theo chuẩn APA 7th / AER Booktabs, hoặc tự động hóa toàn bộ quy trình báo cáo trên <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> và <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Minh họa kịch bản thực hành trên Stata, R và Python
+## 4. Kịch bản mã lệnh thực hành trên Stata, R và Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Thiết lập môi trường và nạp dữ liệu thực hành từ EcoData / SachKTL
+* Thiết lập chuỗi thời gian, kiểm định nghiệm đơn vị và ước lượng ARIMA / GARCH
 version 18.0
 clear all
 set more off
+import delimited "sachktl_timeseries_finco.csv", clear encoding("utf-8")
 
-* Nạp bộ dữ liệu thực nghiệm chuẩn hóa
-import delimited "sachktl_lsink20u1_c11_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+tsset time_id
+dfuller y, lags(4) trend regress
+pperron y, lags(4) trend
 
-* Ước lượng mô hình và kiểm định chẩn đoán với sai số chuẩn vững
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 1. Ước lượng mô hình ARIMA và kiểm định nhiễu trắng phần dư
+arima y, arima(1,1,1) vce(robust)
+predict resid_arima, resid
+wntestq resid_arima, lags(12)
+
+* 2. Ước lượng mô hình phương sai có điều kiện thay đổi ARCH/GARCH(1,1)
+arch d.y x1 x2, arch(1) garch(1) vce(robust)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Nạp thư viện phân tích định lượng và dữ liệu thực hành từ EcoData / SachKTL
-library(tidyverse)
-library(lmtest)
-library(sandwich)
+# Nạp thư viện chuỗi thời gian và ước lượng ARIMA / GARCH(1,1)
+library(tseries)
+library(forecast)
+library(rugarch)
 
-df <- read.csv("sachktl_lsink20u1_c11_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_timeseries_finco.csv")
+y_ts <- ts(df$y, frequency = 12)
 
-# Ước lượng mô hình và xuất sai số chuẩn vững HC1
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA tối ưu theo AICc
+adf.test(y_ts)
+fit_arima <- auto.arima(y_ts, seasonal = FALSE, ic = "aicc")
+summary(fit_arima)
+checkresiduals(fit_arima)
+
+# 2. Ước lượng mô hình GARCH(1,1) cho chuỗi lợi suất
+spec <- ugarchspec(variance.model = list(model = "sGARCH", garchOrder = c(1, 1)),
+                   mean.model = list(armaOrder = c(1, 0), include.mean = TRUE))
+fit_garch <- ugarchfit(spec = spec, data = diff(y_ts))
+show(fit_garch)
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Nạp thư viện kinh tế lượng và bộ dữ liệu thực hành từ EcoData / SachKTL
+# Nạp thư viện statsmodels và arch để phân tích chuỗi thời gian & biến động
 import pandas as pd
-import statsmodels.formula.api as smf
+from statsmodels.tsa.stattools import adfuller
+from statsmodels.tsa.arima.model import ARIMA
+from arch import arch_model
 
-df = pd.read_csv("sachktl_lsink20u1_c11_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_timeseries_finco.csv")
+y = df["y"].dropna()
 
-# Ước lượng mô hình với sai số chuẩn vững HC1
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA(1,1,1)
+adf_stat, p_val, *_ = adfuller(y, autolag="AIC")
+print(f"ADF Statistic: {adf_stat:.4f}, p-value: {p_val:.4f}")
+arima_res = ARIMA(y, order=(1, 1, 1)).fit()
+print(arima_res.summary())
+
+# 2. Ước lượng mô hình GARCH(1,1) với phân phối Student-t
+ret = y.diff().dropna() * 100
+garch_res = arch_model(ret, vol="Garch", p=1, q=1, dist="t").fit(disp="off")
+print(garch_res.summary())
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video bài giảng hướng dẫn thực hành
+## 5. Bảng kiểm định chẩn đoán và quy tắc diễn giải kết quả
+
+| Tiêu chí chẩn đoán | Giả thuyết không $H_0$ | Ngưỡng đánh giá chuẩn | Hướng xử lý khi bác bỏ $H_0$ |
+| :--- | :--- | :--- | :--- |
+| **Phương sai sai số thay đổi** | Phương sai phần dư không đổi $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ bác bỏ $H_0$ | Sử dụng sai số chuẩn vững `vce(robust)`, `vcovHC(HC1)` hoặc ước lượng FGLS/WLS |
+| **Đa cộng tuyến giữa các biến** | Không có phụ thuộc tuyến tính mạnh giữa các biến giải thích | $\text{VIF} < 10$ là chấp nhận được | Loại bỏ biến dư thừa, chuẩn hóa biến hoặc dùng hồi quy điều chuẩn LASSO/Ridge |
+| **Dạng hàm Ramsey RESET** | Mô hình không bỏ sót thành phần phi tuyến bậc cao | $p\text{-value} > 0.05$ chấp nhận $H_0$ | Bổ sung biến tương tác, đa thức bậc hai hoặc lấy logarit tự nhiên các biến dương |
+| **Tính ngoại sinh của biến giải thích** | Biến giải thích không tương quan với sai số $\text{Cov}(X, \varepsilon)=0$ | Kiểm định Durbin-Wu-Hausman $p > 0.05$ | Chuyển sang ước lượng biến công cụ IV/2SLS, LIML hoặc GMM với biến công cụ hợp lệ |
+
+## 6. Video bài giảng hướng dẫn thực hành
 
 <VideoTutorial
-  title="Hướng dẫn thực hành Chương 11: 11. mô hình hóa biến động trên SachKTL"
+  title="Hướng dẫn thực hành 11. Mô hình hóa biến động trên SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Bảng danh mục bài học và liên kết ngược về nguồn gốc tại SachKTL
+## 7. Danh mục toàn bộ bài học trong chương và liên kết học liệu gốc
 
-| Thứ tự | Tên bài học chuyên đề trong Chương 11 | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
+| Mã bài | Tên bài học chuyên đề | Phần mềm hỗ trợ | Liên kết gốc tại SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Bài 01** | Các khái niệm nền tảng và biến động ngụ ý | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c11/cac-khai-niem-nen-tang-va-bien-dong-ngu-y/) |
-| **Bài 02** | Biến động trong kỳ và biến động hiện thực | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c11/bien-dong-trong-ky-va-bien-dong-hien-thuc/) |
-| **Bài 03** | Giới thiệu mô hình ARCH | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c11/gioi-thieu-mo-hinh-arch/) |
-| **Bài 04** | Mô hình GARCH và các phiên bản bất đối xứng | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c11/mo-hinh-garch-va-cac-phien-ban-bat-doi-xung/) |
-| **Bài 05** | Ước lượng và kiểm định mô hình GARCH | Stata 18 MP | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c11/uoc-luong-va-kiem-dinh-mo-hinh-garch/) |
-| **Bài 06** | Các chủ đề nâng cao trong mô hình biến động | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c11/cac-chu-de-nang-cao-trong-mo-hinh-bien-dong/) |
-| **Bài 07** | Thực hành phân tích biến động với Stata | Stata 18 MP, R 4.x | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c11/thuc-hanh-phan-tich-bien-dong-voi-stata/) |
-| **Bài 08** | Tổng hợp và hệ thống hóa kiến thức | Stata 18 MP, R 4.x, Python 3.11+ | [Đọc bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c11/tong-hop-va-he-thong-hoa-kien-thuc/) |
+| **11.1** | Các khái niệm nền tảng và biến động ngụ ý | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c11/cac-khai-niem-nen-tang-va-bien-dong-ngu-y/) |
+| **11.2** | Biến động trong kỳ và biến động hiện thực | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c11/bien-dong-trong-ky-va-bien-dong-hien-thuc/) |
+| **11.3** | Giới thiệu mô hình ARCH | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c11/gioi-thieu-mo-hinh-arch/) |
+| **11.4** | Mô hình GARCH và các phiên bản bất đối xứng | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c11/mo-hinh-garch-va-cac-phien-ban-bat-doi-xung/) |
+| **11.5** | Ước lượng và kiểm định mô hình GARCH | `Stata 18 MP` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c11/uoc-luong-va-kiem-dinh-mo-hinh-garch/) |
+| **11.6** | Các chủ đề nâng cao trong mô hình biến động | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c11/cac-chu-de-nang-cao-trong-mo-hinh-bien-dong/) |
+| **11.7** | Thực hành phân tích biến động với Stata | `Stata 18 MP, R 4.x` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c11/thuc-hanh-phan-tich-bien-dong-voi-stata/) |
+| **11.8** | Tổng hợp và hệ thống hóa kiến thức | `Stata 18 MP, R 4.x, Python 3.11+` | [Mở bài học gốc trên SachKTL](https://sachktl.tnsai.vn/vi/lsink20u1/c11/tong-hop-va-he-thong-hoa-kien-thuc/) |

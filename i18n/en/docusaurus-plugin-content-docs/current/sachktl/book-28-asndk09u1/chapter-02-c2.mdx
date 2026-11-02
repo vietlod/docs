@@ -1,19 +1,19 @@
 ---
 id: chapter-02-c2
-title: "Chapter 02: 2. Tính dừng và thuộc tính phân phối của GARCH — Handbook of Financial Time Series Econometrics"
-sidebar_label: "Chapter 02: 2. Tính dừng và thuộc tính phân phối của G"
+title: "2. Tính dừng và thuộc tính phân phối của GARCH"
+sidebar_label: "2. Tính dừng và thuộc tính phân phối của GARCH"
 sidebar_position: 3
-description: "Step-by-step practical how-to guide for Chapter 02: 2. Tính dừng và thuộc tính phân phối của GARCH from Handbook of Financial Time Series Econometrics on SachKTL with Stata, R, and Python workflows integrated with EcoData, Finco, and EcoLab."
+description: "Comprehensive practical how-to guide for 2. Tính dừng và thuộc tính phân phối của GARCH from Handbook of Financial Time Series Econometrics on SachKTL featuring structural equations, 6 lesson breakdowns, and Stata, R, and Python scripts."
 ---
 
-# Chapter 02: 2. Tính dừng và thuộc tính phân phối của GARCH — Handbook of Financial Time Series Econometrics
+# 2. Tính dừng và thuộc tính phân phối của GARCH
 
 <Available plans={["Academic Free", "Researcher Pro", "Institutional VIP"]} />
 
-This practical how-to guide synthesizes the methodology and empirical implementation workflow of **Chapter 02: 2. Tính dừng và thuộc tính phân phối của GARCH** from [**Book 28: Handbook of Financial Time Series Econometrics**](/en/sachktl/book-28-asndk09u1/), with direct backlinks to the authoritative source material at [https://sachktl.tnsai.vn/vi/asndk09u1/c2/](https://sachktl.tnsai.vn/vi/asndk09u1/c2/).
+This practical how-to guide presents the theoretical foundations, structural mathematical equations, detailed breakdown of **6 specialized lessons**, and multi-platform replication workflows for **2. Tính dừng và thuộc tính phân phối của GARCH** from the textbook [**Handbook of Financial Time Series Econometrics**](/en/sachktl/book-28-asndk09u1/), with direct cross-references to the authoritative source material at [https://sachktl.tnsai.vn/vi/asndk09u1/c2/](https://sachktl.tnsai.vn/vi/asndk09u1/c2/).
 
 <div style={{margin: '1.5rem 0', borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--ifm-color-emphasis-200)'}}>
-  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="Chapter 02: 2. Tính dừng và thuộc tính phân phối của GARCH">
+  <svg viewBox="0 0 960 190" width="100%" height="auto" role="img" aria-label="2. Tính dừng và thuộc tính phân phối của GARCH">
     <defs>
       <linearGradient id="sachktlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#0f172a" />
@@ -25,9 +25,9 @@ This practical how-to guide synthesizes the methodology and empirical implementa
     <circle cx="880" cy="40" r="95" fill="#38bdf8" fillOpacity="0.08" />
     <circle cx="820" cy="155" r="70" fill="#f59e0b" fillOpacity="0.10" />
     <rect x="32" y="28" width="220" height="28" rx="14" fill="#38bdf8" fillOpacity="0.18" stroke="#38bdf8" strokeWidth="1" />
-    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">BOOK 28 · CHAPTER 02</text>
-    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Chapter 02: 2. Tính dừng và thuộc tính phân phối của GARCH</text>
-    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Part of Textbook: Handbook of Financial Time Series Econometrics · 6 Detailed Lessons</text>
+    <text x="142" y="47" fill="#7dd3fc" fontSize="12" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Handbook of Financial Time Series Ec</text>
+    <text x="32" y="96" fill="#f8fafc" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">2. Tính dừng và thuộc tính phân phối của GARCH</text>
+    <text x="32" y="132" fill="#cbd5e1" fontSize="14" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">Time Series Econometrics, Cointegration, and Financial Volatility · 6 Detailed Lesson</text>
     <g transform="translate(32, 150)">
       <rect x="0" y="0" width="110" height="22" rx="6" fill="#10b981" fillOpacity="0.2" />
       <text x="55" y="15" fill="#6ee7b7" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="Inter, system-ui, sans-serif">Stata 18 MP</text>
@@ -41,138 +41,273 @@ This practical how-to guide synthesizes the methodology and empirical implementa
   </svg>
 </div>
 
-## 1. Methodological Meaning and Scope of Application
+## 1. Methodological Foundations, Mathematical Specification, and Identification
 
-Giới thiệu chuỗi bài học về mô hình GARCH An Introduction to GARCH models Series Tổng quan về mô hình GARCH và các tính chất Chào các bạn sinh viên, chào mừng đến với chuỗi bài học chuyên sâu về mô hình GARCH! Trong thế giới tài chính, chúng ta thường xuyên đối mặt với một câu hỏi hóc búa: tại sao có những ngày thị trường chứng khoán biến động dữ dội, trong khi những ngày khác lại tương đối yên bình? Sự thay đổi trong mức độ biến động này, hay còn gọi là phương sai thay đổi theo thời gian, là một đặc điểm cố hữu của hầu hết các chuỗi thời gian tài chính. Các mô hình kinh tế lượng truyền thống
+Giới thiệu chuỗi bài học về mô hình GARCH An Introduction to GARCH models Series Tổng quan về mô hình GARCH và các tính chất Chào các bạn sinh viên, chào mừng đến với chuỗi bài học chuyên sâu về mô hình GARCH! Trong thế giới tài chính, chúng ta thường xuyên đối mặt với một câu hỏi hóc búa: tại sao có những ngày thị trường chứng khoán biến động dữ dội, trong khi những ngày khác lại tương đối yên bình? Sự thay đổi trong mức độ biến động này, hay còn gọi là phương sai thay đổi theo thời gian, là một đặc điểm cố hữu của hầu hết các chuỗi thời gian tài chính.
 
-- **Core Academic Topics**: Tổng quan về mô hình GARCH và các tính chất, CẤU TRÚC CHUỖI BÀI HỌC, KIẾN THỨC TIÊN QUYẾT, MỤC TIÊU HỌC TẬP, TÀI LIỆU THAM KHẢO.
-- **Supported Analytical Environments**: `Stata 18 MP`.
-- **Recommended Empirical Data Sources**: Vietnamese macroeconomic, corporate, and household survey datasets on [EcoData](https://ecodata.io.vn), capital and commodity market series on [Finco](https://www.finco.vn), model cross-references on [VietLOD](https://vietlod.tnsai.vn), and automated estimation on [EcoLab](https://ecolab.io.vn).
+### 1.1. Structural Equations and Representative Estimator
+
+$$
+\Phi(L)(1 - L)^d Y_t = \mu + \Theta(L)\varepsilon_t, \quad \varepsilon_t \mid \mathcal{F}_{t-1} \sim \mathcal{N}(0, \sigma_t^2) \tag*{[1]}
+$$
+
+$$
+\sigma_t^2 = \omega + \sum_{i=1}^p \alpha_i \varepsilon_{t-i}^2 + \sum_{j=1}^q \beta_j \sigma_{t-j}^2, \quad \omega > 0, \; \alpha_i, \beta_j \ge 0 \tag*{[2]}
+$$
+
+### 1.2. Core Identification Assumptions and Applicability Conditions
+
+1. Time series processes must satisfy covariance stationarity or be differenced to their appropriate order of integration $I(d)$ prior to estimation.
+2. Roots of the autoregressive $\Phi(L)$ and moving-average $\Theta(L)$ lag polynomials must lie strictly outside the complex unit circle.
+3. In conditional volatility GARCH specifications, the persistence condition $\sum \alpha_i + \sum \beta_j < 1$ ensures finite unconditional variance.
 
 <FeatureCards
   features={[
     {
-      title: "Original Chapter on SachKTL",
-      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for Chapter 02 on SachKTL.",
+      title: "Authoritative Chapter on SachKTL",
+      description: "Read the complete theoretical derivations, mathematical proofs, and worked examples for this chapter on SachKTL.",
       icon: "📖",
       link: "https://sachktl.tnsai.vn/vi/asndk09u1/c2/"
     },
     {
       title: "Practice Datasets on EcoData & Finco",
-      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and survey data for hands-on replication.",
+      description: "Extract standardized Vietnamese macroeconomic, corporate financial, and household survey data for hands-on replication.",
       icon: "📊",
       link: "https://ecodata.io.vn"
     },
     {
       title: "Automated Estimation on EcoLab",
-      description: "Execute econometric specifications, run diagnostic battery tests, and export publication-grade tables automatically.",
+      description: "Execute econometric specifications, run diagnostic battery tests, and export APA 7th / AER publication-grade tables automatically.",
       icon: "⚡",
       link: "https://ecolab.io.vn"
     }
   ]}
 />
 
-## 2. Step-by-Step Practical Implementation Across Chapter Lessons
+<FeatureNotAvailable
+  feature="Unconditional Baseline Estimation Under Violated Identification Assumptions"
+  reason="Regressing nonstationary levels without unit-root and Johansen cointegration testing induces spurious regression with inflated $t$-statistics and $R^2$."
+  alternative="Run the complete diagnostic battery in Step 4 and transition to the appropriate corrective estimator on VietLOD or EcoLab."
+/>
+
+## 2. Lesson-by-Lesson Academic Breakdown
+
+### 2.1. Nền tảng về tính dừng trong GARCH
+
+Nền tảng về tính dừng trong mô hình GARCH Foundations of stationarity in GARCH models Giới thiệu: Tại sao tính dừng lại quan trọng? Chào mừng các bạn quay trở lại với chuỗi bài học về mô hình GARCH! Trong bài giới thiệu, chúng ta đã biết GARCH là công cụ mạnh mẽ để mô hình hóa sự biến động theo thời gian. Tuy nhiên, trước khi có thể tin tưởng vào kết quả dự báo hay phân tích từ mô hình, chúng ta phải trả lời một câu hỏi cơ bản nhưng cực kỳ quan trọng: Liệu quá trình GARCH mà chúng ta đang mô hình hóa có "ổn định" hay không?
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Giới thiệu: Tại sao tính dừng lại quan trọng?**
+- **Nền tảng lý thuyết của tính dừng**
+- **Giải thích các thành phần**
+- **Phương pháp xác định tính dừng**
+- **Ví dụ minh họa với Stata**
+- **Tổng kết bài học**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c2/nen-tang-ve-tinh-dung-trong-garch/)
+
+### 2.2. Mở rộng tính dừng và biểu diễn ARCH
+
+Mở rộng tính dừng và biểu diễn ARCH General stationarity and ARCH representation Giới thiệu: Từ đơn giản đến tổng quát Ở bài học trước, chúng ta đã khám phá điều kiện dừng cho mô hình GARCH thông qua một phương trình truy hồi ngẫu nhiên đơn giản. Đó là một khởi đầu tuyệt vời, nhưng trong thực tế, các chuỗi thời gian tài chính có thể có cấu trúc phức tạp hơn, đòi hỏi chúng ta phải sử dụng các mô hình GARCH với bậc p và q lớn hơn 1.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Giới thiệu: Từ đơn giản đến tổng quát**
+- **Nền tảng lý thuyết: Ma trận hóa mô hình GARCH**
+- **Từ Logarit đến Số mũ Lyapunov**
+- **Phương pháp nghiên cứu: Biểu diễn ARCH**
+- **Ví dụ minh họa: Tính toán các hệ số ARCH**
+- **Tổng kết bài học**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c2/mo-rong-tinh-dung-va-bieu-dien-arch%e2%88%9e/)
+
+### 2.3. Điều kiện tồn tại mô-men và hàm tự tương quan
+
+Điều kiện tồn tại mô-men và hàm tự tương quan Moments and autocorrelation in GARCH models Giới thiệu: Đo lường rủi ro và "trí nhớ" của biến động Trong hai bài học trước, chúng ta đã xác định được điều kiện để một quá trình GARCH "ổn định" hay có tính dừng. Đây là một nền tảng quan trọng, nhưng nó chỉ mới trả lời câu hỏi "liệu mô hình có hợp lý hay không?". Trong tài chính và kinh tế, chúng ta còn quan tâm đến những câu hỏi cụ thể hơn: Mức độ rủi ro trung bình của tài sản này là bao nhiêu?
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Giới thiệu: Đo lường rủi ro và "trí nhớ" của biến động**
+- **Nền tảng lý thuyết: Khi nào các mô-men tồn tại?**
+- **Phương pháp nghiên cứu: Cấu trúc ARMA của chuỗi bình phương**
+- **Ví dụ minh họa với Stata**
+- **Ví dụ 1: Kiểm tra điều kiện tồn tại Kurtosis**
+- **Ví dụ 2: Minh họa hàm tự tương quan**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c2/dieu-kien-ton-tai-mo-men-va-ham-tu-tuong-quan/)
+
+### 2.4. Tính trộn mạnh và các đặc tính phân phối
+
+Tính trộn mạnh và các đặc tính phân phối Strong mixing and distributional properties of GARCH Giới thiệu: Bí ẩn về sự phụ thuộc và các sự kiện cực đoan Trong các bài học trước, chúng ta đã thiết lập được nền tảng vững chắc về tính dừng và sự tồn tại của các mô-men trong mô hình GARCH. Chúng ta đã biết rằng mô hình GARCH có thể dừng nhưng lại không có phương sai hoặc kurtosis hữu hạn. Điều này gợi ý rằng có những đặc tính rất đặc biệt ẩn sau cấu trúc của nó.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **Giới thiệu: Bí ẩn về sự phụ thuộc và các sự kiện cực đoan**
+- **Nền tảng lý thuyết**
+- **1. Tính trộn mạnh**
+- **2. Đặc tính phân phối: Đuôi Pareto**
+- **Phương pháp nghiên cứu: Nhận diện các tính chất trong thực tế**
+- **Ví dụ minh họa với Stata**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c2/tinh-tron-manh-va-cac-dac-tinh-phan-phoi/)
+
+### 2.5. Thực hành phân tích GARCH với Stata
+
+Thực hành phân tích và ước lượng mô hình GARCH với Stata A practical guide to GARCH modeling in Stata 1. Tóm tắt tổng hợp kiến thức đã học Trước khi bắt tay vào Stata, hãy cùng nhau nhìn lại bức tranh toàn cảnh. Chúng ta không chỉ chạy lệnh một cách máy móc; mỗi bước trong quy trình phân tích đều được xây dựng dựa trên nền tảng lý thuyết vững chắc mà chúng ta đã khám phá: Bài 1 & 2: Chúng ta biết rằng để mô hình có ý nghĩa, các tham số phải thỏa mãn điều kiện dừng.
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **1. Tóm tắt tổng hợp kiến thức đã học**
+- **2. Chuẩn bị dữ liệu**
+- **3. Quy trình phân tích GARCH 5 bước**
+- **4. Hướng dẫn thực hành từng bước với Stata**
+- **Bước 1: Khám phá dữ liệu trực quan**
+- **Bước 2: Kiểm định hiệu ứng ARCH**
+
+- **Analytical Environments:** `Stata 18 MP` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c2/thuc-hanh-phan-tich-garch-voi-stata/)
+
+### 2.6. Hệ thống hóa kiến thức GARCH
+
+Tổng hợp chuỗi bài học GARCH: Từ lý thuyết đến thực tiễn GARCH series synthesis: From theory to practice 1. Vị trí của GARCH trong kinh tế lượng Chào các bạn sinh viên, chúng ta đã cùng nhau đi hết một chặng đường quan trọng. Giờ là lúc lùi lại một bước để nhìn vào bức tranh toàn cảnh: Mô hình GARCH đứng ở đâu trong thế giới rộng lớn của kinh tế lượng? Tại sao nó lại là một cuộc cách mạng, đặc biệt trong lĩnh vực tài chính?
+
+**Key Methodological Sub-Topics Covered in This Lesson:**
+
+- **1. Vị trí của GARCH trong kinh tế lượng**
+- **2. Bốn trụ cột của mô hình GARCH**
+- **3. Quy trình nghiên cứu GARCH chuyên nghiệp**
+- **4. Phân tích chỉ số VN-Index**
+- **5. TỔNG KẾT VÀ HƯỚNG PHÁT TRIỂN**
+- **Những bài học cốt lõi**
+
+- **Analytical Environments:** `Stata 18 MP, R 4.x, Python 3.11+` · **Authoritative Source:** [Read Full Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c2/he-thong-hoa-kien-thuc-garch/)
+
+## 3. Step-by-Step Empirical Implementation Workflow
 
 <Steps>
   <div className="step-item">
-    <h3>Step 1: Nền tảng về tính dừng trong GARCH</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Nền tảng về tính dừng trong GARCH. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c2/nen-tang-ve-tinh-dung-trong-garch/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/asndk09u1/c2/nen-tang-ve-tinh-dung-trong-garch/</a>.</p>
+    <h3>1. Formulate the Research Question and Prepare Data on EcoData & Finco</h3>
+    <p>Define the dependent variable, core explanatory variables, and control covariates aligned with <strong>2. Tính dừng và thuộc tính phân phối của GARCH</strong>. Extract standardized Vietnamese empirical series from <a href="https://ecodata.io.vn" target="_blank" rel="noopener">EcoData</a> or <a href="https://www.finco.vn" target="_blank" rel="noopener">Finco</a>, and screen for missing observations and extreme outliers.</p>
   </div>
   <div className="step-item">
-    <h3>Step 2: Mở rộng tính dừng và biểu diễn ARCH</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Mở rộng tính dừng và biểu diễn ARCH. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c2/mo-rong-tinh-dung-va-bieu-dien-arch%e2%88%9e/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/asndk09u1/c2/mo-rong-tinh-dung-va-bieu-dien-arch%e2%88%9e/</a>.</p>
+    <h3>2. Conduct Descriptive Profiling, Correlation Analysis, and Pre-Estimation Checks</h3>
+    <p>Examine empirical distributions, construct summary statistics tables, and evaluate collinearity using pairwise correlation matrices and Variance Inflation Factors (VIF).</p>
   </div>
   <div className="step-item">
-    <h3>Step 3: Điều kiện tồn tại mô-men và hàm tự tương quan</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Điều kiện tồn tại mô-men và hàm tự tương quan. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c2/dieu-kien-ton-tai-mo-men-va-ham-tu-tuong-quan/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/asndk09u1/c2/dieu-kien-ton-tai-mo-men-va-ham-tu-tuong-quan/</a>.</p>
+    <h3>3. Estimate the Model Across Stata 18 MP, R 4.x, and Python 3.11+</h3>
+    <p>Execute the parameter estimation scripts matching the structural equations in Section 1.1 while cross-checking theoretical derivations at <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c2/" target="_blank" rel="noopener">SachKTL</a>.</p>
   </div>
   <div className="step-item">
-    <h3>Step 4: Tính trộn mạnh và các đặc tính phân phối</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Tính trộn mạnh và các đặc tính phân phối. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c2/tinh-tron-manh-va-cac-dac-tinh-phan-phoi/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/asndk09u1/c2/tinh-tron-manh-va-cac-dac-tinh-phan-phoi/</a>.</p>
+    <h3>4. Perform Post-Estimation Diagnostics and Robust Variance Correction</h3>
+    <p>Test for heteroskedasticity, serial correlation, Ramsey RESET functional form misspecification, and regressor endogeneity. Apply White HC1 or cluster-robust standard errors for valid inference.</p>
   </div>
   <div className="step-item">
-    <h3>Step 5: Thực hành phân tích GARCH với Stata</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Thực hành phân tích GARCH với Stata. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c2/thuc-hanh-phan-tich-garch-voi-stata/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/asndk09u1/c2/thuc-hanh-phan-tich-garch-voi-stata/</a>.</p>
-  </div>
-  <div className="step-item">
-    <h3>Step 6: Hệ thống hóa kiến thức GARCH</h3>
-    <p>Execute the estimation specification, diagnostic verification, and economic interpretation for Hệ thống hóa kiến thức GARCH. View the full original lesson at <a href="https://sachktl.tnsai.vn/vi/asndk09u1/c2/he-thong-hoa-kien-thuc-garch/" target="_blank" rel="noopener">https://sachktl.tnsai.vn/vi/asndk09u1/c2/he-thong-hoa-kien-thuc-garch/</a>.</p>
+    <h3>5. Format Journal-Grade Tables and Cross-Verify on EcoLab</h3>
+    <p>Report point estimates, standard errors in parentheses, and statistical significance stars following APA 7th / AER Booktabs standards, or automate the entire reporting pipeline on <a href="https://ecolab.io.vn" target="_blank" rel="noopener">EcoLab</a> and <a href="https://vietlod.tnsai.vn" target="_blank" rel="noopener">VietLOD</a>.</p>
   </div>
 </Steps>
 
-## 3. Multi-Platform Implementation Examples in Stata, R, and Python
+## 4. Multi-Platform Implementation Scripts in Stata, R, and Python
 
 <Tabs>
   <TabItem value="stata" label="Stata 18 MP" default>
 
 ```stata
-* Initialize environment and load practice dataset from EcoData / SachKTL
+* Thiết lập chuỗi thời gian, kiểm định nghiệm đơn vị và ước lượng ARIMA / GARCH
 version 18.0
 clear all
 set more off
+import delimited "sachktl_timeseries_finco.csv", clear encoding("utf-8")
 
-* Import standardized empirical dataset
-import delimited "sachktl_asndk09u1_c02_ecodata.csv", clear encoding("utf-8")
-describe
-summarize
+tsset time_id
+dfuller y, lags(4) trend regress
+pperron y, lags(4) trend
 
-* Estimate baseline specification and run diagnostic checks with robust standard errors
-regress y x1 x2 x3, vce(robust)
-estat hettest
-estat vif
+* 1. Ước lượng mô hình ARIMA và kiểm định nhiễu trắng phần dư
+arima y, arima(1,1,1) vce(robust)
+predict resid_arima, resid
+wntestq resid_arima, lags(12)
+
+* 2. Ước lượng mô hình phương sai có điều kiện thay đổi ARCH/GARCH(1,1)
+arch d.y x1 x2, arch(1) garch(1) vce(robust)
 ```
 
   </TabItem>
   <TabItem value="r" label="R 4.x">
 
 ```r
-# Load econometric packages and practice dataset from EcoData / SachKTL
-library(tidyverse)
-library(lmtest)
-library(sandwich)
+# Nạp thư viện chuỗi thời gian và ước lượng ARIMA / GARCH(1,1)
+library(tseries)
+library(forecast)
+library(rugarch)
 
-df <- read.csv("sachktl_asndk09u1_c02_ecodata.csv")
-summary(df)
+df <- read.csv("sachktl_timeseries_finco.csv")
+y_ts <- ts(df$y, frequency = 12)
 
-# Estimate model and compute heteroskedasticity-robust HC1 standard errors
-fit <- lm(y ~ x1 + x2 + x3, data = df)
-coeftest(fit, vcov = vcovHC(fit, type = "HC1"))
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA tối ưu theo AICc
+adf.test(y_ts)
+fit_arima <- auto.arima(y_ts, seasonal = FALSE, ic = "aicc")
+summary(fit_arima)
+checkresiduals(fit_arima)
+
+# 2. Ước lượng mô hình GARCH(1,1) cho chuỗi lợi suất
+spec <- ugarchspec(variance.model = list(model = "sGARCH", garchOrder = c(1, 1)),
+                   mean.model = list(armaOrder = c(1, 0), include.mean = TRUE))
+fit_garch <- ugarchfit(spec = spec, data = diff(y_ts))
+show(fit_garch)
 ```
 
   </TabItem>
   <TabItem value="python" label="Python 3.11+">
 
 ```python
-# Load econometric libraries and practice dataset from EcoData / SachKTL
+# Nạp thư viện statsmodels và arch để phân tích chuỗi thời gian & biến động
 import pandas as pd
-import statsmodels.formula.api as smf
+from statsmodels.tsa.stattools import adfuller
+from statsmodels.tsa.arima.model import ARIMA
+from arch import arch_model
 
-df = pd.read_csv("sachktl_asndk09u1_c02_ecodata.csv")
-print(df.describe())
+df = pd.read_csv("sachktl_timeseries_finco.csv")
+y = df["y"].dropna()
 
-# Fit specification with HC1 robust standard errors
-model = smf.ols("y ~ x1 + x2 + x3", data=df).fit(cov_type="HC1")
-print(model.summary())
+# 1. Kiểm định nghiệm đơn vị ADF và ước lượng ARIMA(1,1,1)
+adf_stat, p_val, *_ = adfuller(y, autolag="AIC")
+print(f"ADF Statistic: {adf_stat:.4f}, p-value: {p_val:.4f}")
+arima_res = ARIMA(y, order=(1, 1, 1)).fit()
+print(arima_res.summary())
+
+# 2. Ước lượng mô hình GARCH(1,1) với phân phối Student-t
+ret = y.diff().dropna() * 100
+garch_res = arch_model(ret, vol="Garch", p=1, q=1, dist="t").fit(disp="off")
+print(garch_res.summary())
 ```
 
   </TabItem>
 </Tabs>
 
-## 4. Video Tutorial Walkthrough
+## 5. Post-Estimation Diagnostic and Interpretation Guide
+
+| Diagnostic Criterion | Null Hypothesis $H_0$ | Benchmark Threshold | Corrective Action When $H_0$ Is Rejected |
+| :--- | :--- | :--- | :--- |
+| **Heteroskedasticity** | Constant error variance $\text{Var}(\varepsilon_i) = \sigma^2$ | $p\text{-value} < 0.05$ rejects $H_0$ | Apply `vce(robust)`, `vcovHC(HC1)`, or FGLS/WLS weighted estimation |
+| **Multicollinearity** | No severe linear dependence among regressors | $\text{VIF} < 10$ acceptable | Drop redundant covariates, center interactions, or apply LASSO/Ridge regularization |
+| **Ramsey RESET Functional Form** | No omitted nonlinear or higher-order terms | $p\text{-value} > 0.05$ retains $H_0$ | Add interaction terms, quadratic polynomials, or log-transform skewed positive variables |
+| **Regressor Exogeneity** | Orthogonality $\text{Cov}(X, \varepsilon)=0$ | Durbin-Wu-Hausman $p > 0.05$ | Transition to IV/2SLS, LIML, or GMM estimation with validated instruments |
+
+## 6. Video Tutorial Walkthrough
 
 <VideoTutorial
-  title="Practical Walkthrough for Chapter 02: 2. Tính dừng và thuộc tính phân phối của GARCH on SachKTL"
+  title="Practical Walkthrough for 2. Tính dừng và thuộc tính phân phối của GARCH on SachKTL"
   url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
 />
 
-## 5. Complete Lesson Directory and Backlinks to Original SachKTL Articles
+## 7. Complete Lesson Directory and Backlinks to Original SachKTL Articles
 
-| No. | Lesson Title in Chapter 02 | Supported Software | Original Source Link on SachKTL |
+| Lesson Code | Lesson Title | Supported Software | Original Source Link on SachKTL |
 | :---: | :--- | :--- | :--- |
-| **Lesson 01** | Nền tảng về tính dừng trong GARCH | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c2/nen-tang-ve-tinh-dung-trong-garch/) |
-| **Lesson 02** | Mở rộng tính dừng và biểu diễn ARCH | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c2/mo-rong-tinh-dung-va-bieu-dien-arch%e2%88%9e/) |
-| **Lesson 03** | Điều kiện tồn tại mô-men và hàm tự tương quan | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c2/dieu-kien-ton-tai-mo-men-va-ham-tu-tuong-quan/) |
-| **Lesson 04** | Tính trộn mạnh và các đặc tính phân phối | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c2/tinh-tron-manh-va-cac-dac-tinh-phan-phoi/) |
-| **Lesson 05** | Thực hành phân tích GARCH với Stata | Stata 18 MP | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c2/thuc-hanh-phan-tich-garch-voi-stata/) |
-| **Lesson 06** | Hệ thống hóa kiến thức GARCH | Stata 18 MP, R 4.x, Python 3.11+ | [Read Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c2/he-thong-hoa-kien-thuc-garch/) |
+| **2.1** | Nền tảng về tính dừng trong GARCH | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c2/nen-tang-ve-tinh-dung-trong-garch/) |
+| **2.2** | Mở rộng tính dừng và biểu diễn ARCH | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c2/mo-rong-tinh-dung-va-bieu-dien-arch%e2%88%9e/) |
+| **2.3** | Điều kiện tồn tại mô-men và hàm tự tương quan | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c2/dieu-kien-ton-tai-mo-men-va-ham-tu-tuong-quan/) |
+| **2.4** | Tính trộn mạnh và các đặc tính phân phối | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c2/tinh-tron-manh-va-cac-dac-tinh-phan-phoi/) |
+| **2.5** | Thực hành phân tích GARCH với Stata | `Stata 18 MP` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c2/thuc-hanh-phan-tich-garch-voi-stata/) |
+| **2.6** | Hệ thống hóa kiến thức GARCH | `Stata 18 MP, R 4.x, Python 3.11+` | [Open Original Lesson on SachKTL](https://sachktl.tnsai.vn/vi/asndk09u1/c2/he-thong-hoa-kien-thuc-garch/) |

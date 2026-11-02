@@ -82,9 +82,11 @@ def check_file(filepath: pathlib.Path) -> list[str]:
 
 
 def main() -> int:
+    from concurrent.futures import ThreadPoolExecutor
+
     start = time.perf_counter()
     all_issues: list[str] = []
-    file_count = 0
+    paths: list[pathlib.Path] = []
 
     for root in DOC_ROOTS:
         if not root.is_dir():
@@ -92,8 +94,13 @@ def main() -> int:
             continue
         for path in sorted(root.rglob("*")):
             if path.is_file() and path.suffix.lower() in {".md", ".mdx"}:
-                file_count += 1
-                all_issues.extend(check_file(path))
+                paths.append(path)
+
+    file_count = len(paths)
+    if paths:
+        with ThreadPoolExecutor(max_workers=16) as pool:
+            for res in pool.map(check_file, paths):
+                all_issues.extend(res)
 
     elapsed_ms = (time.perf_counter() - start) * 1000.0
     print(
