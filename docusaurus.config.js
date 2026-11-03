@@ -76,11 +76,13 @@ const config = {
         direction: 'ltr',
         htmlLang: 'vi-VN',
         calendar: 'gregory',
+        baseUrl: '/',
       },
       en: {
         label: 'English',
         direction: 'ltr',
         htmlLang: 'en-US',
+        baseUrl: '/en/',
       },
     },
   },
@@ -167,7 +169,6 @@ const config = {
           alt: 'TNS AI Logo',
           src: 'img/logo.svg',
           srcDark: 'img/logo-white.svg',
-          href: docsDomain,
           target: '_self',
         },
         items: [

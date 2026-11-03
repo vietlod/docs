@@ -10,7 +10,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 // page exposes structured data for search engines and AI/LLM crawlers.
 export default function DocItemLayoutWrapper(props) {
   const {metadata, frontMatter} = useDoc();
-  const {siteConfig} = useDocusaurusContext();
+  const {siteConfig, i18n} = useDocusaurusContext();
   const docsDomain = siteConfig.customFields?.docsDomain || siteConfig.url;
   const url = docsDomain + metadata.permalink;
 
@@ -19,7 +19,7 @@ export default function DocItemLayoutWrapper(props) {
     '@type': 'TechArticle',
     headline: metadata.title,
     description: frontMatter.description || metadata.description || siteConfig.tagline,
-    inLanguage: siteConfig.i18n?.defaultLocale || 'vi',
+    inLanguage: i18n?.currentLocale || siteConfig.i18n?.defaultLocale || 'vi',
     url,
     author: {'@type': 'Organization', name: 'TNS AI', url: docsDomain},
     publisher: {'@type': 'Organization', '@id': `${docsDomain}/#organization`},
