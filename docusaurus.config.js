@@ -202,6 +202,12 @@ const config = {
             label: 'SachKTL',
           },
           {
+            type: 'docSidebar',
+            sidebarId: 'legalSidebar',
+            position: 'left',
+            label: 'Pháp lý',
+          },
+          {
             type: 'localeDropdown',
             position: 'right',
           },
@@ -261,6 +267,31 @@ const config = {
               {
                 label: 'Thư viện giáo trình SachKTL',
                 href: 'https://sachktl.tnsai.vn',
+              },
+            ],
+          },
+          {
+            title: 'Trung tâm pháp lý',
+            items: [
+              {
+                label: 'Chính sách quyền riêng tư và dữ liệu cá nhân',
+                to: '/legal/overview',
+              },
+              {
+                label: 'Cổng pháp lý tập trung TNSAI',
+                href: 'https://tnsai.vn/legal/privacy',
+              },
+              {
+                label: 'Điều khoản dịch vụ thương mại điện tử',
+                href: 'https://tnsai.vn/legal/terms',
+              },
+              {
+                label: 'Tuyên bố minh bạch trí tuệ nhân tạo',
+                href: 'https://tnsai.vn/legal/ai-transparency',
+              },
+              {
+                label: 'Quản lý quyền dữ liệu và xóa tài khoản',
+                href: 'https://tnsai.vn/dashboard/privacy',
               },
             ],
           },
