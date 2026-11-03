@@ -11,12 +11,11 @@ Tài liệu này quy định các nguyên tắc bảo vệ dữ liệu cá nhân
 
 ## Thông tin pháp nhân và đơn vị kiểm soát dữ liệu
 
-- **Tên đơn vị vận hành**: CÔNG TY TNHH TÀI NGUYÊN SỐ TNS
+- **Đơn vị vận hành**: CÔNG TY TNHH CÔNG NGHỆ TÀI NGUYÊN SỐ
 - **Mã số thuế**: `0319442411`
-- **Cơ quan cấp đăng ký kinh doanh**: Sở Kế hoạch và Đầu tư Thành phố Hồ Chí Minh
-- **Địa chỉ trụ sở chính**: Tầng 8, Tòa nhà Pearl Plaza, 561A Điện Biên Phủ, Phường 25, Quận Bình Thạnh, Thành phố Hồ Chí Minh
-- **Thư điện tử hỗ trợ và tiếp nhận yêu cầu dữ liệu**: `ngocthuyet@gmail.com`
-- **Điện thoại liên hệ**: `0941571981`
+- **Địa chỉ**: 55/107/30 Thành Mỹ, Khu phố 21, Phường Tân Hòa, TpHCM, Việt Nam
+- **Điện thoại**: `0941571981`
+- **Email**: `support@tnsai.tech`
 - **Cổng quản lý quyền riêng tư tập trung**: [https://tnsai.vn/legal](https://tnsai.vn/legal)
 
 ## Chính sách bảo vệ dữ liệu cá nhân theo Luật 91/2025/QH15 và Nghị định 356/2025/NĐ-CP

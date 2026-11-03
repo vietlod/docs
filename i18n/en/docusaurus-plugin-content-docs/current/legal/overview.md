@@ -11,12 +11,11 @@ This document establishes the personal data protection principles, electronic co
 
 ## Legal Entity and Data Controller Information
 
-- **Operating Legal Entity**: TNS DIGITAL RESOURCES COMPANY LIMITED
-- **Enterprise Tax Identification Number**: `0319442411`
-- **Issuing Authority**: Department of Planning and Investment of Ho Chi Minh City
-- **Registered Office Address**: Floor 8, Pearl Plaza Building, 561A Dien Bien Phu, Ward 25, Binh Thanh District, Ho Chi Minh City, Vietnam
-- **Data Protection Contact Email**: `ngocthuyet@gmail.com`
-- **Contact Telephone**: `0941571981`
+- **Operating Entity**: CÔNG TY TNHH CÔNG NGHỆ TÀI NGUYÊN SỐ
+- **Tax Identification Number**: `0319442411`
+- **Address**: 55/107/30 Thành Mỹ, Khu phố 21, Phường Tân Hòa, TpHCM, Việt Nam
+- **Telephone**: `0941571981`
+- **Email**: `support@tnsai.tech`
 - **Centralized Privacy Management Portal**: [https://tnsai.vn/legal](https://tnsai.vn/legal)
 
 ## Personal Data Protection Policy Under Law 91/2025/QH15 and Decree 356/2025/ND-CP

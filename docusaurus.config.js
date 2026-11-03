@@ -296,7 +296,7 @@ const config = {
             ],
           },
         ],
-        copyright: `© ${new Date().getFullYear()} TNS AI. Tài liệu hướng dẫn sử dụng hệ sinh thái ứng dụng.`,
+        copyright: `© ${new Date().getFullYear()} TNS AI • Đơn vị vận hành: CÔNG TY TNHH CÔNG NGHỆ TÀI NGUYÊN SỐ • Mã số thuế: 0319442411 • Địa chỉ: 55/107/30 Thành Mỹ, Khu phố 21, Phường Tân Hòa, TpHCM, Việt Nam • Điện thoại: 0941571981 • Email: support@tnsai.tech`,
       },
       prism: {
         theme: prismThemes.github,

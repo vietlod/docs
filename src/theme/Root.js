@@ -82,6 +82,9 @@ export default function Root({ children }) {
                   {dict.policyLink}
                 </a>
               </div>
+              <div style={{ fontSize: "11px", lineHeight: 1.5, color: "#94a3b8", marginTop: "4px" }}>
+                {dict.operatorLine}
+              </div>
             </div>
             <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
               <button
