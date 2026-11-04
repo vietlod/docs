@@ -279,20 +279,32 @@ const config = {
                 to: '/legal/overview',
               },
               {
+                label: 'Phương thức tiếp nhận và giải quyết khiếu nại',
+                to: '/legal/overview#complaints',
+              },
+              {
+                label: 'Chính sách giá và thanh toán trực tuyến',
+                to: '/legal/overview#pricing-policy',
+              },
+              {
+                label: 'Điều kiện cung cấp dịch vụ trên nền tảng',
+                to: '/legal/overview#service-conditions',
+              },
+              {
+                label: 'Chính sách giao ngay và không hoàn tiền',
+                to: '/legal/overview#delivery-refund',
+              },
+              {
+                label: 'Hình thức hỗ trợ trực tuyến',
+                to: '/legal/overview#online-support',
+              },
+              {
                 label: 'Cổng pháp lý tập trung TNSAI',
-                href: 'https://tnsai.vn/legal/privacy',
-              },
-              {
-                label: 'Điều khoản dịch vụ thương mại điện tử',
-                href: 'https://tnsai.vn/legal/terms',
-              },
-              {
-                label: 'Tuyên bố minh bạch trí tuệ nhân tạo',
-                href: 'https://tnsai.vn/legal/ai-transparency',
+                href: 'https://www.tnsai.vn/legal/privacy',
               },
               {
                 label: 'Quản lý quyền dữ liệu và xóa tài khoản',
-                href: 'https://tnsai.vn/dashboard/privacy',
+                href: 'https://www.tnsai.vn/dashboard/privacy',
               },
             ],
           },
