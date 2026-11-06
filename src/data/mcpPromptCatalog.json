@@ -1,0 +1,795 @@
+{
+  "catalog_version": "1.0.0",
+  "system_version": "ecodata-v3.83.0+ecolab-v1.6.0",
+  "updated_at": "2026-11-06T03:20:00+07:00",
+  "workflow_steps": [
+    {
+      "step": 1,
+      "stage": "ideation",
+      "label_vi": "Bước 1: Đề xuất ý tưởng và khung định danh",
+      "label_en": "Step 1: Research Ideation and Identification Blueprint",
+      "tools": [
+        "ecolab_project_create",
+        "ecolab_ideation_blueprint"
+      ]
+    },
+    {
+      "step": 2,
+      "stage": "literature",
+      "label_vi": "Bước 2: Tổng quan tài liệu 6 nguồn học thuật",
+      "label_en": "Step 2: Six-Source Scholarly Literature Review",
+      "tools": [
+        "ecolab_literature_discover_start",
+        "ecolab_literature_verify_citations"
+      ]
+    },
+    {
+      "step": 3,
+      "stage": "data",
+      "label_vi": "Bước 3: Xây dựng dữ liệu bảng và bàn giao Zero-Copy",
+      "label_en": "Step 3: Panel Data Assembly and Zero-Copy Handoff",
+      "tools": [
+        "build_research_panel",
+        "ecolab_dataset_prepare"
+      ]
+    },
+    {
+      "step": 4,
+      "stage": "modeling",
+      "label_vi": "Bước 4: Ước lượng mô hình kinh tế lượng và kiểm định",
+      "label_en": "Step 4: Econometric Model Estimation and Diagnostics",
+      "tools": [
+        "ecolab_model_estimate_start",
+        "ecolab_job_status"
+      ]
+    },
+    {
+      "step": 5,
+      "stage": "report",
+      "label_vi": "Bước 5: Biên soạn bản thảo 8 cổng kiểm chứng",
+      "label_en": "Step 5: Eight-Gate Verified Manuscript Compilation",
+      "tools": [
+        "ecolab_report_storm_pack_start",
+        "ecolab_report_standard_pack_start",
+        "ecolab_report_submit_manuscript"
+      ]
+    },
+    {
+      "step": 0,
+      "stage": "end_to_end",
+      "label_vi": "Trọn vẹn 5 bước: Từ ý tưởng đến bản thảo Q3+",
+      "label_en": "Full 5-Step Workflow: From Idea to Q3+ Manuscript",
+      "tools": [
+        "analyze_request",
+        "ecolab_project_create",
+        "ecolab_ideation_blueprint",
+        "ecolab_literature_discover_start",
+        "ecolab_literature_verify_citations",
+        "build_research_panel",
+        "ecolab_dataset_prepare",
+        "ecolab_model_estimate_start",
+        "ecolab_report_storm_pack_start",
+        "ecolab_report_submit_manuscript"
+      ]
+    }
+  ],
+  "prompts": [
+    {
+      "id": "P01",
+      "stage": "ideation",
+      "step_number": 1,
+      "stage_label_vi": "Bước 1: Đề xuất ý tưởng",
+      "stage_label_en": "Step 1: Research Ideation",
+      "title_vi": "Ý tưởng tác động của đầu tư công đến đầu tư tư nhân cấp tỉnh",
+      "title_en": "Research Ideas on Public and Private Investment Across Vietnamese Provinces",
+      "prompt_vi": "Đề xuất 3–5 ý tưởng nghiên cứu khả thi về tác động của đầu tư công đến đầu tư tư nhân tại các tỉnh Việt Nam, chỉ dùng chỉ tiêu có sẵn trên EcoData, nêu rõ độ phủ dữ liệu và mô hình phù hợp nhất cho từng ý tưởng.",
+      "prompt_en": "Propose 3–5 feasible research ideas on the impact of public investment on private investment across Vietnamese provinces using only indicators available on EcoData, specifying data coverage and the most suitable econometric estimator for each idea.",
+      "datasets": [
+        "GSO_63_PROVINCES",
+        "VN_PROVINCE_34"
+      ],
+      "dataset_label_vi": "Thống kê 63 tỉnh và chuỗi 34 tỉnh",
+      "dataset_label_en": "63-Province GSO and 34-Province Harmonized Panel",
+      "expected_tools": [
+        "ecolab_project_create",
+        "ecolab_ideation_blueprint"
+      ],
+      "expected_primary_model": "panel_threshold",
+      "model_family_vi": "Hồi quy ngưỡng dữ liệu bảng",
+      "model_family_en": "Panel Threshold Regression",
+      "rubric_overrides": {
+        "require_concept_indicator_links": true
+      },
+      "last_pass_at": "2026-11-06T03:20:00+07:00",
+      "system_version": "ecodata-v3.83.0+ecolab-v1.6.0",
+      "status": "verified"
+    },
+    {
+      "id": "P02",
+      "stage": "ideation",
+      "step_number": 1,
+      "stage_label_vi": "Bước 1: Đề xuất ý tưởng",
+      "stage_label_en": "Step 1: Research Ideation",
+      "title_vi": "Hướng nghiên cứu FDI và xuất khẩu cấp tỉnh kết hợp Hải quan và GSO",
+      "title_en": "Provincial FDI and Export Research Directions Combining Customs and GSO Data",
+      "prompt_vi": "Gợi ý các hướng nghiên cứu về FDI và xuất khẩu cấp tỉnh tại Việt Nam có thể thực hiện ngay với dữ liệu EcoData, xếp hạng theo tính mới và khả thi.",
+      "prompt_en": "Suggest research directions on provincial FDI and exports in Vietnam that can be executed immediately with EcoData datasets, ranked by academic novelty and empirical feasibility.",
+      "datasets": [
+        "CUSTOMS_PROVINCE",
+        "GSO_63_PROVINCES"
+      ],
+      "dataset_label_vi": "Hải quan cấp tỉnh và GSO 63 tỉnh",
+      "dataset_label_en": "Provincial Customs and 63-Province GSO Data",
+      "expected_tools": [
+        "ecolab_project_create",
+        "ecolab_ideation_blueprint"
+      ],
+      "expected_primary_model": "sdm_spatial_durbin",
+      "model_family_vi": "Panel động và kinh tế lượng không gian",
+      "model_family_en": "Dynamic Panel and Spatial Econometrics",
+      "rubric_overrides": {
+        "require_concept_indicator_links": true
+      },
+      "last_pass_at": "2026-11-06T03:20:00+07:00",
+      "system_version": "ecodata-v3.83.0+ecolab-v1.6.0",
+      "status": "verified"
+    },
+    {
+      "id": "P03",
+      "stage": "ideation",
+      "step_number": 1,
+      "stage_label_vi": "Bước 1: Đề xuất ý tưởng",
+      "stage_label_en": "Step 1: Research Ideation",
+      "title_vi": "Ý tưởng nghiên cứu nghèo đa chiều hộ gia đình từ khảo sát VHLSS",
+      "title_en": "Household Multidimensional Poverty Research Ideas from VHLSS Microdata",
+      "prompt_vi": "Đề xuất ý tưởng nghiên cứu về các yếu tố quyết định nghèo đa chiều của hộ gia đình Việt Nam dựa trên dữ liệu VHLSS trên EcoData.",
+      "prompt_en": "Propose research ideas on the determinants of household multidimensional poverty in Vietnam based on VHLSS survey data available on EcoData.",
+      "datasets": [
+        "VHLSS_HOUSEHOLD",
+        "VHLSS_PROVINCE"
+      ],
+      "dataset_label_vi": "Khảo sát mức sống dân cư VHLSS",
+      "dataset_label_en": "Vietnam Household Living Standards Survey",
+      "expected_tools": [
+        "ecolab_project_create",
+        "ecolab_ideation_blueprint"
+      ],
+      "expected_primary_model": "logit",
+      "model_family_vi": "Mô hình lựa chọn rời rạc",
+      "model_family_en": "Discrete Choice Models",
+      "rubric_overrides": {
+        "require_concept_indicator_links": true
+      },
+      "last_pass_at": "2026-11-06T03:20:00+07:00",
+      "system_version": "ecodata-v3.83.0+ecolab-v1.6.0",
+      "status": "verified"
+    },
+    {
+      "id": "P04",
+      "stage": "ideation",
+      "step_number": 1,
+      "stage_label_vi": "Bước 1: Đề xuất ý tưởng",
+      "stage_label_en": "Step 1: Research Ideation",
+      "title_vi": "Ý tưởng nghiên cứu cấu trúc vốn và hiệu quả hoạt động doanh nghiệp niêm yết",
+      "title_en": "Capital Structure and Firm Performance Ideas for Listed Vietnamese Firms",
+      "prompt_vi": "Đề xuất ý tưởng nghiên cứu về cấu trúc vốn và hiệu quả hoạt động của doanh nghiệp niêm yết Việt Nam giai đoạn 2015–2024.",
+      "prompt_en": "Propose research ideas on capital structure and corporate performance of listed Vietnamese firms over the 2015–2024 period.",
+      "datasets": [
+        "STOCK_FINANCIAL_UNIFIED"
+      ],
+      "dataset_label_vi": "Báo cáo tài chính doanh nghiệp niêm yết",
+      "dataset_label_en": "Listed Corporate Financial Statements",
+      "expected_tools": [
+        "ecolab_project_create",
+        "ecolab_ideation_blueprint"
+      ],
+      "expected_primary_model": "mmqr",
+      "model_family_vi": "Hồi quy phân vị dữ liệu bảng",
+      "model_family_en": "Panel Quantile Regression",
+      "rubric_overrides": {
+        "require_concept_indicator_links": true
+      },
+      "last_pass_at": "2026-11-06T03:20:00+07:00",
+      "system_version": "ecodata-v3.83.0+ecolab-v1.6.0",
+      "status": "verified"
+    },
+    {
+      "id": "P05",
+      "stage": "literature",
+      "step_number": 2,
+      "stage_label_vi": "Bước 2: Tổng quan tài liệu",
+      "stage_label_en": "Step 2: Literature Review",
+      "title_vi": "Tìm kiếm 30–50 công trình chất lượng cao về hiệu ứng lấn át và thu hút đầu tư",
+      "title_en": "Discover 30–50 High-Quality Studies on Public-Private Investment Crowding-In and Crowding-Out",
+      "prompt_vi": "Tìm 30–50 công trình chất lượng cao từ 6 nguồn học thuật về hiệu ứng lấn át và thu hút giữa đầu tư công và đầu tư tư nhân, ưu tiên nghiên cứu tại Việt Nam và châu Á, loại preprint.",
+      "prompt_en": "Find 30–50 high-quality scholarly papers across 6 academic sources on crowding-out and crowding-in effects between public and private investment, prioritizing studies in Vietnam and Asia while excluding preprints.",
+      "datasets": [
+        "SCHOLARLY_6_SOURCES"
+      ],
+      "dataset_label_vi": "Sáu nguồn cơ sở dữ liệu học thuật",
+      "dataset_label_en": "Six Academic Literature Databases",
+      "expected_tools": [
+        "ecolab_literature_discover_start",
+        "ecolab_literature_verify_citations"
+      ],
+      "expected_primary_model": null,
+      "model_family_vi": "Tổng quan học thuật xác thực DOI",
+      "model_family_en": "DOI-Verified Literature Synthesis",
+      "rubric_overrides": {
+        "min_verified_papers": 30
+      },
+      "last_pass_at": "2026-11-06T03:20:00+07:00",
+      "system_version": "ecodata-v3.83.0+ecolab-v1.6.0",
+      "status": "verified"
+    },
+    {
+      "id": "P06",
+      "stage": "literature",
+      "step_number": 2,
+      "stage_label_vi": "Bước 2: Tổng quan tài liệu",
+      "stage_label_en": "Step 2: Literature Review",
+      "title_vi": "Xác thực danh sách DOI kinh tế lượng và xuất danh mục tham khảo chuẩn APA 7",
+      "title_en": "Verify Canonical Econometric DOIs and Format APA 7 Reference List",
+      "prompt_vi": "Kiểm tra và xác thực danh sách DOI sau, trả danh mục tham khảo chuẩn APA 7: 10.1016/S0304-4076(99)00025-1, 10.1016/S0304-4076(98)00009-8, 10.2307/2297968, 10.2307/1912775.",
+      "prompt_en": "Verify and validate the following DOI list and return an APA 7th edition reference list: 10.1016/S0304-4076(99)00025-1, 10.1016/S0304-4076(98)00009-8, 10.2307/2297968, 10.2307/1912775.",
+      "datasets": [
+        "DOI_CROSSREF_OPENALEX"
+      ],
+      "dataset_label_vi": "Cơ sở dữ liệu định danh DOI quốc tế",
+      "dataset_label_en": "International DOI Verification Ledger",
+      "expected_tools": [
+        "ecolab_literature_verify_citations"
+      ],
+      "expected_primary_model": null,
+      "model_family_vi": "Xác thực trích dẫn chuẩn APA 7",
+      "model_family_en": "APA 7 Citation Verification",
+      "rubric_overrides": {
+        "min_verified_papers": 4
+      },
+      "last_pass_at": "2026-11-06T03:20:00+07:00",
+      "system_version": "ecodata-v3.83.0+ecolab-v1.6.0",
+      "status": "verified"
+    },
+    {
+      "id": "P07",
+      "stage": "literature",
+      "step_number": 2,
+      "stage_label_vi": "Bước 2: Tổng quan tài liệu",
+      "stage_label_en": "Step 2: Literature Review",
+      "title_vi": "Tổng quan phương pháp hồi quy ngưỡng dữ liệu bảng và bài báo phương pháp gốc",
+      "title_en": "Methodological Review of Panel Threshold Regression and Foundational Canon Papers",
+      "prompt_vi": "Tổng quan các phương pháp ước lượng hồi quy ngưỡng dữ liệu bảng và các bài phương pháp gốc cần trích dẫn khi sử dụng.",
+      "prompt_en": "Synthesize the methodological literature on panel threshold regression estimators and identify the foundational methodological papers that must be cited when applying them.",
+      "datasets": [
+        "SCHOLARLY_6_SOURCES",
+        "METHOD_CANON"
+      ],
+      "dataset_label_vi": "Kho bài báo phương pháp gốc và 6 nguồn học thuật",
+      "dataset_label_en": "Methodological Canon and Six Scholarly Sources",
+      "expected_tools": [
+        "ecolab_literature_discover_start",
+        "ecolab_literature_verify_citations"
+      ],
+      "expected_primary_model": "panel_threshold",
+      "model_family_vi": "Phương pháp luận hồi quy ngưỡng",
+      "model_family_en": "Threshold Regression Methodology",
+      "rubric_overrides": {
+        "require_canon_doi": "10.1016/S0304-4076(99)00025-1"
+      },
+      "last_pass_at": "2026-11-06T03:20:00+07:00",
+      "system_version": "ecodata-v3.83.0+ecolab-v1.6.0",
+      "status": "verified"
+    },
+    {
+      "id": "P08",
+      "stage": "literature",
+      "step_number": 2,
+      "stage_label_vi": "Bước 2: Tổng quan tài liệu",
+      "stage_label_en": "Step 2: Literature Review",
+      "title_vi": "Tổng quan tài liệu truyền dẫn giá hàng hóa thế giới vào lạm phát tại các nền kinh tế mới nổi",
+      "title_en": "Thematic Literature Review on Global Commodity Price Pass-Through to Inflation in Emerging Markets",
+      "prompt_vi": "Tổng quan tài liệu về truyền dẫn giá hàng hóa thế giới vào lạm phát tại các nền kinh tế mới nổi, trình bày theo chủ đề.",
+      "prompt_en": "Conduct a thematic literature review on global commodity price pass-through into domestic inflation across emerging market economies.",
+      "datasets": [
+        "SCHOLARLY_6_SOURCES"
+      ],
+      "dataset_label_vi": "Sáu nguồn cơ sở dữ liệu học thuật",
+      "dataset_label_en": "Six Academic Literature Databases",
+      "expected_tools": [
+        "ecolab_literature_discover_start",
+        "ecolab_literature_verify_citations"
+      ],
+      "expected_primary_model": null,
+      "model_family_vi": "Tổng quan học thuật theo chủ đề",
+      "model_family_en": "Thematic Scholarly Synthesis",
+      "rubric_overrides": {
+        "min_verified_papers": 20
+      },
+      "last_pass_at": "2026-11-06T03:20:00+07:00",
+      "system_version": "ecodata-v3.83.0+ecolab-v1.6.0",
+      "status": "verified"
+    },
+    {
+      "id": "P09",
+      "stage": "data",
+      "step_number": 3,
+      "stage_label_vi": "Bước 3: Xây dựng dữ liệu",
+      "stage_label_en": "Step 3: Data Assembly",
+      "title_vi": "Xây dựng dữ liệu bảng 63 tỉnh 2015–2024 về vốn đầu tư và chi đầu tư phát triển",
+      "title_en": "Build 63-Province Panel Dataset for 2015–2024 on Investment by Sector and Development Expenditure",
+      "prompt_vi": "Xây dựng bộ dữ liệu bảng 63 tỉnh giai đoạn 2015–2024 gồm vốn đầu tư khu vực nhà nước, ngoài nhà nước, FDI và chi đầu tư phát triển ngân sách; cho tôi báo cáo độ phủ và file tái lập.",
+      "prompt_en": "Build a 63-province panel dataset for 2015–2024 covering state-sector investment, non-state investment, FDI investment, and development budget expenditure; provide a sample coverage report and replication workbook.",
+      "datasets": [
+        "GSO_63_PROVINCES"
+      ],
+      "dataset_label_vi": "Thống kê cấp tỉnh GSO 63 tỉnh",
+      "dataset_label_en": "GSO 63-Province Statistical Yearbook Series",
+      "expected_tools": [
+        "build_research_panel"
+      ],
+      "expected_primary_model": null,
+      "model_family_vi": "Kiểm toán độ phủ và đóng gói dữ liệu bảng",
+      "model_family_en": "Coverage Audit and Panel Replication Packaging",
+      "rubric_overrides": {
+        "expected_n_obs": 630,
+        "expected_sheets": [
+          "Data",
+          "Meta",
+          "Coverage"
+        ]
+      },
+      "last_pass_at": "2026-11-06T03:20:00+07:00",
+      "system_version": "ecodata-v3.83.0+ecolab-v1.6.0",
+      "status": "verified"
+    },
+    {
+      "id": "P10",
+      "stage": "data",
+      "step_number": 3,
+      "stage_label_vi": "Bước 3: Xây dựng dữ liệu",
+      "stage_label_en": "Step 3: Data Assembly",
+      "title_vi": "Kiểm toán độ phủ dữ liệu vốn đầu tư 63 tỉnh giai đoạn yêu cầu 2010–2024",
+      "title_en": "Audit Sample Coverage for 63-Province Investment Data Over Requested 2010–2024 Window",
+      "prompt_vi": "Lấy dữ liệu vốn đầu tư theo thành phần kinh tế cho 63 tỉnh giai đoạn 2010–2024, báo cáo rõ độ phủ thực tế, các năm bị khuyết và phương án thay thế bằng chuỗi 34 tỉnh chuẩn hóa.",
+      "prompt_en": "Retrieve investment capital by ownership sector for 63 provinces over the 2010–2024 period, explicitly reporting actual coverage, missing years, and the 34-province harmonized panel alternative.",
+      "datasets": [
+        "GSO_63_PROVINCES",
+        "VN_PROVINCE_34"
+      ],
+      "dataset_label_vi": "Đối chiếu độ phủ 63 tỉnh và 34 tỉnh chuẩn hóa",
+      "dataset_label_en": "63-Province Coverage Audit with 34-Province Fallback",
+      "expected_tools": [
+        "build_research_panel"
+      ],
+      "expected_primary_model": null,
+      "model_family_vi": "Công bố minh bạch độ phủ mẫu R1 và R2",
+      "model_family_en": "Transparent Sample Coverage Disclosure",
+      "rubric_overrides": {
+        "require_coverage_warning": true,
+        "expected_available_n": 630
+      },
+      "last_pass_at": "2026-11-06T03:20:00+07:00",
+      "system_version": "ecodata-v3.83.0+ecolab-v1.6.0",
+      "status": "verified"
+    },
+    {
+      "id": "P11",
+      "stage": "data",
+      "step_number": 3,
+      "stage_label_vi": "Bước 3: Xây dựng dữ liệu",
+      "stage_label_en": "Step 3: Data Assembly",
+      "title_vi": "Xây dựng bộ dữ liệu 34 tỉnh thành giai đoạn 2010–2024 gồm GRDP, chi ngân sách và PCI",
+      "title_en": "Assemble 34-Province Harmonized Panel for 2010–2024 with GRDP, Budget Expenditure, and PCI",
+      "prompt_vi": "Xây dựng bộ dữ liệu 34 tỉnh thành giai đoạn 2010–2024 gồm GRDP, chi ngân sách và PCI, tách rõ nguồn gốc số liệu chính thức và ước lượng.",
+      "prompt_en": "Build a 34-province harmonized panel dataset for 2010–2024 comprising GRDP, budget expenditure, and Provincial Competitiveness Index, distinguishing official observations from harmonized estimates.",
+      "datasets": [
+        "VN_PROVINCE_34",
+        "PCI_PROVINCE"
+      ],
+      "dataset_label_vi": "Chuỗi dữ liệu bảng 34 tỉnh thành 1995–2026",
+      "dataset_label_en": "34-Province Harmonized Panel 1995–2026",
+      "expected_tools": [
+        "build_research_panel"
+      ],
+      "expected_primary_model": null,
+      "model_family_vi": "Chuẩn hóa địa giới hành chính 34 tỉnh",
+      "model_family_en": "34-Province Boundary Harmonization",
+      "rubric_overrides": {
+        "expected_n_obs": 510,
+        "require_provenance_flags": true
+      },
+      "last_pass_at": "2026-11-06T03:20:00+07:00",
+      "system_version": "ecodata-v3.83.0+ecolab-v1.6.0",
+      "status": "verified"
+    },
+    {
+      "id": "P12",
+      "stage": "data",
+      "step_number": 3,
+      "stage_label_vi": "Bước 3: Xây dựng dữ liệu",
+      "stage_label_en": "Step 3: Data Assembly",
+      "title_vi": "Tạo bộ dữ liệu bảng các nền kinh tế ASEAN giai đoạn 2000–2024 từ World Bank",
+      "title_en": "Create ASEAN Macroeconomic Panel Dataset for 2000–2024 from World Bank Indicators",
+      "prompt_vi": "Tạo bộ dữ liệu bảng ASEAN giai đoạn 2000–2024 gồm tăng trưởng GDP, FDI/GDP, hình thành vốn và lạm phát từ World Bank.",
+      "prompt_en": "Create an ASEAN macroeconomic panel dataset for 2000–2024 containing GDP growth, net FDI inflows as a share of GDP, gross capital formation, and inflation from the World Bank.",
+      "datasets": [
+        "WORLD_BANK_WDI"
+      ],
+      "dataset_label_vi": "Chỉ số phát triển thế giới World Bank WDI",
+      "dataset_label_en": "World Bank World Development Indicators",
+      "expected_tools": [
+        "build_research_panel"
+      ],
+      "expected_primary_model": null,
+      "model_family_vi": "Dữ liệu bảng vĩ mô đa quốc gia",
+      "model_family_en": "Cross-Country Macroeconomic Panel",
+      "rubric_overrides": {
+        "expected_sheets": [
+          "Data",
+          "Meta",
+          "Coverage"
+        ]
+      },
+      "last_pass_at": "2026-11-06T03:20:00+07:00",
+      "system_version": "ecodata-v3.83.0+ecolab-v1.6.0",
+      "status": "verified"
+    },
+    {
+      "id": "P13",
+      "stage": "data",
+      "step_number": 3,
+      "stage_label_vi": "Bước 3: Xây dựng dữ liệu",
+      "stage_label_en": "Step 3: Data Assembly",
+      "title_vi": "Tổng hợp dữ liệu báo cáo tài chính nhóm VN30 giai đoạn 2015–2024 theo 4 chế độ kế toán",
+      "title_en": "Compile VN30 Corporate Financial Statements for 2015–2024 Across Four Accounting Regimes",
+      "prompt_vi": "Tổng hợp dữ liệu BCTC nhóm VN30 giai đoạn 2015–2024 theo 4 chế độ kế toán, kèm file dữ liệu và từ điển biến.",
+      "prompt_en": "Compile financial statement panel data for VN30 constituent firms over 2015–2024 categorized across the four Vietnamese accounting regimes, complete with replication dataset and variable dictionary.",
+      "datasets": [
+        "STOCK_FINANCIAL_UNIFIED"
+      ],
+      "dataset_label_vi": "Báo cáo tài chính hợp nhất doanh nghiệp VN30",
+      "dataset_label_en": "VN30 Unified Financial Statement Panel",
+      "expected_tools": [
+        "build_research_panel"
+      ],
+      "expected_primary_model": null,
+      "model_family_vi": "Dữ liệu bảng tài chính doanh nghiệp đa chế độ kế toán",
+      "model_family_en": "Multi-Regime Corporate Finance Panel",
+      "rubric_overrides": {
+        "expected_sheets": [
+          "Data",
+          "Meta",
+          "Coverage"
+        ]
+      },
+      "last_pass_at": "2026-11-06T03:20:00+07:00",
+      "system_version": "ecodata-v3.83.0+ecolab-v1.6.0",
+      "status": "verified"
+    },
+    {
+      "id": "P14",
+      "stage": "modeling",
+      "step_number": 4,
+      "stage_label_vi": "Bước 4: Mô hình hóa kinh tế lượng",
+      "stage_label_en": "Step 4: Econometric Modeling",
+      "title_vi": "Ước lượng mô hình ngưỡng Hansen về tác động của đầu tư công đến đầu tư tư nhân cấp tỉnh",
+      "title_en": "Estimate Hansen Panel Threshold Model of Public Investment on Private Investment Across Provinces",
+      "prompt_vi": "Ước lượng mô hình ngưỡng Hansen về tác động của đầu tư công đến đầu tư tư nhân với biến ngưỡng là quy mô đầu tư công trên GRDP, kèm robustness và kiểm định số ngưỡng.",
+      "prompt_en": "Estimate a Hansen panel threshold regression of public investment on private investment using the public-investment-to-GRDP ratio as the threshold variable, including threshold bootstrap F-tests and robustness specifications.",
+      "datasets": [
+        "GSO_63_PROVINCES",
+        "VN_PROVINCE_34"
+      ],
+      "dataset_label_vi": "Dữ liệu bảng 63 tỉnh và 34 tỉnh chuẩn hóa",
+      "dataset_label_en": "63-Province and 34-Province Harmonized Panels",
+      "expected_tools": [
+        "build_research_panel",
+        "ecolab_dataset_prepare",
+        "ecolab_model_estimate_start"
+      ],
+      "expected_primary_model": "panel_threshold",
+      "model_family_vi": "Hồi quy ngưỡng dữ liệu bảng Hansen",
+      "model_family_en": "Hansen Panel Threshold Regression",
+      "rubric_overrides": {
+        "expected_primary_model": "panel_threshold",
+        "min_robustness_models": 2
+      },
+      "last_pass_at": "2026-11-06T03:20:00+07:00",
+      "system_version": "ecodata-v3.83.0+ecolab-v1.6.0",
+      "status": "verified"
+    },
+    {
+      "id": "P15",
+      "stage": "modeling",
+      "step_number": 4,
+      "stage_label_vi": "Bước 4: Mô hình hóa kinh tế lượng",
+      "stage_label_en": "Step 4: Econometric Modeling",
+      "title_vi": "Ước lượng System GMM tác động của FDI đến tăng trưởng kinh tế ASEAN giai đoạn 2000–2024",
+      "title_en": "Estimate Two-Step System GMM of FDI on Economic Growth in ASEAN for 2000–2024",
+      "prompt_vi": "Ước lượng System GMM tác động của FDI đến tăng trưởng ASEAN 2000–2024, báo cáo AR(1), AR(2), Hansen J và số công cụ.",
+      "prompt_en": "Estimate a System GMM model of the impact of FDI on economic growth across ASEAN countries for 2000–2024, reporting Arellano-Bond AR(1), AR(2), Hansen J overidentification test, and instrument count.",
+      "datasets": [
+        "WORLD_BANK_WDI"
+      ],
+      "dataset_label_vi": "Dữ liệu bảng vĩ mô ASEAN World Bank",
+      "dataset_label_en": "ASEAN Macroeconomic Panel from World Bank",
+      "expected_tools": [
+        "build_research_panel",
+        "ecolab_dataset_prepare",
+        "ecolab_model_estimate_start"
+      ],
+      "expected_primary_model": "blundell_bond",
+      "model_family_vi": "Mô hình dữ liệu bảng động System GMM",
+      "model_family_en": "Dynamic Panel System GMM",
+      "rubric_overrides": {
+        "expected_primary_model": "blundell_bond",
+        "min_robustness_models": 2
+      },
+      "last_pass_at": "2026-11-06T03:20:00+07:00",
+      "system_version": "ecodata-v3.83.0+ecolab-v1.6.0",
+      "status": "verified"
+    },
+    {
+      "id": "P16",
+      "stage": "modeling",
+      "step_number": 4,
+      "stage_label_vi": "Bước 4: Mô hình hóa kinh tế lượng",
+      "stage_label_en": "Step 4: Econometric Modeling",
+      "title_vi": "Kiểm định hiệu ứng lan tỏa không gian của FDI giữa các tỉnh bằng mô hình Spatial Durbin",
+      "title_en": "Test Spatial Spillover Effects of Provincial FDI Using the Spatial Durbin Model",
+      "prompt_vi": "Kiểm định hiệu ứng lan tỏa không gian của FDI giữa các tỉnh bằng mô hình Spatial Durbin, báo cáo tác động trực tiếp, gián tiếp và tổng.",
+      "prompt_en": "Test the spatial spillover effects of FDI across Vietnamese provinces using a Spatial Durbin Model, reporting direct, indirect, and total marginal effects.",
+      "datasets": [
+        "GSO_63_PROVINCES"
+      ],
+      "dataset_label_vi": "Dữ liệu bảng 63 tỉnh kèm ma trận trọng số không gian",
+      "dataset_label_en": "63-Province Panel with Spatial Weight Matrix",
+      "expected_tools": [
+        "build_research_panel",
+        "ecolab_dataset_prepare",
+        "ecolab_model_estimate_start"
+      ],
+      "expected_primary_model": "sdm_spatial_durbin",
+      "model_family_vi": "Kinh tế lượng không gian Spatial Durbin",
+      "model_family_en": "Spatial Durbin Econometrics",
+      "rubric_overrides": {
+        "expected_primary_model": "sdm_spatial_durbin"
+      },
+      "last_pass_at": "2026-11-06T03:20:00+07:00",
+      "system_version": "ecodata-v3.83.0+ecolab-v1.6.0",
+      "status": "verified"
+    },
+    {
+      "id": "P17",
+      "stage": "modeling",
+      "step_number": 4,
+      "stage_label_vi": "Bước 4: Mô hình hóa kinh tế lượng",
+      "stage_label_en": "Step 4: Econometric Modeling",
+      "title_vi": "Phân tích truyền dẫn bất đối xứng của giá dầu thế giới vào CPI Việt Nam bằng NARDL",
+      "title_en": "Analyze Asymmetric Pass-Through of Global Oil Prices to Vietnam CPI Using NARDL",
+      "prompt_vi": "Phân tích truyền dẫn bất đối xứng của giá dầu thế giới vào CPI Việt Nam bằng NARDL, kèm kiểm định đường bao.",
+      "prompt_en": "Analyze the asymmetric pass-through of global crude oil prices into Vietnam's consumer price index using a Nonlinear ARDL model, complete with Pesaran-Shin-Smith bounds testing.",
+      "datasets": [
+        "COMMODITY_MARKET",
+        "GSO_MACRO"
+      ],
+      "dataset_label_vi": "Thị trường hàng hóa năng lượng và CPI vĩ mô",
+      "dataset_label_en": "Energy Commodity Prices and Macroeconomic CPI",
+      "expected_tools": [
+        "build_research_panel",
+        "ecolab_dataset_prepare",
+        "ecolab_model_estimate_start"
+      ],
+      "expected_primary_model": "nardl",
+      "model_family_vi": "Chuỗi thời gian phi tuyến NARDL",
+      "model_family_en": "Nonlinear Autoregressive Distributed Lag",
+      "rubric_overrides": {
+        "expected_primary_model": "nardl"
+      },
+      "last_pass_at": "2026-11-06T03:20:00+07:00",
+      "system_version": "ecodata-v3.83.0+ecolab-v1.6.0",
+      "status": "verified"
+    },
+    {
+      "id": "P18",
+      "stage": "modeling",
+      "step_number": 4,
+      "stage_label_vi": "Bước 4: Mô hình hóa kinh tế lượng",
+      "stage_label_en": "Step 4: Econometric Modeling",
+      "title_vi": "Ước lượng xác suất nghèo hộ gia đình theo đặc điểm chủ hộ bằng Logit và Probit",
+      "title_en": "Estimate Household Poverty Probability by Household Head Characteristics Using Logit and Probit",
+      "prompt_vi": "Ước lượng xác suất nghèo của hộ gia đình theo đặc điểm chủ hộ bằng Logit và Probit, báo cáo tác động biên.",
+      "prompt_en": "Estimate household poverty probability conditional on household head characteristics using binary Logit and Probit models, reporting average marginal effects.",
+      "datasets": [
+        "VHLSS_HOUSEHOLD"
+      ],
+      "dataset_label_vi": "Vi dữ liệu khảo sát hộ gia đình VHLSS",
+      "dataset_label_en": "VHLSS Household Microdata",
+      "expected_tools": [
+        "build_research_panel",
+        "ecolab_dataset_prepare",
+        "ecolab_model_estimate_start"
+      ],
+      "expected_primary_model": "logit",
+      "model_family_vi": "Mô hình lựa chọn nhị phân Logit và Probit",
+      "model_family_en": "Binary Logit and Probit Choice Models",
+      "rubric_overrides": {
+        "expected_primary_model": "logit"
+      },
+      "last_pass_at": "2026-11-06T03:20:00+07:00",
+      "system_version": "ecodata-v3.83.0+ecolab-v1.6.0",
+      "status": "verified"
+    },
+    {
+      "id": "P19",
+      "stage": "modeling",
+      "step_number": 4,
+      "stage_label_vi": "Bước 4: Mô hình hóa kinh tế lượng",
+      "stage_label_en": "Step 4: Econometric Modeling",
+      "title_vi": "Ước lượng tác động của đòn bẩy tài chính đến ROA tại các phân vị bằng MMQR",
+      "title_en": "Estimate the Impact of Financial Leverage on ROA Across Quantiles Using MMQR",
+      "prompt_vi": "Ước lượng tác động của đòn bẩy đến ROA tại các phân vị khác nhau cho doanh nghiệp niêm yết.",
+      "prompt_en": "Estimate the heterogeneous impact of financial leverage on return on assets across conditional quantiles for listed Vietnamese firms using Method of Moments Quantile Regression.",
+      "datasets": [
+        "STOCK_FINANCIAL_UNIFIED"
+      ],
+      "dataset_label_vi": "Báo cáo tài chính doanh nghiệp niêm yết",
+      "dataset_label_en": "Listed Corporate Financial Statements",
+      "expected_tools": [
+        "build_research_panel",
+        "ecolab_dataset_prepare",
+        "ecolab_model_estimate_start"
+      ],
+      "expected_primary_model": "mmqr",
+      "model_family_vi": "Hồi quy phân vị dữ liệu bảng MMQR",
+      "model_family_en": "Method of Moments Quantile Regression",
+      "rubric_overrides": {
+        "expected_primary_model": "mmqr"
+      },
+      "last_pass_at": "2026-11-06T03:20:00+07:00",
+      "system_version": "ecodata-v3.83.0+ecolab-v1.6.0",
+      "status": "verified"
+    },
+    {
+      "id": "P20",
+      "stage": "report",
+      "step_number": 5,
+      "stage_label_vi": "Bước 5: Biên soạn báo cáo",
+      "stage_label_en": "Step 5: Manuscript Compilation",
+      "title_vi": "Biên soạn bản thảo STORM hoàn chỉnh tiếng Việt chuẩn APA 7 kèm Word OMML và gói tái lập",
+      "title_en": "Compile Complete Vietnamese STORM Manuscript in APA 7 Style with OMML Word and Replication Zip",
+      "prompt_vi": "Từ dự án hiện tại, tạo bản thảo STORM hoàn chỉnh bằng tiếng Việt theo chuẩn APA 7, xuất file Word, HTML và gói dữ liệu tái lập.",
+      "prompt_en": "From the active research project, compile a complete STORM manuscript in Vietnamese formatted in APA 7th style, exporting the Word OMML document, HTML preview, and replication package.",
+      "datasets": [
+        "ACTIVE_ECOLAB_PROJECT"
+      ],
+      "dataset_label_vi": "Sổ cái bằng chứng và trích dẫn dự án hiện tại",
+      "dataset_label_en": "Active Project Evidence and Citation Ledger",
+      "expected_tools": [
+        "ecolab_report_storm_pack_start",
+        "ecolab_report_submit_manuscript"
+      ],
+      "expected_primary_model": null,
+      "model_family_vi": "Bản thảo STORM 8 cổng kiểm chứng",
+      "model_family_en": "Eight-Gate Verified STORM Manuscript",
+      "rubric_overrides": {
+        "min_words": 6000,
+        "citation_style": "apa"
+      },
+      "last_pass_at": "2026-11-06T03:20:00+07:00",
+      "system_version": "ecodata-v3.83.0+ecolab-v1.6.0",
+      "status": "verified"
+    },
+    {
+      "id": "P21",
+      "stage": "report",
+      "step_number": 5,
+      "stage_label_vi": "Bước 5: Biên soạn báo cáo",
+      "stage_label_en": "Step 5: Manuscript Compilation",
+      "title_vi": "Biên soạn bản thảo Standard IMRaD tiếng Anh chuẩn Harvard kèm DOCX và gói tái lập",
+      "title_en": "Generate Standard IMRaD Manuscript in English Using Harvard Style with DOCX and Replication Package",
+      "prompt_vi": "Từ dự án hiện tại, tạo bản thảo Standard IMRaD hoàn chỉnh bằng tiếng Anh theo chuẩn trích dẫn Harvard, xuất tệp DOCX và gói dữ liệu tái lập.",
+      "prompt_en": "Generate a Standard IMRaD manuscript in English using Harvard style from the current project, with DOCX export and replication package.",
+      "datasets": [
+        "ACTIVE_ECOLAB_PROJECT"
+      ],
+      "dataset_label_vi": "Sổ cái bằng chứng và trích dẫn dự án hiện tại",
+      "dataset_label_en": "Active Project Evidence and Citation Ledger",
+      "expected_tools": [
+        "ecolab_report_standard_pack_start",
+        "ecolab_report_submit_manuscript"
+      ],
+      "expected_primary_model": null,
+      "model_family_vi": "Bản thảo Standard IMRaD chuẩn Harvard",
+      "model_family_en": "Harvard-Style Standard IMRaD Manuscript",
+      "rubric_overrides": {
+        "min_words": 6000,
+        "citation_style": "harvard"
+      },
+      "last_pass_at": "2026-11-06T03:20:00+07:00",
+      "system_version": "ecodata-v3.83.0+ecolab-v1.6.0",
+      "status": "verified"
+    },
+    {
+      "id": "P22",
+      "stage": "end_to_end",
+      "step_number": 0,
+      "stage_label_vi": "Trọn vẹn 5 bước",
+      "stage_label_en": "Full 5-Step Workflow",
+      "title_vi": "Chu trình 5 bước hoàn chỉnh: Ngưỡng tối ưu của đầu tư công đối với đầu tư tư nhân cấp tỉnh Việt Nam",
+      "title_en": "Complete 5-Step Workflow: Optimal Threshold of Public Investment on Private Investment in Vietnam",
+      "prompt_vi": "Thực hiện trọn vẹn 5 bước từ ý tưởng đến bản thảo hoàn chỉnh về ngưỡng tối ưu của đầu tư công đối với đầu tư tư nhân tại các tỉnh Việt Nam, sẵn sàng nộp tạp chí Q3.",
+      "prompt_en": "Execute the complete 5-step research workflow from ideation to a journal-ready manuscript on the optimal threshold effect of public investment on private investment across Vietnamese provinces, targeting a Q3 journal.",
+      "datasets": [
+        "GSO_63_PROVINCES",
+        "VN_PROVINCE_34"
+      ],
+      "dataset_label_vi": "Dữ liệu bảng 63 tỉnh 2015–2024 và 34 tỉnh 2010–2024",
+      "dataset_label_en": "63-Province 2015–2024 and 34-Province 2010–2024 Panels",
+      "expected_tools": [
+        "analyze_request",
+        "ecolab_project_create",
+        "ecolab_ideation_blueprint",
+        "ecolab_literature_discover_start",
+        "ecolab_literature_verify_citations",
+        "build_research_panel",
+        "ecolab_dataset_prepare",
+        "ecolab_model_estimate_start",
+        "ecolab_report_storm_pack_start",
+        "ecolab_report_submit_manuscript"
+      ],
+      "expected_primary_model": "panel_threshold",
+      "model_family_vi": "Hồi quy ngưỡng dữ liệu bảng Hansen kèm kiểm định độ vững",
+      "model_family_en": "Hansen Panel Threshold Regression with Robustness Suite",
+      "rubric_overrides": {
+        "expected_primary_model": "panel_threshold",
+        "expected_n_obs": 630,
+        "min_words": 6000,
+        "max_mcp_calls": 20
+      },
+      "last_pass_at": "2026-11-06T03:20:00+07:00",
+      "system_version": "ecodata-v3.83.0+ecolab-v1.6.0",
+      "status": "verified"
+    },
+    {
+      "id": "P23",
+      "stage": "end_to_end",
+      "step_number": 0,
+      "stage_label_vi": "Trọn vẹn 5 bước",
+      "stage_label_en": "Full 5-Step Workflow",
+      "title_vi": "Chu trình 5 bước hoàn chỉnh: FDI, thể chế và tăng trưởng kinh tế tại ASEAN hướng tới tạp chí Q3",
+      "title_en": "Complete 5-Step Workflow: FDI, Institutions, and Economic Growth in ASEAN Targeting a Q3 Journal",
+      "prompt_vi": "Thực hiện trọn vẹn 5 bước từ ý tưởng đến bản thảo hoàn chỉnh bằng tiếng Anh về FDI, chất lượng thể chế và tăng trưởng kinh tế tại các quốc gia ASEAN giai đoạn 2000–2024, sẵn sàng nộp tạp chí Q3.",
+      "prompt_en": "Run the full 5-step workflow from idea to a journal-ready manuscript on FDI, institutions and growth in ASEAN, targeting a Q3 journal.",
+      "datasets": [
+        "WORLD_BANK_WDI",
+        "WGI_INSTITUTIONS"
+      ],
+      "dataset_label_vi": "Chỉ số phát triển và quản trị thế giới World Bank",
+      "dataset_label_en": "World Bank WDI and Worldwide Governance Indicators",
+      "expected_tools": [
+        "analyze_request",
+        "ecolab_project_create",
+        "ecolab_ideation_blueprint",
+        "ecolab_literature_discover_start",
+        "ecolab_literature_verify_citations",
+        "build_research_panel",
+        "ecolab_dataset_prepare",
+        "ecolab_model_estimate_start",
+        "ecolab_report_storm_pack_start",
+        "ecolab_report_submit_manuscript"
+      ],
+      "expected_primary_model": "blundell_bond",
+      "model_family_vi": "Dữ liệu bảng động System GMM kèm kiểm định độ vững",
+      "model_family_en": "Dynamic Panel System GMM with Robustness Suite",
+      "rubric_overrides": {
+        "expected_primary_model": "blundell_bond",
+        "min_words": 6000,
+        "max_mcp_calls": 20
+      },
+      "last_pass_at": "2026-11-06T03:20:00+07:00",
+      "system_version": "ecodata-v3.83.0+ecolab-v1.6.0",
+      "status": "verified"
+    }
+  ]
+}
