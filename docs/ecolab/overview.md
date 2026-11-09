@@ -1,14 +1,14 @@
 ---
 title: Tổng quan EcoLab
 sidebar_position: 1
-description: Tổng quan nền tảng nghiên cứu kinh tế lượng EcoLab (v1.6.0) với quy trình 5 giai đoạn khép kín, tổng hợp học thuật 6 nguồn xác thực DOI, cầu nối dữ liệu Zero-Copy EcoData, 201+ bộ ước lượng thuộc 15 họ mô hình, biên soạn báo cáo kiểm chứng 8 cổng (G1–G8) và danh mục 23 prompts kiểm chứng.
+description: Tổng quan nền tảng nghiên cứu kinh tế lượng EcoLab (v1.8.0) với quy trình 5 giai đoạn khép kín, tổng hợp học thuật 6 nguồn xác thực DOI, cầu nối dữ liệu Zero-Copy EcoData, 201+ bộ ước lượng thuộc 15 họ mô hình, biên soạn báo cáo kiểm chứng 8 cổng (G1–G8) và danh mục 23 prompts kiểm chứng.
 ---
 
 import McpPromptCatalog from '@site/src/components/McpPromptCatalog';
 
 # Tổng quan EcoLab
 
-**EcoLab** (phiên bản `v1.6.0`) là nền tảng nghiên cứu kinh tế định lượng chuyên sâu hỗ trợ toàn diện vòng đời học thuật — từ thiết kế ý tưởng, tổng hợp tài liệu xác thực DOI, kết nối dữ liệu chuẩn hóa, ước lượng mô hình kinh tế lượng trên bộ 3 môi trường thực thi đến xuất bản bản thảo nghiên cứu hoàn chỉnh.
+**EcoLab** (phiên bản `v1.8.0`) là nền tảng nghiên cứu kinh tế định lượng chuyên sâu hỗ trợ toàn diện vòng đời học thuật — từ thiết kế ý tưởng, tổng hợp tài liệu xác thực DOI, kết nối dữ liệu chuẩn hóa, ước lượng mô hình kinh tế lượng trên bộ 3 môi trường thực thi đến xuất bản bản thảo nghiên cứu hoàn chỉnh.
 
 Nền tảng kết nối trực tiếp với kho dữ liệu và lõi tính toán **EcoData Tri-Engine** (**Python**, **R** và **Stata 18 MP**), cung cấp danh mục động **201+ bộ ước lượng cốt lõi thuộc 15 họ mô hình và 58 mô hình con**, đồng thời hỗ trợ điều phối tự động qua cả hai cổng **Unified EcoData MCP (`https://ecodata.io.vn/mcp`, 53 công cụ)** và **Direct EcoLab MCP (`https://ecolab.io.vn/mcp`, 15 công cụ)**.
 

@@ -10,7 +10,7 @@ export const aiMcpSchema = {
   '@context': 'https://schema.org',
   '@type': 'TechArticle',
   headline: 'Khai thác AI Chat, Unified EcoData MCP Server 52 công cụ và bộ kỹ năng chuyên dụng cho Gemini Task và AI Agents',
-  description: 'Hướng dẫn sử dụng AI Chat, điều phối 52 công cụ Unified MCP (37 EcoData + 15 EcoLab) với khóa cứng server_llm_calls == 0 và cài đặt bộ 5 kỹ năng cho Gemini Task, Gemini Gems, AntiGravity, Claude Code, OpenAI Codex và Cursor IDE.',
+  description: 'Hướng dẫn sử dụng AI Chat, điều phối 52 công cụ Unified MCP (37 EcoData + 15 EcoLab) với khóa cứng 100% client-side reasoning và cài đặt bộ 5 kỹ năng cho Gemini Task, Gemini Gems, AntiGravity, Claude Code, OpenAI Codex và Cursor IDE.',
   url: 'https://docs.tnsai.vn/ecodata/cong-cu/ai-chat',
   inLanguage: 'vi',
 };
@@ -23,14 +23,14 @@ export const aiMcpSchema = {
 
 EcoData cung cấp hai phương thức kết hợp trí tuệ nhân tạo vào nghiên cứu kinh tế định lượng: sử dụng trực tiếp **AI Chat** ngay trên trình duyệt web, hoặc kết nối máy chủ **Unified EcoData MCP Server** tại địa chỉ `https://ecodata.io.vn/mcp` với **52 công cụ chuyên biệt** vào các trợ lý AI và môi trường lập trình như Gemini Spark, Gemini Gems, AntiGravity, Claude Code, OpenAI Codex và Cursor IDE.
 
-## Kiến trúc 52 công cụ hợp nhất và khóa cứng `server_llm_calls == 0`
+## Kiến trúc 52 công cụ hợp nhất và khóa cứng 100% xử lý phía máy khách
 
 Cổng `https://ecodata.io.vn/mcp` hợp nhất toàn bộ năng lực dữ liệu của EcoData và quy trình nghiên cứu học thuật 5 giai đoạn của EcoLab trong một kết nối MCP duy nhất:
 
 - **37 công cụ dữ liệu và kinh tế lượng gốc của EcoData:** Tìm kiếm ngữ nghĩa hơn 200.000 chỉ số vĩ mô quốc tế và 7 phân hệ Việt Nam (`boundary_mode="34"` / `"63"`), BCTC 30 năm theo 4 chế độ kế toán, khảo sát vi mô VHLSS/PCI/PAPI, thực thi **201+ bộ ước lượng thuộc 15 họ mô hình** trên Python, R và Stata 18 MP cùng gói tái lập `.zip`.
 - **15 công cụ nghiên cứu học thuật 5 bước của EcoLab (`ecolab_*`):** Khởi tạo dự án và ý tưởng nghiên cứu (Stage 1), khám phá và kiểm chứng DOI trên 6 cơ sở dữ liệu học thuật mở gồm OpenAlex, Crossref, DOAJ, arXiv, Semantic Scholar, CORE (Stage 2), bàn giao dữ liệu **Zero-Copy** qua 3 chế độ `ecodata_TransferPayload`, `ecodata_bundle_id` hoặc `ecodata_csv_url` (Stage 3), ước lượng chuyên sâu trên danh mục động 201+ mô hình (Stage 4) và biên soạn bản thảo **Standard IMRaD** hoặc **STORM** khóa bằng chứng 5 cổng kèm biểu đồ PNG 300-DPI và công thức Word OMML `.docx` gốc (Stage 5).
 - **5 công cụ quản trị kiểm duyệt mô hình (`admin_econometrics_*`):** Chỉ hiển thị cho tài khoản có quyền **Admin**, phục vụ điều phối quy trình phát hiện Giai đoạn A và kiểm chứng 4 cổng `B1–B4` Giai đoạn B.
-- **Khóa thực thi Host-LLM (`server_llm_calls == 0`):** Toàn bộ luồng gọi qua `/mcp*` chỉ sử dụng tài nguyên suy luận từ mô hình AI phía máy khách (Gemini, Claude, Cursor, Codex), đảm bảo `0` lệnh gọi LLM phía máy chủ và `0` phụ thuộc hạn mức khóa AI server.
+- **Khóa thực thi Host-LLM:** Toàn bộ luồng gọi qua `/mcp*` chỉ sử dụng tài nguyên suy luận từ mô hình AI phía máy khách (Gemini, Claude, Cursor, Codex), đảm bảo `0` lệnh gọi LLM phía máy chủ và `0` phụ thuộc hạn mức khóa AI server.
 
 ## Khi nào nên dùng AI Chat và Unified EcoData MCP
 

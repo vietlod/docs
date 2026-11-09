@@ -32,10 +32,10 @@ Tại mục **Cài đặt → Khóa API**, EcoLab tách bạch ba nhóm khóa c�
    - Bốn nguồn học thuật mở (**OpenAlex**, **Crossref**, **DOAJ**, **arXiv**) hoạt động sẵn 100% không cần khóa.
    - Người dùng có thể lưu thêm khóa cá nhân **Semantic Scholar** và **CORE** kèm nút kiểm tra trực tiếp (`Probe`) để mở khóa trọn vẹn **6/6 nguồn tổng hợp tài liệu** với hạn mức truy vấn riêng biệt.
 3. **Khóa truy cập EcoLab MCP (`Personal MCP Access Tokens`):**
-   - Cấp phát, xoay vòng và thu hồi mã truy cập cá nhân để kết nối trực tiếp trợ lý AI (Gemini Task, AntiGravity, Claude Code, Codex, Cursor) vào cổng **`https://ecolab.io.vn/mcp`** dưới cơ chế khóa cứng `server_llm_calls == 0`.
+   - Cấp phát, xoay vòng và thu hồi mã truy cập cá nhân để kết nối trực tiếp trợ lý AI (Gemini Task, AntiGravity, Claude Code, Codex, Cursor) vào cổng **`https://ecolab.io.vn/mcp`** dưới cơ chế khóa cứng 100% xử lý phía máy khách.
 
 :::info[Bảo mật mã hóa khóa cá nhân]
-Toàn bộ khóa API do người dùng lưu trữ đều được **mã hóa đối xứng chuẩn Fernet (AES-128-CBC + HMAC-SHA256)** trước khi ghi xuống cơ sở dữ liệu, chỉ hiển thị phần hậu tố nhận diện trên giao diện và chỉ giải mã tạm thời trong bộ nhớ RAM đúng tại thời điểm thực thi yêu cầu của chính chủ sở hữu khóa.
+Toàn bộ khóa API do người dùng lưu trữ đều được **mã hóa đối xứng chuẩn chuẩn bảo mật cao (AES-128-CBC + chữ ký số bảo mật)** trước khi ghi xuống cơ sở dữ liệu, chỉ hiển thị phần hậu tố nhận diện trên giao diện và chỉ giải mã tạm thời trong bộ nhớ RAM đúng tại thời điểm thực thi yêu cầu của chính chủ sở hữu khóa.
 :::
 
 ---

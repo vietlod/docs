@@ -1,51 +1,69 @@
 ---
 id: docusaurus-vps
-title: Docusaurus and VPS Integration Plan
-description: Deployment checklist for the Ecodata documentation repo, domain, Nginx, and SSL.
+title: Step-by-Step Guide to Input Resource Auditing, Custom Survey Simulation, and AI Skill Integration
+description: Step-by-step instructions on attaching reference papers, research outlines, empirical datasets, or custom questionnaires for automated auditing, context standardization, and exact model execution.
 ---
 
-# Docusaurus and VPS Integration Plan
+# Step-by-Step Guide: Input Resource Auditing, Custom Survey Simulation, and AI Skill Integration
 
-The documentation repo is standardized as a Docusaurus app for "Using Ecodata". The deployment goal is to synchronize the local repo, GitHub repo, and VPS documentation directory, then configure domain, Nginx, and SSL.
+When you attach or describe a **reference paper**, **thesis/dissertation outline**, **work-in-progress manuscript**, **empirical dataset (`.csv`, `.xlsx`)**, **public article URL**, or **custom survey questionnaire** in your initial prompt, the **EcoData MCP × EcoLab** ecosystem automatically runs a **4-Layer Resource Audit** to detect inconsistencies, standardize the research context, and lock all inputs for downstream econometric estimation.
 
-## Local and VPS State
+---
 
-| Item | State |
-| --- | --- |
-| Local repo | `D:\DOCS\ecodata` |
-| GitHub repo | `https://github.com/vietlod/docs` |
-| App name | Using Ecodata |
-| Default content | Vietnamese |
-| Target docs domain | `ecodata.tnsai.vn` |
-| App domain for feature reference | `ecodata.io.vn` |
-| VPS path | `/opt/docs/ecodata` |
+## Step 1: Prepare and Attach Your Initial Research Resources
 
-## Pre-Deploy Checklist
+You can provide one or more of the following resources directly in your opening prompt on **Gemini Connected Apps** or AI research assistants:
 
-1. Confirm the final documentation and app domains.
-2. Confirm that the DNS A record points to the VPS.
-3. SSH into the VPS and check `/opt/docs`.
-4. Check active ports with `ss -tulpn`.
-5. Check Nginx sites-enabled and sites-available.
-6. Verify that the Ecodata app containers remain untouched.
-7. Build Docusaurus locally or on the VPS.
-8. Configure SSL only after the domain resolves correctly.
+| Attached Resource Type | What You Provide | Automated Standardization Outcome |
+| :--- | :--- | :--- |
+| **1. Research Outline / Draft / Reference Paper** | Research objectives, research questions `RQ1..RQk`, hypotheses `H1..Hk`, and proposed model | Audits alignment across objectives, questions, and hypotheses, identifies missing controls, and locks the research question ledger. |
+| **2. Empirical Dataset (`.csv`, `.xlsx`)** | Your actual dataset or an EcoData dataset identifier | Activates the **Empirical Dataset Lock**, preserving 100% of your real observations and variable names without substituting simulated data. |
+| **3. Custom Likert Survey Questionnaire** | Construct names, indicator codes, item wordings, and Likert scale points (5-point or 7-point) | Locks your exact construct structure so simulation and psychometric testing match every indicator and reverse-coded item. |
+| **4. Public Scholarly Article URL** | Public DOI link or open-access article URL | Extracts methodological specifications, baseline models, and verified bibliographic metadata. |
 
-## Recommended Deployment Flow
+---
 
-```mermaid
-flowchart TD
-  A["Local Docusaurus repo"] --> B["GitHub vietlod/docs"]
-  B --> C["VPS /opt/docs/ecodata"]
-  C --> D["npm ci and npm run build"]
-  D --> E["Nginx serves static build"]
-  E --> F["SSL with Certbot"]
+## Step 2: Choose Your Survey Questionnaire Lock Mode
+
+When working with behavioral or survey questionnaires, you can choose between **two questionnaire handling modes**:
+
+1. **100% Strict Questionnaire Lock (`Strict Questionnaire Lock`)**:
+   - Preserves your exact construct codes, item counts, and question wording 1:1.
+   - Never adds or removes any survey indicator.
+2. **Guided Psychometric Standardization**:
+   - Retains all of your custom constructs while optionally recommending a reverse-coded attention check item or supplemental indicator if a construct has fewer than 3 items.
+
+---
+
+## Step 3: Personalize Your Academic Writing Style
+
+During context standardization, you can select one of **four academic style profiles** for the final manuscript:
+
+- **International Journal Article (Q1–Q3 IMRaD 6-Section Format):** Concise academic prose emphasizing causal identification, multi-model robustness checks, and theoretical contributions.
+- **Master's Thesis / Doctoral Dissertation (3–5 Chapters):** Comprehensive exposition covering theoretical foundations, scale development, pilot and main survey stages, and managerial implications.
+- **Replication & Extension Study:** Direct side-by-side comparison between your newly estimated coefficients and the benchmark findings in your attached reference paper.
+- **Executive Policy & Analytical Report:** Focuses on economic magnitudes, sectoral sensitivity, and actionable policy roadmaps.
+
+---
+
+## Step 4: Connect the 3-Skill Suite on Gemini Connected Apps & AI Agents
+
+To enable seamless end-to-end orchestration, download the three zero-overlap skill files from the **AI Integration Hub** on `https://ecodata.io.vn`:
+
+1. **Skill 1 — Data & Econometric Orchestration (`gemini-ecodata-mcp-skill.md`):** Handles initial resource auditing, macroeconomic and corporate panel assembly, and estimation across 201+ econometric specifications.
+2. **Skill 2 — Behavioral & Survey Research Studio (`behavioral-research-ecodata-skill.md`):** Handles Likert questionnaire locking, latent-variable survey simulation, and full EFA, CFA, SEM, and PLS-SEM diagnostics.
+3. **Skill 3 — Manuscript Authoring & 9-Gate Verification (`gemini-ecolab-ecodata-mcp-skill.md`):** Authors complete manuscripts 100% locked to executed results, embeds 300-DPI structural diagrams, builds bidirectional citation hyperlinks, and exports Word, PDF, and HTML packages.
+
+---
+
+## Step 5: Ready-to-Use Step-by-Step Prompt Template
+
+Copy the template below and paste it alongside your outline or questionnaire in Gemini:
+
+```text
+I am attaching my research outline and survey questionnaire with 4 constructs (Transformational Leadership TL: 4 items, Psychological Empowerment PE: 4 items, Innovation Climate IC: 4 items, Innovative Work Behavior IWB: 4 items, 5-point Likert scale, N = 400).
+Please execute the following steps:
+1. Audit the input resources, standardize research questions and hypotheses H1–H3, and strictly lock 100% of my custom survey constructs.
+2. Generate the survey dataset matching my locked questionnaire and run full Cronbach's Alpha, EFA, CFA, HTMT, VIF, and PLS-SEM structural estimation alongside robust competing models.
+3. Produce the complete academic report embedding all 3 300-DPI structural & measurement diagrams in Sections 3 and 4, bidirectional citation hyperlinks to the References section, and R, Stata, and Python replication scripts.
 ```
-
-## Nginx
-
-Nginx should serve the static Docusaurus build. There is no need to run a dev server. The documentation server block must stay separate from the Ecodata production app so it does not affect backend, frontend, Redis, adapter, or Python service ports.
-
-## Scope Not Touched
-
-The `ecodata.io.vn` domain belongs to the production Ecodata app and is used only as a feature reference. The documentation deployment does not change app code, containers, the `/opt/ecodata` directory, or the app's Nginx block.

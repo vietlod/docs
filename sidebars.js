@@ -64,7 +64,7 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "Quản trị và triển khai",
+      "label": "Hướng dẫn nâng cao & Kỹ năng AI",
       "collapsed": true,
       "items": [
         "ecodata/admin/quan-tri-du-lieu",

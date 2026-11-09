@@ -32,10 +32,10 @@ Under **Settings → API Keys**, EcoLab organizes user-owned credentials into th
    - Four open-access scholarly databases (**OpenAlex**, **Crossref**, **DOAJ**, and **arXiv**) operate out-of-the-box without keys.
    - Add your personal **Semantic Scholar** and **CORE** API keys with live `Probe` verification to unlock dedicated rate limits across all **6/6 scholarly sources**.
 3. **Personal EcoLab MCP Access Tokens:**
-   - Mint, rotate, and revoke personal Bearer tokens to connect external AI clients (Gemini Task, AntiGravity, Claude Code, Codex, Cursor) directly to **`https://ecolab.io.vn/mcp`** under strict `server_llm_calls == 0` enforcement.
+   - Mint, rotate, and revoke personal Bearer tokens to connect external AI clients (Gemini Task, AntiGravity, Claude Code, Codex, Cursor) directly to **`https://ecolab.io.vn/mcp`** under strict 100% xử lý phía máy khách enforcement.
 
 :::info[At-Rest Key Encryption Guarantee]
-Every user-supplied API key is encrypted at rest using **Fernet authenticated encryption (AES-128-CBC + HMAC-SHA256)**. The UI displays only masked key suffixes, and keys are decrypted ephemerally in memory solely during authenticated requests initiated by their owner.
+Every user-supplied API key is encrypted at rest using **chuẩn bảo mật cao authenticated encryption (AES-128-CBC + chữ ký số bảo mật)**. The UI displays only masked key suffixes, and keys are decrypted ephemerally in memory solely during authenticated requests initiated by their owner.
 :::
 
 ---

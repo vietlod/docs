@@ -1,51 +1,69 @@
 ---
 id: docusaurus-vps
-title: Kế hoạch tích hợp Docusaurus và VPS
-description: Checklist triển khai repo docs, domain, Nginx và SSL cho tài liệu Ecodata.
+title: Hướng dẫn từng bước kiểm toán tài liệu đầu vào, mô phỏng khảo sát và kết nối kỹ năng AI
+description: Hướng dẫn chi tiết từng bước cách đính kèm bài báo gốc, đề cương, dữ liệu thực tế hoặc bảng khảo sát để hệ thống tự động kiểm toán, chuẩn hóa ngữ cảnh và chạy mô hình chính xác.
 ---
 
-# Kế hoạch tích hợp Docusaurus và VPS
+# Hướng dẫn từng bước: Kiểm toán tài liệu đầu vào, mô phỏng khảo sát và kết nối kỹ năng AI
 
-Repo tài liệu đã được chuẩn hóa theo Docusaurus để phục vụ app "Khai thác Ecodata". Mục tiêu triển khai là đồng bộ local repo, GitHub repo và thư mục tài liệu trên VPS, sau đó cấu hình domain, Nginx và SSL.
+Khi bạn cung cấp **bài báo tham chiếu gốc**, **đề cương luận văn/luận án**, **bản thảo đang viết dở**, **tệp dữ liệu thực tế (`.csv`, `.xlsx`)**, **đường dẫn bài báo công khai** hoặc **bảng câu hỏi khảo sát** ngay trong mô tả ban đầu, hệ thống **EcoData MCP × EcoLab** sẽ tự động thực hiện **Kiểm toán 4 tầng** để phát hiện điểm chưa phù hợp, chuẩn hóa ngữ cảnh và khóa cứng toàn bộ đầu vào cho các bước ước lượng.
 
-## Trạng thái local
+---
 
-| Hạng mục | Trạng thái |
-| --- | --- |
-| Local repo | `D:\DOCS\ecodata` |
-| GitHub repo | `https://github.com/vietlod/docs` |
-| App name | Khai thác Ecodata |
-| Nội dung mặc định | Tiếng Việt |
-| Target docs domain | `ecodata.tnsai.vn` |
-| Domain app tham chiếu tính năng | `ecodata.io.vn` |
-| VPS path dự kiến | `/opt/docs/ecodata` |
+## Bước 1: Chuẩn bị và đính kèm tài nguyên nghiên cứu ban đầu
 
-## Checklist trước khi deploy
+Bạn có thể cung cấp một hoặc nhiều tài nguyên sau ngay trong câu lệnh đầu tiên trên **Gemini Connected Apps** hoặc các trợ lý nghiên cứu AI:
 
-1. Xác nhận domain cuối cùng cho docs và app.
-2. Xác nhận DNS A record đã trỏ về VPS.
-3. SSH vào VPS và kiểm tra thư mục `/opt/docs`.
-4. Kiểm tra port đang dùng bằng `ss -tulpn`.
-5. Kiểm tra Nginx sites-enabled/sites-available.
-6. Kiểm tra container/app Ecodata đang chạy để tránh đụng port.
-7. Build Docusaurus ở local hoặc trên VPS.
-8. Chỉ cấu hình SSL sau khi domain đã resolve đúng.
+| Loại tài nguyên đính kèm | Nội dung bạn cần cung cấp | Kết quả chuẩn hóa tự động từ hệ thống |
+| :--- | :--- | :--- |
+| **1. Đề cương / Luận văn / Bài báo mẫu** | Mục tiêu nghiên cứu, câu hỏi nghiên cứu `RQ1..RQk`, giả thuyết `H1..Hk` và mô hình dự kiến | Rà soát tính nhất quán giữa mục tiêu – câu hỏi – giả thuyết, bổ sung biến kiểm soát còn thiếu và khóa sổ cái câu hỏi nghiên cứu. |
+| **2. Tệp dữ liệu thực nghiệm (`.csv`, `.xlsx`)** | Bảng dữ liệu thực tế của bạn hoặc mã bộ dữ liệu trên EcoData | Khóa cứng chế độ **Dữ liệu thực tế**, giữ nguyên 100% quan sát và tên biến thực tế, tuyệt đối không sinh dữ liệu mô phỏng thay thế. |
+| **3. Bảng câu hỏi khảo sát Likert** | Danh sách các thang đo (khái niệm), mã biến quan sát và số mức điểm Likert (5 mức hoặc 7 mức) | Khóa cấu trúc thang đo của bạn để mô phỏng hoặc kiểm định chính xác từng biến quan sát và biến đảo chiều. |
+| **4. Đường dẫn URL bài báo công khai** | Liên kết DOI hoặc trang bài báo khoa học công khai | Trích xuất thông tin phương pháp luận, mô hình chuẩn và đối chiếu tài liệu tham khảo xác thực. |
 
-## Phương án triển khai khuyến nghị
+---
 
-```mermaid
-flowchart TD
-  A["Local Docusaurus repo"] --> B["GitHub vietlod/docs"]
-  B --> C["VPS /opt/docs/ecodata"]
-  C --> D["npm ci và npm run build"]
-  D --> E["Nginx serve static build"]
-  E --> F["SSL bằng Certbot"]
+## Bước 2: Chọn chế độ khóa bảng câu hỏi khảo sát (khi nghiên cứu khảo sát hành vi)
+
+Khi bạn cung cấp bảng câu hỏi khảo sát gồm các thang đo và biến quan sát, hệ thống hỗ trợ **2 chế độ linh hoạt**:
+
+1. **Chế độ Khóa tuyệt đối 100% bảng hỏi của bạn (`Strict Questionnaire Lock`)**:
+   - Giữ nguyên chính xác tên mã thang đo, số lượng biến quan sát và lời văn từng câu hỏi bạn đã cung cấp.
+   - Không tự ý thêm hoặc bớt bất kỳ biến quan sát nào.
+2. **Chế độ Chuẩn hóa học thuật có kiểm soát**:
+   - Giữ toàn bộ thang đo gốc của bạn và tự động gợi ý bổ sung câu hỏi đảo chiều (reverse-coded item) hoặc thang đo còn thiếu theo chuẩn tâm trắc học quốc tế nếu một nhân tố có ít hơn 3 biến quan sát.
+
+---
+
+## Bước 3: Cá nhân hóa phong cách học thuật cho báo cáo đầu ra
+
+Ngay từ bước chuẩn hóa ngữ cảnh, bạn có thể yêu cầu hệ thống trình bày theo đúng một trong **4 phong cách học thuật chuẩn mực**:
+
+- **Bài báo tạp chí quốc tế Q1–Q3 (IMRaD 6 mục):** Văn phong súc tích, tập trung vào chiến lược nhận dạng nhân quả, kiểm định độ vững đa mô hình và hàm ý học thuật.
+- **Luận văn Thạc sĩ / Luận án Tiến sĩ (3–5 chương):** Trình bày chi tiết cơ sở lý thuyết, quy trình xây dựng thang đo, khảo sát sơ bộ, khảo sát chính thức và hàm ý quản trị.
+- **Nghiên cứu tái lập & mở rộng từ bài báo gốc:** Đối chiếu trực tiếp kết quả ước lượng mới với hệ số của bài báo gốc mà bạn đính kèm.
+- **Báo cáo phân tích chính sách chuyên sâu:** Nhấn mạnh quy mô tác động kinh tế thực tiễn và lộ trình khuyến nghị chính sách theo từng nhóm đối tượng.
+
+---
+
+## Bước 4: Cài đặt bộ 3 Kỹ năng (Skills) chuyên biệt cho Gemini và AI Agents
+
+Để trợ lý AI tự động điều phối mượt mà toàn bộ quy trình trên, bạn có thể tải và gắn bộ kỹ năng chuẩn hóa tại mục **Tích hợp AI** trên `https://ecodata.io.vn`:
+
+1. **Kỹ năng 1 — Điều phối Dữ liệu & Kinh tế lượng (`gemini-ecodata-mcp-skill.md`):** Chuyên trách kiểm toán tài nguyên đầu vào, truy xuất dữ liệu vĩ mô – doanh nghiệp và ước lượng hơn 201 mô hình kinh tế lượng.
+2. **Kỹ năng 2 — Nghiên cứu Hành vi & Khảo sát (`behavioral-research-ecodata-skill.md`):** Chuyên trách thiết kế bảng hỏi Likert, mô phỏng dữ liệu khảo sát và chạy trọn bộ kiểm định EFA, CFA, SEM, PLS-SEM.
+3. **Kỹ năng 3 — Biên soạn Bản thảo & Kiểm định 9 Cổng (`gemini-ecolab-ecodata-mcp-skill.md`):** Chuyên trách viết báo cáo hoàn chỉnh bám sát 100% kết quả ước lượng, nhúng sơ đồ cấu trúc 300-DPI, tạo siêu liên kết trích dẫn hai chiều và xuất tệp Word, PDF, HTML.
+
+---
+
+## Bước 5: Mẫu câu lệnh (Prompt) thực hành ngay
+
+Bạn có thể sao chép mẫu câu lệnh dưới đây và dán kèm đề cương hoặc bảng hỏi của mình vào Gemini:
+
+```text
+Tôi đính kèm đề cương nghiên cứu và bảng khảo sát gồm 4 thang đo (Lãnh đạo chuyển đổi TL: 4 biến, Trao quyền tâm lý PE: 4 biến, Khí hậu đổi mới IC: 4 biến, Hành vi làm việc đổi mới IWB: 4 biến, thang Likert 5 mức, mẫu N = 400).
+Hãy thực hiện lần lượt:
+1. Kiểm toán tài liệu đầu vào, chuẩn hóa câu hỏi nghiên cứu và giả thuyết H1–H3, khóa đúng 100% các thang đo tôi đã cung cấp.
+2. Khởi tạo dữ liệu khảo sát bám sát cấu trúc thang đo và chạy đầy đủ kiểm định độ tin cậy Cronbach's Alpha, EFA, CFA, HTMT, VIF và mô hình cấu trúc PLS-SEM kèm mô hình đối chứng vững.
+3. Xuất báo cáo học thuật hoàn chỉnh gồm đầy đủ bộ 3 sơ đồ cấu trúc 300-DPI ở Mục Phương pháp và Mục Kết quả, gắn siêu liên kết trích dẫn hai chiều tới Mục Tài liệu tham khảo và đính kèm mã lệnh tái lập R, Stata, Python.
 ```
-
-## Nginx
-
-Nginx nên serve static build của Docusaurus, không cần chạy dev server. Cấu hình cần tách riêng khỏi app Ecodata production để không ảnh hưởng các service đang dùng port backend, frontend, Redis, adapter hoặc Python service.
-
-## Phạm vi không tác động
-
-Domain `ecodata.io.vn` là domain của app Ecodata production và chỉ dùng để tham chiếu tính năng. Quá trình triển khai tài liệu không thay đổi code, container, Nginx block hoặc thư mục `/opt/ecodata` của app.

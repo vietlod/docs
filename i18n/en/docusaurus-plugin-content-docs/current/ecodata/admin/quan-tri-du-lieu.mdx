@@ -1,82 +1,61 @@
 ---
 id: quan-tri-du-lieu
-title: Data Administration, Pipelines, and Two-Stage Econometrics Model Curation
-description: Operational guide for EcoData administrators covering ingestion pipelines and the two-stage batch econometrics model discovery, 5-artifact synthesis, 4-gate B1–B4 verification, and live catalog publishing workflow.
+title: Step-by-Step Guide to EFA, CFA, SEM, and PLS-SEM Analysis, 300-DPI Structural Diagrams, and Bidirectional Citations
+description: Step-by-step instructions on generating and interpreting the 3-diagram 300-DPI EFA/CFA/SEM/PLS-SEM structural suite in Methodology and Results, using two-way citation hyperlinks, and verifying manuscripts.
 ---
 
-# Data Administration, Pipelines, and Two-Stage Econometrics Model Curation
+# Step-by-Step Guide: EFA/CFA/SEM/PLS-SEM Analysis, 3-Diagram 300-DPI Structural Models, and Bidirectional Citation Hyperlinks
 
-This page is intended for EcoData administrators and platform engineers. Regular researchers do not need these steps to query indicators or run econometric estimations.
-
-## Core Administration Modules
-
-| Admin Module | Route / Protocol | Operational Responsibility |
-| --- | --- | --- |
-| **Admin Dashboard** | `/admin` | Monitor platform health, membership quotas, billing events, and background workers. |
-| **Econometrics Model Curation** | `/admin/econometrics-curation` & `admin_econometrics_*` | Two-stage batch discovery, 5-artifact synthesis, 4-gate (`B1–B4`) Tri-Engine verification, and live `Publish` / `Unpublish` lifecycle management. |
-| **GSO & 34-Province Admin** | `/admin` (GSO tab) | Ingest National Statistics Office tables, manage indicator aliases, and audit 34-province harmonized panels. |
-| **Customs & Commodity Admin** | `/admin` (Customs tab) | Manage 11-form Vietnam Customs batches and five-sector Commodity Market feeds. |
-| **Stock & Financials Admin** | `/admin` (Stocks tab) | Synchronize 30-year financial statements across four accounting regimes, notes, dividends, and corporate events. |
-| **Translation & Metadata Jobs** | `/admin` (Translation tab) | Curate bilingual VI/EN variable labels, methodological descriptions, and SDMX metadata. |
-| **Chat Providers & Export Queue** | `/admin` | Configure AI providers for Web Chat and monitor large-scale dataset export requests. |
+This guide walks you step by step through conducting psychometric and structural equation studies (**EFA / CFA / SEM / PLS-SEM**), interpreting the **3-Diagram 300-DPI Measurement & Structural Model Suite**, and using **Bidirectional Citation Hyperlinks** and the **Smart Back-to-Top Progress Ring** across **EcoLab** and **EcoData**.
 
 ---
 
-## Two-Stage Batch Econometrics Model Discovery and Curation Pipeline
+## 1. The 3-Diagram Measurement & Structural Model Suite (300 DPI)
 
-To keep the **201+ estimator catalog across 15 model families** aligned with peer-reviewed econometric advances without ever exposing mock or unverified wrappers in production, EcoData strictly separates **Stage A (Scholarly & Package Registry Discovery)** from **Stage B (5-Artifact Synthesis & 4-Gate Tri-Engine Verification)** at `/admin/econometrics-curation` (`/api/admin/econometrics/*`).
+Whenever your study involves Exploratory Factor Analysis (**EFA**), Confirmatory Factor Analysis (**CFA**), Covariance-Based Structural Equation Modeling (**CB-SEM**), or Partial Least Squares Structural Equation Modeling (**PLS-SEM**), the platform automatically renders and embeds **three 300-DPI academic diagrams** into the Methodology and Empirical Results sections:
 
 ```mermaid
 flowchart LR
-  A["Stage A: Registry & Literature Discovery (CRAN, SSC/RePEc, PyPI + 6 DOI DBs)"] --> B["Priority Scoring & Deduplication Against Live Catalog"]
-  B --> C["Admin Promotes Candidate to Stage B"]
-  C --> D["Stage B: Deterministic 5-Artifact Synthesis (Manifest, Py/R/Stata Adapters, Templates, Diagnostics, DGP)"]
-  D --> E["4 Hard Verification Gates: B1 AST · B2 Known-DGP · B3 Parity · B4 Negative 422"]
-  E --> F["Publish / Unpublish -> Redis Pub/Sub -> EcoLab Live Sync <= 60s"]
+  A["Section 3: Research Methodology"] --> B["Diagram M1: Conceptual Framework & EFA/CFA Measurement Model"]
+  A --> C["Diagram M2: Baseline vs. Competing Alternative Specifications"]
+  D["Section 4: Empirical Results"] --> E["Diagram R1: Estimated Structural Path Diagram & Hypothesis Verdicts"]
 ```
 
-### 1. Stage A — Dual-Mode Discovery and Hybrid API Key Policy
+### Diagram M1 (Section 3 — Methodology): Conceptual Framework & EFA/CFA Measurement Model
+- **How to read the diagram:**
+  - **Rectangular boxes (`X1..Xk`)** represent observed Likert survey indicators alongside their outer loading ranges $\lambda$.
+  - **Ellipses** represent exogenous, mediating, moderating, and endogenous latent constructs with reliability badges ($lpha$, $	ext{CR}$, $	ext{AVE}$).
+  - **Solid directed arrows (`H1..Hk`)** illustrate the hypothesized structural relationships prior to estimation.
 
-- **Package & Scholarly Sources:** Harvests package metadata directly from **CRAN `PACKAGES.gz`** (Econometrics Task View), **Stata SSC / RePEc**, and **PyPI**, cross-referenced against six scholarly literature databases (**OpenAlex**, **Crossref**, **DOAJ**, **arXiv**, **Semantic Scholar**, and **CORE**).
-- **Keyless-First Hybrid API Key Policy:**
-  - **100% Keyless Default:** Stage A runs out-of-the-box across CRAN, Stata SSC/RePEc, PyPI, OpenAlex, Crossref, DOAJ, and arXiv without requiring any external API keys.
-  - **Optional Encrypted Literature Keys:** Administrators may store **Fernet-encrypted** **Semantic Scholar** and **CORE** API keys in Admin Settings for higher scholarly rate limits.
-  - **Zero Required LLM Keys for Stage B:** Stage B's 5-artifact synthesis relies on deterministic AST parsing and function-signature introspection (`inspect` / `formals`); Admin Web UI LLM assistance is strictly optional for bilingual docstring polishing, while all `/mcp*` endpoints enforce **`server_llm_calls == 0`**.
+### Diagram M2 (Section 3 — Methodology): Baseline vs. Competing Alternative Specifications
+- **How to read the diagram:**
+  - **Panel A (Left — Baseline Model):** Displays the direct-effects structural specification.
+  - **Panel B (Right — Extended / Alternative Specification):** Displays the mediated, moderated ($X 	imes W$), or robust quantile ($	au = 0.50$) specification so readers can immediately compare model architectures.
 
-### 2. Stage B — Five Mandatory Artifacts and Four Hard Verification Gates (`B1–B4`)
-
-Every promoted candidate must assemble **five mandatory artifacts**:
-1. **Manifest Schema:** Canonical `estimator_key`, family assignment, required dependent/endogenous/instrument/cluster slots, and bilingual VI/EN labels.
-2. **Tri-Engine Execution Adapters:** Genuine execution bindings across **Python**, **R (RMCP)**, and **Stata 18 MP** (with persistent SHA-256-locked `.ado` packages).
-3. **Replication Script Templates:** Reproducible `.py`, `.R`, and `.do` code templates bundled into `.zip` exports with `SHA256SUMS.txt`.
-4. **Pre/Postestimation Diagnostic Hooks:** Method-appropriate pre-estimation and postestimation statistical test bindings.
-5. **Synthetic Known-DGP Benchmark Fixture:** Deterministic data-generating process with known ground-truth parameters.
-
-The **`Publish`** action is hard-locked in both the backend API and Admin UI until all **four execution gates** pass on the real Tri-Engine:
-
-| Gate | Verification Gate Name | Mandatory Pass Criterion |
-| --- | --- | --- |
-| **`B1`** | **AST & Command Safety Guard** | Rejects unsafe OS, network, filesystem, or shell-escape instructions across Python AST, R expressions, and Stata `.do` code. |
-| **`B2`** | **Known-DGP Parameter Recovery** | Executes against the synthetic Known-DGP dataset and verifies estimated parameters recover ground-truth values within mathematical tolerance. |
-| **`B3`** | **Cross-Engine Numerical Parity** | Cross-validates parameter signs, magnitudes, and standard-error structures across Python, R, and Stata 18 MP. |
-| **`B4`** | **Negative `422` Fail-Closed Contract** | Confirms collinear, singular, or under-specified inputs return structured HTTP `422` errors with zero silent OLS fallback and zero `500` crashes. |
-
-### 3. Five Admin MCP Tools and `<= 60s` Zero-Downtime Sync to EcoLab
-
-Authenticated administrators can drive the entire curation workflow via five Admin-scoped MCP tools:
-- `admin_econometrics_discover`: Launch a Stage A discovery batch filtered by topic or model family.
-- `admin_econometrics_list_candidates`: List discovered candidates, priority scores, and `B1–B4` gate statuses.
-- `admin_econometrics_synthesize_spec`: Synthesize the five standardized Stage B technical specification artifacts.
-- `admin_econometrics_verify_gates`: Trigger real Tri-Engine execution across Gates `B1–B4`.
-- `admin_econometrics_publish`: Publish a `4/4`-verified estimator into the live catalog or safely unpublish an estimator while preserving historical run readability.
-
-Immediately upon **`Publish`** or **`Unpublish`**, EcoData broadcasts a Redis Pub/Sub catalog event, increments `catalog_version` on `GET /api/catalog/manifest`, and **EcoLab's** `CatalogHeartbeatService` refreshes its dynamic family tree and Unified MCP schemas within **`<= 60` seconds** without restarting any containers.
+### Diagram R1 (Section 4 — Empirical Results): Estimated Structural Path Diagram
+- **How to read the diagram:**
+  - Every structural branch displays the executed **baseline coefficient ($\hat{eta}_{	ext{base}}$)**, **competing model coefficient ($\hat{eta}_{	ext{alt}}$)**, **significance stars (`***`, `**`, `*`, `ns`)**, and **standard error (`SE`)**.
+  - Supported hypotheses are drawn with **bold solid arrows**, while non-significant paths are drawn with **dashed arrows**.
+  - The endogenous outcome ellipse displays **explained variance $R^2$**, **Adjusted $R^2$**, **$F$-statistic**, and **sample size $N$**.
 
 ---
 
-## Shared-Infrastructure Operating Principles
+## 2. How to Use Bidirectional In-Text Citation Hyperlinks
 
-1. Never bypass Stage B `B1–B4` verification gates when registering new econometric estimators.
-2. Always capture `0600`-permissioned `pg_dump` backups prior to database migrations.
-3. On multi-tenant VPS infrastructure, verify `127.0.0.1` loopback bindings, Nginx upstreams, and container health before deployment; never run destructive `docker compose down` commands.
-4. Run post-deployment smoke checks across Web UI, `/api/catalog/manifest`, EcoLab, and the Unified MCP Server after every release.
+To help researchers, advisors, and peer reviewers verify scholarly sources without losing their reading place, every report and academic blog post features **two-way citation hyperlinks**:
+
+1. **Step 1 — Click any in-text citation while reading:**
+   - Click any parenthetical citation such as `(Hair et al., 2022)` or narrative citation such as `Fornell & Larcker (1981)` in Sections 1–5.
+   - The page smoothly scrolls to the exact entry in **Section 6 (References)** and highlights the reference item with a warm gold pulse.
+2. **Step 2 — Inspect the source via its clickable DOI link:**
+   - Click the `https://doi.org/...` link inside the highlighted reference entry to open the original journal publication in a new tab.
+3. **Step 3 — Jump right back to your reading position:**
+   - Click the **`↩ Back to reading position`** button next to the reference entry in Section 6.
+   - The view smoothly scrolls back to the exact sentence and inline citation you were reading and briefly highlights it.
+
+---
+
+## 3. Smart Back-to-Top Progress Ring & Reproducibility Appendix
+
+- **Smart Back-to-Top Button with Progress Ring:** Once you scroll past the introduction, a floating button appears in the bottom-right corner displaying a live circular **reading progress ring (`0% – 100%`)**. Click it at any time to smooth-scroll back to the top of the manuscript.
+- **One-Click `.csv` Dataset Download & Single-Row Mobile Code Switcher:** In the **Appendix**, download the exact UTF-8 `.csv` dataset and switch effortlessly between **R**, **Stata**, and **Python** replication scripts on a single compact row across mobile, tablet, and desktop screens.
