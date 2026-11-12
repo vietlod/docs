@@ -1,7 +1,7 @@
 {
-  "catalog_version": "1.0.0",
-  "system_version": "ecodata-v3.83.0+ecolab-v1.6.0",
-  "updated_at": "2026-11-06T03:20:00+07:00",
+  "catalog_version": "1.1.0",
+  "system_version": "ecodata-v3.91.0+ecolab-v1.8.0",
+  "updated_at": "2026-11-12T14:00:00+07:00",
   "workflow_steps": [
     {
       "step": 1,
@@ -30,6 +30,7 @@
       "label_en": "Step 3: Panel Data Assembly and Zero-Copy Handoff",
       "tools": [
         "build_research_panel",
+        "analyze_vhlss_microdata",
         "ecolab_dataset_prepare"
       ]
     },
@@ -66,6 +67,7 @@
         "ecolab_literature_discover_start",
         "ecolab_literature_verify_citations",
         "build_research_panel",
+        "analyze_vhlss_microdata",
         "ecolab_dataset_prepare",
         "ecolab_model_estimate_start",
         "ecolab_report_storm_pack_start",
@@ -789,6 +791,218 @@
       },
       "last_pass_at": "2026-11-06T03:20:00+07:00",
       "system_version": "ecodata-v3.83.0+ecolab-v1.6.0",
+      "status": "verified"
+    },
+    {
+      "id": "P24",
+      "stage": "ideation",
+      "step_number": 1,
+      "stage_label_vi": "Bước 1: Đề xuất ý tưởng",
+      "stage_label_en": "Step 1: Research Ideation",
+      "title_vi": "Khám phá biến vi mô VHLSS 2004–2024, đối soát bí danh xuyên kỳ và chẩn đoán quyền số mẫu",
+      "title_en": "VHLSS 2004–2024 Variable Discovery, Cross-Wave Alias Mapping, and Survey Weight Audit",
+      "prompt_vi": "Sử dụng công cụ analyze_vhlss_microdata với action='discover' để tra cứu toàn bộ các kỳ khảo sát VHLSS 2004–2024 về chủ đề di cư lao động, việc làm và chi tiêu hộ gia đình. Lập bảng đối chiếu tên biến qua các kỳ, xác định khung mẫu Tổng điều tra tương thích để ghép bảng dọc, phân biệt rõ khi nào dùng quyền số wt45 so với wt9, và đề xuất 3 thiết kế nghiên cứu thực nghiệm khả thi.",
+      "prompt_en": "Use analyze_vhlss_microdata with action='discover' to audit VHLSS 2004–2024 waves on labor migration, employment, and household expenditure. Map variable aliases across waves, identify compatible GSO Census master-sample frames for longitudinal panels, clarify when to apply wt45 versus wt9 sampling weights, and propose three feasible empirical research designs.",
+      "datasets": [
+        "VHLSS_MICRODATA"
+      ],
+      "dataset_label_vi": "Khảo sát mức sống dân cư VHLSS 2004–2024 cấp cá nhân, hộ và xã",
+      "dataset_label_en": "VHLSS 2004–2024 Microdata Across Individual, Household, and Commune Levels",
+      "expected_tools": [
+        "analyze_vhlss_microdata",
+        "ecolab_project_create",
+        "ecolab_ideation_blueprint"
+      ],
+      "expected_primary_model": null,
+      "model_family_vi": "Kiểm toán từ điển biến vi mô, khung mẫu và quyền số khảo sát phức hợp",
+      "model_family_en": "Microdata Dictionary, Master-Sample Frame, and Complex Survey Weight Audit",
+      "rubric_overrides": {
+        "max_mcp_calls": 4
+      },
+      "last_pass_at": "2026-11-12T14:00:00+07:00",
+      "system_version": "ecodata-v3.91.0+ecolab-v1.8.0",
+      "status": "verified"
+    },
+    {
+      "id": "P25",
+      "stage": "data",
+      "step_number": 3,
+      "stage_label_vi": "Bước 3: Xây dựng dữ liệu",
+      "stage_label_en": "Step 3: Data Assembly",
+      "title_vi": "Phân tích phúc lợi, bất bình đẳng Gini, Theil, FGT P0–P2 và đối chứng trọng số trên VHLSS 2022–2024",
+      "title_en": "Welfare, Gini, Theil, FGT P0–P2 Inequality, and Survey Weight Audit on VHLSS 2022–2024",
+      "prompt_vi": "Dùng analyze_vhlss_microdata với action='build_dataset', entity='household', mode='append' trên hai kỳ VHLSS 2022 và 2024, bật harmonize_variables=true, cpi_deflation theo năm gốc 2020 và multi_wave_weight_mode='wave_normalized'. Tính hệ số bất bình đẳng Gini, Theil, tỷ số phân vị P90/P10, bộ chỉ số nghèo FGT P0, P1, P2 và hệ số phóng đại phương sai Kish UWE, đồng thời so sánh chênh lệch giữa ước lượng có quyền số pweight và không quyền số theo khu vực thành thị – nông thôn.",
+      "prompt_en": "Call analyze_vhlss_microdata with action='build_dataset', entity='household', and mode='append' across VHLSS 2022 and 2024 using harmonize_variables=true, CPI deflation to base year 2020, and multi_wave_weight_mode='wave_normalized'. Compute survey-weighted Gini, Theil, P90/P10 decile ratios, FGT P0/P1/P2 poverty indices, and Kish's UWE, comparing weighted pweight estimates against unweighted sample estimates across urban and rural strata.",
+      "datasets": [
+        "VHLSS_MICRODATA"
+      ],
+      "dataset_label_vi": "Dữ liệu vi mô hộ gia đình VHLSS 2022–2024 khử lạm phát CPI",
+      "dataset_label_en": "CPI-Deflated VHLSS 2022–2024 Household Microdata",
+      "expected_tools": [
+        "analyze_vhlss_microdata"
+      ],
+      "expected_primary_model": null,
+      "model_family_vi": "Đo lường bất bình đẳng, nghèo đa chiều FGT và hiệu ứng thiết kế mẫu Kish UWE",
+      "model_family_en": "Inequality Decomposition, FGT Poverty Metrics, and Kish UWE Design Diagnostics",
+      "rubric_overrides": {
+        "max_mcp_calls": 3
+      },
+      "last_pass_at": "2026-11-12T14:00:00+07:00",
+      "system_version": "ecodata-v3.91.0+ecolab-v1.8.0",
+      "status": "verified"
+    },
+    {
+      "id": "P26",
+      "stage": "modeling",
+      "step_number": 4,
+      "stage_label_vi": "Bước 4: Mô hình hóa",
+      "stage_label_en": "Step 4: Econometric Modeling",
+      "title_vi": "Quyết định di cư kinh tế cấp cá nhân từ VHLSS: Logit/Probit có trọng số, biến đồng đẳng loại trừ bản thân và kiểm định DuMouchel–Duncan",
+      "title_en": "Individual Economic Migration Choice on VHLSS: Survey-Weighted Logit/Probit, Exclude-Self Peer Covariates, and DuMouchel–Duncan Test",
+      "prompt_vi": "Sử dụng analyze_vhlss_microdata với action='run_econometrics', entity='individual' trên VHLSS 2022 cho nhóm tuổi lao động 15–64 để ước lượng các yếu tố ảnh hưởng đến quyết định đi làm ăn xa của thành viên hộ gia đình. Tạo đặc trưng hộ đồng đẳng bằng aggregations với exclude_self=true để tránh nội sinh cơ học, ước lượng Logit và Probit với quyền số pweight và sai số chuẩn phân cụm PSU, bật compare_unweighted=true và dumouchel_duncan_test=true để kiểm định tính ngoại sinh của quyền số theo Solon–Haider–Wooldridge, kèm xuất gói mã tái lập Stata, R, Python.",
+      "prompt_en": "Run analyze_vhlss_microdata with action='run_econometrics' and entity='individual' on VHLSS 2022 working-age members aged 15–64 to estimate the determinants of economic out-migration. Construct peer household covariates via aggregations with exclude_self=true to eliminate mechanical reflection bias, estimate survey-weighted Logit and Probit models with PSU cluster-robust SEs, enable compare_unweighted=true and dumouchel_duncan_test=true for the Solon–Haider–Wooldridge weight-exogeneity F-test, and export Stata, R, and Python replication scripts.",
+      "datasets": [
+        "VHLSS_MICRODATA"
+      ],
+      "dataset_label_vi": "VHLSS 2018–2024 cấp cá nhân 15–64 tuổi ghép đặc trưng hộ và xã",
+      "dataset_label_en": "VHLSS 2018–2024 Working-Age Individual Microdata Merged With Household and Commune Covariates",
+      "expected_tools": [
+        "analyze_vhlss_microdata"
+      ],
+      "expected_primary_model": "logit",
+      "model_family_vi": "Mô hình lựa chọn rời rạc Logit/Probit có quyền số mẫu và kiểm định DuMouchel–Duncan",
+      "model_family_en": "Survey-Weighted Discrete Choice Logit/Probit With DuMouchel–Duncan Weight Exogeneity Test",
+      "rubric_overrides": {
+        "expected_primary_model": "logit",
+        "max_mcp_calls": 4
+      },
+      "last_pass_at": "2026-11-12T14:00:00+07:00",
+      "system_version": "ecodata-v3.91.0+ecolab-v1.8.0",
+      "status": "verified"
+    },
+    {
+      "id": "P27",
+      "stage": "modeling",
+      "step_number": 4,
+      "stage_label_vi": "Bước 4: Mô hình hóa",
+      "stage_label_en": "Step 4: Econometric Modeling",
+      "title_vi": "Hàm cầu chi tiêu kiểm duyệt cấp hộ từ VHLSS: Quy đổi năm 12× từ kỳ 30 ngày, khử lạm phát CPI và ước lượng Two-Part / Tobit / PPML",
+      "title_en": "Censored Household Expenditure Demand on VHLSS: 12× Monthly Annualization, CPI Deflation, and Two-Part / Tobit / PPML Estimation",
+      "prompt_vi": "Sử dụng analyze_vhlss_microdata trên các kỳ VHLSS 2018–2022 ở cấp hộ gia đình để ước lượng hàm cầu chi tiêu thuốc lá có kiểm duyệt tại điểm không. Khai báo conditional_aggregations để nhân 12 lần chi tiêu thường xuyên 30 ngày ở Mục 5A2 cộng chi tiêu dịp lễ Tết 12 tháng ở Mục 5A1, khử lạm phát về giá so sánh năm 2020 qua cpi_deflation, gắn quyền số chi tiêu wt9 cùng phân cụm PSU, sau đó ước lượng đối chứng Probit phần tham gia, WLS phần chi tiêu dương, Tobit và PPML kèm độ co giãn theo ngũ phân vị chi tiêu.",
+      "prompt_en": "Use analyze_vhlss_microdata across VHLSS 2018–2022 household waves to estimate zero-censored household tobacco expenditure demand. Configure conditional_aggregations with scale_factor=12 on 30-day regular outlays in Module 5A2 plus 12-month festive outlays in Module 5A1, deflate monetary values to constant 2020 prices via cpi_deflation, attach wt9 expenditure weights and PSU clustering, and estimate Cragg Two-Part Probit + WLS, Tobit, and PPML models with expenditure elasticities across quintiles.",
+      "datasets": [
+        "VHLSS_MICRODATA"
+      ],
+      "dataset_label_vi": "Phân hệ chi tiêu chi tiết Mục 5A1, 5A2, 5B1 VHLSS 2014–2024 kèm quyền số wt9",
+      "dataset_label_en": "VHLSS 2014–2024 Itemized Expenditure Modules 5A1, 5A2, and 5B1 With wt9 Weights",
+      "expected_tools": [
+        "analyze_vhlss_microdata"
+      ],
+      "expected_primary_model": "tobit",
+      "model_family_vi": "Hàm cầu kiểm duyệt Cragg Two-Part, Tobit và PPML có quyền số khảo sát",
+      "model_family_en": "Survey-Weighted Cragg Two-Part, Tobit, and PPML Censored Demand System",
+      "rubric_overrides": {
+        "expected_primary_model": "tobit",
+        "max_mcp_calls": 5
+      },
+      "last_pass_at": "2026-11-12T14:00:00+07:00",
+      "system_version": "ecodata-v3.91.0+ecolab-v1.8.0",
+      "status": "verified"
+    },
+    {
+      "id": "P28",
+      "stage": "modeling",
+      "step_number": 4,
+      "stage_label_vi": "Bước 4: Mô hình hóa",
+      "stage_label_en": "Step 4: Econometric Modeling",
+      "title_vi": "Hiệu ứng chèn lấn ngân sách nội hộ Working–Leser / QUAIDS với biến công cụ bối cảnh loại trừ chính hộ IV-2SLS trên VHLSS",
+      "title_en": "Intra-Household Budget Crowding-Out via Working–Leser / QUAIDS With Leave-One-Out Contextual IV-2SLS on VHLSS",
+      "prompt_vi": "Dùng analyze_vhlss_microdata xây dựng hệ tỷ trọng ngân sách không kể thuốc lá gồm lương thực, giáo dục, y tế và nhà ở của hộ gia đình Việt Nam từ VHLSS 2018–2022. Khai báo contextual_variables với leave_one_out=true ở cấp xã hoặc địa bàn điều tra để tạo biến công cụ tỷ lệ hút thuốc và giá đơn vị địa phương loại trừ chính hộ i, chuẩn hóa quyền số đa kỳ bằng multi_wave_weight_mode='wave_normalized', rồi ước lượng đường cong Engel bậc hai Working–Leser / QUAIDS bằng IV-2SLS phân cụm PSU để lượng hóa mức chèn lấn chi tiêu giáo dục và y tế.",
+      "prompt_en": "Use analyze_vhlss_microdata to construct non-tobacco household budget shares across food, education, healthcare, and housing on VHLSS 2018–2022. Generate commune- and PSU-level leave-one-out peer prevalence and unit-value instruments via contextual_variables with leave_one_out=true, normalize multi-wave weights via multi_wave_weight_mode='wave_normalized', and estimate quadratic conditional Working–Leser / QUAIDS Engel curves via PSU-clustered IV-2SLS to quantify crowding-out on education and healthcare.",
+      "datasets": [
+        "VHLSS_MICRODATA"
+      ],
+      "dataset_label_vi": "Hệ tỷ trọng ngân sách 11 nhóm hàng hộ gia đình VHLSS kèm biến công cụ bối cảnh LOO",
+      "dataset_label_en": "VHLSS Multi-Category Household Budget Shares With Leave-One-Out Contextual Instruments",
+      "expected_tools": [
+        "analyze_vhlss_microdata"
+      ],
+      "expected_primary_model": "iv_2sls",
+      "model_family_vi": "Hệ cầu điều kiện Working–Leser / QUAIDS và biến công cụ bối cảnh IV-2SLS",
+      "model_family_en": "Conditional Working–Leser / QUAIDS Demand System With Leave-One-Out IV-2SLS",
+      "rubric_overrides": {
+        "expected_primary_model": "iv_2sls",
+        "max_mcp_calls": 5
+      },
+      "last_pass_at": "2026-11-12T14:00:00+07:00",
+      "system_version": "ecodata-v3.91.0+ecolab-v1.8.0",
+      "status": "verified"
+    },
+    {
+      "id": "P29",
+      "stage": "modeling",
+      "step_number": 4,
+      "stage_label_vi": "Bước 4: Mô hình hóa",
+      "stage_label_en": "Step 4: Econometric Modeling",
+      "title_vi": "Dữ liệu bảng hộ gia đình VHLSS 2020–2022: Ghép bảng cân bằng, quyền số kỳ gốc và ước lượng Fixed Effects",
+      "title_en": "Longitudinal VHLSS 2020–2022 Household Panel: Balanced Matching, Base-Wave Weights, and Fixed Effects Estimation",
+      "prompt_vi": "Gọi analyze_vhlss_microdata với mode='merge_panel', waves=[2020, 2022], panel_balance='balanced', harmonize_variables=true và multi_wave_weight_mode='longitudinal_base' để ghép nối bảng cân bằng hộ gia đình luân phiên trong cùng khung Tổng điều tra 2019. Ước lượng mô hình Fixed Effects hai chiều với sai số chuẩn phân cụm PSU nhằm đánh giá tác động của biến động thu nhập thực và cú sốc việc làm sau đại dịch đến chi tiêu giáo dục và phúc lợi hộ gia đình, kèm kiểm định Hausman và mã tái lập Stata xtreg.",
+      "prompt_en": "Invoke analyze_vhlss_microdata with mode='merge_panel', waves=[2020, 2022], panel_balance='balanced', harmonize_variables=true, and multi_wave_weight_mode='longitudinal_base' to link rotating panel households within the 2019 Population Census master frame. Estimate Two-Way Fixed Effects with PSU-clustered standard errors to quantify how real income shocks and post-pandemic employment shifts affect household education spending and per-capita welfare, including Hausman diagnostics and Stata xtreg replication code.",
+      "datasets": [
+        "VHLSS_MICRODATA"
+      ],
+      "dataset_label_vi": "Dữ liệu bảng cân bằng hộ gia đình luân phiên VHLSS 2020–2022",
+      "dataset_label_en": "Balanced Rotating Household Longitudinal Panel VHLSS 2020–2022",
+      "expected_tools": [
+        "analyze_vhlss_microdata"
+      ],
+      "expected_primary_model": "panel_fe",
+      "model_family_vi": "Kinh tế lượng dữ liệu bảng vi mô Fixed Effects với quyền số dọc kỳ gốc",
+      "model_family_en": "Micro-Panel Fixed Effects Econometrics With Base-Wave Longitudinal Weights",
+      "rubric_overrides": {
+        "expected_primary_model": "panel_fe",
+        "max_mcp_calls": 4
+      },
+      "last_pass_at": "2026-11-12T14:00:00+07:00",
+      "system_version": "ecodata-v3.91.0+ecolab-v1.8.0",
+      "status": "verified"
+    },
+    {
+      "id": "P30",
+      "stage": "end_to_end",
+      "step_number": 0,
+      "stage_label_vi": "Trọn vẹn 5 bước",
+      "stage_label_en": "Full 5-Step Workflow",
+      "title_vi": "Chu trình 5 bước hoàn chỉnh từ VHLSS Microdata đến bản thảo Q3+ định dạng Word OMML kèm gói tái lập tam giác",
+      "title_en": "Complete 5-Step Workflow From VHLSS Microdata to a Word OMML Q3+ Manuscript With Triangle Replication",
+      "prompt_vi": "Thực hiện trọn vẹn chu trình nghiên cứu 5 bước từ dữ liệu vi mô VHLSS 2018–2024 về tác động của học vấn chủ hộ, tiếp cận tín dụng và hạ tầng xã đến thoát nghèo bền vững và bất bình đẳng thu nhập tại Việt Nam: khám phá từ điển biến, tổng hợp tài liệu 6 nguồn xác thực DOI, trích xuất dữ liệu vi mô có quyền số pweight và chuyển tiếp Zero-Copy qua ecodata_dataset_id sang EcoLab, ước lượng đối chứng WLS, Logit và Quantile Regression có kiểm định DuMouchel–Duncan, sau đó biên soạn bản thảo chuẩn APA 7th vượt qua 9 cổng G1–G9 và xuất tệp Word OMML .docx.",
+      "prompt_en": "Execute the complete 5-step quantitative research workflow on VHLSS 2018–2024 microdata examining how household head education, credit access, and commune infrastructure drive sustainable poverty escapes and income inequality in Vietnam: audit variables via discover, synthesize 6-source DOI-verified literature, build a survey-weighted pweight microdata extract and hand off Zero-Copy via ecodata_dataset_id to EcoLab, estimate WLS, Logit, and Quantile Regression models with DuMouchel–Duncan diagnostics, and compile a 9-gate G1–G9 verified APA 7th manuscript exported to Word OMML .docx.",
+      "datasets": [
+        "VHLSS_MICRODATA"
+      ],
+      "dataset_label_vi": "VHLSS Microdata đa cấp 2018–2024 kết hợp cầu nối Zero-Copy EcoData – EcoLab",
+      "dataset_label_en": "Multi-Level VHLSS 2018–2024 Microdata With Zero-Copy EcoData–EcoLab Handoff",
+      "expected_tools": [
+        "analyze_vhlss_microdata",
+        "ecolab_project_create",
+        "ecolab_ideation_blueprint",
+        "ecolab_literature_discover_start",
+        "ecolab_literature_verify_citations",
+        "ecolab_dataset_prepare",
+        "ecolab_model_estimate_start",
+        "ecolab_report_storm_pack_start",
+        "ecolab_report_submit_manuscript"
+      ],
+      "expected_primary_model": "logit",
+      "model_family_vi": "Nghiên cứu vi mô 5 bước trọn gói: WLS, Logit, hồi quy phân vị và kiểm chứng 9 cổng G1–G9",
+      "model_family_en": "End-to-End 5-Stage Microeconometric Suite: WLS, Logit, Quantile Regression, and 9-Gate G1–G9 Validation",
+      "rubric_overrides": {
+        "expected_primary_model": "logit",
+        "min_words": 6000,
+        "max_mcp_calls": 20
+      },
+      "last_pass_at": "2026-11-12T14:00:00+07:00",
+      "system_version": "ecodata-v3.91.0+ecolab-v1.8.0",
       "status": "verified"
     }
   ]

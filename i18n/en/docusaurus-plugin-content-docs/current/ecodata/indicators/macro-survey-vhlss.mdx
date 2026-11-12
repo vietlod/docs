@@ -1,22 +1,23 @@
 ---
 id: macro-survey-vhlss
-title: Provincial Governance Indices and VHLSS Household Microdata
-description: How to use the seven provincial governance indices PCI, PGI, PAPI, PII, ICT Index, PAR Index, and SIPAS alongside VHLSS household microdata on the Variable Hub.
+title: Provincial Governance Indices and VHLSS 2004–2024 Microdata
+description: Comprehensive guide to the seven provincial governance indices PCI, PGI, PAPI, PII, ICT Index, PAR Index, and SIPAS, complex survey weights methodology on VHLSS 2004–2024 microdata, and seven ready-to-copy MCP prompts for Gemini and AI Agents.
 ---
 
 import Head from '@docusaurus/Head';
+import McpPromptCatalog from '@site/src/components/McpPromptCatalog';
 
 export const datasetSchemaEn = {
   '@context': 'https://schema.org',
   '@type': 'Dataset',
-  name: 'EcoData: Vietnam Provincial Governance Surveys and VHLSS Microdata',
+  name: 'EcoData: Vietnam Provincial Governance Surveys and VHLSS 2004–2024 Microdata',
   description:
-    'Seven provincial governance, green transition, innovation, and public administration indices for Vietnam including PCI, PGI, PAPI, PII, ICT Index, PAR Index, and SIPAS alongside VHLSS household microdata variables on the Variable Hub.',
+    'Seven provincial governance, green transition, innovation, and public administration indices for Vietnam including PCI, PGI, PAPI, PII, ICT Index, PAR Index, and SIPAS alongside VHLSS 2004–2024 microdata with automated pweight survey weights, DuMouchel–Duncan diagnostics, and the analyze_vhlss_microdata MCP tool.',
   url: 'https://docs.tnsai.vn/en/ecodata/indicators/macro-survey-vhlss',
   inLanguage: ['vi', 'en'],
   isAccessibleForFree: true,
   conditionsOfAccess: 'Free browsing and preview; full export requires a subscription.',
-  keywords: ['Vietnam', 'PCI', 'PGI', 'PAPI', 'PII', 'SIPAS', 'PAR Index', 'ICT Index', 'VHLSS', 'governance', 'microdata'],
+  keywords: ['Vietnam', 'PCI', 'PGI', 'PAPI', 'PII', 'SIPAS', 'PAR Index', 'ICT Index', 'VHLSS', 'pweight', 'DuMouchel-Duncan', 'microdata'],
   creator: [
     { '@type': 'Organization', name: 'VCCI' },
     { '@type': 'Organization', name: 'UNDP and CECODES' },
@@ -28,7 +29,7 @@ export const datasetSchemaEn = {
   includedInDataCatalog: { '@type': 'DataCatalog', '@id': 'https://ecodata.io.vn/#catalog' },
   spatialCoverage: { '@type': 'Place', name: 'Vietnam across 63 and 34 provinces and surveyed households' },
   temporalCoverage: '2002/2026',
-  variableMeasured: ['PCI score', 'PGI score', 'PAPI score', 'PII score', 'PAR Index', 'SIPAS', 'ICT Index', 'Household income', 'Household expenditure'],
+  variableMeasured: ['PCI score', 'PGI score', 'PAPI score', 'PII score', 'PAR Index', 'SIPAS', 'ICT Index', 'Household income', 'Household expenditure', 'Migration choice', 'Sampling weights wt45 and wt9'],
   distribution: [
     { '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: 'https://ecodata.io.vn/data/survey' },
     { '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: 'https://ecodata.io.vn/data/vhlss-micro' },
@@ -39,9 +40,9 @@ export const datasetSchemaEn = {
   <script type="application/ld+json">{JSON.stringify(datasetSchemaEn)}</script>
 </Head>
 
-# Provincial Governance Indices and VHLSS Household Microdata
+# Provincial Governance Indices and VHLSS 2004–2024 Microdata
 
-This group combines two complementary empirical layers: the **Provincial Governance Indices** subsystem capturing provincial institutional quality and public administration, and the **VHLSS Variable Hub** providing household and individual microdata.
+This group combines two complementary empirical layers: the **Provincial Governance Indices** subsystem capturing provincial institutional quality and public administration, and the **VHLSS Variable Hub** paired with the **`analyze_vhlss_microdata`** MCP tool providing standardized individual, household, and commune microdata from 2004 through 2024.
 
 ## Seven Provincial Governance Indices in the Provincial Governance Subsystem
 
@@ -63,16 +64,34 @@ Under EcoData's **non-aggregable observation preservation** rule, institutional 
 
 ## VHLSS Aggregates in GSO Explorer
 
-Provincial aggregates published in official VHLSS reports: including monthly per-capita income, household expenditure, Gini inequality coefficients, and poverty rates: are available in **GSO Explorer** across both 63-province and 34-province modes under the denominator-weighted average rule.
+Provincial aggregates published in official VHLSS reports — including monthly per-capita income, household expenditure, Gini inequality coefficients, and poverty rates — are available in **GSO Explorer** across both 63-province and 34-province modes under the denominator-weighted average rule.
 
-## VHLSS Microdata and Variable Hub
+## VHLSS 2004–2024 Microdata on Variable Hub and MCP `analyze_vhlss_microdata`
 
-The VHLSS Variable Hub enables researchers to search variable dictionaries and build custom microdata extracts across living standards survey waves:
+Conducted biennially by the National Statistics Office of Vietnam, the Vietnam Household Living Standards Survey follows a stratified two-stage probability-proportional-to-size sampling design across enumeration-area primary sampling units. Because sparsely populated mountainous provinces in the Northern Midlands and Central Highlands are intentionally oversampled for provincial precision, household inclusion probabilities vary substantially across strata.
 
-| Step | Action on Variable Hub |
-| --- | --- |
-| 1 | Select target VHLSS survey waves from 2002 through 2024. |
-| 2 | Choose questionnaire modules such as Demographics, Education, Health, Employment, Income, Expenditure, or Housing. |
-| 3 | Filter variables by Vietnamese or English keywords or native Stata variable names. |
-| 4 | Preview sample records and summary statistics to inspect distributions and missingness. |
-| 5 | Export datasets using single-wave merge, cross-wave panel, or pooled append modes, or query directly via the MCP tool `get_vhlss_survey_data`. |
+### Survey Weights Decision Matrix for VHLSS Microdata
+
+| Analytical Objective | Weighting and Variance Rule | Canonical VHLSS Weight Variable | Econometric Rationale and Diagnostic Gate |
+| --- | --- | --- | --- |
+| **Descriptive Means, Proportions, and Population Totals** | **Mandatory `pweight` + `psu` clustering** | `wt45` for 45,000-household income-demographic modules; `wt9` for itemized expenditure modules | Guarantees Horvitz–Thompson design consistency; unweighted sample means over-represent rural and oversampled mountainous strata. |
+| **Poverty `FGT P0/P1/P2` and Inequality `Gini`, `Theil`, `P90/P10`** | **Mandatory `pweight` scaled by household size for per-capita welfare** | `wt45` for income inequality; `wt9` for consumption poverty | National Lorenz curves and poverty headcounts depend directly on inverse-probability stratum expansion factors. |
+| **Single-Wave Causal and Structural Regressions: OLS/WLS, Logit, Probit, Tobit, PPML, IV-2SLS** | **Report Weighted and Unweighted in Parallel + `psu` cluster-robust SE** | `wt45` or `wt9` with `compare_unweighted=true` and `dumouchel_duncan_test=true` | Under Solon–Haider–Wooldridge and Deaton, unweighted estimators are more efficient by Kish's Unequal Weighting Effect $\text{UWE} = 1 + \text{CV}(w)^2$ when weights are exogenous; if the DuMouchel–Duncan $F$-test rejects $H_0$ ($p < 0.05$), endogenous stratification or unmodeled heterogeneity requires survey-weighted estimation. |
+| **Multi-Wave Pooled Cross-Sections `mode="append"`** | **Normalize wave weights + wave fixed effects + `psu` clustering** | `multi_wave_weight_mode="wave_normalized"` or `"equal_wave"` | Prevents waves with larger sample sizes or population totals from dominating pooled pseudo-likelihood functions across 2014–2024. |
+| **Rotating Household Longitudinal Panels `mode="merge_panel"`** | **Lock base-wave longitudinal weights within the same Census master frame** | `multi_wave_weight_mode="longitudinal_base"` within `2004–2008`, `2010–2018`, or `2020–2024` | Preserves initial target-population representativeness for Fixed Effects and Mundlak CRE models while blocking invalid cross-Census household ID links. |
+
+### Declarative Microdata Feature Engineering in Web App and MCP
+
+Both the **Variable Hub (`/data/vhlss-micro`)** and the **`analyze_vhlss_microdata`** MCP tool expose five declarative primitives so complex household and individual studies run end-to-end without ad-hoc external scripts:
+
+1. **Conditional `1:m` Aggregations With Recall Scaling (`conditional_aggregations`):** Filter itemized child records by commodity or attribute codes and multiply 30-day regular recall outlays in Module 5A2 by `scale_factor=12` before summing with 12-month festive outlays in Module 5A1.
+2. **Exclude-Self Peer Household Covariates (`exclude_self=true`):** When analyzing individual records `entity="individual"`, compute household sums or means strictly across *other* household members ($j \neq i$), eliminating mechanical reflection bias in migration and intra-household labor supply models.
+3. **Official GSO CPI Deflation (`cpi_deflation`):** Automatically deflate nominal monetary columns to constant prices of any chosen reference wave such as `base_year=2020` across 2004–2024.
+4. **Leave-One-Out Contextual Instruments (`contextual_variables` with `leave_one_out=true`):** Construct jackknife PSU-, commune-, or province-level peer prevalence and unit-value instruments excluding household $i$ for IV-2SLS, Control-Function IV-Probit, and 3SLS QUAIDS demand systems.
+5. **Survey-Aware Triangle Runtime Replication:** Automatically generates `svyset psu [pweight=...]` scripts for Stata 18 MP, `survey::svydesign` scripts for R, and PSU-clustered Sandwich estimators for Python.
+
+## Seven Ready-to-Copy VHLSS Microdata Prompts (P24–P30)
+
+Switch between **English** and **Tiếng Việt** and click **Copy Prompt** to launch verified VHLSS microdata workflows directly in Gemini, Claude, AntiGravity, or Cursor:
+
+<McpPromptCatalog locale="en" defaultFilter="vhlss" />

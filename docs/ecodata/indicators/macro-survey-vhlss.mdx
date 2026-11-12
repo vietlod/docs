@@ -1,22 +1,23 @@
 ---
 id: macro-survey-vhlss
-title: Khảo sát quản trị cấp tỉnh và vi mô hộ gia đình VHLSS
-description: Hướng dẫn khai thác 7 bộ chỉ số quản trị cấp tỉnh PCI, PGI, PAPI, PII, ICT Index, PAR Index, SIPAS và dữ liệu điều tra vi mô hộ gia đình VHLSS trên Variable Hub.
+title: Khảo sát quản trị cấp tỉnh và dữ liệu vi mô VHLSS 2004–2024
+description: Hướng dẫn khai thác 7 bộ chỉ số quản trị cấp tỉnh PCI, PGI, PAPI, PII, ICT Index, PAR Index, SIPAS, phương pháp luận quyền số mẫu khảo sát phức hợp VHLSS Microdata 2004–2024 và 7 mẫu lệnh MCP kiểm chứng cho Gemini và AI Agents.
 ---
 
 import Head from '@docusaurus/Head';
+import McpPromptCatalog from '@site/src/components/McpPromptCatalog';
 
 export const datasetSchema = {
   '@context': 'https://schema.org',
   '@type': 'Dataset',
-  name: 'EcoData: Khảo sát quản trị cấp tỉnh và dữ liệu vi mô hộ gia đình VHLSS',
+  name: 'EcoData: Khảo sát quản trị cấp tỉnh và dữ liệu vi mô hộ gia đình VHLSS 2004–2024',
   description:
-    'Bảy bộ chỉ số quản trị và năng lực điều hành cấp tỉnh Việt Nam gồm PCI, PGI, PAPI, PII, ICT Index, PAR Index và SIPAS kết hợp với kho biến số điều tra vi mô hộ gia đình VHLSS trên Variable Hub.',
+    'Bảy bộ chỉ số quản trị và năng lực điều hành cấp tỉnh Việt Nam gồm PCI, PGI, PAPI, PII, ICT Index, PAR Index và SIPAS kết hợp với kho dữ liệu điều tra vi mô VHLSS 2004–2024 tích hợp quyền số mẫu phức hợp pweight, kiểm định DuMouchel–Duncan và công cụ MCP analyze_vhlss_microdata.',
   url: 'https://docs.tnsai.vn/ecodata/indicators/macro-survey-vhlss',
   inLanguage: ['vi', 'en'],
   isAccessibleForFree: true,
   conditionsOfAccess: 'Duyệt danh mục và xem trước miễn phí; xuất toàn bộ dữ liệu theo gói thành viên.',
-  keywords: ['Vietnam', 'PCI', 'PGI', 'PAPI', 'PII', 'SIPAS', 'PAR Index', 'ICT Index', 'VHLSS', 'governance', 'microdata'],
+  keywords: ['Vietnam', 'PCI', 'PGI', 'PAPI', 'PII', 'SIPAS', 'PAR Index', 'ICT Index', 'VHLSS', 'pweight', 'DuMouchel-Duncan', 'microdata'],
   creator: [
     { '@type': 'Organization', name: 'VCCI' },
     { '@type': 'Organization', name: 'UNDP and CECODES' },
@@ -28,7 +29,7 @@ export const datasetSchema = {
   includedInDataCatalog: { '@type': 'DataCatalog', '@id': 'https://ecodata.io.vn/#catalog' },
   spatialCoverage: { '@type': 'Place', name: 'Vietnam across 63 and 34 provinces and surveyed households' },
   temporalCoverage: '2002/2026',
-  variableMeasured: ['PCI score', 'PGI score', 'PAPI score', 'PII score', 'PAR Index', 'SIPAS', 'ICT Index', 'Household income', 'Household expenditure'],
+  variableMeasured: ['PCI score', 'PGI score', 'PAPI score', 'PII score', 'PAR Index', 'SIPAS', 'ICT Index', 'Household income', 'Household expenditure', 'Migration choice', 'Sampling weights wt45 and wt9'],
   distribution: [
     { '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: 'https://ecodata.io.vn/data/survey' },
     { '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: 'https://ecodata.io.vn/data/vhlss-micro' },
@@ -39,9 +40,9 @@ export const datasetSchema = {
   <script type="application/ld+json">{JSON.stringify(datasetSchema)}</script>
 </Head>
 
-# Khảo sát quản trị cấp tỉnh và vi mô hộ gia đình VHLSS
+# Khảo sát quản trị cấp tỉnh và dữ liệu vi mô VHLSS 2004–2024
 
-Nhóm dữ liệu này bao gồm hai lớp thông tin bổ trợ nhau: phân hệ **Chỉ số Quản trị Cấp tỉnh** phản ánh chất lượng thể chế và quản trị công ở cấp tỉnh, và **VHLSS Variable Hub** cung cấp dữ liệu điều tra vi mô ở cấp hộ gia đình và cá nhân.
+Nhóm dữ liệu này bao gồm hai lớp thông tin bổ trợ nhau: phân hệ **Chỉ số Quản trị Cấp tỉnh** phản ánh chất lượng thể chế và quản trị công ở cấp tỉnh, và **VHLSS Variable Hub** cùng công cụ MCP **`analyze_vhlss_microdata`** cung cấp dữ liệu điều tra vi mô chuẩn hóa ở ba cấp quan sát cá nhân, hộ gia đình và xã/phường giai đoạn 2004–2024.
 
 ## Bảy bộ chỉ số quản trị cấp tỉnh trong phân hệ Chỉ số Quản trị Cấp tỉnh
 
@@ -65,14 +66,32 @@ Theo quy tắc **giữ nguyên quan sát gốc** của EcoData, các điểm s�
 
 Các chỉ tiêu tổng hợp từ báo cáo VHLSS chính thức như thu nhập bình quân đầu người, chi tiêu hộ gia đình, hệ số bất bình đẳng Gini và tỷ lệ hộ nghèo theo tỉnh được tích hợp sẵn trong **GSO Explorer**, hỗ trợ cả chế độ 63 tỉnh và 34 tỉnh theo quy tắc bình quân gia quyền.
 
-## VHLSS Micro và Variable Hub
+## VHLSS Microdata 2004–2024 trên Variable Hub và MCP `analyze_vhlss_microdata`
 
-VHLSS Variable Hub giúp nhà nghiên cứu tra cứu từ điển biến số và trích xuất dữ liệu vi mô từ các kỳ khảo sát mức sống dân cư:
+Khảo sát mức sống dân cư VHLSS do Cục Thống kê Việt Nam thực hiện hai năm một lần theo thiết kế chọn mẫu phân tầng hai giai đoạn có xác suất chọn tỷ lệ với quy mô cụm địa bàn điều tra PSU. Do các tỉnh miền núi phía Bắc và Tây Nguyên được lấy mẫu vượt tỷ lệ để đảm bảo độ chính xác cấp tỉnh, xác suất chọn của mỗi hộ khác nhau đáng kể giữa các địa bàn.
 
-| Bước | Thao tác thực hiện trên Variable Hub |
-| --- | --- |
-| 1 | Chọn kỳ khảo sát VHLSS từ năm 2002 đến năm 2024. |
-| 2 | Chọn phân mục bảng câu hỏi như Nhân khẩu, Giáo dục, Y tế, Việc làm, Thu nhập, Chi tiêu hoặc Nhà ở. |
-| 3 | Tìm kiếm và lọc biến số theo từ khóa tiếng Việt, tiếng Anh hoặc tên biến gốc. |
-| 4 | Xem trước mẫu bản ghi và bảng thống kê mô tả để kiểm tra phân phối và tỷ lệ khuyết. |
-| 5 | Xuất dữ liệu theo một trong ba chế độ: ghép bảng trong cùng một kỳ khảo sát, tạo dữ liệu bảng xuyên kỳ khảo sát hoặc nối gộp nhiều kỳ khảo sát, hoặc gọi qua công cụ MCP `get_vhlss_survey_data`. |
+### Ma trận quyết định sử dụng quyền số mẫu khảo sát VHLSS
+
+| Loại hình phân tích | Khuyến nghị quyền số và sai số chuẩn | Biến quyền số chuẩn trên VHLSS | Cơ sở kinh tế lượng và kiểm định đi kèm |
+| --- | --- | --- | --- |
+| **Thống kê mô tả, trung bình, tổng quy mô dân số** | **Bắt buộc dùng `pweight` + phân cụm `psu`** | `wt45` cho mô-đun thu nhập – nhân khẩu 45.000 hộ; `wt9` cho mô-đun chi tiêu chi tiết | Đảm bảo ước lượng không chệch thiết kế theo định lý Horvitz–Thompson; bỏ qua quyền số sẽ phóng đại đặc trưng nông thôn và vùng lấy mẫu vượt tỷ lệ. |
+| **Đo lường nghèo FGT `P0/P1/P2` và bất bình đẳng `Gini`, `Theil`, `P90/P10`** | **Bắt buộc dùng `pweight` nhân quy mô hộ khi tính bình quân đầu người** | `wt45` đối với thu nhập; `wt9` đối với chi tiêu | Phân phối thu nhập và chi tiêu phụ thuộc trực tiếp vào trọng số đại diện dân số của từng tầng tỉnh – thành thị/nông thôn. |
+| **Hồi quy nhân quả và cấu trúc đơn kỳ: OLS/WLS, Logit, Probit, Tobit, PPML, IV-2SLS** | **Báo cáo song song Có quyền số và Không quyền số + phân cụm `psu`** | `wt45` hoặc `wt9` kèm `compare_unweighted=true` và `dumouchel_duncan_test=true` | Theo Solon–Haider–Wooldridge và Deaton, khi mô hình định dạng đúng và quyền số ngoại sinh thì OLS không trọng số hiệu quả hơn theo hệ số phóng đại phương sai Kish $\text{UWE} = 1 + \text{CV}(w)^2$; nếu kiểm định $F$ DuMouchel–Duncan bác bỏ $H_0$ ($p < 0,05$), tồn tại chọn mẫu nội sinh hoặc tác động không đồng nhất theo tầng nên bắt buộc ưu tiên WLS/Survey GLM. |
+| **Gộp chéo nhiều kỳ khảo sát `mode="append"`** | **Chuẩn hóa quyền số đa kỳ + cố định năm + phân cụm `psu`** | `multi_wave_weight_mode="wave_normalized"` hoặc `"equal_wave"` | Tránh hiện tượng các kỳ có tổng dân số hoặc cỡ mẫu lớn hơn chi phối hàm hợp lý gộp khi ước lượng xu hướng dài hạn 2014–2024. |
+| **Dữ liệu bảng hộ luân phiên `mode="merge_panel"`** | **Cố định quyền số kỳ gốc trong cùng khung Tổng điều tra** | `multi_wave_weight_mode="longitudinal_base"` trên khung `2004–2008`, `2010–2018` hoặc `2020–2024` | Bảo toàn tập hợp mục tiêu ban đầu cho ước lượng Fixed Effects và Mundlak CRE, tuyệt đối không ghép mã hộ xuyên qua hai khung Tổng điều tra dân số khác nhau. |
+
+### Đường ống biến đổi khai báo tổng quát trên Web App và MCP
+
+Để xử lý trọn vẹn các bài toán thực nghiệm phức tạp mà không cần viết kịch bản tiền xử lý thủ công ngoài hệ thống, cả giao diện **Variable Hub (`/data/vhlss-micro`)** và công cụ MCP **`analyze_vhlss_microdata`** cung cấp 5 cơ chế khai báo tổng quát:
+
+1. **Gộp điều kiện `1:m` kèm hệ số quy đổi năm (`conditional_aggregations`):** Trích lọc theo mã mặt hàng hoặc điều kiện thuộc tính ở bảng con và nhân trực tiếp `scale_factor=12` cho các khoản chi tiêu thường xuyên kỳ tham chiếu 30 ngày ở Mục 5A2 trước khi cộng với khoản chi dịp lễ Tết 12 tháng ở Mục 5A1.
+2. **Đặc trưng hộ đồng đẳng loại trừ bản thân (`exclude_self=true`):** Khi phân tích cấp cá nhân `entity="individual"`, hệ thống tính tổng hoặc trung bình của các thành viên *còn lại* trong cùng hộ gia đình, loại bỏ hoàn toàn hiện tượng tự phản chiếu cơ học trong mô hình quyết định di cư hoặc cung lao động nội hộ.
+3. **Khử lạm phát tự động theo CPI chính thức (`cpi_deflation`):** Tự động quy đổi toàn bộ biến tiền tệ danh nghĩa về mặt bằng giá so sánh năm gốc lựa chọn như `base_year=2020` xuyên suốt các kỳ 2004–2024.
+4. **Biến công cụ bối cảnh loại trừ chính hộ (`contextual_variables` với `leave_one_out=true`):** Tự động tính trung bình không bao gồm hộ $i$ tại cấp địa bàn điều tra PSU, xã hoặc tỉnh làm biến công cụ không gian/đồng đẳng phục vụ nhận diện nhân quả IV-2SLS, Control-Function IV-Probit và hệ cầu QUAIDS 3SLS.
+5. **Xuất gói tái lập tam giác nhận biết thiết kế mẫu:** Mọi lệnh ước lượng tự động sinh mã tái lập `svyset psu [pweight=...]` trên Stata 18 MP, `survey::svydesign` trên R và bộ ước lượng Sandwich phân cụm PSU trên Python.
+
+## Bảy mẫu lệnh VHLSS Microdata sẵn sàng sao chép (P24–P30)
+
+Chọn ngôn ngữ **Tiếng Việt** hoặc **English** và nhấn **Sao chép lệnh** để triển khai ngay ý tưởng khai thác dữ liệu vi mô VHLSS trên Gemini, Claude, AntiGravity hoặc Cursor:
+
+<McpPromptCatalog locale="vi" defaultFilter="vhlss" />

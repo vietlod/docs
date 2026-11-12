@@ -4,7 +4,8 @@ import catalogData from '../../data/mcpPromptCatalog.json';
 import styles from './styles.module.css';
 
 const STAGE_FILTERS = [
-  { key: 'all', vi: 'Tất cả 23 mẫu lệnh', en: 'All 23 Prompts' },
+  { key: 'all', vi: 'Tất cả 30 mẫu lệnh', en: 'All 30 Prompts' },
+  { key: 'vhlss', vi: 'VHLSS vi mô · 7 mẫu lệnh', en: 'VHLSS Microdata · 7 Prompts' },
   { key: 'ideation', vi: 'Bước 1: Đề xuất ý tưởng', en: 'Step 1: Ideation' },
   { key: 'literature', vi: 'Bước 2: Tổng quan tài liệu', en: 'Step 2: Literature' },
   { key: 'data', vi: 'Bước 3: Xây dựng dữ liệu', en: 'Step 3: Data' },
@@ -13,15 +14,18 @@ const STAGE_FILTERS = [
   { key: 'end_to_end', vi: 'Trọn vẹn 5 bước Q3+', en: 'Full 5-Step Q3+' },
 ];
 
-export default function McpPromptCatalog({ locale = 'vi' }) {
+export default function McpPromptCatalog({ locale = 'vi', defaultFilter = 'all' }) {
   const isVi = locale !== 'en';
-  const [activeStage, setActiveStage] = useState('all');
+  const [activeStage, setActiveStage] = useState(defaultFilter);
   const [promptLang, setPromptLang] = useState(isVi ? 'vi' : 'en');
   const [copiedId, setCopiedId] = useState(null);
 
   const verifiedPrompts = useMemo(() => {
     const list = (catalogData.prompts || []).filter((p) => p.status === 'verified');
     if (activeStage === 'all') return list;
+    if (activeStage === 'vhlss') {
+      return list.filter((p) => Array.isArray(p.datasets) && p.datasets.includes('VHLSS_MICRODATA'));
+    }
     return list.filter((p) => p.stage === activeStage);
   }, [activeStage]);
 
