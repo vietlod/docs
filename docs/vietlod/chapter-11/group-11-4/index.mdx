@@ -4,7 +4,7 @@ title: "11.4. Nguy cơ thời gian rời rạc và rủi ro cạnh tranh"
 sidebar_label: "11.4. Nguy cơ thời gian rời rạc và rủi ro cạnh tranh"
 sidebar_position: 4
 slug: /vietlod/chapter-11/group-11-4
-description: "Hướng dẫn thực hành Phần 11.4 — Nguy cơ thời gian rời rạc và rủi ro cạnh tranh thuộc Chương 11: so sánh và thực thi 2 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Phần 11.4 — Nguy cơ thời gian rời rạc và rủi ro cạnh tranh thuộc Chương 11: so sánh và thực thi 5 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
   - Phần 11.4 VietLOD
   - Nguy cơ thời gian rời rạc và rủi ro cạnh tranh
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Phần 11.4. Nguy cơ thời gian rời rạc và rủi ro cạnh tranh** thuộc [11. Phân tích sống sót, thời gian sự kiện và rủi ro cạnh tranh](/vietlod/chapter-11) cung cấp quy trình thực hành từng bước cho **2 bài học mô hình kinh tế lượng** từ mục `11.4.1` đến `11.4.2`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 11.4](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-11-phan-tich-song-sot-thoi-gian-su-kien-va-rui-ro-canh-tranh/nhom-11-4-competing-discrete) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+**Phần 11.4. Nguy cơ thời gian rời rạc và rủi ro cạnh tranh** thuộc [11. Phân tích sống sót, thời gian sự kiện và rủi ro cạnh tranh](/vietlod/chapter-11) cung cấp quy trình thực hành từng bước cho **5 bài học mô hình kinh tế lượng** từ mục `11.4.1` đến `11.4.5`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 11.4](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-11-phan-tich-song-sot-thoi-gian-su-kien-va-rui-ro-canh-tranh/nhom-11-4-competing-discrete) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="Hướng dẫn thực hành Phần 11.4: Nguy cơ thời gian rời rạc và rủi ro cạnh tranh trên Stata 18, R 4.x và Python 3.11+"
@@ -71,6 +71,11 @@ $$
 | **11.4.1** · [Mô hình nguy cơ thời gian rời rạc Prentice–Gloeckler](/vietlod/chapter-11/group-11-4/b177-discrete-time-hazard) | `discrete_time_hazard` | `cloglog event_it x1 x2 i.spell_t, vce(cluster id)` | `glm(event_it ~ x1 + x2 + factor(spell_t), family = binomial(link = 'cloglog'), data = df)` | `smf.glm('event_it ~ x1 + x2 + C(spell_t)', data=df, family=sm.families.Binomial(sm.families.links.CLogLog())).fit()` | <Available /> |
 | **11.4.2** · [Mô hình nguy cơ phân phối con cho rủi ro cạnh tranh Fine–Gray](/vietlod/chapter-11/group-11-4/b178-fine-gray-competing-risks) | `fine_gray_competing_risks` | `stcrreg x1 x2, compete(event == 2) vce(robust)` | `cmprsk::crr(ftime = df$duration, fstatus = df$event, cov1 = df[, c('x1', 'x2')])` | `CoxPHFitter().fit(df_ipcw, duration_col='duration', event_col='event_cr', weights_col='w_ipcw')` | <Available /> |
 
+
+| **11.4.3** · [Mô hình khoảng thời gian chờ có điều kiện tự hồi quy Engle Russell](/vietlod/chapter-11/group-11-4/b242-acd-conditional-duration) | `acd_conditional_duration` | `streg x1 x2, distribution(weibull) time` | `ACDm::acdFit(model = 'ACD', dist = 'exponential')` | `AFT log-duration covariate adjustment + Bauwens-Giot Log-ACD(1,1)` | <Available /> |
+| **11.4.4** · [Mô hình thời lượng rủi ro dễ tổn thương chung phân phối Gamma Vaupel Hougaard](/vietlod/chapter-11/group-11-4/b300-shared-gamma-frailty-hazard) | `shared_gamma_frailty_hazard` | `stset y & streg x1 x2, distribution(weibull) frailty(gamma) time` | `survival::survreg(Surv(y) ~ x1 + x2, dist = 'weibull')` | `Weibull-Gamma Frailty marginal Laplace-transform MLE + AFT log-duration elasticities` | <Available /> |
+| **11.4.5** · [Mô hình thời lượng hàm nguy cơ hằng số từng đoạn Holford Laird Olivier](/vietlod/chapter-11/group-11-4/b301-piecewise-exponential-hazard) | `piecewise_exponential_hazard` | `stset y & stsplit, at(failures) / streg x1 x2, distribution(exponential) time` | `eha::pchreg / stats::lm(log(y) ~ x1 + x2)` | `Holford-Laird-Olivier interval-exposure Poisson hazard + log-duration AFT projection` | <Available /> |
+
 ## 11.4.4. Quy trình thực hành chuẩn cho Phần 11.4
 
 <Steps>
@@ -80,7 +85,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu</h3>
-    <p>So sánh các bài học mô hình từ <code>11.4.1</code> đến <code>11.4.2</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
+    <p>So sánh các bài học mô hình từ <code>11.4.1</code> đến <code>11.4.5</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab</h3>

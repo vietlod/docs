@@ -4,7 +4,7 @@ title: "3.2. Lựa chọn đa phân loại"
 sidebar_label: "3.2. Lựa chọn đa phân loại"
 sidebar_position: 2
 slug: /vietlod/chapter-03/group-3-2
-description: "Hướng dẫn thực hành Phần 3.2 — Lựa chọn đa phân loại thuộc Chương 3: so sánh và thực thi 4 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Phần 3.2 — Lựa chọn đa phân loại thuộc Chương 3: so sánh và thực thi 5 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
   - Phần 3.2 VietLOD
   - Lựa chọn đa phân loại
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Phần 3.2. Lựa chọn đa phân loại** thuộc [3. Mô hình lựa chọn rời rạc và cầu cấu trúc](/vietlod/chapter-03) cung cấp quy trình thực hành từng bước cho **4 bài học mô hình kinh tế lượng** từ mục `3.2.1` đến `3.2.4`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 3.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-03-mo-hinh-lua-chon-roi-rac-va-cau-cau-truc/nhom-3-2-multinomial) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+**Phần 3.2. Lựa chọn đa phân loại** thuộc [3. Mô hình lựa chọn rời rạc và cầu cấu trúc](/vietlod/chapter-03) cung cấp quy trình thực hành từng bước cho **5 bài học mô hình kinh tế lượng** từ mục `3.2.1` đến `3.2.5`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 3.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-03-mo-hinh-lua-chon-roi-rac-va-cau-cau-truc/nhom-3-2-multinomial) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="Hướng dẫn thực hành Phần 3.2: Lựa chọn đa phân loại trên Stata 18, R 4.x và Python 3.11+"
@@ -85,6 +85,9 @@ $$
 | **3.2.3** · [Mô hình Logit tổ phân cấp nới lỏng giả định IIA](/vietlod/chapter-03/group-3-2/b034-nested-logit) | `nested_logit` | `nlogit choice x_alt \|\| nest: z_case, case(id)` | `mlogit::mlogit(choice ~ x_alt \| z_case, data = df)` | `smf.mnlogit('y_cat ~ x1 + x2', data=df).fit()` | <Available /> |
 | **3.2.4** · [Mô hình Probit đa phân loại (MNP)](/vietlod/chapter-03/group-3-2/b035-multinomial-probit) | `multinomial_probit` | `mprobit y_cat x1 x2, baseoutcome(0) vce(robust)` | `MNP::mnp(y_cat ~ x1 + x2, data = df)` | `smf.mnlogit('y_cat ~ x1 + x2', data=df).fit()` | <Available /> |
 
+
+| **3.2.5** · [Mô hình Logit bùng nổ xếp hạng thứ tự Plackett Luce Beggs Cardell Hausman](/vietlod/chapter-03/group-3-2/b273-rank-ordered-exploded-logit) | `rank_ordered_exploded_logit` | `cmrologit y x1 x2 / rologit y x1 x2, group(case_id)` | `PlackettLuce::PlackettLuce / survival::clogit` | `Plackett-Luce exploded conditional logit partial-likelihood MLE` | <Available /> |
+
 ## 3.2.4. Quy trình thực hành chuẩn cho Phần 3.2
 
 <Steps>
@@ -94,7 +97,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu</h3>
-    <p>So sánh các bài học mô hình từ <code>3.2.1</code> đến <code>3.2.4</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
+    <p>So sánh các bài học mô hình từ <code>3.2.1</code> đến <code>3.2.5</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab</h3>

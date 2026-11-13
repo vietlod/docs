@@ -4,7 +4,7 @@ title: "12.2. Kinh tế lượng Bayes và trung bình hóa mô hình (BMA)"
 sidebar_label: "12.2. Kinh tế lượng Bayes và trung bình hóa mô hình (BMA)"
 sidebar_position: 2
 slug: /vietlod/chapter-12/group-12-2
-description: "Hướng dẫn thực hành Phần 12.2 — Kinh tế lượng Bayes và trung bình hóa mô hình (BMA) thuộc Chương 12: so sánh và thực thi 3 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Phần 12.2 — Kinh tế lượng Bayes và trung bình hóa mô hình (BMA) thuộc Chương 12: so sánh và thực thi 5 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
   - Phần 12.2 VietLOD
   - Kinh tế lượng Bayes và trung bình hóa mô hình (BMA)
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Phần 12.2. Kinh tế lượng Bayes và trung bình hóa mô hình (BMA)** thuộc [12. Hệ phương trình đồng thời, hệ cầu, kinh tế lượng Bayes và học máy](/vietlod/chapter-12) cung cấp quy trình thực hành từng bước cho **3 bài học mô hình kinh tế lượng** từ mục `12.2.1` đến `12.2.3`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 12.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-12-he-phuong-trinh-he-cau-kinh-te-luong-bayes-va-hoc-may/nhom-12-2-bayesian) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+**Phần 12.2. Kinh tế lượng Bayes và trung bình hóa mô hình (BMA)** thuộc [12. Hệ phương trình đồng thời, hệ cầu, kinh tế lượng Bayes và học máy](/vietlod/chapter-12) cung cấp quy trình thực hành từng bước cho **5 bài học mô hình kinh tế lượng** từ mục `12.2.1` đến `12.2.5`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 12.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-12-he-phuong-trinh-he-cau-kinh-te-luong-bayes-va-hoc-may/nhom-12-2-bayesian) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="Hướng dẫn thực hành Phần 12.2: Kinh tế lượng Bayes và trung bình hóa mô hình (BMA) trên Stata 18, R 4.x và Python 3.11+"
@@ -78,6 +78,10 @@ $$
 | **12.2.2** · [Hệ tự hồi quy vectơ Bayes suy luận hậu nghiệm đa biến](/vietlod/chapter-12/group-12-2/b184-bayesian-var) | `bayesian_var` | `bayes, rseed(42): var y x1 x2, lags(1/2)` | `BVAR::bvar(df[, c('y', 'x1', 'x2')], lags = 2, n_draw = 5000)` | `VAR(df[['y', 'x1', 'x2']]).fit(maxlags=2)` | <Available /> |
 | **12.2.3** · [Trung bình hóa mô hình Bayes giải quyết bất định chọn biến (BMA)](/vietlod/chapter-12/group-12-2/b185-bma-model-averaging) | `bma_model_averaging` | `bmaregress y x1 x2 x3, gprior(uip) mprior(uniform)` | `BMS::bms(df[, c('y', 'x1', 'x2', 'x3')], g = 'UIP', mprior = 'uniform')` | `smf.ols('y ~ x1 + x2', data=df).fit()` | <Available /> |
 
+
+| **12.2.4** · [Lựa chọn biến tìm kiếm ngẫu nhiên Bayes Spike and Slab George McCulloch](/vietlod/chapter-12/group-12-2/b302-bayesian-stochastic-search-ssvs) | `bayesian_stochastic_search_ssvs` | `bmaregress y x1 x2 / regress y x1 x2, vce(robust)` | `BoomSpikeSlab::lm.spike(y ~ x1 + x2, niter = 1000) / BMS::bms` | `George-McCulloch Spike-and-Slab Zellner-g exact/Gibbs PIP & BMA posterior moments` | <Available /> |
+| **12.2.5** · [Mô hình tham số biến thiên theo thời gian không gian trạng thái Carter Kohn Durbin Koopman](/vietlod/chapter-12/group-12-2/b303-bayesian-state-space-tvp) | `bayesian_state_space_tvp` | `sspace (b1 L.b1, state noconstant) (y x1 x2, state) / regress y x1 x2, vce(robust)` | `dlm::dlmSmooth / tvReg::tvLM(y ~ x1 + x2)` | `Kalman filter + Rauch-Tung-Striebel / Carter-Kohn TVP state-space smoother` | <Available /> |
+
 ## 12.2.4. Quy trình thực hành chuẩn cho Phần 12.2
 
 <Steps>
@@ -87,7 +91,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu</h3>
-    <p>So sánh các bài học mô hình từ <code>12.2.1</code> đến <code>12.2.3</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
+    <p>So sánh các bài học mô hình từ <code>12.2.1</code> đến <code>12.2.5</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab</h3>

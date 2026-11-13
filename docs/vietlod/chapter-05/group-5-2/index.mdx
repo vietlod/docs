@@ -4,7 +4,7 @@ title: "5.2. Dữ liệu bảng động"
 sidebar_label: "5.2. Dữ liệu bảng động"
 sidebar_position: 2
 slug: /vietlod/chapter-05/group-5-2
-description: "Hướng dẫn thực hành Phần 5.2 — Dữ liệu bảng động thuộc Chương 5: so sánh và thực thi 3 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Phần 5.2 — Dữ liệu bảng động thuộc Chương 5: so sánh và thực thi 6 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
   - Phần 5.2 VietLOD
   - Dữ liệu bảng động
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Phần 5.2. Dữ liệu bảng động** thuộc [5. Kinh tế lượng dữ liệu bảng tĩnh, động và phụ thuộc chéo](/vietlod/chapter-05) cung cấp quy trình thực hành từng bước cho **3 bài học mô hình kinh tế lượng** từ mục `5.2.1` đến `5.2.3`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 5.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-05-kinh-te-luong-du-lieu-bang-tinh-dong-va-phu-thuoc-cheo/nhom-5-2-dynamic) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+**Phần 5.2. Dữ liệu bảng động** thuộc [5. Kinh tế lượng dữ liệu bảng tĩnh, động và phụ thuộc chéo](/vietlod/chapter-05) cung cấp quy trình thực hành từng bước cho **6 bài học mô hình kinh tế lượng** từ mục `5.2.1` đến `5.2.6`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 5.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-05-kinh-te-luong-du-lieu-bang-tinh-dong-va-phu-thuoc-cheo/nhom-5-2-dynamic) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="Hướng dẫn thực hành Phần 5.2: Dữ liệu bảng động trên Stata 18, R 4.x và Python 3.11+"
@@ -78,6 +78,11 @@ $$
 | **5.2.2** · [Ước lượng GMM hệ thống dữ liệu bảng động Blundell–Bond](/vietlod/chapter-05/group-5-2/b066-blundell-bond) | `blundell_bond` | `xtdpdsys y x1 x2, lags(1) vce(robust)` | `plm::pgmm(y ~ lag(y, 1) + x1 + x2 \| lag(y, 2:4), data = pdata, transformation = 'ld')` | `abond('y L1.y x1 x2 \| gmm(y, 2:4) \| iv(x1 x2)', df, ['id', 't'])` | <Available /> |
 | **5.2.3** · [Ước lượng biến giả hiệu chỉnh chệch Nickell (LSDVC)](/vietlod/chapter-05/group-5-2/b067-bias-corrected-lsdv) | `bias_corrected_lsdv` | `xtlsdvc y x1 x2, initial(ab) vcov(50)` | `plm::plm(y ~ lag(y, 1) + x1 + x2, data = pdata, model = 'within')` | `PanelOLS.from_formula('y ~ l1_y + x1 + x2 + EntityEffects', data=pdata).fit()` | <Available /> |
 
+
+| **5.2.4** · [Biến công cụ sai phân bậc nhất bảng động Anderson Hsiao](/vietlod/chapter-05/group-5-2/b214-anderson-hsiao-fd-iv) | `anderson_hsiao_fd_iv` | `ivregress 2sls D.y D.(x1 x2) (LD.y = L2.y), vce(cluster id)` | `plm::plm(model = 'fd') + AER::ivreg` | `First-difference IV with lagged levels y_{i,t-2} and cluster-robust SE` | <Available /> |
+| **5.2.5** · [Hiệu ứng cố định hiệu chỉnh chệch tham số ngẫu nhiên bằng tách bảng jackknife](/vietlod/chapter-05/group-5-2/b215-incidental-params-bias-corrected-fe) | `incidental_params_bias_corrected_fe` | `xtreg y x1 x2, fe vce(cluster id)` | `alpaca::biasCorr / plm split-panel jackknife` | `Dhaene-Jochmans split-panel half-sample jackknife FE` | <Available /> |
+| **5.2.6** · [Hợp lý cực đại giả sai phân bảng động Hsiao Pesaran Tahmiscioglu](/vietlod/chapter-05/group-5-2/b279-quasi-ml-dynamic-panel-hsiao) | `quasi_ml_dynamic_panel_hsiao` | `xtdpdqml y x1 x2, fe / xtreg y x1 x2, fe vce(robust)` | `OrthoPanels /plm FD-QMLE optimization` | `Hsiao-Pesaran-Tahmiscioglu (2002) first-difference tri-diagonal QMLE` | <Available /> |
+
 ## 5.2.4. Quy trình thực hành chuẩn cho Phần 5.2
 
 <Steps>
@@ -87,7 +92,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu</h3>
-    <p>So sánh các bài học mô hình từ <code>5.2.1</code> đến <code>5.2.3</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
+    <p>So sánh các bài học mô hình từ <code>5.2.1</code> đến <code>5.2.6</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab</h3>

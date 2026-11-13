@@ -6,7 +6,7 @@ description: Hướng dẫn quản lý hồ sơ, khóa API cá nhân (BYOK AI, S
 
 # Quản lý tài khoản, khóa API cá nhân & thanh toán
 
-EcoLab (`v1.5.0`) cung cấp trung tâm quản lý tập trung tại mục **Cài đặt** giúp nhà nghiên cứu kiểm soát hồ sơ học thuật, khóa API cá nhân cho mô hình ngôn ngữ lớn, khóa cơ sở dữ liệu học thuật mở rộng, khóa kết nối MCP và gói thành viên.
+EcoLab (`v1.12.0`) cung cấp trung tâm quản lý tập trung tại mục **Cài đặt** giúp nhà nghiên cứu kiểm soát hồ sơ học thuật, khóa API cá nhân cho mô hình ngôn ngữ lớn, khóa cơ sở dữ liệu học thuật mở rộng, khóa kết nối MCP và gói thành viên.
 
 ---
 

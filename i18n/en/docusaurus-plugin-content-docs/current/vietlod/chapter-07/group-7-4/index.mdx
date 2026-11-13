@@ -4,7 +4,7 @@ title: "7.4. Time-Varying Parameter VAR and Spillover Networks"
 sidebar_label: "7.4. Time-Varying Parameter VAR and Spillover Networks"
 sidebar_position: 4
 slug: /vietlod/chapter-07/group-7-4
-description: "How-To User Guide for Methodological Part 7.4 — Time-Varying Parameter VAR and Spillover Networks in Chapter 7: comparing and executing 3 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
+description: "How-To User Guide for Methodological Part 7.4 — Time-Varying Parameter VAR and Spillover Networks in Chapter 7: comparing and executing 4 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
 keywords:
   - VietLOD Part 7.4
   - Time-Varying Parameter VAR and Spillover Networks
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Methodological Part 7.4. Time-Varying Parameter VAR and Spillover Networks** in [7. Multivariate Time Series, Local Projections and Spillover Networks](/en/vietlod/chapter-07) provides step-by-step How-To implementation guides for **3 econometric model lessons** spanning from Section `7.4.1` to `7.4.3`. Full theoretical derivations are available at [VietLOD Part 7.4](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-07-chuoi-thoi-gian-da-bien-chieu-cuc-bo-va-mang-lan-toa/nhom-7-4-tvp-factor-spillover) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+**Methodological Part 7.4. Time-Varying Parameter VAR and Spillover Networks** in [7. Multivariate Time Series, Local Projections and Spillover Networks](/en/vietlod/chapter-07) provides step-by-step How-To implementation guides for **4 econometric model lessons** spanning from Section `7.4.1` to `7.4.4`. Full theoretical derivations are available at [VietLOD Part 7.4](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-07-chuoi-thoi-gian-da-bien-chieu-cuc-bo-va-mang-lan-toa/nhom-7-4-tvp-factor-spillover) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="How-To Guide for Part 7.4: Time-Varying Parameter VAR and Spillover Networks in Stata 18, R 4.x, and Python 3.11+"
@@ -78,6 +78,9 @@ $$
 | **7.4.2** · [Time-Varying Parameter Vector Autoregression](/en/vietlod/chapter-07/group-7-4/b117-tvp-var) | `tvp_var` | `sspace (b1 L.b1, state noconstant) (y L.y, state)` | `tvReg::tvVAR(df[, c('y', 'x1', 'x2')], p = 2)` | `UnobservedComponents(df['y'], exog=df[['x1', 'x2']], mle_regression=False).fit()` | <Available /> |
 | **7.4.3** · [Diebold-Yilmaz Generalized Spillover Connectedness](/en/vietlod/chapter-07/group-7-4/b118-spillover-connectedness) | `spillover_connectedness` | `var y x1 x2, lags(1/2) -> irf create gfevd, step(10)` | `ConnectednessApproach::ConnectednessApproach(df_zoo, nlag = 2, nfore = 10)` | `VAR(df[['y', 'x1', 'x2']]).fit(maxlags=2).fevd(10)` | <Available /> |
 
+
+| **7.4.4** · [Mixed Frequency Kalman Nowcasting Dynamic Factor Model](/en/vietlod/chapter-07/group-7-4/b285-nowcasting-dynamic-factor-banbura) | `nowcasting_dynamic_factor_banbura` | `dfactor (y x1 x2 = , noconstant) (f = , ar(1))` | `nowcasting::nowcast / dfms::DFM(X, r = 1, p = 1)` | `statsmodels.tsa.DynamicFactor / Kalman state-space smoother + bridge projection` | <Available /> |
+
 ## 7.4.4. Standard Implementation Workflow for Part 7.4
 
 <Steps>
@@ -87,7 +90,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Step 2. Select the Optimal Estimator for Your Error and Sample Structure</h3>
-    <p>Compare the estimators from <code>7.4.1</code> to <code>7.4.3</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
+    <p>Compare the estimators from <code>7.4.1</code> to <code>7.4.4</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab</h3>

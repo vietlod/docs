@@ -4,7 +4,7 @@ title: "6.1. Unit Root and Cointegration Tests"
 sidebar_label: "6.1. Unit Root and Cointegration Tests"
 sidebar_position: 1
 slug: /vietlod/chapter-06/group-6-1
-description: "How-To User Guide for Methodological Part 6.1 — Unit Root and Cointegration Tests in Chapter 6: comparing and executing 6 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
+description: "How-To User Guide for Methodological Part 6.1 — Unit Root and Cointegration Tests in Chapter 6: comparing and executing 7 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
 keywords:
   - VietLOD Part 6.1
   - Unit Root and Cointegration Tests
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Methodological Part 6.1. Unit Root and Cointegration Tests** in [6. Univariate, Nonlinear, Structural Break and Bubble Time Series](/en/vietlod/chapter-06) provides step-by-step How-To implementation guides for **6 econometric model lessons** spanning from Section `6.1.1` to `6.1.6`. Full theoretical derivations are available at [VietLOD Part 6.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-06-chuoi-thoi-gian-don-bien-phi-tuyen-diem-gay-va-bong-bong/nhom-6-1-unit-root-cointegration) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+**Methodological Part 6.1. Unit Root and Cointegration Tests** in [6. Univariate, Nonlinear, Structural Break and Bubble Time Series](/en/vietlod/chapter-06) provides step-by-step How-To implementation guides for **7 econometric model lessons** spanning from Section `6.1.1` to `6.1.7`. Full theoretical derivations are available at [VietLOD Part 6.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-06-chuoi-thoi-gian-don-bien-phi-tuyen-diem-gay-va-bong-bong/nhom-6-1-unit-root-cointegration) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="How-To Guide for Part 6.1: Unit Root and Cointegration Tests in Stata 18, R 4.x, and Python 3.11+"
@@ -99,6 +99,9 @@ $$
 | **6.1.5** · [Zivot-Andrews Structural-Break Unit-Root Test](/en/vietlod/chapter-06/group-6-1/b088-zivot-andrews) | `zivot_andrews` | `zandrews y, break(both) lagmethod(AIC)` | `urca::ur.za(df$y, model = 'both', lag = 2)` | `ZivotAndrews(df['y'], trend='ct', method='aic')` | <Available /> |
 | **6.1.6** · [Johansen Multivariate Cointegration](/en/vietlod/chapter-06/group-6-1/b089-johansen) | `johansen` | `vecrank y x1 x2, trend(constant) lags(2)` | `urca::ca.jo(df[, c('y', 'x1', 'x2')], type = 'trace', K = 2)` | `coint_johansen(df[['y', 'x1', 'x2']], det_order=0, k_ar_diff=1)` | <Available /> |
 
+
+| **6.1.7** · [Elliott Rothenberg Stock DF GLS and Ng Perron M Tests](/en/vietlod/chapter-06/group-6-1/b282-ers-dfgls-ng-perron) | `ers_dfgls_ng_perron` | `dfgls y, maxlag(4)` | `urca::ur.ers(y, type = 'DF-GLS', model = 'trend')` | `arch.unitroot.DFGLS + Ng-Perron MZa/MZt/MSB/MPT spectral GLS autoregression` | <Available /> |
+
 ## 6.1.4. Standard Implementation Workflow for Part 6.1
 
 <Steps>
@@ -108,7 +111,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Step 2. Select the Optimal Estimator for Your Error and Sample Structure</h3>
-    <p>Compare the estimators from <code>6.1.1</code> to <code>6.1.6</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
+    <p>Compare the estimators from <code>6.1.1</code> to <code>6.1.7</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab</h3>

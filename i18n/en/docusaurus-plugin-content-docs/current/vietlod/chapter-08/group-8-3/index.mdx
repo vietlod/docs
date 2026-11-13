@@ -4,7 +4,7 @@ title: "8.3. Multivariate Volatility and Dynamic Correlation"
 sidebar_label: "8.3. Multivariate Volatility and Dynamic Correlation"
 sidebar_position: 3
 slug: /vietlod/chapter-08/group-8-3
-description: "How-To User Guide for Methodological Part 8.3 — Multivariate Volatility and Dynamic Correlation in Chapter 8: comparing and executing 2 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
+description: "How-To User Guide for Methodological Part 8.3 — Multivariate Volatility and Dynamic Correlation in Chapter 8: comparing and executing 5 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
 keywords:
   - VietLOD Part 8.3
   - Multivariate Volatility and Dynamic Correlation
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Methodological Part 8.3. Multivariate Volatility and Dynamic Correlation** in [8. Financial Volatility, Asset Pricing and Systemic Risk](/en/vietlod/chapter-08) provides step-by-step How-To implementation guides for **2 econometric model lessons** spanning from Section `8.3.1` to `8.3.2`. Full theoretical derivations are available at [VietLOD Part 8.3](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-08-do-bien-dong-tai-chinh-dinh-gia-tai-san-va-rui-ro-he-thong/nhom-8-3-multivariate-vol) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+**Methodological Part 8.3. Multivariate Volatility and Dynamic Correlation** in [8. Financial Volatility, Asset Pricing and Systemic Risk](/en/vietlod/chapter-08) provides step-by-step How-To implementation guides for **5 econometric model lessons** spanning from Section `8.3.1` to `8.3.5`. Full theoretical derivations are available at [VietLOD Part 8.3](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-08-do-bien-dong-tai-chinh-dinh-gia-tai-san-va-rui-ro-he-thong/nhom-8-3-multivariate-vol) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="How-To Guide for Part 8.3: Multivariate Volatility and Dynamic Correlation in Stata 18, R 4.x, and Python 3.11+"
@@ -71,6 +71,11 @@ $$
 | **8.3.1** · [Constant Conditional Correlation Multivariate GARCH](/en/vietlod/chapter-08/group-8-3/b133-ccc-garch) | `ccc_garch` | `mgarch ccc (ret1 ret2 = ), arch(1) garch(1)` | `rmgarch::cgarchfit(cgarchspec(uspec), data = df[, c('ret1', 'ret2')])` | `arch_model(df['y'], vol='GARCH', p=1, q=1).fit(disp='off')` | <Available /> |
 | **8.3.2** · [Engle Dynamic Conditional Correlation — DCC-GARCH](/en/vietlod/chapter-08/group-8-3/b134-dcc-garch) | `dcc_garch` | `mgarch dcc (ret1 ret2 = ), arch(1) garch(1)` | `rmgarch::dccfit(dccspec(uspec), data = df[, c('ret1', 'ret2')])` | `arch_model(ret1, vol='GARCH', p=1, q=1).fit(disp='off')` | <Available /> |
 
+
+| **8.3.3** · [Ledoit Wolf Optimal Linear Shrinkage Covariance Factor Model](/en/vietlod/chapter-08/group-8-3/b231-ledoit-wolf-shrinkage-cov) | `ledoit_wolf_shrinkage_cov` | `regress y x1 x2, vce(robust)` | `corpcor::cov.shrink` | `sklearn.covariance.LedoitWolf + precision shrinkage regression` | <Available /> |
+| **8.3.4** · [BEKK Positive Definite Multivariate GARCH](/en/vietlod/chapter-08/group-8-3/b289-bekk-mgarch-engle-kroner) | `bekk_mgarch_engle_kroner` | `mgarch dvech (y = x1 x2), arch(1) garch(1)` | `BEKKs::bekk_fit(bekk_spec(), data)` | `Engle-Kroner (1995) Gaussian QMLE Diagonal BEKK recursion + conditional mean equation` | <Available /> |
+| **8.3.5** · [Patton Dynamic Student t and Asymmetric Tail Copula GARCH](/en/vietlod/chapter-08/group-8-3/b290-copula-garch-patton) | `copula_garch_patton` | `arch y x1 x2, arch(1) garch(1) tdistribution` | `rmgarch::cgarchfit(cgarchspec(...), data)` | `Two-stage IFM GARCH filtration + Student-t Copula MLE & lower-tail dependence lambda_L` | <Available /> |
+
 ## 8.3.4. Standard Implementation Workflow for Part 8.3
 
 <Steps>
@@ -80,7 +85,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Step 2. Select the Optimal Estimator for Your Error and Sample Structure</h3>
-    <p>Compare the estimators from <code>8.3.1</code> to <code>8.3.2</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
+    <p>Compare the estimators from <code>8.3.1</code> to <code>8.3.5</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab</h3>

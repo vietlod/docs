@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 **Họ mô hình 15 (Tái lấy mẫu, học máy nhân quả & suy diễn nhiều chiều)** giải quyết hai thách thức hiện đại của nghiên cứu kinh tế thực nghiệm: (1) suy diễn thống kê chuẩn xác khi số lượng cụm nhỏ hoặc kích thước cụm mất cân đối (ví dụ dữ liệu **34 tỉnh thành** hoặc 6 vùng kinh tế), và (2) ước lượng tác động nhân quả không chệch khi tập biến kiểm soát nhiều chiều hoặc phi tuyến phức tạp.
 
-Trong EcoLab, nhóm mô hình này nằm tại **Mô hình hóa → 15. Bootstrap & Causal ML**. Xem thêm [Danh mục 15 họ mô hình](/ecolab/model/group).
+Trong EcoLab, nhóm mô hình này nằm tại **Mô hình hóa → 15. Bootstrap & Causal ML**. Xem thêm [Danh mục 16 họ mô hình](/ecolab/model/group).
 
 ---
 

@@ -4,7 +4,7 @@ title: "10.3. Hồi quy địa lý đa thang đo và sai số chuẩn Conley"
 sidebar_label: "10.3. Hồi quy địa lý đa thang đo và sai số chuẩn Conley"
 sidebar_position: 3
 slug: /vietlod/chapter-10/group-10-3
-description: "Hướng dẫn thực hành Phần 10.3 — Hồi quy địa lý đa thang đo và sai số chuẩn Conley thuộc Chương 10: so sánh và thực thi 2 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Phần 10.3 — Hồi quy địa lý đa thang đo và sai số chuẩn Conley thuộc Chương 10: so sánh và thực thi 6 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
   - Phần 10.3 VietLOD
   - Hồi quy địa lý đa thang đo và sai số chuẩn Conley
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Phần 10.3. Hồi quy địa lý đa thang đo và sai số chuẩn Conley** thuộc [10. Kinh tế lượng không gian, sai số chuẩn Conley và mạng cặp đôi](/vietlod/chapter-10) cung cấp quy trình thực hành từng bước cho **2 bài học mô hình kinh tế lượng** từ mục `10.3.1` đến `10.3.2`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 10.3](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-10-kinh-te-luong-khong-gian-conley-hac-va-mang-cap-doi/nhom-10-3-multiscale-conley) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+**Phần 10.3. Hồi quy địa lý đa thang đo và sai số chuẩn Conley** thuộc [10. Kinh tế lượng không gian, sai số chuẩn Conley và mạng cặp đôi](/vietlod/chapter-10) cung cấp quy trình thực hành từng bước cho **6 bài học mô hình kinh tế lượng** từ mục `10.3.1` đến `10.3.6`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 10.3](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-10-kinh-te-luong-khong-gian-conley-hac-va-mang-cap-doi/nhom-10-3-multiscale-conley) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="Hướng dẫn thực hành Phần 10.3: Hồi quy địa lý đa thang đo và sai số chuẩn Conley trên Stata 18, R 4.x và Python 3.11+"
@@ -71,6 +71,12 @@ $$
 | **10.3.1** · [Hồi quy trọng số địa lý và đa thang đo (GWR, MGWR)](/vietlod/chapter-10/group-10-3/b168-mgwr-spatial) | `mgwr_spatial` | `gwr y x1 x2, east(coord_x) north(coord_y) bandwidth(aic)` | `GWmodel::gwr.multiscale(y ~ x1 + x2, data = spdf, adaptive = TRUE)` | `MGWR(coords, y, X, selector=Sel_BW(coords, y, X, multi=True)).fit()` | <Available /> |
 | **10.3.2** · [Sai số chuẩn bền vững không gian–thời gian Conley và mạng cặp đôi](/vietlod/chapter-10/group-10-3/b169-conley-spatial-hac) | `conley_spatial_hac` | `acreg y x1 x2, spatial latitude(lat) longitude(lon) dist(100)` | `fixest::feols(y ~ x1 + x2, vcov = fixest::vcov_conley(lat = 'lat', lon = 'lon', cutoff = 100), data = df)` | `smf.ols('y ~ x1 + x2', data=df).fit(cov_type='HAC', cov_kwds={'maxlags': 4})` | <Available /> |
 
+
+| **10.3.3** · [Lọc không gian bằng véc tơ riêng Moran Griffith Tiefelsdorf](/vietlod/chapter-10/group-10-3/b240-eigenvector-spatial-filtering) | `eigenvector_spatial_filtering` | `regress y x1 x2 ev_1 ev_2, vce(robust)` | `spatialreg::SpatialFiltering / spmoran::meigen` | `Spectral decomposition of M*W*M + spatial eigenvector sieve OLS` | <Available /> |
+| **10.3.4** · [Lựa chọn rời rạc tự hồi quy không gian Probit Logit LeSage Pinkse Slade](/vietlod/chapter-10/group-10-3/b241-spatial-probit-lesage) | `spatial_probit_lesage` | `probit y x1 x2 Wy, vce(robust)` | `spatialprobit::sar_probit_mcmc / McSpatial::spprobit` | `Spatial-lag augmented binary choice + LeSage spatial Wald test` | <Available /> |
+| **10.3.5** · [Bình phương tối thiểu hai giai đoạn không gian tổng quát Kelejian Prucha Arbia](/vietlod/chapter-10/group-10-3/b298-gs2sls-kelejian-prucha) | `gs2sls_kelejian_prucha` | `spregress y x1 x2, gs2sls dvarlag(W) errorlag(W) heteroskedastic` | `sphet::spreg(y ~ x1 + x2, data = df, listw = lw, model = 'sarar', het = TRUE)` | `Kelejian-Prucha (1998, 2010) 3-step Spatial 2SLS + GM error lambda + Cochrane-Orcutt GS2SLS` | <Available /> |
+| **10.3.6** · [Đặc tả không gian hàm mũ ma trận LeSage Pace](/vietlod/chapter-10/group-10-3/b299-matrix-exponential-spatial-mess) | `matrix_exponential_spatial_mess` | `regress y x1 x2, vce(robust)` | `spatialreg::lagmess(y ~ x1 + x2, data = df, listw = lw)` | `scipy.linalg.expm concentrated Gaussian MLE Matrix Exponential Spatial Specification` | <Available /> |
+
 ## 10.3.4. Quy trình thực hành chuẩn cho Phần 10.3
 
 <Steps>
@@ -80,7 +86,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu</h3>
-    <p>So sánh các bài học mô hình từ <code>10.3.1</code> đến <code>10.3.2</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
+    <p>So sánh các bài học mô hình từ <code>10.3.1</code> đến <code>10.3.6</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab</h3>

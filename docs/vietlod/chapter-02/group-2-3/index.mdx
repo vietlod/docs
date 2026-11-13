@@ -4,7 +4,7 @@ title: "2.3. Giảm chiều và nhân tố ẩn"
 sidebar_label: "2.3. Giảm chiều và nhân tố ẩn"
 sidebar_position: 3
 slug: /vietlod/chapter-02/group-2-3
-description: "Hướng dẫn thực hành Phần 2.3 — Giảm chiều và nhân tố ẩn thuộc Chương 2: so sánh và thực thi 4 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Phần 2.3 — Giảm chiều và nhân tố ẩn thuộc Chương 2: so sánh và thực thi 6 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
   - Phần 2.3 VietLOD
   - Giảm chiều và nhân tố ẩn
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Phần 2.3. Giảm chiều và nhân tố ẩn** thuộc [2. Mô hình chính quy hóa, suy luận chiều cao và giảm chiều](/vietlod/chapter-02) cung cấp quy trình thực hành từng bước cho **4 bài học mô hình kinh tế lượng** từ mục `2.3.1` đến `2.3.4`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 2.3](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-02-mo-hinh-chinh-quy-hoa-suy-luan-chieu-cao-va-giam-chieu/nhom-2-3-dimension-reduction) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+**Phần 2.3. Giảm chiều và nhân tố ẩn** thuộc [2. Mô hình chính quy hóa, suy luận chiều cao và giảm chiều](/vietlod/chapter-02) cung cấp quy trình thực hành từng bước cho **6 bài học mô hình kinh tế lượng** từ mục `2.3.1` đến `2.3.6`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 2.3](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-02-mo-hinh-chinh-quy-hoa-suy-luan-chieu-cao-va-giam-chieu/nhom-2-3-dimension-reduction) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="Hướng dẫn thực hành Phần 2.3: Giảm chiều và nhân tố ẩn trên Stata 18, R 4.x và Python 3.11+"
@@ -85,6 +85,10 @@ $$
 | **2.3.3** · [Phân tích thành phần chính và chỉ số tổng hợp (PCA)](/vietlod/chapter-02/group-2-3/b024-pca-factors) | `pca_factors` | `pca x1 x2 x3, components(2)` | `stats::prcomp(df[, c('x1', 'x2')], scale. = TRUE)` | `PCA(n_components=2).fit_transform(X_std)` | <Available /> |
 | **2.3.4** · [Phân tích nhân tố khám phá và phép xoay trực giao (EFA)](/vietlod/chapter-02/group-2-3/b025-factor-analysis) | `factor_analysis` | `factor x1 x2 x3, ml factors(2)` | `stats::factanal(df[, c('x1', 'x2', 'x3')], factors = 1, rotation = 'varimax')` | `FactorAnalysis(n_components=2, rotation='varimax').fit(X_std)` | <Available /> |
 
+
+| **2.3.5** · [Hồi quy thành phần chính thưa Zou Hastie Tibshirani](/vietlod/chapter-02/group-2-3/b269-sparse-pca-zou) | `sparse_pca_zou` | `pca x1 x2 & regress y x1 x2, vce(robust)` | `elasticnet::spca + stats::lm` | `sklearn.decomposition.SparsePCA + back-projected OLS factor regression` | <Available /> |
+| **2.3.6** · [Hồi quy ngược phân lát giảm chiều đủ Li Duan](/vietlod/chapter-02/group-2-3/b270-sufficient-dimension-reduction-sir) | `sufficient_dimension_reduction_sir` | `regress y x1 x2, vce(robust)` | `dr::dr(y ~ x1 + x2, method = 'sir')` | `Standardized slice-covariance eigendecomposition + Li (1991) dimensionality test + EDR projection` | <Available /> |
+
 ## 2.3.4. Quy trình thực hành chuẩn cho Phần 2.3
 
 <Steps>
@@ -94,7 +98,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu</h3>
-    <p>So sánh các bài học mô hình từ <code>2.3.1</code> đến <code>2.3.4</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
+    <p>So sánh các bài học mô hình từ <code>2.3.1</code> đến <code>2.3.6</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab</h3>

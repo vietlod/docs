@@ -4,7 +4,7 @@ title: "6.5. Chuỗi thời gian phi tuyến, điểm gãy và bong bóng"
 sidebar_label: "6.5. Chuỗi thời gian phi tuyến, điểm gãy và bong bóng"
 sidebar_position: 5
 slug: /vietlod/chapter-06/group-6-5
-description: "Hướng dẫn thực hành Phần 6.5 — Chuỗi thời gian phi tuyến, điểm gãy và bong bóng thuộc Chương 6: so sánh và thực thi 5 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Phần 6.5 — Chuỗi thời gian phi tuyến, điểm gãy và bong bóng thuộc Chương 6: so sánh và thực thi 7 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
   - Phần 6.5 VietLOD
   - Chuỗi thời gian phi tuyến, điểm gãy và bong bóng
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Phần 6.5. Chuỗi thời gian phi tuyến, điểm gãy và bong bóng** thuộc [6. Chuỗi thời gian đơn biến, phi tuyến, điểm gãy và bong bóng](/vietlod/chapter-06) cung cấp quy trình thực hành từng bước cho **5 bài học mô hình kinh tế lượng** từ mục `6.5.1` đến `6.5.5`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 6.5](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-06-chuoi-thoi-gian-don-bien-phi-tuyen-diem-gay-va-bong-bong/nhom-6-5-nonlinear-breaks-bubbles) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+**Phần 6.5. Chuỗi thời gian phi tuyến, điểm gãy và bong bóng** thuộc [6. Chuỗi thời gian đơn biến, phi tuyến, điểm gãy và bong bóng](/vietlod/chapter-06) cung cấp quy trình thực hành từng bước cho **7 bài học mô hình kinh tế lượng** từ mục `6.5.1` đến `6.5.7`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 6.5](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-06-chuoi-thoi-gian-don-bien-phi-tuyen-diem-gay-va-bong-bong/nhom-6-5-nonlinear-breaks-bubbles) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="Hướng dẫn thực hành Phần 6.5: Chuỗi thời gian phi tuyến, điểm gãy và bong bóng trên Stata 18, R 4.x và Python 3.11+"
@@ -92,6 +92,10 @@ $$
 | **6.5.4** · [Kiểm định và ước lượng đa điểm gãy cấu trúc Bai–Perron](/vietlod/chapter-06/group-6-5/b105-bai-perron-break) | `bai_perron_break` | `regress y x1 x2 -> estat sbsingle` | `strucchange::breakpoints(y ~ x1 + x2, data = df, h = 0.15)` | `smf.ols('y ~ x1 * I(t >= t_break) + x2', data=df).fit(cov_type='HAC', cov_kwds={'maxlags': 4})` | <Available /> |
 | **6.5.5** · [Kiểm định đệ quy đuôi phải phát hiện bong bóng (GSADF)](/vietlod/chapter-06/group-6-5/b106-psy-bubble-gsadf) | `psy_bubble_gsadf` | `radf y, prefix(bsadf) boot(500)` | `exuber::radf(df$y, lag = 1)` | `adfuller(df['y'], maxlag=2, regression='c', autolag='AIC')` | <Available /> |
 
+
+| **6.5.6** · [Đồng liên kết ngưỡng và điều chỉnh sai số bất đối xứng Balke Fomby Enders Siklos](/vietlod/chapter-06/group-6-5/b223-nonlinear-threshold-ecm) | `nonlinear_threshold_ecm` | `regress y x1 x2 + asymmetric ECM regime F-test` | `tsDyn::TVECM / apt::ecmAsymFit` | `Long-run cointegration + M-TAR asymmetric adjustment ECM + symmetry F-test` | <Available /> |
+| **6.5.7** · [Hồi quy chuỗi thời gian hệ số hàm biến thiên Cai Fan Yao](/vietlod/chapter-06/group-6-5/b284-functional-coef-far-cai) | `functional_coef_far_cai` | `npregress kernel y x1 x2 / regress y x1 x2, vce(robust)` | `np::npscoef(txdat = x, tydat = y, tzdat = state)` | `Cai-Fan-Yao (2000) local-linear Epanechnikov functional-coefficient estimator + constancy F-test` | <Available /> |
+
 ## 6.5.4. Quy trình thực hành chuẩn cho Phần 6.5
 
 <Steps>
@@ -101,7 +105,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu</h3>
-    <p>So sánh các bài học mô hình từ <code>6.5.1</code> đến <code>6.5.5</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
+    <p>So sánh các bài học mô hình từ <code>6.5.1</code> đến <code>6.5.7</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab</h3>

@@ -4,7 +4,7 @@ title: "8.1. Conditional Heteroskedasticity ARCH and GARCH Family"
 sidebar_label: "8.1. Conditional Heteroskedasticity ARCH and GARCH Family"
 sidebar_position: 1
 slug: /vietlod/chapter-08/group-8-1
-description: "How-To User Guide for Methodological Part 8.1 — Conditional Heteroskedasticity ARCH and GARCH Family in Chapter 8: comparing and executing 7 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
+description: "How-To User Guide for Methodological Part 8.1 — Conditional Heteroskedasticity ARCH and GARCH Family in Chapter 8: comparing and executing 11 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
 keywords:
   - VietLOD Part 8.1
   - Conditional Heteroskedasticity ARCH and GARCH Family
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Methodological Part 8.1. Conditional Heteroskedasticity ARCH and GARCH Family** in [8. Financial Volatility, Asset Pricing and Systemic Risk](/en/vietlod/chapter-08) provides step-by-step How-To implementation guides for **7 econometric model lessons** spanning from Section `8.1.1` to `8.1.7`. Full theoretical derivations are available at [VietLOD Part 8.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-08-do-bien-dong-tai-chinh-dinh-gia-tai-san-va-rui-ro-he-thong/nhom-8-1-arch-family) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+**Methodological Part 8.1. Conditional Heteroskedasticity ARCH and GARCH Family** in [8. Financial Volatility, Asset Pricing and Systemic Risk](/en/vietlod/chapter-08) provides step-by-step How-To implementation guides for **11 econometric model lessons** spanning from Section `8.1.1` to `8.1.11`. Full theoretical derivations are available at [VietLOD Part 8.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-08-do-bien-dong-tai-chinh-dinh-gia-tai-san-va-rui-ro-he-thong/nhom-8-1-arch-family) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="How-To Guide for Part 8.1: Conditional Heteroskedasticity ARCH and GARCH Family in Stata 18, R 4.x, and Python 3.11+"
@@ -106,6 +106,12 @@ $$
 | **8.1.6** · [Asymmetric Power ARCH — APARCH](/en/vietlod/chapter-08/group-8-1/b127-aparch) | `aparch` | `arch ret, aparch(1) pgarch(1)` | `rugarch::ugarchfit(ugarchspec(variance.model = list(model = 'apARCH', garchOrder = c(1, 1))), ret)` | `arch_model(ret, vol='APARCH', p=1, o=1, q=1).fit(disp='off')` | <Available /> |
 | **8.1.7** · [Fractionally Integrated Long-Memory GARCH](/en/vietlod/chapter-08/group-8-1/b128-figarch) | `figarch` | `arch ret, figarch(1,1)` | `rugarch::ugarchfit(ugarchspec(variance.model = list(model = 'fiGARCH', garchOrder = c(1, 1))), df$ret)` | `arch_model(df['y'], vol='FIGARCH', p=1, q=1).fit(disp='off')` | <Available /> |
 
+
+| **8.1.8** · [Taylor Log Autoregressive Stochastic Volatility QML](/en/vietlod/chapter-08/group-8-1/b226-stochastic-volatility-taylor) | `stochastic_volatility_taylor` | `arch y x1, arch(1) garch(1) vce(robust)` | `stochvol::svsample` | `Harvey-Ruiz-Shephard log-chi2 QML state-space filter` | <Available /> |
+| **8.1.9** · [Markov Switching Regime GARCH Hamilton Susmel Gray](/en/vietlod/chapter-08/group-8-1/b227-ms-garch-regime) | `ms_garch_regime` | `mswitch dr y x1, states(2) varswitch` | `MSGARCH::FitML(MSGARCH::CreateSpec())` | `Hamilton EM 2-state Markov variance filter + intra-state ARCH` | <Available /> |
+| **8.1.10** · [HAR CJ Continuous Bipower and Jump Realized Volatility](/en/vietlod/chapter-08/group-8-1/b228-har-rv-cj-jump) | `har_rv_cj_jump` | `newey rv L.c_bv c_w c_m L.j_rv, lag(5)` | `highfrequency::HARmodel(type = 'HARCJ')` | `Barndorff-Nielsen-Shephard bipower + HAR-CJ Newey-West HAC` | <Available /> |
+| **8.1.11** · [Multiplicative Error Model Engle Gallo](/en/vietlod/chapter-08/group-8-1/b229-multiplicative-error-mem) | `multiplicative_error_mem` | `arch y x1, arch(1) garch(1) vce(robust)` | `MEM / Gamma GLM dynamic scale recursion` | `Gamma QML Multiplicative Error Model dynamic scale filter` | <Available /> |
+
 ## 8.1.4. Standard Implementation Workflow for Part 8.1
 
 <Steps>
@@ -115,7 +121,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Step 2. Select the Optimal Estimator for Your Error and Sample Structure</h3>
-    <p>Compare the estimators from <code>8.1.1</code> to <code>8.1.7</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
+    <p>Compare the estimators from <code>8.1.1</code> to <code>8.1.11</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab</h3>

@@ -1,12 +1,12 @@
 ---
-title: Catalog of 15 Model Families & 201+ Estimators
+title: Catalog of 16 Model Families & 306 Estimators
 sidebar_position: 0
-description: Comprehensive overview of the 15 model families, 58 sub-models, and 201+ econometric estimators supported across EcoData and EcoLab — selection map, Pre/Postestimation diagnostics, and .zip replication bundles.
+description: Comprehensive overview of the 16 model families, 61 sub-models, and 306 econometric estimators supported across EcoData and EcoLab — selection map, Pre/Postestimation diagnostics, and .zip replication bundles.
 ---
 
-# Catalog of 15 Model Families, 58 Sub-Models & 201+ Estimators
+# Catalog of 16 Model Families, 61 Sub-Models & 306 Estimators
 
-EcoData (`v3.82.0`) and EcoLab (`v1.5.0`) share a unified Tri-Engine econometrics catalog comprising **15 major model families**, **58 mathematical sub-models**, and **201+ core estimators** executing natively across **Python**, **R**, and **Stata 18 MP**. Use this page as your methodological roadmap to match data structures and identification designs to the right estimator family.
+EcoData (`v3.93.0`) and EcoLab (`v1.12.0`) share a unified Tri-Engine econometrics catalog comprising **16 major model families**, **61 mathematical sub-models**, and **306 estimators** executing natively across **Python**, **R**, and **Stata 18 MP**. Use this page as your methodological roadmap to match data structures and identification designs to the right estimator family.
 
 :::tip Method-Accurate Execution & 100% Reproducibility
 Every estimator executes its genuine econometric algorithm (strict Fail-Closed `422` enforcement with zero silent OLS fallback) and exports a `.zip` replication bundle containing Stata 18 MP (`.do`), R (`.R`), and Python (`.py`) scripts alongside `SHA256SUMS.txt`.
@@ -48,7 +48,7 @@ flowchart TD
 
 ---
 
-## Classification of 15 Model Families → 58 Sub-Models
+## Classification of 16 Model Families → 61 Sub-Models
 
 | # | Model Family | Representative Sub-Models | When to Prioritize |
 | :--- | :--- | :--- | :--- |
@@ -67,16 +67,17 @@ flowchart TD
 | 13 | **Structural IO & Demand Systems** | [AIDS, QUAIDS, Berry Logit IV & Random-Coefficients BLP](/ecolab/model/demand-systems-blp) | Price and expenditure elasticities in consumer demand systems and differentiated-product markets |
 | 14 | **Productivity, Frontier & TFP Estimation** | [SFA, DEA, Malmquist, Olley-Pakes, Levinsohn-Petrin, Wooldridge & ACF TFP](/ecolab/model/frontier-tfp-decomposition) | Technical efficiency benchmarking and structural firm-level total factor productivity estimation |
 | 15 | **Resampling, Econometric ML & High-Dimensional Inference** | [Wild Cluster Bootstrap, Double/Debiased ML, Causal Forest & PCA/Factor](/ecolab/model/bootstrap-highdim-inference) | Reliable inference under few clusters ($G < 30$), high-dimensional nuisance controls, and CATE |
+| 16 | **Multilevel, Mixed-Effects & Complex Survey** | Hierarchical LMM, Random Slopes, Mundlak Within-Between, Mixed Logit/Poisson GLMM, GEE, Log-Linear, Complex Survey `svy:` GLM, Calibration Raking, Fay-Herriot & BHF Small-Area | Nested multi-level observations, stratified `pweight`–`psu` household surveys, and small-area poverty estimation |
 
 ---
 
-## How Are the 201+ Core Estimators Formed?
+## How Are the 306 Estimators Formed?
 
-The **58 mathematical sub-models** capture distinct structural equations. Pairing each sub-model with its appropriate optimization routine and variance-covariance / resampling estimator yields **201+ core estimators** (continuously extensible via EcoData's 2-stage `B1–B4` curation pipeline):
+The **61 mathematical sub-models** capture distinct structural equations. Pairing each sub-model with its appropriate optimization routine and variance-covariance / resampling estimator yields **306 estimators** (continuously extensible via EcoData's 2-stage `B1–B4` curation pipeline):
 
 ```mermaid
 flowchart LR
-    M["58 Sub-Models (15 Families)"] --> O["Optimization Routine"]
+    M["61 Sub-Models (16 Families)"] --> O["Optimization Routine"]
     M --> S["Covariance & Resampling"]
     O --> O1["OLS / HDFE / FGLS"]
     O --> O2["MLE / QMLE / PPML / Cox"]
@@ -85,7 +86,7 @@ flowchart LR
     S --> S1["Homoskedastic & White HC0–HC3"]
     S --> S2["Newey-West HAC / Driscoll-Kraay / Conley Spatial"]
     S --> S3["One-Way / Multi-Way Cluster & Wild Cluster Bootstrap"]
-    O1 --> R["201+ Core Estimators"]
+    O1 --> R["306 Estimators"]
     O2 --> R
     O3 --> R
     O4 --> R

@@ -4,7 +4,7 @@ title: "9.3. Hồi quy gián đoạn, gãy khúc, tích tụ và hiệu ứng bi
 sidebar_label: "9.3. Hồi quy gián đoạn, gãy khúc, tích tụ và hiệu ứng biên"
 sidebar_position: 3
 slug: /vietlod/chapter-09/group-9-3
-description: "Hướng dẫn thực hành Phần 9.3 — Hồi quy gián đoạn, gãy khúc, tích tụ và hiệu ứng biên thuộc Chương 9: so sánh và thực thi 6 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Phần 9.3 — Hồi quy gián đoạn, gãy khúc, tích tụ và hiệu ứng biên thuộc Chương 9: so sánh và thực thi 7 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
   - Phần 9.3 VietLOD
   - Hồi quy gián đoạn, gãy khúc, tích tụ và hiệu ứng biên
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Phần 9.3. Hồi quy gián đoạn, gãy khúc, tích tụ và hiệu ứng biên** thuộc [9. Suy luận nhân quả và đánh giá tác động chính sách](/vietlod/chapter-09) cung cấp quy trình thực hành từng bước cho **6 bài học mô hình kinh tế lượng** từ mục `9.3.1` đến `9.3.6`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 9.3](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-09-suy-luan-nhan-qua-va-danh-gia-tac-dong-chinh-sach/nhom-9-3-rdd) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+**Phần 9.3. Hồi quy gián đoạn, gãy khúc, tích tụ và hiệu ứng biên** thuộc [9. Suy luận nhân quả và đánh giá tác động chính sách](/vietlod/chapter-09) cung cấp quy trình thực hành từng bước cho **7 bài học mô hình kinh tế lượng** từ mục `9.3.1` đến `9.3.7`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 9.3](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-09-suy-luan-nhan-qua-va-danh-gia-tac-dong-chinh-sach/nhom-9-3-rdd) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="Hướng dẫn thực hành Phần 9.3: Hồi quy gián đoạn, gãy khúc, tích tụ và hiệu ứng biên trên Stata 18, R 4.x và Python 3.11+"
@@ -99,6 +99,9 @@ $$
 | **9.3.5** · [Ước lượng tích tụ hành vi tại ngưỡng chính sách Saez–Kleven](/vietlod/chapter-09/group-9-3/b157-bunching-estimator) | `bunching_estimator` | `bunchit z_var, zstar(0) binwidth(0.1) poly(5)` | `bunching::bunchit(z_vector = df$z_var, zstar = 0, binwidth = 0.1, bins_l = 20, bins_r = 20, poly = 5)` | `smf.ols('bin_count ~ z_pow1 + z_pow2 + z_pow3 + excl_window', data=hist_df).fit()` | <Available /> |
 | **9.3.6** · [Hiệu ứng điều trị biên và biến công cụ cục bộ (MTE)](/vietlod/chapter-09/group-9-3/b158-marginal-treatment-effects) | `marginal_treatment_effects` | `mtefe y x1 x2 (d = z1 z2), polyn(2) bootreps(200)` | `ivmte::ivmte(data = df, target = 'ate', m0 = ~ x1 + u, m1 = ~ x1 + u, propensity = d ~ x1 + z1)` | `smf.ols('y ~ x1 + p_hat + p_hat_sq', data=df).fit(cov_type='HC1')` | <Available /> |
 
+
+| **9.3.7** · [Thiết kế gián đoạn hồi quy phân vị tại ngưỡng cắt Frandsen Frolich Melly](/vietlod/chapter-09/group-9-3/b239-quantile-rdd-frandsen) | `quantile_rdd_frandsen` | `sqreg y i.above##c.running, q(0.25 0.50 0.75)` | `quantreg::rq local linear cutoff interaction` | `Local bandwidth statsmodels.QuantReg threshold jump estimator` | <Available /> |
+
 ## 9.3.4. Quy trình thực hành chuẩn cho Phần 9.3
 
 <Steps>
@@ -108,7 +111,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu</h3>
-    <p>So sánh các bài học mô hình từ <code>9.3.1</code> đến <code>9.3.6</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
+    <p>So sánh các bài học mô hình từ <code>9.3.1</code> đến <code>9.3.7</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab</h3>

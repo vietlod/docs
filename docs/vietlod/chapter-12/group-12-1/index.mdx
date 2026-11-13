@@ -4,7 +4,7 @@ title: "12.1. Hệ phương trình đồng thời và hệ cầu cấu trúc"
 sidebar_label: "12.1. Hệ phương trình đồng thời và hệ cầu cấu trúc"
 sidebar_position: 1
 slug: /vietlod/chapter-12/group-12-1
-description: "Hướng dẫn thực hành Phần 12.1 — Hệ phương trình đồng thời và hệ cầu cấu trúc thuộc Chương 12: so sánh và thực thi 4 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Phần 12.1 — Hệ phương trình đồng thời và hệ cầu cấu trúc thuộc Chương 12: so sánh và thực thi 5 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
   - Phần 12.1 VietLOD
   - Hệ phương trình đồng thời và hệ cầu cấu trúc
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Phần 12.1. Hệ phương trình đồng thời và hệ cầu cấu trúc** thuộc [12. Hệ phương trình đồng thời, hệ cầu, kinh tế lượng Bayes và học máy](/vietlod/chapter-12) cung cấp quy trình thực hành từng bước cho **4 bài học mô hình kinh tế lượng** từ mục `12.1.1` đến `12.1.4`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 12.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-12-he-phuong-trinh-he-cau-kinh-te-luong-bayes-va-hoc-may/nhom-12-1-systems) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+**Phần 12.1. Hệ phương trình đồng thời và hệ cầu cấu trúc** thuộc [12. Hệ phương trình đồng thời, hệ cầu, kinh tế lượng Bayes và học máy](/vietlod/chapter-12) cung cấp quy trình thực hành từng bước cho **5 bài học mô hình kinh tế lượng** từ mục `12.1.1` đến `12.1.5`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 12.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-12-he-phuong-trinh-he-cau-kinh-te-luong-bayes-va-hoc-may/nhom-12-1-systems) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="Hướng dẫn thực hành Phần 12.1: Hệ phương trình đồng thời và hệ cầu cấu trúc trên Stata 18, R 4.x và Python 3.11+"
@@ -85,6 +85,9 @@ $$
 | **12.1.3** · [Ước lượng GMM cho hệ phương trình đồng thời dưới phương sai thay đổi](/vietlod/chapter-12/group-12-1/b181-system-gmm) | `system_gmm` | `gmm (eq1: y1 - {b0} - {b1}*y2 - {b2}*x1) (eq2: y2 - {g0} - {g1}*y1 - {g2}*z1), instruments(x1 z1) wmatrix(robust)` | `gmm::sysGmm(list(y1 ~ y2 + x1, y2 ~ y1 + z1), list(~ x1 + z1, ~ x1 + z1), data = df)` | `IVSystemGMM.from_formula({'eq1': 'y1 ~ 1 + x1 + [y2 ~ z1]', 'eq2': 'y2 ~ 1 + z1 + [y1 ~ x1]'}, data=df).fit()` | <Available /> |
 | **12.1.4** · [Hệ phương trình cầu hầu như lý tưởng bậc hai (QUAIDS)](/vietlod/chapter-12/group-12-1/b182-quaids-demand-system) | `quaids_demand_system` | `demandsys quaids w1 w2 w3, prices(p1 p2 p3) expenditure(exp_tot)` | `micEconAids::aidsEst(c('p1', 'p2', 'p3'), c('w1', 'w2', 'w3'), 'exp_tot', data = df)` | `SUR.from_formula(quaids_eqs, data=df).fit(cov_type='robust')` | <Available /> |
 
+
+| **12.1.5** · [Phương pháp mô men mô phỏng và suy diễn gián tiếp McFadden Gourieroux Monfort](/vietlod/chapter-12/group-12-1/b243-simulated-method-of-moments-smm) | `simulated_method_of_moments_smm` | `gmm (y - {b0} - {xb: x1 x2}), instruments(x1 x2) vce(robust)` | `momentfit::gmmFit / Indirect Inference simulator` | `CRN Simulated Method of Moments BFGS + (1 + 1/S) covariance adjustment` | <Available /> |
+
 ## 12.1.4. Quy trình thực hành chuẩn cho Phần 12.1
 
 <Steps>
@@ -94,7 +97,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu</h3>
-    <p>So sánh các bài học mô hình từ <code>12.1.1</code> đến <code>12.1.4</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
+    <p>So sánh các bài học mô hình từ <code>12.1.1</code> đến <code>12.1.5</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab</h3>

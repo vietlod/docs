@@ -4,7 +4,7 @@ title: "6.5. Nonlinear Time Series, Structural Breaks and Bubbles"
 sidebar_label: "6.5. Nonlinear Time Series, Structural Breaks and Bubbles"
 sidebar_position: 5
 slug: /vietlod/chapter-06/group-6-5
-description: "How-To User Guide for Methodological Part 6.5 — Nonlinear Time Series, Structural Breaks and Bubbles in Chapter 6: comparing and executing 5 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
+description: "How-To User Guide for Methodological Part 6.5 — Nonlinear Time Series, Structural Breaks and Bubbles in Chapter 6: comparing and executing 7 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
 keywords:
   - VietLOD Part 6.5
   - Nonlinear Time Series, Structural Breaks and Bubbles
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Methodological Part 6.5. Nonlinear Time Series, Structural Breaks and Bubbles** in [6. Univariate, Nonlinear, Structural Break and Bubble Time Series](/en/vietlod/chapter-06) provides step-by-step How-To implementation guides for **5 econometric model lessons** spanning from Section `6.5.1` to `6.5.5`. Full theoretical derivations are available at [VietLOD Part 6.5](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-06-chuoi-thoi-gian-don-bien-phi-tuyen-diem-gay-va-bong-bong/nhom-6-5-nonlinear-breaks-bubbles) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+**Methodological Part 6.5. Nonlinear Time Series, Structural Breaks and Bubbles** in [6. Univariate, Nonlinear, Structural Break and Bubble Time Series](/en/vietlod/chapter-06) provides step-by-step How-To implementation guides for **7 econometric model lessons** spanning from Section `6.5.1` to `6.5.7`. Full theoretical derivations are available at [VietLOD Part 6.5](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-06-chuoi-thoi-gian-don-bien-phi-tuyen-diem-gay-va-bong-bong/nhom-6-5-nonlinear-breaks-bubbles) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="How-To Guide for Part 6.5: Nonlinear Time Series, Structural Breaks and Bubbles in Stata 18, R 4.x, and Python 3.11+"
@@ -92,6 +92,10 @@ $$
 | **6.5.4** · [Bai-Perron Multiple Structural Breaks](/en/vietlod/chapter-06/group-6-5/b105-bai-perron-break) | `bai_perron_break` | `regress y x1 x2 -> estat sbsingle` | `strucchange::breakpoints(y ~ x1 + x2, data = df, h = 0.15)` | `smf.ols('y ~ x1 * I(t >= t_break) + x2', data=df).fit(cov_type='HAC', cov_kwds={'maxlags': 4})` | <Available /> |
 | **6.5.5** · [Phillips-Shi-Yu Recursive Bubble Detection](/en/vietlod/chapter-06/group-6-5/b106-psy-bubble-gsadf) | `psy_bubble_gsadf` | `radf y, prefix(bsadf) boot(500)` | `exuber::radf(df$y, lag = 1)` | `adfuller(df['y'], maxlag=2, regression='c', autolag='AIC')` | <Available /> |
 
+
+| **6.5.6** · [Threshold Cointegration and Momentum TAR Balke Fomby Enders Siklos](/en/vietlod/chapter-06/group-6-5/b223-nonlinear-threshold-ecm) | `nonlinear_threshold_ecm` | `regress y x1 x2 + asymmetric ECM regime F-test` | `tsDyn::TVECM / apt::ecmAsymFit` | `Long-run cointegration + M-TAR asymmetric adjustment ECM + symmetry F-test` | <Available /> |
+| **6.5.7** · [Functional Coefficient Time Series Regression](/en/vietlod/chapter-06/group-6-5/b284-functional-coef-far-cai) | `functional_coef_far_cai` | `npregress kernel y x1 x2 / regress y x1 x2, vce(robust)` | `np::npscoef(txdat = x, tydat = y, tzdat = state)` | `Cai-Fan-Yao (2000) local-linear Epanechnikov functional-coefficient estimator + constancy F-test` | <Available /> |
+
 ## 6.5.4. Standard Implementation Workflow for Part 6.5
 
 <Steps>
@@ -101,7 +105,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Step 2. Select the Optimal Estimator for Your Error and Sample Structure</h3>
-    <p>Compare the estimators from <code>6.5.1</code> to <code>6.5.5</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
+    <p>Compare the estimators from <code>6.5.1</code> to <code>6.5.7</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab</h3>

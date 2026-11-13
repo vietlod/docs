@@ -1,0 +1,82 @@
+---
+id: index
+title: "16.3. Complex Survey Design, Calibration and Small-Area Estimation"
+sidebar_label: "16.3. Complex Survey Design, Calibration and Small-Area Estimation"
+sidebar_position: 3
+slug: /vietlod/chapter-16/group-16-3
+description: "How-To User Guide for Methodological Part 16.3 — Complex Survey Design, Calibration and Small-Area Estimation in Chapter 16: comparing and executing 4 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
+keywords:
+  - VietLOD Part 16.3
+  - "Complex Survey Design, Calibration and Small-Area Estimation"
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# 16.3. Complex Survey Design, Calibration and Small-Area Estimation
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Methodological Part 16.3. Complex Survey Design, Calibration and Small-Area Estimation** in [16. Multilevel, Mixed-Effects and Complex Survey Econometrics](/en/vietlod/chapter-16) provides step-by-step How-To implementation guides for **4 econometric model lessons** spanning from Section `16.3.1` to `16.3.4` alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="How-To Guide for Part 16.3: Complex Survey Design, Calibration and Small-Area Estimation in Stata 18, R 4.x, and Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 16.3.1. Methodological Overview and Structural Equations
+
+- **Methodological Focus**: Consistent estimation and design-based / model-based inference for **Complex Survey Design, Calibration and Small-Area Estimation** within **Multilevel, Mixed-Effects and Complex Survey Econometrics**.
+- **Mandatory Post-Estimation Diagnostics**: Intraclass Correlation Coefficient ICC, boundary Chibar2 likelihood-ratio test, Kish Design Effect DEFF, and DuMouchel–Duncan survey weight exogeneity test.
+
+$$
+Y_{ij} = X_{ij}^\top \beta + Z_{ij}^\top u_j + \varepsilon_{ij}, \quad u_j \sim \mathcal{N}(0, \Sigma_u), \quad \varepsilon_{ij} \sim \mathcal{N}(0, \sigma_\varepsilon^2)
+$$
+
+$$
+\hat{\beta}_{\text{WLS}} = \left(\sum_{h=1}^H \sum_{c=1}^{C_h} \sum_{i=1}^{n_{hc}} w_{hci} X_{hci} X_{hci}^\top\right)^{-1} \left(\sum_{h=1}^H \sum_{c=1}^{C_h} \sum_{i=1}^{n_{hc}} w_{hci} X_{hci} Y_{hci}\right)
+$$
+
+<FeatureNotAvailable
+  note="Never ignore inverse-probability sampling weights pweight, strata, and primary sampling units PSU in complex household surveys such as VHLSS or DHS."
+/>
+
+## 16.3.2. Econometric Model Lessons in Part 16.3
+
+<FeatureCards
+  features={[
+    {
+      title: '16.3.1. Complex Survey Design Based Regression with Taylor Linearization',
+      description: 'Estimates superpopulation census slopes using inverse-probability sampling weights (pweight) and Binder first-order Taylor linearization acr...',
+      link: '/en/vietlod/chapter-16/group-16-3/b260-survey-taylor-linearized-reg',
+      badge: '16.3.1 · survey_taylor_linearized_reg'
+    },
+    {
+      title: '16.3.2. Generalized Regression Estimator and Raking Survey Calibration',
+      description: 'Calibrates base design weights via minimum chi-square distance / exponential raking to match known population auxiliary totals, reducing non...',
+      link: '/en/vietlod/chapter-16/group-16-3/b261-survey-calibration-greg',
+      badge: '16.3.2 · survey_calibration_greg'
+    },
+    {
+      title: '16.3.3. Balanced Repeated Replication and Delete a Group Jackknife Survey Regression',
+      description: 'Computes design-consistent variance matrices across delete-a-group Jackknife (JK1/JKn) and Fay Balanced Repeated Replication weight columns...',
+      link: '/en/vietlod/chapter-16/group-16-3/b262-survey-replicate-brr-jk',
+      badge: '16.3.3 · survey_replicate_brr_jk'
+    },
+    {
+      title: '16.3.4. Fay Herriot Empirical Best Linear Unbiased Small Area Estimator',
+      description: 'Combines noisy direct survey domain estimates with auxiliary census/satellite covariates via empirical Bayes shrinkage gamma_i = sigma_v^2 /...',
+      link: '/en/vietlod/chapter-16/group-16-3/b263-fay-herriot-small-area',
+      badge: '16.3.4 · fay_herriot_small_area'
+    }
+  ]}
+/>
+
+## 16.3.3. Comparative Execution Syntax Across Stata 18, R 4.x, and Python 3.11+
+
+| Section & Model Title | Estimator Key | Stata 18 MP Syntax | R 4.x Syntax | Python 3.11+ Syntax | Support |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **16.3.1** · [Complex Survey Design Based Regression with Taylor Linearization](/en/vietlod/chapter-16/group-16-3/b260-survey-taylor-linearized-reg) | `survey_taylor_linearized_reg` | `svyset psu [pweight=pw], strata(strata) & svy: regress y x1 x2` | `survey::svyglm(y ~ x1 + x2, design = svydesign(ids = ~psu, strata = ~strata, weights = ~pw))` | `Horvitz-Thompson WLS + Binder (1983) stratified PSU Taylor-series linearized covariance` | <Available /> |
+| **16.3.2** · [Generalized Regression Estimator and Raking Survey Calibration](/en/vietlod/chapter-16/group-16-3/b261-survey-calibration-greg) | `survey_calibration_greg` | `svycal regress x1 x2, generate(w_cal) totals(pop_mat) & regress y x1 x2 [pw=w_cal], vce(robust)` | `survey::calibrate(design, formula = ~x1 + x2, population = pop_totals) + survey::svyglm` | `Deville-Sarndal g-weight chi-square / raking calibration + GREG linearized sandwich covariance` | <Available /> |
+| **16.3.3** · [Balanced Repeated Replication and Delete a Group Jackknife Survey Regression](/en/vietlod/chapter-16/group-16-3/b262-survey-replicate-brr-jk) | `survey_replicate_brr_jk` | `jackknife: regress y x1 x2` | `survey::as.svrepdesign(design, type = 'JKn') + survey::svyglm` | `Delete-a-group PSU Jackknife / Fay-BRR replicate weight covariance engine` | <Available /> |
+| **16.3.4** · [Fay Herriot Empirical Best Linear Unbiased Small Area Estimator](/en/vietlod/chapter-16/group-16-3/b263-fay-herriot-small-area) | `fay_herriot_small_area` | `regress y x1 x2, vce(robust) + Fay-Herriot empirical Bayes shrinkage` | `sae::mseFH(y ~ x1 + x2, vardir = D_i)` | `Fay-Herriot moment/REML variance solver + GLS beta + EBLUP shrinkage & Prasad-Rao MSE` | <Available /> |

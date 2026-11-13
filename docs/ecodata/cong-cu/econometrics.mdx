@@ -1,16 +1,16 @@
 ---
 id: econometrics
-title: Động cơ kinh tế lượng 15 họ mô hình, 58 mô hình con và 201+ bộ ước lượng
-description: Hướng dẫn sử dụng động cơ Kinh tế lượng của EcoData (v3.82.0) với 15 họ mô hình, 58 mô hình con và 201+ bộ ước lượng chạy đồng thời trên Python, R và Stata 18 MP kèm kiểm định tiền/hậu ước lượng và gói mã tái lập .zip.
+title: Động cơ kinh tế lượng 16 họ mô hình, 61 mô hình con và 306 bộ ước lượng
+description: Hướng dẫn sử dụng động cơ Kinh tế lượng của EcoData (v3.93.0) với 16 họ mô hình, 61 mô hình con và 306 bộ ước lượng chạy đồng thời trên Python, R và Stata 18 MP kèm kiểm định tiền/hậu ước lượng và gói mã tái lập .zip.
 ---
 
-# Động cơ kinh tế lượng 15 họ mô hình, 58 mô hình con và 201+ bộ ước lượng
+# Động cơ kinh tế lượng 16 họ mô hình, 61 mô hình con và 306 bộ ước lượng
 
-Công cụ Kinh tế lượng của EcoData (`v3.82.0`) cho phép chuẩn bị mẫu, kiểm định tiền ước lượng, thực thi ước lượng chuẩn xác theo phương pháp, kiểm định hậu ước lượng và xuất gói mã tái lập `.zip` ngay trên trình duyệt web hoặc qua máy chủ **Unified EcoData MCP Server** (`https://ecodata.io.vn/mcp`).
+Công cụ Kinh tế lượng của EcoData (`v3.93.0`) cho phép chuẩn bị mẫu, kiểm định tiền ước lượng, thực thi ước lượng chuẩn xác theo phương pháp, kiểm định hậu ước lượng và xuất gói mã tái lập `.zip` ngay trên trình duyệt web hoặc qua máy chủ **Unified EcoData MCP Server** (`https://ecodata.io.vn/mcp`).
 
-## Kiến trúc 15 họ mô hình, 58 mô hình con và 201+ bộ ước lượng cốt lõi
+## Kiến trúc 16 họ mô hình, 61 mô hình con và 306 bộ ước lượng cốt lõi
 
-EcoData mở rộng danh mục kinh tế lượng lên **15 họ phân tích chuyên sâu**, **58 mô hình con** và **201+ bộ ước lượng cốt lõi** bao phủ toàn diện các phương pháp xuất bản học thuật giai đoạn 2021–2026:
+EcoData mở rộng danh mục kinh tế lượng lên **16 họ phân tích chuyên sâu**, **61 mô hình con** và **306 bộ ước lượng** bao phủ toàn diện các phương pháp xuất bản học thuật giai đoạn 2021–2026:
 
 | Mã họ | Họ mô hình phân tích | Mô hình con và phương pháp tiêu biểu | Bối cảnh nghiên cứu phù hợp |
 | :--- | :--- | :--- | :--- |
@@ -29,8 +29,9 @@ EcoData mở rộng danh mục kinh tế lượng lên **15 họ phân tích chu
 | **13** | **Tổ chức ngành cấu trúc & hệ thống cầu** | Deaton-Muellbauer AIDS, Banks-Blundell-Lewbel QUAIDS, Berry Logit Demand IV, Berry-Levinsohn-Pakes Random-Coefficients BLP (`pyblp`) | Độ co giãn giá – chi tiêu hộ gia đình (VHLSS) và ước lượng cầu sản phẩm phân biệt |
 | **14** | **Biên hiệu quả, năng suất & TFP** | Aigner-Lovell-Schmidt SFA, Battese-Coelli Panel SFA, Charnes-Cooper-Rhodes & Banker-Charnes-Cooper DEA, Chỉ số Malmquist, Olley-Pakes, Levinsohn-Petrin, Wooldridge & Ackerberg-Caves-Frazer (ACF) TFP | Đo lường hiệu quả kỹ thuật ngân hàng/doanh nghiệp và năng suất nhân tố tổng hợp cấp doanh nghiệp |
 | **15** | **Tái lấy mẫu, học máy nhân quả & nhiều chiều** | Nonparametric/Pairs, Moving-Block, Panel Cluster & Roodman-MacKinnon-Nielsen-Webb Wild Cluster Bootstrap, Chernozhukov Double/Debiased ML, Athey-Wager Causal Forest, PCA/Factor/K-Means, Benchmark Predictive ML | Suy diễn vững với số cụm ít ($G < 30$), kiểm soát nhiễu nhiều chiều và ước lượng CATE |
+| **16** | **Đa cấp, hiệu ứng hỗn hợp & khảo sát phức hợp** | Hierarchical Linear Mixed (`mixed` / `lmer`), Random Slopes, Mundlak Within-Between, 3-Level LMM, Mixed Logit & Poisson GLMM, Liang-Zeger GEE, Log-Linear Contingency, Complex Survey GLM (`svy:`), Calibration Raking, Fay-Herriot & Unit-Level BHF Small-Area | Dữ liệu phân cấp cá nhân – hộ – xã – tỉnh, khảo sát chọn mẫu phức hợp `pweight` – `psu` (VHLSS) và ước lượng bản đồ nghèo vùng nhỏ |
 
-### Cơ chế hình thành 201+ bộ ước lượng và nguyên tắc Fail-Closed
+### Cơ chế hình thành 306 bộ ước lượng và nguyên tắc Fail-Closed
 
 Mỗi mô hình con trong 58 đặc tả toán học được kết hợp chặt chẽ với phương pháp tối ưu hóa đặc thù (OLS/HDFE, FGLS, MLE/QMLE, 1-step/2-step Windmeijer GMM, Sieve/Spline, Linear Programming DEA, Kontraction Mapping BLP) và cấu trúc ma trận hiệp phương sai sai số chuẩn phù hợp (Homoskedastic, White Robust HC0–HC3, Newey-West HAC, Driscoll-Kraay, Conley Spatial HAC, Clustered một chiều/đa chiều và Wild Cluster Bootstrap).
 
@@ -51,7 +52,7 @@ EcoData tách riêng hai nhóm kiểm định chẩn đoán để nhà nghiên c
 
 1. Mở công cụ **Kinh tế lượng** trên giao diện web hoặc gọi công cụ MCP `run_econometrics_model` / `run_complete_econometric_study`.
 2. Chạy bước **Kiểm định tiền ước lượng** trên tập biến mục tiêu (hỗ trợ cả chế độ địa giới `boundary_mode="34"` và `"63"`).
-3. Chọn một trong **15 họ mô hình** và bộ ước lượng cụ thể trong danh mục **201+ estimators**.
+3. Chọn một trong **16 họ mô hình** và bộ ước lượng cụ thể trong danh mục **306 estimators**.
 4. Khai báo biến phụ thuộc, biến giải thích, biến nội sinh/công cụ, biến thực thể – thời gian và cấu trúc sai số chuẩn.
 5. Thực thi đồng thời trên **Python**, **R** và **Stata 18 MP** để đối soát chéo hệ số, sai số chuẩn, trị số thống kê $t/z$, trị số $p$ và toàn bộ bảng **Kiểm định hậu ước lượng**.
 6. Chuyển đổi tức thời bảng xuất bản giữa 5 chuẩn quốc tế (**APA 7th**, **Chicago 17th**, **Harvard**, **IEEE**, **MLA 9th**) và tải gói tái lập **`.zip`** bao gồm mã nguồn `.do` (Stata 18 MP), `.R`, `.py`, tập dữ liệu sạch kèm tệp băm kiểm chứng toàn vẹn **`SHA256SUMS.txt`**.

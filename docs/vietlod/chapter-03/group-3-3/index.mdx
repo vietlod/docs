@@ -4,7 +4,7 @@ title: "3.3. Lựa chọn có thứ tự"
 sidebar_label: "3.3. Lựa chọn có thứ tự"
 sidebar_position: 3
 slug: /vietlod/chapter-03/group-3-3
-description: "Hướng dẫn thực hành Phần 3.3 — Lựa chọn có thứ tự thuộc Chương 3: so sánh và thực thi 2 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Phần 3.3 — Lựa chọn có thứ tự thuộc Chương 3: so sánh và thực thi 3 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
   - Phần 3.3 VietLOD
   - Lựa chọn có thứ tự
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Phần 3.3. Lựa chọn có thứ tự** thuộc [3. Mô hình lựa chọn rời rạc và cầu cấu trúc](/vietlod/chapter-03) cung cấp quy trình thực hành từng bước cho **2 bài học mô hình kinh tế lượng** từ mục `3.3.1` đến `3.3.2`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 3.3](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-03-mo-hinh-lua-chon-roi-rac-va-cau-cau-truc/nhom-3-3-ordered) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+**Phần 3.3. Lựa chọn có thứ tự** thuộc [3. Mô hình lựa chọn rời rạc và cầu cấu trúc](/vietlod/chapter-03) cung cấp quy trình thực hành từng bước cho **3 bài học mô hình kinh tế lượng** từ mục `3.3.1` đến `3.3.3`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 3.3](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-03-mo-hinh-lua-chon-roi-rac-va-cau-cau-truc/nhom-3-3-ordered) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="Hướng dẫn thực hành Phần 3.3: Lựa chọn có thứ tự trên Stata 18, R 4.x và Python 3.11+"
@@ -71,6 +71,9 @@ $$
 | **3.3.1** · [Mô hình Logit thứ bậc và giả định tỷ lệ cược tỷ lệ](/vietlod/chapter-03/group-3-3/b036-ordered-logit) | `ordered_logit` | `ologit y_ord x1 x2, vce(robust)` | `MASS::polr(factor(y_ord) ~ x1 + x2, data = df, method = 'logistic')` | `OrderedModel(df['y_ord'], df[['x1', 'x2']], distr='logit').fit(method='bfgs')` | <Available /> |
 | **3.3.2** · [Mô hình Probit thứ bậc](/vietlod/chapter-03/group-3-3/b037-ordered-probit) | `ordered_probit` | `oprobit y_ord x1 x2, vce(robust)` | `MASS::polr(factor(y_ord) ~ x1 + x2, data = df, method = 'probit')` | `OrderedModel(df['y_ord'], df[['x1', 'x2']], distr='probit').fit(method='bfgs')` | <Available /> |
 
+
+| **3.3.3** · [Mô hình Logit định khuôn giảm chiều thứ bậc Anderson](/vietlod/chapter-03/group-3-3/b272-stereotype-logit-anderson) | `stereotype_logit_anderson` | `slogit y x1 x2, vce(robust)` | `VGAM::rrvglm(y ~ x1 + x2, multinomial, Rank = 1)` | `Anderson (1984) reduced-rank stereotype logistic MLE + distinguishability Wald test` | <Available /> |
+
 ## 3.3.4. Quy trình thực hành chuẩn cho Phần 3.3
 
 <Steps>
@@ -80,7 +83,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu</h3>
-    <p>So sánh các bài học mô hình từ <code>3.3.1</code> đến <code>3.3.2</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
+    <p>So sánh các bài học mô hình từ <code>3.3.1</code> đến <code>3.3.3</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab</h3>

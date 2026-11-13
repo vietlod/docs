@@ -4,7 +4,7 @@ title: "9.1. Propensity Matching and Covariate Balancing"
 sidebar_label: "9.1. Propensity Matching and Covariate Balancing"
 sidebar_position: 1
 slug: /vietlod/chapter-09/group-9-1
-description: "How-To User Guide for Methodological Part 9.1 — Propensity Matching and Covariate Balancing in Chapter 9: comparing and executing 2 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
+description: "How-To User Guide for Methodological Part 9.1 — Propensity Matching and Covariate Balancing in Chapter 9: comparing and executing 4 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
 keywords:
   - VietLOD Part 9.1
   - Propensity Matching and Covariate Balancing
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Methodological Part 9.1. Propensity Matching and Covariate Balancing** in [9. Causal Inference and Modern Policy Evaluation](/en/vietlod/chapter-09) provides step-by-step How-To implementation guides for **2 econometric model lessons** spanning from Section `9.1.1` to `9.1.2`. Full theoretical derivations are available at [VietLOD Part 9.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-09-suy-luan-nhan-qua-va-danh-gia-tac-dong-chinh-sach/nhom-9-1-matching) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+**Methodological Part 9.1. Propensity Matching and Covariate Balancing** in [9. Causal Inference and Modern Policy Evaluation](/en/vietlod/chapter-09) provides step-by-step How-To implementation guides for **4 econometric model lessons** spanning from Section `9.1.1` to `9.1.4`. Full theoretical derivations are available at [VietLOD Part 9.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-09-suy-luan-nhan-qua-va-danh-gia-tac-dong-chinh-sach/nhom-9-1-matching) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="How-To Guide for Part 9.1: Propensity Matching and Covariate Balancing in Stata 18, R 4.x, and Python 3.11+"
@@ -71,6 +71,10 @@ $$
 | **9.1.1** · [Propensity Score Matching — PSM](/en/vietlod/chapter-09/group-9-1/b136-propensity-score-matching) | `propensity_score_matching` | `teffects psmatch (y) (treat x1 x2), atet` | `MatchIt::matchit(treat ~ x1 + x2, data = df, method = 'nearest')` | `smf.logit('treat ~ x1 + x2', data=df).fit()` | <Available /> |
 | **9.1.2** · [Hainmueller Entropy Balancing](/en/vietlod/chapter-09/group-9-1/b137-entropy-balancing) | `entropy_balancing` | `ebalance treat x1 x2 -> regress y treat [pweight = _webal]` | `ebal::ebalance(Treatment = df$treat, X = as.matrix(df[, c('x1', 'x2')]))` | `smf.wls('y ~ treat + x1 + x2', data=df, weights=w_ebal).fit(cov_type='HC1')` | <Available /> |
 
+
+| **9.1.3** · [Generalized Propensity Score Continuous Treatment Dose Response Hirano Imbens](/en/vietlod/chapter-09/group-9-1/b236-generalized-propensity-score-gps) | `generalized_propensity_score_gps` | `doseresponse / regress y c.treat##c._gps x1, vce(robust)` | `CausalGPS::generate_pseudo_pop / hi_estimate` | `Conditional density GPS r(T,X) + polynomial dose-response surface` | <Available /> |
+| **9.1.4** · [Rosenbaum Sensitivity Bounds for Hidden Unobserved Confounding](/en/vietlod/chapter-09/group-9-1/b237-rosenbaum-sensitivity-bounds) | `rosenbaum_sensitivity_bounds` | `rbounds delta, gamma(1(0.25)2)` | `rbounds::psens / rbounds::hlsens` | `Treatment effect + Rosenbaum Gamma = {1.0, 1.25, 1.5, 2.0} upper p-bounds` | <Available /> |
+
 ## 9.1.4. Standard Implementation Workflow for Part 9.1
 
 <Steps>
@@ -80,7 +84,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Step 2. Select the Optimal Estimator for Your Error and Sample Structure</h3>
-    <p>Compare the estimators from <code>9.1.1</code> to <code>9.1.2</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
+    <p>Compare the estimators from <code>9.1.1</code> to <code>9.1.4</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab</h3>

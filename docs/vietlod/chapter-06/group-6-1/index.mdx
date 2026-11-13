@@ -4,7 +4,7 @@ title: "6.1. Kiểm định nghiệm đơn vị và đồng tích hợp"
 sidebar_label: "6.1. Kiểm định nghiệm đơn vị và đồng tích hợp"
 sidebar_position: 1
 slug: /vietlod/chapter-06/group-6-1
-description: "Hướng dẫn thực hành Phần 6.1 — Kiểm định nghiệm đơn vị và đồng tích hợp thuộc Chương 6: so sánh và thực thi 6 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Phần 6.1 — Kiểm định nghiệm đơn vị và đồng tích hợp thuộc Chương 6: so sánh và thực thi 7 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
   - Phần 6.1 VietLOD
   - Kiểm định nghiệm đơn vị và đồng tích hợp
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Phần 6.1. Kiểm định nghiệm đơn vị và đồng tích hợp** thuộc [6. Chuỗi thời gian đơn biến, phi tuyến, điểm gãy và bong bóng](/vietlod/chapter-06) cung cấp quy trình thực hành từng bước cho **6 bài học mô hình kinh tế lượng** từ mục `6.1.1` đến `6.1.6`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 6.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-06-chuoi-thoi-gian-don-bien-phi-tuyen-diem-gay-va-bong-bong/nhom-6-1-unit-root-cointegration) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+**Phần 6.1. Kiểm định nghiệm đơn vị và đồng tích hợp** thuộc [6. Chuỗi thời gian đơn biến, phi tuyến, điểm gãy và bong bóng](/vietlod/chapter-06) cung cấp quy trình thực hành từng bước cho **7 bài học mô hình kinh tế lượng** từ mục `6.1.1` đến `6.1.7`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 6.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-06-chuoi-thoi-gian-don-bien-phi-tuyen-diem-gay-va-bong-bong/nhom-6-1-unit-root-cointegration) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="Hướng dẫn thực hành Phần 6.1: Kiểm định nghiệm đơn vị và đồng tích hợp trên Stata 18, R 4.x và Python 3.11+"
@@ -99,6 +99,9 @@ $$
 | **6.1.5** · [Kiểm định nghiệm đơn vị có điểm gãy nội sinh Zivot–Andrews](/vietlod/chapter-06/group-6-1/b088-zivot-andrews) | `zivot_andrews` | `zandrews y, break(both) lagmethod(AIC)` | `urca::ur.za(df$y, model = 'both', lag = 2)` | `ZivotAndrews(df['y'], trend='ct', method='aic')` | <Available /> |
 | **6.1.6** · [Kiểm định đồng tích hợp đa biến theo vết và trị riêng Johansen](/vietlod/chapter-06/group-6-1/b089-johansen) | `johansen` | `vecrank y x1 x2, trend(constant) lags(2)` | `urca::ca.jo(df[, c('y', 'x1', 'x2')], type = 'trace', K = 2)` | `coint_johansen(df[['y', 'x1', 'x2']], det_order=0, k_ar_diff=1)` | <Available /> |
 
+
+| **6.1.7** · [Kiểm định nghiệm đơn vị khử xu hướng GLS Elliott Rothenberg Stock và Ng Perron](/vietlod/chapter-06/group-6-1/b282-ers-dfgls-ng-perron) | `ers_dfgls_ng_perron` | `dfgls y, maxlag(4)` | `urca::ur.ers(y, type = 'DF-GLS', model = 'trend')` | `arch.unitroot.DFGLS + Ng-Perron MZa/MZt/MSB/MPT spectral GLS autoregression` | <Available /> |
+
 ## 6.1.4. Quy trình thực hành chuẩn cho Phần 6.1
 
 <Steps>
@@ -108,7 +111,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu</h3>
-    <p>So sánh các bài học mô hình từ <code>6.1.1</code> đến <code>6.1.6</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
+    <p>So sánh các bài học mô hình từ <code>6.1.1</code> đến <code>6.1.7</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab</h3>

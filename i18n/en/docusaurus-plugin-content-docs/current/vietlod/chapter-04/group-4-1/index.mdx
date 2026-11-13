@@ -4,7 +4,7 @@ title: "4.1. Baseline Count and Trade Gravity Models"
 sidebar_label: "4.1. Baseline Count and Trade Gravity Models"
 sidebar_position: 1
 slug: /vietlod/chapter-04/group-4-1
-description: "How-To User Guide for Methodological Part 4.1 — Baseline Count and Trade Gravity Models in Chapter 4: comparing and executing 4 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
+description: "How-To User Guide for Methodological Part 4.1 — Baseline Count and Trade Gravity Models in Chapter 4: comparing and executing 6 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
 keywords:
   - VietLOD Part 4.1
   - Baseline Count and Trade Gravity Models
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Methodological Part 4.1. Baseline Count and Trade Gravity Models** in [4. Count Data, Trade Gravity and Limited Dependent Variable Models](/en/vietlod/chapter-04) provides step-by-step How-To implementation guides for **4 econometric model lessons** spanning from Section `4.1.1` to `4.1.4`. Full theoretical derivations are available at [VietLOD Part 4.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-04-mo-hinh-dem-luc-hap-dan-va-bien-phu-thuoc-gioi-han/nhom-4-1-count) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+**Methodological Part 4.1. Baseline Count and Trade Gravity Models** in [4. Count Data, Trade Gravity and Limited Dependent Variable Models](/en/vietlod/chapter-04) provides step-by-step How-To implementation guides for **6 econometric model lessons** spanning from Section `4.1.1` to `4.1.6`. Full theoretical derivations are available at [VietLOD Part 4.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-04-mo-hinh-dem-luc-hap-dan-va-bien-phu-thuoc-gioi-han/nhom-4-1-count) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="How-To Guide for Part 4.1: Baseline Count and Trade Gravity Models in Stata 18, R 4.x, and Python 3.11+"
@@ -85,6 +85,10 @@ $$
 | **4.1.3** · [Generalized Poisson Count Regression](/en/vietlod/chapter-04/group-4-1/b043-generalized-poisson) | `generalized_poisson` | `gpoisson y_count x1 x2, vce(robust)` | `glmmTMB::glmmTMB(y_count ~ x1 + x2, family = genpois, data = df)` | `GeneralizedPoisson(endog, exog).fit()` | <Available /> |
 | **4.1.4** · [Poisson Pseudo-Maximum Likelihood with High-Dimensional Fixed Effects](/en/vietlod/chapter-04/group-4-1/b044-ppml-hdfe) | `ppml_hdfe` | `ppmlhdfe trade rta x1, absorb(exp_time imp_time pair_id) cluster(pair_id)` | `fixest::fepois(trade ~ rta + x1 \| exp_time + imp_time + pair_id, cluster = ~pair_id, data = df)` | `pyfixest.fepois('trade ~ rta + x1 \| exp_time + imp_time + pair_id', data=df, vcov={'CRV1': 'pair_id'})` | <Available /> |
 
+
+| **4.1.5** · [Tweedie and Inverse Gaussian Compound Poisson Gamma GLM](/en/vietlod/chapter-04/group-4-1/b274-inverse-gaussian-tweedie-glm) | `inverse_gaussian_tweedie_glm` | `glm y x1 x2, family(gamma) link(log) vce(robust)` | `stats::glm(y ~ x1 + x2, family = Gamma(link = 'log')) / statmod::tweedie` | `statsmodels.GLM(y, X, family=sm.families.Tweedie(link=Log(), var_power=1.5)).fit(cov_type='HC1')` | <Available /> |
+| **4.1.6** · [Zero Truncated Poisson and Negative Binomial Regression](/en/vietlod/chapter-04/group-4-1/b275-zero-truncated-count-ztp) | `zero_truncated_count_ztp` | `tpoisson y x1 x2, ll(0) vce(robust)` | `countreg::zerotrunc(y ~ x1 + x2, dist = 'poisson') / VGAM::pospoisson` | `Exact Zero-Truncated Poisson log-likelihood BFGS MLE + Huber-White sandwich SE` | <Available /> |
+
 ## 4.1.4. Standard Implementation Workflow for Part 4.1
 
 <Steps>
@@ -94,7 +98,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Step 2. Select the Optimal Estimator for Your Error and Sample Structure</h3>
-    <p>Compare the estimators from <code>4.1.1</code> to <code>4.1.4</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
+    <p>Compare the estimators from <code>4.1.1</code> to <code>4.1.6</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab</h3>

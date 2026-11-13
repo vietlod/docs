@@ -4,7 +4,7 @@ title: "3.1. Lựa chọn nhị phân"
 sidebar_label: "3.1. Lựa chọn nhị phân"
 sidebar_position: 1
 slug: /vietlod/chapter-03/group-3-1
-description: "Hướng dẫn thực hành Phần 3.1 — Lựa chọn nhị phân thuộc Chương 3: so sánh và thực thi 5 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Phần 3.1 — Lựa chọn nhị phân thuộc Chương 3: so sánh và thực thi 7 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
   - Phần 3.1 VietLOD
   - Lựa chọn nhị phân
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Phần 3.1. Lựa chọn nhị phân** thuộc [3. Mô hình lựa chọn rời rạc và cầu cấu trúc](/vietlod/chapter-03) cung cấp quy trình thực hành từng bước cho **5 bài học mô hình kinh tế lượng** từ mục `3.1.1` đến `3.1.5`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 3.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-03-mo-hinh-lua-chon-roi-rac-va-cau-cau-truc/nhom-3-1-binary) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+**Phần 3.1. Lựa chọn nhị phân** thuộc [3. Mô hình lựa chọn rời rạc và cầu cấu trúc](/vietlod/chapter-03) cung cấp quy trình thực hành từng bước cho **7 bài học mô hình kinh tế lượng** từ mục `3.1.1` đến `3.1.7`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 3.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-03-mo-hinh-lua-chon-roi-rac-va-cau-cau-truc/nhom-3-1-binary) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="Hướng dẫn thực hành Phần 3.1: Lựa chọn nhị phân trên Stata 18, R 4.x và Python 3.11+"
@@ -92,6 +92,10 @@ $$
 | **3.1.4** · [Mô hình Probit nhị phân có phương sai thay đổi](/vietlod/chapter-03/group-3-1/b030-heteroskedastic-probit) | `heteroskedastic_probit` | `hetprobit y_bin x1 x2, het(z1) vce(robust)` | `glmx::hetglm(y_bin ~ x1 + x2 \| z1, family = binomial(link = 'probit'), data = df)` | `smf.probit('y_bin ~ x1 + x2', data=df).fit(cov_type='HC1')` | <Available /> |
 | **3.1.5** · [Mô hình Probit hai phương trình đồng thời và đệ quy](/vietlod/chapter-03/group-3-1/b031-bivariate-probit) | `bivariate_probit` | `biprobit (y1 = y2 x1) (y2 = z1 x1), vce(robust)` | `GJRM::gjrm(list(y1 ~ y2 + x1, y2 ~ z1 + x1), margins = c('probit', 'probit'), Model = 'B', data = df)` | `smf.probit('y_bin ~ x1 + x2', data=df).fit(cov_type='HC1')` | <Available /> |
 
+
+| **3.1.6** · [Ước lượng điểm số cực đại bán tham số Manski Horowitz](/vietlod/chapter-03/group-3-1/b211-maximum-score-manski) | `maximum_score_manski` | `logit y x1 x2, vce(robust)` | `optim smoothed Manski score objective` | `scipy.optimize.minimize Horowitz smoothed maximum score` | <Available /> |
+| **3.1.7** · [Mô hình lựa chọn nhị phân bất đối xứng Skewed Logit Nagler](/vietlod/chapter-03/group-3-1/b271-scobit-skewed-logit) | `scobit_skewed_logit` | `scobit y x1 x2, vce(robust)` | `glmx::glmx(y ~ x1 + x2, family = binomial, xlink = 'gosset')` | `Burr-II Skewed Logit MLE + LR symmetry test (alpha = 1) + average marginal effects` | <Available /> |
+
 ## 3.1.4. Quy trình thực hành chuẩn cho Phần 3.1
 
 <Steps>
@@ -101,7 +105,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu</h3>
-    <p>So sánh các bài học mô hình từ <code>3.1.1</code> đến <code>3.1.5</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
+    <p>So sánh các bài học mô hình từ <code>3.1.1</code> đến <code>3.1.7</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab</h3>

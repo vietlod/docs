@@ -4,7 +4,7 @@ title: "9.3. Regression Discontinuity, Kink, Bunching and Marginal Effects"
 sidebar_label: "9.3. Regression Discontinuity, Kink, Bunching and Marginal Effects"
 sidebar_position: 3
 slug: /vietlod/chapter-09/group-9-3
-description: "How-To User Guide for Methodological Part 9.3 — Regression Discontinuity, Kink, Bunching and Marginal Effects in Chapter 9: comparing and executing 6 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
+description: "How-To User Guide for Methodological Part 9.3 — Regression Discontinuity, Kink, Bunching and Marginal Effects in Chapter 9: comparing and executing 7 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
 keywords:
   - VietLOD Part 9.3
   - Regression Discontinuity, Kink, Bunching and Marginal Effects
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Methodological Part 9.3. Regression Discontinuity, Kink, Bunching and Marginal Effects** in [9. Causal Inference and Modern Policy Evaluation](/en/vietlod/chapter-09) provides step-by-step How-To implementation guides for **6 econometric model lessons** spanning from Section `9.3.1` to `9.3.6`. Full theoretical derivations are available at [VietLOD Part 9.3](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-09-suy-luan-nhan-qua-va-danh-gia-tac-dong-chinh-sach/nhom-9-3-rdd) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+**Methodological Part 9.3. Regression Discontinuity, Kink, Bunching and Marginal Effects** in [9. Causal Inference and Modern Policy Evaluation](/en/vietlod/chapter-09) provides step-by-step How-To implementation guides for **7 econometric model lessons** spanning from Section `9.3.1` to `9.3.7`. Full theoretical derivations are available at [VietLOD Part 9.3](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-09-suy-luan-nhan-qua-va-danh-gia-tac-dong-chinh-sach/nhom-9-3-rdd) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="How-To Guide for Part 9.3: Regression Discontinuity, Kink, Bunching and Marginal Effects in Stata 18, R 4.x, and Python 3.11+"
@@ -99,6 +99,9 @@ $$
 | **9.3.5** · [Saez-Kleven Counterfactual Density Bunching Estimator](/en/vietlod/chapter-09/group-9-3/b157-bunching-estimator) | `bunching_estimator` | `bunchit z_var, zstar(0) binwidth(0.1) poly(5)` | `bunching::bunchit(z_vector = df$z_var, zstar = 0, binwidth = 0.1, bins_l = 20, bins_r = 20, poly = 5)` | `smf.ols('bin_count ~ z_pow1 + z_pow2 + z_pow3 + excl_window', data=hist_df).fit()` | <Available /> |
 | **9.3.6** · [Heckman-Vytlacil Marginal Treatment Effects and Local IV](/en/vietlod/chapter-09/group-9-3/b158-marginal-treatment-effects) | `marginal_treatment_effects` | `mtefe y x1 x2 (d = z1 z2), polyn(2) bootreps(200)` | `ivmte::ivmte(data = df, target = 'ate', m0 = ~ x1 + u, m1 = ~ x1 + u, propensity = d ~ x1 + z1)` | `smf.ols('y ~ x1 + p_hat + p_hat_sq', data=df).fit(cov_type='HC1')` | <Available /> |
 
+
+| **9.3.7** · [Quantile Regression Discontinuity Design Frandsen Frolich Melly](/en/vietlod/chapter-09/group-9-3/b239-quantile-rdd-frandsen) | `quantile_rdd_frandsen` | `sqreg y i.above##c.running, q(0.25 0.50 0.75)` | `quantreg::rq local linear cutoff interaction` | `Local bandwidth statsmodels.QuantReg threshold jump estimator` | <Available /> |
+
 ## 9.3.4. Standard Implementation Workflow for Part 9.3
 
 <Steps>
@@ -108,7 +111,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Step 2. Select the Optimal Estimator for Your Error and Sample Structure</h3>
-    <p>Compare the estimators from <code>9.3.1</code> to <code>9.3.6</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
+    <p>Compare the estimators from <code>9.3.1</code> to <code>9.3.7</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab</h3>

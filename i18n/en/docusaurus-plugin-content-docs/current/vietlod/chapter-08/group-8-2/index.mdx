@@ -4,7 +4,7 @@ title: "8.2. Realized Volatility, Mixed-Frequency and Tail Risk Models"
 sidebar_label: "8.2. Realized Volatility, Mixed-Frequency and Tail Risk Models"
 sidebar_position: 2
 slug: /vietlod/chapter-08/group-8-2
-description: "How-To User Guide for Methodological Part 8.2 — Realized Volatility, Mixed-Frequency and Tail Risk Models in Chapter 8: comparing and executing 4 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
+description: "How-To User Guide for Methodological Part 8.2 — Realized Volatility, Mixed-Frequency and Tail Risk Models in Chapter 8: comparing and executing 7 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
 keywords:
   - VietLOD Part 8.2
   - Realized Volatility, Mixed-Frequency and Tail Risk Models
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Methodological Part 8.2. Realized Volatility, Mixed-Frequency and Tail Risk Models** in [8. Financial Volatility, Asset Pricing and Systemic Risk](/en/vietlod/chapter-08) provides step-by-step How-To implementation guides for **4 econometric model lessons** spanning from Section `8.2.1` to `8.2.4`. Full theoretical derivations are available at [VietLOD Part 8.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-08-do-bien-dong-tai-chinh-dinh-gia-tai-san-va-rui-ro-he-thong/nhom-8-2-risk-models) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+**Methodological Part 8.2. Realized Volatility, Mixed-Frequency and Tail Risk Models** in [8. Financial Volatility, Asset Pricing and Systemic Risk](/en/vietlod/chapter-08) provides step-by-step How-To implementation guides for **7 econometric model lessons** spanning from Section `8.2.1` to `8.2.7`. Full theoretical derivations are available at [VietLOD Part 8.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-08-do-bien-dong-tai-chinh-dinh-gia-tai-san-va-rui-ro-he-thong/nhom-8-2-risk-models) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="How-To Guide for Part 8.2: Realized Volatility, Mixed-Frequency and Tail Risk Models in Stata 18, R 4.x, and Python 3.11+"
@@ -85,6 +85,11 @@ $$
 | **8.2.3** · [GARCH-MIDAS Two-Component Macro-Finance Volatility](/en/vietlod/chapter-08/group-8-2/b131-garch-midas) | `garch_midas` | `garchmidas ret, mv(macro_x) lags(12)` | `mfGARCH::fit_mfgarch(data = df, y = 'ret', x = 'macro_x', low.freq = 'month', K = 12)` | `arch_model(df['y'], vol='GARCH', p=1, o=1, q=1).fit(disp='off')` | <Available /> |
 | **8.2.4** · [Adrian-Brunnermeier Systemic Tail Risk CoVaR](/en/vietlod/chapter-08/group-8-2/b132-covar-systemic-risk) | `covar_systemic_risk` | `sqreg ret_i ret_sys l1_state, quantile(0.05 0.50) reps(200)` | `quantreg::rq(ret_sys ~ ret_i + l1_state, tau = 0.05, data = df)` | `smf.quantreg('ret_sys ~ ret_i + l1_state', data=df).fit(q=0.05)` | <Available /> |
 
+
+| **8.2.5** · [Extreme Value Theory Peaks Over Threshold Generalized Pareto](/en/vietlod/chapter-08/group-8-2/b230-evt-peaks-over-threshold-gpd) | `evt_peaks_over_threshold_gpd` | `qreg y x1, quantile(0.95) vce(robust)` | `evir::gpd / extRemes::fevd(type = 'GP')` | `scipy.stats.genpareto.fit POT + Extreme VaR99 / ES99` | <Available /> |
+| **8.2.6** · [Realized GARCH Joint Return and Realized Volatility Model](/en/vietlod/chapter-08/group-8-2/b291-realized-garch-hansen-huang) | `realized_garch_hansen_huang` | `arch y x1 x2, arch(1) garch(1) het(rv_proxy)` | `rugarch::ugarchfit(ugarchspec(variance.model = list(model = 'realGARCH')), data)` | `Hansen-Huang-Shek (2012) joint return + log-realized measurement QMLE` | <Available /> |
+| **8.2.7** · [Joint Quantile Expected Shortfall Regression and Acerbi Szekely Backtest](/en/vietlod/chapter-08/group-8-2/b292-conditional-es-acerbi-backtest) | `conditional_es_acerbi_backtest` | `qreg y x1 x2, quantile(0.05) vce(robust)` | `esreg::esreg(y ~ x1 + x2, alpha = 0.05)` | `Fissler-Ziegel FZ0 joint (VaR, ES) regression + Acerbi-Szekely Z2 backtest` | <Available /> |
+
 ## 8.2.4. Standard Implementation Workflow for Part 8.2
 
 <Steps>
@@ -94,7 +99,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Step 2. Select the Optimal Estimator for Your Error and Sample Structure</h3>
-    <p>Compare the estimators from <code>8.2.1</code> to <code>8.2.4</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
+    <p>Compare the estimators from <code>8.2.1</code> to <code>8.2.7</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab</h3>

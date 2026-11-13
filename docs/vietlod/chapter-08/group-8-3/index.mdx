@@ -4,7 +4,7 @@ title: "8.3. Độ biến động đa biến"
 sidebar_label: "8.3. Độ biến động đa biến"
 sidebar_position: 3
 slug: /vietlod/chapter-08/group-8-3
-description: "Hướng dẫn thực hành Phần 8.3 — Độ biến động đa biến thuộc Chương 8: so sánh và thực thi 2 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Phần 8.3 — Độ biến động đa biến thuộc Chương 8: so sánh và thực thi 5 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
   - Phần 8.3 VietLOD
   - Độ biến động đa biến
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Phần 8.3. Độ biến động đa biến** thuộc [8. Độ biến động tài chính, định giá tài sản và rủi ro hệ thống](/vietlod/chapter-08) cung cấp quy trình thực hành từng bước cho **2 bài học mô hình kinh tế lượng** từ mục `8.3.1` đến `8.3.2`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 8.3](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-08-do-bien-dong-tai-chinh-dinh-gia-tai-san-va-rui-ro-he-thong/nhom-8-3-multivariate-vol) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+**Phần 8.3. Độ biến động đa biến** thuộc [8. Độ biến động tài chính, định giá tài sản và rủi ro hệ thống](/vietlod/chapter-08) cung cấp quy trình thực hành từng bước cho **5 bài học mô hình kinh tế lượng** từ mục `8.3.1` đến `8.3.5`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 8.3](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-08-do-bien-dong-tai-chinh-dinh-gia-tai-san-va-rui-ro-he-thong/nhom-8-3-multivariate-vol) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="Hướng dẫn thực hành Phần 8.3: Độ biến động đa biến trên Stata 18, R 4.x và Python 3.11+"
@@ -71,6 +71,11 @@ $$
 | **8.3.1** · [Mô hình GARCH đa biến tương quan có điều kiện hằng số (GARCH)](/vietlod/chapter-08/group-8-3/b133-ccc-garch) | `ccc_garch` | `mgarch ccc (ret1 ret2 = ), arch(1) garch(1)` | `rmgarch::cgarchfit(cgarchspec(uspec), data = df[, c('ret1', 'ret2')])` | `arch_model(df['y'], vol='GARCH', p=1, q=1).fit(disp='off')` | <Available /> |
 | **8.3.2** · [Mô hình GARCH đa biến tương quan có điều kiện động (GARCH)](/vietlod/chapter-08/group-8-3/b134-dcc-garch) | `dcc_garch` | `mgarch dcc (ret1 ret2 = ), arch(1) garch(1)` | `rmgarch::dccfit(dccspec(uspec), data = df[, c('ret1', 'ret2')])` | `arch_model(ret1, vol='GARCH', p=1, q=1).fit(disp='off')` | <Available /> |
 
+
+| **8.3.3** · [Ma trận hiệp phương sai co rút tối ưu tuyến tính Ledoit Wolf](/vietlod/chapter-08/group-8-3/b231-ledoit-wolf-shrinkage-cov) | `ledoit_wolf_shrinkage_cov` | `regress y x1 x2, vce(robust)` | `corpcor::cov.shrink` | `sklearn.covariance.LedoitWolf + precision shrinkage regression` | <Available /> |
+| **8.3.4** · [Mô hình phương sai có điều kiện đa biến xác định dương BEKK Engle Kroner](/vietlod/chapter-08/group-8-3/b289-bekk-mgarch-engle-kroner) | `bekk_mgarch_engle_kroner` | `mgarch dvech (y = x1 x2), arch(1) garch(1)` | `BEKKs::bekk_fit(bekk_spec(), data)` | `Engle-Kroner (1995) Gaussian QMLE Diagonal BEKK recursion + conditional mean equation` | <Available /> |
+| **8.3.5** · [Mô hình Copula GARCH phụ thuộc đuôi động Patton](/vietlod/chapter-08/group-8-3/b290-copula-garch-patton) | `copula_garch_patton` | `arch y x1 x2, arch(1) garch(1) tdistribution` | `rmgarch::cgarchfit(cgarchspec(...), data)` | `Two-stage IFM GARCH filtration + Student-t Copula MLE & lower-tail dependence lambda_L` | <Available /> |
+
 ## 8.3.4. Quy trình thực hành chuẩn cho Phần 8.3
 
 <Steps>
@@ -80,7 +85,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu</h3>
-    <p>So sánh các bài học mô hình từ <code>8.3.1</code> đến <code>8.3.2</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
+    <p>So sánh các bài học mô hình từ <code>8.3.1</code> đến <code>8.3.5</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab</h3>

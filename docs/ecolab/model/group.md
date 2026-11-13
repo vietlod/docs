@@ -1,12 +1,12 @@
 ---
-title: Danh mục 15 họ mô hình & 201+ bộ ước lượng
+title: Danh mục 16 họ mô hình & 306 bộ ước lượng
 sidebar_position: 0
-description: Tổng quan hệ thống 15 họ mô hình, 58 mô hình con và 201+ bộ ước lượng kinh tế lượng được EcoData và EcoLab hỗ trợ — bản đồ chọn mô hình, phân tách kiểm định tiền/hậu ước lượng và gói mã tái lập .zip.
+description: Tổng quan hệ thống 16 họ mô hình, 61 mô hình con và 306 bộ ước lượng kinh tế lượng được EcoData và EcoLab hỗ trợ — bản đồ chọn mô hình, phân tách kiểm định tiền/hậu ước lượng và gói mã tái lập .zip.
 ---
 
-# Danh mục 15 họ mô hình, 58 mô hình con & 201+ bộ ước lượng
+# Danh mục 16 họ mô hình, 61 mô hình con & 306 bộ ước lượng
 
-EcoData (`v3.82.0`) và EcoLab (`v1.5.0`) tích hợp động cơ kinh tế lượng thống nhất gồm **15 họ mô hình lớn**, phân rã thành **58 mô hình con** và **201+ bộ ước lượng cốt lõi (estimators)** thực thi thật trên **Python**, **R** và **Stata 18 MP**. Trang này đóng vai trò bản đồ phương pháp luận giúp bạn chọn chính xác họ mô hình theo cấu trúc dữ liệu và chiến lược định danh.
+EcoData (`v3.93.0`) và EcoLab (`v1.12.0`) tích hợp động cơ kinh tế lượng thống nhất gồm **16 họ mô hình lớn**, phân rã thành **61 mô hình con** và **306 bộ ước lượng (estimators)** thực thi thật trên **Python**, **R** và **Stata 18 MP**. Trang này đóng vai trò bản đồ phương pháp luận giúp bạn chọn chính xác họ mô hình theo cấu trúc dữ liệu và chiến lược định danh.
 
 :::tip Kiểm chứng thực nghiệm và xuất gói tái lập 100%
 Mọi bộ ước lượng trong danh mục đều thực thi đúng thuật toán gốc (cam kết Fail-Closed `422`, không bao giờ fallback ngầm sang OLS) và xuất gói mã tái lập `.zip` gồm kịch bản Stata 18 MP (`.do`), R (`.R`), Python (`.py`) kèm tệp băm `SHA256SUMS.txt`.
@@ -14,7 +14,7 @@ Mọi bộ ước lượng trong danh mục đều thực thi đúng thuật to�
 
 ---
 
-## Bản đồ quyết định 15 họ mô hình
+## Bản đồ quyết định 16 họ mô hình
 
 ```mermaid
 flowchart TD
@@ -48,7 +48,7 @@ flowchart TD
 
 ---
 
-## Bảng phân loại 15 họ mô hình → 58 mô hình con
+## Bảng phân loại 16 họ mô hình → 61 mô hình con
 
 | # | Họ mô hình | Mô hình con tiêu biểu | Khi nào ưu tiên sử dụng |
 | :--- | :--- | :--- | :--- |
@@ -67,16 +67,17 @@ flowchart TD
 | 13 | **Tổ chức ngành cấu trúc & hệ thống cầu** | [AIDS, QUAIDS, Berry Logit IV & Random-Coefficients BLP](/ecolab/model/demand-systems-blp) | Độ co giãn giá – thu nhập hệ thống cầu tiêu dùng và sức mạnh thị trường sản phẩm phân biệt |
 | 14 | **Biên hiệu quả, năng suất & TFP** | [SFA, DEA, Malmquist, Olley-Pakes, Levinsohn-Petrin, Wooldridge & ACF TFP](/ecolab/model/frontier-tfp-decomposition) | Đo lường hiệu quả kỹ thuật ngân hàng/doanh nghiệp và năng suất nhân tố tổng hợp cấu trúc |
 | 15 | **Tái lấy mẫu, học máy nhân quả & suy diễn nhiều chiều** | [Wild Cluster Bootstrap, Double/Debiased ML, Causal Forest & PCA/Factor](/ecolab/model/bootstrap-highdim-inference) | Suy diễn chuẩn xác khi số cụm ít ($G < 30$), kiểm soát nhiễu nhiều chiều và ước lượng CATE |
+| 16 | **Đa cấp, hiệu ứng hỗn hợp & khảo sát phức hợp** | Hierarchical LMM, Random Slopes, Mundlak Within-Between, Mixed Logit/Poisson GLMM, GEE, Log-Linear, Complex Survey `svy:` GLM, Calibration Raking, Fay-Herriot & BHF Small-Area | Dữ liệu phân cấp lồng nhau nhiều tầng, khảo sát hộ gia đình `pweight`–`psu` và ước lượng nghèo vùng nhỏ |
 
 ---
 
-## 201+ bộ ước lượng được cấu thành như thế nào?
+## 306 bộ ước lượng được cấu thành như thế nào?
 
-**58 mô hình con** đại diện cho các đặc tả cấu trúc riêng biệt. Khi kết hợp từng mô hình con với thuật toán tối ưu hóa chuẩn xác và ma trận hiệp phương sai sai số chuẩn chuyên dụng, hệ thống hình thành **201+ bộ ước lượng cốt lõi** (cùng khả năng mở rộng động qua đường ống quản trị 2 giai đoạn `B1–B4` trên EcoData):
+**61 mô hình con** đại diện cho các đặc tả cấu trúc riêng biệt. Khi kết hợp từng mô hình con với thuật toán tối ưu hóa chuẩn xác và ma trận hiệp phương sai sai số chuẩn chuyên dụng, hệ thống hình thành **306 bộ ước lượng** (cùng khả năng mở rộng động qua đường ống quản trị 2 giai đoạn `B1–B4` trên EcoData):
 
 ```mermaid
 flowchart LR
-    M["58 mô hình con (15 họ)"] --> O["Thuật toán tối ưu hóa"]
+    M["61 mô hình con (16 họ)"] --> O["Thuật toán tối ưu hóa"]
     M --> S["Ma trận sai số chuẩn & tái lấy mẫu"]
     O --> O1["OLS / HDFE / FGLS"]
     O --> O2["MLE / QMLE / PPML / Cox"]
@@ -85,7 +86,7 @@ flowchart LR
     S --> S1["Homoskedastic & White HC0–HC3"]
     S --> S2["Newey-West HAC / Driscoll-Kraay / Conley Spatial"]
     S --> S3["One-Way / Multi-Way Cluster & Wild Cluster Bootstrap"]
-    O1 --> R["201+ bộ ước lượng cốt lõi"]
+    O1 --> R["306 bộ ước lượng"]
     O2 --> R
     O3 --> R
     O4 --> R

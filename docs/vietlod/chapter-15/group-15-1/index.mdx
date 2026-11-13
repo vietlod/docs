@@ -4,7 +4,7 @@ title: "15.1. Hồi quy phi tham số và bán tham số"
 sidebar_label: "15.1. Hồi quy phi tham số và bán tham số"
 sidebar_position: 1
 slug: /vietlod/chapter-15/group-15-1
-description: "Hướng dẫn thực hành Phần 15.1 — Hồi quy phi tham số và bán tham số thuộc Chương 15: so sánh và thực thi 2 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Phần 15.1 — Hồi quy phi tham số và bán tham số thuộc Chương 15: so sánh và thực thi 6 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
   - Phần 15.1 VietLOD
   - Hồi quy phi tham số và bán tham số
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Phần 15.1. Hồi quy phi tham số và bán tham số** thuộc [15. Kinh tế lượng phi tham số và suy luận tái lấy mẫu cụm ít](/vietlod/chapter-15) cung cấp quy trình thực hành từng bước cho **2 bài học mô hình kinh tế lượng** từ mục `15.1.1` đến `15.1.2`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 15.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-15-kinh-te-luong-phi-tham-so-va-suy-luan-tai-lay-mau-cum-it/nhom-15-1-nonparametric-smooth) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+**Phần 15.1. Hồi quy phi tham số và bán tham số** thuộc [15. Kinh tế lượng phi tham số và suy luận tái lấy mẫu cụm ít](/vietlod/chapter-15) cung cấp quy trình thực hành từng bước cho **6 bài học mô hình kinh tế lượng** từ mục `15.1.1` đến `15.1.6`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 15.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-15-kinh-te-luong-phi-tham-so-va-suy-luan-tai-lay-mau-cum-it/nhom-15-1-nonparametric-smooth) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="Hướng dẫn thực hành Phần 15.1: Hồi quy phi tham số và bán tham số trên Stata 18, R 4.x và Python 3.11+"
@@ -71,6 +71,12 @@ $$
 | **15.1.1** · [Hồi quy phi tham số đa thức tuyến tính cục bộ Li–Racine](/vietlod/chapter-15/group-15-1/b198-local-polynomial-npregress) | `local_polynomial_npregress` | `npregress kernel y x1 x2, estimator(linear) kernel(epanechnikov)` | `np::npreg(y ~ x1 + x2, regtype = 'll', bwmethod = 'cv.aic', data = df)` | `KernelReg(endog=df['y'], exog=df[['x1', 'x2']], var_type='cc', reg_type='ll').fit()` | <Available /> |
 | **15.1.2** · [Mô hình cộng tổng quát bán tham số kết hợp B-Splines (GAM)](/vietlod/chapter-15/group-15-1/b199-gam-semiparametric) | `gam_semiparametric` | `npregress series y x1 x2, spline(bspline)` | `mgcv::gam(y ~ s(x1, bs = 'cr') + s(x2, bs = 'cr'), method = 'REML', data = df)` | `GLMGam.from_formula('y ~ x1 + x2', data=df, smoother=BSplines(df[['x1', 'x2']], df=[6, 6], degree=[3, 3])).fit()` | <Available /> |
 
+
+| **15.1.3** · [Hồi quy bán tham số tuyến tính từng phần khử phần dư kép Robinson](/vietlod/chapter-15/group-15-1/b247-partially-linear-robinson) | `partially_linear_robinson` | `semipar y x1, nonpar(z) robust` | `np::npplreg` | `Leave-one-out Gaussian kernel double-residual Robinson OLS` | <Available /> |
+| **15.1.4** · [Hồi quy phi tham số chuỗi hàm cơ sở B Spline và sàng lọc Newey Chen](/vietlod/chapter-15/group-15-1/b248-series-bspline-newey) | `series_bspline_newey` | `npregress series y x1 x2, bspline` | `splines::bs + stats::lm` | `Quantile-knot B-spline sieve basis OLS + average derivative functional` | <Available /> |
+| **15.1.5** · [Biến công cụ phi tham số điều chuẩn Tikhonov Newey Powell Darolles](/vietlod/chapter-15/group-15-1/b249-nonparametric-iv-newey-powell) | `nonparametric_iv_newey_powell` | `ivregress 2sls y (x_endog = z1 z2), vce(robust)` | `np::npregiv / crs::crsiv` | `Tikhonov-penalized sieve 2SLS Newey-Powell NPIV` | <Available /> |
+| **15.1.6** · [Hồi quy sàng đa thức trực giao Legendre Hermite Chen Belloni Chernozhukov](/vietlod/chapter-15/group-15-1/b306-orthogonal-sieve-series-chen) | `orthogonal_sieve_series_chen` | `npregress series y x1 x2, polynomial(2) / regress y x1 x2, vce(robust)` | `stats::lm(y ~ poly(x1, degree = 3, raw = FALSE) + x2)` | `Orthonormal Legendre sieve projection + Belloni-Chernozhukov-Chetverikov-Kato HC1 derivative SE` | <Available /> |
+
 ## 15.1.4. Quy trình thực hành chuẩn cho Phần 15.1
 
 <Steps>
@@ -80,7 +86,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu</h3>
-    <p>So sánh các bài học mô hình từ <code>15.1.1</code> đến <code>15.1.2</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
+    <p>So sánh các bài học mô hình từ <code>15.1.1</code> đến <code>15.1.6</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab</h3>

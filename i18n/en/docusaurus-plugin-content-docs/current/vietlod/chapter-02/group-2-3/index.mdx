@@ -4,7 +4,7 @@ title: "2.3. Dimension Reduction and Latent Factors"
 sidebar_label: "2.3. Dimension Reduction and Latent Factors"
 sidebar_position: 3
 slug: /vietlod/chapter-02/group-2-3
-description: "How-To User Guide for Methodological Part 2.3 — Dimension Reduction and Latent Factors in Chapter 2: comparing and executing 4 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
+description: "How-To User Guide for Methodological Part 2.3 — Dimension Reduction and Latent Factors in Chapter 2: comparing and executing 6 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
 keywords:
   - VietLOD Part 2.3
   - Dimension Reduction and Latent Factors
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Methodological Part 2.3. Dimension Reduction and Latent Factors** in [2. Regularized, High-Dimensional Inference and Dimension Reduction Models](/en/vietlod/chapter-02) provides step-by-step How-To implementation guides for **4 econometric model lessons** spanning from Section `2.3.1` to `2.3.4`. Full theoretical derivations are available at [VietLOD Part 2.3](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-02-mo-hinh-chinh-quy-hoa-suy-luan-chieu-cao-va-giam-chieu/nhom-2-3-dimension-reduction) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+**Methodological Part 2.3. Dimension Reduction and Latent Factors** in [2. Regularized, High-Dimensional Inference and Dimension Reduction Models](/en/vietlod/chapter-02) provides step-by-step How-To implementation guides for **6 econometric model lessons** spanning from Section `2.3.1` to `2.3.6`. Full theoretical derivations are available at [VietLOD Part 2.3](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-02-mo-hinh-chinh-quy-hoa-suy-luan-chieu-cao-va-giam-chieu/nhom-2-3-dimension-reduction) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="How-To Guide for Part 2.3: Dimension Reduction and Latent Factors in Stata 18, R 4.x, and Python 3.11+"
@@ -85,6 +85,10 @@ $$
 | **2.3.3** · [Principal Component Analysis and Composite Index](/en/vietlod/chapter-02/group-2-3/b024-pca-factors) | `pca_factors` | `pca x1 x2 x3, components(2)` | `stats::prcomp(df[, c('x1', 'x2')], scale. = TRUE)` | `PCA(n_components=2).fit_transform(X_std)` | <Available /> |
 | **2.3.4** · [Exploratory Factor Analysis](/en/vietlod/chapter-02/group-2-3/b025-factor-analysis) | `factor_analysis` | `factor x1 x2 x3, ml factors(2)` | `stats::factanal(df[, c('x1', 'x2', 'x3')], factors = 1, rotation = 'varimax')` | `FactorAnalysis(n_components=2, rotation='varimax').fit(X_std)` | <Available /> |
 
+
+| **2.3.5** · [Sparse Principal Component Regression](/en/vietlod/chapter-02/group-2-3/b269-sparse-pca-zou) | `sparse_pca_zou` | `pca x1 x2 & regress y x1 x2, vce(robust)` | `elasticnet::spca + stats::lm` | `sklearn.decomposition.SparsePCA + back-projected OLS factor regression` | <Available /> |
+| **2.3.6** · [Sliced Inverse Regression Sufficient Dimension Reduction](/en/vietlod/chapter-02/group-2-3/b270-sufficient-dimension-reduction-sir) | `sufficient_dimension_reduction_sir` | `regress y x1 x2, vce(robust)` | `dr::dr(y ~ x1 + x2, method = 'sir')` | `Standardized slice-covariance eigendecomposition + Li (1991) dimensionality test + EDR projection` | <Available /> |
+
 ## 2.3.4. Standard Implementation Workflow for Part 2.3
 
 <Steps>
@@ -94,7 +98,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Step 2. Select the Optimal Estimator for Your Error and Sample Structure</h3>
-    <p>Compare the estimators from <code>2.3.1</code> to <code>2.3.4</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
+    <p>Compare the estimators from <code>2.3.1</code> to <code>2.3.6</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab</h3>

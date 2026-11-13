@@ -4,7 +4,7 @@ title: "1.4. High-Dimensional Fixed Effects and Modern Instrumental Variables"
 sidebar_label: "1.4. High-Dimensional Fixed Effects and Modern Instrumental Variables"
 sidebar_position: 4
 slug: /vietlod/chapter-01/group-1-4
-description: "How-To User Guide for Methodological Part 1.4 — High-Dimensional Fixed Effects and Modern Instrumental Variables in Chapter 1: comparing and executing 6 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
+description: "How-To User Guide for Methodological Part 1.4 — High-Dimensional Fixed Effects and Modern Instrumental Variables in Chapter 1: comparing and executing 13 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
 keywords:
   - VietLOD Part 1.4
   - High-Dimensional Fixed Effects and Modern Instrumental Variables
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Methodological Part 1.4. High-Dimensional Fixed Effects and Modern Instrumental Variables** in [1. Classical Linear and Instrumental Variables Regression](/en/vietlod/chapter-01) provides step-by-step How-To implementation guides for **6 econometric model lessons** spanning from Section `1.4.1` to `1.4.6`. Full theoretical derivations are available at [VietLOD Part 1.4](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-01-hoi-quy-tuyen-tinh-co-dien-va-bien-cong-cu/nhom-1-4-high-dim-modern-iv) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+**Methodological Part 1.4. High-Dimensional Fixed Effects and Modern Instrumental Variables** in [1. Classical Linear and Instrumental Variables Regression](/en/vietlod/chapter-01) provides step-by-step How-To implementation guides for **13 econometric model lessons** spanning from Section `1.4.1` to `1.4.13`. Full theoretical derivations are available at [VietLOD Part 1.4](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-01-hoi-quy-tuyen-tinh-co-dien-va-bien-cong-cu/nhom-1-4-high-dim-modern-iv) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="How-To Guide for Part 1.4: High-Dimensional Fixed Effects and Modern Instrumental Variables in Stata 18, R 4.x, and Python 3.11+"
@@ -99,6 +99,15 @@ $$
 | **1.4.5** · [Control Function Endogeneity Estimator](/en/vietlod/chapter-01/group-1-4/b013-control-function-iv) | `control_function_iv` | `etregress y x1 x2, treat(d = z1 z2) twostep` | `fixest::feols(y ~ x1 + d + v_hat, vcov = 'hetero', data = df)` | `smf.ols('y ~ x1 + d + v_hat', data=df).fit(cov_type='HC1')` | <Available /> |
 | **1.4.6** · [Instrumental Variables Quantile Regression](/en/vietlod/chapter-01/group-1-4/b014-iv-quantile) | `iv_quantile` | `ivqregress iqr y x1 (endog = z1 z2), quantile(0.5)` | `quantreg::rq(y ~ x1 + d_hat, tau = 0.5, data = df)` | `smf.quantreg('y ~ x1 + d_hat', data=df).fit(q=0.5)` | <Available /> |
 
+
+| **1.4.7** · [Continuously Updated Generalized Method of Moments](/en/vietlod/chapter-01/group-1-4/b204-continuously-updated-gmm) | `continuously_updated_gmm` | `ivregress gmm y (x_endog = z1 z2), igmm vce(robust)` | `gmm::gmm(type = 'cue')` | `scipy.optimize.minimize CUE objective + Hansen-Sargan J` | <Available /> |
+| **1.4.8** · [Iterated Generalized Method of Moments](/en/vietlod/chapter-01/group-1-4/b205-iterated-gmm) | `iterated_gmm` | `ivregress gmm y x1 (x2 = z1 z2), igmm` | `gmm::gmm(type = 'iterative')` | `statsmodels / NumPy fixed-point iterated GMM solver` | <Available /> |
+| **1.4.9** · [Jackknife and Split Sample Instrumental Variables](/en/vietlod/chapter-01/group-1-4/b206-jive-split-sample-iv) | `jive_split_sample_iv` | `jive y (x_endog = z1 z2 z3), robust` | `SteinIV::jive.est / ivmodel::KClass` | `Leave-one-out hat-matrix JIVE1 estimator` | <Available /> |
+| **1.4.10** · [Reduced Rank Multivariate Regression Anderson](/en/vietlod/chapter-01/group-1-4/b207-reduced-rank-regression) | `reduced_rank_regression` | `canon (y) (x1 x2)` | `rrpack::rrr` | `SVD canonical-correlation Reduced Rank Regression` | <Available /> |
+| **1.4.11** · [Fuller Modified Limited Information Maximum Likelihood](/en/vietlod/chapter-01/group-1-4/b264-fuller-modified-liml) | `fuller_modified_liml` | `ivregress liml y (x_endog = z1 z2), vce(robust)` | `ivmodel::FULL(ivmodel(Y, D, Z), beta0 = 0, alpha = 1)` | `linearmodels.iv.IVLIML(fuller=1.0) / exact k-class eigenvalue solver` | <Available /> |
+| **1.4.12** · [Maximum Empirical Likelihood Moment Estimator](/en/vietlod/chapter-01/group-1-4/b265-empirical-likelihood-owen) | `empirical_likelihood_owen` | `gmm (y - {b0} - {xb: x1 x2}), instruments(x1 x2) winitial(identity)` | `gmm::gel(g, x, tet0, type = 'EL')` | `Saddle-point Lagrange tilting Maximum Empirical Likelihood + Wilks ELR statistic` | <Available /> |
+| **1.4.13** · [Two Step Control Function Regression with Endogeneity Test](/en/vietlod/chapter-01/group-1-4/b266-control-function-endogenous) | `control_function_endogenous` | `eregress y x_exog, endogenous(x_endog = z1 z2 x_exog) vce(robust)` | `First-stage lm residual augmentation + sandwich::vcovHC` | `Two-step Control Function projection + Murphy-Topel / HC1 covariance + Wu-Hausman t-test` | <Available /> |
+
 ## 1.4.4. Standard Implementation Workflow for Part 1.4
 
 <Steps>
@@ -108,7 +117,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Step 2. Select the Optimal Estimator for Your Error and Sample Structure</h3>
-    <p>Compare the estimators from <code>1.4.1</code> to <code>1.4.6</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
+    <p>Compare the estimators from <code>1.4.1</code> to <code>1.4.13</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab</h3>

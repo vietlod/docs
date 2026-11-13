@@ -4,7 +4,7 @@ title: "6.2. Dự báo chuỗi thời gian đơn biến"
 sidebar_label: "6.2. Dự báo chuỗi thời gian đơn biến"
 sidebar_position: 2
 slug: /vietlod/chapter-06/group-6-2
-description: "Hướng dẫn thực hành Phần 6.2 — Dự báo chuỗi thời gian đơn biến thuộc Chương 6: so sánh và thực thi 5 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Phần 6.2 — Dự báo chuỗi thời gian đơn biến thuộc Chương 6: so sánh và thực thi 8 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
   - Phần 6.2 VietLOD
   - Dự báo chuỗi thời gian đơn biến
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Phần 6.2. Dự báo chuỗi thời gian đơn biến** thuộc [6. Chuỗi thời gian đơn biến, phi tuyến, điểm gãy và bong bóng](/vietlod/chapter-06) cung cấp quy trình thực hành từng bước cho **5 bài học mô hình kinh tế lượng** từ mục `6.2.1` đến `6.2.5`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 6.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-06-chuoi-thoi-gian-don-bien-phi-tuyen-diem-gay-va-bong-bong/nhom-6-2-univariate) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+**Phần 6.2. Dự báo chuỗi thời gian đơn biến** thuộc [6. Chuỗi thời gian đơn biến, phi tuyến, điểm gãy và bong bóng](/vietlod/chapter-06) cung cấp quy trình thực hành từng bước cho **8 bài học mô hình kinh tế lượng** từ mục `6.2.1` đến `6.2.8`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 6.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-06-chuoi-thoi-gian-don-bien-phi-tuyen-diem-gay-va-bong-bong/nhom-6-2-univariate) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="Hướng dẫn thực hành Phần 6.2: Dự báo chuỗi thời gian đơn biến trên Stata 18, R 4.x và Python 3.11+"
@@ -92,6 +92,11 @@ $$
 | **6.2.4** · [Mô hình tự hồi quy tích hợp trung bình trượt (ARIMA)](/vietlod/chapter-06/group-6-2/b093-arima) | `arima` | `arima y, arima(1,1,1)` | `arima(y, order = c(1, 1, 1))` | `ARIMA(y, order=(1, 1, 1)).fit()` | <Available /> |
 | **6.2.5** · [Mô hình ARIMA có tính mùa vụ nhân tính (SARIMA)](/vietlod/chapter-06/group-6-2/b094-sarima) | `sarima` | `arima y, arima(1,1,1) sarima(1,1,1,12)` | `arima(y, order = c(1,1,1), seasonal = list(order = c(1,1,1), period = 12))` | `SARIMAX(y, order=(1,1,1), seasonal_order=(1,1,1,12)).fit()` | <Available /> |
 
+
+| **6.2.6** · [Hồi quy chuỗi thời gian tự tương quan bậc nhất quét lưới Hildreth Lu](/vietlod/chapter-06/group-6-2/b220-hildreth-lu-ar1) | `hildreth_lu_ar1` | `prais y x1 x2, ssesearch` | `HoRM::hildreth.lu / prais::prais_winsten` | `Global rho grid search + Prais-Winsten exact initial observation GLS` | <Available /> |
+| **6.2.7** · [Mô hình kiểm định độ chính xác dự báo ngang bằng Diebold Mariano](/vietlod/chapter-06/group-6-2/b221-diebold-mariano-forecast-eval) | `diebold_mariano_forecast_eval` | `dmariano y yhat1 yhat2, crit(mse) kernel(bartlett)` | `forecast::dm.test` | `Rolling OOS forecast loss differential + HAC HLN-adjusted DM test` | <Available /> |
+| **6.2.8** · [Tập tin cậy mô hình dự báo vượt trội Hansen Lunde Nason](/vietlod/chapter-06/group-6-2/b222-model-confidence-set-mcs) | `model_confidence_set_mcs` | `regress y x1 x2, vce(robust)` | `MCS::MCSprocedure` | `Sequential max-t equivalence elimination MCS algorithm` | <Available /> |
+
 ## 6.2.4. Quy trình thực hành chuẩn cho Phần 6.2
 
 <Steps>
@@ -101,7 +106,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu</h3>
-    <p>So sánh các bài học mô hình từ <code>6.2.1</code> đến <code>6.2.5</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
+    <p>So sánh các bài học mô hình từ <code>6.2.1</code> đến <code>6.2.8</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab</h3>

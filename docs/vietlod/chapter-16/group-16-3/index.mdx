@@ -1,0 +1,82 @@
+---
+id: index
+title: "16.3. Thiết kế khảo sát phức hợp, hiệu chuẩn trọng số và ước lượng vùng nhỏ"
+sidebar_label: "16.3. Thiết kế khảo sát phức hợp, hiệu chuẩn trọng số và ước lượng vùng nhỏ"
+sidebar_position: 3
+slug: /vietlod/chapter-16/group-16-3
+description: "Hướng dẫn thực hành Phần 16.3 — Thiết kế khảo sát phức hợp, hiệu chuẩn trọng số và ước lượng vùng nhỏ thuộc Chương 16: so sánh và thực thi 4 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+keywords:
+  - Phần 16.3 VietLOD
+  - "Thiết kế khảo sát phức hợp, hiệu chuẩn trọng số và ước lượng vùng nhỏ"
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# 16.3. Thiết kế khảo sát phức hợp, hiệu chuẩn trọng số và ước lượng vùng nhỏ
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Phần 16.3. Thiết kế khảo sát phức hợp, hiệu chuẩn trọng số và ước lượng vùng nhỏ** thuộc [16. Kinh tế lượng đa cấp, hiệu ứng hỗn hợp và khảo sát phức hợp](/vietlod/chapter-16) cung cấp quy trình thực hành từng bước cho **4 bài học mô hình kinh tế lượng** từ mục `16.3.1` đến `16.3.4`, hỗ trợ thực thi đám mây trực tiếp trên [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Phần 16.3: Thiết kế khảo sát phức hợp, hiệu chuẩn trọng số và ước lượng vùng nhỏ trên Stata 18, R 4.x và Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 16.3.1. Bản chất phương pháp và hệ phương trình định danh
+
+- **Câu hỏi nghiên cứu trọng tâm**: Làm thế nào để ước lượng hiệu quả cấu trúc phân cấp đa bậc và suy luận chính xác trên dữ liệu khảo sát phức hợp có phân tầng, chọn mẫu cụm PSU và trọng số xác suất như VHLSS hay DHS?
+- **Kiểm định chẩn đoán bắt buộc**: Hệ số tương quan nội cụm ICC, kiểm định tỷ số hợp lý biên hỗn hợp Chibar2 LR, hệ số hiệu ứng thiết kế Kish DEFF và kiểm định tính ngoại sinh trọng số khảo sát DuMouchel–Duncan.
+
+$$
+Y_{ij} = X_{ij}^\top \beta + Z_{ij}^\top u_j + \varepsilon_{ij}, \quad u_j \sim \mathcal{N}(0, \Sigma_u), \quad \varepsilon_{ij} \sim \mathcal{N}(0, \sigma_\varepsilon^2)
+$$
+
+$$
+\hat{\beta}_{\text{WLS}} = \left(\sum_{h=1}^H \sum_{c=1}^{C_h} \sum_{i=1}^{n_{hc}} w_{hci} X_{hci} X_{hci}^\top\right)^{-1} \left(\sum_{h=1}^H \sum_{c=1}^{C_h} \sum_{i=1}^{n_{hc}} w_{hci} X_{hci} Y_{hci}\right)
+$$
+
+<FeatureNotAvailable
+  note="Không bỏ qua trọng số xác suất pweight và đơn vị chọn mẫu sơ cấp PSU khi phân tích khảo sát hộ gia đình phân tầng nhiều giai đoạn như VHLSS để tránh chệch tham số và ước lượng thấp sai số chuẩn."
+/>
+
+## 16.3.2. Danh mục các bài học mô hình trong Phần 16.3
+
+<FeatureCards
+  features={[
+    {
+      title: '16.3.1. Hồi quy thiết kế khảo sát phức hợp xấp xỉ tuyến tính Taylor',
+      description: 'Estimates superpopulation census slopes using inverse-probability sampling weights (pweight) and Binder first-order Taylor linearization acr...',
+      link: '/vietlod/chapter-16/group-16-3/b260-survey-taylor-linearized-reg',
+      badge: '16.3.1 · survey_taylor_linearized_reg'
+    },
+    {
+      title: '16.3.2. Ước lượng hồi quy tổng quát và hiệu chuẩn trọng số khảo sát Deville Sarndal',
+      description: 'Calibrates base design weights via minimum chi-square distance / exponential raking to match known population auxiliary totals, reducing non...',
+      link: '/vietlod/chapter-16/group-16-3/b261-survey-calibration-greg',
+      badge: '16.3.2 · survey_calibration_greg'
+    },
+    {
+      title: '16.3.3. Hồi quy khảo sát tái lấy mẫu lặp cân bằng BRR và Jackknife xóa cụm',
+      description: 'Computes design-consistent variance matrices across delete-a-group Jackknife (JK1/JKn) and Fay Balanced Repeated Replication weight columns...',
+      link: '/vietlod/chapter-16/group-16-3/b262-survey-replicate-brr-jk',
+      badge: '16.3.3 · survey_replicate_brr_jk'
+    },
+    {
+      title: '16.3.4. Ước lượng dự báo tuyến tính không chệch tốt nhất thực nghiệm vùng nhỏ Fay Herriot',
+      description: 'Combines noisy direct survey domain estimates with auxiliary census/satellite covariates via empirical Bayes shrinkage gamma_i = sigma_v^2 /...',
+      link: '/vietlod/chapter-16/group-16-3/b263-fay-herriot-small-area',
+      badge: '16.3.4 · fay_herriot_small_area'
+    }
+  ]}
+/>
+
+## 16.3.3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
+
+| Bài học & Mô hình | Mã định danh | Cú pháp Stata 18 MP | Cú pháp R 4.x | Cú pháp Python 3.11+ | Hỗ trợ |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **16.3.1** · [Hồi quy thiết kế khảo sát phức hợp xấp xỉ tuyến tính Taylor](/vietlod/chapter-16/group-16-3/b260-survey-taylor-linearized-reg) | `survey_taylor_linearized_reg` | `svyset psu [pweight=pw], strata(strata) & svy: regress y x1 x2` | `survey::svyglm(y ~ x1 + x2, design = svydesign(ids = ~psu, strata = ~strata, weights = ~pw))` | `Horvitz-Thompson WLS + Binder (1983) stratified PSU Taylor-series linearized covariance` | <Available /> |
+| **16.3.2** · [Ước lượng hồi quy tổng quát và hiệu chuẩn trọng số khảo sát Deville Sarndal](/vietlod/chapter-16/group-16-3/b261-survey-calibration-greg) | `survey_calibration_greg` | `svycal regress x1 x2, generate(w_cal) totals(pop_mat) & regress y x1 x2 [pw=w_cal], vce(robust)` | `survey::calibrate(design, formula = ~x1 + x2, population = pop_totals) + survey::svyglm` | `Deville-Sarndal g-weight chi-square / raking calibration + GREG linearized sandwich covariance` | <Available /> |
+| **16.3.3** · [Hồi quy khảo sát tái lấy mẫu lặp cân bằng BRR và Jackknife xóa cụm](/vietlod/chapter-16/group-16-3/b262-survey-replicate-brr-jk) | `survey_replicate_brr_jk` | `jackknife: regress y x1 x2` | `survey::as.svrepdesign(design, type = 'JKn') + survey::svyglm` | `Delete-a-group PSU Jackknife / Fay-BRR replicate weight covariance engine` | <Available /> |
+| **16.3.4** · [Ước lượng dự báo tuyến tính không chệch tốt nhất thực nghiệm vùng nhỏ Fay Herriot](/vietlod/chapter-16/group-16-3/b263-fay-herriot-small-area) | `fay_herriot_small_area` | `regress y x1 x2, vce(robust) + Fay-Herriot empirical Bayes shrinkage` | `sae::mseFH(y ~ x1 + x2, vardir = D_i)` | `Fay-Herriot moment/REML variance solver + GLS beta + EBLUP shrinkage & Prasad-Rao MSE` | <Available /> |

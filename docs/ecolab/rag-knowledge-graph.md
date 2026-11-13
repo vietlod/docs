@@ -48,7 +48,7 @@ Chuyển hóa tổng quan tài liệu thành hệ thống mục tiêu tổng qu�
 
 ### Đề xuất khung biến số và họ mô hình ước lượng
 - **Bảng từ điển biến số đề xuất:** Phân định rõ vai trò biến phụ thuộc, biến giải thích trọng tâm, biến kiểm soát, biến nội sinh/công cụ, công thức đo lường và dấu kỳ vọng ($+$, $-$, $?$).
-- **Gợi ý bộ ước lượng trong 15 họ mô hình:** Đề xuất phương pháp ước lượng chính và các mô hình kiểm tra độ vững tương thích trực tiếp với danh mục **201+ bộ ước lượng** của EcoLab.
+- **Gợi ý bộ ước lượng trong 16 họ mô hình:** Đề xuất phương pháp ước lượng chính và các mô hình kiểm tra độ vững tương thích trực tiếp với danh mục **306 bộ ước lượng** của EcoLab.
 
 ### Bản đồ Đồ thị Tri thức học thuật (Academic Knowledge Graph)
 Trực quan hóa mạng lưới kết nối đa chiều giữa:

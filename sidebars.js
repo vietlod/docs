@@ -235,6 +235,13 @@ const sidebars = {
           "items": [
             "ecolab/model/bootstrap-highdim-inference"
           ]
+        },
+        {
+          "type": "category",
+          "label": "16. Đa cấp, hỗn hợp & khảo sát",
+          "items": [
+            "ecolab/model/multilevel-mixed-survey"
+          ]
         }
       ]
     },
@@ -324,7 +331,10 @@ const sidebars = {
             "vietlod/chapter-01/group-1-1/b001-ols",
             "vietlod/chapter-01/group-1-1/b002-wls",
             "vietlod/chapter-01/group-1-1/b003-gls",
-            "vietlod/chapter-01/group-1-1/b004-fgls"
+            "vietlod/chapter-01/group-1-1/b004-fgls",
+            "vietlod/chapter-01/group-1-1/b202-constrained-least-squares",
+            "vietlod/chapter-01/group-1-1/b203-nonlinear-least-squares",
+            "vietlod/chapter-01/group-1-1/b267-errors-in-variables-eiv"
           ]
         },
         {
@@ -364,7 +374,14 @@ const sidebars = {
             "vietlod/chapter-01/group-1-4/b011-bartik-shift-share-iv",
             "vietlod/chapter-01/group-1-4/b012-lewbel-het-iv",
             "vietlod/chapter-01/group-1-4/b013-control-function-iv",
-            "vietlod/chapter-01/group-1-4/b014-iv-quantile"
+            "vietlod/chapter-01/group-1-4/b014-iv-quantile",
+            "vietlod/chapter-01/group-1-4/b204-continuously-updated-gmm",
+            "vietlod/chapter-01/group-1-4/b205-iterated-gmm",
+            "vietlod/chapter-01/group-1-4/b206-jive-split-sample-iv",
+            "vietlod/chapter-01/group-1-4/b207-reduced-rank-regression",
+            "vietlod/chapter-01/group-1-4/b264-fuller-modified-liml",
+            "vietlod/chapter-01/group-1-4/b265-empirical-likelihood-owen",
+            "vietlod/chapter-01/group-1-4/b266-control-function-endogenous"
           ]
         }
       ]
@@ -401,7 +418,11 @@ const sidebars = {
             "vietlod/chapter-02/group-2-2/b018-lasso-lars",
             "vietlod/chapter-02/group-2-2/b019-elastic-net-cv",
             "vietlod/chapter-02/group-2-2/b020-adaptive-lasso",
-            "vietlod/chapter-02/group-2-2/b021-post-lasso-ols"
+            "vietlod/chapter-02/group-2-2/b021-post-lasso-ols",
+            "vietlod/chapter-02/group-2-2/b208-james-stein-shrinkage",
+            "vietlod/chapter-02/group-2-2/b209-mallows-jackknife-averaging",
+            "vietlod/chapter-02/group-2-2/b210-lasso-iv-belloni",
+            "vietlod/chapter-02/group-2-2/b268-group-lasso-yuan-lin"
           ]
         },
         {
@@ -415,7 +436,9 @@ const sidebars = {
             "vietlod/chapter-02/group-2-3/b022-pcr",
             "vietlod/chapter-02/group-2-3/b023-pls-regression",
             "vietlod/chapter-02/group-2-3/b024-pca-factors",
-            "vietlod/chapter-02/group-2-3/b025-factor-analysis"
+            "vietlod/chapter-02/group-2-3/b025-factor-analysis",
+            "vietlod/chapter-02/group-2-3/b269-sparse-pca-zou",
+            "vietlod/chapter-02/group-2-3/b270-sufficient-dimension-reduction-sir"
           ]
         },
         {
@@ -451,7 +474,9 @@ const sidebars = {
             "vietlod/chapter-03/group-3-1/b028-probit",
             "vietlod/chapter-03/group-3-1/b029-cloglog",
             "vietlod/chapter-03/group-3-1/b030-heteroskedastic-probit",
-            "vietlod/chapter-03/group-3-1/b031-bivariate-probit"
+            "vietlod/chapter-03/group-3-1/b031-bivariate-probit",
+            "vietlod/chapter-03/group-3-1/b211-maximum-score-manski",
+            "vietlod/chapter-03/group-3-1/b271-scobit-skewed-logit"
           ]
         },
         {
@@ -465,7 +490,8 @@ const sidebars = {
             "vietlod/chapter-03/group-3-2/b032-mnlogit",
             "vietlod/chapter-03/group-3-2/b033-conditional-logit",
             "vietlod/chapter-03/group-3-2/b034-nested-logit",
-            "vietlod/chapter-03/group-3-2/b035-multinomial-probit"
+            "vietlod/chapter-03/group-3-2/b035-multinomial-probit",
+            "vietlod/chapter-03/group-3-2/b273-rank-ordered-exploded-logit"
           ]
         },
         {
@@ -477,7 +503,8 @@ const sidebars = {
           },
           "items": [
             "vietlod/chapter-03/group-3-3/b036-ordered-logit",
-            "vietlod/chapter-03/group-3-3/b037-ordered-probit"
+            "vietlod/chapter-03/group-3-3/b037-ordered-probit",
+            "vietlod/chapter-03/group-3-3/b272-stereotype-logit-anderson"
           ]
         },
         {
@@ -524,7 +551,9 @@ const sidebars = {
             "vietlod/chapter-04/group-4-1/b041-poisson",
             "vietlod/chapter-04/group-4-1/b042-negative-binomial",
             "vietlod/chapter-04/group-4-1/b043-generalized-poisson",
-            "vietlod/chapter-04/group-4-1/b044-ppml-hdfe"
+            "vietlod/chapter-04/group-4-1/b044-ppml-hdfe",
+            "vietlod/chapter-04/group-4-1/b274-inverse-gaussian-tweedie-glm",
+            "vietlod/chapter-04/group-4-1/b275-zero-truncated-count-ztp"
           ]
         },
         {
@@ -565,7 +594,9 @@ const sidebars = {
             "vietlod/chapter-04/group-4-4/b052-double-hurdle",
             "vietlod/chapter-04/group-4-4/b053-two-part-continuous",
             "vietlod/chapter-04/group-4-4/b054-fractional-logit",
-            "vietlod/chapter-04/group-4-4/b055-beta-regression"
+            "vietlod/chapter-04/group-4-4/b055-beta-regression",
+            "vietlod/chapter-04/group-4-4/b212-censored-quantile-powell",
+            "vietlod/chapter-04/group-4-4/b276-clm-trimmed-lad-honore"
           ]
         }
       ]
@@ -594,7 +625,9 @@ const sidebars = {
             "vietlod/chapter-05/group-5-1/b061-mundlak-cre",
             "vietlod/chapter-05/group-5-1/b062-fama-macbeth",
             "vietlod/chapter-05/group-5-1/b063-pcse-panel",
-            "vietlod/chapter-05/group-5-1/b064-driscoll-kraay-fe"
+            "vietlod/chapter-05/group-5-1/b064-driscoll-kraay-fe",
+            "vietlod/chapter-05/group-5-1/b219-pesaran-cd-cross-section-dep",
+            "vietlod/chapter-05/group-5-1/b281-unbalanced-bi-way-ec-baltagi"
           ]
         },
         {
@@ -607,7 +640,10 @@ const sidebars = {
           "items": [
             "vietlod/chapter-05/group-5-2/b065-arellano-bond",
             "vietlod/chapter-05/group-5-2/b066-blundell-bond",
-            "vietlod/chapter-05/group-5-2/b067-bias-corrected-lsdv"
+            "vietlod/chapter-05/group-5-2/b067-bias-corrected-lsdv",
+            "vietlod/chapter-05/group-5-2/b214-anderson-hsiao-fd-iv",
+            "vietlod/chapter-05/group-5-2/b215-incidental-params-bias-corrected-fe",
+            "vietlod/chapter-05/group-5-2/b279-quasi-ml-dynamic-panel-hsiao"
           ]
         },
         {
@@ -620,7 +656,8 @@ const sidebars = {
           "items": [
             "vietlod/chapter-05/group-5-3/b068-panel-iv-2sls",
             "vietlod/chapter-05/group-5-3/b069-panel-gmm",
-            "vietlod/chapter-05/group-5-3/b070-hausman-taylor"
+            "vietlod/chapter-05/group-5-3/b070-hausman-taylor",
+            "vietlod/chapter-05/group-5-3/b278-amemiya-macurdy-panel-iv"
           ]
         },
         {
@@ -650,7 +687,13 @@ const sidebars = {
             "vietlod/chapter-05/group-5-5/b077-westerlund-coint",
             "vietlod/chapter-05/group-5-5/b078-cce-mg",
             "vietlod/chapter-05/group-5-5/b079-ccep",
-            "vietlod/chapter-05/group-5-5/b080-cs-ardl"
+            "vietlod/chapter-05/group-5-5/b080-cs-ardl",
+            "vietlod/chapter-05/group-5-5/b213-swamy-random-coefficients",
+            "vietlod/chapter-05/group-5-5/b216-grouped-fixed-effects-bonhomme",
+            "vietlod/chapter-05/group-5-5/b217-pedroni-kao-panel-coint",
+            "vietlod/chapter-05/group-5-5/b218-ips-llc-panel-unit-root",
+            "vietlod/chapter-05/group-5-5/b277-interactive-fe-bai",
+            "vietlod/chapter-05/group-5-5/b280-chudik-pesaran-dccemg"
           ]
         },
         {
@@ -689,7 +732,8 @@ const sidebars = {
             "vietlod/chapter-06/group-6-1/b086-df-gls",
             "vietlod/chapter-06/group-6-1/b087-kpss",
             "vietlod/chapter-06/group-6-1/b088-zivot-andrews",
-            "vietlod/chapter-06/group-6-1/b089-johansen"
+            "vietlod/chapter-06/group-6-1/b089-johansen",
+            "vietlod/chapter-06/group-6-1/b282-ers-dfgls-ng-perron"
           ]
         },
         {
@@ -704,7 +748,10 @@ const sidebars = {
             "vietlod/chapter-06/group-6-2/b091-ma",
             "vietlod/chapter-06/group-6-2/b092-arma",
             "vietlod/chapter-06/group-6-2/b093-arima",
-            "vietlod/chapter-06/group-6-2/b094-sarima"
+            "vietlod/chapter-06/group-6-2/b094-sarima",
+            "vietlod/chapter-06/group-6-2/b220-hildreth-lu-ar1",
+            "vietlod/chapter-06/group-6-2/b221-diebold-mariano-forecast-eval",
+            "vietlod/chapter-06/group-6-2/b222-model-confidence-set-mcs"
           ]
         },
         {
@@ -731,7 +778,8 @@ const sidebars = {
           "items": [
             "vietlod/chapter-06/group-6-4/b099-sarimax",
             "vietlod/chapter-06/group-6-4/b100-unobserved-components",
-            "vietlod/chapter-06/group-6-4/b101-dynamic-factor"
+            "vietlod/chapter-06/group-6-4/b101-dynamic-factor",
+            "vietlod/chapter-06/group-6-4/b283-beveridge-nelson-decomposition"
           ]
         },
         {
@@ -746,7 +794,9 @@ const sidebars = {
             "vietlod/chapter-06/group-6-5/b103-star-smooth-transition",
             "vietlod/chapter-06/group-6-5/b104-midas-regression",
             "vietlod/chapter-06/group-6-5/b105-bai-perron-break",
-            "vietlod/chapter-06/group-6-5/b106-psy-bubble-gsadf"
+            "vietlod/chapter-06/group-6-5/b106-psy-bubble-gsadf",
+            "vietlod/chapter-06/group-6-5/b223-nonlinear-threshold-ecm",
+            "vietlod/chapter-06/group-6-5/b284-functional-coef-far-cai"
           ]
         }
       ]
@@ -770,7 +820,10 @@ const sidebars = {
             "vietlod/chapter-07/group-7-1/b107-var",
             "vietlod/chapter-07/group-7-1/b110-vecm",
             "vietlod/chapter-07/group-7-1/b111-svar",
-            "vietlod/chapter-07/group-7-1/b112-bvar"
+            "vietlod/chapter-07/group-7-1/b112-bvar",
+            "vietlod/chapter-07/group-7-1/b224-varma-multivariate",
+            "vietlod/chapter-07/group-7-1/b287-global-var-pesaran-gvar",
+            "vietlod/chapter-07/group-7-1/b288-proxy-svar-external-iv"
           ]
         },
         {
@@ -782,7 +835,9 @@ const sidebars = {
           },
           "items": [
             "vietlod/chapter-07/group-7-2/b108-granger-causality",
-            "vietlod/chapter-07/group-7-2/b109-impulse-response"
+            "vietlod/chapter-07/group-7-2/b109-impulse-response",
+            "vietlod/chapter-07/group-7-2/b225-hatemi-j-asymmetric-causality",
+            "vietlod/chapter-07/group-7-2/b286-mincer-zarnowitz-forecast-combination"
           ]
         },
         {
@@ -808,7 +863,8 @@ const sidebars = {
           "items": [
             "vietlod/chapter-07/group-7-4/b116-favar",
             "vietlod/chapter-07/group-7-4/b117-tvp-var",
-            "vietlod/chapter-07/group-7-4/b118-spillover-connectedness"
+            "vietlod/chapter-07/group-7-4/b118-spillover-connectedness",
+            "vietlod/chapter-07/group-7-4/b285-nowcasting-dynamic-factor-banbura"
           ]
         },
         {
@@ -848,7 +904,11 @@ const sidebars = {
             "vietlod/chapter-08/group-8-1/b125-gjr-garch",
             "vietlod/chapter-08/group-8-1/b126-tarch",
             "vietlod/chapter-08/group-8-1/b127-aparch",
-            "vietlod/chapter-08/group-8-1/b128-figarch"
+            "vietlod/chapter-08/group-8-1/b128-figarch",
+            "vietlod/chapter-08/group-8-1/b226-stochastic-volatility-taylor",
+            "vietlod/chapter-08/group-8-1/b227-ms-garch-regime",
+            "vietlod/chapter-08/group-8-1/b228-har-rv-cj-jump",
+            "vietlod/chapter-08/group-8-1/b229-multiplicative-error-mem"
           ]
         },
         {
@@ -862,7 +922,10 @@ const sidebars = {
             "vietlod/chapter-08/group-8-2/b129-ewma-volatility",
             "vietlod/chapter-08/group-8-2/b130-har-rv",
             "vietlod/chapter-08/group-8-2/b131-garch-midas",
-            "vietlod/chapter-08/group-8-2/b132-covar-systemic-risk"
+            "vietlod/chapter-08/group-8-2/b132-covar-systemic-risk",
+            "vietlod/chapter-08/group-8-2/b230-evt-peaks-over-threshold-gpd",
+            "vietlod/chapter-08/group-8-2/b291-realized-garch-hansen-huang",
+            "vietlod/chapter-08/group-8-2/b292-conditional-es-acerbi-backtest"
           ]
         },
         {
@@ -874,7 +937,10 @@ const sidebars = {
           },
           "items": [
             "vietlod/chapter-08/group-8-3/b133-ccc-garch",
-            "vietlod/chapter-08/group-8-3/b134-dcc-garch"
+            "vietlod/chapter-08/group-8-3/b134-dcc-garch",
+            "vietlod/chapter-08/group-8-3/b231-ledoit-wolf-shrinkage-cov",
+            "vietlod/chapter-08/group-8-3/b289-bekk-mgarch-engle-kroner",
+            "vietlod/chapter-08/group-8-3/b290-copula-garch-patton"
           ]
         },
         {
@@ -907,7 +973,9 @@ const sidebars = {
           },
           "items": [
             "vietlod/chapter-09/group-9-1/b136-propensity-score-matching",
-            "vietlod/chapter-09/group-9-1/b137-entropy-balancing"
+            "vietlod/chapter-09/group-9-1/b137-entropy-balancing",
+            "vietlod/chapter-09/group-9-1/b236-generalized-propensity-score-gps",
+            "vietlod/chapter-09/group-9-1/b237-rosenbaum-sensitivity-bounds"
           ]
         },
         {
@@ -920,7 +988,9 @@ const sidebars = {
           "items": [
             "vietlod/chapter-09/group-9-2/b140-twfe-did",
             "vietlod/chapter-09/group-9-2/b141-event-study-did",
-            "vietlod/chapter-09/group-9-2/b143-callaway-santanna-did"
+            "vietlod/chapter-09/group-9-2/b143-callaway-santanna-did",
+            "vietlod/chapter-09/group-9-2/b232-triple-difference-ddd",
+            "vietlod/chapter-09/group-9-2/b233-changes-in-changes-athey-imbens"
           ]
         },
         {
@@ -936,7 +1006,8 @@ const sidebars = {
             "vietlod/chapter-09/group-9-3/b155-rdrobust-sharp-fuzzy",
             "vietlod/chapter-09/group-9-3/b156-regression-kink-rkd",
             "vietlod/chapter-09/group-9-3/b157-bunching-estimator",
-            "vietlod/chapter-09/group-9-3/b158-marginal-treatment-effects"
+            "vietlod/chapter-09/group-9-3/b158-marginal-treatment-effects",
+            "vietlod/chapter-09/group-9-3/b239-quantile-rdd-frandsen"
           ]
         },
         {
@@ -970,7 +1041,14 @@ const sidebars = {
             "vietlod/chapter-09/group-9-5/b147-wooldridge-etwfe",
             "vietlod/chapter-09/group-9-5/b148-lp-did",
             "vietlod/chapter-09/group-9-5/b149-honest-did-sensitivity",
-            "vietlod/chapter-09/group-9-5/b152-synthetic-did"
+            "vietlod/chapter-09/group-9-5/b152-synthetic-did",
+            "vietlod/chapter-09/group-9-5/b234-tmle-targeted-mle",
+            "vietlod/chapter-09/group-9-5/b235-causal-mediation-imai",
+            "vietlod/chapter-09/group-9-5/b238-optimal-policy-tree-kitagawa",
+            "vietlod/chapter-09/group-9-5/b293-marginal-treatment-effects-mte",
+            "vietlod/chapter-09/group-9-5/b294-lee-trimming-bounds",
+            "vietlod/chapter-09/group-9-5/b295-changes-in-quantiles-dfl-dinardo",
+            "vietlod/chapter-09/group-9-5/b296-matrix-completion-panel-athey"
           ]
         }
       ]
@@ -1007,7 +1085,8 @@ const sidebars = {
           },
           "items": [
             "vietlod/chapter-10/group-10-2/b166-spatial-panel-fe",
-            "vietlod/chapter-10/group-10-2/b167-spatial-panel-re"
+            "vietlod/chapter-10/group-10-2/b167-spatial-panel-re",
+            "vietlod/chapter-10/group-10-2/b297-dynamic-spatial-panel-yu-lee"
           ]
         },
         {
@@ -1019,7 +1098,11 @@ const sidebars = {
           },
           "items": [
             "vietlod/chapter-10/group-10-3/b168-mgwr-spatial",
-            "vietlod/chapter-10/group-10-3/b169-conley-spatial-hac"
+            "vietlod/chapter-10/group-10-3/b169-conley-spatial-hac",
+            "vietlod/chapter-10/group-10-3/b240-eigenvector-spatial-filtering",
+            "vietlod/chapter-10/group-10-3/b241-spatial-probit-lesage",
+            "vietlod/chapter-10/group-10-3/b298-gs2sls-kelejian-prucha",
+            "vietlod/chapter-10/group-10-3/b299-matrix-exponential-spatial-mess"
           ]
         },
         {
@@ -1088,7 +1171,10 @@ const sidebars = {
           },
           "items": [
             "vietlod/chapter-11/group-11-4/b177-discrete-time-hazard",
-            "vietlod/chapter-11/group-11-4/b178-fine-gray-competing-risks"
+            "vietlod/chapter-11/group-11-4/b178-fine-gray-competing-risks",
+            "vietlod/chapter-11/group-11-4/b242-acd-conditional-duration",
+            "vietlod/chapter-11/group-11-4/b300-shared-gamma-frailty-hazard",
+            "vietlod/chapter-11/group-11-4/b301-piecewise-exponential-hazard"
           ]
         }
       ]
@@ -1112,7 +1198,8 @@ const sidebars = {
             "vietlod/chapter-12/group-12-1/b179-sur",
             "vietlod/chapter-12/group-12-1/b180-three-stage-ls",
             "vietlod/chapter-12/group-12-1/b181-system-gmm",
-            "vietlod/chapter-12/group-12-1/b182-quaids-demand-system"
+            "vietlod/chapter-12/group-12-1/b182-quaids-demand-system",
+            "vietlod/chapter-12/group-12-1/b243-simulated-method-of-moments-smm"
           ]
         },
         {
@@ -1125,7 +1212,9 @@ const sidebars = {
           "items": [
             "vietlod/chapter-12/group-12-2/b183-bayesian-linear",
             "vietlod/chapter-12/group-12-2/b184-bayesian-var",
-            "vietlod/chapter-12/group-12-2/b185-bma-model-averaging"
+            "vietlod/chapter-12/group-12-2/b185-bma-model-averaging",
+            "vietlod/chapter-12/group-12-2/b302-bayesian-stochastic-search-ssvs",
+            "vietlod/chapter-12/group-12-2/b303-bayesian-state-space-tvp"
           ]
         },
         {
@@ -1150,7 +1239,8 @@ const sidebars = {
             "id": "vietlod/chapter-12/group-12-4/index"
           },
           "items": [
-            "vietlod/chapter-12/group-12-4/b190-lstm-forecaster"
+            "vietlod/chapter-12/group-12-4/b190-lstm-forecaster",
+            "vietlod/chapter-12/group-12-4/b244-bart-additive-trees"
           ]
         }
       ]
@@ -1173,7 +1263,8 @@ const sidebars = {
           "items": [
             "vietlod/chapter-13/group-13-1/b191-oaxaca-blinder",
             "vietlod/chapter-13/group-13-1/b192-rif-regression",
-            "vietlod/chapter-13/group-13-1/b193-oaxaca-rif-decomposition"
+            "vietlod/chapter-13/group-13-1/b193-oaxaca-rif-decomposition",
+            "vietlod/chapter-13/group-13-1/b304-chernozhukov-counterfactual-dist"
           ]
         }
       ]
@@ -1197,7 +1288,10 @@ const sidebars = {
             "vietlod/chapter-14/group-14-1/b194-sfa-frontier",
             "vietlod/chapter-14/group-14-1/b195-dea-efficiency",
             "vietlod/chapter-14/group-14-1/b196-malmquist-productivity",
-            "vietlod/chapter-14/group-14-1/b197-acf-production-tfp"
+            "vietlod/chapter-14/group-14-1/b197-acf-production-tfp",
+            "vietlod/chapter-14/group-14-1/b245-translog-production-jorgenson",
+            "vietlod/chapter-14/group-14-1/b246-solow-growth-accounting-tfp",
+            "vietlod/chapter-14/group-14-1/b305-true-fixed-effects-sfa-greene"
           ]
         }
       ]
@@ -1219,7 +1313,11 @@ const sidebars = {
           },
           "items": [
             "vietlod/chapter-15/group-15-1/b198-local-polynomial-npregress",
-            "vietlod/chapter-15/group-15-1/b199-gam-semiparametric"
+            "vietlod/chapter-15/group-15-1/b199-gam-semiparametric",
+            "vietlod/chapter-15/group-15-1/b247-partially-linear-robinson",
+            "vietlod/chapter-15/group-15-1/b248-series-bspline-newey",
+            "vietlod/chapter-15/group-15-1/b249-nonparametric-iv-newey-powell",
+            "vietlod/chapter-15/group-15-1/b306-orthogonal-sieve-series-chen"
           ]
         },
         {
@@ -1231,7 +1329,61 @@ const sidebars = {
           },
           "items": [
             "vietlod/chapter-15/group-15-2/b200-wild-cluster-bootstrap",
-            "vietlod/chapter-15/group-15-2/b201-randomization-inference"
+            "vietlod/chapter-15/group-15-2/b201-randomization-inference",
+            "vietlod/chapter-15/group-15-2/b250-sieve-bootstrap-buhlmann",
+            "vietlod/chapter-15/group-15-2/b251-pairs-double-bootstrap"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "16. Kinh tế lượng đa cấp, hiệu ứng hỗn hợp và khảo sát phức hợp",
+      "link": {
+        "type": "doc",
+        "id": "vietlod/chapter-16/index"
+      },
+      "items": [
+        {
+          "type": "category",
+          "label": "16.1. Mô hình tuyến tính phân cấp và hệ số ngẫu nhiên hỗn hợp",
+          "link": {
+            "type": "doc",
+            "id": "vietlod/chapter-16/group-16-1/index"
+          },
+          "items": [
+            "vietlod/chapter-16/group-16-1/b252-multilevel-random-intercept-lmm",
+            "vietlod/chapter-16/group-16-1/b253-multilevel-random-slopes-lmm",
+            "vietlod/chapter-16/group-16-1/b254-three-level-nested-lmm",
+            "vietlod/chapter-16/group-16-1/b255-mundlak-within-between-lmm"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "16.2. Mô hình hỗn hợp tuyến tính tổng quát và log tuyến tính phân loại",
+          "link": {
+            "type": "doc",
+            "id": "vietlod/chapter-16/group-16-2/index"
+          },
+          "items": [
+            "vietlod/chapter-16/group-16-2/b256-mixed-effects-logit-glmm",
+            "vietlod/chapter-16/group-16-2/b257-mixed-effects-poisson-glmm",
+            "vietlod/chapter-16/group-16-2/b258-population-averaged-gee",
+            "vietlod/chapter-16/group-16-2/b259-loglinear-contingency-glm"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "16.3. Thiết kế khảo sát phức hợp, hiệu chuẩn trọng số và ước lượng vùng nhỏ",
+          "link": {
+            "type": "doc",
+            "id": "vietlod/chapter-16/group-16-3/index"
+          },
+          "items": [
+            "vietlod/chapter-16/group-16-3/b260-survey-taylor-linearized-reg",
+            "vietlod/chapter-16/group-16-3/b261-survey-calibration-greg",
+            "vietlod/chapter-16/group-16-3/b262-survey-replicate-brr-jk",
+            "vietlod/chapter-16/group-16-3/b263-fay-herriot-small-area"
           ]
         }
       ]

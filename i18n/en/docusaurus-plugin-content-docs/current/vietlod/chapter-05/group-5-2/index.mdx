@@ -4,7 +4,7 @@ title: "5.2. Dynamic Panel Data Estimators"
 sidebar_label: "5.2. Dynamic Panel Data Estimators"
 sidebar_position: 2
 slug: /vietlod/chapter-05/group-5-2
-description: "How-To User Guide for Methodological Part 5.2 — Dynamic Panel Data Estimators in Chapter 5: comparing and executing 3 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
+description: "How-To User Guide for Methodological Part 5.2 — Dynamic Panel Data Estimators in Chapter 5: comparing and executing 6 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
 keywords:
   - VietLOD Part 5.2
   - Dynamic Panel Data Estimators
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Methodological Part 5.2. Dynamic Panel Data Estimators** in [5. Static, Dynamic and Cross-Sectionally Dependent Panel Econometrics](/en/vietlod/chapter-05) provides step-by-step How-To implementation guides for **3 econometric model lessons** spanning from Section `5.2.1` to `5.2.3`. Full theoretical derivations are available at [VietLOD Part 5.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-05-kinh-te-luong-du-lieu-bang-tinh-dong-va-phu-thuoc-cheo/nhom-5-2-dynamic) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+**Methodological Part 5.2. Dynamic Panel Data Estimators** in [5. Static, Dynamic and Cross-Sectionally Dependent Panel Econometrics](/en/vietlod/chapter-05) provides step-by-step How-To implementation guides for **6 econometric model lessons** spanning from Section `5.2.1` to `5.2.6`. Full theoretical derivations are available at [VietLOD Part 5.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-05-kinh-te-luong-du-lieu-bang-tinh-dong-va-phu-thuoc-cheo/nhom-5-2-dynamic) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="How-To Guide for Part 5.2: Dynamic Panel Data Estimators in Stata 18, R 4.x, and Python 3.11+"
@@ -78,6 +78,11 @@ $$
 | **5.2.2** · [Blundell-Bond Dynamic Panel GMM](/en/vietlod/chapter-05/group-5-2/b066-blundell-bond) | `blundell_bond` | `xtdpdsys y x1 x2, lags(1) vce(robust)` | `plm::pgmm(y ~ lag(y, 1) + x1 + x2 \| lag(y, 2:4), data = pdata, transformation = 'ld')` | `abond('y L1.y x1 x2 \| gmm(y, 2:4) \| iv(x1 x2)', df, ['id', 't'])` | <Available /> |
 | **5.2.3** · [Kiviet-Bruno Bias-Corrected LSDV](/en/vietlod/chapter-05/group-5-2/b067-bias-corrected-lsdv) | `bias_corrected_lsdv` | `xtlsdvc y x1 x2, initial(ab) vcov(50)` | `plm::plm(y ~ lag(y, 1) + x1 + x2, data = pdata, model = 'within')` | `PanelOLS.from_formula('y ~ l1_y + x1 + x2 + EntityEffects', data=pdata).fit()` | <Available /> |
 
+
+| **5.2.4** · [Anderson Hsiao First Difference Instrumental Variables](/en/vietlod/chapter-05/group-5-2/b214-anderson-hsiao-fd-iv) | `anderson_hsiao_fd_iv` | `ivregress 2sls D.y D.(x1 x2) (LD.y = L2.y), vce(cluster id)` | `plm::plm(model = 'fd') + AER::ivreg` | `First-difference IV with lagged levels y_{i,t-2} and cluster-robust SE` | <Available /> |
+| **5.2.5** · [Split Panel Jackknife Bias Corrected Fixed Effects](/en/vietlod/chapter-05/group-5-2/b215-incidental-params-bias-corrected-fe) | `incidental_params_bias_corrected_fe` | `xtreg y x1 x2, fe vce(cluster id)` | `alpaca::biasCorr / plm split-panel jackknife` | `Dhaene-Jochmans split-panel half-sample jackknife FE` | <Available /> |
+| **5.2.6** · [Hsiao Pesaran Tahmiscioglu Transformed Likelihood Dynamic Panel QMLE](/en/vietlod/chapter-05/group-5-2/b279-quasi-ml-dynamic-panel-hsiao) | `quasi_ml_dynamic_panel_hsiao` | `xtdpdqml y x1 x2, fe / xtreg y x1 x2, fe vce(robust)` | `OrthoPanels /plm FD-QMLE optimization` | `Hsiao-Pesaran-Tahmiscioglu (2002) first-difference tri-diagonal QMLE` | <Available /> |
+
 ## 5.2.4. Standard Implementation Workflow for Part 5.2
 
 <Steps>
@@ -87,7 +92,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Step 2. Select the Optimal Estimator for Your Error and Sample Structure</h3>
-    <p>Compare the estimators from <code>5.2.1</code> to <code>5.2.3</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
+    <p>Compare the estimators from <code>5.2.1</code> to <code>5.2.6</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab</h3>

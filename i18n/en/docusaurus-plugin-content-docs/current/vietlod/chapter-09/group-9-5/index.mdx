@@ -4,7 +4,7 @@ title: "9.5. Modern Heterogeneity-Robust Staggered Difference-in-Differences"
 sidebar_label: "9.5. Modern Heterogeneity-Robust Staggered Difference-in-Differences"
 sidebar_position: 5
 slug: /vietlod/chapter-09/group-9-5
-description: "How-To User Guide for Methodological Part 9.5 — Modern Heterogeneity-Robust Staggered Difference-in-Differences in Chapter 9: comparing and executing 8 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
+description: "How-To User Guide for Methodological Part 9.5 — Modern Heterogeneity-Robust Staggered Difference-in-Differences in Chapter 9: comparing and executing 15 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
 keywords:
   - VietLOD Part 9.5
   - Modern Heterogeneity-Robust Staggered Difference-in-Differences
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Methodological Part 9.5. Modern Heterogeneity-Robust Staggered Difference-in-Differences** in [9. Causal Inference and Modern Policy Evaluation](/en/vietlod/chapter-09) provides step-by-step How-To implementation guides for **8 econometric model lessons** spanning from Section `9.5.1` to `9.5.8`. Full theoretical derivations are available at [VietLOD Part 9.5](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-09-suy-luan-nhan-qua-va-danh-gia-tac-dong-chinh-sach/nhom-9-5-staggered-did-modern) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+**Methodological Part 9.5. Modern Heterogeneity-Robust Staggered Difference-in-Differences** in [9. Causal Inference and Modern Policy Evaluation](/en/vietlod/chapter-09) provides step-by-step How-To implementation guides for **15 econometric model lessons** spanning from Section `9.5.1` to `9.5.15`. Full theoretical derivations are available at [VietLOD Part 9.5](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-09-suy-luan-nhan-qua-va-danh-gia-tac-dong-chinh-sach/nhom-9-5-staggered-did-modern) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="How-To Guide for Part 9.5: Modern Heterogeneity-Robust Staggered Difference-in-Differences in Stata 18, R 4.x, and Python 3.11+"
@@ -113,6 +113,15 @@ $$
 | **9.5.7** · [Rambachan-Roth HonestDiD Parallel-Trends Sensitivity](/en/vietlod/chapter-09/group-9-5/b149-honest-did-sensitivity) | `honest_did_sensitivity` | `honestdid, pre(1/4) post(5/8) mvec(0.5(0.5)2)` | `HonestDiD::createSensitivityResults_relativeMagnitudes(betahat, sigma, numPrePeriods = 4, numPostPeriods = 4)` | `scipy.optimize.linprog(c_obj, A_ub=A_rm, b_ub=b_rm)` | <Available /> |
 | **9.5.8** · [Synthetic Difference-in-Differences](/en/vietlod/chapter-09/group-9-5/b152-synthetic-did) | `synthetic_did` | `sdid y id year treat, vce(placebo) reps(200)` | `synthdid::synthdid_estimate(Y, N0, T0)` | `SynthDID().fit(Y_panel, N0, T0)` | <Available /> |
 
+
+| **9.5.9** · [Targeted Maximum Likelihood Estimation van der Laan Rubin](/en/vietlod/chapter-09/group-9-5/b234-tmle-targeted-mle) | `tmle_targeted_mle` | `teffects aipw (y x1 x2) (treat x1 x2), vce(robust)` | `tmle::tmle` | `Clever-covariate targeting step + Efficient Influence Function SE` | <Available /> |
+| **9.5.10** · [Potential Outcomes Causal Mediation ACME and ADE Imai Keele Yamamoto](/en/vietlod/chapter-09/group-9-5/b235-causal-mediation-imai) | `causal_mediation_imai` | `mediate (y x1) (m x1) (treat) / sem + estat teffects` | `mediation::mediate(med.fit, out.fit, treat = 'treat', mediator = 'm')` | `Sequential ignorability mediator/outcome decomposition + ACME/ADE inference` | <Available /> |
+| **9.5.11** · [Empirical Welfare Maximization and Optimal Policy Tree Kitagawa Tetenov Athey Wager](/en/vietlod/chapter-09/group-9-5/b238-optimal-policy-tree-kitagawa) | `optimal_policy_tree_kitagawa` | `teffects ra (y x1 x2) (treat), vce(robust)` | `policytree::policy_tree + grf::double_robust_scores` | `Doubly-robust welfare scores + optimal threshold policy rule search` | <Available /> |
+| **9.5.12** · [Heckman Vytlacil Local IV Marginal Treatment Effects](/en/vietlod/chapter-09/group-9-5/b293-marginal-treatment-effects-mte) | `marginal_treatment_effects_mte` | `mtefe y (treat = z_iv) x1 / teffects ra (y x1) (treat)` | `ivmte::ivmte / mtefe::mtefe` | `Local Instrumental Variables polynomial propensity derivative MTE + ATE/ATT integration` | <Available /> |
+| **9.5.13** · [Lee Sharp Nonparametric Sample Selection Treatment Effect Bounds](/en/vietlod/chapter-09/group-9-5/b294-lee-trimming-bounds) | `lee_trimming_bounds` | `leebounds y treat, cieffect / regress y treat x1, vce(robust)` | `leebounds::leebounds` | `Lee (2009) upper/lower quantile-trimmed sharp bounds + Imbens-Manski (2004) CI` | <Available /> |
+| **9.5.14** · [DiNardo Fortin Lemieux Counterfactual Reweighting and Changes in Changes](/en/vietlod/chapter-09/group-9-5/b295-changes-in-quantiles-dfl-dinardo) | `changes_in_quantiles_dfl_dinardo` | `dfl treat x1, outcome(y) / teffects ipwra (y x1) (treat x1)` | `qte::CiC(y ~ treat, t = year, tmin1 = t0, t = t1, data = df)` | `DiNardo-Fortin-Lemieux propensity-odds reweighting + Athey-Imbens quantile counterfactuals` | <Available /> |
+| **9.5.15** · [Athey Imbens Nuclear Norm Matrix Completion Causal Panel Estimator](/en/vietlod/chapter-09/group-9-5/b296-matrix-completion-panel-athey) | `matrix_completion_panel_athey` | `fect y, treat(treat) unit(entity) time(year) cov(x1) method(mc)` | `fect::fect(y ~ treat + x1, data = df, index = c('entity', 'year'), method = 'mc')` | `Athey et al. (2021) Singular-Value-Thresholding (SVT) nuclear-norm matrix completion + ATT` | <Available /> |
+
 ## 9.5.4. Standard Implementation Workflow for Part 9.5
 
 <Steps>
@@ -122,7 +131,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Step 2. Select the Optimal Estimator for Your Error and Sample Structure</h3>
-    <p>Compare the estimators from <code>9.5.1</code> to <code>9.5.8</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
+    <p>Compare the estimators from <code>9.5.1</code> to <code>9.5.15</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab</h3>

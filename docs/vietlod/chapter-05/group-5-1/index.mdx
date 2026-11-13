@@ -4,7 +4,7 @@ title: "5.1. Dữ liệu bảng tĩnh"
 sidebar_label: "5.1. Dữ liệu bảng tĩnh"
 sidebar_position: 1
 slug: /vietlod/chapter-05/group-5-1
-description: "Hướng dẫn thực hành Phần 5.1 — Dữ liệu bảng tĩnh thuộc Chương 5: so sánh và thực thi 9 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Phần 5.1 — Dữ liệu bảng tĩnh thuộc Chương 5: so sánh và thực thi 11 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
   - Phần 5.1 VietLOD
   - Dữ liệu bảng tĩnh
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Phần 5.1. Dữ liệu bảng tĩnh** thuộc [5. Kinh tế lượng dữ liệu bảng tĩnh, động và phụ thuộc chéo](/vietlod/chapter-05) cung cấp quy trình thực hành từng bước cho **9 bài học mô hình kinh tế lượng** từ mục `5.1.1` đến `5.1.9`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 5.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-05-kinh-te-luong-du-lieu-bang-tinh-dong-va-phu-thuoc-cheo/nhom-5-1-static) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+**Phần 5.1. Dữ liệu bảng tĩnh** thuộc [5. Kinh tế lượng dữ liệu bảng tĩnh, động và phụ thuộc chéo](/vietlod/chapter-05) cung cấp quy trình thực hành từng bước cho **11 bài học mô hình kinh tế lượng** từ mục `5.1.1` đến `5.1.11`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 5.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-05-kinh-te-luong-du-lieu-bang-tinh-dong-va-phu-thuoc-cheo/nhom-5-1-static) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="Hướng dẫn thực hành Phần 5.1: Dữ liệu bảng tĩnh trên Stata 18, R 4.x và Python 3.11+"
@@ -120,6 +120,10 @@ $$
 | **5.1.8** · [Sai số chuẩn hiệu chỉnh dữ liệu bảng Beck–Katz (PCSE)](/vietlod/chapter-05/group-5-1/b063-pcse-panel) | `pcse_panel` | `xtpcse y x1 x2, correlation(ar1) hetonly` | `pcse::pcse(lm(y ~ x1 + x2, data = df), groupN = df$id, groupT = df$t)` | `PanelOLS.from_formula('y ~ 1 + x1 + x2', data=pdata).fit(cov_type='kernel')` | <Available /> |
 | **5.1.9** · [Sai số chuẩn bền vững không gian–thời gian Driscoll–Kraay](/vietlod/chapter-05/group-5-1/b064-driscoll-kraay-fe) | `driscoll_kraay_fe` | `xtscc y x1 x2, fe lag(3)` | `lmtest::coeftest(plm_fe, vcov = plm::vcovSCC(plm_fe, maxlag = 3))` | `PanelOLS.from_formula('y ~ 1 + x1 + x2 + EntityEffects', data=pdata).fit(cov_type='kernel', kernel='bartlett', bandwidth=3)` | <Available /> |
 
+
+| **5.1.10** · [Mô hình dữ liệu bảng kiểm soát phụ thuộc chéo Pesaran CD](/vietlod/chapter-05/group-5-1/b219-pesaran-cd-cross-section-dep) | `pesaran_cd_cross_section_dep` | `xtreg y x1 x2, fe vce(cluster id) + xtcsd, pesaran` | `plm::pcdtest(fit, test = 'cd')` | `Within FE + pairwise correlation Pesaran CD z-statistic` | <Available /> |
+| **5.1.11** · [Bình phương tối thiểu tổng quát hai chiều sai số ngẫu nhiên bảng không cân bằng Wansbeek Kapteyn Baltagi](/vietlod/chapter-05/group-5-1/b281-unbalanced-bi-way-ec-baltagi) | `unbalanced_bi_way_ec_baltagi` | `xtreg y x1 x2 i.year, re vce(robust)` | `plm::plm(y ~ x1 + x2, effect = 'twoways', model = 'random', random.method = 'walhus')` | `Wansbeek-Kapteyn / Swamy-Arora two-way variance components FGLS` | <Available /> |
+
 ## 5.1.4. Quy trình thực hành chuẩn cho Phần 5.1
 
 <Steps>
@@ -129,7 +133,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu</h3>
-    <p>So sánh các bài học mô hình từ <code>5.1.1</code> đến <code>5.1.9</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
+    <p>So sánh các bài học mô hình từ <code>5.1.1</code> đến <code>5.1.11</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab</h3>

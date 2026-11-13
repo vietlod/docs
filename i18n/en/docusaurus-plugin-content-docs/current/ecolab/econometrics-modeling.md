@@ -1,12 +1,12 @@
 ---
 title: Quantitative Analysis
 sidebar_position: 3
-description: Complete workflow for estimating 201+ econometric models across 15 families and 58 sub-models on Python, R, and Stata 18 MP with separated Pre/Postestimation diagnostics and .zip replication bundles in EcoLab.
+description: Complete workflow for estimating 306 econometric models across 16 families and 61 sub-models on Python, R, and Stata 18 MP with separated Pre/Postestimation diagnostics and .zip replication bundles in EcoLab.
 ---
 
-# Econometrics Estimation & Modeling (201+ Estimators)
+# Econometrics Estimation & Modeling (306 Estimators)
 
-EcoLab's **Modeling** workspace (`v1.5.0`) connects directly to the **EcoData Tri-Engine** (**Python**, **R** via the RMCP gateway, and **Stata 18 MP**), exposing a dynamically synchronized catalog of **201+ core estimators across 15 model families and 58 sub-models** covering cross-sectional, time-series, longitudinal panel, spatial, and structural microeconometric designs.
+EcoLab's **Modeling** workspace (`v1.12.0`) connects directly to the **EcoData Tri-Engine** (**Python**, **R** via the RMCP gateway, and **Stata 18 MP**), exposing a dynamically synchronized catalog of **306 estimators across 16 model families and 61 sub-models** covering cross-sectional, time-series, longitudinal panel, spatial, and structural microeconometric designs.
 
 Whenever an EcoData administrator publishes a newly verified (`B1–B4`) estimator, EcoLab refreshes its model catalog from `GET /api/catalog/manifest` automatically within **`<= 60` seconds**.
 

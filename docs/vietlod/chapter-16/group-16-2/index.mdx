@@ -1,0 +1,82 @@
+---
+id: index
+title: "16.2. Mô hình hỗn hợp tuyến tính tổng quát và log tuyến tính phân loại"
+sidebar_label: "16.2. Mô hình hỗn hợp tuyến tính tổng quát và log tuyến tính phân loại"
+sidebar_position: 2
+slug: /vietlod/chapter-16/group-16-2
+description: "Hướng dẫn thực hành Phần 16.2 — Mô hình hỗn hợp tuyến tính tổng quát và log tuyến tính phân loại thuộc Chương 16: so sánh và thực thi 4 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+keywords:
+  - Phần 16.2 VietLOD
+  - "Mô hình hỗn hợp tuyến tính tổng quát và log tuyến tính phân loại"
+  - Stata 18
+  - R 4.x
+  - Python 3.11
+---
+
+# 16.2. Mô hình hỗn hợp tuyến tính tổng quát và log tuyến tính phân loại
+
+<Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
+
+**Phần 16.2. Mô hình hỗn hợp tuyến tính tổng quát và log tuyến tính phân loại** thuộc [16. Kinh tế lượng đa cấp, hiệu ứng hỗn hợp và khảo sát phức hợp](/vietlod/chapter-16) cung cấp quy trình thực hành từng bước cho **4 bài học mô hình kinh tế lượng** từ mục `16.2.1` đến `16.2.4`, hỗ trợ thực thi đám mây trực tiếp trên [EcoLab](https://ecolab.io.vn).
+
+<VideoTutorial
+  title="Hướng dẫn thực hành Phần 16.2: Mô hình hỗn hợp tuyến tính tổng quát và log tuyến tính phân loại trên Stata 18, R 4.x và Python 3.11+"
+  url="https://youtu.be/FtiqlHQ7054?list=PLYrLDn3rIFnesSAJW8uy9VAPq-j6IVKO3"
+/>
+
+## 16.2.1. Bản chất phương pháp và hệ phương trình định danh
+
+- **Câu hỏi nghiên cứu trọng tâm**: Làm thế nào để ước lượng hiệu quả cấu trúc phân cấp đa bậc và suy luận chính xác trên dữ liệu khảo sát phức hợp có phân tầng, chọn mẫu cụm PSU và trọng số xác suất như VHLSS hay DHS?
+- **Kiểm định chẩn đoán bắt buộc**: Hệ số tương quan nội cụm ICC, kiểm định tỷ số hợp lý biên hỗn hợp Chibar2 LR, hệ số hiệu ứng thiết kế Kish DEFF và kiểm định tính ngoại sinh trọng số khảo sát DuMouchel–Duncan.
+
+$$
+Y_{ij} = X_{ij}^\top \beta + Z_{ij}^\top u_j + \varepsilon_{ij}, \quad u_j \sim \mathcal{N}(0, \Sigma_u), \quad \varepsilon_{ij} \sim \mathcal{N}(0, \sigma_\varepsilon^2)
+$$
+
+$$
+\hat{\beta}_{\text{WLS}} = \left(\sum_{h=1}^H \sum_{c=1}^{C_h} \sum_{i=1}^{n_{hc}} w_{hci} X_{hci} X_{hci}^\top\right)^{-1} \left(\sum_{h=1}^H \sum_{c=1}^{C_h} \sum_{i=1}^{n_{hc}} w_{hci} X_{hci} Y_{hci}\right)
+$$
+
+<FeatureNotAvailable
+  note="Không bỏ qua trọng số xác suất pweight và đơn vị chọn mẫu sơ cấp PSU khi phân tích khảo sát hộ gia đình phân tầng nhiều giai đoạn như VHLSS để tránh chệch tham số và ước lượng thấp sai số chuẩn."
+/>
+
+## 16.2.2. Danh mục các bài học mô hình trong Phần 16.2
+
+<FeatureCards
+  features={[
+    {
+      title: '16.2.1. Mô hình hỗn hợp tuyến tính tổng quát nhị phân Logit',
+      description: 'Integrates normal cluster random intercepts out of the conditional logistic likelihood via Gauss-Hermite quadrature to estimate subject-spec...',
+      link: '/vietlod/chapter-16/group-16-2/b256-mixed-effects-logit-glmm',
+      badge: '16.2.1 · mixed_effects_logit_glmm'
+    },
+    {
+      title: '16.2.2. Mô hình hỗn hợp tuyến tính tổng quát đếm Poisson',
+      description: 'Models clustered non-negative count data with log-normal random cluster intercepts exp(X_ij*beta + u_i) via Gauss-Hermite marginal likelihoo...',
+      link: '/vietlod/chapter-16/group-16-2/b257-mixed-effects-poisson-glmm',
+      badge: '16.2.2 · mixed_effects_poisson_glmm'
+    },
+    {
+      title: '16.2.3. Phương trình ước lượng tổng quát trung bình quần thể Liang Zeger',
+      description: 'Solves quasi-score equations with an exchangeable working correlation matrix and Huber-White cluster sandwich covariance, delivering consist...',
+      link: '/vietlod/chapter-16/group-16-2/b258-population-averaged-gee',
+      badge: '16.2.3 · population_averaged_gee'
+    },
+    {
+      title: '16.2.4. Mô hình tuyến tính lôgarit phân cấp bảng ngẫu nhiên nhiều chiều',
+      description: 'Models multi-way cross-classified cell frequencies via canonical log-link Poisson GLM ln(mu_cell) = X*beta, evaluating conditional independe...',
+      link: '/vietlod/chapter-16/group-16-2/b259-loglinear-contingency-glm',
+      badge: '16.2.4 · loglinear_contingency_glm'
+    }
+  ]}
+/>
+
+## 16.2.3. Bảng đối chiếu cú pháp thực thi trên Stata 18, R 4.x và Python 3.11+
+
+| Bài học & Mô hình | Mã định danh | Cú pháp Stata 18 MP | Cú pháp R 4.x | Cú pháp Python 3.11+ | Hỗ trợ |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **16.2.1** · [Mô hình hỗn hợp tuyến tính tổng quát nhị phân Logit](/vietlod/chapter-16/group-16-2/b256-mixed-effects-logit-glmm) | `mixed_effects_logit_glmm` | `melogit y x1 x2 \|\| entity:, intpoints(7)` | `lme4::glmer(y ~ x1 + x2 + (1 \| entity), family = binomial, nAGQ = 7)` | `Gauss-Hermite quadrature marginal MLE Mixed-Effects Logit + statsmodels BinomialBayesMixedGLM` | <Available /> |
+| **16.2.2** · [Mô hình hỗn hợp tuyến tính tổng quát đếm Poisson](/vietlod/chapter-16/group-16-2/b257-mixed-effects-poisson-glmm) | `mixed_effects_poisson_glmm` | `mepoisson y x1 x2 \|\| entity:, intpoints(7)` | `lme4::glmer(y ~ x1 + x2 + (1 \| entity), family = poisson, nAGQ = 7)` | `Gauss-Hermite quadrature marginal MLE Poisson GLMM + statsmodels PoissonBayesMixedGLM` | <Available /> |
+| **16.2.3** · [Phương trình ước lượng tổng quát trung bình quần thể Liang Zeger](/vietlod/chapter-16/group-16-2/b258-population-averaged-gee) | `population_averaged_gee` | `xtgee y x1 x2, family(gaussian) link(identity) corr(exchangeable) vce(robust)` | `geepack::geeglm(y ~ x1 + x2, id = entity, corstr = 'exchangeable')` | `statsmodels.genmod.generalized_estimating_equations.GEE(cov_struct=Exchangeable()).fit()` | <Available /> |
+| **16.2.4** · [Mô hình tuyến tính lôgarit phân cấp bảng ngẫu nhiên nhiều chiều](/vietlod/chapter-16/group-16-2/b259-loglinear-contingency-glm) | `loglinear_contingency_glm` | `glm y x1 x2, family(poisson) link(log) vce(robust)` | `stats::glm(y ~ x1 + x2, family = poisson(link = 'log'))` | `statsmodels.GLM(y, X, family=sm.families.Poisson()).fit(cov_type='HC1')` | <Available /> |

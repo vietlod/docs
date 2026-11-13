@@ -4,7 +4,7 @@ title: "4.4. Mô hình nghiệm góc và tỷ trọng"
 sidebar_label: "4.4. Mô hình nghiệm góc và tỷ trọng"
 sidebar_position: 4
 slug: /vietlod/chapter-04/group-4-4
-description: "Hướng dẫn thực hành Phần 4.4 — Mô hình nghiệm góc và tỷ trọng thuộc Chương 4: so sánh và thực thi 4 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Phần 4.4 — Mô hình nghiệm góc và tỷ trọng thuộc Chương 4: so sánh và thực thi 6 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
   - Phần 4.4 VietLOD
   - Mô hình nghiệm góc và tỷ trọng
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Phần 4.4. Mô hình nghiệm góc và tỷ trọng** thuộc [4. Mô hình đếm, lực hấp dẫn thương mại và biến phụ thuộc giới hạn](/vietlod/chapter-04) cung cấp quy trình thực hành từng bước cho **4 bài học mô hình kinh tế lượng** từ mục `4.4.1` đến `4.4.4`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 4.4](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-04-mo-hinh-dem-luc-hap-dan-va-bien-phu-thuoc-gioi-han/nhom-4-4-corner-proportion) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+**Phần 4.4. Mô hình nghiệm góc và tỷ trọng** thuộc [4. Mô hình đếm, lực hấp dẫn thương mại và biến phụ thuộc giới hạn](/vietlod/chapter-04) cung cấp quy trình thực hành từng bước cho **6 bài học mô hình kinh tế lượng** từ mục `4.4.1` đến `4.4.6`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 4.4](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-04-mo-hinh-dem-luc-hap-dan-va-bien-phu-thuoc-gioi-han/nhom-4-4-corner-proportion) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="Hướng dẫn thực hành Phần 4.4: Mô hình nghiệm góc và tỷ trọng trên Stata 18, R 4.x và Python 3.11+"
@@ -85,6 +85,10 @@ $$
 | **4.4.3** · [Hồi quy phản hồi phân số Papke–Wooldridge](/vietlod/chapter-04/group-4-4/b054-fractional-logit) | `fractional_logit` | `fracreg logit y_frac x1 x2, vce(robust)` | `glm(y_frac ~ x1 + x2, family = quasibinomial(link = 'logit'), data = df)` | `smf.glm('y_frac ~ x1 + x2', data=df, family=sm.families.Binomial()).fit(cov_type='HC1')` | <Available /> |
 | **4.4.4** · [Hồi quy Beta cho biến tỷ trọng liên tục](/vietlod/chapter-04/group-4-4/b055-beta-regression) | `beta_regression` | `betareg y_prop x1 x2, link(logit) vce(robust)` | `betareg::betareg(y_prop ~ x1 + x2, data = df, link = 'logit')` | `BetaModel(df['y_prop'], sm.add_constant(df[['x1', 'x2']])).fit()` | <Available /> |
 
+
+| **4.4.5** · [Độ lệch tuyệt đối tối thiểu kiểm duyệt Powell](/vietlod/chapter-04/group-4-4/b212-censored-quantile-powell) | `censored_quantile_powell` | `qreg y x1 x2, quantile(0.5) vce(robust)` | `quantreg::crq(method = 'Powell')` | `statsmodels.QuantReg iterative Buchinsky ILPA Powell CLAD` | <Available /> |
+| **4.4.6** · [Ước lượng độ lệch tuyệt đối tối thiểu kiểm duyệt Powell và cắt tỉa đối xứng Honore](/vietlod/chapter-04/group-4-4/b276-clm-trimmed-lad-honore) | `clm_trimmed_lad_honore` | `qreg y x1 x2, vce(robust)` | `quantreg::crq(Surv(y, event) ~ x1 + x2, method = 'Powell')` | `Buchinsky (1994) ILPA iterative censored median QuantReg + Powell kernel sandwich SE` | <Available /> |
+
 ## 4.4.4. Quy trình thực hành chuẩn cho Phần 4.4
 
 <Steps>
@@ -94,7 +98,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu</h3>
-    <p>So sánh các bài học mô hình từ <code>4.4.1</code> đến <code>4.4.4</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
+    <p>So sánh các bài học mô hình từ <code>4.4.1</code> đến <code>4.4.6</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab</h3>

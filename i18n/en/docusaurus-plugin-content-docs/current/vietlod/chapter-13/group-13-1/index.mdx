@@ -4,7 +4,7 @@ title: "13.1. Inequality Decomposition and Distributional Regression"
 sidebar_label: "13.1. Inequality Decomposition and Distributional Regression"
 sidebar_position: 1
 slug: /vietlod/chapter-13/group-13-1
-description: "How-To User Guide for Methodological Part 13.1 — Inequality Decomposition and Distributional Regression in Chapter 13: comparing and executing 3 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
+description: "How-To User Guide for Methodological Part 13.1 — Inequality Decomposition and Distributional Regression in Chapter 13: comparing and executing 4 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
 keywords:
   - VietLOD Part 13.1
   - Inequality Decomposition and Distributional Regression
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Methodological Part 13.1. Inequality Decomposition and Distributional Regression** in [13. Income Distribution and Inequality Decomposition](/en/vietlod/chapter-13) provides step-by-step How-To implementation guides for **3 econometric model lessons** spanning from Section `13.1.1` to `13.1.3`. Full theoretical derivations are available at [VietLOD Part 13.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-13-phan-phoi-thu-nhap-va-phan-ra-bat-binh-dang/nhom-13-1-inequality-decomposition) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+**Methodological Part 13.1. Inequality Decomposition and Distributional Regression** in [13. Income Distribution and Inequality Decomposition](/en/vietlod/chapter-13) provides step-by-step How-To implementation guides for **4 econometric model lessons** spanning from Section `13.1.1` to `13.1.4`. Full theoretical derivations are available at [VietLOD Part 13.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-13-phan-phoi-thu-nhap-va-phan-ra-bat-binh-dang/nhom-13-1-inequality-decomposition) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="How-To Guide for Part 13.1: Inequality Decomposition and Distributional Regression in Stata 18, R 4.x, and Python 3.11+"
@@ -78,6 +78,9 @@ $$
 | **13.1.2** · [Recentered Influence Function Unconditional Quantile and Gini Regression](/en/vietlod/chapter-13/group-13-1/b192-rif-regression) | `rif_regression` | `rifhdreg y x1 x2, rif(q(50)) vce(robust)` | `rifreg::rifreg(y ~ x1 + x2, data = df, statistic = 'quantiles', probs = 0.5)` | `smf.ols('rif_y_q50 ~ x1 + x2', data=df).fit(cov_type='HC1')` | <Available /> |
 | **13.1.3** · [IPW-Reweighted RIF-Oaxaca Distributional Decomposition](/en/vietlod/chapter-13/group-13-1/b193-oaxaca-rif-decomposition) | `oaxaca_rif_decomposition` | `oaxaca_rif y x1 x2, rif(q(90)) by(group) rwlogit(x1 x2)` | `oaxaca::oaxaca(rif_y ~ x1 + x2 \| group, data = df, R = 200)` | `sm.stats.OaxacaBlinder(df['rif_y'], df[['x1', 'x2']], df['group']).two_fold()` | <Available /> |
 
+
+| **13.1.4** · [Chernozhukov Fernandez Val Melly Counterfactual Distribution Process](/en/vietlod/chapter-13/group-13-1/b304-chernozhukov-counterfactual-dist) | `chernozhukov_counterfactual_dist` | `cdeco y x1 x2, group(grp) / regress y x1 x2, vce(robust)` | `Counterfactual::cdeco(y ~ x1 + x2, group = grp)` | `Chernozhukov-Fernandez-Val-Melly (2013) threshold distribution + quantile process decomposition` | <Available /> |
+
 ## 13.1.4. Standard Implementation Workflow for Part 13.1
 
 <Steps>
@@ -87,7 +90,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Step 2. Select the Optimal Estimator for Your Error and Sample Structure</h3>
-    <p>Compare the estimators from <code>13.1.1</code> to <code>13.1.3</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
+    <p>Compare the estimators from <code>13.1.1</code> to <code>13.1.4</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab</h3>

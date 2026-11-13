@@ -4,7 +4,7 @@ title: "9.2. Sai biệt trong sai biệt cổ điển và nghiên cứu sự ki�
 sidebar_label: "9.2. Sai biệt trong sai biệt cổ điển và nghiên cứu sự kiện"
 sidebar_position: 2
 slug: /vietlod/chapter-09/group-9-2
-description: "Hướng dẫn thực hành Phần 9.2 — Sai biệt trong sai biệt cổ điển và nghiên cứu sự kiện thuộc Chương 9: so sánh và thực thi 3 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Phần 9.2 — Sai biệt trong sai biệt cổ điển và nghiên cứu sự kiện thuộc Chương 9: so sánh và thực thi 5 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
   - Phần 9.2 VietLOD
   - Sai biệt trong sai biệt cổ điển và nghiên cứu sự kiện
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Phần 9.2. Sai biệt trong sai biệt cổ điển và nghiên cứu sự kiện** thuộc [9. Suy luận nhân quả và đánh giá tác động chính sách](/vietlod/chapter-09) cung cấp quy trình thực hành từng bước cho **3 bài học mô hình kinh tế lượng** từ mục `9.2.1` đến `9.2.3`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 9.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-09-suy-luan-nhan-qua-va-danh-gia-tac-dong-chinh-sach/nhom-9-2-did) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+**Phần 9.2. Sai biệt trong sai biệt cổ điển và nghiên cứu sự kiện** thuộc [9. Suy luận nhân quả và đánh giá tác động chính sách](/vietlod/chapter-09) cung cấp quy trình thực hành từng bước cho **5 bài học mô hình kinh tế lượng** từ mục `9.2.1` đến `9.2.5`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 9.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-09-suy-luan-nhan-qua-va-danh-gia-tac-dong-chinh-sach/nhom-9-2-did) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="Hướng dẫn thực hành Phần 9.2: Sai biệt trong sai biệt cổ điển và nghiên cứu sự kiện trên Stata 18, R 4.x và Python 3.11+"
@@ -78,6 +78,10 @@ $$
 | **9.2.2** · [Thiết kế nghiên cứu sự kiện động và kiểm định tiền xu hướng](/vietlod/chapter-09/group-9-2/b141-event-study-did) | `event_study_did` | `reghdfe y lead4 lead3 lead2 lag0 lag1 lag2 x1, absorb(id year) vce(cluster id)` | `fixest::feols(y ~ i(rel_time, ref = -1) + x1 \| id + year, cluster = ~id, data = df)` | `PanelOLS.from_formula('y ~ lead3 + lead2 + lag0 + lag1 + lag2 + x1 + EntityEffects + TimeEffects', data=pdata).fit(cov_type='clustered', cluster_entity=True)` | <Available /> |
 | **9.2.3** · [Ước lượng DID theo nhóm–thời gian không đồng nhất Callaway–Sant'Anna](/vietlod/chapter-09/group-9-2/b143-callaway-santanna-did) | `callaway_santanna_did` | `csdid y x1, ivar(id) time(year) gvar(first_treat) notyet` | `did::att_gt(yname = 'y', tname = 'year', idname = 'id', gname = 'first_treat', data = df)` | `att_gt(yname='y', tname='year', idname='id', gname='first_treat', data=df)` | <Available /> |
 
+
+| **9.2.4** · [Sai phân bậc ba đánh giá tác động chính sách Gruber Olden Moen](/vietlod/chapter-09/group-9-2/b232-triple-difference-ddd) | `triple_difference_ddd` | `xtreg y treat x1 i.year, fe vce(robust)` | `fixest::feols(y ~ treat + x1 \| entity + year, vcov = ~entity)` | `Saturated Triple-Difference FE + cluster-robust ATT` | <Available /> |
+| **9.2.5** · [Thay đổi trong thay đổi phân phối phản thực phi tuyến Athey Imbens](/vietlod/chapter-09/group-9-2/b233-changes-in-changes-athey-imbens) | `changes_in_changes_athey_imbens` | `xtreg y treat x1 i.year, fe vce(robust)` | `qte::CiC` | `Athey-Imbens quantile mapping F_01^-1(F_00(Y_10)) + KS test` | <Available /> |
+
 ## 9.2.4. Quy trình thực hành chuẩn cho Phần 9.2
 
 <Steps>
@@ -87,7 +91,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu</h3>
-    <p>So sánh các bài học mô hình từ <code>9.2.1</code> đến <code>9.2.3</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
+    <p>So sánh các bài học mô hình từ <code>9.2.1</code> đến <code>9.2.5</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab</h3>

@@ -4,7 +4,7 @@ title: "12.1. Simultaneous Equations and Structural Demand Systems"
 sidebar_label: "12.1. Simultaneous Equations and Structural Demand Systems"
 sidebar_position: 1
 slug: /vietlod/chapter-12/group-12-1
-description: "How-To User Guide for Methodological Part 12.1 — Simultaneous Equations and Structural Demand Systems in Chapter 12: comparing and executing 4 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
+description: "How-To User Guide for Methodological Part 12.1 — Simultaneous Equations and Structural Demand Systems in Chapter 12: comparing and executing 5 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
 keywords:
   - VietLOD Part 12.1
   - Simultaneous Equations and Structural Demand Systems
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Methodological Part 12.1. Simultaneous Equations and Structural Demand Systems** in [12. Simultaneous Systems, Demand Systems, Bayesian and Machine Learning Econometrics](/en/vietlod/chapter-12) provides step-by-step How-To implementation guides for **4 econometric model lessons** spanning from Section `12.1.1` to `12.1.4`. Full theoretical derivations are available at [VietLOD Part 12.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-12-he-phuong-trinh-he-cau-kinh-te-luong-bayes-va-hoc-may/nhom-12-1-systems) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+**Methodological Part 12.1. Simultaneous Equations and Structural Demand Systems** in [12. Simultaneous Systems, Demand Systems, Bayesian and Machine Learning Econometrics](/en/vietlod/chapter-12) provides step-by-step How-To implementation guides for **5 econometric model lessons** spanning from Section `12.1.1` to `12.1.5`. Full theoretical derivations are available at [VietLOD Part 12.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-12-he-phuong-trinh-he-cau-kinh-te-luong-bayes-va-hoc-may/nhom-12-1-systems) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="How-To Guide for Part 12.1: Simultaneous Equations and Structural Demand Systems in Stata 18, R 4.x, and Python 3.11+"
@@ -85,6 +85,9 @@ $$
 | **12.1.3** · [Dynamic System Generalized Method of Moments](/en/vietlod/chapter-12/group-12-1/b181-system-gmm) | `system_gmm` | `gmm (eq1: y1 - {b0} - {b1}*y2 - {b2}*x1) (eq2: y2 - {g0} - {g1}*y1 - {g2}*z1), instruments(x1 z1) wmatrix(robust)` | `gmm::sysGmm(list(y1 ~ y2 + x1, y2 ~ y1 + z1), list(~ x1 + z1, ~ x1 + z1), data = df)` | `IVSystemGMM.from_formula({'eq1': 'y1 ~ 1 + x1 + [y2 ~ z1]', 'eq2': 'y2 ~ 1 + z1 + [y1 ~ x1]'}, data=df).fit()` | <Available /> |
 | **12.1.4** · [Banks-Blundell-Lewbel Quadratic Almost Ideal Demand System](/en/vietlod/chapter-12/group-12-1/b182-quaids-demand-system) | `quaids_demand_system` | `demandsys quaids w1 w2 w3, prices(p1 p2 p3) expenditure(exp_tot)` | `micEconAids::aidsEst(c('p1', 'p2', 'p3'), c('w1', 'w2', 'w3'), 'exp_tot', data = df)` | `SUR.from_formula(quaids_eqs, data=df).fit(cov_type='robust')` | <Available /> |
 
+
+| **12.1.5** · [Simulated Method of Moments and Indirect Inference McFadden Gourieroux Monfort](/en/vietlod/chapter-12/group-12-1/b243-simulated-method-of-moments-smm) | `simulated_method_of_moments_smm` | `gmm (y - {b0} - {xb: x1 x2}), instruments(x1 x2) vce(robust)` | `momentfit::gmmFit / Indirect Inference simulator` | `CRN Simulated Method of Moments BFGS + (1 + 1/S) covariance adjustment` | <Available /> |
+
 ## 12.1.4. Standard Implementation Workflow for Part 12.1
 
 <Steps>
@@ -94,7 +97,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Step 2. Select the Optimal Estimator for Your Error and Sample Structure</h3>
-    <p>Compare the estimators from <code>12.1.1</code> to <code>12.1.4</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
+    <p>Compare the estimators from <code>12.1.1</code> to <code>12.1.5</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab</h3>

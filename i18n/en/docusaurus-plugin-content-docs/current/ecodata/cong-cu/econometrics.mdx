@@ -1,16 +1,16 @@
 ---
 id: econometrics
-title: Econometrics Engine Across 15 Model Families, 58 Sub-Models, and 201+ Estimators
-description: Complete guide to EcoData's Econometrics Engine (v3.82.0) featuring 15 model families, 58 sub-models, and 201+ core estimators across Python, R, and Stata 18 MP with separated Pre/Postestimation diagnostics and .zip replication bundles.
+title: Econometrics Engine Across 16 Model Families, 61 Sub-Models, and 306 Estimators
+description: Complete guide to EcoData's Econometrics Engine (v3.93.0) featuring 16 model families, 61 sub-models, and 306 estimators across Python, R, and Stata 18 MP with separated Pre/Postestimation diagnostics and .zip replication bundles.
 ---
 
-# Econometrics Engine Across 15 Model Families, 58 Sub-Models, and 201+ Estimators
+# Econometrics Engine Across 16 Model Families, 61 Sub-Models, and 306 Estimators
 
-EcoData's integrated Econometrics Engine (`v3.82.0`) enables sample preparation, pre-estimation specification testing, method-accurate parameter estimation, postestimation diagnostic auditing, and `.zip` replication bundle generation directly in your browser or through the **Unified EcoData MCP Server** (`https://ecodata.io.vn/mcp`).
+EcoData's integrated Econometrics Engine (`v3.93.0`) enables sample preparation, pre-estimation specification testing, method-accurate parameter estimation, postestimation diagnostic auditing, and `.zip` replication bundle generation directly in your browser or through the **Unified EcoData MCP Server** (`https://ecodata.io.vn/mcp`).
 
-## Architecture of 15 Model Families, 58 Sub-Models, and 201+ Core Estimators
+## Architecture of 16 Model Families, 61 Sub-Models, and 306 Estimators
 
-EcoData organizes **201+ core estimators** across **15 specialized model families** and **58 mathematical sub-models**, covering modern empirical methodologies published in leading economics journals from 2021 to 2026:
+EcoData organizes **306 estimators** across **16 specialized model families** and **61 mathematical sub-models**, covering modern empirical methodologies published in leading economics journals from 2021 to 2026:
 
 | ID | Model Family | Representative Sub-Models and Estimators | Primary Empirical Research Context |
 | :--- | :--- | :--- | :--- |
@@ -29,10 +29,11 @@ EcoData organizes **201+ core estimators** across **15 specialized model familie
 | **13** | **Structural IO & Demand Systems** | Deaton-Muellbauer AIDS, Banks-Blundell-Lewbel QUAIDS, Berry Logit Demand IV, Berry-Levinsohn-Pakes Random-Coefficients BLP (`pyblp`) | Household expenditure elasticities (VHLSS) and differentiated-products market power and welfare estimation |
 | **14** | **Productivity, Frontier & TFP Estimation** | Aigner-Lovell-Schmidt SFA, Battese-Coelli Panel SFA, Charnes-Cooper-Rhodes & Banker-Charnes-Cooper DEA, Malmquist Index, Olley-Pakes, Levinsohn-Petrin, Wooldridge & Ackerberg-Caves-Frazer (ACF) TFP | Technical efficiency benchmarking for banks/firms and structural total factor productivity estimation correcting input endogeneity |
 | **15** | **Resampling, Econometric ML & High-Dimensional Inference** | Nonparametric/Pairs, Moving-Block, Panel Cluster & Roodman-MacKinnon-Nielsen-Webb Wild Cluster Bootstrap, Chernozhukov Double/Debiased ML, Athey-Wager Causal Forest, PCA/Factor/K-Means, Benchmark Predictive ML | Finite-sample inference with few clusters ($G < 30$), high-dimensional nuisance control, and heterogeneous treatment effects (CATE) |
+| **16** | **Multilevel, Mixed-Effects & Complex Survey** | Hierarchical Linear Mixed (`mixed` / `lmer`), Random Slopes, Mundlak Within-Between, 3-Level LMM, Mixed Logit & Poisson GLMM, Liang-Zeger GEE, Categorical Log-Linear, Complex Survey GLM (`svy:`), Calibration Raking, Fay-Herriot & Unit-Level BHF Small-Area | Nested individual–household–commune–province hierarchies, stratified multi-stage `pweight`–`psu` surveys (VHLSS), and small-area poverty mapping |
 
-### How 201+ Estimators Are Parameterized and Fail-Closed Integrity
+### How 306 Estimators Are Parameterized and Fail-Closed Integrity
 
-Each of the **58 mathematical sub-models** pairs its exact structural objective (OLS/HDFE, FGLS, MLE/QMLE, 1-step/2-step Windmeijer GMM, Penalized Splines, Linear Programming DEA, BLP Contraction Mapping) with rigorous variance-covariance structures (Homoskedastic, White Robust HC0–HC3, Newey-West HAC, Driscoll-Kraay, Conley Spatial HAC, One-Way/Multi-Way Clustering, and Wild Cluster Bootstrap).
+Each of the **61 mathematical sub-models** pairs its exact structural objective (OLS/HDFE, FGLS, MLE/QMLE, 1-step/2-step Windmeijer GMM, Penalized Splines, Linear Programming DEA, BLP Contraction Mapping) with rigorous variance-covariance structures (Homoskedastic, White Robust HC0–HC3, Newey-West HAC, Driscoll-Kraay, Conley Spatial HAC, One-Way/Multi-Way Clustering, and Wild Cluster Bootstrap).
 
 :::warning[Fail-Closed Methodological Guarantee]
 EcoData's Tri-Engine executes the **exact mathematical algorithm** corresponding to every requested estimator key. If an unregistered estimator key is requested or required structural inputs are missing (such as excluded instruments for 2SLS/BLP, spatial weights or coordinates for spatial models, or intermediate proxy inputs for ACF TFP), the engine returns an explicit `422 UNSUPPORTED_ESTIMATOR` or `422 INVALID_SPECIFICATION` error — **never silently falling back to OLS**.
@@ -51,7 +52,7 @@ EcoData cleanly separates pre-estimation data checks from postestimation model v
 
 1. Open the **Econometrics** module in the web workspace or invoke `run_econometrics_model` / `run_complete_econometric_study` via MCP.
 2. Execute **Pre-Estimation Diagnostics** on your candidate variables (supporting both `boundary_mode="34"` and `"63"`).
-3. Select from the **15 model families** and **201+ core estimators**.
+3. Select from the **16 model families** and **306 estimators**.
 4. Specify dependent, explanatory, endogenous/instrument, entity/time identifiers, and standard-error structures.
 5. Run parallel estimation across **Python**, **R**, and **Stata 18 MP** to inspect coefficients, standard errors, $t/z$-statistics, $p$-values, and the full **Postestimation Diagnostics** suite.
 6. Switch instantaneously across five publication table standards (**APA 7th**, **Chicago 17th**, **Harvard**, **IEEE**, **MLA 9th**) and export the self-contained **`.zip` Replication Bundle** containing `.do` (Stata 18 MP), `.R`, `.py`, cleaned data slices, and **`SHA256SUMS.txt`** cryptographic checksums.

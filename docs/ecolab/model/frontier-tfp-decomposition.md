@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 **Họ mô hình 14 (Biên hiệu quả, năng suất & TFP)** cung cấp trọn bộ công cụ đo lường hiệu quả kỹ thuật, hiệu quả chi phí và năng suất nhân tố tổng hợp (**Total Factor Productivity — TFP**) cho doanh nghiệp sản xuất, ngân hàng thương mại, bệnh viện và địa phương.
 
-Trong EcoLab, nhóm mô hình này nằm tại **Mô hình hóa → 14. Biên hiệu quả & TFP**. Xem thêm [Danh mục 15 họ mô hình](/ecolab/model/group).
+Trong EcoLab, nhóm mô hình này nằm tại **Mô hình hóa → 14. Biên hiệu quả & TFP**. Xem thêm [Danh mục 16 họ mô hình](/ecolab/model/group).
 
 ---
 

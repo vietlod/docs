@@ -4,7 +4,7 @@ title: "12.2. Bayesian Econometrics and Bayesian Model Averaging"
 sidebar_label: "12.2. Bayesian Econometrics and Bayesian Model Averaging"
 sidebar_position: 2
 slug: /vietlod/chapter-12/group-12-2
-description: "How-To User Guide for Methodological Part 12.2 — Bayesian Econometrics and Bayesian Model Averaging in Chapter 12: comparing and executing 3 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
+description: "How-To User Guide for Methodological Part 12.2 — Bayesian Econometrics and Bayesian Model Averaging in Chapter 12: comparing and executing 5 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
 keywords:
   - VietLOD Part 12.2
   - Bayesian Econometrics and Bayesian Model Averaging
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Methodological Part 12.2. Bayesian Econometrics and Bayesian Model Averaging** in [12. Simultaneous Systems, Demand Systems, Bayesian and Machine Learning Econometrics](/en/vietlod/chapter-12) provides step-by-step How-To implementation guides for **3 econometric model lessons** spanning from Section `12.2.1` to `12.2.3`. Full theoretical derivations are available at [VietLOD Part 12.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-12-he-phuong-trinh-he-cau-kinh-te-luong-bayes-va-hoc-may/nhom-12-2-bayesian) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+**Methodological Part 12.2. Bayesian Econometrics and Bayesian Model Averaging** in [12. Simultaneous Systems, Demand Systems, Bayesian and Machine Learning Econometrics](/en/vietlod/chapter-12) provides step-by-step How-To implementation guides for **5 econometric model lessons** spanning from Section `12.2.1` to `12.2.5`. Full theoretical derivations are available at [VietLOD Part 12.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-12-he-phuong-trinh-he-cau-kinh-te-luong-bayes-va-hoc-may/nhom-12-2-bayesian) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="How-To Guide for Part 12.2: Bayesian Econometrics and Bayesian Model Averaging in Stata 18, R 4.x, and Python 3.11+"
@@ -78,6 +78,10 @@ $$
 | **12.2.2** · [Bayesian Vector Autoregression](/en/vietlod/chapter-12/group-12-2/b184-bayesian-var) | `bayesian_var` | `bayes, rseed(42): var y x1 x2, lags(1/2)` | `BVAR::bvar(df[, c('y', 'x1', 'x2')], lags = 2, n_draw = 5000)` | `VAR(df[['y', 'x1', 'x2']]).fit(maxlags=2)` | <Available /> |
 | **12.2.3** · [Bayesian Model Averaging under Zellner g-Prior](/en/vietlod/chapter-12/group-12-2/b185-bma-model-averaging) | `bma_model_averaging` | `bmaregress y x1 x2 x3, gprior(uip) mprior(uniform)` | `BMS::bms(df[, c('y', 'x1', 'x2', 'x3')], g = 'UIP', mprior = 'uniform')` | `smf.ols('y ~ x1 + x2', data=df).fit()` | <Available /> |
 
+
+| **12.2.4** · [George McCulloch Stochastic Search Variable Selection and Spike Slab BMA](/en/vietlod/chapter-12/group-12-2/b302-bayesian-stochastic-search-ssvs) | `bayesian_stochastic_search_ssvs` | `bmaregress y x1 x2 / regress y x1 x2, vce(robust)` | `BoomSpikeSlab::lm.spike(y ~ x1 + x2, niter = 1000) / BMS::bms` | `George-McCulloch Spike-and-Slab Zellner-g exact/Gibbs PIP & BMA posterior moments` | <Available /> |
+| **12.2.5** · [Time Varying Parameter State Space Carter Kohn Kalman Smoother](/en/vietlod/chapter-12/group-12-2/b303-bayesian-state-space-tvp) | `bayesian_state_space_tvp` | `sspace (b1 L.b1, state noconstant) (y x1 x2, state) / regress y x1 x2, vce(robust)` | `dlm::dlmSmooth / tvReg::tvLM(y ~ x1 + x2)` | `Kalman filter + Rauch-Tung-Striebel / Carter-Kohn TVP state-space smoother` | <Available /> |
+
 ## 12.2.4. Standard Implementation Workflow for Part 12.2
 
 <Steps>
@@ -87,7 +91,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Step 2. Select the Optimal Estimator for Your Error and Sample Structure</h3>
-    <p>Compare the estimators from <code>12.2.1</code> to <code>12.2.3</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
+    <p>Compare the estimators from <code>12.2.1</code> to <code>12.2.5</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab</h3>

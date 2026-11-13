@@ -4,7 +4,7 @@ title: "15.1. Nonparametric and Semiparametric Smooth Regression"
 sidebar_label: "15.1. Nonparametric and Semiparametric Smooth Regression"
 sidebar_position: 1
 slug: /vietlod/chapter-15/group-15-1
-description: "How-To User Guide for Methodological Part 15.1 — Nonparametric and Semiparametric Smooth Regression in Chapter 15: comparing and executing 2 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
+description: "How-To User Guide for Methodological Part 15.1 — Nonparametric and Semiparametric Smooth Regression in Chapter 15: comparing and executing 6 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
 keywords:
   - VietLOD Part 15.1
   - Nonparametric and Semiparametric Smooth Regression
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Methodological Part 15.1. Nonparametric and Semiparametric Smooth Regression** in [15. Nonparametric Econometrics and Few-Cluster Resampling Inference](/en/vietlod/chapter-15) provides step-by-step How-To implementation guides for **2 econometric model lessons** spanning from Section `15.1.1` to `15.1.2`. Full theoretical derivations are available at [VietLOD Part 15.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-15-kinh-te-luong-phi-tham-so-va-suy-luan-tai-lay-mau-cum-it/nhom-15-1-nonparametric-smooth) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+**Methodological Part 15.1. Nonparametric and Semiparametric Smooth Regression** in [15. Nonparametric Econometrics and Few-Cluster Resampling Inference](/en/vietlod/chapter-15) provides step-by-step How-To implementation guides for **6 econometric model lessons** spanning from Section `15.1.1` to `15.1.6`. Full theoretical derivations are available at [VietLOD Part 15.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-15-kinh-te-luong-phi-tham-so-va-suy-luan-tai-lay-mau-cum-it/nhom-15-1-nonparametric-smooth) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="How-To Guide for Part 15.1: Nonparametric and Semiparametric Smooth Regression in Stata 18, R 4.x, and Python 3.11+"
@@ -71,6 +71,12 @@ $$
 | **15.1.1** · [Local-Linear Kernel Nonparametric Regression](/en/vietlod/chapter-15/group-15-1/b198-local-polynomial-npregress) | `local_polynomial_npregress` | `npregress kernel y x1 x2, estimator(linear) kernel(epanechnikov)` | `np::npreg(y ~ x1 + x2, regtype = 'll', bwmethod = 'cv.aic', data = df)` | `KernelReg(endog=df['y'], exog=df[['x1', 'x2']], var_type='cc', reg_type='ll').fit()` | <Available /> |
 | **15.1.2** · [Semiparametric Generalized Additive and Partial Linear Model](/en/vietlod/chapter-15/group-15-1/b199-gam-semiparametric) | `gam_semiparametric` | `npregress series y x1 x2, spline(bspline)` | `mgcv::gam(y ~ s(x1, bs = 'cr') + s(x2, bs = 'cr'), method = 'REML', data = df)` | `GLMGam.from_formula('y ~ x1 + x2', data=df, smoother=BSplines(df[['x1', 'x2']], df=[6, 6], degree=[3, 3])).fit()` | <Available /> |
 
+
+| **15.1.3** · [Robinson Semiparametric Partially Linear Double Residual Estimator](/en/vietlod/chapter-15/group-15-1/b247-partially-linear-robinson) | `partially_linear_robinson` | `semipar y x1, nonpar(z) robust` | `np::npplreg` | `Leave-one-out Gaussian kernel double-residual Robinson OLS` | <Available /> |
+| **15.1.4** · [Nonparametric Series and B Spline Sieve Regression Newey Chen](/en/vietlod/chapter-15/group-15-1/b248-series-bspline-newey) | `series_bspline_newey` | `npregress series y x1 x2, bspline` | `splines::bs + stats::lm` | `Quantile-knot B-spline sieve basis OLS + average derivative functional` | <Available /> |
+| **15.1.5** · [Nonparametric Instrumental Variables Tikhonov Sieve Newey Powell Darolles](/en/vietlod/chapter-15/group-15-1/b249-nonparametric-iv-newey-powell) | `nonparametric_iv_newey_powell` | `ivregress 2sls y (x_endog = z1 z2), vce(robust)` | `np::npregiv / crs::crsiv` | `Tikhonov-penalized sieve 2SLS Newey-Powell NPIV` | <Available /> |
+| **15.1.6** · [Orthogonal Legendre Hermite Polynomial Sieve Regression](/en/vietlod/chapter-15/group-15-1/b306-orthogonal-sieve-series-chen) | `orthogonal_sieve_series_chen` | `npregress series y x1 x2, polynomial(2) / regress y x1 x2, vce(robust)` | `stats::lm(y ~ poly(x1, degree = 3, raw = FALSE) + x2)` | `Orthonormal Legendre sieve projection + Belloni-Chernozhukov-Chetverikov-Kato HC1 derivative SE` | <Available /> |
+
 ## 15.1.4. Standard Implementation Workflow for Part 15.1
 
 <Steps>
@@ -80,7 +86,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Step 2. Select the Optimal Estimator for Your Error and Sample Structure</h3>
-    <p>Compare the estimators from <code>15.1.1</code> to <code>15.1.2</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
+    <p>Compare the estimators from <code>15.1.1</code> to <code>15.1.6</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab</h3>

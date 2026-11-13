@@ -4,7 +4,7 @@ title: "9.5. Sai biệt trong sai biệt lệch pha hiện đại"
 sidebar_label: "9.5. Sai biệt trong sai biệt lệch pha hiện đại"
 sidebar_position: 5
 slug: /vietlod/chapter-09/group-9-5
-description: "Hướng dẫn thực hành Phần 9.5 — Sai biệt trong sai biệt lệch pha hiện đại thuộc Chương 9: so sánh và thực thi 8 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Phần 9.5 — Sai biệt trong sai biệt lệch pha hiện đại thuộc Chương 9: so sánh và thực thi 15 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
   - Phần 9.5 VietLOD
   - Sai biệt trong sai biệt lệch pha hiện đại
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Phần 9.5. Sai biệt trong sai biệt lệch pha hiện đại** thuộc [9. Suy luận nhân quả và đánh giá tác động chính sách](/vietlod/chapter-09) cung cấp quy trình thực hành từng bước cho **8 bài học mô hình kinh tế lượng** từ mục `9.5.1` đến `9.5.8`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 9.5](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-09-suy-luan-nhan-qua-va-danh-gia-tac-dong-chinh-sach/nhom-9-5-staggered-did-modern) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+**Phần 9.5. Sai biệt trong sai biệt lệch pha hiện đại** thuộc [9. Suy luận nhân quả và đánh giá tác động chính sách](/vietlod/chapter-09) cung cấp quy trình thực hành từng bước cho **15 bài học mô hình kinh tế lượng** từ mục `9.5.1` đến `9.5.15`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 9.5](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-09-suy-luan-nhan-qua-va-danh-gia-tac-dong-chinh-sach/nhom-9-5-staggered-did-modern) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="Hướng dẫn thực hành Phần 9.5: Sai biệt trong sai biệt lệch pha hiện đại trên Stata 18, R 4.x và Python 3.11+"
@@ -113,6 +113,15 @@ $$
 | **9.5.7** · [Phân tích độ nhạy vi phạm xu hướng song song Rambachan–Roth](/vietlod/chapter-09/group-9-5/b149-honest-did-sensitivity) | `honest_did_sensitivity` | `honestdid, pre(1/4) post(5/8) mvec(0.5(0.5)2)` | `HonestDiD::createSensitivityResults_relativeMagnitudes(betahat, sigma, numPrePeriods = 4, numPostPeriods = 4)` | `scipy.optimize.linprog(c_obj, A_ub=A_rm, b_ub=b_rm)` | <Available /> |
 | **9.5.8** · [Sai biệt trong sai biệt tổng hợp (SDID)](/vietlod/chapter-09/group-9-5/b152-synthetic-did) | `synthetic_did` | `sdid y id year treat, vce(placebo) reps(200)` | `synthdid::synthdid_estimate(Y, N0, T0)` | `SynthDID().fit(Y_panel, N0, T0)` | <Available /> |
 
+
+| **9.5.9** · [Hợp lý cực đại có mục tiêu hai lần vững van der Laan Rubin](/vietlod/chapter-09/group-9-5/b234-tmle-targeted-mle) | `tmle_targeted_mle` | `teffects aipw (y x1 x2) (treat x1 x2), vce(robust)` | `tmle::tmle` | `Clever-covariate targeting step + Efficient Influence Function SE` | <Available /> |
+| **9.5.10** · [Phân tích trung gian nhân quả hiệu ứng gián tiếp và trực tiếp Imai Keele Yamamoto](/vietlod/chapter-09/group-9-5/b235-causal-mediation-imai) | `causal_mediation_imai` | `mediate (y x1) (m x1) (treat) / sem + estat teffects` | `mediation::mediate(med.fit, out.fit, treat = 'treat', mediator = 'm')` | `Sequential ignorability mediator/outcome decomposition + ACME/ADE inference` | <Available /> |
+| **9.5.11** · [Tối đa hóa phúc lợi thực nghiệm và cây quy tắc chính sách tối ưu Kitagawa Tetenov](/vietlod/chapter-09/group-9-5/b238-optimal-policy-tree-kitagawa) | `optimal_policy_tree_kitagawa` | `teffects ra (y x1 x2) (treat), vce(robust)` | `policytree::policy_tree + grf::double_robust_scores` | `Doubly-robust welfare scores + optimal threshold policy rule search` | <Available /> |
+| **9.5.12** · [Hiệu ứng xử lý cận biên biến công cụ cục bộ Heckman Vytlacil Carneiro](/vietlod/chapter-09/group-9-5/b293-marginal-treatment-effects-mte) | `marginal_treatment_effects_mte` | `mtefe y (treat = z_iv) x1 / teffects ra (y x1) (treat)` | `ivmte::ivmte / mtefe::mtefe` | `Local Instrumental Variables polynomial propensity derivative MTE + ATE/ATT integration` | <Available /> |
+| **9.5.13** · [Khoảng chặn sắc phi tham số hiệu ứng xử lý có chọn lọc mẫu Lee](/vietlod/chapter-09/group-9-5/b294-lee-trimming-bounds) | `lee_trimming_bounds` | `leebounds y treat, cieffect / regress y treat x1, vce(robust)` | `leebounds::leebounds` | `Lee (2009) upper/lower quantile-trimmed sharp bounds + Imbens-Manski (2004) CI` | <Available /> |
+| **9.5.14** · [Tái trọng số phản thực tế DiNardo Fortin Lemieux và thay đổi trong thay đổi Athey Imbens](/vietlod/chapter-09/group-9-5/b295-changes-in-quantiles-dfl-dinardo) | `changes_in_quantiles_dfl_dinardo` | `dfl treat x1, outcome(y) / teffects ipwra (y x1) (treat x1)` | `qte::CiC(y ~ treat, t = year, tmin1 = t0, t = t1, data = df)` | `DiNardo-Fortin-Lemieux propensity-odds reweighting + Athey-Imbens quantile counterfactuals` | <Available /> |
+| **9.5.15** · [Hoàn thiện ma trận chuẩn hạt nhân ước lượng nhân quả dữ liệu bảng Athey Imbens](/vietlod/chapter-09/group-9-5/b296-matrix-completion-panel-athey) | `matrix_completion_panel_athey` | `fect y, treat(treat) unit(entity) time(year) cov(x1) method(mc)` | `fect::fect(y ~ treat + x1, data = df, index = c('entity', 'year'), method = 'mc')` | `Athey et al. (2021) Singular-Value-Thresholding (SVT) nuclear-norm matrix completion + ATT` | <Available /> |
+
 ## 9.5.4. Quy trình thực hành chuẩn cho Phần 9.5
 
 <Steps>
@@ -122,7 +131,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu</h3>
-    <p>So sánh các bài học mô hình từ <code>9.5.1</code> đến <code>9.5.8</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
+    <p>So sánh các bài học mô hình từ <code>9.5.1</code> đến <code>9.5.15</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab</h3>

@@ -4,7 +4,7 @@ title: "15.2. Suy luận tái lấy mẫu cụm ít và ngẫu nhiên hóa"
 sidebar_label: "15.2. Suy luận tái lấy mẫu cụm ít và ngẫu nhiên hóa"
 sidebar_position: 2
 slug: /vietlod/chapter-15/group-15-2
-description: "Hướng dẫn thực hành Phần 15.2 — Suy luận tái lấy mẫu cụm ít và ngẫu nhiên hóa thuộc Chương 15: so sánh và thực thi 2 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Phần 15.2 — Suy luận tái lấy mẫu cụm ít và ngẫu nhiên hóa thuộc Chương 15: so sánh và thực thi 4 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
   - Phần 15.2 VietLOD
   - Suy luận tái lấy mẫu cụm ít và ngẫu nhiên hóa
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Phần 15.2. Suy luận tái lấy mẫu cụm ít và ngẫu nhiên hóa** thuộc [15. Kinh tế lượng phi tham số và suy luận tái lấy mẫu cụm ít](/vietlod/chapter-15) cung cấp quy trình thực hành từng bước cho **2 bài học mô hình kinh tế lượng** từ mục `15.2.1` đến `15.2.2`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 15.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-15-kinh-te-luong-phi-tham-so-va-suy-luan-tai-lay-mau-cum-it/nhom-15-2-resampling-inference) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+**Phần 15.2. Suy luận tái lấy mẫu cụm ít và ngẫu nhiên hóa** thuộc [15. Kinh tế lượng phi tham số và suy luận tái lấy mẫu cụm ít](/vietlod/chapter-15) cung cấp quy trình thực hành từng bước cho **4 bài học mô hình kinh tế lượng** từ mục `15.2.1` đến `15.2.4`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 15.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-15-kinh-te-luong-phi-tham-so-va-suy-luan-tai-lay-mau-cum-it/nhom-15-2-resampling-inference) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="Hướng dẫn thực hành Phần 15.2: Suy luận tái lấy mẫu cụm ít và ngẫu nhiên hóa trên Stata 18, R 4.x và Python 3.11+"
@@ -71,6 +71,10 @@ $$
 | **15.2.1** · [Suy luận Bootstrap cụm Wild nhanh với trọng số Rademacher và Webb](/vietlod/chapter-15/group-15-2/b200-wild-cluster-bootstrap) | `wild_cluster_bootstrap` | `regress y x1 x2, vce(cluster cid) -> boottest x1, weight(webb) reps(9999)` | `sandwich::vcovBS(lm(y ~ x1 + x2, data = df), cluster = ~cid, R = 4999, type = 'wild-webb')` | `wildboottest(smf.ols('y ~ x1 + x2', data=df).fit(), param='x1', cluster=df['cid'], B=9999)` | <Available /> |
 | **15.2.2** · [Suy luận ngẫu nhiên hóa chính xác của Fisher và kiểm chứng Alwyn Young](/vietlod/chapter-15/group-15-2/b201-randomization-inference) | `randomization_inference` | `ritest treat _b[treat], reps(5000) cluster(cid): regress y treat x1 x2` | `ri2::conduct_ri(y ~ treat + x1 + x2, declaration = decl, sharp_hypothesis = 0, sims = 5000, data = df)` | `scipy.stats.permutation_test((df_treat, df_ctrl), statistic=diff_in_means, n_resamples=5000)` | <Available /> |
 
+
+| **15.2.3** · [Tái lấy mẫu sàng tự hồi quy cho chuỗi phụ thuộc thời gian Buhlmann](/vietlod/chapter-15/group-15-2/b250-sieve-bootstrap-buhlmann) | `sieve_bootstrap_buhlmann` | `bootstrap, reps(200) seed(42): regress y x1 x2` | `boot::tsboot(sim = 'fixed') / funtimes::sieve_bootstrap` | `AR(p) residual sieve innovation resampling bootstrap` | <Available /> |
+| **15.2.4** · [Tái lấy mẫu cặp quan sát và chuẩn hóa tiệm cận tinh chỉnh Freedman MacKinnon](/vietlod/chapter-15/group-15-2/b251-pairs-double-bootstrap) | `pairs_double_bootstrap` | `regress y x1 x2, vce(bootstrap, reps(299) seed(42))` | `boot::boot + car::Boot` | `Nonparametric (y_i, x_i) pairs resampling + HC1 studentized pivotal t-quantiles` | <Available /> |
+
 ## 15.2.4. Quy trình thực hành chuẩn cho Phần 15.2
 
 <Steps>
@@ -80,7 +84,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu</h3>
-    <p>So sánh các bài học mô hình từ <code>15.2.1</code> đến <code>15.2.2</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
+    <p>So sánh các bài học mô hình từ <code>15.2.1</code> đến <code>15.2.4</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab</h3>

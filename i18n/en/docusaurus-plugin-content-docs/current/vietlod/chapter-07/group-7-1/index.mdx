@@ -4,7 +4,7 @@ title: "7.1. Vector Autoregression, VECM and Structural VAR"
 sidebar_label: "7.1. Vector Autoregression, VECM and Structural VAR"
 sidebar_position: 1
 slug: /vietlod/chapter-07/group-7-1
-description: "How-To User Guide for Methodological Part 7.1 — Vector Autoregression, VECM and Structural VAR in Chapter 7: comparing and executing 4 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
+description: "How-To User Guide for Methodological Part 7.1 — Vector Autoregression, VECM and Structural VAR in Chapter 7: comparing and executing 7 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
 keywords:
   - VietLOD Part 7.1
   - Vector Autoregression, VECM and Structural VAR
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Methodological Part 7.1. Vector Autoregression, VECM and Structural VAR** in [7. Multivariate Time Series, Local Projections and Spillover Networks](/en/vietlod/chapter-07) provides step-by-step How-To implementation guides for **4 econometric model lessons** spanning from Section `7.1.1` to `7.1.4`. Full theoretical derivations are available at [VietLOD Part 7.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-07-chuoi-thoi-gian-da-bien-chieu-cuc-bo-va-mang-lan-toa/nhom-7-1-var-models) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+**Methodological Part 7.1. Vector Autoregression, VECM and Structural VAR** in [7. Multivariate Time Series, Local Projections and Spillover Networks](/en/vietlod/chapter-07) provides step-by-step How-To implementation guides for **7 econometric model lessons** spanning from Section `7.1.1` to `7.1.7`. Full theoretical derivations are available at [VietLOD Part 7.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-07-chuoi-thoi-gian-da-bien-chieu-cuc-bo-va-mang-lan-toa/nhom-7-1-var-models) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="How-To Guide for Part 7.1: Vector Autoregression, VECM and Structural VAR in Stata 18, R 4.x, and Python 3.11+"
@@ -85,6 +85,11 @@ $$
 | **7.1.3** · [Structural Vector Autoregression — SVAR](/en/vietlod/chapter-07/group-7-1/b111-svar) | `svar` | `matrix A = (1, 0 \ ., 1) -> svar y x1, lags(1/2) aeq(A)` | `vars::SVAR(var_fit, Amat = A_mat, Bmat = NULL)` | `SVAR(df[['y', 'x1']], svar_type='A', A=A_mat).fit(maxlags=2)` | <Available /> |
 | **7.1.4** · [Minnesota-Prior Bayesian VAR](/en/vietlod/chapter-07/group-7-1/b112-bvar) | `bvar` | `bayes, rseed(42): var y x1 x2, lags(1/2)` | `BVAR::bvar(df[, c('y', 'x1', 'x2')], lags = 2)` | `VAR(df[['y', 'x1', 'x2']]).fit(maxlags=2)` | <Available /> |
 
+
+| **7.1.5** · [Vector Autoregressive Moving Average Hannan Rissanen](/en/vietlod/chapter-07/group-7-1/b224-varma-multivariate) | `varma_multivariate` | `dfactor / var y x1, lags(1/2)` | `MTS::VARMA` | `statsmodels.tsa.statespace.varmax.VARMAX / Hannan-Rissanen VARMA` | <Available /> |
+| **7.1.6** · [Global Vector Autoregression with Foreign Star Variables](/en/vietlod/chapter-07/group-7-1/b287-global-var-pesaran-gvar) | `global_var_pesaran_gvar` | `var y x1, exog(x2) lags(1/2)` | `GVARX::GVARest / vars::VAR(exogen = X_star)` | `Trade-weighted foreign star VARX*(p, q) + weak-exogeneity F-test` | <Available /> |
+| **7.1.7** · [Proxy Structural VAR with External Instruments](/en/vietlod/chapter-07/group-7-1/b288-proxy-svar-external-iv) | `proxy_svar_external_iv` | `var y x1, lags(1/2) & ivregress 2sls y (x1 = z_proxy), vce(robust)` | `svars::id.iv / vars::VAR + 2SLS innovation projection` | `Reduced-form VAR innovation IV projection + Montiel-Olea-Stock-Watson effective F diagnostic` | <Available /> |
+
 ## 7.1.4. Standard Implementation Workflow for Part 7.1
 
 <Steps>
@@ -94,7 +99,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Step 2. Select the Optimal Estimator for Your Error and Sample Structure</h3>
-    <p>Compare the estimators from <code>7.1.1</code> to <code>7.1.4</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
+    <p>Compare the estimators from <code>7.1.1</code> to <code>7.1.7</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab</h3>

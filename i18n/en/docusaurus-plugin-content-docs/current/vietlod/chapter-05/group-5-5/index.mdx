@@ -4,7 +4,7 @@ title: "5.5. Second-Generation Cross-Sectionally Dependent Panels"
 sidebar_label: "5.5. Second-Generation Cross-Sectionally Dependent Panels"
 sidebar_position: 5
 slug: /vietlod/chapter-05/group-5-5
-description: "How-To User Guide for Methodological Part 5.5 — Second-Generation Cross-Sectionally Dependent Panels in Chapter 5: comparing and executing 5 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
+description: "How-To User Guide for Methodological Part 5.5 — Second-Generation Cross-Sectionally Dependent Panels in Chapter 5: comparing and executing 11 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
 keywords:
   - VietLOD Part 5.5
   - Second-Generation Cross-Sectionally Dependent Panels
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Methodological Part 5.5. Second-Generation Cross-Sectionally Dependent Panels** in [5. Static, Dynamic and Cross-Sectionally Dependent Panel Econometrics](/en/vietlod/chapter-05) provides step-by-step How-To implementation guides for **5 econometric model lessons** spanning from Section `5.5.1` to `5.5.5`. Full theoretical derivations are available at [VietLOD Part 5.5](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-05-kinh-te-luong-du-lieu-bang-tinh-dong-va-phu-thuoc-cheo/nhom-5-5-cross-sectional-dependence) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+**Methodological Part 5.5. Second-Generation Cross-Sectionally Dependent Panels** in [5. Static, Dynamic and Cross-Sectionally Dependent Panel Econometrics](/en/vietlod/chapter-05) provides step-by-step How-To implementation guides for **11 econometric model lessons** spanning from Section `5.5.1` to `5.5.11`. Full theoretical derivations are available at [VietLOD Part 5.5](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-05-kinh-te-luong-du-lieu-bang-tinh-dong-va-phu-thuoc-cheo/nhom-5-5-cross-sectional-dependence) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="How-To Guide for Part 5.5: Second-Generation Cross-Sectionally Dependent Panels in Stata 18, R 4.x, and Python 3.11+"
@@ -92,6 +92,14 @@ $$
 | **5.5.4** · [Common Correlated Effects Pooled Estimator](/en/vietlod/chapter-05/group-5-5/b079-ccep) | `ccep` | `xtdcce2 y x1 x2, cr(y x1 x2) pooled(x1 x2) pooledvce(nw)` | `plm::pcce(y ~ x1 + x2, data = pdata, model = 'p')` | `PanelOLS.from_formula('y ~ 1 + x1 + x2 + mean_y + mean_x1 + EntityEffects', data=pdata).fit()` | <Available /> |
 | **5.5.5** · [Cross-Sectionally Augmented Panel ARDL](/en/vietlod/chapter-05/group-5-5/b080-cs-ardl) | `cs_ardl` | `xtdcce2 d.y, lr(l.y x1 x2) lr_options(ardl) cr(y x1 x2) cr_lags(2)` | `plm::pcce(dy ~ l1_y + x1 + x2, data = pdata, model = 'mg')` | `smf.ols('dy ~ l1_y + x1 + x2 + mean_dy + mean_x1', data=df).fit()` | <Available /> |
 
+
+| **5.5.6** · [Swamy Panel Random Coefficients Model](/en/vietlod/chapter-05/group-5-5/b213-swamy-random-coefficients) | `swamy_random_coefficients` | `xtrc y x1 x2` | `plm::pvcm(model = 'random')` | `Swamy empirical-Bayes GLS random coefficients + homogeneity chi2` | <Available /> |
+| **5.5.7** · [Grouped Fixed Effects Panel Estimator Bonhomme Manresa](/en/vietlod/chapter-05/group-5-5/b216-grouped-fixed-effects-bonhomme) | `grouped_fixed_effects_bonhomme` | `xtreg y x1 x2 i.year, fe vce(cluster id)` | `phtt / iterative k-means GFE` | `Iterative KMeans + group-by-time interactive FE solver` | <Available /> |
+| **5.5.8** · [Pedroni and Kao Residual Panel Cointegration Model](/en/vietlod/chapter-05/group-5-5/b217-pedroni-kao-panel-coint) | `pedroni_kao_panel_coint` | `xtcointtest pedroni y x1 x2` | `plm::purtest(residuals(fit_fe), test = 'ips')` | `Long-run panel cointegrating regression + Kao/Pedroni residual ADF` | <Available /> |
+| **5.5.9** · [Im Pesaran Shin and Levin Lin Chu Panel Unit Root Model](/en/vietlod/chapter-05/group-5-5/b218-ips-llc-panel-unit-root) | `ips_llc_panel_unit_root` | `xtunitroot ips y, lags(1)` | `plm::purtest(test = 'ips') + plm::purtest(test = 'levinlin')` | `IPS standardized W_tbar + LLC pooled ADF panel regression` | <Available /> |
+| **5.5.10** · [Bai Interactive Fixed Effects Panel Factor Estimator](/en/vietlod/chapter-05/group-5-5/b277-interactive-fe-bai) | `interactive_fe_bai` | `regife y x1 x2, factors(entity year, 1) vce(cluster entity)` | `phtt::Eup(y ~ x1 + x2) / gsynth::interFE` | `Bai (2009) alternating SVD factor extraction + analytical bias-corrected covariance` | <Available /> |
+| **5.5.11** · [Chudik Pesaran Dynamic Common Correlated Effects Mean Group](/en/vietlod/chapter-05/group-5-5/b280-chudik-pesaran-dccemg) | `chudik_pesaran_dccemg` | `xtdcce2 y x1 x2, cr(y x1 x2) cr_lags(1)` | `plm::pcce(y ~ x1 + x2, data = pdata, model = 'mg')` | `Chudik-Pesaran (2015) lagged cross-sectional average CCEP / Mean-Group estimator` | <Available /> |
+
 ## 5.5.4. Standard Implementation Workflow for Part 5.5
 
 <Steps>
@@ -101,7 +109,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Step 2. Select the Optimal Estimator for Your Error and Sample Structure</h3>
-    <p>Compare the estimators from <code>5.5.1</code> to <code>5.5.5</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
+    <p>Compare the estimators from <code>5.5.1</code> to <code>5.5.11</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab</h3>

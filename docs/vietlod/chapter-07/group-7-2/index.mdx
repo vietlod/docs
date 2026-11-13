@@ -4,7 +4,7 @@ title: "7.2. Nhân quả Granger và hàm phản ứng xung"
 sidebar_label: "7.2. Nhân quả Granger và hàm phản ứng xung"
 sidebar_position: 2
 slug: /vietlod/chapter-07/group-7-2
-description: "Hướng dẫn thực hành Phần 7.2 — Nhân quả Granger và hàm phản ứng xung thuộc Chương 7: so sánh và thực thi 2 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Phần 7.2 — Nhân quả Granger và hàm phản ứng xung thuộc Chương 7: so sánh và thực thi 4 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
   - Phần 7.2 VietLOD
   - Nhân quả Granger và hàm phản ứng xung
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Phần 7.2. Nhân quả Granger và hàm phản ứng xung** thuộc [7. Chuỗi thời gian đa biến, chiếu cục bộ và mạng lan tỏa](/vietlod/chapter-07) cung cấp quy trình thực hành từng bước cho **2 bài học mô hình kinh tế lượng** từ mục `7.2.1` đến `7.2.2`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 7.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-07-chuoi-thoi-gian-da-bien-chieu-cuc-bo-va-mang-lan-toa/nhom-7-2-causality) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+**Phần 7.2. Nhân quả Granger và hàm phản ứng xung** thuộc [7. Chuỗi thời gian đa biến, chiếu cục bộ và mạng lan tỏa](/vietlod/chapter-07) cung cấp quy trình thực hành từng bước cho **4 bài học mô hình kinh tế lượng** từ mục `7.2.1` đến `7.2.4`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 7.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-07-chuoi-thoi-gian-da-bien-chieu-cuc-bo-va-mang-lan-toa/nhom-7-2-causality) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="Hướng dẫn thực hành Phần 7.2: Nhân quả Granger và hàm phản ứng xung trên Stata 18, R 4.x và Python 3.11+"
@@ -71,6 +71,10 @@ $$
 | **7.2.1** · [Kiểm định nhân quả Granger và nhân quả Toda–Yamamoto](/vietlod/chapter-07/group-7-2/b108-granger-causality) | `granger_causality` | `var y x1 x2, lags(1/2) -> vargranger` | `lmtest::grangertest(y ~ x1, order = 2, data = df)` | `grangercausalitytests(df[['y', 'x1']], maxlag=2)` | <Available /> |
 | **7.2.2** · [Hàm phản ứng xung và phân rã phương sai (IRF, FEVD)](/vietlod/chapter-07/group-7-2/b109-impulse-response) | `impulse_response` | `var y x1 x2, lags(1/2) -> irf create oirf, step(10)` | `vars::irf(var_fit, impulse = 'x1', response = 'y', n.ahead = 10)` | `VAR(df[['y', 'x1', 'x2']]).fit(2).irf(10)` | <Available /> |
 
+
+| **7.2.3** · [Nhân quả Granger bất đối xứng cú sốc dương và âm Hatemi J](/vietlod/chapter-07/group-7-2/b225-hatemi-j-asymmetric-causality) | `hatemi_j_asymmetric_causality` | `var y x_pos x_neg, lags(1/2) + vargranger` | `vars::VAR on cumulative positive/negative shock components` | `Cumulative partial-sum decomposition + asymmetric Wald causality F-tests` | <Available /> |
+| **7.2.4** · [Kết hợp dự báo tối ưu Bates Granger và kiểm định hiệu quả dự báo Mincer Zarnowitz](/vietlod/chapter-07/group-7-2/b286-mincer-zarnowitz-forecast-combination) | `mincer_zarnowitz_forecast_combination` | `newey y x1 x2, lag(2) & test (_cons = 0) (x1 = 1)` | `ForecastComb::comb_GR + sandwich::NeweyWest` | `Granger-Ramanathan HAC regression + Bates-Granger optimal weights + MZ joint Wald F-test` | <Available /> |
+
 ## 7.2.4. Quy trình thực hành chuẩn cho Phần 7.2
 
 <Steps>
@@ -80,7 +84,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu</h3>
-    <p>So sánh các bài học mô hình từ <code>7.2.1</code> đến <code>7.2.2</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
+    <p>So sánh các bài học mô hình từ <code>7.2.1</code> đến <code>7.2.4</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab</h3>

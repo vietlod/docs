@@ -4,7 +4,7 @@ title: "6.2. Univariate Time Series Forecasting"
 sidebar_label: "6.2. Univariate Time Series Forecasting"
 sidebar_position: 2
 slug: /vietlod/chapter-06/group-6-2
-description: "How-To User Guide for Methodological Part 6.2 — Univariate Time Series Forecasting in Chapter 6: comparing and executing 5 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
+description: "How-To User Guide for Methodological Part 6.2 — Univariate Time Series Forecasting in Chapter 6: comparing and executing 8 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
 keywords:
   - VietLOD Part 6.2
   - Univariate Time Series Forecasting
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Methodological Part 6.2. Univariate Time Series Forecasting** in [6. Univariate, Nonlinear, Structural Break and Bubble Time Series](/en/vietlod/chapter-06) provides step-by-step How-To implementation guides for **5 econometric model lessons** spanning from Section `6.2.1` to `6.2.5`. Full theoretical derivations are available at [VietLOD Part 6.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-06-chuoi-thoi-gian-don-bien-phi-tuyen-diem-gay-va-bong-bong/nhom-6-2-univariate) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+**Methodological Part 6.2. Univariate Time Series Forecasting** in [6. Univariate, Nonlinear, Structural Break and Bubble Time Series](/en/vietlod/chapter-06) provides step-by-step How-To implementation guides for **8 econometric model lessons** spanning from Section `6.2.1` to `6.2.8`. Full theoretical derivations are available at [VietLOD Part 6.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-06-chuoi-thoi-gian-don-bien-phi-tuyen-diem-gay-va-bong-bong/nhom-6-2-univariate) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="How-To Guide for Part 6.2: Univariate Time Series Forecasting in Stata 18, R 4.x, and Python 3.11+"
@@ -92,6 +92,11 @@ $$
 | **6.2.4** · [Autoregressive Integrated Moving-Average — ARIMA](/en/vietlod/chapter-06/group-6-2/b093-arima) | `arima` | `arima y, arima(1,1,1)` | `arima(y, order = c(1, 1, 1))` | `ARIMA(y, order=(1, 1, 1)).fit()` | <Available /> |
 | **6.2.5** · [Seasonal ARIMA Time Series](/en/vietlod/chapter-06/group-6-2/b094-sarima) | `sarima` | `arima y, arima(1,1,1) sarima(1,1,1,12)` | `arima(y, order = c(1,1,1), seasonal = list(order = c(1,1,1), period = 12))` | `SARIMAX(y, order=(1,1,1), seasonal_order=(1,1,1,12)).fit()` | <Available /> |
 
+
+| **6.2.6** · [Hildreth Lu Grid Search AR1 Regression](/en/vietlod/chapter-06/group-6-2/b220-hildreth-lu-ar1) | `hildreth_lu_ar1` | `prais y x1 x2, ssesearch` | `HoRM::hildreth.lu / prais::prais_winsten` | `Global rho grid search + Prais-Winsten exact initial observation GLS` | <Available /> |
+| **6.2.7** · [Diebold Mariano Equal Predictive Accuracy Test Model](/en/vietlod/chapter-06/group-6-2/b221-diebold-mariano-forecast-eval) | `diebold_mariano_forecast_eval` | `dmariano y yhat1 yhat2, crit(mse) kernel(bartlett)` | `forecast::dm.test` | `Rolling OOS forecast loss differential + HAC HLN-adjusted DM test` | <Available /> |
+| **6.2.8** · [Model Confidence Set Superior Predictive Set Hansen Lunde Nason](/en/vietlod/chapter-06/group-6-2/b222-model-confidence-set-mcs) | `model_confidence_set_mcs` | `regress y x1 x2, vce(robust)` | `MCS::MCSprocedure` | `Sequential max-t equivalence elimination MCS algorithm` | <Available /> |
+
 ## 6.2.4. Standard Implementation Workflow for Part 6.2
 
 <Steps>
@@ -101,7 +106,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Step 2. Select the Optimal Estimator for Your Error and Sample Structure</h3>
-    <p>Compare the estimators from <code>6.2.1</code> to <code>6.2.5</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
+    <p>Compare the estimators from <code>6.2.1</code> to <code>6.2.8</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab</h3>

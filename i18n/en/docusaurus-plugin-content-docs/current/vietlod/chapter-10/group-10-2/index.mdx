@@ -4,7 +4,7 @@ title: "10.2. Spatial Panel Econometrics"
 sidebar_label: "10.2. Spatial Panel Econometrics"
 sidebar_position: 2
 slug: /vietlod/chapter-10/group-10-2
-description: "How-To User Guide for Methodological Part 10.2 — Spatial Panel Econometrics in Chapter 10: comparing and executing 2 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
+description: "How-To User Guide for Methodological Part 10.2 — Spatial Panel Econometrics in Chapter 10: comparing and executing 3 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
 keywords:
   - VietLOD Part 10.2
   - Spatial Panel Econometrics
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Methodological Part 10.2. Spatial Panel Econometrics** in [10. Spatial Econometrics, Conley Standard Errors and Dyadic Networks](/en/vietlod/chapter-10) provides step-by-step How-To implementation guides for **2 econometric model lessons** spanning from Section `10.2.1` to `10.2.2`. Full theoretical derivations are available at [VietLOD Part 10.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-10-kinh-te-luong-khong-gian-conley-hac-va-mang-cap-doi/nhom-10-2-spatial-panel) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+**Methodological Part 10.2. Spatial Panel Econometrics** in [10. Spatial Econometrics, Conley Standard Errors and Dyadic Networks](/en/vietlod/chapter-10) provides step-by-step How-To implementation guides for **3 econometric model lessons** spanning from Section `10.2.1` to `10.2.3`. Full theoretical derivations are available at [VietLOD Part 10.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-10-kinh-te-luong-khong-gian-conley-hac-va-mang-cap-doi/nhom-10-2-spatial-panel) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="How-To Guide for Part 10.2: Spatial Panel Econometrics in Stata 18, R 4.x, and Python 3.11+"
@@ -71,6 +71,9 @@ $$
 | **10.2.1** · [Spatial Panel Fixed Effects](/en/vietlod/chapter-10/group-10-2/b166-spatial-panel-fe) | `spatial_panel_fe` | `spxtregress y x1 x2, fe dvarlag(W)` | `splm::spml(y ~ x1 + x2, data = pdata, listw = lw, model = 'within', lag = TRUE)` | `spreg.Panel_FE_Lag(y, X, w=w)` | <Available /> |
 | **10.2.2** · [Spatial Panel Random Effects](/en/vietlod/chapter-10/group-10-2/b167-spatial-panel-re) | `spatial_panel_re` | `spxtregress y x1 x2, re dvarlag(W)` | `splm::spml(y ~ x1 + x2, data = pdata, listw = lw, model = 'random', lag = TRUE)` | `spreg.Panel_RE_Lag(y, X, w=w)` | <Available /> |
 
+
+| **10.2.3** · [Yu de Jong Lee Bias Corrected Dynamic Spatial Panel QMLE](/en/vietlod/chapter-10/group-10-2/b297-dynamic-spatial-panel-yu-lee) | `dynamic_spatial_panel_yu_lee` | `xsmle y x1 x2, wmat(W) model(sar) dlag(1) fe` | `sdpd::SDPDm(y ~ x1 + x2, data = df, W = W_mat, model = 'sar', dynamic = TRUE)` | `Row-standardized W concentrated QMLE + Yu-de Jong-Lee (2008) analytical bias correction` | <Available /> |
+
 ## 10.2.4. Standard Implementation Workflow for Part 10.2
 
 <Steps>
@@ -80,7 +83,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Step 2. Select the Optimal Estimator for Your Error and Sample Structure</h3>
-    <p>Compare the estimators from <code>10.2.1</code> to <code>10.2.2</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
+    <p>Compare the estimators from <code>10.2.1</code> to <code>10.2.3</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab</h3>

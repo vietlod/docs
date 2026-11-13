@@ -4,7 +4,7 @@ title: "7.2. Granger Causality and Impulse Response Analysis"
 sidebar_label: "7.2. Granger Causality and Impulse Response Analysis"
 sidebar_position: 2
 slug: /vietlod/chapter-07/group-7-2
-description: "How-To User Guide for Methodological Part 7.2 — Granger Causality and Impulse Response Analysis in Chapter 7: comparing and executing 2 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
+description: "How-To User Guide for Methodological Part 7.2 — Granger Causality and Impulse Response Analysis in Chapter 7: comparing and executing 4 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
 keywords:
   - VietLOD Part 7.2
   - Granger Causality and Impulse Response Analysis
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Methodological Part 7.2. Granger Causality and Impulse Response Analysis** in [7. Multivariate Time Series, Local Projections and Spillover Networks](/en/vietlod/chapter-07) provides step-by-step How-To implementation guides for **2 econometric model lessons** spanning from Section `7.2.1` to `7.2.2`. Full theoretical derivations are available at [VietLOD Part 7.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-07-chuoi-thoi-gian-da-bien-chieu-cuc-bo-va-mang-lan-toa/nhom-7-2-causality) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+**Methodological Part 7.2. Granger Causality and Impulse Response Analysis** in [7. Multivariate Time Series, Local Projections and Spillover Networks](/en/vietlod/chapter-07) provides step-by-step How-To implementation guides for **4 econometric model lessons** spanning from Section `7.2.1` to `7.2.4`. Full theoretical derivations are available at [VietLOD Part 7.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-07-chuoi-thoi-gian-da-bien-chieu-cuc-bo-va-mang-lan-toa/nhom-7-2-causality) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="How-To Guide for Part 7.2: Granger Causality and Impulse Response Analysis in Stata 18, R 4.x, and Python 3.11+"
@@ -71,6 +71,10 @@ $$
 | **7.2.1** · [Multi-Lag Granger Causality System](/en/vietlod/chapter-07/group-7-2/b108-granger-causality) | `granger_causality` | `var y x1 x2, lags(1/2) -> vargranger` | `lmtest::grangertest(y ~ x1, order = 2, data = df)` | `grangercausalitytests(df[['y', 'x1']], maxlag=2)` | <Available /> |
 | **7.2.2** · [Orthogonalized Impulse Response System — IRF](/en/vietlod/chapter-07/group-7-2/b109-impulse-response) | `impulse_response` | `var y x1 x2, lags(1/2) -> irf create oirf, step(10)` | `vars::irf(var_fit, impulse = 'x1', response = 'y', n.ahead = 10)` | `VAR(df[['y', 'x1', 'x2']]).fit(2).irf(10)` | <Available /> |
 
+
+| **7.2.3** · [Hatemi J Asymmetric Positive and Negative Granger Causality](/en/vietlod/chapter-07/group-7-2/b225-hatemi-j-asymmetric-causality) | `hatemi_j_asymmetric_causality` | `var y x_pos x_neg, lags(1/2) + vargranger` | `vars::VAR on cumulative positive/negative shock components` | `Cumulative partial-sum decomposition + asymmetric Wald causality F-tests` | <Available /> |
+| **7.2.4** · [Bates Granger Optimal Forecast Combination and Mincer Zarnowitz Efficiency](/en/vietlod/chapter-07/group-7-2/b286-mincer-zarnowitz-forecast-combination) | `mincer_zarnowitz_forecast_combination` | `newey y x1 x2, lag(2) & test (_cons = 0) (x1 = 1)` | `ForecastComb::comb_GR + sandwich::NeweyWest` | `Granger-Ramanathan HAC regression + Bates-Granger optimal weights + MZ joint Wald F-test` | <Available /> |
+
 ## 7.2.4. Standard Implementation Workflow for Part 7.2
 
 <Steps>
@@ -80,7 +84,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Step 2. Select the Optimal Estimator for Your Error and Sample Structure</h3>
-    <p>Compare the estimators from <code>7.2.1</code> to <code>7.2.2</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
+    <p>Compare the estimators from <code>7.2.1</code> to <code>7.2.4</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab</h3>

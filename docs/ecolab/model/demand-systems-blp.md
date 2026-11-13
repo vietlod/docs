@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 **Họ mô hình 13 (Tổ chức ngành cấu trúc & hệ thống cầu)** bao gồm các phương pháp ước lượng hệ thống tỷ trọng chi tiêu hộ gia đình và mô hình lựa chọn rời rạc sản phẩm phân biệt ở cấp thị trường. Nhóm phương pháp này là công cụ chuẩn mực trong kinh tế học phúc lợi, thuế tiêu dùng, khảo sát mức sống hộ gia đình (**VHLSS**) và phân tích cạnh tranh – sáp nhập doanh nghiệp.
 
-Trong EcoLab, nhóm mô hình này nằm tại **Mô hình hóa → 13. Hệ thống cầu & BLP**. Xem thêm [Danh mục 15 họ mô hình](/ecolab/model/group).
+Trong EcoLab, nhóm mô hình này nằm tại **Mô hình hóa → 13. Hệ thống cầu & BLP**. Xem thêm [Danh mục 16 họ mô hình](/ecolab/model/group).
 
 ---
 

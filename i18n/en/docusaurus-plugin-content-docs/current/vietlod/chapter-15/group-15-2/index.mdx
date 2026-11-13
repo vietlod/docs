@@ -4,7 +4,7 @@ title: "15.2. Few-Cluster Resampling and Randomization Inference"
 sidebar_label: "15.2. Few-Cluster Resampling and Randomization Inference"
 sidebar_position: 2
 slug: /vietlod/chapter-15/group-15-2
-description: "How-To User Guide for Methodological Part 15.2 — Few-Cluster Resampling and Randomization Inference in Chapter 15: comparing and executing 2 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
+description: "How-To User Guide for Methodological Part 15.2 — Few-Cluster Resampling and Randomization Inference in Chapter 15: comparing and executing 4 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
 keywords:
   - VietLOD Part 15.2
   - Few-Cluster Resampling and Randomization Inference
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Methodological Part 15.2. Few-Cluster Resampling and Randomization Inference** in [15. Nonparametric Econometrics and Few-Cluster Resampling Inference](/en/vietlod/chapter-15) provides step-by-step How-To implementation guides for **2 econometric model lessons** spanning from Section `15.2.1` to `15.2.2`. Full theoretical derivations are available at [VietLOD Part 15.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-15-kinh-te-luong-phi-tham-so-va-suy-luan-tai-lay-mau-cum-it/nhom-15-2-resampling-inference) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+**Methodological Part 15.2. Few-Cluster Resampling and Randomization Inference** in [15. Nonparametric Econometrics and Few-Cluster Resampling Inference](/en/vietlod/chapter-15) provides step-by-step How-To implementation guides for **4 econometric model lessons** spanning from Section `15.2.1` to `15.2.4`. Full theoretical derivations are available at [VietLOD Part 15.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-15-kinh-te-luong-phi-tham-so-va-suy-luan-tai-lay-mau-cum-it/nhom-15-2-resampling-inference) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="How-To Guide for Part 15.2: Few-Cluster Resampling and Randomization Inference in Stata 18, R 4.x, and Python 3.11+"
@@ -71,6 +71,10 @@ $$
 | **15.2.1** · [Fast Wild Cluster Bootstrap Inference with Rademacher and Webb Weights](/en/vietlod/chapter-15/group-15-2/b200-wild-cluster-bootstrap) | `wild_cluster_bootstrap` | `regress y x1 x2, vce(cluster cid) -> boottest x1, weight(webb) reps(9999)` | `sandwich::vcovBS(lm(y ~ x1 + x2, data = df), cluster = ~cid, R = 4999, type = 'wild-webb')` | `wildboottest(smf.ols('y ~ x1 + x2', data=df).fit(), param='x1', cluster=df['cid'], B=9999)` | <Available /> |
 | **15.2.2** · [Fisher Exact and Stratified Cluster Randomization Inference](/en/vietlod/chapter-15/group-15-2/b201-randomization-inference) | `randomization_inference` | `ritest treat _b[treat], reps(5000) cluster(cid): regress y treat x1 x2` | `ri2::conduct_ri(y ~ treat + x1 + x2, declaration = decl, sharp_hypothesis = 0, sims = 5000, data = df)` | `scipy.stats.permutation_test((df_treat, df_ctrl), statistic=diff_in_means, n_resamples=5000)` | <Available /> |
 
+
+| **15.2.3** · [Autoregressive Sieve Bootstrap for Dependent Series Buhlmann](/en/vietlod/chapter-15/group-15-2/b250-sieve-bootstrap-buhlmann) | `sieve_bootstrap_buhlmann` | `bootstrap, reps(200) seed(42): regress y x1 x2` | `boot::tsboot(sim = 'fixed') / funtimes::sieve_bootstrap` | `AR(p) residual sieve innovation resampling bootstrap` | <Available /> |
+| **15.2.4** · [Pairs and Studentized Asymptotic Refinement Bootstrap Freedman MacKinnon](/en/vietlod/chapter-15/group-15-2/b251-pairs-double-bootstrap) | `pairs_double_bootstrap` | `regress y x1 x2, vce(bootstrap, reps(299) seed(42))` | `boot::boot + car::Boot` | `Nonparametric (y_i, x_i) pairs resampling + HC1 studentized pivotal t-quantiles` | <Available /> |
+
 ## 15.2.4. Standard Implementation Workflow for Part 15.2
 
 <Steps>
@@ -80,7 +84,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Step 2. Select the Optimal Estimator for Your Error and Sample Structure</h3>
-    <p>Compare the estimators from <code>15.2.1</code> to <code>15.2.2</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
+    <p>Compare the estimators from <code>15.2.1</code> to <code>15.2.4</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab</h3>

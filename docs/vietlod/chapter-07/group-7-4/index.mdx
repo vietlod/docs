@@ -4,7 +4,7 @@ title: "7.4. Mô hình VAR tham số biến thiên và mạng lan tỏa"
 sidebar_label: "7.4. Mô hình VAR tham số biến thiên và mạng lan tỏa"
 sidebar_position: 4
 slug: /vietlod/chapter-07/group-7-4
-description: "Hướng dẫn thực hành Phần 7.4 — Mô hình VAR tham số biến thiên và mạng lan tỏa thuộc Chương 7: so sánh và thực thi 3 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Phần 7.4 — Mô hình VAR tham số biến thiên và mạng lan tỏa thuộc Chương 7: so sánh và thực thi 4 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
   - Phần 7.4 VietLOD
   - Mô hình VAR tham số biến thiên và mạng lan tỏa
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Phần 7.4. Mô hình VAR tham số biến thiên và mạng lan tỏa** thuộc [7. Chuỗi thời gian đa biến, chiếu cục bộ và mạng lan tỏa](/vietlod/chapter-07) cung cấp quy trình thực hành từng bước cho **3 bài học mô hình kinh tế lượng** từ mục `7.4.1` đến `7.4.3`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 7.4](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-07-chuoi-thoi-gian-da-bien-chieu-cuc-bo-va-mang-lan-toa/nhom-7-4-tvp-factor-spillover) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+**Phần 7.4. Mô hình VAR tham số biến thiên và mạng lan tỏa** thuộc [7. Chuỗi thời gian đa biến, chiếu cục bộ và mạng lan tỏa](/vietlod/chapter-07) cung cấp quy trình thực hành từng bước cho **4 bài học mô hình kinh tế lượng** từ mục `7.4.1` đến `7.4.4`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 7.4](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-07-chuoi-thoi-gian-da-bien-chieu-cuc-bo-va-mang-lan-toa/nhom-7-4-tvp-factor-spillover) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="Hướng dẫn thực hành Phần 7.4: Mô hình VAR tham số biến thiên và mạng lan tỏa trên Stata 18, R 4.x và Python 3.11+"
@@ -78,6 +78,9 @@ $$
 | **7.4.2** · [Mô hình VAR tham số và phương sai biến thiên theo thời gian (VAR)](/vietlod/chapter-07/group-7-4/b117-tvp-var) | `tvp_var` | `sspace (b1 L.b1, state noconstant) (y L.y, state)` | `tvReg::tvVAR(df[, c('y', 'x1', 'x2')], p = 2)` | `UnobservedComponents(df['y'], exog=df[['x1', 'x2']], mle_regression=False).fit()` | <Available /> |
 | **7.4.3** · [Mô hình đo lường lan tỏa và kết nối mạng lưới Diebold–Yilmaz](/vietlod/chapter-07/group-7-4/b118-spillover-connectedness) | `spillover_connectedness` | `var y x1 x2, lags(1/2) -> irf create gfevd, step(10)` | `ConnectednessApproach::ConnectednessApproach(df_zoo, nlag = 2, nfore = 10)` | `VAR(df[['y', 'x1', 'x2']]).fit(maxlags=2).fevd(10)` | <Available /> |
 
+
+| **7.4.4** · [Mô hình nhân tử động dự báo tức thời đa tần suất Banbura Giannone Reichlin](/vietlod/chapter-07/group-7-4/b285-nowcasting-dynamic-factor-banbura) | `nowcasting_dynamic_factor_banbura` | `dfactor (y x1 x2 = , noconstant) (f = , ar(1))` | `nowcasting::nowcast / dfms::DFM(X, r = 1, p = 1)` | `statsmodels.tsa.DynamicFactor / Kalman state-space smoother + bridge projection` | <Available /> |
+
 ## 7.4.4. Quy trình thực hành chuẩn cho Phần 7.4
 
 <Steps>
@@ -87,7 +90,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu</h3>
-    <p>So sánh các bài học mô hình từ <code>7.4.1</code> đến <code>7.4.3</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
+    <p>So sánh các bài học mô hình từ <code>7.4.1</code> đến <code>7.4.4</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab</h3>

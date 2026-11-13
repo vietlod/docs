@@ -4,7 +4,7 @@ title: "8.1. Họ mô hình phương sai thay đổi có điều kiện (ARCH, G
 sidebar_label: "8.1. Họ mô hình phương sai thay đổi có điều kiện (ARCH, GARCH)"
 sidebar_position: 1
 slug: /vietlod/chapter-08/group-8-1
-description: "Hướng dẫn thực hành Phần 8.1 — Họ mô hình phương sai thay đổi có điều kiện (ARCH, GARCH) thuộc Chương 8: so sánh và thực thi 7 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Phần 8.1 — Họ mô hình phương sai thay đổi có điều kiện (ARCH, GARCH) thuộc Chương 8: so sánh và thực thi 11 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
   - Phần 8.1 VietLOD
   - Họ mô hình phương sai thay đổi có điều kiện (ARCH, GARCH)
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Phần 8.1. Họ mô hình phương sai thay đổi có điều kiện (ARCH, GARCH)** thuộc [8. Độ biến động tài chính, định giá tài sản và rủi ro hệ thống](/vietlod/chapter-08) cung cấp quy trình thực hành từng bước cho **7 bài học mô hình kinh tế lượng** từ mục `8.1.1` đến `8.1.7`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 8.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-08-do-bien-dong-tai-chinh-dinh-gia-tai-san-va-rui-ro-he-thong/nhom-8-1-arch-family) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+**Phần 8.1. Họ mô hình phương sai thay đổi có điều kiện (ARCH, GARCH)** thuộc [8. Độ biến động tài chính, định giá tài sản và rủi ro hệ thống](/vietlod/chapter-08) cung cấp quy trình thực hành từng bước cho **11 bài học mô hình kinh tế lượng** từ mục `8.1.1` đến `8.1.11`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 8.1](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-08-do-bien-dong-tai-chinh-dinh-gia-tai-san-va-rui-ro-he-thong/nhom-8-1-arch-family) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="Hướng dẫn thực hành Phần 8.1: Họ mô hình phương sai thay đổi có điều kiện (ARCH, GARCH) trên Stata 18, R 4.x và Python 3.11+"
@@ -106,6 +106,12 @@ $$
 | **8.1.6** · [Mô hình ARCH lũy thừa bất đối xứng (APARCH)](/vietlod/chapter-08/group-8-1/b127-aparch) | `aparch` | `arch ret, aparch(1) pgarch(1)` | `rugarch::ugarchfit(ugarchspec(variance.model = list(model = 'apARCH', garchOrder = c(1, 1))), ret)` | `arch_model(ret, vol='APARCH', p=1, o=1, q=1).fit(disp='off')` | <Available /> |
 | **8.1.7** · [Mô hình GARCH tích hợp phân số nhớ dài (FIGARCH)](/vietlod/chapter-08/group-8-1/b128-figarch) | `figarch` | `arch ret, figarch(1,1)` | `rugarch::ugarchfit(ugarchspec(variance.model = list(model = 'fiGARCH', garchOrder = c(1, 1))), df$ret)` | `arch_model(df['y'], vol='FIGARCH', p=1, q=1).fit(disp='off')` | <Available /> |
 
+
+| **8.1.8** · [Độ biến động ngẫu nhiên tự hồi quy logarit Taylor QML](/vietlod/chapter-08/group-8-1/b226-stochastic-volatility-taylor) | `stochastic_volatility_taylor` | `arch y x1, arch(1) garch(1) vce(robust)` | `stochvol::svsample` | `Harvey-Ruiz-Shephard log-chi2 QML state-space filter` | <Available /> |
+| **8.1.9** · [Chuyển chế độ Markov phương sai thay đổi có điều kiện Hamilton Susmel Gray](/vietlod/chapter-08/group-8-1/b227-ms-garch-regime) | `ms_garch_regime` | `mswitch dr y x1, states(2) varswitch` | `MSGARCH::FitML(MSGARCH::CreateSpec())` | `Hamilton EM 2-state Markov variance filter + intra-state ARCH` | <Available /> |
+| **8.1.10** · [Độ biến động thực hiện đa tần suất tách bước nhảy HAR CJ Andersen Bollerslev Diebold](/vietlod/chapter-08/group-8-1/b228-har-rv-cj-jump) | `har_rv_cj_jump` | `newey rv L.c_bv c_w c_m L.j_rv, lag(5)` | `highfrequency::HARmodel(type = 'HARCJ')` | `Barndorff-Nielsen-Shephard bipower + HAR-CJ Newey-West HAC` | <Available /> |
+| **8.1.11** · [Mô hình sai số nhân cho chuỗi tài chính không âm Engle Gallo](/vietlod/chapter-08/group-8-1/b229-multiplicative-error-mem) | `multiplicative_error_mem` | `arch y x1, arch(1) garch(1) vce(robust)` | `MEM / Gamma GLM dynamic scale recursion` | `Gamma QML Multiplicative Error Model dynamic scale filter` | <Available /> |
+
 ## 8.1.4. Quy trình thực hành chuẩn cho Phần 8.1
 
 <Steps>
@@ -115,7 +121,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu</h3>
-    <p>So sánh các bài học mô hình từ <code>8.1.1</code> đến <code>8.1.7</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
+    <p>So sánh các bài học mô hình từ <code>8.1.1</code> đến <code>8.1.11</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab</h3>

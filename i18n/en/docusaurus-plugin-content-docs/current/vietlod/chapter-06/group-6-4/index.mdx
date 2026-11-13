@@ -4,7 +4,7 @@ title: "6.4. State-Space and Unobserved Components Models"
 sidebar_label: "6.4. State-Space and Unobserved Components Models"
 sidebar_position: 4
 slug: /vietlod/chapter-06/group-6-4
-description: "How-To User Guide for Methodological Part 6.4 — State-Space and Unobserved Components Models in Chapter 6: comparing and executing 3 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
+description: "How-To User Guide for Methodological Part 6.4 — State-Space and Unobserved Components Models in Chapter 6: comparing and executing 4 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
 keywords:
   - VietLOD Part 6.4
   - State-Space and Unobserved Components Models
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Methodological Part 6.4. State-Space and Unobserved Components Models** in [6. Univariate, Nonlinear, Structural Break and Bubble Time Series](/en/vietlod/chapter-06) provides step-by-step How-To implementation guides for **3 econometric model lessons** spanning from Section `6.4.1` to `6.4.3`. Full theoretical derivations are available at [VietLOD Part 6.4](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-06-chuoi-thoi-gian-don-bien-phi-tuyen-diem-gay-va-bong-bong/nhom-6-4-state-space) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+**Methodological Part 6.4. State-Space and Unobserved Components Models** in [6. Univariate, Nonlinear, Structural Break and Bubble Time Series](/en/vietlod/chapter-06) provides step-by-step How-To implementation guides for **4 econometric model lessons** spanning from Section `6.4.1` to `6.4.4`. Full theoretical derivations are available at [VietLOD Part 6.4](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-06-chuoi-thoi-gian-don-bien-phi-tuyen-diem-gay-va-bong-bong/nhom-6-4-state-space) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="How-To Guide for Part 6.4: State-Space and Unobserved Components Models in Stata 18, R 4.x, and Python 3.11+"
@@ -78,6 +78,9 @@ $$
 | **6.4.2** · [Structural Unobserved Components Time Series](/en/vietlod/chapter-06/group-6-4/b100-unobserved-components) | `unobserved_components` | `ucm y, model(lltrend)` | `StructTS(y, type = 'trend')` | `UnobservedComponents(y, level='local linear trend').fit()` | <Available /> |
 | **6.4.3** · [Dynamic Factor Time-Series Estimator](/en/vietlod/chapter-06/group-6-4/b101-dynamic-factor) | `dynamic_factor` | `dfactor (y x1 x2 = , noconstant) (f = , ar(1/2))` | `stats::prcomp(df[, c('y', 'x1', 'x2')], scale. = TRUE)` | `DynamicFactor(df[['y', 'x1', 'x2']], k_factors=1, factor_order=1).fit()` | <Available /> |
 
+
+| **6.4.4** · [Beveridge Nelson Permanent Transitory ARIMA Decomposition](/en/vietlod/chapter-06/group-6-4/b283-beveridge-nelson-decomposition) | `beveridge_nelson_decomposition` | `ucm y, model(rwdrift) cycle(1) / arima D.y, ar(1) ma(1)` | `stats::arima(diff(y)) + Beveridge-Nelson exact state-space trend` | `Wold long-run multiplier Psi(1) state-space Beveridge-Nelson decomposition + HAC regression` | <Available /> |
+
 ## 6.4.4. Standard Implementation Workflow for Part 6.4
 
 <Steps>
@@ -87,7 +90,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Step 2. Select the Optimal Estimator for Your Error and Sample Structure</h3>
-    <p>Compare the estimators from <code>6.4.1</code> to <code>6.4.3</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
+    <p>Compare the estimators from <code>6.4.1</code> to <code>6.4.4</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab</h3>

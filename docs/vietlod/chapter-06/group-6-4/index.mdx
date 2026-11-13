@@ -4,7 +4,7 @@ title: "6.4. Mô hình không gian trạng thái"
 sidebar_label: "6.4. Mô hình không gian trạng thái"
 sidebar_position: 4
 slug: /vietlod/chapter-06/group-6-4
-description: "Hướng dẫn thực hành Phần 6.4 — Mô hình không gian trạng thái thuộc Chương 6: so sánh và thực thi 3 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Phần 6.4 — Mô hình không gian trạng thái thuộc Chương 6: so sánh và thực thi 4 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
   - Phần 6.4 VietLOD
   - Mô hình không gian trạng thái
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Phần 6.4. Mô hình không gian trạng thái** thuộc [6. Chuỗi thời gian đơn biến, phi tuyến, điểm gãy và bong bóng](/vietlod/chapter-06) cung cấp quy trình thực hành từng bước cho **3 bài học mô hình kinh tế lượng** từ mục `6.4.1` đến `6.4.3`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 6.4](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-06-chuoi-thoi-gian-don-bien-phi-tuyen-diem-gay-va-bong-bong/nhom-6-4-state-space) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+**Phần 6.4. Mô hình không gian trạng thái** thuộc [6. Chuỗi thời gian đơn biến, phi tuyến, điểm gãy và bong bóng](/vietlod/chapter-06) cung cấp quy trình thực hành từng bước cho **4 bài học mô hình kinh tế lượng** từ mục `6.4.1` đến `6.4.4`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 6.4](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-06-chuoi-thoi-gian-don-bien-phi-tuyen-diem-gay-va-bong-bong/nhom-6-4-state-space) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="Hướng dẫn thực hành Phần 6.4: Mô hình không gian trạng thái trên Stata 18, R 4.x và Python 3.11+"
@@ -78,6 +78,9 @@ $$
 | **6.4.2** · [Mô hình tách thành phần không quan sát được Harvey (UCM)](/vietlod/chapter-06/group-6-4/b100-unobserved-components) | `unobserved_components` | `ucm y, model(lltrend)` | `StructTS(y, type = 'trend')` | `UnobservedComponents(y, level='local linear trend').fit()` | <Available /> |
 | **6.4.3** · [Mô hình nhân tố động không gian trạng thái (DFM)](/vietlod/chapter-06/group-6-4/b101-dynamic-factor) | `dynamic_factor` | `dfactor (y x1 x2 = , noconstant) (f = , ar(1/2))` | `stats::prcomp(df[, c('y', 'x1', 'x2')], scale. = TRUE)` | `DynamicFactor(df[['y', 'x1', 'x2']], k_factors=1, factor_order=1).fit()` | <Available /> |
 
+
+| **6.4.4** · [Phân rã thành phần xu hướng dài hạn và chu kỳ ngắn hạn Beveridge Nelson](/vietlod/chapter-06/group-6-4/b283-beveridge-nelson-decomposition) | `beveridge_nelson_decomposition` | `ucm y, model(rwdrift) cycle(1) / arima D.y, ar(1) ma(1)` | `stats::arima(diff(y)) + Beveridge-Nelson exact state-space trend` | `Wold long-run multiplier Psi(1) state-space Beveridge-Nelson decomposition + HAC regression` | <Available /> |
+
 ## 6.4.4. Quy trình thực hành chuẩn cho Phần 6.4
 
 <Steps>
@@ -87,7 +90,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu</h3>
-    <p>So sánh các bài học mô hình từ <code>6.4.1</code> đến <code>6.4.3</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
+    <p>So sánh các bài học mô hình từ <code>6.4.1</code> đến <code>6.4.4</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab</h3>

@@ -1,18 +1,18 @@
 ---
 title: Phân tích Định lượng
 sidebar_position: 3
-description: Hướng dẫn quy trình ước lượng 201+ mô hình kinh tế lượng thuộc 15 họ phân tích và 58 mô hình con trên Python, R và Stata 18 MP kèm kiểm định tiền/hậu ước lượng và gói mã tái lập .zip trên EcoLab.
+description: Hướng dẫn quy trình ước lượng 306 mô hình kinh tế lượng thuộc 16 họ phân tích và 61 mô hình con trên Python, R và Stata 18 MP kèm kiểm định tiền/hậu ước lượng và gói mã tái lập .zip trên EcoLab.
 ---
 
-# Ước lượng & mô hình hóa kinh tế lượng (201+ bộ ước lượng)
+# Ước lượng & mô hình hóa kinh tế lượng (306 bộ ước lượng)
 
-Phân hệ **Mô hình hóa** của EcoLab (`v1.5.0`) kết nối trực tiếp đến lõi tính toán **EcoData Tri-Engine** (**Python**, **R** qua cổng RMCP và **Stata 18 MP**), cung cấp danh mục động **201+ bộ ước lượng cốt lõi thuộc 15 họ mô hình và 58 mô hình con** cho mọi cấu trúc dữ liệu (chéo, chuỗi thời gian, dữ liệu bảng, không gian và vi mô doanh nghiệp – hộ gia đình).
+Phân hệ **Mô hình hóa** của EcoLab (`v1.12.0`) kết nối trực tiếp đến lõi tính toán **EcoData Tri-Engine** (**Python**, **R** qua cổng RMCP và **Stata 18 MP**), cung cấp danh mục động **306 bộ ước lượng thuộc 16 họ mô hình và 61 mô hình con** cho mọi cấu trúc dữ liệu (chéo, chuỗi thời gian, dữ liệu bảng, không gian và vi mô doanh nghiệp – hộ gia đình).
 
 Danh mục mô hình trên EcoLab tự động đồng bộ từ `GET /api/catalog/manifest` của EcoData trong vòng **`<= 60` giây** mỗi khi quản trị viên xuất bản bộ ước lượng mới đã vượt qua 4 cổng kiểm chứng `B1–B4`.
 
 ---
 
-## 1. Hệ thống 15 họ mô hình hỗ trợ
+## 1. Hệ thống 16 họ mô hình hỗ trợ
 
 | Nhóm cấu trúc | Họ mô hình trong EcoLab | Các bộ ước lượng tiêu biểu | Phạm vi ứng dụng học thuật |
 | :--- | :--- | :--- | :--- |
@@ -40,7 +40,7 @@ EcoLab tách riêng hai lớp kiểm định chẩn đoán kèm cơ chế **Ki�
 
 ## 3. Quy trình thực hiện và cam kết Fail-Closed `422`
 
-1. Tại phân hệ **Mô hình hóa**, nhấn **Thêm mô hình** để mở cây phân loại động **15 họ mô hình**.
+1. Tại phân hệ **Mô hình hóa**, nhấn **Thêm mô hình** để mở cây phân loại động **16 họ mô hình**.
 2. Chọn họ mô hình và bộ ước lượng cụ thể, khai báo biến phụ thuộc ($Y$), biến giải thích ($X_1, \dots, X_k$), biến thực thể – thời gian, biến nội sinh/công cụ và cấu trúc sai số chuẩn (Homoskedastic, Robust HC0–HC3, HAC, Driscoll-Kraay, Conley Spatial HAC, Clustered một chiều/hai chiều hoặc Wild Cluster Bootstrap).
 3. Lựa chọn môi trường thực thi (**Python**, **R** hoặc **Stata 18 MP**) và nhấn **Chạy mô hình**.
 4. Nếu khóa mô hình chưa được đăng ký hoặc thiếu tham số cấu trúc bắt buộc, hệ thống trả về thông báo lỗi tường minh **`422 UNSUPPORTED_ESTIMATOR` / `422 INVALID_SPECIFICATION`** — tuyệt đối không bao giờ âm thầm chuyển sang OLS để che giấu lỗi đặc tả.

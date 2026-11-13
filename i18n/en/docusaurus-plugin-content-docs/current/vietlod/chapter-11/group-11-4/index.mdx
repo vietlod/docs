@@ -4,7 +4,7 @@ title: "11.4. Discrete-Time Hazard and Competing-Risks Models"
 sidebar_label: "11.4. Discrete-Time Hazard and Competing-Risks Models"
 sidebar_position: 4
 slug: /vietlod/chapter-11/group-11-4
-description: "How-To User Guide for Methodological Part 11.4 — Discrete-Time Hazard and Competing-Risks Models in Chapter 11: comparing and executing 2 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
+description: "How-To User Guide for Methodological Part 11.4 — Discrete-Time Hazard and Competing-Risks Models in Chapter 11: comparing and executing 5 econometric model lessons across Stata 18 MP, R 4.x, and Python 3.11+."
 keywords:
   - VietLOD Part 11.4
   - Discrete-Time Hazard and Competing-Risks Models
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Methodological Part 11.4. Discrete-Time Hazard and Competing-Risks Models** in [11. Survival, Event History and Competing-Risks Analysis](/en/vietlod/chapter-11) provides step-by-step How-To implementation guides for **2 econometric model lessons** spanning from Section `11.4.1` to `11.4.2`. Full theoretical derivations are available at [VietLOD Part 11.4](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-11-phan-tich-song-sot-thoi-gian-su-kien-va-rui-ro-canh-tranh/nhom-11-4-competing-discrete) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
+**Methodological Part 11.4. Discrete-Time Hazard and Competing-Risks Models** in [11. Survival, Event History and Competing-Risks Analysis](/en/vietlod/chapter-11) provides step-by-step How-To implementation guides for **5 econometric model lessons** spanning from Section `11.4.1` to `11.4.5`. Full theoretical derivations are available at [VietLOD Part 11.4](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-11-phan-tich-song-sot-thoi-gian-su-kien-va-rui-ro-canh-tranh/nhom-11-4-competing-discrete) alongside cloud execution on [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="How-To Guide for Part 11.4: Discrete-Time Hazard and Competing-Risks Models in Stata 18, R 4.x, and Python 3.11+"
@@ -71,6 +71,11 @@ $$
 | **11.4.1** · [Prentice-Gloeckler Discrete-Time Complementary Log-Log Hazard](/en/vietlod/chapter-11/group-11-4/b177-discrete-time-hazard) | `discrete_time_hazard` | `cloglog event_it x1 x2 i.spell_t, vce(cluster id)` | `glm(event_it ~ x1 + x2 + factor(spell_t), family = binomial(link = 'cloglog'), data = df)` | `smf.glm('event_it ~ x1 + x2 + C(spell_t)', data=df, family=sm.families.Binomial(sm.families.links.CLogLog())).fit()` | <Available /> |
 | **11.4.2** · [Fine and Gray Competing-Risks Subdistribution Hazard](/en/vietlod/chapter-11/group-11-4/b178-fine-gray-competing-risks) | `fine_gray_competing_risks` | `stcrreg x1 x2, compete(event == 2) vce(robust)` | `cmprsk::crr(ftime = df$duration, fstatus = df$event, cov1 = df[, c('x1', 'x2')])` | `CoxPHFitter().fit(df_ipcw, duration_col='duration', event_col='event_cr', weights_col='w_ipcw')` | <Available /> |
 
+
+| **11.4.3** · [Autoregressive Conditional Duration Model Engle Russell](/en/vietlod/chapter-11/group-11-4/b242-acd-conditional-duration) | `acd_conditional_duration` | `streg x1 x2, distribution(weibull) time` | `ACDm::acdFit(model = 'ACD', dist = 'exponential')` | `AFT log-duration covariate adjustment + Bauwens-Giot Log-ACD(1,1)` | <Available /> |
+| **11.4.4** · [Shared Gamma Frailty Proportional Hazards and AFT Duration Model](/en/vietlod/chapter-11/group-11-4/b300-shared-gamma-frailty-hazard) | `shared_gamma_frailty_hazard` | `stset y & streg x1 x2, distribution(weibull) frailty(gamma) time` | `survival::survreg(Surv(y) ~ x1 + x2, dist = 'weibull')` | `Weibull-Gamma Frailty marginal Laplace-transform MLE + AFT log-duration elasticities` | <Available /> |
+| **11.4.5** · [Piecewise Constant Exponential Hazard Duration Model](/en/vietlod/chapter-11/group-11-4/b301-piecewise-exponential-hazard) | `piecewise_exponential_hazard` | `stset y & stsplit, at(failures) / streg x1 x2, distribution(exponential) time` | `eha::pchreg / stats::lm(log(y) ~ x1 + x2)` | `Holford-Laird-Olivier interval-exposure Poisson hazard + log-duration AFT projection` | <Available /> |
+
 ## 11.4.4. Standard Implementation Workflow for Part 11.4
 
 <Steps>
@@ -80,7 +85,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Step 2. Select the Optimal Estimator for Your Error and Sample Structure</h3>
-    <p>Compare the estimators from <code>11.4.1</code> to <code>11.4.2</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
+    <p>Compare the estimators from <code>11.4.1</code> to <code>11.4.5</code> in the syntax matrix above and execute the estimation in Stata 18 MP, R 4.x, or Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Step 3. Run Mandatory Diagnostics and Export Publication Tables on EcoLab</h3>

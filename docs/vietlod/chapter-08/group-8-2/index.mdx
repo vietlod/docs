@@ -4,7 +4,7 @@ title: "8.2. Độ biến động thực tế, tần suất hỗn hợp và rủ
 sidebar_label: "8.2. Độ biến động thực tế, tần suất hỗn hợp và rủi ro đuôi"
 sidebar_position: 2
 slug: /vietlod/chapter-08/group-8-2
-description: "Hướng dẫn thực hành Phần 8.2 — Độ biến động thực tế, tần suất hỗn hợp và rủi ro đuôi thuộc Chương 8: so sánh và thực thi 4 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Phần 8.2 — Độ biến động thực tế, tần suất hỗn hợp và rủi ro đuôi thuộc Chương 8: so sánh và thực thi 7 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
   - Phần 8.2 VietLOD
   - Độ biến động thực tế, tần suất hỗn hợp và rủi ro đuôi
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Phần 8.2. Độ biến động thực tế, tần suất hỗn hợp và rủi ro đuôi** thuộc [8. Độ biến động tài chính, định giá tài sản và rủi ro hệ thống](/vietlod/chapter-08) cung cấp quy trình thực hành từng bước cho **4 bài học mô hình kinh tế lượng** từ mục `8.2.1` đến `8.2.4`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 8.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-08-do-bien-dong-tai-chinh-dinh-gia-tai-san-va-rui-ro-he-thong/nhom-8-2-risk-models) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+**Phần 8.2. Độ biến động thực tế, tần suất hỗn hợp và rủi ro đuôi** thuộc [8. Độ biến động tài chính, định giá tài sản và rủi ro hệ thống](/vietlod/chapter-08) cung cấp quy trình thực hành từng bước cho **7 bài học mô hình kinh tế lượng** từ mục `8.2.1` đến `8.2.7`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 8.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-08-do-bien-dong-tai-chinh-dinh-gia-tai-san-va-rui-ro-he-thong/nhom-8-2-risk-models) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="Hướng dẫn thực hành Phần 8.2: Độ biến động thực tế, tần suất hỗn hợp và rủi ro đuôi trên Stata 18, R 4.x và Python 3.11+"
@@ -85,6 +85,11 @@ $$
 | **8.2.3** · [Mô hình độ biến động hai thành phần vĩ mô–tài chính (MIDAS)](/vietlod/chapter-08/group-8-2/b131-garch-midas) | `garch_midas` | `garchmidas ret, mv(macro_x) lags(12)` | `mfGARCH::fit_mfgarch(data = df, y = 'ret', x = 'macro_x', low.freq = 'month', K = 12)` | `arch_model(df['y'], vol='GARCH', p=1, o=1, q=1).fit(disp='off')` | <Available /> |
 | **8.2.4** · [Mô hình đo lường rủi ro đuôi và lây lan hệ thống (VaR, CoVaR)](/vietlod/chapter-08/group-8-2/b132-covar-systemic-risk) | `covar_systemic_risk` | `sqreg ret_i ret_sys l1_state, quantile(0.05 0.50) reps(200)` | `quantreg::rq(ret_sys ~ ret_i + l1_state, tau = 0.05, data = df)` | `smf.quantreg('ret_sys ~ ret_i + l1_state', data=df).fit(q=0.05)` | <Available /> |
 
+
+| **8.2.5** · [Lý thuyết giá trị cực trị vượt ngưỡng phân phối Pareto tổng quát](/vietlod/chapter-08/group-8-2/b230-evt-peaks-over-threshold-gpd) | `evt_peaks_over_threshold_gpd` | `qreg y x1, quantile(0.95) vce(robust)` | `evir::gpd / extRemes::fevd(type = 'GP')` | `scipy.stats.genpareto.fit POT + Extreme VaR99 / ES99` | <Available /> |
+| **8.2.6** · [Mô hình Realized GARCH kết hợp lợi suất và độ biến động thực tế Hansen Huang Shek](/vietlod/chapter-08/group-8-2/b291-realized-garch-hansen-huang) | `realized_garch_hansen_huang` | `arch y x1 x2, arch(1) garch(1) het(rv_proxy)` | `rugarch::ugarchfit(ugarchspec(variance.model = list(model = 'realGARCH')), data)` | `Hansen-Huang-Shek (2012) joint return + log-realized measurement QMLE` | <Available /> |
+| **8.2.7** · [Hồi quy đồng thời giá trị rủi ro và tổn thất kỳ vọng vượt ngưỡng Dimitriadis Bayer Acerbi Szekely](/vietlod/chapter-08/group-8-2/b292-conditional-es-acerbi-backtest) | `conditional_es_acerbi_backtest` | `qreg y x1 x2, quantile(0.05) vce(robust)` | `esreg::esreg(y ~ x1 + x2, alpha = 0.05)` | `Fissler-Ziegel FZ0 joint (VaR, ES) regression + Acerbi-Szekely Z2 backtest` | <Available /> |
+
 ## 8.2.4. Quy trình thực hành chuẩn cho Phần 8.2
 
 <Steps>
@@ -94,7 +99,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu</h3>
-    <p>So sánh các bài học mô hình từ <code>8.2.1</code> đến <code>8.2.4</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
+    <p>So sánh các bài học mô hình từ <code>8.2.1</code> đến <code>8.2.7</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab</h3>

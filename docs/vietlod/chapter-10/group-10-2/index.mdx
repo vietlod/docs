@@ -4,7 +4,7 @@ title: "10.2. Dữ liệu bảng không gian"
 sidebar_label: "10.2. Dữ liệu bảng không gian"
 sidebar_position: 2
 slug: /vietlod/chapter-10/group-10-2
-description: "Hướng dẫn thực hành Phần 10.2 — Dữ liệu bảng không gian thuộc Chương 10: so sánh và thực thi 2 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
+description: "Hướng dẫn thực hành Phần 10.2 — Dữ liệu bảng không gian thuộc Chương 10: so sánh và thực thi 3 bài học mô hình kinh tế lượng trên Stata 18 MP, R 4.x và Python 3.11+."
 keywords:
   - Phần 10.2 VietLOD
   - Dữ liệu bảng không gian
@@ -17,7 +17,7 @@ keywords:
 
 <Available plans={['EcoData', 'EcoLab', 'Finco', 'VietLOD']} />
 
-**Phần 10.2. Dữ liệu bảng không gian** thuộc [10. Kinh tế lượng không gian, sai số chuẩn Conley và mạng cặp đôi](/vietlod/chapter-10) cung cấp quy trình thực hành từng bước cho **2 bài học mô hình kinh tế lượng** từ mục `10.2.1` đến `10.2.2`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 10.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-10-kinh-te-luong-khong-gian-conley-hac-va-mang-cap-doi/nhom-10-2-spatial-panel) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
+**Phần 10.2. Dữ liệu bảng không gian** thuộc [10. Kinh tế lượng không gian, sai số chuẩn Conley và mạng cặp đôi](/vietlod/chapter-10) cung cấp quy trình thực hành từng bước cho **3 bài học mô hình kinh tế lượng** từ mục `10.2.1` đến `10.2.3`. Người đọc có thể xem bài giảng lý thuyết đầy đủ tại [VietLOD Phần 10.2](https://vietlod.tnsai.vn/sach/kinh-te-luong-ung-dung-toan-dien-tu-a-z/chuong-10-kinh-te-luong-khong-gian-conley-hac-va-mang-cap-doi/nhom-10-2-spatial-panel) và chạy thực nghiệm trực tiếp trên [EcoLab](https://ecolab.io.vn).
 
 <VideoTutorial
   title="Hướng dẫn thực hành Phần 10.2: Dữ liệu bảng không gian trên Stata 18, R 4.x và Python 3.11+"
@@ -71,6 +71,9 @@ $$
 | **10.2.1** · [Mô hình dữ liệu bảng không gian hiệu ứng cố định](/vietlod/chapter-10/group-10-2/b166-spatial-panel-fe) | `spatial_panel_fe` | `spxtregress y x1 x2, fe dvarlag(W)` | `splm::spml(y ~ x1 + x2, data = pdata, listw = lw, model = 'within', lag = TRUE)` | `spreg.Panel_FE_Lag(y, X, w=w)` | <Available /> |
 | **10.2.2** · [Mô hình dữ liệu bảng không gian hiệu ứng ngẫu nhiên](/vietlod/chapter-10/group-10-2/b167-spatial-panel-re) | `spatial_panel_re` | `spxtregress y x1 x2, re dvarlag(W)` | `splm::spml(y ~ x1 + x2, data = pdata, listw = lw, model = 'random', lag = TRUE)` | `spreg.Panel_RE_Lag(y, X, w=w)` | <Available /> |
 
+
+| **10.2.3** · [Hợp lý cực đại giả bảng không gian động hiệu chỉnh chệch Yu de Jong Lee Elhorst](/vietlod/chapter-10/group-10-2/b297-dynamic-spatial-panel-yu-lee) | `dynamic_spatial_panel_yu_lee` | `xsmle y x1 x2, wmat(W) model(sar) dlag(1) fe` | `sdpd::SDPDm(y ~ x1 + x2, data = df, W = W_mat, model = 'sar', dynamic = TRUE)` | `Row-standardized W concentrated QMLE + Yu-de Jong-Lee (2008) analytical bias correction` | <Available /> |
+
 ## 10.2.4. Quy trình thực hành chuẩn cho Phần 10.2
 
 <Steps>
@@ -80,7 +83,7 @@ $$
   </div>
   <div className="step-item">
     <h3>Bước 2. Chọn đúng hàm ước lượng theo bản chất sai số và cấu trúc mẫu</h3>
-    <p>So sánh các bài học mô hình từ <code>10.2.1</code> đến <code>10.2.2</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
+    <p>So sánh các bài học mô hình từ <code>10.2.1</code> đến <code>10.2.3</code> trong bảng đối chiếu phía trên để chọn hàm ước lượng tối ưu trên Stata 18 MP, R 4.x hoặc Python 3.11+.</p>
   </div>
   <div className="step-item">
     <h3>Bước 3. Kiểm định giả định hậu ước lượng và xuất báo cáo trên EcoLab</h3>
