@@ -1,6 +1,6 @@
 ---
 name: behavioral-research-ecodata-skill
-version: 3.92.0
+version: 3.93.0
 role: Skill 2 — Behavioral Economics, Psychology, Management & Marketing Survey/SEM Pipeline (0% Overlap)
 platform: Google Gemini Connected Apps / Gemini Gems / Claude Code / Cursor / Antigravity / OpenAI Codex
 mcp_endpoint: https://ecodata.io.vn/mcp

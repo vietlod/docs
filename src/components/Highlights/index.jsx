@@ -112,7 +112,7 @@ export default function Highlights() {
           </h2>
           <p className={styles.subtitle}>
             <Translate id="highlights.subtitle" description="Highlights subtitle">
-              Nền tảng dữ liệu kinh tế, tài chính và hàng hóa kết hợp 201 mô hình kinh tế lượng chuẩn hóa cho nghiên cứu và giảng dạy.
+              Nền tảng dữ liệu kinh tế, tài chính và hàng hóa kết hợp 306 mô hình kinh tế lượng chuẩn hóa cho nghiên cứu và giảng dạy.
             </Translate>
           </p>
         </div>

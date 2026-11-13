@@ -1,14 +1,15 @@
 ---
 title: Tổng quan EcoLab & Hướng dẫn sử dụng từng bước
 sidebar_position: 1
-description: Hướng dẫn sử dụng từng bước nền tảng nghiên cứu kinh tế định lượng và hành vi EcoLab (v1.10.0) từ kiểm toán tài liệu đầu vào, mô phỏng khảo sát tùy chỉnh, đánh số bảng và hình ảnh liên tục chuẩn trích dẫn, định dạng số nguyên thang đo học thuật đến tự động đăng bài toàn diện cho mọi chế độ phân tích.
+description: Hướng dẫn sử dụng từng bước nền tảng nghiên cứu kinh tế định lượng và hành vi EcoLab (v1.12.0) từ kiểm toán tài liệu đầu vào, mô phỏng khảo sát tùy chỉnh, đánh số bảng và hình ảnh liên tục chuẩn trích dẫn, định dạng số nguyên thang đo học thuật đến tự động đăng bài toàn diện cho mọi chế độ phân tích.
 ---
 
 import McpPromptCatalog from '@site/src/components/McpPromptCatalog';
+import GeminiSkillsSuite from '@site/src/components/GeminiSkillsSuite';
 
 # Tổng quan EcoLab & Hướng dẫn sử dụng từng bước
 
-**EcoLab** (phiên bản `v1.10.0`) là không gian nghiên cứu kinh tế định lượng, tài chính và khoa học hành vi chuyên sâu hỗ trợ trọn vẹn vòng đời học thuật — từ chuẩn hóa ý tưởng và tài liệu đính kèm, tổng hợp tài liệu xác thực DOI, chuẩn bị dữ liệu nghiên cứu, ước lượng đa mô hình đến biên tập bài báo khoa học, luận án hoàn chỉnh và tự động xuất bản lên chuyên mục học thuật.
+**EcoLab** (phiên bản `v1.12.0`) là không gian nghiên cứu kinh tế định lượng, tài chính và khoa học hành vi chuyên sâu hỗ trợ trọn vẹn vòng đời học thuật — từ chuẩn hóa ý tưởng và tài liệu đính kèm, tổng hợp tài liệu xác thực DOI, chuẩn bị dữ liệu nghiên cứu, ước lượng 306 mô hình kinh tế lượng thuộc 16 họ phân tích và 61 mô hình con trên Python, R và Stata 18 MP qua cổng Unified MCP 58 công cụ đến biên tập bài báo khoa học, luận án hoàn chỉnh và tự động xuất bản lên chuyên mục học thuật.
 
 ---
 
@@ -21,7 +22,7 @@ import McpPromptCatalog from '@site/src/components/McpPromptCatalog';
 | **3. Nghiên cứu khảo sát hành vi & định dạng số nguyên chuẩn học thuật** | Hỗ trợ nghiên cứu thang đo Likert (`1..5`, `1..7`), biến nhị phân (`0`/`1`) và phỏng vấn sâu với chế độ giữ nguyên 100% câu hỏi gốc của người dùng | Toàn bộ cỡ mẫu $N$, giá trị tối thiểu/tối đa của biến Likert và biến nhị phân trong cả bảng thống kê lẫn tệp dữ liệu `.csv` đều được định dạng chuẩn **số nguyên** (`400`, `1`, `5`, `0`, `1`), trong khi các chỉ tiêu liên tục (`Mean`, `SD`, hệ số ước lượng) giữ đúng độ chính xác thập phân học thuật. |
 | **4. Đánh số liên tục Bảng & Hình ảnh chuẩn trích dẫn (`APA 7th` mặc định)** | Mọi biểu đồ, sơ đồ cấu trúc (`M1`, `M2`, `R1`) và bảng biểu được đánh số thứ tự liên tục xuyên suốt bài viết (`Hình 1, Hình 2, Hình 3...` và `Bảng 1, Bảng 2, Bảng 3...`; `Bảng A1...` tại Phụ lục; hoặc `BẢNG I, BẢNG II` theo chuẩn `IEEE`) | Đồng bộ 100% tham chiếu chéo trong văn bản với tiêu đề bảng và hình ảnh; đồng thời khóa chặt quy tắc ngắt dòng để dấu câu (`.`, `?`, `~`, `,`, `;`, `:`, `!`) không bao giờ bị rớt xuống đầu dòng trên máy tính, máy tính bảng và điện thoại. |
 | **5. Tự động xuất bản bài viết cho mọi chế độ phản hồi** | Tự động đăng bài lên chuyên mục Học thuật (`/blog`) không chỉ cho Dự án nghiên cứu 5 bước (Mode B) mà cho cả **Top 5 ý tưởng nghiên cứu**, **Phân tích kinh tế lượng trọn gói 1 chạm (Mode A)** và mọi báo cáo tổng hợp từ trợ lý AI | Mỗi lần thực thi đều trả về đường dẫn bài viết công khai ngay lập tức kèm ảnh bìa học thuật và gói tái lập dữ liệu. |
-| **6. Bản thảo sạch chuẩn tạp chí & bộ 3 kỹ năng cô đọng 1 chạm** | Xuất bản thảo hoàn chỉnh không chứa bất kỳ câu chữ giải trình kỹ thuật nội bộ nào, kèm nút **Về đầu trang** hiển thị tiến độ đọc và bộ 3 kỹ năng cô đọng dễ dàng sao chép – dán trên Gemini Connected Apps | Độc giả có thể tải trực tiếp tệp dữ liệu `.csv` và chuyển đổi xem mã nguồn tái lập đa ngôn ngữ (`R · Stata · Python`) ngay trên cả máy tính và điện thoại. |
+| **6. Bản thảo sạch chuẩn tạp chí & bộ 4 kỹ năng cô đọng 0%-Overlap 1 chạm** | Xuất bản thảo hoàn chỉnh không chứa bất kỳ câu chữ giải trình kỹ thuật nội bộ nào, kèm nút **Về đầu trang** hiển thị tiến độ đọc và bộ 4 kỹ năng cô đọng 0%-Overlap dễ dàng sao chép – dán trên Gemini Connected Apps | Độc giả có thể tải trực tiếp tệp dữ liệu `.csv` và chuyển đổi xem mã nguồn tái lập đa ngôn ngữ (`R · Stata · Python`) ngay trên cả máy tính và điện thoại. |
 
 ---
 
@@ -57,7 +58,15 @@ import McpPromptCatalog from '@site/src/components/McpPromptCatalog';
 
 ---
 
-## 3. Danh mục 23 Prompts mẫu thực nghiệm (P01–P23)
+## 3. Bộ 4 Kỹ năng Sao chép 1 Chạm cho Gemini Connected Apps & AI Agents
+
+Sao chép trực tiếp nội dung từng kỹ năng bên dưới để dán vào mục **Instructions / Knowledge** trên Google Gemini Connected Apps (`https://ecodata.io.vn/mcp`):
+
+<GeminiSkillsSuite locale="vi" filter="all" />
+
+---
+
+## 4. Danh mục 30 Prompts mẫu thực nghiệm (P01–P30)
 
 Nhấn **Sao chép** ở bất kỳ mẫu câu lệnh nào dưới đây để trải nghiệm ngay quy trình nghiên cứu 5 bước:
 

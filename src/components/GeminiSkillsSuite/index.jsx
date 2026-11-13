@@ -6,12 +6,12 @@ const SKILLS = [
   {
     id: 'skill-1',
     file: 'gemini-ecodata-mcp-skill.md',
-    viName: 'Skill 1 — Điều phối dữ liệu & 205+ mô hình',
-    enName: 'Skill 1 — Macro-Financial Data & 205+ Models',
+    viName: 'Skill 1 — Điều phối dữ liệu & 306 mô hình',
+    enName: 'Skill 1 — Macro-Financial Data & 306 Models',
     viDesc:
-      'Điều phối 54 công cụ MCP hợp nhất, dữ liệu quốc tế, chuỗi 34/63 tỉnh 1995–2026, BCTC 30 năm, kiểm toán tài nguyên đính kèm và ước lượng 205+ mô hình kinh tế lượng.',
+      'Điều phối 58 công cụ MCP hợp nhất, dữ liệu quốc tế, chuỗi 34/63 tỉnh 1995–2026, BCTC 30 năm, kiểm toán tài nguyên đính kèm và ước lượng 306 mô hình kinh tế lượng.',
     enDesc:
-      'Orchestrates all 54 Unified MCP tools across global series, Vietnam 34/63-province panels, 30-year financial statements, resource auditing, and 205+ econometric models.',
+      'Orchestrates all 58 Unified MCP tools across global series, Vietnam 34/63-province panels, 30-year financial statements, resource auditing, and 306 econometric models.',
     tags: ['all'],
   },
   {

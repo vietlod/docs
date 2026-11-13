@@ -1,23 +1,23 @@
 ---
 name: gemini-ecodata-mcp-skill
-version: 3.92.0
-role: Skill 1 — Vietnam & Global Data Retrieval, Panel Construction, 205+ Econometric Models & Dual Auto-Publish (0% Overlap)
+version: 3.93.0
+role: Skill 1 — Vietnam & Global Data Retrieval, Panel Construction, 306 Econometric Models across 16 Families & Dual Auto-Publish (0% Overlap)
 platform: Google Gemini Connected Apps / Gemini Gems / Gemini Task / Google AI Studio
 mcp_endpoint: https://ecodata.io.vn/mcp
 mcp_sse_endpoint: https://ecodata.io.vn/mcp/sse
 docs_url: https://docs.tnsai.vn/ecodata/overview
 description: >
   Bộ kỹ năng số 1 (cô đọng, sẵn sàng Copy-Paste 1-Click trên Google Gemini, 0% trùng lặp với Skill 2, Skill 3 & Skill 4):
-  Điều phối 54 công cụ hợp nhất trên `https://ecodata.io.vn/mcp`, truy xuất dữ liệu vĩ mô – tài chính Việt Nam
+  Điều phối 58 công cụ hợp nhất (43 EcoData + 15 EcoLab) trên `https://ecodata.io.vn/mcp`, truy xuất dữ liệu vĩ mô – tài chính Việt Nam
   (chuỗi lịch sử 34 & 63 tỉnh thành 1995–2026, 7 phân hệ Finco, Hải quan 11 biểu mẫu, BCTC 30 năm) & Quốc tế,
-  kiểm toán tài liệu đính kèm (`audit_research_resources`), ghép bảng `build_research_panel`, ước lượng 205+ mô hình
-  kinh tế lượng (Python · R · Stata 18 MP) và tự động xuất bản kết quả lên EcoLab Blog (`https://ecolab.io.vn/blog`).
+  kiểm toán tài liệu đính kèm (`audit_research_resources`), ghép bảng `build_research_panel`, ước lượng 306 mô hình
+  kinh tế lượng thuộc 16 họ phân tích và 61 nhóm con (Python · R · Stata 18 MP) và tự động xuất bản kết quả lên EcoLab Blog (`https://ecolab.io.vn/blog`).
 ---
 
-# Kỹ năng 1: Điều phối Dữ liệu Kinh tế – Tài chính & Ước lượng 205+ Mô hình Kinh tế lượng (`EcoData Unified MCP`)
+# Kỹ năng 1: Điều phối Dữ liệu Kinh tế – Tài chính & Ước lượng 306 Mô hình Kinh tế lượng thuộc 16 Họ Phân tích (`EcoData Unified MCP`)
 
 > **Phân vai 0% trùng lặp trong Bộ 4 Skills trên Google Gemini**:
-> - **Skill 1 (Tài liệu này)**: Truy xuất dữ liệu Việt Nam & Quốc tế, kiểm toán tài liệu đính kèm, ghép bảng `build_research_panel`, ước lượng 205+ mô hình kinh tế lượng và tự động đăng bài (`Dual Auto-Publish`).
+> - **Skill 1 (Tài liệu này)**: Truy xuất dữ liệu Việt Nam & Quốc tế, kiểm toán tài liệu đính kèm, ghép bảng `build_research_panel`, ước lượng 306 mô hình kinh tế lượng thuộc 16 họ / 61 nhóm con và tự động đăng bài (`Dual Auto-Publish`).
 > - **Skill 2 (`behavioral-research-ecodata-skill`)**: Chuyên trách khảo sát thang đo Likert & mô hình cấu trúc (`EFA`, `CFA`, `CB-SEM`, `PLS-SEM`, `HTMT`, `CMB`, `Mediation/Moderation`, `ANOVA`).
 > - **Skill 3 (`gemini-ecolab-ecodata-mcp-skill`)**: Chuyên trách biên tập bản thảo học thuật chuẩn tạp chí Q1–Q3 ($\ge 6.000$ từ), đánh số tuần tự Bảng/Hình chuẩn trích dẫn (`APA 7th` mặc định), siêu liên kết trích dẫn hai chiều, chống lỗi hiển thị và tiền kiểm 9 cổng (`G1–G9`).
 > - **Skill 4 (`vhlss-micro-ecodata-skill`)**: Chuyên trách dữ liệu vi mô khảo sát hộ gia đình `VHLSS 2004–2024` (`analyze_vhlss_microdata`), hài hòa hóa bảng hỏi đa kỳ, quyền số mẫu phức hợp `pweight` (`wt45`/`wt9`), kiểm định ngoại sinh trọng số DuMouchel–Duncan và 5 toán tử khai báo tổng quát.
@@ -67,11 +67,16 @@ Truyền `boundary_mode="63"` (`scope="vn63"`) hoặc `boundary_mode="34"` (`sco
 
 ---
 
-## 4. Ma trận 16 Họ Mô hình Kinh tế lượng (205+ Mô hình trên Python · R · Stata 18 MP)
+## 4. Ma trận 16 Họ Mô hình Kinh tế lượng 1-đối-1 (306 Mô hình / 61 Nhóm con trên Python · R · Stata 18 MP)
 
-- **Cổ điển & Chính quy hóa**: `analyze_classical_regression` (OLS, WLS, GLS, FGLS, Robust RLM, Quantile, IV-2SLS, IV-LIML), `analyze_regularized_regression` (Ridge, Lasso, Elastic Net, LARS, PCR).
-- **Dữ liệu bảng (`analyze_panel_econometrics`)**: Pooled OLS, FE, Two-Way FE, RE, Driscoll-Kraay, PCSE, Panel FGLS, Fama-MacBeth, Diff-GMM Arellano-Bond, Sys-GMM Blundell-Bond, LSDVC, Panel IV, Hausman-Taylor, FMOLS, DOLS, Dynamic Panel Threshold (Hansen 1999), CCE-MG, AMG, PMG/MG.
-- **Lựa chọn rời rạc & Biến đếm/Giới hạn**: `analyze_discrete_choice` (Logit, Probit, Multinomial/Conditional/Ordered/Mixed Logit), `analyze_count_limited` (Poisson QMLE, PPML, NegBin, ZIP, ZINB, Hurdle, Tobit, Heckman, Fractional Logit).
-- **Chuỗi thời gian & Độ biến động**: `analyze_time_series` (ARIMA, SARIMAX, ARDL Bounds Test, NARDL, QARDL, Local Projections, Threshold, Structural Break, ADF/PP/KPSS/Zivot-Andrews/Johansen), `analyze_multivariate_time_series` (VAR, VECM, SVAR, BVAR, TVP-VAR, FAVAR, Granger, Toda-Yamamoto, Markov Switching), `analyze_volatility` (ARCH, GARCH, EGARCH, GJR-GARCH, FIGARCH, HAR-RV, DCC-GARCH).
-- **Nhân quả, Không gian, Sinh tồn & Đa chiều**: `analyze_causal_policy` (PSM, IPW, AIPW, Entropy Balancing, DID, Callaway-Sant'Anna Staggered DID, Sun-Abraham, Synthetic DID, RDD, Double ML, Causal Forest, Synthetic Control), `analyze_spatial_econometrics` (Moran's I, SAR, SEM, SDM, Spatial Panel FE/RE, MGWR, Conley HAC), `analyze_survival_duration` (Kaplan-Meier, Cox PH, AFT, Fine-Gray), `analyze_bayesian_ml` (SUR, 3SLS, Bayesian MCMC, BMA, XGBoost/SHAP), cùng các mô hình Cầu thị trường (`AIDS/QUAIDS/BLP`), Biên hiệu quả TFP (`SFA/DEA/Malmquist/LP/OP/ACF/Oaxaca-Blinder`), Bootstrap (`Wild Cluster/Romano-Wolf`) và `analyze_behavioral_psychometrics` (chi tiết tại Skill 2).
+- **Cổ điển & Chính quy hóa**: `analyze_classical_regression` (OLS, WLS, GLS, FGLS, Robust RLM, Quantile, IV-2SLS, IV-LIML, Bartik Shift-Share IV, Lewbel Het-IV, Control Function, Mundlak CRE, Jackknife JIVE), `analyze_regularized_regression` (Ridge, Lasso, Elastic Net, Post-Double-Selection Lasso, Group/Fused Lasso, SCAD/MCP, Nuclear-Norm Matrix).
+- **Dữ liệu bảng (`analyze_panel_econometrics`)**: Pooled OLS, FE, Two-Way HDFE, RE, Driscoll-Kraay, PCSE, Panel FGLS, Fama-MacBeth, Diff-GMM Arellano-Bond, Sys-GMM Blundell-Bond, LSDVC, Hahn-Kuersteiner, Chudik-Pesaran DCCE, Panel IV, Hausman-Taylor, FMOLS, DOLS, Hansen/Seo-Shin Dynamic Panel Threshold, Canay/MMQR Panel Quantile, Pesaran CCE-MG, Eberhardt-Teal AMG, PMG/MG, Bai Interactive FE.
+- **Lựa chọn rời rạc & Biến đếm/Giới hạn**: `analyze_discrete_choice` (Logit, Probit, Firth/Scobit/Het-Probit, Multinomial/Conditional/Nested/Ordered/Generalized Ordered/Mixed/Latent Class Logit, Berry BLP, Dynamic Panel Probit Wooldridge), `analyze_count_limited` (Poisson QMLE, PPML-HDFE, NegBin, Conway-Maxwell Poisson, ZIP, ZINB, Cragg/Lognormal Hurdle, Tobit, Powell CLAD, Honore Panel Tobit, Heckman 2-Step/MLE, Fractional Logit, Beta Regression).
+- **Chuỗi thời gian & Độ biến động**: `analyze_time_series` (ARIMA, SARIMAX, ARFIMA, ARDL Bounds Test, NARDL, Quantile ARDL, Fourier/Bootstrap ARDL, MIDAS, Markov Switching, SETAR/LSTAR, Bai-Perron, PSY-GSADF Bubble, ADF/DF-GLS/KPSS/Zivot-Andrews/Lee-Strazicich), `analyze_multivariate_time_series` (VAR, VECM, Threshold VECM, SVAR, Sign-Restricted/Proxy SVAR, Minnesota BVAR, TVP-VAR, FAVAR, Jorda Local Projections/LP-IV, Panel VAR, GVAR, Diebold-Yilmaz), `analyze_volatility` (ARCH, GARCH, EGARCH, GJR-GARCH, APARCH, FIGARCH, GARCH-MIDAS, Markov-Switching GARCH, HAR-RV, Realized GARCH, DCC/BEKK/GO-GARCH, Fama-French/GRS, CoVaR/MES/SRISK).
+- **Nhân quả, Không gian, Sinh tồn & Hệ phương trình/ML**: `analyze_causal_policy` (PSM, CEM, IPW, AIPW, Entropy Balancing, TWFE/Event-Study DID, Callaway-Sant'Anna, Sun-Abraham, Borusyak Imputation, de Chaisemartin-D'Haultfoeuille, Wooldridge ETWFE, LP-DID, Abadie SCM, Arkhangelsky Synthetic DID, Matrix Completion Athey, Sharp/Fuzzy/Kink RDD, Cattaneo Manipulation, HonestDiD, Oster Bounds, Double ML, Causal Forest, MTE), `analyze_spatial_econometrics` (Moran's I, SAR, SEM, SDM, SDEM, SLX, SAC/GS2SLS Kelejian-Prucha, Dynamic Spatial Panel Yu-de Jong-Lee, SpatialHausman, MGWR, Conley Spatial HAC, Bramoulle Peer Effects, Dyadic Gravity), `analyze_survival_duration` (Kaplan-Meier, Nelson-Aalen, Cox PH/Stratified/Time-Varying/Shared Frailty, Weibull/Log-Normal/Generalized Gamma AFT, Royston-Parmar Spline, Fine-Gray Competing Risks, Discrete Cloglog, Cure Mixture), `analyze_bayesian_ml` (SUR, 3SLS, System GMM, AIDS/QUAIDS/Rotterdam/Lewbel EASI Demand, Bayesian Linear/BMA/State-Space TVP, Random Forest, Gradient Boosting/SHAP, SVR, MLP, LSTM).
+- **Bốn Họ Chuyên sâu Mới Có Công cụ Riêng 1-đối-1 (Họ 13–16)**:
+  - **Họ 13 (`analyze_distributional_decomposition`)**: Blinder-Oaxaca 2/3-fold, Fairlie Nonlinear, Firpo-Fortin-Lemieux RIF Unconditional Quantile, IPW-Reweighted RIF-Oaxaca, DiNardo-Fortin-Lemieux DFL, Machado-Mata, Chernozhukov Counterfactual Distribution, Atkinson & Theil Entropy Decomposition.
+  - **Họ 14 (`analyze_productivity_efficiency`)**: Aigner-Lovell-Schmidt & Battese-Coelli SFA, Greene True FE SFA, Kumbhakar 4-Component GTRE, Wang Heteroskedastic SFA, Simar-Wilson Bootstrap DEA, Tone SBM DEA, Malmquist TFP, Olley-Pakes, Levinsohn-Petrin, Ackerberg-Caves-Frazer, Wooldridge One-Step TFP, Gandhi-Navarro-Rivers Gross-Output TFP.
+  - **Họ 15 (`analyze_nonparametric_resampling`)**: Li-Racine Local-Linear Kernel, GAM/Robinson Semiparametric, Ichimura Single-Index, Cai-Fan-Yao Functional-Coefficient, Newey-Powell Nonparametric IV, Wild Cluster Bootstrap Rademacher/Webb, Fisher Stratified/Cluster Randomization Inference, Racine h-Block CV.
+  - **Họ 16 (`analyze_multilevel_survey`)**: Đa cấp HLM/LMM Random Intercept (`multilevel_random_intercept_lmm`) & Random Slopes (`multilevel_random_slopes_lmm`), 3-Level Nested LMM (`three_level_nested_lmm`), Mundlak-Bell-Jones Within-Between Mixed (`mundlak_within_between_lmm`), GLMM Binary Logit (`mixed_effects_logit_glmm`) & Poisson (`mixed_effects_poisson_glmm`), Liang-Zeger GEE (`population_averaged_gee`), Hierarchical Log-Linear Contingency (`loglinear_contingency_glm`), Survey Taylor-Linearized Regression (`survey_taylor_linearized_reg`), Deville-Sarndal Calibration GREG (`survey_calibration_greg`), Survey Replicate Weights BRR/Jackknife (`survey_replicate_brr_jk`) và Fay-Herriot Area-Level EBLUP SAE (`fay_herriot_small_area`).
 - **Quy tắc số nguyên học thuật**: Mọi chỉ tiêu Số quan sát ($N$), thang đo Likert (`1..5`, `1..7`) và biến nhị phân (`0`/`1`) bắt buộc hiển thị dạng **số nguyên** (`400`, `1`, `5`, `0`, `1`), tuyệt đối không ghi `.0` hay `.0000`.

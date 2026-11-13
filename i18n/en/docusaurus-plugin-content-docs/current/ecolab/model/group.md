@@ -14,7 +14,7 @@ Every estimator executes its genuine econometric algorithm (strict Fail-Closed `
 
 ---
 
-## Decision Map Across the 15 Model Families
+## Decision Map Across the 16 Model Families
 
 ```mermaid
 flowchart TD
@@ -44,6 +44,7 @@ flowchart TD
     G --> G13["13. Demand Systems AIDS/QUAIDS & BLP"]
     G --> G14["14. Frontier SFA/DEA & Structural ACF TFP"]
     G --> G15["15. Wild Cluster Bootstrap & Causal ML"]
+    G --> G16["16. Multilevel, GLMM & Complex Survey"]
 ```
 
 ---
@@ -67,7 +68,7 @@ flowchart TD
 | 13 | **Structural IO & Demand Systems** | [AIDS, QUAIDS, Berry Logit IV & Random-Coefficients BLP](/ecolab/model/demand-systems-blp) | Price and expenditure elasticities in consumer demand systems and differentiated-product markets |
 | 14 | **Productivity, Frontier & TFP Estimation** | [SFA, DEA, Malmquist, Olley-Pakes, Levinsohn-Petrin, Wooldridge & ACF TFP](/ecolab/model/frontier-tfp-decomposition) | Technical efficiency benchmarking and structural firm-level total factor productivity estimation |
 | 15 | **Resampling, Econometric ML & High-Dimensional Inference** | [Wild Cluster Bootstrap, Double/Debiased ML, Causal Forest & PCA/Factor](/ecolab/model/bootstrap-highdim-inference) | Reliable inference under few clusters ($G < 30$), high-dimensional nuisance controls, and CATE |
-| 16 | **Multilevel, Mixed-Effects & Complex Survey** | Hierarchical LMM, Random Slopes, Mundlak Within-Between, Mixed Logit/Poisson GLMM, GEE, Log-Linear, Complex Survey `svy:` GLM, Calibration Raking, Fay-Herriot & BHF Small-Area | Nested multi-level observations, stratified `pweight`–`psu` household surveys, and small-area poverty estimation |
+| 16 | **Multilevel, Mixed-Effects & Complex Survey** | Hierarchical LMM, Random Slopes, Mundlak Within-Between, Mixed Logit/Poisson GLMM, GEE, Log-Linear, Complex Survey `svy:` GLM, Calibration Raking, Survey Replicate BRR/JK & Fay-Herriot Small-Area | Nested multi-level observations, stratified `pweight`–`psu` household surveys, and small-area poverty estimation |
 
 ---
 

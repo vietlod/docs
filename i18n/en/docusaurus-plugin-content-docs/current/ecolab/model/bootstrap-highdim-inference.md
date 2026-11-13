@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 **Family 15 (Resampling, Econometric ML & High-Dimensional Inference)** addresses two central challenges in modern empirical economics: (1) valid finite-sample inference when clusters are few or unbalanced in size (such as **34 consolidated provinces** or regional macro blocks), and (2) root-$N$ consistent causal estimation under high-dimensional or non-linear confounding.
 
-In EcoLab, access these estimators under **Modeling → 15. Bootstrap & Causal ML**. See also the [15-Family Estimator Catalog](/ecolab/model/group).
+In EcoLab, access these estimators under **Modeling → 15. Bootstrap & Causal ML**. See also the [16-Family Estimator Catalog](/ecolab/model/group).
 
 ---
 

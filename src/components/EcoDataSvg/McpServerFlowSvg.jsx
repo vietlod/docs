@@ -7,17 +7,17 @@ export default function McpServerFlowSvg() {
   const isVi = currentLocale === 'vi';
 
   const t = {
-    title: isVi ? 'Kiến trúc Unified EcoData MCP Server với 52 công cụ AI chuyên biệt' : 'Unified EcoData MCP Server Architecture with 52 Specialized AI Tools',
-    sub: isVi ? 'Hợp nhất 37 công cụ dữ liệu/kinh tế lượng EcoData và 15 công cụ nghiên cứu 5 bước EcoLab' : 'Unifying 37 native EcoData data/econometric tools and 15 bridged EcoLab 5-stage tools',
+    title: isVi ? 'Kiến trúc Unified EcoData MCP Server với 58 công cụ AI chuyên biệt' : 'Unified EcoData MCP Server Architecture with 58 Specialized AI Tools',
+    sub: isVi ? 'Hợp nhất 43 công cụ dữ liệu/kinh tế lượng EcoData và 15 công cụ nghiên cứu 5 bước EcoLab' : 'Unifying 43 native EcoData data/econometric tools and 15 bridged EcoLab 5-stage tools',
     clientsHeader: isVi ? 'Khách hàng AI (AI Clients)' : 'AI Clients & IDEs',
     busHeader: isVi ? 'Giao thức kết nối MCP (Model Context Protocol)' : 'MCP Protocol Bus',
-    toolsHeader: isVi ? '52 công cụ hợp nhất (37 EcoData + 15 EcoLab)' : '52 Unified Tools (37 EcoData + 15 EcoLab)',
+    toolsHeader: isVi ? '58 công cụ hợp nhất (43 EcoData + 15 EcoLab)' : '58 Unified Tools (43 EcoData + 15 EcoLab)',
     coreHeader: isVi ? 'Kho dữ liệu và lõi tính toán EcoData' : 'EcoData Data Warehouse & Analytical Engine',
-    tool1: 'search_indicators_unified',
+    tool1: 'search_macro_indicators',
     tool2: 'query_macro_data_unified',
-    tool3: 'inspect_series_metadata',
-    tool4: 'run_econometrics_regression',
-    tool5: 'export_replication_bundle',
+    tool3: 'build_research_panel',
+    tool4: 'analyze_panel_econometrics',
+    tool5: 'generate_econometric_code',
     tokenBadge: isVi ? 'Cắt giảm 84.2% token ngữ cảnh' : '-84.2% context token usage',
     authBadge: isVi ? 'Xác thực an toàn OAuth 2.1 & Direct Token' : 'OAuth 2.1 & Direct Token Auth',
   };
@@ -196,7 +196,7 @@ export default function McpServerFlowSvg() {
           </g>
         </g>
 
-        {/* CENTER COLUMN: MCP Protocol Bus & 52 Unified Tools */}
+        {/* CENTER COLUMN: MCP Protocol Bus & 58 Unified Tools */}
         <g transform="translate(315, 85)">
           <rect width="330" height="360" rx="16" fill="url(#mcpGrad)" stroke="#8b5cf6" strokeWidth="1.8" />
 
@@ -217,7 +217,7 @@ export default function McpServerFlowSvg() {
             </text>
           </g>
 
-          {/* 52 Unified Tools List showcase */}
+          {/* 58 Unified Tools List showcase */}
           <text x="18" y="110" fill="currentColor" fontSize="11.5" fontWeight="700">
             {t.toolsHeader}
           </text>
@@ -263,7 +263,7 @@ export default function McpServerFlowSvg() {
           </g>
 
           <text x="18" y="348" fill="#7c3aed" fontSize="9.5" fontWeight="600">
-            {isVi ? '+ 47 công cụ khác (15 công cụ EcoLab 5 bước, BCTC, Customs, VHLSS...)' : '+ 47 more tools (15 EcoLab 5-stage tools, Financials, Customs, VHLSS...)'}
+            {isVi ? '+ 53 công cụ khác (15 công cụ EcoLab 5 bước, BCTC, Customs, VHLSS...)' : '+ 53 more tools (15 EcoLab 5-stage tools, Financials, Customs, VHLSS...)'}
           </text>
         </g>
 
@@ -316,7 +316,7 @@ export default function McpServerFlowSvg() {
         </g>
       </svg>
       <div className={styles.svgFooter}>
-        <span><strong>52 {isVi ? 'công cụ Unified MCP (37 EcoData + 15 EcoLab)' : 'Unified MCP tools (37 EcoData + 15 EcoLab)'}</strong> | JSON-RPC 2.0 / SSE / Streamable HTTP</span>
+        <span><strong>58 {isVi ? 'công cụ Unified MCP (43 EcoData + 15 EcoLab)' : 'Unified MCP tools (43 EcoData + 15 EcoLab)'}</strong> | JSON-RPC 2.0 / SSE / Streamable HTTP</span>
         <span className={styles.badgeTag}>Gemini Spark • Claude • Cursor • AntiGravity</span>
       </div>
     </div>

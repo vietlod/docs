@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 **Family 13 (Structural IO & Demand Systems)** provides structural estimators for multi-good household budget-share equations and market-level differentiated-product discrete choice demand. These estimators underpin empirical welfare analysis, commodity tax incidence, household living-standards research (**VHLSS**), and competition or merger counterfactuals.
 
-In EcoLab, access these estimators under **Modeling → 13. Demand Systems & BLP**. See also the [15-Family Estimator Catalog](/ecolab/model/group).
+In EcoLab, access these estimators under **Modeling → 13. Demand Systems & BLP**. See also the [16-Family Estimator Catalog](/ecolab/model/group).
 
 ---
 

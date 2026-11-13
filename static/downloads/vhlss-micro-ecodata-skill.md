@@ -1,7 +1,7 @@
 ---
 name: vhlss-micro-ecodata-skill
-version: 3.92.0
-role: Skill 4 — VHLSS 2004–2024 Microdata, Complex Survey Weights, Multi-Wave Harmonization & Declarative Pipeline (0% Overlap)
+version: 3.93.0
+role: Skill 4 — VHLSS 2004–2024 Microdata, Complex Survey Weights, Multi-Wave Harmonization, Family 16 Multilevel/SAE & Declarative Pipeline (0% Overlap)
 platform: Google Gemini Connected Apps / Gemini Gems / Claude Code / Cursor / Antigravity / OpenAI Codex
 mcp_endpoint: https://ecodata.io.vn/mcp
 ecolab_endpoint: https://ecolab.io.vn/mcp

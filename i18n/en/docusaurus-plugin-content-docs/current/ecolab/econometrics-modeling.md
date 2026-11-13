@@ -12,7 +12,7 @@ Whenever an EcoData administrator publishes a newly verified (`B1–B4`) estimat
 
 ---
 
-## 1. Fifteen Supported Model Families
+## 1. Sixteen Supported Model Families
 
 | Structural Domain | Model Families in EcoLab | Representative Estimators | Scholarly Application Scope |
 | :--- | :--- | :--- | :--- |
@@ -21,6 +21,7 @@ Whenever an EcoData administrator publishes a newly verified (`B1–B4`) estimat
 | **Discrete Choice, Selection, Survival & Count** | Family 5 (Discrete & Survival), Family 6 (Count & Gravity PPML) | Binary/Multinomial/Ordered Logit & Probit, Tobit, Truncated, Heckman, Fractional, Cox PH, Weibull AFT, Poisson, NegBin, ZIP, ZINB, Gravity PPML-HDFE | Discrete choices, default risk, non-random sample selection, duration outcomes, and zero-rich bilateral trade gravity equations. |
 | **Quantile, Time Series & Simultaneous Systems** | Family 7 (Quantile & Decomposition), Family 8 (Univariate TS), Family 9 (Multivariate TS & LP), Family 10 (IV & Systems), Family 11 (Non-Linear & Threshold) | Quantile, Panel MM-QR, RIF, Oaxaca-Blinder, ARIMA, GARCH/EGARCH, ARDL/NARDL, Markov-Switching, PSY GSADF, VAR/VECM/SVAR, Local Projections, IV-2SLS, LIML, Lewbel IV, Bartik Shift-Share, 3SLS, SUR, NLS, GAM, Hansen Threshold | Distributional heterogeneity, asymmetric macro-financial pass-through, impulse response horizons, and weak-instrument-robust IV systems. |
 | **Modern Causal, Structural IO, Frontier TFP & Causal ML** | Family 12 (Causal & Spatial), Family 13 (Demand Systems & BLP), Family 14 (Frontier & TFP), Family 15 (Bootstrap & Causal ML) | TWFE & Staggered DID (Callaway-Sant'Anna, Sun-Abraham, BJS, dCDH, Bacon, LP-DID, SDID), Synthetic Control, Sharp/Fuzzy RDD, PSM/AIPW, Spatial SAR/SEM/SDM & Conley HAC, AIDS/QUAIDS, Berry-BLP, SFA, DEA, Malmquist, OP/LP/Wooldridge/ACF TFP, Wild Cluster Bootstrap, Double ML, Causal Forest | Staggered policy evaluation, spatial spillovers, structural demand elasticities, technical efficiency & firm TFP, and few-cluster inference. |
+| **Multilevel, Mixed-Effects & Complex Survey** | Family 16 (Multilevel, GLMM & Complex Survey) | Hierarchical LMM, Random Slopes, 3-Level Nested LMM, Mundlak Within-Between, Mixed Logit/Poisson GLMM, GEE, Log-Linear Contingency, Survey Taylor-Linearized, Calibration GREG, Survey Replicate BRR/JK, Fay-Herriot Small-Area | Multi-level nested hierarchies (individual–household–commune–province), stratified pweight–PSU household surveys (VHLSS), and small-area estimation. |
 
 ---
 
@@ -40,7 +41,7 @@ EcoLab cleanly separates data-level specification diagnostics from model-level r
 
 ## 3. Estimation Workflow and Fail-Closed `422` Guarantee
 
-1. In the **Modeling** module, click **Add Model** to open the dynamic **15-family model selector**.
+1. In the **Modeling** module, click **Add Model** to open the dynamic **16-family model selector**.
 2. Select your model family and specific estimator, declare the dependent variable ($Y$), explanatory covariates ($X_1, \dots, X_k$), entity/time identifiers, endogenous/instrument slots, and standard-error structure (Homoskedastic, Robust HC0–HC3, HAC, Driscoll-Kraay, Conley Spatial HAC, One-Way/Multi-Way Clustering, or Wild Cluster Bootstrap).
 3. Choose the target execution runtime (**Python**, **R**, or **Stata 18 MP**) and click **Run Model**.
 4. If an unregistered estimator key is requested or mandatory structural inputs are omitted, the engine fails closed with an explicit **`422 UNSUPPORTED_ESTIMATOR` / `422 INVALID_SPECIFICATION`** diagnostic — never silently substituting OLS.
@@ -51,7 +52,7 @@ EcoLab cleanly separates data-level specification diagnostics from model-level r
 
 Completed runs populate four structured workspace tabs:
 
-- **Estimation Table Tab:** Parameter estimates ($\hat{\beta}$), standard errors, $t/z$-statistics, $p$-values, significance stars (`***`, `**`, `*`), and goodness-of-fit statistics ($R^2$, Within-$R^2$, $F$/Wald, Log-Likelihood, AIC, BIC), ready for 5-gate evidence locking in Stage 5 reports.
+- **Estimation Table Tab:** Parameter estimates ($\hat{\beta}$), standard errors, $t/z$-statistics, $p$-values, significance stars (`***`, `**`, `*`), and goodness-of-fit statistics ($R^2$, Within-$R^2$, $F$/Wald, Log-Likelihood, AIC, BIC), ready for 9-gate evidence locking in Stage 5 reports.
 - **Postestimation Diagnostics Tab:** Full test statistics, degrees of freedom, $p$-values, and methodological interpretations.
 - **Robustness Tab:** Side-by-side multi-column comparison across alternative estimators, subsamples, standard-error structures, and 63-province vs. 34-province regimes.
 - **Replication Bundle Tab (`.zip`):** One-click `.zip` archive containing standalone **Stata 18 MP (`.do`)**, **R (`.R`)**, and **Python (`.py`)** scripts, cleaned dataset slices, and **`SHA256SUMS.txt`** verification hashes.

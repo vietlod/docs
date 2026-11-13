@@ -1,6 +1,6 @@
 ---
 name: gemini-ecolab-ecodata-mcp-skill
-version: 3.92.0
+version: 3.93.0
 role: Skill 3 — Academic Manuscript Authoring, Bidirectional Verified Citations, Zero-Render-Defect QA & Auto-Publish (0% Overlap)
 platform: Google Gemini Connected Apps / Gemini Gems / Gemini Task / Google AI Studio
 mcp_endpoint: https://ecodata.io.vn/mcp

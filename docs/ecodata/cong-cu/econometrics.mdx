@@ -29,11 +29,11 @@ EcoData mở rộng danh mục kinh tế lượng lên **16 họ phân tích chu
 | **13** | **Tổ chức ngành cấu trúc & hệ thống cầu** | Deaton-Muellbauer AIDS, Banks-Blundell-Lewbel QUAIDS, Berry Logit Demand IV, Berry-Levinsohn-Pakes Random-Coefficients BLP (`pyblp`) | Độ co giãn giá – chi tiêu hộ gia đình (VHLSS) và ước lượng cầu sản phẩm phân biệt |
 | **14** | **Biên hiệu quả, năng suất & TFP** | Aigner-Lovell-Schmidt SFA, Battese-Coelli Panel SFA, Charnes-Cooper-Rhodes & Banker-Charnes-Cooper DEA, Chỉ số Malmquist, Olley-Pakes, Levinsohn-Petrin, Wooldridge & Ackerberg-Caves-Frazer (ACF) TFP | Đo lường hiệu quả kỹ thuật ngân hàng/doanh nghiệp và năng suất nhân tố tổng hợp cấp doanh nghiệp |
 | **15** | **Tái lấy mẫu, học máy nhân quả & nhiều chiều** | Nonparametric/Pairs, Moving-Block, Panel Cluster & Roodman-MacKinnon-Nielsen-Webb Wild Cluster Bootstrap, Chernozhukov Double/Debiased ML, Athey-Wager Causal Forest, PCA/Factor/K-Means, Benchmark Predictive ML | Suy diễn vững với số cụm ít ($G < 30$), kiểm soát nhiễu nhiều chiều và ước lượng CATE |
-| **16** | **Đa cấp, hiệu ứng hỗn hợp & khảo sát phức hợp** | Hierarchical Linear Mixed (`mixed` / `lmer`), Random Slopes, Mundlak Within-Between, 3-Level LMM, Mixed Logit & Poisson GLMM, Liang-Zeger GEE, Log-Linear Contingency, Complex Survey GLM (`svy:`), Calibration Raking, Fay-Herriot & Unit-Level BHF Small-Area | Dữ liệu phân cấp cá nhân – hộ – xã – tỉnh, khảo sát chọn mẫu phức hợp `pweight` – `psu` (VHLSS) và ước lượng bản đồ nghèo vùng nhỏ |
+| **16** | **Đa cấp, hiệu ứng hỗn hợp & khảo sát phức hợp** | Hierarchical Linear Mixed (`mixed` / `lmer`), Random Slopes, Mundlak Within-Between, 3-Level LMM, Mixed Logit & Poisson GLMM, Liang-Zeger GEE, Log-Linear Contingency, Complex Survey GLM (`svy:`), Calibration Raking, Survey Replicate BRR/JK & Fay-Herriot Small-Area | Dữ liệu phân cấp cá nhân – hộ – xã – tỉnh, khảo sát chọn mẫu phức hợp `pweight` – `psu` (VHLSS) và ước lượng bản đồ nghèo vùng nhỏ |
 
 ### Cơ chế hình thành 306 bộ ước lượng và nguyên tắc Fail-Closed
 
-Mỗi mô hình con trong 58 đặc tả toán học được kết hợp chặt chẽ với phương pháp tối ưu hóa đặc thù (OLS/HDFE, FGLS, MLE/QMLE, 1-step/2-step Windmeijer GMM, Sieve/Spline, Linear Programming DEA, Kontraction Mapping BLP) và cấu trúc ma trận hiệp phương sai sai số chuẩn phù hợp (Homoskedastic, White Robust HC0–HC3, Newey-West HAC, Driscoll-Kraay, Conley Spatial HAC, Clustered một chiều/đa chiều và Wild Cluster Bootstrap).
+Mỗi mô hình con trong 61 đặc tả toán học được kết hợp chặt chẽ với phương pháp tối ưu hóa đặc thù (OLS/HDFE, FGLS, MLE/QMLE, 1-step/2-step Windmeijer GMM, Sieve/Spline, Linear Programming DEA, Kontraction Mapping BLP) và cấu trúc ma trận hiệp phương sai sai số chuẩn phù hợp (Homoskedastic, White Robust HC0–HC3, Newey-West HAC, Driscoll-Kraay, Conley Spatial HAC, Clustered một chiều/đa chiều và Wild Cluster Bootstrap).
 
 :::warning[Cam kết toàn vẹn học thuật Fail-Closed]
 Động cơ Tri-Engine của EcoData thực thi **đúng thuật toán gốc** của từng khóa ước lượng được yêu cầu. Nếu một khóa mô hình chưa được đăng ký hoặc thiếu biến bắt buộc (như thiếu biến công cụ cho 2SLS/BLP, thiếu ma trận trọng số hoặc tọa độ cho mô hình không gian, thiếu biến đầu vào trung gian cho ACF TFP), hệ thống trả về mã lỗi tường minh `422 UNSUPPORTED_ESTIMATOR` hoặc `422 INVALID_SPECIFICATION` — **tuyệt đối không bao giờ âm thầm chuyển về hồi quy OLS**.
@@ -50,7 +50,7 @@ EcoData tách riêng hai nhóm kiểm định chẩn đoán để nhà nghiên c
 
 ## Quy trình thực thi và gói tái lập `.zip` ba ngôn ngữ
 
-1. Mở công cụ **Kinh tế lượng** trên giao diện web hoặc gọi công cụ MCP `run_econometrics_model` / `run_complete_econometric_study`.
+1. Mở công cụ **Kinh tế lượng** trên giao diện web hoặc gọi công cụ MCP `analyze_panel_econometrics` (cùng 16 công cụ họ `analyze_*`) / `run_complete_econometric_study`.
 2. Chạy bước **Kiểm định tiền ước lượng** trên tập biến mục tiêu (hỗ trợ cả chế độ địa giới `boundary_mode="34"` và `"63"`).
 3. Chọn một trong **16 họ mô hình** và bộ ước lượng cụ thể trong danh mục **306 estimators**.
 4. Khai báo biến phụ thuộc, biến giải thích, biến nội sinh/công cụ, biến thực thể – thời gian và cấu trúc sai số chuẩn.

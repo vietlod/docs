@@ -48,7 +48,7 @@ Translates theoretical mechanisms and literature gaps into general objectives, s
 
 ### Proposed Variable Dictionary and Estimator Mapping
 - **Editable Variable Framework:** Defines dependent, core explanatory, control, and endogenous/instrumental variables alongside measurement formulas and expected theoretical signs ($+$, $-$, $?$).
-- **Recommended Estimators Across 16 Families:** Maps your data structure directly to baseline and robustness estimators within EcoLab's **201+ estimator catalog**.
+- **Recommended Estimators Across 16 Families:** Maps your data structure directly to baseline and robustness estimators within EcoLab's **306-estimator catalog**.
 
 ### Interactive Academic Knowledge Graph
 Renders an interactive network map connecting:

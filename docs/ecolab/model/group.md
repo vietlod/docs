@@ -44,6 +44,7 @@ flowchart TD
     G --> G13["13. Hệ thống cầu AIDS/QUAIDS & BLP"]
     G --> G14["14. Biên hiệu quả SFA/DEA & ACF TFP"]
     G --> G15["15. Wild Cluster Bootstrap & Causal ML"]
+    G --> G16["16. Đa cấp, GLMM & Khảo sát phức hợp"]
 ```
 
 ---
@@ -67,7 +68,7 @@ flowchart TD
 | 13 | **Tổ chức ngành cấu trúc & hệ thống cầu** | [AIDS, QUAIDS, Berry Logit IV & Random-Coefficients BLP](/ecolab/model/demand-systems-blp) | Độ co giãn giá – thu nhập hệ thống cầu tiêu dùng và sức mạnh thị trường sản phẩm phân biệt |
 | 14 | **Biên hiệu quả, năng suất & TFP** | [SFA, DEA, Malmquist, Olley-Pakes, Levinsohn-Petrin, Wooldridge & ACF TFP](/ecolab/model/frontier-tfp-decomposition) | Đo lường hiệu quả kỹ thuật ngân hàng/doanh nghiệp và năng suất nhân tố tổng hợp cấu trúc |
 | 15 | **Tái lấy mẫu, học máy nhân quả & suy diễn nhiều chiều** | [Wild Cluster Bootstrap, Double/Debiased ML, Causal Forest & PCA/Factor](/ecolab/model/bootstrap-highdim-inference) | Suy diễn chuẩn xác khi số cụm ít ($G < 30$), kiểm soát nhiễu nhiều chiều và ước lượng CATE |
-| 16 | **Đa cấp, hiệu ứng hỗn hợp & khảo sát phức hợp** | Hierarchical LMM, Random Slopes, Mundlak Within-Between, Mixed Logit/Poisson GLMM, GEE, Log-Linear, Complex Survey `svy:` GLM, Calibration Raking, Fay-Herriot & BHF Small-Area | Dữ liệu phân cấp lồng nhau nhiều tầng, khảo sát hộ gia đình `pweight`–`psu` và ước lượng nghèo vùng nhỏ |
+| 16 | **Đa cấp, hiệu ứng hỗn hợp & khảo sát phức hợp** | Hierarchical LMM, Random Slopes, Mundlak Within-Between, Mixed Logit/Poisson GLMM, GEE, Log-Linear, Complex Survey `svy:` GLM, Calibration Raking, Survey Replicate BRR/JK & Fay-Herriot Small-Area | Dữ liệu phân cấp lồng nhau nhiều tầng, khảo sát hộ gia đình `pweight`–`psu` và ước lượng nghèo vùng nhỏ |
 
 ---
 
