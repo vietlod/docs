@@ -56,7 +56,7 @@ Sử dụng hàm cầu đầu vào trung gian đơn điệu $m_{it} = f_t(k_{it}
 ## Minh họa mã tái lập 3 ngôn ngữ
 
 <Tabs groupId="lang">
-  <TabItem value="stata" label="Stata 18 MP" default>
+  <TabItem value="stata" label="StataNow 19.5 MP" default>
 
 ```stata
 * === 1. Biên ngẫu nhiên dữ liệu bảng (Battese-Coelli SFA) ===

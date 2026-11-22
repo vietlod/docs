@@ -38,7 +38,7 @@ In EcoLab, access these estimators under **Modeling → 16. Multilevel, Mixed & 
 ## Three-Language Replication Code Examples
 
 <Tabs groupId="lang">
-  <TabItem value="stata" label="Stata 18 MP" default>
+  <TabItem value="stata" label="StataNow 19.5 MP" default>
 
 ```stata
 * === 1. Three-Level Hierarchical Linear Mixed Model (mixed REML) ===

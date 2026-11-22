@@ -38,7 +38,7 @@ Trong EcoLab, nhóm mô hình này nằm tại **Mô hình hóa → 16. Đa cấ
 ## Minh họa mã tái lập 3 ngôn ngữ
 
 <Tabs groupId="lang">
-  <TabItem value="stata" label="Stata 18 MP" default>
+  <TabItem value="stata" label="StataNow 19.5 MP" default>
 
 ```stata
 * === 1. Mô hình tuyến tính đa cấp 3 bậc (mixed REML) ===

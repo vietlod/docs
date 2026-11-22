@@ -6,12 +6,12 @@ const SKILLS = [
   {
     id: 'skill-1',
     file: 'gemini-ecodata-mcp-skill.md',
-    viName: 'Skill 1 — Điều phối dữ liệu & 306 mô hình',
-    enName: 'Skill 1 — Macro-Financial Data & 306 Models',
+    viName: 'Skill 1 — Điều phối dữ liệu & 328 mô hình',
+    enName: 'Skill 1 — Macro-Financial Data & 328 Models',
     viDesc:
-      'Điều phối 58 công cụ MCP hợp nhất, dữ liệu quốc tế, chuỗi 34/63 tỉnh 1995–2026, BCTC 30 năm, kiểm toán tài nguyên đính kèm và ước lượng 306 mô hình kinh tế lượng.',
+      'Điều phối 58 công cụ MCP hợp nhất, dữ liệu quốc tế, chuỗi 34/63 tỉnh 1995–2026, BCTC 30 năm, ghép bảng Zero-Copy và ước lượng 328 mô hình kinh tế lượng trên Python, R và StataNow 19.5 MP.',
     enDesc:
-      'Orchestrates all 58 Unified MCP tools across global series, Vietnam 34/63-province panels, 30-year financial statements, resource auditing, and 306 econometric models.',
+      'Orchestrates all 58 Unified MCP tools across global series, Vietnam 34/63-province panels, 30-year financial statements, Zero-Copy panels, and 328 econometric models on Python, R, and StataNow 19.5 MP.',
     tags: ['all'],
   },
   {
@@ -28,12 +28,12 @@ const SKILLS = [
   {
     id: 'skill-3',
     file: 'gemini-ecolab-ecodata-mcp-skill.md',
-    viName: 'Skill 3 — Bản thảo Q1–Q3 & trích dẫn hai chiều',
-    enName: 'Skill 3 — Q1–Q3 Manuscripts & Bidirectional Citations',
+    viName: 'Skill 3 — Bản thảo Q1–Q3 & trích dẫn xác thực DOI',
+    enName: 'Skill 3 — Q1–Q3 Manuscripts & Verified DOI Citations',
     viDesc:
-      'Chuẩn hóa bản thảo học thuật trên 6.000 từ, một khối tóm tắt cốt lõi duy nhất, siêu liên kết trích dẫn đối xứng 1-1 có xác thực DOI kèm nút ↩ về lần trích dẫn đầu tiên và tiền kiểm 9 cổng.',
+      'Chuẩn hóa bản thảo học thuật trên 6.000 từ, một khối tóm tắt cốt lõi duy nhất, siêu liên kết trích dẫn một chiều xác thực DOI, tiền kiểm 9 cổng G1–G9 và gói xuất bản .docx + .pdf.',
     enDesc:
-      'Governs standalone scholarly manuscripts above 6,000 words, single core abstract formatting, DOI-verified 1-to-1 bidirectional citations with ↩ first-mention navigation, and 9-gate QA.',
+      'Governs standalone scholarly manuscripts above 6,000 words, single core abstract formatting, DOI-verified one-way citation hyperlinks, 9-gate G1–G9 QA, and .docx + .pdf exports.',
     tags: ['all'],
   },
   {
@@ -46,6 +46,17 @@ const SKILLS = [
     enDesc:
       'Dedicated to VHLSS 2004–2024 individual, household, and commune microdata: cross-wave questionnaire harmonization, pweight wt45/wt9 rules, PSU clustering, Kish UWE, DuMouchel–Duncan test, and 5 declarative primitives.',
     tags: ['all', 'vhlss'],
+  },
+  {
+    id: 'skill-5',
+    file: 'reproducibility-research-ecodata-skill.md',
+    viName: 'Skill 5 — Nghiên cứu tái lập Q1–Q2 & bình duyệt độc lập',
+    enName: 'Skill 5 — Q1–Q2 Reproducibility Studies & Peer Review',
+    viDesc:
+      'Kiểm toán gói lưu trữ Harvard Dataverse và DOI quốc tế, giải quyết dữ liệu 3 tầng, đối chiếu ba runtime R, StataNow 19.5 MP, Python với khóa dung sai định lượng không quá 1.0% và Phụ lục A bình duyệt.',
+    enDesc:
+      'Audits Harvard Dataverse and DOI replication archives, resolves 3-tier empirical data, verifies R, StataNow 19.5 MP, and Python parity within 1.0% tolerance, and authors Appendix A peer-review critiques.',
+    tags: ['all'],
   },
 ];
 
@@ -86,16 +97,10 @@ function SkillCard({ item, isVi }) {
           onClick={handleCopy}
           className={`${styles.copyBtn} ${copied ? styles.copyBtnActive : ''}`}
         >
-          {copied
-            ? isVi
-              ? '✓ Đã sao chép nội dung'
-              : '✓ Copied Skill'
-            : isVi
-              ? 'Sao chép nội dung kỹ năng'
-              : 'Copy Skill Content'}
+          {copied ? (isVi ? 'Đã chép' : 'Copied') : isVi ? 'Sao chép' : 'Copy'}
         </button>
         <a href={localHref} download={item.file} className={styles.downloadBtn}>
-          {isVi ? 'Tải tệp .md' : 'Download .md'}
+          {isVi ? 'Tải về' : 'Download'}
         </a>
       </div>
     </div>

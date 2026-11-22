@@ -96,11 +96,11 @@ export default function McpPromptCatalog({ locale = 'vi', defaultFilter = 'all' 
                 >
                   {isCopied
                     ? isVi
-                      ? 'Đã sao chép'
+                      ? 'Đã chép'
                       : 'Copied'
                     : isVi
-                      ? 'Sao chép lệnh'
-                      : 'Copy Prompt'}
+                      ? 'Sao chép'
+                      : 'Copy'}
                 </button>
               </div>
               <h4 className={styles.cardTitle}>{title}</h4>

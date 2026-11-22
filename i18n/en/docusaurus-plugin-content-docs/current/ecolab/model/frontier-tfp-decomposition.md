@@ -56,7 +56,7 @@ Inverting strictly monotonic intermediate input demand $m_{it} = f_t(k_{it}, l_{
 ## Three-Language Replication Code Examples
 
 <Tabs groupId="lang">
-  <TabItem value="stata" label="Stata 18 MP" default>
+  <TabItem value="stata" label="StataNow 19.5 MP" default>
 
 ```stata
 * === 1. Panel Stochastic Production Frontier (Battese-Coelli SFA) ===

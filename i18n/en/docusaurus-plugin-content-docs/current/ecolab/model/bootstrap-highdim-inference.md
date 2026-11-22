@@ -60,7 +60,7 @@ where nuisance residuals $\hat{U}_i^{(-k)} = Y_i - \hat{\ell}_0^{(-k)}(W_i)$ and
 ## Three-Language Replication Code Examples
 
 <Tabs groupId="lang">
-  <TabItem value="stata" label="Stata 18 MP" default>
+  <TabItem value="stata" label="StataNow 19.5 MP" default>
 
 ```stata
 * === 1. Wild Cluster Bootstrap With Rademacher / Webb Weights (boottest) ===

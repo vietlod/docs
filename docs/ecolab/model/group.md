@@ -1,15 +1,15 @@
 ---
-title: Danh mục 16 họ mô hình & 306 bộ ước lượng
+title: Danh mục 16 họ mô hình & 328 bộ ước lượng
 sidebar_position: 0
-description: Tổng quan hệ thống 16 họ mô hình, 61 mô hình con và 306 bộ ước lượng kinh tế lượng được EcoData và EcoLab hỗ trợ — bản đồ chọn mô hình, phân tách kiểm định tiền/hậu ước lượng và gói mã tái lập .zip.
+description: Tổng quan hệ thống 16 họ mô hình, 61 mô hình con và 328 bộ ước lượng kinh tế lượng được EcoData và EcoLab hỗ trợ — bản đồ chọn mô hình, phân tách kiểm định tiền/hậu ước lượng và gói mã tái lập .zip.
 ---
 
-# Danh mục 16 họ mô hình, 61 mô hình con & 306 bộ ước lượng
+# Danh mục 16 họ mô hình, 61 mô hình con & 328 bộ ước lượng
 
-EcoData (`v3.93.0`) và EcoLab (`v1.12.0`) tích hợp động cơ kinh tế lượng thống nhất gồm **16 họ mô hình lớn**, phân rã thành **61 mô hình con** và **306 bộ ước lượng (estimators)** thực thi thật trên **Python**, **R** và **Stata 18 MP**. Trang này đóng vai trò bản đồ phương pháp luận giúp bạn chọn chính xác họ mô hình theo cấu trúc dữ liệu và chiến lược định danh.
+EcoData (`v3.97.0`) và EcoLab (`v1.14.0`) tích hợp động cơ kinh tế lượng thống nhất gồm **16 họ mô hình lớn**, phân rã thành **61 mô hình con** và **328 bộ ước lượng (estimators)** thực thi thật trên **Python**, **R** và **StataNow 19.5 MP**. Trang này đóng vai trò bản đồ phương pháp luận giúp bạn chọn chính xác họ mô hình theo cấu trúc dữ liệu và chiến lược định danh.
 
 :::tip Kiểm chứng thực nghiệm và xuất gói tái lập 100%
-Mọi bộ ước lượng trong danh mục đều thực thi đúng thuật toán gốc (cam kết Fail-Closed `422`, không bao giờ fallback ngầm sang OLS) và xuất gói mã tái lập `.zip` gồm kịch bản Stata 18 MP (`.do`), R (`.R`), Python (`.py`) kèm tệp băm `SHA256SUMS.txt`.
+Mọi bộ ước lượng trong danh mục đều thực thi đúng thuật toán gốc (cam kết Fail-Closed `422`, không bao giờ fallback ngầm sang OLS) và xuất gói mã tái lập `.zip` gồm kịch bản StataNow 19.5 MP (`.do`), R (`.R`), Python (`.py`) kèm tệp băm `SHA256SUMS.txt`.
 :::
 
 ---
@@ -72,9 +72,9 @@ flowchart TD
 
 ---
 
-## 306 bộ ước lượng được cấu thành như thế nào?
+## 328 bộ ước lượng được cấu thành như thế nào?
 
-**61 mô hình con** đại diện cho các đặc tả cấu trúc riêng biệt. Khi kết hợp từng mô hình con với thuật toán tối ưu hóa chuẩn xác và ma trận hiệp phương sai sai số chuẩn chuyên dụng, hệ thống hình thành **306 bộ ước lượng** (cùng khả năng mở rộng động qua đường ống quản trị 2 giai đoạn `B1–B4` trên EcoData):
+**61 mô hình con** đại diện cho các đặc tả cấu trúc riêng biệt. Khi kết hợp từng mô hình con với thuật toán tối ưu hóa chuẩn xác và ma trận hiệp phương sai sai số chuẩn chuyên dụng, hệ thống hình thành **328 bộ ước lượng** (cùng khả năng mở rộng động qua đường ống quản trị 2 giai đoạn `B1–B4` trên EcoData):
 
 ```mermaid
 flowchart LR
@@ -87,7 +87,7 @@ flowchart LR
     S --> S1["Homoskedastic & White HC0–HC3"]
     S --> S2["Newey-West HAC / Driscoll-Kraay / Conley Spatial"]
     S --> S3["One-Way / Multi-Way Cluster & Wild Cluster Bootstrap"]
-    O1 --> R["306 bộ ước lượng"]
+    O1 --> R["328 bộ ước lượng"]
     O2 --> R
     O3 --> R
     O4 --> R

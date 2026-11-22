@@ -1,15 +1,15 @@
 ---
 title: Catalog of 16 Model Families & 306 Estimators
 sidebar_position: 0
-description: Comprehensive overview of the 16 model families, 61 sub-models, and 306 econometric estimators supported across EcoData and EcoLab — selection map, Pre/Postestimation diagnostics, and .zip replication bundles.
+description: Comprehensive overview of the 16 model families, 61 sub-models, and 328 econometric estimators supported across EcoData and EcoLab — selection map, Pre/Postestimation diagnostics, and .zip replication bundles.
 ---
 
 # Catalog of 16 Model Families, 61 Sub-Models & 306 Estimators
 
-EcoData (`v3.93.0`) and EcoLab (`v1.12.0`) share a unified Tri-Engine econometrics catalog comprising **16 major model families**, **61 mathematical sub-models**, and **306 estimators** executing natively across **Python**, **R**, and **Stata 18 MP**. Use this page as your methodological roadmap to match data structures and identification designs to the right estimator family.
+EcoData (`v3.97.0`) and EcoLab (`v1.14.0`) share a unified Tri-Engine econometrics catalog comprising **16 major model families**, **61 mathematical sub-models**, and **328 estimators** executing natively across **Python**, **R**, and **StataNow 19.5 MP**. Use this page as your methodological roadmap to match data structures and identification designs to the right estimator family.
 
 :::tip Method-Accurate Execution & 100% Reproducibility
-Every estimator executes its genuine econometric algorithm (strict Fail-Closed `422` enforcement with zero silent OLS fallback) and exports a `.zip` replication bundle containing Stata 18 MP (`.do`), R (`.R`), and Python (`.py`) scripts alongside `SHA256SUMS.txt`.
+Every estimator executes its genuine econometric algorithm (strict Fail-Closed `422` enforcement with zero silent OLS fallback) and exports a `.zip` replication bundle containing StataNow 19.5 MP (`.do`), R (`.R`), and Python (`.py`) scripts alongside `SHA256SUMS.txt`.
 :::
 
 ---
@@ -74,7 +74,7 @@ flowchart TD
 
 ## How Are the 306 Estimators Formed?
 
-The **61 mathematical sub-models** capture distinct structural equations. Pairing each sub-model with its appropriate optimization routine and variance-covariance / resampling estimator yields **306 estimators** (continuously extensible via EcoData's 2-stage `B1–B4` curation pipeline):
+The **61 mathematical sub-models** capture distinct structural equations. Pairing each sub-model with its appropriate optimization routine and variance-covariance / resampling estimator yields **328 estimators** (continuously extensible via EcoData's 2-stage `B1–B4` curation pipeline):
 
 ```mermaid
 flowchart LR

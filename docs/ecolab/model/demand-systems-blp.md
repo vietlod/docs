@@ -58,7 +58,7 @@ $$
 ## Minh họa mã tái lập 3 ngôn ngữ
 
 <Tabs groupId="lang">
-  <TabItem value="stata" label="Stata 18 MP" default>
+  <TabItem value="stata" label="StataNow 19.5 MP" default>
 
 ```stata
 * === 1. Hệ thống cầu QUAIDS với biến nhân khẩu học ===

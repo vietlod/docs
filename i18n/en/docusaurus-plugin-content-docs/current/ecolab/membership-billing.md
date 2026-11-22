@@ -6,7 +6,7 @@ description: Guide to managing your academic profile, personal API keys (BYOK AI
 
 # Account Management, Personal API Keys & Billing
 
-EcoLab (`v1.12.0`) provides a unified workspace under **Settings** to manage your academic profile, personal AI provider keys, personal scholarly database keys, MCP access tokens, and subscription tiers.
+EcoLab (`v1.14.0`) provides a unified workspace under **Settings** to manage your academic profile, personal AI provider keys, personal scholarly database keys, MCP access tokens, and subscription tiers.
 
 ---
 

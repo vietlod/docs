@@ -1,12 +1,12 @@
 ---
 name: behavioral-research-ecodata-skill
-version: 3.93.0
+version: 3.97.0
 role: Skill 2 — Behavioral Economics, Psychology, Management & Marketing Survey/SEM Pipeline (0% Overlap)
 platform: Google Gemini Connected Apps / Gemini Gems / Claude Code / Cursor / Antigravity / OpenAI Codex
 mcp_endpoint: https://ecodata.io.vn/mcp
 ecolab_endpoint: https://ecolab.io.vn/mcp
 description: >
-  Bộ kỹ năng số 2 (cô đọng, sẵn sàng Copy-Paste 1-Click trên Google Gemini, 0% trùng lặp với Skill 1, Skill 3 & Skill 4):
+  Bộ kỹ năng số 2 (cô đọng, sẵn sàng Copy-Paste 1-Click trên Google Gemini, 0% trùng lặp với Skill 1, Skill 3, Skill 4 & Skill 5):
   Chuyên trách nghiên cứu Kinh tế hành vi – Tâm lý học tổ chức – Quản trị – Marketing (`survey_behavioral`,
   `EFA`, `CFA`, `CB-SEM`, `PLS-SEM`): thiết kế đề cương Luận án (3–5 chương) hoặc Bài báo Q1–Q3 (IMRaD),
   tính cỡ mẫu & mô phỏng dữ liệu khảo sát Likert (`Pilot` + `Main Survey`, mã hóa ngược, khóa bảng hỏi),
@@ -65,9 +65,10 @@ Gọi `analyze_behavioral_psychometrics` hoặc `ecolab_model_estimate_start(pro
 1. **Định dạng Số nguyên Bắt buộc cho Thang đo Khảo sát & Cỡ mẫu**:
    - Mọi giá trị cá biệt và cực trị (`Min`, `Max`) của các mục hỏi Likert (`1..5`, `1..7`), biến phân loại/nhị phân (`0`/`1`), số mục hỏi của thang đo và cỡ mẫu ($N_{\text{pilot}}$, $N_{\text{main}}$) trong văn bản, bảng thống kê mô tả và tệp `.csv` tải về **bắt buộc hiển thị dạng số nguyên** (`1`, `5`, `7`, `0`, `400` — tuyệt đối không viết `1.0000`, `5.0000`, `400.0`).
    - Các chỉ tiêu tính toán liên tục (`Mean`, `SD`, $\hat{\beta}$, `SE`, `AVE`, `CR`, `HTMT`) giữ định dạng số thập phân học thuật chuẩn (`2`–`4` chữ số thập phân).
-2. **Bộ 3 Sơ đồ Cấu trúc 300-DPI (`M1`, `M2`, `R1`) & Đánh số Hình Liên tục**:
-   - Hệ thống tự động kết xuất và nhúng **đúng 1 lần duy nhất** bộ 3 sơ đồ cấu trúc chuẩn công bố quốc tế:
-     - **Sơ đồ M1 (Mục 3 — Khung lý thuyết & Mô hình đo lường EFA/CFA)**: Ô biến quan sát ghi gọn `CODE1–CODEk` (ví dụ `ENV1–ENV4`) kèm `λ ∈ [min; max]`; tên khái niệm nằm trọn trong khối elip.
+2. **Bộ 3 Sơ đồ Cấu trúc `300/450-DPI` (`M1`, `M2`, `R1`) & Chuẩn Đồ họa Tiếng Việt Sạch**:
+   - Hệ thống kết xuất bằng `NetworkX + Matplotlib` ở độ phân giải `300/450-DPI` và nhúng **đúng 1 lần duy nhất** bộ 3 sơ đồ cấu trúc chuẩn công bố quốc tế:
+     - **Sơ đồ M1 (Mục 3 — Khung lý thuyết & Mô hình đo lường EFA/CFA)**: Ô biến quan sát ghi gọn `CODE1–CODEk` kèm `λ ∈ [min; max]`.
      - **Sơ đồ M2 (Cuối Mục 3 — Đối sánh Mô hình cơ sở vs. Mô hình mở rộng)**: Khung đôi `Panel A` & `Panel B` kèm thanh chú giải mã khái niệm ở chân hình.
      - **Sơ đồ R1 (Mục 4 — Kết quả ước lượng đường dẫn SEM/PLS-SEM)**: Hiển thị hệ số ước lượng + mức ý nghĩa thống kê gọn gàng trên từng nhánh (`H1: β̂ = +0.307***`, `H4: β̂ = +0.039 (ns)`).
+   - **Quy tắc Bọc chữ & Ngôn ngữ Trên Hình**: Khi `language="vi"`, **100% nhãn khái niệm, tiêu đề, chú giải trên `M1`, `M2`, `R1` phải là tiếng Việt chuẩn UTF-8** (không dùng mã biến thô làm tiêu đề, không lỗi dấu `?`), sử dụng font thanh mảnh (`regular/light`), ngắt dòng có ý nghĩa để toàn bộ văn bản **nằm gọn hoàn toàn bên trong khối elip/hộp** (không tràn viền, không cắt chữ), mũi tên điều tiết trỏ chính xác vào **trung điểm đường dẫn cấu trúc** (`X -> Y`).
    - Toàn bộ sơ đồ và biểu đồ kiểm định được **đánh số thứ tự liên tục toàn bài** (`Hình 1`, `Hình 2`, `Hình 3`... hoặc `Figure 1`, `Figure 2`... theo chuẩn trích dẫn tại Skill 3) và đồng bộ 100% với tham chiếu trong bài viết.

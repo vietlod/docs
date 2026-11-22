@@ -1,16 +1,16 @@
 ---
 id: econometrics
-title: Động cơ kinh tế lượng 16 họ mô hình, 61 mô hình con và 306 bộ ước lượng
-description: Hướng dẫn sử dụng động cơ Kinh tế lượng của EcoData (v3.93.0) với 16 họ mô hình, 61 mô hình con và 306 bộ ước lượng chạy đồng thời trên Python, R và Stata 18 MP kèm kiểm định tiền/hậu ước lượng và gói mã tái lập .zip.
+title: Động cơ kinh tế lượng 16 họ mô hình, 61 mô hình con và 328 bộ ước lượng
+description: Hướng dẫn sử dụng động cơ Kinh tế lượng của EcoData (v3.97.0) với 16 họ mô hình, 61 mô hình con và 328 bộ ước lượng chạy đồng thời trên Python, R và StataNow 19.5 MP kèm kiểm định tiền/hậu ước lượng và gói mã tái lập .zip.
 ---
 
-# Động cơ kinh tế lượng 16 họ mô hình, 61 mô hình con và 306 bộ ước lượng
+# Động cơ kinh tế lượng 16 họ mô hình, 61 mô hình con và 328 bộ ước lượng
 
-Công cụ Kinh tế lượng của EcoData (`v3.93.0`) cho phép chuẩn bị mẫu, kiểm định tiền ước lượng, thực thi ước lượng chuẩn xác theo phương pháp, kiểm định hậu ước lượng và xuất gói mã tái lập `.zip` ngay trên trình duyệt web hoặc qua máy chủ **Unified EcoData MCP Server** (`https://ecodata.io.vn/mcp`).
+Công cụ Kinh tế lượng của EcoData (`v3.97.0`) cho phép chuẩn bị mẫu, kiểm định tiền ước lượng, thực thi ước lượng chuẩn xác theo phương pháp, kiểm định hậu ước lượng và xuất gói mã tái lập `.zip` ngay trên trình duyệt web hoặc qua máy chủ **Unified EcoData MCP Server** (`https://ecodata.io.vn/mcp`).
 
-## Kiến trúc 16 họ mô hình, 61 mô hình con và 306 bộ ước lượng cốt lõi
+## Kiến trúc 16 họ mô hình, 61 mô hình con và 328 bộ ước lượng cốt lõi
 
-EcoData mở rộng danh mục kinh tế lượng lên **16 họ phân tích chuyên sâu**, **61 mô hình con** và **306 bộ ước lượng** bao phủ toàn diện các phương pháp xuất bản học thuật giai đoạn 2021–2026:
+EcoData mở rộng danh mục kinh tế lượng lên **16 họ phân tích chuyên sâu**, **61 mô hình con** và **328 bộ ước lượng** bao phủ toàn diện các phương pháp xuất bản học thuật giai đoạn 2021–2026:
 
 | Mã họ | Họ mô hình phân tích | Mô hình con và phương pháp tiêu biểu | Bối cảnh nghiên cứu phù hợp |
 | :--- | :--- | :--- | :--- |
@@ -31,13 +31,21 @@ EcoData mở rộng danh mục kinh tế lượng lên **16 họ phân tích chu
 | **15** | **Tái lấy mẫu, học máy nhân quả & nhiều chiều** | Nonparametric/Pairs, Moving-Block, Panel Cluster & Roodman-MacKinnon-Nielsen-Webb Wild Cluster Bootstrap, Chernozhukov Double/Debiased ML, Athey-Wager Causal Forest, PCA/Factor/K-Means, Benchmark Predictive ML | Suy diễn vững với số cụm ít ($G < 30$), kiểm soát nhiễu nhiều chiều và ước lượng CATE |
 | **16** | **Đa cấp, hiệu ứng hỗn hợp & khảo sát phức hợp** | Hierarchical Linear Mixed (`mixed` / `lmer`), Random Slopes, Mundlak Within-Between, 3-Level LMM, Mixed Logit & Poisson GLMM, Liang-Zeger GEE, Log-Linear Contingency, Complex Survey GLM (`svy:`), Calibration Raking, Survey Replicate BRR/JK & Fay-Herriot Small-Area | Dữ liệu phân cấp cá nhân – hộ – xã – tỉnh, khảo sát chọn mẫu phức hợp `pweight` – `psu` (VHLSS) và ước lượng bản đồ nghèo vùng nhỏ |
 
-### Cơ chế hình thành 306 bộ ước lượng và nguyên tắc Fail-Closed
+### Cơ chế hình thành 328 bộ ước lượng và nguyên tắc Fail-Closed
 
 Mỗi mô hình con trong 61 đặc tả toán học được kết hợp chặt chẽ với phương pháp tối ưu hóa đặc thù (OLS/HDFE, FGLS, MLE/QMLE, 1-step/2-step Windmeijer GMM, Sieve/Spline, Linear Programming DEA, Kontraction Mapping BLP) và cấu trúc ma trận hiệp phương sai sai số chuẩn phù hợp (Homoskedastic, White Robust HC0–HC3, Newey-West HAC, Driscoll-Kraay, Conley Spatial HAC, Clustered một chiều/đa chiều và Wild Cluster Bootstrap).
 
 :::warning[Cam kết toàn vẹn học thuật Fail-Closed]
 Động cơ Tri-Engine của EcoData thực thi **đúng thuật toán gốc** của từng khóa ước lượng được yêu cầu. Nếu một khóa mô hình chưa được đăng ký hoặc thiếu biến bắt buộc (như thiếu biến công cụ cho 2SLS/BLP, thiếu ma trận trọng số hoặc tọa độ cho mô hình không gian, thiếu biến đầu vào trung gian cho ACF TFP), hệ thống trả về mã lỗi tường minh `422 UNSUPPORTED_ESTIMATOR` hoặc `422 INVALID_SPECIFICATION` — **tuyệt đối không bao giờ âm thầm chuyển về hồi quy OLS**.
 :::
+
+### 12 bộ ước lượng cờ đầu và lệnh gốc mới trên StataNow 19.5 MP
+
+Toàn bộ runtime Stata trên hệ thống đã được nâng cấp lên **StataNow 19.5 MP** kèm cơ chế dự phòng nóng tức thì (`0` giây) sang các runtime đối ứng trong kiến trúc Tri-Engine, bổ sung trực tiếp các lệnh kinh tế lượng hiện đại giai đoạn 2025–2026:
+
+- **Suy luận nhân quả hiện đại:** `cate aipw` (`estat ate`, `estat gatetest` ước lượng CATE/GATE/IATE chéo Neyman-trực giao), `xthdidlogit`, `xthdidpoisson`, `xthdidfracreg` (DID phi tuyến không đồng nhất theo đoàn hệ – thời gian), `xtswitchdid` (DID chuyển đổi trạng thái can thiệp bật/tắt lặp lại) và `lateffects ipwra` (ước lượng LATE khả vững kép cho nhóm tuân thủ).
+- **Biến công cụ, hàm kiểm soát và hiệu ứng cố định đa chiều:** `areg` và `ivregress 2sls ..., absorb(...)` hấp thụ đa chiều tốc độ cao, `estat weakrobust` kiểm định AR/CLR bền vững trước công cụ yếu, sai số chuẩn Jackknife `vce(hc3, hansen)` theo Hansen (2025), cùng `cfregress` (`estat endog`) và `cfprobit` xử lý nội sinh bằng hàm kiểm soát.
+- **Dữ liệu bảng động, chuỗi thời gian, sinh tồn khoảng và học máy H2O/Bayes:** `xtreg ..., cre` (`estat mundlak`), `xtvar` (Panel VAR trực giao tiến FOD-GMM), `ivsvar gmm` (Proxy SVAR biến công cụ ngoại sinh), `ivlpirf` (Local Projections IV), `stmgintcox` (Cox biên đa sự kiện kiểm duyệt khoảng), `bayesselect ..., hshoe` (lựa chọn biến Bayes tiên nghiệm móng ngựa), `h2oml gbregress` và `h2oml rfregress` (Gradient Boosting & Random Forest phân tán kèm đóng mở cụm tức thời `0 MB` RAM rỗi) và nạp dữ liệu cột siêu tốc `import parquet`.
 
 ## Tách bạch kiểm định tiền ước lượng và kiểm định hậu ước lượng
 
@@ -46,13 +54,13 @@ EcoData tách riêng hai nhóm kiểm định chẩn đoán để nhà nghiên c
 | Giai đoạn kiểm định | Nhóm kiểm định chẩn đoán tự động | Ý nghĩa quyết định phương pháp |
 | :--- | :--- | :--- |
 | **1. Tiền ước lượng (Pre-Estimation Diagnostics)** | Nghiệm đơn vị ADF, Phillips-Perron, KPSS, Im-Pesaran-Shin, Levin-Lin-Chu, Pesaran CIPS; Đa cộng tuyến $VIF$ và số điều kiện ma trận; Phụ thuộc chéo Pesaran CD; Tự tương quan không gian toàn cục/cục bộ Moran's $I$ và Geary's $C$; Đồng liên kết bảng Pedroni, Kao, Westerlund và chuỗi thời gian Johansen | Xác định bậc tích hợp $I(0)/I(1)$, phát hiện phụ thuộc chéo để chọn Driscoll-Kraay hoặc CCE-MG, xác nhận hiệu ứng không gian trước khi chạy SAR/SDM và kiểm tra đồng liên kết trước khi ước lượng VECM/ARDL/FMOLS |
-| **2. Hậu ước lượng (Postestimation Diagnostics)** | Phương sai sai số thay đổi Breusch-Pagan, White; Tự tương quan Durbin-Watson, Breusch-Godfrey, Wooldridge; Dạng hàm Ramsey RESET và chuẩn phần dư Jarque-Bera; Lựa chọn FE/RE Hausman và Mundlak; Arellano-Bond AR(1)/AR(2) và Hansen/Sargan $J$; Công cụ yếu Cragg-Donald và Kleibergen-Paap rk Wald $F$; Kiểm định biên Pesaran-Shin-Smith Bounds $F/t$ và bất đối xứng Wald NARDL; Xu hướng song song Event-Study Pre-Trend Wald và mật độ liên tục McCrary RDD | Kiểm chứng giả định Gauss-Markov, tính hợp lệ của biến công cụ, tính vững của chiến lược định danh nhân quả và sự đồng thuận hệ số giữa Python, R và Stata 18 MP ($\Delta < 10^{-6}$) |
+| **2. Hậu ước lượng (Postestimation Diagnostics)** | Phương sai sai số thay đổi Breusch-Pagan, White; Tự tương quan Durbin-Watson, Breusch-Godfrey, Wooldridge; Dạng hàm Ramsey RESET và chuẩn phần dư Jarque-Bera; Lựa chọn FE/RE Hausman và Mundlak; Arellano-Bond AR(1)/AR(2) và Hansen/Sargan $J$; Công cụ yếu Cragg-Donald và Kleibergen-Paap rk Wald $F$; Kiểm định biên Pesaran-Shin-Smith Bounds $F/t$ và bất đối xứng Wald NARDL; Xu hướng song song Event-Study Pre-Trend Wald và mật độ liên tục McCrary RDD | Kiểm chứng giả định Gauss-Markov, tính hợp lệ của biến công cụ, tính vững của chiến lược định danh nhân quả và sự đồng thuận hệ số giữa Python, R và StataNow 19.5 MP ($\Delta < 10^{-6}$) |
 
 ## Quy trình thực thi và gói tái lập `.zip` ba ngôn ngữ
 
 1. Mở công cụ **Kinh tế lượng** trên giao diện web hoặc gọi công cụ MCP `analyze_panel_econometrics` (cùng 16 công cụ họ `analyze_*`) / `run_complete_econometric_study`.
 2. Chạy bước **Kiểm định tiền ước lượng** trên tập biến mục tiêu (hỗ trợ cả chế độ địa giới `boundary_mode="34"` và `"63"`).
-3. Chọn một trong **16 họ mô hình** và bộ ước lượng cụ thể trong danh mục **306 estimators**.
+3. Chọn một trong **16 họ mô hình** và bộ ước lượng cụ thể trong danh mục **328 estimators**.
 4. Khai báo biến phụ thuộc, biến giải thích, biến nội sinh/công cụ, biến thực thể – thời gian và cấu trúc sai số chuẩn.
-5. Thực thi đồng thời trên **Python**, **R** và **Stata 18 MP** để đối soát chéo hệ số, sai số chuẩn, trị số thống kê $t/z$, trị số $p$ và toàn bộ bảng **Kiểm định hậu ước lượng**.
-6. Chuyển đổi tức thời bảng xuất bản giữa 5 chuẩn quốc tế (**APA 7th**, **Chicago 17th**, **Harvard**, **IEEE**, **MLA 9th**) và tải gói tái lập **`.zip`** bao gồm mã nguồn `.do` (Stata 18 MP), `.R`, `.py`, tập dữ liệu sạch kèm tệp băm kiểm chứng toàn vẹn **`SHA256SUMS.txt`**.
+5. Thực thi đồng thời trên **Python**, **R** và **StataNow 19.5 MP** để đối soát chéo hệ số, sai số chuẩn, trị số thống kê $t/z$, trị số $p$ và toàn bộ bảng **Kiểm định hậu ước lượng**.
+6. Chuyển đổi tức thời bảng xuất bản giữa 5 chuẩn quốc tế (**APA 7th**, **Chicago 17th**, **Harvard**, **IEEE**, **MLA 9th**) và tải gói tái lập **`.zip`** bao gồm mã nguồn `.do` (StataNow 19.5 MP), `.R`, `.py`, tập dữ liệu sạch kèm tệp băm kiểm chứng toàn vẹn **`SHA256SUMS.txt`**.

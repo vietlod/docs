@@ -1,25 +1,26 @@
 ---
 name: vhlss-micro-ecodata-skill
-version: 3.93.0
+version: 3.97.0
 role: Skill 4 — VHLSS 2004–2024 Microdata, Complex Survey Weights, Multi-Wave Harmonization, Family 16 Multilevel/SAE & Declarative Pipeline (0% Overlap)
 platform: Google Gemini Connected Apps / Gemini Gems / Claude Code / Cursor / Antigravity / OpenAI Codex
 mcp_endpoint: https://ecodata.io.vn/mcp
 ecolab_endpoint: https://ecolab.io.vn/mcp
 docs_url: https://docs.tnsai.vn/ecodata/indicators/macro-survey-vhlss
 description: >
-  Bộ kỹ năng số 4 (cô đọng, sẵn sàng Copy-Paste 1-Click trên Google Gemini, 0% trùng lặp với Skill 1, Skill 2 & Skill 3):
+  Bộ kỹ năng số 4 (cô đọng, sẵn sàng Copy-Paste 1-Click trên Google Gemini, 0% trùng lặp với Skill 1, Skill 2, Skill 3 & Skill 5):
   Chuyên trách khai thác Dữ liệu Vi mô Khảo sát Mức sống Dân cư Việt Nam (GSO VHLSS 2004–2024, 11 kỳ khảo sát,
   cấp cá nhân / hộ gia đình / xã) qua công cụ `analyze_vhlss_microdata`: bản đồ hài hòa hóa bảng hỏi đa kỳ
   (`MUC1A/1B/XDTVHo`, `MUC2V+2X`, `MUC4A/4D`, `MUC5A1/5A2/5B1`, `HO1..HO4`, `XA`), ma trận quyết định quyền số mẫu
   phức hợp (`pweight` `wt45`/`wt9`, phân cụm `PSU`, hệ số Kish `UWE`, kiểm định ngoại sinh trọng số DuMouchel–Duncan),
+  hồi quy vi mô (`hurdle` Cragg hai phần, `quaids_demand_system` IV-2SLS/3SLS, NELM Binary/IV-Probit, Panel FE / Mundlak CRE),
   5 toán tử khai báo tổng quát (`conditional_aggregations`, `exclude_self`, `contextual_variables` `leave_one_out`,
-  khử lạm phát `CPI`), chuyển giao Zero-Copy `dataset_id` và xuất gói tái lập `Stata 18 MP · R · Python`.
+  khử lạm phát `CPI`), chuyển giao Zero-Copy `dataset_id` và xuất gói tái lập `StataNow 19.5 MP · R · Python`.
 ---
 
 # Kỹ năng 4: Khai thác Chuyên sâu Dữ liệu Vi mô VHLSS 2004–2024 & Trọng số Mẫu Phức hợp (`analyze_vhlss_microdata`)
 
-> **Phạm vi kích hoạt nghiêm ngặt (`Scope Gate — 0% Overlap` trong Bộ 4 Skills)**:
-> Chỉ kích hoạt kỹ năng này khi nghiên cứu khai thác **Dữ liệu Vi mô Khảo sát Mức sống Dân cư Việt Nam (`VHLSS 2004–2024`)** ở cấp cá nhân, hộ gia đình hoặc xã/phường qua `analyze_vhlss_microdata`. Phối hợp với **Skill 1** (điều phối chung & dữ liệu vĩ mô/tỉnh/BCTC), **Skill 2** (khảo sát Likert/SEM) và **Skill 3** (biên tập bản thảo chuẩn tạp chí Q1–Q3 & trích dẫn hai chiều).
+> **Phạm vi kích hoạt nghiêm ngặt (`Scope Gate — 0% Overlap` trong Bộ 5 Skills)**:
+> Chỉ kích hoạt kỹ năng này khi nghiên cứu khai thác **Dữ liệu Vi mô Khảo sát Mức sống Dân cư Việt Nam (`VHLSS 2004–2024`)** ở cấp cá nhân, hộ gia đình hoặc xã/phường qua `analyze_vhlss_microdata`. Phối hợp với **Skill 1** (điều phối chung & dữ liệu vĩ mô/tỉnh/BCTC), **Skill 2** (khảo sát Likert/SEM) và **Skill 3** (biên tập bản thảo chuẩn tạp chí Q1–Q3, trích dẫn một chiều sạch & gói `.docx` + `.pdf`).
 
 ---
 
@@ -96,6 +97,10 @@ VHLSS áp dụng thiết kế chọn mẫu phân tầng 2 giai đoạn tỷ lệ
    }
    ```
    - Lưu lại mã **`dataset_id`** trả về (Zero-Copy trên máy chủ, đã tự động gỡ bỏ cột định danh cá nhân PII, đính kèm chỉ số `Gini`/`Theil`/`FGT P0–P2`, hệ số Kish `UWE` và gói tải về `.csv`/`.dta`/`_replication.zip`).
-3. **Bước 3 — Ước lượng Đa Mô hình & Chuyển giao sang Bản thảo Q1 (`action="run_econometrics"` / `EcoLab`)**:
-   - **Phân tích nhanh (Mode A)**: Gọi `analyze_vhlss_microdata(action="run_econometrics", dataset_id=..., model_type="logit"|"probit"|"tobit"|"ppml"|"heckman_selection"|"iv_2sls"|"panel_fe"|"oaxaca_blinder"|"quantile", dep_var=..., indep_vars=[...], cluster_var="psu", use_weights=True, compare_unweighted=True, selected_engine="auto")` để nhận bảng đối sánh Có trọng số vs. Không trọng số, kiểm định $F$ DuMouchel–Duncan và mã tái lập `svyset psu [pw=...]` (Stata 18 MP), `survey::svydesign` (R), Sandwich PSU (Python).
-   - **Bản thảo học thuật hoàn chỉnh (Mode B — phối hợp Skill 3)**: Truyền `ecodata_dataset_id=dataset_id` vào `ecolab_dataset_prepare` để ước lượng đa mô hình đối chứng và xuất bản thảo đạt chuẩn quốc tế (tuyệt đối không để lộ tên tệp đặc tả nội bộ `.xlsx`/prompt trong bài viết, chỉ giữ đúng 1 khối `> [!ABSTRACT]` + tiêu đề phụ biên tập gọn 1 câu, và bảo đảm đối xứng `1-1` giữa trích dẫn trong bài với danh mục Tài liệu tham khảo có DOI xác thực).
+3. **Bước 3 — Ước lượng Đa Mô hình Vi mô & Chuyển giao Zero-Copy sang Bản thảo Q1 (`action="run_econometrics"` / `EcoLab`)**:
+   - **Phân tích nhanh (Mode A — Bộ ước lượng VHLSS chuyên biệt)**: Gọi `analyze_vhlss_microdata(action="run_econometrics", dataset_id=..., model_type="...", dep_var=..., indep_vars=[...], cluster_var="psu", use_weights=True, compare_unweighted=True, selected_engine="auto")`. Hỗ trợ đầy đủ các mô hình vi mô chuẩn công bố:
+     * **`hurdle` (Cragg Two-Part Hurdle)**: Tách xác suất tham gia tiêu dùng (Probit/Logit bậc 1) và cường độ chi tiêu có điều kiện (Truncated/Lognormal OLS bậc 2) cho mặt hàng nhiều giá trị 0 (thuốc lá, y tế, giáo dục).
+     * **`quaids_demand_system` (Quadratic Working–Leser / QUAIDS)**: Hệ phương trình tỷ trọng chi tiêu đa hàng hóa dùng **đơn giá bình quân cấp xã/huyện (`unit value`) với công cụ IV-2SLS / System 3SLS phân cụm `psu`** kiểm soát nội sinh giá & hiệu ứng chất lượng Deaton.
+     * **`logit` / `probit` / `cloglog` / `iv_probit` (NELM Binary & Control Function)** và **`panel_fe` / Mundlak `CRE`** trên bảng dọc hộ luân phiên (`longitudinal_base` weights).
+     * Trả về bảng đối sánh **Có trọng số vs. Không trọng số**, kiểm định $F$ DuMouchel–Duncan, đồ thị `300-DPI` **100% nhãn tiếng Việt UTF-8 sạch** (`0` mã biến thô trên hình) và mã tái lập `svyset psu [pw=...]` (StataNow 19.5 MP), `survey::svydesign` (R), Sandwich PSU (Python).
+   - **Bản thảo học thuật hoàn chỉnh (Mode B — phối hợp Skill 3)**: Truyền `ecodata_dataset_id=dataset_id` vào `ecolab_dataset_prepare` để ước lượng đa mô hình đối chứng và xuất bản thảo đạt chuẩn quốc tế (tuyệt đối không để lộ tên cột kỹ thuật hoặc tên tệp nội bộ trong văn bản chính, dùng khối `> [!ABSTRACT]` & `Trong đó:` dạng bullet, siêu liên kết trích dẫn một chiều `#ref-...` có DOI xác thực và gói tải về kèm `.docx` + `.pdf`).

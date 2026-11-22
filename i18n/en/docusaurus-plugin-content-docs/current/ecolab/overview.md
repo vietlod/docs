@@ -1,15 +1,45 @@
 ---
 title: EcoLab Overview & Step-by-Step User Guide
 sidebar_position: 1
-description: Step-by-step user guide for the EcoLab quantitative economics and behavioral research platform (v1.12.0), covering resource auditing, custom survey simulation, citation-style-aware sequential figure and table numbering, academic integer formatting, and universal auto-publishing across all research modes.
+description: Step-by-step user guide for the EcoLab quantitative economics and behavioral research platform (v1.14.0), covering resource auditing, custom survey simulation, citation-style-aware sequential figure and table numbering, academic integer formatting, and universal auto-publishing across all research modes.
 ---
 
+import Head from '@docusaurus/Head';
 import McpPromptCatalog from '@site/src/components/McpPromptCatalog';
 import GeminiSkillsSuite from '@site/src/components/GeminiSkillsSuite';
 
+export const ecolabOverviewSchemaEn = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'TechArticle',
+      headline: 'EcoLab Overview & Step-by-Step User Guide: Quantitative Economic Research on Python, R, and StataNow 19.5 MP',
+      description: 'Step-by-step guide to EcoLab integrated with Vietnam and global economic datasets on EcoData, executing 328 econometric models across 16 families on Python, R, and StataNow 19.5 MP, 1.0% tolerance reproducibility verification, and journal manuscript publishing.',
+      inLanguage: 'en',
+      url: 'https://docs.tnsai.vn/en/ecolab/overview',
+    },
+    {
+      '@type': 'SoftwareApplication',
+      name: 'EcoLab Quantitative Research Platform',
+      applicationCategory: 'EducationalApplication',
+      operatingSystem: 'Web',
+      url: 'https://ecolab.io.vn',
+    },
+  ],
+};
+
+<Head>
+  <script type="application/ld+json">{JSON.stringify(ecolabOverviewSchemaEn)}</script>
+</Head>
+
 # EcoLab Overview & Step-by-Step User Guide
 
-**EcoLab** (version `v1.12.0`) is an end-to-end quantitative economics, finance, and behavioral research platform designed to guide researchers through the entire scholarly workflow — from auditing attached research materials and synthesizing DOI-verified literature to estimating 306 econometric and structural equation models across 16 families and 61 sub-models on Python, R, and Stata 18 MP via the 58-tool Unified MCP Server, formatting figures and tables to international citation standards, and automatically publishing journal-ready articles.
+:::tip[Answer-First Platform Summary]
+**What is EcoLab?** EcoLab (`https://ecolab.io.vn`) is an end-to-end quantitative economic analysis and scientific research workspace within the TNSAI ecosystem, directly bridged to Vietnam and global datasets on **EcoData** to guide researchers across 5 stages: research gap ideation, 6-source DOI-verified literature synthesis, Zero-Copy dataset assembly, live estimation across **328 econometric models in 16 families on Python, R, and StataNow 19.5 MP**, and publication-ready manuscript export with independent replication bundles.
+:::
+
+
+**EcoLab** (version `v1.14.0`) is an end-to-end quantitative economics, finance, and behavioral research platform designed to guide researchers through the entire scholarly workflow — from auditing attached research materials and synthesizing DOI-verified literature to estimating 328 econometric and structural equation models across 16 families and 61 sub-models on Python, R, and StataNow 19.5 MP via the 58-tool Unified MCP Server, formatting figures and tables to international citation standards, and automatically publishing journal-ready articles.
 
 ---
 
@@ -22,7 +52,7 @@ import GeminiSkillsSuite from '@site/src/components/GeminiSkillsSuite';
 | **3. Behavioral Survey Studio & Academic Integer Formatting** | Conduct Likert-scale survey (`1..5`, `1..7`), binary outcome (`0`/`1`), and in-depth interview studies with 100% preservation of custom questionnaires | Sample sizes ($N$) and `Min`/`Max` bounds of Likert scale items and binary variables are formatted strictly as **integers** (`400`, `1`, `5`, `0`, `1`) in both statistical tables and downloadable `.csv` datasets, while continuous metrics (`Mean`, `SD`, path coefficients) retain standard decimal precision. |
 | **4. Citation-Style Sequential Figure & Table Numbering (`APA 7th` Default)** | All charts, structural diagrams (`M1`, `M2`, `R1`), and statistical tables are numbered sequentially (`Figure 1, Figure 2, Figure 3...` and `Table 1, Table 2, Table 3...`; `Table A1...` in Appendices; or `TABLE I, TABLE II` under `IEEE`) | Synchronizes 100% of in-text cross-references with figure and table captions, and locks punctuation line-breaking so `.`, `?`, `~`, `,`, `;`, `:`, and `!` never wrap onto a new line by themselves on desktop, tablet, or mobile screens. |
 | **5. Universal Auto-Publishing Across All Research Modes** | Automatically publishes every completed output to the Academic Blog (`/blog`) — not only 5-Stage Journal/Thesis projects (Mode B), but also **Top 5 Research Ideas**, **1-Click Automated Econometric Studies (Mode A)**, and custom synthesized reports | Every run returns a live public article URL complete with an academic cover banner and downloadable replication assets. |
-| **6. Standalone Journal-Ready Prose & Zero-Overlap 4-Skill Suite** | Produces clean manuscripts free of any internal workflow self-references, paired with a floating **Back-to-Top** progress ring and 4 zero-overlap 1-click copy-paste skills for Gemini Connected Apps | Readers can download the exact `.csv` dataset and switch effortlessly across `R`, `Stata`, and `Python` replication scripts on any device. |
+| **6. Standalone Journal-Ready Prose & Zero-Overlap 5-Skill Suite** | Produces clean manuscripts free of any internal workflow self-references, paired with a floating **Back-to-Top** progress ring and 5 zero-overlap 1-click copy-paste skills for Gemini Connected Apps | Readers can download the exact `.csv` dataset and switch effortlessly across `R`, `Stata`, and `Python` replication scripts on any device. |
 
 ---
 
@@ -58,7 +88,7 @@ import GeminiSkillsSuite from '@site/src/components/GeminiSkillsSuite';
 
 ---
 
-## 3. One-Click Copy-Paste 4-Skill Suite for Gemini Connected Apps & AI Assistants
+## 3. One-Click Copy-Paste 5-Skill Suite for Gemini Connected Apps & AI Assistants
 
 Copy any skill below in one click and paste it directly into **Instructions / Knowledge** on Google Gemini Connected Apps (`https://ecodata.io.vn/mcp`):
 

@@ -1,12 +1,12 @@
 ---
 title: Quantitative Analysis
 sidebar_position: 3
-description: Complete workflow for estimating 306 econometric models across 16 families and 61 sub-models on Python, R, and Stata 18 MP with separated Pre/Postestimation diagnostics and .zip replication bundles in EcoLab.
+description: Complete workflow for estimating 328 econometric models across 16 families and 61 sub-models on Python, R, and StataNow 19.5 MP with separated Pre/Postestimation diagnostics and .zip replication bundles in EcoLab.
 ---
 
 # Econometrics Estimation & Modeling (306 Estimators)
 
-EcoLab's **Modeling** workspace (`v1.12.0`) connects directly to the **EcoData Tri-Engine** (**Python**, **R** via the RMCP gateway, and **Stata 18 MP**), exposing a dynamically synchronized catalog of **306 estimators across 16 model families and 61 sub-models** covering cross-sectional, time-series, longitudinal panel, spatial, and structural microeconometric designs.
+EcoLab's **Modeling** workspace (`v1.14.0`) connects directly to the **EcoData Tri-Engine** (**Python**, **R** via the RMCP gateway, and **StataNow 19.5 MP**), exposing a dynamically synchronized catalog of **328 estimators across 16 model families and 61 sub-models** covering cross-sectional, time-series, longitudinal panel, spatial, and structural microeconometric designs.
 
 Whenever an EcoData administrator publishes a newly verified (`B1–B4`) estimator, EcoLab refreshes its model catalog from `GET /api/catalog/manifest` automatically within **`<= 60` seconds**.
 
@@ -43,7 +43,7 @@ EcoLab cleanly separates data-level specification diagnostics from model-level r
 
 1. In the **Modeling** module, click **Add Model** to open the dynamic **16-family model selector**.
 2. Select your model family and specific estimator, declare the dependent variable ($Y$), explanatory covariates ($X_1, \dots, X_k$), entity/time identifiers, endogenous/instrument slots, and standard-error structure (Homoskedastic, Robust HC0–HC3, HAC, Driscoll-Kraay, Conley Spatial HAC, One-Way/Multi-Way Clustering, or Wild Cluster Bootstrap).
-3. Choose the target execution runtime (**Python**, **R**, or **Stata 18 MP**) and click **Run Model**.
+3. Choose the target execution runtime (**Python**, **R**, or **StataNow 19.5 MP**) and click **Run Model**.
 4. If an unregistered estimator key is requested or mandatory structural inputs are omitted, the engine fails closed with an explicit **`422 UNSUPPORTED_ESTIMATOR` / `422 INVALID_SPECIFICATION`** diagnostic — never silently substituting OLS.
 
 ---
@@ -55,4 +55,4 @@ Completed runs populate four structured workspace tabs:
 - **Estimation Table Tab:** Parameter estimates ($\hat{\beta}$), standard errors, $t/z$-statistics, $p$-values, significance stars (`***`, `**`, `*`), and goodness-of-fit statistics ($R^2$, Within-$R^2$, $F$/Wald, Log-Likelihood, AIC, BIC), ready for 9-gate evidence locking in Stage 5 reports.
 - **Postestimation Diagnostics Tab:** Full test statistics, degrees of freedom, $p$-values, and methodological interpretations.
 - **Robustness Tab:** Side-by-side multi-column comparison across alternative estimators, subsamples, standard-error structures, and 63-province vs. 34-province regimes.
-- **Replication Bundle Tab (`.zip`):** One-click `.zip` archive containing standalone **Stata 18 MP (`.do`)**, **R (`.R`)**, and **Python (`.py`)** scripts, cleaned dataset slices, and **`SHA256SUMS.txt`** verification hashes.
+- **Replication Bundle Tab (`.zip`):** One-click `.zip` archive containing standalone **StataNow 19.5 MP (`.do`)**, **R (`.R`)**, and **Python (`.py`)** scripts, cleaned dataset slices, and **`SHA256SUMS.txt`** verification hashes.

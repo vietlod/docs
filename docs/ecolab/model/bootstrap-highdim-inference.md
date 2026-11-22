@@ -60,7 +60,7 @@ trong đó phần dư $\hat{U}_i^{(-k)} = Y_i - \hat{\ell}_0^{(-k)}(W_i)$ và $\
 ## Minh họa mã tái lập 3 ngôn ngữ
 
 <Tabs groupId="lang">
-  <TabItem value="stata" label="Stata 18 MP" default>
+  <TabItem value="stata" label="StataNow 19.5 MP" default>
 
 ```stata
 * === 1. Wild Cluster Bootstrap với Rademacher / Webb weights (boottest) ===
